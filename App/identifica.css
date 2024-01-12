@@ -38,7 +38,7 @@ body {
   border-right: 2px solid #C80096;
 }
 .for-filters li:after {
-  background: #e0f0fd;
+  background: #4285f4 !important;
   content: "";
   position: absolute;
   bottom: 0;
@@ -94,7 +94,7 @@ body {
   width: 90%;
 }
 .container.for-content .prog-container .icon i {
-  background: #e0f0fd;
+  background: #4285f4 !important;
   box-shadow: 5px 0px #C80096;
   font-size: 3em;
   border-radius: 50%;
