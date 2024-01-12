@@ -2,7 +2,7 @@ Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
-# Redirigir todas las solicitudes a un archivo index.php
+# Redirigir todas las solicitudes no existentes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+RewriteRule ^ index.php [QSA,L]
