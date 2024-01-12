@@ -1,0 +1,201 @@
+$('document').ready(function ($) {
+  $.validator.addMethod("Sololetras", function (value, element) {
+    return this.optional(element) || /[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/.test(value);
+  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
+  $.validator.addMethod("Telefonico", function (value, element) {
+    return this.optional(element) || /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value);
+  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar numeros!");
+  $.validator.addMethod("Correos", function (value, element) {
+    return this.optional(element) || /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value);
+  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa un correo valido!");
+  $.validator.addMethod("NEmpresa", function (value, element) {
+    return this.optional(element) || /^[\u00F1A-Za-z _]*[\u00F1A-Za-z][\u00F1A-Za-z _]*$/.test(value);
+  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
+  $.validator.addMethod("Problema", function (value, element) {
+    return this.optional(element) || /^[\u00F1A-Za-z _]*[\u00F1A-Za-z][\u00F1A-Za-z _]*$/.test(value);
+  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
+
+
+  $("#AbreCredito").validate({
+    rules: {
+
+
+      TipoCred: {
+        required: true,
+      },
+      
+      CAP: {
+        required: true,
+      },
+      Nombres: {
+        required: true,
+      },
+      Edad: {
+        required: true,
+      },
+      Sexo: {
+        required: true,
+      },
+      Direccion: {
+        required: true,
+      },
+      Telefono: {
+        required: true,
+      },
+
+      Sucursal: {
+        required: true,
+      },
+      FechaI: {
+        required: true,
+      },
+      FechaF: {
+        required: true,
+      },
+      Odo: {
+        required: true,
+      },
+      Promo: {
+        required: true,
+      },
+      Validez: {
+        required: true,
+      },
+      Area: {
+        required: true,
+      },
+    },
+    messages: {
+      TipoCred: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Nombres: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Edad: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Sexo: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Direccion: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Telefono: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+
+      CAP: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Sucursal: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      FechaI: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      FechaF: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Odo: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Promo: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Validez: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+      Area: {
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+      },
+
+
+    },
+    submitHandler: submitForm
+  });
+  // hide messages 
+
+
+  function submitForm() {
+
+
+
+    $.ajax({
+      type: 'POST',
+      url: "Consultas/AbreCredito.php",
+      data: $('#AbreCredito').serialize(),
+      cache: false,
+      beforeSend: function () {
+
+        $("#submit_registro").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+
+
+      },
+      success: function (dataResult) {
+        var dataResult = JSON.parse(dataResult);
+
+        if (dataResult.statusCode == 250) {
+          var modal_lv = 0;
+          $('.modal').on('shown.bs.modal', function (e) {
+            $('.modal-backdrop:last').css('zIndex', 1051 + modal_lv);
+            $(e.currentTarget).css('zIndex', 1052 + modal_lv);
+            modal_lv++
+          });
+
+          $('.modal').on('hidden.bs.modal', function (e) {
+            modal_lv--
+          });
+          $("#submit_registro").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
+          $('#ErrorDupli').modal('toggle');
+          setTimeout(function () {
+          }, 2000); // abrir
+          setTimeout(function () {
+            $("#submit_registro").html("Guardar <i class='fas fa-save'></i>");
+          }, 3000); // abrir
+
+
+        }
+
+        else if (dataResult.statusCode == 200) {
+
+          $("#submit_registro").html("Enviado <i class='fas fa-check'></i>")
+
+          $("#AbreCredito")[0].reset();
+          $("#AperturaCredit").removeClass("in");
+          $(".modal-backdrop").remove();
+          $("#AperturaCredit").hide();
+
+
+          $('#Exito').modal('toggle');
+          setTimeout(function () {
+            $('#Exito').modal('hide')
+          }, 2000); // abrir
+          CargaCreditos();
+
+
+
+          //  Solucionar muestra de modal de exito
+
+
+        }
+        else if (dataResult.statusCode == 201) {
+          $("#submit_Age").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
+          $('#ErrorData').modal('toggle');
+
+          setTimeout(function () {
+            $("#submit_Age").html("Guardar <i class='fas fa-save'></i>");
+          }, 3000); // abrir
+
+
+        }
+
+
+
+
+
+      }
+    });
+    return false;
+  }
+});
