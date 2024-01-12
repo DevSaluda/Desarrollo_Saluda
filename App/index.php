@@ -32,19 +32,8 @@ include "Header.php";
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
      
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-       
-        <i  data-toggle="modal" data-target="#centralModalInfo" class="fas fa-tools fa-2x fa-lgfa-2x fa-lg"></i>
       
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-        <i data-toggle="modal" data-target="#AcercaDe" class="fas fa-info-circle fa-2x fa-lgfa-2x fa-lg"></i>
-      
-        </a>
-      </li>
+     
     </ul>
   </div>
 </nav>
@@ -89,7 +78,7 @@ include "Header.php";
 <?php include "Footer.php"?>
 <script src="Componentes/jquery.min.js"></script>
 <script src="Scripts/RedireccionesV3.js" type="text/javascript"></script>
-<script src="AyudaSistema/Ayuda_bienvenida.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 $(window).load(function() {
     $(".loader").fadeOut(3000);
