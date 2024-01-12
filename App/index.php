@@ -20,7 +20,7 @@ include "Header.php";
 </div></div>
 </div>
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #C80096 !important;">
-  <a class="navbar-brand" href="#">CONTROL FARMACIA <i  class="fas fa-prescription-bottle-alt  fa-2x fa-lgfa-2x fa-lg"></i></a>
+  <a class="navbar-brand" href="#">SALUDA CENTRO MEDICO FAMILIAR <i  class="fas fa-prescription-bottle-alt  fa-2x fa-lgfa-2x fa-lg"></i></a>
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
