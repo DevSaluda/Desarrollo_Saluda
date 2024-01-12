@@ -20,7 +20,11 @@ include "Header.php";
 </div></div>
 </div>
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">CONTROL FARMACIA <i  class="fas fa-prescription-bottle-alt  fa-2x fa-lgfa-2x fa-lg"></i></a>
+<a class="navbar-brand" href="#" style="color: #C80096; font-weight: bold; text-decoration: none;">
+    CONTROL FARMACIA 
+    <i class="fas fa-prescription-bottle-alt fa-2x fa-lg" style="color: #C80096;"></i>
+</a>
+
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,22 +34,7 @@ include "Header.php";
     <ul class="navbar-nav mr-auto">
    
     </ul>
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-     
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-       
-        <i  data-toggle="modal" data-target="#centralModalInfo" class="fas fa-tools fa-2x fa-lgfa-2x fa-lg"></i>
-      
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-        <i data-toggle="modal" data-target="#AcercaDe" class="fas fa-info-circle fa-2x fa-lgfa-2x fa-lg"></i>
-      
-        </a>
-      </li>
-    </ul>
+    
   </div>
 </nav>
 
