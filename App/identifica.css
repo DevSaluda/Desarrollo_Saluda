@@ -126,7 +126,7 @@ body {
 .container.for-content .prog-container .button {
   
   border-radius: 2em;
-  box-shadow: 0px 3px #666;
+  box-shadow: 0px 3px #4285f4 !important;
   
   display: block;
   font-size: 1.1em;
@@ -139,12 +139,12 @@ body {
 }
 .container.for-content .prog-container .button:hover {
   transform: translate(0px, -3px);
-  box-shadow: 0px 9px #666;
+  box-shadow: 0px 9px #4285f4 !important;
   transition: 0.2s;
 }
 .container.for-content .prog-container .button:active {
   transform: translate(0px, 0px);
-  box-shadow: 0px 0px #666;
+  box-shadow: 0px 0px #4285f4 !important;
   transition: 0.1s;
 }
 .container.for-content .prog-container:hover {

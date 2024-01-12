@@ -19,7 +19,7 @@ include "Header.php";
     </div>
 </div></div>
 </div>
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #C80096 !important;">
   <a class="navbar-brand" href="#">CONTROL FARMACIA <i  class="fas fa-prescription-bottle-alt  fa-2x fa-lgfa-2x fa-lg"></i></a>
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
