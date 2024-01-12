@@ -62,7 +62,7 @@ include "Header.php";
 
 <div class="prog-container degree">
   <span class="icon">
-  <i onclick="Citas()" class="fas fa-calendar-day"></i>
+  <i onclick="Citas()" class="fas fa-calendar-day" style="color: #ffffff !important;"></i>
   </span>
   <div class="details">
   <h1>CONTROL DE CITAS</h1>
