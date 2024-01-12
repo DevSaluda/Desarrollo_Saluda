@@ -95,7 +95,7 @@ include "Header.php";
 
   </div>
 </div>
-<?include "Footer.php"?>
+<?php include "Footer.php"?>
 <script src="Componentes/jquery.min.js"></script>
 <script src="Scripts/RedireccionesV3.js" type="text/javascript"></script>
 <script src="AyudaSistema/Ayuda_bienvenida.js" type="text/javascript"></script>
