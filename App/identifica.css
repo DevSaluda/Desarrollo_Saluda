@@ -83,7 +83,8 @@ body {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 1em;
+  margin: 0;
+  padding: 0;
   text-decoration: none;
   width: 20em;
   transition: 0.2s;

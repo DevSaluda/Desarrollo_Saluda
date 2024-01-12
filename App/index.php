@@ -85,7 +85,7 @@ include "Header.php";
 
 
   </div>
-</div>
+
 <?php include "Footer.php"?>
 <script src="Componentes/jquery.min.js"></script>
 <script src="Scripts/RedireccionesV3.js" type="text/javascript"></script>
