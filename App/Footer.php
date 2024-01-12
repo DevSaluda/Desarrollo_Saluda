@@ -1,4 +1,4 @@
-<footer class="page-footer font-small pink">
+<footer class="page-footer font-small blue">
 <!--Start of Tawk.to Script-->
 
 <!--End of Tawk.to Script-->
