@@ -77,7 +77,7 @@ include "Header.php";
 
 <?php include "Footer.php"?>
 <script src="Componentes/jquery.min.js"></script>
-<script src="Scripts/RedireccionesV3.js" type="text/javascript"></script>
+<script src="Scripts/Redirecciones.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(window).load(function() {
