@@ -13,7 +13,7 @@ body {
   width: auto;
 }
 .for-filters li {
-  border: 2px solid #2979ff;
+  border: 2px solid #C80096;
   border-right: none;
   overflow: hidden;
   position: relative;
@@ -23,7 +23,7 @@ body {
   
   font-weight: bold;
   text-align: center;
-  color: #2979ff;
+  color: #C80096;
   position: relative;
   padding: 1em;
   text-decoration: none;
@@ -35,7 +35,7 @@ body {
 }
 .for-filters li:last-child {
   border-radius: 0px 10px 10px 0px;
-  border-right: 2px solid #2979ff;
+  border-right: 2px solid #C80096;
 }
 .for-filters li:after {
   background: #e0f0fd;
@@ -49,7 +49,7 @@ body {
   z-index: -1;
 }
 .for-filters li.is-active:after {
-  background: #2979ff;
+  background: #C80096;
   height: 100%;
 }
 .for-filters li.is-active a {
@@ -95,20 +95,20 @@ body {
 }
 .container.for-content .prog-container .icon i {
   background: #e0f0fd;
-  box-shadow: 5px 0px #2979ff;
+  box-shadow: 5px 0px #C80096;
   font-size: 3em;
   border-radius: 50%;
   height: 3em;
   width: 3em;
   line-height: 3em;
   /*   animation: pulse-shadow 2s infinite; */
-  color: #2979ff;
+  color: #C80096;
   text-align: center;
   transform: scale(0.8);
   transition: 0.2s;
 }
 .container.for-content .prog-container .details {
-  color: #2979ff;
+  color: #C80096;
   text-align: center;
   width: 85%;
 }
@@ -153,7 +153,7 @@ body {
 }
 .container.for-content .prog-container:hover i {
   transform: translate(-20px, 0px);
-  box-shadow: 40px 0 #2979ff;
+  box-shadow: 40px 0 #C80096;
   transition: 0.2s;
 }
 .container.for-content .prog-container:hover .details p {
