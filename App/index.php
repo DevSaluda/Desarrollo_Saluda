@@ -1,4 +1,5 @@
 <?php 
+$url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 include "Header.php";
 ?>
 
