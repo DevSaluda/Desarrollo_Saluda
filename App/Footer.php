@@ -1,4 +1,4 @@
-<footer class="page-footer font-small pink">
+<footer class="page-footer font-small pink" style="background-color: #C80096 !important;">
 <!--Start of Tawk.to Script-->
 
 <!--End of Tawk.to Script-->
