@@ -49,7 +49,66 @@ include("Cookies/Mensaje.php");
     </style>
 
 
-<style></style>
+<style>/* Estilos adicionales para un diseño juvenil y futurista */
+/* Puedes ajustar estos estilos según tus preferencias */
+
+/* Fondos y colores vibrantes */
+body, html {
+  background-color: #C80096; /* Fondo rosa */
+}
+
+.container-login100 {
+  background-color: #C80096; /* Color de fondo para el contenedor principal */
+}
+
+/* Estilo de los inputs */
+.input100 {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #6ab4ff; /* Azul vibrante */
+  border-radius: 0;
+  color: #fff; /* Texto blanco */
+}
+
+.input100::placeholder {
+  color: #a3a3a3; /* Color de placeholder */
+}
+
+.input100:focus {
+  border-bottom-color: #42a5f5; /* Azul más claro al enfocar */
+}
+
+/* Estilo del botón */
+.login100-form-btn {
+  background-color: #ff4081; /* Rosa brillante */
+  font-weight: bold;
+}
+
+.wrap-login100-form-btn:hover .login100-form-bgbtn {
+  left: 0;
+  background-color: #ff4081; /* Rosa más claro al pasar el mouse */
+}
+
+/* Efectos de transición */
+.wrap-input100, .login100-form-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.wrap-input100:hover, .wrap-input100:focus, .login100-form-btn:hover {
+  transform: scale(1.05); /* Efecto de escala al pasar el mouse o enfocar */
+}
+
+/* Otros ajustes de estilo */
+.label-input100 {
+  color: #6ab4ff; /* Azul vibrante para el texto de la etiqueta */
+}
+
+.focus-input100::before {
+  color: #6ab4ff; /* Azul vibrante para el icono */
+}
+
+/* Puedes agregar más estilos según tus preferencias */
+</style>
 <div class="loader">
 <div class="absCenter ">
     <div class="loaderPill">
