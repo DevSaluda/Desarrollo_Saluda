@@ -1,7 +1,8 @@
 <?php 
   $hora = date('G'); 
   $saludos = array();
-
+  $serverTime = date('Y-m-d H:i:s');
+  echo "Server Time: $serverTime";
   if (($hora >= 0) AND ($hora < 6)) 
   { 
     $saludos = array(
@@ -77,5 +78,5 @@
   }
 
   $indiceAleatorio = array_rand($saludos);
-  $mensaje = $saludos[$indiceAleatorio];
+  $mensaje = $saludos + $serverTime[$indiceAleatorio]  ; 
 ?>
