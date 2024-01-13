@@ -86,7 +86,7 @@ include("Cookies/Mensaje.php");
 				<form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
 					<span class="login100-form-title p-b-49">
-						<?php echo $mensaje?>br
+						<?php echo $mensaje?> <br>
             <?php
             date_default_timezone_set('America/Merida');
             $hora = date('g:i A'); // Formato horas:minutos AM/PM
