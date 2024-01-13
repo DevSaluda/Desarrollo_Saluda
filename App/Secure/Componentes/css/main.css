@@ -7,17 +7,17 @@
 body, html {
   height: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5; /* Color de fondo claro */
+  background-color: #f5f5f5; /* Light background color */
 }
 
 a {
-  color: #2196F3; /* Azul Material */
+  color: #2196F3; /* Material Blue */
   transition: color 0.4s;
 }
 
 a:hover {
   text-decoration: none;
-  color: #1565C0; /* Azul ligeramente más oscuro al pasar el mouse */
+  color: #1565C0; /* Slightly darker blue on hover */
 }
 
 /*---------------------------------------------*/
@@ -39,7 +39,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-  border-color: #2196F3; /* Azul Material al enfocar */
+  border-color: #2196F3; /* Material Blue on focus */
 }
 
 /*---------------------------------------------*/
@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-  background-color: #1565C0; /* Azul ligeramente más oscuro al pasar el mouse */
+  background-color: #1565C0; /* Slightly darker blue on hover */
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ button:hover {
 }
 
 .bg1, .bg2, .bg3 {
-  background-color: #2196F3; /* Azul Material */
+  background-color: #2196F3; /* Material Blue */
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -78,7 +78,6 @@ button:hover {
 .wrap-login100 {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px; /* Se agregó un border-radius para un aspecto más suave */
 }
 
 /*----------------------------------------------
@@ -86,18 +85,18 @@ button:hover {
 .input100 {
   background: transparent;
   border: none;
-  border-bottom: 2px solid #2196F3; /* Azul Material */
+  border-bottom: 2px solid #2196F3; /* Material Blue */
   border-radius: 0;
 }
 
 .input100:focus {
-  border-bottom-color: #1565C0; /* Azul ligeramente más oscuro al enfocar */
+  border-bottom-color: #1565C0; /* Slightly darker blue on focus */
 }
 
 /*----------------------------------------------
 [ Button ]*/
 .login100-form-btn {
-  background-color: #C80096;
+  background-color: #2196F3;
 }
 
 .wrap-login100-form-btn:hover .login100-form-bgbtn {
@@ -115,7 +114,7 @@ button:hover {
   position: absolute;
   max-width: 70%;
   background-color: #fff;
-  border: 1px solid #C80000; /* Rojo Material */
+  border: 1px solid #C80000; /* Material Red */
   border-radius: 2px;
   padding: 4px 25px 4px 10px;
   bottom: calc((100% - 20px) / 2);
@@ -158,5 +157,5 @@ button:hover {
 }
 
 .login100-social-item:hover {
-  background-color: #212121; /* Gris ligeramente más oscuro al pasar el mouse */
+  background-color: #212121; /* Slightly darker grey on hover */
 }
