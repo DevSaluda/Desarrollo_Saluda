@@ -465,8 +465,7 @@ iframe {
   background-color: #333333;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Responsive ]*/
+
 
 @media (max-width: 576px) {
   .wrap-login100 {
