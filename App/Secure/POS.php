@@ -86,15 +86,14 @@ include("Cookies/Mensaje.php");
 				<form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
 					<span class="login100-form-title p-b-49">
-						<?php echo $mensaje?>
-					</span>
-          <div class="server-time">
+						<?php echo $mensaje?>br
             <?php
             date_default_timezone_set('America/Merida');
-            $hora = date('G:i:s'); // Formato horas:minutos:segundos
-            echo "Hora del servidor: <span id='real-time-clock'>$hora</span>";
+            $hora = date('g:i A'); // Formato horas:minutos AM/PM
+            echo "Son las <span id='real-time-clock'>$hora</span>";
             ?>
-        </div>
+					</span>
+          
 					<div class="wrap-input100 " >
 						<span class="label-input100">Correo electronico</span>
 						<input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="50">
@@ -170,27 +169,30 @@ include("Cookies/Mensaje.php");
 
 </body>
 </html>
+
 <script>
 function actualizarReloj() {
     var reloj = document.getElementById('real-time-clock');
     var horaActual = new Date();
     var horas = horaActual.getHours();
     var minutos = horaActual.getMinutes();
-    var segundos = horaActual.getSeconds();
+    var ampm = (horas >= 12) ? 'PM' : 'AM';
+
+    // Convertir a formato de 12 horas
+    horas = (horas % 12) || 12;
 
     // Formatear la hora para asegurarse de que siempre tenga dos dígitos
     horas = (horas < 10) ? '0' + horas : horas;
     minutos = (minutos < 10) ? '0' + minutos : minutos;
-    segundos = (segundos < 10) ? '0' + segundos : segundos;
 
     // Actualizar el contenido del reloj en tiempo real
-    reloj.textContent = horas + ':' + minutos + ':' + segundos;
+    reloj.textContent = horas + ':' + minutos + ' ' + ampm;
 }
 
 // Actualizar el reloj cada segundo
 setInterval(actualizarReloj, 1000);
 </script>
-    <script type="text/javascript">
+<script type="text/javascript">
 $(window).load(function() {
     $(".loader").fadeOut(1000);
 });
