@@ -120,7 +120,7 @@ include("Cookies/Mensaje.php");
                  
                     </form>  <div id="error">
   </div>
-
+  
 
 					
 					<!--Start of Tawk.to Script-->
@@ -138,7 +138,7 @@ include("Cookies/Mensaje.php");
 
   <!-- Copyright -->
 
-  <b>PUNTO DE VENTA</b> | Version 4.0
+  <b>PUNTO DE VENTA</b> | Version 3.0
   </div>
   <!-- Copyright -->
 
