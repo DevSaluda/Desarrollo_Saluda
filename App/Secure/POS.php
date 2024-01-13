@@ -57,9 +57,6 @@ body, html {
   background-color: #1a1a1a; /* Fondo oscuro */
 }
 
-.container-login100 {
-  background-color: #272727; /* Color de fondo para el contenedor principal */
-}
 
 /* Estilo de los inputs */
 .input100 {
