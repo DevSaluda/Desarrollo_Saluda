@@ -85,7 +85,7 @@ include("Cookies/Mensaje.php");
     
 				<form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
-					<span class="login100-form-title p-b-49" style="font-size: 16px;">
+					<span class="login100-form-title p-b-49" style="font-size: 18px;">
 						<?php echo $mensaje?> <br>
             <?php
             date_default_timezone_set('America/Merida');
