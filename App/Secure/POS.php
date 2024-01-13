@@ -159,7 +159,7 @@ body, html {
           
 					<div class="wrap-input100 " >
 						<span class="label-input100">Correo electronico</span>
-						<input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="50">
+						<input class="input100" input type="email" autocomplete="off" required placeholder="farmacia@saluda.com" name="user_email" id="user_email" maxlength="50">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
