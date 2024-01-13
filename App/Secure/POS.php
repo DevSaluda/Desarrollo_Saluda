@@ -86,7 +86,7 @@ include("Cookies/Mensaje.php");
 				<form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
 					<span class="login100-form-title p-b-49">
-						<?echo $mensaje?>
+						<?php echo $mensaje?>
 					</span>
 
 					<div class="wrap-input100 " >
