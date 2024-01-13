@@ -1,6 +1,4 @@
-<?
-session_start();
-include("db_connect.php");
+<?php 
 include("Cookies/Mensaje.php");
 ?>
 <!DOCTYPE html>
@@ -35,15 +33,18 @@ include("Cookies/Mensaje.php");
 <link rel="stylesheet" type="text/css" href="Componentes/Preloader.css">
 <!--===============================================================================================-->
 <script type="text/javascript" src="Consultas/validation.min.js"></script>
-<script type="text/javascript" src="Consultas/POS.js"></script>
+<script type="text/javascript" src="Consultas/POS3.js"></script>
+<script type="text/javascript" src="Scripts/Soporte.js"></script>
 
 </head>
-<body style="background-color: #1856ff;">
-    <style>
+<body style="background-color: #2FDDEE;">
+   <style>
         .error {
   color: red;
-  margin-left: 5px;
+  margin-left: 5px; 
+  
 }
+
     </style>
 <div class="loader">
 <div class="absCenter ">
@@ -61,171 +62,98 @@ include("Cookies/Mensaje.php");
         <div class="loaderPill-text">Cargando... </div>
     </div>
 </div></div>
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark blue accent-4">
-  <div class="container">
-    <a class="navbar-brand" href="#"><strong>PUNTO DE VENTA</strong></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
-      aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+  <a class="navbar-brand" href="#">PUNTO DE VENTA  <i  class="fas fa-receipt fa-2x fa-lgfa-2x fa-lg"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+   
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+        <i onclick="Home()"class="fas fa-home fa-2x fa-lgfa-2x fa-lg" ></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+       
+        <i  data-toggle="modal" data-target="#centralModalInfo" class="fas fa-tools fa-2x fa-lgfa-2x fa-lg"></i>
+      
+        </a>
+      </li>
+     
+    </ul>
   </div>
 </nav>
+<!--/.Navbar -->
+
 
         
-		<div class="container-login100" style="background-image: url('Componentes/images/bg-01.jpg');">
+		<div class="container-login100" >
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
     
-				<form class="login100-form validate-form" method="post" id="login-form">
+				<form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
 					<span class="login100-form-title p-b-49">
 						<?echo $mensaje?>
 					</span>
 
 					<div class="wrap-input100 " >
-						<span class="label-input100">Usuario</span>
-						<input class="input100" input type="email" required placeholder="Correo Electronico" name="user_email" id="user_email">
+						<span class="label-input100">Correo electronico</span>
+						<input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="50">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 ">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="password" required placeholder="************"  name="password" id="password">
+						<input class="input100" type="password" required placeholder="************" autocomplete="new-password" name="password" id="password"  maxlength="10">
+                       
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
+                        
                     </div>
-                    <div class="wrap-input100 ">
-						<span class="label-input100">Tipo de usuario</span>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="nivel">
-    <option selected>Elige un tipo de usuario</option>
-    <option value="6">Administrador</option>
-    <option value="7">Ventas</option>
-  </select>
-                    </div>
-               
-
-					
-					<div class="text-right p-t-8 p-b-31">
-						
-					</div>
-					
+                    <br>
+                    <div class="checkbox">
+    <label>
+    <input id="show_password" type="checkbox" /> Mostrar contraseña
+    </label>
+  </div>   
+ 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" type="submit"  name="login_button" id="login_button">
+							<button class="login100-form-btn" type="submit"  name="login_button" id="login_button"  style="background-color: #C80096;">
 								Ingresar
 							</button>
 						</div>
 					</div>
-                    <div class="txt1 text-center p-t-54 p-b-20">
-						<span>
-						
-						</span>
-					</div>
+                 
                     </form>  <div id="error">
   </div>
-					<div class="flex-c-m">
-						<button onclick="ayudalogin()" class="login100-social-item bg1">
-                        <i class="fas fa-info-circle"></i>
-						</button>
-
-						<button onclick="Home()" class="login100-social-item bg2">
-                        <i class="fas fa-house-user"></i>
-							</button>
-
-
-						<button data-toggle="modal" data-target="#exampleModal"  class="login100-social-item bg3">
-						<i class="fas fa-users-cog"></i>
-						</button>
-					</div>
+  <?include "Modal.php";
+  include "Modales.php";?>
 
 					
-					
+					<!--Start of Tawk.to Script-->
+
+<!--End of Tawk.to Script-->
 			
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Opciones de configuración</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-	  <button type="button" class="btn btn-primary btn-lg btn-block">Mensajes de ayuda <i class="fas fa-comment-alt"></i></button>
-<button type="button" data-toggle="modal" data-target="#ModalSoporte" data-dismiss="modal" class="btn btn-secondary btn-lg btn-block">Contacto a soporte <i class="fas fa-laptop-code"></i></button>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-       
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal hacia soporte -->
-<div class="modal fade" id="ModalSoporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Contacto a soporte</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-	  <form>
-  <div class="form-group">
-    
-    <input type="email" class="form-control" id="exampleInputEmail1" hidden aria-describedby="emailHelp" value="Control Farmacia">
-  </div>
-  <div class="form-group">
-  
-    <input type="Text" class="form-control" id="exampleInputPassword1"hidden value="Doctor Consulta">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Nombre Y Apellidos</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Por ejemplo Luis Quintal">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Telefono</label>
-    <input type="Text" class="form-control" id="exampleInputPassword1" placeholder="9991426600">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Descripcion</label>
-	<textarea id="w3review" name="w3review" rows="4" cols="50">
-Describe el problema presentado
-</textarea>
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal">Cancelar</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
-<?include "AvisoPuntoventa.php"?>
-<!-- Modal hacia soporte -->
-<script>
-$( document ).ready(function() {
-    $('#Nuevo').modal('toggle')
-});
-</script>
-
-
 	
-    <footer class="page-footer font-small primary-color">
+<!-- Modal hacia soporte -->
+
+    
+    <footer class="page-footer font-small default-color">
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">Copyright &copy; 2020 <a href="https://somosgrupoe.com/">Somos Grupo E</a> <br>
-  <b>Control Farmacia</b> V 1.3.1
+
+  <b>PUNTO DE VENTA</b> | Version 3.0
   </div>
   <!-- Copyright -->
 
@@ -257,6 +185,24 @@ $(window).load(function() {
     $(".loader").fadeOut(1000);
 });
 </script>
+
+<script>
+
+   // Cuando el checkbox cambie de estado.
+$('#show_password').on('change',function(event){
+   // Si el checkbox esta "checkeado"
+   if($('#show_password').is(':checked')){
+      // Convertimos el input de contraseña a texto.
+      $('#password').get(0).type='text';
+   // En caso contrario..
+   } else {
+      // Lo convertimos a contraseña.
+      $('#password').get(0).type='password';
+   }
+});
+
+$('#login-form').attr('autocomplete', 'off');
+</script>
 <script src="../Scripts/Redirecciones.js" type="text/javascript"></script>
-<script src="../Scripts/Ayuda_login.js" type="text/javascript"></script>
-	
+
+	<??>

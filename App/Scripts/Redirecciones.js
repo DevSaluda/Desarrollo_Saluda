@@ -1,6 +1,6 @@
 // Se refiere al login del punto de venta en su version 3, el punto de venta aun se maneja en version v2
 function POSV(){
-  location.href="Secure/POSV3"
+  location.href="Secure/POS"
 }
 
 
