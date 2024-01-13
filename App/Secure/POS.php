@@ -35,6 +35,8 @@ include("Cookies/Mensaje.php");
 <script type="text/javascript" src="Consultas/validation.min.js"></script>
 <script type="text/javascript" src="Consultas/POS3.js"></script>
 <script type="text/javascript" src="Scripts/Soporte.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body style="background-color: #C80096;">
@@ -262,22 +264,35 @@ $(window).load(function() {
 </script>
 
 <script>
+  // Cuando el checkbox cambie de estado.
+  $('#show_password').on('change', function(event) {
+    // Mostrar la confirmación de SweetAlert2
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres revelar la contraseña?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, revelar contraseña'
+    }).then((result) => {
+      // Si el usuario confirma
+      if (result.isConfirmed) {
+        // Si el checkbox está "checkeado"
+        if ($('#show_password').is(':checked')) {
+          // Convertimos el input de contraseña a texto.
+          $('#password').get(0).type = 'text';
+        } else {
+          // Lo convertimos a contraseña.
+          $('#password').get(0).type = 'password';
+        }
+      }
+    });
+  });
 
-   // Cuando el checkbox cambie de estado.
-$('#show_password').on('change',function(event){
-   // Si el checkbox esta "checkeado"
-   if($('#show_password').is(':checked')){
-      // Convertimos el input de contraseña a texto.
-      $('#password').get(0).type='text';
-   // En caso contrario..
-   } else {
-      // Lo convertimos a contraseña.
-      $('#password').get(0).type='password';
-   }
-});
-
-$('#login-form').attr('autocomplete', 'off');
+  $('#login-form').attr('autocomplete', 'off');
 </script>
+
 <script src="../Scripts/Redirecciones.js" type="text/javascript"></script>
 
 	
