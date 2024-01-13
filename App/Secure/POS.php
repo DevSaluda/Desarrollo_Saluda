@@ -44,7 +44,12 @@ include("Cookies/Mensaje.php");
   margin-left: 5px; 
   
 }
-/* Estilos adicionales para un diseño juvenil y futurista */
+
+
+    </style>
+
+
+<style>/* Estilos adicionales para un diseño juvenil y futurista */
 /* Puedes ajustar estos estilos según tus preferencias */
 
 /* Fondos y colores vibrantes */
@@ -103,10 +108,7 @@ body, html {
 }
 
 /* Puedes agregar más estilos según tus preferencias */
-
-
-    </style>
-    
+</style>
 <div class="loader">
 <div class="absCenter ">
     <div class="loaderPill">
