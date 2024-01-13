@@ -88,7 +88,13 @@ include("Cookies/Mensaje.php");
 					<span class="login100-form-title p-b-49">
 						<?php echo $mensaje?>
 					</span>
-
+          <div class="server-time">
+            <?php
+            date_default_timezone_set('America/Merida');
+            $hora = date('G:i:s'); // Formato horas:minutos:segundos
+            echo "Hora del servidor: <span id='real-time-clock'>$hora</span>";
+            ?>
+        </div>
 					<div class="wrap-input100 " >
 						<span class="label-input100">Correo electronico</span>
 						<input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="50">
@@ -164,7 +170,26 @@ include("Cookies/Mensaje.php");
 
 </body>
 </html>
+<script>
+function actualizarReloj() {
+    var reloj = document.getElementById('real-time-clock');
+    var horaActual = new Date();
+    var horas = horaActual.getHours();
+    var minutos = horaActual.getMinutes();
+    var segundos = horaActual.getSeconds();
 
+    // Formatear la hora para asegurarse de que siempre tenga dos dígitos
+    horas = (horas < 10) ? '0' + horas : horas;
+    minutos = (minutos < 10) ? '0' + minutos : minutos;
+    segundos = (segundos < 10) ? '0' + segundos : segundos;
+
+    // Actualizar el contenido del reloj en tiempo real
+    reloj.textContent = horas + ':' + minutos + ':' + segundos;
+}
+
+// Actualizar el reloj cada segundo
+setInterval(actualizarReloj, 1000);
+</script>
     <script type="text/javascript">
 $(window).load(function() {
     $(".loader").fadeOut(1000);
