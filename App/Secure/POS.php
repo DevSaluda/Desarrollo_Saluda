@@ -63,7 +63,7 @@ include("Cookies/Mensaje.php");
     </div>
 </div></div>
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color" style="background-color:#C80096 !important;">
   <a class="navbar-brand" href="#">PUNTO DE VENTA  <i  class="fas fa-receipt fa-2x fa-lgfa-2x fa-lg"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,21 +73,7 @@ include("Cookies/Mensaje.php");
     <ul class="navbar-nav mr-auto">
    
     </ul>
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-        <i onclick="Home()"class="fas fa-home fa-2x fa-lgfa-2x fa-lg" ></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-       
-        <i  data-toggle="modal" data-target="#centralModalInfo" class="fas fa-tools fa-2x fa-lgfa-2x fa-lg"></i>
-      
-        </a>
-      </li>
-     
-    </ul>
+    
   </div>
 </nav>
 <!--/.Navbar -->
