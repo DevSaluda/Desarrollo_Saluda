@@ -37,7 +37,7 @@ include("Cookies/Mensaje.php");
 <script type="text/javascript" src="Scripts/Soporte.js"></script>
 
 </head>
-<body style="background-color: #2FDDEE;">
+<body style="background-color: #C80096;">
    <style>
         .error {
   color: red;
