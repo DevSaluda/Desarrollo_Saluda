@@ -69,7 +69,7 @@ body, html {
   border: none;
   border-bottom: 2px solid #6ab4ff; /* Azul vibrante */
   border-radius: 0;
-  color: #fff; /* Texto blanco */
+  color: #000; /* Texto blanco */
 }
 
 .input100::placeholder {
