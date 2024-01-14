@@ -43,7 +43,7 @@ include "Header.php";
     
 <div class="prog-container degree">
   <span class="icon">
-  <i onclick="POSV()" class="fas fa-cash-register"></i>
+  <i onclick="NuevoPV()" class="fas fa-cash-register"></i>
   </span>
   <div class="details">
     <h1>PUNTO DE VENTA</h1>

@@ -1,5 +1,5 @@
 // Se refiere al login del punto de venta en su version 3, el punto de venta aun se maneja en version v2
-function POSV(){
+function NuevoPV(){
   location.href="https://saludapos.com/App/Secure/POS"
 }
 
