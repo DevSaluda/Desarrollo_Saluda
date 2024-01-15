@@ -1,54 +1,30 @@
-<?
-
+<?php
 session_start();
-include ("Scripts/POS.php");
-if($_SESSION["SuperAdmin"])	//Condicion admin
-{
-	
+include("Scripts/POS.php");
 
-	header("location:https://controlfarmacia.com/AdminPOS");	
+// Mapeo de sesiones a URLs de redirección
+$sessionRedirects = [
+    "SuperAdmin" => "https://controlfarmacia.com/AdminPOS",
+    "VentasPos" => "https://controlfarmacia.com/POS2",
+    "AdminPOS" => "https://controlfarmacia.com/AdministracionPOS",
+    "LogisticaPOS" => "https://controlfarmacia.com/POSLogistica",
+    "ResponsableCedis" => "https://controlfarmacia.com/CEDIS",
+    "ResponsableInventarios" => "https://controlfarmacia.com/Inventarios",
+    "ResponsableDeFarmacias" => "https://controlfarmacia.com/ResponsableDeFarmacias",
+    "CoordinadorDental" => "https://controlfarmacia.com/JefeDental",
+    "Supervisor" => "https://controlfarmacia.com/CEDISMOVIL",
+    "JefeEnfermeros" => "https://controlfarmacia.com/JefaturaEnfermeria",
+];
 
-}
-if($_SESSION["VentasPos"])	//Condicion personal
-{
-
-	header("location: https://controlfarmacia.com/POS2"); 
-}
-
-if($_SESSION["AdminPOS"])	//Condicion personal
-{
-
-	header("location: https://controlfarmacia.com/AdministracionPOS"); 
-}
-
-
-if($_SESSION["LogisticaPOS"])	//Condicion personal
-{
-
-	header("location: https://controlfarmacia.com/POSLogistica"); 
+// Verificar las sesiones y redireccionar
+foreach ($sessionRedirects as $sessionKey => $redirectURL) {
+    if ($_SESSION[$sessionKey]) {
+        header("location: $redirectURL");
+        exit();
+    }
 }
 
-if($_SESSION["ResponsableCedis"])	//Condicion personal
-{
-
-	header("location: https://controlfarmacia.com/CEDIS"); 
-}
-
-if($_SESSION["ResponsableInventarios"])	//Condicion personal
-{
-
-	header("location: https://controlfarmacia.com/Inventarios"); 
-}
-
-if($_SESSION["ResponsableDeFarmacias"])	//Condicion personal
-	{	header("location: https://controlfarmacia.com/ResponsableDeFarmacias");
-	}
-	if($_SESSION["CoordinadorDental"])	//Condicion personal
-	{	header("location: https://controlfarmacia.com/JefeDental");
-	}
-	if($_SESSION["Supervisor"])	//Condicion personal
-	{	header("location: https://controlfarmacia.com/CEDISMOVIL");
-	}
-	if($_SESSION["JefeEnfermeros"])	//Condicion personal
-	{	header("location: https://controlfarmacia.com/JefaturaEnfermeria");
-	}
+// Redirección predeterminada o mensaje de error
+header("location: https://controlfarmacia.com/pagina-de-error");
+exit();
+?>
