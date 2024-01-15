@@ -16,10 +16,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
-
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 $user_id=null;
 $sql1="SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,	Traspasos_generados.TraspasoGeneradoPor,Traspasos_generados.Num_Orden,
 Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, Traspasos_generados.Proveedor1,	Traspasos_generados.Proveedor2,

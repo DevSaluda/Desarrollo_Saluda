@@ -16,9 +16,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include ("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 
 $user_id=null;
 $sql1="SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional,
