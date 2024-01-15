@@ -4,16 +4,16 @@ include("Scripts/POS.php");
 
 // Mapeo de sesiones a URLs de redirección
 $sessionRedirects = [
-    "SuperAdmin" => "https://controlfarmacia.com/AdminPOS",
-    "VentasPos" => "https://controlfarmacia.com/POS2",
-    "AdminPOS" => "https://controlfarmacia.com/AdministracionPOS",
-    "LogisticaPOS" => "https://controlfarmacia.com/POSLogistica",
-    "ResponsableCedis" => "https://controlfarmacia.com/CEDIS",
-    "ResponsableInventarios" => "https://controlfarmacia.com/Inventarios",
-    "ResponsableDeFarmacias" => "https://controlfarmacia.com/ResponsableDeFarmacias",
-    "CoordinadorDental" => "https://controlfarmacia.com/JefeDental",
-    "Supervisor" => "https://controlfarmacia.com/CEDISMOVIL",
-    "JefeEnfermeros" => "https://controlfarmacia.com/JefaturaEnfermeria",
+    "SuperAdmin" => "https://saludapos.com/AdminPOS",
+    "VentasPos" => "https://saludapos.com/POS2",
+    "AdminPOS" => "https://saludapos.com/AdministracionPOS",
+    "LogisticaPOS" => "https://saludapos.com/POSLogistica",
+    "ResponsableCedis" => "https://saludapos.com/CEDIS",
+    "ResponsableInventarios" => "https://saludapos.com/Inventarios",
+    "ResponsableDeFarmacias" => "https://saludapos.com/ResponsableDeFarmacias",
+    "CoordinadorDental" => "https://saludapos.com/JefeDental",
+    "Supervisor" => "https://saludapos.com/CEDISMOVIL",
+    "JefeEnfermeros" => "https://saludapos.com/JefaturaEnfermeria",
 ];
 
 // Verificar las sesiones y redireccionar
@@ -25,6 +25,6 @@ foreach ($sessionRedirects as $sessionKey => $redirectURL) {
 }
 
 // Redirección predeterminada o mensaje de error
-header("location: https://controlfarmacia.com/pagina-de-error");
+header("location: https://saludapos.com/pagina-de-error");
 exit();
 ?>
