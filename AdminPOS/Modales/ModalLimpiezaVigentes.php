@@ -13,10 +13,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
-
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 $user_id=null;
 $sql1="SELECT Personal_Intendecia.Intendencia_ID,Personal_Intendecia.Nombre_Apellidos,Personal_Intendecia.file_name,Personal_Intendecia.file_name,Personal_Intendecia.Fk_Usuario,
 Personal_Intendecia.Telefono,Personal_Intendecia.Fk_Sucursal,Personal_Intendecia.Estatus ,Personal_Intendecia.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal, Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol from Personal_Intendecia,SucursalesCorre,Roles_Puestos where 

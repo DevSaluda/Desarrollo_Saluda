@@ -46,9 +46,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include ("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 
 $user_id=null;
 $sql1="SELECT Cajas_POS.ID_Caja,Cajas_POS.Fecha_Apertura,Cajas_POS.Cantidad_Fondo,Cajas_POS.Sucursal,

@@ -12,11 +12,8 @@ $(document).ready( function () {
 } );
 </script>
 <?php
-
-include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
-
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 $user_id=null;
 $sql1="SELECT Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Personal_Medico.Fk_Usuario,Personal_Medico.Fk_Sucursal,
 Personal_Medico.ID_H_O_D,Personal_Medico.Estatus,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol 
