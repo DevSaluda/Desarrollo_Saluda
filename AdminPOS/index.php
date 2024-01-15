@@ -16,8 +16,8 @@
     # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
     $exibirModal = true;
   }
+  include "Consultas/Sesion.php";
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/ContadorIndex.php";
 
 ?>
