@@ -17,8 +17,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 
 
 
