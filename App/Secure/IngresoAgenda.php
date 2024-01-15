@@ -1,10 +1,10 @@
-<?include("db_connect.php");
+<?php include("db_connect.php");
 include("Cookies/Mensaje.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>CONTROL DE CITAS | LOGIN</title>
+	<title>🔐 INICIO DE SESIÓN</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
