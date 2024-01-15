@@ -29,12 +29,12 @@ include "Consultas/ContadorIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>PUNTO DE VENTA <?echo $row['ID_H_O_D']?> </title>
+  <title>PUNTO DE VENTA <?php echo $row['ID_H_O_D']?> </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
@@ -45,7 +45,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?echo $CajasAbiertas['CajasAbiertas']?></h3>
+                <h3><?php echo $CajasAbiertas['CajasAbiertas']?></h3>
 
                 <p>Cajas abiertas</p>
               </div>
@@ -60,7 +60,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3><?echo $Tickets['Folio_Ticket']?></h3>
+                <h3><?php echo $Tickets['Folio_Ticket']?></h3>
 
                 <p>Productos vendidos</p>
               </div>
@@ -75,7 +75,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-              <h3><?echo $TraspasosPendientes['TraspasosPendientes']?></h3>
+              <h3><?php echo $TraspasosPendientes['TraspasosPendientes']?></h3>
                 <p>Traspasos</p>
 
                
@@ -91,7 +91,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?echo $TotalGanancia['totaldia']?></h3>
+              <h3><?php echo $TotalGanancia['totaldia']?></h3>
               <p>Ganancia global</p>
                
               </div>
@@ -105,7 +105,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?echo $TotalFarmaceuticos['Farmaceuticos']?></h3>
+                <h3><?php echo $TotalFarmaceuticos['Farmaceuticos']?></h3>
 
                 <p>Farmacéuticos <br> vigentes</p>
               </div>
@@ -120,7 +120,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3><?echo $TotalEnfermeros['Enfermeros']?></h3>
+                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
 
                 <p>Enfermeros <br> vigentes</p>
               </div>
@@ -134,7 +134,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3><?echo $TotalMedicos['Medicos']?></h3>
+                <h3><?php echo $TotalMedicos['Medicos']?></h3>
 
                 <p>Medicos <br> vigentes</p>
               </div>
@@ -151,7 +151,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?echo $TotalLimpieza['Intendentes']?></h3>
+              <h3><?php echo $TotalLimpieza['Intendentes']?></h3>
               <p>Intendencia/Limpieza <br> Vigentes</p>
                
               </div>
@@ -184,7 +184,7 @@ include "Consultas/ContadorIndex.php";
 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Registros del reloj checador de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
  
   <div >
@@ -199,7 +199,7 @@ Registros del reloj checador de <?echo $row['ID_H_O_D']?> al <?php echo FechaCas
   <!-- <div class="tab-pane fade" id="pills-MoreVentas" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Productos mas vendidos  <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+Productos mas vendidos  
   </div>
   
   <div >
@@ -232,7 +232,7 @@ Productos mas vendidos  <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?include ("Modales/Ingreso.php");
+  <?php include ("Modales/Ingreso.php");
   include ("Modales/ConsultaCajasAbiertas.php");
   include ("Modales/ModalConsultaVentas.php");
   include ("Modales/ModalTraspasos.php");
@@ -287,7 +287,7 @@ $(document).ready(function()
 });
 </script>
 <?php endif; ?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
