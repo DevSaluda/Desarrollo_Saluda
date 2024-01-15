@@ -75,8 +75,8 @@ $sql1 = "SELECT
     a.EstadoAsis AS EstadoAsis,
     a.totalhora_tr AS totalhora_tr
 FROM
-    somosgr1_Huellas.personal p
-JOIN somosgr1_Huellas.asistenciaper a
+u155356178_SaludaHuellas.personal p
+JOIN u155356178_SaludaHuellas.asistenciaper a
     ON a.Id_Pernl = p.Id_pernl
 WHERE
     a.FechaAsis = CURDATE()"; 
@@ -124,7 +124,7 @@ $query = $conn->query($sql1);
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
