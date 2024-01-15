@@ -50,9 +50,8 @@ $(document).ready( function () {
 </script>
 <?php
 header("Acces-Control-Allow-Origin: *"); 
-include("db_connection.php"); 
-include "Consultas.php";
-include "Sesion.php";
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 $user_id=null;
 $sql1="SELECT PersonalPOS.Pos_ID,PersonalPOS.Nombre_Apellidos,PersonalPOS.file_name,PersonalPOS.Fk_Usuario,PersonalPOS.Fk_Sucursal,PersonalPOS.Telefono,PersonalPOS.Correo_Electronico,
  PersonalPOS.ID_H_O_D,PersonalPOS.Estatus,PersonalPOS.Password,PersonalPOS.ColorEstatus,PersonalPOS.AgregadoPor,PersonalPOS.AgregadoEl,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
