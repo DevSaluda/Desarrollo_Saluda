@@ -49,7 +49,7 @@ $(document).ready( function () {
 } );
 </script>
 <?php
-header("Acces-Control-Allow-Origin: *"); 
+
 include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
 $user_id=null;
