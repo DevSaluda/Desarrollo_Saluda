@@ -10,7 +10,7 @@
         <p style="font-size: 18px;">Por favor, inicia sesión nuevamente o contacta al administrador.</p>
       </div>
       <div class="modal-footer" style="border-top: none;">
-      <a href="https://controlfarmacia.com/AdminPOS/Cierre" class="btn btn-warning">Aceptar</a>
+      <a href="https://saludapos.com/AdminPOS/Cierre" class="btn btn-warning">Aceptar</a>
       </div>
     </div>
   </div>

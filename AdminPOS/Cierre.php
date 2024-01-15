@@ -6,5 +6,5 @@ session_unset();
 session_destroy();
 setcookie('csrf_token', '', time() - 3600, '/');
 
-header("Location:https://controlfarmacia.com/App/Secure/POS2");
+header("Location:https://saludapos.com/App/Secure/POS");
 ?>
