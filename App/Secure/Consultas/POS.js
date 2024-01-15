@@ -1,8 +1,14 @@
 $('document').ready(function() { 
+
 	/* handling form validation */
 	$("#login-form").validate({
+		
 		rules: {
+		
 			password: {
+				required: true,
+			},
+			nivel: {
 				required: true,
 			},
 			user_email: {
@@ -12,9 +18,10 @@ $('document').ready(function() {
 		},
 		messages: {
 			password:{
-			  required: "Se requiere tu contraseña"
+			  required: "<i class='fas fa-times'></i> Se requiere tu contraseña " 
 			 },
-			user_email: "ingresa tu correo por favor.",
+			 
+			user_email: "<i class='fas fa-times'></i> ingresa tu correo por favor ",
 		},
 		submitHandler: submitForm	
 	});	   
@@ -23,40 +30,34 @@ $('document').ready(function() {
 		var data = $("#login-form").serialize();				
 		$.ajax({				
 			type : 'POST',
-			url  : 'Scripts/POS.php',
+			url  : 'Scripts/POS3.php',
 			data : data,
-			beforeSend: function(){	
+            beforeSend: function(){	
 				$("#error").fadeOut();
 				
-				$("#login_button").html(Swal.fire({
-					showConfirmButton: false,
-					imageUrl: 'images/Verificando.gif',
-					imageWidth: 900,
-					title: 'Verificando Datos',
-					imageAlt: 'Custom image',
-					timer:6000,
-				  }));
+				$("#login_button").html();
+				$('#Validacion').modal('toggle');
+				setTimeout(function(){ 
+					$('#Validacion').modal('hide') 
+				}, 3000); 
+                  
 			},
+				
 			success : function(response){						
 				if(response=="ok"){									
-					$("#login_button").html("Iniciando ",Swal.fire({
-						icon: 'success',
-						title: 'Datos Correctos.',
-						text: 'Bienvenido, espere un momento!',
-						showConfirmButton: false,
-					  }))
+                    $("#login_button").html("Iniciando...")
+					$('#Ingreso').modal('toggle');
 					setTimeout(' window.location.href = "https://controlfarmacia.com/App/Secure/ControlPOS"; ',2000);
 				} else {									
-					$("#error").fadeIn(1000, function(){									
-						$("#error").html(Swal.fire({
-							icon: 'error',
-							title: 'Datos no validos...',
-							text: 'Usuario o contraseña incorrectos.',
-							showConfirmButton: true,
-						  }));
-						  $("#login_button").html('<span ></span> &nbsp;   Ingresar   ');
-				
-						});
+					$("#error").fadeIn(1000, function(){						
+                        $("#error").html();
+                        setTimeout(function(){ 
+                            $('#Fallo').modal('toggle');
+                        }, 2000); 
+						
+                        $("#login_button").html('<span ></span> &nbsp;   Ingresar   ');
+					});
+						 
 				}
 			}
 		});
