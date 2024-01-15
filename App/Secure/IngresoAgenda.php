@@ -128,7 +128,7 @@ body, html {
 </div></div>
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color" style="background-color:#C80096 !important;">
-  <a class="navbar-brand" href="#">Panel de Administracion de Agenda SALUDA<i  class="fas fa-receipt fa-2x fa-lgfa-2x fa-lg"></i></a>
+  <a class="navbar-brand" href="#">Panel de administracion de agenda SALUDA<i  class="fas fa-book-open fa-2x fa-lgfa-2x fa-lg"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -207,7 +207,7 @@ body, html {
 
   <!-- Copyright -->
 
-  <b>PUNTO DE VENTA</b> | Version 3.0
+  <b>Control de Citas</b> | Version 3.0
   </div>
   <!-- Copyright -->
 
