@@ -53,7 +53,7 @@ $(document).ready( function () {
 
 include("db_connection_Huellas.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 //$sql1="SELECT * FROM Reloj_ChecadorV2 WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')  UNION ALL SELECT * FROM Reloj_ChecadorV2_Salidas WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') ORDER BY Nombre";
