@@ -2,9 +2,9 @@
 <?php
 class DBController {
 	private $host = "localhost";
-	private $user = "somosgr1_SHWEB";
-	private $password = "yH.0a-v?T*1R";
-	private $database = "somosgr1_Sistema_Hospitalario";
+	private $user = "u155356178_SaludDevCenter";
+	private $password = "uE;bAISz;*6c|I4PvEnfSys324\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>";
+	private $database = "u155356178_saludapos";
 	private $conn;
 	
 	function __construct() {
