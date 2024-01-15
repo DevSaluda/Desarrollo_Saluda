@@ -17,8 +17,9 @@ $(document).ready( function () {
 </script>
 <?php
 
-include ("db_connection.php");
+include("db_connection.php");
 include "Consultas.php";
+
 
 
 $user_id=null;
