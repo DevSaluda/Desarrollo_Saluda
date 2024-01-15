@@ -1,7 +1,5 @@
 <?php
-include "Consultas/Consultas.php";
 
-include "Consultas/ContadorIndex.php";
   # Iniciando la variable de control que permitirá mostrar o no el modal
   $exibirModal = false;
   # Verificando si existe o no la cookie
@@ -19,7 +17,8 @@ include "Consultas/ContadorIndex.php";
     # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
     $exibirModal = true;
   }
-
+  include "Consultas/Consultas.php";
+  include "Consultas/ContadorIndex.php";
 
 ?>
 

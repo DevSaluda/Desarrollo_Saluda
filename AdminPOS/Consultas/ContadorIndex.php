@@ -1,7 +1,7 @@
 <?php 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 
 $sql ="SELECT Estatus,ID_H_O_D,Fecha_Apertura,COUNT(*) as CajasAbiertas FROM Cajas_POS WHERE Estatus='Abierta' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fecha_Apertura=CURRENT_DATE ";
