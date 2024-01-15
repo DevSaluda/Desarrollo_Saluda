@@ -29,7 +29,7 @@ include "Consultas/ContadorIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>PUNTO DE VENTA <?php echo $row['ID_H_O_D']?> </title>
+  <title><?php echo $row['ID_H_O_D']?> PUNTO DE VENTA  </title>
 
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
