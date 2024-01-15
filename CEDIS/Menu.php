@@ -146,7 +146,7 @@
             <li class="nav-header">Almacen</li>
            
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/CEDIS/ProductosV2" class="nav-link">
+            <a href="https://saludapos.com/CEDIS/ProductosV2" class="nav-link">
             <i class="fas fa-pills"></i>
               <p>
             Base general
@@ -340,7 +340,7 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://controlfarmacia.com/CEDIS/Cierre'); 
+window.location.replace('https://saludapos.com/CEDIS/Cierre'); 
 
 }
 $( document ).ready(function() {
