@@ -51,7 +51,7 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
+include("db_connection_Huellas.php");
 include "Consultas.php";
 include "Sesion.php";
 
