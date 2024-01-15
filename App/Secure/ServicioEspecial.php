@@ -143,14 +143,13 @@ body, html {
 <!--/.Navbar -->
 
 
-        
-       <div class="container-login100" >
+      <div class="container-login100" >
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
     
-                <form class="login100-form validate-form" method="post" id="login-form">
+                <form class="login100-form validate-form" method="post" id="login-form" autocomplete="off">
 
-                    <span class="login100-form-title p-b-49">
-            <?echo $mensaje?>
+                    <span class="login100-form-title p-b-49" style="font-size: 18px;">
+                        <?php echo $mensaje?> <br>
               <?php
             date_default_timezone_set('America/Merida');
             $hora = date('g:i A'); // Formato horas:minutos AM/PM
@@ -264,17 +263,32 @@ $(window).load(function() {
 
 <script>
   // Cuando el checkbox cambie de estado.
-  $('#show_password').on('change',function(event){
-   // Si el checkbox esta "checkeado"
-   if($('#show_password').is(':checked')){
-      // Convertimos el input de contraseña a texto.
-      $('#password').get(0).type='text';
-   // En caso contrario..
-   } else {
-      // Lo convertimos a contraseña.
-      $('#password').get(0).type='password';
-   }
-});
+ $('#show_password').on('change', function(event) {
+    // Mostrar la confirmación de SweetAlert2
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres revelar la contraseña?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, revelar contraseña'
+    }).then((result) => {
+      // Si el usuario confirma
+      if (result.isConfirmed) {
+        // Si el checkbox está "checkeado"
+        if ($('#show_password').is(':checked')) {
+          // Convertimos el input de contraseña a texto.
+          $('#password').get(0).type = 'text';
+        } else {
+          // Lo convertimos a contraseña.
+          $('#password').get(0).type = 'password';
+        }
+      }
+    });
+  });
+
+  $('#login-form').attr('autocomplete', 'off');
 </script>
 
 <script src="../Scripts/Redirecciones.js" type="text/javascript"></script>
