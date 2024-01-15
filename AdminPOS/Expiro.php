@@ -1,6 +1,6 @@
 
 <?php include "Modales/Expirado.php";
-include "header.php";?>
+include "Header.php";?>
 <!-- Agrega este código al final de tu archivo PHP -->
 <script>
   // Utilizando jQuery para activar el modal automáticamente
