@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ContadorIndex.php";
   # Iniciando la variable de control que permitirá mostrar o no el modal
   $exibirModal = false;
