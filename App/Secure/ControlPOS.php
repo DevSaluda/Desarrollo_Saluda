@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("Scripts/POS.php");
+
 
 // Mapeo de sesiones a URLs de redirección
 $sessionRedirects = [
