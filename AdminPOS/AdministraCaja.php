@@ -23,15 +23,7 @@ include "Consultas/Consultas.php";
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" >Fondos de caja</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"  >Cajas del <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  </a>
-  </li>
 
-</ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
@@ -50,16 +42,7 @@ include "Consultas/Consultas.php";
 </div>
 <div id="FCajas"></div>
 </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Cajas abiertas de <?php echo $row['ID_H_O_D']?> 
-  </div>
   
-  <div >
-  
-</div>
-</div>
-<div id="Cajas"></div></div>
  
 
 </div>
