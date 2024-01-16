@@ -223,6 +223,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="CajasActivas" class="nav-link">
+            <i class="fas fa-dot-circle"></i>
+              <p>
+              Cajas Activas
+              
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="HistorialCaja" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>

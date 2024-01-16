@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +10,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Administración de caja | <?echo $row['ID_H_O_D']?> </title>
+  <title>Administración de caja | <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,7 +22,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" >Fondos de caja</a>
@@ -36,7 +35,7 @@ include "Consultas/AnalisisIndex.php";
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Fondos de caja de <?echo $row['ID_H_O_D']?> 
+  Fondos de caja de <?php echo $row['ID_H_O_D']?> 
   </div>
   
   <div >
@@ -53,7 +52,7 @@ include "Consultas/AnalisisIndex.php";
 </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Cajas abiertas de <?echo $row['ID_H_O_D']?> 
+Cajas abiertas de <?php echo $row['ID_H_O_D']?> 
   </div>
   
   <div >
@@ -114,7 +113,7 @@ Cajas abiertas de <?echo $row['ID_H_O_D']?>
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
