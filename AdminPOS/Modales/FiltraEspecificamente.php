@@ -24,7 +24,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly  value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
     </div>
     
