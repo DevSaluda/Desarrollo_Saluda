@@ -1,7 +1,7 @@
 function RegistroEnergias() {
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/RegistroCombustible.php", "", function(data) {
+    $.post("https://saludapos.com/AdminPOS/Consultas/RegistroCombustible.php", "", function(data) {
         $("#RegistrosDeCombustibles").html(data);
     })
 
