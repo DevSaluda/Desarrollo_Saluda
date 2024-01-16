@@ -71,7 +71,7 @@ include "Consultas/Consultas.php";
 
 <script src="js/AsignaFondo.js"></script>
 <script src="js/ControlFondosCajas.js"></script>
-<script src="js/Cajas.js"></script>
+
 
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
