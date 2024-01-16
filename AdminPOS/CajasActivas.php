@@ -52,10 +52,7 @@ Cajas abiertas de <?php echo $row['ID_H_O_D']?>
  
   <!-- Main Footer -->
 <?php
-    
-  include ("Modales/AltaFondos.php");
-  include ("Modales/Error.php");
-  include ("Modales/Exito.php");
+  
   include ("Modales/ExitoActualiza.php");
   include ("footer.php")?>
 
