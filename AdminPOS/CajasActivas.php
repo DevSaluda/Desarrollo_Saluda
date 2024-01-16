@@ -25,7 +25,7 @@ include "Consultas/Consultas.php";
 <?php include_once ("Menu.php")?>
 
 <div class="tab-content" id="pills-tabContent">
-  <<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="card text-center">
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
 Cajas abiertas de <?php echo $row['ID_H_O_D']?> 
   </div>
