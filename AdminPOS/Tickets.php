@@ -10,9 +10,9 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Consulta de tickets | <?echo $row['ID_H_O_D']?> <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Consulta de tickets | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -26,14 +26,14 @@ include "Consultas/Sesion.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important; color: white;">
-  Desglose de tickets  <?echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Desglose de tickets  <?php echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -62,7 +62,7 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
 
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -99,7 +99,7 @@ include "Consultas/Sesion.php";
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -111,7 +111,7 @@ include "Consultas/Sesion.php";
     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
     $(document).on("click", ".btn-Reimpresion", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Reimpresion de tickets");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -124,7 +124,7 @@ include "Consultas/Sesion.php";
      // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
      $(document).on("click", ".btn-EditarData", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/EdicionTicketVenta.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/EdicionTicketVenta.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Edicion de datos de ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -157,7 +157,7 @@ include "Consultas/Sesion.php";
   </div><!-- /.modal -->
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
