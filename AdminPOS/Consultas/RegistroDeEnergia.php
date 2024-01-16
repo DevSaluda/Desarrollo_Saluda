@@ -179,7 +179,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/RegistrosEnergiaArray.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/RegistrosEnergiaArray.php",
  "aoColumns": [
        { mData: 'Id_Registro' },
        { mData: 'Registro_energia' },

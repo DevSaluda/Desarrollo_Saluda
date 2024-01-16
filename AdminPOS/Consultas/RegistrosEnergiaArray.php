@@ -3,8 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro= CURRENT_DATE";
  
@@ -19,7 +18,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Fecha_registro"] = $fila["Fecha_registro"];
     $data[$c]["Sucursal"] = $fila["Sucursal"];
     $data[$c]["Comentario"] = $fila["Comentario"];
-    $data[$c]["Foto"] = ["<img   alt='avatar' class='img-thumbnail' src='https://controlfarmacia.com/FotosMedidores/$fila[file_name]'>"];
+    $data[$c]["Foto"] = ["<img   alt='avatar' class='img-thumbnail' src='https://saludapos.com/FotosMedidores/$fila[file_name]'>"];
     $data[$c]["Registrado"] = $fila["Registro"];
     $data[$c]["Horaregistro"] = $fila["Agregadoel"];
     $c++; 
