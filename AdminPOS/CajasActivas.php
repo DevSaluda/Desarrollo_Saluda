@@ -39,6 +39,8 @@ Cajas abiertas de <?php echo $row['ID_H_O_D']?>
 
 </div>
 
+</div>
+</div>
 
 
 
