@@ -32,7 +32,7 @@ include "Consultas/ContadorIndex.php";
   <title>PUNTO DE VENTA PERFIL DE CEDIS </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
   <script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -42,7 +42,7 @@ include "Consultas/ContadorIndex.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
