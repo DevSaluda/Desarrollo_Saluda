@@ -3,8 +3,6 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
 
 $sql = "SELECT Cajas_POS.ID_Caja, Cajas_POS.Cantidad_Fondo, Cajas_POS.Empleado, Cajas_POS.Turno, Cajas_POS.Sucursal, Cajas_POS.Estatus,
 Cajas_POS.CodigoEstatus, Cajas_POS.Fecha_Apertura, Cajas_POS.Valor_Total_Caja, Cajas_POS.ID_H_O_D,
