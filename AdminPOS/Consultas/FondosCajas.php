@@ -112,7 +112,7 @@ $query = $conn->query($sql1);
   	
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");
@@ -124,7 +124,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");
@@ -136,7 +136,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-HistorialFondos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Movimientos de fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");
