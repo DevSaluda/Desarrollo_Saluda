@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Venta_POS_ID,Folio_Ticket,Fk_Caja,Fk_sucursal,ID_H_O_D FROM Ventas_POS WHERE Fk_Caja = '".$_POST['id']."'  
@@ -66,7 +66,7 @@ $query = $conn->query($sql5);
 
 
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 
   
@@ -83,7 +83,7 @@ $query = $conn->query($sql5);
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  id="ticketinicial" name="TicketInicial"  readonly value="<? echo $Especialistas->Folio_Ticket; ?>">           
+  <input type="text" class="form-control "  id="ticketinicial" name="TicketInicial"  readonly value="<?php echo $Especialistas->Folio_Ticket; ?>">           
   
 </div></div>
 <div class="col">
@@ -93,7 +93,7 @@ $query = $conn->query($sql5);
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  id="ticketinicial" name="TicketFinal"  readonly value="<? echo $Especialistas2->Folio_Ticket; ?>">           
+  <input type="text" class="form-control "  id="ticketinicial" name="TicketFinal"  readonly value="<?php echo $Especialistas2->Folio_Ticket; ?>">           
   
 </div></div></div>
 <div class="row">
@@ -105,9 +105,9 @@ $query = $conn->query($sql5);
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
           
-  <input type="text" class="form-control "  name="TotalTickets"readonly value="<? echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-  <input type="text" class="form-control "  hidden name="NumeroCaja"readonly value="<? echo $Especialistas3->Fk_Caja; ?>" aria-describedby="basic-addon1" maxlength="60">
-  <input type="text" class="form-control "   hidden name="FkSucursalL"readonly value="<? echo $Especialistas3->Fk_sucursal; ?>" aria-describedby="basic-addon1" maxlength="60"> 
+  <input type="text" class="form-control "  name="TotalTickets"readonly value="<?php echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" maxlength="60"> 
+  <input type="text" class="form-control "  hidden name="NumeroCaja"readonly value="<?php echo $Especialistas3->Fk_Caja; ?>" aria-describedby="basic-addon1" maxlength="60">
+  <input type="text" class="form-control "   hidden name="FkSucursalL"readonly value="<?php echo $Especialistas3->Fk_sucursal; ?>" aria-describedby="basic-addon1" maxlength="60"> 
 </div></div>
 <div class="col">
     <label for="exampleFormControlInput1">Total de venta<span class="text-danger">*</span></label>
@@ -116,7 +116,7 @@ $query = $conn->query($sql5);
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="number" class="form-control "  id="cantidadtotalventas" name="TotalCaja" step="any" readonly value="<? echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" >             
+  <input type="number" class="form-control "  id="cantidadtotalventas" name="TotalCaja" step="any" readonly value="<?php echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" >             
   
 </div></div>
 </div>
@@ -125,9 +125,9 @@ $query = $conn->query($sql5);
 
 
 
-<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?php echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?php echo $row['ID_H_O_D']?>">
 
 
 <button type="submit"  id="submit"  class="btn btn-warning">Realizar corte <i class="fas fa-money-check-alt"></i></button>
@@ -138,9 +138,9 @@ $query = $conn->query($sql5);
 
 
 <script src="js/GuardaCorte.js"></script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script type="text/javascript">
 

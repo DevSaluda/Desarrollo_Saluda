@@ -1,4 +1,4 @@
-<?$fcha = date("Y-m-d");?>
+<?php $fcha = date("Y-m-d");?>
 <script type="text/javascript">
 $(document).ready( function () {
     var printCounter = 0;
@@ -52,10 +52,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT Cajas_POS_Audita.ID_Caja,Cajas_POS_Audita.Cantidad_Fondo,Cajas_POS_Audita.Empleado,Cajas_POS_Audita.Sucursal,Cajas_POS_Audita.Estatus,Cajas_POS_Audita.CodigoEstatus,
@@ -109,7 +109,8 @@ $query = $conn->query($sql1);
 </div>
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
-<?php endif;?><?
+<?php endif;?>
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
