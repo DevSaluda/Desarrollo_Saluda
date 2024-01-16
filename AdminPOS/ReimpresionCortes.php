@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 
 ?>
 <!DOCTYPE html>
@@ -10,9 +9,9 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Reimpresión de cortes | <?echo $row['ID_H_O_D']?> <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Reimpresión de cortes | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -26,7 +25,7 @@ include "Consultas/Sesion.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
@@ -62,7 +61,7 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
 
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -100,7 +99,7 @@ include "Consultas/Sesion.php";
     $(document).on("click", ".btn-edit", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Corte de caja");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -122,7 +121,7 @@ include "Consultas/Sesion.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -139,7 +138,7 @@ include "Consultas/Sesion.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
