@@ -17,7 +17,7 @@
     $exibirModal = true;
   }
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ContadorIndex.php";
 
 ?>
