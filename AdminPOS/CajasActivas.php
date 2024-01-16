@@ -10,7 +10,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Cajas activas de <?php echo $row['ID_H_O_D']?> </title>
+  <title>Cajas activas | <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
  <style>
@@ -25,22 +25,28 @@ include "Consultas/Consultas.php";
 <?php include_once ("Menu.php")?>
 
 <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="card text-center">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Cajas abiertas de <?php echo $row['ID_H_O_D']?> 
+  Fondos de caja de <?php echo $row['ID_H_O_D']?> 
   </div>
   
   <div >
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaFondo" class="btn btn-default">
+  Asignar nuevo fondo <i class="fas fa-calculator"></i>
+</button>
+
+</div>
+<div class="card-footer text-muted" style="background-color:#2b73bb !important;color: white;">
+
+  </div>
+</div>
+<div id="Cajas"></div>
+</div>
   
-</div>
-</div>
-<div id="Cajas"></div></div>
  
 
 </div>
 
-</div>
-</div>
 
 
 
@@ -54,7 +60,10 @@ Cajas abiertas de <?php echo $row['ID_H_O_D']?>
  
   <!-- Main Footer -->
 <?php
-  
+    
+  include ("Modales/AltaFondos.php");
+  include ("Modales/Error.php");
+  include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("footer.php")?>
 
