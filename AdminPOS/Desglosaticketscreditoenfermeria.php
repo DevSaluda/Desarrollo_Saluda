@@ -122,7 +122,7 @@ include "Consultas/Consultas.php";
   </div><!-- /.modal -->
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
