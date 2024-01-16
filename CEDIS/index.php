@@ -61,7 +61,7 @@ include "Consultas/ContadorIndex.php";
 </div>
 </div>
 
-<!-- POR CADUCAR --> 
+<!-- POR CADUCAR -->
  
 
 
@@ -79,30 +79,33 @@ include "Consultas/ContadorIndex.php";
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<?php include("footer.php"); ?>
-
-<!-- Scripts -->
 <script src="js/ListaDeTraspasos.js"></script>
 <script src="js/Logs.js"></script>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
-<script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-<script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
 <script src="js/Cookies.js"></script>
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
 <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="plugins/raphael/raphael.min.js"></script>
 <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-
-<?php if ($exibirModal === true) : ?>
-
-<!-- ChartJS --->
+<!-- ChartJS -->
 
 </body>
 </html>
