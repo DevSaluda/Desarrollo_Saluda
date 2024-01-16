@@ -46,20 +46,14 @@ include "Consultas/ContadorIndex.php";
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Traspasos realizados al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
-  <div >
+  <div id="tablaProductos"></div>
 
 </div>
-</div>
-    
-<div id="tablaProductos"></div>
 
-</div>
-</div>
-</div>
-</div>
+
 
 <!-- POR CADUCAR -->
  
