@@ -1,7 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 $fcha = date("Y-m-d");
 $user_id=null;
@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
 
   <title>ALMACEN | PRODUCTOS | <?echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -38,8 +38,8 @@ while ($r=$query->fetch_object()){
 }
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#4285f4!important;color: white;">
  Asignando <? echo $Especialistas->Nombre_Prod; ?> en sucursales
@@ -68,7 +68,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " id="asignanombreprod" name="AsignaNombreProd" value="<? echo $Especialistas->Nombre_Prod; ?>" >          
+  <input type="text" class="form-control " id="asignanombreprod" name="AsignaNombreProd" value="<?php echo $Especialistas->Nombre_Prod; ?>" >          
     </div><label for="nombreprod" class="error">
    </div></div>
    <div class="row">
@@ -79,7 +79,7 @@ while ($r=$query->fetch_object()){
   </div>
   
   <select id = "sucursal" class = "form-control" name = "AsignaSucursal[]" multiple>
-                                               <?
+                                               <?php
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre where ID_SucursalC NOT IN (SELECT Fk_sucursal FROM Stock_POS where ID_Prod_POS='$IdBusqueda')");
           while ($valores = mysqli_fetch_array($query)) {
@@ -102,7 +102,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " id="pv" name="AsLote" value="<? echo $Especialistas->Lote_Med; ?>" >
+  <input type="text" class="form-control " id="pv" name="AsLote" value="<?php echo $Especialistas->Lote_Med; ?>" >
 </div><label for="pv" class="error"></div></div>
 <div class="row">
     <div class="col">
@@ -110,7 +110,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " id="aslote" name="AsFecha" value="<? echo $Especialistas->Fecha_Caducidad; ?>" >
+  <input type="text" class="form-control " id="aslote" name="AsFecha" value="<?php echo $Especialistas->Fecha_Caducidad; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -148,7 +148,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " id="aspv" name="ASPV" value="<? echo $Especialistas->Precio_Venta; ?>" >
+  <input type="text" class="form-control " id="aspv" name="ASPV" value="<?php echo $Especialistas->Precio_Venta; ?>" >
 </div><label for="pv" class="error"></div>
 
 
@@ -157,7 +157,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " id="aspc" name="ASPC" value="<? echo $Especialistas->Precio_C; ?>" >
+  <input type="text" class="form-control " id="aspc" name="ASPC" value="<?php  echo $Especialistas->Precio_C; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -165,7 +165,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " name="ASMinimo" id="asmine"  aria-describedby="basic-addon1" value="<? echo $Especialistas->Min_Existencia; ?>" >           
+  <input type="text" class="form-control " name="ASMinimo" id="asmine"  aria-describedby="basic-addon1" value="<?php echo $Especialistas->Min_Existencia; ?>" >           
     </div><label for="mine" class="error">
     </div>
     <div class="col">
@@ -173,7 +173,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " name="AsMaximo" id="asmaxe"  aria-describedby="basic-addon1" value="<? echo $Especialistas->Max_Existencia; ?>" >           
+  <input type="text" class="form-control " name="AsMaximo" id="asmaxe"  aria-describedby="basic-addon1" value="<?php echo $Especialistas->Max_Existencia; ?>" >           
     </div><label for="maxe" class="error">
     </div>
     </div>
@@ -208,16 +208,16 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
 }?>">
 
 
-<input type="text" class="form-control "  hidden name="ID_Prod" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
-<input type="text" class="form-control " hidden name="TipoServicio" id="tiposervicio"  value="<?echo $Especialistas->Tipo_Servicio?>"aria-describedby="basic-addon1" >
-    <input type="text" class="form-control " hidden name="EmpresaProductos" id="empresa" value="<?echo  $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
-    <input type="text" class="form-control " hidden name="RevProvee1" id="revprovee1" value="<? echo $Especialistas->Proveedor1; ?>"  >   
-    <input type="text" class="form-control " hidden name="RevProvee2" id="revprovee2" value="<? echo $Especialistas->Proveedor2; ?>" >   
-    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden name="ID_Prod" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
+<input type="text" class="form-control " hidden name="TipoServicio" id="tiposervicio"  value="<?php echo $Especialistas->Tipo_Servicio?>"aria-describedby="basic-addon1" >
+    <input type="text" class="form-control " hidden name="EmpresaProductos" id="empresa" value="<?php echo  $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
+    <input type="text" class="form-control " hidden name="RevProvee1" id="revprovee1" value="<?php echo $Especialistas->Proveedor1; ?>"  >   
+    <input type="text" class="form-control " hidden name="RevProvee2" id="revprovee2" value="<?php echo $Especialistas->Proveedor2; ?>" >   
+    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
     <input type="text" class="form-control"  hidden name="Vigencia" id="sistema" readonly value="Vigente">
     <input type="text" class="form-control"  hidden name="CodVigencia" id="sistema" readonly value="background-color:#2BBB1D!important;">
-    <input type="text" class="form-control " hidden name="ASignaClav" id="asignaclav" value="<? echo $Especialistas->Clave_adicional; ?>">
+    <input type="text" class="form-control " hidden name="ASignaClav" id="asignaclav" value="<?php echo $Especialistas->Clave_adicional; ?>">
   
   <input type="text" class="form-control "  hidden value="<?php echo $fcha;?>"  aria-describedby="basic-addon1"  >           
  
@@ -245,13 +245,13 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
       <div class="modal-body">
 
       <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
-      <p class="alert alert-danger" style="background-color: #00c851;color: white;">Se ha realizado de forma correcta la asignación de  <? echo $Especialistas->Nombre_Prod; ?></p>
+      <p class="alert alert-danger" style="background-color: #00c851;color: white;">Se ha realizado de forma correcta la asignación de  <?php echo $Especialistas->Nombre_Prod; ?></p>
      
     </p>
     <button type="button" class="btn btn-outline-info btn-sm" onClick="history.go(-1);" class="btn btn-default">
   <i class="fas fa-long-arrow-alt-left fa-lg"></i> Regresar a productos 
 </button>
-<a type="button" class="btn btn-outline-success btn-sm" href="https://controlfarmacia.com/AdminPOS/VerificaAsignacionProducto?idProd=<? echo base64_encode($Especialistas->ID_Prod_POS); ?>" class="btn btn-default">
+<a type="button" class="btn btn-outline-success btn-sm" href="https://saludapos.com/AdminPOS/VerificaAsignacionProducto?idProd=<?php echo base64_encode($Especialistas->ID_Prod_POS); ?>" class="btn btn-default">
    Verificar Asignación <i class="fas fa-table"></i>
 </a>
       </div>
