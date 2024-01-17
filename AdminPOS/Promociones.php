@@ -36,7 +36,7 @@ Añadir nueva promoción <i class="far fa-plus-square"></i>
 </div>
 </div>
     
-<div id="TablePromosCreditos"></div>
+
 
 </div>
 
