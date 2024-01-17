@@ -63,7 +63,7 @@ $query = $conn->query($sql1);
 <td > <?php echo $Categorias["ID_Tip_Cred"]; ?></td>
   <td > <?php echo $Categorias["Nombre_Tip"]; ?></td>
   <td >$ <?php echo $Categorias["Costo"]; ?></td>
-  <td> <button style="<?echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
+  <td> <button style="<?php echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
   <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
@@ -93,7 +93,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaTipCredito.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaTipCredito.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Editar tipo de crédito");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -105,7 +105,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialTiposCreditos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialTiposCreditos.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
