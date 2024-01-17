@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT * FROM `Medicos_Credit_POS` WHERE ID_H_O_D='".$row['ID_H_O_D']."' AND ID_Med_Cred = ".$_POST["id"];
 $query = $conn->query($sql1);
@@ -15,7 +15,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="EditaMedCreditos" >
 <div class="form-group">
@@ -23,7 +23,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->ID_Med_Cred; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->ID_Med_Cred; ?>">
     </div>
     </div>
     
@@ -35,7 +35,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  name="ActAreaMed" id="actareamed" value="<? echo $Especialistas->Nombre_Med; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  name="ActAreaMed" id="actareamed" value="<?php echo $Especialistas->Nombre_Med; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
 
@@ -49,7 +49,7 @@ while ($r=$query->fetch_object()){
   <select name="ActVigenciaMedico" class="form-control" id="actvigenciamedico" onchange="ActTipoVigenciaMedicos();">
                  
                     
-                   <option  value="<? echo $Especialistas->CodigoEstatus; ?>"><? echo $Especialistas->Estatus; ?></option>		
+                   <option  value="<?php echo $Especialistas->CodigoEstatus; ?>"><?php echo $Especialistas->Estatus; ?></option>		
               <option  value="background-color:#2BBB1D!important;">Vigente</option>		
               <option  value="background-color:#FE0000!important;">Descontinuado</option>						  	
               				  				  
@@ -69,7 +69,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaBDMed" class="btn btn-default btn-sm" style=<? echo $Especialistas->CodigoEstatus; ?>><? echo $Especialistas->Estatus; ?></button> 
+<button id="VigenciaBDMed" class="btn btn-default btn-sm" style=<?php echo $Especialistas->CodigoEstatus; ?>><?php echo $Especialistas->Estatus; ?></button> 
      <button id="SiVigenteAcTMed" class="divOcultoActMed btn btn-default btn-sm" style="background-color:#2BBB1D!important;">Vigente</button> 
       <button id="NoVigenteActMed" class="divOcultoActMed btn btn-default btn-sm" style="background-color:#FE0000!important;">Descontinuado</button>
     
@@ -82,9 +82,9 @@ while ($r=$query->fetch_object()){
   </div></div>
     </div>
     
-<input type="text" class="form-control " hidden  readonly name="UsuarioActMed" id="usuarioactmed"  readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistemaactmed" name="SistemaActMed" readonly value="POS <?echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "  hidden id="empresaactmed" name="EmpresaActMed" readonly value="<?echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control " hidden  readonly name="UsuarioActMed" id="usuarioactmed"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistemaactmed" name="SistemaActMed" readonly value="POS <?php echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden id="empresaactmed" name="EmpresaActMed" readonly value="<?php echo $row['ID_H_O_D']?>">
     <input type="text"  class="form-control " hidden readonly name="VigenciaEstActMed" id="vigenciaestactmed">
 <input type="hidden" name="id_ActMed" id="id_actamed" value="<?php echo $Especialistas->ID_Med_Cred; ?>">
 <button type="submit"  id="submit"  class="btn btn-info">Aplicar cambios <i class="fas fa-check"></i></button>
@@ -92,9 +92,9 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/ActualizaMedCreditos.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
