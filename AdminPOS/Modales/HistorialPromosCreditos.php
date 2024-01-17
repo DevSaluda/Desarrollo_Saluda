@@ -47,7 +47,6 @@ $(document).ready( function () {
 <?
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 
 $user_id=null;
 $sql1="SELECT Promos_Credit_POS_Audita.ID_Promo_Cred,Promos_Credit_POS_Audita.Nombre_Promo,
