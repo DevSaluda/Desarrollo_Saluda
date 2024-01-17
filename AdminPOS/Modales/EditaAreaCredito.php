@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT * FROM `Areas_Credit_POS` WHERE ID_H_O_D='".$row['ID_H_O_D']."' AND ID_Area_Cred = ".$_POST["id"];
 $query = $conn->query($sql1);
@@ -15,7 +15,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="EditaAreaCreditos" >
 <div class="form-group">
@@ -23,7 +23,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->ID_Area_Cred; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->ID_Area_Cred; ?>">
     </div>
     </div>
     
@@ -35,7 +35,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  name="ActAreaN" id="actarean" value="<? echo $Especialistas->Nombre_Area; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  name="ActAreaN" id="actarean" value="<?php echo $Especialistas->Nombre_Area; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
 
@@ -49,7 +49,7 @@ while ($r=$query->fetch_object()){
   <select name="ActVigenciaArea" class="form-control" id="actvigenciaarea" onchange="ActTipoVigenciaAreas();">
                  
                     
-                   <option  value="<? echo $Especialistas->CodigoEstatus; ?>"><? echo $Especialistas->Estatus; ?></option>		
+                   <option  value="<?php echo $Especialistas->CodigoEstatus; ?>"><?php echo $Especialistas->Estatus; ?></option>		
               <option  value="background-color:#2BBB1D!important;">Vigente</option>		
               <option  value="background-color:#FE0000!important;">Descontinuado</option>						  	
               				  				  
@@ -69,7 +69,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaBD" class="btn btn-default btn-sm" style=<? echo $Especialistas->CodigoEstatus; ?>><? echo $Especialistas->Estatus; ?></button> 
+<button id="VigenciaBD" class="btn btn-default btn-sm" style=<?php echo $Especialistas->CodigoEstatus; ?>><?php echo $Especialistas->Estatus; ?></button> 
      <button id="SiVigenteAcTArea" class="divOcultoActArea btn btn-default btn-sm" style="background-color:#2BBB1D!important;">Vigente</button> 
       <button id="NoVigenteActArea" class="divOcultoActArea btn btn-default btn-sm" style="background-color:#FE0000!important;">Descontinuado</button>
     
@@ -82,9 +82,9 @@ while ($r=$query->fetch_object()){
   </div></div>
     </div>
     
-<input type="text" class="form-control " hidden  readonly name="UsuarioActArea" id="usuarioactarea"  readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistemaactarea" name="SistemaActArea" readonly value="POS <?echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "  hidden id="empresaactarea" name="EmpresaActArea" readonly value="<?echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control " hidden  readonly name="UsuarioActArea" id="usuarioactarea"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistemaactarea" name="SistemaActArea" readonly value="POS <?php echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden id="empresaactarea" name="EmpresaActArea" readonly value="<?php echo $row['ID_H_O_D']?>">
     <input type="text"  class="form-control " hidden readonly name="VigenciaEstActArea" id="vigenciaestactarea">
 <input type="hidden" name="id_ActArea" id="id_actarea" value="<?php echo $Especialistas->ID_Area_Cred; ?>">
 <button type="submit"  id="submit"  class="btn btn-info">Aplicar cambios <i class="fas fa-check"></i></button>
@@ -92,9 +92,9 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/ActualizaAreaCreditos.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
@@ -150,7 +150,7 @@ $("#actvigenciaarea").on('change', function() {
      
       
       break;
-      case "<? echo $Especialistas->CodigoEstatus; ?>":
+      case "<?php echo $Especialistas->CodigoEstatus; ?>":
   
         $("#VigenciaBD").show();
         $("#NoVigenteActArea").hide();

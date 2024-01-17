@@ -63,7 +63,7 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $Categorias["ID_Area_Cred"]; ?></td>
   <td > <?php echo $Categorias["Nombre_Area"]; ?></td>
-  <td> <button style="<?echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
+  <td> <button style="<?php echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
   <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
@@ -93,7 +93,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editArea").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaAreaCredito.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaAreaCredito.php","id="+id,function(data){
   			$("#EditAreas").html(data);
           $("#TituloAreas").html("Editar área de crédito");
         
@@ -105,7 +105,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-HistorialAreas").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialAreasCreditos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialAreasCreditos.php","id="+id,function(data){
               $("#EditAreas").html(data);
               $("#TituloAreas").html("Movimientos aplicados en el área");
               $("#DiAreas").removeClass(" modal-dialog modal-lg modal-notify modal-info");
