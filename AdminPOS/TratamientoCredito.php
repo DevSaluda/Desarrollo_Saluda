@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Tratamiento crédito| <?echo $row['ID_H_O_D']?> </title>
+  <title>Tratamiento crédito| <?php echo $row['ID_H_O_D']?> </title>
 
 <?include "Header.php"?>
 </head>
@@ -21,7 +20,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-     Tratamientos  de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+     Tratamientos  de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -51,7 +50,7 @@ include "Consultas/AnalisisIndex.php";
   
 
   <!-- Main Footer -->
-  <?include ("Modales/AltaTipCred.php");
+  <?php include ("Modales/AltaTipCred.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
@@ -82,7 +81,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
