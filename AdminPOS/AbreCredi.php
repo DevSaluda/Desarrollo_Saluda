@@ -9,7 +9,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Creditos | <?echo $row['ID_H_O_D']?> </title>
+  <title>Creditos | <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 </head>
@@ -18,19 +18,15 @@ include "Consultas/Consultas.php";
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Creditos</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Porvencercred" role="tab" aria-controls="pills-profile" aria-selected="false">Por vencer</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Vencidos" role="tab" aria-controls="pills-profile" aria-selected="false">Vencidos</a>
-  </li>
+
+ 
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Creditos en clinicas <? echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Creditos en clinicas <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
