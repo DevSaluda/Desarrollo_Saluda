@@ -44,10 +44,9 @@ include "Consultas/ContadorIndex.php";
 </div>
 <?php include_once ("Menu.php")?>
 
-<div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
+<div class="card-header" style="background-color:#0057b8 !important;color: white;">
+ Traspasos Realizados al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+            </div>
   
   <div id="tablaProductos"></div>
 

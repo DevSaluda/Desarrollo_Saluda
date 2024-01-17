@@ -18,7 +18,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT * from Productos_POS where Fecha_Caducidad >= CURDATE() AND Fecha_Caducidad <= CURDATE() AND Fecha_Caducidad <= CURDATE() + INTERVAL 20 day AND ID_H_O_D ='".$row['ID_H_O_D']."'";
