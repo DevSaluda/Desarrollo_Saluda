@@ -400,7 +400,7 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="ReportesVentas" class="nav-link">
             <i class="fas fa-folder"></i>
               <p>
@@ -408,7 +408,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <a href="DataFacturacion" class="nav-link">
             <i class="fas fa-file-invoice-dollar"></i>
@@ -419,7 +419,7 @@
             </a>
           </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="ListadoDeCancelaciones" class="nav-link">
             <i class="fas fa-ban"></i>
               <p>
@@ -427,7 +427,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
             </ul>
           </li>
           </div>
@@ -443,14 +443,14 @@
         
       
 ?>>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/AdminPOS/EstadisticasFarmacias" class="nav-link">
             <i class="fas fa-chart-area"></i>
               <p>
               Estadisticas Farmacia
               </p>
             </a>
-          </li>
+          </li> -->
 </div>
 <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
