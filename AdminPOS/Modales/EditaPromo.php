@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT Promos_Credit_POS.ID_Promo_Cred,Promos_Credit_POS.Nombre_Promo,
 Promos_Credit_POS.CantidadADescontar, Promos_Credit_POS.Fk_Tratamiento,
@@ -19,7 +19,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="EditaPromosAct" >
 <div class="form-group">
@@ -27,7 +27,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->ID_Promo_Cred; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->ID_Promo_Cred; ?>">
     </div>
     </div>
     
@@ -39,7 +39,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly value="<? echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  readonly value="<?php echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
 <div class="form-group">
@@ -49,7 +49,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  name="ActCostoProm" id="actcostoprom" value="<? echo $Especialistas->CantidadADescontar; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  name="ActCostoProm" id="actcostoprom" value="<?php echo $Especialistas->CantidadADescontar; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
 <div class="row">
@@ -61,7 +61,7 @@ while ($r=$query->fetch_object()){
   <select name="VigenciaProm" class="form-control" id="vigenciaProm" onchange="TipoVigenciaProm();">
                  
                     
-                   <option  value="<? echo $Especialistas->CodigoEstatus; ?>"><? echo $Especialistas->Estatus; ?></option>		
+                   <option  value="<?php echo $Especialistas->CodigoEstatus; ?>"><? echo $Especialistas->Estatus; ?></option>		
               <option  value="background-color: #2BBB1D !important;">Vigente</option>		
               <option  value="background-color: #FE0000 !important;">Descontinuado</option>						  	
               				  				  
@@ -81,7 +81,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaPromBDPromo" class="btn btn-default btn-sm" style=<? echo $Especialistas->CodigoEstatus; ?>><? echo $Especialistas->Estatus; ?></button> 
+<button id="VigenciaPromBDPromo" class="btn btn-default btn-sm" style=<?php echo $Especialistas->CodigoEstatus; ?>><? echo $Especialistas->Estatus; ?></button> 
      <button id="SiVigentePromo" class="divOculto btn btn-default btn-sm" style="background-color: #2BBB1D !important;">Vigente</button> 
       <button id="NoVigentePromo" class="divOculto btn btn-default btn-sm" style="background-color: #FE0000 !important;">Descontinuado</button>
     
@@ -94,8 +94,8 @@ while ($r=$query->fetch_object()){
   </div></div>
     </div>
     
-<input type="text" class="form-control " hidden  readonly name="UsuarioPromo" id="usuariopromo"  readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistemapromo" name="SistemaPromo" readonly value="POS <?echo $row['Nombre_rol']?>">
+<input type="text" class="form-control " hidden  readonly name="UsuarioPromo" id="usuariopromo"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistemapromo" name="SistemaPromo" readonly value="POS <?php echo $row['Nombre_rol']?>">
 
     <input type="text"  class="form-control " hidden readonly name="VigenciaPromEst" id="vigenciaPromest">
 <input type="hidden" name="idpromo" id="idpromo" value="<?php echo $Especialistas->ID_Promo_Cred; ?>">
@@ -104,9 +104,9 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/ActualizaPromociones.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
@@ -162,7 +162,7 @@ $("#vigenciaProm").on('change', function() {
      
       
       break;
-      case "<? echo $Especialistas->CodigoEstatus; ?>":
+      case "<?php echo $Especialistas->CodigoEstatus; ?>":
   
         $("#VigenciaPromBDPromo").show();
         $("#NoVigentePromo").hide();

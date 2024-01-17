@@ -36,7 +36,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Promos_Credit_POS.ID_Promo_Cred,Promos_Credit_POS.Nombre_Promo,
@@ -69,7 +69,7 @@ $query = $conn->query($sql1);
 <td > <?php echo $Categorias["Nombre_Promo"]; ?></td>
 <td > <?php echo $Categorias["CantidadADescontar"]; ?></td>
   <td > <?php echo $Categorias["Nombre_Tip"]; ?></td>
-  <td> <button style="<?echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
+  <td> <button style="<?php echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
   <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
@@ -99,7 +99,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editPromos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaPromo.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaPromo.php","id="+id,function(data){
   			$("#EditPromos").html(data);
           $("#TituloPromos").html("Editar área de crédito");
         
@@ -111,7 +111,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-HistorialPromos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialPromosCreditos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialPromosCreditos.php","id="+id,function(data){
               $("#EditPromos").html(data);
               $("#TituloPromos").html("Movimientos aplicados en el área");
               $("#DiPromos").removeClass(" modal-dialog modal-lg modal-notify modal-info");
@@ -145,7 +145,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
