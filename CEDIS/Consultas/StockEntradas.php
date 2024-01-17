@@ -8,7 +8,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saluadpos.com/CEDIS/Consultas/ArrayStockAlmacenEntradas.php",
+ "sAjaxSource": "https://saludapos.com/CEDIS/Consultas/ArrayStockAlmacenEntradas.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
