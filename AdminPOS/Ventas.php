@@ -13,7 +13,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Ventas realizadas por  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -27,7 +27,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 <div class="tab-content" id="pills-tabContent">
@@ -130,7 +130,7 @@ window.addEventListener("click", (event) => {
 });
 </script>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
