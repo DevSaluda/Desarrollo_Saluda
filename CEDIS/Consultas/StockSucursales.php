@@ -99,7 +99,7 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">Aún no hay Stock Sucursales registrados para <?echo $row['ID_H_O_D']?></p>
+	<p class="alert alert-warning">Aún no hay Stock Sucursales registrados para <?php echo $row['ID_H_O_D']?></p>
 <?php endif;?>
   <!-- Modal -->
   <script>

@@ -22,7 +22,7 @@ while ($r=$query->fetch_object()){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>ALMACEN | PRODUCTOS | <?echo $row['ID_H_O_D']?> </title>
+  <title>ALMACEN | PRODUCTOS | <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
  <style>
@@ -59,7 +59,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " id="asignacodbarra" name="AsignaCodBarra" value="<? echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control " id="asignacodbarra" name="AsignaCodBarra" value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     

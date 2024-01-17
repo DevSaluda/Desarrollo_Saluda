@@ -23,7 +23,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly  value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
     
     
@@ -34,7 +34,7 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
@@ -42,7 +42,7 @@
         ?>  </select>
     </div>
     
-    <input type="text"  name="user" hidden value="<?echo $row['Pos_ID']?>">
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
   <div>
    
       <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>

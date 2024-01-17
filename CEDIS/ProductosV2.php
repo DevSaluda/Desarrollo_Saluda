@@ -11,7 +11,7 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Base general de productos de <?echo $row['ID_H_O_D']?> </title>
+  <title>Base general de productos de <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 
@@ -41,20 +41,23 @@ include "Consultas/AnalisisIndex.php";
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
-<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Productos de Saluda al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
-  Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="card text-center">
+            <div class="card-header" style="background-color:#0057b8 !important;color: white;">
+                Productos Generales de Saluda al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos">
+                    Agregar producto nuevo <i class="fas fa-pills"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="tablaProductos"></div>
+    </div>
 </div>
-</div>
-    
-<div id="tablaProductos"></div>
+
 
 </div>
 

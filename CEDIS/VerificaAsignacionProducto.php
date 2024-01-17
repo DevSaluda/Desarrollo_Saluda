@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 $IdBusqueda=base64_decode($_GET['idProd']);
 
