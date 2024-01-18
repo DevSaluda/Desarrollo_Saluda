@@ -33,7 +33,7 @@ table td {
   
   
   <li class="nav-item">
-    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Stock por sucursales</a>
+  <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Stock por sucursales</a>
   </li>
  
 </ul>
@@ -43,8 +43,8 @@ table td {
 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Stock de cedis <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
+  Stock de Cedis al <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+?>
  
   <div >
  
@@ -75,7 +75,7 @@ table td {
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
   include ("Modales/FiltroSucursales.php");
 
   include ("Modales/Vacios.php");
@@ -115,7 +115,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

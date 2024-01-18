@@ -14,7 +14,7 @@ $IdBusqueda=base64_decode($_GET['idProd']);
 
   <title>ALMACEN | PRODUCTOS | <?echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -152,7 +152,7 @@ $query = $conn->query($sql1);
      
   
 
-<?
+<?php
  
   include ("Modales/ExitoActualiza.php");
 
@@ -199,7 +199,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
