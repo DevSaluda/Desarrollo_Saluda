@@ -1,7 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -38,26 +38,29 @@ table td {
   </li>
  
 </ul>
-
 <div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="card text-center">
+      <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+        Stock por sucursales al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+      </div>
+      
+      <div>
+        <button type="button" class="btn btn-success btn-default" data-toggle="modal" data-target="#FiltroPorSucursales">
+          Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+        </button>
+      </div>
 
-<div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Stock por sucursales de  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+      <div>
+      </div>
+    </div>
   </div>
- 
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroPorSucursales" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
-</div>
-  <div >
- 
+
+  <div class="col-md-12">
+    <div id="TableStockSucursales"></div>
+  </div>
 </div>
 
-</div><div class="col-md-12">
-<div id="TableStockSucursales"></div>
   </div></div>
 <!-- POR CADUCAR -->
  
