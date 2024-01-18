@@ -6,7 +6,7 @@
     $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
     $Ticketss = mysqli_fetch_assoc($resultset);
 
-    $monto1 = $Ticketss['Folio_Traspaso'];  // Corregido: eliminado el punto y coma extra
+    $monto1 = intval($Ticketss['Folio_Traspaso']);
     $monto2 = 000000000001; 
-    $totalmonto =  $monto1 + $monto2;
+    $totalmonto = $monto1 + $monto2;
 ?>
