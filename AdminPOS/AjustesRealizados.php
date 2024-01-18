@@ -13,7 +13,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Ajustes realizados <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
