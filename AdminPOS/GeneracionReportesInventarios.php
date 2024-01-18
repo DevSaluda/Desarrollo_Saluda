@@ -1,9 +1,10 @@
 <?php
 include "Consultas/Consultas.php";
 
-$fecha1=($_POST['Fecha1']);
-$fecha2=($_POST['Fecha2']);
-$Sucursal=($_POST['SucursalParaReporte']);
+// Verifica si las claves existen en la matriz $_POST
+$fecha1 = isset($_POST['Fecha1']) ? $_POST['Fecha1'] : '';
+$fecha2 = isset($_POST['Fecha2']) ? $_POST['Fecha2'] : '';
+$Sucursal = isset($_POST['SucursalParaReporte']) ? $_POST['SucursalParaReporte'] : '';
 $sql1="SELECT
 Stock_POS_PruebasInv.Folio_Prod_Stock,
 Stock_POS_PruebasInv.ID_Prod_POS,
