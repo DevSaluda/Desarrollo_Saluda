@@ -31,10 +31,7 @@ include "Consultas/Consultas.php";
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Traspasos realizados
-al <?php
-$fechaActual = date('d-m-Y H:i:s');
-echo FechaCastellano($fechaActual);
+  Traspasos Realizados al <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>   
 ?>
 
   </div>
@@ -118,7 +115,7 @@ include("footer.php") ?>
 </body>
 
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

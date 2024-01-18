@@ -60,14 +60,14 @@ $query = $conn->query($sql1);
   <td > <?php echo $Usuarios['Precio_Venta']; ?></td>
   <td > <?php echo $Usuarios['Nombre_Sucursal']; ?></td>
 
-  <td >  <button class="btn btn-default btn-sm" style=<?if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
+  <td >  <button class="btn btn-default btn-sm" style=<?php if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
    echo "background-color:#ff1800!important";
 } elseif($Usuarios['Existencias_R'] > $Usuarios['Max_Existencia']) {
   echo "background-color:#fd7e14!important";
 }else {
    echo "background-color:#2bbb1d!important";
 }
-?>><?if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
+?>><?php if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
   echo "Resurtir";
 } elseif($Usuarios['Existencias_R'] > $Usuarios['Max_Existencia']) {
  echo "Exceso de producto";

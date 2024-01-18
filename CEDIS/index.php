@@ -45,7 +45,7 @@ include "Consultas/ContadorIndex.php";
 <?php include_once ("Menu.php")?>
 
 <div class="card-header" style="background-color:#0057b8 !important;color: white;">
- Traspasos Realizados al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+ Traspasos Realizados al <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
             </div>
   
   <div id="tablaProductos"></div>
@@ -111,7 +111,7 @@ $(document).ready(function()
 });
 </script>
 <?php endif; ?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
