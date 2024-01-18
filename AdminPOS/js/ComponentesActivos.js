@@ -1,7 +1,7 @@
 function CargaComponentesActivos(){
 
 
-    $.get("https://controlfarmacia.com/AdminPOS/Consultas/ComponentesActivos.php","",function(data){
+    $.get("https://saludapos.com/AdminPOS/Consultas/ComponentesActivos.php","",function(data){
       $("#ComponentesActivos").html(data);
     })
   
