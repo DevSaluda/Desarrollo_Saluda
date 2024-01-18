@@ -36,7 +36,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM `Servicios_POS` WHERE ID_H_O_D='".$row['ID_H_O_D']."'";
@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editServ").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaServicio.php","id="+id,function(data){
   			$("#form-Serv").html(data);
           $("#TituloServ").html("Editar datos de categoría");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -107,7 +107,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-editServ2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesServicio.php","id="+id,function(data){
               $("#form-Serv").html(data);
               $("#TituloServ").html("Detalles de categoría ");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -119,7 +119,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historialServ").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialServicio.php","id="+id,function(data){
               $("#form-Serv").html(data);
               $("#TituloServ").html("Actualizaciones y ediciones realizadas");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -140,7 +140,7 @@ $query = $conn->query($sql1);
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"> <i class="fas fa-info-circle"></i> <?echo $row['Nombre_Apellidos']?>, 
+						                <span id="Aviso" class="text-semibold"> <i class="fas fa-info-circle"></i> <?php echo $row['Nombre_Apellidos']?>, 
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -153,7 +153,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
