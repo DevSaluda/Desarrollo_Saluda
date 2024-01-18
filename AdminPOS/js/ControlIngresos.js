@@ -1,7 +1,7 @@
 function IngresosProductos(){
 
 
-    $.get("https://controlfarmacia.com/AdminPOS/Consultas/IngresosProductos.php","",function(data){
+    $.get("https://saludapos.com/AdminPOS/Consultas/IngresosProductos.php","",function(data){
       $("#TableStockSucursales").html(data);
     })
   
