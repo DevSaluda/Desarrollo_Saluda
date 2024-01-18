@@ -17,7 +17,7 @@ if ($ProveedorFijo === "CEDIS") {
 }
 
 include "Consultas/Consultas.php";
-
+include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
