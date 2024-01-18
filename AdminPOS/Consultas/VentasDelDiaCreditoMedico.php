@@ -1,4 +1,3 @@
-
 <script>
 
 tabla = $('#ProductosMedico').DataTable({
@@ -8,7 +7,7 @@ tabla = $('#ProductosMedico').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayDesgloseVentasCreditoMedico.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasCreditoMedico.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
