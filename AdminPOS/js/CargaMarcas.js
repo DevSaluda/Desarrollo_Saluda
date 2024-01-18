@@ -1,7 +1,7 @@
 function CargaMarcas(){
 
 
-    $.get("https://controlfarmacia.com/AdminPOS/Consultas/Marcas.php","",function(data){
+    $.get("https://saludapos.com/AdminPOS/Consultas/Marcas.php","",function(data){
       $("#TableMarcas").html(data);
     })
   
