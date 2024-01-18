@@ -289,11 +289,11 @@
 
    </div>
    <div id="errorproveedor" class="alert alert-danger" role="alert" style="display: none;">No puedes repetir el proveedor</div>
-    <input type="text" class="form-control " name="EmpresaProductos" id="empresa" hidden value="<?echo $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
+    <input type="text" class="form-control " name="EmpresaProductos" id="empresa" hidden value="<?php echo $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
     <input type="text" class="form-control " name="RevProvee1" hidden id="revprovee1"  >   
     <input type="text" class="form-control " name="RevProvee2" hidden id="revprovee2"  >   
-    <input type="text" class="form-control"  name="AgregaProductosBy" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  name="SistemaProductos" id="sistema" hidden readonly value=" POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  name="AgregaProductosBy" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  name="SistemaProductos" id="sistema" hidden readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
    
 
