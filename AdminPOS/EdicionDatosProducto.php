@@ -97,7 +97,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control "  id="leviclave" oninput="actualizarClaveLevic()" name="ClaveLevic" value="<? echo $Especialistas->Clave_Levic; ?>"  >
+  <input type="text" class="form-control "  id="leviclave" oninput="actualizarClaveLevic()" name="ClaveLevic" value="<?php echo $Especialistas->Clave_Levic; ?>"  >
 </div><label for="pv" class="error"></div>
 <div class="col">
       
