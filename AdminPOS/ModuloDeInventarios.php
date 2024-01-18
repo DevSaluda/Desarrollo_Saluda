@@ -66,7 +66,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
 }
 
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 
 
@@ -80,7 +80,7 @@ $fcha = date("Y-m-d");
 
   <title>Area de inventarios </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -128,7 +128,7 @@ $fcha = date("Y-m-d");
 
 
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -172,7 +172,7 @@ $(document).ready( function () {
         <?php
           $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>
     </select> <br>
@@ -181,7 +181,7 @@ $(document).ready( function () {
         <option value="Inventario inicial">Inventario inicial</option>
         <option value="Ajuste de inventario">Ajuste de inventario</option>
     </select>
-    <input type="text" hidden name="Agrega" value="<?echo $row['Nombre_Apellidos']?>">
+    <input type="text" hidden name="Agrega" value="<?php echo $row['Nombre_Apellidos']?>">
 
     <br>
     <button type="submit" id="submit" name="import" class="btn-submit">Importar Registros</button>
@@ -246,7 +246,7 @@ if (mysqli_num_rows($result) > 0)
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   include ("Modales/AltaMobiliario.php");
   include ("Modales/Error.php");
@@ -273,7 +273,7 @@ if (mysqli_num_rows($result) > 0)
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
