@@ -38,7 +38,7 @@
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id = null;
 $sql1 = "SELECT * FROM `Presentacion_Prod_POS` WHERE ID_H_O_D='" . $row['ID_H_O_D'] . "'";
@@ -98,7 +98,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-edit3").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaPresentacion.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaPresentacion.php","id="+id,function(data){
   			$("#form-edit2").html(data);
           $("#Titulo2").html("Editar datos de presentacion");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -111,7 +111,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit4").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesPresentaciones.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesPresentaciones.php","id="+id,function(data){
               $("#form-edit2").html(data);
               $("#Titulo2").html("Detalles de categoria ");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -123,7 +123,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historialPre").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialPresentaciones.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialPresentaciones.php","id="+id,function(data){
               $("#form-edit2").html(data);
               $("#Titulo2").html("Movimientos realizados");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -157,7 +157,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT * FROM Presentacion_Prod_POS WHERE ID_H_O_D ='".$row['ID_H_O_D']."' AND Pprod_ID = ".$_POST["id"];
 $query = $conn->query($sql1);
@@ -15,7 +15,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Presentaciones!=null):?>
+<?php if($Presentaciones!=null):?>
 
 <form action="javascript:void(0)" method="post" id="ActualizaPresentaciones" >
 <div class="row">
@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Presentaciones->Pprod_ID; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Presentaciones->Pprod_ID; ?>">
     </div>
     </div>
     
@@ -36,7 +36,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " name="ActNombrepresentacion" id="actnombrepresentacion" value="<? echo $Presentaciones->Nom_Presentacion; ?>">            
+  <input type="text" class="form-control " name="ActNombrepresentacion" id="actnombrepresentacion" value="<?php echo $Presentaciones->Nom_Presentacion; ?>">            
 </div></div></div>
     
    
@@ -49,7 +49,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " name="ActSiglaspresentacion" id="Actsiglaspresentacion" value="<? echo $Presentaciones->Siglas; ?>">   
+  <input type="text" class="form-control " name="ActSiglaspresentacion" id="Actsiglaspresentacion" value="<?php echo $Presentaciones->Siglas; ?>">   
     </div>
     </div>
     <div class="col">
@@ -60,7 +60,7 @@ while ($r=$query->fetch_object()){
   <select name="ActVigenciaPre" class="form-control" id="actualizavigenciapre" onchange="ActualizaTipoVigenciaPre();">
                  
                     
-                   <option  value="<? echo $Presentaciones->Cod_Estado; ?>"><? echo $Presentaciones->Estado; ?></option>		
+                   <option  value="<?php echo $Presentaciones->Cod_Estado; ?>"><?php echo $Presentaciones->Estado; ?></option>		
               <option  value="background-color:#2BBB1D!important;">Vigente</option>		
               <option  value="background-color:#828681!important;">Descontinuado</option>						  	
               <option  value="background-color:#ff6c0c!important;">Proximamente</option>						  				  
@@ -80,7 +80,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaBDPre" class="btn btn-default btn-sm" style=<? echo $Presentaciones->Cod_Estado; ?>><? echo $Presentaciones->Estado; ?></button> 
+<button id="VigenciaBDPre" class="btn btn-default btn-sm" style=<?php echo $Presentaciones->Cod_Estado; ?>><? echo $Presentaciones->Estado; ?></button> 
      <button id="SiVigentePreAct" class="divOcultoPreAct btn btn-default btn-sm" style="background-color:#2BBB1D!important;">Vigente</button> 
       <button id="NoVigentePreAct" class="divOcultoPreAct btn btn-default btn-sm" style="background-color:#828681!important;">Descontinuado</button>
       <button id="QuizasproximoPreAct" class="divOcultoPreAct btn btn-default btn-sm" style="background-color:#ff6c0c!important;">Próximamente</button></td>
@@ -91,17 +91,17 @@ while ($r=$query->fetch_object()){
 </table>
 </div> 
     <input type="text"  class="form-control " hidden readonly name="ActVigEstP" id="vigenciaPreact">
-    <input type="text" class="form-control " hidden  readonly id="actusuariop" name="ActUsuarioP" readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="actsistemap" name="ActSistemaP" readonly value="POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control " hidden  readonly id="actusuariop" name="ActUsuarioP" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="actsistemap" name="ActSistemaP" readonly value="POS <?php echo $row['Nombre_rol']?>">
 <input type="hidden" name="Id_Cat_Pre" id="id_pre" value="<?php echo $Presentaciones->Pprod_ID; ?>">
 <button type="submit"  id="submit"  class="btn btn-info">Aplicar cambios <i class="fas fa-check"></i></button>
                           
 </form>
 <script src="js/ActualizaPresentacion.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
@@ -157,7 +157,7 @@ $("#actualizavigenciapre").on('change', function() {
      
       
       break;
-      case "<? echo $Presentaciones->Cod_Estado; ?>":
+      case "<?php echo $Presentaciones->Cod_Estado; ?>":
   
         $("#VigenciaBDPre").show();
         $("#NoVigentePreAct").hide();

@@ -44,10 +44,9 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 
 $user_id=null;
 $sql1= "SELECT * FROM `Presentacion_Prod_POS_Updates` where ID_H_O_D='".$row['ID_H_O_D']."' AND 
