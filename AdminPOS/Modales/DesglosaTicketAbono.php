@@ -2,8 +2,7 @@
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 
-include "../Consultas/ConsultaCaja.php";
-include "../Consultas/SumadeFolioTickets.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT ReimpresionesTickets_CreditosDentales.ID_Reimpresion,ReimpresionesTickets_CreditosDentales.Fk_Folio_Credito,
@@ -81,7 +80,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-info-circle"></i></span>
   </div>
-  <input type="text" class="form-control " id="asignanombreprod" name="AsignaNombreProd" value="<? echo $Especialistas->Saldo; ?>" >          
+  <input type="text" class="form-control " id="asignanombreprod" name="AsignaNombreProd" value="<?php echo $Especialistas->Saldo; ?>" >          
     </div><label for="nombreprod" class="error">
     </div>
 </div>
