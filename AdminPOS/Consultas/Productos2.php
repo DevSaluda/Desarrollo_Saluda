@@ -177,7 +177,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayProductos.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayProductos.php",
  "aoColumns": [
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
