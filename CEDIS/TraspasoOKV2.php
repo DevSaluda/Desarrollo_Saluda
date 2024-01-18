@@ -1,7 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['traspasoid']);
 include "Consultas/Consultas.php";
-
+include "Consultas/AnalisisIndex.php";
 
 $fcha = date("Y-m-d");
 $user_id=null;
