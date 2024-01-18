@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $IdBusqueda=base64_decode($_GET['idProd']);
 $sql1="SELECT Stock_registrosNuevos.Folio_Ingreso,Stock_registrosNuevos.ID_Prod_POS,Stock_registrosNuevos.Fk_sucursal,
 Stock_registrosNuevos.Existencias_R,Stock_registrosNuevos.ExistenciaPrev,Stock_registrosNuevos.Recibido,Stock_registrosNuevos.AgregadoPor,Stock_registrosNuevos.AgregadoEl,
@@ -18,7 +17,7 @@ Stock_registrosNuevos.ID_Prod_POS = Productos_POS.ID_Prod_POS AND Productos_POS.
 
   <title>Actualizando existencias de <?echo $Usuarios['Nombre_Prod']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -28,11 +27,11 @@ Stock_registrosNuevos.ID_Prod_POS = Productos_POS.ID_Prod_POS AND Productos_POS.
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   <div >
   <button type="button" class="btn btn-outline-info btn-sm" onClick="history.go(-1);" class="btn btn-default">
@@ -77,7 +76,7 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -149,7 +148,7 @@ $query = $conn->query($sql1);
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
  
   include ("Modales/ExitoActualiza.php");
 
@@ -191,7 +190,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
