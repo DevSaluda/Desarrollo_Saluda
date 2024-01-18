@@ -147,7 +147,7 @@ $("#actualizavigenciacat").on('change', function() {
      
       
       break;
-      case "<? echo $Especialistas->Cod_Estado; ?>":
+      case "<?php echo $Especialistas->Cod_Estado; ?>":
   
         $("#VigenciaBD").show();
         $("#NoVigenteCatAct").hide();
