@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
 
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   
          <div class="row">
     <div class="col">
@@ -32,7 +32,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<? echo $Especialistas->Folio_Ticket; ?>" >
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Folio_Ticket; ?>" >
     </div>
     </div>
     
@@ -44,14 +44,14 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<? echo $Especialistas->Fk_tipo_Credi; ?>">            
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Fk_tipo_Credi; ?>">            
 </div><label for="clav" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Titular<span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-info-circle"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<? echo $Especialistas->Nombre_Cred; ?>" >          
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Nombre_Cred; ?>" >          
     </div><label for="nombreprod" class="error">
     </div>
 </div>
@@ -62,7 +62,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<? echo $Especialistas->SaldoAnterior; ?>" >
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->SaldoAnterior; ?>" >
     </div>
     </div>
     
@@ -74,7 +74,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<? echo $Especialistas->Cant_Abono; ?>">            
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Cant_Abono; ?>">            
 </div><label for="clav" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Saldo<span class="text-danger">*</span></label>
@@ -100,6 +100,6 @@ while ($r=$query->fetch_object()){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
