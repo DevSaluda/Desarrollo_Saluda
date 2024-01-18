@@ -1,7 +1,7 @@
 function CargaCreditosFinalizados(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/CreditosFinalizados.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/Consultas/CreditosFinalizados.php","",function(data){
       $("#tablaCreditosFinalizados").html(data);
     })
 

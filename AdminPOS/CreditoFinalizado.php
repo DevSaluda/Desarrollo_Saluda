@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 
 ?>
 <!DOCTYPE html>
@@ -10,9 +9,9 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Medico Credito | <?echo $row['ID_H_O_D']?> </title>
+  <title>Medico Credito | <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -22,12 +21,12 @@ include "Consultas/Sesion.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Créditos Finalizados de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Créditos Finalizados de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -42,7 +41,6 @@ include "Consultas/Sesion.php";
 
 
 
-      <div id="CreditosFinalizados"></div>
       </div>
     </div>
   </div>
@@ -64,12 +62,8 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
-    
- 
-  
-  
-  include ("Modales/Error.php");
+<?php
+    include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("footer.php");?>
@@ -98,7 +92,7 @@ include "Consultas/Sesion.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
