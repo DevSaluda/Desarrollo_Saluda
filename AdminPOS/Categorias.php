@@ -21,7 +21,7 @@ include "Consultas/Consultas.php";
     </style>
 </head>
 <?php include_once ("Menu.php");?>
-<div id="ContadorDeAlmacen"></div>
+
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
@@ -73,7 +73,7 @@ include ("Modales/AltaCategorias.php");
 <script src="js/CargaCategorias.js"></script>
 <script src="js/AgregaCategoria.js"></script>
 
-<script src="js/ContadorControlAlmacen.js"></script>
+
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
