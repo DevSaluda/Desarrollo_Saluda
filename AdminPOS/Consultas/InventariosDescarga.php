@@ -1,6 +1,7 @@
-<?include("db_connection.php");
+<?php include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";?>
+
+?>
 <script>
 
 tabla = $('#Productos').DataTable({
@@ -10,7 +11,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayStockInventarios.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayStockInventarios.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
