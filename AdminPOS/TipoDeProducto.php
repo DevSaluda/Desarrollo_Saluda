@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +10,7 @@ include "Consultas/Sesion.php";
 
   <title>Tipo de Productos activos | <?echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -22,7 +20,7 @@ include "Consultas/Sesion.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
@@ -65,7 +63,7 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
 
   include ("Modales/AltaTipoProductos.php");
@@ -119,7 +117,7 @@ include "Consultas/Sesion.php";
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

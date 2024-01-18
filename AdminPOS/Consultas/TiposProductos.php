@@ -15,10 +15,9 @@ $(document).ready( function () {
 } );
 </script>
 <?php
-
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM TipProd_POS WHERE ID_H_O_D ='".$row['ID_H_O_D']."'";
@@ -44,7 +43,7 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $TiposProd['Tip_Prod_ID']; ?></td>
   <td > <?php echo $TiposProd['Nom_Tipo_Prod']; ?></td>
-  <td >  <button class="btn btn-default btn-sm" style="<?echo $TiposProd['Cod_Estado'];?>"><?php echo $TiposProd["Estado"]; ?></button> </td>
+  <td >  <button class="btn btn-default btn-sm" style="<?php echo $TiposProd['Cod_Estado'];?>"><?php echo $TiposProd["Estado"]; ?></button> </td>
   <td > <?php echo fechaCastellano($TiposProd['Agregadoel']); ?></td> 
     <td>
    
@@ -76,7 +75,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-editProd").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaTipoProducto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaTipoProducto.php","id="+id,function(data){
   			$("#form-editTP").html(data);
           $("#TituloTP").html("Editar tipo de productos");
               $("#DiTP").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -89,7 +88,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-editDetailProd").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetalleTipoProducto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetalleTipoProducto.php","id="+id,function(data){
               $("#form-editTP").html(data);
               $("#TituloTP").html("Detalles del tipo de producto");
               $("#DiTP").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -102,7 +101,7 @@ $query = $conn->query($sql1);
 
     $(".btn-historialTiPoProd").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialTiposProducto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialTiposProducto.php","id="+id,function(data){
               $("#form-editTP").html(data);
               $("#TituloTP").html("Actualizaciones y cambios en tipos de productos");
               $("#DiTP").removeClass("modal-dialog modal-lg modal-notify modal-info");
