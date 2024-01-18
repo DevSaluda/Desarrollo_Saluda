@@ -150,7 +150,8 @@ $query = $conn->query($sql1);
 <?php endif;?>
 
 
-
+</div>
+</div>
 
 
 
@@ -171,13 +172,6 @@ $query = $conn->query($sql1);
 
 <!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-<script src="js/ControlProductos2.js"></script>
-
-<script src="js/ProductosPovencer.js"></script>
-<script src="js/ControlStockSucursales.js"></script>
-
-<script src="js/AltaProductos.js"></script>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
