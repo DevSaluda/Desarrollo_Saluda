@@ -37,47 +37,11 @@ include "Consultas/Consultas.php";
 
 <div id="tablaCreditos"></div>
 </div>
-<!-- Tipos_productos -->
-<div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  
-  <div >
-  
-</div>
-</div>
-    
 
-</div>
 
-<div class="tab-pane fade show " id="Porvencercred" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Créditos por vencer de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  
-</div>
-</div>
-    
-<div id="tablaCreditosPorVencer"></div>
 
-</div>
 
-<div class="tab-pane fade show " id="Vencidos" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Créditos vencidos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  
-</div>
-</div>
-    
-<div id="tablaCreditosVencidos"></div>
 
-</div>
 </div>
 
   
