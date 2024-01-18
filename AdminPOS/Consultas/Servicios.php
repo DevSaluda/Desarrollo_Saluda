@@ -63,7 +63,7 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $Categorias["Servicio_ID"]; ?></td>
   <td > <?php echo $Categorias["Nom_Serv"]; ?></td>
-  <td> <button style="<?echo $Categorias['Cod_Estado'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estado"]; ?></button></td>
+  <td> <button style="<?php echo $Categorias['Cod_Estado'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estado"]; ?></button></td>
   <td > <?php echo fechaCastellano($Categorias["Agregadoel"]); ?></td> 
   <td>
 		 <!-- Basic dropdown -->
