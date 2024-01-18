@@ -1,10 +1,8 @@
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT Ventas_POS.Folio_Ticket,
                Ventas_POS.Fk_Caja,

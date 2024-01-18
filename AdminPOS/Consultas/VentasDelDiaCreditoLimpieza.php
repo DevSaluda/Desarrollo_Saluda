@@ -8,7 +8,7 @@ tabla = $('#ProductosLimpieza').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayDesgloseVentasCreditoLimpieza.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasCreditoLimpieza.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
