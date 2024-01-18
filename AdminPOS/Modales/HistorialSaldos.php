@@ -68,10 +68,9 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 
 $user_id=null;
 $sql1= "SELECT Folio_Abono,Fk_Folio_Credito,Nombre_Cred,Cant_Apertura,Cant_Abono,Fecha_Abono,Saldo,Agrega FROM `AbonoCreditos_POS` where ID_H_O_D='".$row['ID_H_O_D']."' AND 
