@@ -12,7 +12,7 @@ include "Consultas/Consultas.php";
 
   <title><?php echo $row['ID_H_O_D']?> | Marcas de productos </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
