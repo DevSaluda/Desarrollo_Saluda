@@ -1,4 +1,5 @@
-<?include("db_connection.php");
+<?php 
+include("db_connection.php");
 include "Consultas.php";
 include "Sesion.php";?>
 <script>
@@ -10,7 +11,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayAjustesDeInventariosRealizados.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayAjustesDeInventariosRealizados.php",
  "aoColumns": [
        { mData: 'FolioAjuste' },
        { mData: 'Nombre_Prod' },
