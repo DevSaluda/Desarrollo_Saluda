@@ -28,7 +28,7 @@ while ($r=$query->fetch_object()){
 
   <title>Editando datos del producto</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -38,11 +38,11 @@ while ($r=$query->fetch_object()){
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
- Editando datos de <? echo $Especialistas->Nombre_Prod; ?>
+ Editando datos de <?php echo $Especialistas->Nombre_Prod; ?>
  
   </div>
   <div >
@@ -62,7 +62,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     
@@ -74,14 +74,14 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control "  id="clavadicional" name="ClaveAdicional"  value="<? echo $Especialistas->Clave_adicional; ?>">            
+  <input type="text" class="form-control "  id="clavadicional" name="ClaveAdicional"  value="<?php echo $Especialistas->Clave_adicional; ?>">            
 </div><label for="clav" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Nombre / Descripcion<span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <textarea class="form-control"    onkeyup="actualizarNombreProd()" name="NameDescrip" rows="3" id="namedescripcion"><? echo $Especialistas->Nombre_Prod; ?></textarea>
+  <textarea class="form-control"    onkeyup="actualizarNombreProd()" name="NameDescrip" rows="3" id="namedescripcion"><?php echo $Especialistas->Nombre_Prod; ?></textarea>
          
     </div><label for="nombreprod" class="error">
     </div>
@@ -108,7 +108,7 @@ while ($r=$query->fetch_object()){
     
       <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
     </div>
-    <input type="text" class="form-control "  id="enferclave" oninput="actualizarClaveEnFer()" name="ClaveEnfermeria" value="<? echo $Especialistas->Cod_Enfermeria; ?>"  >
+    <input type="text" class="form-control "  id="enferclave" oninput="actualizarClaveEnFer()" name="ClaveEnfermeria" value="<?php echo $Especialistas->Cod_Enfermeria; ?>"  >
   </div><label for="pv" class="error"></div>
 
 
@@ -117,7 +117,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="date" class="form-control "   name="fechacad" value="<? echo $Especialistas->Fecha_Caducidad; ?>" >
+  <input type="date" class="form-control "   name="fechacad" value="<?php echo $Especialistas->Fecha_Caducidad; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -125,7 +125,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control "   name="lestock"aria-describedby="basic-addon1" value="<? echo $Especialistas->Stock; ?>" >           
+  <input type="text" class="form-control "   name="lestock"aria-describedby="basic-addon1" value="<?php echo $Especialistas->Stock; ?>" >           
     </div><label for="mine" class="error">
     </div>
     
@@ -149,14 +149,14 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="number" class="form-control " onchange="validarPrecioVenta()" id="acaspv" name="ACASPV" value="<? echo $Especialistas->Precio_Venta; ?>" >
+  <input type="number" class="form-control " onchange="validarPrecioVenta()" id="acaspv" name="ACASPV" value="<?php echo $Especialistas->Precio_Venta; ?>" >
 </div><label for="pv" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Precio compra <span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="number" class="form-control "   onchange="actualizarPrecioCompra() "  id="pcc" name="pcc"value="<? echo $Especialistas->Precio_C; ?>" >
+  <input type="number" class="form-control "   onchange="actualizarPrecioCompra() "  id="pcc" name="pcc"value="<?php echo $Especialistas->Precio_C; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -164,7 +164,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="number" class="form-control "  name="ACAsMinimo" id="acasmini" aria-describedby="basic-addon1" value="<? echo $Especialistas->Min_Existencia; ?>" >           
+  <input type="number" class="form-control "  name="ACAsMinimo" id="acasmini" aria-describedby="basic-addon1" value="<?php echo $Especialistas->Min_Existencia; ?>" >           
     </div><label for="mine" class="error">
     </div>
     <div class="col">
@@ -172,7 +172,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="number" class="form-control " name="ACAsMaximo" id="acasmaxe"  aria-describedby="basic-addon1" value="<? echo $Especialistas->Max_Existencia; ?>" >           
+  <input type="number" class="form-control " name="ACAsMaximo" id="acasmaxe"  aria-describedby="basic-addon1" value="<?php echo $Especialistas->Max_Existencia; ?>" >           
     </div><label for="maxe" class="error">
     </div>
     </div>
@@ -181,12 +181,12 @@ while ($r=$query->fetch_object()){
   
    
 
-    <input type="text" class="form-control " hidden name="ACT_ID_Prod" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
+    <input type="text" class="form-control " hidden name="ACT_ID_Prod" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
 
        
      
-    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
    
 
@@ -201,7 +201,7 @@ while ($r=$query->fetch_object()){
                                         </form>
        <form enctype="multipart/form-data" id="EnviaActualizacionPrecios">
 
-       <input type="text" class="form-control " hidden name="Act_Stock_ID" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
+       <input type="text" class="form-control " hidden name="Act_Stock_ID" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
        <div class="row">
        <div class="col">
       
@@ -211,8 +211,8 @@ while ($r=$query->fetch_object()){
     
       <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
     </div>
-    <input type="Text" class="form-control " id="nameactualiza" name="NombreStockActualiza" value="<? echo $Especialistas->Nombre_Prod; ?>" >
-    <input type="Text" class="form-control " id=" actualizaClaveEnfer" name="ActualizaClaveEnfermeria" value="<? echo $Especialistas->Cod_Enfermeria; ?>" >
+    <input type="Text" class="form-control " id="nameactualiza" name="NombreStockActualiza" value="<?php echo $Especialistas->Nombre_Prod; ?>" >
+    <input type="Text" class="form-control " id=" actualizaClaveEnfer" name="ActualizaClaveEnfermeria" value="<?php echo $Especialistas->Cod_Enfermeria; ?>" >
    
   </div><label for="pv" class="error"></div>
    <div class="col">
@@ -223,14 +223,14 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="number" class="form-control " id="preciostockventa" name="preciostockventa" value="<? echo $Especialistas->Precio_Venta; ?>" >
+  <input type="number" class="form-control " id="preciostockventa" name="preciostockventa" value="<?php echo $Especialistas->Precio_Venta; ?>" >
 </div><label for="pv" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Precio compra <span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="number" class="form-control "  id="preciostockcompra" name="preciostockcompra"value="<? echo $Especialistas->Precio_C; ?>" >
+  <input type="number" class="form-control "  id="preciostockcompra" name="preciostockcompra"value="<?php echo $Especialistas->Precio_C; ?>" >
   <input type="text" name="actualizaClavelevic" id="actualizaClavelevic">
     </div><label for="pc" class="error">
     </div>
@@ -243,9 +243,9 @@ while ($r=$query->fetch_object()){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script>
   function validarPrecioVenta() {
@@ -309,7 +309,7 @@ actualizarNombreProd() {
 </script>
 <script src="js/ActualizaProductosGenerales.js"></script>
 <script src="js/ActualizaPreciosDeTodo.js"></script>
-<?
+<?php
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -357,7 +357,7 @@ $(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
