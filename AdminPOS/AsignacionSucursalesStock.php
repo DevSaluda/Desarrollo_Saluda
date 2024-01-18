@@ -44,7 +44,7 @@ while ($r=$query->fetch_object()){
  Asignando <?php echo $Especialistas->Nombre_Prod; ?> en sucursales
   </div>
   
-  <div class="col-md-12">
+  <div class="col-md-6">
   <button type="button" class="btn btn-outline-info btn-sm" onClick="history.go(-1);" class="btn btn-default">
   <i class="fas fa-long-arrow-alt-left fa-lg"></i> Regresar a productos 
 </button>
