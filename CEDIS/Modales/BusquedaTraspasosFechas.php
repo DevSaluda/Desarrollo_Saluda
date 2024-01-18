@@ -14,7 +14,7 @@
 
         <div class="modal-body">
 
-          <form method="POST" action="https://controlfarmacia.com/CEDIS/TraspasosPorFechas">
+          <form method="POST" action="https://saludapos.com/CEDIS/TraspasosPorFechas">
 
 
 

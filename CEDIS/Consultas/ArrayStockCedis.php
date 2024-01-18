@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 
 $sql = "SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.Clave_adicional,Stock_POS.ID_Prod_POS,
@@ -30,7 +30,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Min_Existencia"] = $fila["Min_Existencia"];
     $data[$c]["Max_Existencia"] = $fila["Max_Existencia"];
    
-    $data[$c]["Acciones"] = "<a href='https://controlfarmacia.com/CEDIS/ActualizaOne?idProd=" . base64_encode($fila["Folio_Prod_Stock"]) . "' class='btn btn-primary btn-sm btn-edit'>
+    $data[$c]["Acciones"] = "<a href='https://saludapos.com/CEDIS/ActualizaOne?idProd=" . base64_encode($fila["Folio_Prod_Stock"]) . "' class='btn btn-primary btn-sm btn-edit'>
     Ingresar Productos <i class='fas fa-edit'></i>
 </a>";
 
