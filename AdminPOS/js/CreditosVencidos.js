@@ -1,7 +1,7 @@
 function  CargaCreditosVencidos(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/CreditosVencidos.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/Consultas/CreditosVencidos.php","",function(data){
       $("#tablaCreditosVencidos").html(data);
     })
 
