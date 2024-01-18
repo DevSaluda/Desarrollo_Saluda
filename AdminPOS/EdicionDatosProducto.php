@@ -1,8 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['editprod']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Productos_POS.ID_Prod_POS,Productos_POS.Cod_Barra,Productos_POS.Clave_adicional,Productos_POS.Cod_Enfermeria,Productos_POS.Nombre_Prod,Productos_POS.Stock,
