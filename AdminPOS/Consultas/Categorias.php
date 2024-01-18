@@ -36,7 +36,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM `Categorias_POS` WHERE ID_H_O_D='".$row['ID_H_O_D']."'";
@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
 <script>
     $(".btn-edit").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/EditaCategoria.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/EditaCategoria.php","id="+id,function(data){
         $("#form-edit").html(data);
           $("#Titulo").html("Editar datos de categoría");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -107,7 +107,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit2").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesCategoria.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/DetallesCategoria.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles de categoría ");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -119,7 +119,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historial").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialCategorias.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/HistorialCategorias.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Actualizaciones y ediciones realizadas");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -153,7 +153,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
