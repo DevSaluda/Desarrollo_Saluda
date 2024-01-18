@@ -1,8 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Productos_POS.ID_Prod_POS,Productos_POS.Cod_Barra,Productos_POS.Clave_adicional,Productos_POS.Nombre_Prod,Productos_POS.Stock,Productos_POS.Lote_Med,Productos_POS.Precio_Venta,Productos_POS.Precio_C,
@@ -27,7 +26,7 @@ while ($r=$query->fetch_object()){
 
   <title>Editando datos del producto</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -37,8 +36,8 @@ while ($r=$query->fetch_object()){
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
  Editando datos de <? echo $Especialistas->Nombre_Prod; ?>
@@ -61,7 +60,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     
@@ -71,7 +70,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <textarea class="form-control"  rows="3" ><? echo $Especialistas->Nombre_Prod; ?></textarea>
+  <textarea class="form-control"  rows="3" ><?php echo $Especialistas->Nombre_Prod; ?></textarea>
          
     </div><label for="nombreprod" class="error">
     </div>
@@ -98,11 +97,11 @@ while ($r=$query->fetch_object()){
   </div>
 
   <select id = "tiposervicio" class = "form-control" name = "TipoServicio" onchange="actualizaservicio()">
-                                               <option value="<? echo $Especialistas->Tipo_Servicio; ?>"><? echo $Especialistas->Nom_Serv; ?></option>
+                                               <option value="<?php echo $Especialistas->Tipo_Servicio; ?>"><?php echo $Especialistas->Nom_Serv; ?></option>
         <?
           $query = $conn -> query ("SELECT Servicio_ID,Nom_Serv,Estado,ID_H_O_D FROM Servicios_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Servicio_ID].'">'.$valores[Nom_Serv].'</option>';
+            echo '<option value="'.$valores["Servicio_ID"].'">'.$valores["Nom_Serv"].'</option>';
           }
         ?>  </select>       
 </div><label for="pv" class="error"></div>
@@ -114,11 +113,11 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   <select id = "proveedor1" class = "form-control" name = "Provee1" onchange="actualizaproveedor1()" >
-                                               <option value="<? echo $Especialistas->Proveedor1; ?>"><? echo $Especialistas->Proveedor1; ?></option>
-        <?
+                                               <option value="<?php echo $Especialistas->Proveedor1; ?>"><?php echo $Especialistas->Proveedor1; ?></option>
+        <?php
           $query = $conn -> query ("SELECT 	ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Alta'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Proveedor].'">'.$valores[Nombre_Proveedor].'</option>';
+            echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
           }
         ?>  </select>
     </div><label for="pc" class="error">
@@ -130,11 +129,11 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   <select id = "proveedor2" class = "form-control" name = "Provee2" onchange="actualizaproveedor2()">
-                                               <option value="<? echo $Especialistas->Proveedor2; ?>"><? echo $Especialistas->Proveedor2; ?></option>
-        <?
+                                               <option value="<?php echo $Especialistas->Proveedor2; ?>"><?php echo $Especialistas->Proveedor2; ?></option>
+        <?php
           $query = $conn -> query ("SELECT 	ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Alta'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Proveedor].'">'.$valores[Nombre_Proveedor].'</option>';
+            echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
           }
         ?>  </select>
     </div><label for="pc" class="error">
@@ -149,7 +148,7 @@ while ($r=$query->fetch_object()){
   
    
 
-    <input type="text" class="form-control " hidden name="ACT_ID_Prod" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
+    <input type="text" class="form-control " hidden name="ACT_ID_Prod" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
 
        
   
@@ -164,7 +163,7 @@ while ($r=$query->fetch_object()){
                                         </form>
        <form enctype="multipart/form-data" id="EnviaActualizacionPrecios">
 
-       <input type="text" class="form-control " hidden name="Act_Stock_ID" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
+       <input type="text" class="form-control " hidden name="Act_Stock_ID" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
        <div class="row">
    
    <div class="col">
@@ -175,15 +174,15 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " id="servicionuevo" name="ServicioNuevo" value="<? echo $Especialistas->Tipo_Servicio; ?>" >
-  <input type="text" class="form-control " id="proveedor1stock" name="Proveedor1Stock" value="<? echo $Especialistas->Proveedor1; ?>" >
+  <input type="text" class="form-control " id="servicionuevo" name="ServicioNuevo" value="<?php echo $Especialistas->Tipo_Servicio; ?>" >
+  <input type="text" class="form-control " id="proveedor1stock" name="Proveedor1Stock" value="<?php echo $Especialistas->Proveedor1; ?>" >
 </div><label for="pv" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Proveedor 2 <span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control "  id="proveedor2stock" name="Proveedor2Stock"value="<? echo $Especialistas->Proveedor2; ?>" >
+  <input type="text" class="form-control "  id="proveedor2stock" name="Proveedor2Stock"value="<?php echo $Especialistas->Proveedor2; ?>" >
     </div><label for="pc" class="error">
     </div>
     </div>
@@ -195,9 +194,9 @@ while ($r=$query->fetch_object()){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script>
   function actualizaproveedor1() {
@@ -219,7 +218,7 @@ function actualizaservicio() {
 </script>
 <script src="js/ActualizaProveedoresPrincipales.js"></script> 
 <script src="js/ActualizaProveedoresStock.js"></script> 
-<?
+<?php
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -256,7 +255,7 @@ function actualizaservicio() {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
