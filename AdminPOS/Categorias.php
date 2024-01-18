@@ -20,7 +20,7 @@ include "Consultas/Consultas.php";
 
     </style>
 </head>
-<?include_once ("Menu.php");?>
+<?php include_once ("Menu.php");?>
 <div id="ContadorDeAlmacen"></div>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <div class="card text-center">
