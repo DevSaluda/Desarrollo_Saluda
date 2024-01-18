@@ -16,11 +16,7 @@ if ($ProveedorFijo === "CEDIS") {
     $valorCombinado = $NumeroDeFacturaTrapaso;
 }
 
-
-
-
 include "Consultas/Consultas.php";
-
 include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
