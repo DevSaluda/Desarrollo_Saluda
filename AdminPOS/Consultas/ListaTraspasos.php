@@ -175,7 +175,7 @@ tabla = $('#Traspasos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrrayTraspasos.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrrayTraspasos.php",
  "aoColumns": [
        { mData: 'IDTraspasoGenerado' },
        { mData: 'NumberOrden' },

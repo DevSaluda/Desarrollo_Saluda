@@ -1,6 +1,3 @@
-
-
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -49,7 +46,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Estatus"] =$fila["Estatus"];
     $data[$c]["Envio"] =$fila["TraspasoGeneradoPor"];
     $data[$c]["Recibio"] =$fila["TraspasoRecibidoPor"];
-    $data[$c]["Traspasocorrecto"] = ["<a href=https://controlfarmacia.com/AdminPOS/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
+    $data[$c]["Traspasocorrecto"] = ["<a href=https://saludapos.com/AdminPOS/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
     
     $c++; 
  
