@@ -81,7 +81,7 @@ table td {
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
   include ("Modales/FiltroSucursales.php");
 
   include ("Modales/Vacios.php");
@@ -121,7 +121,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

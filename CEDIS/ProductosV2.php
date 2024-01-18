@@ -1,7 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -146,7 +146,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
