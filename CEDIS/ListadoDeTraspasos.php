@@ -32,7 +32,11 @@ include "Consultas/Consultas.php";
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Traspasos realizados
-al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
+al <?php
+$fechaActual = date('d-m-Y H:i:s');
+echo FechaCastellano($fechaActual);
+?>
+
   </div>
 
   <div>
