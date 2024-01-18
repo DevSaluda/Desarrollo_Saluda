@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
@@ -38,7 +36,7 @@ AND Stock_POS_PruebasInv.Fk_sucursal = '$Sucursal' AND Stock_POS_PruebasInv.Cod_
 
   <title>Generador de reportes de inventarios  </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -48,7 +46,7 @@ AND Stock_POS_PruebasInv.Fk_sucursal = '$Sucursal' AND Stock_POS_PruebasInv.Cod_
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
@@ -96,7 +94,7 @@ $(document).ready( function () {
 				extend:    'excelHtml5',
 				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
 				titleAttr: 'Exportar a Excel',
-                title: 'Reporte de inventarios <?echo $fecha1?> al <?echo $fecha2?>',
+                title: 'Reporte de inventarios <?php echo $fecha1?> al <?php echo $fecha2?>',
 				className: 'btn btn-success'
 			},
 			
@@ -111,7 +109,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -212,7 +210,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
