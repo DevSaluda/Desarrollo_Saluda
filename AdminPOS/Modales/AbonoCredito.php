@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Creditos_POS.Folio_Credito,Creditos_POS.Fk_tipo_Credi,Creditos_POS.Nombre_Cred,Creditos_POS.Cant_Apertura,Creditos_POS.Fk_Sucursal,Creditos_POS.Saldo,
@@ -20,7 +20,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="AbonaCredito" >
 
@@ -30,7 +30,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " id="foliocred" name="FolioCred"  readonly value="<? echo $Especialistas->Folio_Credito; ?>">
+  <input type="text" class="form-control " id="foliocred" name="FolioCred"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
   
     </div>
     </div>
@@ -43,8 +43,8 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly value="<? echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60">            
-  <input type="text" class="form-control " hidden name="FolioTipocred" id="foliotipocred" readonly value="<? echo $Especialistas->Fk_tipo_Credi; ?>">
+  <input type="text" class="form-control "  readonly value="<?php echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control " hidden name="FolioTipocred" id="foliotipocred" readonly value="<?php echo $Especialistas->Fk_tipo_Credi; ?>">
 </div></div></div>
 
 <div class="row">
@@ -55,7 +55,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly name="Titular" id="titular" value="<? echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  readonly name="Titular" id="titular" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div>
 <div class="col">
     <label for="exampleFormControlInput1">Fecha<span class="text-danger">*</span></label>
@@ -72,8 +72,8 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">
-  <input type="text" class="form-control " hidden name="Sucursal" id="sucursal" value="<? echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">   
+  <input type="text" class="form-control "  readonly value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">
+  <input type="text" class="form-control " hidden name="Sucursal" id="sucursal" value="<?php echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">   
     </div>
     </div>
     <div class="col">
@@ -81,7 +81,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly name="SaldoActual" id="saldoactual" value="<? echo $Especialistas->Saldo; ?>" aria-describedby="basic-addon1" maxlength="60">   
+  <input type="text" class="form-control "  readonly name="SaldoActual" id="saldoactual" value="<?php echo $Especialistas->Saldo; ?>" aria-describedby="basic-addon1" maxlength="60">   
     </div>
     <label for="abono" class="error"> 
   </div></div>
@@ -106,9 +106,9 @@ while ($r=$query->fetch_object()){
     
    
 
-<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?php echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?php echo $row['ID_H_O_D']?>">
 <input type="text" class="form-control " hidden  readonly name="Estatus" id="estatus"  readonly value="Abonado">
 <input type="text" class="form-control " hidden  readonly name="Codigo" id="codigo"  readonly value="background-color: #2BBB1D !important;">
 <input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
@@ -137,9 +137,9 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/Abona.js"></script>
 <script src="js/UpdateSaldo.js"></script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 
 <script>
