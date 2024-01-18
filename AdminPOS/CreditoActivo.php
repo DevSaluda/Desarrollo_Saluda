@@ -8,7 +8,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Apertura de credito| <?echo $row['ID_H_O_D']?> </title>
+  <title>Apertura de credito| <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 </head>
