@@ -118,7 +118,7 @@ echo '<div class="alert alert-danger">Enter product name or number to generate b
 <?php
     
 
-  include ("Modales/AdvierteDeCaja.php");
+
   include ("footer.php")?>
 
 <!-- ./wrapper -->
