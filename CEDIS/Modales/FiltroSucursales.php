@@ -45,7 +45,6 @@ while ($query->fetch()) {
 }
 
 $query->close();
-}
 
         ?>  </select>
     </div>
