@@ -38,11 +38,11 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Acciones"] = ["<button class='btn btn-primary btn-sm dropdown-toggle' 
     type='button' data-toggle='dropdown' aria-haspopup='true'
      aria-expanded='false'><i class='fas fa-th-list fa-1x'></i></button><div class='dropdown-menu'>
-     <a href=https://controlfarmacia.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-edit  dropdown-item' >
-     Actualizar existencias <i class='fas fa-edit'></i></a><a href=https://controlfarmacia.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])."
+     <a href=https://saludapos.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-edit  dropdown-item' >
+     Actualizar existencias <i class='fas fa-edit'></i></a><a href=https://saludapos.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])."
       class='btn-VerDistribucion  dropdown-item' >Actualizar existencias en coincidencia <i class='fas fa-equals'></i> </a>
-      <a href=https://controlfarmacia.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-editProd dropdown-item' >Traspaso
-       <i class='fas fa-exchange-alt'></i></a><a href=https://controlfarmacia.com/AdminPOS/EstadisticaVentas?idProd=".base64_encode($fila["Cod_Barra"])." 
+      <a href=https://saludapos.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-editProd dropdown-item' >Traspaso
+       <i class='fas fa-exchange-alt'></i></a><a href=https://saludapos.com/AdminPOS/EstadisticaVentas?idProd=".base64_encode($fila["Cod_Barra"])." 
        class='btn-Delete dropdown-item' >Estadisticas de venta <i class='fas fa-chart-line'></i></a></div> "];
     
          $c++; 
