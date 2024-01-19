@@ -3,8 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT Inventario_Mobiliario.Id_inventario,Inventario_Mobiliario.Codigo,Inventario_Mobiliario.Articulo,Inventario_Mobiliario.Descripcion,
 Inventario_Mobiliario.Marca,Inventario_Mobiliario.Departamento,Inventario_Mobiliario.Responsables,Inventario_Mobiliario.Categoria,

@@ -1,6 +1,3 @@
-
-
-
 <script>
     $(document).ready(function () {
     var table = $('#Productos').DataTable({
@@ -9,7 +6,7 @@
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayMobiliarioDisponible.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayMobiliarioDisponible.php",
  "aoColumns": [
        { mData: 'Id_inventario' },
        { mData: 'Codigo' },
