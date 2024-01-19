@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/ConsultaFondoCaja.php";
-include "Consultas/ConsultaCaja.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +11,7 @@ include "Consultas/ConsultaCaja.php";
 
   <title>Generador de codigos de barra Saluda</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,7 +21,7 @@ include "Consultas/ConsultaCaja.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
   Generador de codigos de barra Saluda
@@ -117,7 +115,7 @@ echo '<div class="alert alert-danger">Enter product name or number to generate b
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
 
   include ("Modales/AdvierteDeCaja.php");
@@ -143,7 +141,7 @@ echo '<div class="alert alert-danger">Enter product name or number to generate b
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
