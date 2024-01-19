@@ -1,7 +1,6 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT Personal_Enfermeria.Enfermero_ID,Personal_Enfermeria.Nombre_Apellidos,Personal_Enfermeria.Fk_Usuario,Personal_Enfermeria.file_name,Personal_Enfermeria.Fk_Sucursal,
 Personal_Enfermeria.ID_H_O_D,Personal_Enfermeria.Estatus,Personal_Enfermeria.ColorEstatus,Personal_Enfermeria.Telefono,Personal_Enfermeria.AgregadoEl,Personal_Enfermeria.Password,
@@ -20,7 +19,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="ActualizaEmpleados" >
   <label for=""> <h3> Datos generales del empleado</h3></label>
@@ -30,7 +29,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->Pos_ID; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->Pos_ID; ?>">
     </div>
     </div>
     
@@ -42,7 +41,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " name="ActNombres" id="actnombres" value="<? echo $Especialistas->Nombre_Apellidos; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control " name="ActNombres" id="actnombres" value="<?php echo $Especialistas->Nombre_Apellidos; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 <div class="row">
     <div class="col">
@@ -50,7 +49,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="date" class="form-control " id="actfecha" name="ActFecha" value="<? echo $Especialistas->Fecha_Nacimiento; ?>">
+  <input type="date" class="form-control " id="actfecha" name="ActFecha" value="<?php echo $Especialistas->Fecha_Nacimiento; ?>">
     </div>
     </div>
     
@@ -62,7 +61,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="number" class="form-control " name="AcTtelefono" id="acttelefono" value="<? echo $Especialistas->Telefono; ?>" aria-describedby="basic-addon1" >            
+  <input type="number" class="form-control " name="AcTtelefono" id="acttelefono" value="<?php echo $Especialistas->Telefono; ?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 <label for=""> <h3> Datos del empleado para el uso del sistema</h3></label>
 <div class="row">
@@ -71,7 +70,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  id="actcorreo" name="ActCorreo" value="<? echo $Especialistas->Correo_Electronico;?>">
+  <input type="text" class="form-control "  id="actcorreo" name="ActCorreo" value="<?php echo $Especialistas->Correo_Electronico;?>">
     </div>
     </div>
     
@@ -83,7 +82,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " name="ActPass" id="actpass" value="<? echo $Especialistas->Password; ?>" aria-describedby="basic-addon1" >            
+  <input type="text" class="form-control " name="ActPass" id="actpass" value="<?php echo $Especialistas->Password; ?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 <div class="row">
     <div class="col">
@@ -91,7 +90,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  disabled readonly value="<? echo $Especialistas->Nombre_Sucursal;?>">
+  <input type="text" class="form-control "  disabled readonly value="<?php echo $Especialistas->Nombre_Sucursal;?>">
     </div>
     </div>
     
@@ -103,7 +102,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->ID_H_O_D; ?>" aria-describedby="basic-addon1" >            
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->ID_H_O_D; ?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 
     <input type="text"  hidden class="form-control "  readonly name="VigenciaEst" id="vigenciaest">
@@ -113,6 +112,6 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/ActualizaEnfermeros.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

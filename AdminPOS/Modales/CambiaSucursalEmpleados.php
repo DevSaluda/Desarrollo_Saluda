@@ -1,7 +1,6 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT PersonalPOS.Pos_ID,PersonalPOS.Nombre_Apellidos,PersonalPOS.Fk_Usuario,PersonalPOS.Fk_Sucursal,PersonalPOS.Password,PersonalPOS.Fecha_Nacimiento,PersonalPOS.Correo_Electronico,
 PersonalPOS.Telefono,PersonalPOS.ID_H_O_D,PersonalPOS.Estatus,PersonalPOS.ColorEstatus,PersonalPOS.AgregadoPor,PersonalPOS.AgregadoEl,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
@@ -18,7 +17,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="CambioSucursalEmpleados" >
 <div class="form-group">
@@ -26,8 +25,8 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->Nombre_Sucursal; ?>">
-  <input type="text" class="form-control " hidden name="idempleadooo" readonly value="<? echo $Especialistas->Pos_ID; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->Nombre_Sucursal; ?>">
+  <input type="text" class="form-control " hidden name="idempleadooo" readonly value="<?php echo $Especialistas->Pos_ID; ?>">
     </div>
     </div>
     
@@ -41,10 +40,10 @@ while ($r=$query->fetch_object()){
   </div>
   <select id = "Sucursalnueva" class = "form-control" name = "Sucursalnueva">
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
         </div></div>
@@ -52,6 +51,6 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/CambiaSucursalDeEmpleados.js"></script>
  
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

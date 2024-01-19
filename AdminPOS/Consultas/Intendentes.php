@@ -15,7 +15,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Personal_Intendecia.Intendencia_ID,Personal_Intendecia.Nombre_Apellidos,Personal_Intendecia.file_name,Personal_Intendecia.Fk_Usuario,Personal_Intendecia.Fk_Sucursal,Personal_Intendecia.Telefono,
@@ -52,7 +52,7 @@ $query = $conn->query($sql1);
   <td><?php echo $Especialidades["Telefono"]; ?></td>
     <td><?php echo $Especialidades["Nombre_Sucursal"]; ?></td>
     <td><?php echo $Especialidades["Nombre_rol"]; ?></td>
-    <td><?if($Especialidades['Biometrico'] == 1){
+    <td><?php if($Especialidades['Biometrico'] == 1){
    
    echo "Verificado ";
  
@@ -89,7 +89,7 @@ $query = $conn->query($sql1);
    
     $(".btn-edit2").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/EditaIntendentes.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/EditaIntendentes.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
 
     $(".btn-BajaDeEmpleados").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/BajaDeIntendes.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/BajaDeIntendes.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Baja de usuario");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

@@ -14,8 +14,7 @@ $(document).ready( function () {
 <?php
 
 include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Personal_Medico.file_name,Personal_Medico.Fk_Usuario,Personal_Medico.Fk_Sucursal,Personal_Medico.Telefono,
@@ -94,7 +93,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoMedico.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ContactoMedico.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -107,7 +106,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaMedico.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaMedico.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -122,7 +121,7 @@ $query = $conn->query($sql1);
 
     $(".btn-HistorialEmpleados").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialMedicos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialMedicos.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -134,7 +133,7 @@ $query = $conn->query($sql1);
 
     $(".btn-BajaDeEmpleados").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/BajaDeMedicos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/BajaDeMedicos.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Baja de usuario");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

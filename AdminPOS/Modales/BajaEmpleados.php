@@ -1,7 +1,6 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT PersonalPOS.Pos_ID,PersonalPOS.Nombre_Apellidos,PersonalPOS.Fk_Usuario,PersonalPOS.Fk_Sucursal,PersonalPOS.Password,PersonalPOS.Fecha_Nacimiento,PersonalPOS.Correo_Electronico,
 PersonalPOS.Telefono,PersonalPOS.ID_H_O_D,PersonalPOS.Estatus,PersonalPOS.ColorEstatus,PersonalPOS.AgregadoPor,PersonalPOS.AgregadoEl,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
@@ -18,7 +17,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="BajaEmpleados" >
  
@@ -33,6 +32,6 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/BajaEmpleados.js"></script>
  
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

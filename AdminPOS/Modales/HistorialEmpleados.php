@@ -51,10 +51,9 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT 	PersonalPOS_Audita.Audita_Pos_ID,PersonalPOS_Audita.Pos_ID,PersonalPOS_Audita.Nombre_Apellidos,PersonalPOS_Audita.file_name,PersonalPOS_Audita.Fk_Usuario,PersonalPOS_Audita.Fk_Sucursal,

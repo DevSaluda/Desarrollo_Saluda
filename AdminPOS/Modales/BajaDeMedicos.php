@@ -1,7 +1,5 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 $user_id=null;
 $sql1= "SELECT Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Personal_Medico.file_name,Personal_Medico.Fk_Usuario,Personal_Medico.Fk_Sucursal,Personal_Medico.Telefono,
 Personal_Medico.ID_H_O_D,Personal_Medico.Estatus,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,Personal_Medico.Biometrico
@@ -18,7 +16,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="BajaEmpleados" >
  
@@ -33,6 +31,6 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/BajaEmpleadosMedicos.js"></script>
  
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

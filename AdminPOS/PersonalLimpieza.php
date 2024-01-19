@@ -1,8 +1,6 @@
 <?php
 
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 
 ?>
 <!DOCTYPE html>
@@ -14,7 +12,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Personal de limpieza |  <?php echo $row["ID_H_O_D"] ?></title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -24,17 +22,8 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Personal Vigente</a>
-  </li>
-  
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Bajas</a>
-  </li>
- 
-</ul>
+<?php include_once ("Menu.php")?>
+
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
@@ -58,26 +47,7 @@ include "Consultas/AnalisisIndex.php";
 
 
 </div>
-<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Bajas de intendencia al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
- 
-</div>
-</div>
 
-    
-
-
- 
-    
-<div id="tablaEmpleadosBajas"></div>
-
-
-</div>
 
 </div>
 </div></div>
@@ -89,7 +59,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   include ("Modales/AltaEmpleadosLimpieza.php");
   include ("Modales/Vacios.php");
@@ -102,7 +72,6 @@ include "Consultas/AnalisisIndex.php";
 
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlEmpleadosLimpieza.js"></script>
-<script src="js/ControlEmpleadosLimpiezaBajas.js"></script>
 <script src="js/AltaEmpleadosLimpieza.js"></script>
 
 
@@ -128,7 +97,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

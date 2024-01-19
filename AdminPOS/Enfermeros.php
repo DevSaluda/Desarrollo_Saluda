@@ -1,9 +1,5 @@
 <?php
-
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +8,7 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Personal de enfermería | <?echo $row['ID_H_O_D']?> </title>
+  <title>Personal de enfermería | <?php echo $row['ID_H_O_D']?> </title>
 
 <?include "Header.php"?>
  <style>
@@ -24,7 +20,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Personal Vigente</a>
@@ -59,26 +55,6 @@ include "Consultas/AnalisisIndex.php";
 
 
 </div>
-<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Bajas de Enfermería al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
- 
-</div>
-</div>
-
-    
-
-
- 
-    
-<div id="tablaEmpleadosBajas"></div>
-
-
-</div>
 
 </div>
 </div></div>
@@ -102,7 +78,6 @@ include "Consultas/AnalisisIndex.php";
 
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlEnfemeros.js"></script>
-<script src="js/ControlEnfemerosBajas.js"></script>
 <script src="js/AltaEnfermeros.js"></script>
 
 
@@ -128,7 +103,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

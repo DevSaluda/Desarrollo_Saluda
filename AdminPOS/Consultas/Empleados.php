@@ -51,8 +51,7 @@ $(document).ready( function () {
 <?php
 
 include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT PersonalPOS.Pos_ID,PersonalPOS.Nombre_Apellidos,PersonalPOS.file_name,PersonalPOS.Fk_Usuario,PersonalPOS.Fk_Sucursal,PersonalPOS.Telefono,PersonalPOS.Correo_Electronico,
@@ -85,7 +84,7 @@ $query = $conn->query($sql1);
 <?php while ($Usuarios=$query->fetch_array()):?>
 <tr>
 <td > <?php echo $Usuarios["Pos_ID"]; ?></td>
-  <td><img  width="60" height="60" alt="avatar" class="rounded-circle img-responsive" src="https://controlfarmacia.com/Perfiles/<?php echo $Usuarios["file_name"]; ?> "></td>
+  <td><img  width="60" height="60" alt="avatar" class="rounded-circle img-responsive" src="https://saludapos.com/Perfiles/<?php echo $Usuarios["file_name"]; ?> "></td>
   <td > <?php echo $Usuarios["Nombre_Apellidos"]; ?></td>
   <td > <?php echo $Usuarios["Telefono"]; ?></td>
     <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
@@ -107,17 +106,17 @@ $query = $conn->query($sql1);
   <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-edit3 dropdown-item" >Detalles <i class="fas fa-info-circle"></i></a>
   <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a>
    <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-CambiaSucursal dropdown-item" >Cambio de sucursal <i class="fas fa-exchange-alt"></i></a>
-  <a style=<?if($Usuarios['Biometrico'] == 1){
+  <a style=<?php if($Usuarios['Biometrico'] == 1){
    
    echo "display:none;";
  
 } else {
   echo "display:block;";
 }?>  
-  class="dropdown-item"  href="http://localhost/AdminPOS/index.php?nombrerh=<?echo $row['Nombre_Apellidos']?>&&rol=<?echo $row['Nombre_rol']?>&&file=<?echo $row['file_name']?>&&
+  class="dropdown-item"  href="http://localhost/AdminPOS/index.php?nombrerh=<?php echo $row['Nombre_Apellidos']?>&&rol=<?php echo $row['Nombre_rol']?>&&file=<?php echo $row['file_name']?>&&
   idempleado=<?php echo $Usuarios["Pos_ID"]; ?>&&nombreempleado=<?php echo $Usuarios["Nombre_Apellidos"]; ?>&&sucursalnombre=<?php echo $Usuarios["Nombre_Sucursal"]; ?>&&puesto=Farmacia" target="Blank_">Capturar datos biometricos <i class="fas fa-fingerprint"></i></a>
  
-  <a  class="dropdown-item" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=Hola,<?php echo $Usuarios["Nombre_Apellidos"]; ?>,tus datos de accceso para el punto de venta son: %0A *Correo: <?php echo $Usuarios["Correo_Electronico"]; ?>*%0A *Contraseña :<?php echo $Usuarios["Password"]; ?>* %0A Recuerda que tu punto de venta puedes encontrarlo en el escritorio de tu equipo en sucursal o puedes ingresar  a través del siguiente link: https://controlfarmacia.com/App/Secure/POSV3" target="blank_" >Enviar datos por whatsapp <i class="fab fa-whatsapp"></i></a>
+  <a  class="dropdown-item" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=Hola,<?php echo $Usuarios["Nombre_Apellidos"]; ?>,tus datos de accceso para el punto de venta son: %0A *Correo: <?php echo $Usuarios["Correo_Electronico"]; ?>*%0A *Contraseña :<?php echo $Usuarios["Password"]; ?>* %0A Recuerda que tu punto de venta puedes encontrarlo en el escritorio de tu equipo en sucursal o puedes ingresar  a través del siguiente link: https://saludapos.com/App/Secure/POSV3" target="blank_" >Enviar datos por whatsapp <i class="fab fa-whatsapp"></i></a>
   <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-baja dropdown-item" >Marcar como baja <i class="fas fa-user-slash"></i></a>
  
  
@@ -139,7 +138,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoEmpleado.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ContactoEmpleado.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -152,7 +151,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaEmpleado.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaEmpleado.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -167,7 +166,7 @@ $query = $conn->query($sql1);
 
     $(".btn-HistorialEmpleados").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialEmpleados.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -180,7 +179,7 @@ $query = $conn->query($sql1);
 
     $(".btn-baja").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/BajaEmpleados.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/BajaEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -192,7 +191,7 @@ $query = $conn->query($sql1);
 
     $(".btn-CambiaSucursal").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/CambiaSucursalEmpleados.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/CambiaSucursalEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cambio de sucursal");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
