@@ -11,7 +11,7 @@ include "Consultas/Consultas.php";
 
   <title>SUCURSALES <?php echo $row['ID_H_O_D']?> </title>
 
-<?php  "Header.php"?>
+<?php  include "Header.php"?>
  <style>
         .error {
   color: red;
