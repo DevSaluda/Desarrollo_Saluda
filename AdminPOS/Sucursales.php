@@ -1,9 +1,6 @@
 <?php
 
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,9 +9,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>SUCURSALES <?echo $row['ID_H_O_D']?> </title>
+  <title>SUCURSALES <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php  "Header.php"?>
  <style>
         .error {
   color: red;
@@ -24,7 +21,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
  
 <div class="card text-center">
@@ -60,7 +57,7 @@ Sucursales
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   include ("Modales/AltaSucursal.php");
   include ("Modales/Error.php");
@@ -92,7 +89,7 @@ Sucursales
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
