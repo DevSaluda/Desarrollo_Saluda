@@ -44,9 +44,7 @@ include "Consultas/Consultas.php";
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
      <div class="card text-center">
  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
- Productos Generales de Saluda al<?php
-$fechaActual = date('d-m-Y H:i:s');
-echo FechaCastellano($fechaActual);
+ Productos Generales de Saluda al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
 ?>  
             </div>
 
