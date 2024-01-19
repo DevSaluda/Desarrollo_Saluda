@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
