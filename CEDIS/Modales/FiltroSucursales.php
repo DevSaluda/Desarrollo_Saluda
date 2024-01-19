@@ -35,16 +35,9 @@
   <select id = "sucursal" class = "form-control" name = "Sucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
         <?php
-     $query = $conn->prepare("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D = ?");
-$query->bind_param("s", $row['ID_H_O_D']);
-$query->execute();
-$query->bind_result($ID_SucursalC, $Nombre_Sucursal, $ID_H_O_D);
-
-while ($query->fetch()) {
-    echo '<option value="' . $ID_SucursalC . '">' . $Nombre_Sucursal . '</option>';
-}
-
-$query->close();
+     $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='" . $row['ID_H_O_D'] . "'");
+while ($valores = mysqli_fetch_assoc($query)) {
+    echo '<option value="' . $valores['ID_SucursalC'] . '">' . $valores['Nombre_Sucursal'] . '</option>';
 
         ?>  </select>
     </div>

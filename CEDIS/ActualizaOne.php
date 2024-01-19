@@ -39,7 +39,7 @@ while ($r=$query->fetch_object()){
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<?php  if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
   <div class="text-center">
     
@@ -311,9 +311,9 @@ function CapturaFacturas() {
                                        
          
       </div></div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script src="js/ActualizaExistenciasDeProductosEnSucursales.js"></script>
 <script src="js/CapturaExistencias.js"></script>
 
@@ -328,7 +328,6 @@ function CapturaFacturas() {
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
-
   include ("footer.php")?>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
