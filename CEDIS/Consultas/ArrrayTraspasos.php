@@ -76,7 +76,7 @@ echo json_encode($results);
 
 
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
