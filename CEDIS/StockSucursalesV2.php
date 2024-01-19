@@ -46,9 +46,10 @@ table td {
       </div>
       
       <div>
-        <button type="button" class="btn btn-success btn-default" data-toggle="modal" data-target="#FiltroPorSucursales">
-          Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-        </button>
+   <button type="button" class="btn btn-success btn-default" data-toggle="modal" data-target="#FiltroPorSucursales">
+  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+</button>
+
       </div>
 
       <div>
