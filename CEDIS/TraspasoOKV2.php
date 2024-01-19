@@ -1,7 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['traspasoid']);
 include "Consultas/Consultas.php";
-include "Consultas/AnalisisIndex.php";
+
 
 $fcha = date("Y-m-d");
 $user_id=null;
@@ -29,7 +29,7 @@ while ($r=$query->fetch_object()){
 
   <title>Recepción de traspasos</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -39,8 +39,8 @@ while ($r=$query->fetch_object()){
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
  Verificacion de traspaso
@@ -269,9 +269,9 @@ $(document).ready(function () {
 
                                         </form>
                                         </div></div> </div></div> </div></div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 
 <script src="js/RegistraConExito.js"></script>
@@ -312,7 +312,7 @@ $(document).ready(function () {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

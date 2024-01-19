@@ -4,12 +4,10 @@ include "Consultas/Consultas.php";
 
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
-$sql1="SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,	Traspasos_generados.TraspasoGeneradoPor,Traspasos_generados.ProveedorFijo,
-Traspasos_generados.Cod_Barra,Traspasos_generados.Num_Orden,Traspasos_generados.Num_Factura, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, Traspasos_generados.Proveedor1,	Traspasos_generados.Proveedor2,
-Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_generados.Total_traspaso,Traspasos_generados.TotalVenta,Traspasos_generados.Existencias_R,
- Traspasos_generados.Cantidad_Enviada,Traspasos_generados.Existencias_D_envio,Traspasos_generados.FechaEntrega,Traspasos_generados.Estatus,Traspasos_generados.ID_H_O_D,
- SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Traspasos_generados,SucursalesCorre WHERE Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC AND
- Traspasos_generados.FechaEntrega BETWEEN '$fecha1' AND '$fecha2' "
+$sql1="SELECT Ventas_POS.Cod_Barra,Ventas_POS.Nombre_Prod,Ventas_POS.Fk_sucursal,Ventas_POS.Fecha_venta,Ventas_POS.Identificador_tipo,Ventas_POS.Folio_Ticket, Ventas_POS.Importe,Ventas_POS.FormaDePago,
+Ventas_POS.AgregadoPor,Ventas_POS.Cliente,Servicios_POS.Servicio_ID, Servicios_POS.Nom_Serv,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
+FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fecha_venta BETWEEN '$fecha1' AND '$fecha2' AND Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC and 
+Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identificador_tipo=12 GROUP BY Ventas_POS.Cod_Barra"
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +16,7 @@ Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_ge
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Reportes de traspasos  </title>
+  <title>Reportes de laboratorios de sucursales  </title>
 
 <?php include "Header.php"?>
  <style>
@@ -34,7 +32,7 @@ Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_ge
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Reporte de traspasos de la fecha <?php echo $fecha1?> al <?php echo $fecha2?> 
+  Datos de laboratorios de la sucursal  <?php echo $nombresucursalelegida?> del <?php echo fechaCastellano($fecha1)?> al <?php echo fechaCastellano($fecha2)?>
   </div>
   <div >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
@@ -69,8 +67,19 @@ $(document).ready( function () {
           
          //para usar los botones   
          responsive: "true",
-          dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
-        
+          dom: "B<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+                title: 'registros de laboratorio del <?php echo $fecha1?> al <?php echo $fecha2?>',
+				className: 'btn btn-success'
+			},
+			
+		
+        ],
+       
    
 	   
         	        
@@ -96,23 +105,17 @@ $query = $conn->query($sql1);
 	<div class="table-responsive">
 	<table  id="StockSucursalesDistribucion" class="table table-hover">
 <thead>
-<th>ID</th>
-<th>#De Orden</th>
-<th>#De Factura</th>
-<th>Codigo de barras</th>
-<th>Nombre</th>
-<th>Proveedor</th>
-
-<th>Destino</th>
-<th>Cantidad</th>
-
-
-<!-- <th>Total global de venta</th>
-<th>Total global de compra</th> -->
-<th>Fecha de entrega</th>
-<th>Estatus</th>
-<th>Entrega</th>
-<th>Recepciono</th>
+<th>Cod</th>
+<th>Producto</th>
+    <th>Sucursal</th>
+    <th>Ticket</th>
+    <th>Cantidad</th>
+    <th>Importe</th>
+    <th>Forma de pago </th>
+    <th>Cliente</th>
+    <th>Vendedor</th>
+    <th>Fecha</th>
+    
 	
 
 
@@ -122,20 +125,16 @@ $query = $conn->query($sql1);
 
 
 
-<td > <?php echo $Usuarios['ID_Traspaso_Generado']; ?></td>
-<td > <?php echo $Usuarios['Num_Orden']; ?></td>
-<td > <?php echo $Usuarios['Num_Factura']; ?></td>
 <td > <?php echo $Usuarios['Cod_Barra']; ?></td>
 <td > <?php echo $Usuarios['Nombre_Prod']; ?></td>
-<td > <?php echo $Usuarios['ProveedorFijo']; ?></td>
-  <td><?php echo $Usuarios["Fk_Sucursal_Destino"]; ?></td>
-  <td><?php echo $Usuarios["Cantidad_Enviada"]; ?></td>
-
- 
-    <td><?php echo $Usuarios["FechaEntrega"]; ?></td>
-    <td><?php echo $Usuarios["Estatus"]; ?></td>
-    <td><?php echo $Usuarios["TraspasoGeneradoPor"]; ?></td>
-    <td><?php echo $Usuarios["TraspasoRecibidoPor"]; ?></td>
+  <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
+  <td><?php echo $Usuarios["Folio_Ticket"]; ?></td>
+  <td><?php echo $Usuarios["Cantidad_Venta"]; ?></td>
+  <td><?php echo $Usuarios["Importe"]; ?></td>
+  <td><?php echo $Usuarios["FormaDePago"]; ?></td>
+  <td><?php echo $Usuarios["Cliente"]; ?></td>
+  <td><?php echo $Usuarios["AgregadoPor"]; ?></td>
+    <td><?php echo $Usuarios["Fecha_venta"]; ?></td>
     
 		
 </tr>
