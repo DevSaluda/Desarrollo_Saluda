@@ -22,3 +22,4 @@ $Factura=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Factur
     }
     mysqli_close($conn);
 
+?>
