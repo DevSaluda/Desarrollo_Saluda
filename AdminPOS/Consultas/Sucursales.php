@@ -15,7 +15,7 @@ $(document).ready( function () {
 header("Acces-Control-Allow-Origin: *"); 
 include("db_connection.php"); 
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM SucursalesCorre WHERE ID_H_O_D= '".$row['ID_H_O_D']."'";
@@ -73,7 +73,7 @@ $query = $conn->query($sql1);
   
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaSucursal.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaSucursal.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -89,7 +89,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Historial").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialSucursales.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialSucursales.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
