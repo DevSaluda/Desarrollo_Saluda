@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
 
   <title>Actualizando existencias </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -38,8 +38,8 @@ while ($r=$query->fetch_object()){
 }
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php  if($Especialistas!=null):?>
 
   <div class="text-center">
     
