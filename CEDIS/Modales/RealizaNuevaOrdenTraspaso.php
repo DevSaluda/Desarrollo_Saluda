@@ -27,13 +27,13 @@ $totalmonto = $monto1 + $monto2;
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/CEDIS/GeneradorTraspasosV2">
+ <form  method="POST" action="https://saludapos.com/CEDIS/GeneradorTraspasosV2">
     <div class="form-group">
   <label for="exampleInputEmail1">Elija proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
     <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
     <option value="">Seleccione un proveedor:</option>
-                                                 <?
+                                                 <?php
             $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND  ID_H_O_D='".$row['ID_H_O_D']."'");
           
             while ($valores = mysqli_fetch_array($query)) {
@@ -48,7 +48,7 @@ $totalmonto = $monto1 + $monto2;
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clinic-medical"></i></span>
   <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
-                                               <?
+                                               <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
         
           while ($valores = mysqli_fetch_array($query)) {
@@ -75,7 +75,7 @@ $totalmonto = $monto1 + $monto2;
     </div>
     <span id="estadousuario"></span>
 
-    <p><img src="https://controlfarmacia.com/AdminPOS/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
+    <p><img src="https://saludapos.com/CEDIS/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
 </div>
 </div>
 
@@ -126,7 +126,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
 function comprobarUsuario() {
 	$("#loaderIcon").show();
 	jQuery.ajax({
-	url: "https://controlfarmacia.com/AdminPOS/Consultas/ComprobarFactura.php",
+	url: "https://saludapos.com/CEDIS/Consultas/ComprobarFactura.php",
 	data:'NumFactura='+$("#NumFactura").val(),
 	type: "POST",
 	success:function(data){
