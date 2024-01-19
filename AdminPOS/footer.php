@@ -5,7 +5,7 @@
       <b>Version</b> 3.0
     </div>
   </footer>
-</div><?include ("Modales/Salidas.php");
+</div><?php include ("Modales/Salidas.php");
 
 ?>
 <script src="js/LogSalida.js"></script>
