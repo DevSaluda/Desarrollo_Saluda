@@ -1,7 +1,7 @@
 function StockMobiliario() {
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/StockMobiliarioDisponibles.php", "", function(data) {
+    $.post("https://saludapos.com/AdminPOS/Consultas/StockMobiliarioDisponibles.php", "", function(data) {
         $("#TableStockSucursales").html(data);
     })
 
