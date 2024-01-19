@@ -1,8 +1,7 @@
 <?php
 
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -12,9 +11,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>ROLES O PUESTOS DE  <?echo $row['ID_H_O_D']?> </title>
+  <title>ROLES O PUESTOS DE  <?php  $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -24,7 +23,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Roles Vigente</a>
@@ -89,7 +88,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   include ("Modales/AltaRol.php");
   include ("Modales/Error.php");
@@ -127,7 +126,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
