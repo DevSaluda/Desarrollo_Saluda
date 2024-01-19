@@ -66,7 +66,7 @@ include "Consultas/Consultas.php";
  <!--  <div class="tab-pane fade" id="PorCaducar" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Productos por caducar de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Productos por caducar de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >

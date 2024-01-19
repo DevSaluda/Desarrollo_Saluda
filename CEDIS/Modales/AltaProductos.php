@@ -95,7 +95,7 @@
   </div>
   <select id = "tiposervicio" class = "form-control" name = "TipoServicio">
                                                <option value="">Seleccione una servicio:</option>
-        <?php
+        <?
           $query = $conn -> query ("SELECT Servicio_ID,Nom_Serv,Estado,ID_H_O_D FROM Servicios_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores[Servicio_ID].'">'.$valores[Nom_Serv].'</option>';
@@ -186,7 +186,7 @@
   </div>
   <select id = "tip" class = "form-control" name = "Tip">
                                                <option value="">Selecciona un tipo:</option>
-        <?php 
+        <?
           $query = $conn -> query ("SELECT 	Tip_Prod_ID,Nom_Tipo_Prod,Estado,ID_H_O_D FROM TipProd_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores[Tip_Prod_ID].'">'.$valores[Nom_Tipo_Prod].'</option>';
