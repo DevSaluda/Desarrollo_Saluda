@@ -44,10 +44,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT * FROM `Productos_POS_Audita` WHERE 	ID_Prod_POS = ".$_POST["id"];

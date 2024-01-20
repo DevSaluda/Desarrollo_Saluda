@@ -27,7 +27,7 @@ $totalmonto = $monto1 + $monto2;
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/CEDISMOVIL/GeneradorTraspasosV2">
+ <form  method="POST" action="https://saludapos.com/CEDISMOVIL/GeneradorTraspasosV2">
     
  
     <div class="form-group">
@@ -35,11 +35,11 @@ $totalmonto = $monto1 + $monto2;
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clinic-medical"></i></span>
   <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
-                                               <?
+                                               <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D,Codigo_identificador FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
         
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
                         ?>
         </select>   

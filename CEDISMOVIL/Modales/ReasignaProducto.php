@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = ".$_POST["id"];
@@ -14,7 +14,7 @@ while ($r=$query->fetch_object()){
 }
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   <form enctype="multipart/form-data" id="ReasignaProductos">
          <div class="row">
     <div class="col">
@@ -22,7 +22,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " id="asignacodbarra" name="AsignaCodBarra" value="<? echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control " id="asignacodbarra" name="AsignaCodBarra" value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     
@@ -34,7 +34,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control " name="ASignaClav" id="asignaclav" value="<? echo $Especialistas->Clave_adicional; ?>">            
+  <input type="text" class="form-control " name="ASignaClav" id="asignaclav" value="<?php echo $Especialistas->Clave_adicional; ?>">            
 </div><label for="clav" class="error"></div>
 <div class="col">
     <label for="exampleFormControlInput1">Nombre / Descripcion<span class="text-danger">*</span></label>
@@ -57,7 +57,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " id="pv" name="AsLote" value="<? echo $Especialistas->Lote_Med; ?>" >
+  <input type="text" class="form-control " id="pv" name="AsLote" value="<?php echo $Especialistas->Lote_Med; ?>" >
 </div><label for="pv" class="error"></div>
 
 
@@ -66,7 +66,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " id="aslote" name="AsFecha" value="<? echo $Especialistas->Fecha_Caducidad; ?>" >
+  <input type="text" class="form-control " id="aslote" name="AsFecha" value="<?php echo $Especialistas->Fecha_Caducidad; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -74,7 +74,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " name="ExisteCedis" id="existecedis"  aria-describedby="basic-addon1" value="<? echo $Especialistas->Stock; ?>" >           
+  <input type="text" class="form-control " name="ExisteCedis" id="existecedis"  aria-describedby="basic-addon1" value="<?php echo $Especialistas->Stock; ?>" >           
     </div><label for="mine" class="error">
     </div>
     
@@ -90,10 +90,10 @@ while ($r=$query->fetch_object()){
   </div>
   <select id = "sucursal" class = "form-control" name = "AsignaSucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>            
     </div><label for="mine" class="error">
@@ -125,7 +125,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " id="aspv" name="ASPV" value="<? echo $Especialistas->Precio_Venta; ?>" >
+  <input type="text" class="form-control " id="aspv" name="ASPV" value="<?php echo $Especialistas->Precio_Venta; ?>" >
 </div><label for="pv" class="error"></div>
 
 
@@ -134,7 +134,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " id="aspc" name="ASPC" value="<? echo $Especialistas->Precio_C; ?>" >
+  <input type="text" class="form-control " id="aspc" name="ASPC" value="<?php echo $Especialistas->Precio_C; ?>" >
     </div><label for="pc" class="error">
     </div>
     <div class="col">
@@ -161,37 +161,37 @@ while ($r=$query->fetch_object()){
 
    
 
-    <input type="text" hidden name="AsTipo" class="form-control " value="<?if($Especialistas->Tipo == 0000000000){
+    <input type="text" hidden name="AsTipo" class="form-control " value="<?php if($Especialistas->Tipo == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->Tipo";
 }?>">
 
-<input type="text" hidden name="AsCategoria" class="form-control " value="<?if($Especialistas->FkCategoria == 0000000000){
+<input type="text" hidden name="AsCategoria" class="form-control " value="<?php if($Especialistas->FkCategoria == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkCategoria";
 }?>">
-<input type="text" hidden name="AsMarca" class="form-control " value="<?if($Especialistas->FkMarca == 0000000000){
+<input type="text" hidden name="AsMarca" class="form-control " value="<?php if($Especialistas->FkMarca == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkMarca";
 }?>">
 
-<input type="text" hidden name="AsPresentacion" class="form-control " value="<?if($Especialistas->FkPresentacion == 0000000000){
+<input type="text" hidden name="AsPresentacion" class="form-control " value="<?php if($Especialistas->FkPresentacion == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkPresentacion";
 }?>">
 
 
-<input type="text" class="form-control "  hidden name="ID_Prod" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
-<input type="text" class="form-control " hidden name="TipoServicio" id="tiposervicio"  value="<?echo $Especialistas->Tipo_Servicio?>"aria-describedby="basic-addon1" >
-    <input type="text" class="form-control " hidden name="EmpresaProductos" id="empresa" value="<?echo  $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
-    <input type="text" class="form-control " hidden name="RevProvee1" id="revprovee1" value="<? echo $Especialistas->Proveedor1; ?>"  >   
-    <input type="text" class="form-control " hidden name="RevProvee2" id="revprovee2" value="<? echo $Especialistas->Proveedor2; ?>" >   
-    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden name="ID_Prod" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
+<input type="text" class="form-control " hidden name="TipoServicio" id="tiposervicio"  value="<?php echo $Especialistas->Tipo_Servicio?>"aria-describedby="basic-addon1" >
+    <input type="text" class="form-control " hidden name="EmpresaProductos" id="empresa" value="<?php echo  $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
+    <input type="text" class="form-control " hidden name="RevProvee1" id="revprovee1" value="<?php echo $Especialistas->Proveedor1; ?>"  >   
+    <input type="text" class="form-control " hidden name="RevProvee2" id="revprovee2" value="<?php echo $Especialistas->Proveedor2; ?>" >   
+    <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
    
 
@@ -210,9 +210,9 @@ while ($r=$query->fetch_object()){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php  endif;?>
 <script src="js/ReasignaProductos2.js"></script>
  
  <!-- Central Modal Medium Info-->

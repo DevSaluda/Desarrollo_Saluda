@@ -51,10 +51,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 
 $user_id=null;
@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
   <td > <?php echo $Usuarios['Existencias_R']; ?></td>
   <td > <?php echo $Usuarios['Nombre_Sucursal']; ?></td>
 
-  <!-- <td >  <button class="btn btn-default btn-sm" style="<?echo $Usuarios['CodigoEstatus'];?>"><?php echo $Usuarios["Estatus"]; ?></button> </td> -->
+  <!-- <td >  <button class="btn btn-default btn-sm" style="<?php echo $Usuarios['CodigoEstatus'];?>"><?php echo $Usuarios["Estatus"]; ?></button> </td> -->
     
 	
 		
@@ -104,5 +104,5 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">Aún no hay distribucion para <?echo $row['ID_H_O_D']?></p>
+	<p class="alert alert-warning">Aún no hay distribucion para <?php echo $row['ID_H_O_D']?></p>
 <?php endif;?>

@@ -18,7 +18,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT * from Productos_POS where Fecha_Caducidad >= CURDATE() AND Fecha_Caducidad <= CURDATE() AND Fecha_Caducidad <= CURDATE() + INTERVAL 20 day AND ID_H_O_D ='".$row['ID_H_O_D']."'";
@@ -69,7 +68,7 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Aún no hay productos registrados para <?echo $row['ID_H_O_D']?></p>
 <?php endif;?>
   <!-- Modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
