@@ -174,7 +174,7 @@ tabla = $('#Traspasos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/CEDISMOVIL/Consultas/ArrrayTraspasos.php",
+ "sAjaxSource": "https://saludapos.com/CEDISMOVIL/Consultas/ArrrayTraspasos.php",
  "aoColumns": [
        { mData: 'IDTraspasoGenerado' },
        { mData: 'NumberOrden' },

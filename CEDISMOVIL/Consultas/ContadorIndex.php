@@ -1,8 +1,8 @@
-<?
+<?php
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 
 $sql ="SELECT ID_Sol_Traspaso,Estatus,COUNT(*) As totalsolicitudes FROM Solicitudes_Traspasos WHERE Estatus='Solicitud enviada' ";
