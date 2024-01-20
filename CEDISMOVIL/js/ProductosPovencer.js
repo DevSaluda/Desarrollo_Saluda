@@ -1,7 +1,7 @@
 function  CaducanProntoProds(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/ProductosPorVencer.php","",function(data){
+    $.post("https://saludapos.com/CEDISMOVIL/Consultas/ProductosPorVencer.php","",function(data){
       $("#TableProdCaducaPronto").html(data);
     })
 
