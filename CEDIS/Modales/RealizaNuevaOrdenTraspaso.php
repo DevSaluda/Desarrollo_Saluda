@@ -37,7 +37,7 @@ $totalmonto = $monto1 + $monto2;
             $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           
               while ($valores = mysqli_fetch_array($query)) {
-          echo '<option value="'.$valores[Nombre_Proveedor].'">'.$valores["Nombre_Proveedor"].'</option>';
+          echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
         }
                       ?>
           </select>   
@@ -52,7 +52,7 @@ $totalmonto = $monto1 + $monto2;
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
         
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores["Nombre_Sucursal"].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
                         ?>
         </select>   

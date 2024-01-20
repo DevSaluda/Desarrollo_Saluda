@@ -17,7 +17,7 @@
     $exibirModal = true;
   }
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ContadorIndex.php";
 
 ?>
@@ -29,10 +29,10 @@ include "Consultas/ContadorIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>PUNTO DE VENTA <?echo $row['ID_H_O_D']?> </title>
+  <title>PUNTO DE VENTA <?php echo $row['ID_H_O_D']?> </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
   <script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -46,7 +46,7 @@ include "Consultas/ContadorIndex.php";
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados  <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Traspasos realizados  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -118,7 +118,7 @@ $(document).ready(function()
 });
 </script>
 <?php endif; ?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
