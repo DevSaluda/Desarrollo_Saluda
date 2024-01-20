@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,
@@ -91,7 +91,7 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">Aún no hay StockSucursales registrados para <?echo $row['ID_H_O_D']?></p>
+	<p class="alert alert-warning">Aún no hay StockSucursales registrados para <?php echo $row['ID_H_O_D']?></p>
 <?php endif;?>
  
                                       

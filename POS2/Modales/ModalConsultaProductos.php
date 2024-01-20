@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.Clave_adicional,Stock_POS.Cod_Barra,Stock_POS.Precio_Venta,Stock_POS.Nombre_Prod,Stock_POS.Fk_sucursal,Stock_POS.Max_Existencia,Stock_POS.Min_Existencia,
@@ -74,14 +74,14 @@ $query = $conn->query($sql1);
   <td >$ <?php echo $Usuarios['Precio_Venta']; ?></td>
 
   <!-- 
-  <td >  <button class="btn btn-default btn-sm" style=<?if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
+  <td >  <button class="btn btn-default btn-sm" style=<?php if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
    echo "background-color:#ff1800!important";
 } elseif($Usuarios['Existencias_R'] > $Usuarios['Max_Existencia']) {
   echo "background-color:#fd7e14!important";
 }else {
    echo "background-color:#2bbb1d!important";
 }
-?>><?if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
+?>><?php if($Usuarios['Existencias_R'] < $Usuarios['Min_Existencia']){
   echo "Resurtir";
 } elseif($Usuarios['Existencias_R'] > $Usuarios['Max_Existencia']) {
  echo "Exceso de producto";
@@ -100,7 +100,7 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">Aún no hay StockSucursales registrados para <?echo $row['ID_H_O_D']?></p>
+	<p class="alert alert-warning">Aún no hay StockSucursales registrados para <?php echo $row['ID_H_O_D']?></p>
 <?php endif;?>
  
                                       

@@ -2,7 +2,7 @@
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 
 $sql ="SELECT COUNT(ID_Notificacion)as totalnotifi, Estado, Sucursal FROM Area_De_Notificaciones WHERE Sucursal='".$row['Fk_Sucursal']."' and Estado !=0 ";

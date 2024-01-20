@@ -9,7 +9,7 @@
 
     </div>
   </footer>
-</div><?
+</div><?php
 include ("Modales/Salidas.php");
 ?>
 <script src="js/LogSalida.js"></script>

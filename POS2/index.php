@@ -13,10 +13,9 @@ if(!isset($_COOKIE["IngresoVentas"]))
   $exibirModal = true;
 }
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/NotificacionesApp.php";
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
+// include "Consultas/Conexion_selects.php";
+// include "Consultas/ConeSelectDinamico.php";
 include "Consultas/ConsultaFondoCaja.php";
 
 ?>
@@ -131,17 +130,17 @@ include "Consultas/ConsultaFondoCaja.php";
     <!-- Then put toasts within -->
     <div class="toast" id="toastt" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
-      <img src="https://controlconsulta.com/Perfiles/Saluda.jpeg" style="width: 8%;" class="rounded mr-2" alt="...">
-        <strong class="mr-auto"><?echo $Usuarios['Tipo_Notificacion']?></strong><small class="text-mute"><?echo date('h:i A', strtotime(($Usuarios['Registrado'])))?></small> <br>
+      <img src="https://saludapos.com/Perfiles/Saluda.jpeg" style="width: 8%;" class="rounded mr-2" alt="...">
+        <strong class="mr-auto"><?echo $Usuarios['Tipo_Notificacion']?></strong><small class="text-mute"><?php echo date('h:i A', strtotime(($Usuarios['Registrado'])))?></small> <br>
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="toast-body">
         <div class="text-center">
-      <?echo $Usuarios['Encabezado']?> <?echo $Usuarios['Mensaje_Notificacion']?>
+      <?php echo $Usuarios['Encabezado']?> <?php echo $Usuarios['Mensaje_Notificacion']?>
       <form enctype="multipart/form-data" id="ActualizaNotificaciones">
-        <input hidden type="text" name="idactualizable"value="<?echo $Usuarios['ID_Notificacion']?>">
+        <input hidden type="text" name="idactualizable"value="<?php echo $Usuarios['ID_Notificacion']?>">
         <input hidden type="text" name="nuevoestado"value="0">
       <button type="submit"  onclick="chale()" id="EnviarDatos" value="Guardar" class="btn btn-success btn-sm">Marcar como leído <i class="fa-solid fa-check"></i></button>
       
@@ -225,7 +224,7 @@ $(document).ready(function()
   	
     $(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AbreCajaIndex.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AbreCajaIndex.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Apertura de caja");
               $("#Di").addClass("modal-dialog modal-lg modal-notify modal-success");
@@ -248,7 +247,7 @@ window.addEventListener("offline",function(){$("#Sinwifi").modal("show");},false
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
