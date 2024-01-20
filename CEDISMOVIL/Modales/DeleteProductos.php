@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = ".$_POST["id"];
@@ -15,7 +15,7 @@ while ($r=$query->fetch_object()){
 
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   <form enctype="multipart/form-data" id="DeleteProd">
  
     <div class="alert alert-danger">
@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
 </div>
 <p>¿Esta seguro que desea eliminar el producto  <br>
     <?php echo $Especialistas->Nombre_Prod; ?> ?</p> 
-    <input type="text" class="form-control " hidden name="DestroyProd" value="<? echo $Especialistas->ID_Prod_POS; ?>" >
+    <input type="text" class="form-control " hidden name="DestroyProd" value="<?php echo $Especialistas->ID_Prod_POS; ?>" >
 
        
    
@@ -39,6 +39,6 @@ while ($r=$query->fetch_object()){
                                         </form>
                                         <? else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script src="js/DeleteProductos.js"></script>

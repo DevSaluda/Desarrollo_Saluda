@@ -13,7 +13,7 @@ include "Consultas/Sesion.php";
 
   <title>Traspasos generados <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -27,7 +27,7 @@ include "Consultas/Sesion.php";
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados  <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Traspasos realizados  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -93,7 +93,7 @@ include "Consultas/Sesion.php";
 
 </body>
 </html>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
