@@ -13,5 +13,5 @@ function Expiro(){
  
 }
 function Login(){
-    location.href="https://saludapos.com/App/Secure/ControlDecitas"
+    location.href="https://saludapos.com/App/Secure/POS"
  }
