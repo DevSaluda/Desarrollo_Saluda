@@ -29,7 +29,7 @@ include "Consultas/ContadorIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>PUNTO DE VENTA <?php echo $row['ID_H_O_D']?> </title>
+  <title>PUNTO DE VENTA </title>
 
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
@@ -44,22 +44,15 @@ include "Consultas/ContadorIndex.php";
 </div>
 <?php include_once ("Menu.php")?>
 
-<div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
+<div class="card-header" style="background-color:#0057b8 !important;color: white;">
+ Traspasos Realizados  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+            </div>
   
-  <div >
+  <div id="tablaProductos"></div>
 
 </div>
-</div>
-    
-<div id="tablaProductos"></div>
 
-</div>
-</div>
-</div>
-</div>
+
 
 <!-- POR CADUCAR -->
  
