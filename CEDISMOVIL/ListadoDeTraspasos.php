@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 
 
 ?>
@@ -23,7 +23,7 @@ include "Consultas/Sesion.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
