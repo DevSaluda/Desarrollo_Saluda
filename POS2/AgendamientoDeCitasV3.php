@@ -76,7 +76,7 @@ Citas de especialistas
    include ("Modales/ExitoActualiza.php");
    include ("Modales/EstatusAgendaGuardado.php");
   include ("Modales/AgendarCitasExt.php");
- include ("Modales/AltaEspecialista.php");
+
   include ("footer.php")?>
 
 <script src="js/CampanasSucursales.js"></script>
