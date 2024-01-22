@@ -33,7 +33,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT AgendaCitas_EspecialistasSucursales.ID_Agenda_Especialista,AgendaCitas_EspecialistasSucursales.Fk_Especialidad,AgendaCitas_EspecialistasSucursales.Fk_Especialista,
@@ -104,7 +104,7 @@ $query = $conn->query($sql1);
   	
     $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/DetallesCitaSucursal.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/DetallesCitaSucursal.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles de cita");
               $("#Di").removeClass("modal-dialog modal-notify modal-success");
@@ -116,7 +116,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Cancela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/CancelaCita.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/CancelaCita.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cancelación");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -137,7 +137,7 @@ $query = $conn->query($sql1);
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>

@@ -17,13 +17,7 @@ include "Consultas/ConeSelectDinamico.php";
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  
-  <li class="nav-item">
-    <a class="nav-link active " id="pills-home-tab" data-toggle="pill" href="#CrediClinicas" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-file-medical"></i> Campañas de especialistas</a>
-  </li>
- 
-</ul>
+
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
