@@ -37,7 +37,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Creditos_POS.Folio_Credito,Creditos_POS.Fk_tipo_Credi,Creditos_POS.Nombre_Cred,
@@ -100,7 +100,7 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">No hay créditos por vencer</p>
 <?php endif;?>
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -1,5 +1,5 @@
 <?php
-include_once("../db_connect.php");
+include_once("../db_connection.php");
 include "../Consultas.php";
 include "../Sesion.php";
 

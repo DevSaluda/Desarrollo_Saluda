@@ -34,10 +34,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,
@@ -110,7 +110,7 @@ $query = $conn->query($sql1);
 <script>
     $(".btn-desglose").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/DesgloseTicket.php","id="+id,function(data){
+    $.post("https://saludapos.com/POS2/Modales/DesgloseTicket.php","id="+id,function(data){
         $("#FormCancelacion").html(data);
         $("#TituloCancelacion").html("Desglose del ticket");
         $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -132,7 +132,7 @@ $query = $conn->query($sql1);
 
 $(".btn-Reimpresion").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/ReimpresionTicketVenta.php","id="+id,function(data){
+    $.post("https://saludapos.com/POS2/Modales/ReimpresionTicketVenta.php","id="+id,function(data){
         $("#FormCancelacion").html(data);
         $("#TituloCancelacion").html("Editar datos de categoría");
         $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");

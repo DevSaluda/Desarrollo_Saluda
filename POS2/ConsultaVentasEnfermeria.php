@@ -1,8 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +8,7 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Registro de ventas realizadas    <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Registro de ventas realizadas <?php echo $row['Nombre_Sucursal']?> </title>
 
 <?include "Header.php"?>
  <style>
@@ -23,7 +20,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
@@ -57,7 +54,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
 
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -92,7 +89,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

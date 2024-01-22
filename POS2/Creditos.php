@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 include "Consultas/ConsultaCaja.php";
 $fcha = date("Y-m-d");
 ?>
@@ -15,9 +13,9 @@ $fcha = date("Y-m-d");
 
   <title>Apertura de credito|  </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Créditos dentales</a>
@@ -115,7 +113,7 @@ $fcha = date("Y-m-d");
   
 
   <!-- Main Footer -->
-  <?include ("Modales/AperturaCredito.php");
+  <?php include ("Modales/AperturaCredito.php");
   include ("Modales/AperturaCreditoClinicas.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -156,7 +154,7 @@ $fcha = date("Y-m-d");
 
 </body>
 </html>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
