@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
@@ -35,7 +35,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialidades!=null):?>
+<?php if($Especialidades!=null):?>
 
 
   <div class="form-row">
@@ -46,7 +46,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_rol; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_rol; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -56,7 +56,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     
@@ -69,7 +69,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo FechaCastellano($Especialidades->Fecha_Disponibilidad); ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo FechaCastellano($Especialidades->Fecha_Disponibilidad); ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -79,7 +79,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo date('h:i A', strtotime(($Especialidades->Horario_Disponibilidad))); ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo date('h:i A', strtotime(($Especialidades->Horario_Disponibilidad))); ?>" aria-describedby="basic-addon1">
       </div>
     </div> </div>
     <div class="form-row">
@@ -90,7 +90,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Sucursal; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_Sucursal; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -100,12 +100,12 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->AgendadoPor; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->AgendadoPor; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
   </div>
 
 
-<? else:?>
+<?php else:?>
 <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

@@ -177,7 +177,7 @@ tabla = $('#CitasEnSucursal').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/Enfermeria2/Consultas/ArrayMedicosExpress.php",
+ "sAjaxSource": "https://saludapos.com/Enfermeria2/Consultas/ArrayMedicosExpress.php",
  "aoColumns": [
   { mData: 'IdAgenda' },  
   { mData: 'Paciente' },
@@ -261,7 +261,7 @@ $(document).ready( function () {
   	
     $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Enfermeria2/Modales/DetallesCitaSucursal.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/DetallesCitaSucursal.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Detalles de cita");
               $("#DiExt").removeClass("modal-dialog modal-notify modal-success");
@@ -273,7 +273,7 @@ $(document).ready( function () {
 
     $(".btn-Cancela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Enfermeria2/Modales/CancelaCita.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/CancelaCita.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Cancelación");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -294,7 +294,7 @@ $(document).ready( function () {
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
