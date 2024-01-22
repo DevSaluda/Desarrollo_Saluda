@@ -6,8 +6,7 @@ $ProveedorFijo=($_POST['NombreProveedor']);
 $NumeroOrdenTraspaso=($_POST['NumOrden']);
 $NumeroDeFacturaTrapaso=($_POST['NumFactura']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
@@ -19,7 +18,7 @@ include "Consultas/SumaDeTraspasos.php";
 
   <title>Generar ordenes de traspasos </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
 
  <style>
         .error {
@@ -47,7 +46,7 @@ table td {
 }
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   
@@ -63,7 +62,7 @@ table td {
 
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
- Solicitud de insumos de enfermeria <?echo $row['Nombre_Sucursal']?>
+ Solicitud de insumos de enfermeria <?php echo $row['Nombre_Sucursal']?>
   </div>
  
   <div >
@@ -157,7 +156,7 @@ table td {
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<?echo $NumeroOrdenTraspaso?>"  > 
+  <input type="text" class="form-control " readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
   
   
     </div>  </div>
@@ -169,7 +168,7 @@ table td {
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
   </div>
-  <input type="date" class="form-control "   value="<?echo date("Y-m-d")?>"  > 
+  <input type="date" class="form-control "   value="<?php echo date("Y-m-d")?>"  > 
   
   
     </div>  </div>
@@ -229,22 +228,22 @@ table td {
    <div class="col" hidden>  <label for="exampleFormControlInput1">Precio de compra <span class="text-danger">*</span>  </label>  <input class="input-preciocompra form-control"   type="text" id="preciodecompra" name="PrecioDeCompra[]" placeholder="Grado"/></div>
    <div class="col"> <label for="exampleFormControlInput1">Unicad(Caja) <span class="text-danger">*</span> </label><input class="input-cantidad form-control" value="0" onchange="contarTotal()" type="number" id="traspasocant" name="NTraspasos[]" placeholder="Cantidad traspasada"/></div>
    <div class="col"> <label for="exampleFormControlInput1">Piezas(Contenido de caja) <span class="text-danger">*</span> </label><input class="input-cantidad form-control" value="0" onchange="contarTotal()" type="number" id="traspasocant" name="NTraspasos[]" placeholder="Cantidad traspasada"/></div>
-   <input type="text" name="SucursalDestino[]"  hidden id="SucDestino" class="form-control" value="<?echo $SucursalDestino?>">
-   <input type="text" name="SucursalDestinoLetras[]" hidden id="SucDestinoLetras" class="form-control" value="<?echo $SucursalDestinoLetras?>">
+   <input type="text" name="SucursalDestino[]"  hidden id="SucDestino" class="form-control" value="<?php echo $SucursalDestino?>">
+   <input type="text" name="SucursalDestinoLetras[]" hidden id="SucDestinoLetras" class="form-control" value="<?php echo $SucursalDestinoLetras?>">
    <input type="text" name="TipodeServicio[]" hidden id="tipodeservicio" class="form-control" >
    <input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" >
-   <input type="date" class="form-control "  hidden name="FechaAprox[]" id="fechaaprox" value="<?echo date("Y-m-d")?>"  > 
-   <input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?echo $row['Nombre_Apellidos']?>"readonly  >
-      <input type="text" class="form-control " hidden  name="Empresa[]" value="<?echo $row['ID_H_O_D']?>"readonly  >
+   <input type="date" class="form-control "  hidden name="FechaAprox[]" id="fechaaprox" value="<?php echo date("Y-m-d")?>"  > 
+   <input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  >
+      <input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  >
       <input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" >
       <input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" >
       <input type="text" hidden name="Estatus[]" value="Generado" class="form-control" >
       <input type="text" hidden name="Existencia1[]" value="0" class="form-control" >
       <input type="text" hidden name="Existencia2[]" value="0" class="form-control" >
       <input type="text" hidden name="Recibio[]" value="" class="form-control" >
-      <input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?echo $NumeroOrdenTraspaso?>"  > 
-      <input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?echo $ProveedorFijo?>"  >
-      <input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?echo $NumeroDeFacturaTrapaso?>"  > 
+      <input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
+      <input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  >
+      <input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > 
   </form>    
    <div class="col">   <label for="exampleFormControlInput1">Eliminar </label> <br> <a   id="deletee" class="btn btn-danger btn-sm remove"><i class="fas fa-minus-circle"></i></a></div></div>
               	</li>
@@ -327,7 +326,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
