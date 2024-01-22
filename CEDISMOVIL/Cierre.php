@@ -4,5 +4,5 @@ session_start();
 setcookie ("mostrarModal", "", time() - 3600);
 session_unset();
 session_destroy();
-header("Location:https://controlfarmacia.com/App/Secure/POS2");
+header("Location:https://saludapos.com/App/Secure/POS2");
 ?>

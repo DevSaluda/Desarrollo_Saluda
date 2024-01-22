@@ -120,11 +120,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../Perfiles/<?echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
+          <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a  id="DatosGenerales" class="d-block"><?echo $row['Nombre_Apellidos']?></a>
-          <a  id="DatosGenerales" class="d-block"><small><?echo $row['Nombre_rol']?></small></a>
+          <a  id="DatosGenerales" class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
+          <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
             <li class="nav-header">Almacen</li>
            
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/CEDISMOVIL/ProductosV2" class="nav-link">
+            <a href="https://saludapos.com/CEDISMOVIL/ProductosV2" class="nav-link">
             <i class="fas fa-pills"></i>
               <p>
             Base general
@@ -331,7 +331,7 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://controlfarmacia.com/CEDISMOVIL/Cierre'); 
+window.location.replace('https://saludapos.com/CEDISMOVIL/Cierre'); 
 
 }
 $( document ).ready(function() {
