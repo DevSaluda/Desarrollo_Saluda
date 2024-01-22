@@ -3,8 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT ID_Notificacion,Encabezado, Tipo_Notificacion, Mensaje_Notificacion,
  Registrado, Sucursal, Estado FROM Area_De_Notificaciones WHERE Sucursal=".$row['Fk_Sucursal']." AND Estado=1";

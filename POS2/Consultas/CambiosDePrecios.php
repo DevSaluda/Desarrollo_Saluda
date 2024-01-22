@@ -174,7 +174,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/POS2/Consultas/ArrayProductosCambioDePrecio.php",
+ "sAjaxSource": "https://saludapos.com/POS2/Consultas/ArrayProductosCambioDePrecio.php",
  "aoColumns": [
   { mData: 'IDNotificacion' },
     { mData: 'Encabezado' },

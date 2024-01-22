@@ -1,8 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +10,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Cambios de precios en productos  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -27,12 +24,12 @@ include "Consultas/AnalisisIndex.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Cambios de precios en productos de SALUDA
-    <?echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
+    <?php echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
   </div>
 
   <div>
@@ -69,13 +66,6 @@ include "Consultas/AnalisisIndex.php";
  
   <!-- Main Footer -->
 <?php
-
-  include ("Modales/Error.php");
-  include ("Modales/Exito.php");
-  include ("Modales/ExitoActualiza.php");
-  include ("Modales/FiltraEspecificamente.php");
-  include ("Modales/FiltraFechasEspecialesVenta.php");
-  include ("Modales/FiltraPorMes.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
@@ -91,7 +81,7 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-s
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -106,7 +96,7 @@ s
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
