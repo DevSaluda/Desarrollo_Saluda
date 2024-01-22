@@ -13,7 +13,7 @@
          </button>
        </div>
         <div class="alert alert-success alert-styled-left text-blue-800 content-group">
-						                <span class="text-semibold"><?echo $row['Nombre_Apellidos']?>, </span>
+						                <span class="text-semibold"><?php echo $row['Nombre_Apellidos']?>, </span>
                             los campos con un  <span class="text-danger"> * </span> son campos necesarios para el correcto ingreso de datos.
                           
 						                <button type="button" class="close" data-dismiss="alert">×</button>
@@ -62,9 +62,9 @@
     
     
 
-<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
 
-<input type="text" class="form-control "  hidden id="empresa" name="Empresa" readonly value="<?echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control "  hidden id="empresa" name="Empresa" readonly value="<?php echo $row['ID_H_O_D']?>">
   <div>
    
       <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
