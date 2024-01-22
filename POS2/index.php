@@ -131,7 +131,7 @@ include "Consultas/ConsultaFondoCaja.php";
     <div class="toast" id="toastt" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
       <img src="https://saludapos.com/Perfiles/Saluda.jpeg" style="width: 8%;" class="rounded mr-2" alt="...">
-        <strong class="mr-auto"><?echo $Usuarios['Tipo_Notificacion']?></strong><small class="text-mute"><?php echo date('h:i A', strtotime(($Usuarios['Registrado'])))?></small> <br>
+        <strong class="mr-auto"><?php echo $Usuarios['Tipo_Notificacion']?></strong><small class="text-mute"><?php echo date('h:i A', strtotime(($Usuarios['Registrado'])))?></small> <br>
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
