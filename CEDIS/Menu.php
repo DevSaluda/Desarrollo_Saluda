@@ -173,14 +173,7 @@
             </a>
           </li>
              
-          <li class="nav-item">
-            <a href="StockCedis" class="nav-link">
-            <i class="fas fa-file-invoice-dollar"></i>
-              <p>
-            Ingreso de medicamentos            
-              </p>
-            </a>
-          </li>
+          
           
           
           
@@ -218,7 +211,7 @@
             </a>
           </li>
          
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a  href="ListadoDeTraspasos"  class="nav-link">
             <i class="fas fa-exchange-alt"></i>
               <p>
@@ -226,7 +219,7 @@
                
               </p>
             </a>
-          </li> -->
+          </li>
          
          
         
@@ -323,8 +316,6 @@
     </div>
   </div>
 </div>
-<?php include ("Modales/Ventana_Mantenimiento.php");
-?>
 <script src="js/clock.js"></script>
     <!-- Main content -->
     <script>
@@ -354,8 +345,3 @@ $( document ).ready(function() {
         color:#007bff;
       }
     </style>
-    <!-- <script>
-    $(document).ready(function(){
-        $('#maintenanceModal').modal('show');
-    });
-</script> -->
