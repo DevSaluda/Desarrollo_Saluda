@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1=" SELECT Incidencias_Express.ID_incidencia,Incidencias_Express.Descripcion,Incidencias_Express.Reporto,
@@ -62,7 +62,7 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Aún no hay incidencias registradas </p>
 <?php endif;?>
   <!-- Modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

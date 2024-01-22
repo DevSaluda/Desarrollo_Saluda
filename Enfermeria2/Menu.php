@@ -249,7 +249,7 @@
             </a>
           </li> -->
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/Enfermeria2/CancelacionesV2" class="nav-link">
+            <a href="https://saludapos.com/Enfermeria2/CancelacionesV2" class="nav-link">
             <i class="fas fa-calendar-times"></i>
               <p>
               Cancelaciones
@@ -384,7 +384,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/Enfermeria2/ReporteRapido" class="nav-link">
+            <a href="https://saludapos.com/Enfermeria2/ReporteRapido" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Reportar
