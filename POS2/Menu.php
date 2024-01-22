@@ -166,7 +166,18 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
         <div class="info">
           <a  id="DatosGenerales" class="d-block" ><?php echo $row['Nombre_Apellidos']?></a>
           <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
- 
+          <a id="DatosGenerales" class="d-block">
+    <small>
+        <?php 
+        if ($ValorCaja !== null && isset($ValorCaja['Turno'])) {
+            echo 'Turno actual: <strong>' . $ValorCaja['Turno'] . '</strong>';
+        } else {
+            echo 'Turno no disponible'; // or any other message you want to display
+        }
+        ?>
+    </small>
+</a>
+
 
         </div>
       </div>
