@@ -30,8 +30,8 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " hidden name="FkFondo" id="fkfondo" readonly value="<? echo $Especialistas->ID_Fon_Caja; ?>">
-  <input type="number" class="form-control "  id="cantidad" name="Cantidad" step="any" readonly value="<? echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >  
+  <input type="text" class="form-control " hidden name="FkFondo" id="fkfondo" readonly value="<?php echo $Especialistas->ID_Fon_Caja; ?>">
+  <input type="number" class="form-control "  id="cantidad" name="Cantidad" step="any" readonly value="<?php echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >  
     </div>
     </div>
     
@@ -43,7 +43,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  name="Empleado" id="empleado" value="<?echo $row['Nombre_Apellidos']?>" aria-describedby="basic-addon1" >            
+  <input type="text" class="form-control " readonly  name="Empleado" id="empleado" value="<?php echo $row['Nombre_Apellidos']?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 
 <div class="row">
@@ -52,8 +52,8 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >       
-  <input type="text" class="form-control " readonly name="Sucursal" id="sucursal" hidden value="<? echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" >       
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >       
+  <input type="text" class="form-control " readonly name="Sucursal" id="sucursal" hidden value="<?php echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" >       
     </div>
     </div>
     
@@ -65,7 +65,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " readonly name="Fecha" id="fecha" value="<? echo $fcha; ?>" aria-describedby="basic-addon1" >   
+  <input type="text" class="form-control " readonly name="Fecha" id="fecha" value="<?php echo $fcha; ?>" aria-describedby="basic-addon1" >   
   <input type="text" class="form-control " hidden readonly name="Asignacion" id="asignacion" value="1" aria-describedby="basic-addon1" >            
 </div></div></div>
 <div class="row">
@@ -106,10 +106,10 @@ while ($r=$query->fetch_object()){
                                                <option value="">Seleccione un enfermero:</option>
                                                <option value="Ninguno">Ninguno</option>
                                                <option value="Otro">Otro</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Enfermero_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus FROM Personal_Enfermeria WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
     </div>
@@ -125,10 +125,10 @@ while ($r=$query->fetch_object()){
                                                <option value="">Seleccione un médico:</option>
                                                <option value="Ninguno">Ninguno</option>
                                                <option value="Otro">Otro</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Medico_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus FROM Personal_Medico WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
   </div>
@@ -264,21 +264,21 @@ while ($r=$query->fetch_object()){
       onsubmit="window.open('about:blank','print_popup','width=600,height=600');"  id="GeneraTicketAperturaCaja">
 
    
-      <input type="text" class="form-control "   readonly name="VendedorTicket"  readonly value="<?echo $row['Nombre_Apellidos']?>">
+      <input type="text" class="form-control "   readonly name="VendedorTicket"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
       <input type="text" class="form-control "   readonly name="TurnoTicket" id="turnoticket"  >
-      <input type="number" class="form-control "   name="FondoBase" step="any" readonly value="<? echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >  
+      <input type="number" class="form-control "   name="FondoBase" step="any" readonly value="<?php echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >  
       <input type="number" class="form-control "  step="any" name="TotalCajaDeApertura" id="resultadoticket" readonly   aria-describedby="basic-addon1" >    
      
-      <input type="datetime" name="Horadeimpresion" value="<?echo date('h:i:s A');?>">
-      <input type="text" class="form-control" name="SucursalApertura" readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >     
+      <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
+      <input type="text" class="form-control" name="SucursalApertura" readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >     
       <button type="submit"  id="EnviaTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
 <script src="js/AbreCajaIndex.js"></script>
 <script src="js/ContadorDinero.js"></script>
 <script src="js/Sumadinero.js"></script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger"><i class="fas fa-exclamation-triangle fa-2x" style="color: #f50909;"></i> No encontramos algún fondo de caja asignado, por favor verifica e intenta de nuevo <i class="fas fa-exclamation-triangle fa-2x" style="color: #f50909;"></i></p>
-<? endif;?>
+<?php endif;?>
  <script>
 
 function CapturaNombreEnfermero() {
