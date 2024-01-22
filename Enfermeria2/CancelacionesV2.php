@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 ?>
@@ -13,10 +13,10 @@ include "Consultas/ConeSelectDinamico.php";
 
   <title>Cancelaciones de citas </title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div id="loading-overlay">
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
@@ -51,7 +51,7 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
    include ("Modales/Error.php");
   
    include ("Modales/Exito.php");
@@ -78,7 +78,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

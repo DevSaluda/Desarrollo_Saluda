@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ include "Consultas/Sesion.php";
 
   <title>Reporte de incidencias </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -22,7 +22,7 @@ include "Consultas/Sesion.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color:#33b5e5 !important;color: white;">
    Reporte rapido de incidencia 
@@ -61,7 +61,7 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
 
   include ("Modales/ReporteRapido.php");
@@ -95,7 +95,7 @@ include "Consultas/Sesion.php";
   	
     $(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Apertura de caja");
               $("#Di").addClass("modal-dialog modal-lg modal-notify modal-success");
@@ -114,7 +114,7 @@ include "Consultas/Sesion.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -127,7 +127,7 @@ include "Consultas/Sesion.php";
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

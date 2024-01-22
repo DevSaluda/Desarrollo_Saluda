@@ -177,7 +177,7 @@ tabla = $('#CitasExteriores').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/Enfermeria2/Consultas/arrayRevaloracionesAgendadas.php",
+ "sAjaxSource": "https://saludapos.com/Enfermeria2/Consultas/arrayRevaloracionesAgendadas.php",
  "aoColumns": [
   { mData: 'Folio' },  
   { mData: 'Nombre' },
@@ -282,7 +282,7 @@ tabla = $('#CitasExteriores').DataTable({
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
