@@ -166,7 +166,7 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
         <div class="info">
           <a  id="DatosGenerales" class="d-block" ><?php echo $row['Nombre_Apellidos']?></a>
           <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
-          <a  id="DatosGenerales" class="d-block"  ><small>Turno actual: <strong><?php echo $ValorCaja['Turno']?></strong></small></a>
+ 
 
         </div>
       </div>
