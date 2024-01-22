@@ -164,14 +164,10 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
           <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a  id="DatosGenerales" class="d-block" ><?echo $row['Nombre_Apellidos']?></a>
+          <a  id="DatosGenerales" class="d-block" ><?php echo $row['Nombre_Apellidos']?></a>
           <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
           <a  id="DatosGenerales" class="d-block"  ><small>Turno actual: <strong><?php echo $ValorCaja['Turno']?></strong></small></a>
-<!-- 
-               <a  id="DatosGenerales" class="d-block"  title="<?php echo $row['Cuenta_Clip']?>" lang="es" ><small title="<?php echo $row['Cuenta_Clip']?>" lang="es">CLIP Usuario   <br> <?php echo $row['Cuenta_Clip']?></small></a>
-              
-          <a  id="DatosGenerales" class="d-block" title="<?php echo $row['Clave_Clip']?>" lang="es" ><small title="<?php echo $row['Clave_Clip']?>" lang="es" >CLIP Contraseña  <br> <?php echo $row['Clave_Clip']?></small></a>
-           -->
+
         </div>
       </div>
 
