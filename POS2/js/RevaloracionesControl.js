@@ -6,7 +6,6 @@ function CargaRevaloraciones() {
     })
 
 }
-
-
-
 CargaRevaloraciones();
+
+
