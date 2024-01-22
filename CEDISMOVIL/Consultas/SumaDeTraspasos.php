@@ -10,7 +10,5 @@ $monto1 = $Ticketss["Folio_Traspaso"];
 $monto2 = 000000000001;
 $totalmonto = $monto1 + $monto2;
 
- 
-    
-  
+
 ?>
