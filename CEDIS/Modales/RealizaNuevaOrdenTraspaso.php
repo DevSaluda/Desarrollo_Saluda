@@ -28,8 +28,24 @@ $totalmonto = $monto1 + $monto2;
       <div class="modal-body">
      
  <form  method="POST" action="https://saludapos.com/CEDIS/GeneradorTraspasosV2">
+    
+ 
     <div class="form-group">
-  <label for="exampleInputEmail1">Elija proveedor</label>
+    <label for="exampleInputEmail1">Elija sucursal</label>
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clinic-medical"></i></span>
+  <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
+  <option value="">Seleccione una Sucursal:</option>
+                                               <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D,Codigo_identificador FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
+        </select>   
+  </div>  </div>  
+  <div class="form-group">
+  <label for="exampleInputEmail1">Proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
     <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
     <option value="">Seleccione un proveedor:</option>
@@ -41,23 +57,7 @@ $totalmonto = $monto1 + $monto2;
         }
                       ?>
           </select>   
-    </div>  </div> 
- 
-    <div class="form-group">
-    <label for="exampleInputEmail1">Elija sucursal</label>
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clinic-medical"></i></span>
-  <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
-  <option value="">Seleccione una Sucursal:</option>
-                                               <?php
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
-        
-          while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
-          }
-                        ?>
-        </select>   
-  </div>  </div>  
-   
+    </div>  </div>  
 
 
 
@@ -67,18 +67,8 @@ $totalmonto = $monto1 + $monto2;
    <input type="number" value="<?php echo $totalmonto?>"  class="form-control"  name="NumOrden" readonly>
     </div>  </div>  
 
-    <div class="form-group" id="numFacturaContainer">
-    <label for="exampleInputEmail1"># de factura</label>
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="Tarjeta2"><i class="fas fa-file-invoice"></i></span>
-        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarUsuario()">
-    </div>
-    <span id="estadousuario"></span>
-
-    <p><img src="https://saludapos.com/CEDIS/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
-</div>
-</div>
-
+    
+  </div> 
   <div class="form-group" style="display:none;">
     
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
@@ -97,44 +87,21 @@ $(document).on('change', '#sucursalconorden', function(event) {
 
      </script>
 
-<script>
-    // Función para manejar cambios en el proveedor seleccionado
-    $('#nombreproveedor').on('change', function() {
-        var selectedProveedor = $(this).val();
 
-        if (selectedProveedor === 'CEDIS') {
-            $('#numFacturaContainer').hide(); // Ocultar el input NumFactura
-
-            // Combinar las primeras 4 letras del input sucursalLetras con totalmonto y establecerlo como valor del input NumOrden
-            var inputSucursal = $('#sucursalLetras').val().slice(0, 4);
-            var totalmonto = '<?php echo $totalmonto; ?>'; // Convertimos $totalmonto a cadena con comillas
-            $('#NumOrden').val(inputSucursal + totalmonto);
-        } else {
-            $('#numFacturaContainer').show(); // Mostrar el input NumFactura
-        }
-    });
-
-    // Llamar al evento change del select al cargar la página para establecer el valor inicial de NumOrden solo si se seleccionó CEDIS
-    $(document).ready(function() {
-        if ($('#nombreproveedor').val() === 'CEDIS') {
-            $('#nombreproveedor').trigger('change');
-        }
-    });
-</script>
 <script>
 
 function comprobarUsuario() {
-	$("#loaderIcon").show();
-	jQuery.ajax({
-	url: "https://saludapos.com/CEDIS/Consultas/ComprobarFactura.php",
-	data:'NumFactura='+$("#NumFactura").val(),
-	type: "POST",
-	success:function(data){
-		$("#estadousuario").html(data);
-		$("#loaderIcon").hide();
-	},
-	error:function (){}
-	});
+  $("#loaderIcon").show();
+  jQuery.ajax({
+  url: "https://saludapos.com/CEDIS/Consultas/ComprobarFactura.php",
+  data:'NumFactura='+$("#NumFactura").val(),
+  type: "POST",
+  success:function(data){
+    $("#estadousuario").html(data);
+    $("#loaderIcon").hide();
+  },
+  error:function (){}
+  });
 }
 
 </script>
