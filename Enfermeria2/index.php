@@ -17,8 +17,6 @@ if(!isset($_COOKIE["IngresoEnfer"]))
   $exibirModal = true;
 }
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 
 ?>
 <!DOCTYPE html>
@@ -31,9 +29,9 @@ include "Consultas/AnalisisIndex.php";
   <title>Enfermería | Página de inicio  </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -81,7 +79,7 @@ include "Consultas/AnalisisIndex.php";
               <div class="icon">
               <i class="fas fa-vials"></i>
               </div>
-              <a href="<?echo $row['Url_Drive_Enfermeria']?>" target="_blank" class="small-box-footer">Realizar pedido <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?php echo $row['Url_Drive_Enfermeria']?>" target="_blank" class="small-box-footer">Realizar pedido <i class="fas fa-arrow-circle-right"></i></a>
 
             </div>
           </div>
@@ -171,7 +169,7 @@ $(document).ready(function()
 });
 </script>
 <?php endif; ?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
