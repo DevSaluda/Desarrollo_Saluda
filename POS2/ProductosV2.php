@@ -101,7 +101,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
  
-  include ("Modales/Vacios.php");
+
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
