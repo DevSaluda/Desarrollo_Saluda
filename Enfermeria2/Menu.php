@@ -164,7 +164,7 @@
             </a>
           </li>-->
           <li class="nav-item">
-          <a href="<?= $row['Url_Drive_Enfermeria'] ?>" target="_blank" class="nav-link">
+          <a href="<?php = $row['Url_Drive_Enfermeria'] ?>" target="_blank" class="nav-link">
           <i class="fas fa-briefcase-medical"></i> Solicitar Insumos 
           </a>
           </li>
@@ -492,7 +492,7 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://controlfarmacia.com/Enfermeria2/Cierre'); 
+window.location.replace('https://saludapos.com/Enfermeria2/Cierre'); 
 
 }
 $( document ).ready(function() {
