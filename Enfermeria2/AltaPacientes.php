@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -14,9 +14,9 @@ include "Consultas/ConeSelectDinamico.php";
 
   <title>Alta de pacientes</title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important; color: white;">
     Alta de nuevos pacientes  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
@@ -43,7 +43,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 
   <!-- Main Footer -->
-  <?
+  <?php
 include ("Modales/NuevoPaciente.php");
 include ("Modales/Exito.php");
 include ("Modales/Error.php");

@@ -16,7 +16,7 @@ $(document).ready( function () {
 
 include ("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT ID_Data_Paciente,Nombre_Paciente,Edad,Sexo,FK_ID_H_O_D,Telefono,Correo
@@ -63,7 +63,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlconsulta.com/Enfermeria2/Modales/AgendaNuevo.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/AgendaNuevo.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');
