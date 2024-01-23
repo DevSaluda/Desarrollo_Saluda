@@ -339,31 +339,33 @@ $("#turnoticket").val(selected);
 </script>
 
 <?php
-if($ValorCaja["Estatus"] == 'Abierta'){
+// ... (tu código de consulta aquí)
 
-  echo '
-  <script>
-$(document).ready(function()
-{
-// id de nuestro modal
+// Verifica si hay resultados en la consulta
+if ($resultset && mysqli_num_rows($resultset) > 0) {
+    // Asigna los resultados a $ValorCaja
+    $ValorCaja = mysqli_fetch_assoc($resultset);
 
-$("#submit").attr("disabled", false);
-});
-</script>
-  ';
-     }else{
-    
-      echo '
-      <script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-
-  $("#submit").attr("disabled", true);
-});
-</script>
-      ';
-      
-      
-    
-     } ?>
+    // Verifica el estado de la caja
+    if ($ValorCaja["Estatus"] == 'Abierta') {
+        echo '
+        <script>
+            $(document).ready(function() {
+                $("#submit").attr("disabled", false);
+            });
+        </script>
+        ';
+    } else {
+        echo '
+        <script>
+            $(document).ready(function() {
+                $("#submit").attr("disabled", true);
+            });
+        </script>
+        ';
+    }
+} else {
+    // Mostrar un mensaje si no hay resultados
+    echo "Por el momento sin turno.";
+}
+?>
