@@ -17,7 +17,7 @@
         <i class="fas fa-cog fa-4x fa-spin"></i> <br> <br>
 
         
-        <button  class="btn-success" > <a style="color:white;"href="https://controlfarmacia.com/POS2/ContadorDiario" target="Blank_"> INICIAR CONTEO </a></button>
+        <button  class="btn-success" > <a style="color:white;"href="https://saludapos.com/POS2/ContadorDiario" target="Blank_"> INICIAR CONTEO </a></button>
       </div>
 
       <!--Footer-->
