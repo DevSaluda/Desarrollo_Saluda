@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/ConsultaFondoCaja.php";
 include "Consultas/ConsultaCaja.php";
 ?>
@@ -13,7 +12,7 @@ include "Consultas/ConsultaCaja.php";
 
   <title>Administración de caja |</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -26,7 +25,7 @@ include "Consultas/ConsultaCaja.php";
 <?include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-  Administración de caja de <?echo $row['Nombre_Sucursal']?>
+  Administración de caja de <?php echo $row['Nombre_Sucursal']?>
   </div>
   
   <div >
@@ -62,7 +61,7 @@ include "Consultas/ConsultaCaja.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   
   include ("Modales/Error.php");
@@ -73,8 +72,6 @@ include "Consultas/ConsultaCaja.php";
 
 <!-- ./wrapper -->
 
-
-<script src="js/ControlFondosCajas.js"></script>
 
 <script src="js/Cajas.js"></script>
 <!-- Bootstrap -->
@@ -96,7 +93,7 @@ include "Consultas/ConsultaCaja.php";
   	
     $(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Apertura de caja");
               $("#Di").addClass("modal-dialog modal-lg modal-notify modal-success");
@@ -115,7 +112,7 @@ include "Consultas/ConsultaCaja.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -128,7 +125,7 @@ include "Consultas/ConsultaCaja.php";
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

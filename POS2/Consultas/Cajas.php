@@ -20,7 +20,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT Cajas_POS.ID_Caja,Cajas_POS.Cantidad_Fondo,Cajas_POS.Empleado,Cajas_POS.Sucursal,Cajas_POS.Estatus,Cajas_POS.CodigoEstatus,Cajas_POS.Turno,Cajas_POS.Asignacion,
@@ -58,7 +57,7 @@ $query = $conn->query($sql1);
     <td> <?php echo FechaCastellano($Usuarios["Fecha_Apertura"]); ?></td>
     <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
     <td> <?php echo $Usuarios["Turno"]; ?></td>
-    <td><button class="btn btn-default btn-sm" style=<?if($Usuarios['Asignacion'] ==1){
+    <td><button class="btn btn-default btn-sm" style=<?php if($Usuarios['Asignacion'] ==1){
    echo "background-color:#007bff!important";
 } elseif($Usuarios['Asignacion'] ==2) {
   echo "background-color:#001f3f!important";
@@ -88,14 +87,14 @@ $query = $conn->query($sql1);
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
 <div class="dropdown-menu">
-<a data-id="<?php echo $Usuarios["ID_Caja"];?>" style=<?if($Usuarios['Asignacion'] == 1){
+<a data-id="<?php echo $Usuarios["ID_Caja"];?>" style=<?php if($Usuarios['Asignacion'] == 1){
    
    echo "display:block;";
 } else {
   echo "display:none;";
 }
 ?>  class="btn-CambiaAsgina dropdown-item" >Cambiar asignación <i class="fas fa-exchange-alt"></i></a>
-<a data-id="<?php echo $Usuarios["ID_Caja"];?>" style=<?if($Usuarios['Asignacion'] == 0){
+<a data-id="<?php echo $Usuarios["ID_Caja"];?>" style=<?php if($Usuarios['Asignacion'] == 0){
    
    echo "display:block;";
 } else {
@@ -127,7 +126,7 @@ $query = $conn->query($sql1);
   	
     $(".btn-editcaja").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Apertura de caja");
               $("#Di").removeClass("modal-dialog modal-notify modal-success");
@@ -139,7 +138,7 @@ $query = $conn->query($sql1);
 
     $(".btn-CambiaAsgina").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/ReasignaCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/ReasignaCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Reajustando estado de asignación");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -149,7 +148,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-Asignamela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AsignaCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AsignaCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Asignación de caja");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -161,7 +160,7 @@ $query = $conn->query($sql1);
 
     $(".btn-edit").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -193,7 +192,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
