@@ -22,7 +22,7 @@ include "Consultas/ConsultaCaja.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
   Administración de caja de <?php echo $row['Nombre_Sucursal']?>
