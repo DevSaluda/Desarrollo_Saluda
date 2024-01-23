@@ -1,9 +1,8 @@
-
 <?php
+include "Consultas/db_connection.php";
 include "Consultas/Consultas.php";
 include "Consultas/ConsultaCaja.php";
 include "Consultas/SumadeFolioTickets.php";
-include "Consultas/db_connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
