@@ -18,7 +18,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1=" SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.ID_Prod_POS,Stock_POS.Clave_adicional,Productos_POS.ID_Prod_POS,Productos_POS.Precio_Venta,Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Fk_sucursal,Stock_POS.Max_Existencia,Stock_POS.Min_Existencia,
@@ -99,42 +98,4 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Aún no hay StockSucursales registrados para <?echo $row['ID_H_O_D']?></p>
 <?php endif;?>
   <!-- Modal -->
-  <script>
-  	$(".btn-editStock").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/ActualizaDataStock.php","id="+id,function(data){
-  			$("#form-editStockSucursalesA").html(data);
-          $("#TituloStockSucursalesA").html("Asignacion de StockSucursales en otras sucursales");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-danger");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-primary");
-              $("#DiStockSucursalesSA").addClass("modal-dialog modal-lg  modal-notify modal-success");
-  		});
-  		$('#editModalStockSucursalesA').modal('show');
-  	});
-    
-  </script>
-  <div class="modal fade" id="editModalStockSucursalesA" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="DiStockSucursalesSA"class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloStockSucursalesA"></p>
-
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-        <div id="MensajeStockSucursalesG"class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold">Estimado usuario, 
-                            Verifique los campos antes de realizar alguna accion</span>
-						                <button type="button" class="close" data-dismiss="alert">×</button>
-                            </div>
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="form-editStockSucursalesA"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  
