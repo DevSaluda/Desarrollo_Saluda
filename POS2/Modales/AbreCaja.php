@@ -346,23 +346,29 @@ if ($resultset && mysqli_num_rows($resultset) > 0) {
     // Asigna los resultados a $ValorCaja
     $ValorCaja = mysqli_fetch_assoc($resultset);
 
-    // Verifica el estado de la caja
-    if ($ValorCaja["Estatus"] == 'Abierta') {
-        echo '
-        <script>
-            $(document).ready(function() {
-                $("#submit").attr("disabled", false);
-            });
-        </script>
-        ';
+    // Verifica si $ValorCaja no es null antes de acceder a sus propiedades
+    if ($ValorCaja !== null && isset($ValorCaja["Estatus"])) {
+        // Verifica el estado de la caja
+        if ($ValorCaja["Estatus"] == 'Abierta') {
+            echo '
+            <script>
+                $(document).ready(function() {
+                    $("#submit").attr("disabled", false);
+                });
+            </script>
+            ';
+        } else {
+            echo '
+            <script>
+                $(document).ready(function() {
+                    $("#submit").attr("disabled", true);
+                });
+            </script>
+            ';
+        }
     } else {
-        echo '
-        <script>
-            $(document).ready(function() {
-                $("#submit").attr("disabled", true);
-            });
-        </script>
-        ';
+        // Mostrar un mensaje si $ValorCaja es null o no tiene la propiedad "Estatus"
+        echo "Error: No se pudo obtener la información de la caja.";
     }
 } else {
     // Mostrar un mensaje si no hay resultados
