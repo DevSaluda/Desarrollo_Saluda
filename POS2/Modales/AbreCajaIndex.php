@@ -250,11 +250,11 @@ while ($r=$query->fetch_object()){
  <!-- INICIA CONTADOR DINERO -->
 
 
- <input type="text" hidden name="Empresa" value="<? echo $row['ID_H_O_D']?>">
+ <input type="text" hidden name="Empresa" value="<?php echo $row['ID_H_O_D']?>">
  
  <input type="text" hidden name="Estatus" value="Abierta">
  <input type="text" hidden name="CodEstatus" value="background-color: #2BBB1D !important;">
- <input type="text"  hidden name="Sistema" value="POS <? echo $row['Nombre_rol']?>">
+ <input type="text"  hidden name="Sistema" value="POS <?php echo $row['Nombre_rol']?>">
                           
 </form>
 
