@@ -1,7 +1,7 @@
 <?php
 include_once("../db_connection.php");
 include "../Consultas.php";
-include "../Sesion.php";
+
 
 $sql = "SELECT * FROM Ventas_POS  WHERE Fk_sucursal='" . $row['Fk_Sucursal'] . "' ORDER BY Venta_POS_ID DESC LIMIT 1";
 $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
