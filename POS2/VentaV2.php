@@ -155,7 +155,7 @@ include ("db_connection.php");
 
 $(".btn-edit").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -165,7 +165,7 @@ $(".btn-edit").click(function() {
 
 $(".btn-arqui").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Arqueo De Caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -176,7 +176,7 @@ $(".btn-arqui").click(function() {
 
 $(".btn-aperturacaja").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").text("Apertura De caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
