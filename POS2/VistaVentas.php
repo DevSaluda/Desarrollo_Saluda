@@ -1,11 +1,22 @@
 <?php
+include "Consultas/Consultas.php";
+include "Consultas/Sesion.php";
+include "Consultas/ConsultaCaja.php";
+include "Consultas/SumadeFolioTickets.php";
+
+include ("Consultas/db_connection.php");
 $fcha = date("Y-m-d");
+
 // Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
 $primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
+
+
 // Concatenar las primeras 3 letras con el valor de $totalmonto
 $resultado_concatenado = $primeras_tres_letras ;
+
 // Convertir el resultado a mayúsculas
 $resultado_en_mayusculas = strtoupper($resultado_concatenado);
+
 // Imprimir el resultado en mayúsculas
 ?>
 

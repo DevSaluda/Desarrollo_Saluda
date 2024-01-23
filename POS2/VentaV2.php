@@ -1,8 +1,10 @@
+
 <?php
-include "Consultas/db_connection.php";
 include "Consultas/Consultas.php";
+include "Consultas/Sesion.php";
 include "Consultas/ConsultaCaja.php";
 include "Consultas/SumadeFolioTickets.php";
+include ("db_connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,6 +33,11 @@ include "Consultas/SumadeFolioTickets.php";
 <?php include_once ("Menu.php")?>
 
 
+  
+
+
+
+ 
 
    <div class="text-center">
 <button data-toggle="modal" data-target="#ConsultaProductos" class="btn btn-primary btn-sm"  >Consulta productos <i class="fas fa-search"></i></button>
@@ -149,7 +156,7 @@ include "Consultas/SumadeFolioTickets.php";
 
 $(".btn-edit").click(function() {
     id = $(this).data("id");
-    $.post("https://saludapos.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
+    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -159,7 +166,7 @@ $(".btn-edit").click(function() {
 
 $(".btn-arqui").click(function() {
     id = $(this).data("id");
-    $.post("https://saludapos.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
+    $.post("https://controlfarmacia.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Arqueo De Caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -170,7 +177,7 @@ $(".btn-arqui").click(function() {
 
 $(".btn-aperturacaja").click(function() {
     id = $(this).data("id");
-    $.post("https://saludapos.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
+    $.post("https://controlfarmacia.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").text("Apertura De caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -184,6 +191,7 @@ $(".btn-aperturacaja").click(function() {
    
    <script src="js/ControladorFormVentas.js"></script>
 
+   <script src="js/VentasControlador.js"></script>
      <script src="js/BusquedaVentasV.js"></script>
      <script src="js/BusquedaVentasV2.js"></script>
      <script src="js/BusquedaVentasV23.js"></script>
