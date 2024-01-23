@@ -12,9 +12,9 @@ include "Consultas/ConeSelectDinamico.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title> Cita en sucursal <?echo $row['Nombre_Sucursal']?></title>
+  <title> Cita en sucursal <?php echo $row['Nombre_Sucursal']?></title>
 
-  <? include "Header.php"?>
+  <?php  include "Header.php"?>
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
@@ -24,7 +24,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important;color: white;">
-  Cita en sucursal <?echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Cita en sucursal <?php echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   <div >
   <a type="button" class="btn btn-success" href="AltaPacientes">
@@ -49,7 +49,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 
   <!-- Main Footer -->
-  <?
+  <?php
 include ("Modales/AltaCitaSucursal.php");
 include ("Modales/Exito.php");
 include ("Modales/Confirmacion.php");
@@ -121,7 +121,7 @@ include ("Modales/Precarga.php");
   </div><!-- /.modal -->
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
