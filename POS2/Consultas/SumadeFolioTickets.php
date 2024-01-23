@@ -1,6 +1,6 @@
 <?php
-include_once("db_connection.php");
-include "Consultas.php";
+include_once("https://saludapos.com/POS2/Consultas/db_connection.php");
+include "https://saludapos.com/POS2/Consultas/Consultas.php";
 
 
 $sql = "SELECT * FROM Ventas_POS  WHERE Fk_sucursal='" . $row['Fk_Sucursal'] . "' ORDER BY Venta_POS_ID DESC LIMIT 1";
