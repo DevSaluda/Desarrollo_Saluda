@@ -16,7 +16,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Establecer la zona horaria
-mysqli_query($conn, "SET time_zone = '-6:00'");  // Ajusta esto según tu zona horaria
+mysqli_query($conn, "SET time_zone = '+6:00'");  // Ajusta esto según tu zona horaria
 
 // Resto de tu código aquí...
 
