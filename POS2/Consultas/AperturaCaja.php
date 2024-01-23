@@ -1,6 +1,6 @@
 <?php
 include_once 'db_connection.php';
-
+date_default_timezone_set('America/Mexico_City');
 $Fk_Fondo = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['FkFondo']))));
 $Cantidad_Fondo = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Cantidad']))));
 $Empleado = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Empleado']))));
