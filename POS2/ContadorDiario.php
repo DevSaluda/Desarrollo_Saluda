@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 $sql1="SELECT * FROM `Stock_POS` WHERE  Tipo_Servicio=24  AND Fk_sucursal='".$row['Fk_Sucursal']."' ORDER by rand() limit 50 ";
 ?>
@@ -14,7 +13,7 @@ $sql1="SELECT * FROM `Stock_POS` WHERE  Tipo_Servicio=24  AND Fk_sucursal='".$ro
 
   <title>Conteo diario</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -24,11 +23,11 @@ $sql1="SELECT * FROM `Stock_POS` WHERE  Tipo_Servicio=24  AND Fk_sucursal='".$ro
      
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Conteo diario de la sucursal <?echo  $row['Nombre_Sucursal']?> 
+  Conteo diario de la sucursal <?php echo  $row['Nombre_Sucursal']?> 
   </div>
   <div >
  
@@ -74,7 +73,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -150,7 +149,7 @@ $query = $conn->query($sql1);
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
  
   include ("Modales/BuscaPorFechaVentas.php");
 
@@ -182,7 +181,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
