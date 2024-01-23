@@ -6,7 +6,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " name="Vendedor" id="vendedor" readonly value="<?echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control " name="Vendedor" id="vendedor" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
     </div>
     </div>
     
@@ -16,7 +16,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " name="NmCaja" id="nmcaja" readonly value="<?echo $ValorCaja['Valor_Total_Caja']?>" >
+  <input type="text" class="form-control " name="NmCaja" id="nmcaja" readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
     </div>
    
 <label for="clav" class="error"></div>
@@ -37,7 +37,7 @@
 
 
 
-<input type="text" hidden class="form-control " name="SucursalVentas" readonly value="<?echo $row['Nombre_Sucursal']?>" >
+<input type="text" hidden class="form-control " name="SucursalVentas" readonly value="<?php echo $row['Nombre_Sucursal']?>" >
 <div id="outer">
 <div id="header">
 
