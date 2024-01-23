@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Inventario rapido </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -28,7 +27,7 @@ table td {
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
@@ -94,7 +93,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
