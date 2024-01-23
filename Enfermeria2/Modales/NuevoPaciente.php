@@ -125,9 +125,9 @@
     </div>
   
   
-  <input type="text" class="form-control" id="empresa" name="Empresa" hidden  readonly value="<? echo $row['ID_H_O_D']?>" >
-  <input type="text" class="form-control" id="agenda" name="AgendaPor" hidden readonly   value="<?echo $row['Nombre_Apellidos']?>" >
-  <input type="text" class="form-control" id="sistema" name="Sistema"  hidden  readonly value="<?echo $row['Nombre_rol']?>" >
+  <input type="text" class="form-control" id="empresa" name="Empresa" hidden  readonly value="<?php echo $row['ID_H_O_D']?>" >
+  <input type="text" class="form-control" id="agenda" name="AgendaPor" hidden readonly   value="<?php echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control" id="sistema" name="Sistema"  hidden  readonly value="<?php echo $row['Nombre_rol']?>" >
   <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-primary">Guardar <i class="fas fa-save"></i></button>
                                         </form>
      

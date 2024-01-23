@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT * FROM Data_Pacientes WHERE ID_Data_Paciente = ".$_POST["id"];
@@ -16,7 +16,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($datapacientes!=null):?>
+<?php if($datapacientes!=null):?>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DataGeneral" aria-expanded="false" aria-controls="collapseExample">
     Mostrar todos los datos del paciente <i class="fas fa-info-circle"></i>
   </button>
@@ -29,7 +29,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" disabled class="form-control" value="<? echo $datapacientes->ID_Data_Paciente; ?>" readonly name="Folio" id="folio" aria-describedby="basic-addon1">
+  <input type="text" disabled class="form-control" value="<?php echo $datapacientes->ID_Data_Paciente; ?>" readonly name="Folio" id="folio" aria-describedby="basic-addon1">
 </div>
     </div>
     <div class="col">
@@ -38,7 +38,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $datapacientes->Nombre_Paciente; ?>" readonly name="Nombres" id="nombres" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $datapacientes->Nombre_Paciente; ?>" readonly name="Nombres" id="nombres" aria-describedby="basic-addon1">
 </div>
     </div>
     </div>
@@ -50,7 +50,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="date" class="form-control"  value="<? echo $datapacientes->Fecha_Nacimiento; ?>" readonly id="fechaNac" aria-describedby="basic-addon1">
+  <input type="date" class="form-control"  value="<?php echo $datapacientes->Fecha_Nacimiento; ?>" readonly id="fechaNac" aria-describedby="basic-addon1">
 </div>
     </div>
     <div class="col">
@@ -59,7 +59,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control"  value="<? echo $datapacientes->Edad; ?>" name="Edad" readonly  id="edad" aria-describedby="basic-addon1">
+  <input type="text" class="form-control"  value="<?php echo $datapacientes->Edad; ?>" name="Edad" readonly  id="edad" aria-describedby="basic-addon1">
 </div>
     </div>
     </div>
@@ -70,7 +70,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $datapacientes->Telefono; ?>"  readonly name="Tel" id="tel" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $datapacientes->Telefono; ?>"  readonly name="Tel" id="tel" aria-describedby="basic-addon1">
 </div>
 
     </div>
@@ -81,7 +81,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $datapacientes->Correo; ?>" readonly name="Correo" id="correo" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $datapacientes->Correo; ?>" readonly name="Correo" id="correo" aria-describedby="basic-addon1">
   
 </div>
 
@@ -94,7 +94,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $datapacientes->Sexo; ?>" readonly name="Sexo" id="sexo" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $datapacientes->Sexo; ?>" readonly name="Sexo" id="sexo" aria-describedby="basic-addon1">
 </div>
     </div>
     <div class="col">
@@ -103,7 +103,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $datapacientes->Alergias; ?>" readonly name="Alergias" id="alergias" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $datapacientes->Alergias; ?>" readonly name="Alergias" id="alergias" aria-describedby="basic-addon1">
 </div>
     </div>
     </div>
@@ -119,10 +119,10 @@ while ($r=$query->fetch_object()){
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM Sucursales_CampañasV2 WHERE Estatus_Sucursal='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
@@ -226,9 +226,9 @@ while ($r=$query->fetch_object()){
 <!-- FINALIZA DATA DE AGENDA -->
  
 
-    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
     <input type="text" class="form-control" name="sistema" id="sistema"  value="Enfermería" hidden  readonly >
-    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?echo $row['ID_H_O_D']?>" hidden  readonly >
+    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>

@@ -177,7 +177,7 @@ tabla = $('#PacientesData').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/Enfermeria2/Consultas/ArrayPacientesSeguimiento.php",
+ "sAjaxSource": "https://saludapos.com/Enfermeria2/Consultas/ArrayPacientesSeguimiento.php",
  "aoColumns": [
   { mData: 'Folio' },  
   { mData: 'Nombre' },

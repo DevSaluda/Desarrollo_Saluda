@@ -186,7 +186,7 @@
 </div>
     </div>
       
-   <?Include "Consultas/Select_horas.php"?>
+   <?php Include "Consultas/Select_horas.php"?>
 
    <div class="form-row">
     <div class="col">
