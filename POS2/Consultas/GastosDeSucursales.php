@@ -18,7 +18,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT Otros_Gastos_POS.ID_Gastos,Otros_Gastos_POS.Concepto_Categoria,Otros_Gastos_POS.Importe_Total,Otros_Gastos_POS.Empleado,
@@ -68,42 +67,4 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Aún no hay GastosSucursales registrados para <?echo $row['ID_H_O_D']?></p>
 <?php endif;?>
   <!-- Modal -->
-  <script>
-  	$(".btn-editStock").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaStatusStock.php","id="+id,function(data){
-  			$("#form-editGastosSucursalesA").html(data);
-          $("#TituloGastosSucursalesA").html("Asignacion de GastosSucursales en otras sucursales");
-              $("#DiGastosSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#DiGastosSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-danger");
-              $("#DiGastosSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-primary");
-              $("#DiGastosSucursalesSA").addClass("modal-dialog  modal-notify modal-success");
-  		});
-  		$('#editModalGastosSucursalesA').modal('show');
-  	});
-    
-  </script>
-  <div class="modal fade" id="editModalGastosSucursalesA" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="DiGastosSucursalesSA"class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloGastosSucursalesA"></p>
-
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-        <div id="MensajeGastosSucursalesG"class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold">Estimado usuario, 
-                            Verifique los campos antes de realizar alguna accion</span>
-						                <button type="button" class="close" data-dismiss="alert">×</button>
-                            </div>
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="form-editGastosSucursalesA"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  
