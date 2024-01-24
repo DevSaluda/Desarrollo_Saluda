@@ -21,7 +21,7 @@ for ($i = 0; $i < $contador; $i++) {
             mysqli_real_escape_string($conn, $_POST["pro_FKID"][$i]),
             mysqli_real_escape_string($conn, $_POST["IdentificadorTip"][$i]),
             mysqli_real_escape_string($conn, $_POST["TurnoCaja"][$i]),
-            mysqli_real_escape_string($conn, $_POST["TicketSucursalName"]),
+            mysqli_real_escape_string($conn, $_POST["TicketSucursalName"][$i]),
             mysqli_real_escape_string($conn, $_POST["TicketVal"]),
             mysqli_real_escape_string($conn, $_POST["pro_clavad"][$i]),
             mysqli_real_escape_string($conn, $_POST["CodBarras"][$i]),
