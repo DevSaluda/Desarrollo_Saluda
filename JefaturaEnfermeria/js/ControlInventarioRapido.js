@@ -1,7 +1,7 @@
 function CargaVentasDelDia() {
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/InventarioRapidoResultados.php", "", function(data) {
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/InventarioRapidoResultados.php", "", function(data) {
         $("#TableStockSucursales").html(data);
     })
 

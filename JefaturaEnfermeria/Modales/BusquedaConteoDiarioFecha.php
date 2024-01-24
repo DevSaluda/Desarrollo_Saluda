@@ -14,7 +14,7 @@
 
         <div class="modal-body">
 
-          <form method="POST" action="https://controlfarmacia.com/JefaturaEnfermeria/InventarioRapidoResultado">
+          <form method="POST" action="https://saludapos.com/JefaturaEnfermeria/InventarioRapidoResultado">
 
 
 

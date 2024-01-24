@@ -23,7 +23,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly  value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
     
     
@@ -34,30 +34,17 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal" >
     <option value="">Seleccione una Sucursal:</option>
-     <option value="18">Akil</option>
-           <option value="24">Capacitación</option>
-           <option value="21">CEDIS</option>
-           <option value="23">CEDIS(Partner)</option>
-           <option value="25">Itzincab</option>
-          <option value="3">Izamal</option>
-          <option value="19">Kanasín</option>
-           <option value="4">Mama</option>
-          <option value="5">Mani</option>
-            <option value="20">Motul</option>
-            <option value="15">Oficinas</option>
-          <option value="6">Oxkutzcab</option>
-           <option value="7">Peto</option>
-             <option value="8">Teabo</option>
-              <option value="22">Teabo Clínica</option>
-               <option value="9">Tekax</option>
-              <option value="10">Tekit</option>
-              <option value="11">Ticul</option>
-            <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>
+      <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
     </select>
     </div>
     
-    <input type="text"  name="user" hidden value="<?echo $row['Pos_ID']?>">
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
   <div>
    
       <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
