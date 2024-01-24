@@ -133,7 +133,6 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
 
-<input id="FiltrarContenido" type="text" class="form-control" autofocus placeholder="Ingrese código de barras" style="position: relative;" aria-label="Alumno" aria-describedby="basic-addon1">
 
 <script>
 $(document).ready(function () {
