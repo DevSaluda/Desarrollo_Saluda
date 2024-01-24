@@ -47,7 +47,7 @@ include ("Consultas/db_connection.php");
     <span class="input-group-text" id="basic-addon1"> Buscar<i class="fas fa-search"></i>  </span>
   </div>
   <input id="FiltrarContenido" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido2" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
+  <!-- <input id="FiltrarContenido2" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   <input id="FiltrarContenido3" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   <input id="FiltrarContenido4" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   <input id="FiltrarContenido5" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
@@ -57,7 +57,7 @@ include ("Consultas/db_connection.php");
   <input id="FiltrarContenido7" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   <input id="FiltrarContenido8" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   <input id="FiltrarContenido9" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido10" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
+  <input id="FiltrarContenido10" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1"> -->
 </div></div>
 <div class="text-center">
   
@@ -187,8 +187,8 @@ $(".btn-aperturacaja").click(function() {
    <script src="js/ControladorFormVentas.js"></script>
 
    <script src="js/VentasControlador.js"></script>
-     <script src="js/BusquedaVentasV.js"></script>
-     <script src="js/BusquedaVentasV2.js"></script>
+     <!-- <script src="js/BusquedaVentasV.js"></script> -->
+     <!-- <script src="js/BusquedaVentasV2.js"></script>
      <script src="js/BusquedaVentasV23.js"></script>
      <script src="js/BusquedaVentasV24.js"></script>
      <script src="js/BusquedaVentasV25.js"></script>
@@ -196,7 +196,7 @@ $(".btn-aperturacaja").click(function() {
      <script src="js/BusquedaVentasV27.js"></script>
      <script src="js/BusquedaVentasV28.js"></script>
      <script src="js/BusquedaVentasV29.js"></script>
-     <script src="js/BusquedaVentasV210.js"></script>
+     <script src="js/BusquedaVentasV210.js"></script> -->
 
   
       

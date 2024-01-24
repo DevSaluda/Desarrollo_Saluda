@@ -194,7 +194,7 @@ $(document).ready(function()
      
 <script src="js/CalculaTotaldeproducto.js"></script>
 
-<script>
+<!-- <script>
 var campos_maxini          = 1;   //max de 10 campos
 var xini = 0;
 
@@ -913,7 +913,7 @@ $('#parte10').on("click","#remover_campo9",function(e) {
     $("#FiltrarContenido9").show()
     multiplicar9();
 });
-</script>
+</script> -->
 <script src="js/RealizaVentas.js"></script>
 <script src="js/RemueveProductos.js"></script>   
 <script src="js/Descuentos.js"></script>
