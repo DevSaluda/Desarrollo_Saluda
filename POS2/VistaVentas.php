@@ -135,6 +135,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
 
 <script>
+  var xini = 0;
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
         source: "Consultas/VentaDeProductos.php",
