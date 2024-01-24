@@ -182,10 +182,10 @@ $(document).ready(function () {
         }
     });
 });
-
-
+</script>
 </div></div>
- <?php
+ 
+<?php
 if($ValorCaja["Estatus"] == 'Abierta'){
 
     
