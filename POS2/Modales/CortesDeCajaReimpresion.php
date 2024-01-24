@@ -1,7 +1,6 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 include "../Consultas/ConsultaCaja.php";
 $fcha = date("Y-m-d");
 $user_id=null;
@@ -218,34 +217,34 @@ $query8888 = $conn->query($sql8888);
 
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
   <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/CierreDeCaja.php"
       onsubmit="window.open('about:blank','print_popup','width=900,height=900');"  id="GeneraTicketCierreCaja">
   <div style="display:none;">
-      <input type="text" class="form-control "   readonly name="VendedorTicket"  readonly value="<?echo $row['Nombre_Apellidos']?>">
+      <input type="text" class="form-control "   readonly name="VendedorTicket"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
       <input type="number" class="form-control "  step="any" name="TotalCajaTicket" id="resultadototalventasTicket" readonly   aria-describedby="basic-addon1" >
-      <input type="text" class="form-control " id="ticketiniciall" name="TicketInicialTicket"  readonly value="<? echo $Especialistas->Folio_Ticket; ?>">
-      <input type="text" class="form-control " id="ticketfinall" name="TicketFinalTicket" readonly value="<? echo $Especialistas2->Folio_Ticket; ?>" aria-describedby="basic-addon1" maxlength="60">            
-      <input type="text" class="form-control "  name="TotalTicketsTickets"readonly value="<? echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" maxlength="60">            
-      <input type="number" class="form-control "  id="cantidadtotalventas" name="VentaTotal" step="any" readonly value="<? echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" >
-      <input type="number" class="form-control "  id="cantidadtotalventas" name="totalSignosvitales" step="any" readonly value="<? echo $Especialistas3->Total_Folios; ?>" aria-describedby="basic-addon1" > 
-      <input type="datetime" name="Horadeimpresiondelticket" value="<? echo date('h:i A', strtotime(($Especialistas13->Hora_Cierre))); ?>">
+      <input type="text" class="form-control " id="ticketiniciall" name="TicketInicialTicket"  readonly value="<?php echo $Especialistas->Folio_Ticket; ?>">
+      <input type="text" class="form-control " id="ticketfinall" name="TicketFinalTicket" readonly value="<?php echo $Especialistas2->Folio_Ticket; ?>" aria-describedby="basic-addon1" maxlength="60">            
+      <input type="text" class="form-control "  name="TotalTicketsTickets"readonly value="<?php echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" maxlength="60">            
+      <input type="number" class="form-control "  id="cantidadtotalventas" name="VentaTotal" step="any" readonly value="<?php echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" >
+      <input type="number" class="form-control "  id="cantidadtotalventas" name="totalSignosvitales" step="any" readonly value="<?php echo $Especialistas3->Total_Folios; ?>" aria-describedby="basic-addon1" > 
+      <input type="datetime" name="Horadeimpresiondelticket" value="<?php echo date('h:i A', strtotime(($Especialistas13->Hora_Cierre))); ?>">
       <input type="datetime" name="Horadeimpresiondelticketcierre" value="<?php echo date('h:i:s A');?>">
-      <input type="datetime" name="FechaDelCorte"  value="<? echo date('Y-m-d',strtotime(($Especialistas13->Hora_Cierre))); ?>">
-      <input type="text" class="form-control" name="Sucursal" readonly  value="<?echo $row['Nombre_Sucursal']?>" aria-describedby="basic-addon1" >   
-      <input type="number" class="form-control "  step="any" name="Totaldentales"  readonly   value="<? echo $Especialistas4->totaldentalescreditos; ?>" aria-describedby="basic-addon1" >
-      <input type="text" class="form-control "   name="TotalCreditoEnfermeria"  readonly value="<? echo $Especialistas6->VentaTotalCredito; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalCreditolimpieza"  readonly value="<? echo $Especialistas7->VentaTotalCreditoLimpieza; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalCreditoMedicos"  readonly value="<? echo $Especialistas12->VentaTotalCreditoMedicos; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalCreditoFarmaceutico"  readonly value="<? echo $Especialistas11->VentaTotalCreditoFarmaceutico; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TurnoCorteticket"  readonly value="<? echo $Especialistas3->Turno; ?>" aria-describedby="basic-addon1" >  
+      <input type="datetime" name="FechaDelCorte"  value="<?php echo date('Y-m-d',strtotime(($Especialistas13->Hora_Cierre))); ?>">
+      <input type="text" class="form-control" name="Sucursal" readonly  value="<?php echo $row['Nombre_Sucursal']?>" aria-describedby="basic-addon1" >   
+      <input type="number" class="form-control "  step="any" name="Totaldentales"  readonly   value="<?php echo $Especialistas4->totaldentalescreditos; ?>" aria-describedby="basic-addon1" >
+      <input type="text" class="form-control "   name="TotalCreditoEnfermeria"  readonly value="<?php echo $Especialistas6->VentaTotalCredito; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalCreditolimpieza"  readonly value="<?php echo $Especialistas7->VentaTotalCreditoLimpieza; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalCreditoMedicos"  readonly value="<?php echo $Especialistas12->VentaTotalCreditoMedicos; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalCreditoFarmaceutico"  readonly value="<?php echo $Especialistas11->VentaTotalCreditoFarmaceutico; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TurnoCorteticket"  readonly value="<?php echo $Especialistas3->Turno; ?>" aria-describedby="basic-addon1" >  
 
-      <input type="text" class="form-control "   name="TotalDeEfectivo"  readonly value="<? echo $Especialistas20->VentaTotalDeEfectivo; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalDeTarjeta"  readonly value="<? echo $Especialistas21->VentaTotalTarjeta; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalDeCreditos"  readonly value="<? echo $Especialistas22->VentaTotalCreditosGlobales; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalDeEfectivo"  readonly value="<?php echo $Especialistas20->VentaTotalDeEfectivo; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalDeTarjeta"  readonly value="<?php echo $Especialistas21->VentaTotalTarjeta; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalDeCreditos"  readonly value="<?php echo $Especialistas22->VentaTotalCreditosGlobales; ?>" aria-describedby="basic-addon1" >  
       
       </div>
 
@@ -255,29 +254,29 @@ $query8888 = $conn->query($sql8888);
   <div class="row">
     <div class="col">
   <label for="exampleFormControlInput1">Sucursal</label>
-  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas14->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >
+  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas14->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >
   </div>
   <div class="col">
   <label for="exampleFormControlInput1">Turno</label>
-  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas3->Turno; ?>" aria-describedby="basic-addon1" >
+  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas3->Turno; ?>" aria-describedby="basic-addon1" >
   </div>  </div>
   <div class="row">
     <div class="col">
   <label for="exampleFormControlInput1">Cajero</label>
-  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas3->AgregadoPor; ?>" aria-describedby="basic-addon1" >
+  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas3->AgregadoPor; ?>" aria-describedby="basic-addon1" >
   </div> 
   <div class="col">
   <label for="exampleFormControlInput1">Total de venta</label>
-  <input type="number" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" > 
+  <input type="number" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" > 
   </div>  </div>
   <div class="row">
     <div class="col">
   <label for="exampleFormControlInput1">Total de tickets</label>
-  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" >
+  <input type="text" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" >
   </div> 
   <div class="col">
   <label for="exampleFormControlInput1">Total de signos vitales</label>
-  <input type="number" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<? echo $Especialistas3->Total_Folios; ?>" aria-describedby="basic-addon1" > 
+  <input type="number" class="form-control "  id="cantidadtotalventas" name="TicketVentasTotl" step="any" readonly value="<?php echo $Especialistas3->Total_Folios; ?>" aria-describedby="basic-addon1" > 
   </div>  </div>
   
   <br>	<div class="table-responsive">
@@ -393,7 +392,7 @@ $query8888 = $conn->query($sql8888);
       
 
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 

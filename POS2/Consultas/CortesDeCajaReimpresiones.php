@@ -20,7 +20,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Cajas_POS.ID_Caja,Cajas_POS.Cantidad_Fondo,Cajas_POS.Empleado,Cajas_POS.Sucursal,Cajas_POS.Estatus,Cajas_POS.CodigoEstatus,Cajas_POS.Turno,Cajas_POS.Asignacion,
@@ -103,7 +103,7 @@ $query = $conn->query($sql1);
   	
       $(".btn-edit").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCajaReimpresion.php","id="+id,function(data){
+    $.post("https://saludapos.com/POS2/Modales/CortesDeCajaReimpresion.php","id="+id,function(data){
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -139,9 +139,8 @@ $query = $conn->query($sql1);
   </div><!-- /.modal -->
 
  
-  <?
-
-function fechaCastellano ($fecha) {
+  <?php 
+  function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));
   $dia = date('l', strtotime($fecha));
