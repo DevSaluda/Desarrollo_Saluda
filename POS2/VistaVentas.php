@@ -148,7 +148,7 @@ $('#parte1').on('input', '.montoreal', function () {
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
-
+</form>
 <script>
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
