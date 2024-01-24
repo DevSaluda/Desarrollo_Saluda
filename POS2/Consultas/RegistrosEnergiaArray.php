@@ -4,8 +4,15 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
+$fcha = date("Y-m-d");
 
-$sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro= CURRENT_DATE AND Sucursal='".$row['Nombre_Sucursal']."'";
+
+// Obtiene la fecha actual en el formato 'YYYY-MM-DD'
+$fechaActual = date("Y-m-d");
+
+// Consulta SQL adaptada con la variable de fecha
+$sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro = '$fechaActual' AND Sucursal = '" . $row['Nombre_Sucursal'] . "'";
+
  
 $result = mysqli_query($conn, $sql);
  
