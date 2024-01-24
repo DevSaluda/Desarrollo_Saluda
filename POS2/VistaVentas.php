@@ -163,7 +163,9 @@ $(document).ready(function () {
                     <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
                     <textarea class="Nombre form-control" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>\
                 </div>\
-                <!-- Agrega otros campos según sea necesario -->\
+                <div class="col">\
+                    <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
+                </div>\
             ';
 
             // Agregar el nuevo campo al contenedor
@@ -172,7 +174,11 @@ $(document).ready(function () {
             // Actualizar los valores del nuevo campo
             $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
-            // ... y así sucesivamente
+
+            // Asociar un evento de clic al botón de remover
+            $(nuevoCampo).find('.remover_campo').click(function () {
+                $(nuevoCampo).remove();
+            });
 
             // Resto de las acciones necesarias
 
