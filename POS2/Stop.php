@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>NO TIENES PERMISOS</title>
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 
 </head>
 <body  class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -123,7 +123,7 @@
   
 </div>
 <!-- ./wrapper -->
-<?include ("Modales/SinPermisos.php");?>
+<?php include ("Modales/SinPermisos.php");?>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
