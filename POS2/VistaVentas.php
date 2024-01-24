@@ -153,6 +153,7 @@ $(document).ready(function () {
                     <input class="form-control Codigo" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
                     <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
                     <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
+                    <input class="Lote form-control" hidden readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
                     <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
                     <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
@@ -178,10 +179,6 @@ $(document).ready(function () {
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
                 </div>\
-                <div class="col"> \
-                    <label for="exampleFormControlInput1">Lote</label>\
-                    <input class="Lote form-control" readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
-                </div>\
                 <!-- Agrega otros campos según sea necesario -->\
                 <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
@@ -198,6 +195,7 @@ $(document).ready(function () {
             $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
             $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
+            $(nuevoCampo).find('.Lote').val(ui.item.pro_lote);
             $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
 
