@@ -1,12 +1,7 @@
-
-
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
 
 $sql = "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.Fk_SucDestino,Traspasos_generados.Estatus,Traspasos_generados.TraspasoRecibidoPor,
 Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, Traspasos_generados.Num_Orden,Traspasos_generados.ProveedorFijo,
@@ -47,7 +42,7 @@ echo json_encode($results);
 
 
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
