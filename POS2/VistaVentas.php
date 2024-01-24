@@ -137,23 +137,33 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 var campos_max = 10; // Máximo de campos
 
 function agregarCampo(idSuffix) {
-    return '<div class="campo">\
-              <a hidden class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>\
-              <div class="row">\
-                <div class="col">\
-                  <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                  <input class="form-control" value="Publico General" hidden type="text" id="cliente' + idSuffix + '" name="cliente[]" />\
-                  <input class="form-control" hidden type="text" id="sv' + idSuffix + '" name="foliosv[]" />\
-                  <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
-                </div>\
-                <div class="col">\
-                  <label for="exampleFormControlInput1">Producto <span class="text-danger">*</span></label>\
-                  <textarea class="form-control" readonly id="nombreprod' + idSuffix + '" name="NombreProd[]" rows="3"></textarea>\
-                  <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
-                </div>\
-                <!-- Agrega aquí el resto de los div y etiquetas -->\
-              </div>\
-            </div>';
+    var nuevoCampo = '<div class="campo">\
+                        <a hidden class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>\
+                        <div class="row">\
+                            <div class="col">\
+                                <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                                <input class="form-control" value="Publico General" hidden type="text" id="cliente' + idSuffix + '" name="cliente[]" />\
+                                <input class="form-control" hidden type="text" id="sv' + idSuffix + '" name="foliosv[]" />\
+                                <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
+                            </div>\
+                            <div class="col">\
+                                <label for="exampleFormControlInput1">Producto <span class="text-danger">*</span></label>\
+                                <textarea class="form-control" readonly id="nombreprod' + idSuffix + '" name="NombreProd[]" rows="3"></textarea>\
+                                <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
+                            </div>\
+                            <!-- Agrega aquí el resto de los div y etiquetas -->\
+                        </div>\
+                    </div>';
+
+    $('#contenedorCampos').append(nuevoCampo);
+
+    // Oculta todos los elementos dentro del campo recién creado
+    $('.campo:last input, .campo:last textarea, .campo:last select').hide();
+
+    // Asigna el evento onchange dinámicamente
+    $('.campo:last .Cantidad').on('change', function () {
+        multiplicar();
+    });
 }
 
 $('#agregarCampo').click(function (e) {
@@ -162,18 +172,7 @@ $('#agregarCampo').click(function (e) {
     var cantidadCampos = $('.campo').length;
 
     if (cantidadCampos < campos_max) {
-        $('#contenedorCampos').append(agregarCampo(cantidadCampos + 1));
-
-        // Oculta todos los elementos con la clase "FiltrarContenidoX" dentro del contenedor
-        $('.campo:last .FiltrarContenido').hide();
-
-        // Muestra el primer elemento con la clase "FiltrarContenido" dentro del contenedor
-        $('.campo:last .FiltrarContenido').first().show();
-
-        // Asigna el evento onchange dinámicamente
-        $('.campo:last .Cantidad').on('change', function () {
-            multiplicar();
-        });
+        agregarCampo(cantidadCampos + 1);
     }
 });
 
@@ -181,8 +180,7 @@ $('#agregarCampo').click(function (e) {
 $('#contenedorCampos').on("click", ".remover_campo", function (e) {
     e.preventDefault();
     $(this).parent('.campo').remove();
-
-    // Resto de tu lógica para decrementar variables y mostrar elementos
+    multiplicar(); // Asegúrate de llamar a la función multiplicar después de remover un campo
 });
 </script>
 
