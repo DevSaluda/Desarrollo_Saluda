@@ -157,7 +157,7 @@ $(document).ready(function () {
 <input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >\
 <input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >\
 <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
-                    <input class="form-control Codigo" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
+<input class="form-control Codigo cliente" value="Publico General" hidden type="text" id="cliente" name="cliente[]">\
                     <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
                     <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
                     <input class="Lote form-control" hidden readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\

@@ -90,10 +90,10 @@
       </div>
       <select name="NombreEnfemero" id="nombreenfermero" class = "form-control"  onchange="CapturaNombreEnfermero();">
                                                <option value="">Seleccione un enfermero:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Enfermero_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus FROM Personal_Enfermeria WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
         </div>
@@ -111,10 +111,10 @@
       </div>
       <select name="NombreFarmaceutico" id="nombrefarma" class = "form-control"  onchange="CapturaNombreFarmaceutico();">
                                                <option value="">Seleccione un farmacéutico:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Pos_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus,Fk_Usuario FROM PersonalPOS WHERE 	Fk_Usuario=7 AND Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
         </div>
@@ -132,10 +132,10 @@
       </div>
       <select name="NombreMedico" id="nombremedicoo" class = "form-control"  onchange="CapturaNombreMedico();">
                                                <option value="">Seleccione un médico:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Medico_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus FROM Personal_Medico WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
         </div>
@@ -155,10 +155,10 @@
       </div>
       <select name="NombreIntendente" id="nombreintendente" class = "form-control"  onchange="CapturaNombreLimpieza();">
                                                <option value="">Seleccione personal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Intendencia_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Estatus FROM Personal_Intendecia WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
         </div>
@@ -178,10 +178,10 @@
       </div>
       <select name="NombreMedico" id="nombremedicoo" class = "form-control"  onchange="CapturaNombreMedico();">
                                                <option value="">Seleccione un médico:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	Pos_ID,Nombre_Apellidos,ID_H_O_D,Fk_Sucursal,Fk_Usuario,Estatus FROM PersonalPOS WHERE Fk_Usuario='31' AND Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."' AND Fk_Sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>  
         </div>
@@ -440,23 +440,15 @@ document.getElementById("cliente10").value =nombredelpersonallimpieza;
 
 }
 function CapturaNombreclienteTicket() {
+    var nombredelcliente = document.getElementById("namecliente").value;
 
-var nombredelcliente = document.getElementById("namecliente").value;
-//Se actualiza en municipio inm
-
-document.getElementById("cliente1").value = nombredelcliente;
-document.getElementById("cliente2").value = nombredelcliente;
-document.getElementById("cliente3").value = nombredelcliente;
-document.getElementById("cliente4").value = nombredelcliente;
-document.getElementById("cliente5").value = nombredelcliente;
-document.getElementById("cliente6").value = nombredelcliente;
-document.getElementById("cliente7").value = nombredelcliente;
-document.getElementById("cliente8").value = nombredelcliente;
-document.getElementById("cliente9").value = nombredelcliente;
-document.getElementById("cliente10").value =nombredelcliente;
-
-
+    // Iterar sobre todos los elementos con la clase "cliente"
+    var clientes = document.getElementsByClassName("cliente");
+    for (var i = 0; i < clientes.length; i++) {
+        clientes[i].value = nombredelcliente;
+    }
 }
+
 
 
 function CapturaFolioSignoVital() {
