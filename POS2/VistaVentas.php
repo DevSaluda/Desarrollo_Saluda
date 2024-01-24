@@ -129,20 +129,24 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     $Importetotal.value = subtotal;
   } 
 </script>
-<div id="parte1">
-    <!-- Contenedor donde se agregarán los campos dinámicamente -->
-</div>
 
 <button id="add_fieldinicial">Agregar Campo</button>
 
 <!-- Plantilla oculta para clonar -->
 <div id="campoTemplate" style="display:none;">
-    <a hidden class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>
-    <div class="row">
-        <div class="col">
-            <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>
-            <input class="form-control" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />
-            <!-- Otros campos aquí... -->
+    <div class="campo">
+        <a class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>
+        <div class="row">
+            <!-- Agrega tus campos aquí -->
+            <div class="col">
+                <label for="codbarras">Código de Barras</label>
+                <input class="form-control Codigo" readonly type="text" id="codbarras" name="CodBarras[]">
+            </div>
+            <div class="col">
+                <label for="nombreprod">Nombre del Producto</label>
+                <textarea class="form-control Nombre" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>
+            </div>
+            <!-- Agrega otros campos según sea necesario -->
         </div>
     </div>
 </div>
@@ -151,8 +155,8 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 </form>
 
 <script>
-  $(document).ready(function () {
-    var campos_maxini = 100;
+ $(document).ready(function () {
+    var campos_maxini = 1;
     var xini = 0;
 
     $('#add_fieldinicial').click(function (e) {
@@ -162,8 +166,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
             // Modificar IDs y otros atributos según sea necesario
             campoClone.find('.Codigo').attr('id', 'codbarras_' + xini);
-            // Otros campos aquí...
-
+            campoClone.find('.Nombre').attr('id', 'nombreprod_' + xini);
             // Agregar el campo clonado al DOM
             $('#parte1').append(campoClone);
 
@@ -173,11 +176,11 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
     $('#parte1').on("click", ".remover_campo", function (e) {
         e.preventDefault();
-        $(this).parent('div').remove();
+        $(this).closest('.campo').remove();
         xini--;
-        // Resto del código para ocultar elementos al remover campos
     });
 });
+
 
 </script>
 </div></div>
