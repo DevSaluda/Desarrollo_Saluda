@@ -151,7 +151,7 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input class="form-control" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
+                    <input class="form-control Codigo" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
                     <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
                     <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
                     <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
@@ -170,8 +170,8 @@ $(document).ready(function () {
             $('#parte1').append(nuevoCampo);
 
             // Actualizar los valores del nuevo campo
-            $('#codbarras').val(ui.item.pro_nombre);
-            $('#nombreprod').val(ui.item.NombreProd);
+            $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
+            $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
             // ... y así sucesivamente
 
             // Resto de las acciones necesarias
@@ -182,7 +182,6 @@ $(document).ready(function () {
         }
     });
 });
-</script>
 
 
 </div></div>
