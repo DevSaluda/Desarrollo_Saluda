@@ -133,9 +133,9 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
 
+<input id="FiltrarContenido" type="text" class="form-control" autofocus placeholder="Ingrese código de barras" style="position: relative;" aria-label="Alumno" aria-describedby="basic-addon1">
 
 <script>
-  var xini = 0;
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
         source: "Consultas/VentaDeProductos.php",
@@ -144,29 +144,47 @@ $(document).ready(function () {
         select: function (event, ui) {
             event.preventDefault();
 
-            var campoClone = $("#campoTemplate").clone().removeAttr("id").removeClass("remover_campo").show();
+            // Crear un nuevo elemento div con la clase "row"
+            var nuevoCampo = document.createElement("div");
+            nuevoCampo.className = "row";
 
-            // Modificar IDs y otros atributos según sea necesario
-            campoClone.find('.Codigo').attr('id', 'codbarras_' + xini);
-            campoClone.find('.Nombre').attr('id', 'nombreprod_' + xini);
-            // ... y así sucesivamente
+            // Construir la estructura interna del nuevo campo
+            nuevoCampo.innerHTML = '\
+                <div class="col">\
+                    <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                    <input class="form-control" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
+                    <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
+                    <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
+                    <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
+                    <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
+                    <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
+                    <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  >\
+                </div>\
+                <div class="col">\
+                    <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
+                    <textarea class="Nombre form-control" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>\
+                </div>\
+                <!-- Agrega otros campos según sea necesario -->\
+            ';
 
-            // Agregar el campo clonado al DOM
-            $('#parte1').append(campoClone);
+            // Agregar el nuevo campo al contenedor
+            $('#parte1').append(nuevoCampo);
 
             // Actualizar los valores del nuevo campo
-            campoClone.find('.Codigo').val(ui.item.pro_nombre);
-            campoClone.find('.Nombre').val(ui.item.NombreProd);
+            $('#codbarras').val(ui.item.pro_nombre);
+            $('#nombreprod').val(ui.item.NombreProd);
             // ... y así sucesivamente
 
-            xini++;
+            // Resto de las acciones necesarias
 
+            // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
             $("#cantidadventa").focus();
         }
     });
 });
 </script>
+
 
 </div></div>
  <?php
