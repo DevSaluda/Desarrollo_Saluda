@@ -1,11 +1,13 @@
 
-<?
+<?php
 date_default_timezone_set("America/Monterrey");
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 if(!isset($_SESSION['JefeEnfermeros'])){
 	header("Location: Expiro.php");
 }
-include_once("../db_connect.php");
+include_once("db_connection.php");
 $sql = "SELECT Personal_Enfermeria.Enfermero_ID,Personal_Enfermeria.Nombre_Apellidos,Personal_Enfermeria.file_name,Personal_Enfermeria.Fk_Sucursal,
 Personal_Enfermeria.ID_H_O_D,Personal_Enfermeria.Fk_Usuario, Roles_Puestos.ID_rol, Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Personal_Enfermeria,Roles_Puestos,SucursalesCorre 
 where Personal_Enfermeria.Fk_Usuario = Roles_Puestos.ID_rol AND Personal_Enfermeria.Fk_Sucursal = SucursalesCorre.ID_SucursalC 

@@ -292,7 +292,7 @@ table td {
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
 
   include ("Modales/Error.php");
   include ("Modales/Exito.php");

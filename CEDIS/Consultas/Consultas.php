@@ -1,6 +1,8 @@
 <?php 
 date_default_timezone_set("America/Monterrey");
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 if(!isset($_SESSION['ResponsableCedis'])){
     header("Location: Expiro.php");
 }

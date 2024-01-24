@@ -1,7 +1,7 @@
 function CargaCampanasDias(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/CampanasDias.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/CampanasDias.php","",function(data){
       $("#TablaCampanas").html(data);
     })
   
