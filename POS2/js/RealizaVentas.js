@@ -75,7 +75,7 @@ $('document').ready(function ($) {
           document.getElementById('Pruebas').submit()
           $("#submit_registro").html("Realizar venta <i class='fas fa-save'></i>></span>");
           setTimeout(function(){ 
-            location.reload();
+            // location.reload();
         }, 2000); // abrir
        
                      },
