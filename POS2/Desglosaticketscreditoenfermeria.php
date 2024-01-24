@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,9 +8,9 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Consulta de tickets | <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Consulta de tickets | <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -22,14 +20,14 @@ include "Consultas/Sesion.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#2bbbad !important;color: white;">
-  Desglose de tickets de enfermería  <?echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Desglose de tickets de enfermería  <?php echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -56,8 +54,7 @@ include "Consultas/Sesion.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
-
+<?php
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
@@ -91,8 +88,7 @@ include "Consultas/Sesion.php";
 
 </body>
 </html>
-<?
-
+<?php
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));

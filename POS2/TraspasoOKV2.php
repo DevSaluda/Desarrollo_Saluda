@@ -89,7 +89,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile"></i></span>
   </div>
-  <input type="text" class="form-control " readonly name="CantidadEnviada" id="enviado" value="<? echo $Especialistas->Cantidad_Enviada; ?>" >
+  <input type="text" class="form-control " readonly name="CantidadEnviada" id="enviado" value="<?php echo $Especialistas->Cantidad_Enviada; ?>" >
                                          
  
 </div><label for="pv" class="error"></div>
