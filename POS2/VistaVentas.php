@@ -166,6 +166,7 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input class="form-control Codigo" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
                     <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
                     <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
