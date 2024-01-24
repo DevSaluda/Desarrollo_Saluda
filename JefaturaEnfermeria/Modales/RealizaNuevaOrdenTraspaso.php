@@ -28,29 +28,20 @@ $totalmonto = $monto1 + $monto2;
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/JefaturaEnfermeria/GeneradorTraspasosV2">
+ <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/GeneradorTraspasosV2">
     <div class="form-group">
   <label for="exampleInputEmail1">Elija proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
     <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
     <option value="">Seleccione un proveedor:</option>
               <option value="">Seleccione un proveedor:</option>
-<option value="CEDIS">CEDIS</option>
-<option value="LEVIC">LEVIC</option>
-<option value="COLGATE">COLGATE</option>
-<option value="MEDICINE DEPOT">MEDICINE DEPOT</option>
-<option value="NADRO">NADRO</option>
-<option value="PISA FARMACEUTICA">PISA FARMACEUTICA</option>
-<option value="ABASTECEDOR HOSPITALARIO">ABASTECEDOR HOSPITALARIO</option>
-<option value="LEVIC">LEVIC</option>
-<option value="LABORATORIO GALENOS">LABORATORIO GALENOS</option>
-<option value="PRODUCTO NATURAL">PRODUCTO NATURAL</option>
-<option value="DISTRIBUIDORA FARMACEUTICA CALDERON">DISTRIBUIDORA FARMACEUTICA CALDERON</option>
-<option value="CLINICAS SALUDA">CLINICAS SALUDA</option>
-<option value="LAPSUR (INSUMOS DE LABORATORIO)">LAPSUR (INSUMOS DE LABORATORIO)</option>
-<option value="LOS TRES REYES (INSUMOS DE PAPELERIA)">LOS TRES REYES (INSUMOS DE PAPELERIA)</option>
-<option value="DIAGNOX LABORATORIO CLINICO">DIAGNOX LABORATORIO CLINICO</option>
-<option value="DISTRIBUIDORA DEKAFARMA S.A. DE C.V.">DISTRIBUIDORA DEKAFARMA S.A. DE C.V.</option>
+ <?php
+            $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND ID_H_O_D='".$row['ID_H_O_D']."'");
+          
+              while ($valores = mysqli_fetch_array($query)) {
+          echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
+        }
+                      ?>
           </select>   
     </div>  </div> 
  
@@ -60,26 +51,13 @@ $totalmonto = $monto1 + $monto2;
   <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
                                                
-           <option value="18">Akil</option>
-           <option value="24">Capacitación</option>
-           <option value="21">CEDIS</option>
-           <option value="23">CEDIS(Partner)</option>
-           <option value="25">Itzincab</option>
-          <option value="3">Izamal</option>
-          <option value="19">Kanasín</option>
-           <option value="4">Mama</option>
-          <option value="5">Mani</option>
-            <option value="20">Motul</option>
-            <option value="15">Oficinas</option>
-          <option value="6">Oxkutzcab</option>
-           <option value="7">Peto</option>
-             <option value="8">Teabo</option>
-              <option value="22">Teabo Clínica</option>
-               <option value="9">Tekax</option>
-              <option value="10">Tekit</option>
-              <option value="11">Ticul</option>
-            <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>
+            <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
                         
         </select>   
   </div>  </div>  
@@ -101,7 +79,7 @@ $totalmonto = $monto1 + $monto2;
     </div>
     <span id="estadousuario"></span>
 
-    <p><img src="https://controlfarmacia.com/JefaturaEnfermeria/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
+    <p><img src="https://saludapos.com/JefaturaEnfermeria/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
 </div>
 </div>
 
@@ -152,7 +130,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
 function comprobarUsuario() {
 	$("#loaderIcon").show();
 	jQuery.ajax({
-	url: "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ComprobarFactura.php",
+	url: "https://saludapos.com/JefaturaEnfermeria/Consultas/ComprobarFactura.php",
 	data:'NumFactura='+$("#NumFactura").val(),
 	type: "POST",
 	success:function(data){
