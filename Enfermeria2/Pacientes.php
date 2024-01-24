@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -20,7 +20,7 @@ include "Consultas/ConeSelectDinamico.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important;color: white;">
@@ -80,7 +80,7 @@ include ("Modales/Precarga.php");
         // Delegación de eventos para el botón ".btn-edit"
         $(document).on("click", ".btn-edit", function() {
             var id = $(this).data("id");
-            $.post("https://controlfarmacia.com/Enfermeria2/Modales/ConfirmaDatosP.php", "id=" + id, function(data) {
+            $.post("https://saludapos.com/Enfermeria2/Modales/ConfirmaDatosP.php", "id=" + id, function(data) {
                 $("#form-edit").html(data);
             });
             $('#editModal').modal('show');
@@ -101,13 +101,13 @@ include ("Modales/Precarga.php");
          </button>
        </div>
         <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span class="text-semibold"><?echo $row['Nombre_Apellidos']?>, </span>
+						                <span class="text-semibold"><?php echo $row['Nombre_Apellidos']?>, </span>
                             Antes iniciar el proceso de captura de datos de signos vitales del paciente, se requiere una previa confirmación de sus datos, por favor verifica los campos antes de continuar.
                             
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
                             <div class="alert alert-warning alert-styled-left text-blue-800 content-group">
-                            <span class="text-semibold"><?echo $row['Nombre_Apellidos']?>, </span>
+                            <span class="text-semibold"><?php echo $row['Nombre_Apellidos']?>, </span>
                             los campos con un  <span class="text-danger" style="font-weight: 900;"> * </span> son campos necesarios para el correcto ingreso de datos.
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>

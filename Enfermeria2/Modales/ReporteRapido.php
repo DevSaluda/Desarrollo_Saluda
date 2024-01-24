@@ -38,11 +38,11 @@
     
       
         
-        <input type="text"  class="form-control "   readonly name="Sucursal" id="sucursal" hidden value="<?echo $row['Fk_Sucursal']?>">
+        <input type="text"  class="form-control "   readonly name="Sucursal" id="sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
   
-      <input type="text" class="form-control" id="empresa" name="Empresa"  hidden readonly value="<? echo $row['ID_H_O_D']?>" >
-      <input type="text" class="form-control" id="usuario" name="Usuario" hidden readonly   value="<?echo $row['Nombre_Apellidos']?>" >
-      <input type="text" class="form-control" id="sistema" name="Sistema"    hidden readonly value="<?echo $row['Nombre_rol']?>" >
+      <input type="text" class="form-control" id="empresa" name="Empresa"  hidden readonly value="<?php echo $row['ID_H_O_D']?>" >
+      <input type="text" class="form-control" id="usuario" name="Usuario" hidden readonly   value="<?php echo $row['Nombre_Apellidos']?>" >
+      <input type="text" class="form-control" id="sistema" name="Sistema"    hidden readonly value="<?php echo $row['Nombre_rol']?>" >
       
       <div class="text-center">
       <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
