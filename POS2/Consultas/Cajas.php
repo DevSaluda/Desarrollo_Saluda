@@ -20,11 +20,34 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
+// Ajusta la zona horaria en PHP
+date_default_timezone_set('America/Mexico_City');
+
+// Otras variables
+$fechaActual = date('Y-m-d');  // Obtiene la fecha actual en el formato 'YYYY-MM-DD'
 
 $user_id=null;
-$sql1="SELECT Cajas_POS.ID_Caja,Cajas_POS.Cantidad_Fondo,Cajas_POS.Empleado,Cajas_POS.Sucursal,Cajas_POS.Estatus,Cajas_POS.CodigoEstatus,Cajas_POS.Turno,Cajas_POS.Asignacion,
-Cajas_POS.Fecha_Apertura,Cajas_POS.Valor_Total_Caja,Cajas_POS.ID_H_O_D, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
-FROM Cajas_POS,SucursalesCorre where Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC AND Cajas_POS.Fecha_Apertura= CURDATE() AND Cajas_POS.Sucursal='".$row['Fk_Sucursal']."' AND Cajas_POS.Empleado='".$row['Nombre_Apellidos']."'
+$sql1="SELECT 
+Cajas_POS.ID_Caja,
+Cajas_POS.Cantidad_Fondo,
+Cajas_POS.Empleado,
+Cajas_POS.Sucursal,
+Cajas_POS.Estatus,
+Cajas_POS.CodigoEstatus,
+Cajas_POS.Turno,
+Cajas_POS.Asignacion,
+Cajas_POS.Fecha_Apertura,
+Cajas_POS.Valor_Total_Caja,
+Cajas_POS.ID_H_O_D,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal 
+FROM 
+Cajas_POS, SucursalesCorre 
+WHERE 
+Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC 
+AND Cajas_POS.Fecha_Apertura = '$fechaActual'  -- Usa la variable de fecha
+AND Cajas_POS.Sucursal='".$row['Fk_Sucursal']."'
+AND Cajas_POS.Empleado='".$row['Nombre_Apellidos']."'
 AND Cajas_POS.ID_H_O_D='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
 ?>
