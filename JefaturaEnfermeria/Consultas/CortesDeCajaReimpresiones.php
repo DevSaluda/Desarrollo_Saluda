@@ -177,7 +177,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ArrayHistoricoDeCortes.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayHistoricoDeCortes.php",
  "aoColumns": [
   { mData: 'IdCaja' },  
   { mData: 'Empleado' },

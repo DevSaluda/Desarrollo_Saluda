@@ -181,7 +181,7 @@
   ?>
 ">
   <li class="nav-item">
-    <a href="https://salduapos.com/JefaturaEnfermeria/RegistroDeCombustible" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/RegistroDeCombustible" class="nav-link">
       <i class="fas fa-gas-pump"></i>
       <p>
         Control de combustible
