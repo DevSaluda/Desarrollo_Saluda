@@ -71,32 +71,3 @@ while ($r=$query->fetch_object()){
  
 
 
-<?php
-if($ValorCaja["Estatus"] == 'Abierta'){
-
-  echo '
-  <script>
-$(document).ready(function()
-{
-// id de nuestro modal
-
-$("#submit").attr("disabled", false);
-});
-</script>
-  ';
-     }else{
-    
-      echo '
-      <script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-
-  $("#submit").attr("disabled", true);
-});
-</script>
-      ';
-      
-      
-    
-     } ?>
