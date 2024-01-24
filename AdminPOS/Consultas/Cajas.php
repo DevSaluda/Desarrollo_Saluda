@@ -49,6 +49,7 @@ Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC
 AND DATE(Cajas_POS.Fecha_Apertura) = '$fechaActual'  -- Usa la variable de fecha
 AND Cajas_POS.Estatus='Abierta'
 AND Cajas_POS.ID_H_O_D='".$row['ID_H_O_D']."'";
+
 $query = $conn->query($sql1);
 ?>
 
