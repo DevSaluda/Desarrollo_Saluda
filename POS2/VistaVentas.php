@@ -140,51 +140,38 @@ function agregarCampo(idSuffix) {
     return '<div class="campo">\
               <a hidden class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>\
               <div class="row">\
-    <div class="col">\
-    <label for="exampleFormControlInput1">Codigo  <span class="text-danger">*</span></label>\
-    <input class="form-control" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
-    <input class="form-control"   hidden type="text" id="sv1" name="foliosv[]" />\
-    <input class="form-control"   hidden type="text" id="tk1" name="ticketant[]" />\
-    <input class="FKID form-control"  hidden type="text" id="fkid" name="pro_FKID[]"/>\
-    <input class="Clavead form-control"   hidden type="text" id="clavad" name="pro_clavad[]"/>\
-    <input class="Identificador form-control"  hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
-  <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  ></div>\
-   <div class="col">\
-    <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
- <textarea class="Nombre form-control" readonly id="nombreprod"name="NombreProd[]" rows="3"></textarea></div>\
-     <input hidden type="text" class="Lote form-control" readonly type="text" id="lote"name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" ><div class="col">\
-    <label for="exampleFormControlInput1">Precio<span class="text-danger">*</span></label>\
-  <input  class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
-    <div class="col">\
-    <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
-<input  class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
-    <div class="col">\
-    <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
-     <input  class="form-control" readonly type="number" id="descuento1"  value="0"name="DescuentoAplicado[]" > </div>\
-    <div class="col">\
-    <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-   <input   class="Cantidad form-control" onfocus="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
-    <div class="col"> \
-    <label for="exampleFormControlInput1">Descuento</label>\
-    <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
-    </div>\
+                <div class="col">\
+                  <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                  <input class="form-control" value="Publico General" hidden type="text" id="cliente' + idSuffix + '" name="cliente[]" />\
+                  <input class="form-control" hidden type="text" id="sv' + idSuffix + '" name="foliosv[]" />\
+                  <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
+                </div>\
+                <div class="col">\
+                  <label for="exampleFormControlInput1">Producto <span class="text-danger">*</span></label>\
+                  <textarea class="form-control" readonly id="nombreprod' + idSuffix + '" name="NombreProd[]" rows="3"></textarea>\
+                  <!-- Agrega aquí el resto de los campos con el sufijo idSuffix -->\
+                </div>\
+                <!-- Agrega aquí el resto de los div y etiquetas -->\
+              </div>\
             </div>';
 }
 
 $('#agregarCampo').click(function (e) {
     e.preventDefault();
-    
-    if ($('.campo').length < campos_max) {
-        $('#contenedorCampos').append(agregarCampo($('.campo').length + 1));
+
+    var cantidadCampos = $('.campo').length;
+
+    if (cantidadCampos < campos_max) {
+        $('#contenedorCampos').append(agregarCampo(cantidadCampos + 1));
 
         // Oculta todos los elementos con la clase "FiltrarContenidoX" dentro del contenedor
-        $('#contenedorCampos .FiltrarContenido').hide();
+        $('.campo:last .FiltrarContenido').hide();
 
         // Muestra el primer elemento con la clase "FiltrarContenido" dentro del contenedor
-        $('#contenedorCampos .FiltrarContenido').first().show();
+        $('.campo:last .FiltrarContenido').first().show();
 
         // Asigna el evento onchange dinámicamente
-        $('#contenedorCampos .campo:last .Cantidad').on('change', function () {
+        $('.campo:last .Cantidad').on('change', function () {
             multiplicar();
         });
     }
@@ -194,12 +181,6 @@ $('#agregarCampo').click(function (e) {
 $('#contenedorCampos').on("click", ".remover_campo", function (e) {
     e.preventDefault();
     $(this).parent('.campo').remove();
-
-    // Oculta todos los elementos con la clase "FiltrarContenidoX" dentro del contenedor
-    $('#contenedorCampos .FiltrarContenido').hide();
-
-    // Muestra el primer elemento con la clase "FiltrarContenido" dentro del contenedor
-    $('#contenedorCampos .FiltrarContenido').first().show();
 
     // Resto de tu lógica para decrementar variables y mostrar elementos
 });
