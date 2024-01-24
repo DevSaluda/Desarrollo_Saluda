@@ -114,20 +114,36 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <script>
 
  function sumar()
-  {
+ function sumar() {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
-      if(element.value !== '') {
-        subtotal += parseFloat(element.value);
-      }
+
+    // Iterar sobre todos los elementos con la clase "montoreal"
+    [...document.getElementsByClassName("montoreal")].forEach(function (element) {
+        if (element.value !== '') {
+            subtotal += parseFloat(element.value);
+        }
     });
+
+    // Actualizar el valor de los campos
     $total.value = subtotal;
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
-  } 
+}
+
+// Llama a la función sumar cada vez que se añade o remueve un campo
+$('#parte1').on('click', '.remover_campo', function () {
+    sumar();
+});
+
+$('#parte1').on('input', '.montoreal', function () {
+    sumar();
+});
+
+// También puedes llamar a la función sumar en otras partes del código donde sea necesario
+
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
