@@ -8,7 +8,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/InventariosDiariosEnviados.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/InventariosDiariosEnviados.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },

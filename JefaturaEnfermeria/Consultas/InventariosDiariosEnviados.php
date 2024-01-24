@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 
 $sql = "SELECT ConteosDiarios.Cod_Barra,ConteosDiarios.Nombre_Producto,ConteosDiarios.Fk_sucursal,ConteosDiarios.Existencias_R, 

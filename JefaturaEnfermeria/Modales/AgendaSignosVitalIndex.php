@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 
@@ -76,7 +76,7 @@ while ($r=$query->fetch_object()){
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control"  name="Edad" oninput="actualizarEdad()" value="<? echo $datapacientes->Edad; ?>" readonly id="edad" aria-describedby="basic-addon1">
+  <input type="text" class="form-control"  name="Edad" oninput="actualizarEdad()" value="<?php echo $datapacientes->Edad; ?>" readonly id="edad" aria-describedby="basic-addon1">
 </div>
     </div>
     </div>
@@ -509,6 +509,6 @@ $('#fechaNac').change(e => {
 
 
 </script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

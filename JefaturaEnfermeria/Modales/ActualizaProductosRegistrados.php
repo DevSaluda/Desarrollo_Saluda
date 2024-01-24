@@ -129,8 +129,8 @@
 
     </div>   
     </div>   
-    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
-    <input type="text" class="form-control" name="Sistema" id="sistema"  value="<?echo $row['Nombre_rol']?>" hidden readonly >
+    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="Sistema" id="sistema"  value="<?php echo $row['Nombre_rol']?>" hidden readonly >
     <input type="text" class="form-control" name="Folioporact" id="Folioporact"  hidden readonly >
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
