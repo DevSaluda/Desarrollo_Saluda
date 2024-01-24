@@ -120,14 +120,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../Perfiles/1695761441_ian.jpg<?echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
+          <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-    <a  id="DatosGenerales" class="d-block"><?echo $row['Nombre_Apellidos']?></a>
-          <a  id="DatosGenerales" class="d-block"><small><?echo $row['Nombre_rol']?></small></a>
-          <a id="DatosGenerales" class="d-block">
-      <small>Sucursal actual: <strong><?php echo isset($row['Nombre_Sucursales']) ? htmlspecialchars($row['Nombre_Sucursales'], ENT_QUOTES, 'UTF-8') : 'Sin Sucursales'; ?></strong></small>
-      </a>
+          <a  id="DatosGenerales" class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
+          <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
         </div>
       </div>
 
@@ -158,7 +155,7 @@
   }
 ?>">
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/RegistrosEnergiaElectrica" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/RegistrosEnergiaElectrica" class="nav-link">
       <i class="fas fa-lightbulb"></i>
       <p>
         Control de energía
@@ -184,7 +181,7 @@
   ?>
 ">
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/RegistroDeCombustible" class="nav-link">
+    <a href="https://salduapos.com/JefaturaEnfermeria/RegistroDeCombustible" class="nav-link">
       <i class="fas fa-gas-pump"></i>
       <p>
         Control de combustible
@@ -378,7 +375,7 @@
   }
 ?>">
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/EstadisticasFarmacias" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/EstadisticasFarmacias" class="nav-link">
       <i class="fas fa-chart-area"></i>
       <p>
         Estadísticas Farmacia
@@ -398,7 +395,7 @@
   }
 ?>">
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/SugerenciaFechas" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/SugerenciaFechas" class="nav-link">
       <i class="fa-solid fa-filter"></i>
       <p>
         Filtrar Ventas
@@ -429,7 +426,7 @@
   }
 ?>">
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/CreditoEnfermeriaGeneral" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/CreditoEnfermeriaGeneral" class="nav-link">
       <i class="fas fa-user-nurse"></i>
       <p>
         Créditos enfermería
@@ -437,7 +434,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/CreditoFarmaceuticoGeneral" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/CreditoFarmaceuticoGeneral" class="nav-link">
       <i class="fas fa-prescription-bottle-alt"></i>
       <p>
         Créditos Farmaceutico
@@ -476,7 +473,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="https://controlfarmacia.com/JefaturaEnfermeria/ComponentesActivos" class="nav-link">
+        <a href="https://saludapos.com/JefaturaEnfermeria/ComponentesActivos" class="nav-link">
           <i class="fas fa-dot-circle"></i>
           <p>
             Componente activo
@@ -484,7 +481,7 @@
         </a>
       </li>
        <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/ProductosV2" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/ProductosV2" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Productos general
@@ -706,7 +703,7 @@
   </li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/InventarioRapidoResultado" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/InventarioRapidoResultado" class="nav-link">
       <i class="fas fa-boxes"></i>
       <p>
         Conteo diario
@@ -717,7 +714,7 @@
   <li class="nav-header">Reportes <i class="fas fa-dolly"></i></li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesLab" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/ReportesLab" class="nav-link">
       <i class="fas fa-file-excel"></i>
       <p>
         Reportes laboratorios
@@ -726,7 +723,7 @@
   </li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesRx" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/ReportesRx" class="nav-link">
       <i class="fas fa-file-excel"></i>
       <p>
         Reportes Rayos X
@@ -735,7 +732,7 @@
   </li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesUSG" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/ReportesUSG" class="nav-link">
       <i class="fas fa-file-excel"></i>
       <p>
         Reportes USG
@@ -744,7 +741,7 @@
   </li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesEkg" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/ReportesEkg" class="nav-link">
       <i class="fas fa-file-excel"></i>
       <p>
         Reportes EKG
@@ -753,7 +750,7 @@
   </li>
 
   <li class="nav-item">
-    <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesSG" class="nav-link">
+    <a href="https://saludapos.com/JefaturaEnfermeria/ReportesSG" class="nav-link">
       <i class="fas fa-file-excel"></i>
       <p>
         Reportes Signos vitales
@@ -780,13 +777,13 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="https://controlfarmacia.com/JefaturaEnfermeria/Enfermeros" class="nav-link">
+        <a href="https://saludapos.com/JefaturaEnfermeria/Enfermeros" class="nav-link">
           <i class="fas fa-user-nurse"></i>
           <p>Enfermeros</p>
         </a>
       </li>
       <li class="nav-item">
-        <a href="https://controlfarmacia.com/JefaturaEnfermeria/Farmaceuticos" class="nav-link">
+        <a href="https://saludapos.com/JefaturaEnfermeria/Farmaceuticos" class="nav-link">
           <i class="fas fa-pills"></i>
           <p>Farmacéuticos</p>
         </a>
@@ -805,7 +802,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/JefaturaEnfermeria/RegistroPersonalDia" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroPersonalDia" class="nav-link">
             
             <i class="fas fa-calendar-day"></i>
               <p>
@@ -815,7 +812,7 @@
             </a>
           </li>         
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/JefaturaEnfermeria/RegistroPersonalLibre" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroPersonalLibre" class="nav-link">
             <i class="far fa-calendar-check"></i>
               <p>
               Registro general
@@ -837,7 +834,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/JefaturaEnfermeria/ReportesDeIncidencias" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/ReportesDeIncidencias" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Reportes
@@ -872,13 +869,13 @@
   <li class="nav-header">Configuraciones</li>
   <li class="nav-item has-treeview">
     <li class="nav-item">
-      <a href="https://controlfarmacia.com/JefaturaEnfermeria/Roles" class="nav-link">
+      <a href="https://saludapos.com/JefaturaEnfermeria/Roles" class="nav-link">
         <i class="fas fa-user-tag"></i>
         <p>Roles / Puestos</p>
       </a>
     </li>
     <li class="nav-item">
-      <a href="https://controlfarmacia.com/JefaturaEnfermeria/Sucursales" class="nav-link">
+      <a href="https://saludapos.com/JefaturaEnfermeria/Sucursales" class="nav-link">
         <i class="fas fa-clinic-medical"></i>
         <p>Sucursales</p>
       </a>
@@ -898,7 +895,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="https://controlfarmacia.com/JefaturaEnfermeria/RegistroDiariosSignosVitales" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroDiariosSignosVitales" class="nav-link">
                 <i class="fas fa-user-nurse"></i>
                 <p>
                     Registro por día
@@ -906,7 +903,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroSignosVitalesGeneral" class="nav-link">
                 <i class="fas fa-pills"></i>
                 <p>
                     Registro en general
@@ -937,7 +934,7 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="https://controlfarmacia.com/AdminPOS/RegistroDiariosSignosVitales" class="nav-link">
+                <a href="https://saludapos.com/JefaturaEnfermeria/RegistroDiariosSignosVitales" class="nav-link">
                     <i class="fas fa-user-nurse"></i>
                     <p>
                         Registro por día
@@ -945,7 +942,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="https://controlfarmacia.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+                <a href="https://saludapos.com/JefaturaEnfermeria/RegistroSignosVitalesGeneral" class="nav-link">
                     <i class="fas fa-pills"></i>
                     <p>
                         Registro en general
@@ -953,7 +950,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="https://controlfarmacia.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+                <a href="https://saludapos.com/JefaturaEnfermeria/RegistroSignosVitalesGeneral" class="nav-link">
                     <i class="fas fa-user-nurse"></i>
                     <p>
                         Registro por enfermero
@@ -977,7 +974,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fab fa-searchengin"></i>
               <p>
               Registro personalizado
@@ -1001,7 +998,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/RegistroDiarioMotivoConsulta" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistroDiarioMotivoConsulta" class="nav-link">
           <i class="fas fa-calendar-day"></i>
               <p>
               Registro por dia
@@ -1010,7 +1007,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/RegistrosMotivosConsultaGeneral" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistrosMotivosConsultaGeneral" class="nav-link">
             <i class="fas fa-calendar-alt"></i>
               <p>
               Registro en general
@@ -1019,7 +1016,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/AdminPOS/RegistrosMotivosConsultaGeneral" class="nav-link">
+            <a href="https://saludapos.com/JefaturaEnfermeria/RegistrosMotivosConsultaGeneral" class="nav-link">
             <i class="fab fa-searchengin"></i>
               <p>
               Registro personalizado
@@ -1097,7 +1094,7 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://controlfarmacia.com/JefatruaEnfermeria/Cierre'); 
+window.location.replace('https://saludapos.com/JefatruaEnfermeria/Cierre'); 
 
 }
 $( document ).ready(function() {
