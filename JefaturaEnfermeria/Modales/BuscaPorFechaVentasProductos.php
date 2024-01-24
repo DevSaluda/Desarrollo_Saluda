@@ -25,24 +25,13 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "SucursalProducto" >
   <option value="">Seleccione una Sucursal:</option>
-  <option value="21">CEDIS</option>
-           <option value="23">CEDIS(Partner)</option>
-           <option value="25">Itzincab</option>
-          <option value="3">Izamal</option>
-          <option value="19">Kanasín</option>
-           <option value="4">Mama</option>
-          <option value="5">Mani</option>
-            <option value="20">Motul</option>
-            <option value="15">Oficinas</option>
-          <option value="6">Oxkutzcab</option>
-           <option value="7">Peto</option>
-             <option value="8">Teabo</option>
-              <option value="22">Teabo Clínica</option>
-               <option value="9">Tekax</option>
-              <option value="10">Tekit</option>
-              <option value="11">Ticul</option>
-            <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>
+  <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
           </select>
         <input hidden type="text" name="nombresucursal" id="namesucursal">
     </div>
@@ -104,7 +93,7 @@ $(document).ready(function(){
 $("#buscador").select2({
     theme: 'bootstrap4',
 ajax: {
-url: "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/BusquedaProductoParaFiltrar.php",
+url: "https://saludapos.com/JefaturaEnfermeria/Consultas/BusquedaProductoParaFiltrar.php",
 type: "post",
 dataType: 'json',
 delay: 150,
