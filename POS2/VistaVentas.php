@@ -129,6 +129,9 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     $Importetotal.value = subtotal;
   } 
 </script>
+<div id="parte1">
+    <!-- Contenedor donde se agregarán los campos dinámicamente -->
+</div>
 
 <button id="add_fieldinicial">Agregar Campo</button>
 
@@ -155,8 +158,8 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 </form>
 
 <script>
- $(document).ready(function () {
-    var campos_maxini = 40;
+  $(document).ready(function () {
+    var campos_maxini = 100;
     var xini = 0;
 
     $('#add_fieldinicial').click(function (e) {
