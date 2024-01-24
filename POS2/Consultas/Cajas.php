@@ -87,7 +87,7 @@ $query = $conn->query($sql1);
 }else {
    echo "background-color:#fd7e14!important";
 }
-?>><?if($Usuarios['Asignacion'] ==1){
+?>><?php if($Usuarios['Asignacion'] ==1){
   echo "Asignado";
 } elseif($Usuarios['Asignacion'] ==2) {
  echo "Finalizado";
@@ -99,7 +99,7 @@ $query = $conn->query($sql1);
 
     <td>
 		 <!-- Basic dropdown -->
-<button  style=<?if($Usuarios['Asignacion'] == 2){
+<button  style=<?php if($Usuarios['Asignacion'] == 2){
    
    echo "display:none;";
  
