@@ -54,7 +54,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Fondos_Cajas.ID_Fon_Caja,Fondos_Cajas.Fk_Sucursal,Fondos_Cajas.Fondo_Caja,Fondos_Cajas.ID_H_O_D, Fondos_Cajas.CodigoEstatus,Fondos_Cajas.Estatus, 
@@ -81,7 +81,7 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td>$ <?php echo $Usuarios["Fondo_Caja"]; ?></td>
-    <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
+    <td> <button style="<?php echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
 <td>		 <!-- Basic dropdown -->
 <button class="btn btn-primary btn-sm dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
@@ -112,7 +112,7 @@ $query = $conn->query($sql1);
   	
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/EditaFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/EditaFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");
@@ -124,7 +124,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/DetallesFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/DetallesFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");
@@ -136,7 +136,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-HistorialFondos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/HistorialFondoCaja.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialFondoCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Movimientos de fondo de caja");
               $("#Di").removeClass("modal-dialog  modal-notify modal-info");

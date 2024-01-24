@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 
 $fecha1=($_POST['Fecha1']);
@@ -19,7 +19,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
 
   <title>Reportes de Ultrasonidos de sucursales  </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -29,11 +29,11 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Datos de laboratorios de la sucursal  <?echo $nombresucursalelegida?> del <?echo fechaCastellano($fecha1)?> al <?echo fechaCastellano($fecha2)?>
+  Datos de laboratorios de la sucursal  <?php echo $nombresucursalelegida?> del <?php echo fechaCastellano($fecha1)?> al <?php echo fechaCastellano($fecha2)?>
   </div>
   <div >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
@@ -74,7 +74,7 @@ $(document).ready( function () {
 				extend:    'excelHtml5',
 				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
 				titleAttr: 'Exportar a Excel',
-                title: 'registros de ultrasonidos del <?echo $fecha1?> al <?echo $fecha2?>',
+                title: 'registros de ultrasonidos del <?php echo $fecha1?> al <?php echo $fecha2?>',
 				className: 'btn btn-success'
 			},
 			
@@ -89,7 +89,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -196,7 +196,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

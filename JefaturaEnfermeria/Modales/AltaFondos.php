@@ -114,9 +114,9 @@
   </div></div>
 
       <input type="text"  class="form-control "  hidden readonly name="EstadoAsignacion" id="estadoasignacion">
-  <input type="text" class="form-control"  name="Empresa" id="empresa" hidden readonly value="<?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  name="Agrega" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  name="Sistema" id="sistema" hidden readonly value=" POS <?echo $row['Nombre_rol']?>">
+  <input type="text" class="form-control"  name="Empresa" id="empresa" hidden readonly value="<?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  name="Agrega" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  name="Sistema" id="sistema" hidden readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
   <button type="submit"  name="submit_registro" id="submit_registro"  value="Guardar" class="btn btn-success">Asignar <i class="fas fa-save"></i></button>
 </form>
