@@ -73,5 +73,4 @@ while ($r=$query->fetch_object()){
 
 
       
-    
-     } ?>
+   
