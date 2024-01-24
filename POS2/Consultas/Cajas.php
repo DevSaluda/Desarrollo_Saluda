@@ -78,7 +78,7 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["Empleado"]; ?></td>
     <td> <?php echo $Usuarios["Cantidad_Fondo"]; ?></td>
     <td> <?php echo FechaCastellano($Usuarios["Fecha_Apertura"]); ?></td>
-    <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
+    <td> <button style="<?php echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
     <td> <?php echo $Usuarios["Turno"]; ?></td>
     <td><button class="btn btn-default btn-sm" style=<?php if($Usuarios['Asignacion'] ==1){
    echo "background-color:#007bff!important";
