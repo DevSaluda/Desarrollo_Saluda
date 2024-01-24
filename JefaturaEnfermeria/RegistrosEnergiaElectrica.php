@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 
 ?>
@@ -11,9 +11,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Registro de uso de energia electrica <?echo $row['ID_H_O_D']?> </title>
+  <title>Registro de uso de energia electrica <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -32,7 +32,7 @@ table td {
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
@@ -106,7 +106,7 @@ Consulta por fechas <i class="fas fa-lightbulb"></i>
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -179,7 +179,7 @@ tabla = $('#Combustible').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ArrayCombustible.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayCombustible.php",
  "aoColumns": [
        { mData: 'Id_Registro' },
        { mData: 'Registro_combustible' },

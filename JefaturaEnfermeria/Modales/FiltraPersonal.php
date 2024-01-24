@@ -24,7 +24,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly  value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
     </div>
     
@@ -35,15 +35,15 @@
   </div>
   <select id = "Empleado" class = "form-control" name = "Empleado" >
                                                <option value="">Seleccione un empleado:</option>
-        <?
+        <?php 
           $query = $conn -> query ("SELECT Pos_ID,Nombre_Apellidos,Fk_Sucursal FROM PersonalPOS WHERE  Fk_sucursal='".$row['Fk_Sucursal']."' ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_Apellidos].'">'.$valores[Nombre_Apellidos].'</option>';
+            echo '<option value="'.$valores["Nombre_Apellidos"].'">'.$valores["Nombre_Apellidos"].'</option>';
           }
         ?>  </select>
     </div>
     
-    <input type="text"  name="user" hidden value="<?echo $row['Pos_ID']?>">
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
   <div>     </div>
   </div>  </div>
       <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>

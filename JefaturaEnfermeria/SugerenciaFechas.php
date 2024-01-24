@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 $IdBusqueda=($_POST['Sucursal']);
 $fecha1=($_POST['Fecha1']);
@@ -18,9 +18,9 @@ AND Ventas_POS.Fk_sucursal='$IdBusqueda' AND Stock_POS.Fk_sucursal='$IdBusqueda'
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Filtro de pedidos de la sucursal  <?echo $nombresucursalelegida?> </title>
+  <title>Filtro de pedidos de la sucursal  <?php echo $nombresucursalelegida?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -30,11 +30,11 @@ AND Ventas_POS.Fk_sucursal='$IdBusqueda' AND Stock_POS.Fk_sucursal='$IdBusqueda'
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important; color: white;">
-  Datos de venta de la sucursal  <?echo $nombresucursalelegida?> del <?echo fechaCastellano($fecha1)?> al <?echo fechaCastellano($fecha2)?>
+  Datos de venta de la sucursal  <?php echo $nombresucursalelegida?> del <?echo fechaCastellano($fecha1)?> al <?php echo fechaCastellano($fecha2)?>
   </div>
   <div >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
@@ -77,7 +77,7 @@ $(document).ready( function () {
 				extend:    'excelHtml5',
 				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
 				titleAttr: 'Exportar a Excel',
-                title: 'registro de ventas del <?echo $fecha1?> al <?echo $fecha2?> de la sucursal <?echo $nombresucursalelegida?>',
+                title: 'registro de ventas del <?php echo $fecha1?> al <?echo $fecha2?> de la sucursal <?php echo $nombresucursalelegida?>',
 				className: 'btn btn-success'
 			},
 			
@@ -92,7 +92,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php 
 ;
 
 
@@ -192,7 +192,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
