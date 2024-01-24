@@ -29,35 +29,28 @@ include "Consultas/Consultas.php";
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Stock</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Productos prontos a caducar</a>
-  </li>
-  
-</ul>
 
-<div class="tab-content" id="pills-tabContent">
-<div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+
+
+<!-- Tipos_productos -->
+<div class="tab-pane fade show " id="pills-contact" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Productos de SALUDA CENTRO MEDICO FAMILIAR <?php echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Productos por caducar al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
-  
+ 
 </div>
-
 </div>
     
-<div id="TableStockSucursales"></div>
+<div id="TableProdCaducaPronto"></div>
 
 </div>
+<!-- Tipos_productos Fin -->
+<!-- PRESENTACIONES -->
 
-
-
+</div>
 
     
 </div></div>
@@ -82,11 +75,8 @@ include "Consultas/Consultas.php";
   include ("Modales/IniciaProcesoDeCaptura.php");
   include ("footer.php")?>
 
-<!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-<script src="js/ControlStockSucursalesV2.js"></script>
-
+<script src="js/StockPorVencer.js"></script>
 
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
