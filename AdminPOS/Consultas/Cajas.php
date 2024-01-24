@@ -22,6 +22,7 @@ include("db_connection.php");
 include "Consultas.php";
 date_default_timezone_set('America/Mexico_City');
 
+$fechaActual = date('Y-m-d');  // Obtiene la fecha actual en el formato 'YYYY-MM-DD'
 
 $user_id=null;
 $sql1="SELECT 
@@ -45,7 +46,7 @@ FROM
 Cajas_POS, SucursalesCorre 
 WHERE 
 Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC 
-AND DATE(Cajas_POS.Fecha_Apertura) = CURDATE()  -- Usar CURDATE() para la fecha actual
+AND DATE(Cajas_POS.Fecha_Apertura) = '$fechaActual'  -- Usa la variable de fecha
 AND Cajas_POS.Estatus='Abierta'
 AND Cajas_POS.ID_H_O_D='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
