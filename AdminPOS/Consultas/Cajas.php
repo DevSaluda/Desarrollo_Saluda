@@ -24,10 +24,30 @@ date_default_timezone_set('America/Mexico_City');
 
 
 $user_id=null;
-$sql1="SELECT Cajas_POS.ID_Caja,Cajas_POS.Cantidad_Fondo,Cajas_POS.Empleado,Cajas_POS.Sucursal,Cajas_POS.Estatus,Cajas_POS.CodigoEstatus,Cajas_POS.Hora_real_apertura,Cajas_POS.Hora_apertura,Cajas_POS.Turno,
-Cajas_POS.Fecha_Apertura,Cajas_POS.Valor_Total_Caja,Cajas_POS.ID_H_O_D,Cajas_POS.MedicoEnturno,Cajas_POS.EnfermeroEnturno, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
-FROM Cajas_POS,SucursalesCorre where Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC AND Cajas_POS.Fecha_Apertura = CURRENT_DATE()  AND
-Cajas_POS.Estatus='Abierta'AND Cajas_POS.ID_H_O_D='".$row['ID_H_O_D']."'";
+$sql1="SELECT 
+Cajas_POS.ID_Caja,
+Cajas_POS.Cantidad_Fondo,
+Cajas_POS.Empleado,
+Cajas_POS.Sucursal,
+Cajas_POS.Estatus,
+Cajas_POS.CodigoEstatus,
+Cajas_POS.Hora_real_apertura,
+Cajas_POS.Hora_apertura,
+Cajas_POS.Turno,
+Cajas_POS.Fecha_Apertura,
+Cajas_POS.Valor_Total_Caja,
+Cajas_POS.ID_H_O_D,
+Cajas_POS.MedicoEnturno,
+Cajas_POS.EnfermeroEnturno, 
+SucursalesCorre.ID_SucursalC, 
+SucursalesCorre.Nombre_Sucursal 
+FROM 
+Cajas_POS, SucursalesCorre 
+WHERE 
+Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC 
+AND DATE(Cajas_POS.Fecha_Apertura) = CURDATE()  -- Usar CURDATE() para la fecha actual
+AND Cajas_POS.Estatus='Abierta'
+AND Cajas_POS.ID_H_O_D='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
 ?>
 
