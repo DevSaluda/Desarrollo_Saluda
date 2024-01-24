@@ -129,39 +129,57 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     $Importetotal.value = subtotal;
   } 
 </script>
-<div id="parte1"> 
-    
-    </div> 
-  
-   <div id="parte2">
-    
-    </div> 
-    
-    <div id="parte3">
-    
+<div id="parte1">
+    <!-- Contenedor donde se agregarán los campos dinámicamente -->
+</div>
+
+<button id="add_fieldinicial">Agregar Campo</button>
+
+<!-- Plantilla oculta para clonar -->
+<div id="campoTemplate" style="display:none;">
+    <a hidden class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>
+    <div class="row">
+        <div class="col">
+            <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>
+            <input class="form-control" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />
+            <!-- Otros campos aquí... -->
+        </div>
     </div>
-    <div id="parte4">
-    
-    </div>
-    <div id="parte5">
-    
-    </div>
-    <div id="parte6">
-    
-    </div>
-    <div id="parte7">
-    
-    </div>
-    <div id="parte8">
-    
-    </div>
-    <div id="parte9">
-    
-    </div>
-    <div id="parte10">
-    </div>
+</div>
+
   
 </form>
+
+<script>
+  $(document).ready(function () {
+    var campos_maxini = 1;
+    var xini = 0;
+
+    $('#add_fieldinicial').click(function (e) {
+        e.preventDefault();
+        if (xini < campos_maxini) {
+            var campoClone = $("#campoTemplate").clone().removeAttr("id").removeClass("remover_campo").show();
+
+            // Modificar IDs y otros atributos según sea necesario
+            campoClone.find('.Codigo').attr('id', 'codbarras_' + xini);
+            // Otros campos aquí...
+
+            // Agregar el campo clonado al DOM
+            $('#parte1').append(campoClone);
+
+            xini++;
+        }
+    });
+
+    $('#parte1').on("click", ".remover_campo", function (e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        xini--;
+        // Resto del código para ocultar elementos al remover campos
+    });
+});
+
+</script>
 </div></div>
  <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
