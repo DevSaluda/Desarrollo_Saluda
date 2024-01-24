@@ -452,24 +452,13 @@ function CapturaNombreclienteTicket() {
 
 
 function CapturaFolioSignoVital() {
+    var numerodefoliodesignovital = document.getElementById("Signosvitalescaptura").value;
 
-var numerodefoliodesignovital = document.getElementById("Signosvitalescaptura").value;
-//Se actualiza en municipio inm
-
-document.getElementById("sv1").value = numerodefoliodesignovital;
-document.getElementById("sv2").value = numerodefoliodesignovital;
-document.getElementById("sv3").value = numerodefoliodesignovital;
-document.getElementById("sv4").value = numerodefoliodesignovital;
-document.getElementById("sv5").value = numerodefoliodesignovital;
-document.getElementById("sv6").value = numerodefoliodesignovital;
-document.getElementById("sv7").value = numerodefoliodesignovital;
-document.getElementById("sv8").value = numerodefoliodesignovital;
-document.getElementById("sv9").value = numerodefoliodesignovital;
-document.getElementById("sv10").value =numerodefoliodesignovital;
-document.getElementById("svprincipal").value =numerodefoliodesignovital;
-
-
-
+    // Iterar sobre todos los elementos con la clase "sv"
+    var svElements = document.getElementsByClassName("sv");
+    for (var i = 0; i < svElements.length; i++) {
+        svElements[i].value = numerodefoliodesignovital;
+    }
 }
 
 function CapturaTicketAnterior() {
