@@ -152,7 +152,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
 <script>
   $(document).ready(function () {
-    var campos_maxini = 1;
+    var campos_maxini = 100;
     var xini = 0;
 
     $('#add_fieldinicial').click(function (e) {
