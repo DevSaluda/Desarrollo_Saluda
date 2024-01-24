@@ -151,6 +151,12 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
                     <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
+                    <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
+                    <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
+<input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >\
+<input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >\
+<input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >\
+<input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
                     <input class="form-control Codigo" value="Publico General" hidden type="text" id="cliente1" name="cliente[]" />\
                     <input class="form-control" hidden type="text" id="sv1" name="foliosv[]" />\
                     <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
