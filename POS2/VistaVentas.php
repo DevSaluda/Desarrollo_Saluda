@@ -113,7 +113,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
 <script>
 
- function sumar()
+
  function sumar() {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
