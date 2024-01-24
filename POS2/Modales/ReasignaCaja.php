@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Cajas_POS.ID_Caja,Cajas_POS.Empleado,Cajas_POS.Sucursal,Cajas_POS.Turno,Cajas_POS.Asignacion,
@@ -19,7 +19,7 @@ while ($r=$query->fetch_object()){
   $hora = date('G');
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="CambiaAsignacionCaja" >
 <div class="form-group">
@@ -29,7 +29,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " readonly   value="<? echo $Especialistas->Empleado; ?>" aria-describedby="basic-addon1" >            
+  <input type="text" class="form-control " readonly   value="<?php echo $Especialistas->Empleado; ?>" aria-describedby="basic-addon1" >            
 </div></div>
 
 <div class="form-group">
@@ -37,7 +37,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >       
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" >       
         
     </div>
 
@@ -46,7 +46,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Turno; ?>" aria-describedby="basic-addon1" >       
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Turno; ?>" aria-describedby="basic-addon1" >       
         
     </div>
     
@@ -54,10 +54,10 @@ while ($r=$query->fetch_object()){
   
 
     <!-- INICIA CONTADOR DINERO -->
-    <input type="text"  hidden name="IDdeCaja" value="<? echo $Especialistas->ID_Caja; ?>">
+    <input type="text"  hidden name="IDdeCaja" value="<?php echo $Especialistas->ID_Caja; ?>">
 
 
- <input type="text"  hidden name="SistemaCaja" value="POS <? echo $row['Nombre_rol']?>">
+ <input type="text"  hidden name="SistemaCaja" value="POS <?php echo $row['Nombre_rol']?>">
  <button type="submit"  id="cambialacaja"  class="btn btn-warning">Desactivar Caja </i><i class="fas fa-cash-register"></i></button>                 
 </form>
 
@@ -65,9 +65,9 @@ while ($r=$query->fetch_object()){
 
 <script src="js/CambiaCaja.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
  
 
 
