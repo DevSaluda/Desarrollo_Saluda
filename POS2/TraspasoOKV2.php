@@ -1,8 +1,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['traspasoid']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.Fk_SucDestino,Traspasos_generados.ID_Prod_POS,
@@ -29,7 +28,7 @@ while ($r=$query->fetch_object()){
 
   <title>Recepción de traspasos</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -39,8 +38,8 @@ while ($r=$query->fetch_object()){
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
-<? if($Especialistas!=null):?>
+<?php include_once ("Menu.php")?>
+<?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
  Verificacion de traspaso
@@ -64,7 +63,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control" name="CodBarra" id="codbarra" readonly  value="<? echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control" name="CodBarra" id="codbarra" readonly  value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     
@@ -74,7 +73,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pen-square"></i></span>
   </div>
-  <input type="text" class="form-control " readonly   value="<? echo $Especialistas->Nombre_Prod; ?>" >
+  <input type="text" class="form-control " readonly   value="<?php echo $Especialistas->Nombre_Prod; ?>" >
     </div><label for="nombreprod" class="error">
     </div>
 </div>
@@ -101,11 +100,11 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="number" class="form-control " readonly autofocus name="CantidadRecibida"  value="<? echo $Especialistas->Cantidad_Enviada; ?>" id="recibido" onchange="habilitar()"name="recibido" >
+  <input type="number" class="form-control " readonly autofocus name="CantidadRecibida"  value="<?php echo $Especialistas->Cantidad_Enviada; ?>" id="recibido" onchange="habilitar()"name="recibido" >
 
-  <input type="text" class="form-control " readonly hidden name="IDTraspaso" id="idtraspaso" value="<? echo $Especialistas->ID_Traspaso_Generado ?>" >
-  <input type="text" class="form-control " readonly hidden name="SucursalTrigger" id="" value="<? echo $Especialistas->Fk_SucDestino ?>" >
-  <input type="text" class="form-control " readonly hidden  name="IDProductos" id="" value="<? echo $Especialistas->ID_Prod_POS ?>" >
+  <input type="text" class="form-control " readonly hidden name="IDTraspaso" id="idtraspaso" value="<?php echo $Especialistas->ID_Traspaso_Generado ?>" >
+  <input type="text" class="form-control " readonly hidden name="SucursalTrigger" id="" value="<?php echo $Especialistas->Fk_SucDestino ?>" >
+  <input type="text" class="form-control " readonly hidden  name="IDProductos" id="" value="<?php echo $Especialistas->ID_Prod_POS ?>" >
   
   
 
@@ -199,7 +198,7 @@ $(document).ready(function () {
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-map-marked-alt"></i></span>
   </div>
-  <input type="text" class="form-control "   readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" >
+  <input type="text" class="form-control "   readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" >
   <input type="text" class="form-control "  readonly  hidden name="OrigenSucursal" readonly  value="<? echo $Especialistas->Fk_sucursal; ?>" >
     </div>
     </div>
@@ -210,7 +209,7 @@ $(document).ready(function () {
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-map-marked"></i></span>
   </div>
-  <input type="text" class="form-control " readonly name="DestinoSucursal" value="<? echo $Especialistas->Fk_Sucursal_Destino; ?>" >
+  <input type="text" class="form-control " readonly name="DestinoSucursal" value="<?php echo $Especialistas->Fk_Sucursal_Destino; ?>" >
     </div><label for="nombreprod" class="error">
     </div>
 </div>
@@ -227,8 +226,8 @@ $(document).ready(function () {
 
        
      
-    <input type="text" class="form-control"  hidden name="Agrego" id="agrega" readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="Sistema" id="sistema" readonly value=" POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  hidden name="Agrego" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="Sistema" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
    
 
@@ -244,8 +243,8 @@ $(document).ready(function () {
        <form  id="ActualizaEstadoTraspaso" style="display: none;">
 
                                        
-  <input type="text" class="form-control " readonly hidden name="IDTraspasoActualiza" id="idtraspasoactualiza" value="<? echo $Especialistas->ID_Traspaso_Generado ?>" >
-  <input type="text" class="form-control " readonly hidden name="NombreRecibio" id="nombrerecibio" value="<?echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control " readonly hidden name="IDTraspasoActualiza" id="idtraspasoactualiza" value="<?php echo $Especialistas->ID_Traspaso_Generado ?>" >
+  <input type="text" class="form-control " readonly hidden name="NombreRecibio" id="nombrerecibio" value="<?php echo $row['Nombre_Apellidos']?>" >
   <input type="date"  hidden name="FechaRecepcion" value="<?php echo date('Y-m-d'); ?> ">
   <button type="submit" style="display: none;"  id="EnviarActualizacion" value="Guardar" class="btn btn-info">Confirmar <i class="fas fa-check"></i></button>
 
@@ -256,12 +255,12 @@ $(document).ready(function () {
                                         <form  id="ActualizaDatosStock" style="display: none;">
 
                                        
-  <input type="text" class="form-control " readonly hidden name="CodBarraActualiza" value="<? echo $Especialistas->Cod_Barra?>" >
+  <input type="text" class="form-control " readonly hidden name="CodBarraActualiza" value="<?php echo $Especialistas->Cod_Barra?>" >
 
-  <input type="text" class="form-control " readonly hidden name="NombreDefinio" id="nombredefinio" value="<?echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control " readonly hidden name="NombreDefinio" id="nombredefinio" value="<?php echo $row['Nombre_Apellidos']?>" >
   <input type="date" class="form-control" name="FechaDeCaducidad" id="fechacaducidadinput"  >
   <input type="text" class="form-control " name="NumDelote" id="numdeloteinput" >
-  <input type="text" class="form-control " readonly hidden name="SucursalActualizadora" value="<?echo $row['Fk_Sucursal']?>" >
+  <input type="text" class="form-control " readonly hidden name="SucursalActualizadora" value="<?php echo $row['Fk_Sucursal']?>" >
   <input type="text"  hidden name="Fechadeactualizacion" value="<?php echo date('Y-m-d'); ?> ">
   <input type="text"   name="Fechadeactualizacion" value="<?php echo date('Y-m-d'); ?> ">
   <button type="submit" style="display: none;"  id="EnviarActualizaciondestock" value="Guardar" class="btn btn-info">Confirmar <i class="fas fa-check"></i></button>
@@ -269,15 +268,15 @@ $(document).ready(function () {
 
                                         </form>
                                         </div></div> </div></div> </div></div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 
 <script src="js/RegistraConExito.js"></script>
 <script src="js/ActualizaDetalleTraspasoCorrecto.js"></script>
 <script src="js/ActualizaLoteYCaducidad.js"></script>
-<?
+<?php
  
  include ("Modales/Error.php");
  include ("Modales/Exito.php");
@@ -312,7 +311,7 @@ $(document).ready(function () {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -1,12 +1,8 @@
-
-
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.Fk_SucDestino,Traspasos_generados.Estatus,Traspasos_generados.Num_Orden,Traspasos_generados.FechaEntrega,
 Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, Traspasos_generados.ProveedorFijo,
@@ -31,7 +27,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["FechaEntrega"] = fechaCastellano($fila["FechaEntrega"]);
     $data[$c]["Estatus"] = fechaCastellano($fila["Estatus"]);
     //$data[$c]["Traspasocorrecto"] = ["<a href=https://controlfarmacia.com/POS2/Mantenimiento type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
-     $data[$c]["Traspasocorrecto"] = ["<a href=https://controlfarmacia.com/POS2/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
+     $data[$c]["Traspasocorrecto"] = ["<a href=https://saludapos.com/POS2/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
     //  $data[$c]["Traspasoincorrecto"] = ["<a href=https://controlfarmacia.com/POS2/ProblemaTraspaso?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-warning  btn-sm '><i class='fas fa-exclamation-triangle'></i></a> "];
     
     $c++; 
@@ -49,7 +45,7 @@ echo json_encode($results);
 
 
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
