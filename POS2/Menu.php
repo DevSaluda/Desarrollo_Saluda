@@ -354,7 +354,7 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/POS2/ReportesMedicamentos" class="nav-link">
             <i class="fa-solid fa-people-carry-box"></i>
               <p>
@@ -362,7 +362,7 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
                
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-dolly"></i>
@@ -512,7 +512,7 @@ Surtir a enfermería
 </div>
           
 
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-cart-plus"></i>
               <p>
@@ -544,7 +544,7 @@ Surtir a enfermería
           </li>
          
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="https://saludapos.com/POS2/RegistrosEnergiaElectrica" class="nav-link">
             <i class="fas fa-lightbulb"></i>
