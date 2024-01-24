@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Folio_Prod_Stock,Clave_adicional,Cod_Barra,Nombre_Prod, Proveedor1,Proveedor2,Fk_sucursal,
@@ -69,7 +69,7 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Aún no hay productos registrados para <?echo $row['ID_H_O_D']?></p>
 <?php endif;?>
   <!-- Modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

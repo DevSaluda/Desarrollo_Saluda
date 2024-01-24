@@ -382,7 +382,15 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
               </p>
             </a>
           </li>
-         
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/ProntosACaducar" class="nav-link">
+            <i class="fas fa-prescription-bottle-alt"></i>
+              <p>
+            Prontos a caducar
+               
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="https://saludapos.com/POS2/ProductosEnfermeria" class="nav-link">
