@@ -88,7 +88,7 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["Fecha_Apertura"]; ?></td>
     <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
     <td> <?php echo $Usuarios["Valor_Total_Caja"]; ?></td>
-    <td> <?php echo date('h:i A', strtotime(($Usuarios["Hora_apertura"]))); ?></td>
+    <td> <?php echo date('h:i A', strtotime(($Usuarios["Hora_apertura_formatted"]))); ?></td>
     <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
