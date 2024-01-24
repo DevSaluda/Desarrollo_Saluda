@@ -83,7 +83,7 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["MedicoEnturno"]; ?></td>
     <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td> <?php echo $Usuarios["Turno"]; ?></td>
-      <td> <?php echo date('h:i A', strtotime(($Usuarios["Hora_real_apertura"]))); ?></td>
+      <td> <?php echo date('h:i A', strtotime(($Usuarios["Hora_real_apertura_formatted"]))); ?></td>
     <td> <?php echo $Usuarios["Cantidad_Fondo"]; ?></td>
     <td> <?php echo $Usuarios["Fecha_Apertura"]; ?></td>
     <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
