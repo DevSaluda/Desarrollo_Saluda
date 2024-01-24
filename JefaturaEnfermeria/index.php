@@ -17,7 +17,7 @@ if(!isset($_COOKIE["IngresoAdminEnfer"]))
   $exibirModal = true;
 }
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ContadorIndex.php";
 
 ?>
@@ -31,9 +31,9 @@ include "Consultas/ContadorIndex.php";
   <title>Enfermería | Página de inicio  </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
          <div class="row">
@@ -41,7 +41,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3><?echo $TotalEnfermeros['Enfermeros']?></h3>
+                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
 
                 <p>Enfermeros <br> vigentes</p>
               </div>
@@ -56,7 +56,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?echo $TomaSignosVitales['TotalPacientesdias']?></h3>
+                <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
 
                 <p>Registros de <br> signos vitales</p>
               </div>
@@ -88,7 +88,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?echo $TotalReportes['totalreportes']?></h3>
+              <h3><?php echo $TotalReportes['totalreportes']?></h3>
               <p>Reportes de <br> incidencias</p>
                
               </div>
@@ -132,7 +132,7 @@ include "Consultas/ContadorIndex.php";
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?include ("Modales/Ingreso.php");
+  <?php include ("Modales/Ingreso.php");
 include ("Modales/Confirmacion.php");
 include ("Modales/Exito.php");
 include ("Modales/ModalEnfermerosVigentes.php");
@@ -178,7 +178,7 @@ $(document).ready(function()
 });
 </script>
 <?php endif; ?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

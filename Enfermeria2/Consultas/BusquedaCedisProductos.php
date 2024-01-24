@@ -4,6 +4,7 @@ if (isset($_GET['term'])){
     include ("db_connection.php");
     include "Consultas.php";
     
+    
 	
 $return_arr = array();
 /* Si la conexión a la base de datos , ejecuta instrucción SQL. */
@@ -11,7 +12,7 @@ if ($conn)
 {
     $fetch = mysqli_query($conn,"SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.ID_Prod_POS,Stock_POS.Clave_adicional,Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Tipo_Servicio,
 Stock_POS.Fk_sucursal, Stock_POS.Existencias_R,Stock_POS.Proveedor1,Stock_POS.Proveedor2,Stock_POS.CodigoEstatus,Stock_POS.Lote,Stock_POS.Precio_C,	Stock_POS.Precio_Venta,
-Stock_POS.Estatus,Stock_POS.Fecha_Caducidad,Stock_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Stock_POS,SucursalesCorre WHERE Stock_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND  Fk_sucursal=23 AND Cod_Barra like '%" . mysqli_real_escape_string($conn,($_GET['term'])) . "%' OR Nombre_Prod like '%" . mysqli_real_escape_string($conn,($_GET['term'])) . "%'   LIMIT 1"); 
+Stock_POS.Estatus,Stock_POS.Fecha_Caducidad,Stock_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Stock_POS,SucursalesCorre WHERE Stock_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND  Fk_sucursal=21 AND Cod_Barra like '%" . mysqli_real_escape_string($conn,($_GET['term'])) . "%' OR Nombre_Prod like '%" . mysqli_real_escape_string($conn,($_GET['term'])) . "%'   LIMIT 1"); 
     /* Recuperar y almacenar en conjunto los resultados de la consulta.*/
 	while ($row = mysqli_fetch_array($fetch)) {
         $ID_Prod_POS=$row['ID_Prod_POS'];
