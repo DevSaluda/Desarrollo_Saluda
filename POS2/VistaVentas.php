@@ -191,9 +191,14 @@ $(document).ready(function () {
             // Agregar el nuevo campo al contenedor
             $('#parte1').append(nuevoCampo);
 
-            // Actualizar los valores del nuevo campo
-            $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
+          // Actualizar los valores del nuevo campo
+          $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
+            $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
+            $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
+            $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
+            $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
+            $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
 
             // Asociar un evento de clic al botón de remover
