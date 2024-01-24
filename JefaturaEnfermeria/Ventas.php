@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 
 ?>
@@ -13,7 +13,7 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Ventas realizadas por  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -98,7 +98,7 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-s
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -130,7 +130,7 @@ window.addEventListener("click", (event) => {
 });
 </script>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
