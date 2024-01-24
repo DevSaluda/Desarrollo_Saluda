@@ -1,5 +1,5 @@
 function CargaEmpleados(){
-    $.get("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/Sucursales.php","",function(data){
+    $.get("https://saludapos.com/JefaturaEnfermeria/Consultas/Sucursales.php","",function(data){
         $("#tablaEmpleados").html(data);
       })
       }

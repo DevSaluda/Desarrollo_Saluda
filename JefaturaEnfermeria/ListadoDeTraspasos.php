@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 
 
 ?>
@@ -14,7 +14,7 @@ include "Consultas/Sesion.php";
 
   <title>Traspasos generados <?php echo $row['ID_H_O_D'] ?> </title>
 
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
   <style>
     .error {
       color: red;
@@ -27,12 +27,12 @@ include "Consultas/Sesion.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Traspasos realizados
-    <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
+    <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
   </div>
 
   <div>
@@ -114,7 +114,7 @@ include("footer.php") ?>
 </body>
 
 </html>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

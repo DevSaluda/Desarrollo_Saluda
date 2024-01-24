@@ -49,9 +49,9 @@
 
 
 
-    <input type="text" class="form-control" hidden  name="Empresa" id="empresa"  readonly value="<?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  hidden name="Agrega" id="agrega"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="Sistema" id="sistema"  readonly value=" <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control" hidden  name="Empresa" id="empresa"  readonly value="<?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  hidden name="Agrega" id="agrega"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="Sistema" id="sistema"  readonly value=" <?php echo $row['Nombre_rol']?>">
    
 
   
