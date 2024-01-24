@@ -133,59 +133,41 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
 
-<button id="add_fieldinicial">Agregar Campo</button>
-
-<!-- Plantilla oculta para clonar -->
-<div id="campoTemplate" style="display:none;">
-    <div class="campo">
-        <a class="btn btn-warning btn-sm remover_campo"><i class="fas fa-minus-circle"></i></a>
-        <div class="row">
-            <!-- Agrega tus campos aquí -->
-            <div class="col">
-                <label for="codbarras">Código de Barras</label>
-                <input class="form-control Codigo" readonly type="text" id="codbarras" name="CodBarras[]">
-            </div>
-            <div class="col">
-                <label for="nombreprod">Nombre del Producto</label>
-                <textarea class="form-control Nombre" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>
-            </div>
-            <!-- Agrega otros campos según sea necesario -->
-        </div>
-    </div>
-</div>
-
-  
-</form>
+<input id="FiltrarContenido" type="text" class="form-control" autofocus placeholder="Ingrese código de barras" style="position: relative;" aria-label="Alumno" aria-describedby="basic-addon1">
 
 <script>
-  $(document).ready(function () {
-    var campos_maxini = 100;
-    var xini = 0;
+$(document).ready(function () {
+    $("#FiltrarContenido").autocomplete({
+        source: "Consultas/VentaDeProductos.php",
+        minLength: 2,
+        appendTo: "#productos",
+        select: function (event, ui) {
+            event.preventDefault();
 
-    $('#add_fieldinicial').click(function (e) {
-        e.preventDefault();
-        if (xini < campos_maxini) {
             var campoClone = $("#campoTemplate").clone().removeAttr("id").removeClass("remover_campo").show();
 
             // Modificar IDs y otros atributos según sea necesario
             campoClone.find('.Codigo').attr('id', 'codbarras_' + xini);
             campoClone.find('.Nombre').attr('id', 'nombreprod_' + xini);
+            // ... y así sucesivamente
+
             // Agregar el campo clonado al DOM
             $('#parte1').append(campoClone);
 
+            // Actualizar los valores del nuevo campo
+            campoClone.find('.Codigo').val(ui.item.pro_nombre);
+            campoClone.find('.Nombre').val(ui.item.NombreProd);
+            // ... y así sucesivamente
+
             xini++;
+
+            $('#FiltrarContenido').val("");
+            $("#cantidadventa").focus();
         }
     });
-
-    $('#parte1').on("click", ".remover_campo", function (e) {
-        e.preventDefault();
-        $(this).closest('.campo').remove();
-        xini--;
-    });
 });
-
-
 </script>
+
 </div></div>
  <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
