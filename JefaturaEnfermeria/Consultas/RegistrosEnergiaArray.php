@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 
 $sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro= CURRENT_DATE";

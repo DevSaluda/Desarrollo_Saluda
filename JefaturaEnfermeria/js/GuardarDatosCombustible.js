@@ -51,7 +51,7 @@ $('document').ready(function($) {
 
             $.ajax({
                 type: 'POST',
-                url: 'https://controlfarmacia.com/JefaturaEnfermeria/Consultas/RegistroDeCombustibleDiario.php',
+                url: 'https://saludapos.com/JefaturaEnfermeria/Consultas/RegistroDeCombustibleDiario.php',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
