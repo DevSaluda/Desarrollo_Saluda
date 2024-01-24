@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional,
@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
 
 $(".btn-Reimpresion").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/ReimpresionTicketVenta.php","id="+id,function(data){
+    $.post("https://saludapos.com/POS2/Modales/ReimpresionTicketVenta.php","id="+id,function(data){
         $("#FormCancelacion").html(data);
         $("#TituloCancelacion").html("Editar datos de categoría");
         $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
