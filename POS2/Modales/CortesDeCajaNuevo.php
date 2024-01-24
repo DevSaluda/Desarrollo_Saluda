@@ -608,9 +608,9 @@ $query8888 = $conn->query($sql8888);
 <script src="js/ContadorDineroCorteNuevo.js"></script>
 <script src="js/FinalizaAsignacionNuevo.js"></script>
 <script src="js/GuardaCorteNuevo.js"></script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script type="text/javascript">
 
