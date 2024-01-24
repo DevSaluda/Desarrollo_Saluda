@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
 }else {
   echo "Sin asignar";
 }
-?></button>  <?php echo $Usuarios[""]; ?></td>
+?></button>  </td>
     <td> <?php echo $Usuarios["Valor_Total_Caja"]; ?></td>
 
     <td>
