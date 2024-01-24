@@ -93,7 +93,7 @@ $('document').ready(function($) {
                     }, 2000); // abrir
 
 
-                    setTimeout(' window.location.href = "https://controlfarmacia.com/AdminPOS/AjusteDeInventarios"; ', 2000);
+                    setTimeout(' window.location.href = "https://saludapos.com/AdminPOS/AjusteDeInventarios"; ', 2000);
 
                     //  Solucionar muestra de modal de AltaCorrecta
 
