@@ -52,10 +52,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT Ventas_POS.Fk_Caja,Ventas_POS.Identificador_tipo,Ventas_POS.Folio_Ticket,Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional,

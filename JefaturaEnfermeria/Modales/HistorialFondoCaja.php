@@ -51,10 +51,9 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 
 $user_id=null;
 $sql1= "SELECT Fondos_Cajas_Audita.ID_Audita_FonCaja,Fondos_Cajas_Audita.ID_Fon_Caja,Fondos_Cajas_Audita.Fk_Sucursal,Fondos_Cajas_Audita.Fondo_Caja,

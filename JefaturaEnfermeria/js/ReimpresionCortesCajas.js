@@ -1,7 +1,7 @@
 function CargaVentasDelDia(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/CortesDeCajaReimpresiones.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/CortesDeCajaReimpresiones.php","",function(data){
       $("#TableVentasDelDia").html(data);
     })
 
