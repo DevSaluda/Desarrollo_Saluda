@@ -110,7 +110,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   
    <!-- SEGUNDO PRODUCTP -->
 
-<!-- <script>
+<script>
 
  function sumar()
   {
@@ -127,7 +127,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
   } 
-</script> -->
+</script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
@@ -221,56 +221,6 @@ $(document).ready(function () {
         }
     });
 });
-</script>
-<script>
-function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val());
-        var precio = parseFloat(precioInput.val());
-
-        // Validar si los valores son números válidos
-        if (!isNaN(cantidad) && !isNaN(precio)) {
-            // Calcular el importe solo si ambos valores son números válidos
-            var importe = cantidad * precio;
-
-            // Actualizar el campo de importe en la misma fila
-            importeInput.val(importe);
-        } else {
-            // Manejar el caso en el que uno o ambos valores no son números válidos
-            // Puedes mostrar un mensaje de error o tomar la acción adecuada
-            importeInput.val(""); // Vaciar el campo de importe en caso de valores no válidos
-        }
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
-
-function sumar() {
-    var $total = document.getElementById('totalventa2');
-    var $total2 = document.getElementById('totalventa');
-    var $Importetotal = document.getElementById('subtotal');
-    var subtotal = 0;
-
-    // Iterar sobre elementos con clase .montoreal
-    [...document.getElementsByClassName("montoreal")].forEach(function (element) {
-        if (!isNaN(parseFloat(element.value))) {
-            subtotal += parseFloat(element.value);
-        }
-    });
-
-    $total.value = subtotal;
-    $total2.value = subtotal;
-    $Importetotal.value = subtotal;
-}
-
 </script>
 
 </div></div>
