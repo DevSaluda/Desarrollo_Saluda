@@ -284,58 +284,60 @@ $(document).ready(function () {
   </div>
 </div>
 <script>
-  // Contador para generar IDs únicos para cada fila dinámica
-  var contadorFilas = 1;
+  document.addEventListener("DOMContentLoaded", function() {
+    // Contador para generar IDs únicos para cada fila dinámica
+    var contadorFilas = 1;
 
-  // Función para configurar los botones de descuento
-  function configurarBotonDescuento(boton) {
-    boton.addEventListener('click', function () {
-      var idFilaActual = boton.getAttribute('data-fila');
-      // Limpiar el campo de entrada del porcentaje cada vez que se abre el modal
-      document.getElementById('porcentajeDescuento').value = '';
-      // Actualizar el contenido del modal de detalles de descuento
-      document.getElementById('detalleDescuento').textContent = 'Detalles de descuento para la fila ' + idFilaActual;
+    // Función para configurar los botones de descuento
+    function configurarBotonDescuento(boton) {
+      boton.addEventListener('click', function () {
+        var idFilaActual = boton.getAttribute('data-fila');
+        // Limpiar el campo de entrada del porcentaje cada vez que se abre el modal
+        document.getElementById('porcentajeDescuento').value = '';
+        // Actualizar el contenido del modal de detalles de descuento
+        document.getElementById('detalleDescuento').textContent = 'Detalles de descuento para la fila ' + idFilaActual;
+      });
+    }
+
+    // Delegación de eventos para los botones de descuento
+    document.getElementById('contenedorCamposDinamicos').addEventListener('click', function (event) {
+      if (event.target.classList.contains('btn-descuento')) {
+        configurarBotonDescuento(event.target);
+      }
     });
-  }
 
-  // Delegación de eventos para los botones de descuento
-  document.getElementById('contenedorCamposDinamicos').addEventListener('click', function (event) {
-    if (event.target.classList.contains('btn-descuento')) {
-      configurarBotonDescuento(event.target);
+    // Función para aplicar descuento a la fila actual
+    function aplicarDescuento() {
+      // Obtener el porcentaje de descuento ingresado por el usuario
+      var porcentajeDescuento = parseFloat(document.getElementById('porcentajeDescuento').value);
+
+      // Validar que el porcentaje sea un número válido
+      if (!isNaN(porcentajeDescuento)) {
+        // Lógica para aplicar el descuento a la fila
+        var fila = document.getElementById(idFilaActual);
+
+        // Verificar si la fila existe antes de intentar acceder a sus propiedades
+        if (fila) {
+          // (Asume que la columna donde aplicar el descuento es la segunda, ajusta según tu estructura)
+          var precioOriginal = parseFloat(fila.querySelector('.Precio').value);
+          var descuento = (precioOriginal * porcentajeDescuento) / 100;
+          var precioConDescuento = precioOriginal - descuento;
+
+          // Actualizar el valor en la columna correspondiente
+          fila.querySelector('.Precio').value = precioConDescuento.toFixed(2);
+
+          // Cerrar el modal después de aplicar el descuento
+          $('#DescuentoDetalles').modal('hide');
+        } else {
+          // Manejar el caso en el que la fila no existe
+          alert('No se pudo encontrar la fila correspondiente.');
+        }
+      } else {
+        // Mostrar un mensaje de error si el porcentaje no es válido
+        alert('Ingrese un porcentaje de descuento válido.');
+      }
     }
   });
-
-  // Función para aplicar descuento a la fila actual
-  function aplicarDescuento() {
-    // Obtener el porcentaje de descuento ingresado por el usuario
-    var porcentajeDescuento = parseFloat(document.getElementById('porcentajeDescuento').value);
-
-    // Validar que el porcentaje sea un número válido
-    if (!isNaN(porcentajeDescuento)) {
-      // Lógica para aplicar el descuento a la fila
-      var fila = document.getElementById(idFilaActual);
-
-      // Verificar si la fila existe antes de intentar acceder a sus propiedades
-      if (fila) {
-        // (Asume que la columna donde aplicar el descuento es la segunda, ajusta según tu estructura)
-        var precioOriginal = parseFloat(fila.querySelector('.Precio').value);
-        var descuento = (precioOriginal * porcentajeDescuento) / 100;
-        var precioConDescuento = precioOriginal - descuento;
-
-        // Actualizar el valor en la columna correspondiente
-        fila.querySelector('.Precio').value = precioConDescuento.toFixed(2);
-
-        // Cerrar el modal después de aplicar el descuento
-        $('#DescuentoDetalles').modal('hide');
-      } else {
-        // Manejar el caso en el que la fila no existe
-        alert('No se pudo encontrar la fila correspondiente.');
-      }
-    } else {
-      // Mostrar un mensaje de error si el porcentaje no es válido
-      alert('Ingrese un porcentaje de descuento válido.');
-    }
-  }
 </script>
 <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
