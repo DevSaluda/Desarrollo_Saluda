@@ -133,21 +133,24 @@ function multiplicar() {
     sumar();
 }
 document.addEventListener("DOMContentLoaded", function() {
- function sumar()
-  {
+  function sumar() {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
-      if(element.value !== '') {
+
+    [...document.getElementsByClassName("montoreal")].forEach(function(element) {
+      if (element.value !== '') {
         subtotal += parseFloat(element.value);
       }
     });
+
     $total.value = subtotal;
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
-  } });
+  }
+});
+
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
