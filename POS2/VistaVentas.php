@@ -116,8 +116,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
         // Obtener elementos relevantes en la fila actual
         var cantidadInput = $(this).find('.cantidadventa');
         var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-
+       
         // Obtener valores como números
         var cantidad = parseFloat(cantidadInput.val()) || 0;
         var precio = parseFloat(precioInput.val()) || 0;
