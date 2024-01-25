@@ -68,15 +68,15 @@ $('document').ready(function ($) {
              
                 var FormBuscarSiniestro = $('#VentasAlmomento');
               
-      //           $("#VentasAlmomento").removeAttr("id");
-      //           FormBuscarSiniestro.attr("id","Pruebas");
-      //     FormBuscarSiniestro.attr("action","http://localhost:8080/ticket/TicketVenta.php/");
-      // /*     FormBuscarSiniestro.attr("action","http://localhost/ticket/Pruebasarreglos.php/"); */
-      //     document.getElementById('Pruebas').submit()
-      //     $("#submit_registro").html("Realizar venta <i class='fas fa-save'></i>></span>");
-      //     setTimeout(function(){ 
-      //       location.reload();
-      //   }, 2000); // abrir
+                $("#VentasAlmomento").removeAttr("id");
+                FormBuscarSiniestro.attr("id","Pruebas");
+          FormBuscarSiniestro.attr("action","http://localhost:8080/ticket/TicketVenta.php/");
+      /*     FormBuscarSiniestro.attr("action","http://localhost/ticket/Pruebasarreglos.php/"); */
+          document.getElementById('Pruebas').submit()
+          $("#submit_registro").html("Realizar venta <i class='fas fa-save'></i>></span>");
+          setTimeout(function(){ 
+            location.reload();
+        }, 2000); // abrir
        
                      },
                      error: function(){
