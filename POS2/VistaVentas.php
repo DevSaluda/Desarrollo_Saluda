@@ -111,34 +111,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
    <!-- SEGUNDO PRODUCTP -->
 
 <script>
-function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
 
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val());
-        var precio = parseFloat(precioInput.val());
-
-        // Verificar si ambos valores son números válidos
-        if (!isNaN(cantidad) && !isNaN(precio)) {
-            // Calcular el importe solo si ambos valores son números válidos
-            var importe = cantidad * precio;
-
-            // Actualizar el campo de importe en la misma fila
-            importeInput.val(importe);
-        } else {
-            // Si algún valor no es un número válido, puedes dejar el campo de importe vacío o manejarlo de otra manera
-            importeInput.val("");
-        }
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
  function sumar()
   {
     var $total = document.getElementById('totalventa2');
@@ -210,7 +183,7 @@ $(document).ready(function () {
                     <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-                    <input class="Cantidad form-control"   id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
+                    <input class="Cantidad form-control" onfocus="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
@@ -235,16 +208,16 @@ $(document).ready(function () {
             $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
 
+            // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
-                 multiplicar();
             });
 
             // Resto de las acciones necesarias
-            multiplicar();
+
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-           
+            $("#cantidadventa").focus();
         }
     });
 });
