@@ -28,7 +28,7 @@ if ($conn)
         $row_array['pro_clavad']=$row['Clave_adicional'];
             $row_array['pro_nombre']=$row['Cod_Barra'];
             $row_array['NombreProd']=$row['Nombre_Prod'];
-            $row_array['pro_cantidad']=$row['Precio_Venta'];
+            $row_array['montoreal']=$row['Precio_Venta'];
             
             $row_array['pro_lote']=$row['Lote'];
             $row_array['IdentificadorTip']=$row['Tipo_Servicio'];
