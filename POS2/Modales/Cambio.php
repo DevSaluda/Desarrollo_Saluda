@@ -242,10 +242,14 @@
        
         function CapturaValorPago() {
     var realpago = document.getElementById("pago").value;
-    //Se actualiza en municipio inm
-    document.getElementById("pagoreal").value = realpago;
-   
+
+    // Seleccionar todos los elementos con la clase "pago-dinamico"
+    var elementosDinamicos = document.getElementsByClassName("pago-dinamico");
+    for (var i = 0; i < elementosDinamicos.length; i++) {
+        elementosDinamicos[i].value = realpago;
+    }
 }
+
 function CapturaValorCambio() {
     var realcambio = document.getElementById("cambio").value;
     //Se actualiza en municipio inm
