@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 function fechaCastellano ($fecha) {
     $fecha = substr($fecha, 0, 10);

@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +10,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?echo $row['ID_H_O_D']?> | Control de productos </title>
+  <title><?php echo $row['ID_H_O_D']?> | Control de productos </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,12 +22,12 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php");?>
+<?php include_once ("Menu.php");?>
 <div id="ContadorDeAlmacen"></div>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Categorías de productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Categorías de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -47,7 +46,7 @@ include "Consultas/AnalisisIndex.php";
 <div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Tipos de productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Tipos de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>-->
   
   <div >
@@ -66,7 +65,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Presentaciones de productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Presentaciones de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -81,7 +80,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Marcas de productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Marcas de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -96,7 +95,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade" id="ServiciosS" role="tabpanel" aria-labelledby="pills-contact-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Servicios de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Servicios de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -128,7 +127,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   include ("Modales/AltaCategorias.php");
   include ("Modales/AltaPresentaciones.php");
@@ -182,7 +181,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
