@@ -242,7 +242,7 @@ $(document).ready(function () {
             multiplicar();
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-           z
+           
         }
     });
 });
