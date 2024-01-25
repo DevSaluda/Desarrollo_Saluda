@@ -346,16 +346,17 @@ function CapturaFormadePago() {
 // document.getElementById("totalventa").value = costototalmaslacomi;
 
 // }
-var formadepagoreal = document.getElementById("formapago").value;
-    //Se actualiza en municipio inm
+   // Captura del valor de formapago
+   var formadepagoreal = document.getElementById("formapago").value;
     document.getElementById("formapagorealistaaa").value = formadepagoreal;
-     // Obtener todos los elementos con el atributo name="FormaPago[]"
-     var formaPagos = document.getElementsByName("FormaPago[]");
 
-// Iterar sobre los elementos y asignar el valor
-for (var i = 0; i < formaPagos.length; i++) {
-    formaPagos[i].value = formadepagoreal;
-}
+    // Obtener todos los elementos con el atributo name="FormaPago[]"
+    var formaPagos = document.getElementsByName("FormaPago[]");
+
+    // Iterar sobre los elementos y asignar el valor
+    for (var i = 0; i < formaPagos.length; i++) {
+        formaPagos[i].value = formadepagoreal;
+    }
 }
    
    
