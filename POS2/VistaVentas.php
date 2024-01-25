@@ -93,7 +93,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
 <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
   <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >
-  <input type="text" class="form-control " id="formapago1"name="FormaPago[]" readonly  >
+  
   <input type="text" class="form-control "   id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >
   <input type="text" class="form-control " name="Cambio[]" readonly id="cambioreal" >
  <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
