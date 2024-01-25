@@ -188,7 +188,6 @@ $(".btn-aperturacaja").click(function() {
    <!-- ./wrapper -->
    
    <script src="js/ControladorFormVentas.js"></script>
-
    <script src="js/VentasControlador.js"></script>
      <!-- <script src="js/BusquedaVentasV.js"></script> -->
      <!-- <script src="js/BusquedaVentasV2.js"></script>
