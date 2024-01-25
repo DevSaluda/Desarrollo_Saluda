@@ -117,7 +117,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
         var cantidadInput = $(this).find('.cantidadventa');
         var precioInput = $(this).find('.Precio');
         var importeInput = $(this).find('.montoreal');
-
+        console.log("Valor de importeInput: ", importeInput.val());
         // Obtener valores como números
         var cantidad = parseFloat(cantidadInput.val()) || 0;
         var precio = parseFloat(precioInput.val()) || 0;
