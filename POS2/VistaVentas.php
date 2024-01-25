@@ -132,25 +132,22 @@ function multiplicar() {
     // Llamar a la función sumar si es necesario
     sumar();
 }
-document.addEventListener("DOMContentLoaded", function() {
-  window.sumar = function() {
+
+ function sumar()
+  {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-
-    [...document.getElementsByClassName("montoreal")].forEach(function(element) {
-      if (element.value !== '') {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
+      if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
     });
-
     $total.value = subtotal;
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
-  }
-});
-
+  } 
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
@@ -208,10 +205,12 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
-                    <div class="col">\
-    <label for="exampleFormControlInput1">Descuento</label>\
-    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm"><i class="fas fa-percent"></i></a>\
-</div>\                <div class="col"> \
+                <div class="col"> \
+                    <label for="exampleFormControlInput1">Descuento</label>\
+                    <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
+                </div>\
+                <!-- Agrega otros campos según sea necesario -->\
+                <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
                 </div>\
 ';
@@ -271,6 +270,7 @@ $(document).ready(function()
      ?>
 
      
+<script src="js/CalculaTotaldeproducto.js"></script>
 
 
 <script src="js/RealizaVentas.js"></script>
