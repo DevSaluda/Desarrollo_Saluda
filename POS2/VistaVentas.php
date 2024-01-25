@@ -217,7 +217,7 @@ $(document).ready(function () {
 
             // Agregar el nuevo campo al contenedor
             $('#parte1').append(nuevoCampo);
-
+            console.log(ui.item.pro_cantidad);
           // Actualizar los valores del nuevo campo
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
