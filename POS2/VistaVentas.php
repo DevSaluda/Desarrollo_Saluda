@@ -239,10 +239,10 @@ $(document).ready(function () {
             });
 
             // Resto de las acciones necesarias
-
+            multiplicar();
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            multiplicar();
+           z
         }
     });
 });
