@@ -161,7 +161,7 @@ $(document).ready(function () {
 <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
 <input class="form-control Codigo cliente" value="Publico General" hidden type="text" id="cliente" name="cliente[]">\
 <input class="form-control sv" hidden type="text" id="sv" name="foliosv[]" />\
- <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
+<input class="form-control tk-dinamico" type="text" id="tk1" name="ticketant[]" />\
                     <input class="Lote form-control" hidden readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
                     <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\

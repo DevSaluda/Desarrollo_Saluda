@@ -423,21 +423,15 @@ function CapturaFolioSignoVital() {
 }
 
 function CapturaTicketAnterior() {
+    var numerodeticketanterior = document.getElementById("TicketAnterior").value;
 
-var numerodeticketanterior= document.getElementById("TicketAnterior").value;
-//Se actualiza en municipio inm
+    // Seleccionar todos los elementos con la clase "tk-dinamico"
+    var elementosDinamicos = document.getElementsByClassName("tk-dinamico");
+    for (var i = 0; i < elementosDinamicos.length; i++) {
+        elementosDinamicos[i].value = numerodeticketanterior;
+    }
+}
 
-document.getElementById("tk1").value = numerodeticketanterior;
-document.getElementById("tk2").value = numerodeticketanterior;
-document.getElementById("tk3").value = numerodeticketanterior;
-document.getElementById("tk4").value = numerodeticketanterior;
-document.getElementById("tk5").value = numerodeticketanterior;
-document.getElementById("tk6").value = numerodeticketanterior;
-document.getElementById("tk7").value = numerodeticketanterior;
-document.getElementById("tk8").value = numerodeticketanterior;
-document.getElementById("tk9").value = numerodeticketanterior;
-document.getElementById("tk10").value =numerodeticketanterior;
-document.getElementById("svprincipal").value =numerodeticketanterior;
 
 
 
