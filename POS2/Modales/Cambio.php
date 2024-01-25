@@ -325,7 +325,7 @@ var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
 for (var i = 0; i < elementosDinamicos.length; i++) {
     elementosDinamicos[i].value = formadepagoreal;
 }
-
+   
 }
 
 
