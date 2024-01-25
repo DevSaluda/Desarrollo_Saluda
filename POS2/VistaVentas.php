@@ -111,7 +111,34 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
    <!-- SEGUNDO PRODUCTP -->
 
 <script>
+function multiplicar() {
+    // Iterar sobre todas las filas dinámicas
+    $('.row').each(function () {
+        // Obtener elementos relevantes en la fila actual
+        var cantidadInput = $(this).find('.cantidadventa');
+        var precioInput = $(this).find('.Precio');
+        var importeInput = $(this).find('.montoreal');
 
+        // Obtener valores como números
+        var cantidad = parseFloat(cantidadInput.val());
+        var precio = parseFloat(precioInput.val());
+
+        // Verificar si ambos valores son números válidos
+        if (!isNaN(cantidad) && !isNaN(precio)) {
+            // Calcular el importe solo si ambos valores son números válidos
+            var importe = cantidad * precio;
+
+            // Actualizar el campo de importe en la misma fila
+            importeInput.val(importe);
+        } else {
+            // Si algún valor no es un número válido, puedes dejar el campo de importe vacío o manejarlo de otra manera
+            importeInput.val("");
+        }
+    });
+
+    // Llamar a la función sumar si es necesario
+    sumar();
+}
  function sumar()
   {
     var $total = document.getElementById('totalventa2');
