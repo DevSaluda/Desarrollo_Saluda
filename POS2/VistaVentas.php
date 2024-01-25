@@ -231,22 +231,21 @@ function multiplicar() {
         var precioInput = $(this).find('.Precio');
         var importeInput = $(this).find('.montoreal');
 
-        if (!isNaN(cantidad) && !isNaN(precio)) {
-// Validar si los valores son números válidos
-if (!isNaN(cantidad) && !isNaN(precio)) {
-    // Calcular el importe solo si ambos valores son números válidos
-    var importe = cantidad * precio;
+        // Obtener valores como números
+        var cantidad = parseFloat(cantidadInput.val()) || 0;
+        var precio = parseFloat(precioInput.val()) || 0;
 
-    // Actualizar el campo de importe en la misma fila
-    importeInput.val(importe);
-} else {
-    // Manejar el caso en el que uno o ambos valores no son números válidos
-    // Puedes mostrar un mensaje de error o tomar la acción adecuada
-}
+        // Calcular el importe
+        var importe = cantidad * precio;
+
+        // Actualizar el campo de importe en la misma fila
+        importeInput.val(importe);
+    });
 
     // Llamar a la función sumar si es necesario
     sumar();
-}</script>
+}
+</script>
 
 </div></div>
  
