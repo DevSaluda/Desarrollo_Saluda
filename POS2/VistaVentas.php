@@ -100,7 +100,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
     <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
     <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " hidden id="totalventa"  name ="TotalVentas[]" readonly  >
+     <input type="number" class="form-control " hidden ="totalventa"  name ="TotalVentas[]" readonly  >
    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
 <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
 <input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
@@ -139,22 +139,17 @@ document.addEventListener("DOMContentLoaded", function() {
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
 
-    if ($total2) {
-      [...document.getElementsByClassName("montoreal")].forEach(function(element) {
-        if (element.value !== '') {
-          subtotal += parseFloat(element.value);
-        }
-      });
+    [...document.getElementsByClassName("montoreal")].forEach(function(element) {
+      if (element.value !== '') {
+        subtotal += parseFloat(element.value);
+      }
+    });
 
-      $total.value = subtotal;
-      $total2.value = subtotal;
-      $Importetotal.value = subtotal;
-    } else {
-      console.error("Elemento con ID 'totalventa' no encontrado.");
-    }
+    $total.value = subtotal;
+    $total2.value = subtotal;
+    $Importetotal.value = subtotal;
   }
 });
-
 
 </script>
 <div id="parte1">
@@ -176,7 +171,6 @@ $(document).ready(function () {
 
             // Construir la estructura interna del nuevo campo
             nuevoCampo.innerHTML = '\
-            <div id="contenedorCamposDinamicos">\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
                     <input type="text" class="form-control formapago-dinamico" hidden id="formapago1" name="FormaPago[]" readonly>\
@@ -216,12 +210,10 @@ $(document).ready(function () {
                     <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
                     <div class="col">\
     <label for="exampleFormControlInput1">Descuento</label>\
-    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm btn-descuento" data-fila="fila1">\
-            <i class="fas fa-percent"></i> Aplicar Descuento\
-          </a>\
+    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm"><i class="fas fa-percent"></i></a>\
 </div>\                <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
-                </div>\</div>\
+                </div>\
 ';
 
             // Agregar el nuevo campo al contenedor
@@ -255,91 +247,7 @@ $(document).ready(function () {
 </script>
 
 </div></div>
- <!-- Modal de detalles de descuento -->
-<div class="modal fade" id="DescuentoDetalles" tabindex="-1" role="dialog" aria-labelledby="DescuentoDetallesLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="DescuentoDetallesLabel">Detalles de Descuento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario para ingresar el porcentaje de descuento -->
-        <form id="formDescuento">
-          <div class="form-group">
-            <label for="porcentajeDescuento">Porcentaje de Descuento:</label>
-            <input type="number" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje">
-          </div>
-        </form>
-
-        <!-- Contenido específico de detalles de descuento -->
-        <p id="detalleDescuento">Detalles de descuento para la fila seleccionada.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="aplicarDescuento()">Aplicar Descuento</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Contador para generar IDs únicos para cada fila dinámica
-    var contadorFilas = 1;
-
-    // Función para configurar los botones de descuento
-    function configurarBotonDescuento(boton) {
-      boton.addEventListener('click', function () {
-        var idFilaActual = boton.getAttribute('data-fila');
-        // Limpiar el campo de entrada del porcentaje cada vez que se abre el modal
-        document.getElementById('porcentajeDescuento').value = '';
-        // Actualizar el contenido del modal de detalles de descuento
-        document.getElementById('detalleDescuento').textContent = 'Detalles de descuento para la fila ' + idFilaActual;
-      });
-    }
-
-    // Delegación de eventos para los botones de descuento
-    document.getElementById('contenedorCamposDinamicos').addEventListener('click', function (event) {
-      if (event.target.classList.contains('btn-descuento')) {
-        configurarBotonDescuento(event.target);
-      }
-    });
-
-    // Función para aplicar descuento a la fila actual
-    function aplicarDescuento() {
-      // Obtener el porcentaje de descuento ingresado por el usuario
-      var porcentajeDescuento = parseFloat(document.getElementById('porcentajeDescuento').value);
-
-      // Validar que el porcentaje sea un número válido
-      if (!isNaN(porcentajeDescuento)) {
-        // Lógica para aplicar el descuento a la fila
-        var fila = document.getElementById(idFilaActual);
-
-        // Verificar si la fila existe antes de intentar acceder a sus propiedades
-        if (fila) {
-          // (Asume que la columna donde aplicar el descuento es la segunda, ajusta según tu estructura)
-          var precioOriginal = parseFloat(fila.querySelector('.Precio').value);
-          var descuento = (precioOriginal * porcentajeDescuento) / 100;
-          var precioConDescuento = precioOriginal - descuento;
-
-          // Actualizar el valor en la columna correspondiente
-          fila.querySelector('.Precio').value = precioConDescuento.toFixed(2);
-
-          // Cerrar el modal después de aplicar el descuento
-          $('#DescuentoDetalles').modal('hide');
-        } else {
-          // Manejar el caso en el que la fila no existe
-          alert('No se pudo encontrar la fila correspondiente.');
-        }
-      } else {
-        // Mostrar un mensaje de error si el porcentaje no es válido
-        alert('Ingrese un porcentaje de descuento válido.');
-      }
-    }
-  });
-</script>
+ 
 <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
 
@@ -363,7 +271,6 @@ $(document).ready(function()
      ?>
 
      
-
 
 
 <script src="js/RealizaVentas.js"></script>
