@@ -284,12 +284,13 @@ $(document).ready(function () {
   </div>
 </div>
 <script>
+  // Contador para generar IDs únicos para cada fila dinámica
+  var contadorFilas = 1;
+
   // JavaScript para manejar los descuentos
   var idFilaActual; // Variable para almacenar el ID de la fila actual
 
-  var botonesDescuento = document.querySelectorAll('.btn-descuento');
-
-  botonesDescuento.forEach(function (boton) {
+  function configurarBotonDescuento(boton) {
     boton.addEventListener('click', function () {
       idFilaActual = boton.getAttribute('data-fila');
       // Limpiar el campo de entrada del porcentaje cada vez que se abre el modal
@@ -297,8 +298,13 @@ $(document).ready(function () {
       // Actualizar el contenido del modal de detalles de descuento
       document.getElementById('detalleDescuento').textContent = 'Detalles de descuento para la fila ' + idFilaActual;
     });
-  });
+  }
 
+  // Configurar los botones de descuento al cargar la página
+  var botonesDescuento = document.querySelectorAll('.btn-descuento');
+  botonesDescuento.forEach(configurarBotonDescuento);
+
+  // Función para aplicar descuento a la fila actual
   function aplicarDescuento() {
     // Obtener el porcentaje de descuento ingresado por el usuario
     var porcentajeDescuento = parseFloat(document.getElementById('porcentajeDescuento').value);
@@ -311,12 +317,12 @@ $(document).ready(function () {
       // Verificar si la fila existe antes de intentar acceder a sus propiedades
       if (fila) {
         // (Asume que la columna donde aplicar el descuento es la segunda, ajusta según tu estructura)
-        var precioOriginal = parseFloat(fila.cells[1].textContent);
+        var precioOriginal = parseFloat(fila.querySelector('.Precio').value);
         var descuento = (precioOriginal * porcentajeDescuento) / 100;
         var precioConDescuento = precioOriginal - descuento;
 
         // Actualizar el valor en la columna correspondiente
-        fila.cells[1].textContent = precioConDescuento.toFixed(2);
+        fila.querySelector('.Precio').value = precioConDescuento.toFixed(2);
 
         // Cerrar el modal después de aplicar el descuento
         $('#DescuentoDetalles').modal('hide');
