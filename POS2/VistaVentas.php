@@ -232,6 +232,7 @@ $(document).ready(function () {
             // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
+                multiplicar();
             });
 
             // Resto de las acciones necesarias
