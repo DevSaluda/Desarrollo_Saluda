@@ -242,16 +242,10 @@
        
         function CapturaValorPago() {
     var realpago = document.getElementById("pago").value;
-
-    // Obtener todos los elementos con el atributo name="FormaPago[]"
-    var formaPagos = document.getElementsByName("FormaPago[]");
-
-    // Iterar sobre los elementos y asignar el valor
-    for (var i = 0; i < formaPagos.length; i++) {
-        formaPagos[i].value = realpago;
-    }
+    //Se actualiza en municipio inm
+    document.getElementById("pagoreal").value = realpago;
+   
 }
-
 function CapturaValorCambio() {
     var realcambio = document.getElementById("cambio").value;
     //Se actualiza en municipio inm
