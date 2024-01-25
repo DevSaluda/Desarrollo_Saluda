@@ -100,7 +100,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
     <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
     <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " id="totalventa"  name ="TotalVentas[]" readonly  >
+     <input type="number" class="form-control " hidden ="totalventa"  name ="TotalVentas[]" readonly  >
    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
 <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
 <input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
@@ -205,12 +205,10 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
-                <div class="col"> \
-                    <label for="exampleFormControlInput1">Descuento</label>\
-                    <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
-                </div>\
-                <!-- Agrega otros campos según sea necesario -->\
-                <div class="col"> \
+                    <div class="col">\
+    <label for="exampleFormControlInput1">Descuento</label>\
+    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm"><i class="fas fa-percent"></i></a>\
+</div>\                <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
                 </div>\
 ';
