@@ -183,6 +183,7 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" onfocus="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
+                    <button hidden class="btn-calcular">Calcular</button>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
