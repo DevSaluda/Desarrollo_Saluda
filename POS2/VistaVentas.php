@@ -110,31 +110,38 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   
    <!-- SEGUNDO PRODUCTP -->
    <script>
-  function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-        console.log("Valor de importeInput: ", importeInput.val());
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val()) || 0;
-        var precio = parseFloat(precioInput.val()) || 0;
-
-        // Calcular el importe
-        var importeprodutctos = cantidad * precio;
-
-        // Actualizar el campo de importe en la misma fila
-        importeInput.val(importeprodutctos);
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
-
+  
 </script>
 <script>
+function multiplicar() {
+    // Obtener el contenedor principal de las filas
+    var contenedorFilas = $('#parte1');
+
+    // Inicializar la suma total
+    var sumaTotal = 0;
+
+    // Iterar sobre todas las filas dentro del contenedor
+    contenedorFilas.find('.row').each(function () {
+        // Obtener los valores de la fila actual
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
+        var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
+
+        // Calcular el importe para la fila actual
+        var importe = precioProducto * cantidadVenta;
+
+        // Actualizar el campo de importe para la fila actual
+        $(this).find('.montoreal').val(importe.toFixed(2));
+
+        // Sumar el importe al total
+        sumaTotal += importe;
+    });
+
+    // Actualizar el campo de importe total (puedes ajustar el selector según tu estructura HTML)
+    $('#totalImporte').val(sumaTotal.toFixed(2));
+
+    // Llamar a la función de suma (si es necesario)
+    sumar();
+}
 
  function sumar()
   {
