@@ -133,7 +133,7 @@ function multiplicar() {
     sumar();
 }
 document.addEventListener("DOMContentLoaded", function() {
-  function sumar() {
+  window.sumar = function() {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
