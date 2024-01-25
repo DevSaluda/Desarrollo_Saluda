@@ -371,6 +371,7 @@ function actualizarTotal() {
 
     // Actualiza el campo totalventa2 (ajusta el id según sea necesario)
     $('#totalventa2').val(sumaTotal.toFixed(2));
+    $('#subtotal').val(sumaTotal.toFixed(2));
 }
 </script>
 <?php
