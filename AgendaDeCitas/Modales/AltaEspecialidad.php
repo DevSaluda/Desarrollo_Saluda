@@ -11,7 +11,7 @@
          </button>
        </div>
         <div class="alert alert-success alert-styled-left text-blue-800 content-group">
-						                <span class="text-semibold"><? echo $row['Nombre_Apellidos']?>, </span>
+						                <span class="text-semibold"><?php echo $row['Nombre_Apellidos']?>, </span>
                             los campos con un  <span class="text-danger"> * </span> son campos necesarios para el correcto ingreso de datos.
                           
 						                <button type="button" class="close" data-dismiss="alert">×</button>
@@ -41,10 +41,10 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal"  >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 
@@ -52,8 +52,8 @@
 <div>
 <label for="especialidad" class="error">
 </div>
-<input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<? echo $row['ID_H_O_D']?>" >
-<input type="text" class="form-control" id="usuario" name="Usuario" hidden  value="<? echo $row['Nombre_Apellidos']?>" >    
+<input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<?php echo $row['ID_H_O_D']?>" >
+<input type="text" class="form-control" id="usuario" name="Usuario" hidden  value="<?php echo $row['Nombre_Apellidos']?>" >    
    
       <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
                              </form>
