@@ -100,7 +100,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
     <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
     <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " hidden id="totalventa"  name ="TotalVentas[]" readonly  >
+     <input type="number" class="form-control " id="totalventa"  name ="TotalVentas[]" readonly  >
    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
 <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
 <input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
@@ -222,7 +222,7 @@ $(document).ready(function () {
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
             $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
-            $(nuevoCampo).find('.montoreal').val(ui.item.importeproducto); // Puedes ajustar esto según tus necesidades
+            $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
             $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
             $(nuevoCampo).find('.Lote').val(ui.item.pro_lote);
@@ -232,7 +232,7 @@ $(document).ready(function () {
             // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
-                multiplicar();
+                 multiplicar();
             });
 
             // Resto de las acciones necesarias
@@ -270,7 +270,7 @@ $(document).ready(function()
      ?>
 
      
-
+<script src="js/CalculaTotaldeproducto.js"></script>
 
 
 <script src="js/RealizaVentas.js"></script>
