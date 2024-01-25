@@ -346,19 +346,19 @@ function CapturaFormadePago() {
 // document.getElementById("totalventa").value = costototalmaslacomi;
 
 // }
-    var formadepagoreal = document.getElementById("formapago").value;
-    //Se actualiza en municipio inm
-    document.getElementById("formapagorealistaaa").value = formadepagoreal;
-    document.getElementById("formapago1").value = formadepagoreal;
-    document.getElementById("formapago2").value = formadepagoreal;
-    document.getElementById("formapago3").value = formadepagoreal;
-    document.getElementById("formapago4").value = formadepagoreal;
-    document.getElementById("formapago5").value = formadepagoreal;
-    document.getElementById("formapago6").value = formadepagoreal;
-    document.getElementById("formapago7").value = formadepagoreal;
-    document.getElementById("formapago8").value = formadepagoreal;
-    document.getElementById("formapago9").value = formadepagoreal;
-    document.getElementById("formapago10").value = formadepagoreal;
+    // var formadepagoreal = document.getElementById("formapago").value;
+    // //Se actualiza en municipio inm
+    // document.getElementById("formapagorealistaaa").value = formadepagoreal;
+    // document.getElementById("formapago1").value = formadepagoreal;
+    // document.getElementById("formapago2").value = formadepagoreal;
+    // document.getElementById("formapago3").value = formadepagoreal;
+    // document.getElementById("formapago4").value = formadepagoreal;
+    // document.getElementById("formapago5").value = formadepagoreal;
+    // document.getElementById("formapago6").value = formadepagoreal;
+    // document.getElementById("formapago7").value = formadepagoreal;
+    // document.getElementById("formapago8").value = formadepagoreal;
+    // document.getElementById("formapago9").value = formadepagoreal;
+    // document.getElementById("formapago10").value = formadepagoreal;
    
    
 }
