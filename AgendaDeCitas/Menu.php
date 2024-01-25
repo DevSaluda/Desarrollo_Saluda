@@ -162,7 +162,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
+                  <a href="https://saludapos.com/AgendaDeCitas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
                   <i class="fas fa-calendar-check"></i>
                     <p>
                      Agendar citas

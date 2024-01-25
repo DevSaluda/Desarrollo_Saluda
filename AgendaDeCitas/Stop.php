@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>NO TIENES PERMISOS</title>
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 
 </head>
 <body  class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

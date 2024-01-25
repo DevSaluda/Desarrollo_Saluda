@@ -1,4 +1,4 @@
-<?
+<?php
 
 
 ?>
@@ -219,7 +219,7 @@ tabla = $('#CitasExpress').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AgendaDeCitas/Consultas/ArrayAgendaEspecialidades.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/ArrayAgendaEspecialidades.php",
  "aoColumns": [
     { mData: 'Folio' },
        { mData: 'Paciente' },

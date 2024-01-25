@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 
 $user_id=null;
@@ -30,7 +30,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialidades!=null):?>
+<?php if($Especialidades!=null):?>
 
 <form action="javascript:void(0)" method="post" id="Actualizacita">
   <div class="form-row">
@@ -41,7 +41,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Especialidad; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_Especialidad; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -51,7 +51,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     
@@ -120,13 +120,13 @@ while ($r=$query->fetch_object()){
     <tr>
       
      
-      <td><button id="ActPago" class="btn btn-default btn-sm" style="<? echo $Especialidades->Color_Pago; ?>"><?php echo $Especialidades->Estatus_pago; ?></button>
+      <td><button id="ActPago" class="btn btn-default btn-sm" style="<?php echo $Especialidades->Color_Pago; ?>"><?php echo $Especialidades->Estatus_pago; ?></button>
      <button id="SiPago" class="divOculto btn btn-default btn-sm" style="background-color: #9A2EFE !important;">Pagado</button> 
       <button id="NoPago" class="divOculto btn btn-default btn-sm" style="background-color: #DA81F5 !important;">Pendiente</button></td>
-      <td><button id="ActCita" class="btn btn-default btn-sm" style="<? echo $Especialidades->ColorEstatusCita; ?>"><?php echo $Especialidades->Estatus_cita; ?></button> 
+      <td><button id="ActCita" class="btn btn-default btn-sm" style="<?php echo $Especialidades->ColorEstatusCita; ?>"><?php echo $Especialidades->Estatus_cita; ?></button> 
       <button id="Completa" class="divOculto btn btn-default btn-sm" style="background-color: #298A08 !important;">Completa</button> 
       <button id="Cancelada" class="divOculto btn btn-default btn-sm" style="background-color: #FF0000 !important;">Cancelada</button></td>
-      <td><button id="ActSegui" class="btn btn-default btn-sm" style="<? echo $Especialidades->Color_Seguimiento; ?>"><?php echo $Especialidades->Estatus_Seguimiento; ?></button>
+      <td><button id="ActSegui" class="btn btn-default btn-sm" style="<?php echo $Especialidades->Color_Seguimiento; ?>"><?php echo $Especialidades->Estatus_Seguimiento; ?></button>
       <button id="Wait" class="divOculto btn btn-default btn-sm" style="background-color: #DBA901 !important;">Espera seguimiento</button> 
       <button id="NoWait" class="divOculto btn btn-default btn-sm" style="background-color: #DF7401  !important;">Completa</button></td>
     </tr>
@@ -135,9 +135,9 @@ while ($r=$query->fetch_object()){
   </tbody>
 </table>
 </div>
-  <input type="text" hidden name="EstatusPago" value="<? echo $Especialidades->Estatus_pago; ?>"id="estatuspago">
-  <input type="text" hidden name="EstatusCita" value=" <? echo $Especialidades->Estatus_cita; ?>" id="estatuscita">
-  <input type="text" hidden name="Estatusseguimiento" value=" <? echo $Especialidades->Estatus_Seguimiento; ?>" id="estatussigue">
+  <input type="text" hidden name="EstatusPago" value="<?php echo $Especialidades->Estatus_pago; ?>"id="estatuspago">
+  <input type="text" hidden name="EstatusCita" value=" <?php echo $Especialidades->Estatus_cita; ?>" id="estatuscita">
+  <input type="text" hidden name="Estatusseguimiento" value=" <?php echo $Especialidades->Estatus_Seguimiento; ?>" id="estatussigue">
   <input type="hidden" name="id" id="id" value="<?php echo $Especialidades->ID_Agenda_Especialista; ?>">
   <button type="submit" name="submit" id="submit" class="btn btn-primary">Aplicar cambios <i class="fas fa-save"></i></button>
 
@@ -269,6 +269,6 @@ switch (selectValue) {
 			display: none;
 		}
 </style>
-<? else:?>
+<?php else:?>
 <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
