@@ -92,7 +92,8 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <div class="text-center">
 <button type="submit" hidden  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
 <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
-
+  <input type="text" class="form-control "   name="PagoReal[]" readonly id="pagoreal" >
+ 
   <input type="text" class="form-control " hidden name="Cambio[]" readonly id="cambioreal" >
  <input type="datetime" name="Horadeimpresion" hidden value="<?php echo date('h:i:s A');?>">
   <input type="date" class="form-control " hidden readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
@@ -100,7 +101,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
     <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
     <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " id="totalventa"  name ="TotalVentas[]" readonly  >
+     <input type="number" class="form-control " id="totalventa" hidden name ="TotalVentas[]" readonly  >
    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
 <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
 <input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
@@ -110,28 +111,6 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
    <!-- SEGUNDO PRODUCTP -->
 
 <script>
-function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val()) || 0;
-        var precio = parseFloat(precioInput.val()) || 0;
-
-        // Calcular el importe
-        var importe = cantidad * precio;
-
-        // Actualizar el campo de importe en la misma fila
-        importeInput.val(importe);
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
 
  function sumar()
   {
@@ -161,7 +140,7 @@ $(document).ready(function () {
         appendTo: "#productos",
         select: function (event, ui) {
             event.preventDefault();
-            console.log(ui);
+
             // Crear un nuevo elemento div con la clase "row"
             var nuevoCampo = document.createElement("div");
             nuevoCampo.className = "row";
@@ -170,9 +149,9 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control formapago-dinamico" hidden id="formapago1" name="FormaPago[]" readonly>\
-<input type="text" class="form-control formapago-dinamico" id="formapagorealistaaa" hidden name="FormaPagoTickettt" readonly>\
-<input type="text" class="form-control pago-dinamico"  hidden name="PagoReal[]" readonly id="pagoreal" >\
+                    <input type="text" class="form-control formapago-dinamico" id="formapago1" name="FormaPago[]" readonly>\
+<input type="text" class="form-control formapago-dinamico" id="formapagorealistaaa" name="FormaPagoTickettt" readonly>\
+                    <input type="text" class="form-control "  hidden name="PagoReal[]" readonly id="pagoreal" >\
                     <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
                     <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
@@ -182,7 +161,7 @@ $(document).ready(function () {
 <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
 <input class="form-control Codigo cliente" value="Publico General" hidden type="text" id="cliente" name="cliente[]">\
 <input class="form-control sv" hidden type="text" id="sv" name="foliosv[]" />\
-<input class="form-control tk-dinamico" hidden type="text" id="tk1" name="ticketant[]" />\
+ <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
                     <input class="Lote form-control" hidden readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
                     <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
@@ -200,8 +179,11 @@ $(document).ready(function () {
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
                     <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
                 <div class="col">\
+                    <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
+                    <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
+                <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-                    <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
+                    <input class="Cantidad form-control" onfocus="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
@@ -213,15 +195,13 @@ $(document).ready(function () {
 ';
 
             // Agregar el nuevo campo al contenedor
-            console.log(nuevoCampo.innerHTML);
             $('#parte1').append(nuevoCampo);
-            console.log(ui.item.pro_cantidad);
+
           // Actualizar los valores del nuevo campo
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
             $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
-            $(nuevoCampo).find('.montoreal').val(parseFloat(ui.item.montoreal));
-
+            $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
             $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
             $(nuevoCampo).find('.Lote').val(ui.item.pro_lote);
@@ -231,14 +211,13 @@ $(document).ready(function () {
             // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
-                 multiplicar();
             });
 
             // Resto de las acciones necesarias
-            multiplicar();
+
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-      
+            $("#cantidadventa").focus();
         }
     });
 });
@@ -269,8 +248,9 @@ $(document).ready(function()
      ?>
 
      
+<script src="js/CalculaTotaldeproducto.js"></script>
 
 
 <script src="js/RealizaVentas.js"></script>
-
+<script src="js/RemueveProductos.js"></script>   
 <script src="js/Descuentos.js"></script>
