@@ -139,17 +139,22 @@ document.addEventListener("DOMContentLoaded", function() {
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
 
-    [...document.getElementsByClassName("montoreal")].forEach(function(element) {
-      if (element.value !== '') {
-        subtotal += parseFloat(element.value);
-      }
-    });
+    if ($total2) {
+      [...document.getElementsByClassName("montoreal")].forEach(function(element) {
+        if (element.value !== '') {
+          subtotal += parseFloat(element.value);
+        }
+      });
 
-    $total.value = subtotal;
-    $total2.value = subtotal;
-    $Importetotal.value = subtotal;
+      $total.value = subtotal;
+      $total2.value = subtotal;
+      $Importetotal.value = subtotal;
+    } else {
+      console.error("Elemento con ID 'totalventa' no encontrado.");
+    }
   }
 });
+
 
 </script>
 <div id="parte1">
