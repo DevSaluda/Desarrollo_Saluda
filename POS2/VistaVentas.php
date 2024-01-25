@@ -337,12 +337,37 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
     });
 }
 
-// Llama a esta función desde el evento onchange del select en tu modal
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
-    aplicarDescuentoEnFila(cantidadDescuento);
-}
 
+    // Aplica descuento en las filas
+    aplicarDescuentoEnFila(cantidadDescuento);
+
+    // Actualiza el total
+    actualizarTotal();
+
+    // Cierra el modal
+    $('#Descuento1detalles').modal('hide');
+
+    // Muestra SweetAlert
+    Swal.fire({
+        icon: 'success',
+        title: 'Descuento aplicado',
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+function actualizarTotal() {
+    var contenedorFilas = $('#parte1');
+    var sumaTotal = 0;
+
+    contenedorFilas.find('.row').each(function () {
+        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
+        sumaTotal += importe;
+    });
+
+    $('#totalImporte').val(sumaTotal.toFixed(2));
+}
 
 </script>
 <?php
