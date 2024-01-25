@@ -93,7 +93,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
 <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
   <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >
-  <input type="text" class="form-control " id="formapago"name="FormaPago[]" readonly  >
+  <input type="text" class="form-control " id="formapago1"name="FormaPago[]" readonly  >
   <input type="text" class="form-control "   id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >
   <input type="text" class="form-control " name="Cambio[]" readonly id="cambioreal" >
  <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
@@ -150,8 +150,7 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control " id="formapago" name="FormaPago[]" value="Esteeselgood" readonly  >\
-                    <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >\
+                    <input type="text" class="form-control "  name="PagoReal[]" readonly  value="Esteeselgood" id="pagoreal" >\
                     <input type="text" class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
                     <input type="text" class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
