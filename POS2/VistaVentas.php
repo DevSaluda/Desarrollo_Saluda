@@ -219,7 +219,7 @@ $(document).ready(function () {
 ';
 
             // Agregar el nuevo campo al contenedor
-            multiplicar();
+           
             $('#parte1').append(nuevoCampo);
 
           // Actualizar los valores del nuevo campo
@@ -243,7 +243,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-           
+            multiplicar();
         }
     });
 });
