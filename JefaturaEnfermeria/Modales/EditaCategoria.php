@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT * FROM Categorias_POS WHERE ID_H_O_D ='".$row['ID_H_O_D']."' AND Cat_ID = ".$_POST["id"];
 $query = $conn->query($sql1);
@@ -15,7 +15,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="ActualizaCategorias" >
 <div class="form-group">
@@ -23,7 +23,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->Cat_ID; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->Cat_ID; ?>">
     </div>
     </div>
     
@@ -35,7 +35,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control "  id="actnomcat" name="ActNomCat" value="<? echo $Especialistas->Nom_Cat; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control "  id="actnomcat" name="ActNomCat" value="<?php echo $Especialistas->Nom_Cat; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
     
@@ -48,7 +48,7 @@ while ($r=$query->fetch_object()){
   <select name="ActVigenciaCat" class="form-control" id="actualizavigenciacat" onchange="ActualizaTipoVigencia();">
                  
                     
-                   <option  value="<? echo $Especialistas->Cod_Estado; ?>"><? echo $Especialistas->Estado; ?></option>		
+                   <option  value="<?php echo $Especialistas->Cod_Estado; ?>"><?php echo $Especialistas->Estado; ?></option>		
               <option  value="background-color:#2BBB1D!important;">Vigente</option>		
               <option  value="background-color:#828681!important;">Descontinuado</option>						  	
               <option  value="background-color:#ff6c0c!important;">Proximamente</option>						  				  
@@ -68,7 +68,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaBD" class="btn btn-default btn-sm" style=<? echo $Especialistas->Cod_Estado; ?>><? echo $Especialistas->Estado; ?></button> 
+<button id="VigenciaBD" class="btn btn-default btn-sm" style=<?php echo $Especialistas->Cod_Estado; ?>><?php echo $Especialistas->Estado; ?></button> 
      <button id="SiVigenteCatAct" class="divOcultoCatAct btn btn-default btn-sm" style="background-color:#2BBB1D!important;">Vigente</button> 
       <button id="NoVigenteCatAct" class="divOcultoCatAct btn btn-default btn-sm" style="background-color:#828681!important;">Descontinuado</button>
       <button id="QuizasproximoCatAct" class="divOcultoCatAct btn btn-default btn-sm" style="background-color:#ff6c0c!important;">Próximamente</button></td>
@@ -81,17 +81,17 @@ while ($r=$query->fetch_object()){
   </div></div>
     </div>
     <input type="text"  class="form-control " hidden readonly name="ActVigEst" id="vigenciacatact">
-    <input type="text" class="form-control " hidden  readonly id="actusuarioc" name="ActUsuarioC" readonly value="<?echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="actsistemac" name="ActSistemaC" readonly value="POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control " hidden  readonly id="actusuarioc" name="ActUsuarioC" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="actsistemac" name="ActSistemaC" readonly value="POS <?php echo $row['Nombre_rol']?>">
 <input type="hidden" name="Id_Cat_Act" id="id" value="<?php echo $Especialistas->Cat_ID; ?>">
 <button type="submit"  id="submit"  class="btn btn-info">Aplicar cambios <i class="fas fa-check"></i></button>
                           
 </form>
 <script src="js/ActualizaCategoria.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
@@ -147,7 +147,7 @@ $("#actualizavigenciacat").on('change', function() {
      
       
       break;
-      case "<? echo $Especialistas->Cod_Estado; ?>":
+      case "<?php echo $Especialistas->Cod_Estado; ?>":
   
         $("#VigenciaBD").show();
         $("#NoVigenteCatAct").hide();
