@@ -298,7 +298,29 @@ $(document).ready(function () {
 </div>
 
 <script>
-  function aplicarDescuentoEnFila(cantidadDescuento) {
+  function aplicarDescuento(importe, cantidadDescuento) {
+    // Calcula el descuento
+    var descuento = (importe * cantidadDescuento) / 100;
+
+    // Calcula el valor con descuento
+    var valorConDescuento = importe - descuento;
+
+    // Devuelve un objeto con los resultados
+    return {
+        valorConDescuento: valorConDescuento,
+        descuento: descuento
+    };
+}
+
+function actualizarFilaConDescuento(fila, resultadoDescuento) {
+    // Actualiza el campo de costo de venta
+    fila.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+
+    // Actualiza el campo de descuento en la fila
+    fila.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+}
+
+function aplicarDescuentoEnFila(cantidadDescuento) {
     // Obtén el contenedor principal de las filas
     var contenedorFilas = $('#parte1');
 
@@ -320,6 +342,7 @@ function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
     aplicarDescuentoEnFila(cantidadDescuento);
 }
+
 
 </script>
 <?php
