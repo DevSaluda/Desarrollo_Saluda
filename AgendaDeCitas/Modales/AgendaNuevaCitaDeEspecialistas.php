@@ -77,10 +77,10 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php 
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM Sucursales_CampañasV2 WHERE Estatus_Sucursal='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
@@ -184,9 +184,9 @@
 <!-- FINALIZA DATA DE AGENDA -->
  
 
-    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="Usuario" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
     <input type="text" class="form-control" name="Sistema" id="sistema"  value="Agenda de citas" hidden  readonly >
-    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?echo $row['ID_H_O_D']?>" hidden  readonly >
+    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
