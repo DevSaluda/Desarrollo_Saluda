@@ -235,13 +235,13 @@ $(document).ready(function () {
             $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
 
-            // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
+                 multiplicar();
             });
 
             // Resto de las acciones necesarias
-
+            multiplicar();
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
            
