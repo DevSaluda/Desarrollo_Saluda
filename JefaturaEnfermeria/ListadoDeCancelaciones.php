@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +9,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Ventas realizadas por  <?echo $row['ID_H_O_D']?> <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Ventas realizadas por  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,7 +21,7 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <!--<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Ventas del dia</a>
@@ -44,7 +42,7 @@ include "Consultas/AnalisisIndex.php";
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Ventas de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Ventas de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
  
   <div >
@@ -68,7 +66,7 @@ include "Consultas/AnalisisIndex.php";
 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Solicitudes de cancelaciones <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Solicitudes de cancelaciones <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -82,7 +80,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade" id="PorCaducar" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Productos por caducar de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Productos por caducar de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -95,7 +93,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="tab-pane fade" id="Rechazado" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Cancelaciones rechazadas <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Cancelaciones rechazadas <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -160,7 +158,7 @@ include ("footer.php")?>
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

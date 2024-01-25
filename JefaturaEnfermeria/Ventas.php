@@ -27,7 +27,7 @@ include "Consultas/AnalisisIndex.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 <div class="tab-content" id="pills-tabContent">
