@@ -150,7 +150,7 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control " id="formapago1"name="FormaPago[]" readonly  >\
+                    <input type="text" class="form-control " id="formapago" name="FormaPago[]" readonly  >\
                     <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >\
                     <input type="text" class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
