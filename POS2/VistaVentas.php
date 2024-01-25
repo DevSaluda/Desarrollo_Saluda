@@ -216,7 +216,7 @@ $(document).ready(function () {
 
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            $("#cantidadventa").focus();
+      
         }
     });
 });
@@ -251,5 +251,5 @@ $(document).ready(function()
 
 
 <script src="js/RealizaVentas.js"></script>
-<script src="js/RemueveProductos.js"></script>   
+
 <script src="js/Descuentos.js"></script>
