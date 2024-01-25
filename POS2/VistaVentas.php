@@ -287,12 +287,10 @@ $(document).ready(function () {
   // Contador para generar IDs únicos para cada fila dinámica
   var contadorFilas = 1;
 
-  // JavaScript para manejar los descuentos
-  var idFilaActual; // Variable para almacenar el ID de la fila actual
-
+  // Función para configurar los botones de descuento
   function configurarBotonDescuento(boton) {
     boton.addEventListener('click', function () {
-      idFilaActual = boton.getAttribute('data-fila');
+      var idFilaActual = boton.getAttribute('data-fila');
       // Limpiar el campo de entrada del porcentaje cada vez que se abre el modal
       document.getElementById('porcentajeDescuento').value = '';
       // Actualizar el contenido del modal de detalles de descuento
@@ -300,9 +298,12 @@ $(document).ready(function () {
     });
   }
 
-  // Configurar los botones de descuento al cargar la página
-  var botonesDescuento = document.querySelectorAll('.btn-descuento');
-  botonesDescuento.forEach(configurarBotonDescuento);
+  // Delegación de eventos para los botones de descuento
+  document.getElementById('contenedorCamposDinamicos').addEventListener('click', function (event) {
+    if (event.target.classList.contains('btn-descuento')) {
+      configurarBotonDescuento(event.target);
+    }
+  });
 
   // Función para aplicar descuento a la fila actual
   function aplicarDescuento() {
