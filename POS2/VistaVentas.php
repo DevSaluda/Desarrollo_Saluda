@@ -123,10 +123,10 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
         var precio = parseFloat(precioInput.val()) || 0;
 
         // Calcular el importe
-        var importe = cantidad * precio;
+        var importeprodutctos = cantidad * precio;
 
         // Actualizar el campo de importe en la misma fila
-        importeInput.val(importe);
+        importeInput.val(importeprodutctos);
     });
 
     // Llamar a la función sumar si es necesario
@@ -219,6 +219,7 @@ $(document).ready(function () {
 ';
 
             // Agregar el nuevo campo al contenedor
+            multiplicar();
             $('#parte1').append(nuevoCampo);
 
           // Actualizar los valores del nuevo campo
