@@ -212,7 +212,7 @@ $(document).ready(function () {
                     <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-                    <input class="Cantidad form-control" onchange="multiplicarManual(this);" id="cantidadventa" value="1" type="number" name="CantidadTotal[]">\
+                    <input class="Cantidad form-control" onchange="multiplicarmanual();" id="cantidadventa" value="1" type="number" name="CantidadTotal[]">\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
@@ -252,34 +252,27 @@ $(document).ready(function () {
 });
 </script>
 <script>
-  function multiplicarManual(element) {
-    // Obtener la fila actual
-    var fila = $(element).closest('.row');
+  function multiplicarmanual() {
+    // Iterar sobre todas las filas dinámicas
+    $('.row').each(function () {
+        // Obtener elementos relevantes en la fila actual
+        var cantidadInput = $(this).find('.cantidadventa');
+        var precioInput = $(this).find('.Precio');
+        var importeInput = $(this).find('.montoreal');
 
-    // Obtener elementos relevantes en la fila actual
-    var cantidadInput = fila.find('.cantidadventa');
-    var precioInput = fila.find('.Precio');
-    var importeInput = fila.find('.montoreal');
+        // Obtener valores como números
+        var cantidad = parseFloat(cantidadInput.val()) || 0;
+        var precio = parseFloat(precioInput.val()) || 0;
 
-    // Obtener valores como números
-    var cantidad = parseFloat(cantidadInput.val());
-    var precio = parseFloat(precioInput.val());
-
-    // Validar si los valores son números válidos
-    if (!isNaN(cantidad) && !isNaN(precio)) {
-        // Calcular el importe solo si ambos valores son números válidos
+        // Calcular el importe
         var importe = cantidad * precio;
 
         // Actualizar el campo de importe en la misma fila
         importeInput.val(importe);
+    });
 
-        // Llamar a la función sumar si es necesario
-        sumar();
-    } else {
-        // Manejar el caso en el que uno o ambos valores no son números válidos
-        // Puedes mostrar un mensaje de error o tomar la acción adecuada
-        importeInput.val(""); // Vaciar el campo de importe en caso de valores no válidos
-    }
+    // Llamar a la función sumar si es necesario
+    sumar();
 }
 </script>
 </div></div>
