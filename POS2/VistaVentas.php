@@ -176,6 +176,7 @@ $(document).ready(function () {
 
             // Construir la estructura interna del nuevo campo
             nuevoCampo.innerHTML = '\
+            <div id="contenedorCamposDinamicos">\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
                     <input type="text" class="form-control formapago-dinamico" hidden id="formapago1" name="FormaPago[]" readonly>\
@@ -220,7 +221,7 @@ $(document).ready(function () {
           </a>\
 </div>\                <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
-                </div>\
+                </div>\</div>\
 ';
 
             // Agregar el nuevo campo al contenedor
