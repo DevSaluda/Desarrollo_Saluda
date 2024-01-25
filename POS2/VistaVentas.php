@@ -111,28 +111,6 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
    <!-- SEGUNDO PRODUCTP -->
 
 <script>
-function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val()) || 0;
-        var precio = parseFloat(precioInput.val()) || 0;
-
-        // Calcular el importe
-        var importe = cantidad * precio;
-
-        // Actualizar el campo de importe en la misma fila
-        importeInput.val(importe);
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
 
  function sumar()
   {
@@ -245,7 +223,31 @@ $(document).ready(function () {
     });
 });
 </script>
+<script>
+  function multiplicar() {
+    // Iterar sobre todas las filas dinámicas
+    $('.row').each(function () {
+        // Obtener elementos relevantes en la fila actual
+        var cantidadInput = $(this).find('.cantidadventa');
+        var precioInput = $(this).find('.Precio');
+        var importeInput = $(this).find('.montoreal');
 
+        // Obtener valores como números
+        var cantidad = parseFloat(cantidadInput.val()) || 0;
+        var precio = parseFloat(precioInput.val()) || 0;
+
+        // Calcular el importe
+        var importe = cantidad * precio;
+
+        // Actualizar el campo de importe en la misma fila
+        importeInput.val(importe);
+    });
+
+    // Llamar a la función sumar si es necesario
+    sumar();
+}
+
+</script>
 </div></div>
  
 <?php
