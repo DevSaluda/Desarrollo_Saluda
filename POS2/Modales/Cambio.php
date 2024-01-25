@@ -435,7 +435,7 @@ function CapturaTicketAnterior() {
 
 
 
-}
+
 $("#activoventa").on('click', function(e) {
     $("#Cierra").trigger("click");
    
