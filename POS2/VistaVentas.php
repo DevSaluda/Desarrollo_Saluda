@@ -366,9 +366,12 @@ function actualizarTotal() {
         sumaTotal += importe;
     });
 
-    $('#totalImporte').val(sumaTotal.toFixed(2));
-}
+    // Actualiza el campo totalventa
+    $('#totalventa').val(sumaTotal.toFixed(2));
 
+    // Actualiza el campo totalventa2 (ajusta el id según sea necesario)
+    $('#totalventa2').val(sumaTotal.toFixed(2));
+}
 </script>
 <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
