@@ -30,19 +30,17 @@
         <div class="input-group mb-3">
       <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
       </div>
-      <select id="formapago" required class="form-control" onchange="CapturaFormadePago();">
-    <option value="">Elija forma de pago</option>
-    <option value="Efectivo">Efectivo</option>
-    <option value="Tarjeta">Tarjeta</option>
-    <option value="Credito">Credito</option>
-    <option value="Vale">Vale</option>
-    <option value="Transferencia">Transferencia</option>
-    <option value="Crédito Enfermería">Crédito Enfermería</option>
-    <option value="Crédito Farmacéutico">Crédito Farmacéutico</option>
-    <option value="Crédito Médico">Crédito Médico</option>
-    <option value="Crédito Limpieza">Crédito Limpieza</option>
-</select>
-
+     <select  id="formapago" required class="form-control" onchange="CapturaFormadePago();">
+     <option value="">Elija forma de pago</option>
+     <option >Efectivo</option>
+     <option >Tarjeta</option>
+     <option >Credito</option>
+     <option >Vale</option>
+     <option >Transferencia</option>
+     <option  >Crédito Enfermería</option>
+     <option  >Crédito Farmacéutico</option>
+      <option >Crédito Médico</option>
+      <option >Crédito Limpieza</option>
       <!-- <option >Crédito Gestores</option> -->
      </select>
         </div>
@@ -348,23 +346,22 @@ function CapturaFormadePago() {
 // document.getElementById("totalventa").value = costototalmaslacomi;
 
 // }
-   // Captura del valor de formapago
-   var formapagoValue = document.getElementById("formapago").value;
-
-// Asignar el valor de formapago a campos específicos
-document.getElementById("formapagorealistaaa").value = formapagoValue;
-
-// Obtener todos los elementos con el atributo name="FormaPago[]"
-var formaPagos = document.getElementsByName("FormaPago[]");
-
-// Iterar sobre los elementos y asignar el valor
-for (var i = 0; i < formaPagos.length; i++) {
-    formaPagos[i].value = formapagoValue;
-}
-}
+    var formadepagoreal = document.getElementById("formapago").value;
+    //Se actualiza en municipio inm
+    document.getElementById("formapagorealistaaa").value = formadepagoreal;
+    document.getElementById("formapago1").value = formadepagoreal;
+    document.getElementById("formapago2").value = formadepagoreal;
+    document.getElementById("formapago3").value = formadepagoreal;
+    document.getElementById("formapago4").value = formadepagoreal;
+    document.getElementById("formapago5").value = formadepagoreal;
+    document.getElementById("formapago6").value = formadepagoreal;
+    document.getElementById("formapago7").value = formadepagoreal;
+    document.getElementById("formapago8").value = formadepagoreal;
+    document.getElementById("formapago9").value = formadepagoreal;
+    document.getElementById("formapago10").value = formadepagoreal;
    
    
-
+}
 
 
 function CapturaNombreEnfermero() {
