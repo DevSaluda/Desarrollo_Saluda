@@ -199,10 +199,6 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
                     <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
-                <div class="col">\
-                    <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
-                    <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
-                <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
