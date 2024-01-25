@@ -232,8 +232,8 @@ function multiplicar() {
         var importeInput = $(this).find('.montoreal');
 
         // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val()) || 0;
-        var precio = parseFloat(precioInput.val()) || 0;
+        var cantidad = parseFloat(cantidadInput.val());
+        var precio = parseFloat(precioInput.val());
 
         // Calcular el importe
         var importe = cantidad * precio;
