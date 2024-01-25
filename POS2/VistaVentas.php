@@ -161,7 +161,7 @@ $(document).ready(function () {
         appendTo: "#productos",
         select: function (event, ui) {
             event.preventDefault();
-
+            console.log(ui);
             // Crear un nuevo elemento div con la clase "row"
             var nuevoCampo = document.createElement("div");
             nuevoCampo.className = "row";
@@ -221,7 +221,7 @@ $(document).ready(function () {
           // Actualizar los valores del nuevo campo
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
-            // $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
+            $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
             $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
             $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
