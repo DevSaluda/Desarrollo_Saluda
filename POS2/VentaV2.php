@@ -4,6 +4,9 @@ include "Consultas/ConsultaCaja.php";
 include "Consultas/SumadeFolioTickets.php";
 include ("Consultas/db_connection.php");
 ?>
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
