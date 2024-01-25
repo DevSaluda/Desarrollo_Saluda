@@ -231,7 +231,7 @@ $(document).ready(function () {
             $(nuevoCampo).find('.Lote').val(ui.item.pro_lote);
             $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
-
+            multiplicar();
             // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
@@ -239,7 +239,7 @@ $(document).ready(function () {
             });
 
             // Resto de las acciones necesarias
-            multiplicar();
+            
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
            
