@@ -10,7 +10,7 @@ function multiplicar(inputCantidad) {
   var m1 = parseFloat(inputCantidad.closest(".fila").querySelector(".precioprod").value);
   var m2 = parseFloat(inputCantidad.value);
 
-  // Realiza la multiplicación
+ 
   var r = m1 * m2;
 
   // Actualiza el campo de resultado dentro de la misma fila
