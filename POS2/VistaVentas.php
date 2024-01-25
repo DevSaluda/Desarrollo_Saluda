@@ -110,28 +110,27 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
    <!-- SEGUNDO PRODUCTP -->
 
 <script>
-// Asigna un evento de clic al contenedor que envuelve a los campos dinámicos
-document.getElementById("contenedor-padre").addEventListener("click", function(event) {
-   // Verifica si el clic ocurrió en un elemento con la clase "btn-calcular"
-   if (event.target.classList.contains("btn-calcular")) {
-      // Obtiene los valores de los campos relacionados al botón clickeado
-      var m1 = parseFloat(event.target.closest(".col").querySelector(".precioprod").value);
-      var m2 = parseFloat(event.target.closest(".col").querySelector(".cantidadventa").value);
+function multiplicar() {
+    // Iterar sobre todas las filas dinámicas
+    $('.row').each(function () {
+        // Obtener elementos relevantes en la fila actual
+        var cantidadInput = $(this).find('.cantidadventa');
+        var precioInput = $(this).find('.Precio');
+        var importeInput = $(this).find('.montoreal');
 
-      // Realiza la multiplicación
-      var r = m1 * m2;
+        // Obtener valores como números
+        var cantidad = parseFloat(cantidadInput.val()) || 0;
+        var precio = parseFloat(precioInput.val()) || 0;
 
-      // Actualiza el campo de resultado dentro del mismo contenedor
-      event.target.closest(".col").querySelector(".costoventa").value = r;
+        // Calcular el importe
+        var importe = cantidad * precio;
 
-      // Llama a la función sumar para realizar cualquier otra operación necesaria
-      sumar();
-   }
-});
+        // Actualizar el campo de importe en la misma fila
+        importeInput.val(importe);
+    });
 
-// Función sumar (debes tenerla definida en tu código)
-function sumar() {
-   // Implementa la lógica de la función sumar si es necesario
+    // Llamar a la función sumar si es necesario
+    sumar();
 }
 
  function sumar()
@@ -203,13 +202,10 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
                     <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
-                    <div class="col">\
-   <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-   <input class="Cantidad form-control cantidadventa" value="1" type="number" name="CantidadTotal[]">\
-   <button class="btn-calcular">Calcular</button>\
-   <!-- Otros campos relacionados al mismo contenedor -->\
-</div>\
-<div class="col"> \
+                <div class="col">\
+                    <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
+                    <input class="Cantidad form-control" id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
+                <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
                 </div>\
@@ -239,7 +235,7 @@ $(document).ready(function () {
             });
 
             // Resto de las acciones necesarias
-
+            multiplicar();
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
       
@@ -273,7 +269,7 @@ $(document).ready(function()
      ?>
 
      
-
+<script src="js/CalculaTotaldeproducto.js"></script>
 
 
 <script src="js/RealizaVentas.js"></script>
