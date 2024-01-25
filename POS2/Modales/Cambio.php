@@ -313,53 +313,14 @@ function CapturaFormadePago() {
        
         
     }
-    // if (document.getElementById("formapago").value == "Crédito Gestores") {
-    
-    //   $("#PersonalGestores").show();
-    //   $("#PersonalLimpieza").hide();
-    //   $("#PersonalMedico").hide();
-    //     $("#PublicoGenerall").hide();
-    //     $("#PersonalEnfermeria").hide();
-    //     $("#PersonalFarmacia").hide();
-    //     $("#SignoVitalpaciente").hide();
-    //     $("#Pagare").hide();
-       
-        
-    // }
-
    
-//      if (document.getElementById("formapago").value == "Tarjeta") {
-//        sumacomision();
-       
-        
-//      }
-
- 
-//     function sumacomision(){
-
-// var montoapagar= document.getElementById("subtotal").value;
-//  var comision=parseInt(5);
-// var totalcomision = (parseInt(comision)/ 100 * parseInt(montoapagar)) 
-// var costomascomision= parseInt(totalcomision);
-// var costototalmaslacomi =parseInt( montoapagar) + parseInt(costomascomision);
-// document.getElementById("subtotal").value = costototalmaslacomi;
-// document.getElementById("totalventa").value = costototalmaslacomi;
-
-// }
     var formadepagoreal = document.getElementById("formapago").value;
-    //Se actualiza en municipio inm
-    document.getElementById("formapagorealistaaa").value = formadepagoreal;
-    document.getElementById("formapago1").value = formadepagoreal;
-    document.getElementById("formapago2").value = formadepagoreal;
-    document.getElementById("formapago3").value = formadepagoreal;
-    document.getElementById("formapago4").value = formadepagoreal;
-    document.getElementById("formapago5").value = formadepagoreal;
-    document.getElementById("formapago6").value = formadepagoreal;
-    document.getElementById("formapago7").value = formadepagoreal;
-    document.getElementById("formapago8").value = formadepagoreal;
-    document.getElementById("formapago9").value = formadepagoreal;
-    document.getElementById("formapago10").value = formadepagoreal;
-   
+
+// Seleccionar todos los elementos con la clase "formapago-dinamico"
+var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
+for (var i = 0; i < elementosDinamicos.length; i++) {
+    elementosDinamicos[i].value = formadepagoreal;
+}
    
 }
 
