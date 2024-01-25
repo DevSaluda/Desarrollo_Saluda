@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -14,14 +14,14 @@ include "Consultas/ConeSelectDinamico.php";
 
   <title>Agendamiento de citas </title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="tab-content" id="pills-tabContent">
 
@@ -57,7 +57,7 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
    include ("Modales/Error.php");
   
    include ("Modales/Exito.php");

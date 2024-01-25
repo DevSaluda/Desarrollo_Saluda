@@ -44,7 +44,7 @@ $('#Campanas').DataTable({
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "../js/Fecha.php";
 
 $user_id=null;
@@ -112,10 +112,10 @@ $query = $conn->query($sql1);
 <div class="dropdown-menu">
     <div class="text-center">
 <a class="dropdown-item" >Cita</a>
-<button class="btn btn-default btn-sm" style="<?echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button> 
+<button class="btn btn-default btn-sm" style="<?php echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button> 
 <div class="dropdown-divider"></div>
 <a class="dropdown-item" >Pago</a>
-<button class="btn btn-default btn-sm" style="<?echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button>
+<button class="btn btn-default btn-sm" style="<?php echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button>
 </div>
 </div>
 <!-- Basic dropdown -->
@@ -149,7 +149,7 @@ $query = $conn->query($sql1);
  <script>
   	$(".btn-edit1").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/ControldecitasV2/Modales/ContactoPaciente.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/ContactoPaciente.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Medios disponibles para contacto a paciente");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -161,7 +161,7 @@ $query = $conn->query($sql1);
       });
       $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/ControldecitasV2/Modales/CambioEstatusPaciente.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/CambioEstatusPaciente.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cambio de estatus en cita");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -172,7 +172,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit3").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/ControldecitasV2/Modales/Cancelaciones.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/Cancelaciones.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cancelacion");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
