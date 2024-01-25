@@ -9,12 +9,20 @@
         </button>
       </div>
       <div class="modal-body">
+        <!-- Formulario para ingresar el porcentaje de descuento -->
+        <form id="formDescuento">
+          <div class="form-group">
+            <label for="porcentajeDescuento">Porcentaje de Descuento:</label>
+            <input type="number" class="form-control" id="porcentajeDescuento" placeholder="Ingrese el porcentaje">
+          </div>
+        </form>
+
         <!-- Contenido específico de detalles de descuento -->
         <p id="detalleDescuento">Detalles de descuento para la fila seleccionada.</p>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="aplicarDescuento()">Aplicar Descuento</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- Puedes agregar más botones según tus necesidades -->
       </div>
     </div>
   </div>
