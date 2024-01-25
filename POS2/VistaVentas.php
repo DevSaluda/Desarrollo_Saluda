@@ -223,7 +223,8 @@ $(document).ready(function () {
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
             $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
-            $(nuevoCampo).find('.montoreal').val(ui.item.montoreal); // Puedes ajustar esto según tus necesidades
+            $(nuevoCampo).find('.montoreal').val(parseFloat(ui.item.montoreal));
+
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
             $(nuevoCampo).find('.Clavead').val(ui.item.pro_clavad);
             $(nuevoCampo).find('.Lote').val(ui.item.pro_lote);
