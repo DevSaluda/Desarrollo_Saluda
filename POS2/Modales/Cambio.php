@@ -30,17 +30,19 @@
         <div class="input-group mb-3">
       <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
       </div>
-     <select  id="formapago" required class="form-control" onchange="CapturaFormadePago();">
-     <option value="">Elija forma de pago</option>
-     <option >Efectivo</option>
-     <option >Tarjeta</option>
-     <option >Credito</option>
-     <option >Vale</option>
-     <option >Transferencia</option>
-     <option  >Crédito Enfermería</option>
-     <option  >Crédito Farmacéutico</option>
-      <option >Crédito Médico</option>
-      <option >Crédito Limpieza</option>
+      <select id="formapago" required class="form-control" onchange="CapturaFormadePago();">
+    <option value="">Elija forma de pago</option>
+    <option value="Efectivo">Efectivo</option>
+    <option value="Tarjeta">Tarjeta</option>
+    <option value="Credito">Credito</option>
+    <option value="Vale">Vale</option>
+    <option value="Transferencia">Transferencia</option>
+    <option value="Crédito Enfermería">Crédito Enfermería</option>
+    <option value="Crédito Farmacéutico">Crédito Farmacéutico</option>
+    <option value="Crédito Médico">Crédito Médico</option>
+    <option value="Crédito Limpieza">Crédito Limpieza</option>
+</select>
+
       <!-- <option >Crédito Gestores</option> -->
      </select>
         </div>
