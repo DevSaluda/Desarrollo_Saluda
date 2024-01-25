@@ -132,7 +132,7 @@ function multiplicar() {
     // Llamar a la función sumar si es necesario
     sumar();
 }
-
+document.addEventListener("DOMContentLoaded", function() {
  function sumar()
   {
     var $total = document.getElementById('totalventa2');
@@ -147,7 +147,7 @@ function multiplicar() {
     $total.value = subtotal;
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
-  } 
+  } });
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
