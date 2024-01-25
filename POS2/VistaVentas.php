@@ -216,6 +216,7 @@ $(document).ready(function () {
 ';
 
             // Agregar el nuevo campo al contenedor
+            console.log(nuevoCampo.innerHTML);
             $('#parte1').append(nuevoCampo);
             console.log(ui.item.pro_cantidad);
           // Actualizar los valores del nuevo campo
