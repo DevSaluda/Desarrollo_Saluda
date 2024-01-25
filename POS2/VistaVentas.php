@@ -94,7 +94,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
   <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >
   <input type="text" class="form-control " id="formapago1"name="FormaPago[]" readonly  >
-  <input type="text" class="form-control "   id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >
+
   <input type="text" class="form-control " name="Cambio[]" readonly id="cambioreal" >
  <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
   <input type="date" class="form-control " readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
@@ -150,6 +150,7 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                    <input type="text" class="form-control "   id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >\
                     <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >\
                     <input type="text" class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
