@@ -17,10 +17,10 @@
 
               <div class="row">
                 <div class="col-3 text-center">
-                  <img  src="../Perfiles/<?echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
+                  <img  src="../Perfiles/<?php echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
                   <div style="height: 10px"></div>
-                  <p class="title mb-0"><?echo $row['Nombre_Apellidos']?></p>
-                  <p class="text-muted " style="font-size: 13px"><?echo $row['Nombre_rol']?></p>
+                  <p class="title mb-0"><?php echo $row['Nombre_Apellidos']?></p>
+                  <p class="text-muted " style="font-size: 13px"><?php echo $row['Nombre_rol']?></p>
                 </div>
             
                 <div class="col-9">
@@ -69,10 +69,10 @@
 
               <div class="row">
                 <div class="col-3 text-center">
-                  <img  src="../Perfiles/<?echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
+                  <img  src="../Perfiles/<?php echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
                   <div style="height: 10px"></div>
-                  <p class="title mb-0"><?echo $row['Nombre_Apellidos']?></p>
-                  <p class="text-muted " style="font-size: 13px"><?echo $row['Nombre_rol']?></p>
+                  <p class="title mb-0"><?php echo $row['Nombre_Apellidos']?></p>
+                  <p class="text-muted " style="font-size: 13px"><?php echo $row['Nombre_rol']?></p>
                 </div>
             
                 <div class="col-9">
@@ -168,10 +168,10 @@
 
               <div class="row">
                 <div class="col-3 text-center">
-                  <img  src="../Perfiles/<?echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
+                  <img  src="../Perfiles/<?php echo $row['file_name']?>" alt="Perfil de usuario" class="img-fluid z-depth-1-half rounded-circle">
                   <div style="height: 10px"></div>
-                  <p class="title mb-0"><?echo $row['Nombre_Apellidos']?></p>
-                  <p class="text-muted " style="font-size: 13px"><?echo $row['Nombre_rol']?></p>
+                  <p class="title mb-0"><?php echo $row['Nombre_Apellidos']?></p>
+                  <p class="text-muted " style="font-size: 13px"><?php echo $row['Nombre_rol']?></p>
                 </div>
             
                 <div class="col-9">

@@ -2,7 +2,7 @@
 <?php
  
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ConsultaEstadoConexion.php";
 include "Consultas/Mensaje.php";
 
@@ -18,14 +18,14 @@ include "Consultas/Mensaje.php";
   <title>AGENDA DE CITAS |  </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
@@ -59,7 +59,7 @@ include "Consultas/Mensaje.php";
   <!-- /.control-sidebar -->
  
   <!-- Main Footer -->
-  <?include ("Modales/Ingreso.php");
+  <?php include ("Modales/Ingreso.php");
    include ("Modales/Error.php");
    include ("Modales/Eliminar.php");
 
@@ -98,7 +98,7 @@ include "Consultas/Mensaje.php";
 </body>
 </html>
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

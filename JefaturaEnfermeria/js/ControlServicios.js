@@ -1,7 +1,7 @@
 function ServiciosCarga(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/Servicios.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/Servicios.php","",function(data){
       $("#TableServicios").html(data);
     })
 

@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="alert alert-success alert-styled-left text-blue-800 content-group">
-                    <span class="text-semibold"><i class="fas fa-info-circle"></i> <?echo $row['Nombre_Apellidos']?>, </span>
+                    <span class="text-semibold"><i class="fas fa-info-circle"></i> <?php echo $row['Nombre_Apellidos']?>, </span>
                     los campos con un <span class="text-danger"> * </span> son campos necesarios para el correcto ingreso de datos.
 
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -80,10 +80,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <input type="text" class="form-control " hidden  readonly id="usuariom" name="UsuarioTP"  readonly value="<?echo $row['Nombre_Apellidos']?>">
+                        <input type="text" class="form-control " hidden  readonly id="usuariom" name="UsuarioTP"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
                         <input type="text" class="form-control " hidden  readonly name="VigenciaEstPP" id="vigenciatipoprodd">
-                        <input type="text" class="form-control " hidden  readonly id="sistemam" name="SistemaPP" readonly value="POS <?echo $row['Nombre_rol']?>">
-                        <input type="text" class="form-control " hidden id="empresam" name="EmpresaPP" readonly value="<?echo $row['ID_H_O_D']?>">
+                        <input type="text" class="form-control " hidden  readonly id="sistemam" name="SistemaPP" readonly value="POS <?php echo $row['Nombre_rol']?>">
+                        <input type="text" class="form-control " hidden id="empresam" name="EmpresaPP" readonly value="<?php echo $row['ID_H_O_D']?>">
                         <div>
 
                             <button type="submit" name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
