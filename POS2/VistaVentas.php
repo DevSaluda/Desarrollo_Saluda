@@ -120,20 +120,17 @@ function multiplicar() {
         var importeInput = $(this).find('.montoreal');
 
         // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val());
-        var precio = parseFloat(precioInput.val());
+        var cantidad = parseFloat(cantidadInput.val()) || 0;
+        var precio = parseFloat(precioInput.val()) || 0;
 
-        // Verificar si ambos valores son números válidos
-        if (!isNaN(cantidad) && !isNaN(precio)) {
-            // Calcular el importe solo si ambos valores son números válidos
-            var importe = cantidad * precio;
+        // Calcular el importe
+        var importe = cantidad * precio;
 
-            // Actualizar el campo de importe en la misma fila
-            importeInput.val(importe);
-        } else {
-            // Si algún valor no es un número válido, puedes dejar el campo de importe vacío o manejarlo de otra manera
-            importeInput.val("");
-        }
+        // Imprimir valores en la consola para debug
+        console.log("Cantidad:", cantidad, "Precio:", precio, "Importe:", importe);
+
+        // Actualizar el campo de importe en la misma fila
+        importeInput.val(importe);
     });
 
     // Llamar a la función sumar si es necesario
