@@ -257,7 +257,71 @@ $(document).ready(function () {
 </script>
 
 </div></div>
- 
+ <!-- Modal de descuentos -->
+<div class="modal fade bd-example-modal-sm" id="Descuento1detalles" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success">
+    <div class="modal-content">
+      <div class="text-center">
+        <div class="modal-header">
+          <p class="heading lead">Aplicar descuentos<i class="fas fa-credit-card"></i></p>
+          <button type="button" id="Cierra" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <label for="exampleFormControlInput1">% a descontar <span class="text-danger">*</span></label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="Tarjeta"><i class="fas fa-dollar-sign"></i></span>
+            </div>
+
+            <!-- Añade el evento onchange para aplicar el descuento automáticamente -->
+            <select id="cantidadadescontar" class="form-control" onchange="aplicarDescuentoSeleccionado()">
+              <option value="">Seleccionar descuento</option>
+              <option value="5">5%</option>
+              <option value="10">10%</option>
+              <option value="15">15%</option>
+              <option value="20">20%</option>
+              <option value="25">25%</option>
+              <option value="30">30%</option>
+              <option value="35">35%</option>
+              <option value="40">40%</option>
+              <option value="45">45%</option>
+              <option value="50">50%</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function aplicarDescuentoEnFila(cantidadDescuento) {
+    // Obtén el contenedor principal de las filas
+    var contenedorFilas = $('#parte1');
+
+    // Itera sobre todas las filas dentro del contenedor
+    contenedorFilas.find('.row').each(function () {
+        // Obtén los valores de la fila actual
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
+
+        // Aplica el descuento y obtén los resultados
+        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+
+        // Actualiza la fila con los resultados del descuento
+        actualizarFilaConDescuento($(this), resultadoDescuento);
+    });
+}
+
+// Llama a esta función desde el evento onchange del select en tu modal
+function aplicarDescuentoSeleccionado() {
+    var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+    aplicarDescuentoEnFila(cantidadDescuento);
+}
+
+</script>
 <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
 
