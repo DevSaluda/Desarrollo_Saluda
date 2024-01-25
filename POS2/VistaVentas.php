@@ -110,29 +110,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   
    <!-- SEGUNDO PRODUCTP -->
 
-   <script>
-function multiplicar() {
-    // Iterar sobre todas las filas dinámicas
-    $('.row').each(function () {
-        // Obtener elementos relevantes en la fila actual
-        var cantidadInput = $(this).find('.cantidadventa');
-        var precioInput = $(this).find('.Precio');
-        var importeInput = $(this).find('.montoreal');
-
-        // Obtener valores como números
-        var cantidad = parseFloat(cantidadInput.val()) || 0;
-        var precio = parseFloat(precioInput.val()) || 0;
-
-        // Calcular el importe
-        var importe = cantidad * precio;
-
-        // Actualizar el campo de importe en la misma fila
-        importeInput.val(importe);
-    });
-
-    // Llamar a la función sumar si es necesario
-    sumar();
-}
+<script>
 
  function sumar()
   {
@@ -170,10 +148,10 @@ $(document).ready(function () {
             // Construir la estructura interna del nuevo campo
             nuevoCampo.innerHTML = '\
                 <div class="col">\
-                <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control formapago-dinamico" hidden id="formapago1" name="FormaPago[]" readonly>\
-<input type="text" class="form-control formapago-dinamico" id="formapagorealistaaa" hidden name="FormaPagoTickettt" readonly>\
-<input type="text" class="form-control pago-dinamico"  hidden name="PagoReal[]" readonly id="pagoreal" >\
+                    <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
+                    <input type="text" class="form-control formapago-dinamico" id="formapago1" name="FormaPago[]" readonly>\
+<input type="text" class="form-control formapago-dinamico" id="formapagorealistaaa" name="FormaPagoTickettt" readonly>\
+                    <input type="text" class="form-control "  hidden name="PagoReal[]" readonly id="pagoreal" >\
                     <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
                     <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
