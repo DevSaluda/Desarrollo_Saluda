@@ -34,10 +34,10 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 $user_id=null;
 $sql1= "SELECT DISTINCT Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Folio_Ticket,Ventas_POS.Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl,
@@ -109,7 +109,7 @@ $query = $conn->query($sql1);
 
 $(".btn-Autorizar").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/ConfirmaCancelacionTicket.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/ConfirmaCancelacionTicket.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -122,7 +122,7 @@ $(".btn-Autorizar").click(function(){
 
   $(".btn-Rechazar").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/ConfirmaRechazoTicket.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/ConfirmaRechazoTicket.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -158,7 +158,7 @@ $(".btn-Autorizar").click(function(){
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

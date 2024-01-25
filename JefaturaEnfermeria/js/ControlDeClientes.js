@@ -1,7 +1,7 @@
 function CargaVentasDelDia(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/DatosDeClientes.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/DatosDeClientes.php","",function(data){
       $("#ListaDeClientes").html(data);
     })
 
