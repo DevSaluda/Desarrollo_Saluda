@@ -271,7 +271,6 @@ $(document).ready(function()
      ?>
 
      
-<script src="js/CalculaTotaldeproducto.js"></script>
 
 
 <script src="js/RealizaVentas.js"></script>
