@@ -215,7 +215,9 @@ $(document).ready(function () {
                     <input class="Cantidad form-control" id="cantidadventa" value="1" onchange="multiplicar();" type="number" name="CantidadTotal[]"  ></div>\
                     <div class="col">\
     <label for="exampleFormControlInput1">Descuento</label>\
-    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm"><i class="fas fa-percent"></i></a>\
+    <a data-toggle="modal" data-target="#DescuentoDetalles" class="btn btn-primary btn-sm btn-descuento" data-fila="fila1">\
+            <i class="fas fa-percent"></i> Aplicar Descuento\
+          </a>\
 </div>\                <div class="col"> \
                     <button type="button" class="btn btn-danger btn-sm remover_campo">Remover</button>\
                 </div>\

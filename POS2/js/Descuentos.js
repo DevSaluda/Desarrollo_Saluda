@@ -1,37 +1,24 @@
-// Función de descuento genérica
-function aplicarDescuento(identificador) {
-  const campoDescuento = document.getElementById(`cantidadadescontar${identificador}`);
-  const campoCostoVenta = document.getElementById(`costoventa${identificador}`);
-  const campoDescuentoReal = document.getElementById(`descuento${identificador}`);
+var botonesDescuento = document.querySelectorAll('.btn-descuento');
 
-  console.log(`Identificador: ${identificador}`);
-  console.log(`Campo Descuento: ${campoDescuento.value}`);
-  console.log(`Campo Costo Venta: ${campoCostoVenta.value}`);
-
-  const cantidadDescuento = campoDescuento.value;
-  const r = parseFloat(campoCostoVenta.value);
-
-  console.log(`Valor de r: ${r}`);
-
-  const totalDescuento = (r * cantidadDescuento) / 100;
-  const valorConDescuento = r - totalDescuento;
-
-  console.log(`Total Descuento: ${totalDescuento}`);
-  console.log(`Valor con Descuento: ${valorConDescuento}`);
-
-  campoCostoVenta.value = valorConDescuento;
-  campoDescuentoReal.value = cantidadDescuento;
-}
-
-// Obtener todos los botones que abren el modal
-const buttons = document.querySelectorAll('[data-toggle="modal"][data-target="#DescuentoDetalles"]');
-
-// Asignar eventos a los botones de aplicar descuento
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    // Obtener el identificador de la fila desde el botón
-    const identificador = button.getAttribute('data-identificador');
-    console.log(`Botón clicado - Identificador: ${identificador}`);
-    aplicarDescuento(identificador);
+botonesDescuento.forEach(function (boton) {
+  boton.addEventListener('click', function () {
+    var idFila = boton.getAttribute('data-fila');
+    aplicarDescuento(idFila);
   });
 });
+
+function aplicarDescuento(idFila) {
+  // Lógica para aplicar el descuento a la fila
+  // (Asume que la columna donde aplicar el descuento es la segunda, ajusta según tu estructura)
+  var fila = document.getElementById(idFila);
+  var precioOriginal = parseFloat(fila.cells[1].textContent);
+  var porcentajeDescuento = 10; // Ejemplo: 10%
+  var descuento = (precioOriginal * porcentajeDescuento) / 100;
+  var precioConDescuento = precioOriginal - descuento;
+
+  // Actualizar el valor en la columna correspondiente
+  fila.cells[1].textContent = precioConDescuento.toFixed(2);
+
+  // Actualizar el contenido del modal de detalles de descuento
+  document.getElementById('detalleDescuento').textContent = 'Detalles de descuento aplicados a ' + idFila;
+}
