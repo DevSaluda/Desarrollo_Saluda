@@ -210,7 +210,7 @@ $(document).ready(function () {
                     <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
-                    <input class="Cantidad form-control"   id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
+                    <input class="Cantidad form-control" onfocus="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
@@ -235,16 +235,16 @@ $(document).ready(function () {
             $(nuevoCampo).find('.Identificador').val(ui.item.IdentificadorTip);
             // ... y así sucesivamente
 
+            // Asociar un evento de clic al botón de remover
             $(nuevoCampo).find('.remover_campo').click(function () {
                 $(nuevoCampo).remove();
-                 multiplicar();
             });
 
             // Resto de las acciones necesarias
-            multiplicar();
+
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-           
+            $("#cantidadventa").focus();
         }
     });
 });
