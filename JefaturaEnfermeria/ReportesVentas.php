@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -13,10 +12,10 @@ include "Consultas/AnalisisIndex.php";
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Generar reportes |
-    <?echo $row['ID_H_O_D']?>
+    <?php echo $row['ID_H_O_D']?>
   </title>
 
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
   <style>
     .error {
       color: red;
@@ -25,11 +24,11 @@ include "Consultas/AnalisisIndex.php";
     }
   </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Generar reportes para
-    <?echo $row['ID_H_O_D']?>
+    <?php echo $row['ID_H_O_D']?>
   </div>
 
   <!-- <div>
@@ -111,10 +110,10 @@ include "Consultas/AnalisisIndex.php";
   
  
 
-    <input type="text" class="form-control" name="UsuarioMaestro" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="UsuarioMaestro" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
    
     <input type="text" class="form-control" name="Sistema" id="sistema"  value="Farmacia" hidden  readonly >
-    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?echo $row['ID_H_O_D']?>" hidden  readonly >
+    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Generar Reporte <i class="fas fa-file-import"></i></button>
@@ -135,24 +134,13 @@ include "Consultas/AnalisisIndex.php";
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal"  onchange="sucursaldereporte();">
          <option value="">Seleccione una Sucursal:</option>
-         <option value="21">CEDIS</option>
-           <option value="23">CEDIS(Partner)</option>
-           <option value="25">Itzincab</option>
-          <option value="3">Izamal</option>
-          <option value="19">Kanasín</option>
-           <option value="4">Mama</option>
-          <option value="5">Mani</option>
-            <option value="20">Motul</option>
-            <option value="15">Oficinas</option>
-          <option value="6">Oxkutzcab</option>
-           <option value="7">Peto</option>
-             <option value="8">Teabo</option>
-              <option value="22">Teabo Clínica</option>
-               <option value="9">Tekax</option>
-              <option value="10">Tekit</option>
-              <option value="11">Ticul</option>
-            <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>
+          <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
          </select>
 </div>
 <label for="sucursal" class="error">
@@ -190,10 +178,10 @@ $("#sucursalporsucursal").val(selected);
 
  </script>
 
-    <input type="text" class="form-control" name="UsuarioPorSucursal" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="UsuarioPorSucursal" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
     <input type="text" class="form-control" name="SucursalPorSucursal" id="sucursalporsucursal"    hidden readonly >
     <input type="text" class="form-control" name="Sistema" id="sistema"  value="Farmacia" hidden  readonly >
-    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?echo $row['ID_H_O_D']?>" hidden  readonly >
+    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Generar Reporte <i class="fas fa-file-import"></i></button>
@@ -222,10 +210,10 @@ $("#sucursalporsucursal").val(selected);
   </div>
   <select id = "sucursalvendedor" class = "form-control" >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
@@ -277,10 +265,10 @@ $("#vendedorporvendedor").val(selected);
 
  </script>
 
-    <input type="text" class="form-control" name="UsuarioPorSucursal" id="usuario"  value="<?echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="UsuarioPorSucursal" id="usuario"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
     <input type="text" class="form-control" name="VendedorPorVendedor" id="vendedorporvendedor"    hidden readonly >
     <input type="text" class="form-control" name="Sistema" id="sistema"  value="Farmacia" hidden  readonly >
-    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?echo $row['ID_H_O_D']?>" hidden  readonly >
+    <input type="text" class="form-control" name="Empresa" id="empresa"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 
     
 <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-success">Generar Reporte <i class="fas fa-file-import"></i></button>
@@ -330,7 +318,7 @@ $("#vendedorporvendedor").val(selected);
         <?
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
@@ -480,7 +468,7 @@ $("#vendedorporvendedoroff").val(selected);
 <!-- Control Sidebar -->
 
 <!-- Main Footer -->
-<?
+<?php
     
   include ("footer.php")?>
 
@@ -510,7 +498,7 @@ $("#vendedorporvendedoroff").val(selected);
 </body>
 
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

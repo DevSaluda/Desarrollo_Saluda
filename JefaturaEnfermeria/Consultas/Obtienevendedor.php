@@ -7,6 +7,6 @@
 		$a_result = $medicos->get_result();
 	}
 		while($row = $a_result->fetch_array()){
-			echo '<option value = "'.$row['Pos_ID'].'">'.( $row['Nombre_Apellidos']).'</option>';
+			echo '<option value = "'.$row["Pos_ID"].'">'.( $row["Nombre_Apellidos"]).'</option>';
 		}
 ?>

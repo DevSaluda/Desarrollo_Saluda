@@ -5,7 +5,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 
 $sql = "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,	Traspasos_generados.TraspasoGeneradoPor,Traspasos_generados.Num_Orden,
@@ -49,7 +49,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Estatus"] =$fila["Estatus"];
     $data[$c]["Envio"] =$fila["TraspasoGeneradoPor"];
     $data[$c]["Recibio"] =$fila["TraspasoRecibidoPor"];
-    $data[$c]["Traspasocorrecto"] = ["<a href=https://controlfarmacia.com/AdminPOS/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
+    $data[$c]["Traspasocorrecto"] = ["<a href=https://salduapos.com/JefaturaEnfermeria/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
     
     $c++; 
  
@@ -66,7 +66,7 @@ echo json_encode($results);
 
 
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

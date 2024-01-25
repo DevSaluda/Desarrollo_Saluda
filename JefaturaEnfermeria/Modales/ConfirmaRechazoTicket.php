@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $user_id=null;
 $sql1= "SELECT DISTINCT Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Folio_Ticket,Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional,
 Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.Fk_sucursal,Ventas_POS.Motivo_Cancelacion,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM 
@@ -18,7 +18,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="RechazaLaCancelacionDeTicket" >
 <div class="form-group">
@@ -26,7 +26,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " name="TicketFolioARechazar" readonly value="<? echo $Especialistas->Folio_Ticket; ?>">
+  <input type="text" class="form-control " name="TicketFolioARechazar" readonly value="<?php echo $Especialistas->Folio_Ticket; ?>">
     </div>
     </div>
     
@@ -38,7 +38,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
     
@@ -50,7 +50,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="Text" class="form-control "  value="<? echo $Especialistas->Motivo_Cancelacion; ?>" aria-describedby="basic-addon1" >            
+  <input type="Text" class="form-control "  value="<?php echo $Especialistas->Motivo_Cancelacion; ?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 
     </div>
@@ -60,6 +60,6 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/RechazaElTicket.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

@@ -18,7 +18,7 @@ data-backdrop="static" data-keyboard="false" aria-hidden="true">
   
       <input type="text" class="form-control" name="usuario" id="usuario" readonly hidden value="<?php echo $row['Nombre_Apellidos']?>" >
       <input type="text" class="form-control" name="log" id="log" readonly hidden value="Inicio de sesión" >
-      <input type="text" class="form-control" name="sistema" id="sistema" hidden readonly value="Enfermeria" >
+      <input type="text" class="form-control" name="sistema" id="sistema" hidden readonly value="Administración general del POS" >
       <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?php echo $row['ID_H_O_D']?>" >
   
   
