@@ -25,7 +25,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <button data-toggle="modal" data-target="#CambioAdar" class="btn btn-success btn-sm">Realizar venta <i class="fas fa-cash-register"></i></button>
 <button  class="btn btn-danger btn-sm" onclick="CargaGestionventas();">Cancelar venta <i class="far fa-window-close"></i></button>
 <div class="row">
-<input hidden type="text" class="form-control "  readonly value="<?php echo $row['Nombre_Apellidos']?>" >
+<input type="text" class="form-control "  readonly value="<?php echo $row['Nombre_Apellidos']?>" >
     
     <div class="col">
       
@@ -34,7 +34,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
   <input type="text" class="form-control "  readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
-  <input type="text" class="form-control " hidden id="valcaja" name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
+  <input type="text" class="form-control " id="valcaja" name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
     </div>  </div>
       
     <div class="col">
@@ -87,26 +87,26 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
     });
 });
   </script>
-<button hidden id="Ajusteeee" onclick="sumar()">Ajustar total de venta<i class="fas fa-cash-register"></i></button>
+<button id="Ajusteeee" onclick="sumar()">Ajustar total de venta<i class="fas fa-cash-register"></i></button>
 <form action="javascript:void(0)"     target="print_popup"  method="post" id="VentasAlmomento" >
 <div class="text-center">
-<button type="submit" hidden  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
-<input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
-  <input type="text" class="form-control "  hidden name="PagoReal[]" readonly id="pagoreal" >
-  <input type="text" class="form-control " hidden id="formapago1"name="FormaPago[]" readonly  >
-  <input type="text" class="form-control "   hidden id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >
-  <input type="text" class="form-control " hidden name="Cambio[]" readonly id="cambioreal" >
- <input type="datetime" name="Horadeimpresion" hidden value="<?php echo date('h:i:s A');?>">
-  <input type="date" class="form-control " hidden readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
-<input type="text" class="form-control "  hidden readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
-  <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
-    <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
-    <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " id="totalventa" hidden name ="TotalVentas[]" readonly  >
-   <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
-<input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
-<input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
-<input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >
+<button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
+<input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >
+  <input type="text" class="form-control " id="formapago1"name="FormaPago[]" readonly  >
+  <input type="text" class="form-control "   id="formapagorealistaaa" name="FormaPagoTickettt" readonly  >
+  <input type="text" class="form-control " name="Cambio[]" readonly id="cambioreal" >
+ <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
+  <input type="date" class="form-control " readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
+<input type="text" class="form-control "  readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
+  <input type="text" class="form-control " id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
+    <input type="text" class="form-control " id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
+    <input type="text" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
+     <input type="number" class="form-control " id="totalventa" name ="TotalVentas[]" readonly  >
+   <input type="text" class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
+<input type="text" class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
+<input type="text" class="form-control "  name="Sistema[]" readonly value="Ventas" >
+<input type="date" class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >
 <input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >
   
    <!-- SEGUNDO PRODUCTP -->
@@ -150,21 +150,21 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control "  hidden name="PagoReal[]" readonly id="pagoreal" >\
-                    <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
-                    <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
-                    <input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
-<input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >\
-<input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >\
+                    <input type="text" class="form-control "  name="PagoReal[]" readonly id="pagoreal" >\
+                    <input type="text" class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
+                    <input type="text" class="form-control " name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
+                    <input type="text" class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >\
+<input type="text" class="form-control "  name="Sistema[]" readonly value="Ventas" >\
+<input type="date" class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >\
 <input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >\
-<input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
-<input class="form-control Codigo cliente" value="Publico General" hidden type="text" id="cliente" name="cliente[]">\
-<input class="form-control sv" hidden type="text" id="sv" name="foliosv[]" />\
- <input class="form-control" hidden type="text" id="tk1" name="ticketant[]" />\
-                    <input class="Lote form-control" hidden readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
-                    <input class="FKID form-control" hidden type="text" id="fkid" name="pro_FKID[]"/>\
-                    <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
-                    <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
+<input type="text" class="form-control " id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >\
+<input class="form-control Codigo cliente" value="Publico General" type="text" id="cliente" name="cliente[]">\
+<input class="form-control sv" type="text" id="sv" name="foliosv[]" />\
+ <input class="form-control" type="text" id="tk1" name="ticketant[]" />\
+                    <input class="Lote form-control" readonly type="text" id="lote" name="pro_lote[]" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >\
+                    <input class="FKID form-control" type="text" id="fkid" name="pro_FKID[]"/>\
+                    <input class="Clavead form-control" type="text" id="clavad" name="pro_clavad[]"/>\
+                    <input class="Identificador form-control" type="text" id="identificadortip" name="IdentificadorTip[]"/>\
                     <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  >\
                 </div>\
                 <div class="col">\
