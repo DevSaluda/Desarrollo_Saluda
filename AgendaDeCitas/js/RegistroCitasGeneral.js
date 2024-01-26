@@ -1,7 +1,7 @@
 function CargaSignosVitalesLibre(){
 
 
-    $.get("https://controlfarmacia.com/AgendaDeCitas/Consultas/RegistroLibre.php","",function(data){
+    $.get("https://saludapos.com/AgendaDeCitas/Consultas/RegistroLibre.php","",function(data){
       $("#sv").html(data);
     })
   

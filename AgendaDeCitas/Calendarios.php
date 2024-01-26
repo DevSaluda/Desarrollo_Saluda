@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 $consulta_eventos = "SELECT AgendaCitas_EspecialistasSucursales.ID_Agenda_Especialista,AgendaCitas_EspecialistasSucursales.Fk_Especialidad,AgendaCitas_EspecialistasSucursales.Fk_Especialista,
 AgendaCitas_EspecialistasSucursales.Fk_Sucursal,AgendaCitas_EspecialistasSucursales.Fecha,AgendaCitas_EspecialistasSucursales.Hora,AgendaCitas_EspecialistasSucursales.Nombre_Paciente,AgendaCitas_EspecialistasSucursales.Color_Calendario,AgendaCitas_EspecialistasSucursales.ID_H_O_D,
 SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,
@@ -34,10 +32,10 @@ $resultado_eventos2 = mysqli_query($conn, $consulta_eventos2);
 
   <title>Agendamiento de citas </title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <style>
 			.fc-content {
 	color:white;
@@ -265,7 +263,7 @@ $resultado_eventos2 = mysqli_query($conn, $consulta_eventos2);
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
    
   include ("footer.php")?>
   
@@ -290,7 +288,7 @@ $resultado_eventos2 = mysqli_query($conn, $consulta_eventos2);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
