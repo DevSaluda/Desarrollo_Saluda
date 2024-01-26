@@ -73,7 +73,7 @@ include ("Consultas/db_connection.php");
     </div>
 
  
- <a class="btn btn-warning btn-sm" id="multi1" hidden onclick="multiplicar2()"><i class="fas fa-minus-circle"></i></a>
+ <!-- <a class="btn btn-warning btn-sm" id="multi1" hidden onclick="multiplicar2()"><i class="fas fa-minus-circle"></i></a>
  <a class="btn btn-warning btn-sm" id="multi2" hidden onclick="multiplicar3()"><i class="fas fa-minus-circle"></i></a>
  <a class="btn btn-warning btn-sm" id="multi3" hidden onclick="multiplicar4()"><i class="fas fa-minus-circle"></i></a>
  <a class="btn btn-warning btn-sm" id="multi4" hidden onclick="multiplicar5()"><i class="fas fa-minus-circle"></i></a>
@@ -81,8 +81,8 @@ include ("Consultas/db_connection.php");
  <a class="btn btn-warning btn-sm" id="multi6" hidden onclick="multiplicar7()"><i class="fas fa-minus-circle"></i></a>
  <a class="btn btn-warning btn-sm" id="multi7" hidden onclick="multiplicar8()"><i class="fas fa-minus-circle"></i></a>
  <a class="btn btn-warning btn-sm" id="multi8" hidden onclick="multiplicar9()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi9" hidden onclick="multiplicar10()"><i class="fas fa-minus-circle"></i></a>
- <button hidden type="button" class="btn btn-primary btn-sm "id="add_fieldinicial" >Agregar mas productos</button>
+ <a class="btn btn-warning btn-sm" id="multi9" hidden onclick="multiplicar10()"><i class="fas fa-minus-circle"></i></a> -->
+ <!-- <button hidden type="button" class="btn btn-primary btn-sm "id="add_fieldinicial" >Agregar mas productos</button>
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field" >Agregar mas productos</button>
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field2" >Agregar mas productos</button>
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field3" >Agregar mas productos</button>
@@ -92,7 +92,7 @@ include ("Consultas/db_connection.php");
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field7" >Agregar mas productos</button>
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field8" >Agregar mas productos</button>
   <button hidden type="button" class="btn btn-primary btn-sm "id="add_field9" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field10" >Agregar mas productos</button>
+  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field10" >Agregar mas productos</button> -->
   
      
   
