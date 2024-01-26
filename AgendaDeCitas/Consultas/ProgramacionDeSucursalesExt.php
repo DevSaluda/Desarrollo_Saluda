@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT 
@@ -99,7 +99,7 @@ $query = $conn->query($sql1);
     <?php echo $Especialidades["Fecha_Fin"]; ?> </td>
     <td><?php echo date("g:i a",strtotime($Especialidades["Hora_inicio"])); ?> <br>
     <?php echo date("g:i a",strtotime($Especialidades["Hora_Fin"])); ?> </td>
-	<td><button class="btn btn-default btn-sm" style=<?if($Especialidades['Estatus'] == 'Autorizar Fechas'){
+	<td><button class="btn btn-default btn-sm" style=<?php if($Especialidades['Estatus'] == 'Autorizar Fechas'){
    echo "background-color:#fd7e14!important";
 } elseif($Especialidades['Estatus'] == 'Autorizar Horas') {
   echo "background-color:#6f42c1!important";
@@ -107,7 +107,7 @@ $query = $conn->query($sql1);
     echo "background-color:#00c851!important";
 }
 ?>>
-<?if($Especialidades['Estatus'] == ''){
+<?php if($Especialidades['Estatus'] == ''){
    echo "No se asigno estatus";
 } else {
     echo $Especialidades["Estatus"]; 
@@ -119,28 +119,28 @@ $query = $conn->query($sql1);
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
 <div class="dropdown-menu">
-<!-- <a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?if($Especialidades['Estatus'] =='Autorizar Fechas'){
+<!-- <a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?php if($Especialidades['Estatus'] =='Autorizar Fechas'){
    
    echo "display:block;";
 } else {
   echo "display:none;";
 };
 ?> class="btn-AsigSucursal dropdown-item" >Autorizar fechas <i class="fas fa-calendar-week"></i></a>
-  <a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?if($Especialidades['Estatus'] =='Autorizar Horas'){
+  <a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?php if($Especialidades['Estatus'] =='Autorizar Horas'){
    
    echo "display:block;";
 } else {
   echo "display:none;";
 }
 ?> class="btn-horas dropdown-item" >Autorizar horarios <i class="fas fa-clock"></i></a>
- --><a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?if($Especialidades['Estatus'] =='Autorizado'){
+ --><a data-id="<?php echo $Especialidades["ID_Programacion"];?>" style=<?php if($Especialidades['Estatus'] =='Autorizado'){
    
    echo "display:block;";
 } else {
   echo "display:none;";
 }
 ?> class="btn-finaliza dropdown-item" >Finalizar<i class="fas fa-info-circle"></i></a>
-<a data-id="<?php echo $Especialidades["ID_Programacion"];?>"  style=<?if($Especialidades['Estatus'] =='Autorizar Fechas'){
+<a data-id="<?php echo $Especialidades["ID_Programacion"];?>"  style=<?php if($Especialidades['Estatus'] =='Autorizar Fechas'){
    
    echo "display:block;";
 } else {
@@ -165,7 +165,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-AsigSucursal").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AutorizaFechasExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AutorizaFechasExt.php","id="+id,function(data){
         console.log("btn-AsigSucursal clickeado");
   			$("#form-edit").html(data);
           $("#Titulo").html("Confirmando fechas");
@@ -179,7 +179,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-horas").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AutorizaHorasExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AutorizaHorasExt.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Confirmado horarios");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -190,7 +190,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-finaliza").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/FinalizaProgramaExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/FinalizaProgramaExt.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Confirmado horarios");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -204,7 +204,7 @@ $query = $conn->query($sql1);
 
     $(".btn-NuevaAutorizacionFechas").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/NuevaAperturaDeFechas.php","id="+id,function(data){    
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/NuevaAperturaDeFechas.php","id="+id,function(data){    
               $("#form-edit").html(data);
               $("#Titulo").html("Selección de fechas disponibles");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -217,7 +217,7 @@ $query = $conn->query($sql1);
 
     $(".btn-NuevaAutorizacionHoras").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/NuevaAperturaDeHorarios.php","id="+id,function(data){    
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/NuevaAperturaDeHorarios.php","id="+id,function(data){    
               $("#form-edit").html(data);
               $("#Titulo").html("Selección de fechas y horas disponibles");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -247,7 +247,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

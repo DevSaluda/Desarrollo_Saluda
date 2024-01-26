@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -45,7 +45,7 @@ include "Consultas/ConeSelectDinamico.php";
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header">
     Especialidades
@@ -77,7 +77,7 @@ include "Consultas/ConeSelectDinamico.php";
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?
+  <?php
   include ("Modales/AltaCampana2.php");
   include ("Modales/EliminarCampana.php");
   include ("footer.php")?>

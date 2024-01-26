@@ -1,8 +1,8 @@
-<?
+<?php
 
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));
@@ -36,7 +36,7 @@ while ($r=$query->fetch_object()){
 
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   <div class="text-center">
                                         
                                         <b>Marcar como horario completado</b>
@@ -60,7 +60,7 @@ $date_obj = new DateTime($inicio);
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Apellidos; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Apellidos; ?>" >
   
          
     </div>
@@ -70,7 +70,7 @@ $date_obj = new DateTime($inicio);
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" >
  
  
          
@@ -84,11 +84,11 @@ $date_obj = new DateTime($inicio);
   </div>
   <select  id="FechasSeleccionadasxd"class = "form-control" name = "FechaAsignadaParaHoras[]"  multiple >
                                         
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_Fecha_Esp,Fecha_Disponibilidad,Fk_Programacion FROM 
           Fechas_EspecialistasExt WHERE ID_Fecha_Esp NOT IN (SELECT FK_Fecha FROM Horarios_Citas_Ext) AND Fk_Programacion=$Especialistas->ID_Programacion");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Fecha_Esp].'">'.fechaCastellano($valores[Fecha_Disponibilidad]).'</option>';
+            echo '<option value="'.$valores["ID_Fecha_Esp"].'">'.fechaCastellano($valores["Fecha_Disponibilidad"]).'</option>';
           }
         ?>  </select>
   
@@ -101,7 +101,7 @@ $date_obj = new DateTime($inicio);
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   <select id = "SeleccionHorarios" class = "form-control" name = "HorasAGuardar[]" multiple>
-                          <?
+                          <?php
 
 while($date_incr < $final) {
     $date_incr = $date_obj->format('H:i:s');
@@ -129,7 +129,7 @@ echo '<option class="form-control"   name="HorasAGuardar[]" value="'.$date_incr.
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Hora_inicio; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Hora_inicio; ?>" >
   
          
     </div>
@@ -157,13 +157,13 @@ echo '<option class="form-control"   name="HorasAGuardar[]" value="'.$date_incr.
     
     
 
-    <input type="text" class="form-control " hidden name="MedicoHoras[]" readonly  value="<? echo $Especialistas->FK_Medico; ?>" >
-    <input type="text" class="form-control "  hidden name="NumberProgramaHoras[]" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+    <input type="text" class="form-control " hidden name="MedicoHoras[]" readonly  value="<?php  echo $Especialistas->FK_Medico; ?>" >
+    <input type="text" class="form-control "  hidden name="NumberProgramaHoras[]" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
        
      
-    <input type="text" class="form-control"  hidden name="UsuarioHoras[]"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="EmpresaHoras[]"  readonly value=" <?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  hidden  name="SistemaHoras[]"  readonly value="<?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  hidden name="UsuarioHoras[]"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="EmpresaHoras[]"  readonly value=" <?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  hidden  name="SistemaHoras[]"  readonly value="<?php echo $row['Nombre_rol']?>">
     
    
 
@@ -181,19 +181,19 @@ echo '<option class="form-control"   name="HorasAGuardar[]" value="'.$date_incr.
 
 
                                         <div class="modal-body">
-                                        <p>¿Esta seguro que se han autorizado todos los horarios para fechas? <br> del medico <? echo $Especialistas->Nombre_Apellidos; ?> <br>
-                                        de la sucursal <? echo $Especialistas->Nombre_Sucursal; ?>  <br> del periodo <? echo $Especialistas->Fecha_Inicio; ?> al <? echo $Especialistas->Fecha_Fin; ?>
+                                        <p>¿Esta seguro que se han autorizado todos los horarios para fechas? <br> del medico <?php echo $Especialistas->Nombre_Apellidos; ?> <br>
+                                        de la sucursal <?php echo $Especialistas->Nombre_Sucursal; ?>  <br> del periodo <?php echo $Especialistas->Fecha_Inicio; ?> al <?php echo $Especialistas->Fecha_Fin; ?>
                                          <br>
         <i class="fas fa-calendar-times fa-4x animated rotateIn"></i>
        
       </div>
-                                        <input type="text" class="form-control "   hidden name="ID_ProgramaF" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+                                        <input type="text" class="form-control "   hidden name="ID_ProgramaF" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
                                         <input type="text" class="form-control"  hidden name="EstadoProgramacionF"  readonly value="Autorizado">
        
      
-       <input type="text" class="form-control"  hidden name="UsuarioAutorizoF"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
+       <input type="text" class="form-control"  hidden name="UsuarioAutorizoF"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
        
-       <input type="text" class="form-control"  hidden  name="SistemaAutorizoF"  readonly value="<?echo $row['Nombre_rol']?>">
+       <input type="text" class="form-control"  hidden  name="SistemaAutorizoF"  readonly value="<?php echo $row['Nombre_rol']?>">
                                         <button type="submit"   id="ActualizarEstadoFinal" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
                                         </form>               
                                   
@@ -203,9 +203,9 @@ echo '<option class="form-control"   name="HorasAGuardar[]" value="'.$date_incr.
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script src="js/AgregaHorasProgramacionExtV2.js"></script>
 <script src="js/ActualizaEstadoParaFinalizarExt.js"></script>

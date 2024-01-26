@@ -1,7 +1,7 @@
 function CargaCampanas(){
 
 
-    $.get("https://controlfarmacia.com/Controldecitas/Consultas/Campanas.php","",function(data){
+    $.get("https://saludapos.com/AgendaDeCitas/Consultas/Campanas.php","",function(data){
       $("#TablaCampanas").html(data);
     })
   

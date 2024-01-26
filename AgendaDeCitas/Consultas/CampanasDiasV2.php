@@ -32,7 +32,7 @@ $('#CampanasV2').DataTable({
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "../js/Fecha.php";
 
 $user_id=null;

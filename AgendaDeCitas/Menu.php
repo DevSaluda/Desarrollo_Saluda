@@ -180,7 +180,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/CancelacionesV2.php" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/CancelacionesV2.php" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-times"></i>
                     <p>
                       Cancelaciones
@@ -217,7 +217,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/DataCampañas" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/DataCampañas" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                    Datos campañas
@@ -304,7 +304,7 @@
               <ul class="nav nav-treeview">
              
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/MedicosExpress" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/MedicosExpress" class="nav-link" style="color: white;">
                   <i class="fas fa-user-md"></i>
                     <p>
                      Agregar medico
@@ -313,7 +313,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/CitasEspecialistasExt" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/CitasEspecialistasExt" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                      Programar campaña

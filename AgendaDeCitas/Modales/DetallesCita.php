@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 
 $user_id=null;
@@ -30,7 +30,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialidades!=null):?>
+<?php if($Especialidades!=null):?>
 
 <form action="javascript:void(0)" method="post" id="Actualizacita">
   <div class="form-row">
@@ -41,7 +41,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Especialidad; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Nombre_Especialidad; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -51,7 +51,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital-user"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php  echo $Especialidades->Nombre_Paciente; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -61,7 +61,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-phone"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Telefono; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Telefono; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
   </div>
@@ -75,8 +75,8 @@ while ($r=$query->fetch_object()){
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-money-check-alt"></i></span>
         </div>
         <select name="Colorpago" class="form-control form-control-sm" id="colorpago" onchange="ShowSelected();">
-          <option value="<? echo $Especialidades->Color_Pago; ?>">
-            <? echo $Especialidades->Estatus_pago; ?>
+          <option value="<?php echo $Especialidades->Color_Pago; ?>">
+            <?php echo $Especialidades->Estatus_pago; ?>
           </option>
 
           <option value="btn btn-success btn-sm">Pagado</option>
@@ -92,8 +92,8 @@ while ($r=$query->fetch_object()){
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-clipboard-check"></i></span>
         </div>
         <select name="Colorcita" class="form-control form-control-sm" id="colorcita" onchange="ShowSelected2();">
-          <option value="<? echo $Especialidades->ColorEstatusCita; ?>">
-            <? echo $Especialidades->Estatus_cita; ?>
+          <option value="<?php echo $Especialidades->ColorEstatusCita; ?>">
+            <?php echo $Especialidades->Estatus_cita; ?>
           </option>
 
           <option value="btn btn-primary btn-sm">Finalizada</option>
@@ -111,8 +111,8 @@ while ($r=$query->fetch_object()){
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-headset"></i></span>
   </div>
   <select name="Colorseguimiento" class="form-control form-control-sm" id="colorsegui" onchange="ShowSelected3();">
-                    <option value="<? echo $Especialidades->ColorEstatusCita; ?>">
-            <? echo $Especialidades->Estatus_Seguimiento; ?>
+                    <option value="<?php echo $Especialidades->ColorEstatusCita; ?>">
+            <?php echo $Especialidades->Estatus_Seguimiento; ?>
           </option>
                     
 				
@@ -129,7 +129,7 @@ while ($r=$query->fetch_object()){
       <span class="input-group-text" id="Tarjeta"><i class="fas fa-comment-dots"></i></span>
     </div>
     <textarea id="observaciones" class="form-control form-control-sm" name="Observaciones" rows="2" cols="50">
-    <? echo $Especialidades->Observaciones; ?>
+    <?php echo $Especialidades->Observaciones; ?>
   </textarea>
   </div>
   <div class="form-row">
@@ -140,7 +140,7 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="far fa-hand-point-right"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->AgendadoPor; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->AgendadoPor; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     <div class="col">
@@ -150,13 +150,13 @@ while ($r=$query->fetch_object()){
 
           <span class="input-group-text" id="Tarjeta"><i class="fas fa-laptop-code"></i></span>
         </div>
-        <input type="text" class="form-control" readonly value="<? echo $Especialidades->Sistema; ?>" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" readonly value="<?php echo $Especialidades->Sistema; ?>" aria-describedby="basic-addon1">
       </div>
     </div>
     </div>
-  <input type="hidden" name="EstatusPago" value="<? echo $Especialidades->Estatus_pago; ?>"id="estatuspago">
-  <input type="hidden" name="EstatusCita" value=" <? echo $Especialidades->Estatus_cita; ?>" id="estatuscita">
-  <input type="hidden" name="Estatusseguimiento" value=" <? echo $Especialidades->Estatus_Seguimiento; ?>" id="estatussigue">
+  <input type="hidden" name="EstatusPago" value="<?php echo $Especialidades->Estatus_pago; ?>"id="estatuspago">
+  <input type="hidden" name="EstatusCita" value=" <?php echo $Especialidades->Estatus_cita; ?>" id="estatuscita">
+  <input type="hidden" name="Estatusseguimiento" value=" <?php echo $Especialidades->Estatus_Seguimiento; ?>" id="estatussigue">
   <input type="hidden" name="id" value="<?php echo $Especialidades->ID_Agenda_Especialista; ?>">
   <button type="submit" name="submit" id="submit" class="btn btn-primary">Aplicar cambios <i class="fas fa-save"></i></button>
 
@@ -192,6 +192,6 @@ $("#estatussigue").val(selected);
 
 <script src="js/EditaCita.js"></script>
 
-<? else:?>
+<?php else:?>
 <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

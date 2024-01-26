@@ -1,7 +1,7 @@
 function   CargaPmedicos(){
 
 
-    $.post("https://controlfarmacia.com/AgendaDeCitas/Consultas/PersonalMedico.php","",function(data){
+    $.post("https://saludapos.com/AgendaDeCitas/Consultas/PersonalMedico.php","",function(data){
       $("#PersonalMedico").html(data);
     })
   

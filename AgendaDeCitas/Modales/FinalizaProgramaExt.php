@@ -1,8 +1,8 @@
-<?
+<?php
 
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));
@@ -37,17 +37,17 @@ while ($r=$query->fetch_object()){
 
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   
                                         <form action="javascript:void(0)" method="post" id="FinalizaSucursales"> 
                                         <div class="modal-body">
-                                        <p>¿Estas seguro que deseas finalizar la programacion? <br> del medico <? echo $Especialistas->Nombre_Apellidos; ?> <br>
-                                        de la sucursal <? echo $Especialistas->Nombre_Sucursal; ?>  <br> del periodo <? echo $Especialistas->Fecha_Inicio; ?> al <? echo $Especialistas->Fecha_Fin; ?>
+                                        <p>¿Estas seguro que deseas finalizar la programacion? <br> del medico <?php echo $Especialistas->Nombre_Apellidos; ?> <br>
+                                        de la sucursal <?php echo $Especialistas->Nombre_Sucursal; ?>  <br> del periodo <?php echo $Especialistas->Fecha_Inicio; ?> al <?php echo $Especialistas->Fecha_Fin; ?>
                                          <br>
         <i class="fas fa-calendar-times fa-4x animated rotateIn"></i>
        
       </div>
-                                        <input type="text" class="form-control " hidden id="ID_ProgramaF" name="ID_ProgramaF" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+                                        <input type="text" class="form-control " hidden id="ID_ProgramaF" name="ID_ProgramaF" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
                                        
                                         <button type="submit"   id="ActualizarEstadoFinal" value="Guardar" class="btn btn-danger">Finalizar <i class="fas fa-check-circle"></i></button>
                                         </form>               
@@ -58,8 +58,8 @@ while ($r=$query->fetch_object()){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
 <script src="js/FinalizaProgramacionExt.js"></script>

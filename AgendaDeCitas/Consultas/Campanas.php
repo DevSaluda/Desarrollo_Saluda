@@ -12,7 +12,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "../js/Fecha.php";
 
 $user_id=null;
@@ -68,9 +68,9 @@ $query = $conn->query($sql1);
 	<?php echo date('h:i A', strtotime($Especialista["Horario_Disponibilidad"])); ?>
 </td>
 	
-	<td><button class="<?echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button><br>
-	<button class="<?echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button>
-	<button class="<?echo $Especialista['Color_Seguimiento'];?>"><?php echo $Especialista["Estatus_Seguimiento"]; ?></button>
+	<td><button class="<?php echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button><br>
+	<button class="<?php echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button>
+	<button class="<?php echo $Especialista['Color_Seguimiento'];?>"><?php echo $Especialista["Estatus_Seguimiento"]; ?></button>
 </td>
 
 	<td><button data-id="<?php echo $Especialista["ID_Agenda_Especialista"];?>" class="btn-edit btn btn-info btn-sm"><i class="far fa-eye"></i></button></td>
@@ -83,7 +83,7 @@ $query = $conn->query($sql1);
 			event.preventDefault();//Esto es para cancelar el envio
 	
 			$("#Celimina").click(function() {
-				$.post("https://controlfarmacia.com/Controldecitas/Consultas/CancelaCita.php","id="+<?php echo $Especialista["ID_Agenda_Especialista"];?>,function(data){
+				$.post("https://saludapos.com/AgendaDeCitas/Consultas/CancelaCita.php","id="+<?php echo $Especialista["ID_Agenda_Especialista"];?>,function(data){
 					
   
           CargaCampanas();
@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Controldecitas/Modales/DetallesCita.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/DetallesCita.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');

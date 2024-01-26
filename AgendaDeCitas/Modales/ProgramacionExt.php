@@ -36,10 +36,10 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal"  >
                                                <option value="">Seleccione una Sucursal:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
   
@@ -112,8 +112,8 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-calendar-check"></i></span>
   </div>
 
-  <input type="date" class="form-control " value="<?echo $fechaActual?>" name="" id="fechapordia" min="<?echo $fechaActual?>" >
-  <input type="date" class="form-control "  value="<?echo $fechaActual?>" name="" id="fechapordiafin"  >
+  <input type="date" class="form-control " value="<?php echo $fechaActual?>" name="" id="fechapordia" min="<?php echo $fechaActual?>" >
+  <input type="date" class="form-control "  value="<?php echo $fechaActual?>" name="" id="fechapordiafin"  >
     </div><label for="nombreprod" class="error">
     </div>
 
@@ -174,7 +174,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   
-  <input type="date" class="form-control " value="<?echo $fechaActual?>" name="" id="fechasemana1" >
+  <input type="date" class="form-control " value="<?php echo $fechaActual?>" name="" id="fechasemana1" >
     </div><label for="nombreprod" class="error">
     </div>
     <div class="col">
@@ -184,7 +184,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   
-  <input type="date" class="form-control " name=""  value="<?echo $fechafinalcargasemama?>"  id="fechasemana2" >
+  <input type="date" class="form-control " name=""  value="<?php echo $fechafinalcargasemama?>"  id="fechasemana2" >
     </div><label for="nombreprod" class="error">
     </div>
     
@@ -247,7 +247,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   
-  <input type="date" class="form-control " value="<?echo $fechaActual?>" name="" id="fechasmes1" >
+  <input type="date" class="form-control " value="<?php echo $fechaActual?>" name="" id="fechasmes1" >
     </div><label for="nombreprod" class="error">
     </div>
     <div class="col">
@@ -257,7 +257,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
   
-  <input type="date" class="form-control " name=""  value="<?echo $fechafinalcargames?>"  id="fechasmes2" >
+  <input type="date" class="form-control " name=""  value="<?php echo $fechafinalcargames?>"  id="fechasmes2" >
     </div><label for="nombreprod" class="error">
     </div>
     
@@ -305,12 +305,12 @@
  
 <!-- FIN FORM DE CARGA POR MES -->
 
-<input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<? echo $row['ID_H_O_D']?>" >
+<input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<?php echo $row['ID_H_O_D']?>" >
 
 <input type="text" class="form-control" id="sistema" name="Sistema" hidden   value="Agenda de citas" >
 
 <input type="text" class="form-control" id="estatus" name="Estatus" hidden   value="Autorizar Fechas" >
-<input type="text" class="form-control" id="usuario" name="Usuario" hidden  value="<? echo $row['Nombre_Apellidos']?>" >   
+<input type="text" class="form-control" id="usuario" name="Usuario" hidden  value="<?php echo $row['Nombre_Apellidos']?>" >   
          
       <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
                                         </form>
