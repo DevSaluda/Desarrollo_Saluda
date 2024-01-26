@@ -123,7 +123,7 @@
   
 </div>
 <!-- ./wrapper -->
-<?include ("Modales/SinPermisos.php");?>
+<?php include ("Modales/SinPermisos.php");?>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
