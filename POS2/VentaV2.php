@@ -104,9 +104,14 @@ include ("Consultas/db_connection.php");
       </div>
       </div>
       </div>';
-      <?php else: ?> Mensaje en caso de que no haya caja abierta o asignada
-      echo '<div class="text-center">Por el momento no hay una caja abierta o asignada.</div>';
-      <?php endif; ?></div>
+      <?php
+else:
+    // Mensaje en caso de que no haya caja abierta o asignada
+    echo '<div class="text-center alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
+    echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
+endif;
+?>
+</div>
       </div>
       </div>
       </div>
