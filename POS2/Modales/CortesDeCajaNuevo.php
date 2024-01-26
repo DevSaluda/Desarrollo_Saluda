@@ -458,7 +458,7 @@ $ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
 
 
 // Redondear el valor al número entero más cercano
-$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo);
+$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo,2);
 
 
 
