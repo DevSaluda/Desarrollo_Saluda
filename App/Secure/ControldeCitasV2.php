@@ -145,7 +145,7 @@ include("Cookies/Mensaje.php");
                  
                     </form>  <div id="error">
   </div>
-  <?include "Modales/ModalCitas.php";
+  <?php include "Modales/ModalCitas.php";
   include "Modales.php";?>
 
                         <!--Start of Tawk.to Script-->
@@ -225,7 +225,7 @@ $('#show_password').on('change',function(event){
 <script src="../Scripts/Redirecciones.js" type="text/javascript"></script>
 
     
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
