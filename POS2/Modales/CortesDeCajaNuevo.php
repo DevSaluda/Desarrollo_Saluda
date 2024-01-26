@@ -452,17 +452,7 @@ $query8888 = $conn->query($sql8888);
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
           
-  <input type="number" class="form-control "  id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?php
-$ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
-
-// Redondear el valor a dos decimales
-$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo, 2);
-
-// Formatear el valor
-$ventaTotalEfectivoFormateado = number_format($ventaTotalEfectivoRedondeado, 2);
-
-echo $ventaTotalEfectivoFormateado;
-?>" aria-describedby="basic-addon1" >  
+  <input type="number" class="form-control "  id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?php echo $Especialistas33->VentaTotaldeEfectivoPAraElcorte; ?>" aria-describedby="basic-addon1" >  
 </div></div>
 <div class="col">
     <label for="exampleFormControlInput1">Conteo de billetes<span class="text-danger">*</span></label>
