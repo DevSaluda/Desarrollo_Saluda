@@ -15,7 +15,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Personal_Medico.Fk_Usuario,Personal_Medico.Fk_Sucursal,
@@ -56,7 +56,7 @@ $query = $conn->query($sql1);
     echo "background-color:#fd1414!important";
 }
 ?>>
-<?if($Especialidades['Estatus'] == ''){
+<?php if($Especialidades['Estatus'] == ''){
    echo "No se asigno estatus";
 } else {
     echo $Especialidades["Estatus"]; 
@@ -76,7 +76,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-AsigSucursal").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AsignaAlEspecialistaEnSucursal.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AsignaAlEspecialistaEnSucursal.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Asignar sucursal a médico");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -122,7 +122,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

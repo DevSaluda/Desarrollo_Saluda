@@ -337,7 +337,7 @@
               </a>
               <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/MedicosEnGeneral" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/MedicosEnGeneral" class="nav-link" style="color: white;">
                   <i class="fas fa-user-md"></i>
                     <p>
                      Médicos
@@ -346,7 +346,7 @@
                   </a>
                 </li>
               <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/ProgramacionSucursales" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/ProgramacionSucursales" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                      Programar campaña
@@ -362,7 +362,7 @@
             </li>
             <li class="nav-header">Reportes y data de pacientes </li>
             <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/ProductosV2" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/ProductosV2" class="nav-link" style="color: white;">
                   <i class="fas fa-money-bill-alt"></i>
                     <p>
                      Listado de costos
@@ -370,7 +370,7 @@
                   </a>
                 </li>   
             <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/DatosPacientes" class="nav-link">
+                  <a href="https://saludapos.com/AgendaDeCitas/DatosPacientes" class="nav-link">
                   <i class="fas fa-database"></i>
                     <p>
                      Data Px

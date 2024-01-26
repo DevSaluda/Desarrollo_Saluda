@@ -1,7 +1,7 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Programacion_Medicos_Sucursales.ID_Programacion,Programacion_Medicos_Sucursales.FK_Medico,Programacion_Medicos_Sucursales.Fk_Sucursal,
@@ -22,7 +22,7 @@ while ($r=$query->fetch_object()){
 
   }
 ?>
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   <form action="javascript:void(0)" method="post" id="ProgramaFechas">
   <?php
 $fechaInicio=strtotime($Especialistas->Fecha_Inicio);
@@ -40,7 +40,7 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Apellidos; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Apellidos; ?>" >
   
          
     </div>
@@ -50,7 +50,7 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" >
   
          
     </div><label for="nombreprod" class="error">
@@ -62,7 +62,7 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Fecha_Inicio; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Fecha_Inicio; ?>" >
   
          
     </div>
@@ -72,7 +72,7 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Fecha_Fin; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Fecha_Fin; ?>" >
   
          
     </div><label for="nombreprod" class="error">
@@ -80,13 +80,13 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
    
     
 
-    <input type="text" class="form-control " hidden name="Medico" readonly  value="<? echo $Especialistas->FK_Medico; ?>" >
-    <input type="text" class="form-control "  hidden name="NumberPrograma" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+    <input type="text" class="form-control " hidden name="Medico" readonly  value="<?php echo $Especialistas->FK_Medico; ?>" >
+    <input type="text" class="form-control "  hidden name="NumberPrograma" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
        
      
-    <input type="text" class="form-control"  hidden name="UsuarioA"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="Empresa"  readonly value=" <?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  hidden  name="SistemaA"  readonly value="<?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  hidden name="UsuarioA"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="Empresa"  readonly value=" <?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  hidden  name="SistemaA"  readonly value="<?php echo $row['Nombre_rol']?>">
     
    
 
@@ -99,13 +99,13 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
                                         </form>
 
                                         <form action="javascript:void(0)" method="post" id="ActualizaElEstadoFechas"> 
-                                        <input type="text" class="form-control "   name="ID_Programa" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+                                        <input type="text" class="form-control "   name="ID_Programa" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
                                         <input type="text" class="form-control"  hidden name="EstadoProgramacion"  readonly value="Autorizar Horas">
        
      
-       <input type="text" class="form-control"  hidden name="UsuarioAutorizo"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
+       <input type="text" class="form-control"  hidden name="UsuarioAutorizo"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
        
-       <input type="text" class="form-control"  hidden  name="SistemaAutorizo"  readonly value="<?echo $row['Nombre_rol']?>">
+       <input type="text" class="form-control"  hidden  name="SistemaAutorizo"  readonly value="<?php echo $row['Nombre_rol']?>">
                                         <button type="submit"   id="ActualizarEstadoFechas" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
                                         </form>               
        </div>
@@ -114,9 +114,9 @@ for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
    </div>
  </div>
  </div>
- <? else:?>
+ <?php else:?>
   <p class="alert alert-danger">Es posible que  esta programación  ya tenga sus fechas verificadas y asignadas por eso no podemos encontrar los datos que requieres. <i class="fas fa-exclamation-triangle"></i></p>
-<? endif;?>
+<?php endif;?>
 <script src="js/AgregaFechasProgramacion.js"></script>
 <script src="js/ActualizaEstadoParaHoras.js"></script>
 

@@ -1,7 +1,7 @@
 function CargaDatadePX(){
 
 
-    $.get("https://controlfarmacia.com/AgendaDeCitas/Consultas/DataPacientesGeneral.php","",function(data){
+    $.get("https://saludapos.com/AgendaDeCitas/Consultas/DataPacientesGeneral.php","",function(data){
       $("#DataPacientes").html(data);
     })
   

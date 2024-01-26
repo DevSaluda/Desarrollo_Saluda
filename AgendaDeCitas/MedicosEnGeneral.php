@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -14,9 +14,9 @@ include "Consultas/ConeSelectDinamico.php";
 
   <title>Personal médico de sucursales</title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2E64FE !important;color: white;">
     Personal médico de sucursales 
@@ -43,7 +43,7 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
   
   include ("footer.php")?>
 
@@ -69,7 +69,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
