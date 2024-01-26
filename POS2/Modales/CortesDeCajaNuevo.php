@@ -455,12 +455,12 @@ $query8888 = $conn->query($sql8888);
   <?php
 $ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
 
-var_dump($ventaTotalEfectivo); // Verifica el valor
+
 
 // Redondear el valor al número entero más cercano
 $ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo);
 
-var_dump($ventaTotalEfectivoRedondeado); // Verifica el valor redondeado
+
 
 ?>
 <input type="number" class="form-control" id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?= $ventaTotalEfectivoRedondeado; ?>" aria-describedby="basic-addon1">
