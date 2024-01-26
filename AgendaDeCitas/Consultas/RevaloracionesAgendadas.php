@@ -1,4 +1,4 @@
-<?
+<?php
 function fechaCastellano ($fecha) {
     $fecha = substr($fecha, 0, 10);
     $numeroDia = date('d', strtotime($fecha));
@@ -227,7 +227,7 @@ tabla = $('#RevaloracionesSemanales').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AgendaDeCitas/Consultas/RevaloracionesSemanal.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/RevaloracionesSemanal.php",
  "aoColumns": [
     { mData: 'Folio' },
        { mData: 'Paciente' },
