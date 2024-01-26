@@ -452,19 +452,15 @@ $query8888 = $conn->query($sql8888);
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
           
-          <?php
-          $ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
-          
-          // Redondear el valor a dos decimales
-          $ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo, 2);
-          
-          // Formatear el valor
-          $ventaTotalEfectivoFormateado = number_format($ventaTotalEfectivoRedondeado, 2);
-          
-       
-          ?>
+  <?php
+$ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
+
+// Redondear el valor al número entero más cercano
+$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo);
+
+?>
          
-<input type="number" class="form-control" id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?php  echo $ventaTotalEfectivoFormateado;?>" aria-describedby="basic-addon1">
+         <input type="number" class="form-control" id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?php $ventaTotalEfectivoRedondeado; ?>" aria-describedby="basic-addon1">
   
 </div></div>
 <div class="col">
