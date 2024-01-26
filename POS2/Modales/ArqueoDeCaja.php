@@ -232,9 +232,7 @@ $query8888 = $conn->query($sql8888);
       <input type="text" class="form-control "  name="TotalTicketsTickets"readonly value="<?php echo $Especialistas3->Total_tickets; ?>" aria-describedby="basic-addon1" maxlength="60">            
       <input type="number" class="form-control "  id="cantidadtotalventas" name="VentaTotal" step="any" readonly value="<?php echo $Especialistas3->VentaTotal; ?>" aria-describedby="basic-addon1" >
       <input type="number" class="form-control "  id="cantidadtotalventas" name="totalSignosvitales" step="any" readonly value="<?php echo $Especialistas3->Total_Folios; ?>" aria-describedby="basic-addon1" > 
-      <input type="datetime" name="Horadeimpresiondelticket" value="<?php echo date('h:i A', strtotime(($Especialistas13->Hora_Cierre))); ?>">
-      <input type="datetime" name="Horadeimpresiondelticketcierre" value="<?php echo date('h:i:s A');?>">
-      <input type="datetime" name="FechaDelCorte"  value="<?php echo date('Y-m-d',strtotime(($Especialistas13->Hora_Cierre))); ?>">
+   
       <input type="text" class="form-control" name="Sucursal" readonly  value="<?php echo $row['Nombre_Sucursal']?>" aria-describedby="basic-addon1" >   
       <input type="number" class="form-control "  step="any" name="Totaldentales"  readonly   value="<?php echo $Especialistas4->totaldentalescreditos; ?>" aria-describedby="basic-addon1" >
       <input type="text" class="form-control "   name="TotalCreditoEnfermeria"  readonly value="<?php echo $Especialistas6->VentaTotalCredito; ?>" aria-describedby="basic-addon1" >  
