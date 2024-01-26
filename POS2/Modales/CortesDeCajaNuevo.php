@@ -458,7 +458,7 @@ $ventaTotalEfectivo = $Especialistas33->VentaTotaldeEfectivoPAraElcorte;
 
 
 // Redondear el valor al número entero más cercano
-$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo,2);
+$ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo);
 
 
 
@@ -510,35 +510,35 @@ $ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo,2);
   <tbody>
     <tr>
 <td><input type="number" class="form-control "  id="billetemil" name="BilleteMil"onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td> <input type="number" class="form-control " hidden id="mil" value="1000.00" aria-describedby="basic-addon1" >$1000.00 </td>
+     <td> <input type="number" class="form-control " hidden id="mil" value="1000" aria-describedby="basic-addon1" >$1000.00 </td>
      <td><input type="number" class="subtotal form-control  "  step="any" id="resultadomil" onchange="multiplicar();"  aria-describedby="basic-addon1" ></td>
      
     </tr>
     <tr>
 <td><input type="number" class="form-control "  id="billequinie" name="BilleteQuinie"  onchange="multiplicar();"aria-describedby="basic-addon1" ></td>
-     <td> <input type="number" class="form-control " hidden id="quinientos" value="500.00" aria-describedby="basic-addon1" >$500.00 </td>
+     <td> <input type="number" class="form-control " hidden id="quinientos" value="500" aria-describedby="basic-addon1" >$500.00 </td>
      <td><input type="number" class="subtotal form-control  "  step="any" readonly id="resultadoquinientos" onchange="multiplicar();"  aria-describedby="basic-addon1" ></td>
      
     </tr>
     <tr>
 <td><input type="number" class="form-control "   id="billedos" name="BilleteDos"onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="doscientos" value="200.00" aria-describedby="basic-addon1" > $200.00 </td>
+     <td><input type="number" class="form-control " hidden id="doscientos" value="200" aria-describedby="basic-addon1" > $200.00 </td>
      <td><input type="number" class="form-control " step="any"  readonly id="resultadodoscioentos"aria-describedby="basic-addon1" ></td>
      
     </tr>
     <tr>
 <td><input type="number" class="form-control "   id="billecien" name="BilleteCien"onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="cien" value="100.00" aria-describedby="basic-addon1" > $100.00 </td>
+     <td><input type="number" class="form-control " hidden id="cien" value="100" aria-describedby="basic-addon1" > $100.00 </td>
      <td><input type="number" class="form-control "  id="resultadocien" readonly aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
 <td><input type="number" class="form-control "  id="billecincuenta" name="BilleteCincuenta"onchange="multiplicar();"  aria-describedby="basic-addon1" ></td>
-     <td> <input type="number" class="form-control " hidden id="cincuenta" value="50.00" aria-describedby="basic-addon1"> $50.00 </td>
+     <td> <input type="number" class="form-control " hidden id="cincuenta" value="50" aria-describedby="basic-addon1"> $50.00 </td>
      <td><input type="number" class="form-control " step="any"  id="resultadocincuenta" readonly aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
 <td><input type="number" class="form-control "  id="billeveinte" name="BilleteVeinte" onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="veinte" value="20.00" aria-describedby="basic-addon1" > $20.00 </td>
+     <td><input type="number" class="form-control " hidden id="veinte" value="20" aria-describedby="basic-addon1" > $20.00 </td>
      <td><input type="number" class="form-control "   step="any" id="resultadoveinte" readonly aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
@@ -568,22 +568,22 @@ $ventaTotalEfectivoRedondeado = round($ventaTotalEfectivo,2);
     
     <tr>
 <td><input type="number" class="form-control "    id="monedadiez" name="MonedaDiez" onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td> <input type="number" class="form-control " hidden id="diez" value="10.00" aria-describedby="basic-addon1" >$10.00 </td>
+     <td> <input type="number" class="form-control " hidden id="diez" value="10" aria-describedby="basic-addon1" >$10.00 </td>
      <td><input type="number" class="form-control "  step="any" id="resultadodiez" aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
 <td><input type="number" class="form-control "    id="modenacinco" name="MonedaCinco" onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="cinco" value="5.00" aria-describedby="basic-addon1" > $5.00 </td>
+     <td><input type="number" class="form-control " hidden id="cinco" value="5" aria-describedby="basic-addon1" > $5.00 </td>
      <td><input type="number" class="form-control "  step="any"  id="resultadocinco"aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
 <td><input type="number" class="form-control "   id="monedados" name="MonedaDos" onchange="multiplicar();" aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="dos" value="2.00" aria-describedby="basic-addon1" > $2.00 </td>
+     <td><input type="number" class="form-control " hidden id="dos" value="2" aria-describedby="basic-addon1" > $2.00 </td>
      <td><input type="number" class="form-control "  step="any" id="resultadodos" aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
 <td><input type="number" class="form-control "  id="monedapeso" name="MonedaPeso" onchange="multiplicar();"  aria-describedby="basic-addon1" ></td>
-     <td><input type="number" class="form-control " hidden id="peso" value="1.00" aria-describedby="basic-addon1" > $1.00 </td>
+     <td><input type="number" class="form-control " hidden id="peso" value="1" aria-describedby="basic-addon1" > $1.00 </td>
      <td><input type="number" class="form-control "  step="any" id="resultadopeso" aria-describedby="basic-addon1" ></td>  
     </tr>
     <tr>
