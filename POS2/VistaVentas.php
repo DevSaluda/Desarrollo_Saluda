@@ -180,8 +180,8 @@ $(document).ready(function () {
             nuevoCampo.innerHTML = '\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Codigo <span class="text-danger">*</span></label>\
-                    <input type="text" class="form-control  hidden  formapago-dinamico" id="formapago1" name="FormaPago[]" readonly>\
-<input type="text" class="form-control formapago-dinamico" hidden  id="formapagorealistaaa" name="FormaPagoTickettt" readonly>\
+                    <input type="text" class="form-control  formapago-dinamico" hidden id="formapago1" name="FormaPago[]" readonly>\
+<input type="text" class="form-control formapago-dinamico"   id="formapagorealistaaa" hidden name="FormaPagoTickettt" readonly>\
                     <input type="text" class="form-control "  hidden name="PagoReal[]" readonly id="pagoreal" >\
                     <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >\
                     <input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >\
