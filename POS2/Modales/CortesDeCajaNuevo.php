@@ -452,7 +452,7 @@ $query8888 = $conn->query($sql8888);
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
           
-  <input type="number" class="form-control" id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?= number_format($Especialistas33->VentaTotaldeEfectivoPAraElcorte, 2); ?>" aria-describedby="basic-addon1">
+  <input type="number" class="form-control" id="cantidadtotalventas" name="Cantidad" step="any" readonly value="<?php number_format($Especialistas33->VentaTotaldeEfectivoPAraElcorte, 2); ?>" aria-describedby="basic-addon1">
   
 </div></div>
 <div class="col">
