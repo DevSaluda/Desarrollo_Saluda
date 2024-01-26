@@ -1,7 +1,7 @@
 function CargaRevaloraciones() {
 
 
-    $.post("https://controlfarmacia.com/AgendaDeCitas/Consultas/RevaloracionesAgendadas.php", "", function(data) {
+    $.post("https://saludapos.com/AgendaDeCitas/Consultas/RevaloracionesAgendadas.php", "", function(data) {
         $("#CitasDeRevaloracion").html(data);
     })
 

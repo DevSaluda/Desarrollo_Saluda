@@ -171,7 +171,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-check"></i>
                     <p>
                    Revaloraciones

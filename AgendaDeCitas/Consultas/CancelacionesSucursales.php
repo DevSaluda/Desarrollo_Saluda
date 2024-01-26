@@ -33,7 +33,6 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT Cancelaciones_AgendaSucursales.ID_Cancelacion,Cancelaciones_AgendaSucursales.ID_Agenda_Especialista,Cancelaciones_AgendaSucursales.Fk_Especialidad,

@@ -109,7 +109,7 @@ include "Consultas/ConeSelectDinamico.php";
     $(document).on("click", ".btn-edit", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/CancelaCitaExt.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/CancelaCitaExt.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Corte de caja");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -130,7 +130,7 @@ include "Consultas/ConeSelectDinamico.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
 						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -179,7 +179,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
