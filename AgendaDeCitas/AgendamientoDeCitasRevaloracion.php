@@ -80,16 +80,11 @@ include "Consultas/ConeSelectDinamico.php";
 
 <script src="js/AgregaEspecialidad.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
-<script src="js/BuscaDataPacientesExt.js"></script>
+
 <script src="js/AgregaEspecialista.js"></script>
 <script src="js/ObtieneEspecialidadMedicoSucursal.js"></script>
 <script src="js/ObtieneMedicoDeSucursal.js"></script>
-<script src="js/ObtieneFechas.js"></script>
-<script src="js/ObtieneHoras.js"></script>
-<script src="js/ObtieneEspecialidadMedicoExt.js"></script>
-<script src="js/ObtieneMedicoDeSucursalExt.js"></script>
-<script src="js/ObtieneFechasExt.js"></script>
-<script src="js/ObtieneHorasExt.js"></script>
+
 <script src="js/AgendaEnSucursalesExt.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
