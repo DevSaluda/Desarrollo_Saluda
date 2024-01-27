@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-include "mcript.php";
 function fechaCastellano ($fecha) {
     $fecha = substr($fecha, 0, 10);
     $numeroDia = date('d', strtotime($fecha));
@@ -45,7 +44,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Doctor"] = $fila["Nombre_Apellidos"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Observaciones"] = $fila["Observaciones"];
-    $data[$c]["ConfirmarCita"] = $fila["FormaDePago"];
+    // $data[$c]["ConfirmarCita"] = $fila["FormaDePago"];
     $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
     $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
     $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
