@@ -195,8 +195,8 @@
 
 
             
-            <li class="nav-header" style="color: white;">Calendarios de campañas</li>
-            <li class="nav-item has-treeview">
+            <!-- <li class="nav-header" style="color: white;">Calendarios de campañas</li> -->
+            <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-calendar-alt" style="color: white;"></i>
 
@@ -224,7 +224,7 @@
 
                     </p>
                   </a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
             <a href="https://controlfarmacia.com/AgendaDeCitas/Calendario" class="nav-link">
             <i class="fas fa-calendar-check"></i>
@@ -252,8 +252,8 @@
                     </p>
                   </a>
                 </li> -->
-              </ul>
-            </li>
+              <!-- </ul>
+            </li> -->
             <!-- CALENDARIO XD -->
 
 
