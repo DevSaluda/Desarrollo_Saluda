@@ -1,8 +1,8 @@
 <?php
 include "Consultas/Consultas.php";
 
-// include "Consultas/Conexion_selects.php";
-// include "Consultas/ConeSelectDinamico.php";
+ include "Consultas/Conexion_selects.php";
+ include "Consultas/ConeSelectDinamico.php";
 
 ?>
 <!DOCTYPE html>
