@@ -15,7 +15,6 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
 
 $user_id=null;
 $sql1="SELECT Personal_Medico_Express.Medico_ID,Personal_Medico_Express.Nombre_Apellidos,Personal_Medico_Express.Correo_Electronico, 
@@ -91,7 +90,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-detail").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/DetallesMedicoExpress.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/DetallesMedicoExpress.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Detalles médico");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -103,7 +102,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-FinMed").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/BajaMedicoExpress.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/BajaMedicoExpress.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cambio de vigencia");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -114,7 +113,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edicion").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EditaMedicoExpress.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/EditaMedicoExpress.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Editar datos de Médico");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

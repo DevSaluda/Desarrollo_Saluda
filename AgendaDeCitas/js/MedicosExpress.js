@@ -1,7 +1,7 @@
 function CargaMedicosExpress(){
 
 
-    $.post("https://controlfarmacia.com/AgendaDeCitas/Consultas/MedicosExpress.php","",function(data){
+    $.post("https://saludapos.com/AgendaDeCitas/Consultas/MedicosExpress.php","",function(data){
       $("#DoctoresExpress").html(data);
     })
   
