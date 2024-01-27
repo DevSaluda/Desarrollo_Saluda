@@ -1,11 +1,8 @@
 
 <?php
- 
-include "Consultas/Consultas.php";
-
+ include "Consultas/Consultas.php";
 include "Consultas/ConsultaEstadoConexion.php";
 include "Consultas/Mensaje.php";
-
 
 ?>
 <!DOCTYPE html>
