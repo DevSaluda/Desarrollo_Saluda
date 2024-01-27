@@ -25,10 +25,10 @@ data-backdrop="static" data-keyboard="false">
   </div>
  <select id = "especialidad" class = "form-control form-control-sm" name = "Especialidad">
                                                <option value="0">Seleccione una Especialidad:</option>
-        <?
+        <?php
           $query = $mysqli -> query ("SELECT ID_Especialidad,Nombre_Especialidad,ID_H_O_D FROM Especialidades WHERE Estatus_Especialidad='Activo' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Especialidad].'">'.$valores[Nombre_Especialidad].'</option>';
+            echo '<option value="'.$valores["ID_Especialidad"].'">'.$valores["Nombre_Especialidad"].'</option>';
           }
         ?>  </select>
 </div>
@@ -185,7 +185,7 @@ data-backdrop="static" data-keyboard="false">
   <input type="hidden" name="EstatusCita" id="estatuscita"  >
   <input type="hidden" name="EstatusSeguimiento" id="estatussegui" value="Sin seguimiento" >
   <input type="hidden" name="ColorSigue" id="colorsegui" value="btn btn-dark btn-sm" >
-  <input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<? echo $row['ID_H_O_D']?>" >
+  <input type="text" class="form-control" id="empresa" name="Empresa" hidden   value="<?php echo $row['ID_H_O_D']?>" >
   <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-primary">Guardar <i class="fas fa-save"></i></button>
                                         </form>
      

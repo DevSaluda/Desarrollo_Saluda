@@ -1,7 +1,7 @@
 function   CargaProgramaMedicosSucursales(){
 
 
-    $.post("https://controlfarmacia.com/AgendaDeCitas/Consultas/ProgramacionDeSucursales.php","",function(data){
+    $.post("https://saludapos.com/AgendaDeCitas/Consultas/ProgramacionDeSucursales.php","",function(data){
       $("#ProgramaSucursales").html(data);
     })
   

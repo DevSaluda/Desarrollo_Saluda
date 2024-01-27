@@ -1,7 +1,7 @@
 <?php
  
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/ConsultaEstadoConexion.php";
 include "Consultas/Mensaje.php";
 
@@ -17,10 +17,10 @@ include "Consultas/Mensaje.php";
   <title>Datos de campañas| </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-user-md"></i> Campañas por sucursal </a>
@@ -78,7 +78,7 @@ include "Consultas/Mensaje.php";
   <!-- /.control-sidebar -->
  
   <!-- Main Footer -->
-  <?
+  <?php
  include ("footer.php");?>
 <!-- ./wrapper -->
 
@@ -115,7 +115,7 @@ include "Consultas/Mensaje.php";
 </body>
 </html>
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

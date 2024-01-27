@@ -1,7 +1,6 @@
 <?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Programacion_MedicosExt.ID_Programacion, Programacion_MedicosExt.FK_Medico, Programacion_MedicosExt.Fk_Sucursal, Programacion_MedicosExt.Tipo_Programacion, Programacion_MedicosExt.Fecha_Inicio, Programacion_MedicosExt.Fecha_Fin, Programacion_MedicosExt.Hora_inicio, Programacion_MedicosExt.Hora_Fin, Programacion_MedicosExt.Intervalo, Programacion_MedicosExt.Sistema, Programacion_MedicosExt.ID_H_O_D, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Personal_Medico_Express.Medico_ID,Personal_Medico_Express.Nombre_Apellidos
@@ -29,7 +28,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Apellidos; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Apellidos; ?>" >
   
          
     </div>
@@ -39,7 +38,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" >
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" >
   
          
     </div><label for="nombreprod" class="error">
@@ -53,7 +52,7 @@ $fechaFin=strtotime($Especialistas->Fecha_Fin);
 ?>  </select>   
 
 <select id = "SeleccionFechas" class = "form-control" name = "FechasAguardar[]" multiple>
-                          <?
+                          <?php
                           for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
      
                             echo '<option value="'.date("Y-m-d",$i).'">'.date("Y-m-d",$i).'</option>';
@@ -90,13 +89,13 @@ $fechaFin=strtotime($Especialistas->Fecha_Fin);
    
     
 
-    <input type="text" class="form-control " hidden name="Medico" readonly  value="<? echo $Especialistas->FK_Medico; ?>" >
-    <input type="text" class="form-control "  hidden name="NumberPrograma" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+    <input type="text" class="form-control " hidden name="Medico" readonly  value="<?php echo $Especialistas->FK_Medico; ?>" >
+    <input type="text" class="form-control "  hidden name="NumberPrograma" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
        
      
-    <input type="text" class="form-control"  hidden name="UsuarioA"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  hidden name="Empresa"  readonly value=" <?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  hidden  name="SistemaA"  readonly value="<?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  hidden name="UsuarioA"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  hidden name="Empresa"  readonly value=" <?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  hidden  name="SistemaA"  readonly value="<?php echo $row['Nombre_rol']?>">
     
    
 
@@ -109,13 +108,13 @@ $fechaFin=strtotime($Especialistas->Fecha_Fin);
                                         </form>
 
                                         <!-- <form action="javascript:void(0)" method="post" id="ActualizaElEstadoFechas"> 
-                                        <input type="text" class="form-control "   name="ID_Programa" readonly  value="<? echo $Especialistas->ID_Programacion; ?>" >
+                                        <input type="text" class="form-control "   name="ID_Programa" readonly  value="<?php echo $Especialistas->ID_Programacion; ?>" >
                                         <input type="text" class="form-control"  hidden name="EstadoProgramacion"  readonly value="Autorizar Horas">
        
      
-       <input type="text" class="form-control"  hidden name="UsuarioAutorizo"  readonly value=" <?echo $row['Nombre_Apellidos']?>">
+       <input type="text" class="form-control"  hidden name="UsuarioAutorizo"  readonly value=" <?php echo $row['Nombre_Apellidos']?>">
        
-       <input type="text" class="form-control"  hidden  name="SistemaAutorizo"  readonly value="<?echo $row['Nombre_rol']?>">
+       <input type="text" class="form-control"  hidden  name="SistemaAutorizo"  readonly value="<?php echo $row['Nombre_rol']?>">
                                         <button type="submit"   id="ActualizarEstadoFechas" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
                                         </form>                -->
        </div>

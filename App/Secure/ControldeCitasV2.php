@@ -1,28 +1,28 @@
-<?
-header ("Location:https://controlfarmacia.com/App/Secure/IngresoAgenda");
+<?php
+header ("Location:https://saludapos.com/App/Secure/IngresoAgenda");
 include("db_connect.php");
 include("Cookies/Mensaje.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>CONTROL DE CITAS | LOGIN</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CONTROL DE CITAS | LOGIN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="Componentes/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="Componentes/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Componentes/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="Componentes/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="Componentes/vendor/animate/animate.css">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="Componentes/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Componentes/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="Componentes/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Componentes/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="Componentes/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="Componentes/vendor/select2/select2.min.css">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="Componentes/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Componentes/css/util.css">
+    <link rel="stylesheet" type="text/css" href="Componentes/css/util.css">
     <link rel="stylesheet" type="text/css" href="Componentes/css/main.css">
     <script src="Componentes/sweetalert2@9.js"></script>
 <link rel="stylesheet" href="Componentes/bootstrap.min.css">
@@ -104,27 +104,27 @@ include("Cookies/Mensaje.php");
 
 
         
-		<div class="container-login100" >
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+        <div class="container-login100" >
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
     
-				<form class="login100-form validate-form" method="post" id="login-form">
+                <form class="login100-form validate-form" method="post" id="login-form">
 
-					<span class="login100-form-title p-b-49">
-            <?echo $mensaje?>
+                    <span class="login100-form-title p-b-49">
+            <?php echo $mensaje?>
              
-					</span>
+                    </span>
 
-					<div class="wrap-input100 " >
-						<span class="label-input100">Correo electronico</span>
-						<input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="30">
-						<span class="focus-input100" data-symbol="&#xf206;"></span>
-					</div>
+                    <div class="wrap-input100 " >
+                        <span class="label-input100">Correo electronico</span>
+                        <input class="input100" input type="email" autocomplete="off" required placeholder="puntoventa@consulta.com" name="user_email" id="user_email" maxlength="30">
+                        <span class="focus-input100" data-symbol="&#xf206;"></span>
+                    </div>
 
-					<div class="wrap-input100 ">
-						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="password" required placeholder="************"  name="password" id="password"  maxlength="10">
+                    <div class="wrap-input100 ">
+                        <span class="label-input100">Contraseña</span>
+                        <input class="input100" type="password" required placeholder="************"  name="password" id="password"  maxlength="10">
                        
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
+                        <span class="focus-input100" data-symbol="&#xf190;"></span>
                         
                     </div>
                     <br>
@@ -134,21 +134,21 @@ include("Cookies/Mensaje.php");
     </label>
   </div>   
   
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" type="submit"  name="login_button" id="login_button">
-								Ingresar
-							</button>
-						</div>
-					</div>
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" type="submit"  name="login_button" id="login_button">
+                                Ingresar
+                            </button>
+                        </div>
+                    </div>
                  
                     </form>  <div id="error">
   </div>
-  <?include "Modales/ModalCitas.php";
+  <?php include "Modales/ModalCitas.php";
   include "Modales.php";?>
 
-						<!--Start of Tawk.to Script-->
+                        <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
@@ -161,12 +161,12 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-					
-			
-			</div>
-		</div>
-	</div>
-	
+                    
+            
+            </div>
+        </div>
+    </div>
+    
 <!-- Modal hacia soporte -->
 
     
@@ -183,20 +183,20 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 <!--===============================================================================================-->
-	
-	<script src="Componentes/vendor/animsition/js/animsition.min.js"></script>
+    
+    <script src="Componentes/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="Componentes/vendor/bootstrap/js/popper.js"></script>
-	<script src="Componentes/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="Componentes/vendor/bootstrap/js/popper.js"></script>
+    <script src="Componentes/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="Componentes/vendor/select2/select2.min.js"></script>
+    <script src="Componentes/vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="Componentes/vendor/daterangepicker/moment.min.js"></script>
-	<script src="Componentes/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="Componentes/vendor/daterangepicker/moment.min.js"></script>
+    <script src="Componentes/vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-	<script src="Componentes/vendor/countdowntime/countdowntime.js"></script>
+    <script src="Componentes/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="Componentes/js/main.js"></script>
+    <script src="Componentes/js/main.js"></script>
 
 </body>
 </html>
@@ -224,8 +224,8 @@ $('#show_password').on('change',function(event){
 </script>
 <script src="../Scripts/Redirecciones.js" type="text/javascript"></script>
 
-	
-<?
+    
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

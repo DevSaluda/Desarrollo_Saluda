@@ -16,7 +16,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Programacion_Medicos_Sucursales.ID_Programacion,Programacion_Medicos_Sucursales.FK_Medico,Programacion_Medicos_Sucursales.Fk_Sucursal,Programacion_Medicos_Sucursales.Tipo_Programacion,Programacion_Medicos_Sucursales.Fecha_Inicio,Programacion_Medicos_Sucursales.ID_H_O_D,
@@ -70,7 +70,7 @@ $query = $conn->query($sql1);
     echo "background-color:#00c851!important";
 }
 ?>>
-<?if($Especialidades['Estatus'] == ''){
+<?php if($Especialidades['Estatus'] == ''){
    echo "No se asigno estatus";
 } else {
     echo $Especialidades["Estatus"]; 
@@ -122,7 +122,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-AsigSucursal").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AutorizaFechas.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AutorizaFechas.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Confirmando fechas");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -136,7 +136,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-horas").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AutorizaHoras.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AutorizaHoras.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Confirmado horarios");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -148,7 +148,7 @@ $query = $conn->query($sql1);
     }); 
     $(".btn-finaliza").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/FinalizaProgramaSucursal.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/FinalizaProgramaSucursal.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Finalizar programacion");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -178,7 +178,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

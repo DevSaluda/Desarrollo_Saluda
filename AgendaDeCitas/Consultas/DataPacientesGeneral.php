@@ -7,7 +7,7 @@ tabla = $('#PacientesNuevos').DataTable({
  "ordering": true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AgendaDeCitas/Consultas/ArrayDataPacientes.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/ArrayDataPacientes.php",
  "aoColumns": [
        { mData: 'Folio' },
        { mData: 'Nombre' },

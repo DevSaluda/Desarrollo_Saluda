@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/AgendaDeCitas/Reportes">
+ <form  method="POST" action="https://saludapos.com/AgendaDeCitas/Reportes">
     
  
  

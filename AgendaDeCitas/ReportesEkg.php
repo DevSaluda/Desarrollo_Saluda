@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/AnalisisIndex.php";
 
 $fecha1=($_POST['Fecha1']);
@@ -19,7 +18,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
 
   <title>Reportes de Electrocardiogramas de sucursales  </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -33,7 +32,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Datos de laboratorios de la sucursal  <?echo $nombresucursalelegida?> del 
+  Datos de laboratorios de la sucursal  <?php echo $nombresucursalelegida?> del 
   </div>
   <div >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
@@ -89,7 +88,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -196,7 +195,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
