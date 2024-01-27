@@ -12,7 +12,7 @@ include "Consultas/Consultas.php";
   <title>Agendamiento de citas de revaloracion </title>
 
   <?php include "Header.php"?>
-  <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
+
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
