@@ -180,7 +180,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/CancelacionesV2.php" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeCitas/CancelacionesV2" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-times"></i>
                     <p>
                       Cancelaciones
@@ -195,7 +195,7 @@
 
 
             
-            <li class="nav-header" style="color: white;">Calendarios de campañas</li>
+            <!-- <li class="nav-header" style="color: white;">Calendarios de campañas</li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-calendar-alt" style="color: white;"></i>
@@ -224,7 +224,7 @@
 
                     </p>
                   </a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
             <a href="https://controlfarmacia.com/AgendaDeCitas/Calendario" class="nav-link">
             <i class="fas fa-calendar-check"></i>
