@@ -84,12 +84,6 @@ include "Consultas/Consultas.php";
  
   <!-- Main Footer -->
 <?php
-  include ("Modales/AltaProductos.php");
-
-  include ("Modales/Vacios.php");
-  include ("Modales/Error.php");
-  include ("Modales/Exito.php");
-  include ("Modales/ExitoActualiza.php");
 
   include ("footer.php")?>
 
