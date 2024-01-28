@@ -32,7 +32,7 @@ function Expiro(){
  
 }
 function Login(){
-    location.href="https://controlfarmacia.com/App/Secure/ServicioEspecial"
+    location.href="https://saludapos.com/App/Secure/ServicioEspecial"
  }
   </script>
 </head>
