@@ -11,4 +11,4 @@
   </footer>
 </div>
 <script src="js/LogSalida.js"></script>
-<script src="https://controlfarmacia.com/ControldecitasV2/js/Refresca.js"></script>
+<script src="https://saludapos.com/AgendaDeCitas/js/Refresca.js"></script>
