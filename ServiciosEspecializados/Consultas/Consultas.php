@@ -1,10 +1,13 @@
-<?
+<?php
 date_default_timezone_set("America/Monterrey");
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
 if(!isset($_SESSION['Especialista'])){
 	header("Location: Expiro.php");
 }
-include_once("../db_connect.php");
+include_once("db_connection.php");
 $sql = "SELECT Especialista_ID,Nombre_Apellidos,file_name,ID_Sucursal,ID_H_O_D,Fk_Logo_identidad FROM Servicios_Especializados WHERE Especialista_ID='".$_SESSION['Especialista']."'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
