@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if(!isset($_SESSION['Especialista'])){
-	header("Location: Expiro.php");
+	header("Location: Expiro");
 }
 include_once("db_connection.php");
 $sql = "SELECT Especialista_ID,Nombre_Apellidos,file_name,ID_Sucursal,ID_H_O_D,Fk_Logo_identidad FROM Servicios_Especializados WHERE Especialista_ID='".$_SESSION['Especialista']."'";
