@@ -5,7 +5,7 @@ include("ConeSelectDinamico.php");
 $sucursal = intval($_REQUEST['especialidadext']);
 
 // Prepara la consulta con un marcador de posición
-$medicos = $conn->prepare("SELECT * FROM Personal_Medico_Express WHERE Estatus='Disponible' AND Especialidad_Express = ?") or die(mysqli_error());
+$medicos = $conn->prepare("SELECT * FROM Personal_Medico_Express WHERE Estatus='Disponible' AND Especialidad_Express = ?") or die(mysqli_error($conn));
 
 // Vincula el parámetro
 $medicos->bind_param("i", $sucursal);
@@ -19,6 +19,9 @@ if ($medicos->execute()) {
     while ($row = $a_result->fetch_array()) {
         echo '<option value="' . $row['Medico_ID'] . '">' . $row['Nombre_Apellidos'] . '</option>';
     }
+} else {
+    // Manejo de error si la consulta no se ejecuta correctamente
+    die(mysqli_error($conn));
 }
 
 // Cierra la conexión y la consulta
