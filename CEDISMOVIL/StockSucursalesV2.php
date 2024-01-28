@@ -29,14 +29,7 @@ table td {
 </head>
 <?php include_once ("Menu.php")?>
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  
-  
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Stock por sucursales</a>
-  </li>
- 
-</ul>
+
 
 <div class="tab-content" id="pills-tabContent">
 
