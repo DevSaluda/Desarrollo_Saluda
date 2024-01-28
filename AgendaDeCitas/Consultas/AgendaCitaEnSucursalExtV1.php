@@ -36,29 +36,33 @@ $sql = "SELECT Fk_Especialidad,Fk_Especialista,Fk_Sucursal,Fecha,Hora,Nombre_Pac
 $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
-$Fk_Fecha = isset($row['Fecha']) ? $row['Fecha'] : null;
-$Fk_Hora = isset($row['Hora']) ? $row['Hora'] : null;
+if ($row !== null) {
+    $Fk_Fecha = isset($row['Fecha']) ? $row['Fecha'] : null;
+    $Fk_Hora = isset($row['Hora']) ? $row['Hora'] : null;
 
-if (
-    $row['Nombre_Paciente'] == $Nombre_Paciente &&
-    $Fk_Fecha == $Fecha &&
-    $Fk_Hora == $Hora &&
-    $row['Fk_Especialidad'] == $Fk_Especialidad
-) {
-    echo json_encode(array("statusCode" => 250));
-} else {
-    $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, `Costo`, 
-            `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`,  `Color_Calendario`) 
-            VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora','$Costo', 
-            '$Nombre_Paciente','$Telefono','$Tipo_Consulta', '$Estatus_cita', '$Observaciones','$ID_H_O_D','$AgendadoPor','$Sistema', '$Color_Calendario')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo json_encode(array("statusCode" => 200));
+    if (
+        $row['Nombre_Paciente'] == $Nombre_Paciente &&
+        $Fk_Fecha == $Fecha &&
+        $Fk_Hora == $Hora &&
+        $row['Fk_Especialidad'] == $Fk_Especialidad
+    ) {
+        echo json_encode(array("statusCode" => 250));
     } else {
-        echo json_encode(array("statusCode" => 201));
-    }
+        $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, `Costo`, 
+                `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`,  `Color_Calendario`) 
+                VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora','$Costo', 
+                '$Nombre_Paciente','$Telefono','$Tipo_Consulta', '$Estatus_cita', '$Observaciones','$ID_H_O_D','$AgendadoPor','$Sistema', '$Color_Calendario')";
 
-    mysqli_close($conn);
+        if (mysqli_query($conn, $sql)) {
+            echo json_encode(array("statusCode" => 200));
+        } else {
+            echo json_encode(array("statusCode" => 201));
+        }
+    }
+} else {
+    echo json_encode(array("statusCode" => 500, "error" => "No se encontraron datos en la base de datos"));
 }
+
+mysqli_close($conn);
 
 ?>
