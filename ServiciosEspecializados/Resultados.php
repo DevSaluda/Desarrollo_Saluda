@@ -9,7 +9,7 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>SERVICIOS ESPECIALIZADOS |<?echo $row['ID_Sucursal']?> </title>
+  <title>SERVICIOS ESPECIALIZADOS |<?echo $row['ID_H_O_D']?> </title>
 
   <!-- Font Awesome Icons -->
  
@@ -36,7 +36,7 @@ include "Consultas/Sesion.php";
 <script src="Componentes/sweetalert2@9.js"></script>
 <script src="Componentes/b5ed0deb1b.js"></script>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <!-- <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">¡ATENCIÓN! </h4>
   <p>El espacio en el disco del servidor está llegando al límite, se recomienda contactar a soporte para realizar tareas de mantenimiento.</p>
@@ -89,7 +89,7 @@ include "Consultas/Sesion.php";
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
- <?include "footer.php" ?>
+ <?php include "footer.php" ?>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
