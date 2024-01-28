@@ -143,7 +143,7 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">No se encontraron coincidencias</p>
+	<p class="alert alert-warning">Por el momento no se ha realizado busqueda</p>
 <?php endif;?>
 </div>
 </div>
