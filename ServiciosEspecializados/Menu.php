@@ -118,10 +118,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../Perfiles/<?echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
+          <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a  class="d-block"><?echo $row['Nombre_Apellidos']?></a>
+          <a  class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
         </div>
       </div>
 
