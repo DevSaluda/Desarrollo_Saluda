@@ -27,10 +27,15 @@ $Color_Calendario	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($Co
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);	
     //include database configuration file
-    if($row['Nombre_Paciente']==$Nombre_Paciente  AND $row['Fk_Fecha']=="$Fk_Fecha" AND $row['Fk_Hora']=="$Fk_Hora" AND $row['Fk_Especialidad']=="$Fk_Especialidad"){				
-        echo json_encode(array("statusCode"=>250));
-      
-    } 
+    if (
+        isset($row['Nombre_Paciente']) && $row['Nombre_Paciente'] == $Nombre_Paciente &&
+        isset($row['Fk_Fecha']) && $row['Fk_Fecha'] == "$Fk_Fecha" &&
+        isset($row['Fk_Hora']) && $row['Fk_Hora'] == "$Fk_Hora" &&
+        isset($row['Fk_Especialidad']) && $row['Fk_Especialidad'] == "$Fk_Especialidad"
+    ) {
+        echo json_encode(array("statusCode" => 250));
+    }
+    
     else{
     
 		$sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, 
