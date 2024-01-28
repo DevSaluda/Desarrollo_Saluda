@@ -3,8 +3,8 @@ include "Consultas/Consultas.php";
 
 include "Consultas/AnalisisIndex.php";
 
-$fecha1=($_POST['Fecha1']);
-$fecha2=($_POST['Fecha2']);
+$fecha1 = isset($_POST['Fecha1']) ? $_POST['Fecha1'] : '';
+$fecha2 = isset($_POST['Fecha2']) ? $_POST['Fecha2'] : '';
 $sql1="SELECT Ventas_POS.Cod_Barra,Ventas_POS.Nombre_Prod,Ventas_POS.Fk_sucursal,Ventas_POS.Fecha_venta,Ventas_POS.Identificador_tipo,Ventas_POS.Folio_Ticket, Ventas_POS.Importe,Ventas_POS.FormaDePago,
 Ventas_POS.AgregadoPor,Ventas_POS.Cliente,Servicios_POS.Servicio_ID, Servicios_POS.Nom_Serv,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
 FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fecha_venta BETWEEN '$fecha1' AND '$fecha2' AND Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC AND 
