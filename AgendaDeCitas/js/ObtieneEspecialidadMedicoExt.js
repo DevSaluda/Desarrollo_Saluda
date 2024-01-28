@@ -1,17 +1,15 @@
-$('document').ready(function(){
+$(document).ready(function(){
     $('#sucursalExt').on('change', function(){
-            if($('#sucursalExt').val() == ""){
-                $('#especialidadExt').empty();
-                $('<option value = "">Selecciona un especialidadExt</option>').appendTo('#especialidadExt');
-                $('#especialidadExt').attr('disabled', 'disabled');
-            }else{
-                $('#especialidadExt').removeAttr('disabled', 'disabled');
-                console.log('Consultas/ObtieneMedExt.php?sucursalExt=' + $('#sucursalExt').val());
-                $('#especialidadExt').load('Consultas/ObtieneMedExt.php?sucursalExt=' + $('#sucursalExt').val());
-                
-                
-            }
+        var sucursalValue = $(this).val();
+
+        if(sucursalValue === ""){
+            $('#especialidadExt').empty().append('<option value="">Selecciona una especialidad</option>').prop('disabled', true);
+        } else {
+            console.log('Consultas/ObtieneMedExt.php?sucursalExt=' + sucursalValue);
+
+            $('#especialidadExt')
+                .prop('disabled', false)
+                .load('Consultas/ObtieneMedExt.php?sucursalExt=' + sucursalValue);
+        }
     });
 });
-
-
