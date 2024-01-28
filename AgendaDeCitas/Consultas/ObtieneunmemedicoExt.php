@@ -1,9 +1,9 @@
 <?php
 include("ConeSelectDinamico.php");
 
-// Verificar si 'especialidadext' está definido en $_REQUEST
-if (isset($_REQUEST['especialidadext'])) {
-    $sucursal = intval($_REQUEST['especialidadext']);
+// Verificar si 'sucursalExt' está definido en $_GET
+if (isset($_GET['sucursalExt'])) {
+    $sucursal = intval($_GET['sucursalExt']);
     
     // Utilizar sentencia preparada para evitar SQL injection
     $medicos = $conn->prepare("SELECT * FROM Personal_Medico_Express WHERE Estatus='Disponible' AND Especialidad_Express = ?") or die(mysqli_error());
@@ -25,6 +25,6 @@ if (isset($_REQUEST['especialidadext'])) {
     $medicos->close();
     $conn->close();
 } else {
-    echo "Parámetro 'especialidadext' no definido en la solicitud.";
+    echo "Parámetro 'sucursalExt' no definido en la solicitud.";
 }
 ?>
