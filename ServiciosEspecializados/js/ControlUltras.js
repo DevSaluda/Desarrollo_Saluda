@@ -1,7 +1,7 @@
 function CargaResultadosUltras(){
 
 
-    $.get("https://controlfarmacia.com/Servicios_Especializados/Consultas/EntregaUltrasF.php","",function(data){
+    $.get("https://saludapos.com/ServiciosEspecializados/Consultas/EntregaUltrasF.php","",function(data){
       $("#TablaResultadosUltrasonidos").html(data);
     })
   
