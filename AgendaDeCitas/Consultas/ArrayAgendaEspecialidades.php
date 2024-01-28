@@ -46,7 +46,7 @@ Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_Especiali
 LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
-AgendaCitas_EspecialistasExt.ID_H_O_D = '".$row['ID_H_O_D']."'
+AgendaCitas_EspecialistasExt.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
 AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
 
 

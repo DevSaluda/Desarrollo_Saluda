@@ -71,7 +71,6 @@ include "Consultas/Consultas.php";
   include ("footer.php")?>
 
 
-  <script src="js/AgendaEnSucursales.js"></script>
 
 <script src="js/CampanasExpress.js"></script>
 <script src="js/AgregaEspecialidad.js"></script>
