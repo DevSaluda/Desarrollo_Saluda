@@ -6,7 +6,9 @@ $('document').ready(function(){
                 $('#especialidadExt').attr('disabled', 'disabled');
             }else{
                 $('#especialidadExt').removeAttr('disabled', 'disabled');
+                console.log('Consultas/ObtieneMedExt.php?sucursalExt=' + $('#sucursalExt').val());
                 $('#especialidadExt').load('Consultas/ObtieneMedExt.php?sucursalExt=' + $('#sucursalExt').val());
+                
                 
             }
     });
