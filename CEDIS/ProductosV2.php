@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -108,8 +106,7 @@ include "Consultas/Consultas.php";
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlProductos2.js"></script>
 
-<!-- <script src="js/ProductosPovencer.js"></script> -->
-<script src="js/ControlStockSucursales.js"></script>
+
 
 <script src="js/AltaProductos.js"></script>
 
