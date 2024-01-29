@@ -3,7 +3,6 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-include "mcript.php";
 
 $sql1="SELECT Agenda_revaloraciones.Id_genda,
               Agenda_revaloraciones.Nombres_Apellidos,
