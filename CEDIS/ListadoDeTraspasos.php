@@ -79,7 +79,6 @@ include "Consultas/Consultas.php";
 include("Modales/BusquedaTraspasosFechas.php");
 include("Modales/RealizaNuevaOrdenTraspaso.php");
 include("Modales/RealizaNuevaOrdenTraspasoPorSucursales.php");
-include("Modales/ModalCancelarTraspasos.php");
 include("footer.php") ?>
 
 <!-- ./wrapper -->
