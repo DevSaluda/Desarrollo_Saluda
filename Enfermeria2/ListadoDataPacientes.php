@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
 
 ?>
 <!DOCTYPE html>
@@ -27,57 +25,7 @@ include "Consultas/ConeSelectDinamico.php";
 </div>
 
 </div>
-  
-<?php
-$phoneNumber1 = "529991432948";
-$phoneNumber2 = "529994424745";
-?>
 
-<style>  
-  div.whatsapp-container {
-    text-align: center;
-    background-color: #fff; 
-    padding: 20px; 
-  }
-
-  .whatsapp-button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center; 
-  }
-
-  .whatsapp-button i {
-    font-size: 20px; 
-    margin-right: 10px; 
-  }
-
-  .whatsapp-button:hover {
-    background-color: #25d366;
-  }
-</style>
-
-
-<div class="whatsapp-container">
-  <div class="whatsapp-button" id="whatsapp-button1">
-    <a href="https://api.whatsapp.com/send?phone=<?php echo $phoneNumber1; ?>" target="_blank" aria-label="Contactar por WhatsApp (Número 1)">
-      <i class="fab fa-whatsapp"></i> 
-      <span> Contactar a Jefatura de Enfermería por Whatsapp </span>
-    </a>
-  </div>
-  <div class="whatsapp-button" id="whatsapp-button2">
-    <a href="https://api.whatsapp.com/send?phone=<?php echo $phoneNumber2; ?>" target="_blank" aria-label="Contactar por WhatsApp (Número 2)">
-      <i class="fab fa-whatsapp"></i> 
-      <span> Contactar a Gestores de Procesos por Whatsapp </span>
-    </a>
-  </div>
-</div>  
 
 
 <div class="col-md-12">
