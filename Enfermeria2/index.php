@@ -119,7 +119,7 @@ include "Consultas/Consultas.php";
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?include ("Modales/Ingreso.php");
+  <?php include ("Modales/Ingreso.php");
  include ("Modales/ModalConsultaProductos.php");
  include ("Modales/Confirmacion.php"); 
  include ("Modales/AltaProcedimiento.php");

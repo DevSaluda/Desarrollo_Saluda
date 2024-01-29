@@ -164,7 +164,7 @@
             </a>
           </li>-->
           <li class="nav-item">
-          <a href="<?php = $row['Url_Drive_Enfermeria'] ?>" target="_blank" class="nav-link">
+          <a href="<?php echo $row['Url_Drive_Enfermeria'] ?>" target="_blank" class="nav-link">
           <i class="fas fa-briefcase-medical"></i> Solicitar Insumos 
           </a>
           </li>
