@@ -28,7 +28,7 @@ include "Consultas/ConeSelectDinamico.php";
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important; color: white;">
-  <i class="fas fa-user-md"></i> Especialidades de medicos express <i class="fas fa-user-md"></i>
+Lista de pacientes agendados
   </div>
  
   <div >
