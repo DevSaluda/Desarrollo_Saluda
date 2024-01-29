@@ -3,7 +3,7 @@ $SucursalDestino = $_POST['SucursalConOrdenDestino'];
 $SucursalDestinoLetras = $_POST['sucursalLetras'];
 $ProveedorFijo = $_POST['NombreProveedor'];
 $NumeroOrdenTraspaso = $_POST['NumOrden'];
-$NumeroDeFacturaTrapaso = $_POST['NumFactura'];
+$NumeroDeFacturaTrapaso ="";
 
 if ($ProveedorFijo === "CEDIS") {
     // Tomar solo las primeras 4 letras de $SucursalDestinoLetras
