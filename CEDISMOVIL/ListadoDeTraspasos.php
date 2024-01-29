@@ -40,9 +40,9 @@ include "Consultas/Consultas.php";
   Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
 </button>
 
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroParaSucursalesVarias" class="btn btn-default">
+<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroParaSucursalesVarias" class="btn btn-default">
   Traspaso entre sucursales <i class="fas fa-clinic-medical"></i> <i class="fas fa-exchange-alt"></i> <i class="fas fa-clinic-medical"></i>
-</div>
+</div> -->
 </div>
     
 <div id="tablaProductos"></div>
