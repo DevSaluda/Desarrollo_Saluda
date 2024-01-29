@@ -1,9 +1,10 @@
 <?php
-$SucursalDestino = $_POST['SucursalConOrdenDestino'];
-$SucursalDestinoLetras = $_POST['sucursalLetras'];
-$ProveedorFijo = $_POST['NombreProveedor'];
-$NumeroOrdenTraspaso = $_POST['NumOrden'];
-$NumeroDeFacturaTrapaso ="";
+
+  $SucursalDestino = isset($_POST['SucursalConOrdenDestino']) ? $_POST['SucursalConOrdenDestino'] : "";
+  $SucursalDestinoLetras = isset($_POST['sucursalLetras']) ? $_POST['sucursalLetras'] : "";
+  $ProveedorFijo = isset($_POST['NombreProveedor']) ? $_POST['NombreProveedor'] : "";
+  $NumeroOrdenTraspaso = isset($_POST['NumOrden']) ? $_POST['NumOrden'] : "";
+  $NumeroDeFacturaTrapaso = "";
 
 if ($ProveedorFijo === "CEDIS") {
     // Tomar solo las primeras 4 letras de $SucursalDestinoLetras
