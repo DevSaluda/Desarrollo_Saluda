@@ -7,7 +7,7 @@
       <!--Header-->
       <div class="modal-header">
           
-        <img src="../Perfiles/<?echo $row['file_name']?>" alt="Perfil" class="rounded-circle img-responsive">
+        <img src="../Perfiles/<?php echo $row['file_name']?>" alt="Perfil" class="rounded-circle img-responsive">
     
       </div>
      
@@ -18,13 +18,13 @@
       <i class="fas fa-sign-out-alt fa-4x mb-3 animated rotateIn" style="color:red"></i>
     
         <h5 class="mt-1 mb-2">¿Deseas cerrar tu sesión? <br>
-        <?echo $row['Nombre_Apellidos']?> <br>
+        <?php echo $row['Nombre_Apellidos']?> <br>
         <form  method="post" id="Logsale">
   
-      <input type="text" class="form-control" name="usuario" id="usuarioo" readonly hidden value="<?echo $row['Nombre_Apellidos']?>" >
+      <input type="text" class="form-control" name="usuario" id="usuarioo" readonly hidden value="<?php echo $row['Nombre_Apellidos']?>" >
       <input type="text" class="form-control" name="log" id="logg" readonly hidden value="Cierre de sesión" >
-      <input type="text" class="form-control" name="sistema" id="sistemaa" hidden readonly value="Administración general del POS" >
-      <input type="text" class="form-control" name="empresa" id="empresaa" hidden readonly value="<?echo $row['ID_H_O_D']?>" >
+      <input type="text" class="form-control" name="sistema" id="sistemaa" hidden readonly value="Supervisor" >
+      <input type="text" class="form-control" name="empresa" id="empresaa" hidden readonly value="<?php echo $row['ID_H_O_D']?>" >
   
   
 
