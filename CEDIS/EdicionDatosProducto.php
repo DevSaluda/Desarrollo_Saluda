@@ -2,7 +2,6 @@
  $IdBusqueda=base64_decode($_GET['editprod']);
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
@@ -276,7 +275,7 @@ $(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
