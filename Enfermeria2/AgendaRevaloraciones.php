@@ -1,9 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,13 +19,7 @@ include "Consultas/ConeSelectDinamico.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  
-  <li class="nav-item">
-    <a class="nav-link active " id="pills-home-tab" data-toggle="pill" href="#CrediClinicas" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-file-medical"></i>Revaloraciones</a>
-  </li>
- 
-</ul>
+
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
@@ -79,7 +70,7 @@ Citas de especialistas
    include ("Modales/ExitoActualiza.php");
    include ("Modales/EstatusAgendaGuardado.php");
    include ("Modales/AgendarCitaRevaloracion.php");
-   include ("Modales/AltaEspecialista.php");
+
    include ("footer.php")?>
 
 <script src="js/RevaloracionesControl.js"></script>
