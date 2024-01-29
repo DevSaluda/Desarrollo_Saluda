@@ -7,7 +7,6 @@ $NumeroOrdenTraspaso=($_POST['NumOrden']);
 $NumeroDeFacturaTrapaso=($_POST['NumFactura']);
 include "Consultas/Consultas.php";
 
-include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
