@@ -66,9 +66,9 @@ Citas de especialistas
   <?php 
    include ("Modales/Error.php");
    include ("Modales/Exito.php");
-   include ("Modales/Precarga.php");
-   include ("Modales/ExitoActualiza.php");
-   include ("Modales/EstatusAgendaGuardado.php");
+  //  include ("Modales/Precarga.php");
+  //  include ("Modales/ExitoActualiza.php");
+  //  include ("Modales/EstatusAgendaGuardado.php");
    include ("Modales/AgendarCitaRevaloracion.php");
 
    include ("footer.php")?>
