@@ -228,6 +228,8 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
 
 
                                         </div>
+                                        </div>
+                                        </div>
 
 
 </div>
