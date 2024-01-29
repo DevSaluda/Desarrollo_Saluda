@@ -174,7 +174,7 @@
              
        
               <p>
-              <i class="fa-solid fa-clipboard-question"></i>
+              <i class="fas fa-notes-medical"></i>
                             Consultas
               
               </p>
