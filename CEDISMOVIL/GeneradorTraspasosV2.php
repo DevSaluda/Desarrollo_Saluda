@@ -4,7 +4,7 @@ $SucursalDestino=($_POST['SucursalConOrdenDestino']);
 $SucursalDestinoLetras=($_POST['sucursalLetras']);
 
 $NumeroOrdenTraspaso=($_POST['NumOrden']);
-
+$NumeroDeFacturaTrapaso="";
 include "Consultas/Consultas.php";
 
 ?>
