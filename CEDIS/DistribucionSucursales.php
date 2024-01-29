@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
 $IdBusqueda=base64_decode($_GET['Disid']);
 $sql1="SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.ID_Prod_POS,Stock_POS.Clave_adicional,Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Fk_sucursal,
 Stock_POS.Existencias_R,Stock_POS.Proveedor1,Stock_POS.Proveedor2,Stock_POS.CodigoEstatus,Stock_POS.Estatus,Stock_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
@@ -160,7 +159,7 @@ $query = $conn->query($sql1);
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
  
   include ("Modales/ExitoActualiza.php");
 
@@ -169,12 +168,10 @@ $query = $conn->query($sql1);
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ControlProductos2.js"></script>
 
-<script src="js/ProductosPovencer.js"></script>
-<script src="js/ControlStockSucursales.js"></script>
 
-<script src="js/AltaProductos.js"></script>
+
+
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
@@ -207,7 +204,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

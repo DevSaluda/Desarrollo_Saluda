@@ -41,7 +41,7 @@ while ($r=$query->fetch_object()){
 <?php if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#4285f4!important;color: white;">
- Asignando <? echo $Especialistas->Nombre_Prod; ?> en sucursales
+ Asignando <?php echo $Especialistas->Nombre_Prod; ?> en sucursales
   </div>
   
   <div class="col-md-12">
