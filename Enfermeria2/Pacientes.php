@@ -1,9 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,7 +55,7 @@ include ("Modales/Precarga.php");
 <!-- ./wrapper -->
 <script src="js/ControlPacientes.js"></script>
 
-<script src="js/ControlSignosVitales.js"></script>
+<!-- <script src="js/ControlSignosVitales.js"></script> -->
 <script src="js/GuardaCita.js"></script>
 <script src="js/Capturadata.js"></script>
 <script src="js/CalculaIMC.js"></script>
