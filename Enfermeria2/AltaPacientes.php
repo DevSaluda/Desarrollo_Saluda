@@ -1,8 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -76,7 +75,7 @@ include ("Modales/EstatusAgendaGuardado.php");
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
