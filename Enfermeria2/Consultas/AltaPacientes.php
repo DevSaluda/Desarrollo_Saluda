@@ -17,12 +17,12 @@ $Sistema =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['sis
     //insert form data in the database
     $sql = "SELECT Nombre_Paciente FROM Data_Pacientes WHERE Nombre_Paciente='$Nombre_Paciente'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$row = mysqli_fetch_assoc($resultset);	
-    //include database configuration file
-    if($row['Nombre_Paciente']==$Nombre_Paciente){				
-        echo json_encode(array("statusCode"=>250));
-      
-    } 
+$row = mysqli_fetch_assoc($resultset);
+
+if ($row !== null && $row['Nombre_Paciente'] == $Nombre_Paciente) {
+    echo json_encode(array("statusCode"=>250));
+} 
+
     else{
     
 		$sql = "INSERT INTO `Data_Pacientes`( `Nombre_Paciente`,`Fecha_Nacimiento`,`Edad`,`Sexo`,`Alergias`,`Telefono`,`Correo`,`FK_ID_H_O_D`,`Ingreso`,`Sistema`) 
