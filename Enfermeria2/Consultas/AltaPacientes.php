@@ -37,7 +37,7 @@ $row = mysqli_fetch_assoc($resultset);
 		mysqli_close($conn);
    
 
-    mysqli_close($conn);
+
 }
 ?>
 
