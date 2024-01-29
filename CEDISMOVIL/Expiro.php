@@ -9,9 +9,9 @@
   <title>Cierre de sesión |...  </title>
 
   <!-- Font Awesome Icons -->
-  <?include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #33b5e5 !important;color: white;">
    Sin actividad reciente <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?>  y <?php echo FechaCastellano(date('d-m-Y H:i:s', strtotime("+1 day")));  ?>  
@@ -46,7 +46,7 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?
+  <?php
 include ("Modales/Expirado.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
@@ -85,7 +85,7 @@ $(document).ready(function()
 </body>
 </html>
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
