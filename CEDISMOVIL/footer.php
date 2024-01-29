@@ -13,7 +13,7 @@
     }, 1200000 );
 
     function pingServer() {
-        $.ajax('https://controlfarmacia.com/CEDISMOVIL/keepAlive');
+        $.ajax('https://saludapos.com/CEDISMOVIL/keepAlive');
     }
 </script>
 
@@ -24,7 +24,7 @@
       <b>Version</b> 3.0
     </div>
   </footer>
-</div><?include ("Modales/Salidas.php");
+</div><?php include ("Modales/Salidas.php");
 ?>
 <script src="js/LogSalida.js"></script>
-<script src="https://controlfarmacia.com/CEDIS/js/Refresca.js"></script>
+<script src="https://saludapos.com/CEDIS/js/Refresca.js"></script>
