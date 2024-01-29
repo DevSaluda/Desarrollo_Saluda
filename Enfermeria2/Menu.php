@@ -248,7 +248,7 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/Enfermeria2/CancelacionesV2" class="nav-link">
             <i class="fas fa-calendar-times"></i>
               <p>
@@ -256,7 +256,7 @@
                
               </p>
             </a>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <a href="https://controlconsulta.com/Enfermeria2/Cancelaciones" class="nav-link">
             <i class="fas fa-calendar-times"></i>
