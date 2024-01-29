@@ -47,7 +47,7 @@ include "Consultas/Consultas.php";
 
   <!-- Main Footer -->
   <?php
-include ("Modales/AltaCitaSucursal.php");
+// include ("Modales/AltaCitaSucursal.php");
 include ("Modales/Exito.php");
 include ("Modales/Confirmacion.php");
 include ("Modales/Precarga.php");
