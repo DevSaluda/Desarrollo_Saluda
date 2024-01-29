@@ -8,7 +8,6 @@ $Fk_Especialista	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_PO
 $Fk_Sucursal =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['SucursalExt']))));
 $Fecha= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['FechaExt']))));	
 $Hora	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['HorasExt']))));
-$Costo= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['CostoExt']))));
 $Nombre_Paciente= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['NombresExt']))));
 $Telefono= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TelExt']))));
 $Tipo_Consulta	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TipoConsultaExt']))));
@@ -28,15 +27,20 @@ $Color_Calendario	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($Co
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);	
     //include database configuration file
-    if($row['Nombre_Paciente']==$Nombre_Paciente  AND $row['Fk_Fecha']=="$Fk_Fecha" AND $row['Fk_Hora']=="$Fk_Hora" AND $row['Fk_Especialidad']=="$Fk_Especialidad"){				
-        echo json_encode(array("statusCode"=>250));
-      
-    } 
+    if (
+        isset($row['Nombre_Paciente']) && $row['Nombre_Paciente'] == $Nombre_Paciente &&
+        isset($row['Fk_Fecha']) && $row['Fk_Fecha'] == "$Fk_Fecha" &&
+        isset($row['Fk_Hora']) && $row['Fk_Hora'] == "$Fk_Hora" &&
+        isset($row['Fk_Especialidad']) && $row['Fk_Especialidad'] == "$Fk_Especialidad"
+    ) {
+        echo json_encode(array("statusCode" => 250));
+    }
+    
     else{
     
-		$sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, `Costo`, 
-        `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`, `Color_Calendario`) 
-		VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora','$Costo', 
+		$sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, 
+        `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`,  `Color_Calendario`) 
+		VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora',
         '$Nombre_Paciente','$Telefono','$Tipo_Consulta', '$Estatus_cita', '$Observaciones','$ID_H_O_D','$AgendadoPor','$Sistema', '$Color_Calendario')";
 	
 		if (mysqli_query($conn, $sql)) {
@@ -48,7 +52,7 @@ $row = mysqli_fetch_assoc($resultset);
 		mysqli_close($conn);
    
 
-    mysqli_close($conn);
+
 }
 
 ?>
