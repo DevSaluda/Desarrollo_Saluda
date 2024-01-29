@@ -3,7 +3,6 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-include "mcript.php";
 
 
 //user_id=null;
