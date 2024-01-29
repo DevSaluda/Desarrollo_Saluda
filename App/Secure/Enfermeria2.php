@@ -33,8 +33,8 @@ include("Cookies/Mensaje.php");
 <link rel="stylesheet" type="text/css" href="Componentes/Preloader.css">
 <!--===============================================================================================-->
 <script type="text/javascript" src="Consultas/validation.min.js"></script>
-<script type="text/javascript" src="Consultas/POS.js"></script>
-<script type="text/javascript" src="Scripts/Soporte.js"></script>
+<script type="text/javascript" src="Consultas/Enfermeria2.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
