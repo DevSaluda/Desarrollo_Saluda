@@ -40,7 +40,7 @@ include "Consultas/Consultas.php";
 
   <!-- Main Footer -->
   <?php
-include ("Modales/AltaCitaSucursal.php");
+// include ("Modales/AltaCitaSucursal.php");
 include ("Modales/Exito.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
