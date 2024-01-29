@@ -2,7 +2,6 @@
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
@@ -83,7 +82,7 @@ while ($r=$query->fetch_object()){
 $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre where ID_SucursalC NOT IN (SELECT Fk_sucursal FROM Stock_POS where ID_Prod_POS='$IdBusqueda')");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
                         ?>
         </select>            
@@ -118,7 +117,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="text" class="form-control " name="ExisteCedis" id="existecedis"  aria-describedby="basic-addon1" value="<? echo $Especialistas->Stock; ?>" >           
+  <input type="text" class="form-control " name="ExisteCedis" id="existecedis"  aria-describedby="basic-addon1" value="<?php echo $Especialistas->Stock; ?>" >           
     </div><label for="mine" class="error">
     </div>
     <div class="col">
@@ -184,24 +183,24 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
     
    
 
-    <input type="text" hidden name="AsTipo" class="form-control " value="<?if($Especialistas->Tipo == 0000000000){
+    <input type="text" hidden name="AsTipo" class="form-control " value="<?php if($Especialistas->Tipo == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->Tipo";
 }?>">
 
-<input type="text" hidden name="AsCategoria" class="form-control " value="<?if($Especialistas->FkCategoria == 0000000000){
+<input type="text" hidden name="AsCategoria" class="form-control " value="<?php if($Especialistas->FkCategoria == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkCategoria";
 }?>">
-<input type="text" hidden name="AsMarca" class="form-control " value="<?if($Especialistas->FkMarca == 0000000000){
+<input type="text" hidden name="AsMarca" class="form-control " value="<?php if($Especialistas->FkMarca == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkMarca";
 }?>">
 
-<input type="text" hidden name="AsPresentacion" class="form-control " value="<?if($Especialistas->FkPresentacion == 0000000000){
+<input type="text" hidden name="AsPresentacion" class="form-control " value="<?php if($Especialistas->FkPresentacion == 0000000000){
    echo "0000000000";
 } else {
    echo "$Especialistas->FkPresentacion";
@@ -261,9 +260,9 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
  
   </div>
 </div>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 
        <!--Footer-->
      
@@ -279,7 +278,7 @@ $sql1= "SELECT * FROM Productos_POS WHERE ID_Prod_POS = $IdBusqueda";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -329,7 +328,7 @@ $(function(){
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
