@@ -2,7 +2,7 @@
 include("db_connection.php");
 include "Consultas.php";
 
-    $sql = "SELECT * FROM Traspasos_generadosV2 ORDER BY ID_Traspaso_Generado DESC LIMIT 1";
+    $sql = "SELECT * FROM Traspasos_generados ORDER BY ID_Traspaso_Generado DESC LIMIT 1";
     $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 
     // Verificar si hay resultados
