@@ -174,7 +174,7 @@
              
        
               <p>
-                <i class="fa-solid fa-stethoscope"></i>
+              <i class="fa-solid fa-clipboard-question"></i>
                             Consultas
               
               </p>
