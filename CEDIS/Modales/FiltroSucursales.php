@@ -32,7 +32,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
+  <select id = "sucursalconorden" name="Sucursal" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
                                                <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
