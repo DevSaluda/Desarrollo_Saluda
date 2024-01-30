@@ -75,7 +75,7 @@ include "Consultas/Consultas.php";
 <!-- Contenido de la página -->
 
 <!-- Ventana modal -->
-<div id="myModal" class="modal">
+<!-- <div id="myModal" class="modal">
     <div class="modal-content">
         <p>Lamentamos las molestias, pero estamos realizando correcciones. Gracias por su comprensión.</p>
     </div>
@@ -96,7 +96,7 @@ include "Consultas/Consultas.php";
     });
 </script>
 
-  
+   -->
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
