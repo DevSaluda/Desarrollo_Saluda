@@ -1,96 +1,259 @@
+<style>
+  /* Personalizar el diseño de la paginación con CSS */
+  .dataTables_wrapper .dataTables_paginate {
+    text-align: center !important; /* Centrar los botones de paginación */
+    margin-top: 10px !important;
+  }
 
-<script type="text/javascript">
-$(document).ready( function () {
-    var printCounter = 0;
-    $('#VEntas').DataTable({
-      "order": [[ 0, "desc" ]],
-      "lengthMenu": [[25,50, 150, 200, -1], [25,50, 150, 200, "Todos"]],   
-        language: {
-            "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            },
-          
-        //para usar los botones   
-        responsive: "true",
-        dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
-        
-   
-	   
-        	        
-    });     
-});
-   
-	  
-	 
+  .dataTables_paginate .paginate_button {
+    padding: 5px 10px !important;
+    border: 1px solid #007bff !important;
+    margin: 2px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    color: #007bff !important;
+    background-color: #fff !important;
+  }
+
+  /* Cambiar el color del paginado seleccionado */
+  .dataTables_paginate .paginate_button.current {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Cambiar el color del hover */
+  .dataTables_paginate .paginate_button:hover {
+    background-color: #C80096 !important;
+    color: #fff !important;
+    border-color: #C80096 !important;
+  }
+</style>
+
+<style>
+  /* Estilos personalizados para la tabla */
+  #Productos th {
+    font-size: 12px; /* Tamaño de letra para los encabezados */
+    padding: 4px; /* Ajustar el espaciado entre los encabezados */
+    white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
+  }
+</style>
+
+<style>
+  /* Estilos para la tabla */
+  #Productos {
+    font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
+    border-collapse: collapse; /* Colapsar los bordes de las celdas */
+    width: 100%;
+    text-align: center; /* Centrar el contenido de las celdas */
+  }
+
+  #Productos th {
+    font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
+    background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
+    color: white; /* Cambiar el color del texto a blanco para contrastar */
+    padding: 10px; /* Ajustar el espaciado de los encabezados */
+  }
+
+  #Productos td {
+    font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
+    padding: 8px; /* Ajustar el espaciado de las celdas */
+    border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
+  }
+
+  /* Estilos para el botón de Excel */
+  .dt-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .dt-buttons button {
+    font-size: 14px;
+    margin: 0 5px;
+    color: white; /* Cambiar el color del texto a blanco */
+    background-color: #fff; /* Cambiar el color de fondo a blanco */
+  }
+
+ 
+</style>
+
+<style>
+  /* Estilos para la capa de carga */
+  #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegurarse de que el overlay esté encima de todo */
+    display: none; /* Ocultar inicialmente el overlay */
+  }
+
+  /* Estilo para el ícono de carga */
+  .loader {
+    border: 6px solid #f3f3f3; /* Color del círculo externo */
+    border-top: 6px solid #C80096; /* Color del círculo interno */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite; /* Animación de rotación */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Definir una lista de mensajes para el mensaje de carga
+  var mensajesCarga = [
+    "Consultando ventas...",
+    "Estamos realizando la búsqueda...",
+    "Cargando datos...",
+    "Procesando la información...",
+    "Espere un momento...",
+    "Cargando... ten paciencia, incluso los planetas tardaron millones de años en formarse.",
+
+"¡Espera un momento! Estamos contando hasta el infinito... otra vez.",
+
+"¿Sabías que los pingüinos también tienen que esperar mientras cargan su comida?",
+
+"¡Zapateando cucarachas de carga! ¿Quién necesita un exterminador?",
+
+"Cargando... ¿quieres un chiste para hacer más amena la espera? ¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
+
+"¡Alerta! Un koala está jugando con los cables de carga. Espera un momento mientras lo persuadimos.",
+
+"¿Sabías que las tortugas cargan a una velocidad épica? Bueno, estamos intentando superarlas.",
+
+"¡Espera un instante! Estamos pidiendo ayuda a los unicornios para acelerar el proceso.",
+
+"Cargando... mientras nuestros programadores disfrutan de una buena taza de café.",
+"Cargando... No estamos seguros de cómo llegamos aquí, pero estamos trabajando en ello.",
+
+"Estamos contando en binario... 10%, 20%, 110%... espero que esto no sea un error de desbordamiento.",
+
+"Cargando... mientras cazamos pokémons para acelerar el proceso.",
+
+"Error 404: Mensaje gracioso no encontrado. Estamos trabajando en ello.",
+
+"Cargando... ¿Sabías que los programadores también tienen emociones? Bueno, nosotros tampoco.",
+
+"Estamos buscando la respuesta a la vida, el universo y todo mientras cargamos... Pista: es un número entre 41 y 43.",
+
+"Cargando... mientras los gatos toman el control. ¡Meowtrix está en marcha!",
+
+"Estamos ajustando tu espera a la velocidad de la luz. Aún no es suficientemente rápida, pero pronto llegaremos.",
+
+"Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
+
+"Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
+  ];
+
+  // Función para mostrar el mensaje de carga con un texto aleatorio
+  function mostrarCargando(event, settings) {
+    var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
+    var mensaje = mensajesCarga[randomIndex];
+    document.getElementById('loading-text').innerText = mensaje;
+    document.getElementById('loading-overlay').style.display = 'flex';
+  }
+
+  // Función para ocultar el mensaje de carga
+  function ocultarCargando() {
+    document.getElementById('loading-overlay').style.display = 'none';
+  }
+  
+
+tabla = $('#Productos').DataTable({
+
+ "bProcessing": true,
+ "ordering": true,
+ "stateSave":true,
+ "bAutoWidth": true,
+ "order": [[ 0, "desc" ]],
+ "sAjaxSource": "https://saludapos.com/POS2/Consultas/ArrayDesgloseVentas.php",
+ "aoColumns": [
+       { mData: 'Cod_Barra' },
+       { mData: 'Nombre_Prod' },
+       { mData: 'FolioTicket' },
+       { mData: 'Sucursal' },
+       { mData: 'Turno' },
+       { mData: 'Cantidad_Venta' },
+       { mData: 'Total_Venta' },
+       { mData: 'Importe' },
+       { mData: 'Descuento' },
+       { mData: 'FormaPago' },
+       { mData: 'Cliente' },
+       { mData: 'FolioSignoVital' },
+       { mData: 'NomServ' },
+       { mData: 'AgregadoEl' },
+       { mData: 'AgregadoEnMomento' },
+       { mData: 'AgregadoPor' },
+       { mData: 'Enfermero' },
+       { mData: 'Doctor' },
+      
+  
+      ],
+     
+    
+      "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
+  
+      "language": {
+      "lengthMenu": "Mostrar _MENU_ registros",
+      "sPaginationType": "extStyle",
+      "zeroRecords": "No se encontraron resultados",
+      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sSearch": "Buscar:",
+      "paginate": {
+        "first": '<i class="fas fa-angle-double-left"></i>',
+        "last": '<i class="fas fa-angle-double-right"></i>',
+        "next": '<i class="fas fa-angle-right"></i>',
+        "previous": '<i class="fas fa-angle-left"></i>'
+      },
+      "processing": function () {
+        mostrarCargando();
+      }
+    },
+    "initComplete": function() {
+      // Al completar la inicialización de la tabla, ocultar el mensaje de carga
+      ocultarCargando();
+    },
+    // Para personalizar el estilo del botón de Excel
+    // "buttons": [
+    //   {
+    //     extend: 'excelHtml5',
+    //     text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+    //     titleAttr: 'Exportar a Excel',
+    //     title: 'registro de ventas ',
+    //     className: 'btn btn-success',
+    //     exportOptions: {
+    //       columns: ':visible' // Exportar solo las columnas visibles
+    //     }
+    //   }
+    // ],
+    // Personalizar la posición de los elementos del encabezado
+    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
+    "responsive": true
+  });
+
 </script>
-<?php
-include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
-
-
-$user_id=null;
-$sql1= " SELECT 
-Ventas_POS.Folio_Ticket,
-Ventas_POS.Fk_Caja,
-Ventas_POS.Venta_POS_ID,
-Ventas_POS.Identificador_tipo,
-Ventas_POS.Total_Venta,
-Ventas_POS.Importe,
-Ventas_POS.Total_VentaG,
-Ventas_POS.FormaDePago,
-Ventas_POS.Turno,
-Ventas_POS.Cod_Barra,
-Ventas_POS.Fecha_venta,
-Ventas_POS.Clave_adicional, 
-Ventas_POS.Identificador_tipo,
-Ventas_POS.FolioSignoVital,
-Ventas_POS.Nombre_Prod,
-Ventas_POS.Cantidad_Venta,
-Ventas_POS.Fk_sucursal,
-Ventas_POS.AgregadoPor,
-Ventas_POS.Cliente,
-CONVERT_TZ(Ventas_POS.AgregadoEl, '+00:00', '-06:00') AS AgregadoElAdjusted,
-Ventas_POS.Total_Venta,
-Ventas_POS.Lote,
-Ventas_POS.ID_H_O_D,
-SucursalesCorre.ID_SucursalC,
-SucursalesCorre.Nombre_Sucursal,
-Servicios_POS.Servicio_ID,
-Servicios_POS.Nom_Serv
-
-FROM 
-Ventas_POS
-INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-WHERE 
-DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
-AND 
-Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
-AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
-$query = $conn->query($sql1);
-?>
-
-<?php if($query->num_rows>0):?>
-  <div class="text-center">
+<div class="text-center">
 	<div class="table-responsive">
-	<table  id="VEntas" class="table table-hover">
+	<table  id="Productos" class="hover" style="width:100%">
 <thead>
 
 <th>Cod</th>
 <th>Nombre</th>
 <th>N° Ticket</th>
+<th>Sucursal</th>
 <th>Turno</th>
 <th>Cantidad</th>
 <th>P.U</th>
@@ -101,125 +264,17 @@ $query = $conn->query($sql1);
 <th>Descuento</th>
 <th>Forma de pago</th>
 <th>Cliente</th>
-<th>Folio de signo vital </th>
+<th>Folio Signo Vital</th>
 <th>Servicio</th>
-<th>Fecha | Hora</th>
-    <th>Vendedor</th>
-   
-    
-
+<th>Fecha</th>
+<th>Hora</th>   
+<th>Vendedor</th>
+<th>Enfermero</th>
+<th>Doctor</th>
 
 </thead>
-<?php while ($Usuarios=$query->fetch_array()):?>
-<tr>
 
-
-<td><?php echo $Usuarios["Cod_Barra"]; ?></td>
-<td><?php echo $Usuarios["Nombre_Prod"]; ?></td>
-    <td><?php echo $Usuarios["Folio_Ticket"]; ?></td>
-    <td><?php echo $Usuarios["Turno"]; ?></td>
-    <td><?php echo $Usuarios["Cantidad_Venta"]; ?></td>
-    <td><?php echo $Usuarios["Total_Venta"]; ?></td>
-    <td><?php echo $Usuarios["Importe"]; ?></td>
-    <td><?php echo isset($Usuarios["DescuentoAplicado"]) ? $Usuarios["DescuentoAplicado"] . " %" : ""; ?></td>
-    <td><?php echo $Usuarios["FormaDePago"]; ?></td>
-    <td><?php echo $Usuarios["Cliente"]; ?></td>
-    <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
-    <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
-      <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
-      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
-    </td>
-    <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
-  
-     
-      
-   
-</tr>
-<?php endwhile;?>
-</table>
 </div>
 </div>
-<?php else:?>
-	<p class="alert alert-warning">No hay resultados</p>
-<?php endif;?>
-<script>
-    $(".btn-desglose").click(function(){
-    id = $(this).data("id");
-    $.post("https://saludapos.com/POS2/Modales/DesgloseTicket.php","id="+id,function(data){
-        $("#FormCancelacion").html(data);
-        $("#TituloCancelacion").html("Desglose del ticket");
-        $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-        $("#Di3").removeClass("modal-dialog modal-xl modal-notify modal-success");
-        $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-primary");
-        var modal_lv = 0;
-          $('.modal').on('shown.bs.modal', function (e) {
-            $('.modal-backdrop:last').css('zIndex', 1051 + modal_lv);
-            $(e.currentTarget).css('zIndex', 1052 + modal_lv);
-            modal_lv++
-          });
 
-          $('.modal').on('hidden.bs.modal', function (e) {
-            modal_lv--
-          });
-    });
-    $('#Cancelacionmodal').modal('show');
-});
 
-$(".btn-Reimpresion").click(function(){
-    id = $(this).data("id");
-    $.post("https://saludapos.com/POS2/Modales/ReimpresionTicketVenta.php","id="+id,function(data){
-        $("#FormCancelacion").html(data);
-        $("#TituloCancelacion").html("Editar datos de categoría");
-        $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-        $("#Di3").removeClass("modal-dialog modal-xl modal-notify modal-primary");
-        $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-success");
-        var modal_lv = 0;
-          $('.modal').on('shown.bs.modal', function (e) {
-            $('.modal-backdrop:last').css('zIndex', 1051 + modal_lv);
-            $(e.currentTarget).css('zIndex', 1052 + modal_lv);
-            modal_lv++
-          });
-
-          $('.modal').on('hidden.bs.modal', function (e) {
-            modal_lv--
-          });
-    });
-    $('#Cancelacionmodal').modal('show');
-});
-</script>
-<?php
-
-function fechaCastellano ($fecha) {
-  $fecha = substr($fecha, 0, 10);
-  $numeroDia = date('d', strtotime($fecha));
-  $dia = date('l', strtotime($fecha));
-  $mes = date('F', strtotime($fecha));
-  $anio = date('Y', strtotime($fecha));
-  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
-}
-?>
- <div class="modal fade" id="Cancelacionmodal" tabindex="-2" role="dialog" style="overflow-y: scroll;" aria-labelledby="CancelacionmodalLabel" aria-hidden="true">
-  <div id="Di3" class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloCancelacion">Confirmacion de ticket</p>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-       
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="FormCancelacion"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
