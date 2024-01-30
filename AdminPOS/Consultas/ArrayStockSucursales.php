@@ -2,6 +2,7 @@
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
+include "Consultas.php";
 
 
 $sql = "SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.Clave_adicional,Stock_POS.ID_Prod_POS,Stock_POS.AgregadoEl,Stock_POS.Clave_adicional,Stock_POS.Clave_Levic,
