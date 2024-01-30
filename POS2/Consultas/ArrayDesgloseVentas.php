@@ -5,7 +5,8 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-
+echo "Valor de \$fkSucursal: " . $fkSucursal . "<br>";
+echo "Valor de \$idHOD: " . $idHOD . "<br>";
 $sql = "SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.FolioSucursal,
@@ -48,8 +49,8 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-Ventas_POS.Fk_sucursal = 3 
- 
+Ventas_POS.Fk_sucursal = '$fkSucursal' 
+    AND Ventas_POS.ID_H_O_D = '$idHOD' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 AND Ventas_POS.Fecha_venta >= CURDATE()";
 
