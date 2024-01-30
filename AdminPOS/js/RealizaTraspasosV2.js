@@ -65,7 +65,7 @@ $('document').ready(function($) {
                 }, 2000); // abrir
 
 
-                setTimeout(' window.location.href = "https://controlfarmacia.com/AdminPOS/ListadoDeTraspasos"; ', 3000);
+                setTimeout(' window.location.href = "https://saludapos.com/AdminPOS/ListadoDeTraspasos"; ', 3000);
 
             },
             error: function() {
