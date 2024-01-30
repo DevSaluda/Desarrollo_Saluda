@@ -226,20 +226,20 @@ tabla = $('#Productos').DataTable({
       // Al completar la inicialización de la tabla, ocultar el mensaje de carga
       ocultarCargando();
     },
-    // Para personalizar el estilo del botón de Excel
-    // "buttons": [
-    //   {
-    //     extend: 'excelHtml5',
-    //     text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-    //     titleAttr: 'Exportar a Excel',
-    //     title: 'registro de ventas ',
-    //     className: 'btn btn-success',
-    //     exportOptions: {
-    //       columns: ':visible' // Exportar solo las columnas visibles
-    //     }
-    //   }
-    // ],
-    // Personalizar la posición de los elementos del encabezado
+    
+    "buttons": [
+      {
+        extend: 'excelHtml5',
+        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+        titleAttr: 'Exportar a Excel',
+        title: 'registro de ventas ',
+        className: 'btn btn-success',
+        exportOptions: {
+          columns: ':visible' // Exportar solo las columnas visibles
+        }
+      }
+    ],
+    
     "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
     "responsive": true
   });
