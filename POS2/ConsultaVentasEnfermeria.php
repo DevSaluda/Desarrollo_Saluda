@@ -10,7 +10,7 @@ include "Consultas/Consultas.php";
 
   <title>Registro de ventas realizadas <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -20,14 +20,14 @@ include "Consultas/Consultas.php";
 
     </style>
 </head>
-<?php include_once ("Menu.php")?>
+<?php  include_once ("Menu.php")?>
 
 
 
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#2bbbad !important;color: white;">
-    Ventas de  <?echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Ventas de  <?php echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
