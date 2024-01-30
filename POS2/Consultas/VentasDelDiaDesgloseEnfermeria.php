@@ -118,7 +118,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["Cantidad_Venta"]; ?></td>
     <td><?php echo $Usuarios["Total_Venta"]; ?></td>
     <td><?php echo $Usuarios["Importe"]; ?></td>
-    <td><?php echo $Usuarios["DescuentoAplicado"]; ?> %</td>
+    <td><?php echo isset($Usuarios["DescuentoAplicado"]) ? $Usuarios["DescuentoAplicado"] . ' %' : 'N/A'; ?></td>
     <td><?php echo $Usuarios["FormaDePago"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
       <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
