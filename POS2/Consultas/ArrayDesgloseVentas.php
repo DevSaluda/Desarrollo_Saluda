@@ -7,6 +7,7 @@ include "Consultas.php";
 
 echo "Valor de \$fkSucursal: " . $fkSucursal . "<br>";
 echo "Valor de \$idHOD: " . $idHOD . "<br>";
+$data = []; // Inicializar $data como un array vacío
 $sql = "SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.FolioSucursal,
