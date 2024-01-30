@@ -48,7 +48,54 @@ include "Consultas/Consultas.php";
  
 
 
-     
+<style>
+        /* Estilo para la ventana modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Contenido de la página -->
+
+<!-- Ventana modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <p>Lamentamos las molestias, pero estamos realizando correcciones. Gracias por su comprensión.</p>
+    </div>
+</div>
+
+<script>
+    // Mostrar la ventana modal al cargar la página
+    window.onload = function() {
+        document.getElementById('myModal').style.display = 'flex';
+    };
+
+    // Deshabilitar la capacidad de cerrar la ventana modal haciendo clic fuera de ella
+    document.getElementById('myModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    });
+</script>
+
   
   <!-- /.content-wrapper -->
 
