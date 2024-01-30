@@ -30,26 +30,23 @@ Ventas_POS.Nombre_Prod,
 Ventas_POS.Cantidad_Venta,
 Ventas_POS.Fk_sucursal,
 Ventas_POS.AgregadoPor,
-Ventas_POS.AgregadoEl,
-Ventas_POS.Total_Venta,
+CONVERT_TZ(Ventas_POS.AgregadoEl, '+00:00', '-06:00') AS AgregadoElAdjusted,
 Ventas_POS.Lote,
 Ventas_POS.ID_H_O_D,
 SucursalesCorre.ID_SucursalC, 
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
-Servicios_POS.Nom_Serv 
+Servicios_POS.Nom_Serv
 FROM 
-Ventas_POS, 
-SucursalesCorre, 
-Servicios_POS, 
-Cajas_POS 
+Ventas_POS
+INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
+INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
+INNER JOIN Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-AND Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-AND Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
+Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
 AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+
 
 $result = mysqli_query($conn, $sql);
 
@@ -72,7 +69,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["FolioSignoVital"] = $fila["FolioSignoVital"];
     $data[$c]["NomServ"] = $fila["Nom_Serv"];
     $data[$c]["AgregadoEl"] = date("d/m/Y", strtotime($fila["Fecha_venta"]));
-    $data[$c]["AgregadoEnMomento"] = $fila["AgregadoEl"];
+    $data[$c]["AgregadoEnMomento"] = $fila["AgregadoElAdjusted"];
     $data[$c]["AgregadoPor"] = $fila["AgregadoPor"];
     $data[$c]["Enfermero"] = $fila["EnfermeroEnturno"];
     $data[$c]["Doctor"] = $fila["MedicoEnturno"];
