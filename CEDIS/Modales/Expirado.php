@@ -21,7 +21,7 @@
       </div>
       <!--Footer-->
       <div class="modal-footer flex-center">
-        <a href="https://controlfarmacia.com/AdminPOS/Cierre" class="btn btn-warning">Aceptar</a>
+        <a href="https://saludapos.com/CEDIS/Cierre" class="btn btn-warning">Aceptar</a>
        
       </div>
     </div>
