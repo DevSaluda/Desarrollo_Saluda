@@ -115,7 +115,9 @@ while ($r=$query->fetch_object()){
      
     <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
     <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
-    
+    <input type="text" name="Loteee" value="">
+    <input type="text" name="fechacad" value="">
+    <input type="text" name="fechaingreso" value="<?php echo date('Y-m-d'); ?>" readonly>
       
 
        <button type="submit"   id="EnviarDatos" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
