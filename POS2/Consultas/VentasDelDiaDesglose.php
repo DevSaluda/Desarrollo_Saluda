@@ -228,7 +228,7 @@ tabla = $('#Productos').DataTable({
     },
     
     
-    "dom": '<"d-flex justify-content-between"lBf>', // Modificar la disposición aquí
+    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
     "responsive": true
   });
 
