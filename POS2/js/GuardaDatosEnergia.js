@@ -51,7 +51,7 @@ $('document').ready(function($) {
 
             $.ajax({
                 type: 'POST',
-                url: 'https://controlfarmacia.com/POS2/Consultas/RegistroDeEnergiaDiario.php',
+                url: 'https://saludapos.com/POS2/Consultas/RegistroDeEnergiaDiario.php',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
