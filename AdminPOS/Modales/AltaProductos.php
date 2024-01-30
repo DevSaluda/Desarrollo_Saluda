@@ -57,10 +57,10 @@
   </div>
   <select id = "componente" class = "form-control" name = "ComponenteActivo">
                                                <option value="">Seleccione una presentacion:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT * FROM ComponentesActivos");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nom_Com].'">'.$valores[Nom_Com].'</option>';
+            echo '<option value="'.$valores["Nom_Com"].'">'.$valores["Nom_Com"].'</option>';
           }
         ?>  </select>
     </div><label for="presentacion" class="error">
@@ -130,10 +130,10 @@
   </div>
   <select id = "tiposervicio" class = "form-control" name = "TipoServicio">
                                                <option value="">Seleccione una servicio:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Servicio_ID,Nom_Serv,Estado,ID_H_O_D FROM Servicios_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Servicio_ID].'">'.$valores[Nom_Serv].'</option>';
+            echo '<option value="'.$valores["Servicio_ID"].'">'.$valores["Nom_Serv"].'</option>';
           }
         ?>  </select>       
     </div><label for="maxe" class="error">
@@ -221,10 +221,10 @@
   </div>
   <select id = "tip" class = "form-control" name = "Tip">
                                                <option value="">Selecciona un tipo:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	Tip_Prod_ID,Nom_Tipo_Prod,Estado,ID_H_O_D FROM TipProd_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nom_Tipo_Prod].'">'.$valores[Nom_Tipo_Prod].'</option>';
+            echo '<option value="'.$valores["Nom_Tipo_Prod"].'">'.$valores["Nom_Tipo_Prod"].'</option>';
           }
         ?>  </select>
     </div><label for="tip" class="error">
@@ -236,10 +236,10 @@
   </div>
   <select id = "categoria" class = "form-control" name = "Categoria">
                                                <option value="">Seleccione una categoria:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	Cat_ID,Nom_Cat,Estado,ID_H_O_D FROM Categorias_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nom_Cat].'">'.$valores[Nom_Cat].'</option>';
+            echo '<option value="'.$valores["Nom_Cat"].'">'.$valores["Nom_Cat"].'</option>';
           }
         ?>  </select>
     </div><label for="categoria" class="error">
@@ -252,10 +252,10 @@
   </div>
   <select id = "marca" class = "form-control" name = "Marca">
                                                <option value="">Seleccione una marca:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Marca_ID,Nom_Marca,ID_H_O_D,Estado FROM Marcas_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nom_Marca].'">'.$valores[Nom_Marca].'</option>';
+            echo '<option value="'.$valores["Nom_Marca"].'">'.$valores["Nom_Marca"].'</option>';
           }
         ?>  </select>
     </div><label for="marca" class="error">
@@ -273,10 +273,10 @@
   </div>
   <select id = "presentacion" class = "form-control" name = "Presentacion">
                                                <option value="">Seleccione una presentacion:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	Pprod_ID,Nom_Presentacion,ID_H_O_D,Estado FROM Presentacion_Prod_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."'AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Pprod_ID].'">'.$valores[Nom_Presentacion].'</option>';
+            echo '<option value="'.$valores["Nom_Presentacion"].'">'.$valores["Nom_Presentacion"].'</option>';
           }
         ?>  </select>
     </div><label for="presentacion" class="error">
@@ -289,10 +289,10 @@
   </div>
   <select id = "proveedor1" class = "form-control" name = "Provee1" onchange="verify(this)" onchange="Proveedorn1()">
                                                <option value="">Seleccione un proveedor:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Alta'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Proveedor].'">'.$valores[	Nombre_Proveedor].'</option>';
+            echo '<option value="'.$valores["ID_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
           }
         ?>  </select>
     </div><label for="Provee1" class="error">
@@ -305,10 +305,10 @@
   </div>
   <select id = "proveedor2" class = "form-control" name = "Provee2" onchange="verify(this)">
                                                <option value=""></option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT 	ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Alta'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Proveedor].'">'.$valores[	Nombre_Proveedor].'</option>';
+            echo '<option value="'.$valores["ID_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
           }
         ?>  </select>
     </div><label for="Provee2" class="error">
@@ -324,11 +324,11 @@
 
    </div>
    <div id="errorproveedor" class="alert alert-danger" role="alert" style="display: none;">No puedes repetir el proveedor</div>
-    <input type="text" class="form-control " name="EmpresaProductos" id="empresa" hidden value="<?echo $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
+    <input type="text" class="form-control " name="EmpresaProductos" id="empresa" hidden value="<?php echo $row['ID_H_O_D']?>"aria-describedby="basic-addon1" >       
     <input type="text" class="form-control " name="RevProvee1" hidden id="revprovee1"  >   
     <input type="text" class="form-control " name="RevProvee2" hidden id="revprovee2"  >   
-    <input type="text" class="form-control"  name="AgregaProductosBy" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
-    <input type="text" class="form-control"  name="SistemaProductos" id="sistema" hidden readonly value=" POS <?echo $row['Nombre_rol']?>">
+    <input type="text" class="form-control"  name="AgregaProductosBy" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  name="SistemaProductos" id="sistema" hidden readonly value=" POS <?php echo $row['Nombre_rol']?>">
     
    
 
