@@ -77,7 +77,7 @@ DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.FormaDePago='Crédito Enfermería
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID ";
 $query = $conn->query($sql1);
 ?>
 
@@ -118,13 +118,11 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["Cantidad_Venta"]; ?></td>
     <td><?php echo $Usuarios["Total_Venta"]; ?></td>
     <td><?php echo $Usuarios["Importe"]; ?></td>
-    <td><?php echo isset($Usuarios["DescuentoAplicado"]) ? $Usuarios["DescuentoAplicado"] . " %" : ""; ?></td>
+    <td><?php echo $Usuarios["DescuentoAplicado"]; ?> %</td>
     <td><?php echo $Usuarios["FormaDePago"]; ?></td>
-    <td><?php echo $Usuarios["Cliente"]; ?></td>
-    <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
-      <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
-      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
+      <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoEl"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   
