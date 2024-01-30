@@ -1,5 +1,5 @@
 <?php
-header ("Location:https://controlfarmacia.com/App/Secure/POSV3");
+header ("Location:https://saludapos.com/App/Secure/POS");
 include("db_connect.php");
 include("Cookies/Mensaje.php");
 ?>
