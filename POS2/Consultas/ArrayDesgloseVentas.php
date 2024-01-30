@@ -50,8 +50,7 @@ WHERE
 Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
-AND Ventas_POS.Fecha_venta >= CURDATE() -- Solo del día en curso
-AND Ventas_POS.Fecha_venta < CURDATE() + INTERVAL 1 DAY";
+AND Ventas_POS.Fecha_venta >= CURDATE()";
 
 
 
