@@ -74,7 +74,7 @@ Ventas_POS
 INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
 WHERE 
-DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
+DATE(Ventas_POS.Fecha_venta) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
