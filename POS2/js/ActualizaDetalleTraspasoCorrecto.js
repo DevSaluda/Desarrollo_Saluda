@@ -99,7 +99,7 @@ $('document').ready(function ($) {
             setTimeout(function () {
               $('#TraspasoCompleto').modal('hide')
             }, 3000); // abrir
-            setTimeout(' window.location.href = "https://controlfarmacia.com/POS2/ListadoDeTraspasos"; ',3000);
+            setTimeout(' window.location.href = "https://saludapos.com/POS2/ListadoDeTraspasos"; ',3000);
   
   
             //  Solucionar muestra de modal de TraspasoCompleto
