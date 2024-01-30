@@ -51,6 +51,7 @@ Ventas_POS.Total_VentaG,
 Ventas_POS.FormaDePago,
 Ventas_POS.Turno,
 Ventas_POS.Cod_Barra,
+Ventas_POS.Fecha_venta,
 Ventas_POS.Clave_adicional, 
 Ventas_POS.Identificador_tipo,
 Ventas_POS.FolioSignoVital,
@@ -67,6 +68,7 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv
+
 FROM 
 Ventas_POS
 INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
@@ -123,7 +125,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["Cliente"]; ?></td>
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
-      <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
+      <td><?php echo fechaCastellano($Usuarios["Fecha_Venta"]); ?> <br>
       <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
