@@ -36,6 +36,11 @@ $hora = date('G'); if (($hora >= 0) AND ($hora < 6))
   { 
   $mensaje = "Buenas noches"; 
   } 
-
+  $fkSucursal = $row['Fk_Sucursal'];
+  $idHOD = $row['ID_H_O_D'];
+  
+  // Establecer cookies
+  setcookie("Fk_Sucursal", $fkSucursal, time() + 3600, "/"); // Caduca en 1 hora (puedes ajustar el tiempo)
+  setcookie("ID_H_O_D", $idHOD, time() + 3600, "/"); // Caduca en 1 hora (puedes ajustar el tiempo)
    ?>
 
