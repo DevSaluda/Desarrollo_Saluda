@@ -1,7 +1,7 @@
 
 <?php
 header('Content-Type: application/json');
-function obtenerVentasPorSucursalYIDHOD($fkSucursal, $idHOD) {
+
 include("db_connection.php");
 include "Consultas.php";
 
@@ -48,8 +48,8 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-Ventas_POS.Fk_sucursal = '".$fkSucursal."' 
-        AND Ventas_POS.ID_H_O_D = '".$idHOD."' 
+Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
+AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 AND Ventas_POS.Fecha_venta >= CURDATE()";
 
@@ -90,5 +90,4 @@ $results = ["sEcho" => 1,
             "aaData" => $data ];
  
 echo json_encode($results);
-}
 ?>
