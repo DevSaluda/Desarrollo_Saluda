@@ -9,7 +9,7 @@
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrayStockSucursales.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayStockSucursales.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Clave_adicional' },
