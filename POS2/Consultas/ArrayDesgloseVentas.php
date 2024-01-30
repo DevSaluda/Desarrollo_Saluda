@@ -48,8 +48,7 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
+Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 AND Ventas_POS.Fecha_venta >= CURDATE()";
 
 
