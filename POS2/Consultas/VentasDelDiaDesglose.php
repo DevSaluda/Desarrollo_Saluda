@@ -40,7 +40,7 @@ include "../Consultas/Consultas.php";
 
 
 $user_id=null;
-$sql1= "SELECT 
+$sql1= " SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
@@ -51,11 +51,11 @@ Ventas_POS.Total_VentaG,
 Ventas_POS.FormaDePago,
 Ventas_POS.Turno,
 Ventas_POS.Cod_Barra,
-Ventas_POS.Fecha_venta,
 Ventas_POS.Clave_adicional, 
 Ventas_POS.Identificador_tipo,
 Ventas_POS.FolioSignoVital,
 Ventas_POS.Nombre_Prod,
+Ventas_POS.Fecha_venta,
 Ventas_POS.Cantidad_Venta,
 Ventas_POS.Fk_sucursal,
 Ventas_POS.AgregadoPor,
@@ -73,8 +73,7 @@ Ventas_POS
 INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
 WHERE 
-Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
-AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
+DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
@@ -126,7 +125,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
       <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
-      <?php echo date("g:i a", strtotime($Usuarios["AgregadoElAdjusted"])); ?>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   
