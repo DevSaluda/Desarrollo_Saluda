@@ -80,7 +80,7 @@ INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servic
 INNER JOIN Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
 Ventas_POS.Fecha_venta >= CURDATE() -- Ventas del día de hoy
-AND Ventas_POS.Fecha_venta < CURDATE() + INTERVAL 1 DAY -- Hasta el final del día de hoy
+
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
