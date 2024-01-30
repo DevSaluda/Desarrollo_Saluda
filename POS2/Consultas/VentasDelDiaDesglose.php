@@ -40,7 +40,7 @@ include "../Consultas/Consultas.php";
 
 
 $user_id=null;
-$sql1= " SELECT 
+$sql1= "SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.FolioSucursal,
 Ventas_POS.Fk_Caja,
@@ -79,11 +79,12 @@ INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_Sucurs
 INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
 INNER JOIN Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
-AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
-AND  Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
+Ventas_POS.Fecha_venta >= CURDATE() -- Ventas del día de hoy
+AND Ventas_POS.Fecha_venta < CURDATE() + INTERVAL 1 DAY -- Hasta el final del día de hoy
+AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+
 $query = $conn->query($sql1);
 ?>
 
@@ -132,7 +133,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
       <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
-      <?php echo $Usuarios["AgregadoElAdjusted"]; ?>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   
