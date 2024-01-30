@@ -1,4 +1,4 @@
-<?
+<?php
 header ("Location:https://controlfarmacia.com/App/Secure/POSV3");
 include("db_connect.php");
 include("Cookies/Mensaje.php");
