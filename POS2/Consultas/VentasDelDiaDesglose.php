@@ -124,7 +124,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
       <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
-      <?php echo date("g:i a",strtotime($Usuarios["AgregadoEl"])); ?>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   
