@@ -17,7 +17,7 @@ setcookie("ID_H_O_D", $idHOD, time() + 3600, "/"); // Caduca en 1 hora (puedes a
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Registro de ventas realizadas | <?php echo $row['Nombre_Sucursal']?> </title>
+  <title>Registro de ventas realizadas | <?php echo "Fk_Sucursal: " . $fkSucursal;?> </title>
 
 <?php include "Header.php"?>
  <style>
