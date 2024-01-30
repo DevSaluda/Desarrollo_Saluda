@@ -19,23 +19,10 @@ else
 {header("Location:Stop");
 }
 
-$hora = date('G'); if (($hora >= 0) AND ($hora < 6)) 
-  { 
-    
-    $mensaje = "Hola, que tengas una excelente madrugada."; 
-  } 
-  else if (($hora >= 6) AND ($hora < 12)) 
-  { 
-    $mensaje = "Buenos días"; 
-  } 
-  else if (($hora >= 12) AND ($hora < 18)) 
-  { 
-    $mensaje = "Buenas tardes"; 
-  } 
-  else
-  { 
-  $mensaje = "Buenas noches"; 
-  } 
+$fkSucursal = 'valor_Fk_Sucursal';
+$idHOD = 'valor_ID_H_O_D';
+
+$ventasData = obtenerVentasPorSucursalYIDHOD($fkSucursal, $idHOD);
 
    ?>
 
