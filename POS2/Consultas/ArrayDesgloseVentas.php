@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-
+$data = []; // Inicializar $data como un array vacío
 $sql = "SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.FolioSucursal,
