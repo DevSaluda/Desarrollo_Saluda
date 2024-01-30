@@ -40,7 +40,7 @@ include "../Consultas/Consultas.php";
 
 
 $user_id=null;
-$sql1= "SELECT SELECT 
+$sql1= " SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
