@@ -51,6 +51,7 @@ Ventas_POS.Total_VentaG,
 Ventas_POS.FormaDePago,
 Ventas_POS.Turno,
 Ventas_POS.Cod_Barra,
+Ventas_POS.Fecha_venta,
 Ventas_POS.Clave_adicional, 
 Ventas_POS.Identificador_tipo,
 Ventas_POS.FolioSignoVital,
@@ -72,7 +73,6 @@ Ventas_POS
 INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
 WHERE 
-DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
 Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
 AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
@@ -125,7 +125,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["Cliente"]; ?></td>
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
-      <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
+      <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
       <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
