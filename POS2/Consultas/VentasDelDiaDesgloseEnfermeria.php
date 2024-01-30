@@ -68,7 +68,6 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv
-
 FROM 
 Ventas_POS
 INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
