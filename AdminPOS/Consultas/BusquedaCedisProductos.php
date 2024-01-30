@@ -3,7 +3,7 @@ if (isset($_GET['term'])){
 	# conectare la base de datos
     include ("db_connection.php");
     include "Consultas.php";
-    include "Sesion.php";
+
     
 	
 $return_arr = array();
