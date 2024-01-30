@@ -43,10 +43,10 @@ if ($row['Cod_Barra'] == $Cod_Barra and $row['Nombre_Prod'] == $Nombre_Prod  and
     and $row['Lote_Med'] == $Lote_Med and $row['Fecha_Caducidad'] == $Fecha_Caducidad and $row['Stock'] == $Stock) {
     echo json_encode(array("statusCode" => 250));
 } else {
-    $sql = "INSERT INTO `Productos_POS`( `Cod_Barra`,`Clave_adicional`,`Nombre_Prod`,`Precio_Venta`,`Precio_C`,`Min_Existencia`,`Max_Existencia`,`Porcentaje`,`Descuento`,`Precio_Promo`,
-    `Lote_Med`,`Fecha_Caducidad`,`Stock`,`Vendido`,`Saldo`,`Tipo_Servicio`,`Componente_Activo`,`Tipo`,`FkCategoria`,`FkMarca`,`FkPresentacion`, `Proveedor1`,`Proveedor2`,`RecetaMedica`,`Estatus`,`CodigoEstatus`,`Sistema`,`AgregadoPor`,`ID_H_O_D`) 
-            VALUES ('$Cod_Barra','$Clave_adicional','$Nombre_Prod','$Precio_Venta','$Precio_C','$Min_Existencia','$Max_Existencia','$Porcentaje','$Descuento','$Precio_Promo',
-    '$Lote_Med','$Fecha_Caducidad','$Stock','$Vendido','$Saldo','$Tipo_Servicio','$Componente_Activo','$Tipo','$FkCategoria','$FkMarca','$FkPresentacion', '$Proveedor1','$Proveedor2','$RecetaMedica','$Estatus','$CodigoEstatus','$Sistema','$AgregadoPor','$ID_H_O_D')";
+    $sql = "INSERT INTO `Productos_POS`( `Cod_Barra`,`Clave_adicional`,`Nombre_Prod`,`Precio_Venta`,`Precio_C`,`Min_Existencia`,`Max_Existencia`,
+    `Lote_Med`,`Fecha_Caducidad`,`Tipo_Servicio`,`Componente_Activo`,`Tipo`,`FkCategoria`,`FkMarca`,`FkPresentacion`, `Proveedor1`,`Proveedor2`,`RecetaMedica`,`Estatus`,`CodigoEstatus`,`Sistema`,`AgregadoPor`,`ID_H_O_D`) 
+            VALUES ('$Cod_Barra','$Clave_adicional','$Nombre_Prod','$Precio_Venta','$Precio_C','$Min_Existencia','$Max_Existencia',
+    '$Lote_Med','$Fecha_Caducidad','$Tipo_Servicio','$Componente_Activo','$Tipo','$FkCategoria','$FkMarca','$FkPresentacion', '$Proveedor1','$Proveedor2','$RecetaMedica','$Estatus','$CodigoEstatus','$Sistema','$AgregadoPor','$ID_H_O_D')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
