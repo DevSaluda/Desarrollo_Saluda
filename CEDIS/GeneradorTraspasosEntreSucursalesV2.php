@@ -12,7 +12,7 @@ $SucursalDeOrigennLetras=($_POST['sucursalLetrasOrigen']);
 setcookie("Busquedainfinita", $SucursalDeOrigenn, time() + 30*24*60*60);
 include "Consultas/Consultas.php";
 
-include "Consultas/SumaDeTraspasos.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
