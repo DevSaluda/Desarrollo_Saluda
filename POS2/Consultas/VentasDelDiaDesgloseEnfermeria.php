@@ -121,8 +121,8 @@ $query = $conn->query($sql1);
     <td><?php echo isset($Usuarios["DescuentoAplicado"]) ? $Usuarios["DescuentoAplicado"] . ' %' : 'N/A'; ?></td>
     <td><?php echo $Usuarios["FormaDePago"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
-      <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?> <br>
-      <?php echo date("g:i a",strtotime($Usuarios["AgregadoEl"])); ?>
+    <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   
