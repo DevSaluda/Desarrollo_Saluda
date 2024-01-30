@@ -24,7 +24,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly  value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
     </div>
     
@@ -43,7 +43,7 @@
         ?>  </select>
     </div>
     
-    <input type="text"  name="user" hidden value="<?echo $row['Pos_ID']?>">
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
   <div>     </div>
   </div>  </div>
       <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
