@@ -6,7 +6,7 @@ include "Consultas.php";
 
 
 $sql = "SELECT Productos_POS.ID_Prod_POS,Productos_POS.Nombre_Prod,Productos_POS.Cod_Enfermeria,Productos_POS.Cod_Barra,Productos_POS.Cod_Enfermeria,Productos_POS.Proveedor1,Productos_POS.Proveedor2,Productos_POS.ID_H_O_D,Productos_POS.Clave_adicional,Productos_POS.Clave_Levic,
-Productos_POS.Precio_Venta,Productos_POS.Precio_C,Productos_POS.AgregadoPor,Productos_POS.Vendido,Productos_POS.Tipo_Servicio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv,Productos_POS.AgregadoEl FROM Productos_POS,Servicios_POS where 
+Productos_POS.Precio_Venta,Productos_POS.Precio_C,Productos_POS.AgregadoPor,Productos_POS.Tipo_Servicio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv,Productos_POS.AgregadoEl FROM Productos_POS,Servicios_POS where 
 Servicios_POS.Servicio_ID = Productos_POS.Tipo_Servicio  AND Productos_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
  
 $result = mysqli_query($conn, $sql);
