@@ -224,7 +224,7 @@ function actualizarlote() {
                                         </div>
        <!--Footer-->
      
-
+       </div>    </div>    </div>
                                        
          
       </div></div>
