@@ -98,8 +98,7 @@ $('document').ready(function($) {
                         setTimeout(function() {
                             $('#Exito').modal('hide')
                         }, 2000); // abrir
-                        RegistroEnergias();
-
+                     
 
                         //  Solucionar muestra de modal de exito
 
