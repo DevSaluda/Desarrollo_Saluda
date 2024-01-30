@@ -1,4 +1,6 @@
-<?include("db_connect.php");
+<?php
+header ("Location:https://saludapos.com/App/Secure/POS");
+include("db_connect.php");
 include("Cookies/Mensaje.php");
 ?>
 <!DOCTYPE html>
