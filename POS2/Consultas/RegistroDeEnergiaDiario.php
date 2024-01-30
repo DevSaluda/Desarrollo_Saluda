@@ -10,7 +10,7 @@ if(!empty($_POST['name']) || !empty($_FILES['file']['name'])){
         $file_extension = end($temporary);
         if((($_FILES["hard_file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")|| ($_FILES["file"]["type"] == "image/png")) && in_array($file_extension, $valid_extensions)){
             $sourcePath = $_FILES['file']['tmp_name'];
-            $targetPath = "../../FotosMedidores/$fileName";
+            $targetPath = "https://saludapos.com/FotosMedidores/$fileName";
             if(move_uploaded_file($sourcePath,$targetPath)){
                 $uploadedFile = $fileName;
             }
