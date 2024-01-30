@@ -82,7 +82,9 @@ while($fila=$result->fetch_assoc()){
     $c++; 
  
 }
- 
+$data = array(); // o $data = []; si estás utilizando PHP 7.x o superior
+// Resto de tu lógica para llenar $data
+
 $results = ["sEcho" => 1,
             "iTotalRecords" => count($data),
             "iTotalDisplayRecords" => count($data),
