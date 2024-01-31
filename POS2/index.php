@@ -236,115 +236,80 @@ $(document).ready(function()
 });
 </script>
 <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f0f0f0;
+    /* Estilos adicionales para personalizar el modal */
+    .modal-custom {
+      max-width: 600px;
+      margin: auto;
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      max-width: 400px; /* Ajusta el ancho máximo según tus preferencias */
-      width: 100%;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      text-align: left;
-      overflow: hidden; /* Evita que el modal sobresalga en pantallas pequeñas */
-    }
-
-    .modal img {
+    .modal-custom img {
       width: 100%;
       max-width: 300px;
       border-radius: 8px;
       margin-top: 10px;
     }
 
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1;
+    .modal-custom .modal-body {
+      text-align: left;
     }
 
-    .modal-content {
-      margin-bottom: 10px;
-    }
-
-    .modal ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .modal ul li {
-      margin-bottom: 10px;
-    }
-
-    .modal p {
-      margin-bottom: 10px;
-    }
-
-    .modal button {
+    .modal-custom .btn-primary {
       background-color: #25D366;
       color: #fff;
-      padding: 10px 15px;
-      text-decoration: none;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
     }
   </style>
-  <div class="modal" id="modal">
-  <div class="modal-content">
-    <p>Lamentamos las molestias ocasionadas por el mantenimiento que sufrió el sistema. Agradecemos su paciencia y apoyo.</p>
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-custom" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="customModalLabel">Lamentamos las molestias</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Lamentamos las molestias ocasionadas por el mantenimiento que sufrió el sistema. Agradecemos su paciencia y apoyo.</p>
 
-    <ul>
-      <li>La agenda de citas ya funciona y pueden agendar sin problemas.</li>
-      <li>La recepción de traspasos opera con normalidad.</li>
-      <li>La apertura y cobro de abonos dentales para las sucursales que lo manejan estarán listas en el transcurso del día.</li>
-      <li>Estamos trabajando en el tema del cierre de sesión por inactividad.</li>
-    </ul>
+        <ul>
+          <li>La agenda de citas ya funciona y pueden agendar sin problemas.</li>
+          <li>La recepción de traspasos opera con normalidad.</li>
+          <li>La apertura y cobro de abonos dentales para las sucursales que lo manejan estarán listas en el transcurso del día.</li>
+          <li>Estamos trabajando en el tema del cierre de sesión por inactividad.</li>
+        </ul>
 
-    <p>Gracias nuevamente por su paciencia y apoyo.</p>
+        <p>Gracias nuevamente por su paciencia y apoyo.</p>
+
+        <!-- Gif de Cheems -->
+        <img src="URL_DEL_GIF_DE_CHEEMS" alt="Cheems" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <a href="https://api.whatsapp.com/send?phone=TUNUMERODEWHATSAPP" target="_blank" class="btn btn-primary">Reportar Incidencias por WhatsApp</a>
+      </div>
+    </div>
   </div>
-
-  <!-- Gif de Cheems -->
-  <img src="https://c.tenor.com/YEqsyuOsPVwAAAAd/tenor.gif" alt="Cheems">
-
-  
 </div>
 
-<script>
-  // Función para abrir la modal automáticamente al cargar la página
-  window.onload = function() {
-    openModal();
-  };
 
+<script>
+  // Función para abrir la modal automáticamente
   function openModal() {
     document.getElementById('modal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
   }
 
+  // Función para cerrar la modal
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
   }
 
-  // Cerrar modal al hacer clic fuera de él
+  // Abre la modal automáticamente al cargar la página
+  window.onload = function() {
+    openModal();
+  };
+
+  // Cierra la modal al hacer clic fuera de ella
   window.onclick = function (event) {
     var modal = document.getElementById('modal');
     if (event.target === modal) {
