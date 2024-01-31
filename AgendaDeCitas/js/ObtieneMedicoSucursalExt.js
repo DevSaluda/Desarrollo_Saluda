@@ -4,7 +4,18 @@ $(document).ready(function(){
 
         if (especialidadextValue !== "") {
             $('#medicoext').prop('disabled', false);
-            $('#medicoext').load('Consultas/ObtieneMedicoProgramacion.php?sucursalExt=' + especialidadextValue);
+
+            $.ajax({
+                url: 'Consultas/ObtieneMedicoProgramacion.php',
+                type: 'GET',
+                data: { sucursalExt: especialidadextValue },
+                success: function(response) {
+                    $('#medicoext').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
         } else {
             $('#medicoext').empty();
             $('<option value="">Selecciona un medicoext</option>').appendTo('#medicoext');
