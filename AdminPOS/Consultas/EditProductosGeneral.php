@@ -4,7 +4,6 @@ include "db_connection.php";
         $ID_Prod_POS=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACT_ID_Prod']))));
         $Nombre_Prod=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['NameDescrip']))));
         $Stock=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['lestock']))));
-        $Lote_Med=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Loteee']))));
         $Precio_Venta=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACASPV']))));
         $Precio_C=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['pcc']))));
         $Min_Existencia=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACAsMinimo']))));
@@ -27,7 +26,6 @@ include "db_connection.php";
         `Precio_C`='$Precio_C',
         `Min_Existencia`='$Min_Existencia',
         `Max_Existencia`='$Max_Existencia',
-        `Lote_Med`='$Lote_Med',
         `Fecha_Caducidad`='$Fecha_Caducidad',
         `AgregadoPor`='$AgregadoPor',
         `Clave_adicional`='$Clave_adicional',
