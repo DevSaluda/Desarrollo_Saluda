@@ -52,7 +52,37 @@ table td {
 
 
 
-     
+    <!-- Modal de Mantenimiento -->
+ <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel">Mantenimiento</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.</p>
+                    <!-- Botón para redirigir -->
+                    <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Main Footer -->
+
+  <script>
+        $(document).ready(function() {
+            $('#modalMantenimiento').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        });
+
+        // Función para redirigir a la página de inicio
+        function redirigirAInicio() {
+            // Puedes cambiar la URL según tus necesidades
+            window.location.href = 'https://saludapos.com/POS2/index';
+        }
+    </script> 
   
   <!-- /.content-wrapper -->
 
