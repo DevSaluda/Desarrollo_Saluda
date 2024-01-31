@@ -55,10 +55,11 @@ $fcha = date("Y-m-d");
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalMantenimientoLabel">Mantenimiento</h5>
-                    <!-- Eliminamos el botón de cierre si no deseas que se pueda cerrar -->
                 </div>
                 <div class="modal-body">
-                    Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.
+                    <p>Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.</p>
+                    <!-- Botón para redirigir -->
+                    <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
                 </div>
             </div>
         </div>
@@ -72,6 +73,12 @@ $fcha = date("Y-m-d");
                 keyboard: false
             });
         });
+
+        // Función para redirigir a la página de inicio
+        function redirigirAInicio() {
+            // Puedes cambiar la URL según tus necesidades
+            window.location.href = 'https://saludapos.com/POS2/index';
+        }
     </script>
   <?php include ("Modales/AperturaCredito.php");
 
