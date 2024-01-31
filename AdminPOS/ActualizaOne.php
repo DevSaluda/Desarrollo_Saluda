@@ -2,8 +2,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT * FROM Stock_POS WHERE Folio_Prod_Stock = $IdBusqueda " ;
