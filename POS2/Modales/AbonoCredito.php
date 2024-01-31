@@ -22,7 +22,6 @@ while ($r=$query->fetch_object()){
 ?>
 
 <?php if($Especialistas!=null):?>
-  <div style="display: none;">
   <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/"
@@ -40,7 +39,6 @@ while ($r=$query->fetch_object()){
       <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
       <button type="submit"  id="EnviaTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
-
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
@@ -58,7 +56,7 @@ while ($r=$query->fetch_object()){
 <input type="date" class="form-control " readonly name="FechaAbonoR" id="fechaabonor" value="<?php echo $fcha;?>" aria-describedby="basic-addon1" maxlength="60">
       <button type="submit"  id="EnviaReimpresionTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
-</div>
+
 
 
 <form action="javascript:void(0)" method="post" id="AbonaCredito" >
@@ -111,7 +109,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  readonly value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">
+  <input type="text" class="form-control "  readonly value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">
   <input type="text" class="form-control " hidden name="Sucursal" id="sucursal" value="<?php echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">   
     </div>
     </div>
@@ -170,7 +168,7 @@ while ($r=$query->fetch_object()){
 </div></div>
 
 
-<input type="hidden" name="IDFolio" id="idfolioajuste" value="<?php echo $Especialistas->Folio_Credito; ?>">
+<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
 <button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
@@ -197,37 +195,44 @@ while ($r=$query->fetch_object()){
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
 <input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
 </form>
-<script src="js/Abona.js"></script>
-<script src="js/UpdateSaldo.js"></script>
+
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
 
 
-<<script>
-    var precio1 = document.getElementById("saldoactual");
-    var precio2 = document.getElementById("abono");
-    var precio3 = document.getElementById("saldonuevo");
-    var ajustecred = document.getElementById("ajuste");
-    var ticketcred = document.getElementById("saldoticket");
-    var ticketcredr = document.getElementById("saldoticketr");
+<script>
+       var precio1 = document.getElementById("saldoactual")
+       var precio2 = document.getElementById("abono")
+       var precio3 = document.getElementById("saldonuevo")
+       var ajustecred=document.getElementById("ajuste")
+       var ticketcred=document.getElementById("saldoticket")
+       var ticketcredr=document.getElementById("saldoticketr")
+        precio2.addEventListener("change", () => {
+            precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value)
 
-    precio2.addEventListener("input", () => {
-        var abono = parseFloat(precio2.value);
-        precio3.value = parseFloat(precio1.value) - abono;
-        ajustecred.value = parseFloat(precio1.value) - abono;
-        ticketcred.value = parseFloat(precio1.value) - abono;
-        ticketcredr.value = parseFloat(precio1.value) - abono;
-        CapturaValorVenta();
-    });
+        })
+        precio2.addEventListener("change", () => {
+          ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
 
-    function CapturaValorVenta() {
-        var abono = document.getElementById("abono").value;
-        document.getElementById("totalventa").value = abono;
-        document.getElementById("abonoticket").value = abono;
-        document.getElementById("abonoticketr").value = abono;
-    }
-</script>
+        })
+        precio2.addEventListener("change", () => {
+          ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
 
+        })
+        precio2.addEventListener("change", () => {
+          ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value)
 
+        })
+        function CapturaValorVenta() {
+    var abono = document.getElementById("abono").value;
+    //Se actualiza en municipio inm
+    document.getElementById("totalventa").value = abono;
+    document.getElementById("abonoticket").value = abono;
+    document.getElementById("abonoticketr").value = abono;
+}
 
+    </script>
+
+<script src="js/Abona.js"></script>
+<script src="js/UpdateSaldo.js"></script>
