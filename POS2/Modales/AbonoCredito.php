@@ -4,21 +4,25 @@ include "../Consultas/Consultas.php";
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
-$user_id=null;
-$sql1= "SELECT Creditos_POS.Folio_Credito,Creditos_POS.Fk_tipo_Credi,Creditos_POS.Nombre_Cred,Creditos_POS.Cant_Apertura,Creditos_POS.Fk_Sucursal,Creditos_POS.Validez,Creditos_POS.Saldo,
-Creditos_POS.Estatus,Creditos_POS.CodigoEstatus,Creditos_POS.ID_H_O_D,Tipos_Credit_POS.ID_Tip_Cred,
-Tipos_Credit_POS.Nombre_Tip,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Creditos_POS,Tipos_Credit_POS,SucursalesCorre WHERE
-Creditos_POS.Fk_tipo_Credi=Tipos_Credit_POS.ID_Tip_Cred AND Creditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC and Creditos_POS.ID_H_O_D='".$row['ID_H_O_D']."' AND 
-Creditos_POS.Folio_Credito = ".$_POST["id"];
-$query = $conn->query($sql1);
+$sql1 = "SELECT Creditos_POS.Folio_Credito, Creditos_POS.Fk_tipo_Credi, Creditos_POS.Nombre_Cred, Creditos_POS.Cant_Apertura, Creditos_POS.Fk_Sucursal, Creditos_POS.Validez, Creditos_POS.Saldo,
+    Creditos_POS.Estatus, Creditos_POS.CodigoEstatus, Creditos_POS.ID_H_O_D, Tipos_Credit_POS.ID_Tip_Cred,
+    Tipos_Credit_POS.Nombre_Tip, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal
+FROM Creditos_POS
+JOIN Tipos_Credit_POS ON Creditos_POS.Fk_tipo_Credi = Tipos_Credit_POS.ID_Tip_Cred
+JOIN SucursalesCorre ON Creditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC
+WHERE Creditos_POS.ID_H_O_D = ? AND Creditos_POS.Folio_Credito = ?";
+$stmt = $conn->prepare($sql1);
+$stmt->bind_param("ss", $row['ID_H_O_D'], $_POST["id"]);
+$stmt->execute();
+$result = $stmt->get_result();
+
 $Especialistas = null;
-if($query->num_rows>0){
-while ($r=$query->fetch_object()){
-  $Especialistas=$r;
-  break;
+if ($result->num_rows > 0) {
+    $Especialistas = $result->fetch_object();
 }
 
-  }
+$stmt->close();
+
 ?>
 
 <?php if($Especialistas!=null):?>
