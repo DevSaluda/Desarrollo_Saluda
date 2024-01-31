@@ -2,8 +2,8 @@
 include_once 'db_connection.php';
 $ID_Prod_POS=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACT_ID_Prod']))));
        
-$Lote=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Loteee']))));
-$Fecha_Caducidad=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['fechacad']))));
+$Lote=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Loteeee']))));
+$Fecha_Caducidad=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['fechacadd']))));
 $AgregadoPor=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['AgregaProductosBy']))));
 $Sistema=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['SistemaProductos']))));
 $Existencias_R=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['NuevaExistencia']))));
