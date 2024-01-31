@@ -52,7 +52,7 @@ $fcha = date("Y-m-d");
 
   <!-- Main Footer -->
   <?php include ("Modales/AperturaCredito.php");
-  include ("Modales/AperturaCreditoClinicas.php");
+
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/AdvierteDeCaja.php");

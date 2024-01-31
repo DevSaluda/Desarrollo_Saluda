@@ -102,11 +102,11 @@
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-list-ol"></i></span>
   </div>
   <select name="Area" id="area" class = "form-control"  >
-                                               <option value="">Seleccione una Sucursal:</option>
-        <?
+                                               <option value="">Seleccione una area:</option>
+        <?php
           $query = $conn -> query ("SELECT ID_Area_Cred,Nombre_Area,ID_H_O_D FROM Areas_Credit_POS WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Area_Cred].'">'.$valores[Nombre_Area].'</option>';
+            echo '<option value="'.$valores["ID_Area_Cred"].'">'.$valores["Nombre_Area"].'</option>';
           }
         ?>  </select>  
               
@@ -130,7 +130,7 @@
     </div>
     <div class="col">
       
-    <label for="exampleFormControlInput1">Fecha de termino <span class="text-danger">*</span></label>
+    <label for="exampleFormControlInput1">Fecha de termino estimada <span class="text-danger">*</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
   
@@ -142,16 +142,16 @@
 <label for="fechaf" class="error">
     </div>
     <div class="col">
-    <label for="exampleFormControlInput1">odontologo </label>
+    <label for="exampleFormControlInput1">Doctor que atiende</label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-calendar-alt"></i></span>
   </div>
   <select id="odo" name="Odo" class = "form-control"  >
-                                               <option value="">Seleccione una Sucursal:</option>
-        <?
+                                               <option value="">Seleccione un doctor:</option>
+        <?php
           $query = $conn -> query ("SELECT ID_Med_Cred,Nombre_Med,ID_H_O_D FROM Medicos_Credit_POS WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Med_Cred].'">'.$valores[Nombre_Med].'</option>';
+            echo '<option value="'.$valores["ID_Med_Cred"].'">'.$valores["Nombre_Med"].'</option>';
           }
         ?>  </select>  
  
@@ -172,10 +172,10 @@
   </div>
   <select id = "tipocred" class = "form-control" name = "TipoCred" >
                                                <option value="">Seleccione un tratamiento:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_Tip_Cred,Nombre_Tip,ID_H_O_D FROM Tipos_Credit_POS WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Tip_Cred].'">'.$valores[Nombre_Tip].'</option>';
+            echo '<option value="'.$valores["ID_Tip_Cred"].'">'.$valores["Nombre_Tip"].'</option>';
           }
         ?>  </select>        
     </div>
@@ -202,7 +202,7 @@
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text"  class="form-control " readonly value="<?echo $row['Nombre_Sucursal']?>">
+  <input type="text"  class="form-control " readonly value="<?php echo $row['Nombre_Sucursal']?>">
   
 </div>
 <label for="nombres" class="error">
@@ -268,11 +268,11 @@
     <input type="text"  class="form-control " hidden readonly name="Costoo" id="costoo">
     <input type="text"  class="form-control "   hidden name="Descuento" id="descuentoooo">
     <input type="text"  class="form-control "   hidden  name="PromoReal" id="promoreal">
-    <input type="text"  class="form-control " hidden  readonly name="Sucursal" id="sucursal" value="<?echo $row['Fk_Sucursal']?>">
+    <input type="text"  class="form-control " hidden  readonly name="Sucursal" id="sucursal" value="<?php echo $row['Fk_Sucursal']?>">
     <input type="text" class="form-control" id="codestatus" name="CodEstatus"  hidden  readonly value="background-color: #2BBB1D !important;" >
-  <input type="text" class="form-control" id="empresa" name="Empresa" hidden  readonly value="<? echo $row['ID_H_O_D']?>" >
-  <input type="text" class="form-control" id="agenda" name="AgendaPor" hidden readonly   value="<?echo $row['Nombre_Apellidos']?>" >
-  <input type="text" class="form-control" id="sistema" name="Sistema"  hidden  readonly value="POS <?echo $row['Nombre_rol']?>" >
+  <input type="text" class="form-control" id="empresa" name="Empresa" hidden  readonly value="<?php echo $row['ID_H_O_D']?>" >
+  <input type="text" class="form-control" id="agenda" name="AgendaPor" hidden readonly   value="<?php echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control" id="sistema" name="Sistema"  hidden  readonly value="POS <?php echo $row['Nombre_rol']?>" >
   <div class="text-center">
   <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
   </div>
