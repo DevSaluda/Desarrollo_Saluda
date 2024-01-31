@@ -11,7 +11,7 @@ $fcha = date("Y-m-d");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Apertura de credito|  </title>
+  <title>Apertura de credito|<?php echo $row['ID_H_O_D']?>  <?php echo $row['Nombre_Sucursal']?></title>
 
 <?php include "Header.php"?>
 </head>
