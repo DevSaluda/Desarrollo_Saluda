@@ -70,30 +70,7 @@
   <a href="https://api.whatsapp.com/send?phone=9993630961" target="_blank" style="display: inline-block; background-color: #25D366; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin-top: 10px;">Reportar Incidencias por WhatsApp</a>
 </div>
 
-<script>
-  // Función para abrir la modal automáticamente al cargar la página
-  window.onload = function() {
-    openModal();
-  };
 
-  function openModal() {
-    document.getElementById('modal').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-  }
-
-  // Cerrar modal al hacer clic fuera de él
-  window.onclick = function (event) {
-    var modal = document.getElementById('modal');
-    if (event.target === modal) {
-      closeModal();
-    }
-  };
-</script>
 
 </body>
 </html>
