@@ -139,7 +139,8 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="number" class="form-control "   readonly name="SaldoNuevo" id="saldonuevo" aria-describedby="basic-addon1" maxlength="60">               
+  <input type="number" class="form-control" readonly name="SaldoNuevo" id="saldonuevo" aria-describedby="basic-addon1">
+         
     </div>
     <label for="abono" class="error"> 
   </div></div>
