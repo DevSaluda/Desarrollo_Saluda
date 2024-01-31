@@ -1,7 +1,12 @@
 <?php
 include("ConeSelectDinamico.php");
 
-$sucursal = isset($_REQUEST['especialidadext']) ? intval($_REQUEST['especialidadext']) : 0;
+// Imprimir contenido de $_REQUEST para fines de depuración
+var_dump($_REQUEST);
+
+// Obtener el valor de 'especialidadext' y escapar para evitar inyección SQL
+$sucursal = isset($_REQUEST['especialidadext']) ? mysqli_real_escape_string($conn, $_REQUEST['especialidadext']) : '';
+
 echo "Valor de especialidadext: $sucursal";
 
 $medicos = $conn->prepare("SELECT * FROM Personal_Medico_Express WHERE Estatus='Disponible' AND Especialidad_Express = '$sucursal'") or die(mysqli_error());
