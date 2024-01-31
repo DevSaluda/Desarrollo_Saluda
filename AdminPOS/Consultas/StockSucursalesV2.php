@@ -47,7 +47,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
  
 
 
-       { mData: 'Acciones' }, 
+       { mData: 'Coincidencias' }, 
     //    { mData: 'Traspaso' }, 
        { mData: 'Ingreso' }, 
        { mData: 'Auditoria' }, 

@@ -36,17 +36,8 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Min_Existencia"] = $fila["Min_Existencia"];
     $data[$c]["Max_Existencia"] = $fila["Max_Existencia"];
    
-    $data[$c]["Acciones"] = ["<button class='btn btn-primary btn-sm dropdown-toggle' 
-    type='button' data-toggle='dropdown' aria-haspopup='true'
-     aria-expanded='false'><i class='fas fa-th-list fa-1x'></i></button><div class='dropdown-menu'>
-     <a href=https://saludapos.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-edit  dropdown-item' >
-     Actualizar existencias <i class='fas fa-edit'></i></a><a href=https://saludapos.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])."
-      class='btn-VerDistribucion  dropdown-item' >Actualizar existencias en coincidencia <i class='fas fa-equals'></i> </a>
-      <a href=https://saludapos.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-editProd dropdown-item' >Traspaso
-       <i class='fas fa-exchange-alt'></i></a><a href=https://saludapos.com/AdminPOS/EstadisticaVentas?idProd=".base64_encode($fila["Cod_Barra"])." 
-       class='btn-Delete dropdown-item' >Estadisticas de venta <i class='fas fa-chart-line'></i></a></div> "];
-    //    $data[$c]["Traspaso"] = [ "<a class='btn btn-success btn-sm' href=https://saludapos.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])."' >
-    //    <i class='fas fa-exchange-alt'></i></a>"];
+
+    $data[$c]["Coincidencias"] = ["<a  href=https://saludapos.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
        $data[$c]["Ingreso"] = ["<a href=https://saludapos.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
        $data[$c]["Auditoria"] = ["<a href=https://saludapos.com/AdminPOS/HistorialProductoAudita?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
     $c++; 
