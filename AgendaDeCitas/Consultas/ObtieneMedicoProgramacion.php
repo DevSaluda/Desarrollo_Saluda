@@ -1,7 +1,7 @@
 <?php
 include("ConeSelectDinamico.php");
 
-$sucursal = isset($_GET['especialidadext']) ? intval($_GET['especialidadext']) : 0;
+$sucursal = isset($_GET['sucursalExt']) ? intval($_GET['sucursalExt']) : 0;
 
 $medicos = $conn->prepare("SELECT * FROM Personal_Medico_Express WHERE Estatus='Disponible' AND Especialidad_Express = ?");
 $medicos->bind_param("i", $sucursal);

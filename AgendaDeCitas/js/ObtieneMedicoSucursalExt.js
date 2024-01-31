@@ -1,6 +1,6 @@
 $('document').ready(function(){
-    $('#especialidadext').on('change', function(){
-        var especialidadValue = $('#especialidadext').val();
+    $('#sucursalExt').on('change', function(){
+        var especialidadValue = $('#sucursalExt').val();
         if(especialidadValue == ""){
             $('#medicoext').empty();
             $('<option value="">Selecciona un medicoext</option>').appendTo('#medicoext');
@@ -11,7 +11,7 @@ $('document').ready(function(){
             $.ajax({
                 type: 'GET',
                 url: 'Consultas/ObtieneMedicoProgramacion.php',
-                data: { especialidadext: especialidadValue },
+                data: { sucursalExt: especialidadValue },
                 success: function(response) {
                     $('#medicoext').html(response);
                 },
