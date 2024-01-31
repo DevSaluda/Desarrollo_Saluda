@@ -4,48 +4,21 @@ include "../Consultas/Consultas.php";
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
-$user_id = null;
-
-// Usando consulta preparada para evitar problemas de seguridad
-$sql1 = "SELECT Creditos_POS.Folio_Credito, Creditos_POS.Fk_tipo_Credi, Creditos_POS.Nombre_Cred, Creditos_POS.Cant_Apertura, Creditos_POS.Fk_Sucursal, Creditos_POS.Validez, Creditos_POS.Saldo,
-    Creditos_POS.Estatus, Creditos_POS.CodigoEstatus, Creditos_POS.ID_H_O_D, Tipos_Credit_POS.ID_Tip_Cred,
-    Tipos_Credit_POS.Nombre_Tip, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
-    FROM Creditos_POS, Tipos_Credit_POS, SucursalesCorre 
-    WHERE Creditos_POS.Fk_tipo_Credi=Tipos_Credit_POS.ID_Tip_Cred 
-    AND Creditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-    AND Creditos_POS.ID_H_O_D = ?
-    AND Creditos_POS.Folio_Credito = ?";
-
-$stmt = $conn->prepare($sql1);
-$stmt->bind_param("ss", $row['ID_H_O_D'], $_POST["id"]);
-
-if ($stmt->execute()) {
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        while ($r = $result->fetch_object()) {
-            $Especialistas = $r;
-            break;
-        }
-    } else {
-        // No se encontraron resultados
-        echo "No se encontraron resultados para el ID " . $_POST["id"];
-    }
-
-    $stmt->close();
-} else {
-    // Error en la ejecución de la consulta preparada
-    echo "Error en la ejecución de la consulta preparada: " . $stmt->error;
-}
-
+$user_id=null;
+$sql1= "SELECT Creditos_POS.Folio_Credito,Creditos_POS.Fk_tipo_Credi,Creditos_POS.Nombre_Cred,Creditos_POS.Cant_Apertura,Creditos_POS.Fk_Sucursal,Creditos_POS.Validez,Creditos_POS.Saldo,
+Creditos_POS.Estatus,Creditos_POS.CodigoEstatus,Creditos_POS.ID_H_O_D,Tipos_Credit_POS.ID_Tip_Cred,
+Tipos_Credit_POS.Nombre_Tip,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Creditos_POS,Tipos_Credit_POS,SucursalesCorre WHERE
+Creditos_POS.Fk_tipo_Credi=Tipos_Credit_POS.ID_Tip_Cred AND Creditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC  AND 
+Creditos_POS.Folio_Credito = ".$_POST["id"];
+$query = $conn->query($sql1);
 $Especialistas = null;
-
-if ($result->num_rows > 0) {
-    while ($r = $result->fetch_object()) {
-        $Especialistas = $r;
-        break;
-    }
+if($query->num_rows>0){
+while ($r=$query->fetch_object()){
+  $Especialistas=$r;
+  break;
 }
+
+  }
 ?>
 
 <?php if($Especialistas!=null):?>
@@ -222,41 +195,43 @@ if ($result->num_rows > 0) {
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
 <input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
 </form>
-<script>
-        var precio1 = document.getElementById("saldoactual");
-        var precio2 = document.getElementById("abono");
-        var precio3 = document.getElementById("saldonuevo");
-        var ajustecred = document.getElementById("ajuste");
-        var ticketcred = document.getElementById("saldoticket");
-        var ticketcredr = document.getElementById("saldoticketr");
-
-        precio2.addEventListener("change", () => {
-            precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value);
-        });
-
-        precio2.addEventListener("change", () => {
-            ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value);
-        });
-
-        precio2.addEventListener("change", () => {
-            ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value);
-        });
-
-        precio2.addEventListener("change", () => {
-            ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value);
-        });
-
-        function CapturaValorVenta() {
-            var abono = document.getElementById("abono").value;
-            document.getElementById("totalventa").value = abono;
-            document.getElementById("abonoticket").value = abono;
-            document.getElementById("abonoticketr").value = abono;
-        }
-    </script>
-
-<?php else: ?>
-    <p class="alert alert-danger">404 No se encuentra</p>
-<?php endif; ?>
-
 <script src="js/Abona.js"></script>
+
+<?php else:?>
+  <p class="alert alert-danger">404 No se encuentra</p>
+<?php endif;?>
+
+
+<script>
+       var precio1 = document.getElementById("saldoactual")
+       var precio2 = document.getElementById("abono")
+       var precio3 = document.getElementById("saldonuevo")
+       var ajustecred=document.getElementById("ajuste")
+       var ticketcred=document.getElementById("saldoticket")
+       var ticketcredr=document.getElementById("saldoticketr")
+        precio2.addEventListener("change", () => {
+            precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+
+        })
+        precio2.addEventListener("change", () => {
+          ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+
+        })
+        precio2.addEventListener("change", () => {
+          ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+
+        })
+        precio2.addEventListener("change", () => {
+          ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+
+        })
+        function CapturaValorVenta() {
+    var abono = document.getElementById("abono").value;
+    //Se actualiza en municipio inm
+    document.getElementById("totalventa").value = abono;
+    document.getElementById("abonoticket").value = abono;
+    document.getElementById("abonoticketr").value = abono;
+}
+
+    </script>
 
