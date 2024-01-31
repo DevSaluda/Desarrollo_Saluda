@@ -1,4 +1,4 @@
-$('document').ready(function(){
+$(document).ready(function(){
     $('#especialidadext').on('change', function(){
         if ($('#especialidadext').val() == "") {
             $('#medicoext').empty();
