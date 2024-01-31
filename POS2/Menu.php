@@ -310,7 +310,25 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
             <a href="https://saludapos.com/POS2/Creditos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
-                Apertura de crédito
+                Apertura de créditos
+               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/CreditosFinalizados" class="nav-link">
+            <i class="fas fa-dot-circle"></i>
+              <p>
+                Créditos Finalizados
+               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/CreditosFinalizados" class="nav-link">
+            <i class="fas fa-dot-circle"></i>
+              <p>
+                Créditos Vencidos
                
               </p>
             </a>

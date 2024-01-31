@@ -16,21 +16,7 @@ $fcha = date("Y-m-d");
 <?php include "Header.php"?>
 </head>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Créditos dentales</a>
-  </li>
- 
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-TipPro" role="tab" aria-controls="pills-profile" aria-selected="false">Finalizados</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Porvencercred" role="tab" aria-controls="pills-profile" aria-selected="false">Por vencer</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Vencidos" role="tab" aria-controls="pills-profile" aria-selected="false">Vencidos</a>
-  </li>
-</ul>
+
 
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -55,54 +41,6 @@ $fcha = date("Y-m-d");
 </div>
 
 <!-- Tipos_productos -->
-<div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-  Créditos finalizados de  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  
-</div>
-</div>
-    
-<div id="tablaCreditosFinalizados"></div>
-
-</div>
-
-<div class="tab-pane fade show " id="Porvencercred" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-  Créditos por vencer de  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  
-</div>
-</div>
-    
-<div id="tablaCreditosPorVencer"></div>
-
-</div>
-
-<div class="tab-pane fade show " id="Vencidos" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-  Créditos vencidos de  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  
-</div>
-</div>
-    
-<div id="tablaCreditosVencidos"></div>
-
-</div>
-</div>
-
-  
-
 
  
         <!-- /.row -->
@@ -126,9 +64,7 @@ $fcha = date("Y-m-d");
 
 <script src="js/Creditos.js"></script>
 <script src="js/CreditosClinicas.js"></script>
-<script src="js/CreditosFinalizados.js"></script>
-<script src="js/CreditosPorVencer.js"></script>
-<script src="js/CreditosVencidos.js"></script>
+
 <script src="js/AperturaCredito.js"></script>
 <script src="js/AperturaCreditosClinicas.js"></script>
 <script src="js/ObtieneCostoTratamiento.js"></script>
