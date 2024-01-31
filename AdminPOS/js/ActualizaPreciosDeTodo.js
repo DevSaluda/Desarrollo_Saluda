@@ -105,7 +105,7 @@ $('document').ready(function($) {
                     setTimeout(function() {
                         $('#ExitoActualizaCategoria').modal('hide')
                     }, 2000); // abrir
-                    setTimeout(' window.location.href = "https://controlfarmacia.com/AdminPOS/ProductosV2"; ', 2000);
+                    setTimeout(' window.location.href = "https://saludapos.com/AdminPOS/ProductosV2"; ', 2000);
 
 
 
