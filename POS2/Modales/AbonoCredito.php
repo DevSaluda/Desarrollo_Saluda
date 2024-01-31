@@ -22,7 +22,7 @@ while ($r=$query->fetch_object()){
 ?>
 
 <?php if($Especialistas!=null):?>
-  <div style="display: none;">  <form method="post" 
+  <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/"
       onsubmit="window.open('about:blank','print_popup','width=200,height=200');"  id="GeneraTicket">
@@ -39,7 +39,6 @@ while ($r=$query->fetch_object()){
       <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
       <button type="submit"  id="EnviaTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
-
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
