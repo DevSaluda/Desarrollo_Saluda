@@ -336,32 +336,3 @@ var precio1 = document.getElementById("costoo")
 
 </script>
 
-<?php
-if($ValorCaja["Estatus"] == 'Abierta'){
-
-  echo '
-  <script>
-$(document).ready(function()
-{
-// id de nuestro modal
-
-$("#submit_registro").attr("disabled", false);
-});
-</script>
-  ';
-     }else{
-    
-      echo '
-      <script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-
-  $("#submit_registro").attr("disabled", true);
-});
-</script>
-      ';
-      
-      
-    
-     } ?>
