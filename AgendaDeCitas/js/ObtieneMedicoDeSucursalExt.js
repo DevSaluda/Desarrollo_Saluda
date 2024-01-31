@@ -6,7 +6,7 @@ $('document').ready(function(){
                 $('#medicoExt').attr('disabled', 'disabled');
             }else{
                 $('#medicoExt').removeAttr('disabled', 'disabled');
-                $('#medicoExt').load('https://saludapos.com/AgendaDeCitas/Consultas/Obtieneunmemedicoext.php=' + $('#especialidadExt').val());
+                $('#medicoExt').load('Consultas/Obtieneunmemedicoext.php=' + $('#especialidadExt').val());
                 
             }
     });
