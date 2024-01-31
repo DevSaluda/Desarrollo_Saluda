@@ -152,7 +152,7 @@ while ($r=$query->fetch_object()){
   
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
-<? endif;?>
+<?php endif;?>
 <?php
 
 function fechaCastellano ($fecha) {
