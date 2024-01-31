@@ -205,7 +205,7 @@ if ($result->num_rows > 0) {
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
 <input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
 </form>
-<script>
+<!-- <script>
         var precio1 = document.getElementById("saldoactual");
         var precio2 = document.getElementById("abono");
         var precio3 = document.getElementById("saldonuevo");
@@ -235,7 +235,7 @@ if ($result->num_rows > 0) {
             document.getElementById("abonoticket").value = abono;
             document.getElementById("abonoticketr").value = abono;
         }
-    </script>
+    </script> -->
 
 <?php else: ?>
     <p class="alert alert-danger">404 No se encuentra</p>
