@@ -106,22 +106,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?> <?php
-if($ValorCaja["Estatus"] == 'Abierta'){
-
-    
-     }else{
-    
-      echo '
-      <script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-  $("#NoCaja").modal("show");
-});
-</script>
-      ';
-      
-      
-    
-     } ?>
+?> 
