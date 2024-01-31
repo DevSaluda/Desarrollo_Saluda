@@ -196,7 +196,7 @@ while ($r=$query->fetch_object()){
 <input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
 </form>
 <script src="js/Abona.js"></script>
-<script src="js/UpdateSaldo.js"></script>
+
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>

@@ -44,6 +44,6 @@ if ($resultset && mysqli_num_rows($resultset) > 0) {
     // For example, $ValorCaja['ID_Caja'], $ValorCaja['Cantidad_Fondo'], etc.
 } else {
     // Handle the case where no results were found
-    echo "Por el momento sin turno.";
+    
 }
 
