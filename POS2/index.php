@@ -178,7 +178,7 @@ $(document).ready(function(){
       include ("Modales/ModalTraspasos.php");
       include ("Modales/Error.php");
       include ("Modales/ReporteRapido.php");
-  
+      include ("Modales/Mildisculpas.php");
    include ("Modales/Exito.php");
   include ("footer.php");
  ?>
