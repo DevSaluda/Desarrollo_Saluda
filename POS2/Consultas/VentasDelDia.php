@@ -143,7 +143,7 @@ $(".btn-Reimpresion").click(function(){
     $('#Cancelacionmodal').modal('show');
 });
 </script>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
