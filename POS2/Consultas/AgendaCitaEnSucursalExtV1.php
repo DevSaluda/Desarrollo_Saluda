@@ -44,7 +44,7 @@ $row = mysqli_fetch_assoc($resultset);
 		else {
 			echo json_encode(array("statusCode"=>201));
 		}
-		mysqli_close($conn);
+
    
 
     mysqli_close($conn);
