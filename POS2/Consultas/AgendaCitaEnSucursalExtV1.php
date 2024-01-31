@@ -8,7 +8,6 @@ $Fk_Especialista	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_PO
 $Fk_Sucursal =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['SucursalExt']))));
 $Fecha= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['FechaExt']))));	
 $Hora	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['HorasExt']))));
-$Costo= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['CostoExt']))));
 $Nombre_Paciente= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['NombresExt']))));
 $Telefono= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TelExt']))));
 $Tipo_Consulta	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TipoConsultaExt']))));
@@ -34,9 +33,9 @@ $row = mysqli_fetch_assoc($resultset);
     } 
     else{
     
-		$sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, `Costo`, 
+		$sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`,
         `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`,  `Color_Calendario`) 
-		VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora','$Costo', 
+		VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora',
         '$Nombre_Paciente','$Telefono','$Tipo_Consulta', '$Estatus_cita', '$Observaciones','$ID_H_O_D','$AgendadoPor','$Sistema','$Color_Calendario')";
 	
 		if (mysqli_query($conn, $sql)) {
