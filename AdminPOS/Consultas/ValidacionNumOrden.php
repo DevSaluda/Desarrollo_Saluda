@@ -7,7 +7,7 @@ if (isset($_POST['NumOrden'])) {
     $numOrden = $_POST['NumOrden'];
 
     // Realiza la conexión a la base de datos (ajusta los parámetros según tu configuración)
-    $mysqli = new mysqli('localhost', 'somosgr1_SHWEB', 'yH.0a-v?T*1R', 'somosgr1_Sistema_Hospitalario');
+    $mysqli = new mysqli('localhost', 'u155356178_SaludDevCenter', 'uE;bAISz;*6c|I4PvEnfSys324\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>', 'u155356178_saludapos');
 
     // Verifica la conexión
     if ($mysqli->connect_error) {
