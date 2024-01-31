@@ -6,7 +6,11 @@ $(document).ready(function(){
             $('#medicoext').prop('disabled', true);
         } else {
             $('#medicoext').prop('disabled', false);
-            $('#medicoext').load('Consultas/ObtieneMedicoProgramacion.php?sucursalExt=' + $('#especialidadext').val());
+            var url = 'Consultas/ObtieneMedicoProgramacion.php?sucursalExt=' + $('#especialidadext').val();
+            console.log('URL de solicitud:', url);
+            $('#medicoext').load(url, function(response, status, xhr) {
+                console.log('Respuesta del servidor:', response);
+            });
         }
     });
 });
