@@ -49,8 +49,30 @@ $fcha = date("Y-m-d");
 
   <!-- Control Sidebar -->
   
-
+ <!-- Modal de Mantenimiento -->
+ <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel">Mantenimiento</h5>
+                    <!-- Eliminamos el botón de cierre si no deseas que se pueda cerrar -->
+                </div>
+                <div class="modal-body">
+                    Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.
+                </div>
+            </div>
+        </div>
+    </div>
   <!-- Main Footer -->
+
+  <script>
+        $(document).ready(function() {
+            $('#modalMantenimiento').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        });
+    </script>
   <?php include ("Modales/AperturaCredito.php");
 
   include ("Modales/Error.php");
