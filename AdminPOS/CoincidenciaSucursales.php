@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 $IdBusqueda=base64_decode($_GET['Disid']);
 $sql1="SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.ID_Prod_POS,Stock_POS.Clave_adicional,Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Fk_sucursal,
 Stock_POS.Existencias_R,Stock_POS.Proveedor1,Stock_POS.Proveedor2,Stock_POS.CodigoEstatus,Stock_POS.Estatus,Stock_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
@@ -15,9 +14,9 @@ AND Stock_POS.ID_Prod_POS = $IdBusqueda";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Actualizando existencias de <?echo $Usuarios['Nombre_Prod']?> </title>
+  <title>Actualizando existencias de <?php echo $Usuarios['Nombre_Prod']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -27,11 +26,11 @@ AND Stock_POS.ID_Prod_POS = $IdBusqueda";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Productos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   <div >
   <button type="button" class="btn btn-outline-info btn-sm" onClick="history.go(-1);" class="btn btn-default">
@@ -76,7 +75,7 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -119,7 +118,7 @@ $query = $conn->query($sql1);
   <input type="number" class="form-control" name="existenciasnuevas[]" value="<?php echo $Usuarios['Existencias_R']; ?>"></td>
   <td > <?php echo $Usuarios['Nombre_Sucursal']; ?></td>
 
-  <!-- <td >  <button class="btn btn-default btn-sm" style="<?echo $Usuarios['CodigoEstatus'];?>"><?php echo $Usuarios["Estatus"]; ?></button> </td> -->
+  <!-- <td >  <button class="btn btn-default btn-sm" style="<?php echo $Usuarios['CodigoEstatus'];?>"><?php echo $Usuarios["Estatus"]; ?></button> </td> -->
     
 	
 		
@@ -147,7 +146,7 @@ $query = $conn->query($sql1);
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php 
  
   include ("Modales/ExitoActualiza.php");
 
@@ -189,7 +188,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
