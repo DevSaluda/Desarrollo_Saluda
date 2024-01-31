@@ -40,7 +40,8 @@ while ($r=$query->fetch_object()){
       <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
       <button type="submit"  id="EnviaTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
-</div>
+
+<div style="display: none;">
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
@@ -58,7 +59,7 @@ while ($r=$query->fetch_object()){
 <input type="date" class="form-control " readonly name="FechaAbonoR" id="fechaabonor" value="<?php echo $fcha;?>" aria-describedby="basic-addon1" maxlength="60">
       <button type="submit"  id="EnviaReimpresionTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
-
+</div>
 
 
 <form action="javascript:void(0)" method="post" id="AbonaCredito" >
