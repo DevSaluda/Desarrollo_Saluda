@@ -178,32 +178,3 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 ?>
-<?php
-if($ValorCaja["Estatus"] == 'Abierta'){
-
-  echo '
-  <script>
-$(document).ready(function()
-{
-// id de nuestro modal
-
-$(".acciones").attr("disabled", false);
-});
-</script>
-  ';
-     }else{
-    
-      echo '
-      <script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-
-  $(".acciones").attr("disabled", true);
-});
-</script>
-      ';
-      
-      
-    
-     } ?>
