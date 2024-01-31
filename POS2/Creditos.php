@@ -63,7 +63,7 @@ $fcha = date("Y-m-d");
 <!-- REQUIRED SCRIPTS -->
 
 <script src="js/Creditos.js"></script>
-<script src="js/CreditosClinicas.js"></script>
+
 
 <script src="js/AperturaCredito.js"></script>
 <script src="js/AperturaCreditosClinicas.js"></script>
