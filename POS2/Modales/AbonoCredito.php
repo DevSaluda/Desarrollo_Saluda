@@ -168,7 +168,7 @@ while ($r=$query->fetch_object()){
 </div></div>
 
 
-<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
+<input type="hidden" name="IDFolio" id="idfolioajuste" value="<?php echo $Especialistas->Folio_Credito; ?>">
 <button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
@@ -202,36 +202,30 @@ while ($r=$query->fetch_object()){
 <?php endif;?>
 
 
-<script>
-       var precio1 = document.getElementById("saldoactual")
-       var precio2 = document.getElementById("abono")
-       var precio3 = document.getElementById("saldonuevo")
-       var ajustecred=document.getElementById("ajuste")
-       var ticketcred=document.getElementById("saldoticket")
-       var ticketcredr=document.getElementById("saldoticketr")
-        precio2.addEventListener("change", () => {
-            precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+<<script>
+    var precio1 = document.getElementById("saldoactual");
+    var precio2 = document.getElementById("abono");
+    var precio3 = document.getElementById("saldonuevo");
+    var ajustecred = document.getElementById("ajuste");
+    var ticketcred = document.getElementById("saldoticket");
+    var ticketcredr = document.getElementById("saldoticketr");
 
-        })
-        precio2.addEventListener("change", () => {
-          ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+    precio2.addEventListener("input", () => {
+        var abono = parseFloat(precio2.value);
+        precio3.value = parseFloat(precio1.value) - abono;
+        ajustecred.value = parseFloat(precio1.value) - abono;
+        ticketcred.value = parseFloat(precio1.value) - abono;
+        ticketcredr.value = parseFloat(precio1.value) - abono;
+        CapturaValorVenta();
+    });
 
-        })
-        precio2.addEventListener("change", () => {
-          ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+    function CapturaValorVenta() {
+        var abono = document.getElementById("abono").value;
+        document.getElementById("totalventa").value = abono;
+        document.getElementById("abonoticket").value = abono;
+        document.getElementById("abonoticketr").value = abono;
+    }
+</script>
 
-        })
-        precio2.addEventListener("change", () => {
-          ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value)
 
-        })
-        function CapturaValorVenta() {
-    var abono = document.getElementById("abono").value;
-    //Se actualiza en municipio inm
-    document.getElementById("totalventa").value = abono;
-    document.getElementById("abonoticket").value = abono;
-    document.getElementById("abonoticketr").value = abono;
-}
-
-    </script>
 
