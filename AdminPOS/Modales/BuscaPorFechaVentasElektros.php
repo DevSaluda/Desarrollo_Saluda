@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/AdminPOS/ReportesEkg">
+ <form  method="POST" action="https://saludapos.com/AdminPOS/ReportesEkg">
     
  
  
