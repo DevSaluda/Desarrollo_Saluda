@@ -255,7 +255,6 @@ inputBox.addEventListener("keydown", function(e) {
     </div>
     
     </div>
-    </div>  </div>
     </div>
     
 
@@ -314,7 +313,9 @@ function CapturaFacturas() {
      
 
                                        
-         
+       </div>
+    </div>  </div>
+    </div>
       </div></div>
  <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
