@@ -28,7 +28,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
