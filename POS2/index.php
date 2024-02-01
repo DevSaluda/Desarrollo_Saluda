@@ -280,6 +280,11 @@ $(document).ready(function(){
             });
         }
     });
+
+    function redirigirAInicio() {
+            // Puedes cambiar la URL según tus necesidades
+            window.location.href = 'https://saludapos.com/POS2/RegistrosEnergiaElectrica';
+        }
 </script>
 
 </body>
