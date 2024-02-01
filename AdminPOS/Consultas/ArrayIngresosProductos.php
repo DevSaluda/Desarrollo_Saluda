@@ -41,10 +41,11 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
     $data[$c]["ExistenciaPrev"] = $fila["ExistenciaPrev"];
     $data[$c]["Recibido"] = $fila["Recibido"];
+    $data[$c]["totalfactura"] = $fila["totalfactura"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["AgregadoPor"] = $fila["AgregadoPor"];
     $data[$c]["AgregadoEl"] = $fila["AgregadoEl"];
-    $data[$c]["totalfactura"] = $fila["totalfactura"];
+
     $c++;
 }
 
