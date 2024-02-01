@@ -118,8 +118,8 @@
     <input type="number" class="form-control" name="usuario" id="usuario"hidden readonly value="4">
     <input type="text"  class="form-control " value="Vigente" hidden readonly name="VigenciaInicio" id="vigenciainicio">
     <input type="text"  class="form-control " value="background-color:#2BBB1D !important" hidden readonly name="vigencia" id="vigencia">
-    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
     
    
 
