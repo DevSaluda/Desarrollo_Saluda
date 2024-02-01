@@ -76,7 +76,7 @@ table td {
   <script>
         $(document).ready(function() {
             $('#modalMantenimiento').modal({
-           
+                backdrop: 'static',
                 keyboard: false
             });
         });
