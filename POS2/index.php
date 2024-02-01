@@ -243,7 +243,7 @@ $(document).ready(function(){
                     <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
 
                     <!-- Botón para confirmar que no desea ver el modal durante un tiempo -->
-                    <button type="button" id="confirmarNoMostrar" class="btn btn-secondary">No mostrar por 5 horas</button>
+                   
                     
                     <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energía eléctrica</button>
                 </div>
