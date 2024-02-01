@@ -35,6 +35,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Factura"] = $fila["Factura"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+    $data[$c]["Precio_C"] = $fila["Precio_C"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
     $data[$c]["ExistenciaPrev"] = $fila["ExistenciaPrev"];
     $data[$c]["Recibido"] = $fila["Recibido"];
