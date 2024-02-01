@@ -277,16 +277,30 @@ inputBox.addEventListener("keydown", function(e) {
    
   
     <script>
-     function sumanuevo() {
+    function sumanuevo() {
     // Obtener valores
-    let exist = document.getElementById("recibio").value;
-    let preciosCompra = document.getElementById("preciosCompra").value; // Asegúrate de tener el id correcto para el precio de compra
+    let recibioElement = document.getElementById("recibio");
+    let preciosCompraElement = document.getElementById("preciosCompra");
+    let recibiooElement = document.getElementById("recibioo");
+    let existenciaActualElement = document.getElementById("existenciaactual");
+    let nuevaExistenciaElement = document.getElementById("nuevaexistencia");
+    let nuevaExistenciaRegistroElement = document.getElementById("nuevaexistenciaregistro");
+    let totalFacturaElement = document.getElementById("totalfactura");
+
+    // Verificar si los elementos existen antes de acceder a sus propiedades
+    if (!recibioElement || !preciosCompraElement || !recibiooElement || !existenciaActualElement || !nuevaExistenciaElement || !nuevaExistenciaRegistroElement || !totalFacturaElement) {
+        console.error("Uno o más elementos no se encuentran en el DOM.");
+        return;
+    }
+
+    let exist = recibioElement.value;
+    let preciosCompra = preciosCompraElement.value;
 
     // Actualizar en municipio inm
-    document.getElementById("recibioo").value = exist;
+    recibiooElement.value = exist;
 
-    m1 = document.getElementById("existenciaactual").value;
-    m2 = document.getElementById("recibio").value;
+    m1 = existenciaActualElement.value;
+    m2 = recibioElement.value;
 
     r = parseInt(m1) + parseInt(m2);
 
@@ -294,10 +308,11 @@ inputBox.addEventListener("keydown", function(e) {
     totalfactura = parseFloat(preciosCompra) * parseFloat(exist);
 
     // Actualizar valores
-    document.getElementById("nuevaexistencia").value = r;
-    document.getElementById("nuevaexistenciaregistro").value = r;
-    document.getElementById("totalfactura").value = totalfactura; // Asegúrate de tener el id correcto para totalfactura
+    nuevaExistenciaElement.value = r;
+    nuevaExistenciaRegistroElement.value = r;
+    totalFacturaElement.value = totalfactura;
 }
+
 
  
 function actualizarfecha() {
