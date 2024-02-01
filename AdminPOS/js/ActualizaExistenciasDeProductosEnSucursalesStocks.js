@@ -1,5 +1,5 @@
 $("document").ready(function($) {
-    $("#AgregaExistencias").hide();
+    // $("#AgregaExistencias").hide();
 
     $.validator.addMethod(
         "Sololetras",
