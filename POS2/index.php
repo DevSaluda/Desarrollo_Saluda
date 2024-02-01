@@ -223,7 +223,64 @@ $(document).ready(function(){
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
+<!-- Modal de Mantenimiento -->
+<div class="modal-dialog modal-notify modal-primary" role="document">
+    <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">!Aviso! 🚨🔧</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Cambiado el mensaje de mantenimiento -->
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?>. Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo. 🎉🔌⚡️</p>
 
+                    <!-- Botón para redirigir -->
+                    <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <p>¡Nuestros programadores han trabajado para solucionar cualquier problema! 🚀</p>
+                    <br>
+                    <p>¡Gracias por tu paciencia!</p> 
+                    <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
+
+                    <!-- Botón para confirmar que no desea ver el modal durante un tiempo -->
+                    <button type="button" id="confirmarNoMostrar" class="btn btn-secondary">No mostrar por 5 horas</button>
+                    
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energía eléctrica</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<!-- Script para mostrar y ocultar el modal -->
+<script>
+    // Espera a que el documento esté completamente cargado
+    $(document).ready(function() {
+        // Verifica si el usuario ya confirmó que no desea ver el modal
+        if (localStorage.getItem('ocultarModal') === 'true') {
+            $('#modalavisoterminado').modal('hide');
+        } else {
+            // Muestra el modal al cargar la página
+            $('#modalavisoterminado').modal('show');
+
+            // Agrega un listener al botón de confirmación
+            $('#confirmarNoMostrar').on('click', function() {
+                // Cierra el modal
+                $('#modalavisoterminado').modal('hide');
+
+                // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
+                localStorage.setItem('ocultarModal', 'true');
+
+                // Configura un temporizador para volver a mostrar el modal después de 5 horas (en milisegundos)
+                setTimeout(function() {
+                    localStorage.removeItem('ocultarModal'); // Elimina la marca para mostrar el modal nuevamente
+                    $('#modalavisoterminado').modal('show'); // Muestra el modal
+                }, 5 * 60 * 60 * 1000); // 5 horas
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
