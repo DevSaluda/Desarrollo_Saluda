@@ -34,7 +34,7 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
     $resultset = mysqli_query($conn, $sql) or die("error de la base de datos: " . mysqli_error($conn));
     $row = mysqli_fetch_assoc($resultset);
 
-    if ($row['Nombre_Apellidos'] == $Nombre_Apellidos && $row['ID_H_O_D'] == $ID_H_O_D && $row['Fk_Usuario'] == $Fk_Usuario && $row['Correo_Electronico'] == $Correo_Electronico && $row['Fk_Sucursal'] == $Fk_Sucursal) {
+    if ($row && $row['Nombre_Apellidos'] == $Nombre_Apellidos && $row['ID_H_O_D'] == $ID_H_O_D && $row['Fk_Usuario'] == $Fk_Usuario && $row['Correo_Electronico'] == $Correo_Electronico && $row['Fk_Sucursal'] == $Fk_Sucursal) {
         echo json_encode(array("statusCode" => 250));
     } else {
         $sql = "INSERT INTO `Personal_Enfermeria`( `Nombre_Apellidos`,`Password`,`file_name`,`Fk_Usuario`,`Fecha_Nacimiento`,`Correo_Electronico`,`Telefono`,`AgregadoPor`,`Fk_Sucursal`,`ID_H_O_D`,`Estatus`,`ColorEstatus`) VALUES ('$Nombre_Apellidos','$Password','$uploadedFile','$Fk_Usuario','$Fecha_Nacimiento','$Correo_Electronico','$Telefono','$AgregadoPor','$Fk_Sucursal','$ID_H_O_D','$Estatus','$ColorEstatus')";
