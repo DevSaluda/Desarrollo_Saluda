@@ -66,7 +66,7 @@ $('document').ready(function($) {
                     $('#Exito').modal('hide')
                 }, 2000); // abrir
 
-                setTimeout(' window.location.href = "https://controlfarmacia.com/POS2/InventarioRapido"; ', 2000);
+                setTimeout(' window.location.href = "https://saludapos.com.com/POS2/InventarioRapido"; ', 2000);
 
 
             },
