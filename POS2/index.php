@@ -256,32 +256,14 @@ $(document).ready(function(){
 <!-- Script para mostrar y ocultar el modal -->
 <script>
     // Espera a que el documento esté completamente cargado
-    $(document).ready(function() {
-        // Verifica si el usuario ya confirmó que no desea ver el modal
-        if (localStorage.getItem('ocultarModal') === 'true') {
-            $('#modalavisoterminado').modal('hide');
-        } else {
-            // Muestra el modal al cargar la página
-            $('#modalavisoterminado').modal('show');
+    // Espera a que el documento esté completamente cargado
+$(document).ready(function() {
+    // Muestra el modal al cargar la página
+    $('#modalavisoterminado').modal('show');
+});
 
-            // Agrega un listener al botón de confirmación
-            $('#confirmarNoMostrar').on('click', function() {
-                // Cierra el modal
-                $('#modalavisoterminado').modal('hide');
-
-                // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
-                localStorage.setItem('ocultarModal', 'true');
-
-                // Configura un temporizador para volver a mostrar el modal después de 5 horas (en milisegundos)
-                setTimeout(function() {
-                    localStorage.removeItem('ocultarModal'); // Elimina la marca para mostrar el modal nuevamente
-                    $('#modalavisoterminado').modal('show'); // Muestra el modal
-                }, 5 * 60 * 60 * 1000); // 5 horas
-            });
-        }
-    });
-
-    function redirigirAInicio() {
+      // Función para redirigir a la página de inicio
+      function redirigirAInicio() {
             // Puedes cambiar la URL según tus necesidades
             window.location.href = 'https://saludapos.com/POS2/RegistrosEnergiaElectrica';
         }
