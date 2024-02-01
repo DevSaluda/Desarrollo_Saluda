@@ -277,20 +277,28 @@ inputBox.addEventListener("keydown", function(e) {
    
   
     <script>
-      function sumanuevo(){
-        
-        let exist = document.getElementById("recibio").value;
-    //Se actualiza en municipio inm
+     function sumanuevo() {
+    // Obtener valores
+    let exist = document.getElementById("recibio").value;
+    let preciosCompra = document.getElementById("preciosCompra").value; // Asegúrate de tener el id correcto para el precio de compra
+
+    // Actualizar en municipio inm
     document.getElementById("recibioo").value = exist;
-  m1 = document.getElementById("existenciaactual").value;
-  m2 = document.getElementById("recibio").value;
 
-  r = parseInt(m1) + parseInt(m2);
+    m1 = document.getElementById("existenciaactual").value;
+    m2 = document.getElementById("recibio").value;
 
-  document.getElementById("nuevaexistencia").value = r;
-  document.getElementById("nuevaexistenciaregistro").value = r;
-  
+    r = parseInt(m1) + parseInt(m2);
+
+    // Calcular totalfactura
+    totalfactura = parseFloat(preciosCompra) * parseFloat(exist);
+
+    // Actualizar valores
+    document.getElementById("nuevaexistencia").value = r;
+    document.getElementById("nuevaexistenciaregistro").value = r;
+    document.getElementById("totalfactura").value = totalfactura; // Asegúrate de tener el id correcto para totalfactura
 }
+
  
 function actualizarfecha() {
     let exist = document.getElementById("fechacd").value;
