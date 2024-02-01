@@ -3,8 +3,6 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
 
 $sql = "SELECT Stock_registrosNuevos.Folio_Ingreso,Stock_registrosNuevos.ID_Prod_POS,Stock_registrosNuevos.Fk_sucursal,Stock_registrosNuevos.Factura,
 Stock_registrosNuevos.Existencias_R,Stock_registrosNuevos.ExistenciaPrev,Stock_registrosNuevos.Recibido,Stock_registrosNuevos.AgregadoPor,Stock_registrosNuevos.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Productos_POS.ID_Prod_POS,Productos_POS.Cod_Barra,Productos_POS.Nombre_Prod FROM
