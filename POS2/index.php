@@ -263,7 +263,7 @@ $(document).ready(function() {
 });
 
       // Función para redirigir a la página de inicio
-      function redirigirAInicio() {
+      function redirigirEnergiaElectria() {
             // Puedes cambiar la URL según tus necesidades
             window.location.href = 'https://saludapos.com/POS2/RegistrosEnergiaElectrica';
         }
