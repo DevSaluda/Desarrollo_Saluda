@@ -15,10 +15,11 @@ tabla = $('#Productos').DataTable({
                 { mData: 'Cod_Barra' },
                 { mData: 'Nombre_Prod' },
                 { mData: 'Precio_C' },
+                { mData: 'totalfactura' },
                 { mData: 'Existencias_R' },
                 { mData: 'ExistenciaPrev' },
                 { mData: 'Recibido' },
-                { mData: 'totalfactura' },
+              
                 { mData: 'Sucursal' },
                 { mData: 'AgregadoPor' },
                 { mData: 'AgregadoEl' },
