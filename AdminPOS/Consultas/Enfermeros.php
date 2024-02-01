@@ -75,16 +75,6 @@ $query = $conn->query($sql1);
 
   <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a>
   <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-CambiaSucursal dropdown-item" >Cambio de sucursal <i class="fas fa-exchange-alt"></i></a>
-  <a style=<?php if($PersonalEnfermeria['Biometrico'] == 1){
-   
-   echo "display:none;";
- 
-} else {
-  echo "display:block;";
-}?> class="dropdown-item"  href="http://localhost/AdminPOS/index.php?nombrerh=<?echo $row['Nombre_Apellidos']?>&&rol=<?echo $row['Nombre_rol']?>&&file=<?echo $row['file_name']?>&&
-  idempleado=<?php echo $PersonalEnfermeria["Enfermero_ID"]; ?>&&nombreempleado=<?php echo $PersonalEnfermeria["Nombre_Apellidos"]; ?>&&sucursalnombre=<?php echo $PersonalEnfermeria["Nombre_Sucursal"]; ?>&&puesto=Enfermería" target="Blank_">Capturar datos biometricos <i class="fas fa-fingerprint"></i></a>
- 
-  <a  class="dropdown-item" href="https://api.whatsapp.com/send?phone=+52<?php echo $PersonalEnfermeria["Telefono"]; ?>&text=Hola,<?php echo $PersonalEnfermeria["Nombre_Apellidos"]; ?>,tus datos de accceso para el Sistema de enfermería son: %0A *Correo: <?php echo $PersonalEnfermeria["Correo_Electronico"]; ?>*%0A *Contraseña :<?php echo $PersonalEnfermeria["Password"]; ?>* %0A Recuerda que tu sistema puedes encontrarlo en el escritorio de tu tableta  o puedes ingresar  a través del siguiente link: https://controlconsulta.com/App/Secure/Enfermeria2" target="blank_" >Enviar datos por whatsapp <i class="fab fa-whatsapp"></i></a>
   <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-baja dropdown-item" >Marcar como baja <i class="fas fa-user-slash"></i></a>
 </div>
 <!-- Basic dropdown -->
