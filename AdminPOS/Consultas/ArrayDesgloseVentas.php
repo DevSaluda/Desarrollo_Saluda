@@ -49,8 +49,7 @@ Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
 CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
 AND CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') <= LAST_DAY(NOW()) -- Último día del mes en curso
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
-";
+AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
 
 
 
