@@ -74,6 +74,7 @@ tabla = $('#Productos').DataTable({
 <th># De factura</th>
 <th>Codigo barras</th>
     <th>Nombre</th>
+    <th>Precio compra</th>
     <th>Stock</th>
     <th>Stock previo </th>
     <th>Recibido </th>
