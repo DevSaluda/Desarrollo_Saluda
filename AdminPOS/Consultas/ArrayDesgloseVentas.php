@@ -40,13 +40,17 @@ Servicios_POS.Nom_Serv,
 Ventas_POS.DescuentoAplicado -- Agregamos la columna DescuentoAplicado
 FROM 
 Ventas_POS
-INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-INNER JOIN Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
+INNER JOIN 
+SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
+INNER JOIN 
+Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
+INNER JOIN 
+Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
-AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
+AND CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') <= LAST_DAY(NOW()) -- Último día del mes en curso
+AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
+";
 
 
 
