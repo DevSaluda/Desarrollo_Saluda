@@ -60,17 +60,17 @@ table td {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalMantenimientoLabel">Mantenimiento</h5>
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">Mantenimiento</h5>
                 </div>
                 <div class="modal-body">
                     <!-- Cambiado el mensaje de mantenimiento -->
-                    <p>Hola, [nombre del farmacéutico]. Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo.</p>
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?> Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo.</p>
                     <!-- Botón para redirigir -->
-                    <img src="lloro.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
                     <p>¡Nuestros programadores han trabajado para solucionar cualquier problema! 🚀</p>
                     <br>
                     <p>¡Gracias por tu paciencia!</p>
-                    <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energia electrica</button>
                 </div>
             </div>
         </div>
