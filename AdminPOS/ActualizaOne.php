@@ -82,6 +82,16 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control "  oninput="CapturaFacturas()" id="factura" >
     </div>
     </div>
+
+    <div class="col">
+    
+    <label for="exampleFormControlInput1"># de factura o identificador <span class="text-danger">*</span> </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  </div>
+  <input type="text" class="form-control " value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
+    </div>
+    </div>
 </div>
 
   </div>
