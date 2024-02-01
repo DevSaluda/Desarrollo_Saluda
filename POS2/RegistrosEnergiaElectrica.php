@@ -64,7 +64,8 @@ table td {
                     <!-- Botón para redirigir -->
                     <img src="lloro.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
                     <p>¡Nuestros programadores están trabajando horas extras sin pizza para corregir los bugs misteriosos que aparecieron en el sistema! 🐞🍕</p>
-
+                            <br>
+                            <p>No es necesario reportarlo en tu grupo o con soporte, créeme, ellos están más que enterados de los problemas que se están presentando. 👀😈</p>
                     <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
                 </div>
             </div>
