@@ -198,7 +198,7 @@ inputBox.addEventListener("keydown", function(e) {
   
 
 
-<!-- <div style="display: none;"> -->
+<div style="display: none;">
 
 
 
@@ -271,7 +271,7 @@ inputBox.addEventListener("keydown", function(e) {
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
   </div>
   <input type="number" class="form-control " readonly name="NuevaExistencia" id="nuevaexistenciaregistro"  >
-  <input type="number" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompraaguardar" name="preciocompra" >
+  <input type="number" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompraaguardar" name="preciocompraAguardar" >
   <input type="number" class="form-control " readonly name="TotalDeFacturaPorGuardar" id="totalfacturaporguardar"  >
     </div><label for="pc" class="error">
     </div>

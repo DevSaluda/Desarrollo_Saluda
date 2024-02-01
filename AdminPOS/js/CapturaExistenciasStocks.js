@@ -1,5 +1,5 @@
 $('document').ready(function($) {
-    // $("#AgregaExistencias").hide();
+    $("#AgregaExistencias").hide();
     $.validator.addMethod("Sololetras", function(value, element) {
         return this.optional(element) || /[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
