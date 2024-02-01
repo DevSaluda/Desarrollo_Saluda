@@ -54,7 +54,50 @@ include "Consultas/Consultas.php";
 
 
 
+ <!-- Modal de Mantenimiento -->
+ <div class="modal-dialog modal-notify modal-primary" role="document">
+    <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">¡Aviso! 🚨🔧</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido del modal -->
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?>. Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo. 🎉🔌⚡️</p>
 
+                    <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <p>¡Nuestros programadores han trabajado para solucionar cualquier problema! 🚀</p>
+                    <br>
+                    <p>¡Gracias por tu paciencia!</p> 
+                    <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Botón para redirigir -->
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">Ir al registro de energía eléctrica</button>
+                    <!-- Botón para cerrar el modal manualmente -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<!-- Script para mostrar y ocultar el modal -->
+<script>
+    // Espera a que el documento esté completamente cargado
+    $(document).ready(function() {
+        // Muestra el modal al cargar la página
+        $('#modalavisoterminado').modal('show');
+    });
+
+    // Función para redirigir a la página de inicio
+    function redirigirEnergiaElectria() {
+        // Puedes cambiar la URL según tus necesidades
+        window.location.href = 'https://saludapos.com/POS2/RegistrosEnergiaElectrica';
+    }
+</script>
      
   
   <!-- /.content-wrapper -->
