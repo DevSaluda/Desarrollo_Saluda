@@ -89,7 +89,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
+  <input type="number" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
     </div>
     </div>
 </div>
@@ -279,38 +279,24 @@ inputBox.addEventListener("keydown", function(e) {
     <script>
     function sumanuevo() {
     // Obtener valores
-    let recibioElement = document.getElementById("recibio");
-    let preciosCompraElement = document.getElementById("preciosCompra");
-    let recibiooElement = document.getElementById("recibioo");
-    let existenciaActualElement = document.getElementById("existenciaactual");
-    let nuevaExistenciaElement = document.getElementById("nuevaexistencia");
-    let nuevaExistenciaRegistroElement = document.getElementById("nuevaexistenciaregistro");
-    let totalFacturaElement = document.getElementById("totalfactura");
-
-    // Verificar si los elementos existen antes de acceder a sus propiedades
-    if (!recibioElement || !preciosCompraElement || !recibiooElement || !existenciaActualElement || !nuevaExistenciaElement || !nuevaExistenciaRegistroElement || !totalFacturaElement) {
-        console.error("Uno o más elementos no se encuentran en el DOM.");
-        return;
-    }
-
-    let exist = recibioElement.value;
-    let preciosCompra = preciosCompraElement.value;
+    let exist = document.getElementById("recibio").value;
+    let precioCompra = document.getElementById("preciocompra").value; // Cambiado de preciosCompra a preciocompra
 
     // Actualizar en municipio inm
-    recibiooElement.value = exist;
+    document.getElementById("recibioo").value = exist;
 
-    m1 = existenciaActualElement.value;
-    m2 = recibioElement.value;
+    m1 = document.getElementById("existenciaactual").value;
+    m2 = document.getElementById("recibio").value;
 
     r = parseInt(m1) + parseInt(m2);
 
     // Calcular totalfactura
-    totalfactura = parseFloat(preciosCompra) * parseFloat(exist);
+    totalfactura = parseFloat(precioCompra) * parseFloat(exist);
 
     // Actualizar valores
-    nuevaExistenciaElement.value = r;
-    nuevaExistenciaRegistroElement.value = r;
-    totalFacturaElement.value = totalfactura;
+    document.getElementById("nuevaexistencia").value = r;
+    document.getElementById("nuevaexistenciaregistro").value = r;
+    document.getElementById("totalfactura").value = totalfactura;
 }
 
 
