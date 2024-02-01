@@ -62,12 +62,14 @@ table td {
                 </div>
                 <div class="modal-body">
                     <!-- Cambiado el mensaje de mantenimiento -->
-                    <p>Hola, <?php echo $row['Nombre_Apellidos']?> Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo.</p>
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?>. Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo. 🎉🔌⚡️</p>
+
                     <!-- Botón para redirigir -->
                     <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
                     <p>¡Nuestros programadores han trabajado para solucionar cualquier problema! 🚀</p>
                     <br>
-                    <p>¡Gracias por tu paciencia!</p>
+                    <p>¡Gracias por tu paciencia!</p> 
+                    <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
                     <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energia electrica</button>
                 </div>
             </div>
