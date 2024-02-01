@@ -100,6 +100,12 @@ table td {
 
                 // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
                 localStorage.setItem('ocultarModal', 'true');
+
+                // Configura un temporizador para volver a mostrar el modal después de 5 horas (en milisegundos)
+                setTimeout(function() {
+                    localStorage.removeItem('ocultarModal'); // Elimina la marca para mostrar el modal nuevamente
+                    $('#modalavisoterminado').modal('show'); // Muestra el modal
+                }, 5 * 60 * 60 * 1000); // 5 horas
             });
         }
     });
