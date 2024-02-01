@@ -54,8 +54,6 @@ table td {
 
     <!-- Modal de Mantenimiento -->
     <div class="modal-dialog modal-notify modal-primary" role="document">
-    <!-- Tu contenido actual aquí -->
-
     <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
