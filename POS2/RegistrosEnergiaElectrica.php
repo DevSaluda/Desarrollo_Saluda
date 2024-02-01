@@ -86,24 +86,22 @@ table td {
 <script>
     // Espera a que el documento esté completamente cargado
     $(document).ready(function() {
-        // Muestra el modal al cargar la página
-        $('#modalavisoterminado').modal('show');
-
-        // Agrega un listener al botón de confirmación
-        $('#confirmarNoMostrar').on('click', function() {
-            // Cierra el modal
-            $('#modalavisoterminado').modal('hide');
-
-            // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
-            localStorage.setItem('ocultarModal', 'true');
-        });
-
         // Verifica si el usuario ya confirmó que no desea ver el modal
-        (function() {
-            if (localStorage.getItem('ocultarModal') === 'false') {
-                $('#modalavisoterminado').modal('show');
-            }
-        })();
+        if (localStorage.getItem('ocultarModal') === 'true') {
+            $('#modalavisoterminado').modal('hide');
+        } else {
+            // Muestra el modal al cargar la página
+            $('#modalavisoterminado').modal('show');
+
+            // Agrega un listener al botón de confirmación
+            $('#confirmarNoMostrar').on('click', function() {
+                // Cierra el modal
+                $('#modalavisoterminado').modal('hide');
+
+                // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
+                localStorage.setItem('ocultarModal', 'true');
+            });
+        }
     });
 </script>
 
