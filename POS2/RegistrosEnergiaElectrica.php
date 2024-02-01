@@ -82,6 +82,7 @@ table td {
 </div>
 
 <!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<!-- Script para mostrar y ocultar el modal -->
 <script>
     // Espera a que el documento esté completamente cargado
     $(document).ready(function() {
@@ -98,11 +99,14 @@ table td {
         });
 
         // Verifica si el usuario ya confirmó que no desea ver el modal
-        if (localStorage.getItem('ocultarModal') === 'true') {
-            $('#modalavisoterminado').modal('hide');
-        }
+        (function() {
+            if (localStorage.getItem('ocultarModal') === 'true') {
+                $('#modalavisoterminado').modal('hide');
+            }
+        })();
     });
 </script>
+
 
   
   <!-- /.content-wrapper -->
