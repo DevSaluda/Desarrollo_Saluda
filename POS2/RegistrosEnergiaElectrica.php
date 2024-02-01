@@ -53,24 +53,30 @@ table td {
 
 
     <!-- Modal de Mantenimiento -->
- <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-primary" role="document">
+    <!-- Tu contenido actual aquí -->
+
+    <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalMantenimientoLabel">Mantenimiento</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.</p>
+                    <!-- Cambiado el mensaje de mantenimiento -->
+                    <p>Hola, [nombre del farmacéutico]. Te informamos que el registro diario de energía eléctrica ya se encuentra disponible de nuevo.</p>
                     <!-- Botón para redirigir -->
                     <img src="lloro.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
-                    <p>¡Nuestros programadores están trabajando horas extras sin pizza para corregir los bugs misteriosos que aparecieron en el sistema! 🐞🍕</p>
-                            <br>
-                            <p>No es necesario reportarlo en tu grupo o con soporte, créeme, ellos están más que enterados de los problemas que se están presentando. 👀😈</p>
+                    <p>¡Nuestros programadores han trabajado para solucionar cualquier problema! 🚀</p>
+                    <br>
+                    <p>¡Gracias por tu paciencia!</p>
                     <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
   <!-- Main Footer -->
 
   <script>
