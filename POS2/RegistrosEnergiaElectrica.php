@@ -84,22 +84,17 @@ table td {
 <!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
 <script>
     // Espera a que el documento esté completamente cargado
-    document.addEventListener("DOMContentLoaded", function() {
+    $(document).ready(function() {
         // Muestra el modal al cargar la página
         $('#modalavisoterminado').modal('show');
 
         // Agrega un listener al botón de confirmación
-        document.getElementById('confirmarNoMostrar').addEventListener('click', function() {
+        $('#confirmarNoMostrar').on('click', function() {
             // Cierra el modal
             $('#modalavisoterminado').modal('hide');
 
             // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
-            // Puedes implementar esto para que el modal no aparezca durante las próximas 5 horas
-            // Aquí hay un ejemplo utilizando localStorage:
             localStorage.setItem('ocultarModal', 'true');
-
-            // O puedes usar cookies, dependiendo de tus necesidades
-            // document.cookie = "ocultarModal=true; expires=" + new Date(new Date().getTime() + 5 * 60 * 60 * 1000).toUTCString();
         });
 
         // Verifica si el usuario ya confirmó que no desea ver el modal
