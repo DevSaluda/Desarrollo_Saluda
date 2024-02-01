@@ -16,7 +16,7 @@ include "Consultas/ConsultaCaja.php";
       
     </ul>
 
-    <?php
+    <!-- <?php
     
 if ($TraspasosPendientes['traspasopendiente'] != 0) {
     echo "
@@ -51,7 +51,7 @@ if ($TraspasosPendientes['traspasopendiente'] != 0) {
 } else {
     // Agrega cualquier código adicional para el caso contrario si es necesario.
 }
-?>
+?> -->
 
 
     <ul class="navbar-nav ml-auto">
