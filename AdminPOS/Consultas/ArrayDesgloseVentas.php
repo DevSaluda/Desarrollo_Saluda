@@ -47,9 +47,9 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
-CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
-AND CONVERT_TZ(Ventas_POS.Fecha_venta, '+00:00', '-06:00') <= LAST_DAY(NOW()) -- Último día del mes en curso
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+Ventas_POS.Fecha_venta >= DATE_ADD(DATE_FORMAT(NOW(), '%Y-%m-01'), INTERVAL -6 HOUR) -- Primer día del mes en curso ajustado por el desfase
+AND Ventas_POS.Fecha_venta <= DATE_ADD(LAST_DAY(NOW()), INTERVAL -6 HOUR) -- Último día del mes en curso ajustado por el desfase
+AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;";
 
 
 
