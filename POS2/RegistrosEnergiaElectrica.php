@@ -100,8 +100,8 @@ table td {
 
         // Verifica si el usuario ya confirmó que no desea ver el modal
         (function() {
-            if (localStorage.getItem('ocultarModal') === 'true') {
-                $('#modalavisoterminado').modal('hide');
+            if (localStorage.getItem('ocultarModal') === 'false') {
+                $('#modalavisoterminado').modal('show');
             }
         })();
     });
