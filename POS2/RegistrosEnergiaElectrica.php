@@ -62,6 +62,7 @@ table td {
                 <div class="modal-body">
                     <p>Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.</p>
                     <!-- Botón para redirigir -->
+                    <img src="lloro.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
                     <button type="button" class="btn btn-primary" onclick="redirigirAInicio()">Ir a Inicio</button>
                 </div>
             </div>
