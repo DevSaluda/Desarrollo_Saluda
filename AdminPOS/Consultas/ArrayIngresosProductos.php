@@ -30,7 +30,9 @@ WHERE Stock_registrosNuevos.Fk_sucursal='".$row['Fk_Sucursal']."'";
 $result = mysqli_query($conn, $sql);
  
 $data = array();
-$c = 0;
+while ($fila = $result->fetch_assoc()) {
+    $data[] = $fila;
+}
 
 while ($fila = $result->fetch_assoc()) {
     $data[$c]["Folio_Ingreso"] = $fila["Folio_Ingreso"];
