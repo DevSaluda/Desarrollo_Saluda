@@ -16,43 +16,7 @@ include "Consultas/ConsultaCaja.php";
       
     </ul>
 
-    <!-- <?php
     
-if ($TraspasosPendientes['traspasopendiente'] != 0) {
-    echo "
-    <script src='ruta/a/sweetalert2.min.js'></script> <!-- Asegúrate de incluir la ruta correcta -->
-    <link rel='stylesheet' href='ruta/a/sweetalert2.min.css'> <!-- Asegúrate de incluir la ruta correcta -->
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            html: '<div style=\"background-color: #C80096; color: #FFFFFF; padding: 30px; border-radius: 10px;\">' +
-                  '<h1 style=\"font-size: 32px; font-weight: bold; margin-bottom: 20px;\">¡Atención!</h1>' +
-                  '<p style=\"font-size: 24px;\">Estimado " . $row['Nombre_Apellidos'] . ",</p>' +
-                  '<p style=\"font-size: 24px; margin-bottom: 40px;\">Por favor revise sus traspasos pendientes.</p>' +
-                  '<button onclick=\"Swal.close()\" style=\"background-color: #FF5656; color: #FFFFFF; font-size: 20px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;\">Cerrar</button>' +
-                  '</div>',
-            showConfirmButton: false,
-            background: 'transparent',
-            customClass: {
-                popup: 'my-popup-class'
-            }
-        });
-    });
-    </script>
-
-    <style>
-    .my-popup-class {
-        max-width: 500px !important;
-        background: transparent !important;
-        box-shadow: none !important;
-    }
-    </style>";
-} else {
-    // Agrega cualquier código adicional para el caso contrario si es necesario.
-}
-?> -->
-
 
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
