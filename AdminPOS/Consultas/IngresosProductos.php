@@ -76,10 +76,11 @@ tabla = $('#Productos').DataTable({
 <th>Codigo barras</th>
     <th>Nombre</th>
     <th>Precio compra</th>
+    <th>Importe </th>
     <th>Stock</th>
     <th>Stock previo </th>
     <th>Recibido </th>
-    <th>TotalFactura </th>
+ 
     <th>Sucursal</th>
     <th>Agregado por</th>
     <th>Se agrego en  </th>
