@@ -52,13 +52,13 @@ table td {
 
 
 
-    <!-- Modal de Mantenimiento -->
-    <div class="modal-dialog modal-notify modal-primary" role="document">
-    <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+   <!-- Modal de Mantenimiento -->
+<div class="modal-dialog modal-notify modal-primary" role="document">
+    <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">Mantenimiento</h5>
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">!Aviso! 🚨🔧</h5>
                 </div>
                 <div class="modal-body">
                     <!-- Cambiado el mensaje de mantenimiento -->
@@ -70,29 +70,45 @@ table td {
                     <br>
                     <p>¡Gracias por tu paciencia!</p> 
                     <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
-                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energia electrica</button>
+
+                    <!-- Botón para confirmar que no desea ver el modal durante un tiempo -->
+                    <button type="button" id="confirmarNoMostrar" class="btn btn-secondary">No mostrar por 5 horas</button>
+                    
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">ir al registro de energía eléctrica</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-  <!-- Main Footer -->
+<!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<script>
+    // Espera a que el documento esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Muestra el modal al cargar la página
+        $('#modalavisoterminado').modal('show');
 
-  <script>
-        $(document).ready(function() {
-            $('#modalMantenimiento').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
+        // Agrega un listener al botón de confirmación
+        document.getElementById('confirmarNoMostrar').addEventListener('click', function() {
+            // Cierra el modal
+            $('#modalavisoterminado').modal('hide');
+
+            // Establece una cookie o utiliza localStorage para recordar la decisión del usuario
+            // Puedes implementar esto para que el modal no aparezca durante las próximas 5 horas
+            // Aquí hay un ejemplo utilizando localStorage:
+            localStorage.setItem('ocultarModal', 'true');
+
+            // O puedes usar cookies, dependiendo de tus necesidades
+            // document.cookie = "ocultarModal=true; expires=" + new Date(new Date().getTime() + 5 * 60 * 60 * 1000).toUTCString();
         });
 
-        // Función para redirigir a la página de inicio
-        function redirigirAInicio() {
-            // Puedes cambiar la URL según tus necesidades
-            window.location.href = 'https://saludapos.com/POS2/index';
+        // Verifica si el usuario ya confirmó que no desea ver el modal
+        if (localStorage.getItem('ocultarModal') === 'true') {
+            $('#modalavisoterminado').modal('hide');
         }
-    </script> 
+    });
+</script>
+
   
   <!-- /.content-wrapper -->
 
