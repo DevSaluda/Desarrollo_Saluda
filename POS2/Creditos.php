@@ -100,7 +100,7 @@ $fcha = date("Y-m-d");
 
 
 <script src="js/AperturaCredito.js"></script>
-<script src="js/AperturaCreditosClinicas.js"></script>
+
 <script src="js/ObtieneCostoTratamiento.js"></script>
 <script src="js/ObtieneDescuento.js"></script>
 <script src="js/ObtieneValorTrata.js"></script>
