@@ -89,7 +89,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
+  <input type="text" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
     </div>
     </div>
 </div>
@@ -126,7 +126,8 @@ while ($r=$query->fetch_object()){
   </div>
   <input type="date" class="form-control "  readonly name="fechaingreso" id="fechaingreso" value="<?php echo $fcha ?>" >
     </div><label for="pc" class="error">
-    </div></div>
+    </div>
+  </div>
     <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Existencias <span class="text-danger">*</span></label>
@@ -165,6 +166,14 @@ inputBox.addEventListener("keydown", function(e) {
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
   </div>
   <input type="number" class="form-control " readonly name="NuevaExistencia" id="nuevaexistencia"  >
+    </div><label for="pc" class="error">
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Valor total <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
+  </div>
+  <input type="number" class="form-control " readonly name="TotalDeFactura" id="totalfactura"  >
     </div><label for="pc" class="error">
     </div>
     </div>
