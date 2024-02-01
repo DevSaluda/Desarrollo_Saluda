@@ -22,7 +22,8 @@ tabla = $('#Productos').DataTable({
        { mData: 'AgregadoPor' },
 
        { mData: 'AgregadoEl' },
-  
+       { mData: 'totalfactura' },
+       
       ],
      
     
@@ -78,7 +79,7 @@ tabla = $('#Productos').DataTable({
     <th>Stock</th>
     <th>Stock previo </th>
     <th>Recibido </th>
-    
+    <th>TotalFactura </th>
     <th>Sucursal</th>
     <th>Agregado por</th>
     <th>Se agrego en  </th>
