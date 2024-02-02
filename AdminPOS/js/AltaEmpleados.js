@@ -121,7 +121,7 @@ vigencia: {
 
 		$.ajax({				
 			type : 'POST',
-			url  : 'https://controlfarmacia.com/AdminPOS/Consultas/AltaEmp',
+			url  : 'https://saludapos.com/AdminPOS/Consultas/AltaEmp',
 		  data: new FormData(this),
             contentType: false,
             cache: false,
