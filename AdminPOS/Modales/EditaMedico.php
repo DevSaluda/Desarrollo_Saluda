@@ -90,7 +90,7 @@ while ($r=$query->fetch_object()){
   <select id = "sucursalact" class = "form-control" name = "sucursalact">
                                                <option value="<?php echo $Especialistas->Nombre_Sucursal;?>"><? echo $Especialistas->Nombre_Sucursal;?></option>
         <?php
-          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre WHERE  ");
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre  ");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
