@@ -12,8 +12,10 @@ $Recibido=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Recib
 $Fk_sucursal=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['StockActualiza']))));
 $ID_H_O_D=$conn -> real_escape_string(htmlentities(strip_tags(Trim("Saluda"))));
 $Factura=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['FacturasNumber']))));
-    $sql = "INSERT INTO `Stock_registrosNuevos`( `ID_Prod_POS`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`,`ID_H_O_D`,`Factura`) VALUES
-     ('$ID_Prod_POS', '$Fk_sucursal', '$Existencias_R', '$ExistenciaPrev', '$Recibido','$Lote','$Fecha_Caducidad', '$AgregadoPor','$ID_H_O_D','$Factura')";
+$Precio_compra=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['preciocompraAguardar']))));
+$Total_Factura=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TotalDeFacturaPorGuardar']))));
+    $sql = "INSERT INTO `Stock_registrosNuevos`( `ID_Prod_POS`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`,`ID_H_O_D`,`Factura`,`Precio_compra`, `Total_Factura`) VALUES
+     ('$ID_Prod_POS', '$Fk_sucursal', '$Existencias_R', '$ExistenciaPrev', '$Recibido','$Lote','$Fecha_Caducidad', '$AgregadoPor','$ID_H_O_D','$Factura','$Precio_compra','$Total_Factura')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
@@ -22,4 +24,3 @@ $Factura=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Factur
     }
     mysqli_close($conn);
 
-?>
