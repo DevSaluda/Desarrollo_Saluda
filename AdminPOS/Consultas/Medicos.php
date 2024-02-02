@@ -20,7 +20,7 @@ $user_id=null;
 $sql1="SELECT Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Personal_Medico.file_name,Personal_Medico.Fk_Usuario,Personal_Medico.Fk_Sucursal,Personal_Medico.Telefono,
 Personal_Medico.ID_H_O_D,Personal_Medico.Estatus,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,Personal_Medico.Biometrico
 FROM Personal_Medico,SucursalesCorre,Roles_Puestos where Personal_Medico.Fk_Usuario = Roles_Puestos.ID_rol AND 
-Personal_Medico.Fk_Sucursal= SucursalesCorre.ID_SucursalC   AND Personal_Medico.Estatus='Vigente' AND Personal_Medico.ID_H_O_D='".$row['ID_H_O_D']."'";
+Personal_Medico.Fk_Sucursal= SucursalesCorre.ID_SucursalC   AND Personal_Medico.Estatus='Vigente'";
 $query = $conn->query($sql1);
 ?>
 
