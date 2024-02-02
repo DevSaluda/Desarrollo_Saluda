@@ -1,3 +1,4 @@
+
 <?php
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
@@ -39,7 +40,7 @@ while ($r=$query->fetch_object()){
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<?php if($Especialistas!=null):?>
+<?php  if($Especialistas!=null):?>
 
   <div class="text-center">
     
@@ -81,6 +82,16 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control "  oninput="CapturaFacturas()" id="factura" >
     </div>
     </div>
+
+    <div class="col">
+    
+    <label for="exampleFormControlInput1">Precio de compra <span class="text-danger">*</span> </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  </div>
+  <input type="number" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompra" >
+    </div>
+    </div>
 </div>
 
   </div>
@@ -113,9 +124,12 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-at"></i></span>
   </div>
-  <input type="date" class="form-control "  readonly name="fechaingreso" id="fechaingreso" value="<?php echo $fcha ?>" >
+ 
+<input type="date" class="form-control" readonly name="fechaingreso" id="fechaingreso" value="<?php echo $fcha; ?>">
+
     </div><label for="pc" class="error">
-    </div></div>
+    </div>
+  </div>
     <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Existencias <span class="text-danger">*</span></label>
@@ -154,6 +168,14 @@ inputBox.addEventListener("keydown", function(e) {
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
   </div>
   <input type="number" class="form-control " readonly name="NuevaExistencia" id="nuevaexistencia"  >
+    </div><label for="pc" class="error">
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Valor total <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
+  </div>
+  <input type="number" class="form-control " readonly name="TotalDeFactura" id="totalfactura"  >
     </div><label for="pc" class="error">
     </div>
     </div>
@@ -249,6 +271,8 @@ inputBox.addEventListener("keydown", function(e) {
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-pills"></i></span>
   </div>
   <input type="number" class="form-control " readonly name="NuevaExistencia" id="nuevaexistenciaregistro"  >
+  <input type="number" class="form-control " readonly value="<?php echo $Especialistas->Precio_C; ?>" id="preciocompraaguardar" name="preciocompraAguardar" >
+  <input type="number" class="form-control " readonly name="TotalDeFacturaPorGuardar" id="totalfacturaporguardar"  >
     </div><label for="pc" class="error">
     </div>
     </div>
@@ -257,20 +281,31 @@ inputBox.addEventListener("keydown", function(e) {
    
   
     <script>
-      function sumanuevo(){
-        
-        let exist = document.getElementById("recibio").value;
-    //Se actualiza en municipio inm
+    function sumanuevo() {
+    // Obtener valores
+    let exist = document.getElementById("recibio").value;
+    let precioCompra = document.getElementById("preciocompra").value; // Cambiado de preciosCompra a preciocompra
+
+    // Actualizar en municipio inm
     document.getElementById("recibioo").value = exist;
-  m1 = document.getElementById("existenciaactual").value;
-  m2 = document.getElementById("recibio").value;
 
-  r = parseInt(m1) + parseInt(m2);
+    m1 = document.getElementById("existenciaactual").value;
+    m2 = document.getElementById("recibio").value;
 
-  document.getElementById("nuevaexistencia").value = r;
-  document.getElementById("nuevaexistenciaregistro").value = r;
-  
+    r = parseInt(m1) + parseInt(m2);
+
+    // Calcular totalfactura
+    totalfactura = parseFloat(precioCompra) * parseFloat(exist);
+
+    // Actualizar valores
+    document.getElementById("nuevaexistencia").value = r;
+    document.getElementById("nuevaexistenciaregistro").value = r;
+    document.getElementById("totalfactura").value = totalfactura;
+    document.getElementById("totalfacturaporguardar").value = totalfactura;
+    
 }
+
+
  
 function actualizarfecha() {
     let exist = document.getElementById("fechacd").value;
@@ -314,10 +349,10 @@ function CapturaFacturas() {
  <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
-<script src="js/ActualizaExistenciasDeProductosEnSucursales.js"></script>
-<script src="js/CapturaExistencias.js"></script>
+<script src="js/ActualizaExistenciasDeProductosEnSucursalesStocks.js"></script>
+<script src="js/CapturaExistenciasStocks.js"></script>
 
-  
+</div></div></div></div></div></div>
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -328,6 +363,7 @@ function CapturaFacturas() {
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
+
   include ("footer.php")?>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
