@@ -51,6 +51,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Especialidades["Nombre_Sucursal"]; ?></td>
     <td><?php echo $Especialidades["Nombre_rol"]; ?></td>
    
+    <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
@@ -58,11 +59,6 @@ $query = $conn->query($sql1);
 <div class="dropdown-menu">
 <a data-id="<?php echo  $Especialidades["Medico_ID"];?>" class="btn-edit dropdown-item" >Datos de contacto <i class="fas fa-address-card"></i></a>
 <a data-id="<?php echo $Especialidades["Medico_ID"];?>" class="btn-edit2 dropdown-item" >Editar datos <i class="fas fa-pencil-alt"></i></a>
-
-  <a data-id="<?php echo $Especialidades["Medico_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a>
-
- 
-  <a  class="dropdown-item" href="https://api.whatsapp.com/send?phone=+52<?php echo $Especialidades["Telefono"]; ?>&text=Hola,<?php echo $Especialidades["Nombre_Apellidos"]; ?>,tus datos de accceso para el Sistema de enfermería son: %0A *Correo: <?php echo $Especialidades["Correo_Electronico"]; ?>*%0A *Contraseña :<?php echo $Especialidades["Password"]; ?>* %0A Recuerda que tu sistema puedes encontrarlo en el escritorio de tu tableta  o puedes ingresar  a través del siguiente link: https://controlconsulta.com/App/Secure/Enfermeria2" target="blank_" >Enviar datos por whatsapp <i class="fab fa-whatsapp"></i></a>
   <a data-id="<?php echo $Especialidades["Medico_ID"];?>" class="btn-BajaDeEmpleados dropdown-item" >Marcar como baja <i class="fas fa-user-slash"></i></a>
 </div>
 <!-- Basic dropdown -->
