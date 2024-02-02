@@ -41,7 +41,7 @@ while ($r=$query->fetch_object()){
   <select id = "Sucursalnueva" class = "form-control" name = "Sucursalnueva">
                                                <option value="">Seleccione una Sucursal:</option>
         <?php
-          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre ");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
