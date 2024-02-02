@@ -35,8 +35,8 @@ $query = $conn->query($sql1);
     <th>Nombre</th>
     <th>Telefono</th>
     <th>Sucursal</th>
-  <th>Especialidad</th>
-  <th>Huellas Digitales</th>
+  <th>Departamento</th>
+  
   <th>Acciones</th>
 
 
@@ -47,18 +47,12 @@ $query = $conn->query($sql1);
 <?php while ($Especialidades=$query->fetch_array()):?>
 <tr>
   <td><?php echo $Especialidades["Intendencia_ID"]; ?></td>
-<td><img  width="80" height="80" alt="avatar" class="rounded-circle img-responsive" src="https://controlconsulta.com/Perfiles/<?php echo $Especialidades["file_name"]; ?> "></td>
+<td><img  width="80" height="80" alt="avatar" class="rounded-circle img-responsive" src="https://saludapos.com/Perfiles/<?php echo $Especialidades["file_name"]; ?> "></td>
   <td><?php echo $Especialidades["Nombre_Apellidos"]; ?></td>
   <td><?php echo $Especialidades["Telefono"]; ?></td>
     <td><?php echo $Especialidades["Nombre_Sucursal"]; ?></td>
     <td><?php echo $Especialidades["Nombre_rol"]; ?></td>
-    <td><?php if($Especialidades['Biometrico'] == 1){
-   
-   echo "Verificado ";
- 
-} else {
-  echo "Sin datos";
-}?> </td>
+  
 
     <td>
      <!-- Basic dropdown -->
