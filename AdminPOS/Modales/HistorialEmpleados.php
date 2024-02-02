@@ -60,7 +60,7 @@ $sql1= "SELECT 	PersonalPOS_Audita.Audita_Pos_ID,PersonalPOS_Audita.Pos_ID,Perso
 PersonalPOS_Audita.ID_H_O_D,PersonalPOS_Audita.Estatus,PersonalPOS_Audita.ColorEstatus,PersonalPOS_Audita.Telefono,PersonalPOS_Audita.Password,PersonalPOS_Audita.Correo_Electronico,
 PersonalPOS_Audita.AgregadoPor,PersonalPOS_Audita.AgregadoEl,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
 FROM PersonalPOS_Audita,Roles_Puestos,SucursalesCorre WHERE PersonalPOS_Audita.Fk_Usuario= Roles_Puestos.ID_rol AND 
-PersonalPOS_Audita.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND PersonalPOS_Audita.Fk_Usuario='7' AND PersonalPOS_Audita.ID_H_O_D='".$row['ID_H_O_D']."' AND 
+PersonalPOS_Audita.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND PersonalPOS_Audita.Fk_Usuario='7' AND 
 PersonalPOS_Audita.Pos_ID = ".$_POST["id"];
 $query = $conn->query($sql1);
 ?>
