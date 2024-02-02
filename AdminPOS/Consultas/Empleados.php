@@ -79,9 +79,9 @@ $query = $conn->query($sql1);
                             <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
                             <div class="dropdown-menu">
-                                <a data-id="<?php echo  $Usuarios["Pos_ID"];?>" class="btn-edit dropdown-item" >Datos de contacto <i class="fas fa-address-card"></i></a>
+                                <!-- <a data-id="" class="btn-edit dropdown-item" >Datos de contacto <i class="fas fa-address-card"></i></a> -->
                                 <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-edit2 dropdown-item" >Editar datos <i class="fas fa-pencil-alt"></i></a>
-                                <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-edit3 dropdown-item" >Detalles <i class="fas fa-info-circle"></i></a>
+                                <!-- <a data-id="" class="btn-edit3 dropdown-item" >Detalles <i class="fas fa-info-circle"></i></a> -->
                                 <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a>
                                 <a data-id="<?php echo $Usuarios["Pos_ID"];?>" class="btn-CambiaSucursal dropdown-item" >Cambio de sucursal <i class="fas fa-exchange-alt"></i></a>
                                 <a class="dropdown-item" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=Hola,<?php echo $Usuarios["Nombre_Apellidos"]; ?>,tus datos de acceso para el punto de venta son: %0A *Correo: <?php echo $Usuarios["Correo_Electronico"]; ?>*%0A *Contraseña :<?php echo $Usuarios["Password"]; ?>* %0A Recuerda que tu punto de venta puedes encontrarlo en el escritorio de tu equipo en sucursal o puedes ingresar a través del siguiente link: https://saludapos.com/App/Secure/POSV3" target="blank_" >Enviar datos por WhatsApp <i class="fab fa-whatsapp"></i></a>
