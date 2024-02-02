@@ -49,7 +49,14 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  disabled readonly value="<?php echo $Especialistas->Nombre_Sucursal;?>">
+  <select id = "sucursalact" class = "form-control" name = "sucursalact">
+                                               <option value=""><?php echo $Especialistas->Nombre_Sucursal;?></option>
+        <?php
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre ");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>
     </div>
     </div>
     
