@@ -73,7 +73,7 @@ $query = $conn->query($sql1);
 <a data-id="<?php echo  $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-edit dropdown-item" >Datos de contacto <i class="fas fa-address-card"></i></a>
 <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-edit2 dropdown-item" >Editar datos <i class="fas fa-pencil-alt"></i></a>
 
-  <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a>
+  <!-- <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-HistorialEmpleados dropdown-item" >Movimientos <i class="fas fa-history" aria-hidden="true"></i></a> -->
   <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-CambiaSucursal dropdown-item" >Cambio de sucursal <i class="fas fa-exchange-alt"></i></a>
   <a data-id="<?php echo $PersonalEnfermeria["Enfermero_ID"];?>" class="btn-baja dropdown-item" >Marcar como baja <i class="fas fa-user-slash"></i></a>
 </div>
