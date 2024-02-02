@@ -20,7 +20,7 @@ while ($r=$query->fetch_object()){
 <?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="ActualizaEmpleados" >
-  <label for=""> <h3> Datos generales del empleado</h3></label>
+ 
 <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Folio de empleado </label>
