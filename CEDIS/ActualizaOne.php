@@ -350,7 +350,7 @@ function CapturaFacturas() {
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
 <script src="js/ActualizaExistenciasDeProductosEnSucursales.js"></script>
-<script src="js/CapturaExistenciasStocks.js"></script>
+<script src="js/CapturaExistencias.js"></script>
 
 </div></div></div></div></div></div>
   <!-- /.content-wrapper -->
