@@ -92,10 +92,10 @@
   </div>
   <select id = "sucursal" class = "form-control" name = "sucursal">
                                                <option value="">Seleccione:</option>
-        <?
-          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
+        <?php
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre ");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
          
@@ -108,10 +108,10 @@
   </div>
   <select id = "usuario" class = "form-control" name = "usuario">
                                                <option value="">Seleccione :</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT ID_rol,Nombre_rol FROM Roles_Puestos WHERE Nombre_rol LIKE 'Me%' or Nombre_rol LIKE 'Mé%' AND  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_rol].'">'.$valores[Nombre_rol].'</option>';
+            echo '<option value="'.$valores["ID_rol"].'">'.$valores["Nombre_rol"].'</option>';
           }
         ?>  </select>
          
@@ -131,8 +131,8 @@
 
 <input type="text"  class="form-control " value="Vigente" hidden readonly name="VigenciaInicio" id="vigenciainicio">
     <input type="text"  class="form-control " value="background-color:#2BBB1D !important" hidden readonly name="vigencia" id="vigencia">
-    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
+    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
     
    
 
