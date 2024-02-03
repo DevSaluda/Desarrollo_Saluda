@@ -27,7 +27,7 @@ while ($r=$query->fetch_object()){
 
 
 <!-- FORMULARIO DE ABONO DE TICKET -->
-<form action="javascript:void(0)" method="post" id="AbonaCredito" >
+<form action="javascript:void(0)" method="post" id="AbonaCredito">
 
 <div class="row">
     <div class="col">
@@ -118,7 +118,7 @@ while ($r=$query->fetch_object()){
 <input type="text" class="form-control " hidden  readonly name="Codigo" id="codigo"  readonly value="background-color: #2BBB1D !important;">
 <input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">break
 
-<button type="submit"  id="submit"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
+<button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
 <!-- FORMULARIO DE ABONO DE TICKET -->
