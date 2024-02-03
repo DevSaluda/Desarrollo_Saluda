@@ -52,7 +52,25 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control " hidden name="FolioTipocred" id="foliotipocred" readonly value="<?php echo $Especialistas->Fk_tipo_Credi; ?>">
 </div></div></div>
 
-
+<div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Titular<span class="text-danger">*</span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  
+    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
+  </div>
+  <input type="text" class="form-control "  readonly name="Titular" id="titular" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60">            
+</div></div>
+<div class="col">
+    <label for="exampleFormControlInput1">Fecha<span class="text-danger">*</span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  
+    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
+  </div>
+  <input type="date" class="form-control " readonly name="FechaAbono" id="fechaabono" value="<?php echo $fcha;?>" aria-describedby="basic-addon1" maxlength="60">            
+</div></div></div>
 
 
 <button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
