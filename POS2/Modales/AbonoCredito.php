@@ -52,71 +52,8 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control " hidden name="FolioTipocred" id="foliotipocred" readonly value="<?php echo $Especialistas->Fk_tipo_Credi; ?>">
 </div></div></div>
 
-<div class="row">
-    <div class="col">
-    <label for="exampleFormControlInput1">Titular<span class="text-danger">*</span></label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  
-    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
-  </div>
-  <input type="text" class="form-control "  readonly name="Titular" id="titular" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60">            
-</div></div>
-<div class="col">
-    <label for="exampleFormControlInput1">Fecha<span class="text-danger">*</span></label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  
-    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
-  </div>
-  <input type="date" class="form-control " readonly name="FechaAbono" id="fechaabono" value="<?php echo $fcha;?>" aria-describedby="basic-addon1" maxlength="60">            
-</div></div></div>
-<div class="row">
-    <div class="col">
-    <label for="exampleFormControlInput1">Sucursal<span class="text-danger">*</span></label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
-  </div>
-  <input type="text" class="form-control "  readonly value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">
-  <input type="text" class="form-control " hidden name="Sucursal" id="sucursal" value="<?php echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">   
-    </div>
-    </div>
-    <div class="col">
-    <label for="exampleFormControlInput1">Saldo actual<span class="text-danger">*</span></label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
-  </div>
-  <input type="text" class="form-control "  readonly name="SaldoActual" id="saldoactual" value="<?php echo $Especialistas->Saldo; ?>" aria-describedby="basic-addon1" maxlength="60">   
-    </div>
-    <label for="abono" class="error"> 
-  </div></div>
-  <div class="row">
-    <div class="col">
-    <label for="exampleFormControlInput1">Abono <span class="text-danger">*</span></label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
-  </div>
-  <input type="text" class="form-control "  name="Abono" id="abono" oninput="CapturaValorVenta()" aria-describedby="basic-addon1" maxlength="60">   
-    </div>
-    </div>
-    <div class="col">
-    <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
-  </div>
-  <input type="number" class="form-control "   readonly name="SaldoNuevo" id="saldonuevo" aria-describedby="basic-addon1" maxlength="60">               
-    </div>
-    <label for="abono" class="error"> 
-  </div></div>
-    
-   
-  <input type="text" class="form-control " hidden  readonly name="FkCaja" id="fkcaja"  readonly value="<?php echo $ValorCaja["ID_Caja"];?>">
-<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
-<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?php echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?php echo $row['ID_H_O_D']?>">
-<input type="text" class="form-control " hidden  readonly name="Estatus" id="estatus"  readonly value="Abonado">
-<input type="text" class="form-control " hidden  readonly name="Codigo" id="codigo"  readonly value="background-color: #2BBB1D !important;">
-<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
+
+
 
 <button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
                           
