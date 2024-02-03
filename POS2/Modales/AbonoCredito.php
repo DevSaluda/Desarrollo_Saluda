@@ -23,23 +23,7 @@ while ($r=$query->fetch_object()){
 
 <?php if($Especialistas!=null):?>
 
-<form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
-      <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
-      <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
-      <input type="text" class="form-control "  name="TramientoTicketR" readonly value="<?php echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="number" class="form-control "  name="AbonoTicketR" id="abonoticketr" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="number" class="form-control "  name="SaldoTicketR" id="saldoticketr" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="text" class="form-control "  readonly name="TitularCreditoR" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="text" class="form-control "   readonly name="VendedorTicketR"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
-      <input type="text" class="form-control "  readonly name="SaldoAnteriorTicketR" value="<?php echo $Especialistas->Saldo; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="text" class="form-control "  readonly name="FechaValidezR" value="<?php echo $Especialistas->Validez; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="datetime" name="HoraPago" value="<?php echo date('h:i:s A');?>">
-      <input type="text" class="form-control "  readonly id="sistemacajar" name="SistemaCajaR" readonly value="POS <?php echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "    readonly id="empresacajar" name="EmpresaCajaR" readonly value="<?php echo $row['ID_H_O_D']?>">
-<input type="text" class="form-control " name="SucursalR" id="sucursalr" value="<?php echo $Especialistas->Fk_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">   
-<input type="date" class="form-control " readonly name="FechaAbonoR" id="fechaabonor" value="<?php echo $fcha;?>" aria-describedby="basic-addon1" maxlength="60">
-      <button type="submit"  id="EnviaReimpresionTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
-</form>
+
 
 
 
