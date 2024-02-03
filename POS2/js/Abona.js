@@ -1,8 +1,5 @@
 $('document').ready(function ($) {
-    $("#ActualizaSaldo").hide();
-    $("#AgregaEnCaja").hide();
-    $("#GeneraTicket").hide();
-    $("#GuardaReimpresionTicket").hide();
+  
    
     $.validator.addMethod("Sololetras", function (value, element) {
       return this.optional(element) || /[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/.test(value);
