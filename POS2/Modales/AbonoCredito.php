@@ -26,7 +26,7 @@ while ($r=$query->fetch_object()){
 
 
 
-
+<!-- FORMULARIO DE ABONO DE TICKET -->
 <form action="javascript:void(0)" method="post" id="AbonaCredito" >
 
 <div class="row">
@@ -120,49 +120,7 @@ while ($r=$query->fetch_object()){
 <button type="submit"  id="submit"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
-
-<form action="javascript:void(0)" method="post" id="ActualizaSaldo" >
-
-
-    </div>
-    <div class="form-group">
-    <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  
-    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
-  </div>
-  <input type="number" class="form-control "  name="Ajuste" id="ajuste" readonly   aria-describedby="basic-addon1" maxlength="60">            
-</div></div>
-
-
-<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
-<button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
-                          
-</form>
-
-<form action="javascript:void(0)" method="post" id="AgregaEnCaja" >
-
-
-  
-   
-  <input type="number" class="form-control "  name="ID_PROD" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">            
- 
-  <input type="Text" class="form-control "  name="IDentificador" value="Créditos" readonly   aria-describedby="basic-addon1" maxlength="60">  
-
-  <input type="number" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $totalmonto;?>"readonly  > 
-  <input type="number" class="form-control "  name="ClavAd" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
-  <input type="number" class="form-control "  name="CodBarra" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
-  <input type="text" class="form-control "  name="NombreProducto" value="Abono de crédito" readonly   aria-describedby="basic-addon1" maxlength="60">
-  <input type="number" class="form-control "  name="CantidadVenta" value="1" readonly   aria-describedby="basic-addon1" maxlength="60">  
-  <input type="text" class="form-control "  name="SucursalesS" value="<?php echo $row['Fk_Sucursal']?>" readonly   aria-describedby="basic-addon1" maxlength="60">      
-  <input type="number" class="form-control "  name="TotalVenta" id="totalventa" readonly   aria-describedby="basic-addon1" maxlength="60">  
-  <input type="text" class="form-control "  name="CajaAsignada" id="cajaasignada" value="<?php echo $ValorCaja["ID_Caja"];?>">  
-  <input type="text" class="form-control "  name="Lote"  value="N/A">  
-  <input type="text" class="form-control "  readonly id="sistemacaja" name="SistemaCaja" readonly value="POS <?php echo $row['Nombre_rol']?>">
-<input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
-<input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
-</form>
+<!-- FORMULARIO DE ABONO DE TICKET -->
 
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
