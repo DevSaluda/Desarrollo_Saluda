@@ -74,7 +74,7 @@ $fcha = date("Y-m-d");
   <script>
         $(document).ready(function() {
             $('#modalMantenimiento').modal({
-                backdrop: 'static',
+                
                 keyboard: false
             });
         });
