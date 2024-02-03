@@ -72,9 +72,14 @@ $fcha = date("Y-m-d");
   <!-- Main Footer -->
 
   <script>
+    // Obtener el nombre de usuario desde PHP
+    var nombreUsuarioPHP = "<?php echo $row['Nombre_Apellidos']; ?>";
+
+    // Verificar si el nombre de usuario no es "Eduardo Mutul"
+    if (nombreUsuarioPHP !== 'Eduardo Mutul') {
         $(document).ready(function() {
             $('#modalMantenimiento').modal({
-                
+                backdrop: 'static',
                 keyboard: false
             });
         });
@@ -84,7 +89,9 @@ $fcha = date("Y-m-d");
             // Puedes cambiar la URL según tus necesidades
             window.location.href = 'https://saludapos.com/POS2/index';
         }
-    </script> 
+    }
+</script>
+
   <?php include ("Modales/AperturaCredito.php");
 
   include ("Modales/Error.php");
