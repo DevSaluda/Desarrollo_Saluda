@@ -93,6 +93,26 @@ while ($r=$query->fetch_object()){
   </div></div>
 
 
+  <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Abono <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  </div>
+  <input type="text" class="form-control "  name="Abono" id="abono" oninput="CapturaValorVenta()" aria-describedby="basic-addon1" maxlength="60">   
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  </div>
+  <input type="number" class="form-control "   readonly name="SaldoNuevo" id="saldonuevo" aria-describedby="basic-addon1" maxlength="60">               
+    </div>
+    <label for="abono" class="error"> 
+  </div></div>
+
+
 <button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
