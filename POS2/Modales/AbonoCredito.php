@@ -22,23 +22,7 @@ while ($r=$query->fetch_object()){
 ?>
 
 <?php if($Especialistas!=null):?>
-  <form method="post" 
-      target="print_popup" 
-      action="http://localhost:8080/ticket/"
-      onsubmit="window.open('about:blank','print_popup','width=200,height=200');"  id="GeneraTicket">
 
-      <input type="number" class="form-control " name="NumeroTicket" value="<?php echo $totalmonto;?>"readonly  >
-      <input type="text" class="form-control "  name="FolioCredito"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
-      <input type="text" class="form-control "  name="TramientoTicket" readonly value="<?php echo $Especialistas->Nombre_Tip; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="number" class="form-control "  name="AbonoTicket" id="abonoticket" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="number" class="form-control "  name="SaldoTicket" id="saldoticket" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="text" class="form-control "  readonly name="TitularCredito" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="text" class="form-control "   readonly name="VendedorTicket"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
-      <input type="text" class="form-control "  readonly name="SaldoActualTicket" value="<?php echo $Especialistas->Saldo; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="text" class="form-control "  readonly name="FechaValidez" value="<?php echo $Especialistas->Validez; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="datetime" name="Horadeimpresion" value="<?php echo date('h:i:s A');?>">
-      <button type="submit"  id="EnviaTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
-</form>
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
