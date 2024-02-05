@@ -42,8 +42,8 @@ include ("Consultas/db_connection.php");
 <button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-edit btn btn-warning btn-sm " type="submit"  >Corte de caja <i class="fas fa-cut"></i> <i class="fas fa-money-bill"></i></button> 
 
      <button  data-toggle="modal" data-target="#ReimprimeVentas"   class="btn-reimpresion btn btn-info btn-sm  " type="submit"  >Reimpresión de tickets de venta <i class="fas fa-print"></i></button>
-     <button data-toggle="modal" data-target="#CapturaFacturacion" class="btn btn-success btn-sm" style="
-    background: #6610f2 !important;"type="submit" name="guardar" >Datos para facturación <i class="far fa-bell"></i></button>
+     <!-- <button data-toggle="modal" data-target="#CapturaFacturacion" class="btn btn-success btn-sm" style="
+    background: #6610f2 !important;"type="submit" name="guardar" >Datos para facturación <i class="far fa-bell"></i></button> -->
       <div class="input-group mb-3">
         
   <div class="input-group-prepend">
