@@ -330,23 +330,23 @@ for (var i = 0; i < elementosDinamicos.length; i++) {
 
 
 function CapturaNombreEnfermero() {
-
     var nombredelpersonalenfermero = document.getElementById("nombreenfermero").value;
-    //Se actualiza en municipio inm
-   
-    document.getElementById("cliente1").value = nombredelpersonalenfermero;
-    document.getElementById("cliente2").value = nombredelpersonalenfermero;
-    document.getElementById("cliente3").value = nombredelpersonalenfermero;
-    document.getElementById("cliente4").value = nombredelpersonalenfermero;
-    document.getElementById("cliente5").value = nombredelpersonalenfermero;
-    document.getElementById("cliente6").value = nombredelpersonalenfermero;
-    document.getElementById("cliente7").value = nombredelpersonalenfermero;
-    document.getElementById("cliente8").value = nombredelpersonalenfermero;
-    document.getElementById("cliente9").value = nombredelpersonalenfermero;
-    document.getElementById("cliente10").value = nombredelpersonalenfermero;
-   
-   
+
+    // Verificar si se ha seleccionado un enfermero antes de proceder
+    if (nombredelpersonalenfermero.trim() === "") {
+        alert("Por favor, elige un enfermero primero.");
+        return;
+    }
+
+    // Obtener todos los elementos con la clase "cliente"
+    var clientes = document.querySelectorAll(".cliente");
+
+    // Iterar sobre los elementos y actualizar su valor
+    clientes.forEach(function(cliente) {
+        cliente.value = nombredelpersonalenfermero;
+    });
 }
+
 function CapturaNombreFarmaceutico() {
 
 var nombredelpersonalfarmaceutico = document.getElementById("nombrefarma").value;
