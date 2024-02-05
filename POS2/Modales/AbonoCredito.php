@@ -114,6 +114,15 @@ while ($r=$query->fetch_object()){
 
 <button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 
+   
+<input type="text" class="form-control " hidden  readonly name="FkCaja" id="fkcaja"  readonly value="<?php echo $ValorCaja["ID_Caja"];?>">
+<input type="text" class="form-control " hidden  readonly name="Usuario" id="usuario"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistema" name="Sistema" readonly value="POS <?php echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden  readonly id="empresa" name="Empresa" readonly value="<?php echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control " hidden  readonly name="Estatus" id="estatus"  readonly value="Abonado">
+<input type="text" class="form-control " hidden  readonly name="Codigo" id="codigo"  readonly value="background-color: #2BBB1D !important;">
+<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
+
 
                           
 </form>
@@ -166,7 +175,26 @@ while ($r=$query->fetch_object()){
       <button type="submit"  id="EnviaReimpresionTicket"  class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
 <!-- FORMULARIO DE REIMPRESION DE TICKETS -->
+<!-- FORMULARIO DE ACTUALIZACION DE SALDO-->
+<form action="javascript:void(0)" method="post" id="ActualizaSaldo" >
 
+
+    </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  
+    <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
+  </div>
+  <input type="number" class="form-control "  name="Ajuste" id="ajuste" readonly   aria-describedby="basic-addon1" maxlength="60">            
+</div></div>
+
+
+<input type="hidden" name="IDFolio" id="idfolio" value="<?php echo $Especialistas->Folio_Credito; ?>">
+<button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
+                          
+</form>
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
