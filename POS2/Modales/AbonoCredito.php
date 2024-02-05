@@ -180,8 +180,6 @@ while ($r=$query->fetch_object()){
 <div style="display: none;">
 <form action="javascript:void(0)" method="post" id="ActualizaSaldo" >
 
-
-    </div>
     <div class="form-group">
     <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
