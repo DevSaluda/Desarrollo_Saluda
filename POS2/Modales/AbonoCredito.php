@@ -114,6 +114,11 @@ while ($r=$query->fetch_object()){
 
 <button type="submit" id="submit" class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 
+
+                          
+</form>
+
+
 <!-- FORMUARIO DE IMPRESION DEL CODIGO DE ABONO -->
   
 <form method="post" 
@@ -136,8 +141,6 @@ while ($r=$query->fetch_object()){
 
 <!-- FORMUARIO DE IMPRESION DEL CODIGO DE ABONO -->
 
-                          
-</form>
 <!-- FORMULARIO DE ABONO DE TICKET -->
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
