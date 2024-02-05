@@ -99,7 +99,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control "  name="Abono" id="abono" oninput="CapturaValorVenta()" aria-describedby="basic-addon1" maxlength="60">   
+  <input type="text" class="form-control "  name="Abono" id="abono" onchange="CapturaValorVenta()" aria-describedby="basic-addon1" maxlength="60">   
     </div>
     </div>
     <div class="col">
