@@ -1,7 +1,7 @@
 $('document').ready(function ($) {
     // $("#ActualizaSaldo").hide();
     // $("#AgregaEnCaja").hide();
-    // $("#GeneraTicket").hide();
+    $("#GeneraTicket").hide();
     // $("#GuardaReimpresionTicket").hide();
    
     $.validator.addMethod("Sololetras", function (value, element) {
