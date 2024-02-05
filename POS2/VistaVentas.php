@@ -211,7 +211,7 @@ $(document).ready(function () {
                     <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
-                    <input class="form-control" readonly type="number" id="descuento1"  value="0" name="DescuentoAplicado[]" > </div>\
+                    <input class="form-control" readonly type="number" id="descuento1" value="0" name="DescuentoAplicado[]"> </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
@@ -296,6 +296,9 @@ $(document).ready(function () {
     </div>
   </div>
 </div>
+
+
+
 <script>
   var filaActual; // Variable global para almacenar la fila actual
 
@@ -324,6 +327,9 @@ function actualizarFilaConDescuento(resultadoDescuento) {
 
     // Actualiza el campo de descuento en la fila
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+
+    // Muestra el descuento aplicado en el campo descuento1
+    filaActual.find('#descuento1').val(resultadoDescuento.descuento.toFixed(2));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
@@ -377,8 +383,6 @@ function actualizarTotal() {
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
 </script>
-
-
 
 
 <?php
