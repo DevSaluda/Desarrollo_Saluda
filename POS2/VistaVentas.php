@@ -217,7 +217,7 @@ $(document).ready(function () {
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
-                    <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm "><i class="fas fa-percent"></i></a>\
+                    <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm" onclick="setFilaActual(this)"><i class="fas fa-percent"></i></a>\
                 </div>\
                 <!-- Agrega otros campos según sea necesario -->\
                 <div class="col"> \
@@ -296,8 +296,14 @@ $(document).ready(function () {
     </div>
   </div>
 </div>
-
 <script>
+  var filaActual; // Variable global para almacenar la fila actual
+
+  function setFilaActual(boton) {
+    // Obtén la fila asociada al botón
+    filaActual = $(boton).closest('.row');
+  }
+
   function aplicarDescuento(importe, cantidadDescuento) {
     // Calcula el descuento
     var descuento = (importe * cantidadDescuento) / 100;
@@ -312,35 +318,31 @@ $(document).ready(function () {
     };
 }
 
-function actualizarFilaConDescuento(fila, resultadoDescuento) {
+function actualizarFilaConDescuento(resultadoDescuento) {
     // Actualiza el campo de costo de venta
-    fila.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
     // Actualiza el campo de descuento en la fila
-    fila.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
-    // Obtén el contenedor principal de las filas
-    var contenedorFilas = $('#parte1');
-
-    // Itera sobre todas las filas dentro del contenedor
-    contenedorFilas.find('.row').each(function () {
+    if (filaActual) {
         // Obtén los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
 
         // Aplica el descuento y obtén los resultados
         var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
 
         // Actualiza la fila con los resultados del descuento
-        actualizarFilaConDescuento($(this), resultadoDescuento);
-    });
+        actualizarFilaConDescuento(resultadoDescuento);
+    }
 }
 
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
 
-    // Aplica descuento en las filas
+    // Aplica descuento solo en la fila correspondiente
     aplicarDescuentoEnFila(cantidadDescuento);
 
     // Actualiza el total
@@ -357,6 +359,7 @@ function aplicarDescuentoSeleccionado() {
         timer: 1500
     });
 }
+
 function actualizarTotal() {
     var contenedorFilas = $('#parte1');
     var sumaTotal = 0;
@@ -374,6 +377,10 @@ function actualizarTotal() {
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
 </script>
+
+
+
+
 <?php
 if($ValorCaja["Estatus"] == 'Abierta'){
 
