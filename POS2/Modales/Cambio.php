@@ -348,62 +348,60 @@ function CapturaNombreEnfermero() {
 }
 
 function CapturaNombreFarmaceutico() {
+    var nombredelpersonalfarmaceutico = document.getElementById("nombrefarma").value;
 
-var nombredelpersonalfarmaceutico = document.getElementById("nombrefarma").value;
-//Se actualiza en municipio inm
+    // Verificar si se ha ingresado un nombre de farmacéutico antes de proceder
+    if (nombredelpersonalfarmaceutico.trim() === "") {
+        alert("Por favor, ingresa el nombre del farmacéutico primero.");
+        return;
+    }
 
-document.getElementById("cliente1").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente2").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente3").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente4").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente5").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente6").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente7").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente8").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente9").value = nombredelpersonalfarmaceutico;
-document.getElementById("cliente10").value = nombredelpersonalfarmaceutico;
+    // Obtener todos los elementos con la clase "cliente"
+    var clientes = document.querySelectorAll(".cliente");
 
-
+    // Iterar sobre los elementos y actualizar su valor
+    clientes.forEach(function(cliente) {
+        cliente.value = nombredelpersonalfarmaceutico;
+    });
 }
 
 
 function CapturaNombreMedico() {
+    var nombredelpersonalmedico = document.getElementById("nombremedicoo").value;
 
-var nombredelpersonalmedico = document.getElementById("nombremedicoo").value;
-//Se actualiza en municipio inm
+    // Verificar si se ha ingresado un nombre de médico antes de proceder
+    if (nombredelpersonalmedico.trim() === "") {
+        alert("Por favor, ingresa el nombre del médico primero.");
+        return;
+    }
 
-document.getElementById("cliente1").value = nombredelpersonalmedico;
-document.getElementById("cliente2").value = nombredelpersonalmedico;
-document.getElementById("cliente3").value = nombredelpersonalmedico;
-document.getElementById("cliente4").value = nombredelpersonalmedico;
-document.getElementById("cliente5").value = nombredelpersonalmedico;
-document.getElementById("cliente6").value = nombredelpersonalmedico;
-document.getElementById("cliente7").value = nombredelpersonalmedico;
-document.getElementById("cliente8").value = nombredelpersonalmedico;
-document.getElementById("cliente9").value = nombredelpersonalmedico;
-document.getElementById("cliente10").value = nombredelpersonalmedico;
+    // Obtener todos los elementos con la clase "cliente"
+    var clientes = document.querySelectorAll(".cliente");
 
-
+    // Iterar sobre los elementos y actualizar su valor
+    clientes.forEach(function(cliente) {
+        cliente.value = nombredelpersonalmedico;
+    });
 }
 
 function CapturaNombreLimpieza() {
+    var nombredelpersonallimpieza = document.getElementById("nombreintendente").value;
 
-var nombredelpersonallimpieza = document.getElementById("nombreintendente").value;
-//Se actualiza en municipio inm
+    // Verificar si se ha ingresado un nombre de personal de limpieza antes de proceder
+    if (nombredelpersonallimpieza.trim() === "") {
+        alert("Por favor, ingresa el nombre del personal de limpieza primero.");
+        return;
+    }
 
-document.getElementById("cliente1").value = nombredelpersonallimpieza;
-document.getElementById("cliente2").value = nombredelpersonallimpieza;
-document.getElementById("cliente3").value = nombredelpersonallimpieza;
-document.getElementById("cliente4").value = nombredelpersonallimpieza;
-document.getElementById("cliente5").value = nombredelpersonallimpieza;
-document.getElementById("cliente6").value = nombredelpersonallimpieza;
-document.getElementById("cliente7").value = nombredelpersonallimpieza;
-document.getElementById("cliente8").value = nombredelpersonallimpieza;
-document.getElementById("cliente9").value = nombredelpersonallimpieza;
-document.getElementById("cliente10").value =nombredelpersonallimpieza;
+    // Obtener todos los elementos con la clase "cliente"
+    var clientes = document.querySelectorAll(".cliente");
 
-
+    // Iterar sobre los elementos y actualizar su valor
+    clientes.forEach(function(cliente) {
+        cliente.value = nombredelpersonallimpieza;
+    });
 }
+
 function CapturaNombreclienteTicket() {
     var nombredelcliente = document.getElementById("namecliente").value;
 
