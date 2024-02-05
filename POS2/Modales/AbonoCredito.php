@@ -200,29 +200,7 @@ while ($r=$query->fetch_object()){
 <?php endif;?>
 
 <script>
-       var precio1 = document.getElementById("saldoactual")
-       var precio2 = document.getElementById("abono")
-       var precio3 = document.getElementById("saldonuevo")
-       var ajustecred=document.getElementById("ajuste")
-       var ticketcred=document.getElementById("saldoticket")
-       var ticketcredr=document.getElementById("saldoticketr")
-        precio2.addEventListener("change", () => {
-            precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value)
-
-        })
-        precio2.addEventListener("change", () => {
-          ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
-
-        })
-        precio2.addEventListener("change", () => {
-          ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
-
-        })
-        precio2.addEventListener("change", () => {
-          ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value)
-
-        })
-        function CapturaValorVenta() {
+function CapturaValorVenta() {
     var abono = document.getElementById("abono").value;
     //Se actualiza en municipio inm
     document.getElementById("totalventa").value = abono;
@@ -230,7 +208,21 @@ while ($r=$query->fetch_object()){
     document.getElementById("abonoticketr").value = abono;
 }
 
-    </script>
+var precio1 = document.getElementById("saldoactual")
+var precio2 = document.getElementById("abono")
+var precio3 = document.getElementById("saldonuevo")
+var ajustecred = document.getElementById("ajuste")
+var ticketcred = document.getElementById("saldoticket")
+var ticketcredr = document.getElementById("saldoticketr")
+
+precio2.addEventListener("change", () => {
+    precio3.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+    ajustecred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+    ticketcred.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+    ticketcredr.value = parseFloat(precio1.value) - parseFloat(precio2.value)
+});
+</script>
+
 
 <script src="js/Abona.js"></script>
 <script src="js/UpdateSaldo.js"></script>
