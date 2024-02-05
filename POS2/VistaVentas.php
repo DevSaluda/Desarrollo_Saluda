@@ -217,7 +217,7 @@ $(document).ready(function () {
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
-                    <button onclick="aplicarDescuentoSeleccionado(this)">Aplicar Descuento</button>\
+                    <button id="btnAplicarDescuento">Aplicar Descuento</button>\
                 </div>\
                 <!-- Agrega otros campos según sea necesario -->\
                 <div class="col"> \
@@ -373,7 +373,15 @@ function actualizarTotal() {
     $('#totalventa2').val(sumaTotal.toFixed(2));
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
+
+// Agrega un manejador de eventos al botón
+$(document).ready(function() {
+    $('#tuBoton').on('click', function() {
+        aplicarDescuentoSeleccionado(this);
+    });
+});
 </script>
+
 
 
 
