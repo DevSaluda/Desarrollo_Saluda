@@ -38,7 +38,10 @@
   <select name="Sucursal" id="sucursal" required class="form-control">
                                                <option value="0">Seleccione una sucursal:</option>
         <?php
-          $query = $conn -> query ("SELECT Nombre_Sucursal FROM SucursalesCorre");
+          $query = $conn -> query ("SELECT Nombre_Sucursal 
+          FROM Sucursales
+          WHERE Nombre_Sucursal NOT IN ('Hunucm&aacute;', 'Mama', 'Mani', 'Akil', 'CEDIS', 'CEDIS(Partner)', 'Capacitación');
+          ");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["Nombre_Sucursal"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
