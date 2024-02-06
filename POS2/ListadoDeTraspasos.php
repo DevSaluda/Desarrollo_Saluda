@@ -72,34 +72,7 @@ include "Consultas/Consultas.php";
 </head>
 <body>
 
-<!-- Contenido de la página -->
 
-<!-- Ventana modal -->
-<!-- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <p>Lamentamos las molestias, pero estamos realizando correcciones. Gracias por su comprensión.</p>
-    </div>
-</div>
-
-<script>
-    // Mostrar la ventana modal al cargar la página
-    window.onload = function() {
-        document.getElementById('myModal').style.display = 'flex';
-    };
-
-    // Deshabilitar la capacidad de cerrar la ventana modal haciendo clic fuera de ella
-    document.getElementById('myModal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    });
-</script>
-
-   -->
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
  
  
 <?php
