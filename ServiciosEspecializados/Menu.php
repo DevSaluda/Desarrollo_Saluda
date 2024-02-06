@@ -121,7 +121,7 @@
           <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a  class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
+          <a  class="d-block" style="color:white" ><?php echo $row['Nombre_Apellidos']?></a>
         </div>
       </div>
 
