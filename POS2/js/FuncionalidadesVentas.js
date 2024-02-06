@@ -1,6 +1,6 @@
 $(".btn-edit").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCaja.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/CortesDeCaja.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -12,7 +12,7 @@ $(".btn-edit").click(function() {
 
 $(".btn-cancelacion").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/SolicitarCancelacion.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/SolicitarCancelacion.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Solicitar cancelación");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");

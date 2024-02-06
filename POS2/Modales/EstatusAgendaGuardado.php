@@ -41,7 +41,7 @@
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-              <a type="button" href="https://controlfarmacia.com/POS2/ListadoDataPacientesAgenda" class="btn btn-success waves-effect waves-light">Continuar
+              <a type="button" href="https://saludapos.com/POS2/ListadoDataPacientesAgenda" class="btn btn-success waves-effect waves-light">Continuar
               <i class="fas fa-arrow-alt-circle-right"></i>
               </a>
              

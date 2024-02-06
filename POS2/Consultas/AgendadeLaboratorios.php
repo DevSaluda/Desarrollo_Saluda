@@ -33,7 +33,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT DISTINCT Agenda_Labs.Num_Orden, Agenda_Labs.Id_genda,Agenda_Labs.LabAgendado,
@@ -103,7 +103,7 @@ $query = $conn->query($sql1);
   	
     $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/DetallesCitaSucursalExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/DetallesCitaSucursalExt.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Detalles de cita");
               $("#DiExt").removeClass("modal-dialog modal-notify modal-success");
@@ -115,7 +115,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Cancela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/CancelaCitaExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/CancelaCitaExt.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Cancelación");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -127,7 +127,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Asiste").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/AsistenciaPaciente.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/AsistenciaPaciente.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("¿El paciente asistió?");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");

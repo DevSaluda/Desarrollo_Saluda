@@ -95,7 +95,7 @@ $query = $conn->query($sql1);
 <script>
     $(".btn-cancelacion").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/EnviaSolicitudCancelacion.php","id="+id,function(data){
+    $.post("https://saludapos.com/POS2/Modales/EnviaSolicitudCancelacion.php","id="+id,function(data){
         $("#FormSolicitud").html(data);
         $("#dddd").removeClass("modal-dialog modal-lg modal-notify modal-info");
         $("#dddd").addClass("modal-dialog modal-notify modal-primary");

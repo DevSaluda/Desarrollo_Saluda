@@ -1,7 +1,7 @@
 function  CargaContadores(){
 
 
-    $.post("https://controlfarmacia.com/POS2/ContadoresSolicitudes.php","",function(data){
+    $.post("https://saludapos.com/POS2/ContadoresSolicitudes.php","",function(data){
       $("#ContadorDeSolicitudesTraspasos").html(data);
     })
 

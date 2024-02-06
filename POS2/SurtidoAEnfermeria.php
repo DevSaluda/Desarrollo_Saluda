@@ -1,7 +1,7 @@
 
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 
 
 ?>

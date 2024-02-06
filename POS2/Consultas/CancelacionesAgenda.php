@@ -96,7 +96,7 @@ $query = $conn->query($sql1);
  <script>
   	$(".btn-edit1").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/DetallesCancelacion.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/DetallesCancelacion.php","id="+id,function(data){
               $("#form-edit").html(data);
               
   		});

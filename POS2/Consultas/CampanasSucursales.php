@@ -131,7 +131,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Controldecitas/Modales/DetallesCita.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Controldecitas/Modales/DetallesCita.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');

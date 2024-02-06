@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/POS2/CapturadorDeFacturas">
+ <form  method="POST" action="https://saludapos.com/POS2/CapturadorDeFacturas">
     
  
     <div class="form-group">

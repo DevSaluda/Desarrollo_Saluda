@@ -36,10 +36,10 @@
   </div>
   <select id = "conceptogasto" class = "form-control" name = "ConceptoGasto" >
                                                <option value="">Selecciona un concepto o categoría:</option>
-        <?
+        <?php
           $query = $conn -> query ("SELECT Cat_Gasto_ID,Nom_Cat_Gasto,ID_H_O_D,Estado FROM Categorias_Gastos_POS WHERE Estado='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Cat_Gasto_ID].'">'.$valores[Nom_Cat_Gasto].'</option>';
+            echo '<option value="'.$valores["Cat_Gasto_ID"].'">'.$valores["Nom_Cat_Gasto"].'</option>';
           }
         ?>  </select>
 </div>

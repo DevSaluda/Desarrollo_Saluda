@@ -2,7 +2,7 @@
 <?php
  $IdBusqueda=base64_decode($_GET['idProd']);
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 $fcha = date("Y-m-d");
 $user_id=null;
@@ -92,11 +92,11 @@ while ($r=$query->fetch_object()){
   
   <select id = "sucursaldestino" class = "form-control"  >
   <option value="">Seleccione una Sucursal:</option>
-                                               <?
+                                               <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal!='CEDIS(Partner)' ");
         
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_SucursalC].'">'.$valores[Nombre_Sucursal].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
                         ?>
         </select>   
@@ -245,7 +245,7 @@ while ($r=$query->fetch_object()){
     <button type="button" class="btn btn-outline-info btn-sm" onClick="history.go(-1);" class="btn btn-default">
   <i class="fas fa-long-arrow-alt-left fa-lg"></i> Regresar a productos 
 </button>
-<a type="button" class="btn btn-outline-success btn-sm" href="https://controlfarmacia.com/AdminPOS/VerificaAsignacionProducto?idProd=<? echo base64_encode($Especialistas->ID_Prod_POS); ?>" class="btn btn-default">
+<a type="button" class="btn btn-outline-success btn-sm" href="https://saludapos.com/AdminPOS/VerificaAsignacionProducto?idProd=<? echo base64_encode($Especialistas->ID_Prod_POS); ?>" class="btn btn-default">
    Verificar Asignación <i class="fas fa-table"></i>
 </a>
       </div>

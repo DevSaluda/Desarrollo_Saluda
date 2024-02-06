@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 
 ?>
@@ -70,7 +70,7 @@ table td {
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
  
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -108,7 +108,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

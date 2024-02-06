@@ -114,7 +114,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style ="background-color: #0057b8 !important;">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -208,7 +208,11 @@
           </div><!-- /.col -->
           <div class="col-sm-7">
             <ol class="breadcrumb float-sm-right">
+
+              <li class="breadcrumb-item"><a href="#"><?echo date('d-m-Y');?></a></li>
+=======
               <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
+
               <li class="breadcrumb-item active"><?php
   echo date('h:i:s A');
 ?></li>
@@ -221,4 +225,8 @@
 
     <!-- Main content -->
     <script src="js/ModalesAyuda.js"></script>
+
+    <?include ("ModalesApoyo.php")?>
+
     <?php include ("ModalesApoyo.php")?>
+
