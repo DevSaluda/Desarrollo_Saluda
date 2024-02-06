@@ -127,23 +127,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
         }
     });
 </script>
-<script>
 
-function comprobarUsuario() {
-	$("#loaderIcon").show();
-	jQuery.ajax({
-	url: "https://saludapos.com/AdminPOS/Consultas/ComprobarFactura.php",
-	data:'NumFactura='+$("#NumFactura").val(),
-	type: "POST",
-	success:function(data){
-		$("#estadousuario").html(data);
-		$("#loaderIcon").hide();
-	},
-	error:function (){}
-	});
-}
-
-</script>
 <script>
   
   function desactivar()
