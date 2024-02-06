@@ -103,32 +103,6 @@ $(document).on('change', '#sucursalconorden', function(event) {
 
      </script>
 
-<script>
-    // Función para manejar cambios en el proveedor seleccionado
-    $('#nombreproveedor').on('change', function() {
-        var selectedProveedor = $(this).val();
-
-        if (selectedProveedor === 'CEDIS') {
-            $('#numFacturaContainer').hide(); // Ocultar el input NumFactura
-
-            // Combinar las primeras 4 letras del input sucursalLetras con totalmonto y establecerlo como valor del input NumOrden
-            var inputSucursal = $('#sucursalLetras').val().slice(0, 4);
-            var totalmonto = '<?php echo $totalmonto; ?>'; // Convertimos $totalmonto a cadena con comillas
-            $('#NumOrden').val(inputSucursal + totalmonto);
-        } else {
-            $('#numFacturaContainer').show(); // Mostrar el input NumFactura
-        }
-    });
-
-    // Llamar al evento change del select al cargar la página para establecer el valor inicial de NumOrden solo si se seleccionó CEDIS
-    $(document).ready(function() {
-        if ($('#nombreproveedor').val() === 'CEDIS') {
-            $('#nombreproveedor').trigger('change');
-        }
-    });
-</script>
-
-
 
     </div>
   </div>
