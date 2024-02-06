@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1=" SELECT Incidencias_Express.ID_incidencia,Incidencias_Express.Descripcion,Incidencias_Express.Reporto,

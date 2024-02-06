@@ -9,7 +9,7 @@ include "Consultas/db_connection.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>SERVICIOS ESPECIALIZADOS |<?echo $row['ID_H_O_D']?> </title>
+  <title>SERVICIOS ESPECIALIZADOS |<?php echo $row['ID_H_O_D']?> </title>
 
   <?php include "Header.php"?>
 </head>

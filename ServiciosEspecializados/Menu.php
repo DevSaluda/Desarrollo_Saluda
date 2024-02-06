@@ -117,7 +117,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style ="background-color: #0057b8 !important;">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -215,36 +215,27 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-  <?php include ("Modales/Ventana_Mantenimiento.php");
-?>
-      <script src="js/clock.js"></script>
-      <!-- Main content -->
-      <script>
-        function inicio() {
-          $('#inicio').modal('show'); // abrir
-        }
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+        
+          </div><!-- /.col -->
+          <div class="col-sm-7">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#"><?echo date('d-m-Y');?></a></li>
+              <li class="breadcrumb-item active"><?php
+  echo date('h:i:s A');
+?></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-        function cierre() {
-          $('#Cierre').modal('show'); // abrir
-        }
-
-        function salir() {
-
-          window.location.replace('https://saludapos.com/ServiciosEspecializados/Cierre');
-
-        }
-        $(document).ready(function() {
-          startTime();
-        });
-      </script>
-
-      <style>
-        #date {
-          color: #007bff;
-        }
-      </style>
-       <!-- <script>
-    $(document).ready(function(){
-        $('#maintenanceModal').modal('show');
-    });
-</script> -->
+    <!-- Main content -->
+    <script src="js/ModalesAyuda.js"></script>
+    <?include ("ModalesApoyo.php")?>

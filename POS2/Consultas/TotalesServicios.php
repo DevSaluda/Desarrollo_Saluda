@@ -47,7 +47,7 @@ $(document).ready( function () {
 <?php
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Ventas_POS.Identificador_tipo,Ventas_POS.Fk_sucursal,Ventas_POS.ID_H_O_D,Ventas_POS.Turno,Ventas_POS.Fecha_venta,Ventas_POS.AgregadoPor,

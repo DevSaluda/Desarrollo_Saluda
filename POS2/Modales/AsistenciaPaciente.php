@@ -1,6 +1,6 @@
 <?php 
 include "../Consultas/db_connection.php";
-include "../Consultas/Sesion.php";
+
 include "../Consultas/Consultas.php";
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

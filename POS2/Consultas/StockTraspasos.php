@@ -98,7 +98,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-editStock").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/SolicitaTraspaso.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/SolicitaTraspaso.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Solicitud de traspaso");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");

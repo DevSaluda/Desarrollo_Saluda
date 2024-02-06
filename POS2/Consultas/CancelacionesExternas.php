@@ -93,7 +93,7 @@ Cancelado</button></td>
   	
     $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/DetallesCitaSucursalExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/DetallesCitaSucursalExt.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Detalles de cita");
               $("#DiExt").removeClass("modal-dialog modal-notify modal-success");
@@ -105,7 +105,7 @@ Cancelado</button></td>
 
     $(".btn-Cancela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/CancelaCitaExt.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/CancelaCitaExt.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Cancelación");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");

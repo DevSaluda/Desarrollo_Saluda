@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ Registrar Producto <i class="fas fa-prescription-bottle-alt"></i>
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
     
   
   include ("Modales/Error.php");
@@ -91,7 +91,7 @@ Registrar Producto <i class="fas fa-prescription-bottle-alt"></i>
 </html>
 
 
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
+
 include "Consultas/AnalisisIndex.php";
 include "Consultas/ConsultaCaja.php";
 include "Consultas/SumadeFolioTickets.php";
@@ -93,7 +93,7 @@ $(document).ready(function() {
     
       
         $("#FiltrarContenido").autocomplete({
-            source: "https://controlfarmacia.com/POS2/Consultas/BusquedaOptimizadaDeProductos.php",
+            source: "https://saludapos.com/POS2/Consultas/BusquedaOptimizadaDeProductos.php",
             minLength: 1,
             select: function(event, ui) {
                 event.preventDefault();
@@ -399,7 +399,7 @@ $(document).ready(function()
 
 $(".btn-edit").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/CortesDeCajaNuevo.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Corte de caja");
         $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -409,7 +409,7 @@ $(".btn-edit").click(function() {
 
 $(".btn-arqui").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/ArqueoDeCaja.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Arqueo De Caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -420,7 +420,7 @@ $(".btn-arqui").click(function() {
 
 $(".btn-aperturacaja").click(function() {
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
+    $.post("https://saludapos.com/POS2/Modales/AbreCajaEnVentas.php", "id=" + id, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").text("Apertura De caja");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -454,7 +454,7 @@ $(".btn-aperturacaja").click(function() {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

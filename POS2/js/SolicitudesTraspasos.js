@@ -1,7 +1,7 @@
 function  SolicitudesTraspasos(){
 
 
-    $.post("https://controlfarmacia.com/POS2/Consultas/SolicitudesTraspasos.php","",function(data){
+    $.post("https://saludapos.com/POS2/Consultas/SolicitudesTraspasos.php","",function(data){
       $("#TableSolicitudes").html(data);
     })
 

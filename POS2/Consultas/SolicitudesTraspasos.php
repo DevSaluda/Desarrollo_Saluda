@@ -19,7 +19,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Solicitudes_Traspasos.ID_Sol_Traspaso,Solicitudes_Traspasos.Cod_Barra,Solicitudes_Traspasos.Nombre_Prod,
@@ -74,7 +74,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-editStock").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/POS2/Modales/SolicitaTraspaso.php","id="+id,function(data){
+  		$.post("https://saludapos.com/POS2/Modales/SolicitaTraspaso.php","id="+id,function(data){
   			$("#form-editSolicitudesA").html(data);
           $("#TituloSolicitudesA").html("Solicitud de traspaso");
               $("#DiSolicitudesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
