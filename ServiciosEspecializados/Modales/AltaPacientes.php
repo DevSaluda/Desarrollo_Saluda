@@ -38,9 +38,9 @@
   <select name="Sucursal" id="sucursal" required class="form-control">
                                                <option value="0">Seleccione una sucursal:</option>
         <?
-          $query = $conn -> query ("SELECT Nombre_ID_Sucursal FROM Sucursales WHERE Dueño_Propiedad='".$row['ID_H_O_D']."'");
+          $query = $conn -> query ("SELECT Nombre_Sucursal FROM SucursalesCorre");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[Nombre_ID_Sucursal].'">'.$valores[Nombre_ID_Sucursal].'</option>';
+            echo '<option value="'.$valores["Nombre_Sucursal"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
