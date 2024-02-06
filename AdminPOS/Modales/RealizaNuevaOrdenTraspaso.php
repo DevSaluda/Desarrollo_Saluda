@@ -126,6 +126,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
             $('#nombreproveedor').trigger('change');
         }
     });
+</script>
 <script>
 
 function comprobarUsuario() {
