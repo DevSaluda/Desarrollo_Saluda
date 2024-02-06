@@ -34,9 +34,7 @@ include "Consultas/db_connection.php";
   <!-- Content Wrapper. Contains page content -->
   
 
-  <div class="container">
-<div class="row">
-<div class="col-md-12">
+
     
 <div id="TablaPacientes"></div>
 
