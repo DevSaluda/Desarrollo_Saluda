@@ -51,7 +51,7 @@ $fcha = date("Y-m-d");
   
  
     <!-- Modal de Mantenimiento -->
-    <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modalMantenimiento" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +59,7 @@ $fcha = date("Y-m-d");
                 </div>
                 <div class="modal-body">
                     <p>Lamentamos las molestias, pero esta sección se encuentra en mantenimiento.</p>
-                    <!-- Botón para redirigir -->
+                    Botón para redirigir
                     <img src="lloro.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
                     <p>¡Nuestros programadores están trabajando horas extras sin pizza para corregir los bugs misteriosos que aparecieron en el sistema! 🐞🍕</p>
                             <br>
@@ -69,13 +69,13 @@ $fcha = date("Y-m-d");
             </div>
         </div>
     </div>
-  <!-- Main Footer -->
+
 
   <script>
-    // Obtener el nombre de usuario desde PHP
+  
     var nombreUsuarioPHP = "<?php echo $row['Nombre_Apellidos']; ?>";
 
-    // Verificar si el nombre de usuario no es "Eduardo Mutul"
+   
     if (nombreUsuarioPHP !== 'Eduardo Mutul') {
         $(document).ready(function() {
             $('#modalMantenimiento').modal({
@@ -84,13 +84,13 @@ $fcha = date("Y-m-d");
             });
         });
 
-        // Función para redirigir a la página de inicio
+     
         function redirigirAInicio() {
-            // Puedes cambiar la URL según tus necesidades
+            
             window.location.href = 'https://saludapos.com/POS2/index';
         }
     }
-</script>
+</script> -->
 
   <?php include ("Modales/AperturaCredito.php");
 
