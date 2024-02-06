@@ -243,7 +243,7 @@ $(document).ready(function(){
                 </div>
                 <div class="modal-footer">
                
-                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">Ir al registro de energía eléctrica</button>
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">Ir a los creditos dentales</button>
                     
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
