@@ -188,7 +188,8 @@ body, html {
                     </form>  <div id="error">
   </div>
   
-
+  <?php include "Modal.php";
+  include "Modales.php";?>
                     
                     <!--Start of Tawk.to Script-->
 
