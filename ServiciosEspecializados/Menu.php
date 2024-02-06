@@ -98,10 +98,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"><i
-        class="fas fa-sign-out-alt" style="color: white;" data-toggle="modal" data-target="#Salida"></i></a>
-      </li>
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -109,7 +106,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index" class="brand-link" style="background-color: #c80096 !important;">
+    <a href="index" class="brand-link" style="background-color: #0195AF !important;">
 
     <i class="fas fa-file-medical-alt fa-2x fa-lgfa-2x fa-lg" style="color: white;" ></i>
       <span class="brand-text font-weight-light" style="color: white;">ULTRASONIDOS</span>
@@ -184,67 +181,44 @@
           </li>
           
           
-          <!-- Main content -->
-      <div class="modal fade" id="Cierre" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">¿Cerrar la sesión?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <button type="button" onclick="salir()" class="btn btn-danger btn-lg btn-block">Si, Cerrar sesión</button>
-              <br>
-
-
-            </div>
-            <div class="modal-footer">
-
-              <button type="button" data-dismiss="modal" class="btn btn-primary">Cerrar ventana</button>
-
-            </div>
-          </div>
-        </div>
-      </div>
+          <li class="nav-header">Cierre de sesion</li>
+          <li class="nav-item">
+            <a onclick="cierre()" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+              <p>
+           Salir del sistema
+              
+              </p>
+            </a>
+          </li> 
          
-      
-      
+        </ul>
+      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
-  <?php include ("Modales/Ventana_Mantenimiento.php");
-?>
-      <script src="js/clock.js"></script>
-      <!-- Main content -->
-      <script>
-        function inicio() {
-          $('#inicio').modal('show'); // abrir
-        }
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+        
+          </div><!-- /.col -->
+          <div class="col-sm-7">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
+              <li class="breadcrumb-item active"><?php
+  echo date('h:i:s A');
+?></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-        function cierre() {
-          $('#Cierre').modal('show'); // abrir
-        }
-
-        function salir() {
-
-          window.location.replace('https://saludapos.com/ServiciosEspecializados/Cierre');
-
-        }
-        $(document).ready(function() {
-          startTime();
-        });
-      </script>
-
-      <style>
-        #date {
-          color: #007bff;
-        }
-      </style>
-       <!-- <script>
-    $(document).ready(function(){
-        $('#maintenanceModal').modal('show');
-    });
-</script> -->
+    <!-- Main content -->
+    <script src="js/ModalesAyuda.js"></script>
+    <?php include ("ModalesApoyo.php")?>
