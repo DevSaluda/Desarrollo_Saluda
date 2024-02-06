@@ -50,7 +50,42 @@
           
     </div><label for="nombreprod" class="error">
     </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Componente activo<span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" ><i class="fas fa-caret-down"></i></span>
+  </div>
+  <select id = "componente" class = "form-control" name = "ComponenteActivo">
+                                               <option value="">Seleccione una presentacion:</option>
+        <?php
+          $query = $conn -> query ("SELECT * FROM ComponentesActivos");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["Nom_Com"].'">'.$valores["Nom_Com"].'</option>';
+          }
+        ?>  </select>
+    </div><label for="presentacion" class="error">
+    </div>
 </div>
+ <!-- <script>
+    function validarPrecios() {
+      var precioVenta = document.getElementById('pv').value;
+      var precioCompra = document.getElementById('pc').value;
+
+      if (precioVenta <= precioCompra) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El precio de venta debe ser mayor al precio de compra.',
+          showCancelButton: false,
+          confirmButtonText: 'Aceptar',
+        });
+
+        document.getElementById('EnviarDatos').disabled = true;
+      } else {
+        document.getElementById('EnviarDatos').disabled = false;
+      }
+    }
+  </script> -->
     <div class="row">
     <div class="col">
       
@@ -60,7 +95,7 @@
   
     <span class="input-group-text" ><i class="fas fa-tag"></i></span>
   </div>
-  <input type="number" class="form-control " id="pv" name="PV" placeholder="Ingrese precio de venta" >
+  <input type="number" class="form-control " id="pv" name="PV" placeholder="Ingrese precio de venta" onchange="validarPrecios()" >
 </div><label for="pv" class="error"></div>
 
 
@@ -77,7 +112,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" ><i class="fas fa-minus"></i></span>
   </div>
-  <input type="text" class="form-control " name="MinE" id="mine" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" >           
+  <input type="text" class="form-control " name="MinE" id="mine" placeholder="Ingrese minimo de existencia" aria-describedby="basic-addon1" onchange="validarPrecios()" >           
     </div><label for="mine" class="error">
     </div>
     <div class="col">
@@ -189,7 +224,7 @@
         <?php
           $query = $conn -> query ("SELECT 	Tip_Prod_ID,Nom_Tipo_Prod,Estado,ID_H_O_D FROM TipProd_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["Tip_Prod_ID"].'">'.$valores["Nom_Tipo_Prod"].'</option>';
+            echo '<option value="'.$valores["Nom_Tipo_Prod"].'">'.$valores["Nom_Tipo_Prod"].'</option>';
           }
         ?>  </select>
     </div><label for="tip" class="error">
@@ -201,10 +236,10 @@
   </div>
   <select id = "categoria" class = "form-control" name = "Categoria">
                                                <option value="">Seleccione una categoria:</option>
-        <?php 
+        <?php
           $query = $conn -> query ("SELECT 	Cat_ID,Nom_Cat,Estado,ID_H_O_D FROM Categorias_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["Cat_ID"].'">'.$valores["Nom_Cat"].'</option>';
+            echo '<option value="'.$valores["Nom_Cat"].'">'.$valores["Nom_Cat"].'</option>';
           }
         ?>  </select>
     </div><label for="categoria" class="error">
@@ -220,7 +255,7 @@
         <?php
           $query = $conn -> query ("SELECT Marca_ID,Nom_Marca,ID_H_O_D,Estado FROM Marcas_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["Marca_ID"].'">'.$valores["Nom_Marca"].'</option>';
+            echo '<option value="'.$valores["Nom_Marca"].'">'.$valores["Nom_Marca"].'</option>';
           }
         ?>  </select>
     </div><label for="marca" class="error">
@@ -241,7 +276,7 @@
         <?php
           $query = $conn -> query ("SELECT 	Pprod_ID,Nom_Presentacion,ID_H_O_D,Estado FROM Presentacion_Prod_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."'AND Estado='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["Pprod_ID"].'">'.$valores["Nom_Presentacion"].'</option>';
+            echo '<option value="'.$valores["Nom_Presentacion"].'">'.$valores["Nom_Presentacion"].'</option>';
           }
         ?>  </select>
     </div><label for="presentacion" class="error">
@@ -303,7 +338,7 @@
 
        <!--Footer-->
        <div class="modal-footer justify-content-center">
-       <button type="submit"   id="EnviarDatos" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
+       <button type="submit"   id="EnviarDatos" value="Guardar" class="btn btn-success" onclick="validarPrecios()">Guardar <i class="fas fa-save"></i></button>
                                         </form>
          
        </div>
