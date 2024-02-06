@@ -77,7 +77,7 @@
     <label for="exampleInputEmail1"># de factura</label>
     <div class="input-group-prepend">
         <span class="input-group-text" id="Tarjeta2"><i class="fas fa-file-invoice"></i></span>
-        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarUsuario()">
+        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarFactura()">
     </div>
     <span id="estadousuario"></span>
 
@@ -127,6 +127,26 @@ $(document).on('change', '#sucursalconorden', function(event) {
         }
     });
 </script>
+
+
+<script>
+
+function comprobarFactura() {
+	$("#loaderIcon").show();
+	jQuery.ajax({
+	url: "https://saludapos.com/AdminPOS/Consultas/ComprobarFactura.php",
+	data:'NumFactura='+$("#NumFactura").val(),
+	type: "POST",
+	success:function(data){
+		$("#estadousuario").html(data);
+		$("#loaderIcon").hide();
+	},
+	error:function (){}
+	});
+}
+
+</script>
+
 
 <script>
   
