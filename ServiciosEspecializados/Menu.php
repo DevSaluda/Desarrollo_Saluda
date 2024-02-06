@@ -1,7 +1,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-primary navbar-light" style="background-color: #0195AF !important;">
+  <nav class="main-header navbar navbar-expand navbar-primary navbar-light" style="background-color: #c80096 !important;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -106,7 +106,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index" class="brand-link" style="background-color: #0195AF !important;">
+    <a href="index" class="brand-link" style="background-color: #c80096 !important;">
 
     <i class="fas fa-file-medical-alt fa-2x fa-lgfa-2x fa-lg" style="color: white;" ></i>
       <span class="brand-text font-weight-light" style="color: white;">ULTRASONIDOS</span>
