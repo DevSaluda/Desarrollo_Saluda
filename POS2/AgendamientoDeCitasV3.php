@@ -101,7 +101,49 @@ Citas de especialistas
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
+<div class="modal-dialog modal-notify modal-primary" role="document">
+    <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">¡Aviso! 🚨🔧</h5>
+                </div>
+                <div class="modal-body">
+                   
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?>. Te informamos que las sucursales que cuentan con créditos dentales ya pueden realizar aperturas y cobros. 🎉💳🦷</p>
 
+                    <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <p>¡Nuestros programadores han trabajado para habilitar esta funcionalidad! 🚀</p>
+                    <br>
+                    <p>¡Gracias por tu paciencia!</p> 
+                    <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
+                </div>
+                <div class="modal-footer">
+               
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">Ir a los creditos dentales</button>
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<!-- Script para mostrar y ocultar el modal -->
+<script>
+    
+    $(document).ready(function() {
+        
+        $('#modalavisoterminado').modal('show');
+    });
+
+    
+    function redirigirEnergiaElectria() {
+        
+        window.location.href = 'https://saludapos.com/POS2/Creditos';
+    }
+</script> 
 
 </body>
 </html>
