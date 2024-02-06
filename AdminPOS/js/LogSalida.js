@@ -37,7 +37,7 @@ $('document').ready(function($){
                 var dataResult = JSON.parse(dataResult);
                 if(dataResult.statusCode==200){
                         $('#CS').attr("disabled", true);
-                        setTimeout(' window.location.href = "https://saludapos.com/AdminPOS/Cierre"; ',2000);
+                        setTimeout(' window.location.href = "Cierre"; ',2000);
                 }
                 else if(dataResult.statusCode==201){
                     alert("No se cargaron todos los datos, contacta a soporte.");
