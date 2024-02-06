@@ -132,7 +132,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
 function comprobarUsuario() {
 	$("#loaderIcon").show();
 	jQuery.ajax({
-	url: "https://saludapos.com/AdminPOS/ListadoDeTraspasos/Consultas/ComprobarFactura.php",
+	url: "https://saludapos.com/AdminPOS/Consultas/ComprobarFactura.php",
 	data:'NumFactura='+$("#NumFactura").val(),
 	type: "POST",
 	success:function(data){
