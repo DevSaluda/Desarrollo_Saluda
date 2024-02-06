@@ -58,14 +58,14 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Servicios_Especializados/Modales/EditaEstatusUltra.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ServiciosEspecializados/Modales/EditaEstatusUltra.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');
       });
       $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/Servicios_Especializados/Modales/SubirUltras.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ServiciosEspecializados/Modales/SubirUltras.php","id="+id,function(data){
   			$("#form-edit2").html(data);
   		});
   		$('#sube').modal('show');

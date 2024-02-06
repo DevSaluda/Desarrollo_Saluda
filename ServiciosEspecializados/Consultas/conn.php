@@ -1,7 +1,7 @@
 <?php
  
 //MySQLi Procedural
-$conn = mysqli_connect("localhost","somosgr1_SHWEB","yH.0a-v?T*1R","somosgr1_Sistema_Hospitalario");
+$conn = mysqli_connect("localhost","u155356178_SaludDevCenter","uE;bAISz;*6c|I4PvEnfSys324\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>","u155356178_saludapos");
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }

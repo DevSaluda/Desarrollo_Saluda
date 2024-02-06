@@ -9,7 +9,7 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>SERVICIOS ESPECIALIZADOS |<?echo $row['ID_Sucursal']?> </title>
+  <title>SERVICIOS ESPECIALIZADOS |<?php echo $row['ID_H_O_D']?> </title>
 
   <!-- Font Awesome Icons -->
  
@@ -36,7 +36,7 @@ include "Consultas/Sesion.php";
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://kit.fontawesome.com/b5ed0deb1b.js" crossorigin="anonymous"></script>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header">
   <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Desplegar ayuda <i class="far fa-comment-alt"></i></button>

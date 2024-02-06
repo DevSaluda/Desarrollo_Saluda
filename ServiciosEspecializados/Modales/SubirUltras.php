@@ -1,6 +1,5 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
-include "../Consultas/Sesion.php";
 include "../Consultas/Consultas.php";
 $user_id=null;
 $sql1= "select * from Resultados_Ultrasonidos where ID_resultado = ".$_POST["id"];
@@ -15,7 +14,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($person!=null):?>
+<?php if($person!=null):?>
 
   <form method="POST" action="SubeFotos.php" enctype="multipart/form-data">
 
@@ -25,7 +24,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
-  <input type="text" class="form-control" value="<? echo $person->Nombre_paciente; ?>" name="Nombre" id="nombre" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" value="<?php echo $person->Nombre_paciente; ?>" name="Nombre" id="nombre" aria-describedby="basic-addon1">
 </div>
 <label for="exampleFormControlInput1">Nombre del paciente</label>
      <div class="input-group mb-3">
@@ -42,6 +41,6 @@ while ($r=$query->fetch_object()){
 
 <script src="js/Subefotos.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>

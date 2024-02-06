@@ -48,58 +48,8 @@ include "Consultas/Consultas.php";
  
 
 
-<style>
-        /* Estilo para la ventana modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-        }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
 
-<!-- Contenido de la página -->
-
-<!-- Ventana modal -->
-<!-- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <p>Lamentamos las molestias, pero estamos realizando correcciones. Gracias por su comprensión.</p>
-    </div>
-</div>
-
-<script>
-    // Mostrar la ventana modal al cargar la página
-    window.onload = function() {
-        document.getElementById('myModal').style.display = 'flex';
-    };
-
-    // Deshabilitar la capacidad de cerrar la ventana modal haciendo clic fuera de ella
-    document.getElementById('myModal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    });
-</script>
-
-   -->
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
  
  
 <?php
@@ -131,7 +81,49 @@ include "Consultas/Consultas.php";
 <script src="dist/js/demo.js"></script>
 
 <!-- PAGE PLUGINS -->
+<div class="modal-dialog modal-notify modal-primary" role="document">
+    <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMantenimientoLabel" style="color:white;">¡Aviso! 🚨🔧</h5>
+                </div>
+                <div class="modal-body">
+                   
+                    <p>Hola, <?php echo $row['Nombre_Apellidos']?>. Te informamos que las sucursales que cuentan con créditos dentales ya pueden realizar aperturas y cobros. 🎉💳🦷</p>
 
+                    <img src="hey.jpg" alt="" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;">
+                    <p>¡Nuestros programadores han trabajado para habilitar esta funcionalidad! 🚀</p>
+                    <br>
+                    <p>¡Gracias por tu paciencia!</p> 
+                    <p><strong>Recuerda que cualquier problema que se presente puedes reportarlo en tu grupo o con soporte. 🤔💬</strong></p>
+                </div>
+                <div class="modal-footer">
+               
+                    <button type="button" class="btn btn-primary" onclick="redirigirEnergiaElectria()">Ir a los creditos dentales</button>
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
+<!-- Script para mostrar y ocultar el modal -->
+<script>
+    
+    $(document).ready(function() {
+        
+        $('#modalavisoterminado').modal('show');
+    });
+
+    
+    function redirigirEnergiaElectria() {
+        
+        window.location.href = 'https://saludapos.com/POS2/Creditos';
+    }
+</script> 
 </body>
 </html>
 <?php

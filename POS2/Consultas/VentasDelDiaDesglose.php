@@ -40,7 +40,7 @@ include "../Consultas/Consultas.php";
 
 
 $user_id=null;
-$sql1= " SELECT 
+$sql1= "SELECT 
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
@@ -60,7 +60,7 @@ Ventas_POS.Cantidad_Venta,
 Ventas_POS.Fk_sucursal,
 Ventas_POS.AgregadoPor,
 Ventas_POS.Cliente,
-CONVERT_TZ(Ventas_POS.AgregadoEl, '+00:00', '-06:00') AS AgregadoElAdjusted,
+Ventas_POS.AgregadoEl,
 Ventas_POS.Total_Venta,
 Ventas_POS.Lote,
 Ventas_POS.ID_H_O_D,
@@ -70,13 +70,17 @@ Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv
 FROM 
 Ventas_POS
-INNER JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-INNER JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
+INNER JOIN 
+SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
+INNER JOIN 
+Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
 WHERE 
-DATE(Ventas_POS.AgregadoEl) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
+YEAR(Ventas_POS.Fecha_venta) = YEAR(CURDATE()) 
+AND MONTH(Ventas_POS.Fecha_venta) = MONTH(CURDATE()) 
 AND Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."' 
 AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
+AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
+";
 $query = $conn->query($sql1);
 ?>
 
@@ -125,7 +129,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Usuarios["FolioSignoVital"]; ?></td>
     <td><?php echo $Usuarios["Nom_Serv"]; ?></td>
       <td><?php echo fechaCastellano($Usuarios["Fecha_venta"]); ?> <br>
-      <?php echo date("g:i a",strtotime($Usuarios["AgregadoElAdjusted"])); ?>
+      <?php echo date("g:i a",strtotime($Usuarios["AgregadoEl"])); ?>
     </td>
     <td><?php echo $Usuarios["AgregadoPor"]; ?></button></td>
   

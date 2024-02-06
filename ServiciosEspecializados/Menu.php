@@ -1,7 +1,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-primary navbar-light" style="background-color: #0195AF !important;">
+  <nav class="main-header navbar navbar-expand navbar-primary navbar-light" style="background-color: #c80096 !important;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -98,10 +98,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"><i
-        class="fas fa-sign-out-alt" style="color: white;" data-toggle="modal" data-target="#Salida"></i></a>
-      </li>
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -124,7 +121,7 @@
           <img src="../Perfiles/<?php echo $row['file_name']?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a  class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
+          <a  class="d-block" style="color:white" ><?php echo $row['Nombre_Apellidos']?></a>
         </div>
       </div>
 
@@ -184,33 +181,19 @@
           </li>
           
           
-          <!-- Main content -->
-      <div class="modal fade" id="Cierre" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">¿Cerrar la sesión?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <button type="button" onclick="salir()" class="btn btn-danger btn-lg btn-block">Si, Cerrar sesión</button>
-              <br>
-
-
-            </div>
-            <div class="modal-footer">
-
-              <button type="button" data-dismiss="modal" class="btn btn-primary">Cerrar ventana</button>
-
-            </div>
-          </div>
-        </div>
-      </div>
+          <li class="nav-header">Cierre de sesion</li>
+          <li class="nav-item">
+            <a onclick="cierre()" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+              <p>
+           Salir del sistema
+              
+              </p>
+            </a>
+          </li> 
          
-      
-      
+        </ul>
+      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -225,7 +208,11 @@
           </div><!-- /.col -->
           <div class="col-sm-7">
             <ol class="breadcrumb float-sm-right">
+
               <li class="breadcrumb-item"><a href="#"><?echo date('d-m-Y');?></a></li>
+=======
+              <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
+
               <li class="breadcrumb-item active"><?php
   echo date('h:i:s A');
 ?></li>
@@ -238,4 +225,8 @@
 
     <!-- Main content -->
     <script src="js/ModalesAyuda.js"></script>
+
     <?include ("ModalesApoyo.php")?>
+
+    <?php include ("ModalesApoyo.php")?>
+
