@@ -20,6 +20,15 @@ include "Consultas/Consultas.php";
 
 </div> -->
 <div class="card text-center">
+  <div class="card-header" style="background-color: #c80096 !important;color: white;">
+Resultados de Ultrasonidos  <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  </div>
+  <div >
+  
+</div>
+
+</div>
+<div class="card text-center">
   <div class="card-header" style="background-color:#0195AF !important;color: white;">
  
   </div>
