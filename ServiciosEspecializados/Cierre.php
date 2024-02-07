@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("Location:https://controlfarmacia.com/App/Secure/ServicioEspecial");
+header("Location:https://saludapos.com/App/Secure/ServicioEspecial");
 ?>
