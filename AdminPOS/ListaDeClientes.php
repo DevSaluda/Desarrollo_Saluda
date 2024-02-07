@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 
 ?>
 <!DOCTYPE html>
@@ -10,9 +9,9 @@ include "Consultas/Sesion.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Lista De Clientes | <?echo $row['ID_H_O_D']?> <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Lista De Clientes | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -96,7 +95,7 @@ include "Consultas/Sesion.php";
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -108,7 +107,7 @@ include "Consultas/Sesion.php";
     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
     $(document).on("click", ".btn-Reimpresion", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Editar datos de categoría");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");

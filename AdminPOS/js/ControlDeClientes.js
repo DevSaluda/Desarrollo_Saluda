@@ -1,7 +1,7 @@
 function CargaVentasDelDia(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/DatosDeClientes.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/Consultas/DatosDeClientes.php","",function(data){
       $("#ListaDeClientes").html(data);
     })
 
