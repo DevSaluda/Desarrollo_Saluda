@@ -40,12 +40,12 @@ $query = $conn->query($sql1);
 	<td><?php echo $Ultras["Nombre_paciente"]; ?></td>
     <td><?php echo $Ultras["Telefono"]; ?></td>
 
-    <td  > <button class="<?echo $Ultras['Codigo_color'];?>"><?echo $Ultras['Estatus'];?></button></td>
-     <td><a class="btn btn-warning"  href="EntregaUltra?Nombre_paciente=<?echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
-         <a class="btn btn-secondary" target="_blank" href="EntregaUltraM?Nombre_paciente=<?echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
+    <td  > <button class="<?php echo $Ultras['Codigo_color'];?>"><?echo $Ultras['Estatus'];?></button></td>
+     <td><a class="btn btn-warning"  href="EntregaUltra?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
+         <a class="btn btn-secondary" target="_blank" href="EntregaUltraM?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
         </td>
 	<td>
-    <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?echo$Ultras['Telefono']; ?>&text=¡Hola,<? echo $Ultras['Nombre_paciente']; ?>!✨,te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?echo$Ultras['ID_Sucursal']; ?>,quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
+    <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo$Ultras['Telefono']; ?>&text=¡Hola,<?php echo $Ultras['Nombre_paciente']; ?>!✨,te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?echo$Ultras['ID_Sucursal']; ?>,quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
     </td>
   <td>  <button data-id="<?php echo $Ultras["ID_resultado"];?>" class="btn-edit btn btn-info"><i class="far fa-edit"></i></button></td>
   <td>	<a href="#" id="del2-<?php echo $Ultras["ID_resultado"];?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
