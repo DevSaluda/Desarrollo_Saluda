@@ -210,7 +210,6 @@
             <ol class="breadcrumb float-sm-right">
 
               <li class="breadcrumb-item"><a href="#"><?echo date('d-m-Y');?></a></li>
-=======
               <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
 
               <li class="breadcrumb-item active"><?php
