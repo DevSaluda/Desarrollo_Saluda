@@ -52,6 +52,7 @@ include "Consultas/Consultas.php";
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="js/ControlUltras.js"></script>
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->

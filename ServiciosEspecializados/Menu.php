@@ -214,8 +214,5 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <script src="js/ModalesAyuda.js"></script>
-
-
-    <?php include ("ModalesApoyo.php")?>
+   
 

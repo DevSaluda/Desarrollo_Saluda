@@ -1,4 +1,8 @@
 
+<script src="js/ModalesAyuda.js"></script>
+
+
+<?php include ("ModalesApoyo.php")?>
 <footer class="main-footer">
    
     Derechos reservados.
