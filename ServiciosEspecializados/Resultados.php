@@ -11,7 +11,7 @@ include "Consultas/Consultas.php";
 
   <title>SERVICIOS ESPECIALIZADOS |<?php echo $row['ID_H_O_D']?> </title>
 
-<?php include "header.php";?>
+<?php include "Header.php";?>
 </head>
 <?php include_once ("Menu.php")?>
 <!-- <div class="alert alert-danger" role="alert">
