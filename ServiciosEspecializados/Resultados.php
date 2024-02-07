@@ -21,7 +21,7 @@ include "Consultas/Consultas.php";
 </div> -->
 <div class="card text-center">
   <div class="card-header" style="background-color:#0195AF !important;color: white;">
-  <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Desplegar ayuda <i class="far fa-comment-alt"></i></button>
+ 
   </div>
   <div class="collapse" id="collapseExample">
   <div class="card-body">
