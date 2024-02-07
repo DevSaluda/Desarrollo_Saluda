@@ -22,9 +22,7 @@ Resultados de Ultrasonidos
   </div>
   <div >
   
-</div>
 
-</div>
 
   <div class="collapse" id="collapseExample">
   <div class="card-body">
@@ -59,6 +57,9 @@ Resultados de Ultrasonidos
 
 </div>
 </div>
+</div>
+</div>
+
 </div>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
