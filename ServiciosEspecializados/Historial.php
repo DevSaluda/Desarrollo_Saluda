@@ -25,10 +25,7 @@ Resultados de Ultrasonidos
 </div>
 
 </div>
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0195AF !important;color: white;">
- 
-  </div>
+
   <div class="collapse" id="collapseExample">
   <div class="card-body">
   <div class="table-responsive">
