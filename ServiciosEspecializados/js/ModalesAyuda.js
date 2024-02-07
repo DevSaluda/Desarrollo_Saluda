@@ -10,6 +10,6 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://controlfarmacia.com/Servicios_Especializados/Cierre'); 
+window.location.replace('https://saludapos.com/ServiciosEspecializados/Cierre'); 
 
 }
