@@ -52,9 +52,7 @@ Resultados de Ultrasonidos
   <!-- Content Wrapper. Contains page content -->
   
 
-  <div class="container">
-<div class="row">
-<div class="col-md-12">
+ 
     
 <div id="Tablahistorial"></div>
 
