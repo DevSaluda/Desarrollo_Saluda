@@ -176,7 +176,7 @@
        
           <li class="nav-item">
             <a onclick="cierre()" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i>
+            <i style="color:white" class="fas fa-sign-out-alt"></i>
               <p style="color:white">
            Salir del sistema
               
