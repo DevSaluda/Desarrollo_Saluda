@@ -47,8 +47,8 @@ $query = $conn->query($sql1);
 	<td>
     <a class="btn btn-success btn-sm"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Ultras['Telefono']; ?>&text=¡Hola,<?php echo $Ultras['Nombre_paciente']; ?>!✨,te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?php echo$Ultras['ID_Sucursal']; ?>,quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
     </td>
-  <td>  <button data-id="<?php echo $Ultras["ID_resultado"];?>" class="btn-edit btn btn-info"><i class="far fa-edit"></i></button></td>
-  <td>	<a href="#" id="del2-<?php echo $Ultras["ID_resultado"];?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+  <td>  <button data-id="<?php echo $Ultras["ID_resultado"];?>" class="btn-edit btn btn-info btn-sm"><i class="far fa-edit"></i></button></td>
+  <td>	<a href="#" id="del2-<?php echo $Ultras["ID_resultado"];?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
   <script>
 		
 		$("#del2-"+<?php echo $Ultras["ID_resultado"];?>).click(function(e){
