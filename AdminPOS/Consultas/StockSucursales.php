@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
 
 $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesStockSucursales.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesStockSucursales.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Datos de productos");
           $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -119,7 +119,7 @@ $(".btn-Detalles").click(function(){
 
   	$(".btn-editStock").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ActualizaDataStock.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ActualizaDataStock.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Actualizar datos de productos");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -132,7 +132,7 @@ $(".btn-Detalles").click(function(){
 
     $(".btn-HistorialStocksucursaless").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialStockSucursales.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialStockSucursales.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Movimientos de productos");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");

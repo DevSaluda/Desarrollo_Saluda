@@ -1,7 +1,7 @@
 function CargaProductos(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/ProductosCompras.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/Consultas/ProductosCompras.php","",function(data){
       $("#tablaProductos").html(data);
     })
 
