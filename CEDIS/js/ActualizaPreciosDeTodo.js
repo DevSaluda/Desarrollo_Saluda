@@ -105,9 +105,7 @@ $('document').ready(function($){
                     setTimeout(function(){ 
                         $('#ExitoActualizaCategoria').modal('hide') 
                     }, 2000); // abrir
-                
-    CargaProductos();
-                  
+  
            
               
                     
