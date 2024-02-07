@@ -16,11 +16,15 @@ include "Consultas/Consultas.php";
   <?php include "Header.php";?>
 </head>
 <?php include_once ("Menu.php")?>
-<!-- <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">¡ATENCIÓN! </h4>
-  <p>El espacio en el disco del servidor está llegando al límite, se recomienda contactar a soporte para realizar tareas de mantenimiento.</p>
+<div class="card text-center">
+  <div class="card-header" style="background-color: #c80096 !important;color: white;">
+Resultados de Ultrasonidos   
+  </div>
+  <div >
+  
+</div>
 
-</div> -->
+</div>
 <div class="card text-center">
   <div class="card-header" style="background-color:#0195AF !important;color: white;">
  
