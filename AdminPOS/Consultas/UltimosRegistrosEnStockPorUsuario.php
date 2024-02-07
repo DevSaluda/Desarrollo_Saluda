@@ -5,7 +5,7 @@ tabla = $('#Productos').DataTable({
 
  "bProcessing": true,
 
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/UltimosRegistrosStock.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/UltimosRegistrosStock.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },

@@ -93,7 +93,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editMedico").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaMedCredito.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaMedCredito.php","id="+id,function(data){
   			$("#EditMedicos").html(data);
           $("#TituloMedicos").html("Editar área de crédito");
         
@@ -129,7 +129,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -100,7 +100,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ReasignaProducto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ReasignaProducto.php","id="+id,function(data){
   			$("#form-editProductosG").html(data);
           $("#TituloProductosG").html("Asignacion de productos en otras sucursales");
              
@@ -112,7 +112,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-VerDistribucion").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DistribucionesProductos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DistribucionesProductos.php","id="+id,function(data){
   			$("#form-editProductosG").html(data);
           $("#TituloProductosG").html("Distribucion de productos");
              
@@ -124,7 +124,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-editProd").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaProductosStockGeneral.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaProductosStockGeneral.php","id="+id,function(data){
   			$("#form-editProductosG").html(data);
           $("#TituloProductosG").html("Distribucion de productos");
              

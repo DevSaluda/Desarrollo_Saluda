@@ -1,7 +1,7 @@
 function UltimosregistrosStock(){
 
 
-    $.get("https://controlfarmacia.com/AdminPOS/Consultas/UltimosRegistrosEnStockPorUsuario.php","",function(data){
+    $.get("https://saludapos.com/AdminPOS/Consultas/UltimosRegistrosEnStockPorUsuario.php","",function(data){
       $("#UltimasInserciones").html(data);
     })
   

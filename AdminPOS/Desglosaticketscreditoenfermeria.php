@@ -76,7 +76,7 @@ include "Consultas/Consultas.php";
       // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
       $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/DesgloseTicketCreditoEnfermeria.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicketCreditoEnfermeria.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -89,7 +89,7 @@ include "Consultas/Consultas.php";
     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
      $(document).on("click", ".btn-Reimpresion", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AdminPOS/Modales/ReimpresionTicketVentaCreditoEnfermeria.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVentaCreditoEnfermeria.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Reimpresion de tickets");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
