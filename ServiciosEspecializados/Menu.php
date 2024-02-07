@@ -141,11 +141,11 @@
            
          
             
-   <li class="nav-header">Agregando resultados</li>
+   <li class="nav-header" style="color:white"  >Agregando resultados</li>
           <li class="nav-item">
             <a href="Ultrasonidos" class="nav-link">
             <i class="fas fa-vials"></i>
-              <p>
+              <p style="color:white" >
              Añadir un nuevo resultado
               
               </p>
@@ -154,7 +154,7 @@
           <li class="nav-item">
             <a href="Resultados" class="nav-link">
             <i class="fas fa-notes-medical"></i>
-              <p>
+              <p style="color:white"  >
                 Visualizar resultados
                
               </p>
@@ -163,22 +163,14 @@
           <li class="nav-item">
             <a href="Historial" class="nav-link">
             <i class="fas fa-notes-medical"></i>
-              <p>
+              <p style="color:white" >
                 Historial 
                
               </p>
             </a>
           </li>
-          <li class="nav-header">Ayuda y soporte</li>
-          <li class="nav-item">
-            <a target="_blank" href="https://api.whatsapp.com/send?phone=529992012409&text=%F0%9F%90%9E%F0%9F%90%9E%F0%9F%90%9EDeseo%20levantar%20un%20reporte%2Cde%20fallo%20en%20cuanto%20al%20panel%20de%20servicios%20especializados%F0%9F%90%9E%F0%9F%90%9E%F0%9F%90%9E" class="nav-link">
-            <i class="fas fa-bug"></i>
-              <p>
-              Informar de un fallo
-              
-              </p>
-            </a>
-          </li>
+          
+         
           
           
           <li class="nav-header">Cierre de sesion</li>
