@@ -227,7 +227,7 @@ function actualizarPrecioCompra() {
 </script>
 <script src="js/ActualizaProductosGenerales.js"></script>
 <script src="js/ActualizaPreciosDeTodo.js"></script>
-<?
+<?php
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
