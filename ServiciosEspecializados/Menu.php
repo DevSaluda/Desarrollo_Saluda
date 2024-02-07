@@ -209,11 +209,10 @@
           <div class="col-sm-7">
             <ol class="breadcrumb float-sm-right">
 
-              <li class="breadcrumb-item"><a href="#"><?echo date('d-m-Y');?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
               <li class="breadcrumb-item"><a href="#"><?php echo date('d-m-Y');?></a></li>
 
-              <li class="breadcrumb-item active"><?php
-  echo date('h:i:s A');
+              <li class="breadcrumb-item active"><?php echo date('h:i:s A');
 ?></li>
             </ol>
           </div><!-- /.col -->
@@ -225,7 +224,6 @@
     <!-- Main content -->
     <script src="js/ModalesAyuda.js"></script>
 
-    <?include ("ModalesApoyo.php")?>
 
     <?php include ("ModalesApoyo.php")?>
 
