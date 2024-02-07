@@ -10,6 +10,6 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://saludapos.com/ServiciosEspecializados/Cierre'); 
+window.location.replace('https://saludapos.com/ServiciosEspecializados/Expiro'); 
 
 }
