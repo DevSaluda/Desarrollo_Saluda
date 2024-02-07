@@ -106,7 +106,7 @@ $('document').ready(function($){
                         $('#ExitoActualizaCategoria').modal('hide') 
                     }, 2000); // abrir
   
-           
+                    setTimeout(' window.location.href = "https://saludapos.com/CEDIS/ProductosV2"; ', 2000);
               
                     
                    //  Solucionar muestra de modal de exito
