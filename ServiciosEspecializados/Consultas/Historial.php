@@ -40,7 +40,7 @@ $query = $conn->query($sql1);
 	<td><?php echo $Ultras["Nombre_paciente"]; ?></td>
     <td><?php echo $Ultras["Telefono"]; ?></td>
 
-    <td  > <button class="<?php echo $Ultras['Codigo_color'];?>"><?echo $Ultras['Estatus'];?></button></td>
+    <td  > <button class="<?php echo $Ultras['Codigo_color'];?>"><?php echo $Ultras['Estatus'];?></button></td>
      <td><a class="btn btn-warning"  href="EntregaUltra?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
          <a class="btn btn-secondary" target="_blank" href="EntregaUltraM?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
         </td>
