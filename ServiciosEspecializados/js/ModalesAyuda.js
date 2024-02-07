@@ -7,7 +7,7 @@ function cierre()
     $('#Cierre').modal('show'); // abrir
 }
 
-function salir()
+function salirr()
 {
     
 window.location.replace('https://saludapos.com/ServiciosEspecializados/Expiro'); 

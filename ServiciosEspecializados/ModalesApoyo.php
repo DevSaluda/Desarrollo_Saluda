@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <button type="button" onclick="salir()"class="btn btn-danger btn-lg btn-block">Si, Cerrar sesión</button>
+      <button type="button" onclick="salirr()"class="btn btn-danger btn-lg btn-block">Si, Cerrar sesión</button>
       <br>
    
 
