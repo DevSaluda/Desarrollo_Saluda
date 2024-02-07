@@ -37,11 +37,11 @@ $(document).ready(function($){
                     timer:3000,
                   })
                   $("#ActualizaEspecial")[0].reset();
-                 CargaResultadosUltras();
+               
                   $('#editModal').modal('hide');
                   $('body').removeClass('modal-open');
                   $('.modal-backdrop').remove();
-                
+                  CargaResultadosUltras();
                          },
                          error: function(){
                             $("#show_error").fadeIn();
