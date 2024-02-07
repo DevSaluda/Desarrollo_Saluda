@@ -64,7 +64,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/ServiciosEspecializados/Modales/EditaEstatusUltra.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/EditaEstatusUltra.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');
@@ -79,7 +79,7 @@ $query = $conn->query($sql1);
       
 		</div>
 		<span id="error" class="alert alert-danger" style="display: none"></span>
-        <p id="show_message" style="display: none">Form data sent. Thanks for your comments.We will update you within 24 hours. </p>
+       
         <p id="show_error"  class="alert alert-danger" style="display: none">Algo salio mal </p>
         <div class="modal-body">
         <div id="form-edit"></div>

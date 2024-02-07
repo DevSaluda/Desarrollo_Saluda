@@ -360,6 +360,18 @@
             
               </ul>
             </li>
+
+            <li class="nav-header" style="color: white;">Ultrasonidos</li>
+            <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeCitas/ResultadosdeUltrasonidos" class="nav-link" style="color: white;">
+                    <i class="fas fa-calendar-check"></i>
+                    <p>
+                     Entrega de resultados
+
+                    </p>
+                  </a>
+                </li>
+
             <li class="nav-header">Reportes y data de pacientes </li>
             <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeCitas/ProductosV2" class="nav-link" style="color: white;">
