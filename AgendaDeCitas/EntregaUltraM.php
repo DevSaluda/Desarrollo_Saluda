@@ -43,7 +43,8 @@ $pdf->SetX(0);
 //Aqui es donde se hace la consulta, para llamar a las fotografias
 if ($query->num_rows > 0) {
   while($row = $query->fetch_assoc()){ 
-      $pdf->Cell(0,190,$pdf->Image($row['location'],0,0,297,210,'JPG')); 
+    $pdf->Cell(0, 190, $pdf->Image('https://saludapos.com/ServiciosEspecializados/' . $row['location'], 0, 0, 297, 210, 'JPG'));
+
     }
   }
 
