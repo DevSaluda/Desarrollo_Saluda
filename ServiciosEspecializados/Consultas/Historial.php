@@ -56,7 +56,7 @@ $query = $conn->query($sql1);
 			event.preventDefault();//Esto es para cancelar el envio
 	
 			$("#Celimina").click(function() {
-				$.post("https://controlfarmacia.com/Servicios_Especializados/Consultas/Eliminaresultado.php","id="+<?php echo $Ultras["ID_resultado"];?>,function(data){
+				$.post("https://saludapos.com/ServiciosEspecializados/Consultas/Eliminaresultado.php","id="+<?php echo $Ultras["ID_resultado"];?>,function(data){
 					
   
           CargaHistorial();
