@@ -7,7 +7,7 @@ function cierre()
     $('#Cierre').modal('show'); // abrir
 }
 
-function saliralinicio()
+function salir()
 {
     
 window.location.replace('https://saludapos.com/ServiciosEspecializados/Cierre'); 
