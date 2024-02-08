@@ -6,7 +6,7 @@ $('document').ready(function(){
                 $('#medicoext').attr('disabled', 'disabled');
             }else{
                 $('#medicoext').removeAttr('disabled', 'disabled');
-                $('#medicoext').load('Consultas/Obtieneunmemedicoext.php?especialidadext=' + $('#especialidadext').val());
+                $('#medicoext').load('Consultas/ObtieneunmemedicoExt.php?especialidadext=' + $('#especialidadext').val());
                 
             }
     });
