@@ -69,7 +69,7 @@ $query = $conn->query($sql1);
     echo "Error";
  }?></button> </td>
 <td>
-<a href="https://controlfarmacia.com/AdminPOS/GeneradorTraspasosV2?idProd=<?php echo base64_encode($Usuarios["Folio_Prod_Stock"])?>" type='button' class='btn btn-warning  btn-sm '><i class="fas fa-exchange-alt"></i></a> 
+<a href="https://saludapos.com/AdminPOS/GeneradorTraspasosV2?idProd=<?php echo base64_encode($Usuarios["Folio_Prod_Stock"])?>" type='button' class='btn btn-warning  btn-sm '><i class="fas fa-exchange-alt"></i></a> 
 
 </td>
 </tr>

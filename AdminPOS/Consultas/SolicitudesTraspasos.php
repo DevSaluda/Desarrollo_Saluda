@@ -95,7 +95,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-Detalles").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesTraspaso.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesTraspaso.php","id="+id,function(data){
   			$("#FormTraspasos").html(data);
           $("#TituloTraspaso").html("Detalles de solicitud");
               $("#DiTraspaso").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-AutorizaRechaza").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/AutorizaRechazaTraspaso.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/AutorizaRechazaTraspaso.php","id="+id,function(data){
   			$("#FormTraspasos").html(data);
           $("#TituloTraspaso").html("Autorizacion / rechazar solicitud");
               $("#DiTraspaso").removeClass("modal-dialog modal-lg modal-notify modal-info");
