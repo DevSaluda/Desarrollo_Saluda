@@ -217,8 +217,8 @@ function actualizarlote() {
      
     <input type="text" class="form-control"  hidden name="AgregaProductosBy" id="agrega" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
     <input type="text" class="form-control"  hidden name="SistemaProductos" id="sistema" readonly value=" POS <?php echo $row['Nombre_rol']?>">
-    <input type="text" name="Loteee" value="">
-    <input type="text" name="fechacad" value="">
+    <input type="text" name="Loteeee" value="">
+    <input type="text" name="fechacadd" value="">
     <input type="text" name="fechaingreso" value="<?php echo date('Y-m-d'); ?>" readonly>
       
     <input type="text" hidden name="FacturasNumber" id="FacturasNumber" value="">
