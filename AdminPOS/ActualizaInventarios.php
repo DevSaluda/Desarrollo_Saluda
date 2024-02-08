@@ -236,7 +236,7 @@ function actualizarlote() {
   <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
 <script src="js/ActualizaExistenciasDeProductosEnSucursales.js"></script>
-<script src="js/CapturaExistencias.js"></script>
+<script src="js/CapturaExistenciasInventarios.js"></script>
 
   
   <!-- /.content-wrapper -->
