@@ -1,12 +1,12 @@
 $('document').ready(function(){
     $('#especialidadExt').on('change', function(){
             if($('#especialidadExt').val() == ""){
-                $('#medicoExt').empty();
-                $('<option value = "">Selecciona un medico</option>').appendTo('#medicoExt');
-                $('#medicoExt').attr('disabled', 'disabled');
+                $('#medicoext').empty();
+                $('<option value = "">Selecciona un medico</option>').appendTo('#medicoext');
+                $('#medicoext').attr('disabled', 'disabled');
             }else{
-                $('#medicoExt').removeAttr('disabled', 'disabled');
-                $('#medicoExt').load('Consultas/ObtieneunmemedicoExt.php?especialidadExt=' + $('#especialidadExt').val());
+                $('#medicoext').removeAttr('disabled', 'disabled');
+                $('#medicoext').load('Consultas/Obtieneunmemedicoext.php?especialidadExt=' + $('#especialidadExt').val());
                 
             }
     });
