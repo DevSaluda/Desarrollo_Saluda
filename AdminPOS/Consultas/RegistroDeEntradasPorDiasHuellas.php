@@ -52,7 +52,7 @@ $(document).ready( function () {
 <?php
 
 include("db_connection_Huellas.php");
-include "Consultas.php";
+
 
 
 $user_id=null;
