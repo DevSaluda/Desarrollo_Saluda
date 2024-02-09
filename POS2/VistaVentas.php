@@ -341,7 +341,8 @@ function actualizarFilaConDescuento(resultadoDescuento) {
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
     // Muestra el descuento aplicado en el campo descuento1
-    filaActual.find('#descuento1').val(resultadoDescuento.descuento.toFixed(2));
+    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
+    filaActual.find('#descuento1').val(cantidadDescuentoSeleccionado.toFixed(2));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
