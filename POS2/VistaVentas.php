@@ -311,6 +311,7 @@ $(document).ready(function () {
 
 
 
+
 <script>
   var filaActual; // Variable global para almacenar la fila actual
 
@@ -358,6 +359,16 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
     }
 }
 
+function resetearModal() {
+    // Restablece el valor del select
+    $('#cantidadadescontar').val('');
+
+    // Restablece otros campos si es necesario
+    // $('#otroCampo').val('');
+
+    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+}
+
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
 
@@ -369,6 +380,9 @@ function aplicarDescuentoSeleccionado() {
 
     // Cierra el modal
     $('#Descuento1detalles').modal('hide');
+
+    // Resetea el estado de la ventana modal
+    resetearModal();
 
     // Muestra SweetAlert
     Swal.fire({
@@ -396,6 +410,7 @@ function actualizarTotal() {
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
 </script>
+
 
 
 <?php
