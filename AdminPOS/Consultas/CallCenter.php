@@ -131,7 +131,7 @@ $query = $conn->query($sql1);
   <script>
     $(".btn-edit").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoEmpleado.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/ContactoEmpleado.php","id="+id,function(data){
         $("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -144,7 +144,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit2").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/EditaEmpleado.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/EditaEmpleado.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -159,7 +159,7 @@ $query = $conn->query($sql1);
 
     $(".btn-HistorialEmpleados").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialEmpleados.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/HistorialEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -172,7 +172,7 @@ $query = $conn->query($sql1);
 
     $(".btn-baja").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/BajaEmpleados.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/BajaEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -184,7 +184,7 @@ $query = $conn->query($sql1);
 
     $(".btn-CambiaSucursal").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/AdminPOS/Modales/CambiaSucursalEmpleados.php","id="+id,function(data){
+      $.post("https://saludapos.com/AdminPOS/Modales/CambiaSucursalEmpleados.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cambio de sucursal");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

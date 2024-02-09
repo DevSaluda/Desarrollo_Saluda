@@ -80,7 +80,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlconsulta.com/Enfermeria2/Modales/ConfirmaDatosP.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/ConfirmaDatosP.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');
