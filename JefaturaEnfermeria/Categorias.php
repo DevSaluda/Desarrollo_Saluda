@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,7 +21,7 @@ include "Consultas/Consultas.php";
     </style>
 </head>
 <?php include_once ("Menu.php");?>
-<div id="ContadorDeAlmacen"></div>
+
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
@@ -42,78 +40,12 @@ include "Consultas/Consultas.php";
 
 </div>
 
-<!-- Tipos_productos -->
-<div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Tipos de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>-->
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaTiposProductos" class="btn btn-default">
-  Alta de nuevo tipo <i class="fas fa-plus-square"></i>
-</button>
-</div>
-</div>
-    
-<div id="tablaTiposProductos"></div>
-
-</div>
-<!-- Tipos_productos Fin -->
-
-<!-- PRESENTACIONES -->
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Presentaciones de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaPresentacion" class="btn btn-default">
-  Añadir nueva presentación  <i class="far fa-plus-square"></i>
-</button>
-</div>
-
-</div>
-<div id="TablePresentaciones"></div>
-  </div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Marcas de productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaMarcas" class="btn btn-default">
-  Añadir nueva marca <i class="far fa-plus-square"></i>
-</button>
-</div>
-<div id="TableMarcas"></div>
-</div>
-
-  </div>
-  <div class="tab-pane fade" id="ServiciosS" role="tabpanel" aria-labelledby="pills-contact-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-  Servicios de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltadeServicios" class="btn btn-default">
-  Añadir nuevo servicio <i class="far fa-plus-square"></i>
-</button>
-</div>
-
-</div>
-<div id="TableServicios"></div>
   </div>
 
 
 </div>
 
     
-
-
   
 </div>
 </div></div>
@@ -128,11 +60,7 @@ include "Consultas/Consultas.php";
  
   <!-- Main Footer -->
 <?php
-    
-  include ("Modales/AltaCategorias.php");
-  include ("Modales/AltaPresentaciones.php");
-  include ("Modales/AltaServicios.php");
-  include ("Modales/AltaMarcas.php");
+include ("Modales/AltaCategorias.php");
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -144,23 +72,8 @@ include "Consultas/Consultas.php";
 <!-- REQUIRED SCRIPTS -->
 <script src="js/CargaCategorias.js"></script>
 <script src="js/AgregaCategoria.js"></script>
-<!-- Requiere presentaciones -->
-<script src="js/ControlTipoProductos.js"></script>
 
-<script src="js/AltaTipoProductos.js"></script>
 
-<script src="js/CargaPresentaciones.js"></script>
-<script src="js/AgregaPresentaciones.js"></script>
-
-<!-- requiere marcas -->
-<script src="js/CargaMarcas.js"></script>
-<script src="js/AgregaMarcas.js"></script>
-
-<!-- requiere Servicios -->
-<script src="js/ControlServicios.js"></script>
-<script src="js/AgregaServicios.js"></script>
-
-<script src="js/ContadorControlAlmacen.js"></script>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
@@ -182,7 +95,6 @@ include "Consultas/Consultas.php";
 </body>
 </html>
 <?php
-
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));

@@ -1,6 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +33,7 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important; color: white;">
-  Desglose de tickets  <?echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Desglose de tickets  <?php echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >

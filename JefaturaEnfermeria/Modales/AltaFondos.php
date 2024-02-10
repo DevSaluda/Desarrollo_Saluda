@@ -13,9 +13,9 @@
          </button>
        </div>
        <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                            <span class="text-semibold">Estimado usuario, </span>
+						                <span class="text-semibold">Estimado usuario, </span>
                             los campos con un  <span class="text-danger"> * </span> son campos necesarios para el correcto ingreso de datos.
-                            <button type="button" class="close" data-dismiss="alert">×</button>
+						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
        <!--Body-->
        <div class="modal-body">
@@ -36,30 +36,13 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
   <select id = "sucursal" class = "form-control" name = "Sucursal">
-                  
-                                              <option value="">Seleccione una Sucursal:</option>
-                                              <option value="18">Akil</option>
-                                              <option value="24">Capacitación</option>
-                                              <option value="21">CEDIS</option>
-                                              <option value="23">CEDIS(Partner)</option>
-                                              <option value="25">Itzincab</option>
-                                              <option value="3">Izamal</option>
-                                              <option value="19">Kanasín</option>
-                                              <option value="4">Mama</option>
-                                              <option value="5">Mani</option>
-                                              <option value="20">Motul</option>
-                                              <option value="15">Oficinas</option>
-                                              <option value="6">Oxkutzcab</option>
-                                              <option value="7">Peto</option>
-                                              <option value="8">Teabo</option>
-                                              <option value="22">Teabo Clínica</option>
-                                              <option value="9">Tekax</option>
-                                              <option value="10">Tekit</option>
-                                              <option value="11">Ticul</option>
-                                              <option value="12">Tixkokob</option>
-                                              <option value="13">Uman</option>
-
-        </select>   
+                                               <option value="">Seleccione una Sucursal:</option>
+        <?php
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>   
 </div><label for="nombres" class="error">
     </div>
      <div class="form-group">
@@ -81,10 +64,10 @@
   <select name="Vigencia" class="form-control" id="vigencia" onchange="TipoVigencia();">
                  
                     
-  <option  value="">Elija un estatus</option>   
-              <option  value="background-color: #2BBB1D !important;">Asignado</option>    
-                  
-              <option  value="background-color: #ECB442 !important;">Pendiente</option>                       
+  <option  value="">Elija un estatus</option>		
+              <option  value="background-color: #2BBB1D !important;">Asignado</option>		
+            	  	
+              <option  value="background-color: #ECB442 !important;">Pendiente</option>						  				  
              </select>
     </div><label for="vigencia" class="error">
     </div>
@@ -198,7 +181,7 @@ $("#vigencia").on('change', function() {
 </script>
 
 <style>
-          .divOculto {
-      display: none;
-    }
+    			.divOculto {
+			display: none;
+		}
 </style>

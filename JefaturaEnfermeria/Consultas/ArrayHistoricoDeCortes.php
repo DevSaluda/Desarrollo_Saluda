@@ -4,8 +4,6 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-include "mcript.php";
-
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
@@ -44,8 +42,9 @@ Cajas_POS.Sucursal = SucursalesCorre.ID_SucursalC
 AND Cajas_POS.Estatus = 'Cerrada'  
 AND Cajas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'  
 AND Cajas_POS.Sucursal = '".$row['Fk_Sucursal']."'
-AND YEAR(Cajas_POS.Fecha_Apertura) = YEAR(CURRENT_DATE)
+AND YEAR(Cajas_POS.Fecha_Apertura) IN (YEAR(CURRENT_DATE) - 1, YEAR(CURRENT_DATE))
 ORDER BY Cajas_POS.Fecha_Apertura DESC";
+;
  
 $result = mysqli_query($conn, $sql);
  
