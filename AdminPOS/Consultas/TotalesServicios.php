@@ -103,7 +103,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

@@ -82,7 +82,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit4").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
   			$("#form-edit2").html(data);
           $("#Titulo2").html("Medios disponibles para contactar al proveedor");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -95,7 +95,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit5").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaProspecto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaProspecto.php","id="+id,function(data){
               $("#form-edit2").html(data);
               $("#Titulo2").html("Asignacion como nuevo proveedor");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit6").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesProspecto.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesProspecto.php","id="+id,function(data){
               $("#form-edit2").html(data);
               $("#Titulo2").html("Detalles de proveedor");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -119,7 +119,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historialPros").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialProspectos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialProspectos.php","id="+id,function(data){
               $("#form-edit2").html(data);
               $("#Titulo2").html("Editar datos de empleado");
               $("#Di2").removeClass("modal-dialog modal-lg modal-notify modal-info");

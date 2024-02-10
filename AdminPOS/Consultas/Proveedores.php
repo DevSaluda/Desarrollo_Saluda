@@ -82,7 +82,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ContactoProveedor.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaProveedor.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -105,7 +105,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit3").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/DetallesProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesProveedor.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles de proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -116,7 +116,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historial").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialProveedores.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialProveedores.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

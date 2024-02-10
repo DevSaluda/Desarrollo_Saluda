@@ -15,8 +15,8 @@ $(document).ready( function () {
                     "sLast":"Último",
                     "sNext":"Siguiente",
                     "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
+           },
+           "sProcessing":"Procesando...",
             },
           
         //para usar los botones   
@@ -24,13 +24,13 @@ $(document).ready( function () {
           dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
        
    
-	   
-        	        
+     
+                  
     });     
 });
    
-	  
-	 
+    
+   
 </script>
 <?php
 
@@ -45,8 +45,8 @@ $query = $conn->query($sql1);
 
 <?php if($query->num_rows>0):?>
   <div class="text-center">
-	<div class="table-responsive">
-	<table  id="IngresoEmpleados" class="table table-hover">
+  <div class="table-responsive">
+  <table  id="IngresoEmpleados" class="table table-hover">
 <thead>
   
     <th style ="background-color: #0057b8 !important;">N°</th>
@@ -55,7 +55,7 @@ $query = $conn->query($sql1);
     <th style ="background-color: #0057b8 !important;">Agregado el</th>
     <th style ="background-color: #0057b8 !important;">Acciones</th>
     
-	
+  
 
 
 </thead>
@@ -63,10 +63,10 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $Categorias["Cat_ID"]; ?></td>
   <td > <?php echo $Categorias["Nom_Cat"]; ?></td>
-  <td> <button style="<?php echo $Categorias['Cod_Estado'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estado"]; ?></button></td>
+  <td> <button style="<?echo $Categorias['Cod_Estado'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estado"]; ?></button></td>
   <td > <?php echo fechaCastellano($Categorias["Agregadoel"]); ?></td> 
   <td>
-		 <!-- Basic dropdown -->
+     <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-list-ul"></i></button>
 
@@ -79,54 +79,54 @@ $query = $conn->query($sql1);
  
 </div>
 <!-- Basic dropdown -->
-	 </td>
+   </td>
      
-		
+    
 </tr>
 <?php endwhile;?>
 </table>
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">No hay resultados</p>
+  <p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
 
 <script>
-  	$(".btn-edit").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/EditaCategoria.php","id="+id,function(data){
-  			$("#form-edit").html(data);
+    $(".btn-edit").click(function(){
+      id = $(this).data("id");
+      $.post("https://saludapos.com/JefaturaEnfermeria/Modales/EditaCategoria.php","id="+id,function(data){
+        $("#form-edit").html(data);
           $("#Titulo").html("Editar datos de categoría");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-primary");
               $("#Di").removeClass("modal-dialog modal-xl modal-notify modal-primary");
               $("#Di").addClass("modal-dialog  modal-notify modal-info");
-  		});
-  		$('#editModal').modal('show');
-  	});
+      });
+      $('#editModal').modal('show');
+    });
     $(".btn-edit2").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/DetallesCategoria.php","id="+id,function(data){
+      id = $(this).data("id");
+      $.post("https://saludapos.com/JefaturaEnfermeria/Modales/DetallesCategoria.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles de categoría ");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
               $("#Di").removeClass("modal-dialog modal-xl modal-notify modal-primary");
               $("#Di").addClass("modal-dialog modal-notify modal-primary");
-  		});
-  		$('#editModal').modal('show');
+      });
+      $('#editModal').modal('show');
     });
     $(".btn-historial").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialCategorias.php","id="+id,function(data){
+      id = $(this).data("id");
+      $.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialCategorias.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Actualizaciones y ediciones realizadas");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
               $("#Di").addClass("modal-dialog modal-xl modal-notify modal-primary");
-  		});
-  		$('#editModal').modal('show');
+      });
+      $('#editModal').modal('show');
     });
   </script>
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -140,11 +140,11 @@ $query = $conn->query($sql1);
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"> <i class="fas fa-info-circle"></i> <?php echo $row['Nombre_Apellidos']?>, 
+                            <span id="Aviso" class="text-semibold"> <i class="fas fa-info-circle"></i> <?php echo $row['Nombre_Apellidos']?>, 
                             Verifique los campos antes de realizar alguna accion</span>
-						                <button type="button" class="close" data-dismiss="alert">×</button>
+                            <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
-	        <div class="modal-body">
+          <div class="modal-body">
           <div class="text-center">
         <div id="form-edit"></div>
         
@@ -153,7 +153,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?php 
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
