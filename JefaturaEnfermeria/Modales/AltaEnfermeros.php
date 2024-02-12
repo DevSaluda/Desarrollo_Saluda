@@ -91,25 +91,13 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
   <select id = "sucursal" class = "form-control" name = "sucursal">
-  <option value="">Seleccione una Sucursal:</option>
-  <option value="23">CEDIS(Partner)</option>
-           <option value="25">Itzincab</option>
-          <option value="3">Izamal</option>
-          <option value="19">Kanasín</option>
-           <option value="4">Mama</option>
-          <option value="5">Mani</option>
-            <option value="20">Motul</option>
-            <option value="15">Oficinas</option>
-          <option value="6">Oxkutzcab</option>
-           <option value="7">Peto</option>
-             <option value="8">Teabo</option>
-              <option value="22">Teabo Clínica</option>
-               <option value="9">Tekax</option>
-              <option value="10">Tekit</option>
-              <option value="11">Ticul</option>
-            <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>  
-      </select>
+                <option value="">Seleccione una Sucursal:</option>
+        <?php
+          $query = $conn -> query ("SELECT 	ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>
          
     </div><label for="sucursal" class="error">
     </div>
@@ -128,9 +116,10 @@
 
 
     <input type="number" class="form-control" name="usuario" id="usuario"hidden readonly value="4">
-    <input type="text"  class="form-control "  hidden readonly value="Vigente" name="VigenciaInicio" id="vigenciainicio">
-    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?echo $row['ID_H_O_D']?>">
-    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?echo $row['Nombre_Apellidos']?>">
+    <input type="text"  class="form-control " value="Vigente" hidden readonly name="VigenciaInicio" id="vigenciainicio">
+    <input type="text"  class="form-control " value="background-color:#2BBB1D !important" hidden readonly name="vigencia" id="vigencia">
+    <input type="text" class="form-control"  name="empresa" id="empresa" hidden readonly value="<?php echo $row['ID_H_O_D']?>">
+    <input type="text" class="form-control"  name="agrega" id="agrega" hidden readonly value=" <?php echo $row['Nombre_Apellidos']?>">
     
    
 

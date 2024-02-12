@@ -16,7 +16,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Personal_Enfermeria.Enfermero_ID,Personal_Enfermeria.Nombre_Apellidos,Personal_Enfermeria.Fk_Usuario,Personal_Enfermeria.file_name,Personal_Enfermeria.Fk_Sucursal,
@@ -49,7 +49,7 @@ $query = $conn->query($sql1);
 </thead>
 <?php while ($PersonalEnfermeria=$query->fetch_array()):?>
 <tr><td><?php echo $PersonalEnfermeria["Enfermero_ID"]; ?></td>   
-<td><img  width="80" height="80" alt="avatar" class="rounded-circle img-responsive" src="https://controlconsulta.com/Perfiles/<?php echo $PersonalEnfermeria["file_name"]; ?> "></td>
+<td><img  width="80" height="80" alt="avatar" class="rounded-circle img-responsive" src="https://saludapos.com/Perfiles/<?php echo $PersonalEnfermeria["file_name"]; ?> "></td>
 <td><?php echo $PersonalEnfermeria["Nombre_Apellidos"]; ?></td>   
 <td><?php echo $PersonalEnfermeria["Telefono"]; ?></td>   
 
@@ -104,7 +104,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/ContactoEmpleadoeEnfermero.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/ContactoEmpleadoeEnfermero.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -118,7 +118,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/EditaEmpleadoEnfermero.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/EditaEmpleadoEnfermero.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -134,7 +134,7 @@ $query = $conn->query($sql1);
 
     $(".btn-HistorialEmpleados").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/HistorialEmpleadosEnfermero.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialEmpleadosEnfermero.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -147,7 +147,7 @@ $query = $conn->query($sql1);
 
     $(".btn-baja").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/BajaEnfermero.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/BajaEnfermero.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Historial datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -159,7 +159,7 @@ $query = $conn->query($sql1);
 
     $(".btn-CambiaSucursal").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/CambiaSucursalEmpleadosEnfermeros.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/CambiaSucursalEmpleadosEnfermeros.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Cambio de sucursal");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
