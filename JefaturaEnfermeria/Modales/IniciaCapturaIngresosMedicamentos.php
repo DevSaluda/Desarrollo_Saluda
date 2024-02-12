@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://controlfarmacia.com/AdminPOS/GeneradorDeIngresoDeMedicamentos">
+ <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/GeneradorDeIngresoDeMedicamentos">
     
  
     <div class="form-group">

@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 include "mcript.php";
 
 $sql = "SELECT Stock_Enfermeria.Folio_Prod_Stock,Stock_Enfermeria.Clave_adicional,Stock_Enfermeria.ID_Prod_POS,Stock_Enfermeria.AgregadoEl,Stock_Enfermeria.Clave_adicional,
