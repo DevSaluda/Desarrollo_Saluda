@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM `ComponentesActivos` WHERE  ID_H_O_D='".$row['ID_H_O_D']."'";
@@ -75,7 +75,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/ContactoProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/ContactoProveedor.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -87,7 +87,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-edit2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/EditaProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/EditaProveedor.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -98,7 +98,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-edit3").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/DetallesProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/DetallesProveedor.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Detalles de proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -109,7 +109,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historial").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/HistorialProveedores.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialProveedores.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Editar datos de empleado");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");

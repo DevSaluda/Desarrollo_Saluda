@@ -177,7 +177,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ArrayProductos.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayProductos.php",
  "aoColumns": [
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
@@ -188,6 +188,10 @@ tabla = $('#Productos').DataTable({
        { mData: 'Precio_C' },
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
+       { mData: 'Tipo' },
+       { mData: 'Categoria' },
+       { mData: 'Marca' },
+       { mData: 'Presentacion' },
        { mData: 'Proveedor1' },
        { mData: 'Proveedor2' },
        { mData: 'AgregadoPor' },
@@ -254,6 +258,10 @@ tabla = $('#Productos').DataTable({
     <th>PC</th>
     <th>PV </th>
     <th>Servicio </th>
+    <th>Tipo</th>
+    <th>Categoria</th>
+    <th>Marca </th>
+    <th>Presentacion </th>
     <th>Proveedor</th>
     <th>Proveedor</th>
     <th>Agrego</th>
