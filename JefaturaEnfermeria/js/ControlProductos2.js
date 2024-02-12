@@ -1,7 +1,7 @@
 function CargaProductos(){
 
 
-  $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/Productos2.php","",function(data){
+  $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/Productos2.php","",function(data){
     $("#tablaProductos").html(data);
   })
 
