@@ -28,20 +28,19 @@
     </div>
     </div>
     
+    <div class="col">
     <label for="exampleFormControlInput1">Sucursal a elegir </label>
     <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
-  <option value="">Seleccione una Sucursal:</option>
-                                               <?php
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
-        
+  <select id = "sucursal" class = "form-control" name = "Sucursal" required >
+                                               <option value="">Seleccione una Sucursal:</option>
+        <?php 
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
-                        ?>
-        </select>   
+        ?>  </select>
     </div>
     
     <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">

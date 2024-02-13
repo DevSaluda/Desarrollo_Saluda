@@ -1,6 +1,6 @@
 
   
-      <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoFecha" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-xl" id="FiltroDeFechasVentas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="SugerenciaFechas">
+ <form  method="POST" action="FechasReporteGenerado">
     
  
  <div class="row">
@@ -30,7 +30,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
   <input type="date" class="form-control " name="Fecha1">
-  <input type="text" name="Sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
+ 
   
     </div>
     </div>
