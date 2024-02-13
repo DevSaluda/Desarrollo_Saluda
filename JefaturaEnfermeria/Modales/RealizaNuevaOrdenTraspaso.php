@@ -1,13 +1,19 @@
 
-  <?php
-   $sql ="SELECT * FROM Traspasos_generados   order by ID_Traspaso_Generado desc limit 1";
-   $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$Ticketss = mysqli_fetch_assoc($resultset);
-
-
-$monto1 = $Ticketss['Num_Orden'];; 
-$monto2 = 1; 
-$totalmonto = $monto1 + $monto2; 
+<?php
+  $sql = "SELECT * FROM Traspasos_generados ORDER BY ID_Traspaso_Generado DESC LIMIT 1";
+  $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
+  $Ticketss = mysqli_fetch_assoc($resultset);
+  
+  $monto1 = $Ticketss['Num_Orden'];
+  $monto2 = 1;
+  $totalmonto = $monto1 + $monto2;
+  
+  // Obtener la longitud original de $Ticketss['Num_Orden']
+  $longitud_original = strlen($Ticketss['Num_Orden']);
+  
+  // Mostrar $totalmonto con los caracteres '0000000000' (ajustando la longitud)
+  $totalmonto_con_ceros = str_pad($totalmonto, $longitud_original, '0', STR_PAD_LEFT);
+  
 
    
   
@@ -25,7 +31,6 @@ $totalmonto = $monto1 + $monto2;
          </button>
        </div>
      
-     
       <div class="modal-body">
      
  <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/GeneradorTraspasosV2">
@@ -34,14 +39,13 @@ $totalmonto = $monto1 + $monto2;
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
     <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
     <option value="">Seleccione un proveedor:</option>
-              <option value="">Seleccione un proveedor:</option>
- <?php
-            $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND ID_H_O_D='".$row['ID_H_O_D']."'");
+                                                 <?php
+            $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND  ID_H_O_D='".$row['ID_H_O_D']."'");
           
-              while ($valores = mysqli_fetch_array($query)) {
-          echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
-        }
-                      ?>
+            while ($valores = mysqli_fetch_array($query)) {
+              echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
+            }
+                          ?>
           </select>   
     </div>  </div> 
  
@@ -50,15 +54,13 @@ $totalmonto = $monto1 + $monto2;
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clinic-medical"></i></span>
   <select id = "sucursalconorden" name="SucursalConOrdenDestino" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
-                                               
-            <?php
+                                               <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
         
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
                         ?>
-                        
         </select>   
   </div>  </div>  
    
@@ -68,14 +70,14 @@ $totalmonto = $monto1 + $monto2;
     <div class="form-group">
   <label for="exampleInputEmail1"># de orden de traspaso</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-list-ol"></i></span>
-   <input type="number" value="<?php echo $totalmonto?>"  class="form-control"  name="NumOrden" readonly>
+   <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumOrden" readonly>
     </div>  </div>  
 
     <div class="form-group" id="numFacturaContainer">
     <label for="exampleInputEmail1"># de factura</label>
     <div class="input-group-prepend">
         <span class="input-group-text" id="Tarjeta2"><i class="fas fa-file-invoice"></i></span>
-        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarUsuario()">
+        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarFactura()">
     </div>
     <span id="estadousuario"></span>
 
@@ -125,9 +127,11 @@ $(document).on('change', '#sucursalconorden', function(event) {
         }
     });
 </script>
+
+
 <script>
 
-function comprobarUsuario() {
+function comprobarFactura() {
 	$("#loaderIcon").show();
 	jQuery.ajax({
 	url: "https://saludapos.com/JefaturaEnfermeria/Consultas/ComprobarFactura.php",
@@ -142,6 +146,8 @@ function comprobarUsuario() {
 }
 
 </script>
+
+
 <script>
   
   function desactivar()
@@ -154,6 +160,40 @@ function reactivar(){
   $('#registrotraspaso').attr('disabled', false);
 }
 </script>
+
+<!-- Agrega un script para la validación -->
+<script>
+  // Utiliza jQuery para escuchar el evento de apertura del modal
+  $('#FiltroLabs').on('show.bs.modal', function () {
+    console.log("Script ejecutándose..."); // Verifica si este mensaje aparece en la consola
+
+    // Obtiene el valor actual del campo NumOrden
+    var numOrdenValue = $('#NumOrden').val();
+
+    // Realiza una solicitud AJAX para verificar si el valor ya existe en la base de datos
+    $.ajax({
+      url: 'Consultas/ValidacionNumOrden.php',
+      method: 'POST',
+      data: { NumOrden: numOrdenValue },
+      success: function (response) {
+     // Verifica la respuesta del servidor
+     if (response.trim() === 'existe') {
+          // Si la respuesta indica que el valor ya existe, proporciona retroalimentación al usuario
+          alert('El número de orden ya existe. Por favor, elija otro.');
+          // Puedes deshabilitar el botón de guardar o realizar otras acciones según tus necesidades
+        } else {
+          // Puedes realizar acciones adicionales si el NumOrden no existe
+          console.log('El número de orden no existe.');
+        }
+      },
+      error: function (error) {
+        console.error('Error en la solicitud AJAX:', error);
+      }
+    });
+  });
+</script>
+
+
     </div>
   </div>
   </div>

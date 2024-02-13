@@ -16,12 +16,8 @@ if ($ProveedorFijo === "CEDIS") {
     $valorCombinado = $NumeroDeFacturaTrapaso;
 }
 
-
-
-
 include "Consultas/Consultas.php";
 
-include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,7 +56,7 @@ table td {
 }
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   
@@ -92,7 +88,7 @@ table td {
           
         $(document).ready(function(){
 
-             var maxGroup = 600;
+             var maxGroup = 41;
              var id = 0;
             $(".addMore").click(function(){
                 id = id + 1;
@@ -100,7 +96,12 @@ table td {
                     var fieldHTML = '<div class="form-group fieldGroup selector-' + id + '">'+$(".fieldGroupCopy").html()+'</div>';
                     $('body').find('.fieldGroupCopy:last').before(fieldHTML);
                 }else{
-                    alert('Maximo '+maxGroup+' personas, mayor a esto realize cargue masivo.');
+                  Swal.fire({
+        icon: 'warning',
+        title: '¡Alerta!',
+        text: `El máximo de productos son 40 para la generacion del traspaso, por favor en caso de hacer falta productos inicie un nuevo proceso`,
+        confirmButtonText: 'Entendido'
+    });
                 }
                 $(".selector-" + id + " #codbarra").focus();
                 $(".selector-" + id + " #codbarra").autocomplete({
@@ -167,8 +168,8 @@ table td {
     <label for="exampleFormControlInput1">Sucursal destino</label> 
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-  <input type="text" name="" hidden id="" readonly class="form-control" value="<?echo $SucursalDestino?>">
-  <input type="text" name="" id=""  readonly class="form-control" value="<?echo $SucursalDestinoLetras?>">
+  <input type="text" name="" hidden id="" readonly class="form-control" value="<?php echo $SucursalDestino?>">
+  <input type="text" name="" id=""  readonly class="form-control" value="<?php echo $SucursalDestinoLetras?>">
   </div>
   
     </div>  </div>

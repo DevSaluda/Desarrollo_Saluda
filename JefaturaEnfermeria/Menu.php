@@ -111,12 +111,12 @@
     <!-- Brand Logo -->
     <a href="index" class="brand-link" style="background-color: #c80096 !important;">
     
-      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i> PUNTO DE VENTA</span>
+      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i>JEFATURA ENFERMERIA</span>
     
     </a>
 
    <!-- Sidebar -->
-   <div class="sidebar">
+   <div class="sidebar" style ="background-color: #0057b8 !important;">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -856,15 +856,15 @@
         
             </ul>
           </li>
-         <div style=<?php
-  switch ($row['Permisos']) {
-    case 10:
-      echo "display:none;";
-      break;
-    case 0:
-      echo "display:block;";
-      break;
-  }
+          <div  style=<?php switch($row){
+	case $row['Permisos']==10 ;				
+  echo "display:none;";
+
+	break;
+	case $row['Permisos']==0 ;		
+  echo "display:block;";
+		
+		} 	
 ?>>  
   <li class="nav-header">Configuraciones</li>
   <li class="nav-item has-treeview">
