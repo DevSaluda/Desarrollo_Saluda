@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +10,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Entradas/Salidas del personal de <?echo $row['ID_H_O_D']?> </title>
+  <title>Entradas/Salidas del personal de <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,20 +22,20 @@ include "Consultas/AnalisisIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
  
 
 
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Checador general del personal de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Checador general del personal de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
  
   <div >
   <div >
-  <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ChecadorGeneral" class="btn btn-default">
-  Filtrar por fechas <i class="fas fa-calendar-week"></i> 
-</button> -->
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ChecadorGeneral" class="btn btn-default">
+  Filtrar por fechas <i class="fas fa-calendar-week"></i>
+</button>
 </div>
 </div>
 
@@ -59,7 +58,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
   include ("Modales/AltaProductos.php");
 
   include ("Modales/Vacios.php");
@@ -96,7 +95,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
 include "Consultas/Conexion_selects.php";
 include "Consultas/ConeSelectDinamico.php";
 
@@ -12,7 +11,7 @@ include "Consultas/ConeSelectDinamico.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title> Enfermería |<?echo $row['Nombre_Sucursal']?></title>
+  <title> Enfermería |<?php echo $row['Nombre_Sucursal']?></title>
 
   <? include "Header.php"?>
 </head>
@@ -42,7 +41,7 @@ include "Consultas/ConeSelectDinamico.php";
 
 
   <!-- Main Footer -->
-  <?
+  <?php
 include ("Modales/AltaCitaSucursal.php");
 include ("Modales/Exito.php");
   include ("footer.php");?>
@@ -67,7 +66,7 @@ include ("Modales/Exito.php");
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
