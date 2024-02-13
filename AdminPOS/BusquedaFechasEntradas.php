@@ -1,26 +1,6 @@
 <?php
 
-// Incluye el archivo que se conecta a la base de datos con otro usuario y otra base de datos
 include "Consultas/db_connection_Huellas.php";
-
-// Incluye el archivo que contiene las consultas que utilizarán la primera conexión
-include "Consultas/Consultas.php";
-
-// Cierra la conexión actual
-mysqli_close($conn);
-
-// Establece una nueva conexión con los parámetros que necesitas para el archivo Consultas.php
-$conexion_principal = mysqli_connect($host_principal, $usuario_principal, $contrasena_principal, $base_datos_principal);
-
-// Verifica si hay errores en la nueva conexión
-if (!$conexion_principal) {
-    die("La conexión falló: " . mysqli_connect_error());
-}
-
-// Incluye el archivo que necesita la nueva conexión
-include "Consultas/Consultas.php";
-
-// Ahora puedes usar la variable $conexion_principal en el archivo Consultas.php para ejecutar consultas.
 
 
 $fecha1=($_POST['Fecha1']);
