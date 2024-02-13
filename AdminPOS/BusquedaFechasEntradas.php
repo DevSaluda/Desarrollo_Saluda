@@ -40,7 +40,7 @@ $sql2 = "SELECT
 
   <title>Registro de entradas</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -50,11 +50,11 @@ $sql2 = "SELECT
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Registro de entradas del <?echo fechaCastellano($fecha1)?> al <?echo fechaCastellano($fecha2)?>
+  Registro de entradas del <?php echo fechaCastellano($fecha1)?> al <?php echo fechaCastellano($fecha2)?>
   </div>
   <div >
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoFecha" class="btn btn-default">
@@ -94,7 +94,7 @@ $(document).ready( function () {
 				extend:    'excelHtml5',
 				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
 				titleAttr: 'Exportar a Excel',
-                title: 'Registro de entradas y salidas del personal del  <?echo $fecha1?> al <?echo $fecha2?> ',
+                title: 'Registro de entradas y salidas del personal del  <?php echo $fecha1?> al <?php echo $fecha2?> ',
 				className: 'btn btn-success'
 			},
 			
@@ -159,7 +159,7 @@ $query = $conn->query($sql2);
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
 
-<?
+<?php
  
   include ("Modales/BuscaPorFechaVentas.php");
   include ("Modales/FiltraEspecificamenteEntradas.php");
@@ -193,7 +193,7 @@ $query = $conn->query($sql2);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
