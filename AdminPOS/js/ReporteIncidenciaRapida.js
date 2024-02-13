@@ -1,7 +1,7 @@
 function CargaReportes(){
 
 
-    $.post("https://controlfarmacia.com/AdminPOS/Consultas/IncidenciasRapidas.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/Consultas/IncidenciasRapidas.php","",function(data){
       $("#ReporteRapido").html(data);
     })
 

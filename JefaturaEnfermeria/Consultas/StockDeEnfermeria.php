@@ -9,7 +9,7 @@
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ArrayStockEnfermeria.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayStockEnfermeria.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Clave_adicional' },

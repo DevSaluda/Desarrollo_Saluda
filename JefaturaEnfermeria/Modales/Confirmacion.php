@@ -103,7 +103,7 @@ Estatus actual <br>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-              <a type="button" href="https://controlconsulta.com/CEnfermeria/ListadoDataPacientes" class="btn btn-success waves-effect waves-light">Continuar
+              <a type="button" href="https://saludapos.com/CEnfermeria/ListadoDataPacientes" class="btn btn-success waves-effect waves-light">Continuar
               <i class="fas fa-arrow-right"></i>
               </a>
              

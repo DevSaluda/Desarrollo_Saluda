@@ -1,8 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,12 +21,12 @@ include "Consultas/Consultas.php";
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<!--<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Ventas del</a>
   </li>
   
-</ul>-->
+</ul>
 
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -64,8 +61,7 @@ include "Consultas/Consultas.php";
  
   <!-- Main Footer -->
 <?php
-
-  include ("Modales/Error.php");
+ include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraEspecificamenteCreditosEnfermeria.php");
@@ -103,7 +99,6 @@ include ("footer.php")?>
 </body>
 </html>
 <?php
-
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));

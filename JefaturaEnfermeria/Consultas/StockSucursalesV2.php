@@ -9,7 +9,7 @@
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/JefaturaEnfermeria/Consultas/ArrayStockSucursales.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayStockSucursales.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Clave_adicional' },
@@ -17,6 +17,7 @@
        { mData: 'Nombre_Prod' },
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
+       { mData: 'Tipo' },
        { mData: 'Proveedor1' },
        { mData: 'Proveedor2' },
        { mData: 'Sucursal' },
@@ -46,7 +47,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
  
 
 
-       { mData: 'Acciones' }, 
+       { mData: 'Coincidencias' }, 
     //    { mData: 'Traspaso' }, 
        { mData: 'Ingreso' }, 
        { mData: 'Auditoria' }, 
@@ -106,10 +107,11 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
 <th style="background-color:#0057b8 !important;">Nombre</th>
 <th style="background-color:#0057b8 !important;">PV</th>
 <th style="background-color:#0057b8 !important;">Servicio</th>
+<th style="background-color:#0057b8 !important;">Tipo</th>
 <th style="background-color:#0057b8 !important;">Proveedor 1</th>
 <th style="background-color:#0057b8 !important;">Proveedor 2</th>
 <th style="background-color:#0057b8 !important;">Sucursal</th>
-<th style="background-color:#0057b8 !important;">Ultimo moviento registrado</th>
+<th style="background-color:#0057b8 !important;">Ultimo movimiento registrado</th>
 <th style="background-color:#0057b8 !important;">Stock</th>
 <th style="background-color:#0057b8 !important;">Min</th>
 <th style="background-color:#0057b8 !important;">Max</th>

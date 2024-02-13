@@ -3,11 +3,10 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT Stock_POS.Folio_Prod_Stock,Stock_POS.Clave_adicional,Stock_POS.ID_Prod_POS,Stock_POS.AgregadoEl,Stock_POS.Clave_adicional,Stock_POS.Clave_Levic,
-Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Tipo_Servicio,Stock_POS.Fk_sucursal,
+Stock_POS.Cod_Barra,Stock_POS.Nombre_Prod,Stock_POS.Tipo_Servicio,Stock_POS.Tipo,Stock_POS.Fk_sucursal,
 Stock_POS.Max_Existencia,Stock_POS.Min_Existencia, Stock_POS.Existencias_R,Stock_POS.Proveedor1,
 Stock_POS.Proveedor2,Stock_POS.CodigoEstatus,Stock_POS.Estatus,Stock_POS.ID_H_O_D, SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Productos_POS.ID_Prod_POS,
@@ -27,6 +26,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
     $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
     $data[$c]["Nom_Serv"] = $fila["Nom_Serv"];
+    $data[$c]["Tipo"] = $fila["Tipo"];
     $data[$c]["Proveedor1"] = $fila["Proveedor1"];
     $data[$c]["Proveedor2"] = $fila["Proveedor2"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
@@ -36,19 +36,10 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Min_Existencia"] = $fila["Min_Existencia"];
     $data[$c]["Max_Existencia"] = $fila["Max_Existencia"];
    
-    $data[$c]["Acciones"] = ["<button class='btn btn-primary btn-sm dropdown-toggle' 
-    type='button' data-toggle='dropdown' aria-haspopup='true'
-     aria-expanded='false'><i class='fas fa-th-list fa-1x'></i></button><div class='dropdown-menu'>
-     <a href=https://controlfarmacia.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-edit  dropdown-item' >
-     Actualizar existencias <i class='fas fa-edit'></i></a><a href=https://controlfarmacia.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])."
-      class='btn-VerDistribucion  dropdown-item' >Actualizar existencias en coincidencia <i class='fas fa-equals'></i> </a>
-      <a href=https://controlfarmacia.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])." class='btn-editProd dropdown-item' >Traspaso
-       <i class='fas fa-exchange-alt'></i></a><a href=https://controlfarmacia.com/AdminPOS/EstadisticaVentas?idProd=".base64_encode($fila["Cod_Barra"])." 
-       class='btn-Delete dropdown-item' >Estadisticas de venta <i class='fas fa-chart-line'></i></a></div> "];
-    //    $data[$c]["Traspaso"] = [ "<a class='btn btn-success btn-sm' href=https://controlfarmacia.com/AdminPOS/GeneradorTraspasos?idProd=".base64_encode($fila["Folio_Prod_Stock"])."' >
-    //    <i class='fas fa-exchange-alt'></i></a>"];
-       $data[$c]["Ingreso"] = ["<a href=https://controlfarmacia.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
-       $data[$c]["Auditoria"] = ["<a href=https://controlfarmacia.com/AdminPOS/HistorialProductoAudita?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
+
+    $data[$c]["Coincidencias"] = ["<a  href=https://saludapos.com/JefaturaEnfermeria/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
+       $data[$c]["Ingreso"] = ["<a href=https://saludapos.com/JefaturaEnfermeria/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
+       $data[$c]["Auditoria"] = ["<a href=https://saludapos.com/JefaturaEnfermeria/HistorialProductoAudita?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
     $c++; 
  
 }

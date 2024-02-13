@@ -1,7 +1,7 @@
 function  HistorialCajas(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/HistorialCajas.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/HistorialCajas.php","",function(data){
       $("#CajasHistoricas").html(data);
     })
 

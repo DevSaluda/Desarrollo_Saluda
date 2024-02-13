@@ -100,7 +100,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-editStock").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EditaStatusStock.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/EditaStatusStock.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Asignacion de StockSucursales en otras sucursales");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");

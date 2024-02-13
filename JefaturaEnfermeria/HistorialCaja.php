@@ -1,7 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +9,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Historial de cajas | <?echo $row['ID_H_O_D']?> </title>
+  <title>Historial de cajas | <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -27,14 +25,14 @@ include "Consultas/AnalisisIndex.php";
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-   Historial de cajas de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+   Historial de cajas de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
@@ -61,7 +59,7 @@ include "Consultas/AnalisisIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
   include ("footer.php")?>
 
 <!-- ./wrapper -->
@@ -96,7 +94,7 @@ include "Consultas/AnalisisIndex.php";
     $(document).on("click", ".dropdown-menu .btn-Movimientos", function() {
       console.log("Botón de cancelar clickeado para el ID:", id);
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/HistorialCaja.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialCaja.php", { id: id }, function(data) {
             $("#FormCajas").html(data);
             $("#TitulosCajas").html("Historial de caja");
             $("#CajasDi").removeClass("modal-dialog modal-xl modal-notify modal-info");
@@ -108,7 +106,7 @@ include "Consultas/AnalisisIndex.php";
     // Delegación de eventos para el botón "btn-Ventas" dentro de .dropdown-menu
     $(document).on("click", ".dropdown-menu .btn-Ventas", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/HistorialVentas.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/HistorialVentas.php", { id: id }, function(data) {
             $("#FormCajas").html(data);
             $("#TitulosCajas").html("Historial de ventas");
             $("#CajasDi").removeClass("modal-dialog modal-xl modal-notify modal-info");
@@ -121,7 +119,7 @@ include "Consultas/AnalisisIndex.php";
     // Delegación de eventos para el botón "btn-Cortes" dentro de .dropdown-menu
     $(document).on("click", ".dropdown-menu .btn-Cortes", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/CortesDeCaja.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/CortesDeCaja.php", { id: id }, function(data) {
             $("#FormCajas").html(data);
             $("#TitulosCajas").html("Corte de caja");
             $("#CajasDi").removeClass("modal-dialog modal-xl modal-notify modal-info");
@@ -145,11 +143,11 @@ include "Consultas/AnalisisIndex.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-                            <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
-                            <button type="button" class="close" data-dismiss="alert">×</button>
+						                <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
-          <div class="modal-body">
+	        <div class="modal-body">
           <div class="text-center">
         <div id="FormCajas"></div>
         
@@ -160,7 +158,7 @@ include "Consultas/AnalisisIndex.php";
   </div><!-- /.modal -->
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

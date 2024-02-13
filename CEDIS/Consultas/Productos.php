@@ -114,7 +114,7 @@ $query = $conn->query($sql1);
 <script>
   $(".btn-edit").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/AdminPOS/Modales/ReasignaProducto.php","id="+id,function(data){
+    $.post("https://saludapos.com/AdminPOS/Modales/ReasignaProducto.php","id="+id,function(data){
         alert($(this).data("id"));
         $("#form-editProductosG").html(data);
     $("#TituloProductosG").html("Asignacion de productos en otras sucursales");
@@ -127,7 +127,7 @@ $query = $conn->query($sql1);
 });
 $(".btn-VerDistribucion").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/AdminPOS/Modales/DistribucionesProductos.php","id="+id,function(data){
+    $.post("https://saludapos.com/AdminPOS/Modales/DistribucionesProductos.php","id="+id,function(data){
         $("#form-editProductosG").html(data);
     $("#TituloProductosG").html("Distribucion de productos");
        
@@ -139,7 +139,7 @@ $(".btn-VerDistribucion").click(function(){
 });
 $(".btn-editProd").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/AdminPOS/Modales/EditaProductosStockGeneral.php","id="+id,function(data){
+    $.post("https://saludapos.com/AdminPOS/Modales/EditaProductosStockGeneral.php","id="+id,function(data){
         $("#form-editProductosG").html(data);
     $("#TituloProductosG").html("Editar datos");
        
@@ -151,7 +151,7 @@ $(".btn-editProd").click(function(){
 });
 $(".btn-History").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialProductos.php","id="+id,function(data){
+    $.post("https://saludapos.com/AdminPOS/Modales/HistorialProductos.php","id="+id,function(data){
         $("#form-editProductosG").html(data);
     $("#TituloProductosG").html("Actualizaciones y movimientos");
        
@@ -165,7 +165,7 @@ $(".btn-History").click(function(){
 
 $(".btn-Delete").click(function(){
     id = $(this).data("id");
-    $.post("https://controlfarmacia.com/AdminPOS/Modales/DeleteProductos.php","id="+id,function(data){
+    $.post("https://saludapos.com/AdminPOS/Modales/DeleteProductos.php","id="+id,function(data){
         alert($(this).data("id"));
         $("#form-editProductosG").html(data);
     $("#TituloProductosG").html("Eliminar producto");

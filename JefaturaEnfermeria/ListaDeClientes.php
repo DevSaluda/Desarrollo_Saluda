@@ -96,7 +96,7 @@ include "Consultas/Consultas.php";
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
+        $.post("https://saludapos.com//Modales/DesgloseTicket.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");

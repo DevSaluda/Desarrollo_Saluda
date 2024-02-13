@@ -81,7 +81,7 @@ $query = $conn->query($sql1);
 
   	$(".btn-editStock").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/ActualizaProcedimiento.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/ActualizaProcedimiento.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Actualizar datos de procedimiento");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -95,7 +95,7 @@ $query = $conn->query($sql1);
 
     $(".btn-HistorialStocksucursaless").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/HistorialProcedimiento.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialProcedimiento.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Movimientos de productos");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -108,7 +108,7 @@ $query = $conn->query($sql1);
 
       $(".btn-EliminaProcedimiento").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AdminPOS/Modales/EliminaProcedimiento.php","id="+id,function(data){
+  		$.post("https://sludapos.com/AdminPOS/Modales/EliminaProcedimiento.php","id="+id,function(data){
   			$("#form-editStockSucursalesA").html(data);
           $("#TituloStockSucursalesA").html("Eliminar procedimiento");
               $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");

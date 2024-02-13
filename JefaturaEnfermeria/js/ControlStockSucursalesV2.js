@@ -1,7 +1,7 @@
 function StockPorSucursales() {
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/StockSucursalesV2.php", "", function(data) {
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/StockSucursalesV2.php", "", function(data) {
         $("#TableStockSucursales").html(data);
     })
 

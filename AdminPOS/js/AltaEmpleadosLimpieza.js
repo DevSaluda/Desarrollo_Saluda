@@ -121,7 +121,7 @@ vigencia: {
 
     $.ajax({        
       type : 'POST',
-      url  : 'https://controlconsulta.com/AdminPOS/Consultas/AltaEmpleadosLimpieza.php',
+      url  : 'https://saludapos.com/AdminPOS/Consultas/AltaEmpleadosLimpieza.php',
       data: new FormData(this),
             contentType: false,
             cache: false,

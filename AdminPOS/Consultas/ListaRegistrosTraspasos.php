@@ -6,7 +6,7 @@ tabla = $('#Traspasos').DataTable({
  "bProcessing": true,
  "ordering": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AdminPOS/Consultas/ArrrayListaTraspasos.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrrayListaTraspasos.php",
  "aoColumns": [
        { mData: 'IDTraspasoGenerado' },
        { mData: 'Cod_Barra' },
