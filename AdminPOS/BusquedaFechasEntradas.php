@@ -110,7 +110,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 
 
 $user_id=null;
