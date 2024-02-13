@@ -45,8 +45,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
+include("db_connection_Huellas.php");
+
 
 $user_id=null;
 /* $sql1="SELECT Reloj_ChecadorV2.Nombre,Reloj_ChecadorV2_Salidas.Nombre,Reloj_ChecadorV2.Sucursal,Reloj_ChecadorV2.Sucursal,Reloj_ChecadorV2.Area,Reloj_ChecadorV2.Area,Reloj_ChecadorV2_Salidas.Fecha_Registro,
