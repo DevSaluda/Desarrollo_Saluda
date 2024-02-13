@@ -222,25 +222,25 @@ tabla = $('#Combustible').DataTable({
         responsive: "true",
      /*    dom: "B<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
         // buttons:[ 
-    //  {
-    //    extend:    'excelHtml5',
-    //    text:      'Descargar excel  <i Descargar excel class="fas fa-file-excel"></i> ',
-    //    titleAttr: 'Descargar excel',
+		// 	{
+		// 		extend:    'excelHtml5',
+		// 		text:      'Descargar excel  <i Descargar excel class="fas fa-file-excel"></i> ',
+		// 		titleAttr: 'Descargar excel',
         //         autoFilter: true,
         // title: 'Traspasos Enero  ',
-    //    className: 'btn btn-success'
-    //  },
+		// 		className: 'btn btn-success'
+		// 	},
         // ], */
        
    
-     
-                  
+	   
+        	        
     });     
 
 </script>
 <div class="text-center">
-  <div class="table-responsive">
-  <table  id="Combustible" class="table table-hover">
+	<div class="table-responsive">
+	<table  id="Combustible" class="table table-hover">
 <thead>
 
 <th>ID</th>

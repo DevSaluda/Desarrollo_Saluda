@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -99,7 +97,7 @@ table td {
 
 </body>
 </html>
-<?php 
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

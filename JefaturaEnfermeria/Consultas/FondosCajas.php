@@ -81,7 +81,7 @@ $query = $conn->query($sql1);
 <tr>
 <td > <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td>$ <?php echo $Usuarios["Fondo_Caja"]; ?></td>
-    <td> <button style="<?php echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
+    <td> <button style="<?echo $Usuarios['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Usuarios["Estatus"]; ?></button></td>
 <td>		 <!-- Basic dropdown -->
 <button class="btn btn-primary btn-sm dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>

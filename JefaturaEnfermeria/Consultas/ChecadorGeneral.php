@@ -1,4 +1,4 @@
-<?$fcha = date("Y-m-d");?>
+<?php $fcha = date("Y-m-d");?>
 <script type="text/javascript">
 $(document).ready( function () {
     $('#IngresoEmpleados').DataTable({
@@ -47,7 +47,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 /* $sql1="SELECT Reloj_ChecadorV2.Nombre,Reloj_ChecadorV2_Salidas.Nombre,Reloj_ChecadorV2.Fecha_Registro,
@@ -132,7 +132,7 @@ $query = $conn->query($sql2);
 <?php else:?>
 	<p class="alert alert-warning">No se puede generar el total de horas laboradas, hasta que el personal marque su salida.</p>
 <?php endif;?>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

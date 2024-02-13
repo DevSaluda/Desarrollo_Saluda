@@ -234,10 +234,10 @@
   </div>
   <select id = "estado" class = "form-control form-control-sm" name = "Estado" >
   <option value="0">Selecciona un estado:</option>
-        <?
+        <?php
           $query = $mysqli -> query ("SELECT ID_Estado,Nombre_Estado FROM Estados");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores[ID_Estado].'">'.$valores[Nombre_Estado].'</option>';
+            echo '<option value="'.$valores["ID_Estado"].'">'.$valores["Nombre_Estado"].'</option>';
           }
         ?>  </select>             
 </div>
@@ -295,12 +295,12 @@
     </div>
    </div>
   
-<input type="text" hidden class="form-control" readonly id="turno" name="Turno"  value="<?echo $Turno?>"  >
+<input type="text" hidden class="form-control" readonly id="turno" name="Turno"  value="<?php echo $Turno?>"  >
   <input name="FechaConsulta" id="FechaConsulta"   hidden  type="date"   value="<?php echo date("Y-m-d") ?>" Readonly class="form-control">                                     
 
-<input type="text" class="form-control" id="SC" name="SC" readonly hidden value="<?echo $row['ID_Sucursal']?>" >
-<input name="Propiedad" id="Propiedad" type="text" class="form-control" hidden  readonly value="<?echo $row['ID_H_O_D']?>">
-<input type="text" class="form-control" id="enfermero" name="Enfermero" hidden readonly value="<?echo $row['Nombre_Apellidos']?>"  >
+<input type="text" class="form-control" id="SC" name="SC" readonly hidden value="<?php echo $row['ID_Sucursal']?>" >
+<input name="Propiedad" id="Propiedad" type="text" class="form-control" hidden  readonly value="<?php echo $row['ID_H_O_D']?>">
+<input type="text" class="form-control" id="enfermero" name="Enfermero" hidden readonly value="<?php echo $row['Nombre_Apellidos']?>"  >
    </div>   
    <div>
    <button type="submit"  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-primary">Guardar <i class="fas fa-save"></i></button>

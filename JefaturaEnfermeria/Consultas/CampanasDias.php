@@ -18,11 +18,6 @@ $sql1="SELECT AgendaCitas_EspecialistasV2.ID_Agenda_Especialista,AgendaCitas_Esp
 AgendaCitas_EspecialistasV2.Fk_Especialista,AgendaCitas_EspecialistasV2.Fk_Sucursal,
 AgendaCitas_EspecialistasV2.Fk_Fecha,AgendaCitas_EspecialistasV2.Fk_Hora,AgendaCitas_EspecialistasV2.Nombre_Paciente,
 AgendaCitas_EspecialistasV2.Tipo_Consulta,
-
-
-
-
-
 AgendaCitas_EspecialistasV2.Estatus_pago,AgendaCitas_EspecialistasV2.Color_Pago,AgendaCitas_EspecialistasV2.Estatus_cita,
 AgendaCitas_EspecialistasV2.Observaciones,AgendaCitas_EspecialistasV2.ColorEstatusCita,AgendaCitas_EspecialistasV2.Estatus_Seguimiento,
 AgendaCitas_EspecialistasV2.Color_Seguimiento,AgendaCitas_EspecialistasV2.ID_H_O_D,AgendaCitas_EspecialistasV2.AgendadoPor,AgendaCitas_EspecialistasV2.Sistema,AgendaCitas_EspecialistasV2.Folio_Paciente,
@@ -37,7 +32,7 @@ AgendaCitas_EspecialistasV2.Fk_Fecha = Fechas_EspecialistasV2.ID_Fecha_Esp AND
 AgendaCitas_EspecialistasV2.Fk_Hora = Horarios_Citas_especialistasV2.ID_Horario AND
 AgendaCitas_EspecialistasV2.Fk_Costo =  Costos_EspecialistasV2.ID_Costo_Esp AND 
  Fechas_EspecialistasV2.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY AND
-
+AgendaCitas_EspecialistasV2.Fk_Sucursal ='".$row['Fk_Sucursal']."' AND
 AgendaCitas_EspecialistasV2.ID_H_O_D='".$row['ID_H_O_D']."'  order by Horarios_Citas_especialistasV2.Horario_Disponibilidad ASC";
 
 $query = $conn->query($sql1);
@@ -45,21 +40,21 @@ $query = $conn->query($sql1);
 
 <?php if($query->num_rows>0):?>
     <div class="text-center">
-  <div class="table-responsive">
-  <table id="Campanas" class="table table-hover">
+	<div class="table-responsive">
+	<table id="Campanas" class="table table-hover">
 <thead>
    
     <th>Especialidad</th>
-  <th>Paciente</th>
-  
-  <th>Sucursal</th>
+	<th>Paciente</th>
+	
+	<th>Sucursal</th>
     <th>Fecha | Hora</th>
     <th>Estatus</th>
     <th>Acciones</th>
 
-  
+	
 
-  
+	
 
 
 
@@ -67,15 +62,15 @@ $query = $conn->query($sql1);
 <?php while ($Especialista=$query->fetch_array()):?>
 <tr>
     <td><?php echo $Especialista["Nombre_Especialidad"]; ?> </td>
-  <td><?php echo $Especialista["Nombre_Paciente"]; ?></td>
-  <td><?php echo $Especialista["Nombre_Sucursal"]; ?></td>
+	<td><?php echo $Especialista["Nombre_Paciente"]; ?></td>
+	<td><?php echo $Especialista["Nombre_Sucursal"]; ?></td>
 
-  <td><?php echo fechaCastellano($Especialista["Fecha_Disponibilidad"]); ?><br>
-  <?php echo date('h:i A', strtotime($Especialista["Horario_Disponibilidad"])); ?>
+	<td><?php echo fechaCastellano($Especialista["Fecha_Disponibilidad"]); ?><br>
+	<?php echo date('h:i A', strtotime($Especialista["Horario_Disponibilidad"])); ?>
 </td>
 
 <td>
-     <!-- Basic dropdown -->
+		 <!-- Basic dropdown -->
 <button class="btn btn-info dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i></button>
 
@@ -89,82 +84,31 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <!-- Basic dropdown -->
-   </td>
+	 </td>
      <td>
-     <!-- Basic dropdown -->
+		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
   aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
 <div class="dropdown-menu">
-<a data-id="<?php echo $Especialista["ID_Agenda_Especialistas"];?>" class="btn-edit1 dropdown-item" >Contacto a paciente <i class="fas fa-id-card-alt"></i></a>
-  <a data-id="<?php echo $Especialista["ID_Agenda_Especialista"];?>" class="btn-edit2 dropdown-item" >Tomar signos vitales <i class="fas fa-file-medical"></i></a>
+<a data-id="<?php echo $Especialista["ID_Agenda_Especialista"];?>" class="btn-edit1 dropdown-item" >Contacto a paciente <i class="fas fa-id-card-alt"></i></a>
+  
 
  
 </div>
 <!-- Basic dropdown -->
-   </td>
-  
+	 </td>
+	
 
-  
+	
 </tr>
 <?php endwhile;?>
-
 </table>
 </div>
 </div>
 <?php else:?>
-  <p class="alert alert-warning">No hay resultados</p>
+	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
   <!-- Modal -->
  <!-- Modal -->
- <script>
-    $(".btn-edit1").click(function(){
-      id = $(this).data("id");
-      $.post("https://saludapos.com/JefaturaEnfermeria/Modales/ContactoPaciente.php","id="+id,function(data){
-              $("#form-edit").html(data);
-              $("#Titulo").html("Medios disponibles para contacto a paciente");
-              $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
-              $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-primary");
-              $("#Di").addClass("modal-dialog modal-lg modal-notify modal-info");
-      });
-      $('#editModal').modal('show');
-      });
-      $(".btn-edit2").click(function(){
-      id = $(this).data("id");
-      $.post("https://saludapos.com/JefaturaEnfermeria/Modales/AgendaSignosVitalIndex.php","id="+id,function(data){
-              $("#form-edit").html(data);
-              $("#Titulo").html("Captura de signos vitales");
-              $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
-              $("#Di").addClass("modal-dialog modal-lg modal-notify modal-info");
-      });
-      $('#editModal').modal('show');
-    });
-   
-  </script>
-  
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="Di"class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="Titulo"></p>
-
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-        <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-                            <span id="Aviso" class="text-semibold">Estimado usuario, 
-                            Verifique los campos antes de realizar alguna accion</span>
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            </div>
-          <div class="modal-body">
-          <div class="text-center">
-        <div id="form-edit"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+ 

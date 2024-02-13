@@ -1,8 +1,6 @@
 <?php
 
 include "Consultas/Consultas.php";
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +11,7 @@ include "Consultas/Consultas.php";
 
   <title>SUCURSALES <?php echo $row['ID_H_O_D']?> </title>
 
-<?php include "Header.php"?>
+<?php  include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -59,7 +57,7 @@ Sucursales
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?php 
+<?php
     
   include ("Modales/AltaSucursal.php");
   include ("Modales/Error.php");

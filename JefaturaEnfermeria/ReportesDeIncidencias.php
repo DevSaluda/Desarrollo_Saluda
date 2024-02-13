@@ -1,7 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/ContadorIndex.php";
+
+
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ include "Consultas/ContadorIndex.php";
 
   <title>Reportes de incidencias | <?echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -23,7 +23,7 @@ include "Consultas/ContadorIndex.php";
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2b73bb !important;color: white;">
    Reportes de incidencias
@@ -60,7 +60,7 @@ include "Consultas/ContadorIndex.php";
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php 
     
 
   include ("Modales/ReporteRapido.php");
@@ -93,7 +93,7 @@ include "Consultas/ContadorIndex.php";
     
     $(".btn-edit").click(function(){
       id = $(this).data("id");
-      $.post("https://controlfarmacia.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
+      $.post("https://saludapos.com/POS2/Modales/AbreCaja.php","id="+id,function(data){
               $("#form-edit").html(data);
               $("#Titulo").html("Apertura de caja");
               $("#Di").addClass("modal-dialog modal-lg modal-notify modal-success");
@@ -112,7 +112,7 @@ include "Consultas/ContadorIndex.php";
          </button>
        </div>
         <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-                            <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
+                            <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
                             Verifique los campos antes de realizar alguna accion</span>
                             <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
@@ -125,7 +125,7 @@ include "Consultas/ContadorIndex.php";
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

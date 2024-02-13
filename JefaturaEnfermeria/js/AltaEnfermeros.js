@@ -121,7 +121,7 @@ vigencia: {
 
 		$.ajax({				
 			type : 'POST',
-			url  : 'https://controlconsulta.com/CEnfermeria/Consultas/AltaEmp',
+			url  : 'https://saludapos.com/JefaturaEnfermeria/Consultas/AltaEmp',
 		  data: new FormData(this),
             contentType: false,
             cache: false,

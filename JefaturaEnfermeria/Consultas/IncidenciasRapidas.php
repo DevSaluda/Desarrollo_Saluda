@@ -19,8 +19,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "ContadorIndex.php";
+
 
 $user_id=null;
 $sql1=" SELECT Tickets_Incidencias.ID_incidencia,Tickets_Incidencias.Descripcion,Tickets_Incidencias.Reporto,
@@ -39,7 +38,7 @@ $query = $conn->query($sql1);
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">                  
-                    <h3><?echo $TotalTickets['TotalTickets']?></h3>
+                    <h3><?php echo $TotalTickets['TotalTickets']?></h3>
 
                      <p>Total Tickets</p>
                   </div>
@@ -157,7 +156,7 @@ include "../Modales/NuevoTicket.php";
 
 
 
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
