@@ -1,7 +1,7 @@
 <?php
 
 include "Consultas/db_connection_Huellas.php";
-include "Consultas/Consultas";
+include "Consultas/Sesion.php";
 
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
