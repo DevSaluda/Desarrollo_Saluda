@@ -1,4 +1,5 @@
 <?php
+include "Consultas/Consultas";
 include "Consultas/db_connection_Huellas.php";
 
 
