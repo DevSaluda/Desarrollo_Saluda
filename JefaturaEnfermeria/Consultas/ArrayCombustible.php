@@ -3,7 +3,6 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-include "mcript.php";
 
 $sql = "SELECT * FROM `Registros_Combustibles`";
  
@@ -18,7 +17,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Fecha_registro"] = $fila["Fecha_registro"];
     $data[$c]["Sucursal"] = $fila["Sucursal"];
     $data[$c]["Comentario"] = $fila["Comentario"];
-    $data[$c]["Foto"] = ["<img   alt='avatar' class='img-thumbnail' src='https://controlfarmacia.com/FotosMedidores/$fila[file_name]'>"];
+    $data[$c]["Foto"] = ["<img   alt='avatar' class='img-thumbnail' src='https://saludapos.com/FotosMedidores/$fila[file_name]'>"];
     $data[$c]["Registro"] = $fila["Registro"];
     $data[$c]["Agregadoel"] = $fila["Agregadoel"];
       $data[$c]["Tipo_Veiculo"] = $fila["Tipo_Veiculo"];

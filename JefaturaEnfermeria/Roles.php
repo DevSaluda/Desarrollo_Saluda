@@ -11,7 +11,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>ROLES O PUESTOS DE  <?php echo $row['ID_H_O_D']?> </title>
+  <title>ROLES O PUESTOS DE  <?php  $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
  <style>
@@ -24,16 +24,7 @@ include "Consultas/Consultas.php";
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Roles Vigente</a>
-  </li>
-  
-  <!--<li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Roles Descontinuados</a>
-  </li>-->
- 
-</ul>
+
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
@@ -57,26 +48,7 @@ include "Consultas/Consultas.php";
 
 
 </div>
-<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Bajas de intendencia al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
- 
-</div>
-</div>
 
-    
-
-
- 
-    
-<div id="tablaEmpleadosBajas"></div>
-
-
-</div>
 
 </div>
 </div></div>

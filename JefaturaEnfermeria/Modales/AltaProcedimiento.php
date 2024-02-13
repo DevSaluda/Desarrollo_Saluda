@@ -6,7 +6,7 @@
     
     <div class="text-center">
     <div class="modal-header">
-         <p class="heading lead">Añadiendo nuevo procedimiento <i class="fas fa-credit-card"></i></p>
+         <p class="heading lead">Añadiendo nuevo procedimiento <i class="fas fa-credit-card"></i></p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true" class="white-text">&times;</span>

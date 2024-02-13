@@ -116,7 +116,7 @@
     </a>
 
    <!-- Sidebar -->
-   <div class="sidebar" style ="background-color: #0057b8 !important;">
+   <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -125,7 +125,6 @@
         <div class="info">
           <a  id="DatosGenerales" class="d-block"><?php echo $row['Nombre_Apellidos']?></a>
           <a  id="DatosGenerales" class="d-block"><small><?php echo $row['Nombre_rol']?></small></a>
-          <a  id="DatosGenerales" class="d-block"><small>Sucursal actual: <strong><?php echo $row['Nombre_Sucursal']?></strong></small></a>
         </div>
       </div>
 

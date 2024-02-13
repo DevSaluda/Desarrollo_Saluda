@@ -1,7 +1,7 @@
 function CargaSignosVitales(){
 
 
-    $.get("https://saludapos.com/CEnfermeria/Consultas/RegistroPorDias.php","",function(data){
+    $.get("https://saludapos.com/JefaturaEnfermeria/Consultas/RegistroPorDias.php","",function(data){
       $("#sv").html(data);
     })
   
