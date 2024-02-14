@@ -1,7 +1,7 @@
 function CargaTotales(){
 
 
-    $.post("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/TotalesServicios.php","",function(data){
+    $.post("https://saludapos.com/JefaturaEnfermeria/Consultas/TotalesServicios.php","",function(data){
       $("#TableTotalesServ").html(data);
     })
 

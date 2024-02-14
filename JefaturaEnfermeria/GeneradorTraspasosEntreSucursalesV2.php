@@ -12,7 +12,6 @@ $SucursalDeOrigennLetras=($_POST['sucursalLetrasOrigen']);
 setcookie("Busquedainfinita", $SucursalDeOrigenn, time() + 30*24*60*60);
 include "Consultas/Consultas.php";
 
-include "Consultas/SumaDeTraspasos.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +20,7 @@ include "Consultas/SumaDeTraspasos.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Generar ordenes de traspasos <?php echo $row['ID_H_O_D']?> </title>
+  <title>Generar ordenes de traspasos <?echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 
@@ -259,7 +258,7 @@ table td {
    <div class="col">  <label for="exampleFormControlInput1">Precio de compra <span class="text-danger">*</span>  </label>  <input class="input-preciocompra form-control"   type="text" id="preciodecompra" name="PrecioDeCompra[]" placeholder="Grado"/></div>
    <div class="col"> <label for="exampleFormControlInput1">Cantidad a traspasar <span class="text-danger">*</span> </label><input class="input-cantidad form-control" value="1" onchange="contarTotal()" type="number" id="traspasocant" name="NTraspasos[]" placeholder="Cantidad traspasada"/></div>
    <input type="text" name="SucursalDestino[]"  hidden id="SucDestino" class="form-control" value="<?php echo $SucursalDestino?>">
-   <input type="text" name="SucursalDestinoLetras[]" hidden id="SucDestinoLetras" class="form-control" value="<?php echo $SucursalDestinoLetras?>">
+   <input type="text" name="SucursalDestinoLetras[]" hidden id="SucDestinoLetras" class="form-control" value="<?echo $SucursalDestinoLetras?>">
    <input type="text" name="TipodeServicio[]" hidden id="tipodeservicio" class="form-control" >
    <input type="text" name="SucursalTraspasa[]" hidden value="<?php echo $SucursalDeOrigenn?>" class="form-control" >
    <input type="date" class="form-control "  hidden name="FechaAprox[]" id="fechaaprox" value="<?php echo date("Y-m-d")?>"  > 

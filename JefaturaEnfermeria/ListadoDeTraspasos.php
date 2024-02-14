@@ -1,8 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +29,7 @@ include "Consultas/Consultas.php";
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Traspasos realizados
-    <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
+    <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
   </div>
 
   <div>
@@ -78,11 +75,12 @@ include "Consultas/Consultas.php";
 <!-- Control Sidebar -->
 
 <!-- Main Footer -->
+
 <?php
 include("Modales/BusquedaTraspasosFechas.php");
 include("Modales/RealizaNuevaOrdenTraspaso.php");
 include("Modales/RealizaNuevaOrdenTraspasoPorSucursales.php");
-include("Modales/ModalCancelarTraspasos.php");
+
 include("footer.php") ?>
 
 <!-- ./wrapper -->
@@ -114,7 +112,7 @@ include("footer.php") ?>
 </body>
 
 </html>
-<?php 
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

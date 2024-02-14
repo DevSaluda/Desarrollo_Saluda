@@ -1,6 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 
+
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
 $sql1="SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,	Traspasos_generados.TraspasoGeneradoPor,Traspasos_generados.ProveedorFijo,
@@ -209,7 +210,7 @@ $query = $conn->query($sql1);
 
 </body>
 </html>
-<?php 
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

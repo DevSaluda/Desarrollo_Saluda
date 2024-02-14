@@ -2,7 +2,6 @@
  $IdBusqueda=base64_decode($_GET['traspasoid']);
 include "Consultas/Consultas.php";
 
-
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.Fk_SucDestino,Traspasos_generados.ID_Prod_POS,
@@ -40,7 +39,7 @@ while ($r=$query->fetch_object()){
     </style>
 </head>
 <?php include_once ("Menu.php")?>
-<?php if($Especialistas!=null):?>
+<?php  if($Especialistas!=null):?>
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
  Verificacion de traspaso
@@ -258,7 +257,7 @@ $(document).ready(function () {
                                        
   <input type="text" class="form-control " readonly hidden name="CodBarraActualiza" value="<?php echo $Especialistas->Cod_Barra?>" >
 
-  <input type="text" class="form-control " readonly hidden name="NombreDefinio" id="nombredefinio" value="<?php echo $row['Nombre_Apellidos']?>" >
+  <input type="text" class="form-control " readonly hidden name="NombreDefinio" id="nombredefinio" value="<?echo $row['Nombre_Apellidos']?>" >
   <input type="date" class="form-control" name="FechaDeCaducidad" id="fechacaducidadinput"  >
   <input type="text" class="form-control " name="NumDelote" id="numdeloteinput" >
   <input type="text" class="form-control " readonly hidden name="SucursalActualizadora" value="<?php echo $row['Fk_Sucursal']?>" >
@@ -277,7 +276,7 @@ $(document).ready(function () {
 <script src="js/RegistraConExito.js"></script>
 <script src="js/ActualizaDetalleTraspasoCorrecto.js"></script>
 <script src="js/ActualizaLoteYCaducidad.js"></script>
-<?
+<?php
  
  include ("Modales/Error.php");
  include ("Modales/Exito.php");
