@@ -312,15 +312,16 @@ $(document).ready(function () {
 
 
 
-<script>
- var filaActual; // Variable global para almacenar la fila actual
 
-function setFilaActual(boton) {
+<script>
+  var filaActual; // Variable global para almacenar la fila actual
+
+  function setFilaActual(boton) {
     // Obtén la fila asociada al botón
     filaActual = $(boton).closest('.row');
-}
+  }
 
-function aplicarDescuento(importe, cantidadDescuento) {
+  function aplicarDescuento(importe, cantidadDescuento) {
     // Calcula el descuento
     var descuento = (importe * cantidadDescuento) / 100;
 
@@ -329,12 +330,12 @@ function aplicarDescuento(importe, cantidadDescuento) {
 
     // Devuelve un objeto con los resultados
     return {
-        valorConDescuento: valorConDescuento,
-        descuento: descuento
+      valorConDescuento: valorConDescuento,
+      descuento: descuento
     };
-}
+  }
 
-function actualizarFilaConDescuento(resultadoDescuento) {
+  function actualizarFilaConDescuento(resultadoDescuento) {
     // Actualiza el campo de costo de venta
     filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
@@ -344,22 +345,22 @@ function actualizarFilaConDescuento(resultadoDescuento) {
     // Muestra el descuento aplicado en el campo descuento1
     var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
     filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
-}
+  }
 
-function aplicarDescuentoEnFila(cantidadDescuento) {
+  function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
-        // Obtén los valores de la fila actual
-        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+      // Obtén los valores de la fila actual
+      var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
 
-        // Aplica el descuento y obtén los resultados
-        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+      // Aplica el descuento y obtén los resultados
+      var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
 
-        // Actualiza la fila con los resultados del descuento
-        actualizarFilaConDescuento(resultadoDescuento);
+      // Actualiza la fila con los resultados del descuento
+      actualizarFilaConDescuento(resultadoDescuento);
     }
-}
+  }
 
-function resetearModal() {
+  function resetearModal() {
     // Restablece el valor del select
     $('#cantidadadescontar').val('');
 
@@ -367,9 +368,9 @@ function resetearModal() {
     // $('#otroCampo').val('');
 
     // Otros ajustes necesarios para restablecer el estado de la ventana modal
-}
+  }
 
-function aplicarDescuentoSeleccionado() {
+  function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat($('#cantidadadescontar').val()) || 0;
 
     // Aplica descuento solo en la fila correspondiente
@@ -386,20 +387,20 @@ function aplicarDescuentoSeleccionado() {
 
     // Muestra SweetAlert
     Swal.fire({
-        icon: 'success',
-        title: 'Descuento aplicado',
-        showConfirmButton: false,
-        timer: 1500
+      icon: 'success',
+      title: 'Descuento aplicado',
+      showConfirmButton: false,
+      timer: 1500
     });
-}
+  }
 
-function actualizarTotal() {
+  function actualizarTotal() {
     var contenedorFilas = $('#parte1');
     var sumaTotal = 0;
 
     contenedorFilas.find('.row').each(function () {
-        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
-        sumaTotal += importe;
+      var importe = parseFloat($(this).find('.montoreal').val()) || 0;
+      sumaTotal += importe;
     });
 
     // Actualiza el campo totalventa
@@ -408,18 +409,19 @@ function actualizarTotal() {
     // Actualiza el campo totalventa2
     $('#totalventa2').val(sumaTotal.toFixed(2));
     $('#subtotal').val(sumaTotal.toFixed(2));
-}
+  }
 
-// Llama a aplicarDescuentoEnFila() después de agregar una nueva fila
-$(document).on('click', '.remover_campo', function() {
+  // Llama a aplicarDescuentoEnFila() después de agregar una nueva fila
+  $(document).on('click', '.remover_campo', function () {
     aplicarDescuentoEnFila(parseFloat($('#cantidadadescontar').val()) || 0);
-});
+    multiplicar(); // Agrega esta línea para recalcular los importes
+  });
 
-// Llama a aplicarDescuentoEnFila() después de agregar una nueva fila dinámicamente
-$(document).on('click', '.agregar_campo', function() {
+  // Llama a aplicarDescuentoEnFila() después de agregar una nueva fila dinámicamente
+  $(document).on('click', '.agregar_campo', function () {
     aplicarDescuentoEnFila(parseFloat($('#cantidadadescontar').val()) || 0);
-});
-
+    multiplicar(); // Agrega esta línea para recalcular los importes
+  });
 </script>
 
 
