@@ -127,8 +127,11 @@ function multiplicar() {
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
         var descuento = parseFloat($(this).find('.Descuento').val()) || 0;
 
-        // Calcular el importe para la fila actual con descuento
-        var importe = (precioProducto * cantidadVenta) - ((precioProducto * cantidadVenta) * (descuento / 100));
+        // Calcular el importe unitario con descuento
+        var precioConDescuento = precioProducto - (precioProducto * (descuento / 100));
+
+        // Calcular el importe total para la fila actual
+        var importe = precioConDescuento * cantidadVenta;
 
         // Actualizar el campo de importe para la fila actual
         $(this).find('.montocondescuentodeverdad').val(importe.toFixed(2));
@@ -143,6 +146,7 @@ function multiplicar() {
     // Llamar a la función de sumar (si es necesario)
     sumar();
 }
+
 
  function sumar()
   {
