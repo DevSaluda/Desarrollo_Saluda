@@ -313,34 +313,67 @@ $(document).ready(function () {
 
 
 <script>
-  // Función para aplicar descuento a una fila específica
-  function aplicarDescuentoEnFila(fila, cantidadDescuento) {
-    // Obtén los valores de la fila actual
-    var precioProducto = parseFloat(fila.find('.Precio').val()) || 0;
+  var filaActual; // Variable global para almacenar la fila actual
 
-    // Calcula el descuento y el valor con descuento
-    var descuento = (precioProducto * cantidadDescuento) / 100;
-    var valorConDescuento = precioProducto - descuento;
-
-    // Actualiza los campos de la fila con los resultados del descuento
-    fila.find('.montoreal').val(valorConDescuento.toFixed(2));
-    fila.find('.Descuento').val(descuento.toFixed(2));
-    fila.find('#descuento1').val(parseInt(cantidadDescuento));
+  function setFilaActual(boton) {
+    // Obtén la fila asociada al botón
+    filaActual = $(boton).closest('.row');
   }
 
-  // Función para resetear el estado de la ventana modal
-  function resetearModal() {
+  function aplicarDescuento(importe, cantidadDescuento) {
+    // Calcula el descuento
+    var descuento = (importe * cantidadDescuento) / 100;
+
+    // Calcula el valor con descuento
+    var valorConDescuento = importe - descuento;
+
+    // Devuelve un objeto con los resultados
+    return {
+        valorConDescuento: valorConDescuento,
+        descuento: descuento
+    };
+}
+
+function actualizarFilaConDescuento(resultadoDescuento) {
+    // Actualiza el campo de costo de venta
+    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+
+    // Actualiza el campo de descuento en la fila
+    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+
+    // Muestra el descuento aplicado en el campo descuento1
+    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
+    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+}
+
+function aplicarDescuentoEnFila(cantidadDescuento) {
+    if (filaActual) {
+        // Obtén los valores de la fila actual
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+
+        // Aplica el descuento y obtén los resultados
+        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+
+        // Actualiza la fila con los resultados del descuento
+        actualizarFilaConDescuento(resultadoDescuento);
+    }
+}
+
+function resetearModal() {
+    // Restablece el valor del select
     $('#cantidadadescontar').val('');
+
     // Restablece otros campos si es necesario
     // $('#otroCampo').val('');
-  }
 
-  // Función para aplicar el descuento seleccionado
-  function aplicarDescuentoSeleccionado() {
-    var cantidadDescuento = parseFloat($("#cantidadadescontar").val()) || 0;
+    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+}
+
+function aplicarDescuentoSeleccionado() {
+    var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
 
     // Aplica descuento solo en la fila correspondiente
-    aplicarDescuentoEnFila($('#parte1 .row:last'), cantidadDescuento);
+    aplicarDescuentoEnFila(cantidadDescuento);
 
     // Actualiza el total
     actualizarTotal();
@@ -358,27 +391,25 @@ $(document).ready(function () {
         showConfirmButton: false,
         timer: 1500
     });
-  }
+}
 
-  // Función para actualizar el total
-  function actualizarTotal() {
+function actualizarTotal() {
+    var contenedorFilas = $('#parte1');
     var sumaTotal = 0;
 
-    // Recorre todas las filas y suma los valores con descuento
-    $('#parte1 .row').each(function () {
+    contenedorFilas.find('.row').each(function () {
         var importe = parseFloat($(this).find('.montoreal').val()) || 0;
         sumaTotal += importe;
     });
 
-    // Actualiza los campos de total
-    $('#totalventa, #totalventa2, #subtotal').val(sumaTotal.toFixed(2));
-  }
+    // Actualiza el campo totalventa
+    $('#totalventa').val(sumaTotal.toFixed(2));
 
-  // Evento para aplicar descuento cuando se selecciona una opción en el modal
-  $('#aplicarDescuentoBtn').click(aplicarDescuentoSeleccionado);
-
+    // Actualiza el campo totalventa2 (ajusta el id según sea necesario)
+    $('#totalventa2').val(sumaTotal.toFixed(2));
+    $('#subtotal').val(sumaTotal.toFixed(2));
+}
 </script>
-
 
 
 
