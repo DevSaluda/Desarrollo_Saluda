@@ -313,72 +313,104 @@ $(document).ready(function () {
 
 
 <script>
-        $(document).ready(function() {
-            // Evento para abrir el modal y establecer la fila actual
-            $(document).on('click', '.aplicar-descuento-btn', function() {
-                var filaActual = $(this).closest('.row');
-                var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
-                // Aquí puedes hacer lo que necesites con la fila actual y los datos obtenidos
-                // Por ejemplo, puedes mostrar el modal después de establecer los valores necesarios
-                $('#Descuento1detalles').modal('show');
-            });
-        });
+  var filaActual; // Variable global para almacenar la fila actual
 
-        function aplicarDescuentoSeleccionado() {
-            var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
-            var filaActual = $('#Descuento1detalles').data('filaActual');
-            if (filaActual) {
-                var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
-                var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
-                actualizarFilaConDescuento(filaActual, resultadoDescuento);
-                actualizarTotal();
-                $('#Descuento1detalles').modal('hide');
-                resetearModal();
-                mostrarMensajeDescuentoAplicado();
-            }
-        }
+  function setFilaActual(boton) {
+    // Obtén la fila asociada al botón
+    filaActual = $(boton).closest('.row');
+  }
 
-        function aplicarDescuento(importe, cantidadDescuento) {
-            var descuento = (importe * cantidadDescuento) / 100;
-            var valorConDescuento = importe - descuento;
-            return {
-                valorConDescuento: valorConDescuento,
-                descuento: descuento
-            };
-        }
+  function aplicarDescuento(importe, cantidadDescuento) {
+    // Calcula el descuento
+    var descuento = (importe * cantidadDescuento) / 100;
 
-        function actualizarFilaConDescuento(fila, resultadoDescuento) {
-            fila.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
-            fila.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
-            var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
-            fila.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
-        }
+    // Calcula el valor con descuento
+    var valorConDescuento = importe - descuento;
 
-        function resetearModal() {
-            $('#cantidadadescontar').val('');
-        }
+    // Devuelve un objeto con los resultados
+    return {
+        valorConDescuento: valorConDescuento,
+        descuento: descuento
+    };
+}
 
-        function mostrarMensajeDescuentoAplicado() {
-            Swal.fire({
-                icon: 'success',
-                title: 'Descuento aplicado',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+function actualizarFilaConDescuento(resultadoDescuento) {
+    // Actualiza el campo de costo de venta
+    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
-        function actualizarTotal() {
-            var contenedorFilas = $('#parte1');
-            var sumaTotal = 0;
-            contenedorFilas.find('.row').each(function () {
-                var importe = parseFloat($(this).find('.montoreal').val()) || 0;
-                sumaTotal += importe;
-            });
-            $('#totalventa').val(sumaTotal.toFixed(2));
-            $('#totalventa2').val(sumaTotal.toFixed(2));
-            $('#subtotal').val(sumaTotal.toFixed(2));
-        }
-    </script>
+    // Actualiza el campo de descuento en la fila
+    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+
+    // Muestra el descuento aplicado en el campo descuento1
+    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
+    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+}
+
+function aplicarDescuentoEnFila(cantidadDescuento) {
+    if (filaActual) {
+        // Obtén los valores de la fila actual
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+
+        // Aplica el descuento y obtén los resultados
+        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+
+        // Actualiza la fila con los resultados del descuento
+        actualizarFilaConDescuento(resultadoDescuento);
+    }
+}
+
+function resetearModal() {
+    // Restablece el valor del select
+    $('#cantidadadescontar').val('');
+
+    // Restablece otros campos si es necesario
+    // $('#otroCampo').val('');
+
+    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+}
+
+function aplicarDescuentoSeleccionado() {
+    var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+
+    // Aplica descuento solo en la fila correspondiente
+    aplicarDescuentoEnFila(cantidadDescuento);
+
+    // Actualiza el total
+    actualizarTotal();
+
+    // Cierra el modal
+    $('#Descuento1detalles').modal('hide');
+
+    // Resetea el estado de la ventana modal
+    resetearModal();
+
+    // Muestra SweetAlert
+    Swal.fire({
+        icon: 'success',
+        title: 'Descuento aplicado',
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
+function actualizarTotal() {
+    var contenedorFilas = $('#parte1');
+    var sumaTotal = 0;
+
+    contenedorFilas.find('.row').each(function () {
+        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
+        sumaTotal += importe;
+    });
+
+    // Actualiza el campo totalventa
+    $('#totalventa').val(sumaTotal.toFixed(2));
+
+    // Actualiza el campo totalventa2 (ajusta el id según sea necesario)
+    $('#totalventa2').val(sumaTotal.toFixed(2));
+    $('#subtotal').val(sumaTotal.toFixed(2));
+}
+</script>
+
 
 
 <?php
