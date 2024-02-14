@@ -208,7 +208,8 @@ $(document).ready(function () {
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
-                    <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
+                    <input class="montoreal form-control" readonly type="number"   </div>\
+                    <input class="montocondescuentodeverdad form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
                     <input class="form-control" readonly type="number" id="descuento1" value="0" name="DescuentoAplicado[]"> </div>\
@@ -311,6 +312,7 @@ $(document).ready(function () {
 
 
 
+
 <script>
   var filaActual; // Variable global para almacenar la fila actual
 
@@ -331,40 +333,34 @@ $(document).ready(function () {
         valorConDescuento: valorConDescuento,
         descuento: descuento
     };
-  }
+}
 
-  function actualizarFilaConDescuento(resultadoDescuento) {
-    // Obtén los valores originales de la fila
-    var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
-    var cantidadProducto = parseFloat(filaActual.find('.Cantidad').val()) || 0;
+function actualizarFilaConDescuento(resultadoDescuento) {
+    // Actualiza el campo de costo de venta
+    filaActual.find('.montocondescuentodeverdad').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
-    // Calcula el importe modificado con el descuento aplicado
-    var importeModificado = precioProducto * cantidadProducto - resultadoDescuento.descuento;
-
-    // Actualiza los campos con los nuevos valores
-    filaActual.find('.montoreal').val(importeModificado.toFixed(2));
+    // Actualiza el campo de descuento en la fila
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
-    // Actualiza el campo descuento1 con el valor seleccionado
+    // Muestra el descuento aplicado en el campo descuento1
     var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
     filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
 
-
-  function aplicarDescuentoEnFila(cantidadDescuento) {
+function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
-      // Obtén los valores de la fila actual
-      var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+        // Obtén los valores de la fila actual
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
 
-      // Aplica el descuento y obtén los resultados
-      var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+        // Aplica el descuento y obtén los resultados
+        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
 
-      // Actualiza la fila con los resultados del descuento
-      actualizarFilaConDescuento(resultadoDescuento);
+        // Actualiza la fila con los resultados del descuento
+        actualizarFilaConDescuento(resultadoDescuento);
     }
-  }
+}
 
-  function resetearModal() {
+function resetearModal() {
     // Restablece el valor del select
     $('#cantidadadescontar').val('');
 
@@ -372,9 +368,9 @@ $(document).ready(function () {
     // $('#otroCampo').val('');
 
     // Otros ajustes necesarios para restablecer el estado de la ventana modal
-  }
+}
 
-  function aplicarDescuentoSeleccionado() {
+function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
 
     // Aplica descuento solo en la fila correspondiente
@@ -391,20 +387,20 @@ $(document).ready(function () {
 
     // Muestra SweetAlert
     Swal.fire({
-      icon: 'success',
-      title: 'Descuento aplicado',
-      showConfirmButton: false,
-      timer: 1500
+        icon: 'success',
+        title: 'Descuento aplicado',
+        showConfirmButton: false,
+        timer: 1500
     });
-  }
+}
 
-  function actualizarTotal() {
+function actualizarTotal() {
     var contenedorFilas = $('#parte1');
     var sumaTotal = 0;
 
     contenedorFilas.find('.row').each(function () {
-      var importe = parseFloat($(this).find('.montoreal').val()) || 0;
-      sumaTotal += importe;
+        var importe = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        sumaTotal += importe;
     });
 
     // Actualiza el campo totalventa
@@ -413,9 +409,8 @@ $(document).ready(function () {
     // Actualiza el campo totalventa2 (ajusta el id según sea necesario)
     $('#totalventa2').val(sumaTotal.toFixed(2));
     $('#subtotal').val(sumaTotal.toFixed(2));
-  }
+}
 </script>
-
 
 
 
