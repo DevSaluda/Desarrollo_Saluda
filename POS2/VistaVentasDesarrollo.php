@@ -400,7 +400,6 @@ function actualizarTotal() {
     contenedorFilas.find('.row').each(function () {
         var importe = parseFloat($(this).find('.montoreal').val()) || 0;
         sumaTotal += importe;
-        multiplicar();
     });
 
     // Actualiza el campo totalventa
