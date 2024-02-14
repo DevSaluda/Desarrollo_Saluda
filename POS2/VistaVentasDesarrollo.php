@@ -313,7 +313,53 @@ $(document).ready(function () {
 
 
 <script>
- function aplicarDescuentoSeleccionado() {
+ var filaActual; // Variable global para almacenar la fila actual
+
+function setFilaActual(boton) {
+    // Obtén la fila asociada al botón
+    filaActual = $(boton).closest('.row');
+}
+
+function aplicarDescuento(importe, cantidadDescuento) {
+    // Calcula el descuento
+    var descuento = (importe * cantidadDescuento) / 100;
+
+    // Calcula el valor con descuento
+    var valorConDescuento = importe - descuento;
+
+    // Devuelve un objeto con los resultados
+    return {
+        valorConDescuento: valorConDescuento,
+        descuento: descuento
+    };
+}
+
+function actualizarFilaConDescuento(resultadoDescuento) {
+    // Actualiza el campo de costo de venta
+    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+
+    // Actualiza el campo de descuento en la fila
+    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+
+    // Muestra el descuento aplicado en el campo descuento1
+    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
+    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+}
+
+function aplicarDescuentoEnFila(cantidadDescuento) {
+    if (filaActual) {
+        // Obtén los valores de la fila actual
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+
+        // Aplica el descuento y obtén los resultados
+        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+
+        // Actualiza la fila con los resultados del descuento
+        actualizarFilaConDescuento(resultadoDescuento);
+    }
+}
+
+function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat($('#cantidadadescontar').val()) || 0;
 
     // Aplica descuento solo en la fila correspondiente
