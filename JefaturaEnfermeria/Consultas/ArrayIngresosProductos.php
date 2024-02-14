@@ -3,11 +3,10 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
 
-$sql = "SELECT Stock_registrosNuevos.Folio_Ingreso,Stock_registrosNuevos.ID_Prod_POS,Stock_registrosNuevos.Fk_sucursal,Stock_registrosNuevos.Factura,
-Stock_registrosNuevos.Existencias_R,Stock_registrosNuevos.ExistenciaPrev,Stock_registrosNuevos.Recibido,Stock_registrosNuevos.AgregadoPor,Stock_registrosNuevos.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Productos_POS.ID_Prod_POS,Productos_POS.Cod_Barra,Productos_POS.Nombre_Prod FROM
+
+$sql = "SELECT Stock_registrosNuevos.Folio_Ingreso,Stock_registrosNuevos.ID_Prod_POS,Stock_registrosNuevos.Fk_sucursal,Stock_registrosNuevos.Factura,Stock_registrosNuevos.Precio_compra,
+Stock_registrosNuevos.Existencias_R,Stock_registrosNuevos.Total_Factura,Stock_registrosNuevos.ExistenciaPrev,Stock_registrosNuevos.Recibido,Stock_registrosNuevos.AgregadoPor,Stock_registrosNuevos.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Productos_POS.ID_Prod_POS,Productos_POS.Cod_Barra,Productos_POS.Nombre_Prod FROM
 Productos_POS,SucursalesCorre,Stock_registrosNuevos WHERE Stock_registrosNuevos.Fk_sucursal = SucursalesCorre.ID_SucursalC and 
 Stock_registrosNuevos.ID_Prod_POS = Productos_POS.ID_Prod_POS AND Stock_registrosNuevos.Fk_sucursal='".$row['Fk_Sucursal']."'";
  
@@ -21,6 +20,8 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Factura"] = $fila["Factura"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+    $data[$c]["Precio_Compra"] = $fila["Precio_compra"];
+    $data[$c]["TotalFactura"] = $fila["Total_Factura"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
     $data[$c]["ExistenciaPrev"] = $fila["ExistenciaPrev"];
     $data[$c]["Recibido"] = $fila["Recibido"];

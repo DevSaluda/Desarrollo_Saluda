@@ -1,6 +1,7 @@
 <?php include("db_connection.php");
 include "Consultas.php";
 
+?>
 <script>
 
 tabla = $('#Productos').DataTable({
