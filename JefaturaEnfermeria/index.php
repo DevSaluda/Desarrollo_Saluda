@@ -17,7 +17,6 @@ if(!isset($_COOKIE["IngresoAdminEnfer"]))
   $exibirModal = true;
 }
 include "Consultas/Consultas.php";
-
 include "Consultas/ContadorIndex.php";
 
 ?>
@@ -53,19 +52,23 @@ include "Consultas/ContadorIndex.php";
           </div>  
           <!-- ./col -->
           <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
+    <!-- Tarjeta de pequeño tamaño -->
+    <div class="small-box bg-success">
+        <div class="inner">
+            <!-- Título -->
+            <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
+            <!-- Descripción -->
+            <p>Registros de <br> signos vitales</p>
+        </div>
+        <div class="icon">
+            <!-- Icono -->
+            <i class="fas fa-file-medical-alt"></i>
+        </div>
+        <!-- Botón para abrir el modal -->
+        <a data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+</div>
 
-                <p>Registros de <br> signos vitales</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-file-medical-alt"></i>
-              </div>
-              <a data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
           <!-- ./col -->
         
           <!-- ./col -->
@@ -85,20 +88,21 @@ include "Consultas/ContadorIndex.php";
           </div>
   <!-- ./col -->
   <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-              <h3><?php echo $TotalReportes['totalreportes']?></h3>
-              <p>Reportes de <br> incidencias</p>
-               
-              </div>
-              <div class="icon">
-              <i class="fas fa-bullhorn"></i>
-              </div>
-              <a data-toggle="modal" data-target="#ConsultaReportes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          </div>
+    <!-- Tarjeta para mostrar registros de procedimientos -->
+    <div class="card card-danger">
+        <div class="card-body">
+            <!-- Título de la tarjeta -->
+            <h5 class="card-title">Registros de Incidencias</h5>
+        </div>
+        <div class="card-footer">
+            <!-- Botón para consultar procedimientos -->
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProcedimientos">
+                Consultar <i class="fas fa-arrow-circle-right ml-1"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
          
     
 <div class="card text-center">

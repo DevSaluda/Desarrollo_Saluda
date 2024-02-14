@@ -47,7 +47,7 @@ $(document).ready( function () {
 <?php
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Ventas_POS.Identificador_tipo,Ventas_POS.Fk_sucursal,Ventas_POS.ID_H_O_D,Ventas_POS.Fecha_venta,Ventas_POS.Turno,Ventas_POS.AgregadoPor,
@@ -103,7 +103,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/JefaturaEnfermeria/Modales/ContactoProveedor.php","id="+id,function(data){
+  		$.post("https://saludapos.com/JefaturaEnfermeria/Modales/ContactoProveedor.php","id="+id,function(data){
   			$("#form-edit").html(data);
           $("#Titulo").html("Medios disponibles para contactar al proveedor");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -139,7 +139,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

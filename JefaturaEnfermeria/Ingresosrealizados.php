@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +10,9 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Ingreso de medicamentos en sucursales  <?echo $row['ID_H_O_D']?> </title>
+  <title>Ingreso de medicamentos en sucursales  <?php echo $row['ID_H_O_D']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -28,13 +27,13 @@ table td {
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 
 
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Ingreso de medicamentos realizados <?echo $row['ID_H_O_D']?> <?echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Ingreso de medicamentos realizados <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
  
   <div >
@@ -100,7 +99,7 @@ table td {
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
