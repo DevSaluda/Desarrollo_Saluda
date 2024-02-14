@@ -130,7 +130,7 @@ function multiplicar() {
         var importe = precioProducto * cantidadVenta;
 
         // Actualizar el campo de importe para la fila actual
-        $(this).find('.montocondescuentodeverdad').val(importe.toFixed(2));
+        $(this).find('.montoreal').val(importe.toFixed(2));
 
         // Sumar el importe al total
         sumaTotal += importe;
@@ -149,7 +149,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
