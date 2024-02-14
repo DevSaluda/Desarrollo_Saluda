@@ -123,18 +123,14 @@ function multiplicar() {
     // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
         // Obtener los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
-        var descuento = parseFloat($(this).find('.Descuento').val()) || 0;
 
-        // Calcular el importe unitario con descuento
-        var precioConDescuento = precioProducto - (precioProducto * (descuento / 100));
-
-        // Calcular el importe total para la fila actual
-        var importe = precioConDescuento * cantidadVenta;
+        // Calcular el importe para la fila actual
+        var importe = precioProducto * cantidadVenta;
 
         // Actualizar el campo de importe para la fila actual
-        $(this).find('.montocondescuentodeverdad').val(importe.toFixed(2));
+        $(this).find('.montoreal').val(importe.toFixed(2));
 
         // Sumar el importe al total
         sumaTotal += importe;
@@ -143,10 +139,9 @@ function multiplicar() {
     // Actualizar el campo de importe total (puedes ajustar el selector según tu estructura HTML)
     $('#totalImporte').val(sumaTotal.toFixed(2));
 
-    // Llamar a la función de sumar (si es necesario)
+    // Llamar a la función de suma (si es necesario)
     sumar();
 }
-
 
  function sumar()
   {
@@ -154,7 +149,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
