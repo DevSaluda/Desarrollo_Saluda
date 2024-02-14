@@ -1,82 +1,67 @@
 <?php
 include "Consultas/Consultas.php";
-
 include "Consultas/ConsultaCaja.php";
 include "Consultas/SumadeFolioTickets.php";
-
-include ("Consultas/db_connection.php");
+include "Consultas/db_connection.php";
 $fcha = date("Y-m-d");
 
 // Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
 $primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
-
 
 // Concatenar las primeras 3 letras con el valor de $totalmonto
 $resultado_concatenado = $primeras_tres_letras ;
 
 // Convertir el resultado a mayúsculas
 $resultado_en_mayusculas = strtoupper($resultado_concatenado);
-
-// Imprimir el resultado en mayúsculas
 ?>
 
-
 <div class="text-center">
-<button data-toggle="modal" data-target="#CambioAdar" class="btn btn-success btn-sm">Realizar venta <i class="fas fa-cash-register"></i></button>
-<button  class="btn btn-danger btn-sm" onclick="CargaGestionventas();">Cancelar venta <i class="far fa-window-close"></i></button>
-<div class="row">
-<input hidden type="text" class="form-control "  readonly value="<?php echo $row['Nombre_Apellidos']?>" >
-    
-    <div class="col">
-      
-    <label for="exampleFormControlInput1">Caja</label> <br>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-  </div>
-  <input type="text" class="form-control "  readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
-  <input type="text" class="form-control " hidden id="valcaja" name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
-    </div>  </div>
-      
-    <div class="col">
-      
-    <label for="exampleFormControlInput1">Turno</label> <br>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
-  </div>
-  <input type="text" class="form-control "  readonly value="<?php echo $ValorCaja['Turno']?>" >
-  
-    </div>  </div>
-
-
-<div class="col">
-      
-<label for="exampleFormControlInput1">Numero de ticket</label> <br>
-      <div class="input-group mb-3">
-    <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-receipt"></i></span>
+    <button data-toggle="modal" data-target="#CambioAdar" class="btn btn-success btn-sm">Realizar venta <i class="fas fa-cash-register"></i></button>
+    <button class="btn btn-danger btn-sm" onclick="CargaGestionventas();">Cancelar venta <i class="far fa-window-close"></i></button>
+    <div class="row">
+        <input hidden type="text" class="form-control" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
+        <div class="col">
+            <label for="exampleFormControlInput1">Caja</label> <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+                </div>
+                <input type="text" class="form-control" readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
+                <input type="text" class="form-control" hidden id="valcaja" name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
+            </div>
+        </div>
+        <div class="col">
+            <label for="exampleFormControlInput1">Turno</label> <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
+                </div>
+                <input type="text" class="form-control" readonly value="<?php echo $ValorCaja['Turno']?>" >
+            </div>
+        </div>
+        <div class="col">
+            <label for="exampleFormControlInput1">Numero de ticket</label> <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Tarjeta2"><i class="fas fa-receipt"></i></span>
+                </div>
+                <input type="text" class="form-control" value="<?php echo $resultado_en_mayusculas; ?><?php echo $totalmonto_con_ceros; ?>" readonly >
+            </div>
+        </div>
+        <div class="col">
+            <label for="exampleFormControlInput1">Total de venta</label> <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Tarjeta2"><i class="fas fa-money-check-alt"></i></span>
+                </div>
+                <input type="number" class="form-control" id="totalventa2" readonly >
+            </div>
+        </div>
     </div>
-    <input type="text" class="form-control " value="<?php echo $resultado_en_mayusculas; ?><?php echo $totalmonto_con_ceros; ?>" readonly  >
-  
-      </div>
-
-  <label for="clav" class="error"></div>
-  <div class="col">
-      
-  <label for="exampleFormControlInput1">Total de venta </label> <br>
-      <div class="input-group mb-3">
-    <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-money-check-alt"></i></span>
-    </div>
-    <input type="number" class="form-control " id="totalventa2"  readonly  >
-   
-      </div>
-  
-    
 </div>
-</div>
-</div>
-
 
 <script>
- $(function () {
+$(function () {
     $("body").keypress(function (e) {
         var key;
         if (window.event)
@@ -86,79 +71,43 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
         return (key != 13);
     });
 });
-  </script>
-<button hidden id="Ajusteeee" onclick="sumar()">Ajustar total de venta<i class="fas fa-cash-register"></i></button>
-<form action="javascript:void(0)"     target="print_popup"  method="post" id="VentasAlmomento" >
-<div class="text-center">
-<button type="submit" hidden  name="submit_registro" id="submit_registro" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
-<input type="text" class="form-control " hidden name="Vendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']?>" >
 
- 
-  <input type="text" class="form-control " hidden name="Cambio[]" readonly id="cambioreal" >
- <input type="datetime" name="Horadeimpresion" hidden value="<?php echo date('h:i:s A');?>">
-  <input type="date" class="form-control " hidden readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
-<input type="text" class="form-control "  hidden readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
-  <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
-    <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
-    <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
-     <input type="number" class="form-control " id="totalventa" hidden name ="TotalVentas[]" readonly  >
-   <input type="text" hidden class="form-control "  name="Sucursaleventas[]"readonly value="<?php echo $row['Fk_Sucursal']?>" >
-<input type="text" hidden class="form-control "  name="Empresa[]" readonly value="<?php echo $row['ID_H_O_D']?>" >
-<input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
-<input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >
-<input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >
-  
-   <!-- SEGUNDO PRODUCTP -->
-   <script>
-  
-</script>
-<script>
 function multiplicar() {
-    // Obtener el contenedor principal de las filas
     var contenedorFilas = $('#parte1');
-
-    // Inicializar la suma total
     var sumaTotal = 0;
 
-    // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
-        // Obtener los valores de la fila actual
         var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
-
-        // Calcular el importe para la fila actual
         var importe = precioProducto * cantidadVenta;
 
-        // Actualizar el campo de importe para la fila actual
         $(this).find('.montoreal').val(importe.toFixed(2));
 
-        // Sumar el importe al total
         sumaTotal += importe;
     });
 
-    // Actualizar el campo de importe total (puedes ajustar el selector según tu estructura HTML)
     $('#totalImporte').val(sumaTotal.toFixed(2));
-
-    // Llamar a la función de suma (si es necesario)
     sumar();
 }
 
- function sumar()
-  {
+function sumar() {
     var $total = document.getElementById('totalventa2');
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
-      if(element.value !== '') {
-        subtotal += parseFloat(element.value);
-      }
+
+    [...document.getElementsByClassName("montoreal")].forEach(function (element) {
+        if (element.value !== '') {
+            subtotal += parseFloat(element.value);
+        }
     });
+
     $total.value = subtotal;
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
-  } 
+}
 </script>
+
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
 </div>
