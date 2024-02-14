@@ -310,8 +310,29 @@ $(document).ready(function () {
 </div>
 
 
-
 <script>
+  $(document).ready(function () {
+    // Esta función se activa al cambiar el valor del descuento
+    $('#cantidadadescontar').change(function() {
+        // Obtenemos el valor del descuento seleccionado
+        var cantidadDescuento = parseFloat($(this).val()) || 0;
+        // Actualizamos solo el descuento de la fila actual
+        if (filaActual) {
+            actualizarDescuentoEnFila(filaActual, cantidadDescuento);
+            actualizarTotal();
+        }
+    });
+
+    // Esta función se activa al hacer clic en el botón de descuento de una fila
+    $('.aplicar_descuento').click(function() {
+        // Obtenemos el valor del descuento seleccionado
+        var cantidadDescuento = parseFloat($(this).closest('.row').find('.descuento_personalizado').val()) || 0;
+        // Actualizamos solo el descuento de la fila actual
+        actualizarDescuentoEnFila($(this).closest('.row'), cantidadDescuento);
+        actualizarTotal();
+    });
+  });
+
   function aplicarDescuento(importe, cantidadDescuento) {
     var descuento = (importe * cantidadDescuento) / 100;
     var valorConDescuento = importe - descuento;
@@ -321,41 +342,16 @@ $(document).ready(function () {
     };
   }
 
-  function actualizarFilasConDescuento(cantidadDescuento) {
-    $('.row').each(function () {
-        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
-        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
-        $(this).find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
-        $(this).find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
-        $(this).find('#descuento1').val(parseInt(cantidadDescuento));
-    });
+  function actualizarDescuentoEnFila(fila, cantidadDescuento) {
+    var precioProducto = parseFloat(fila.find('.Precio').val()) || 0;
+    var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+    fila.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+    fila.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+    fila.find('.descuento_actual').text(cantidadDescuento + "%"); // Opcional: Actualizar la visualización del descuento aplicado
   }
 
-  function aplicarDescuentoSeleccionado() {
-    var cantidadDescuento = parseFloat($('#cantidadadescontar').val()) || 0;
-    actualizarFilasConDescuento(cantidadDescuento);
-    actualizarTotal();
-    $('#Descuento1detalles').modal('hide');
-    resetearModal();
-    Swal.fire({
-        icon: 'success',
-        title: 'Descuento aplicado',
-        showConfirmButton: false,
-        timer: 1500
-    });
-  }
-
-  function actualizarTotal() {
-    var sumaTotal = 0;
-    $('.montoreal').each(function () {
-        sumaTotal += parseFloat($(this).val()) || 0;
-    });
-    $('#totalventa').val(sumaTotal.toFixed(2));
-    $('#totalventa2').val(sumaTotal.toFixed(2));
-    $('#subtotal').val(sumaTotal.toFixed(2));
-  }
+  // Resto del código...
 </script>
-
 
 
 <?php
