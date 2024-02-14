@@ -415,6 +415,11 @@ $(document).on('click', '.remover_campo', function() {
     aplicarDescuentoEnFila(parseFloat($('#cantidadadescontar').val()) || 0);
 });
 
+// Llama a aplicarDescuentoEnFila() después de agregar una nueva fila dinámicamente
+$(document).on('click', '.agregar_campo', function() {
+    aplicarDescuentoEnFila(parseFloat($('#cantidadadescontar').val()) || 0);
+});
+
 </script>
 
 
