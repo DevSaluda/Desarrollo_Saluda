@@ -322,13 +322,12 @@ $(document).ready(function () {
   }
 
   function actualizarFilasConDescuento(cantidadDescuento) {
-    $('#parte1 .row').each(function () {
+    $('.row').each(function () {
         var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
         $(this).find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
         $(this).find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
-        var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
-        $(this).find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+        $(this).find('#descuento1').val(parseInt(cantidadDescuento));
     });
   }
 
@@ -348,16 +347,14 @@ $(document).ready(function () {
 
   function actualizarTotal() {
     var sumaTotal = 0;
-    $('#parte1 .row').each(function () {
-        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
-        sumaTotal += importe;
+    $('.montoreal').each(function () {
+        sumaTotal += parseFloat($(this).val()) || 0;
     });
     $('#totalventa').val(sumaTotal.toFixed(2));
     $('#totalventa2').val(sumaTotal.toFixed(2));
     $('#subtotal').val(sumaTotal.toFixed(2));
   }
 </script>
-
 
 
 
