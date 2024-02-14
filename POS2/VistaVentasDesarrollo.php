@@ -335,17 +335,13 @@ $(document).ready(function () {
 }
 
 function actualizarFilaConDescuento(resultadoDescuento) {
-    // Actualiza el campo de costo de venta
-    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
-
     // Actualiza el campo de descuento en la fila
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
-    // Muestra el descuento aplicado en el campo descuento1
-    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
-    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+    // Mantiene el importe modificado en el campo montoreal
+    var importeModificado = parseFloat(filaActual.find('.montoreal').val()) || 0;
+    filaActual.find('.montoreal').val(importeModificado.toFixed(2));
 }
-
 function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
         // Obtén los valores de la fila actual
