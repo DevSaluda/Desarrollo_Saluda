@@ -359,6 +359,16 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
     }
 }
 
+function resetearModal() {
+    // Restablece el valor del select
+    $('#cantidadadescontar').val('');
+
+    // Restablece otros campos si es necesario
+    // $('#otroCampo').val('');
+
+    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+}
+
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat($('#cantidadadescontar').val()) || 0;
 
@@ -368,8 +378,13 @@ function aplicarDescuentoSeleccionado() {
     // Actualiza el total
     actualizarTotal();
 
-    // Cierra el modal y muestra la notificación
+    // Cierra el modal
     $('#Descuento1detalles').modal('hide');
+
+    // Resetea el estado de la ventana modal
+    resetearModal();
+
+    // Muestra SweetAlert
     Swal.fire({
         icon: 'success',
         title: 'Descuento aplicado',
@@ -394,6 +409,11 @@ function actualizarTotal() {
     $('#totalventa2').val(sumaTotal.toFixed(2));
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
+
+// Llama a aplicarDescuentoEnFila() después de agregar una nueva fila
+$(document).on('click', '.remover_campo', function() {
+    aplicarDescuentoEnFila(parseFloat($('#cantidadadescontar').val()) || 0);
+});
 
 </script>
 
