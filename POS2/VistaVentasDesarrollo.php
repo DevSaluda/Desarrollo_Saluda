@@ -149,7 +149,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
