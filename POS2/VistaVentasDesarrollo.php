@@ -334,16 +334,18 @@ $(document).ready(function () {
   }
 
   function actualizarFilaConDescuento(resultadoDescuento) {
-    // Obtenemos el importe modificado anteriormente
-    var importeModificado = parseFloat(filaActual.find('.montoreal').val()) || 0;
+    // Obtén los valores originales de la fila
+    var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+    var cantidadProducto = parseFloat(filaActual.find('.Cantidad').val()) || 0;
 
-    // Actualizamos el campo de costo de venta con el nuevo valor descontado
-    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+    // Calcula el importe modificado con el descuento aplicado
+    var importeModificado = precioProducto * cantidadProducto - resultadoDescuento.descuento;
 
-    // Actualizamos el campo de descuento en la fila
+    // Actualiza los campos con los nuevos valores
+    filaActual.find('.montoreal').val(importeModificado.toFixed(2));
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
-    // Muestra el descuento aplicado en el campo descuento1
+    // Actualiza el campo descuento1 con el valor seleccionado
     var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
     filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
