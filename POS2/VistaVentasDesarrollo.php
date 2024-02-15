@@ -251,6 +251,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
+            aplicarDescuentoEnFilaSinDescuento();
             multiplicar();
         }
     });
@@ -359,7 +360,9 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
         actualizarFilaConDescuento(resultadoDescuento);
     }
 }
-
+function aplicarDescuentoEnFilaSinDescuento() {
+    aplicarDescuentoEnFila(0);
+}
 function resetearModal() {
     // Restablece el valor del select
     $('#cantidadadescontar').val('');
