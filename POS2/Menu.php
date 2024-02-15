@@ -12,14 +12,14 @@ include "Consultas/ConsultaCaja.php";
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: white;"></i></a>
-      
       </li>
       <li class="nav-item">
-    <marquee behavior="scroll" direction="left" scrollamount="8" style="color: white; font-weight: bold;">
-        Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, en Laboratorios tenemos 30% descuento, Ultrasonidos *Sujeto a previa agenda* el 20% descuento y en Electrocardiogramas un 30% de descuento, recuerda aplicarlos antes de cobrarle al cliente. 
-        &#x1F389;&#x1F48A; 30% descuento en Laboratorios &#x1F48A;&#x1F389;
-        &#x1F4CB;&#x26A1; 20% descuento en Ultrasonidos &#x26A1;&#x1F4CB;
-        &#x1F493;&#x1F4C8; 30% descuento en Electrocardiogramas &#x1F4C8;&#x1F493;
+    <marquee behavior="scroll" direction="left" scrollamount="4" style="color: white; font-weight: bold;">
+        Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, 
+        🎉💊 30% descuento en Laboratorios 💊🎉
+        📋⚡ 20% descuento en Ultrasonidos ⚡📋
+        💓📈 30% descuento en Electrocardiogramas 📈💓
+        recuerda aplicarlos antes de cobrarle al cliente. 
     </marquee>
 </li>
 
