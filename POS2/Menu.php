@@ -42,7 +42,7 @@ include "Consultas/ConsultaCaja.php";
   message.addEventListener("animationiteration", function() {
     message.style.animation = "none";
     void message.offsetWidth; /* Reinicia la animación */
-    message.style.animation = "scrollText 50s linear infinite"; /* Ajusta la duración según tus necesidades */
+    message.style.animation = "scrollText 300s linear infinite"; /* Ajusta la duración según tus necesidades */
   });
 });
 
