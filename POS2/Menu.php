@@ -118,6 +118,25 @@ include "Consultas/ConsultaCaja.php";
     }
 </style>
 
+
+<style>
+    .scrolling-message {
+        animation: scrollText 30s linear infinite;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var message = document.querySelector(".scrolling-message");
