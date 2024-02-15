@@ -125,10 +125,9 @@ function multiplicar() {
         // Obtener los valores de la fila actual
         var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
-        var descuento = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0; // Obtener el descuento
 
-        // Calcular el importe para la fila actual, considerando el descuento
-        var importe = (precioProducto - (precioProducto * descuento / 100)) * cantidadVenta;
+        // Calcular el importe para la fila actual
+        var importe = precioProducto * cantidadVenta;
 
         // Actualizar el campo de importe para la fila actual
         $(this).find('.montoreal').val(importe.toFixed(2));
@@ -143,7 +142,6 @@ function multiplicar() {
     // Llamar a la función de suma (si es necesario)
     sumar();
 }
-
 
  function sumar()
   {
