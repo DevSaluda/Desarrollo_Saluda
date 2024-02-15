@@ -15,7 +15,7 @@ include "Consultas/ConsultaCaja.php";
       </li>
       <li class="nav-item">
     <marquee behavior="scroll" direction="left" scrollamount="4" style="color: white; font-weight: bold;">
-        Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, 
+        Hola, <?php echo $row['Nombre_Apellidos']?> te recordamos que tenemos promociones vigentes hasta el 20 de febrero, 
         🎉💊 30% descuento en Laboratorios 💊🎉
         📋⚡ 20% descuento en Ultrasonidos ⚡📋
         💓📈 30% descuento en Electrocardiogramas 📈💓
