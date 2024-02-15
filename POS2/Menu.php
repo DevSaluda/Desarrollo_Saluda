@@ -15,8 +15,14 @@ include "Consultas/ConsultaCaja.php";
       
       </li>
       <li class="nav-item">
-            <marquee behavior="scroll" direction="left" scrollamount="4">Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, en Laboratorios tenemos 30% descuento, Ultrasonidos *Sujeto a previa agenda* el 20% descuento y en Electrocardiogramas un 30% de descuento, recuerda aplicarlos antes de cobrarle al cliente.</marquee>
-        </li>
+    <marquee behavior="scroll" direction="left" scrollamount="4" style="color: white; font-weight: bold;">
+        Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, en Laboratorios tenemos 30% descuento, Ultrasonidos *Sujeto a previa agenda* el 20% descuento y en Electrocardiogramas un 30% de descuento, recuerda aplicarlos antes de cobrarle al cliente. 
+        🎉💊 30% descuento en Laboratorios 💊🎉
+        📋⚡ 20% descuento en Ultrasonidos ⚡📋
+        💓📈 30% descuento en Electrocardiogramas 📈💓
+    </marquee>
+</li>
+
     </ul>
 
     
