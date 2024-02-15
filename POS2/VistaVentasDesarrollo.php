@@ -160,11 +160,11 @@ function multiplicar() {
   } 
 
   function actualizarMontos() {
-    // Obtener el valor del input .montoreal
-    var montoReal = $('.montoreal').val();
+    // Seleccionar el último elemento .montoreal agregado
+    var montoReal = $('.montoreal').last().val();
 
-    // Actualizar el valor del input .montocondescuentodeverdad con el valor de .montoreal
-    $('.montocondescuentodeverdad').val(montoReal);
+    // Actualizar el valor del último input .montocondescuentodeverdad con el valor del último input .montoreal
+    $('.montocondescuentodeverdad').last().val(montoReal);
 }
 
 </script>
