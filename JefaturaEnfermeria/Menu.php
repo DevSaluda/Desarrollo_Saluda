@@ -111,7 +111,7 @@
     <!-- Brand Logo -->
     <a href="index" class="brand-link" style="background-color: #c80096 !important;">
     
-      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i>JEFATURA ENFERMERIA</span>
+      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i>PUNTO DE VENTA</span>
     
     </a>
 

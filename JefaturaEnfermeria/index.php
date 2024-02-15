@@ -53,20 +53,20 @@ include "Consultas/ContadorIndex.php";
           <!-- ./col -->
           <div class="col-lg-3 col-6">
     <!-- Tarjeta de pequeño tamaño -->
-    <div class="small-box bg-success">
-        <div class="inner">
-            <!-- Título -->
-            <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
-            <!-- Descripción -->
-            <p>Registros de <br> signos vitales</p>
-        </div>
-        <div class="icon">
-            <!-- Icono -->
-            <i class="fas fa-file-medical-alt"></i>
-        </div>
-        <!-- Botón para abrir el modal -->
-        <a data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-    </div>
+    <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
+
+                <p>Registros de <br>Siginos Vitales</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-file-medical-alt"></i>
+              </div>
+                <a  data-toggle="modal" data-target="#SignosVitalesModal"class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div> 
 </div>
 
           <!-- ./col -->
@@ -76,16 +76,16 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-              <p>Registros de <br> procedimientos</p>
+                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
 
-               
+                <p>Registros de  <br> procedimientos</p>
               </div>
               <div class="icon">
               <i class="fas fa-procedures"></i>
               </div>
-              <a data-toggle="modal" data-target="#ConsulProcedimientos" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+                <a  data-toggle="modal" data-target="#ConsulProcedimientos" class="fas fa-arrow-circle-right">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
+          </div> 
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- Tarjeta para mostrar registros de procedimientos -->
