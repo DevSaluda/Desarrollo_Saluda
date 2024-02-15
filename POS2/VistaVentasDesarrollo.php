@@ -127,13 +127,8 @@ function multiplicar() {
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
         var descuento = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0; // Obtener el descuento
 
-        // Validar que el descuento no sea mayor que el precio del producto
-        if (descuento > precioProducto) {
-            descuento = precioProducto; // Establecer el descuento como el precio del producto
-        }
-
         // Calcular el importe para la fila actual, considerando el descuento
-        var importe = (precioProducto - descuento) * cantidadVenta;
+        var importe = (precioProducto - (precioProducto * descuento / 100)) * cantidadVenta;
 
         // Actualizar el campo de importe para la fila actual
         $(this).find('.montoreal').val(importe.toFixed(2));
@@ -155,7 +150,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
