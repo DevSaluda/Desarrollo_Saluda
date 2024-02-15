@@ -253,6 +253,7 @@ $(document).ready(function () {
             $('#FiltrarContenido').val("");
             aplicarDescuentoEnFilaSinDescuento();
             multiplicar();
+            
         }
     });
 });
