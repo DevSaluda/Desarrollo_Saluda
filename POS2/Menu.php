@@ -12,11 +12,39 @@ include "Consultas/ConsultaCaja.php";
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: white;"></i></a>
-      </li>
+      
+        <span class="scrolling-message">Hola, te recordamos que tenemos promociones vigentes hasta el 20 de febrero, en Laboratorios tenemos 30% descuento, Ultrasonidos *Sujeto a previa agenda* el 20% descuento y en Electrocardiogramas un 30% de descuento, recuerda aplicarlos antes de cobrarle al cliente.</span></li>
       
     </ul>
 
-    
+    <style>
+    .scrolling-message {
+        animation: scrollText 30s linear infinite;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var message = document.querySelector(".scrolling-message");
+        message.addEventListener("animationiteration", function() {
+            message.style.animation = "none";
+            void message.offsetWidth; /* Reinicia la animación */
+            message.style.animation = "scrollText 30s linear infinite"; /* Ajusta la duración según tus necesidades */
+        });
+    });
+</script>
 
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
