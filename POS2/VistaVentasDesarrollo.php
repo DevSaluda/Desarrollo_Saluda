@@ -183,6 +183,8 @@ function multiplicar() {
 }
 
 function actualizarFilaConDescuento(resultadoDescuento) {
+    console.log("Resultado del descuento:", resultadoDescuento);
+
     // Actualiza el campo de costo de venta
     filaActual.find('.montocondescuentodeverdad').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
@@ -194,18 +196,25 @@ function actualizarFilaConDescuento(resultadoDescuento) {
     filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
 
+
 function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
         // Obtén los valores de la fila actual
         var precioProducto = parseFloat(filaActual.find('.montoreal').val()) || 0;
 
+        console.log("Precio del producto:", precioProducto);
+        console.log("Descuento aplicado:", cantidadDescuento);
+
         // Aplica el descuento y obtén los resultados
         var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
+
+        console.log("Resultado del descuento:", resultadoDescuento);
 
         // Actualiza la fila con los resultados del descuento
         actualizarFilaConDescuento(resultadoDescuento);
     }
 }
+
 function aplicarDescuentoEnFilaSinDescuento() {
     console.log("Se está ejecutando aplicarDescuentoEnFilaSinDescuento()");
     aplicarDescuentoEnFila(0);
@@ -353,7 +362,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            aplicarDescuentoEnFila(0);
+           aplicarDescuentoEnFilaSinDescuento()
             multiplicar();
             
         }
