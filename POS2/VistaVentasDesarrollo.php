@@ -251,7 +251,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            aplicarDescuentoEnFilaSinDescuento();
+            aplicarDescuentoEnFila(0);
             multiplicar();
             
         }
