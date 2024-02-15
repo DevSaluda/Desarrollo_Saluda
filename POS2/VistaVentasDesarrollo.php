@@ -185,10 +185,14 @@ function multiplicar() {
 function actualizarFilaConDescuento(resultadoDescuento) {
     console.log("Resultado del descuento:", resultadoDescuento);
 
-    // Actualiza el campo de costo de venta
+    // Verificar los elementos seleccionados
+    console.log("Elemento montocondescuentodeverdad:", filaActual.find('.montocondescuentodeverdad'));
+    console.log("Elemento Descuento:", filaActual.find('.Descuento'));
+
+    // Actualizar el campo de costo de venta
     filaActual.find('.montocondescuentodeverdad').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
-    // Actualiza el campo de descuento en la fila
+    // Actualizar el campo de descuento en la fila
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
     // Muestra el descuento aplicado en el campo descuento1
