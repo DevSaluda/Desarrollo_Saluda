@@ -207,6 +207,7 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
     }
 }
 function aplicarDescuentoEnFilaSinDescuento() {
+    console.log("Se está ejecutando aplicarDescuentoEnFilaSinDescuento()");
     aplicarDescuentoEnFila(0);
 }
 function resetearModal() {
@@ -352,7 +353,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            aplicarDescuentoEnFila(0);
+            aplicarDescuentoEnFilaSinDescuento()
             multiplicar();
             
         }
