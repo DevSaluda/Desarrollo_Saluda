@@ -350,7 +350,7 @@ function actualizarFilaConDescuento(resultadoDescuento) {
 function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
         // Obtén los valores de la fila actual
-        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+        var precioProducto = parseFloat(filaActual.find('.montoreal').val()) || 0;
 
         // Aplica el descuento y obtén los resultados
         var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
