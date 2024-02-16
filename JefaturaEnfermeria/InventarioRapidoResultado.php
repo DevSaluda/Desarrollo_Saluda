@@ -1,5 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +15,7 @@ include "Consultas/Consultas.php";
         <?php echo $row['ID_H_O_D']?>
     </title>
 
-    <?php include "Header.php"?>
+    <?include "Header.php"?>
     <style>
     .error {
         color: red;
