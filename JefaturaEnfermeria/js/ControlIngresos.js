@@ -1,7 +1,7 @@
 function IngresosProductos(){
 
 
-    $.get("https://saludapos.com/JefaturaEnfermeria/Consultas/IngresosProductos.php","",function(data){
+    $.get("https://controlfarmacia.com/JefaturaEnfermeria/Consultas/IngresosProductos.php","",function(data){
       $("#TableStockSucursales").html(data);
     })
   
