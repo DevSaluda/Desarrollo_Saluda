@@ -684,14 +684,14 @@
       break;
   }
 ?>">
-  <li class="nav-item has-treeview">
+  <!--<li class="nav-item has-treeview">
     <a href="Mobiliarios" class="nav-link">
       <i class="fas fa-barcode"></i>
       <p>
         Mobiliario
       </p>
     </a>
-  </li>
+  </li>-->
 
   <li class="nav-item has-treeview">
     <a href="CodigosBarras" class="nav-link">

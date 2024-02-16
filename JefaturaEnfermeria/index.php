@@ -59,12 +59,12 @@ include "Consultas/ContadorIndex.php";
               <div class="inner">
                 <h3><?php echo $TomaSignosVitales['TotalPacientesdias']?></h3>
 
-                <p>Registros de <br>Siginos Vitales</p>
+                <p>Registros de <br> signos vitales</p>
               </div>
               <div class="icon">
               <i class="fas fa-file-medical-alt"></i>
               </div>
-                <a  data-toggle="modal" data-target="#SignosVitalesModal"class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+                <a  data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div> 
 </div>
