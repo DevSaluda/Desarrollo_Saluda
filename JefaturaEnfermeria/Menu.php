@@ -242,14 +242,14 @@
                     </p>
                 </a>
             </li> -->
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a href="ControlGastos" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
                     <p>
                         Otros gastos
                     </p>
                 </a>
-            </li>
+            </li>-->
         </ul>
     </li>
 </div>
