@@ -346,19 +346,19 @@
         </a>
       </li>
     
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="ReportesVentas" class="nav-link">
           <i class="fas fa-folder"></i>
           <p>Reporte de ventas</p>
         </a>
-      </li>
+      </li>-->
   
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="ListadoDeCancelaciones" class="nav-link">
           <i class="fas fa-ban"></i>
           <p>Cancelaciones</p>
         </a>
-      </li>
+      </li>-->
     </ul>
   </li>
 </div>
