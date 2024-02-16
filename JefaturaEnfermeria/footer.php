@@ -1,16 +1,12 @@
-
-<!--End of Tawk.to Script-->
 <footer class="main-footer">
-<strong>Derechos reservados.&copy; 2024 </strong>
-  
-  <div class="float-right d-none d-sm-inline-block">
-  
-    <b>Punto de venta</b> V 3.0 
-
+    <!-- <strong>Copyright &copy; 2020 <a href="https://somosgrupoe.com/">Somos Grupo E</a>.</strong> -->
+    Derechos reservados.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0
     </div>
   </footer>
-</div><?php
-include ("Modales/Salidas.php");
+</div><?php include ("Modales/Salidas.php");
+
 ?>
 <script src="js/LogSalida.js"></script>
-<script src="https://controlfarmacia.com/POS2/js/Refresca.js"></script>
+<script src="https://controlfarmacia.com/Controldecitas/js/Refresca.js"></script>
