@@ -532,7 +532,7 @@
     </ul>
   </li>
 
-  <!--<li class="nav-item has-treeview">
+  <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
       <i class="fas fa-shopping-cart"></i>
       <p>
@@ -556,7 +556,7 @@
             Sugerencias Compras
           </p>
         </a>
-      </li>-->
+      </li>
       <!-- Otros elementos del menú... -->
     </ul>
   </li>
