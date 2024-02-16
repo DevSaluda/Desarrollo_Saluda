@@ -394,14 +394,14 @@
       break;
   }
 ?>">
-  <li class="nav-item">
+  <!--<li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/SugerenciaFechas" class="nav-link">
       <i class="fa-solid fa-filter"></i>
       <p>
         Filtrar Ventas
       </p>
     </a>
-  </li>
+  </li>-->
 </div>
 
 <div style="<?php
