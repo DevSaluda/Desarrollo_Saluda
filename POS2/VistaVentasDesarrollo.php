@@ -131,6 +131,7 @@ function multiplicar() {
 
         // Actualizar el campo de importe para la fila actual
         $(this).find('.montoreal').val(importe.toFixed(2));
+        $(this).find('.montocondescuentodeverdad').val(importe.toFixed(2));
 
         // Sumar el importe al total
         sumaTotal += importe;
