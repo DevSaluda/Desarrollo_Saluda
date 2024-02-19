@@ -161,12 +161,19 @@ function multiplicar() {
   } 
 
   function actualizarMontos() {
-    // Seleccionar el último elemento .montoreal agregado
-    var montoReal = $('.montoreal').last().val();
+    // Seleccionar los nuevos elementos .montoreal agregados desde la última llamada a esta función
+    var nuevosMontosReales = $('.montoreal').not('.actualizado');
 
-    // Actualizar el valor del último input .montocondescuentodeverdad con el valor del último input .montoreal
-    $('.montocondescuentodeverdad').last().val(montoReal);
+    // Iterar sobre los nuevos elementos y actualizar sus valores
+    nuevosMontosReales.each(function() {
+        var montoReal = $(this).val();
+        // Actualizar el valor del input .montocondescuentodeverdad correspondiente
+        $(this).closest('tr').find('.montocondescuentodeverdad').val(montoReal);
+        // Marcar el elemento como actualizado para no ser afectado en futuras llamadas a esta función
+        $(this).addClass('actualizado');
+    });
 }
+
 
 </script>
 <div id="parte1">
