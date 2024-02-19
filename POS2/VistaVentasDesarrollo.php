@@ -123,7 +123,7 @@ function multiplicar() {
     // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
         // Obtener los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
+        var precioProducto = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
 
         // Calcular el importe para la fila actual
@@ -131,7 +131,6 @@ function multiplicar() {
 
         // Actualizar el campo de importe para la fila actual
         $(this).find('.montoreal').val(importe.toFixed(2));
-        $(this).find('.montocondescuentodeverdad').val(importe.toFixed(2));
 
         // Sumar el importe al total
         sumaTotal += importe;
@@ -161,19 +160,12 @@ function multiplicar() {
   } 
 
   function actualizarMontos() {
-    // Seleccionar los nuevos elementos .montoreal agregados desde la última llamada a esta función
-    var nuevosMontosReales = $('.montoreal').not('.actualizado');
+    // Seleccionar el último elemento .montoreal agregado
+    var montoReal = $('.montoreal').last().val();
 
-    // Iterar sobre los nuevos elementos y actualizar sus valores
-    nuevosMontosReales.each(function() {
-        var montoReal = $(this).val();
-        // Actualizar el valor del input .montocondescuentodeverdad correspondiente
-        $(this).closest('tr').find('.montocondescuentodeverdad').val(montoReal);
-        // Marcar el elemento como actualizado para no ser afectado en futuras llamadas a esta función
-        $(this).addClass('actualizado');
-    });
+    // Actualizar el valor del último input .montocondescuentodeverdad con el valor del último input .montoreal
+    $('.montocondescuentodeverdad').last().val(montoReal);
 }
-
 
 </script>
 <div id="parte1">
