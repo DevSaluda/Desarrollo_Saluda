@@ -13,5 +13,5 @@ function Expiro(){
  
 }
 function Login(){
-    location.href="https://controlconsulta.com/App/Secure/Enfermeria2"
+    location.href="https://saludapos.com/App/Secure/Enfermeria2"
  }

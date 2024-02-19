@@ -1,12 +1,14 @@
 <footer class="main-footer">
-    <!-- <strong>Copyright &copy; 2020 <a href="https://somosgrupoe.com/">Somos Grupo E</a>.</strong> -->
-    Derechos reservados.
+    <strong>Derechos reservados.&copy; 2020 <a href="https://somosgrupoe.com/">Somos Grupo E</a>.</strong>
+  
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0
+    CONTROL CONSULTA | Version 2.0 |
+      <b>Enfermeria</b> 2.0 
+  
     </div>
   </footer>
-</div><?php include ("Modales/Salidas.php");
-
-?>
+</div>
+<?
+include ("Modales/Salidas.php");?>
 <script src="js/LogSalida.js"></script>
-<script src="https://controlfarmacia.com/Controldecitas/js/Refresca.js"></script>
+<script src="https://controlconsulta.com/Enfermeria2/js/Refresca.js"></script>

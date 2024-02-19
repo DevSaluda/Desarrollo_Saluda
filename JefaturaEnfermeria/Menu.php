@@ -111,7 +111,7 @@
     <!-- Brand Logo -->
     <a href="index" class="brand-link" style="background-color: #c80096 !important;">
     
-      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i>JEFATURA ENFERMERIA</span>
+      <span class="brand-text font-weight-light" style="color: white;"><i class="fas fa-cash-register"></i>PUNTO DE VENTA</span>
     
     </a>
 
@@ -242,14 +242,14 @@
                     </p>
                 </a>
             </li> -->
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a href="ControlGastos" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
                     <p>
                         Otros gastos
                     </p>
                 </a>
-            </li>
+            </li>-->
         </ul>
     </li>
 </div>
@@ -346,19 +346,19 @@
         </a>
       </li>
     
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="ReportesVentas" class="nav-link">
           <i class="fas fa-folder"></i>
           <p>Reporte de ventas</p>
         </a>
-      </li>
+      </li>-->
   
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="ListadoDeCancelaciones" class="nav-link">
           <i class="fas fa-ban"></i>
           <p>Cancelaciones</p>
         </a>
-      </li>
+      </li>-->
     </ul>
   </li>
 </div>
@@ -394,14 +394,14 @@
       break;
   }
 ?>">
-  <li class="nav-item">
+  <!--<li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/SugerenciaFechas" class="nav-link">
       <i class="fa-solid fa-filter"></i>
       <p>
         Filtrar Ventas
       </p>
     </a>
-  </li>
+  </li>-->
 </div>
 
 <div style="<?php
@@ -684,14 +684,14 @@
       break;
   }
 ?>">
-  <li class="nav-item has-treeview">
+  <!--<li class="nav-item has-treeview">
     <a href="Mobiliarios" class="nav-link">
       <i class="fas fa-barcode"></i>
       <p>
         Mobiliario
       </p>
     </a>
-  </li>
+  </li>-->
 
   <li class="nav-item has-treeview">
     <a href="CodigosBarras" class="nav-link">

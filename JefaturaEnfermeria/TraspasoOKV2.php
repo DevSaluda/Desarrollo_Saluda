@@ -50,6 +50,7 @@ while ($r=$query->fetch_object()){
   <i class="fas fa-long-arrow-alt-left fa-lg"></i> Regresar a traspasos 
 </a> -->
 
+
 </div> 
 <div class="col-md-12">
   <div class="card-body">
