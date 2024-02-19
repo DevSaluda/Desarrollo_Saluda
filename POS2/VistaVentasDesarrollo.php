@@ -123,7 +123,7 @@ function multiplicar() {
     // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
         // Obtener los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
 
         // Calcular el importe para la fila actual
