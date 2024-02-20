@@ -1,7 +1,6 @@
 <?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
