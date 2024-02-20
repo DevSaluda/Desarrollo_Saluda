@@ -214,6 +214,7 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control "  name="SucursalesS" value="<?php echo $row['Fk_Sucursal']?>" readonly   aria-describedby="basic-addon1" maxlength="60">      
   <input type="number" class="form-control "  name="TotalVenta" id="totalventa" readonly   aria-describedby="basic-addon1" maxlength="60">  
   <input type="text" class="form-control "  name="CajaAsignada" id="cajaasignada" value="<?php echo $ValorCaja["ID_Caja"];?>">  
+  <input type="text" class="form-control "  name="Turno" id="turno" value="<?php echo $ValorCaja["Turno"];?>">  
   <input type="text" class="form-control "  name="Lote"  value="N/A">  
   <input type="text" class="form-control "  readonly id="sistemacaja" name="SistemaCaja" readonly value="POS <?php echo $row['Nombre_rol']?>">
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">

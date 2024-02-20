@@ -199,7 +199,8 @@ body, html {
             </div>
         </div>
     </div>
-    
+    <?php include "Modal.php";
+  include "Modales.php";?>
 <!-- Modal hacia soporte -->
 
     
