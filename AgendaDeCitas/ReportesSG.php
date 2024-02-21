@@ -14,7 +14,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Reportes de Electrocardiogramas de sucursales  </title>
+  <title>Registro diarios de signos vitales  </title>
 
 <?php include "Header.php"?>
  <style>
