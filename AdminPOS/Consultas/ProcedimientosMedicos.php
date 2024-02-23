@@ -18,7 +18,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT * FROM Procedimientos_Medicos WHERE ID_H_O_D ='".$row['ID_H_O_D']."'";
