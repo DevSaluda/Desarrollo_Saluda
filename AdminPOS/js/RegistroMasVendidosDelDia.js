@@ -1,7 +1,7 @@
 function CargaMasVendidos(){
 
 
-    $.get("https://controlfarmacia.com/AdminPOS/Consultas/RegistroDeMasVendidosPorDia.php","",function(data){
+    $.get("https://saludapos.com/AdminPOS/Consultas/RegistroDeMasVendidosPorDia.php","",function(data){
       $("#RegistrosMasVendidosDias").html(data);
     })
   
