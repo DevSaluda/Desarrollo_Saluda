@@ -81,7 +81,7 @@ while ($r=$query->fetch_object()){
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Descuento</th>
-<th>Importe</th>
+<th>Import</th>
 
     
 
