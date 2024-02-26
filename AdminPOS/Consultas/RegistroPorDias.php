@@ -15,7 +15,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, Signos_VitalesV2.Motivo_Consulta, Signos_VitalesV2.Nombre_Doctor,Signos_VitalesV2.Edad,Signos_VitalesV2.Sexo,Signos_VitalesV2.Telefono,
@@ -64,7 +64,7 @@ $query = $conn->query($sql1);
       <td><?php echo $DataPacientes["Fk_Enfermero"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
-    <td><button class="btn btn-default btn-sm" style="<?echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
+    <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
 	
  
 
@@ -106,7 +106,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
