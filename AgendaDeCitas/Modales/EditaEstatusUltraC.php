@@ -57,7 +57,7 @@ while ($r=$query->fetch_object()){
     <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
   </div>
   <select name="ActualizaColor" class="form-control" id="color" onchange="ShowSelected();">
-									  <option value="<?php echo $person->Codigo_color; ?>"><? echo $person->Estatus; ?></option>
+									  <option value="<?php echo $person->Codigo_color; ?>"><?php echo $person->Estatus; ?></option>
 				
               <option  value="btn btn-success">Entregado</option>		
               <option  value="btn btn-danger">Pendiente</option>						  
