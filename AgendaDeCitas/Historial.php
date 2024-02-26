@@ -13,39 +13,17 @@ include "Consultas/Consultas.php";
 
   <!-- Font Awesome Icons -->
  
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  
-
-<!-- JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-<!-- JS, Popper.js, and jQuery -->
-
-<script src="https://code.jquery.com/jquery-3.5.0.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://kit.fontawesome.com/b5ed0deb1b.js" crossorigin="anonymous"></script>
+  <?php include "Header.php";?>
 </head>
 <?php include_once ("Menu.php")?>
-<!-- <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">¡ATENCIÓN! </h4>
-  <p>El espacio en el disco del servidor está llegando al límite, se recomienda contactar a soporte para realizar tareas de mantenimiento.</p>
-
-</div> -->
 <div class="card text-center">
-  <div class="card-header" style="background-color:#0195AF !important;color: white;">
-  <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Desplegar ayuda <i class="far fa-comment-alt"></i></button>
+  <div class="card-header" style="background-color: #c80096 !important;color: white;">
+Resultados de Ultrasonidos   
   </div>
+  <div >
+  
+
+
   <div class="collapse" id="collapseExample">
   <div class="card-body">
   <div class="table-responsive">
@@ -72,15 +50,16 @@ include "Consultas/Consultas.php";
   <!-- Content Wrapper. Contains page content -->
   
 
-  <div class="container">
-<div class="row">
-<div class="col-md-12">
+ 
     
 <div id="Tablahistorial"></div>
 
 
 </div>
 </div>
+</div>
+</div>
+
 </div>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

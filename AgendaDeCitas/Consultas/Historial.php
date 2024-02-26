@@ -40,15 +40,15 @@ $query = $conn->query($sql1);
 	<td><?php echo $Ultras["Nombre_paciente"]; ?></td>
     <td><?php echo $Ultras["Telefono"]; ?></td>
 
-    <td  > <button class="<?echo $Ultras['Codigo_color'];?>"><?echo $Ultras['Estatus'];?></button></td>
-     <td><a class="btn btn-warning"  href="EntregaUltra?Nombre_paciente=<?echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
-         <a class="btn btn-secondary" target="_blank" href="EntregaUltraM?Nombre_paciente=<?echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
+    <td  > <button class="<?php echo $Ultras['Codigo_color'];?>" ><?php echo $Ultras['Estatus'];?></button></td>
+     <td><a class="btn btn-warning btn-sm"  href="EntregaUltra?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
+         <a class="btn btn-secondary btn-sm " target="_blank" href="EntregaUltraM?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
         </td>
 	<td>
-    <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?echo$Ultras['Telefono']; ?>&text=¡Hola,<? echo $Ultras['Nombre_paciente']; ?>!✨,te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?echo$Ultras['ID_Sucursal']; ?>,quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
+    <a class="btn btn-success btn-sm"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Ultras['Telefono']; ?>&text=¡Hola,<?php echo $Ultras['Nombre_paciente']; ?>!✨,te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?php echo$Ultras['ID_Sucursal']; ?>,quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
     </td>
-  <td>  <button data-id="<?php echo $Ultras["ID_resultado"];?>" class="btn-edit btn btn-info"><i class="far fa-edit"></i></button></td>
-  <td>	<a href="#" id="del2-<?php echo $Ultras["ID_resultado"];?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+  <td>  <button data-id="<?php echo $Ultras["ID_resultado"];?>" class="btn-edit btn btn-info btn-sm"><i class="far fa-edit"></i></button></td>
+  <td>	<a href="#" id="del2-<?php echo $Ultras["ID_resultado"];?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
   <script>
 		
 		$("#del2-"+<?php echo $Ultras["ID_resultado"];?>).click(function(e){
@@ -56,7 +56,7 @@ $query = $conn->query($sql1);
 			event.preventDefault();//Esto es para cancelar el envio
 	
 			$("#Celimina").click(function() {
-				$.post("https://controlfarmacia.com/AgendaDeCitas/Consultas/Eliminaresultado.php","id="+<?php echo $Ultras["ID_resultado"];?>,function(data){
+				$.post("https://saludapos.com/AgendaDeCitas/Consultas/Eliminaresultado.php","id="+<?php echo $Ultras["ID_resultado"];?>,function(data){
 					
   
           CargaHistorial();
@@ -79,7 +79,7 @@ $query = $conn->query($sql1);
   <script>
   	$(".btn-edit").click(function(){
   		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EditaEstatusUltraC.php","id="+id,function(data){
+  		$.post("https://saludapos.com/AgendaDeCitas/Modales/EditaEstatusUltraC.php","id="+id,function(data){
   			$("#form-edit").html(data);
   		});
   		$('#editModal').modal('show');
@@ -102,4 +102,4 @@ $query = $conn->query($sql1);
 
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  </div><!-- /.modal -
