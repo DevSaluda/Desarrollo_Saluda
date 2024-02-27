@@ -216,7 +216,7 @@ tabla = $('#CitasIndex').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/ArrayCitasIndex.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeEspecialistas/Consultas/ArrayCitasIndex.php",
  "aoColumns": [
     { mData: 'Folio' },
        { mData: 'Paciente' },
