@@ -30,6 +30,12 @@ if(isset($_POST['login_button'])) {
                     $_SESSION['AgendaCallCenter'] = $row['PersonalAgenda_ID'];
                     echo "ok";
                     break;
+
+					case "Pediatría":
+						$_SESSION['AgendaPediatria'] = $row['PersonalAgenda_ID'];
+						echo "ok";
+						break;
+					
                 default:
                     echo "Rol no reconocido";
                     break;
