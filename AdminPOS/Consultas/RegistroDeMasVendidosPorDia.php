@@ -53,7 +53,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Ventas_POS.Nombre_Prod,Ventas_POS.Fk_sucursal,Ventas_POS.Fecha_venta,Sum(Ventas_POS.Cantidad_Venta) AS Expr1,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
@@ -93,7 +93,7 @@ $query = $conn->query($sql1);
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
-<?
+<?php 
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
