@@ -227,7 +227,7 @@ function actualizarPrecioCompra() {
 </script>
 <script src="js/ActualizaProductosGenerales.js"></script>
 <script src="js/ActualizaPreciosDeTodo.js"></script>
-<?
+<?php
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -240,7 +240,7 @@ function actualizarPrecioCompra() {
 <!-- REQUIRED SCRIPTS -->
 
 
-<script src="js/DistribuyeProductosAsucursales.js"></script>
+
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    

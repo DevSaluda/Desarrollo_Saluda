@@ -1,7 +1,7 @@
 <?php
-include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
+include "Consultas/db_connection_Huellas.php";
+
 
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
@@ -24,8 +24,8 @@ $sql2 = "SELECT
               a.EstadoAsis AS EstadoAsis,
               a.totalhora_tr AS totalhora_tr
           FROM
-              somosgr1_Huellas.personal p
-          JOIN somosgr1_Huellas.asistenciaper a
+              u155356178_SaludaHuellas.personal p
+          JOIN u155356178_SaludaHuellas.asistenciaper a
           ON
               a.Id_Pernl = p.Id_pernl
           WHERE
@@ -41,7 +41,7 @@ $sql2 = "SELECT
 
   <title>Registro de entradas</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
@@ -51,11 +51,11 @@ $sql2 = "SELECT
 
     </style>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Registro de entradas del <?echo fechaCastellano($fecha1)?> al <?echo fechaCastellano($fecha2)?>
+  Registro de entradas del <?php echo fechaCastellano($fecha1)?> al <?php echo fechaCastellano($fecha2)?>
   </div>
   <div >
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoFecha" class="btn btn-default">
@@ -95,7 +95,7 @@ $(document).ready( function () {
 				extend:    'excelHtml5',
 				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
 				titleAttr: 'Exportar a Excel',
-                title: 'Registro de entradas y salidas del personal del  <?echo $fecha1?> al <?echo $fecha2?> ',
+                title: 'Registro de entradas y salidas del personal del  <?php echo $fecha1?> al <?php echo $fecha2?> ',
 				className: 'btn btn-success'
 			},
 			
@@ -110,7 +110,7 @@ $(document).ready( function () {
    
 	 
 </script>
-<?
+<?php
 
 
 $user_id=null;
@@ -160,7 +160,7 @@ $query = $conn->query($sql2);
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
 
-<?
+<?php
  
   include ("Modales/BuscaPorFechaVentas.php");
   include ("Modales/FiltraEspecificamenteEntradas.php");
@@ -194,7 +194,7 @@ $query = $conn->query($sql2);
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

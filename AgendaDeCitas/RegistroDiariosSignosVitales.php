@@ -1,7 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -13,9 +12,9 @@ include "Consultas/AnalisisIndex.php";
 
   <title>Registros de signos vitales |</title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php  include_once ("Menu.php")?>
 
 
 <div class="card text-center">
@@ -42,7 +41,7 @@ include "Consultas/AnalisisIndex.php";
   
 <script src="js/RegistroCitasPorDia.js"></script>
   <!-- Main Footer -->
-  <?
+  <?php
 
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -72,7 +71,7 @@ include "Consultas/AnalisisIndex.php";
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);

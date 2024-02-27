@@ -45,8 +45,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
+include("db_connection_Huellas.php");
+
 
 
 $user_id=null;
@@ -76,8 +76,8 @@ a.EstadoAsis AS EstadoAsis,
 a.totalhora_tr AS totalhora_tr
 FROM
 (
-  somosgr1_Huellas.personal p
-JOIN somosgr1_Huellas.asistenciaper a
+  u155356178_SaludaHuellas.personal p
+JOIN u155356178_SaludaHuellas.asistenciaper a
 )
 WHERE
 (a.Id_Pernl = p.Id_pernl)";

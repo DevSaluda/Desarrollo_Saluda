@@ -289,6 +289,18 @@ $(document).ready(function () {
               <option value="40">40%</option>
               <option value="45">45%</option>
               <option value="50">50%</option>
+              <option value="55">55%</option>
+              <option value="60">60%</option>
+              <option value="65">65%</option>
+              <option value="70">70%</option>
+              <option value="75">75%</option>
+              <option value="80">80%</option>
+              <option value="85">85%</option>
+              <option value="90">90%</option>
+              <option value="95">95%</option>
+              <option value="100">100%</option>
+
+
             </select>
           </div>
         </div>
@@ -296,6 +308,7 @@ $(document).ready(function () {
     </div>
   </div>
 </div>
+
 
 
 
@@ -329,7 +342,8 @@ function actualizarFilaConDescuento(resultadoDescuento) {
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
     // Muestra el descuento aplicado en el campo descuento1
-    filaActual.find('#descuento1').val(resultadoDescuento.descuento.toFixed(2));
+    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
+    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
@@ -345,6 +359,16 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
     }
 }
 
+function resetearModal() {
+    // Restablece el valor del select
+    $('#cantidadadescontar').val('');
+
+    // Restablece otros campos si es necesario
+    // $('#otroCampo').val('');
+
+    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+}
+
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
 
@@ -356,6 +380,9 @@ function aplicarDescuentoSeleccionado() {
 
     // Cierra el modal
     $('#Descuento1detalles').modal('hide');
+
+    // Resetea el estado de la ventana modal
+    resetearModal();
 
     // Muestra SweetAlert
     Swal.fire({
@@ -383,6 +410,7 @@ function actualizarTotal() {
     $('#subtotal').val(sumaTotal.toFixed(2));
 }
 </script>
+
 
 
 <?php

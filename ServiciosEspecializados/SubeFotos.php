@@ -9,6 +9,6 @@
 		$Fk_Nombre_paciente = $_POST['Nombre']; 
 		mysqli_query($conn,"insert into Fotografias (Fk_Nombre_paciente, location) values ('$Fk_Nombre_paciente','$location')");
 	}
-	
+	header('location:https://saludapos.com/ServiciosEspecializados/Resultados');
 ?>
 

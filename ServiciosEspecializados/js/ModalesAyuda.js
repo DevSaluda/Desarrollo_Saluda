@@ -7,9 +7,9 @@ function cierre()
     $('#Cierre').modal('show'); // abrir
 }
 
-function salir()
+function salirr()
 {
     
-window.location.replace('https://controlfarmacia.com/Servicios_Especializados/Cierre'); 
+window.location.replace('https://saludapos.com/ServiciosEspecializados/Expiro'); 
 
 }
