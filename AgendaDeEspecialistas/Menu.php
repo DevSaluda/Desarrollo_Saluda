@@ -162,7 +162,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
                   <i class="fas fa-calendar-check"></i>
                     <p>
                      Agendar citas
@@ -171,7 +171,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-check"></i>
                     <p>
                    Revaloraciones
@@ -180,7 +180,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/CancelacionesV2" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/CancelacionesV2" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-times"></i>
                     <p>
                       Cancelaciones
@@ -208,7 +208,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/Calendarios" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/Calendarios" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                       Pacientes agendados
@@ -217,7 +217,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/DataCampañas" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/DataCampañas" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                    Datos campañas
@@ -226,7 +226,7 @@
                   </a>
                 </li> -->
                 <!-- <li class="nav-item">
-            <a href="https://controlfarmacia.com/AgendaDeCitas/Calendario" class="nav-link">
+            <a href="https://controlfarmacia.com/AgendaDeEspecialistas/Calendario" class="nav-link">
             <i class="fas fa-calendar-check"></i>
               <p>
                 Pacientes agendados V 2.0
@@ -235,7 +235,7 @@
             </a>
           </li> -->
                 <!-- <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/CalendarioActivosCampanas" class="nav-link">
+                  <a href="https://controlfarmacia.com/AgendaDeEspecialistas/CalendarioActivosCampanas" class="nav-link">
                     <i class="fas fa-calendar-week"></i>
                     <p>
                       Campañas activas
@@ -244,7 +244,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://controlfarmacia.com/AgendaDeCitas/CalendarioFinalizadosCampanas" class="nav-link">
+                  <a href="https://controlfarmacia.com/AgendaDeEspecialistas/CalendarioFinalizadosCampanas" class="nav-link">
                     <i class="far fa-calendar"></i>
                     <p>
                       Campañas finalizadas
@@ -270,7 +270,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/AgendaDeCitas/CitaEspecialistas" class="nav-link">
+            <a href="https://controlfarmacia.com/AgendaDeEspecialistas/CitaEspecialistas" class="nav-link">
             <i class="fas fa-notes-medical"></i>
               <p>
                 Nueva cita
@@ -304,7 +304,7 @@
               <ul class="nav nav-treeview">
              
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/MedicosExpress" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/MedicosExpress" class="nav-link" style="color: white;">
                   <i class="fas fa-user-md"></i>
                     <p>
                      Agregar medico
@@ -313,7 +313,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/CitasEspecialistasExt" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/CitasEspecialistasExt" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                      Programar campaña
@@ -337,7 +337,7 @@
               </a>
               <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/MedicosEnGeneral" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/MedicosEnGeneral" class="nav-link" style="color: white;">
                   <i class="fas fa-user-md"></i>
                     <p>
                      Médicos
@@ -346,7 +346,7 @@
                   </a>
                 </li>
               <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ProgramacionSucursales" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ProgramacionSucursales" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                      Programar campaña
@@ -363,7 +363,7 @@
 
             <li class="nav-header" style="color: white;">Ultrasonidos</li>
             <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ResultadosdeUltrasonidos" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ResultadosdeUltrasonidos" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
                      Entrega de resultados
@@ -374,7 +374,7 @@
 
             <li class="nav-header">Reportes y data de pacientes </li>
             <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ProductosV2" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ProductosV2" class="nav-link" style="color: white;">
                   <i class="fas fa-money-bill-alt"></i>
                     <p>
                      Listado de costos
@@ -382,7 +382,7 @@
                   </a>
                 </li>   
             <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/DatosPacientes" class="nav-link">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/DatosPacientes" class="nav-link">
                   <i class="fas fa-database"></i>
                     <p>
                      Data Px
@@ -392,7 +392,7 @@
                 </li>   
                 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/Reportes" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/Reportes" class="nav-link" style="color: white;">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes laboratorios
@@ -401,7 +401,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ReportesRx" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ReportesRx" class="nav-link" style="color: white;">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Rayos X
@@ -411,7 +411,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ReportesUSG" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ReportesUSG" class="nav-link" style="color: white;">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes USG
@@ -422,7 +422,7 @@
 
 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ReportesEkg" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ReportesEkg" class="nav-link" style="color: white;">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes EKG
@@ -431,7 +431,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/ReportesSG" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/ReportesSG" class="nav-link" style="color: white;">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Signos vitales
@@ -454,7 +454,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AgendaDeCitas/RegistroDiariosSignosVitales" class="nav-link" style="color: white;">
+            <a href="https://saludapos.com/AgendaDeEspecialistas/RegistroDiariosSignosVitales" class="nav-link" style="color: white;">
             
             <i class="fas fa-calendar-day"></i>
               <p>
@@ -464,7 +464,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AgendaDeCitas/RegistroSignosVitalesGeneral" class="nav-link" style="color: white;">
+            <a href="https://saludapos.com/AgendaDeEspecialistas/RegistroSignosVitalesGeneral" class="nav-link" style="color: white;">
             <i class="far fa-calendar-check"></i>
               <p>
               Registro general
@@ -487,7 +487,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://controlfarmacia.com/AgendaDeCitas/Pacientespordia" class="nav-link">
+            <a href="https://controlfarmacia.com/AgendaDeEspecialistas/Pacientespordia" class="nav-link">
             
             <i class="fas fa-calendar-day"></i>
               <p>
@@ -497,7 +497,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://controlfarmacia.com/AgendaDeCitas/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://controlfarmacia.com/AgendaDeEspecialistas/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="far fa-calendar-check"></i>
               <p>
               Registro general
@@ -586,7 +586,7 @@
 
         function salir() {
 
-          window.location.replace('https://saludapos.com/AgendaDeCitas/Cierre');
+          window.location.replace('https://saludapos.com/AgendaDeEspecialistas/Cierre');
 
         }
         $(document).ready(function() {
