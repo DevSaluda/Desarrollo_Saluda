@@ -45,8 +45,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include("db_connection.php");
-include "Consultas.php";
+include("db_connection_Huellas.php");
+
 
 $user_id=null;
 /* $sql1="SELECT Reloj_ChecadorV2.Nombre,Reloj_ChecadorV2_Salidas.Nombre,Reloj_ChecadorV2.Sucursal,Reloj_ChecadorV2.Sucursal,Reloj_ChecadorV2.Area,Reloj_ChecadorV2.Area,Reloj_ChecadorV2_Salidas.Fecha_Registro,
@@ -70,8 +70,8 @@ $sql1 = "SELECT
     a.EstadoAsis AS EstadoAsis,
     a.totalhora_tr AS totalhora_tr
 FROM
-    somosgr1_Huellas.personal p
-JOIN somosgr1_Huellas.asistenciaper a
+    u155356178_SaludaHuellas.personal p
+JOIN u155356178_SaludaHuellas.asistenciaper a
     ON a.Id_Pernl = p.Id_pernl
 WHERE
     a.FechaAsis = CURDATE()"; 

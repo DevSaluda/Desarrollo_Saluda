@@ -241,7 +241,8 @@ Productos mas vendidos
   include ("Modales/ModalEnfermerosVigentes.php");
   include ("Modales/ModalMedicosVigentes.php");
   include ("Modales/ModalLimpiezaVigentes.php");
-
+  include("Modales/FiltraEspecificamenteEntradas.php");
+  include("Modales/FiltraEspecificamenteSalidas.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 

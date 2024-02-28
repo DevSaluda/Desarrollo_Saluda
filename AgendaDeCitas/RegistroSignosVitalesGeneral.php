@@ -1,6 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/AnalisisIndex.php";
+
 
 ?>
 <!DOCTYPE html>

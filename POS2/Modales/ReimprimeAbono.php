@@ -1,7 +1,6 @@
 <?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
@@ -25,7 +24,7 @@ while ($r=$query->fetch_object()){
   }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
   <p id="Espera" class="heading">ESPERE UN MOMENTO</p>
 
@@ -41,15 +40,15 @@ while ($r=$query->fetch_object()){
       onsubmit="window.open('about:blank','print_popup','width=400,height=400');"  id="GeneraTicket">
 
       <input type="number" class="form-control "  hidden name="NumeroTicket" value="<?php echo $Especialistas->Folio_Ticket; ?>"readonly  >
-      <input type="text" class="form-control "  hidden  name="FolioCredito"  readonly value="<? echo $Especialistas->Fk_Folio_Credito; ?>">
-      <input type="text" class="form-control "  hidden  name="TramientoTicket" readonly value="<? echo $Especialistas->Fk_tipo_Credi; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="number" class="form-control "   hidden name="AbonoTicket" id="abonoticket" value="<? echo $Especialistas->Cant_Abono; ?>" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="number" class="form-control "   hidden name="SaldoTicket" id="saldoticket" value="<? echo $Especialistas->Saldo; ?>" readonly   aria-describedby="basic-addon1" maxlength="60">  
-      <input type="text" class="form-control "  hidden  readonly name="TitularCredito" value="<? echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60"> 
-      <input type="text" class="form-control "   hidden  readonly name="VendedorTicket"  readonly value="<? echo $Especialistas->Agrega; ?>">
-      <input type="text" class="form-control "   hidden readonly name="SaldoActualTicket" value="<? echo $Especialistas->SaldoAnterior; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="text" class="form-control "  hidden readonly name="FechaValidez" value="<? echo $Especialistas->Validez; ?>" aria-describedby="basic-addon1" maxlength="60">   
-      <input type="datetime" name="Horadeimpresion"  hidden value="<?echo date('h:i A', strtotime($Especialistas->AgregadoEl));?>">
+      <input type="text" class="form-control "  hidden  name="FolioCredito"  readonly value="<?php echo $Especialistas->Fk_Folio_Credito; ?>">
+      <input type="text" class="form-control "  hidden  name="TramientoTicket" readonly value="<?php echo $Especialistas->Fk_tipo_Credi; ?>" aria-describedby="basic-addon1" maxlength="60"> 
+      <input type="number" class="form-control "   hidden name="AbonoTicket" id="abonoticket" value="<?php echo $Especialistas->Cant_Abono; ?>" readonly   aria-describedby="basic-addon1" maxlength="60">  
+      <input type="number" class="form-control "   hidden name="SaldoTicket" id="saldoticket" value="<?php echo $Especialistas->Saldo; ?>" readonly   aria-describedby="basic-addon1" maxlength="60">  
+      <input type="text" class="form-control "  hidden  readonly name="TitularCredito" value="<?php echo $Especialistas->Nombre_Cred; ?>" aria-describedby="basic-addon1" maxlength="60"> 
+      <input type="text" class="form-control "   hidden  readonly name="VendedorTicket"  readonly value="<?php echo $Especialistas->Agrega; ?>">
+      <input type="text" class="form-control "   hidden readonly name="SaldoActualTicket" value="<?php echo $Especialistas->SaldoAnterior; ?>" aria-describedby="basic-addon1" maxlength="60">   
+      <input type="text" class="form-control "  hidden readonly name="FechaValidez" value="<?php echo $Especialistas->Validez; ?>" aria-describedby="basic-addon1" maxlength="60">   
+      <input type="datetime" name="Horadeimpresion"  hidden value="<?php echo date('h:i A', strtotime($Especialistas->AgregadoEl));?>">
       <button type="submit"  id="EnviaTicket"  hidden class="btn btn-info">Realizar abono <i class="fas fa-money-check-alt"></i></button>
 </form>
 
@@ -57,7 +56,7 @@ while ($r=$query->fetch_object()){
 
 
 <script src="js/Reimpresion.js"></script>
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 

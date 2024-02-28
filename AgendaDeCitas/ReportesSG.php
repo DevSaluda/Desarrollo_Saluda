@@ -1,6 +1,5 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/AnalisisIndex.php";
 $fecha1 = isset($_POST['Fecha1']) ? $_POST['Fecha1'] : '';
 $fecha2 = isset($_POST['Fecha2']) ? $_POST['Fecha2'] : '';
 $sql1="SELECT Ventas_POS.Cod_Barra,Ventas_POS.Nombre_Prod,Ventas_POS.Fk_sucursal,Ventas_POS.Fecha_venta,Ventas_POS.Identificador_tipo,Ventas_POS.Folio_Ticket, Ventas_POS.Importe,Ventas_POS.FormaDePago,
@@ -15,7 +14,7 @@ Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Identif
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Reportes de Electrocardiogramas de sucursales  </title>
+  <title>Registro diarios de signos vitales  </title>
 
 <?php include "Header.php"?>
  <style>

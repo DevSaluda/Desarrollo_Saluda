@@ -11,30 +11,7 @@ include "Consultas/Consultas.php";
 
   <title>SERVICIOS ESPECIALIZADOS |<?php echo $row['ID_H_O_D']?> </title>
 
-  <!-- Font Awesome Icons -->
- 
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="Componentes/fontsgoogle.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="Componentes/bootstrap.min.css">
-  
-
-<!-- JS, Popper.js, and jQuery -->
-<script src="Componentes/jquery-3.5.1.slim.min.js"></script>
-<script src="Componentes/popper.min.js"></script>
-<script src="Componentes/bootstrap.min.js"></script>
-
-<!-- JS, Popper.js, and jQuery -->
-
-<script src="Componentes/jquery-3.5.0.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
-<script type="text/javascript" src="Componentes/datatables.min.js"></script>
-<script src="Componentes/sweetalert2@9.js"></script>
-<script src="Componentes/b5ed0deb1b.js"></script>
+<?php include "Header.php";?>
 </head>
 <?php include_once ("Menu.php")?>
 <!-- <div class="alert alert-danger" role="alert">
@@ -43,8 +20,17 @@ include "Consultas/Consultas.php";
 
 </div> -->
 <div class="card text-center">
+  <div class="card-header" style="background-color: #c80096 !important;color: white;">
+Resultados de Ultrasonidos   
+  </div>
+  <div >
+  
+</div>
+
+</div>
+<div class="card text-center">
   <div class="card-header" style="background-color:#0195AF !important;color: white;">
-  <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Desplegar ayuda <i class="far fa-comment-alt"></i></button>
+ 
   </div>
   <div class="collapse" id="collapseExample">
   <div class="card-body">

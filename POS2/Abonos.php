@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
 
-include "Consultas/AnalisisIndex.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,11 +9,11 @@ include "Consultas/AnalisisIndex.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Abonos realizado de <?echo $row['ID_H_O_D']?>  <?echo $row['Nombre_Sucursal']?> </title>
+  <title>Abonos realizado de <?php echo $row['ID_H_O_D']?>  <?php echo $row['Nombre_Sucursal']?> </title>
 
-<?include "Header.php"?>
+<?php include "Header.php"?>
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
     Creditos en clinicas  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
@@ -50,7 +48,7 @@ include "Consultas/AnalisisIndex.php";
   
 
   <!-- Main Footer -->
-  <?
+  <?php
   include ("footer.php");?>
 <!-- ./wrapper -->
 

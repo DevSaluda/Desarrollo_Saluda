@@ -277,7 +277,6 @@ $(document).ready(function () {
 <script src="js/ActualizaDetalleTraspasoCorrecto.js"></script>
 <script src="js/ActualizaLoteYCaducidad.js"></script>
 <?php
- 
  include ("Modales/Error.php");
  include ("Modales/Exito.php");
  include ("Modales/ExitoActualiza.php");

@@ -224,7 +224,7 @@ $(document).ready(function(){
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
 
-<div class="modal-dialog modal-notify modal-primary" role="document">
+<!-- <div class="modal-dialog modal-notify modal-primary" role="document">
     <div class="modal fade" id="modalavisoterminado" tabindex="-1" role="dialog" aria-labelledby="modalMantenimientoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -250,11 +250,11 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-</div> 
+</div>  -->
 
 <!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
 <!-- Script para mostrar y ocultar el modal -->
-<script>
+<!-- <script>
     
     $(document).ready(function() {
         
@@ -266,7 +266,7 @@ $(document).ready(function(){
         
         window.location.href = 'https://saludapos.com/POS2/Creditos';
     }
-</script> 
+</script>  -->
 
 </body>
 </html>
