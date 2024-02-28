@@ -290,7 +290,7 @@
          
             </ul>
           </li> -->
-            <li class="nav-header" style="color: white;">Campañas</li>
+            <!-- <li class="nav-header" style="color: white;">Campañas</li>
             <li class="nav-item has-treeview">
               <a href="" class="nav-link" style="color: white;">
                 <i class="nav-icon fas fa-laptop-medical "></i>
@@ -359,7 +359,7 @@
                
             
               </ul>
-            </li>
+            </li> -->
 
             <li class="nav-header" style="color: white;">Ultrasonidos</li>
             <li class="nav-item">
