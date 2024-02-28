@@ -444,7 +444,7 @@
 
            
           
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-clipboard-list"></i>
               <p>
@@ -462,8 +462,8 @@
               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/AgendaDeEspecialistas/RegistroSignosVitalesGeneral" class="nav-link" style="color: white;">
             <i class="far fa-calendar-check"></i>
               <p>
@@ -471,11 +471,10 @@
               
               </p>
             </a>
-          </li> 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
         
             </ul>
-          </li>
+          </li> -->
 
           <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
