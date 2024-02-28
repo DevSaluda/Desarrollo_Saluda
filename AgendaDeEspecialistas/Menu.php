@@ -372,16 +372,16 @@
                   </a>
                 </li> -->
 
-            <li class="nav-header">Reportes y data de pacientes </li>
-            <li class="nav-item">
+            <!-- <li class="nav-header">Reportes y data de pacientes </li> -->
+            <!-- <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeEspecialistas/ProductosV2" class="nav-link" style="color: white;">
                   <i class="fas fa-money-bill-alt"></i>
                     <p>
                      Listado de costos
                     </p>
                   </a>
-                </li>   
-            <li class="nav-item">
+                </li>    -->
+            <!-- <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeEspecialistas/DatosPacientes" class="nav-link">
                   <i class="fas fa-database"></i>
                     <p>
@@ -438,7 +438,7 @@
 
                     </p>
                   </a>
-                </li>
+                </li> -->
 
                 
 
