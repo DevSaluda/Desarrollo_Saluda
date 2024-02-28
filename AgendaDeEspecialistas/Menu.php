@@ -361,7 +361,7 @@
               </ul>
             </li> -->
 
-            <li class="nav-header" style="color: white;">Ultrasonidos</li>
+            <!-- <li class="nav-header" style="color: white;">Ultrasonidos</li>
             <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeEspecialistas/ResultadosdeUltrasonidos" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
@@ -438,7 +438,7 @@
 
                     </p>
                   </a>
-                </li>
+                </li> -->
 
                 
 
