@@ -150,39 +150,7 @@
 
             
             <li class="nav-header" style="color: white;">Agendamiento de citas</li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link" style="color: white;">
-                <i class="nav-icon fas fa-clipboard"></i>
             
-
-                <p>
-                Control de citas
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-               
-                <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
-                  <i class="fas fa-calendar-check"></i>
-                    <p>
-                   Revaloraciones
-
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeEspecialistas/CancelacionesV2" class="nav-link" style="color: white;">
-                  <i class="fas fa-calendar-times"></i>
-                    <p>
-                      Cancelaciones
-
-                    </p>
-                  </a>
-                </li>
-             
-              </ul>
-            </li>
 <!-- CITAS -->
 <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
@@ -194,7 +162,15 @@
                   </a>
                 </li>
 
-            
+                <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/CancelacionesV2" class="nav-link" style="color: white;">
+                  <i class="fas fa-calendar-times"></i>
+                    <p>
+                      Cancelaciones
+
+                    </p>
+                  </a>
+                </li>
             <!-- <li class="nav-header" style="color: white;">Calendarios de campañas</li> -->
             <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
