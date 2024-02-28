@@ -161,15 +161,7 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
-                  <i class="fas fa-calendar-check"></i>
-                    <p>
-                     Agendar citas
-
-                    </p>
-                  </a>
-                </li>
+               
                 <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-check"></i>
@@ -192,7 +184,15 @@
               </ul>
             </li>
 <!-- CITAS -->
+<li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeEspecialistas/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
+                  <i class="fas fa-calendar-check"></i>
+                    <p>
+                     Agendar citas
 
+                    </p>
+                  </a>
+                </li>
 
             
             <!-- <li class="nav-header" style="color: white;">Calendarios de campañas</li> -->
