@@ -73,7 +73,7 @@ $query = $conn->query($sql1);
     <th>Doctor que atiende </th>
     <th>Estatus </th>
 	
-    
+    <th>Fecha nacimiento </th>
 
 
 </thead>

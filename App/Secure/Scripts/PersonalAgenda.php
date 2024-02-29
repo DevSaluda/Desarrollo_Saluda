@@ -24,6 +24,12 @@ if(isset($_POST['login_button'])) {
 		echo "ok";
 		$_SESSION['AgendaCallCenter'] = $row['PersonalAgenda_ID'];		
 	} 	
+
+	if($row['Password']==$Password and $row['Nombre_rol']=="Pediatría" and $row['Estatus']=="Vigente" ){				
+		echo "ok";
+		$_SESSION['AgendaPediatria'] = $row['PersonalAgenda_ID'];		
+	} 	
+	
 	
 }
 ?>
