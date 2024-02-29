@@ -61,6 +61,7 @@ $query = $conn->query($sql1);
 <thead>
     <th>Folio</th>
     <th>Nombre </th>
+    <th>Fecha nacimiento </th>
     <th>Edad </th>
     <th>Sexo </th>
     <th>Telefono</th>
@@ -80,6 +81,7 @@ $query = $conn->query($sql1);
 <tr>
 <td><?php echo $DataPacientes["Folio_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Paciente"]; ?></td>
+    <td><?php echo $DataPacientes["Fecha nacimiento"]; ?></td>
     <td><?php echo $DataPacientes["Edad"]; ?></td>
     <td><?php echo $DataPacientes["Sexo"]; ?></td>
     <td><?php echo $DataPacientes["Telefono"]; ?></td>
