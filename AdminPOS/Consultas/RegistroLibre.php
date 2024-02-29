@@ -44,7 +44,7 @@ $query = $conn->query($sql1);
     <th>Enfermero que atiende </th>
     <th>Doctor que atiende </th>
     <th>Estatus </th>
-   <th>
+   <th>fecha_nacimiento</th>
 	
 	
 
@@ -64,7 +64,7 @@ $query = $conn->query($sql1);
       </td>
       <td><?php echo $DataPacientes["Fk_Enfermero"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
-   
+    <td><?php echo $DataPacientes["Fecha_Nacimiento"]; ?></td>
     <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
 	
  
