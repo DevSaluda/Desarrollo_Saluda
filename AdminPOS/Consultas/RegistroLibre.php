@@ -18,9 +18,10 @@ include "Consultas.php";
 
 
 $user_id=null;
-$sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, Signos_VitalesV2.Motivo_Consulta, Signos_VitalesV2.Nombre_Doctor,Signos_VitalesV2.Edad,Signos_VitalesV2.Sexo,Signos_VitalesV2.Telefono,
+$sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, Signos_VitalesV2.Motivo_Consulta,
+Signos_VitalesV2.Nombre_Doctor,Signos_VitalesV2.Edad,Signos_VitalesV2.Sexo,Signos_VitalesV2.Telefono,
 Signos_VitalesV2.Fk_Enfermero,Signos_VitalesV2.Fk_Sucursal,Signos_VitalesV2.FK_ID_H_O_D, Signos_VitalesV2.Fecha_Visita,Signos_VitalesV2.Estatus,Signos_VitalesV2.CodigoEstatus, 
-SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Signos_VitalesV2,SucursalesCorre where Signos_VitalesV2.Fk_Sucursal= SucursalesCorre.ID_SucursalC GROUP BY Signos_VitalesV2.ID_SignoV  ORDER BY `Signos_VitalesV2`.`ID_SignoV` ASC";  
+SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Data_Pacientes.ID_Data_Paciente,Data_Pacientes.Fecha_Nacimiento FROM Signos_VitalesV2,SucursalesCorre,Data_Pacientes where Signos_VitalesV2.Fk_Sucursal= SucursalesCorre.ID_SucursalC GROUP BY Signos_VitalesV2.ID_SignoV AND Data_Pacientes.ID_Data_Paciente=Signos_VitalesV2.Folio_Paciente ORDER BY `Signos_VitalesV2`.`ID_SignoV` ASC";  
 $query = $conn->query($sql1);
 ?>
 
@@ -43,6 +44,7 @@ $query = $conn->query($sql1);
     <th>Enfermero que atiende </th>
     <th>Doctor que atiende </th>
     <th>Estatus </th>
+   <th>
 	
 	
 

@@ -9,10 +9,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" method="post" id="Filtrapormediodesucursalconajax">
+                    <form action="#" method="post" id="Filtrapormediodesucursalconajax">
                         <div class="row">
-                            
-                           
                             <div class="col">
                                 <label for="exampleFormControlInput1">Seleccione un mes</label>
                                 <div class="input-group mb-3">
@@ -36,8 +34,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                             
                             <div class="col">
                                 <label for="exampleFormControlInput1">Seleccione un año</label>
                                 <div class="input-group mb-3">
@@ -45,22 +41,45 @@
                                         <span class="input-group-text" id="Calendario"><i class="far fa-calendar"></i></span>
                                     </div>
                                     <select id="añosSelect" class="form-control" name="Año" required>
-    <option value="">Seleccione un año:</option>
-    <?php
-    $añoActual = date('Y');
-    $añosAtras = 5; // Puedes ajustar este valor para mostrar más años pasados
-    for ($i = $añoActual; $i >= ($añoActual - $añosAtras); $i--) {
-        echo "<option value='$i'>$i</option>";
-    }
-    ?>
-</select>
+                                        <option value="">Seleccione un año:</option>
+                                        <?php
+                                        $añoActual = date('Y');
+                                        $añosAtras = 5; // Puedes ajustar este valor para mostrar más años pasados
+                                        for ($i = $añoActual; $i >= ($añoActual - $añosAtras); $i--) {
+                                            echo "<option value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                        <button type="button" id="submit_registroarea" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('submit_registroarea').addEventListener('click', function() {
+        var mes = document.getElementById('mesesSelect').value;
+        var año = document.getElementById('añosSelect').value;
+        var formData = new FormData();
+        formData.append('Mes', mes);
+        formData.append('Año', año);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'ruta_al_script_de_procesamiento.php', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Manejar la respuesta del servidor aquí
+                
+                console.log(xhr.responseText);
+            } else {
+                console.error('Error al procesar los productos .');
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
