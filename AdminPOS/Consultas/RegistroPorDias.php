@@ -19,9 +19,10 @@ include "Consultas.php";
 
 $user_id=null;
 $sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, Signos_VitalesV2.Motivo_Consulta, Signos_VitalesV2.Nombre_Doctor,Signos_VitalesV2.Edad,Signos_VitalesV2.Sexo,Signos_VitalesV2.Telefono,
-Signos_VitalesV2.Fk_Enfermero,Signos_VitalesV2.Fk_Sucursal,Signos_VitalesV2.FK_ID_H_O_D, Signos_VitalesV2.Fecha_Visita,Signos_VitalesV2.Estatus,Signos_VitalesV2.CodigoEstatus, 
-SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Signos_VitalesV2,SucursalesCorre where DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')
- AND Signos_VitalesV2.Fk_Sucursal= SucursalesCorre.ID_SucursalC GROUP BY Signos_VitalesV2.ID_SignoV ";  
+Signos_VitalesV2.Fk_Enfermero,Signos_VitalesV2.Fk_Sucursal,Signos_VitalesV2.FK_ID_H_O_D, Signos_VitalesV2.Fecha_Visita,Signos_VitalesV2.Estatus,Signos_VitalesV2.CodigoEstatus,Data_Pacientes.ID_Data_Paciente,Data_Pacientes.Fecha_Nacimiento, 
+SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Signos_VitalesV2,SucursalesCorre,Data_Pacientes where DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')
+ AND Signos_VitalesV2.Fk_Sucursal= SucursalesCorre.ID_SucursalC AND 
+ Data_Pacientes.ID_Data_Paciente=Signos_VitalesV2.Folio_Paciente GROUP BY Signos_VitalesV2.ID_SignoV;";  
 $query = $conn->query($sql1);
 ?>
 
@@ -45,7 +46,7 @@ $query = $conn->query($sql1);
     <th>Doctor que atiende </th>
     <th>Estatus </th>
 	
-	
+    <th>Fecha nacimiento </th>
 
 
 </thead>
@@ -65,7 +66,7 @@ $query = $conn->query($sql1);
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
     <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
-	
+    <td><?php echo $DataPacientes["Fecha_Nacimiento"]; ?></td>
  
 
 	
