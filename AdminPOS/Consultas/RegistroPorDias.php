@@ -92,7 +92,7 @@ $query = $conn->query($sql1);
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
     <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
-    <td><?php echo $DataPacientes["Edad"]; ?></td>
+    <td><?php echo $DataPacientes["Fecha_Nacimiento"]; ?></td>
  
 
 	
