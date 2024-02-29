@@ -260,7 +260,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            // actualizarMontos(); // Llamar a la función para actualizar los montos
+            actualizarMontos(); // Llamar a la función para actualizar los montos
             multiplicar();
             
         }
