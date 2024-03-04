@@ -210,6 +210,7 @@ tabla = $('#Productos').DataTable({
  "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayTickets.php",
  "aoColumns": [
   { mData: 'NumberTicket' },  
+  { mData: 'FolioSucursal' },  
   { mData: 'Fecha' },
   { mData: 'Hora' },
        { mData: 'Vendedor' },
@@ -268,6 +269,7 @@ tabla = $('#Productos').DataTable({
 	<table  id="Productos" class="table table-hover">
 <thead>
 <th>N° Ticket</th>
+<th>Folio Sucursal</th>
 <th>Fecha</th>
 <th>Hora</th>
     <th>Vendedor</th>
