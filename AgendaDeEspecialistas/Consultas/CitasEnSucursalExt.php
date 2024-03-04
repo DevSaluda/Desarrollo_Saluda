@@ -292,10 +292,10 @@ tabla = $('#CitasExpress').DataTable({
 <th>Observaciones</th>
 <!-- <th>Recordartorio</th> -->
 
-<th>Agendado por </th>
+<!-- <th>Agendado por </th>
 <th>Registrado el </th>
 <th>Enviar Mensaje </th>
-<th>Cancelar </th>
+<th>Cancelar </th> -->
 
 
 </thead>
