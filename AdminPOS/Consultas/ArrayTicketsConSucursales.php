@@ -43,7 +43,8 @@ Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE
-Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
+Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."'
+AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
 GROUP BY
 Ventas_POS.Folio_Ticket
 ORDER BY
