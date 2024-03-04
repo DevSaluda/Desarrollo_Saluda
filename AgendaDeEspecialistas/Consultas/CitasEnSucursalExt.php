@@ -228,10 +228,10 @@ tabla = $('#CitasExpress').DataTable({
        { mData: 'Sucursal' },
        { mData: 'Observaciones' },
       //  { mData: 'ConfirmarCita' },
-       { mData: 'AgendadoPor' },
-       { mData: 'AgendamientoRealizado' },
-       { mData: "ConWhatsapp" },
-       { mData: "BotonCancelar" },
+      //  { mData: 'AgendadoPor' },
+      //  { mData: 'AgendamientoRealizado' },
+      // //  { mData: "ConWhatsapp" },
+      //  { mData: "BotonCancelar" },
       
       ],
      
