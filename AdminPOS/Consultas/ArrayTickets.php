@@ -21,7 +21,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 
 $sql = "SELECT
-Ventas_POS.FolioSucursal
+Ventas_POS.FolioSucursal,
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
