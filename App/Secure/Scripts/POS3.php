@@ -42,17 +42,18 @@ if (isset($_POST['login_button'])) {
                 case "Responsable de farmacias":
                     $_SESSION['ResponsableDeFarmacias'] = $row['Pos_ID'];
                     break;
+                case "Jefe de odontología":
+                    $_SESSION['CoordinadorDental'] = $row['Pos_ID'];
+                    break;
                 case "Supervisor":
                     $_SESSION['Supervisor'] = $row['Pos_ID'];
                     break;
                 case "Jefatura de enfermeria":
                     $_SESSION['JefeEnfermeros'] = $row['Pos_ID'];
                     break;
-
-                case "Jefe de Area Dental":
-                    $_SESSION['JefaturaDental'] = $row['Pos_ID'];
-                    break;
                 default:
+
+             
                     // Manejar el caso donde el rol no coincide con ninguno de los anteriores
                     break;
             }
