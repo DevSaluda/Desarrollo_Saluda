@@ -101,68 +101,7 @@
               <a data-toggle="modal" data-target="#TotalesporSucursalesindex" class="small-box-footer">Ver totales <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?php echo $TotalFarmaceuticos['Farmaceuticos']?></h3>
-
-                <p>Farmacéuticos <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-pills"></i>
-              </div>
-              <a data-toggle="modal" data-target="#FarmasVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
-
-                <p>Enfermeros <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-nurse"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>  
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <h3><?php echo $TotalMedicos['Medicos']?></h3>
-
-                <p>Medicos <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-md"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#MedVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-       
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-              <h3><?php echo $TotalLimpieza['Intendentes']?></h3>
-              <p>Intendencia/Limpieza <br> Vigentes</p>
-               
-              </div>
-              <div class="icon">
-              <i class="fas fa-hand-sparkles"></i>
-              </div>
-              <a data-toggle="modal" data-target="#LimpiezaVigente" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
+        
       
   <!-- Content Wrapper. Contains page content -->
   
