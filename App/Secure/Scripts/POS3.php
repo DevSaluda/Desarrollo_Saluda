@@ -51,7 +51,6 @@ if (isset($_POST['login_button'])) {
                 case "Jefatura de enfermeria":
                     $_SESSION['JefeEnfermeros'] = $row['Pos_ID'];
                     break;
-                default:
 
                 case "Jefe de Area Dental":
                     $_SESSION['JefeDental'] = $row['Pos_ID'];
