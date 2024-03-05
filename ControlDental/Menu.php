@@ -1172,7 +1172,7 @@
         
       
 ?>>
-          <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Configuraciones</li>
+          <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Configuraciones</li>
           <li class="nav-item has-treeview">
            
            
@@ -1195,7 +1195,7 @@
             </a>
           </li>
        
-          </li>
+          </li> -->
           
           <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de enfermería <i class="fas fa-user-nurse"></i></li>
             <li class="nav-item has-treeview">
