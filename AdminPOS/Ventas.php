@@ -80,6 +80,7 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraEspecificamente.php");
   include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltraPorMes.php");
+  include ("Modales/FiltroPorProducto.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
