@@ -728,7 +728,7 @@
         
       
 ?>>
-          <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Traspasos <i class="fas fa-truck-loading"></i></i>
+          <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Traspasos <i class="fas fa-truck-loading"></i></i>
           <li class="nav-item">
             <a  href="ListadoDeTraspasos"  class="nav-link">
             <i class="fas fa-random"></i>
@@ -736,7 +736,7 @@
            Listado de traspasos             
               </p>
             </a>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <a  href="https://saludapos.com/ControlDental/ControlTraspasos"  class="nav-link">
             <i class="fas fa-random"></i>
@@ -745,15 +745,15 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-exchange-alt"></i>
               <p>
              Traspasos
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
+            </a> -->
+            <!-- <ul class="nav nav-treeview"> -->
          
           <!-- <li class="nav-item">
             <a  href="ListadoDeTraspasos"  class="nav-link">
@@ -774,8 +774,8 @@
                
               </p>
             </a>-->
-          </li> 
-           <li class="nav-item">
+          <!-- </li>  -->
+           <!-- <li class="nav-item">
             <a  href="RegistroTraspasos"  class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -795,7 +795,7 @@
           </li> 
            
             </ul>
-          </li>
+          </li> -->
           </div>
 
           <div  style=<?php switch($row){
@@ -810,7 +810,7 @@
         
       
 ?>>
-          <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Inventarios <i class="fas fa-store"></i></li>
+          <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Inventarios <i class="fas fa-store"></i></li>
           
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -849,7 +849,7 @@
           
           
             </ul>
-          </li>
+          </li> -->
           </div>
 
           <div  style=<?php switch($row){
