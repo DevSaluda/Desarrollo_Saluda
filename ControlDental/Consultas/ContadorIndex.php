@@ -34,22 +34,5 @@ $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($c
 $TotalLimpieza = mysqli_fetch_assoc($resultset);
 
 
-$sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as TraspasosPendientes FROM Traspasos_generados WHERE Estatus='Generado' AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TraspasosPendientes = mysqli_fetch_assoc($resultset);
-
-
-$sql ="SELECT ID_H_O_D,COUNT(*) as TotalTickets FROM Tickets_Incidencias WHERE  ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TotalTickets = mysqli_fetch_assoc($resultset);
-
-
-$sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as TicketsAsignados FROM Tickets_Incidencias WHERE Estatus='Asignado' AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TicketsAsignados = mysqli_fetch_assoc($resultset);
-
-$sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as TicketsCerrados FROM Tickets_Incidencias WHERE Estatus='Cerrado' AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TicketsCerrados = mysqli_fetch_assoc($resultset);
 
 ?>
