@@ -14,7 +14,7 @@ $roleRedirects = [
     "ResponsableDeFarmacias" => "https://saludapos.com/ResponsableDeFarmacias",
     "Supervisor" => "https://saludapos.com/CEDISMOVIL",
     "JefeEnfermeros" => "https://saludapos.com/JefaturaEnfermeria",
-    "JefeDental" => "https://saludapos.com/ControlDental",
+    "JefaturaDental" => "https://saludapos.com/ControlDental",
 ];
 
 // Función para redirigir según el rol
@@ -48,8 +48,8 @@ if ($_SESSION["SuperAdmin"]) {
 } elseif ($_SESSION["JefeEnfermeros"]) {
     redirectToRole("JefeEnfermeros");
 }
-elseif ($_SESSION["JefeDental"]) {
-    redirectToRole("JefeDental");
+elseif ($_SESSION["JefaturaDental"]) {
+    redirectToRole("JefaturaDental");
 }
 // Agrega aquí cualquier otra lógica que puedas necesitar
 

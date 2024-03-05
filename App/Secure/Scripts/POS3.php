@@ -50,7 +50,7 @@ if (isset($_POST['login_button'])) {
                     break;
 
                 case "Jefe de Area Dental":
-                    $_SESSION['JefeDental'] = $row['Pos_ID'];
+                    $_SESSION['JefaturaDental'] = $row['Pos_ID'];
                     break;
                 default:
                     // Manejar el caso donde el rol no coincide con ninguno de los anteriores
