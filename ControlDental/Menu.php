@@ -159,7 +159,7 @@
       
 ?>>
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistrosEnergiaElectrica" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistrosEnergiaElectrica" class="nav-link">
             <i class="fas fa-lightbulb"></i>
               <p>
              Control de energia 
@@ -182,7 +182,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistrosDeCombustibles" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistrosDeCombustibles" class="nav-link">
             <i class="fas fa-gas-pump"></i>
               <p>
              Control de combustible 
@@ -444,7 +444,7 @@
       
 ?>>
           <!-- <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/EstadisticasFarmacias" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/EstadisticasFarmacias" class="nav-link">
             <i class="fas fa-chart-area"></i>
               <p>
               Estadisticas Farmacia
@@ -465,7 +465,7 @@
       
 ?>>
           <!-- <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/SugerenciaFechas" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/SugerenciaFechas" class="nav-link">
             <i class="fa-solid fa-filter"></i>
               <p>
               Filtrar Ventas
@@ -496,7 +496,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/TratamientoCredito" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/TratamientoCredito" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Tratamiento Creditos
@@ -505,7 +505,7 @@
             </a>
           </li>
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/MedicoCredito" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/MedicoCredito" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Medicos Creditos
@@ -514,7 +514,7 @@
             </a>
           </li>
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/AreaCredito" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/AreaCredito" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Areas Credito
@@ -523,7 +523,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Promociones" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Promociones" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Promociones
@@ -541,7 +541,7 @@
             </a>
           </li>
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/CreditoFinalizado" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/CreditoFinalizado" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Credito Finalizado
@@ -585,7 +585,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/CreditoEnfermeriaGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/CreditoEnfermeriaGeneral" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
             Créditos enfermería
@@ -593,7 +593,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/CreditoFarmaceuticoGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/CreditoFarmaceuticoGeneral" class="nav-link">
             <i class="fas fa-prescription-bottle-alt"></i>
               <p>
             Créditos Farmaceutico
@@ -601,7 +601,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/CreditoMedicoGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/CreditoMedicoGeneral" class="nav-link">
             <i class="fas fa-user-md"></i>
               <p>
             Créditos Medico
@@ -609,7 +609,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/CreditoLimpiezaGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/CreditoLimpiezaGeneral" class="nav-link">
             <i class="fas fa-broom"></i>
               <p>
             Créditos Limpieza
@@ -653,7 +653,7 @@
           </li>
         
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/ComponentesActivos" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/ComponentesActivos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Componente activo
@@ -662,7 +662,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/TipoDeProducto" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/TipoDeProducto" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Tipo de Productos
@@ -671,7 +671,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Presentaciones" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Presentaciones" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Presentaciones
@@ -680,7 +680,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Marcas" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Marcas" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Marcas
@@ -689,7 +689,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Servicios" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Servicios" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Servicios
@@ -698,7 +698,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/ProductosV2" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/ProductosV2" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Productos general
@@ -826,7 +826,7 @@
             </a>
           </li>
           <!-- <li class="nav-item">
-            <a  href="https://saludapos.com/AdminPOS/ControlTraspasos"  class="nav-link">
+            <a  href="https://saludapos.com/ControlDental/ControlTraspasos"  class="nav-link">
             <i class="fas fa-random"></i>
               <p>
             Control de traspasos           
@@ -995,7 +995,7 @@
           
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/InventarioRapidoResultado" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/InventarioRapidoResultado" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
               Conteo diario
@@ -1006,7 +1006,7 @@
 
           <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Reportes <i class="fas fa-dolly"></i>
           <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesLab" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesLab" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes laboratorios
@@ -1015,7 +1015,7 @@
                   </a>
                 </li>
                 <!-- <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesRx" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesRx" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Rayos X
@@ -1025,7 +1025,7 @@
                 </li> -->
 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesUSG" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesUSG" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes USG
@@ -1036,7 +1036,7 @@
 
 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesEkg" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesEkg" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes EKG
@@ -1045,7 +1045,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesSG" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesSG" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Signos vitales
@@ -1078,7 +1078,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Enfermeros" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Enfermeros" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
               Enfermeros
@@ -1087,7 +1087,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Farmaceuticos" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Farmaceuticos" class="nav-link">
             <i class="fas fa-pills"></i>
               <p>
               Farmacéuticos
@@ -1096,7 +1096,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Medicos" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Medicos" class="nav-link">
             <i class="fas fa-user-md"></i>
               <p>
               Medicos
@@ -1117,7 +1117,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/PersonalLimpieza" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/PersonalLimpieza" class="nav-link">
             <i class="fas fa-air-freshener"></i>
               <p>
               Intendencia / Limpieza
@@ -1139,7 +1139,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/PersonalCallCenter" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/PersonalCallCenter" class="nav-link">
             <i class="fas fa-headset"></i>
               <p>
               Call Center
@@ -1161,7 +1161,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Administrativos" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Administrativos" class="nav-link">
             <i class="fas fa-users-cog"></i>
               <p>
               Administradores
@@ -1183,7 +1183,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroPersonalDia" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroPersonalDia" class="nav-link">
             
             <i class="fas fa-calendar-day"></i>
               <p>
@@ -1193,7 +1193,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroPersonalLibre" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroPersonalLibre" class="nav-link">
             <i class="far fa-calendar-check"></i>
               <p>
               Registro general
@@ -1215,7 +1215,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/ReportesDeIncidencias" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/ReportesDeIncidencias" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
               Reportes
@@ -1254,7 +1254,7 @@
            
            
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Roles" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Roles" class="nav-link">
             <i class="fas fa-user-tag"></i>
               <p>
               Roles / Puestos
@@ -1263,7 +1263,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/Sucursales" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/Sucursales" class="nav-link">
             <i class="fas fa-clinic-medical"></i>
               <p>
             Sucursales
@@ -1285,7 +1285,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroDiariosSignosVitales" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroDiariosSignosVitales" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
               Registro por dia
@@ -1294,7 +1294,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fas fa-pills"></i>
               <p>
               Registro en general
@@ -1328,7 +1328,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroDiariosSignosVitales" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroDiariosSignosVitales" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
               Registro por dia
@@ -1337,7 +1337,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fas fa-pills"></i>
               <p>
               Registro en general
@@ -1346,7 +1346,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
               Registro por enfermero
@@ -1368,7 +1368,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroSignosVitalesGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fab fa-searchengin"></i>
               <p>
               Registro personalizado
@@ -1392,7 +1392,7 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistroDiarioMotivoConsulta" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistroDiarioMotivoConsulta" class="nav-link">
           <i class="fas fa-calendar-day"></i>
               <p>
               Registro por dia
@@ -1401,7 +1401,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistrosMotivosConsultaGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistrosMotivosConsultaGeneral" class="nav-link">
             <i class="fas fa-calendar-alt"></i>
               <p>
               Registro en general
@@ -1410,7 +1410,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/RegistrosMotivosConsultaGeneral" class="nav-link">
+            <a href="https://saludapos.com/ControlDental/RegistrosMotivosConsultaGeneral" class="nav-link">
             <i class="fab fa-searchengin"></i>
               <p>
               Registro personalizado
@@ -1490,7 +1490,7 @@ function cierre()
 function salir()
 {
     
-window.location.replace('https://saludapos.com/AdminPOS/Cierre'); 
+window.location.replace('https://saludapos.com/ControlDental/Cierre'); 
 
 }
 $( document ).ready(function() {
