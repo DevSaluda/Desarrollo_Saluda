@@ -875,7 +875,7 @@
         
       
 ?>>
-<li class="nav-item has-treeview">
+<!-- <li class="nav-item has-treeview">
             <a href="ModuloDeInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
@@ -925,7 +925,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Reportes <i class="fas fa-dolly"></i>
           <li class="nav-item">
