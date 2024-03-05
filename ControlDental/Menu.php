@@ -978,19 +978,8 @@
                 </li>
 </div>
                 
-<div  style=<?php switch($row){
-	case $row['Permisos']==9 ;				
-  echo "display:none;";
 
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
-          <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de personal</li>
+          <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de personal</li>
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-users"></i>
@@ -1027,18 +1016,7 @@
               </p>
             </a>
           </li>
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
       
-?>>
           <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/PersonalLimpieza" class="nav-link">
             <i class="fas fa-air-freshener"></i>
@@ -1048,19 +1026,8 @@
               </p>
             </a>
           </li>
-          </div>
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
+         
+         
           <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/PersonalCallCenter" class="nav-link">
             <i class="fas fa-headset"></i>
@@ -1070,19 +1037,8 @@
               </p>
             </a>
           </li>
-          </div>
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
+          
         
-      
-?>>
           <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/Administrativos" class="nav-link">
             <i class="fas fa-users-cog"></i>
@@ -1092,10 +1048,10 @@
               </p>
             </a>
           </li>
-          </div>
+         
             </ul>
-          </li>
-          </div>
+          </li> -->
+          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-clock"></i>
