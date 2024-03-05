@@ -143,7 +143,48 @@
               </p>
             </a>
       
-         
+            <li class="nav-header" style="color: white;">Agendamiento de citas</li>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link" style="color: white;">
+                <i class="nav-icon fas fa-clipboard"></i>
+            
+
+                <p>
+                Control de citas
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="https://saludapos.com/ControlDental/AgendamientoDeCitasV3" class="nav-link" style="color: white;" >
+                  <i class="fas fa-calendar-check"></i>
+                    <p>
+                     Agendar citas
+
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://saludapos.com/ControlDental/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
+                  <i class="fas fa-calendar-check"></i>
+                    <p>
+                   Revaloraciones
+
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://saludapos.com/ControlDental/CancelacionesV2" class="nav-link" style="color: white;">
+                  <i class="fas fa-calendar-times"></i>
+                    <p>
+                      Cancelaciones
+
+                    </p>
+                  </a>
+                </li>
+             
+              </ul>
+            </li>
             <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Punto de venta <i class="fas fa-cash-register"></i></li>
 
            
