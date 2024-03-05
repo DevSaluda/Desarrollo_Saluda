@@ -147,7 +147,7 @@
             <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Punto de venta <i class="fas fa-cash-register"></i></li>
 
            
-            <li class="nav-item">
+            <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/RegistrosEnergiaElectrica" class="nav-link">
             <i class="fas fa-lightbulb"></i>
               <p>
@@ -155,22 +155,11 @@
                
               </p>
             </a>
-          </li>
+          </li> -->
           
 
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
         
-      
-?>>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/RegistrosDeCombustibles" class="nav-link">
             <i class="fas fa-gas-pump"></i>
               <p>
@@ -179,7 +168,7 @@
               </p>
             </a>
           </li>
-          </div>
+         -->
 
           <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
