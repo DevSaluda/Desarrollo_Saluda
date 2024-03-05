@@ -42,9 +42,6 @@ if (isset($_POST['login_button'])) {
                 case "Responsable de farmacias":
                     $_SESSION['ResponsableDeFarmacias'] = $row['Pos_ID'];
                     break;
-                case "Jefe de odontología":
-                    $_SESSION['CoordinadorDental'] = $row['Pos_ID'];
-                    break;
                 case "Supervisor":
                     $_SESSION['Supervisor'] = $row['Pos_ID'];
                     break;
