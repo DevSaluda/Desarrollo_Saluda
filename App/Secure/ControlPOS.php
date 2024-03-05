@@ -12,7 +12,6 @@ $roleRedirects = [
     "ResponsableCedis" => "https://saludapos.com/CEDIS",
     "ResponsableInventarios" => "https://saludapos.com/Inventarios",
     "ResponsableDeFarmacias" => "https://saludapos.com/ResponsableDeFarmacias",
-    "CoordinadorDental" => "https://saludapos.com/JefeDental",
     "Supervisor" => "https://saludapos.com/CEDISMOVIL",
     "JefeEnfermeros" => "https://saludapos.com/JefaturaEnfermeria",
     "JefeDental" => "https://saludapos.com/ControlDental",
