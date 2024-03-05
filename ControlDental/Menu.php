@@ -237,7 +237,7 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="ControlGastos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -245,7 +245,7 @@
                
               </p>
             </a>
-          </li>
+          </li> -->
           
             </ul>
           </li>
@@ -253,18 +253,7 @@
           </div>
 
 
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>   
+           
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-receipt"></i>
@@ -328,20 +317,9 @@
                       </ul>
           </li>
 
-          </div>
+          
 
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
+       
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-barcode"></i>
@@ -364,19 +342,8 @@
          
             </ul>
           </li>
-          </div>
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
         
-      
-?>>
+          
           <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/EstadisticasFarmacias" class="nav-link">
             <i class="fas fa-chart-area"></i>
@@ -1116,18 +1083,7 @@
         
             </ul>
           </li> -->
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
+       
           <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Configuraciones</li>
           <li class="nav-item has-treeview">
            
