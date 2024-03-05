@@ -1,16 +1,29 @@
-
 <div class="modal fade bd-example-modal-xl" id="FiltroPorProducto" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
-    
-    <div class="text-center">
-    <div class="modal-header">
-         <p class="heading lead">Filtra por Nombre de Porducto o Codigo de Barra<i class="fas fa-credit-card"></i></p>
+      <div class="text-center">
+        <div class="modal-header">
+          <p class="heading lead">Filtra Por Código de Barras<i class="fas fa-credit-card"></i></p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="codigo_barras">Código de Barras:</label>
+              <input type="text" class="form-control" id="codigo_barras" name="searchTerm" placeholder="Ingrese el código de barras">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
        
        <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
@@ -26,21 +39,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Consulta SQL
-    $sql = "SELECT * FROM Productos_POS WHERE `Nombre_Prod` LIKE ? OR `Cod_Barra` = ?";
+    // Consulta SQL para buscar por el código de barras solamente
+    $sql = "SELECT * FROM Productos_POS WHERE `Cod_Barra` = ?";
     $stmt = $conn->prepare($sql);
 
     // Verificar si la consulta fue correcta
     if ($stmt === false) {
-        die("Error en la  consulta: " . $conn->error);
+        die("Error en la consulta: " . $conn->error);
     }
 
-    // Definir las variables para la búsqueda
-    $nombre_busqueda = '%' . $searchTerm . '%';
+    // Definir la variable para la búsqueda
     $codigo_busqueda = $searchTerm;
 
     // Enlazar parámetros
-    $stmt->bind_param("ss", $nombre_busqueda, $codigo_busqueda);
+    $stmt->bind_param("s", $codigo_busqueda);
     $stmt->execute();
     $result = $stmt->get_result();
 
