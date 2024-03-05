@@ -565,7 +565,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
             <a href="Categorias" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -574,8 +574,8 @@
               </p>
             </a>
           </li>
-        
-          <li class="nav-item">
+         -->
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/ComponentesActivos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -583,8 +583,8 @@
               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/TipoDeProducto" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -592,8 +592,8 @@
               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/Presentaciones" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -601,8 +601,8 @@
               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/Marcas" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -610,7 +610,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/Servicios" class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -629,47 +629,47 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="StockSucursalesV2" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Stock en sucursales               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="StockSucursalesEnfermeria" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Stock enfermeria/clinica               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="StockEliminado" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Productos Eliminados               
               </p>
             </a>
-          </li>
+          </li> -->
          
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="UltimaInsercionEnStock" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Consultar distribuciones               
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="BajaDeProductos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Baja de productos               
               </p>
             </a>
-          </li>
+          </li> -->
             </ul>
           </li>
           
