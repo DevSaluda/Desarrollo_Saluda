@@ -191,7 +191,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
             <a href="AdministraCaja" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -199,7 +199,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="CajasActivas" class="nav-link">
             <i class="fas fa-dot-circle"></i>
