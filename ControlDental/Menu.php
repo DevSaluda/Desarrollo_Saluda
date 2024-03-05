@@ -1278,18 +1278,7 @@
             </a>
           </li>
           </div>
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
+         
           <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/RegistroSignosVitalesGeneral" class="nav-link">
             <i class="fab fa-searchengin"></i>
@@ -1302,7 +1291,7 @@
           
             </ul>
           </li>
-          </div>
+          
 
        
             <li class="nav-item has-treeview">
