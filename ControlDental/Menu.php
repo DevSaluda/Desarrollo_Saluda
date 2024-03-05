@@ -361,51 +361,7 @@
             </a>
           </li>
         
-          <!-- <li class="nav-item">
-            <a href="VentasEnGeneral" class="nav-link">
-            <i class="fas fa-barcode"></i>
-              <p>
-              Ventas en general
-              </p>
-            </a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a href="TotalesServicios" class="nav-link">
-            <i class="fas fa-laptop-medical"></i>
-              <p>
-            Totales de servicios
-               
-              </p>
-            </a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a href="ReportesVentas" class="nav-link">
-            <i class="fas fa-folder"></i>
-              <p>
-              Reporte de ventas
-              
-              </p>
-            </a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a href="DataFacturacion" class="nav-link">
-            <i class="fas fa-file-invoice-dollar"></i>
-              <p>
-              Datos facturacion
-              
-              </p>
-            </a>
-          </li> -->
-
-          <!-- <li class="nav-item">
-            <a href="ListadoDeCancelaciones" class="nav-link">
-            <i class="fas fa-ban"></i>
-              <p>
-              Cancelaciones
-              
-              </p>
-            </a>
-          </li> -->
+         
             </ul>
           </li>
           </div>
@@ -550,19 +506,8 @@
           </li>
           </div>
 
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
- 
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
         
-      
-?>>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/ControlDental/CreditoEnfermeriaGeneral" class="nav-link">
             <i class="fas fa-user-nurse"></i>
               <p>
@@ -594,7 +539,7 @@
               </p>
             </a>
           </li>
-         </div>
+    -->
 
 
          <div  style=<?php switch($row){
