@@ -164,15 +164,7 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="https://saludapos.com/ControlDental/AgendamientoDeCitasRevaloracion" class="nav-link" style="color: white;">
-                  <i class="fas fa-calendar-check"></i>
-                    <p>
-                   Revaloraciones
-
-                    </p>
-                  </a>
-                </li>
+                
                 <li class="nav-item">
                   <a href="https://saludapos.com/ControlDental/CancelacionesV2" class="nav-link" style="color: white;">
                   <i class="fas fa-calendar-times"></i>
