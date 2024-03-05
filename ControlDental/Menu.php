@@ -967,7 +967,7 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="https://saludapos.com/ControlDental/ReportesSG" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
@@ -976,7 +976,7 @@
                     </p>
                   </a>
                 </li>
-</div>
+</div> -->
                 
 
           <!-- <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de personal</li>
@@ -1084,7 +1084,7 @@
         
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-bullhorn"></i>
               <p>
@@ -1115,7 +1115,7 @@
           </li>
         
             </ul>
-          </li>
+          </li> -->
           <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
   echo "display:none;";
