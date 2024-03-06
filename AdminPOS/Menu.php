@@ -1045,7 +1045,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/ReportesSG" class="nav-link">
+                  <a href="https://saludapos.com/AdminPOS/RegistroDiariosSignosVitales" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Signos vitales
