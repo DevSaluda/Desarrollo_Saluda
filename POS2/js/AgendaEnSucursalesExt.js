@@ -10,10 +10,10 @@ $('document').ready(function($){
                
              },
              
-           CitaExt:{
+             especialidadExt:{
                required:true,
            },
-           Medico:{
+           medicoExt:{
                required:true,
            },
          Fecha:{
