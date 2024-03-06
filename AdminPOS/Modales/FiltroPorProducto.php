@@ -16,7 +16,10 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+          <div class="text-center">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+
           </div>
         </form>
       </div>
