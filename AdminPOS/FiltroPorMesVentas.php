@@ -66,7 +66,9 @@ include "Consultas/Consultas.php";
 </button>
 </div>
 </div>
-    
+    <?php
+       echo "Mes seleccionado: $mes<br>";
+       echo "Año seleccionado: $anual<br>";?>
 <style>
   /* Personalizar el diseño de la paginación con CSS */
   .dataTables_wrapper .dataTables_paginate {
