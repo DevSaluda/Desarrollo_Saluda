@@ -29,8 +29,9 @@ Signos_VitalesV2.Sexo,
 Signos_VitalesV2.Telefono,
 Signos_VitalesV2.Fk_Enfermero,
 Signos_VitalesV2.Fk_Sucursal,
-Sginos_VitalesVv2.Fecha_Estatus
+Signos_VitalesV2.Fecha_Estatus,
 Signos_VitalesV2.FK_ID_H_O_D,
+Signos_VitalesV2.Fecha_Visita, 
 Signos_VitalesV2.Estatus,
 Signos_VitalesV2.CodigoEstatus,
 Data_Pacientes.ID_Data_Paciente,
@@ -84,14 +85,12 @@ $query = $conn->query($sql1);
     <td><?php echo $DataPacientes["Nombre_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Fecha_Nacimiento"]; ?></td>
     <td><?php echo $DataPacientes["Edad"]; ?></td>
-   
+    <td><?php echo $DataPacientes["Fecha_Visita"]; ?></td>
     <td><?php echo $DataPacientes["Sexo"]; ?></td>
     <td><?php echo $DataPacientes["Telefono"]; ?></td>
     <td><?php echo $DataPacientes["Motivo_Consulta"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Sucursal"]; ?></td>
- 
-    <td><?php echo fechaCastellano($DataPacientes["Fecha_Visita"]); ?>
-      </td>
+
       <td><?php echo $DataPacientes["Fk_Enfermero"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
