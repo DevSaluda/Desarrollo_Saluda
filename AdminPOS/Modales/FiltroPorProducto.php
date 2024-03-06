@@ -45,10 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
 
     // Consulta SQL para buscar por el código de barras solamente
     $sql = "SELECT * FROM Productos_POS WHERE `Cod_Barra` = ?";
-    //$searchQuery = "WHERE (productos.clave_producto like '%".$searchValue."%' or 
-        //productos.producto like '%".$searchValue."%' or partidas.partida like '%".$searchValue."%' or 
-        //partidas.clave_partida like'%".$searchValue."%' ) ";
-        //WILDCARDS
+    
     $stmt = $conn->prepare($sql);
 
     // Verificar si la consulta fue correcta
