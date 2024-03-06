@@ -14,7 +14,8 @@ function CargaVentasDelDia(){
   }
   
   function filtarPorProducto(){
-    alert("Hola");
+    var codigo_barras = $("#codigo_barras").val();
+    alert("El codigo de busqueda es: "+codigo_barras);
     //$.post("https://saludapos.com/AdminPOS/Consultas/VentasDelDia.php","",function(data){
     //  $("#TableVentasDelDia").html(data);
     //})
