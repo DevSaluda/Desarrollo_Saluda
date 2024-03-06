@@ -1,4 +1,23 @@
 <?php
+// Verificar si el formulario ha sido enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si las variables están seteadas y no son nulas
+    if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+        // Obtener los valores del formulario
+        $mes = $_POST['Mes'];
+        $anual = $_POST['anual'];
+        
+        // Realizar las operaciones que necesites con estas variables
+        // Por ejemplo, imprimir su valor
+        echo "Mes seleccionado: $mes<br>";
+        echo "Año seleccionado: $anual<br>";
+    } else {
+        // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
+        echo "Error: No se recibieron todas las variables necesarias.";
+    }
+}
+
+
 include "Consultas/Consultas.php";
 
 ?>

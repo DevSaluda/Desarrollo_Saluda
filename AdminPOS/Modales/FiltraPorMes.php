@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="BusquedaPorMesYAnual">
+                    <form id="FiltroPorMesVentas">
                         <div class="form-row">
                             <div class="col">
                                 <label for="mesesSelect">Seleccione un mes</label>
@@ -40,7 +40,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
-                                    <select id="añosSelect" class="form-control" name="Año" required>
+                                    <select id="añosSelect" class="form-control" name="anual" required>
                                         <option value="">Seleccione un año:</option>
                                         <?php
                                         $añoActual = date('Y');
@@ -61,28 +61,4 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('BusquedaPorMesYAnual').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
-        // Obtener los valores del mes y el año seleccionados
-        var mes = document.getElementById('mesesSelect').value;
-        var año = document.getElementById('añosSelect').value;
-
-        // Realizar una solicitud AJAX para enviar los datos al servidor
-        $.ajax({
-            type: 'POST',
-            url: 'FiltroPorMesVentas.php', // Ruta a la página FiltroPorMesVentas.php
-            data: { mes: mes, año: año },
-            dataType: 'json', // Esperar una respuesta en formato JSON
-            success: function(response) {
-                // Aquí puedes manejar la respuesta del servidor, por ejemplo, actualizar la tabla de ventas
-                console.log(response); // Para depuración, muestra la respuesta en la consola
-            },
-            error: function(xhr, status, error) {
-                // Manejar errores si los hay
-                console.error(error); // Muestra el error en la consola para depuración
-            }
-        });
-    });
-</script>
