@@ -386,7 +386,7 @@ include ("footer.php")?>
 
 <!-- REQUIRED SCRIPTS -->
 
-<script src="js/ControlVentas.js"></script>
+
 
 <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
@@ -396,7 +396,7 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-s
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
