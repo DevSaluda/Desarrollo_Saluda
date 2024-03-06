@@ -8,7 +8,7 @@
             <span aria-hidden="true" class="white-text">&times;</span>
           </button>
         </div>
-        <form method="POST" action="">
+        <form id="frm_filtrarproducto">
           <div class="modal-body">
             <div class="form-group">
               <label for="codigo_barras">Código de Barras:</label>
@@ -26,6 +26,7 @@
 
        
        <?php
+       /*
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
     // Validar y limpiar datos de entrada
     $searchTerm = trim($_POST['searchTerm']);
@@ -41,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
 
     // Consulta SQL para buscar por el código de barras solamente
     $sql = "SELECT * FROM Productos_POS WHERE `Cod_Barra` = ?";
+    //$searchQuery = "WHERE (productos.clave_producto like '%".$searchValue."%' or 
+        //productos.producto like '%".$searchValue."%' or partidas.partida like '%".$searchValue."%' or 
+        //partidas.clave_partida like'%".$searchValue."%' ) ";
+        //WILDCARDS
     $stmt = $conn->prepare($sql);
 
     // Verificar si la consulta fue correcta
@@ -75,4 +80,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
     // Si no se ha enviado el formulario, devolver un mensaje de error
     echo json_encode(array("error" => "No se ha enviado el formulario correctamente."));
 }
+*/
 ?>
