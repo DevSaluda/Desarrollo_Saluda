@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
     $searchTerm = htmlspecialchars($searchTerm);
 
     // Conexión a la base de datos
-    include "../Consultas/db_connection.php";
+    //include "../Consultas/db_connection.php";
 
     // Verificar la conexión
     if ($conn->connect_error) {
