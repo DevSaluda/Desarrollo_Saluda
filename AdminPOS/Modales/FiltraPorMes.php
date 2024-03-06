@@ -72,8 +72,9 @@
         // Realizar una solicitud AJAX para enviar los datos al servidor
         $.ajax({
             type: 'POST',
-            url: 'https://saludapos.com/AdminPOS/FiltroPorMesVentas', // Reemplaza 'ruta/a/tu/archivo/php.php' con la ruta correcta
+            url: 'FiltroPorMesVentas.php', // Ruta a la página FiltroPorMesVentas.php
             data: { mes: mes, año: año },
+            dataType: 'json', // Esperar una respuesta en formato JSON
             success: function(response) {
                 // Aquí puedes manejar la respuesta del servidor, por ejemplo, actualizar la tabla de ventas
                 console.log(response); // Para depuración, muestra la respuesta en la consola
