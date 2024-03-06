@@ -31,7 +31,6 @@ Signos_VitalesV2.Fk_Enfermero,
 Signos_VitalesV2.Fk_Sucursal,
 Sginos_VitalesVv2.Fecha_Estatus
 Signos_VitalesV2.FK_ID_H_O_D,
-Signos_VitalesV2.Fecha_Visita,
 Signos_VitalesV2.Estatus,
 Signos_VitalesV2.CodigoEstatus,
 Data_Pacientes.ID_Data_Paciente,
