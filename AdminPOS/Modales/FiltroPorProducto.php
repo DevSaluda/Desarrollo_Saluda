@@ -29,7 +29,7 @@
 
        
        <?php
-       /*
+       
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
     // Validar y limpiar datos de entrada
     $searchTerm = trim($_POST['searchTerm']);
@@ -83,5 +83,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchTerm'])) {
     // Si no se ha enviado el formulario, devolver un mensaje de error
     echo json_encode(array("error" => "No se ha enviado el formulario correctamente."));
 }
-*/
+
 ?>
