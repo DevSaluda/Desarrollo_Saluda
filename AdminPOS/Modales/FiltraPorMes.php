@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="filtroForm">
+                    <form id="BusquedaPorMesYAnual">
                         <div class="form-row">
                             <div class="col">
                                 <label for="mesesSelect">Seleccione un mes</label>
@@ -62,31 +62,26 @@
 </div>
 
 <script>
-    document.getElementById('filtroForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-        
+    document.getElementById('BusquedaPorMesYAnual').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+        // Obtener los valores del mes y el año seleccionados
         var mes = document.getElementById('mesesSelect').value;
         var año = document.getElementById('añosSelect').value;
-        
-        // Validar y procesar datos antes de enviar el formulario
-        if (mes && año) {
-            var formData = new FormData();
-            formData.append('Mes', mes);
-            formData.append('Año', año);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'Ventas.php', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Manejar la respuesta del servidor aquí
-                    console.log(xhr.responseText);
-                } else {
-                    console.error('Error al procesar los productos.');
-                }
-            };
-            xhr.send(formData);
-        } else {
-            console.error('Por favor, seleccione un mes y un año.');
-        }
+        // Realizar una solicitud AJAX para enviar los datos al servidor
+        $.ajax({
+            type: 'POST',
+            url: 'FiltroPorMesVentas', // Reemplaza 'ruta/a/tu/archivo/php.php' con la ruta correcta
+            data: { mes: mes, año: año },
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor, por ejemplo, actualizar la tabla de ventas
+                console.log(response); // Para depuración, muestra la respuesta en la consola
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores si los hay
+                console.error(error); // Muestra el error en la consola para depuración
+            }
+        });
     });
 </script>
