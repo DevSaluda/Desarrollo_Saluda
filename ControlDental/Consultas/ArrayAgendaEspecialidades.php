@@ -48,7 +48,7 @@ Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_
 WHERE
  AgendaCitas_EspecialistasExt.Fk_Especialidad=14 or AgendaCitas_EspecialistasExt.Fk_Especialidad=15  or AgendaCitas_EspecialistasExt.Fk_Especialidad=16  or AgendaCitas_EspecialistasExt.Fk_Especialidad=17  or AgendaCitas_EspecialistasExt.Fk_Especialidad=18  or AgendaCitas_EspecialistasExt.Fk_Especialidad=19  or AgendaCitas_EspecialistasExt.Fk_Especialidad=20 or AgendaCitas_EspecialistasExt.Fk_Especialidad=65  or AgendaCitas_EspecialistasExt.Fk_Especialidad=66  or AgendaCitas_EspecialistasExt.Fk_Especialidad=67  or AgendaCitas_EspecialistasExt.Fk_Especialidad=68 or AgendaCitas_EspecialistasExt.Fk_Especialidad=76
  or AgendaCitas_EspecialistasExt.Fk_Especialidad=80 or AgendaCitas_EspecialistasExt.Fk_Especialidad=81 or AgendaCitas_EspecialistasExt.Fk_Especialidad=84 or AgendaCitas_EspecialistasExt.Fk_Especialidad=85 or AgendaCitas_EspecialistasExt.Fk_Especialidad=86 or AgendaCitas_EspecialistasExt.Fk_Especialidad=87
-AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE());;
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
 
 
 $result = mysqli_query($conn, $sql);
