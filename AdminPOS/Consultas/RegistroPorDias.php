@@ -85,7 +85,7 @@ $query = $conn->query($sql1);
     <td><?php echo $DataPacientes["Nombre_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Fecha_Nacimiento"]; ?></td>
     <td><?php echo $DataPacientes["Edad"]; ?></td>
-    <td><?php echo $DataPacientes["Fecha_Visita"]; ?></td>
+   
     <td><?php echo $DataPacientes["Sexo"]; ?></td>
     <td><?php echo $DataPacientes["Telefono"]; ?></td>
     <td><?php echo $DataPacientes["Motivo_Consulta"]; ?></td>
