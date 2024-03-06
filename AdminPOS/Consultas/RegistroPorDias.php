@@ -69,7 +69,7 @@ $query = $conn->query($sql1);
     <th>Motivo consulta </th>
     <th>Sucursal</th>
    
-    <th>Registrado </th>
+
     <th>Enfermero que atiende </th>
     <th>Doctor que atiende </th>
     <th>Estatus </th>
