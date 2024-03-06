@@ -75,7 +75,7 @@
             formData.append('Año', año);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'ruta_al_script_de_procesamiento.php', true);
+            xhr.open('POST', 'Ventas.php', true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     // Manejar la respuesta del servidor aquí
