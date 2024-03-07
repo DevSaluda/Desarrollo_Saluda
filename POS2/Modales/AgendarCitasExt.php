@@ -72,7 +72,7 @@
         ?>  </select>
 </div>
 <div>
-<label for="SucursalExt" class="error">
+<label for="sucursalExt" class="error">
 </div>
     </div>
     <div class="col">
@@ -86,7 +86,7 @@
 							</select>
 </div>
 <div>
-<label for="EspecialidadExt" class="error">
+<label for="especialidadExt" class="error">
 </div>
     </div>
     
