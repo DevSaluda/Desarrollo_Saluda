@@ -13,21 +13,16 @@ $('document').ready(function($){
              SucursalExt:{
                required:true,
            },
-           medicoExt:{
+           EspecialidadExt:{
                required:true,
            },
-         Fecha:{
+           FechaExt:{
              required:true,
          },
-            Hora:{
+         HorasExt:{
                 required:true,
             },
-            Costo:{
-                required:true,
-            },
-            TipoConsulta:{
-                required:true
-            },
+            
 
    },
    messages: {
@@ -41,21 +36,16 @@ $('document').ready(function($){
        SucursalExt:{
                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
               },
-              Medico:{
+              EspecialidadExt:{
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
                }, 
-               Fecha:{
+               FechaExt:{
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
                },
-               Hora:{
+               HorasExt:{
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
                },
-               Costo:{
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
-               },
-               TipoConsulta:{
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
-               },
+               
    },
        submitHandler: submitForm	
  });	   

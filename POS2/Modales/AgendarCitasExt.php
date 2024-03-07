@@ -71,7 +71,9 @@
           }
         ?>  </select>
 </div>
+<div>
 <label for="SucursalExt" class="error">
+</div>
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Especialidad</label>
@@ -83,7 +85,9 @@
 								<option value = "">Selecciona una especialidad</option>
 							</select>
 </div>
-<label for="especialidad" class="error">
+<div>
+<label for="EspecialidadExt" class="error">
+</div>
     </div>
     
     </div>
@@ -112,8 +116,9 @@
 								<option value = "">Selecciona un medico</option>
 							</select>
 </div>
-
-<label for="fecha" class="error">
+<div>
+<label for="FechaExt" class="error">
+</div>
     </div>
    
     </div>
@@ -134,7 +139,9 @@
  
 							</select>
 </div>
-<label for="hora" class="error">
+<div><label for="HorasExt" class="error">
+</div>
+
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Costo</label>
