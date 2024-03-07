@@ -56,14 +56,15 @@ $('document').ready(function($){
         });
 
         // Construir el mensaje de la alerta con los datos seleccionados
-        var alertMessage = "Confirmar los siguientes datos:\n\n";
-        alertMessage += "Nombre: " + formValues['NombresExt'] + "\n";
-        alertMessage += "Teléfono: " + formValues['TelExt'] + "\n";
-        alertMessage += "Sucursal: " + formValues['SucursalExt'] + "\n";
-        alertMessage += "Especialidad: " + formValues['EspecialidadExt'] + "\n";
-        alertMessage += "Fecha: " + formValues['FechaExt'] + "\n";
-        alertMessage += "Hora: " + formValues['HorasExt'] + "\n";
-        alertMessage += "Médico: " + formValues['MedicoExt'] + "\n";
+        var alertMessage = "<p>Confirmar los siguientes datos:</p><br>";
+        alertMessage += "<p>Nombre: " + formValues['NombresExt'] + "</p><br>";
+        alertMessage += "<p>Teléfono: " + formValues['TelExt'] + "</p><br>";
+        alertMessage += "<p>Sucursal: " + $('#SucursalExt option:selected').text() + "</p><br>";
+        alertMessage += "<p>Especialidad: " + $('#EspecialidadExt option:selected').text() + "</p><br>";
+        alertMessage += "<p>Fecha: " + formValues['FechaExt'] + "</p><br>";
+        alertMessage += "<p>Hora: " + formValues['HorasExt'] + "</p><br>";
+        alertMessage += "<p>Médico: " + $('#MedicoExt option:selected').text() + "</p><br>";
+        
         
 
         // Mostrar la alerta de Sweet Alert
