@@ -52,8 +52,7 @@ INNER JOIN
 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
 Ventas_POS.Fecha_venta >= '2024-01-01' -- Primer día de enero de 2024
-AND Ventas_POS.Fecha_venta <= CURDATE(); -- Hasta la fecha actual
-";
+AND Ventas_POS.Fecha_venta <= '2024-01-31'; -- Último día de enero de 2024";
 
 
 
