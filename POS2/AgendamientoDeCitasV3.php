@@ -73,7 +73,7 @@ Citas de especialistas
 
   include ("footer.php")?>
 
-<script src="js/CampanasSucursales.js"></script>
+
 <script src="js/CampanasExpress.js"></script>
 <script src="js/AgregaEspecialidad.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
