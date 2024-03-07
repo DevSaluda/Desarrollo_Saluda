@@ -23,7 +23,8 @@ include "Consultas/Consultas.php";
   </div>
   
   <div >
- 
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default">
+  Filtrar por nombre de paciente  <i class="fas fa-prescription-bottle"></i>
 </div>
 </div>
     
@@ -46,6 +47,7 @@ include "Consultas/Consultas.php";
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
+  include ("Modales/FiltraPorPaciente.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
