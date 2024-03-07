@@ -64,6 +64,7 @@ $('document').ready(function($){
         alertMessage += "Fecha: " + formValues['FechaExt'] + "\n";
         alertMessage += "Hora: " + formValues['HorasExt'] + "\n";
         alertMessage += "Médico: " + formValues['MedicoExt'] + "\n";
+        
 
         // Mostrar la alerta de Sweet Alert
         Swal.fire({
