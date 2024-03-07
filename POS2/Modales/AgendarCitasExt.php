@@ -61,7 +61,7 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital"></i></span>
   </div>
-  <select id = "sucursalExt" class = "form-control" name = "SucursalExt" required >
+  <select id = "sucursalExt" class = "form-control" name = "SucursalExt"  >
                                                <option value="">Seleccione una Sucursal:</option>
         <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz' AND Nombre_Sucursal !='Akil' AND
@@ -81,7 +81,7 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-tag"></i></span>
   </div>
-  <select  id = "especialidadExt" name = "EspecialidadExt"  class = "form-control" disabled = "disabled" required>
+  <select  id = "especialidadExt" name = "EspecialidadExt"  class = "form-control" disabled = "disabled" >
 								<option value = "">Selecciona una especialidad</option>
 							</select>
 </div>
