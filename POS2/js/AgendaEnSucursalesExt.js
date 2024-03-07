@@ -30,7 +30,7 @@ $('document').ready(function($){
    },
    messages: {
        NombresExt:{
-        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
+        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Debes escribir el nombre del paciente por favor ",
        },
 
     TelExt:{
