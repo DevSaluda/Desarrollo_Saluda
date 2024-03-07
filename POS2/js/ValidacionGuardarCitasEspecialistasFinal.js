@@ -59,8 +59,8 @@ $('document').ready(function($){
         var sucursalText = $('#sucursalExt option:selected').text();
         var especialidadText = $('#especialidadExt option:selected').text();
         var medicoText = $('#medicoExt option:selected').text();
-        var fecha = formValues['FechaExt'];
-        var hora = formValues['HorasExt'];
+        var fecha = $('#fechaExt option:selected').text();
+        var hora = $('#horasExt option:selected').text();
 
         // Construir el mensaje de la alerta con los datos seleccionados
         var alertMessage = "<p>Confirmar los siguientes datos:</p><br>";
