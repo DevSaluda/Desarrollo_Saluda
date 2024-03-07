@@ -51,15 +51,9 @@ Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 INNER JOIN 
 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
-(
-    Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
-    AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW()) -- Último día del mes en curso
-)
-OR
-(
-    Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') -- Primer día del mes anterior
-    AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW() - INTERVAL 1 MONTH) -- Último día del mes anterior
-)
+Ventas_POS.Fecha_venta >= '2024-01-01' -- Primer día de enero de 2024
+AND Ventas_POS.Fecha_venta <= CURDATE(); -- Hasta la fecha actual
+
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID";
 
 
