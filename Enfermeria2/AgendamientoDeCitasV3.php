@@ -15,7 +15,8 @@ include "Consultas/ConeSelectDinamico.php";
   <title>Agendamiento de citas </title>
 
   <?php include "Header.php"?>
- 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 <?php include_once ("Menu.php")?>
 <div id="loading-overlay">
@@ -60,7 +61,7 @@ Lista de pacientes agendados
   include ("Modales/AgendarCitasExt.php");
  include ("Modales/AltaEspecialista.php");
   include ("footer.php")?>
-  <script src="js/AgendaEnSucursales.js"></script>
+
 <script src="js/CampanasSucursales.js"></script>
 <script src="js/CampanasExpress.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
@@ -74,7 +75,7 @@ Lista de pacientes agendados
 <script src="js/ObtieneMedicoDeSucursalExt.js"></script>
 <script src="js/ObtieneFechasExt.js"></script>
 <script src="js/ObtieneHorasExt.js"></script>
-<script src="js/AgendaEnSucursalesExt.js"></script>
+<script src="js/AgendaEnSucursalesExtEnfermeria.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
