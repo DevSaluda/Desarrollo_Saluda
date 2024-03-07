@@ -103,7 +103,9 @@
 								<option value = "">Selecciona un medico</option>
 							</select>
 </div>
-
+<div>
+<label for="MedicoExt" class="error">
+</div>
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Fecha</label>

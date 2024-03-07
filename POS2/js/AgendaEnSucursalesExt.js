@@ -22,6 +22,9 @@ $('document').ready(function($){
          HorasExt:{
                 required:true,
             },
+            MedicoExt:{
+                required:true,
+            },
             
 
    },
@@ -42,9 +45,10 @@ $('document').ready(function($){
                FechaExt:{
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
                },
-               HorasExt:{
+               MedicoExt:{
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
                },
+               
                
    },
        submitHandler: submitForm	
