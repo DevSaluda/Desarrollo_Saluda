@@ -10,7 +10,7 @@ $('document').ready(function($){
                
              },
              
-             especialidadExt:{
+             SucursalExt:{
                required:true,
            },
            medicoExt:{
@@ -38,7 +38,7 @@ $('document').ready(function($){
     TelExt:{
         required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
        },
-            Sucursal:{
+       SucursalExt:{
                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
               },
               Medico:{

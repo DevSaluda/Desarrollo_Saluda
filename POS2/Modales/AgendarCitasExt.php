@@ -71,7 +71,7 @@
           }
         ?>  </select>
 </div>
-<label for="sucursal" class="error">
+<label for="SucursalExt" class="error">
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Especialidad</label>
