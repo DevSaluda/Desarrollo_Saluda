@@ -59,6 +59,8 @@ $('document').ready(function($){
         var sucursalText = $('#sucursalExt option:selected').text();
         var especialidadText = $('#especialidadExt option:selected').text();
         var medicoText = $('#medicoExt option:selected').text();
+        var fecha = formValues['FechaExt'];
+        var hora = formValues['HorasExt'];
 
         // Construir el mensaje de la alerta con los datos seleccionados
         var alertMessage = "<p>Confirmar los siguientes datos:</p><br>";
@@ -66,8 +68,8 @@ $('document').ready(function($){
         alertMessage += "<p>Teléfono: " + formValues['TelExt'] + "</p><br>";
         alertMessage += "<p>Sucursal: " + sucursalText + "</p><br>";
         alertMessage += "<p>Especialidad: " + especialidadText + "</p><br>";
-        alertMessage += "<p>Fecha: " + formValues['FechaExt'] + "</p><br>";
-        alertMessage += "<p>Hora: " + formValues['HorasExt'] + "</p><br>";
+        alertMessage += "<p>Fecha: " + fecha + "</p><br>";
+        alertMessage += "<p>Hora: " + hora + "</p><br>";
         alertMessage += "<p>Médico: " + medicoText + "</p><br>";
 
         // Mostrar la alerta de Sweet Alert
