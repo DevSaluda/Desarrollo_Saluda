@@ -44,10 +44,10 @@ $('document').ready(function($){
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
         },
-        submitHandler: submitForm	
+        submitHandler: submitForm    
     });
 
-    function submitForm() {		
+    function submitForm() {        
         // Obtener los datos del formulario
         var formData = $('#AgendaExterno').serializeArray();
         var formValues = {};
@@ -66,20 +66,22 @@ $('document').ready(function($){
         alertMessage += "Médico: " + formValues['MedicoExt'] + "\n";
 
         // Mostrar la alerta de Sweet Alert
-        swal({
+        Swal.fire({
             title: "Confirmar datos",
             text: alertMessage,
             icon: "info",
-            buttons: ["Cancelar", "Confirmar"]
-        }).then((confirm) => {
-            if (confirm) {
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
                 // Si el usuario confirma, enviar los datos al servidor
                 $.ajax({
                     type: 'POST',
                     url: "Consultas/AgendaCitaEnSucursalExtV1.php",
                     data: $('#AgendaExterno').serialize(),
                     cache: false,
-                    beforeSend: function(){	
+                    beforeSend: function(){    
                         $("#submit_Age").html("Un momento... <i class='fas fa-check'></i>");
                     },
                     success: function(dataResult){
@@ -93,7 +95,7 @@ $('document').ready(function($){
                             });
                             $('.modal').on('hidden.bs.modal', function (e) {
                                 modal_lv--
-                            });	
+                            });    
                             $("#submit_Age").html("Algo no salió bien.. <i class='fas fa-exclamation-triangle'></i>");
                             $('#ErrorDupli').modal('toggle'); 
                             setTimeout(function(){ 
@@ -123,7 +125,7 @@ $('document').ready(function($){
                             });
                             $('.modal').on('hidden.bs.modal', function (e) {
                                 modal_lv--
-                            });	
+                            });    
                             $("#submit_Age").html("Algo no salió bien.. <i class='fas fa-exclamation-triangle'></i>");
                             $('#ErrorData').modal('toggle'); 
                             setTimeout(function(){ 
@@ -135,8 +137,6 @@ $('document').ready(function($){
                         }
                     }
                 });
-            } else {
-                // Si el usuario cancela, no hacer nada
             }
         });
 
