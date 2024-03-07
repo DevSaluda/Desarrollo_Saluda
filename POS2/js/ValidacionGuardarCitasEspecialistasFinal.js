@@ -55,22 +55,25 @@ $('document').ready(function($){
             formValues[obj.name] = obj.value;
         });
 
+        // Obtener el texto seleccionado de los campos select
+        var sucursalText = $('#sucursalExt option:selected').text();
+        var especialidadText = $('#especialidadExt option:selected').text();
+        var medicoText = $('#medicoExt option:selected').text();
+
         // Construir el mensaje de la alerta con los datos seleccionados
         var alertMessage = "<p>Confirmar los siguientes datos:</p><br>";
         alertMessage += "<p>Nombre: " + formValues['NombresExt'] + "</p><br>";
         alertMessage += "<p>Teléfono: " + formValues['TelExt'] + "</p><br>";
-        alertMessage += "<p>Sucursal: " + $('#SucursalExt option:selected').text() + "</p><br>";
-        alertMessage += "<p>Especialidad: " + $('#EspecialidadExt option:selected').text() + "</p><br>";
+        alertMessage += "<p>Sucursal: " + sucursalText + "</p><br>";
+        alertMessage += "<p>Especialidad: " + especialidadText + "</p><br>";
         alertMessage += "<p>Fecha: " + formValues['FechaExt'] + "</p><br>";
         alertMessage += "<p>Hora: " + formValues['HorasExt'] + "</p><br>";
-        alertMessage += "<p>Médico: " + $('#MedicoExt option:selected').text() + "</p><br>";
-        
-        
+        alertMessage += "<p>Médico: " + medicoText + "</p><br>";
 
         // Mostrar la alerta de Sweet Alert
         Swal.fire({
             title: "Confirmar datos",
-            text: alertMessage,
+            html: alertMessage,
             icon: "info",
             showCancelButton: true,
             confirmButtonText: "Confirmar",
