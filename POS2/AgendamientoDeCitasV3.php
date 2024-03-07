@@ -87,7 +87,7 @@ Citas de especialistas
 <script src="js/ObtieneMedicoDeSucursalExt.js"></script>
 <script src="js/ObtieneFechasExt.js"></script>
 <script src="js/ObtieneHorasExt.js"></script>
-<script src="js/AgendaEnSucursalesExt.js"></script>
+<script src="js/GuardaCitasDeEspecialistas.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
