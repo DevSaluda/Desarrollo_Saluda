@@ -20,7 +20,7 @@ LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
 AgendaCitas_EspecialistasExt.Fk_Especialidad IN (14, 15, 16, 17, 18, 19, 20, 65, 66, 67, 68, 76, 80, 81, 84, 85, 86, 87)
-AND Fechas_EspecialistasExt.Fecha_Disponibilidad = CURDATE(); -- Esta condición filtra por la fecha de hoy ";
+AND Fechas_EspecialistasExt.Fecha_Disponibilidad = CURRENT_DATE ";
 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $PacientesGeneralDentalTotal = mysqli_fetch_assoc($resultset);
