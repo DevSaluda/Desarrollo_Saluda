@@ -5,7 +5,7 @@ include "Consultas.php";
 
 
 $sql ="SELECT
-COUNT(*) AS Total_Citas
+COUNT(*) AS TotalResultados
 FROM
 AgendaCitas_EspecialistasExt
 LEFT JOIN
@@ -19,25 +19,8 @@ Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_Especiali
 LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
-(AgendaCitas_EspecialistasExt.Fk_Especialidad = 14 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 15 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 16 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 17 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 18 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 19 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 20 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 65 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 66 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 67 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 68 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 76 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 80 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 81 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 84 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 85 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 86 OR 
- AgendaCitas_EspecialistasExt.Fk_Especialidad = 87)
-AND DATE(AgendaCitas_EspecialistasExt.Fecha_Hora) = CURRENT_DATE ";
+AgendaCitas_EspecialistasExt.Fk_Especialidad IN (14, 15, 16, 17, 18, 19, 20, 65, 66, 67, 68, 76, 80, 81, 84, 85, 86, 87)
+AND Fechas_EspecialistasExt.Fecha_Disponibilidad = CURDATE(); -- Esta condición filtra por la fecha de hoy ";
 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $PacientesGeneralDentalTotal = mysqli_fetch_assoc($resultset);
