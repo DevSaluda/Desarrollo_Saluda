@@ -178,7 +178,7 @@
               </ul>
             </li>
 
-            <a href="index" class="nav-link ">
+            <a href="AgendaPersonalizada" class="nav-link ">
             <i class="fas fa-home"></i>
               <p>
                 Mi agenda
