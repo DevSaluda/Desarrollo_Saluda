@@ -177,6 +177,14 @@
              
               </ul>
             </li>
+
+            <a href="index" class="nav-link ">
+            <i class="fas fa-home"></i>
+              <p>
+                Mi agenda
+           
+              </p>
+            </a>
             <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Punto de venta <i class="fas fa-cash-register"></i></li>
 
            
