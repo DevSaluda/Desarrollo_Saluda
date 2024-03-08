@@ -45,7 +45,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $PacientesGeneralDental['Total_Citas']?></h3>
+                <h3><?php echo $PacientesGeneralDentalTotal['Total_Citas']?></h3>
 
                 <p>Cajas abiertas</p>
               </div>

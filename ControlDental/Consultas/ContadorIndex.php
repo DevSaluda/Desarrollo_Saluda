@@ -42,15 +42,8 @@ FROM (
 ";
 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$PacientesGeneralDental = mysqli_fetch_assoc($resultset);
+$PacientesGeneralDentalTotal = mysqli_fetch_assoc($resultset);
 
-$sql ="SELECT Fecha_venta,COUNT(*) Folio_Ticket FROM Ventas_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Fecha_venta=CURRENT_DATE";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$Tickets = mysqli_fetch_assoc($resultset);
-
-$sql ="SELECT Fecha_Apertura,ID_H_O_D,SUM(Valor_Total_Caja - Cantidad_Fondo) as totaldia FROM Cajas_POS WHERE Fecha_Apertura = CURRENT_DATE AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TotalGanancia = mysqli_fetch_assoc($resultset);
 
 
 
@@ -61,17 +54,6 @@ $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($c
 $TraspasosPendientes = mysqli_fetch_assoc($resultset);
 
 
-$sql ="SELECT ID_H_O_D,COUNT(*) as TotalTickets FROM Tickets_Incidencias WHERE  ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TotalTickets = mysqli_fetch_assoc($resultset);
 
-
-$sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as TicketsAsignados FROM Tickets_Incidencias WHERE Estatus='Asignado' AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TicketsAsignados = mysqli_fetch_assoc($resultset);
-
-$sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as TicketsCerrados FROM Tickets_Incidencias WHERE Estatus='Cerrado' AND ID_H_O_D='".$row['ID_H_O_D']."'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TicketsCerrados = mysqli_fetch_assoc($resultset);
 
 ?>
