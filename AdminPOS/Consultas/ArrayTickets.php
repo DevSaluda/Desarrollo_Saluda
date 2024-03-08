@@ -1,4 +1,5 @@
 
+
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -21,6 +22,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 
 $sql = "SELECT
+Ventas_POS.FolioSucursal,
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
@@ -42,13 +44,11 @@ Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE
-  YEAR(Ventas_POS.AgregadoEl) = YEAR(CURRENT_DATE()) 
-AND Ventas_POS.Fk_sucursal = `Fk_sucursal`
+Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
 GROUP BY
 Ventas_POS.Folio_Ticket
 ORDER BY
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del año
-";
+Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
 ;
  
 $result = mysqli_query($conn, $sql);
@@ -57,6 +57,7 @@ $c=0;
  
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
+    $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));

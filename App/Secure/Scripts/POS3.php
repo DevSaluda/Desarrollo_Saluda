@@ -52,6 +52,8 @@ if (isset($_POST['login_button'])) {
                     $_SESSION['JefeEnfermeros'] = $row['Pos_ID'];
                     break;
                 default:
+
+             
                     // Manejar el caso donde el rol no coincide con ninguno de los anteriores
                     break;
             }
