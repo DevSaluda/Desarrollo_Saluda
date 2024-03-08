@@ -1,5 +1,4 @@
 
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -52,41 +51,34 @@ Ventas_POS.AgregadoEl DESC;
  
 $result = mysqli_query($conn, $sql);
  
-$c=0;
- 
-while($fila=$result->fetch_assoc()){
+$c = 0;
+$data = [];
+
+while ($fila = $result->fetch_assoc()) {
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
-    $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
-    $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     
+    $data[$c]["FolioSucursal"] = isset($fila["FolioSucursal"]) ? $fila["FolioSucursal"] : ""; 
+  
+    $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));
-   
     $data[$c]["Vendedor"] = $fila["AgregadoPor"];
-    $data[$c]["Desglose"] = '
-<td>
-<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-success btn-sm btn-desglose dropdown-item" style="background-color: #C80096 !important;" ><i class="fas fa-receipt"></i> Desglosar ticket</a>
 
-</td>';
-
-$data[$c]["Reimpresion"] = '
-<td>
-<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item " style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a>
-</td>';
-
-$data[$c]["EditarData"] = '
-<td>
-<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-EditarData dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-edit"></i> Editar ticket</a>
-</td>';
-    $c++; 
- 
+    $data[$c]["Desglose"] = "Desglosar ticket";
+    
+    $data[$c]["Reimpresion"] = "Reimpresión ticket";
+    $data[$c]["EditarData"] = "Editar ticket";
+    $c++;
 }
- 
-$results = ["sEcho" => 1,
-            "iTotalRecords" => count($data),
-            "iTotalDisplayRecords" => count($data),
-            "aaData" => $data ];
- 
+
+$results = [
+    "sEcho" => 1,
+    "iTotalRecords" => count($data),
+    "iTotalDisplayRecords" => count($data),
+    "aaData" => $data
+];
+
 echo json_encode($results);
+
 ?>
 
 
