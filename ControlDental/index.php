@@ -75,7 +75,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-              <h3><?php echo $TraspasosPendientes['Todas_Las_Citas']?></h3>
+              <h3><?php echo $TraspasosPendientes['Total_Citas']?></h3>
                 <p>Traspasos</p>
 
                
