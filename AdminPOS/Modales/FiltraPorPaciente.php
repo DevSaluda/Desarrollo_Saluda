@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <h2>Buscar Paciente</h2>
-                <form  method="POST" action="https://saludapos.com/Consultas/AdminPOS/FiltraPorNombrePaciente.php">
+                <form  method="POST" action="https://saludapos.com/AdminPOS/Consultas/FiltraPorNombrePaciente.php">
                     <label for="nombre">Nombre del Paciente:</label>
                     <input type="text" id="nombre" name="nombre" required>
                     <button type="submit">Buscar</button>
