@@ -51,6 +51,25 @@ Signos_VitalesV2.ID_SignoV;
 ";  
 $query = $conn->query($sql1);
 ?>
+<script>
+    $(document).ready(function() {
+        $('#Signos_VitalesV2').DataTable({
+            "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Exportar a Excel <i class="fas fa-file-excel"></i>',
+                    titleAttr: 'Exportar a Excel',
+                    title: 'Registro de Pacientes',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible' // Exportar solo las columnas visibles
+                    }
+                }
+            ]
+        });
+    });
+</script>
+
 
 <?php if($query->num_rows>0):?>
   <div class="text-center">
