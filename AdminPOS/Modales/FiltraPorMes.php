@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="filtroForm">
+                    <form action="FiltroPorMesVentas" method="POST">
                         <div class="form-row">
                             <div class="col">
                                 <label for="mesesSelect">Seleccione un mes</label>
@@ -40,7 +40,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
-                                    <select id="añosSelect" class="form-control" name="Año" required>
+                                    <select id="añosSelect" class="form-control" name="anual" required>
                                         <option value="">Seleccione un año:</option>
                                         <?php
                                         $añoActual = date('Y');
@@ -61,32 +61,4 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('filtroForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-        
-        var mes = document.getElementById('mesesSelect').value;
-        var año = document.getElementById('añosSelect').value;
-        
-        // Validar y procesar datos antes de enviar el formulario
-        if (mes && año) {
-            var formData = new FormData();
-            formData.append('Mes', mes);
-            formData.append('Año', año);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'Ventas.php', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Manejar la respuesta del servidor aquí
-                    console.log(xhr.responseText);
-                } else {
-                    console.error('Error al procesar los productos.');
-                }
-            };
-            xhr.send(formData);
-        } else {
-            console.error('Por favor, seleccione un mes y un año.');
-        }
-    });
-</script>

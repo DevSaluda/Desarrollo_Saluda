@@ -85,7 +85,7 @@ include "Consultas/Consultas.php";
 <script src="js/ObtieneMedicoDeSucursalExt.js"></script>
 <script src="js/ObtieneFechasExt.js"></script>
 <script src="js/ObtieneHorasExt.js"></script>
-<script src="js/AgendaEnSucursalesExt.js"></script>
+<script src="js/AgendaEnSucursalesValidacion.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

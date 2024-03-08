@@ -291,10 +291,10 @@ tabla = $('#CitasIndex').DataTable({
 <th>Observaciones</th>
 <!-- <th>Recordartorio</th> -->
 
-<th>Agendado por </th>
+<!-- <th>Agendado por </th>
 <th>Registrado el </th>
 <th>Enviar Mensaje </th>
-	
+	 -->
 
 
 </thead>

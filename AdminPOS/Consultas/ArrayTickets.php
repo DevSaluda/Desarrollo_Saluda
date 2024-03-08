@@ -1,4 +1,5 @@
 
+
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -44,8 +45,7 @@ SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE 
 YEAR(Ventas_POS.AgregadoEl) = YEAR(CURRENT_DATE()) 
 ORDER BY 
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del año
-";
+Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
 ;
  
 $result = mysqli_query($conn, $sql);
@@ -54,6 +54,7 @@ $c=0;
  
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
+    $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));
