@@ -25,7 +25,8 @@ include "Consultas/Consultas.php";
   <div >
   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default">
   Filtrar por nombre de paciente  <i class="fas fa-prescription-bottle"></i>
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorRangoFechas" class="btn btn-default">
+
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltraPorRangoFechas" class="btn btn-default">
   Filtrar por rango de fechas<i class="fas fa-prescription-bottle"></i>
 </div>
 </div>
@@ -50,6 +51,7 @@ include "Consultas/Consultas.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraPorPaciente.php");
+  include ("Modales/FiltraPorRangoFechas.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
