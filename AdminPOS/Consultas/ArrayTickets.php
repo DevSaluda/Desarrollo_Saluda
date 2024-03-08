@@ -45,7 +45,9 @@ SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE 
 YEAR(Ventas_POS.AgregadoEl) = YEAR(CURRENT_DATE()) 
 ORDER BY 
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
+Ventas_POS.AgregadoEl DESC;
+
+-- Ordena por fecha y hora más reciente dentro del mes";
 ;
  
 $result = mysqli_query($conn, $sql);
