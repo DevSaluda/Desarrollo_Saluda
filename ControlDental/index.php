@@ -47,7 +47,7 @@
               <div class="inner">
                 <h3><?php echo $PacientesGeneralDentalTotal['TotalResultados']?></h3>
 
-                <p>Cajas abiertas</p>
+                <p>Pacientes para el area dental</p>
               </div>
               <div class="icon">
               <i class="fas fa-cash-register"></i>
@@ -62,7 +62,7 @@
               <div class="inner">
                 <h3><?php echo $Tickets['Folio_Ticket']?></h3>
 
-                <p>Productos vendidos</p>
+                <p>Pacientes mios</p>
               </div>
               <div class="icon">
               <i class="fas fa-barcode"></i>
