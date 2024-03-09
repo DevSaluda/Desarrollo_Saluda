@@ -1,5 +1,4 @@
 
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -51,6 +50,12 @@ Ventas_POS.AgregadoEl DESC;
 ;
  
 $result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    // Si hay un error, muestra un mensaje descriptivo y finaliza el script
+    die('Error al ejecutar la consulta SQL: ' . mysqli_error($conn));
+}
+
  
 $c=0;
  
