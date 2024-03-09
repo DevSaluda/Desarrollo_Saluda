@@ -60,7 +60,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3><?php echo $Tickets['Folio_Ticket']?></h3>
+                <h3><?php echo $CreditosVigentes['CreditosVigentes']?></h3>
 
                 <p>Pacientes mios</p>
               </div>
@@ -75,7 +75,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-              <h3><?php echo $TraspasosPendientes['Total_Citas']?></h3>
+              <h3><?php echo $AbonosRealizados['AbonosDelDia']?></h3>
                 <p>Traspasos</p>
 
                
@@ -91,8 +91,8 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?php echo $TotalGanancia['totaldia']?></h3>
-              <p>Ganancia global</p>
+              <h3><?php echo $TotalProcedimientos['VentasDelDia']?></h3>
+              <p>Procedimientos realizados</p>
                
               </div>
               <div class="icon">
