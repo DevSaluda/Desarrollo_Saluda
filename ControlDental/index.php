@@ -47,7 +47,7 @@
               <div class="inner">
                 <h3><?php echo $PacientesGeneralDentalTotal['TotalResultados']?></h3>
 
-                <p>Pacientes para el area dental</p>
+                <p>Pacientes</p>
               </div>
               <div class="icon">
               <i class="fas fa-cash-register"></i>
