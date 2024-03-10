@@ -46,8 +46,8 @@ Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_Especiali
 LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
-AgendaCitas_EspecialistasExt.Fk_Especialidad BETWEEN 14 AND 20
-AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
+AgendaCitas_EspecialistasExt.Fk_Especialista BETWEEN 14 AND 17
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE());";
 
 
 $result = mysqli_query($conn, $sql);
