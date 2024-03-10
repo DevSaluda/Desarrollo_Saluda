@@ -22,7 +22,7 @@ include "Consultas/Consultas.php";
 </div>
 <?php include_once ("Menu.php")?>
 
-<div class="tab-content" id="pills-tabContent">
+
 
 
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -72,7 +72,7 @@ include "Consultas/Consultas.php";
 
 
 
-<script src="js/CampanasExpress.js"></script>
+<script src="js/MiAgenda.js"></script>
 <script src="js/AgregaEspecialidad.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
 <script src="js/BuscaDataPacientesExt.js"></script>
