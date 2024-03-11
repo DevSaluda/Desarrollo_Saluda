@@ -99,7 +99,10 @@ include "Consultas/Consultas.php";
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { id: id }, function(data) {
+        var ids = id.split('-');
+        var folioTicket = ids[0];
+        var foliosucursal = ids[1];
+        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
