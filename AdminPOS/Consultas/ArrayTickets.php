@@ -23,7 +23,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 
 $sql = "SELECT
 Ventas_POS.Folio_Ticket,
-Ventas_POS.Folio_Sucursal,
+Ventas_POS.FolioSucursal,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
 Ventas_POS.Identificador_tipo,
@@ -59,7 +59,7 @@ $c=0;
 while($fila=$result->fetch_assoc()){
   
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
-    $data[$c]["FolioSucursal"] = $fila["Folio_Sucursal"];
+    $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));
