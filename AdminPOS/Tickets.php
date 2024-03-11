@@ -117,7 +117,7 @@ include "Consultas/Consultas.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php",{ folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Reimpresion de tickets");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -133,7 +133,7 @@ include "Consultas/Consultas.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/EdicionTicketVenta.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/EdicionTicketVenta.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Edicion de datos de ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
