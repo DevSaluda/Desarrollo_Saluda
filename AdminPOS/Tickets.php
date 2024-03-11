@@ -113,7 +113,10 @@ include "Consultas/Consultas.php";
 
     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
     $(document).on("click", ".btn-Reimpresion", function() {
-        var id = $(this).data("id");
+      var id = $(this).data("id");
+        var ids = id.split('-');
+        var folioTicket = ids[0];
+        var foliosucursal = ids[1];
         $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Reimpresion de tickets");
@@ -126,7 +129,10 @@ include "Consultas/Consultas.php";
 
      // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
      $(document).on("click", ".btn-EditarData", function() {
-        var id = $(this).data("id");
+      var id = $(this).data("id");
+        var ids = id.split('-');
+        var folioTicket = ids[0];
+        var foliosucursal = ids[1];
         $.post("https://saludapos.com/AdminPOS/Modales/EdicionTicketVenta.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Edicion de datos de ticket");
