@@ -7,7 +7,7 @@ $(document).ready(function () {
         // Luego, puedes enviar el formulario manualmente utilizando AJAX.
         $.ajax({
             type: 'POST',
-            url: "Consultas/ActualizaDataTicket.php",
+            url: "Consultas/ActualizaInfoDelTicket.php",
             data: $(this).serialize(), // Serializa los datos del formulario
             cache: false,
             beforeSend: function () {
