@@ -1,86 +1,60 @@
 <?php
-include_once 'db_connection.php';
 
-// Verifica si se recibieron los datos esperados del formulario
-if (!isset($_POST["TicketPorActualizar"], $_POST["NombreProdActualizable"], $_POST["ImporteActualizable"], $_POST["FormaPagoActualizable"], $_POST["TurnoActualizable"], $_POST["TicketPorActualizarFolio"])) {
-    $response['status'] = 'error';
-    $response['message'] = 'No se recibieron todos los datos necesarios del formulario.';
-    echo json_encode($response);
-    exit(); // Sale del script si no se recibieron todos los datos
-}
+// Verificar si se han enviado datos mediante el método POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Incluir archivo de conexión a la base de datos y otras funciones necesarias
+    include "../Consultas/db_connection.php";
 
-// Obtiene el número de elementos en el array
-$contador = count($_POST["TicketPorActualizar"]);
+    // Realizar las operaciones necesarias para actualizar la información del ticket
 
-// Inicializa el contador de registros actualizados
-$ProContador = 0;
+    // Por ejemplo, podrías obtener los datos enviados desde el formulario
+    $codBarra = $_POST["CodBarraActualizable"];
+    $nombreProd = $_POST["NombreProdActualizable"];
+    $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"];
+    $ticketPorActualizar = $_POST["TicketPorActualizar"];
+    $importeActualizable = $_POST["ImporteActualizable"];
+    $formaPagoActualizable = $_POST["FormaPagoActualizable"];
+    $turnoActualizable = $_POST["TurnoActualizable"];
 
-// Consulta SQL para actualizar los registros
-$query = "UPDATE Ventas_POS_Pruebas SET
-           Nombre_Prod = ?, 
-           Importe = ?, 
-           FormaDePago = ?, 
-           Turno = ?
-           WHERE FolioSucursal = ? AND Folio_Ticket = ?";  
+    // Iterar sobre los datos recibidos para actualizar cada ticket
+    for ($i = 0; $i < count($codBarra); $i++) {
+        // Construir la consulta SQL de actualización
+        $sql = "UPDATE Ventas_POS SET Nombre_Prod = ?, FolioSucursal = ?, Folio_Ticket = ?, Importe = ?, FormaDePago = ?, Turno = ? WHERE FolioSucursal = ? AND Folio_Ticket = ?, ";
+        
+        // Preparar la declaración
+        $stmt = $conn->prepare($sql);
 
-// Inicializa arrays para almacenar los valores y tipos de datos
-$values = [];
-$valueTypes = '';
+        // Vincular parámetros
+        $stmt->bind_param("sssiss", $nombreProd[$i], $ticketPorActualizarFolio[$i], $ticketPorActualizar[$i], $importeActualizable[$i], $formaPagoActualizable[$i], $turnoActualizable[$i], $codBarra[$i]);
 
-// Recorre los datos recibidos del formulario
-for ($i = 0; $i < $contador; $i++) {
-    if (!empty($_POST["TicketPorActualizar"][$i])) {
-        $ProContador++;
+        // Ejecutar la declaración
+        $stmt->execute();
 
-        // Agrega los valores a los arrays
-        $values[] = $_POST["NombreProdActualizable"][$i];
-        $values[] = $_POST["ImporteActualizable"][$i];
-        $values[] = $_POST["FormaPagoActualizable"][$i];
-        $values[] = $_POST["TurnoActualizable"][$i];
-        $values[] = $_POST["TicketPorActualizarFolio"][$i];
-        $values[] = $_POST["TicketPorActualizar"][$i];
+        // Verificar si la ejecución fue exitosa
+        if ($stmt->affected_rows > 0) {
+            // La actualización fue exitosa
+            $response["status"] = "success";
+            $response["message"] = "La información del ticket se ha actualizado correctamente";
+        } else {
+            // Ocurrió un error durante la actualización
+            $response["status"] = "error";
+            $response["message"] = "Ha ocurrido un error al intentar actualizar la información del ticket";
+        }
 
-        // Agrega los tipos de datos a la cadena
-        $valueTypes .= 'ssssss'; // Ajusta los tipos de datos según tus necesidades
+        // Cerrar la declaración
+        $stmt->close();
     }
-}
 
-// Verifica si hay registros para actualizar
-if ($ProContador == 0) {
-    $response['status'] = 'error';
-    $response['message'] = 'No se encontraron registros para actualizar.';
+    // Cerrar la conexión a la base de datos
+    $conn->close();
+
+    // Retornar la respuesta en formato JSON
     echo json_encode($response);
-    exit(); // Sale del script si no hay registros para actualizar
-}
-
-// Prepara la respuesta por defecto
-$response = array(
-    'status' => 'error',
-    'message' => 'Ocurrió un error durante la actualización.'
-);
-
-// Prepara y ejecuta la consulta SQL preparada
-$stmt = mysqli_prepare($conn, $query);
-if ($stmt) {
-    // Vincula los parámetros a la consulta
-    mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
-
-    // Ejecuta la consulta
-    $resultadocon = mysqli_stmt_execute($stmt);
-
-    if ($resultadocon) {
-        $response['status'] = 'success';
-        $response['message'] = 'Registro(s) actualizado(s) correctamente.';
-    } else {
-        $response['message'] = 'Error en la consulta de actualización: ' . mysqli_error($conn);
-    }
 } else {
-    $response['message'] = 'Error en la preparación de la consulta: ' . mysqli_error($conn);
+    // Si no se recibieron datos mediante POST, retornar un error
+    $response["status"] = "error";
+    $response["message"] = "No se han recibido datos mediante POST";
+    echo json_encode($response);
 }
 
-// Retorna la respuesta como JSON
-echo json_encode($response);
-
-// Cierra la conexión a la base de datos
-mysqli_close($conn);
 ?>
