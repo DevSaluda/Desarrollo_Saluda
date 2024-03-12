@@ -34,7 +34,7 @@ if ($ProContador != 0) {
 
     if ($stmt) {
         // Vincula los parámetros a la consulta
-        mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
+        mysqli_stmt_bind_param($stmt, $valueTypes,$values);
 
         // Ejecuta la consulta
         $resultadocon = mysqli_stmt_execute($stmt);
