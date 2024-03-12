@@ -129,9 +129,9 @@ while ($r=$query->fetch_object()){
 </div>
 </div>
 
-
+<button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
    </form>  
-   <button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+  
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
