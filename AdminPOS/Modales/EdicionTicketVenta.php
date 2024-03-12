@@ -159,4 +159,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?><script src="js/ActualizacionTickets.js"></script>
+?><script src="js/ActualizacionDeTickets.js"></script>
