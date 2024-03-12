@@ -2,7 +2,10 @@
 
 // Incluir archivo de conexión a la base de datos
 include "db_connection.php";
-
+$response = array(
+    "status" => "error",
+    "message" => "No se han recibido datos mediante POST"
+);
 // Verificar si se han enviado datos mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Realizar las operaciones necesarias para actualizar la información del ticket
