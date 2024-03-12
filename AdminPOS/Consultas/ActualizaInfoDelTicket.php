@@ -1,59 +1,24 @@
 <?php
-include_once 'db_connection.php';
+// Incluir archivo de conexión a la base de datos
+include("db_connection.php");
 
-$contador = count($_POST["TicketPorActualizar"]);
-$ProContador = 0;
-$query = "UPDATE Ventas_POS_Pruebas SET
-           Nombre_Prod = ?, 
-           Importe = ?, 
-           FormaDePago = ?, 
-           Turno=?
-           WHERE Folio_Ticket = ?";  // Cambia esto según tus necesidades de actualización
+// Iterar sobre los datos recibidos y actualizar la base de datos
+for ($i = 0; $i < count($_POST['CodBarraActualizable']); $i++) {
+    $codBarra = $_POST["CodBarraActualizable"][$i];
+    $nombreProd = $_POST["NombreProdActualizable"][$i];
+    $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"][$i];
+    $ticketPorActualizar = $_POST["TicketPorActualizar"][$i];
+    $importeActualizable = $_POST["ImporteActualizable"][$i];
+    $formaPagoActualizable = $_POST["FormaPagoActualizable"][$i];
+    $turnoActualizable = $_POST["TurnoActualizable"][$i];
 
-$placeholders = [];
-$values = [];
-$valueTypes = '';
-
-for ($i = 0; $i < $contador; $i++) {
-    if (!empty($_POST["TicketPorActualizar"][$i]) && !empty($_POST["NombreProdActualizable[]"][$i]) && !empty($_POST["ImporteActualizable"][$i]) && !empty($_POST["TurnoActualizable"][$i])) {
-        $ProContador++;
-        $values[] = $_POST["NombreProdActualizable"][$i];
-        $values[] = $_POST["ImporteActualizable"][$i];
-        $values[] = $_POST["FormaPagoActualizable"][$i];
-        $values[] = $_POST["TurnoActualizable"][$i];
-        $valueTypes .= 'ssss'; // Ajusta los tipos de datos según tus necesidades
-    }
+    // Realizar la actualización en la base de datos
+    $sql_update = $conn->query("UPDATE Ventas_POS_Pruebas SET Nombre_Prod = '$nombreProd', 
+    FolioSucursal = '$ticketPorActualizarFolio', Folio_Ticket = '$ticketPorActualizar', 
+    Importe = '$importeActualizable', FormaDePago = '$formaPagoActualizable', Turno = '$turnoActualizable'
+     WHERE FolioSucursal = '$ticketPorActualizarFolio' AND Folio_Ticket= '$ticketPorActualizar' ");
 }
 
-$response = array();
-
-if ($ProContador != 0) {
-    $stmt = mysqli_prepare($conn, $query);
-
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
-
-        $resultadocon = mysqli_stmt_execute($stmt);
-
-        if ($resultadocon) {
-            $response['status'] = 'success';
-            $response['message'] = 'Registro(s) actualizado(s) correctamente.';
-        } else {
-            $response['status'] = 'error';
-            $response['message'] = 'Error en la consulta de actualización: ' . mysqli_error($conn);
-        }
-    } else {
-        $response['status'] = 'error';
-        $response['message'] = 'Error en la preparación de la consulta: ' . mysqli_error($conn);
-    }
-
-    mysqli_stmt_close($stmt);
-} else {
-    $response['status'] = 'error';
-    $response['message'] = 'No se encontraron registros para actualizar.';
-}
-
-echo json_encode($response);
-
-mysqli_close($conn);
+// Cerrar la conexión a la base de datos
+$conn->close();
 ?>
