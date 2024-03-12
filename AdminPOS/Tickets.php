@@ -75,7 +75,7 @@ include "Consultas/Consultas.php";
 
 <script src="js/ControlTicketsVentas.js"></script>
 <script src="js/RealizaCambioDeSucursalPorFiltroDeBusqueda.js"></script>
-<script src="js/EditaValoresTickets.js"></script>
+
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
