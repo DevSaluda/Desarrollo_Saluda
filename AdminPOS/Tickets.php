@@ -146,7 +146,7 @@ include "Consultas/Consultas.php";
 </script>
 <!-- PAGE PLUGINS -->
 <div class="modal fade" id="Cancelacionmodal" tabindex="-2" role="dialog" style="overflow-y: scroll;" aria-labelledby="CancelacionmodalLabel" aria-hidden="true">
-  <div id="Di3" class="modal-dialog modal-lg modal-notify modal-info">
+  <div id="Di3" class="modal-dialog modal-xl modal-notify modal-info">
       <div class="modal-content">
       <div class="modal-header">
          <p class="heading lead" id="TituloCancelacion">Confirmacion de ticket</p>
