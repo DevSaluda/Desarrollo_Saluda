@@ -2,24 +2,25 @@
 
 // Incluir archivo de conexión a la base de datos
 include "db_connection.php";
+
+// Definir $response por defecto
 $response = array(
     "status" => "error",
     "message" => "No se han recibido datos mediante POST"
 );
+
 // Verificar si se han enviado datos mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Realizar las operaciones necesarias para actualizar la información del ticket
 
     // Obtener los datos enviados desde el formulario
-    // Obtener los datos enviados desde el formulario
-$codBarra = is_array($_POST["CodBarraActualizable"]) ? $_POST["CodBarraActualizable"] : [];
-$nombreProd = is_array($_POST["NombreProdActualizable"]) ? $_POST["NombreProdActualizable"] : [];
-$ticketPorActualizarFolio = is_array($_POST["TicketPorActualizarFolio"]) ? $_POST["TicketPorActualizarFolio"] : [];
-$ticketPorActualizar = is_array($_POST["TicketPorActualizar"]) ? $_POST["TicketPorActualizar"] : [];
-$importeActualizable = is_array($_POST["ImporteActualizable"]) ? $_POST["ImporteActualizable"] : [];
-$formaPagoActualizable = is_array($_POST["FormaPagoActualizable"]) ? $_POST["FormaPagoActualizable"] : [];
-$turnoActualizable = is_array($_POST["TurnoActualizable"]) ? $_POST["TurnoActualizable"] : [];
-
+    $codBarra = is_array($_POST["CodBarraActualizable"]) ? $_POST["CodBarraActualizable"] : [];
+    $nombreProd = is_array($_POST["NombreProdActualizable"]) ? $_POST["NombreProdActualizable"] : [];
+    $ticketPorActualizarFolio = is_array($_POST["TicketPorActualizarFolio"]) ? $_POST["TicketPorActualizarFolio"] : [];
+    $ticketPorActualizar = is_array($_POST["TicketPorActualizar"]) ? $_POST["TicketPorActualizar"] : [];
+    $importeActualizable = is_array($_POST["ImporteActualizable"]) ? $_POST["ImporteActualizable"] : [];
+    $formaPagoActualizable = is_array($_POST["FormaPagoActualizable"]) ? $_POST["FormaPagoActualizable"] : [];
+    $turnoActualizable = is_array($_POST["TurnoActualizable"]) ? $_POST["TurnoActualizable"] : [];
 
     // Iterar sobre los datos recibidos para actualizar cada ticket
     for ($i = 0; $i < count($codBarra); $i++) {
@@ -49,10 +50,6 @@ $turnoActualizable = is_array($_POST["TurnoActualizable"]) ? $_POST["TurnoActual
         // Cerrar la declaración
         $stmt->close();
     }
-} else {
-    // Si no se recibieron datos mediante POST, retornar un error
-    $response["status"] = "error";
-    $response["message"] = "No se han recibido datos mediante POST";
 }
 
 // Cerrar la conexión a la base de datos
@@ -60,5 +57,3 @@ $conn->close();
 
 // Retornar la respuesta en formato JSON
 echo json_encode($response);
-
-?>
