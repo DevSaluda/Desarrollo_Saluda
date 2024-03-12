@@ -8,12 +8,13 @@ include "../Consultas/Consultas.php";
 
 $fcha = date("Y-m-d");
 $user_id=null;
-$sql1= "SELECT Ventas_POS.Venta_POS_ID,Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
+$sql1= "SELECT Ventas_POS.Venta_POS_ID,Ventas_POS.FolioSucursal,Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
 Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
 Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
 Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
- FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND  Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
- Ventas_POS.Fk_sucursal= '".$row['Fk_Sucursal']."'  AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
+ FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND Ventas_POS.Folio_Ticket= '".$_POST["folioTicket"]."' 
+   AND Ventas_POS.FolioSucursal= '".$_POST["foliosucursal"]."'
+ AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
  
 
 $query = $conn->query($sql1);
@@ -26,13 +27,13 @@ while ($r=$query->fetch_object()){
 
   }
   $user_id=null;
-  $sql2= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,Ventas_POS.Fecha_venta,
+  $sql2= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.FolioSucursal,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,Ventas_POS.Fecha_venta,
   Ventas_POS.FormaDePago,
   Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
   Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
   Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
-   FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
-   Ventas_POS.Fk_sucursal= '".$row['Fk_Sucursal']."'   AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
+   FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC   AND Ventas_POS.Folio_Ticket= '".$_POST["folioTicket"]."' 
+   AND Ventas_POS.FolioSucursal= '".$_POST["foliosucursal"]."' AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
    $query = $conn->query($sql2);
 ?>
 
