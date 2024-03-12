@@ -109,7 +109,7 @@ while ($r=$query->fetch_object()){
 <tr>
 
 <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
-<td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
+<td><input type="text" name="CodBarraActualizable[]" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
 <td><input type="text" class="form-control" name="TicketPorActualizarFolio[]" value="<?php echo $Tickets["FolioSucursal"]; ?>"> </td>
 <td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
