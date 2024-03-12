@@ -4,10 +4,6 @@
 include "db_connection.php";
 
 // Definir $response por defecto
-$response = array(
-    "status" => "error",
-    "message" => "No se han recibido datos mediante POST"
-);
 
 // Verificar si se han enviado datos mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
