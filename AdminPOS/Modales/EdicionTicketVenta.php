@@ -43,6 +43,7 @@ while ($r=$query->fetch_object()){
     overflow-x: auto; /* Habilita la barra de desplazamiento horizontal si es necesario */
     max-height: 400px; /* Altura máxima del contenedor, ajusta según tus necesidades */
     overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
+    margin-bottom: 20px; /* Agrega un margen inferior para crear espacio adicional */
 }
 
 #HistorialCajas {
