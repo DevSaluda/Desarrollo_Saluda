@@ -78,7 +78,7 @@ while ($r=$query->fetch_object()){
     </div>
     </div>
    </div>
-   
+   <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
 <?php if($query->num_rows>0):?>
     <div class="text-center">
     <div class="table-container">
@@ -108,8 +108,8 @@ while ($r=$query->fetch_object()){
 <?php while ($Tickets=$query->fetch_array()):?>
 <tr>
 
-<form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
-<td><input type="text" name="CodBarraActualizable[]" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
+
+<td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
 <td><input type="text" class="form-control" name="TicketPorActualizarFolio[]" value="<?php echo $Tickets["FolioSucursal"]; ?>"> </td>
 <td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
@@ -159,4 +159,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?><script src="js/ActualizacionDeTickets.js"></script>
+?><script src="js/ActualizacionTickets.js"></script>
