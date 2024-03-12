@@ -131,7 +131,7 @@ while ($r=$query->fetch_object()){
 </div>
 </div>
 
-<button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+<button type="submit" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
    </form>  
   
 <?php else:?>
