@@ -1,20 +1,20 @@
 <?php
 
+// Incluir archivo de conexión a la base de datos
+include "db_connection.php";
+
 // Verificar si se han enviado datos mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Incluir archivo de conexión a la base de datos y otras funciones necesarias
-    include "db_connection.php";
-
     // Realizar las operaciones necesarias para actualizar la información del ticket
 
-    // Por ejemplo, podrías obtener los datos enviados desde el formulario
-    $codBarra = $_POST["CodBarraActualizable"];
-    $nombreProd = $_POST["NombreProdActualizable"];
-    $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"];
-    $ticketPorActualizar = $_POST["TicketPorActualizar"];
-    $importeActualizable = $_POST["ImporteActualizable"];
-    $formaPagoActualizable = $_POST["FormaPagoActualizable"];
-    $turnoActualizable = $_POST["TurnoActualizable"];
+    // Obtener los datos enviados desde el formulario
+    $codBarra = $_POST["CodBarraActualizable"] ?? [];
+    $nombreProd = $_POST["NombreProdActualizable"] ?? [];
+    $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"] ?? [];
+    $ticketPorActualizar = $_POST["TicketPorActualizar"] ?? [];
+    $importeActualizable = $_POST["ImporteActualizable"] ?? [];
+    $formaPagoActualizable = $_POST["FormaPagoActualizable"] ?? [];
+    $turnoActualizable = $_POST["TurnoActualizable"] ?? [];
 
     // Iterar sobre los datos recibidos para actualizar cada ticket
     for ($i = 0; $i < count($codBarra); $i++) {
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare($sql);
 
         // Vincular parámetros
-        $stmt->bind_param("sssiss", $nombreProd[$i], $ticketPorActualizarFolio[$i], $ticketPorActualizar[$i], $importeActualizable[$i], $formaPagoActualizable[$i], $turnoActualizable[$i], $codBarra[$i]);
+        $stmt->bind_param("sssissss", $nombreProd[$i], $ticketPorActualizarFolio[$i], $ticketPorActualizar[$i], $importeActualizable[$i], $formaPagoActualizable[$i], $turnoActualizable[$i], $codBarra[$i], $ticketPorActualizar[$i]);
 
         // Ejecutar la declaración
         $stmt->execute();
@@ -44,17 +44,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Cerrar la declaración
         $stmt->close();
     }
-
-    // Cerrar la conexión a la base de datos
-    $conn->close();
-
-    // Retornar la respuesta en formato JSON
-    echo json_encode($response);
 } else {
     // Si no se recibieron datos mediante POST, retornar un error
     $response["status"] = "error";
     $response["message"] = "No se han recibido datos mediante POST";
-    echo json_encode($response);
 }
+
+// Cerrar la conexión a la base de datos
+$conn->close();
+
+// Retornar la respuesta en formato JSON
+echo json_encode($response);
 
 ?>
