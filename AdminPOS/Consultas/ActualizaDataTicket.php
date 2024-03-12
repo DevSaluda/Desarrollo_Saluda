@@ -8,13 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Realizar las operaciones necesarias para actualizar la información del ticket
 
     // Obtener los datos enviados desde el formulario
-    $codBarra = $_POST["CodBarraActualizable"] ?? [];
-    $nombreProd = $_POST["NombreProdActualizable"] ?? [];
-    $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"] ?? [];
-    $ticketPorActualizar = $_POST["TicketPorActualizar"] ?? [];
-    $importeActualizable = $_POST["ImporteActualizable"] ?? [];
-    $formaPagoActualizable = $_POST["FormaPagoActualizable"] ?? [];
-    $turnoActualizable = $_POST["TurnoActualizable"] ?? [];
+    // Obtener los datos enviados desde el formulario
+$codBarra = is_array($_POST["CodBarraActualizable"]) ? $_POST["CodBarraActualizable"] : [];
+$nombreProd = is_array($_POST["NombreProdActualizable"]) ? $_POST["NombreProdActualizable"] : [];
+$ticketPorActualizarFolio = is_array($_POST["TicketPorActualizarFolio"]) ? $_POST["TicketPorActualizarFolio"] : [];
+$ticketPorActualizar = is_array($_POST["TicketPorActualizar"]) ? $_POST["TicketPorActualizar"] : [];
+$importeActualizable = is_array($_POST["ImporteActualizable"]) ? $_POST["ImporteActualizable"] : [];
+$formaPagoActualizable = is_array($_POST["FormaPagoActualizable"]) ? $_POST["FormaPagoActualizable"] : [];
+$turnoActualizable = is_array($_POST["TurnoActualizable"]) ? $_POST["TurnoActualizable"] : [];
+
 
     // Iterar sobre los datos recibidos para actualizar cada ticket
     for ($i = 0; $i < count($codBarra); $i++) {
