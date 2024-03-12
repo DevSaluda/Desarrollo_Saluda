@@ -87,10 +87,10 @@ while ($r=$query->fetch_object()){
         <table id="HistorialCajas" class="table table-hover">
             <!-- Contenido de la tabla -->
 <thead>
-<th>ID de caja</th>
-<th>Servicio</th>
+
 <th>Cod barra</th>
 <th style="width: 10%;">Prod</th>
+<th>Servicio</th>
 <th style="width: 10%;">#Ticket</th>
 <th>Cantidad</th>
 <th>P.U</th>
@@ -108,11 +108,11 @@ while ($r=$query->fetch_object()){
 <?php while ($Tickets=$query->fetch_array()):?>
 <tr>
 <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
-<td><?php echo $Tickets["Venta_POS_ID"]; ?></td>
-<td><?php echo $Tickets["Nom_Serv"]; ?></td>
+
+
 <td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
-
+<td><?php echo $Tickets["Nom_Serv"]; ?></td>
 <td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
