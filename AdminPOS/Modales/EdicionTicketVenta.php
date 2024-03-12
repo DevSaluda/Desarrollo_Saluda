@@ -38,14 +38,15 @@ while ($r=$query->fetch_object()){
 ?>
 
 <style>
-    .table-container {
+.table-container {
     width: 100%; /* Ancho del contenedor */
-    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal */
+    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal si es necesario */
     max-height: 400px; /* Altura máxima del contenedor, ajusta según tus necesidades */
+    overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
 }
 
 #HistorialCajas {
-    width: 120%; /* Ancho de la tabla, ajusta según tus necesidades */
+    width: 100%; /* Cambiado a 100% para que se ajuste al contenedor */
 }
 
 </style>
