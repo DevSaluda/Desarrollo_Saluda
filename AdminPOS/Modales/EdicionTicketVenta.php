@@ -38,16 +38,14 @@ while ($r=$query->fetch_object()){
 ?>
 
 <style>
-.table-container {
+    .table-container {
     width: 100%; /* Ancho del contenedor */
-    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal si es necesario */
+    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal */
     max-height: 400px; /* Altura máxima del contenedor, ajusta según tus necesidades */
-    overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
-    margin-bottom: 20px; /* Agrega un margen inferior para crear espacio adicional */
 }
 
 #HistorialCajas {
-    width: 100%; /* Cambiado a 100% para que se ajuste al contenedor */
+    width: 120%; /* Ancho de la tabla, ajusta según tus necesidades */
 }
 
 </style>
@@ -88,10 +86,11 @@ while ($r=$query->fetch_object()){
             <!-- Contenido de la tabla -->
 <thead>
 
+
 <th>Cod barra</th>
 <th style="width: 10%;">Prod</th>
-<th>Servicio</th>
 <th style="width: 10%;">#Ticket</th>
+<th>Servicio</th>
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Descuento</th>
@@ -99,7 +98,7 @@ while ($r=$query->fetch_object()){
 <th>Forma de pago</th>
 <th>Turno</th>
 <th>Fecha | Hora</th>
-    <th>Vendedor</th>
+
     
 
 
@@ -109,11 +108,11 @@ while ($r=$query->fetch_object()){
 <tr>
 <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
 
-
 <td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
-<td><?php echo $Tickets["Nom_Serv"]; ?></td>
+
 <td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
+<td><?php echo $Tickets["Nom_Serv"]; ?></td>
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
 <td><?php echo $Tickets["DescuentoAplicado"]; ?> %</td>
@@ -123,21 +122,19 @@ while ($r=$query->fetch_object()){
     <td><?php echo fechaCastellano($Tickets["AgregadoEl"]); ?> <br>
     <?php echo date("g:i a",strtotime($Tickets["AgregadoEl"])); ?>
   </td>
-  <td><?php echo $Tickets["AgregadoPor"]; ?></button></td>
+
      
       
    
 </tr>
 <?php endwhile;?>
 </table>
-<br>
 </div>
 </div>
 
-<br>
-<button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+
    </form>  
-   
+   <button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
