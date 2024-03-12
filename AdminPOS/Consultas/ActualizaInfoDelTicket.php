@@ -7,7 +7,7 @@ $query = "UPDATE Ventas_POS_Pruebas SET
            Nombre_Prod = ?, 
            Importe = ?, 
            FormaDePago = ?, 
-           Turno=?
+           Turno = ?
            WHERE FolioSucursal = ? AND Folio_Ticket = ?";  
 
 $placeholders = [];
@@ -33,8 +33,10 @@ if ($ProContador != 0) {
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt) {
+        // Vincula los parámetros a la consulta
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
+        // Ejecuta la consulta
         $resultadocon = mysqli_stmt_execute($stmt);
 
         if ($resultadocon) {
@@ -55,6 +57,7 @@ if ($ProContador != 0) {
     $response['message'] = 'No se encontraron registros para actualizar.';
 }
 
+// Retorna la respuesta como JSON
 echo json_encode($response);
 
 mysqli_close($conn);
