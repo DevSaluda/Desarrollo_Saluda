@@ -3,10 +3,10 @@
 // Incluir archivo de conexión a la base de datos
 include "db_connection.php";
 
-// Definir $response por defecto
+
 
 // Verificar si se han enviado datos mediante el método POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Realizar las operaciones necesarias para actualizar la información del ticket
 
     // Obtener los datos enviados desde el formulario
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Cerrar la declaración
         $stmt->close();
     }
-}
+
 
 // Cerrar la conexión a la base de datos
 $conn->close();
