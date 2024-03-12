@@ -54,7 +54,7 @@ while ($r=$query->fetch_object()){
     
     <div class="row">
     <div class="col">
-    <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
+    <form action="Consultas/ActualizaLasFormasDePago.php" method="post" id="ActualizameLadatadelTicket" >
     <label for="exampleFormControlInput1">N° Ticket</label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
