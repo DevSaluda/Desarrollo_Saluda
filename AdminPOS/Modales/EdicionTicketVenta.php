@@ -54,6 +54,7 @@ while ($r=$query->fetch_object()){
     
     <div class="row">
     <div class="col">
+    <form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
     <label for="exampleFormControlInput1">N° Ticket</label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
@@ -107,7 +108,7 @@ while ($r=$query->fetch_object()){
 </thead>
 <?php while ($Tickets=$query->fetch_array()):?>
 <tr>
-<form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
+
 
 <td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
