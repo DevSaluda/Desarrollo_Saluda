@@ -27,7 +27,7 @@ while ($r=$query->fetch_object()){
 
   }
   $user_id=null;
-  $sql2= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.FolioSucursal,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,Ventas_POS.Fecha_venta,
+  $sql2= "SELECT Ventas_POS.Venta_POS_ID,Ventas_POS.Folio_Ticket,Ventas_POS.FolioSucursal,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,Ventas_POS.Fecha_venta,
   Ventas_POS.FormaDePago,
   Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
   Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
@@ -118,7 +118,8 @@ while ($r=$query->fetch_object()){
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
 <td><?php echo $Tickets["DescuentoAplicado"]; ?> %</td>
-<td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["Importe"]; ?>"></td>
+<td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["Importe"]; ?>">
+<input type="text" class="form-control" name="IDVENTAS[]" value="<?php echo $Tickets["Venta_POS_ID"]; ?>"></td>
 <td><input type="text" class="form-control" name="FormaPagoActualizable[]" value="<?php echo $Tickets["FormaDePago"]; ?>"></td>
 <td><input type="text" class="form-control" name="TurnoActualizable[]" value="<?php echo $Tickets["Turno"]; ?>"></td>
   
