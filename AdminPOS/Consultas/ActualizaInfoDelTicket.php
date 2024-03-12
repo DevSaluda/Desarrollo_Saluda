@@ -1,66 +1,59 @@
 <?php
+include_once 'db_connection.php';
 
-// Verificar si se han enviado datos mediante el método POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Incluir archivo de conexión a la base de datos y otras funciones necesarias
-    include "db_connection.php";
+$contador = count($_POST["TicketPorActualizar"]);
+$ProContador = 0;
+$query = "UPDATE Ventas_POS_Pruebas SET
+           Nombre_Prod = ?, 
+           Importe = ?, 
+           FormaDePago = ?, 
+           Turno=?
+           WHERE Folio_Ticket = ?";  // Cambia esto según tus necesidades de actualización
 
-    // Verificar si las variables son arreglos antes de iterar sobre ellas
-    if (is_array($_POST["CodBarraActualizable"]) && is_array($_POST["NombreProdActualizable"]) && is_array($_POST["TicketPorActualizarFolio"]) && is_array($_POST["TicketPorActualizar"]) && is_array($_POST["ImporteActualizable"]) && is_array($_POST["FormaPagoActualizable"]) && is_array($_POST["TurnoActualizable"])) {
-        // Asignar los datos a variables locales
-        $codBarra = $_POST["CodBarraActualizable"];
-        $nombreProd = $_POST["NombreProdActualizable"];
-        $ticketPorActualizarFolio = $_POST["TicketPorActualizarFolio"];
-        $ticketPorActualizar = $_POST["TicketPorActualizar"];
-        $importeActualizable = $_POST["ImporteActualizable"];
-        $formaPagoActualizable = $_POST["FormaPagoActualizable"];
-        $turnoActualizable = $_POST["TurnoActualizable"];
+$placeholders = [];
+$values = [];
+$valueTypes = '';
 
-        // Iterar sobre los datos recibidos para actualizar cada ticket
-        for ($i = 0; $i < count($codBarra); $i++) {
-            // Construir la consulta SQL de actualización
-            $sql = "UPDATE Ventas_POS_Pruebas SET Nombre_Prod = ?, FolioSucursal = ?, Folio_Ticket = ?, Importe = ?, FormaDePago = ?, Turno = ? WHERE FolioSucursal = ? AND Folio_Ticket = ? ";
-            
-            // Preparar la declaración
-            $stmt = $conn->prepare($sql);
+for ($i = 0; $i < $contador; $i++) {
+    if (!empty($_POST["TicketPorActualizar"][$i]) && !empty($_POST["NombreProdActualizable[]"][$i]) && !empty($_POST["ImporteActualizable"][$i]) && !empty($_POST["TurnoActualizable"][$i])) {
+        $ProContador++;
+        $values[] = $_POST["NombreProdActualizable"][$i];
+        $values[] = $_POST["ImporteActualizable"][$i];
+        $values[] = $_POST["FormaPagoActualizable"][$i];
+        $values[] = $_POST["TurnoActualizable"][$i];
+        $valueTypes .= 'ssss'; // Ajusta los tipos de datos según tus necesidades
+    }
+}
 
-            // Vincular parámetros
-            $stmt->bind_param("sssiss", $nombreProd[$i], $ticketPorActualizarFolio[$i], $ticketPorActualizar[$i], $importeActualizable[$i], $formaPagoActualizable[$i], $turnoActualizable[$i], $codBarra[$i]);
+$response = array();
 
-            // Ejecutar la declaración
-            $stmt->execute();
+if ($ProContador != 0) {
+    $stmt = mysqli_prepare($conn, $query);
 
-            // Verificar si la ejecución fue exitosa
-            if ($stmt->affected_rows > 0) {
-                // La actualización fue exitosa
-                $response["status"] = "success";
-                $response["message"] = "La información del ticket se ha actualizado correctamente";
-            } else {
-                // Ocurrió un error durante la actualización
-                $response["status"] = "error";
-                $response["message"] = "Ha ocurrido un error al intentar actualizar la información del ticket";
-            }
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
-            // Cerrar la declaración
-            $stmt->close();
+        $resultadocon = mysqli_stmt_execute($stmt);
+
+        if ($resultadocon) {
+            $response['status'] = 'success';
+            $response['message'] = 'Registro(s) actualizado(s) correctamente.';
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Error en la consulta de actualización: ' . mysqli_error($conn);
         }
     } else {
-        // Si alguna de las variables no es un arreglo, retornar un error
-        $response["status"] = "error";
-        $response["message"] = "Los datos recibidos no son válidos";
-        echo json_encode($response);
-        exit; // Salir del script para evitar más ejecución
+        $response['status'] = 'error';
+        $response['message'] = 'Error en la preparación de la consulta: ' . mysqli_error($conn);
     }
 
-    // Cerrar la conexión a la base de datos
-    $conn->close();
-
-    // Retornar la respuesta en formato JSON
-    echo json_encode($response);
+    mysqli_stmt_close($stmt);
 } else {
-    // Si no se recibieron datos mediante POST, retornar un error
-    $response["status"] = "error";
-    $response["message"] = "No se han recibido datos mediante POST";
-    echo json_encode($response);
+    $response['status'] = 'error';
+    $response['message'] = 'No se encontraron registros para actualizar.';
 }
+
+echo json_encode($response);
+
+mysqli_close($conn);
 ?>
