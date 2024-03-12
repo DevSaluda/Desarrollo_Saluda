@@ -78,7 +78,7 @@ while ($r=$query->fetch_object()){
     </div>
     </div>
    </div>
-   <form  method="post" id="ActualizameLadatadelTicket" >
+   <form action="" method="post" id="ActualizameLadatadelTicket" >
 <?php if($query->num_rows>0):?>
     <div class="text-center">
     <div class="table-container">
