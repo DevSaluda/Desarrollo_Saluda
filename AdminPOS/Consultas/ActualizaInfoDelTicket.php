@@ -8,20 +8,22 @@ $query = "UPDATE Ventas_POS_Pruebas SET
            Importe = ?, 
            FormaDePago = ?, 
            Turno=?
-           WHERE Folio_Ticket = ?";  // Cambia esto según tus necesidades de actualización
+           WHERE FolioSucursal = ? AND Folio_Ticket = ?";  
 
 $placeholders = [];
 $values = [];
 $valueTypes = '';
 
 for ($i = 0; $i < $contador; $i++) {
-    if (!empty($_POST["TicketPorActualizar"][$i]) && !empty($_POST["NombreProdActualizable[]"][$i]) && !empty($_POST["ImporteActualizable"][$i]) && !empty($_POST["TurnoActualizable"][$i])) {
+    if (!empty($_POST["TicketPorActualizar"][$i])) {
         $ProContador++;
         $values[] = $_POST["NombreProdActualizable"][$i];
         $values[] = $_POST["ImporteActualizable"][$i];
         $values[] = $_POST["FormaPagoActualizable"][$i];
         $values[] = $_POST["TurnoActualizable"][$i];
-        $valueTypes .= 'ssss'; // Ajusta los tipos de datos según tus necesidades
+        $values[] = $_POST["TicketPorActualizarFolio"][$i];
+        $values[] = $_POST["TicketPorActualizar"][$i];
+        $valueTypes .= 'ssssss'; // Ajusta los tipos de datos según tus necesidades
     }
 }
 
