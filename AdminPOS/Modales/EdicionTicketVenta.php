@@ -89,6 +89,7 @@ while ($r=$query->fetch_object()){
 
 <th>Cod barra</th>
 <th style="width: 10%;">Prod</th>
+<th style="width: 10%;">Folio</th>
 <th style="width: 10%;">#Ticket</th>
 <th>Servicio</th>
 <th>Cantidad</th>
@@ -110,8 +111,9 @@ while ($r=$query->fetch_object()){
 
 <td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
 <td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
-
+<td><input type="text" class="form-control" name="TicketPorActualizarFolio[]" value="<?php echo $Tickets["FolioSucursal"]; ?>"> </td>
 <td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
+
 <td><?php echo $Tickets["Nom_Serv"]; ?></td>
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
