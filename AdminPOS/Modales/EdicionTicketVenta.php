@@ -129,6 +129,7 @@ while ($r=$query->fetch_object()){
 </tr>
 <?php endwhile;?>
 </table>
+<br>
 </div>
 </div>
 
