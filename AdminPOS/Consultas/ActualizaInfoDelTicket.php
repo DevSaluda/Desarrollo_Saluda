@@ -3,7 +3,7 @@
 // Verificar si se han enviado datos mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Incluir archivo de conexión a la base de datos y otras funciones necesarias
-    include "../Consultas/db_connection.php";
+    include "db_connection.php";
 
     // Realizar las operaciones necesarias para actualizar la información del ticket
 
