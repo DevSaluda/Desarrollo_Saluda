@@ -57,3 +57,5 @@ $conn->close();
 
 // Retornar la respuesta en formato JSON
 echo json_encode($response);
+
+?>
