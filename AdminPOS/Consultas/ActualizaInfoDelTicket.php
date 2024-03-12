@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Iterar sobre los datos recibidos para actualizar cada ticket
     for ($i = 0; $i < count($codBarra); $i++) {
         // Construir la consulta SQL de actualización
-        $sql = "UPDATE Ventas_POS SET Nombre_Prod = ?, FolioSucursal = ?, Folio_Ticket = ?, Importe = ?, FormaDePago = ?, Turno = ? WHERE FolioSucursal = ? AND Folio_Ticket = ? ";
+        $sql = "UPDATE Ventas_POS_Pruebas SET Nombre_Prod = ?, FolioSucursal = ?, Folio_Ticket = ?, Importe = ?, FormaDePago = ?, Turno = ? WHERE FolioSucursal = ? AND Folio_Ticket = ? ";
         
         // Preparar la declaración
         $stmt = $conn->prepare($sql);
