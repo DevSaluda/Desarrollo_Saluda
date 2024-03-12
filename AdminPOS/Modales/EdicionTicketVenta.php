@@ -97,7 +97,7 @@ while ($r=$query->fetch_object()){
 <th>Importe</th>
 <th>Forma de pago</th>
 <th>Turno</th>
-<th>Fecha | Hora</th>
+
 
     
 
@@ -119,10 +119,7 @@ while ($r=$query->fetch_object()){
 <td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["Importe"]; ?>"></td>
 <td><input type="text" class="form-control" name="FormaPagoActualizable[]" value="<?php echo $Tickets["FormaDePago"]; ?>"></td>
 <td><input type="text" class="form-control" name="TurnoActualizable[]" value="<?php echo $Tickets["Turno"]; ?>"></td>
-    <td><?php echo fechaCastellano($Tickets["AgregadoEl"]); ?> <br>
-    <?php echo date("g:i a",strtotime($Tickets["AgregadoEl"])); ?>
-  </td>
-
+  
      
       
    
