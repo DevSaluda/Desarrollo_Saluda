@@ -4,6 +4,7 @@
 include "db_connection.php";
 
 
+$response = array(); // Inicializa la variable $response como un array vacío
 
 // Verificar si se han enviado datos mediante el método POST
 
