@@ -180,141 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 </style>
 
-<script>
-  // Definir una lista de mensajes para el mensaje de carga
-  var mensajesCarga = [
-    "Consultando ventas...",
-    "Estamos realizando la búsqueda...",
-    "Cargando datos...",
-    "Procesando la información...",
-    "Espere un momento...",
-    "Cargando... ten paciencia, incluso los planetas tardaron millones de años en formarse.",
 
-"¡Espera un momento! Estamos contando hasta el infinito... otra vez.",
-
-"¿Sabías que los pingüinos también tienen que esperar mientras cargan su comida?",
-
-"¡Zapateando cucarachas de carga! ¿Quién necesita un exterminador?",
-
-"Cargando... ¿quieres un chiste para hacer más amena la espera? ¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
-
-"¡Alerta! Un koala está jugando con los cables de carga. Espera un momento mientras lo persuadimos.",
-
-"¿Sabías que las tortugas cargan a una velocidad épica? Bueno, estamos intentando superarlas.",
-
-"¡Espera un instante! Estamos pidiendo ayuda a los unicornios para acelerar el proceso.",
-
-"Cargando... mientras nuestros programadores disfrutan de una buena taza de café.",
-"Cargando... No estamos seguros de cómo llegamos aquí, pero estamos trabajando en ello.",
-
-"Estamos contando en binario... 10%, 20%, 110%... espero que esto no sea un error de desbordamiento.",
-
-"Cargando... mientras cazamos pokémons para acelerar el proceso.",
-
-"Error 404: Mensaje gracioso no encontrado. Estamos trabajando en ello.",
-
-"Cargando... ¿Sabías que los programadores también tienen emociones? Bueno, nosotros tampoco.",
-
-"Estamos buscando la respuesta a la vida, el universo y todo mientras cargamos... Pista: es un número entre 41 y 43.",
-
-"Cargando... mientras los gatos toman el control. ¡Meowtrix está en marcha!",
-
-"Estamos ajustando tu espera a la velocidad de la luz. Aún no es suficientemente rápida, pero pronto llegaremos.",
-
-"Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
-
-"Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
-  ];
-
-  // Función para mostrar el mensaje de carga con un texto aleatorio
-  function mostrarCargando(event, settings) {
-    var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
-    var mensaje = mensajesCarga[randomIndex];
-    document.getElementById('loading-text').innerText = mensaje;
-    document.getElementById('loading-overlay').style.display = 'flex';
-  }
-
-  // Función para ocultar el mensaje de carga
-  function ocultarCargando() {
-    document.getElementById('loading-overlay').style.display = 'none';
-  }
-  
-
-tabla = $('#Productos').DataTable({
-
- "bProcessing": true,
- "ordering": true,
- "stateSave":true,
- "bAutoWidth": true,
- "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
- "aoColumns": [
-       { mData: 'Cod_Barra' },
-       { mData: 'Nombre_Prod' },
-       { mData: 'FolioTicket' },
-       { mData: 'Sucursal' },
-       { mData: 'Turno' },
-       { mData: 'Cantidad_Venta' },
-       { mData: 'Total_Venta' },
-       { mData: 'Importe' },
-       { mData: 'Descuento' },
-       { mData: 'FormaPago' },
-       { mData: 'Cliente' },
-       { mData: 'FolioSignoVital' },
-       { mData: 'NomServ' },
-       { mData: 'AgregadoEl' },
-       { mData: 'AgregadoEnMomento' },
-       { mData: 'AgregadoPor' },
-       { mData: 'Enfermero' },
-       { mData: 'Doctor' },
-      
-  
-      ],
-     
-    
-      "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
-  
-      "language": {
-      "lengthMenu": "Mostrar _MENU_ registros",
-      "sPaginationType": "extStyle",
-      "zeroRecords": "No se encontraron resultados",
-      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sSearch": "Buscar:",
-      "paginate": {
-        "first": '<i class="fas fa-angle-double-left"></i>',
-        "last": '<i class="fas fa-angle-double-right"></i>',
-        "next": '<i class="fas fa-angle-right"></i>',
-        "previous": '<i class="fas fa-angle-left"></i>'
-      },
-      "processing": function () {
-        mostrarCargando();
-      }
-    },
-    "initComplete": function() {
-      // Al completar la inicialización de la tabla, ocultar el mensaje de carga
-      ocultarCargando();
-    },
-    // Para personalizar el estilo del botón de Excel
-    "buttons": [
-      {
-        extend: 'excelHtml5',
-        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-        titleAttr: 'Exportar a Excel',
-        title: 'registro de ventas ',
-        className: 'btn btn-success',
-        exportOptions: {
-          columns: ':visible' // Exportar solo las columnas visibles
-        }
-      }
-    ],
-    // Personalizar la posición de los elementos del encabezado
-    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
-    "responsive": true
-  });
-
-</script>
 <div class="text-center">
 	<div class="table-responsive">
 	<table  id="Productos" class="hover" style="width:100%">
@@ -407,7 +273,86 @@ include ("footer.php")?>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
+<script>
+    $(document).ready(function() {
+      // DataTables
+      $('#Productos').DataTable({
+        "processing": true,
+        "ordering": true,
+        "stateSave": true,
+        "autoWidth": true,
+        "order": [[0, "desc"]],
+        "ajax": {
+          "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
+          "dataSrc": ""
+        },
+        "columns": [
+          { "data": "Cod_Barra" },
+          { "data": "Nombre_Prod" },
+          { "data": "FolioTicket" },
+          { "data": "Sucursal" },
+          { "data": "Turno" },
+          { "data": "Cantidad_Venta" },
+          { "data": "Total_Venta" },
+          { "data": "Importe" },
+          { "data": "Descuento" },
+          { "data": "FormaPago" },
+          { "data": "Cliente" },
+          { "data": "FolioSignoVital" },
+          { "data": "NomServ" },
+          { "data": "AgregadoEl" },
+          { "data": "AgregadoEnMomento" },
+          { "data": "AgregadoPor" },
+          { "data": "Enfermero" },
+          { "data": "Doctor" }
+        ],
+        "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+        "language": {
+          "lengthMenu": "Mostrar _MENU_ registros",
+          "sPaginationType": "extStyle",
+          "zeroRecords": "No se encontraron resultados",
+          "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "sSearch": "Buscar:",
+          "paginate": {
+            "first": '<i class="fas fa-angle-double-left"></i>',
+            "last": '<i class="fas fa-angle-double-right"></i>',
+            "next": '<i class="fas fa-angle-right"></i>',
+            "previous": '<i class="fas fa-angle-left"></i>'
+          },
+          "processing": function() {
+            mostrarCargando();
+          }
+        },
+        "initComplete": function() {
+          ocultarCargando();
+        },
+        "buttons": [{
+          extend: 'excelHtml5',
+          text: 'Exportar a Excel <i Exportar a Excel class="fas fa-file-excel"></i>',
+          titleAttr: 'Exportar a Excel',
+          title: 'registro de ventas ',
+          className: 'btn btn-success',
+          exportOptions: {
+            columns: ':visible'
+          }
+        }],
+        "dom": '<"d-flex justify-content-between"lBf>',
+        "responsive": true
+      });
+    });
 
+    function mostrarCargando() {
+      // Mostrar el mensaje de carga
+      $('#loading-overlay').show();
+    }
+
+    function ocultarCargando() {
+      // Ocultar el mensaje de carga
+      $('#loading-overlay').hide();
+    }
+  </script>
 <!-- PAGE PLUGINS -->
 
 </body><script>const openModalBtn = document.getElementById("openModalBtn");
