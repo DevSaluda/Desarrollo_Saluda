@@ -3,10 +3,9 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Verifica si se han enviado datos por POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Verifica si las variables están seteadas y no son nulas
-    if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+   
         // Obtén los valores del formulario de manera segura
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
@@ -107,6 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Si alguna de las variables no está seteada o es nula, muestra un mensaje de error
         echo json_encode(["error" => "No se recibieron todas las variables necesarias."]);
-    }
-}
+    
+
 ?>
