@@ -223,6 +223,7 @@ include "Consultas/Consultas.php";
             "autoWidth": true,
             "order": [[ 0, "desc" ]],
             "ajax": {
+              "type": "POST", // Especifica el método de envío de la solicitud AJAX
               "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
               "data": function (d) {
                     // Aquí añades los valores de mes y anual como parámetros en la solicitud AJAX
