@@ -135,7 +135,7 @@ include ("footer.php")?>
 
 
 
-<script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
+
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
@@ -153,86 +153,7 @@ include ("footer.php")?>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
-<script>
-    $(document).ready(function() {
-      // DataTables
-      $('#Productos').DataTable({
-        "processing": true,
-        "ordering": true,
-        "stateSave": true,
-        "autoWidth": true,
-        "order": [[0, "desc"]],
-        "ajax": {
-          "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
-          "dataSrc": ""
-        },
-        "columns": [
-          { "data": "Cod_Barra" },
-          { "data": "Nombre_Prod" },
-          { "data": "FolioTicket" },
-          { "data": "Sucursal" },
-          { "data": "Turno" },
-          { "data": "Cantidad_Venta" },
-          { "data": "Total_Venta" },
-          { "data": "Importe" },
-          { "data": "Descuento" },
-          { "data": "FormaPago" },
-          { "data": "Cliente" },
-          { "data": "FolioSignoVital" },
-          { "data": "NomServ" },
-          { "data": "AgregadoEl" },
-          { "data": "AgregadoEnMomento" },
-          { "data": "AgregadoPor" },
-          { "data": "Enfermero" },
-          { "data": "Doctor" }
-        ],
-        "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
-        "language": {
-          "lengthMenu": "Mostrar _MENU_ registros",
-          "sPaginationType": "extStyle",
-          "zeroRecords": "No se encontraron resultados",
-          "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-          "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "sSearch": "Buscar:",
-          "paginate": {
-            "first": '<i class="fas fa-angle-double-left"></i>',
-            "last": '<i class="fas fa-angle-double-right"></i>',
-            "next": '<i class="fas fa-angle-right"></i>',
-            "previous": '<i class="fas fa-angle-left"></i>'
-          },
-          "processing": function() {
-            mostrarCargando();
-          }
-        },
-        "initComplete": function() {
-          ocultarCargando();
-        },
-        "buttons": [{
-          extend: 'excelHtml5',
-          text: 'Exportar a Excel <i Exportar a Excel class="fas fa-file-excel"></i>',
-          titleAttr: 'Exportar a Excel',
-          title: 'registro de ventas ',
-          className: 'btn btn-success',
-          exportOptions: {
-            columns: ':visible'
-          }
-        }],
-        "dom": '<"d-flex justify-content-between"lBf>',
-        "responsive": true
-      });
-    });
 
-    function mostrarCargando() {
-      // Mostrar el mensaje de carga
-      $('#loading-overlay').show();
-    }
-
-    function ocultarCargando() {
-      // Ocultar el mensaje de carga
-      $('#loading-overlay').hide();
-    }
-  </script>
 <!-- PAGE PLUGINS -->
 
 </body>
