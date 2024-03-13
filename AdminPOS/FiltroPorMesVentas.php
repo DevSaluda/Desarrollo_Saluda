@@ -225,10 +225,10 @@ include "Consultas/Consultas.php";
             "ajax": {
               "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
               "data": function (d) {
-                // Aquí añades los valores de mes y anual como parámetros en la solicitud AJAX
-                d.mes = '<?php echo $mes; ?>';
-                d.anual = '<?php echo $anual; ?>';
-            },
+    // Aquí añades los valores de mes y anual como parámetros en la solicitud AJAX
+    d.mes = parseInt('<?php echo $mes; ?>');
+    d.anual = parseInt('<?php echo $anual; ?>');
+},
               "error": function(xhr, error, thrown) {
             console.log("Error en la solicitud AJAX:", error);
         }
