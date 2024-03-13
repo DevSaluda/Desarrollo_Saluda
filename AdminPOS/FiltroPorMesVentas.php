@@ -50,135 +50,8 @@ include "Consultas/Consultas.php";
 </button>
 </div>
 </div>
-   <?php
-   // Verificar si el formulario ha sido enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar si las variables están seteadas y no son nulas
-    if (isset($_POST['Mes']) && isset($_POST['anual'])) {
-        // Obtener los valores del formulario
-        $mes = $_POST['Mes'];
-        $anual = $_POST['anual'];
-        
-        // Realizar las operaciones que necesites con estas variables
-        // Por ejemplo, imprimir su valor
-        echo "Mes seleccionado: $mes<br>";
-        echo "Año seleccionado: $anual<br>";
-    } else {
-        // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
-        echo "Error: No se recibieron todas las variables necesarias.";
-    }
-}?>
-<style>
-  /* Personalizar el diseño de la paginación con CSS */
-  .dataTables_wrapper .dataTables_paginate {
-    text-align: center !important; /* Centrar los botones de paginación */
-    margin-top: 10px !important;
-  }
+  
 
-  .dataTables_paginate .paginate_button {
-    padding: 5px 10px !important;
-    border: 1px solid #007bff !important;
-    margin: 2px !important;
-    cursor: pointer !important;
-    font-size: 16px !important;
-    color: #007bff !important;
-    background-color: #fff !important;
-  }
-
-  /* Cambiar el color del paginado seleccionado */
-  .dataTables_paginate .paginate_button.current {
-    background-color: #007bff !important;
-    color: #fff !important;
-    border-color: #007bff !important;
-  }
-
-  /* Cambiar el color del hover */
-  .dataTables_paginate .paginate_button:hover {
-    background-color: #C80096 !important;
-    color: #fff !important;
-    border-color: #C80096 !important;
-  }
-</style>
-
-<style>
-  /* Estilos personalizados para la tabla */
-  #Productos th {
-    font-size: 12px; /* Tamaño de letra para los encabezados */
-    padding: 4px; /* Ajustar el espaciado entre los encabezados */
-    white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
-  }
-</style>
-
-<style>
-  /* Estilos para la tabla */
-  #Productos {
-    font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
-    border-collapse: collapse; /* Colapsar los bordes de las celdas */
-    width: 100%;
-    text-align: center; /* Centrar el contenido de las celdas */
-  }
-
-  #Productos th {
-    font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
-    background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
-    color: white; /* Cambiar el color del texto a blanco para contrastar */
-    padding: 10px; /* Ajustar el espaciado de los encabezados */
-  }
-
-  #Productos td {
-    font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
-    padding: 8px; /* Ajustar el espaciado de las celdas */
-    border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
-  }
-
-  /* Estilos para el botón de Excel */
-  .dt-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  .dt-buttons button {
-    font-size: 14px;
-    margin: 0 5px;
-    color: white; /* Cambiar el color del texto a blanco */
-    background-color: #fff; /* Cambiar el color de fondo a blanco */
-  }
-
- 
-</style>
-
-<style>
-  /* Estilos para la capa de carga */
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Asegurarse de que el overlay esté encima de todo */
-    display: none; /* Ocultar inicialmente el overlay */
-  }
-
-  /* Estilo para el ícono de carga */
-  .loader {
-    border: 6px solid #f3f3f3; /* Color del círculo externo */
-    border-top: 6px solid #C80096; /* Color del círculo interno */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite; /* Animación de rotación */
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
 
 
 <div class="text-center">
@@ -355,24 +228,7 @@ include ("footer.php")?>
   </script>
 <!-- PAGE PLUGINS -->
 
-</body><script>const openModalBtn = document.getElementById("openModalBtn");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const modal = document.getElementById("modal");
-
-openModalBtn.addEventListener("click", () => {
-    modal.style.display = "block";
-});
-
-closeModalBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
-</script>
+</body>
 </html>
 <?php
 
