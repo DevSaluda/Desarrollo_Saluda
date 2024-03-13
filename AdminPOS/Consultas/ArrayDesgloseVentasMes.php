@@ -7,11 +7,11 @@ include "Consultas.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si las variables están seteadas y no son nulas
     if (isset($_POST['Mes']) && isset($_POST['anual'])) {
-        // Obtén los valores del formulario
+        // Obtén los valores del formulario de manera segura
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
 
-        // Concatena los valores en la consulta SQL
+        // Prepara la consulta SQL con sentencias preparadas
         $sql = "SELECT DISTINCT
                 Ventas_POS.Venta_POS_ID,
                 Ventas_POS.Folio_Ticket,
@@ -55,37 +55,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE 
-                YEAR(Ventas_POS.Fecha_venta) = $anual
-                AND MONTH(Ventas_POS.Fecha_venta) = $mes";
+                YEAR(Ventas_POS.Fecha_venta) = ? AND MONTH(Ventas_POS.Fecha_venta) = ?";
 
-        $result = mysqli_query($conn, $sql);
+        // Prepara la sentencia
+        $stmt = mysqli_prepare($conn, $sql);
 
-        $c=0;
+        // Asocia los parámetros
+        mysqli_stmt_bind_param($stmt, "ii", $anual, $mes);
 
-        while($fila=$result->fetch_assoc()){
+        // Ejecuta la consulta
+        mysqli_stmt_execute($stmt);
 
-            $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-            $data[$c]["FolioTicket"] = $fila["FolioSucursal"] . '' . $fila["Folio_Ticket"];
-            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-            $data[$c]["Turno"] = $fila["Turno"];
-            $data[$c]["Cantidad_Venta"] = $fila["Cantidad_Venta"];
-            $data[$c]["Importe"] = $fila["Importe"];
-            $data[$c]["Total_Venta"] = $fila["Total_Venta"];
-            $data[$c]["Descuento"] = $fila["DescuentoAplicado"];
-            $data[$c]["FormaPago"] = $fila["FormaDePago"];
-            $data[$c]["Cliente"] = $fila["Cliente"];
-            $data[$c]["FolioSignoVital"] = $fila["FolioSignoVital"];
-            $data[$c]["NomServ"] = $fila["Nom_Serv"];
-            $data[$c]["AgregadoEl"] = date("d/m/Y", strtotime($fila["Fecha_venta"]));
-            $data[$c]["AgregadoEnMomento"] = $fila["AgregadoEl"];
-            $data[$c]["AgregadoPor"] = $fila["AgregadoPor"];
-            $data[$c]["Enfermero"] = $fila["EnfermeroEnturno"];
-            $data[$c]["Doctor"] = $fila["MedicoEnturno"];
-            $c++; 
+        // Obtiene el resultado
+        $result = mysqli_stmt_get_result($stmt);
 
+        // Procesa los resultados
+        $data = [];
+        while($fila = mysqli_fetch_assoc($result)){
+            $data[] = [
+                "Cod_Barra" => $fila["Cod_Barra"],
+                "Nombre_Prod" => $fila["Nombre_Prod"],
+                "FolioTicket" => $fila["FolioSucursal"] . '' . $fila["Folio_Ticket"],
+                "Sucursal" => $fila["Nombre_Sucursal"],
+                "Turno" => $fila["Turno"],
+                "Cantidad_Venta" => $fila["Cantidad_Venta"],
+                "Importe" => $fila["Importe"],
+                "Total_Venta" => $fila["Total_Venta"],
+                "Descuento" => $fila["DescuentoAplicado"],
+                "FormaPago" => $fila["FormaDePago"],
+                "Cliente" => $fila["Cliente"],
+                "FolioSignoVital" => $fila["FolioSignoVital"],
+                "NomServ" => $fila["Nom_Serv"],
+                "AgregadoEl" => date("d/m/Y", strtotime($fila["Fecha_venta"])),
+                "AgregadoEnMomento" => $fila["AgregadoEl"],
+                "AgregadoPor" => $fila["AgregadoPor"],
+                "Enfermero" => $fila["EnfermeroEnturno"],
+                "Doctor" => $fila["MedicoEnturno"]
+            ];
         }
 
+        // Crea el arreglo de resultados
         $results = [
             "sEcho" => 1,
             "iTotalRecords" => count($data),
@@ -93,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "aaData" => $data 
         ];
 
+        // Codifica y envía los resultados como JSON
         echo json_encode($results);
     } else {
         // Si alguna de las variables no está seteada o es nula, muestra un mensaje de error
