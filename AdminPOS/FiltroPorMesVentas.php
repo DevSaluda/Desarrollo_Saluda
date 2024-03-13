@@ -224,8 +224,10 @@ include "Consultas/Consultas.php";
             "order": [[ 0, "desc" ]],
             "ajax": {
               "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseVentasMes.php",
-              "dataSrc": ""
-            },
+              "error": function(xhr, error, thrown) {
+            console.log("Error en la solicitud AJAX:", error);
+        }
+    },
             "columns": [
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
