@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                        <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>
