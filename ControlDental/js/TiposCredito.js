@@ -1,7 +1,7 @@
 function CargaTipCredi(){
 
 
-    $.post("https://saludapos.com/AdminPOS/Consultas/TiposCredito.php","",function(data){
+    $.post("https://saludapos.com/AdminPOS/ControlDental/TiposCredito.php","",function(data){
       $("#tablaCreditos").html(data);
     })
 
