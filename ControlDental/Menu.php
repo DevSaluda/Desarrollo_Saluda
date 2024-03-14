@@ -879,15 +879,7 @@
           </li> -->
 
           <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Reportes <i class="fas fa-dolly"></i>
-          <li class="nav-item">
-                  <a href="https://saludapos.com/ControlDental/ReportesLab" class="nav-link">
-                  <i class="fas fa-file-excel"></i>
-                    <p>
-                     Reportes laboratorios
-
-                    </p>
-                  </a>
-                </li>
+          
                 <!-- <li class="nav-item">
                   <a href="https://saludapos.com/ControlDental/ReportesRx" class="nav-link">
                   <i class="fas fa-file-excel"></i>
@@ -898,7 +890,7 @@
                   </a>
                 </li> -->
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="https://saludapos.com/ControlDental/ReportesUSG" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
@@ -906,14 +898,14 @@
 
                     </p>
                   </a>
-                </li>
+                </li> -->
 
 
                 <li class="nav-item">
                   <a href="https://saludapos.com/ControlDental/ReportesEkg" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
-                     Reportes EKG
+                     Reportes Dental
 
                     </p>
                   </a>
