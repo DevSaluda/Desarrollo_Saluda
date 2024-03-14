@@ -177,7 +177,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayProductos.php",
+ "sAjaxSource": "https://saludapos.com/ControlDental/Consultas/ArrayProductos.php",
  "aoColumns": [
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
@@ -198,8 +198,7 @@ tabla = $('#Productos').DataTable({
     //    { mData: 'Stock' },
     //    { mData: 'Vendido' },
     //    { mData: 'Saldo' },
-       { mData: 'Acciones' },
-       { mData: 'AccionesEnfermeria' },
+     
   
       ],
      
@@ -268,8 +267,7 @@ tabla = $('#Productos').DataTable({
     <!-- <th>Stock </th>
     <th>Vendido </th>
     <th>Saldo </th>  -->
-        <th>Acciones Farmacia</th>
-        <th>Acciones Enfermeria</th>
+       
 	
 
 
