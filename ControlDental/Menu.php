@@ -902,7 +902,7 @@
 
 
                 <li class="nav-item">
-                  <a href="https://saludapos.com/ControlDental/ReportesEkg" class="nav-link">
+                  <a href="https://saludapos.com/ControlDental/ReportesDental" class="nav-link">
                   <i class="fas fa-file-excel"></i>
                     <p>
                      Reportes Dental
