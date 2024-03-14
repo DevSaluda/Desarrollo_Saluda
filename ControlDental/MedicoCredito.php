@@ -81,7 +81,7 @@ include "Consultas/Consultas.php";
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 <!-- REQUIRED SCRIPTS -->
 
-<script src="js/MedicosCredito.js"></script>
+<script src="js/MedicosCreditos.js"></script>
 
 <script src="js/AltaMedCred.js"></script>
 
