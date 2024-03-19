@@ -110,7 +110,7 @@ include ("footer.php")?>
             // Inicializar Select2
             $('#buscador').select2({
                 ajax: {
-                    url: 'buscar.php',
+                    url: 'Consultas/BuscarProductosParaFiltro.php',
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {
