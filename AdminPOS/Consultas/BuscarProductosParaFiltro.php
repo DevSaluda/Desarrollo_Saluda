@@ -1,7 +1,6 @@
 <?php
 include "db_connection.php";
 
-
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
@@ -13,7 +12,10 @@ $productos = array();
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $productos[] = $row['Nombre_Prod'];
+        $productos[] = array(
+            'id' => $row['Nombre_Prod'],
+            'text' => $row['Nombre_Prod']
+        );
     }
 }
 

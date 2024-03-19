@@ -12,9 +12,13 @@
                     <form action="FiltroPorProducto" method="POST">
                         <div class="form-row">
            
-                        <select id="buscador" style="width: 300px;">
-        <option value="">Selecciona un producto</option>
+                        <div class="col">
+                                <label for="añosSelect">Seleccione un producto a buscar</label>
+                                <select id="buscador" >
+        <option value="">Ingrese un codigo o nombre</option>
     </select>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
