@@ -106,22 +106,30 @@ include ("footer.php")?>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
     <script>
-$(document).ready(function() {
-    // Inicializar Select2
-    $('#buscador').select2({
-        ajax: {
-            url: 'Consultas/BuscarProductosParaFiltro.php',
-            dataType: 'json',
-            delay: 250,
-            processResults: function(data) {
-                return {
-                    results: data
-                };
-            },
-            cache: true
-        }
+    $(document).ready(function() {
+        // Inicializa Select2
+        $('#buscador').select2({
+            ajax: {
+                url: 'Consultas/BuscarProductosParaFiltro.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+
+        // Maneja la acción de envío del formulario de búsqueda
+        $('#formBusquedaProducto').submit(function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe normalmente
+            var productoSeleccionado = $('#buscador').val(); // Obtiene el valor seleccionado del buscador
+            console.log("Producto seleccionado: ", productoSeleccionado);
+            // Aquí puedes realizar más acciones, como enviar el formulario mediante AJAX o realizar una redirección
+        });
     });
-});
 </script>
 
 <!-- Bootstrap -->
