@@ -106,23 +106,25 @@ include ("footer.php")?>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            // Inicializar Select2
-            $('#buscador').select2({
-                ajax: {
-                    url: 'Consultas/BuscarProductosParaFiltro.php',
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                }
-            });
-        });
-    </script>
+$(document).ready(function() {
+    // Inicializar Select2
+    $('#buscador').select2({
+        ajax: {
+            url: 'Consultas/BuscarProductosParaFiltro.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        placeholder: 'Ingrese un código o nombre', // Agregamos un placeholder al select
+        minimumInputLength: 1 // Especificamos el mínimo de caracteres para activar la búsqueda
+    });
+});
+</script>
 
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
