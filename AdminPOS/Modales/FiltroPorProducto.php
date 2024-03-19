@@ -14,8 +14,8 @@
            
                         <div class="col">
                                 <label for="añosSelect">Seleccione un producto a buscar</label>
-                                <select id="buscador" >
-        <option value="">Ingrese un codigo o nombre</option>
+                                <select id="buscador" style="width: 300px;">
+        <option value="">Selecciona un producto</option>
     </select>
                             </div>
                         </div>
