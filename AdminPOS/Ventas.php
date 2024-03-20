@@ -120,8 +120,15 @@ $(document).ready(function() {
             },
             cache: true
         },
-        placeholder: 'Ingrese un código o nombre', // Agregamos un placeholder al select
-        minimumInputLength: 1 // Especificamos el mínimo de caracteres para activar la búsqueda
+        placeholder: 'Ingrese un código o nombre',
+        minimumInputLength: 1,
+        // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
+        select: function(event) {
+            var nombreProd = event.params.data.id;
+            var codBarra = event.params.data.cod_barra;
+            $('#nombreprod').val(nombreProd);
+            $('#codbarra').val(codBarra);
+        }
     });
 });
 </script>
