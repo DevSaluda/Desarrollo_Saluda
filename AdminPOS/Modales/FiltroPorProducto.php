@@ -19,6 +19,10 @@
                                 </select>
                             </div>
                         </div>
+
+
+<input type="text" id="nombreprod" class="form-control" placeholder="Nombre del producto" />
+<input type="text" id="codbarra"  class="form-control" placeholder="Código de barras" />
                         <button type="submit" class="btn btn-success">Realizar Búsqueda <i class="fas fa-search"></i></button>
                     </form>
                 </div>
