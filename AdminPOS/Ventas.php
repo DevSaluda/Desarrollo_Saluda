@@ -124,7 +124,7 @@ include ("footer.php")?>
         minimumInputLength: 1,
         // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
         select: function(event) {
-            var nombreProd = event.params.data.text; // Accedemos al nombre del producto
+            var nombreProd = event.params.data.id; // Accedemos al nombre del producto
             var codBarra = event.params.data.cod_barra; // Accedemos al código de barras
             $('#nombreprod').val(nombreProd);
             $('#codbarra').val(codBarra);
