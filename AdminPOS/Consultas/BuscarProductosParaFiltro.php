@@ -18,7 +18,8 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $productos[] = array(
             'id' => $row['Nombre_Prod'],
-            'text' => $row['Nombre_Prod']
+            'text' => $row['Nombre_Prod'],
+            'cod_barra' => $row['Cod_Barra'] // Agregamos el código de barras al array de resultados
         );
     }
 }
