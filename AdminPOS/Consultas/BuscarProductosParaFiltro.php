@@ -5,8 +5,12 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Consulta para obtener los nombres de los productos
-$sql = "SELECT Nombre_Prod FROM Productos_POS";
+// Obtener el término de búsqueda (nombre o código de barras)
+$searchTerm = $_GET['term'] ?? '';
+
+// Consulta para obtener los nombres de los productos que coincidan con el término de búsqueda
+$sql = "SELECT Nombre_Prod FROM Productos_POS WHERE Nombre_Prod LIKE '%$searchTerm%' OR Codigo_Barra LIKE '%$searchTerm%'";
+
 $result = $conn->query($sql);
 $productos = array();
 
@@ -19,6 +23,5 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Devolver los nombres de los productos como un array JSON
 echo json_encode($productos);
 ?>
