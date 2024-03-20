@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 $searchTerm = $_GET['term'] ?? '';
 
 // Consulta para obtener los nombres de los productos que coincidan con el término de búsqueda
-$sql = "SELECT Nombre_Prod FROM Productos_POS WHERE Nombre_Prod LIKE '%$searchTerm%' OR Codigo_Barra LIKE '%$searchTerm%'";
+$sql = "SELECT Nombre_Prod,Cod_Barra FROM Productos_POS WHERE Nombre_Prod LIKE '%$searchTerm%' OR Cod_Barra LIKE '%$searchTerm%'";
 
 $result = $conn->query($sql);
 $productos = array();
