@@ -105,8 +105,8 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-    <script>
-$(document).ready(function() {
+   <script>
+    $(document).ready(function() {
     // Inicializar Select2
     $('#buscador').select2({
         ajax: {
@@ -124,14 +124,15 @@ $(document).ready(function() {
         minimumInputLength: 1,
         // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
         select: function(event) {
-            var nombreProd = event.params.data.id;
-            var codBarra = event.params.data.cod_barra;
+            var nombreProd = event.params.data.text; // Accedemos al nombre del producto
+            var codBarra = event.params.data.cod_barra; // Accedemos al código de barras
             $('#nombreprod').val(nombreProd);
             $('#codbarra').val(codBarra);
         }
     });
 });
-</script>
+
+   </script>
 
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
