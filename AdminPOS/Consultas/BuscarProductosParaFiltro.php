@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 $searchTerm = $_GET['term'] ?? '';
 
 // Consulta para obtener los nombres de los productos que coincidan con el término de búsqueda
-$sql = "SELECT Nombre_Prod,Cod_Barra FROM Productos_POS WHERE Nombre_Prod LIKE '%$searchTerm%' OR Cod_Barra LIKE '%$searchTerm%'";
+$sql = "SELECT Nombre_Prod, Cod_Barra FROM Productos_POS WHERE Nombre_Prod LIKE '%$searchTerm%' OR Cod_Barra LIKE '%$searchTerm%'";
 
 $result = $conn->query($sql);
 $productos = array();
@@ -17,9 +17,8 @@ $productos = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $productos[] = array(
-            'id' => $row['Nombre_Prod'],
-            'text' => $row['Nombre_Prod'],
-            'cod_barra' => $row['Cod_Barra'] // Agregamos el código de barras al array de resultados
+            'id' => $row['Nombre_Prod'], // Usamos Nombre_Prod como el ID del producto
+            'text' => $row['Nombre_Prod'] . ' - ' . $row['Cod_Barra'] // Concatenamos el nombre del producto con el código de barras para mostrarlo en el desplegable
         );
     }
 }
