@@ -62,7 +62,7 @@
               <div class="inner">
                 <h3><?php echo $CreditosVigentes['CreditosVigentes']?></h3>
 
-                <p>Pacientes mios</p>
+                <p>Créditos dentales</p>
               </div>
               <div class="icon">
               <i class="fas fa-barcode"></i>
