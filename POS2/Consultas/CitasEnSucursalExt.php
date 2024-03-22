@@ -82,7 +82,14 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["Observaciones"]; ?></td>
     <td> <?php echo $Usuarios["Tipo_Consulta"]; ?></td>
     <td> <?php echo $Usuarios["Asistio"]; ?></td>
-    <td> <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola, <?php echo $Usuarios["Nombre_Paciente"]; ?> ! Te contactamos de *Saluda Centro Médico Familiar* para la confirmación para su cita de <?php echo $Usuarios["Nombre_Especialidad"]; ?> agendada el día *<?php echo fechaCastellano($Usuarios["Fecha_Disponibilidad"]); ?>* *en horario de <?php echo date('h:i A', strtotime(($Usuarios["Horario_Disponibilidad"]))); ?>* en nuestro centro médico de <?php echo $Usuarios["Nombre_Sucursal"]; ?>. Agradecemos su pronta confirmación. 😁" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a></td>
+    <td>
+    <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=<?php
+        $nombreSucursal = ($Usuarios["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $Usuarios["Nombre_Sucursal"];
+        $mensaje = "¡Hola, {$Usuarios["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para la confirmación para su cita de {$Usuarios["Nombre_Especialidad"]} agendada el día *" . fechaCastellano($Usuarios["Fecha_Disponibilidad"]) . "* en horario de " . date('h:i A', strtotime($Usuarios["Horario_Disponibilidad"])) . " en nuestro centro médico de {$nombreSucursal}. Agradecemos su pronta confirmación. 😁";
+        echo urlencode($mensaje);
+    ?>" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
+</td>
+
     <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
