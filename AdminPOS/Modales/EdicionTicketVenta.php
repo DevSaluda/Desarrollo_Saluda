@@ -117,7 +117,7 @@ while ($r=$query->fetch_object()){
 <td><?php echo $Tickets["Nom_Serv"]; ?></td>
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
-<td><?php echo $Tickets["DescuentoAplicado"]; ?> %</td>
+<td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["DescuentoAplicado"]; ?>"> %</td>
 <td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["Importe"]; ?>">
 <input type="text" class="form-control" name="IDVENTAS[]" value="<?php echo $Tickets["Venta_POS_ID"]; ?>"></td>
 <td><input type="text" class="form-control" name="FormaPagoActualizable[]" value="<?php echo $Tickets["FormaDePago"]; ?>"></td>
