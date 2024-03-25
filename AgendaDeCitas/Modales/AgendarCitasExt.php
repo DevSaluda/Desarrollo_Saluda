@@ -35,14 +35,30 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile-alt"></i></span>
   </div>
-  <input type="text" class="form-control"   name="TelExt" id="telExt" aria-describedby="basic-addon1">
+  <input type="text" class="form-control"   name="TelExt" id="telExt" oninput="formatPhoneNumber(this)" aria-describedby="basic-addon1">
 </div>
     </div>
     
     </div>
    
     
- 
+    <script>
+function formatPhoneNumber(input) {
+    // Eliminar todos los caracteres que no sean dígitos
+    var phoneNumber = input.value.replace(/\D/g, '');
+
+    // Aplicar formato solo si hay dígitos suficientes
+    if (phoneNumber.length >= 3) {
+        phoneNumber = phoneNumber.substring(0, 3) + '-' + phoneNumber.substring(3);
+    }
+    if (phoneNumber.length >= 7) {
+        phoneNumber = phoneNumber.substring(0, 7) + '-' + phoneNumber.substring(7, 11);
+    }
+
+    // Establecer el valor formateado en el campo de entrada
+    input.value = phoneNumber;
+}
+</script>
   
 <!-- INICIA DATA DE AGENDA -->
 
