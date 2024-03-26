@@ -35,29 +35,33 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="añosSelect">Seleccione un año</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
-                                    </div>
-                                    <select id="añosSelect" class="form-control" name="anual" required>
-                                        <option value="">Seleccione un año:</option>
-                                        <?php
-                                        $añoActual = date('Y');
-                                        $añosAtras = 5; // Puedes ajustar este valor para mostrar más años pasados
-                                        for ($i = $añoActual; $i >= ($añoActual - $añosAtras); $i--) {
-                                            echo "<option value='$i'>$i</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
+    <label for="fecha">Seleccione un año</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
+        </div>
+        <input type="text" id="fecha" class="form-control" name="anual" required readonly>
+    </div>
+</div>
+
                         </div>
                         <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>
-        </div>
+        </div><script>
+    $(function() {
+        $("#fecha").datepicker({
+            dateFormat: "yy",
+            changeYear: true,
+            showButtonPanel: true,
+            onClose: function(dateText, inst) {
+                $(this).datepicker('setDate', new Date(inst.selectedYear, 0, 1));
+            }
+        });
+    });
+</script>
+
     </div>
 </div>
 
