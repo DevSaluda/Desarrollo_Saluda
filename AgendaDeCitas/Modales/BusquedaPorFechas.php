@@ -17,7 +17,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
-                                    <input type="date" class="control-form" id="fechainicial" name="fechainicial">
+                                    <input type="date" class="form-control" id="fechainicial" name="fechainicial">
                                 </div>
                             </div>
                             <div class="col">
@@ -26,7 +26,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
         </div>
-        <input type="date" class="control-form" id="fechafin" name="fechafinal">
+        <input type="date" class="form-control" id="fechafin" name="fechafinal">
 
     </div>
 </div>
