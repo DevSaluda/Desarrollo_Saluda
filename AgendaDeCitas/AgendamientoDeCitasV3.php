@@ -67,7 +67,7 @@ include "Consultas/Consultas.php";
   include ("Modales/AgendarCitasDeSucursales.php");
   include ("Modales/AgendarCitasExt.php");
  include ("Modales/AltaEspecialista.php");
- include("Modales/BusquedaCitasMes.php");
+ include("Modales/BusquedaPorFechas.php");
   include ("footer.php")?>
 
 
