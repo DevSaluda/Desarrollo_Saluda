@@ -26,7 +26,10 @@ include "Consultas/Consultas.php";
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div class="card text-center">
-      <div>
+        <div class="card-header" style="background-color:#0057b8 !important;color: white;">
+          Busqueda de citas por fechas 
+        </div>
+        <div>
     <!-- Bonton para agregar citas-->
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;"class="btn btn-default">
   Agendar nueva cita <i class="fas fa-file-medical"></i>
