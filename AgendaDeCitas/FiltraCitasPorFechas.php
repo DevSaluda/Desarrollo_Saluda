@@ -8,7 +8,7 @@ include "Consultas/Consultas.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Ventas realizadas por <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
+  <title>Busqueda de citas</title>
   <?php include "Header.php"?>
   <style>
     .error {
@@ -27,7 +27,7 @@ include "Consultas/Consultas.php";
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div class="card text-center">
         <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-          Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
+          Busqueda de citas por fechas 
         </div>
         <div >
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
