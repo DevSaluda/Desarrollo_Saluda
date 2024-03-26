@@ -48,8 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         LEFT JOIN Personal_Medico_Express ON AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID
         LEFT JOIN SucursalesCorre ON AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
         LEFT JOIN Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp
-        LEFT JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario";
-
+        LEFT JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
+    WHERE
+        Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN $mes AND $anual;";
 
         $result = mysqli_query($conn, $sql);
 
