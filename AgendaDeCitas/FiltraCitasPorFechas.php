@@ -347,6 +347,82 @@ include "Consultas/Consultas.php";
   <script src="dist/js/adminlte.js"></script>
   <!-- OPTIONAL SCRIPTS -->
   <script src="dist/js/demo.js"></script>
+  <script>
+ 
+ $(document).ready(function() {
+    // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
+    $(document).on("click", ".btn-edit", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/CancelaCitaExt.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Corte de caja");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
+});
+</script>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div id="Di"class="modal-dialog  modal-notify modal-warning">
+      <div class="modal-content">
+      <div class="modal-header">
+         <p class="heading lead" id="Titulo"></p>
+
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true" class="white-text">&times;</span>
+         </button>
+       </div>
+        <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
+                            Verifique los campos antes de realizar alguna accion</span>
+						                <button type="button" class="close" data-dismiss="alert">×</button>
+                            </div>
+	        <div class="modal-body">
+          <div class="text-center">
+        <div id="form-edit"></div>
+        
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<style>
+        .animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+
+
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var enMantenimiento = false;
+
+            if (enMantenimiento) {
+                // HTML de la animación
+                var animationHTML = '<div class="animation-container"><img src="https://media.tenor.com/iDYg-7xD7M4AAAAC/burning-office-spongebob.gif" style="max-width: 100%; height: auto;">' +
+                '<p style="text-align: center;"><strong>Lo sentimos, estamos realizando tareas de mantenimiento en este momento.</strong><br>Es posible que algún contenido no esté disponible temporalmente. ¡Volvemos pronto!</p></div>';
+
+                Swal.fire({
+                  
+                    title: 'Mantenimiento en curso',
+                    html: animationHTML,
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showCloseButton: false
+                }).then((result) => {
+                    // Aquí podrías agregar lógica adicional si es necesario después de que el usuario interactúe con la alerta
+                });
+            }
+        });
+    </script>
+
+
 </body>
 </html>
 
