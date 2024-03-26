@@ -38,7 +38,7 @@ include "Consultas/Consultas.php";
   Agendar nueva cita <i class="fas fa-file-medical"></i>
 </button>
 <!-- Boton para filtrar por fecha-->
-<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;" class="btn btn-default">
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
  Citas por fechas <i class="fas fa-calendar"></i>
 </button>
 
