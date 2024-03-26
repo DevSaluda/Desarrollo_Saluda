@@ -41,41 +41,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $result = mysqli_query($conn, $sql);
 
-        $c=0;
+        $data = []; // Inicializa el array $data antes del bucle while
+        $c = 0; // Inicializa el contador $c
 
-        while($fila=$result->fetch_assoc()){
-
+        while ($fila = $result->fetch_assoc()) {
             $data[$c]["Folio"] = $fila["ID_Agenda_Especialista"];
-    $data[$c]["Paciente"] = $fila["Nombre_Paciente"];
-    $data[$c]["Telefono"] = $fila["Telefono"];
-    $data[$c]["Fecha"] = fechaCastellano($fila["Fecha_Disponibilidad"]);
-    $data[$c]["Hora"] = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
-    $data[$c]["Especialidad"] = $fila["Nombre_Especialidad"];
-    $data[$c]["Doctor"] = $fila["Nombre_Apellidos"];
-    $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Observaciones"] = $fila["Observaciones"];
-    // $data[$c]["ConfirmarCita"] = $fila["FormaDePago"];
-    $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
-    $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
-    $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
-    $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
+            $data[$c]["Paciente"] = $fila["Nombre_Paciente"];
+            $data[$c]["Telefono"] = $fila["Telefono"];
+            $data[$c]["Fecha"] = fechaCastellano($fila["Fecha_Disponibilidad"]);
+            $data[$c]["Hora"] = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
+            $data[$c]["Especialidad"] = $fila["Nombre_Especialidad"];
+            $data[$c]["Doctor"] = $fila["Nombre_Apellidos"];
+            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
+            $data[$c]["Observaciones"] = $fila["Observaciones"];
+            // $data[$c]["ConfirmarCita"] = $fila["FormaDePago"];
+            $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
+            $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
+            $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
+            $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
 
-    $nombreSucursal = ($fila["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $fila["Nombre_Sucursal"];
+            $nombreSucursal = ($fila["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $fila["Nombre_Sucursal"];
 
-    $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal. Esperamos tu confirmación ☺️";
-    $data[$c]["ConWhatsapp"] = "<a class='btn-sm btn btn-success custom-bg-color' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
-    $data[$c]["BotonCancelar"] = '
-    <td>
-        <a data-id="' . $fila["ID_Agenda_Especialista"] . '"class="btn btn-danger btn-sm btn-edit"><i class="fas fa-ban"></i>  </a>
-    </td>';            $c++; 
-
+            $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal. Esperamos tu confirmación ☺️";
+            $data[$c]["ConWhatsapp"] = "<a class='btn-sm btn btn-success custom-bg-color' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
+            $data[$c]["BotonCancelar"] = '
+            <td>
+                <a data-id="' . $fila["ID_Agenda_Especialista"] . '"class="btn btn-danger btn-sm btn-edit"><i class="fas fa-ban"></i>  </a>
+            </td>';
+            $c++;
         }
 
         $results = [
             "sEcho" => 1,
             "iTotalRecords" => count($data),
             "iTotalDisplayRecords" => count($data),
-            "aaData" => $data 
+            "aaData" => $data
         ];
 
         echo json_encode($results);
