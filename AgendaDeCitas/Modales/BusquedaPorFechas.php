@@ -17,21 +17,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
-                                    <select id="mesesSelect" class="form-control" name="Mes" required>
-                                        <option value="">Seleccione un mes:</option>
-                                        <option value="01">Enero</option>
-                                        <option value="02">Febrero</option>
-                                        <option value="03">Marzo</option>
-                                        <option value="04">Abril</option>
-                                        <option value="05">Mayo</option>
-                                        <option value="06">Junio</option>
-                                        <option value="07">Julio</option>
-                                        <option value="08">Agosto</option>
-                                        <option value="09">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                    </select>
+                                    <input type="date" class="control-form" id="fechainicial" name="fechainicial">
                                 </div>
                             </div>
                             <div class="col">
@@ -40,7 +26,8 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
         </div>
-        <input type="text" id="fecha" class="form-control" name="anual" required readonly>
+        <input type="date" class="control-form" id="fechafin" name="fechafinal">
+
     </div>
 </div>
 
@@ -49,19 +36,7 @@
                     </form>
                 </div>
             </div>
-        </div><script>
-    $(function() {
-        $("#fecha").datepicker({
-            dateFormat: "yy",
-            changeYear: true,
-            showButtonPanel: true,
-            onClose: function(dateText, inst) {
-                $(this).datepicker('setDate', new Date(inst.selectedYear, 0, 1));
-            }
-        });
-    });
-</script>
-
+        </div>
     </div>
 </div>
 
