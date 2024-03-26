@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $anual = $_POST['anual'];
 // Depuración
 echo "Mes: $mes, Anual: $anual<br>";
-echo "Consulta SQL: $sql<br>";
+
         // Concatena los valores en la consulta SQL
         $sql = "SELECT
         AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,
