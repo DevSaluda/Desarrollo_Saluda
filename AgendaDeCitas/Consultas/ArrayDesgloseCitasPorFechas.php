@@ -58,6 +58,7 @@ echo "Mes: $mes, Anual: $anual<br>";
 
        
         $c = 0; // Inicializa el contador $c
+        $data = []; // Inicializar $data como un array vacío
 
         while ($fila = $result->fetch_assoc()) {
             $data[$c]["Folio"] = $fila["ID_Agenda_Especialista"];
