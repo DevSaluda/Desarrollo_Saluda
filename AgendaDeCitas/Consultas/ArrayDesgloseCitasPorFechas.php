@@ -23,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtén los valores del formulario
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
-
+// Depuración
+echo "Mes: $mes, Anual: $anual<br>";
+echo "Consulta SQL: $sql<br>";
         // Concatena los valores en la consulta SQL
         $sql = "SELECT
         AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,
@@ -54,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $result = mysqli_query($conn, $sql);
 
-        $data = []; // Inicializa el array $data antes del bucle while
+       
         $c = 0; // Inicializa el contador $c
 
         while ($fila = $result->fetch_assoc()) {
