@@ -26,20 +26,17 @@ include "Consultas/Consultas.php";
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div class="card text-center">
-        <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-          Busqueda de citas por fechas 
-        </div>
-        <div >
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-          </button>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-            Busqueda por mes <i class="fas fa-calendar-week"></i>
-          </button>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
-            Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-          </button>
-        </div>
+      <div>
+    <!-- Bonton para agregar citas-->
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;"class="btn btn-default">
+  Agendar nueva cita <i class="fas fa-file-medical"></i>
+</button>
+<!-- Boton para filtrar por fecha-->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
+ Citas por fechas <i class="fas fa-calendar"></i>
+</button>
+
+</div> <!-- Fin del container -->
       </div>
 
       <?php
