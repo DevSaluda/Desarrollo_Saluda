@@ -12,7 +12,7 @@
                     <form action="FiltraCitasPorFechas" method="POST">
                         <div class="form-row">
                             <div class="col">
-                                <label for="mesesSelect">Seleccione un mes</label>
+                                <label for="mesesSelect">Seleccione una fecha inicial</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="col">
-    <label for="fecha">Seleccione un año</label>
+    <label for="fecha">Seleccione una fecha final </label>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
@@ -30,7 +30,23 @@
 
     </div>
 </div>
+<div class="col">
+    <label for="fecha">Seleccione una sucursal </label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
+        </div>
+        <select id = "sucursal" class = "form-control" name = "Sucursal" >
+                                               <option value="">Seleccione una Sucursal:</option>
+        <?php 
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM Sucursales_CampañasV2 WHERE Estatus_Sucursal='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>
 
+    </div>
+</div>
                         </div>
                         <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
