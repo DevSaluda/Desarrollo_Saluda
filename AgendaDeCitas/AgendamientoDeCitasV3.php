@@ -41,7 +41,12 @@ include "Consultas/Consultas.php";
 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
  Citas por fechas <i class="fas fa-calendar"></i>
 </button>
-
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
+ Citas por sucursal <i class="fas fa-calendar"></i>
+</button>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
+ Citas por especialista <i class="fas fa-calendar"></i>
+</button>
 </div> <!-- Fin del container -->
 
 </div>
