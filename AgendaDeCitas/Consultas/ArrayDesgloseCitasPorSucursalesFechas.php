@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtén los valores del formulario
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
-
+        $sucursalbusqueda= $_POST['sucursal'];
 
         // Concatena los valores en la consulta SQL
         $sql = "SELECT
