@@ -46,15 +46,16 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['fechainicial']) && isset($_POST['fechafinal'])) {
+          if (isset($_POST['fechainicial']) && isset($_POST['fechafinal']) && isset($_POST['sucursal'])) {
               // Obtener los valores del formulario
               $Fechainicio = $_POST['fechainicial'];
               $FechaFin = $_POST['fechafinal'];
-
+              $sucursalbusqueda= $_POST['sucursal'];
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
               echo "Mes seleccionado: $Fechainicio<br>";
               echo "Año seleccionado: $FechaFin<br>";
+              echo "Sucursal seleccionada: $sucursalbusqueda <br>";
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
@@ -229,12 +230,13 @@ include "Consultas/Consultas.php";
         // Aquí puedes definir el código PHP directamente
         var mes = '<?php echo $Fechainicio; ?>'; // Obtén el valor de fechainicio desde PHP
         var anual = '<?php echo $FechaFin; ?>'; // Obtén el valor de fechafin desde PHP
-        var anual = '<?php echo $FechaFin; ?>'; // Obtén el valor de sucursal desde PHP
+        var sucursaldebusqueda = '<?php echo $sucursalbusqueda; ?>'; // Obtén el valor de sucursal desde PHP
 
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
             "Mes": mes,
-            "anual": anual
+            "anual": anual,
+            "sucursal": sucursaldebusqueda
         };
 
         return dataToSend;

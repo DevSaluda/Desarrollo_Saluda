@@ -46,17 +46,17 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['fechainicial']) && isset($_POST['fechafinal']) && isset($_POST['sucursal'])) {
+          if (isset($_POST['fechainicial']) && isset($_POST['fechafinal'])) {
               // Obtener los valores del formulario
               $Fechainicio = $_POST['fechainicial'];
               $FechaFin = $_POST['fechafinal'];
-              $sucursalbusqueda= $_POST['sucursal'];
+             
 
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
               echo "Mes seleccionado: $Fechainicio<br>";
               echo "Año seleccionado: $FechaFin<br>";
-              echo "Sucursal seleccionada: $sucursalbusqueda <br>";
+              
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
