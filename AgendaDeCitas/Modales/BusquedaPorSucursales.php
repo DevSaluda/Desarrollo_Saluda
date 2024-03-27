@@ -36,7 +36,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
         </div>
-        <select id = "sucursal" class = "form-control" name = "Sucursal" >
+        <select id = "sucursal" class = "form-control" name = "sucursal" >
                                                <option value="">Seleccione una Sucursal:</option>
         <?php 
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal FROM SucursalesCorre ");
