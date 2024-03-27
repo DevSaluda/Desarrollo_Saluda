@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="FiltraCitasPorFechas" method="POST">
+                    <form action="FiltraCitasPorSucursalesFechas" method="POST">
                         <div class="form-row">
                             <div class="col">
                                 <label for="mesesSelect">Seleccione una fecha inicial</label>
