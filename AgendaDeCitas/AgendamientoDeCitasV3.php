@@ -28,7 +28,7 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057B8 !important;color: white;">
-  <i class="fas fa-user-md"></i>Consultas con especialistas agendadas <i class="fas fa-user-md"></i>
+  Citas con especialistas disponibles para el dia de hoy
   </div>
 
   <!-- Container de botones-->
