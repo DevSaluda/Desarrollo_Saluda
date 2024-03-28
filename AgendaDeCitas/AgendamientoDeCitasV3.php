@@ -74,6 +74,7 @@ include "Consultas/Consultas.php";
  include ("Modales/AltaEspecialista.php");
  include("Modales/BusquedaPorFechas.php");
  include("Modales/BusquedaPorSucursales.php");
+ include("Modales/BusquedaPorSucursalesYEspecialistas.php");
   include ("footer.php")?>
 
 
