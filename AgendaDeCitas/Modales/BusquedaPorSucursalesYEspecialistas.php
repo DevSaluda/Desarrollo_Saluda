@@ -46,7 +46,7 @@
         ?>  </select>
 
     </div>
-
+    </div>
     <div class="col">
     <label for="exampleFormControlInput1">Especialidad</label>
      <div class="input-group mb-3">
