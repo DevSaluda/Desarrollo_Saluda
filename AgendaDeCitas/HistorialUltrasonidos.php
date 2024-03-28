@@ -58,6 +58,14 @@ include "Consultas/Consultas.php";
   </div>
   </div>
 </div>
+</div>
+  <!-- Content Wrapper. Contains page content -->
+  
+
+ 
+    
+<div id="Tablahistorial"></div>
+
 
 </div>
 </div>
