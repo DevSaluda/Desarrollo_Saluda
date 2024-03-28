@@ -36,10 +36,35 @@ include "Consultas/Consultas.php";
 
   <div class="container">
 <div class="row">
-<div class="col-md-12">
-    
-<div id="TablaResultadosUltrasonidos"></div>
+<div class="collapse" id="collapseExample">
+  <div class="card-body">
+  <div class="table-responsive">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Descarga pdf</th>
+      <th scope="col">Descarga pdf movil</th>
+      <th scope="col">Abrir whatsapp</th>
+      <th scope="col">Editar informacion</th>
+    </tr>
+      <td><button class="btn btn-warning"><span class="far fa-file-pdf"></span></button></td>
+      <td>  <button class="btn btn-secondary"><span class="far fa-file-pdf"></span></button></td>
+      <td>  <button class="btn btn-success"><span class="fab fa-whatsapp"></span></button></td>
+     <td>  <button class="btn btn-info"><i class="far fa-edit"></i></button></td>
+    </tr>
+  </thead>
+  <tbody>
+</table>
+  </div>
+  </div>
+</div>
+<div id="Tablahistorial"></div>
 
+
+</div>
+</div>
+</div>
+</div>
 
 </div>
 </div>
@@ -72,9 +97,7 @@ include "Consultas/Consultas.php";
 <!-- REQUIRED SCRIPTS -->
 
 
-
-<script src="js/ControlUltras.js"></script>  
-
+<script src="js/ControlHistorial.js"></script>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
