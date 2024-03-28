@@ -59,7 +59,7 @@ include "../Consultas/Sesion.php";
 $user_id=null;
 $sql1="SELECT Personal_Agenda.PersonalAgenda_ID,Personal_Agenda.Nombre_Apellidos,Personal_Agenda.file_name,Personal_Agenda.Fk_Usuario,Personal_Agenda.Telefono,Personal_Agenda.Correo_Electronico,
  Personal_Agenda.ID_H_O_D,Personal_Agenda.Estatus,Personal_Agenda.Password,Personal_Agenda.ColorEstatus,Personal_Agenda.AgregadoPor,Personal_Agenda.AgregadoEL
- FROM Personal_Agenda WHERE Personal_Agenda.Estatus ='vigente' AND Personal_Agenda.Fk_Usuario='14' AND Personal_Agenda.ID_H_O_D='".$row['ID_H_O_D'].;
+ FROM Personal_Agenda WHERE Personal_Agenda.Estatus ='vigente' AND Personal_Agenda.Fk_Usuario='14' AND Personal_Agenda.ID_H_O_D='".$row['ID_H_O_D'].";
 $query = $conn->query($sql1);
 ?>
 
