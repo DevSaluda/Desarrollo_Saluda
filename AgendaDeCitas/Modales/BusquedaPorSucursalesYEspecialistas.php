@@ -46,6 +46,20 @@
         ?>  </select>
 
     </div>
+
+    <div class="col">
+    <label for="exampleFormControlInput1">Especialidad</label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
+  </div>
+  <select  id = "especialidad" name = "Especialidad"  class = "form-control" disabled = "disabled" >
+								<option value = "">Selecciona una especialidad</option>
+							</select>
+</div>
+<label for="especialidad" class="error">
+    </div>
+    
 </div>
                         </div>
                         <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fa-solid fa-magnifying-glass"></i></button>
