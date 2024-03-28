@@ -91,7 +91,7 @@ include "Consultas/Consultas.php";
 
 
 
-<script src="js/ControlUltras.js"></script>  
+<script src="js/ControlHistorial.js"></script> 
 
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
