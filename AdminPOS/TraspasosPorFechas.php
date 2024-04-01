@@ -310,7 +310,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
                 extend: 'excelHtml5',
                 text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
                 titleAttr: 'Exportar a Excel',
-                title: 'registro de ventas ',
+                title: 'Filtrado de traspasos del <?php echo $mes; ?> al <?php echo $anual; ?>', // Concatena los valores de $mes y $anual en el título
                 className: 'btn btn-success',
                 exportOptions: {
                   columns: ':visible' // Exportar solo las columnas visibles
