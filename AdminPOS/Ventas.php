@@ -47,7 +47,7 @@ include "Consultas/Consultas.php";
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
   Filtrar por producto <i class="fas fa-prescription-bottle"></i>
 </button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorFormaDePago" class="btn btn-default">
   Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
 </button>
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
@@ -89,6 +89,7 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltraPorMes.php");
   include ("Modales/FiltroPorProducto.php");
+  include ("Modales/FiltroPorFormaDePago.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
