@@ -1,6 +1,6 @@
 
   
-      <div class="modal fade bd-example-modal-xl" id="FiltraPorRangoFechas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-xl" id="FiltraPorFormasDePago" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
