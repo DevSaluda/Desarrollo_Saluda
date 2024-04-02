@@ -52,7 +52,7 @@
               <div class="icon">
               <i class="fas fa-cash-register"></i>
               </div>
-              <a data-toggle="modal" data-target="#ConsultaCajas" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+              <a data-toggle="modal" data-target="#PacientesDentalModalVista" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -76,7 +76,7 @@
             <div class="small-box bg-danger">
               <div class="inner">
               <h3><?php echo $AbonosRealizados['AbonosDelDia']?></h3>
-                <p>Traspasos</p>
+                <p>abonos realizados</p>
 
                
               </div>
@@ -161,16 +161,8 @@ Productos mas vendidos
 
   <!-- Main Footer -->
   <?php include ("Modales/Ingreso.php");
-  include ("Modales/ConsultaCajasAbiertas.php");
-  include ("Modales/ModalConsultaVentas.php");
-  include ("Modales/ModalTraspasos.php");
-  include ("Modales/ModalTotalesSincortes.php");
-  include ("Modales/ModalFarmaceuticosVigentes.php");
-  include ("Modales/ModalEnfermerosVigentes.php");
-  include ("Modales/ModalMedicosVigentes.php");
-  include ("Modales/ModalLimpiezaVigentes.php");
-  include("Modales/FiltraEspecificamenteEntradas.php");
-  include("Modales/FiltraEspecificamenteSalidas.php");
+  include ("Modales/ConsultaPacientesModal.php");
+ 
   include ("footer.php");?>
 <!-- ./wrapper -->
 
