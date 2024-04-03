@@ -37,7 +37,7 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv,
-Ventas_POS.DescuentoAplicado -- Agregamos la columna DescuentoAplicado
+Ventas_POS.DescuentoAplicado
 FROM 
 Ventas_POS
 INNER JOIN 
@@ -56,8 +56,8 @@ OR
     Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') -- Primer día del mes anterior
     AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW() - INTERVAL 1 MONTH) -- Último día del mes anterior
 )
-AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-AND Ventas_POS.Identificador_tipo IN (1, 2, 3); -- Agregamos la condición para el rango de Identificador_tipo";
+AND Ventas_POS.Identificador_tipo IN (1, 2, 3); -- Agregamos la condición para el rango de Identificador_tipo
+";
 
 
 
