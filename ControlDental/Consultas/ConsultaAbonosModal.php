@@ -46,10 +46,8 @@ $(document).ready( function () {
 	 
 </script>
 <?php
-
-include("db_connection.php");
-include "Consultas.php";
-
+include("Consultas/db_connection.php");
+include "Consultas/Consultas.php";
 $user_id=null;
 $sql1="SELECT AbonoCreditos_POS.Folio_Abono, AbonoCreditos_POS.Fk_Folio_Credito, AbonoCreditos_POS.Fk_tipo_Credi, AbonoCreditos_POS.Nombre_Cred, 
 AbonoCreditos_POS.Cant_Apertura, AbonoCreditos_POS.Cant_Abono, AbonoCreditos_POS.Fecha_Abono, AbonoCreditos_POS.Fk_Sucursal, 
@@ -58,12 +56,31 @@ Tipos_Credit_POS.ID_Tip_Cred, Tipos_Credit_POS.Nombre_Tip, SucursalesCorre.ID_Su
 FROM AbonoCreditos_POS, Tipos_Credit_POS, SucursalesCorre 
 WHERE AbonoCreditos_POS.Fk_tipo_Credi = Tipos_Credit_POS.ID_Tip_Cred 
 AND AbonoCreditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC  
-AND DATE(AbonoCreditos_POS.Fecha_Abono) = CURDATE()";
+AND AbonoCreditos_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
+AND DATE(AbonoCreditos_POS.Fecha_Abono) = CURDATE();";
 $query = $conn->query($sql1);
 ?>
 
-<?php if($query->num_rows>0):?>
-  <div class="text-center">
+<!-- Central Modal Medium Info -->
+<div class="modal fade" id="CreditosDentalesModales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-="true" style="overflow-y: scroll;">
+   <div class="modal-dialog modal-xl modal-notify modal-success" role="document">
+     <!--Content-->
+     <div class="modal-content">
+       <!--Header-->
+       <div class="modal-header">
+         <p class="heading lead">Creditos dentales</p>
+
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-="true" class="white-text">&times;</span>
+         </button>
+       </div>
+     
+       <!--Body-->
+       <div class="modal-body">
+         <div class="text-center">
+         <?php if($query->num_rows>0):?>
+            <div class="text-center">
 	<div class="table-responsive">
 	<table  id="CreditosDisponibles" class="table table-hover">
 <thead>
@@ -96,46 +113,20 @@ $query = $conn->query($sql1);
   <td > $<?php echo $Categorias["Saldo"]; ?></td>
   
   <td> <button style="<?echo $Categorias['CodigoEstatus'];?>" class="btn btn-default btn-sm" > <?php echo $Categorias["Estatus"]; ?></button></td>
-  <td>
-		 <!-- Basic dropdown -->
-<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
-  aria-haspopup="true" aria-expanded="false"><i class="fas fa-list-ul"></i></button>
-
-<div class="dropdown-menu">
-
-<a data-id="<?php echo  $Categorias["Fk_Folio_Credito"];?>" class="btn-desglosaTicket dropdown-item" >Desglose Ticket <i class="fas fa-receipt"></i></a>
  
  
- 
-</div>
-<!-- Basic dropdown -->
-	 </td>
-     
-		
-</tr>
 <?php endwhile;?>
 </table>
 </div>
 </div>
 <?php else:?>
-	<p class="alert alert-warning">No hay resultados</p>
+	<h3 class="alert alert-warning"> No se encontraron Especialidades <i class="fas fa-exclamation-circle"></i> </h3>
 <?php endif;?>
+  
+     </div>
+     <!--/.Content-->
+   </div>
+ </div>
+ </div>
+ </div>
 
-
-<?php
-
-function fechaCastellano ($fecha) {
-  $fecha = substr($fecha, 0, 10);
-  $numeroDia = date('d', strtotime($fecha));
-  $dia = date('l', strtotime($fecha));
-  $mes = date('F', strtotime($fecha));
-  $anio = date('Y', strtotime($fecha));
-  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
-}
-?>

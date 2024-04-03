@@ -163,6 +163,7 @@ Productos mas vendidos
   <?php include ("Modales/Ingreso.php");
   include ("Modales/ConsultaPacientesModal.php");
   include ("Modales/ConsultaCreditosModal.php");
+  include ("Modales/ConsultaAbonosModal.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 
