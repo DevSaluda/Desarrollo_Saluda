@@ -67,7 +67,7 @@
               <div class="icon">
               <i class="fas fa-barcode"></i>
               </div>
-                <a  data-toggle="modal" data-target="#VentasProd" class="small-box-footer">Consultar Ventas <i class="fas fa-arrow-circle-right"></i></a>
+                <a  data-toggle="modal" data-target="#CreditosDentalesModales" class="small-box-footer">Consultar Ventas <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -162,7 +162,7 @@ Productos mas vendidos
   <!-- Main Footer -->
   <?php include ("Modales/Ingreso.php");
   include ("Modales/ConsultaPacientesModal.php");
- 
+  include ("Modales/ConsultaCreditosModal.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 

@@ -75,7 +75,7 @@ $query = $conn->query($sql1);
      <div class="modal-content">
        <!--Header-->
        <div class="modal-header">
-         <p class="heading lead">Médicos Vigentes</p>
+         <p class="heading lead">Pacientes agendadados</p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-="true" class="white-text">&times;</span>
