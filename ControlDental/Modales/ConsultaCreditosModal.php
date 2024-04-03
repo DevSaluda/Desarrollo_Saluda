@@ -2,7 +2,7 @@
 $(document).ready( function () {
     $('#CreditosDisponibles').DataTable({
       "order": [[ 0, "desc" ]],
-      "lengthMenu": [[25,50, 150, 200, -1], [25,50, 150, 200, "Todos"]],   
+      "lengthMenu": [[5,20,30 -1], [5,20,30, "Todos"]],   
         language: {
             "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
