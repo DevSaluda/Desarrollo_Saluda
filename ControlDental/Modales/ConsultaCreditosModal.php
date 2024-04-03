@@ -49,7 +49,7 @@ $query = $conn->query($sql1);
 ?>
 
 <!-- Central Modal Medium Info -->
-<div class="modal fade" id="PacientesDentalModalVista" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="CreditosDentalesModales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
    aria-="true" style="overflow-y: scroll;">
    <div class="modal-dialog modal-xl modal-notify modal-success" role="document">
      <!--Content-->
