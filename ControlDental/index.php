@@ -83,7 +83,7 @@
               <div class="icon">
               <i class="fas fa-boxes"></i>
               </div>
-              <a data-toggle="modal" data-target="#AbonosDentalesModales" class="small-box-footer">Ver traspasos <i class="fas fa-arrow-circle-right"></i></a>
+              <a data-toggle="modal" data-target="#AbonosDentalesRealizadosModales" class="small-box-footer">Ver traspasos <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
   <!-- ./col -->
