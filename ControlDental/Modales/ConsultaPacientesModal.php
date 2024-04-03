@@ -63,7 +63,7 @@ AgendaCitas_EspecialistasExt.Fk_Especialidad = 84 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 85 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 86 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 87)
-AND DATE(AgendaCitas_EspecialistasExt.Fecha_Hora) = CURRENT_DATE();";
+AND DATE(Fechas_EspecialistasExt.Fecha_Disponibilidad) = CURRENT_DATE();";
 $query = $conn->query($sql1);
 ?>
 
