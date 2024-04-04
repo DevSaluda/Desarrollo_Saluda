@@ -29,7 +29,7 @@ while ($r=$query->fetch_object()){
 <button type="submit"  id="submit"  class="btn btn-danger">Confirmar baja <i class="fas fa-check"></i></button>
                           
 </form>
-<script src="js/BajaEmpleadosMedicos.js"></script>
+<script src="js/BajaDeEmpleadosMedicos.js"></script>
  
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
