@@ -25,7 +25,7 @@ while ($r=$query->fetch_object()){
 
     <input type="text"  hidden class="form-control " value="Baja"  readonly name="Vigencia" id="vigenciaest">
     <input type="text"  hidden class="form-control " value="background-color: #FE0000 !important;"  readonly name="ColorVigencia" id="colorvigencia">
-<input type="hidden" name="idbaja" id="idbaja" value="<?php echo $Especialistas->Pos_ID; ?>">
+<input type="hidden" name="idbaja" id="idbaja" value="<?php echo $Especialistas->Medico_ID; ?>">
 <button type="submit"  id="submit"  class="btn btn-danger">Confirmar baja <i class="fas fa-check"></i></button>
                           
 </form>
