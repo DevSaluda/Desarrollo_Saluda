@@ -1,17 +1,17 @@
 <?php
 include "db_connection.php";
 
-        $Pos_ID=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['idbaja']))));
+        $Medico_ID=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['idbaja']))));
      
         $Estatus=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Vigencia']))));
         $ColorEstatus=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ColorVigencia']))));
         
 
-        $sql = "UPDATE `PersonalPOS` 
+        $sql = "UPDATE `Personal_Medico` 
         SET 
         `Estatus`='$Estatus',
         `ColorEstatus`='$ColorEstatus'
-        WHERE Pos_ID=$Pos_ID";
+        WHERE Medico_ID=$Medico_ID";
        if (mysqli_query($conn, $sql)) {
 		echo json_encode(array("statusCode"=>200));
 	} 
