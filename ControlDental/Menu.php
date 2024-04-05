@@ -431,7 +431,7 @@
             <a href="AbreCredi" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
-              Apertura de crédito
+             Creditos Vigentes
                
               </p>
             </a>
