@@ -187,7 +187,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'Cantidad_Venta' },
        { mData: 'Total_Venta' },
        { mData: 'Importe' },
-       { mData: 'Descuento' },
+
        { mData: 'FormaPago' },
        { mData: 'Cliente' },
        { mData: 'FolioSignoVital' },
@@ -195,8 +195,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'AgregadoEl' },
        { mData: 'AgregadoEnMomento' },
        { mData: 'AgregadoPor' },
-       { mData: 'Enfermero' },
-       { mData: 'Doctor' },
+      
       
   
       ],
@@ -258,10 +257,6 @@ tabla = $('#Productos').DataTable({
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Importe</th> 
-
-
-
-<th>Descuento</th>
 <th>Forma de pago</th>
 <th>Cliente</th>
 <th>Folio Signo Vital</th>
@@ -269,8 +264,7 @@ tabla = $('#Productos').DataTable({
 <th>Fecha</th>
 <th>Hora</th>   
 <th>Vendedor</th>
-<th>Enfermero</th>
-<th>Doctor</th>
+
 
 </thead>
 
