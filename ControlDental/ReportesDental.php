@@ -189,7 +189,7 @@ $query = $conn->query($sql1);
  
   <!-- Main Footer -->
 <?php
- include ("Modales/BuscaPorFechaVentasLaboratorios.php");
+ include ("Modales/BuscaPorFechaProcedimientosDentales.php");
   include ("footer.php")?>
 
 <!-- ./wrapper -->
