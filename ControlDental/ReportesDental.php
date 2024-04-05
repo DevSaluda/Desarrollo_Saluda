@@ -29,7 +29,7 @@ Ventas_POS.Fecha_venta BETWEEN '$fecha1' AND '$fecha2'
 AND Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 AND Ventas_POS.Identificador_tipo IN (1, 2, 3) 
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-AND Ventas_POS.FormaDePago='Efectivo' OR 'Tarjeta',
+AND Ventas_POS.FormaDePago='Efectivo' OR 'Tarjeta'
 GROUP BY 
 Ventas_POS.Cod_Barra;
 "
