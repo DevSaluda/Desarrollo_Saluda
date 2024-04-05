@@ -40,7 +40,7 @@ Ventas_POS.Cod_Barra;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Reportes de laboratorios de sucursales  </title>
+  <title>Reportes de procedimientos dentales </title>
 
 <?php include "Header.php"?>
  <style>
@@ -56,7 +56,7 @@ Ventas_POS.Cod_Barra;
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Datos de laboratorios del <?echo fechaCastellano($fecha1)?> al <?echo fechaCastellano($fecha2)?>
+  Reportes de procedimientos dentales
   </div>
   <div >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
