@@ -54,7 +54,7 @@ $('document').ready(function($){
         
         $.ajax({				
             type : 'POST',
-            url: "Consultas/BajadeEmpleadosMedicos.php",
+            url: "Consultas/BajadeEmpleados.php",
             data: $('#BajaEmpleados').serialize(),
             cache: false,
             beforeSend: function(){	
