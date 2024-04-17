@@ -17,7 +17,7 @@ SucursalesCorre.Nombre_Sucursal,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Actualizando existencias de <?echo $Usuarios['Nombre_Prod']?> </title>
+  <title>Actualizando existencias de <?php echo $Usuarios['Nombre_Prod']?> </title>
 
 <?php include "Header.php"?>
  <style>

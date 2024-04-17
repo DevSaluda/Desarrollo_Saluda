@@ -39,7 +39,7 @@ while($fila=$result->fetch_assoc()){
 
     $data[$c]["Coincidencias"] = ["<a  href=https://saludapos.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
        $data[$c]["Ingreso"] = ["<a href=https://saludapos.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
-       $data[$c]["Auditoria"] = ["<a href=https://saludapos.com/AdminPOS/HistorialProductoAudita?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
+       $data[$c]["Auditoria"] = ["<a href=https://saludapos.com/AdminPOS/HistorialProductoAudita?idProd=".base64_encode($fila["Cod_Barra"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
     $c++; 
  
 }
