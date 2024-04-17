@@ -8,8 +8,7 @@ Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional, Ventas_POS.Identificador_tipo,
 Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.Fk_sucursal,Ventas_POS.AgregadoPor,
 Ventas_POS.AgregadoEl, Ventas_POS.Total_Venta,Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv FROM Ventas_POS,SucursalesCorre,Servicios_POS 
- WHERE  Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC AND Ventas_POS.Cod_Barra=$IdBusqueda AND Ventas_POS.Fk_sucursal='".$row['Fk_Sucursal']."' 
- AND Ventas_POS.ID_H_O_D ='".$row['ID_H_O_D']."' AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID "
+ WHERE  Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC AND Ventas_POS.Cod_Barra=$IdBusqueda AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID "
 ?>
 <!DOCTYPE html>
 <html lang="es">
