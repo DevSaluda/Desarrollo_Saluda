@@ -79,7 +79,7 @@ $(document).ready( function () {
 	  
 	 
 </script>
-<?
+<?php
 ;
 
 
@@ -161,7 +161,7 @@ $query = $conn->query($sql1);
   <!-- Control Sidebar -->
  
   <!-- Main Footer -->
-<?
+<?php
  
   include ("Modales/ExitoActualiza.php");
 
@@ -203,7 +203,7 @@ setTimeout(function(){
 </script>
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
