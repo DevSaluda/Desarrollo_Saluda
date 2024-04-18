@@ -102,10 +102,6 @@ $query = $conn->query($sql1);
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Importe</th> 
-
-
-
-<th>Descuento</th>
 <th>Forma de pago</th>
 <th>Servicio</th>
 <th>Fecha</th>
@@ -128,7 +124,6 @@ $query = $conn->query($sql1);
   <td > <?php echo $Usuarios['Cantidad_Venta']; ?> </td>
   <td > <?php echo $Usuarios['Importe']; ?> </td>
   <td > <?php echo $Usuarios['Total_Venta']; ?> </td>
-  <td > <?php echo $Usuarios['DescuentoAplicado']; ?> </td>
   <td > <?php echo $Usuarios['FormaDePago']; ?> </td>
   <td > <?php echo $Usuarios['Nom_Serv']; ?> </td>
   <td > <?php echo $Usuarios['AgregadoEl']; ?> </td>
