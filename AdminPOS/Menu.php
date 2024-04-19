@@ -954,6 +954,16 @@
 ?>>
 <li class="nav-item has-treeview">
             <a href="ModuloDeInventarios" class="nav-link">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+        Productos sin asignar
+               
+              </p>
+            </a>
+          
+          </li>
+<li class="nav-item has-treeview">
+            <a href="ModuloDeInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
         Inventarios desarrollo
