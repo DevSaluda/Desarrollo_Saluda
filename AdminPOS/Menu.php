@@ -954,7 +954,7 @@
 ?>>
 <li class="nav-item has-treeview">
             <a href="ModuloDeInventarios" class="nav-link">
-            <i class="fa-solid fa-triangle-exclamation"></i>
+            <i class="fas fa-times-circle"></i>
               <p>
         Productos sin asignar
                
