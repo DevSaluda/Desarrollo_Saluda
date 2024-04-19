@@ -10,7 +10,9 @@ Productos_POS.Precio_Venta, Productos_POS.Precio_C, Productos_POS.Stock, Product
 Servicios_POS.Servicio_ID, Servicios_POS.Nom_Serv, Productos_POS.AgregadoEl 
 FROM Productos_POS 
 INNER JOIN Servicios_POS ON Servicios_POS.Servicio_ID = Productos_POS.Tipo_Servicio
-WHERE Productos_POS.Cod_Barra NOT IN (SELECT Cod_Barra FROM Stock_POS);";
+LEFT JOIN Stock_POS ON Productos_POS.Cod_Barra = Stock_POS.Cod_Barra
+WHERE Stock_POS.Cod_Barra IS NULL OR Stock_POS.Cod_Barra = '';
+";
  
 $result = mysqli_query($conn, $sql);
  
