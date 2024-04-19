@@ -4,14 +4,17 @@ include("db_connection.php");
 include "Consultas.php";
 
 
-$sql = "SELECT Productos_POS.ID_Prod_POS, Productos_POS.Nombre_Prod, Productos_POS.Cod_Barra, Productos_POS.Cod_Enfermeria, Productos_POS.Proveedor1, Productos_POS.Proveedor2,
-Productos_POS.ID_H_O_D, Productos_POS.Clave_adicional, Productos_POS.Clave_Levic, Productos_POS.FkMarca, Productos_POS.FkCategoria, Productos_POS.FkPresentacion, Productos_POS.Tipo,
-Productos_POS.Precio_Venta, Productos_POS.Precio_C, Productos_POS.Stock, Productos_POS.Saldo, Productos_POS.AgregadoPor, Productos_POS.Vendido, Productos_POS.Tipo_Servicio,
-Servicios_POS.Servicio_ID, Servicios_POS.Nom_Serv, Productos_POS.AgregadoEl 
-FROM Productos_POS 
-INNER JOIN Servicios_POS ON Servicios_POS.Servicio_ID = Productos_POS.Tipo_Servicio
-LEFT JOIN Stock_POS ON Productos_POS.Cod_Barra = Stock_POS.Cod_Barra
-WHERE Stock_POS.Cod_Barra IS NULL OR Stock_POS.Cod_Barra = '';
+$sql = "SELECT 
+p.ID_Prod_POS, p.Nombre_Prod, p.Cod_Barra, p.Cod_Enfermeria, p.Proveedor1, p.Proveedor2,
+p.ID_H_O_D, p.Clave_adicional, p.Clave_Levic, p.FkMarca, p.FkCategoria, p.FkPresentacion, p.Tipo,
+p.Precio_Venta, p.Precio_C, p.Stock, p.Saldo, p.AgregadoPor, p.Vendido, p.Tipo_Servicio,
+s.Servicio_ID, s.Nom_Serv, p.AgregadoEl 
+FROM 
+Productos_POS p
+INNER JOIN 
+Servicios_POS s ON s.Servicio_ID = p.Tipo_Servicio
+WHERE 
+NOT EXISTS (SELECT 1 FROM Stock_POS WHERE Cod_Barra = p.Cod_Barra);
 ";
  
 $result = mysqli_query($conn, $sql);
