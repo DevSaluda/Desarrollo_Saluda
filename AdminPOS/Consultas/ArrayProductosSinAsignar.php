@@ -39,20 +39,10 @@ while($fila=$result->fetch_assoc()){
    
     $data[$c]["Acciones"] = ["<button class='btn btn-primary btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-th-list fa-1x'></i></button><div class='dropdown-menu'>
     <a href=https://saludapos.com/AdminPOS/AsignacionSucursalesStock?idProd=".base64_encode($fila["ID_Prod_POS"])." class='btn-edit  dropdown-item' >Asignar en sucursales <i class='fas fa-clinic-medical'></i></a>
-       <a href=https://saludapos.com/AdminPOS/DistribucionSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." class='btn-VerDistribucion  dropdown-item' >Consultar distribución <i class='fas fa-table'></i> </a>
-       <a href=https://saludapos.com/AdminPOS/EdicionDatosProducto?editprod=".base64_encode($fila["ID_Prod_POS"])." class='btn-editProd dropdown-item' >Editar datos <i class='fas fa-pencil-alt'></i></a>
-    <a href=https://saludapos.com/AdminPOS/HistorialProducto?idProd=".base64_encode($fila["ID_Prod_POS"])." class='btn-History dropdown-item' >Ver movimientos <i class='fas fa-history'></i></a>
-    
-    <a href=https://saludapos.com/AdminPOS/MaximoYMinimo?Disid=".base64_encode($fila["ID_Prod_POS"])." class='btn-Delete dropdown-item' >Actualiza minimo y maximo <i class='fas fa-list-ol'></i></a>
-    <a href=https://saludapos.com/AdminPOS/CambiaProveedor?idProd=".base64_encode($fila["ID_Prod_POS"])." class='btn-Delete dropdown-item' >Cambio de proveedores <i class='fas fa-truck-loading'></i></a></div> "];
+       <a href=https://saludapos.com/AdminPOS/DistribucionSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." class='btn-VerDistribucion  dropdown-item' >Consultar distribución <i class='fas fa-table'></i> </a> "];
     
 
-    $data[$c]["AccionesEnfermeria"] = ["<button class='btn btn-info btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-th-list fa-1x'></i></button><div class='dropdown-menu'>
-   
-    <a href=https://saludapos.com/AdminPOS/AsignacionSucursalesStockEnfermeria?idProd=".base64_encode($fila["ID_Prod_POS"])." class='btn-edit  dropdown-item' >Asignar a enfermeria <i class='fas fa-user-nurse'></i></a>
-    <a href=https://saludapos.com/AdminPOS/CrearCodEnfermeria?editprod=".base64_encode($fila["ID_Prod_POS"])." class='btn-edit  dropdown-item' >Editar datos  <i class='fas fa-edit'></i></a>
-    } <a href=https://saludapos.com/AdminPOS/AsignaProcedimiento?editprod=".base64_encode($fila["ID_Prod_POS"])." class='btn-edit  dropdown-item' >Asignar procedimiento  <i class='fas fa-edit'></i></a>
-     "];
+    
     
     
     $c++; 
