@@ -191,7 +191,7 @@ $(document).ready( function () {
     
          
 <?php
-    $sqlSelect = "SELECT Inserciones_Excel_inventarios.Id_Insert, Inserciones_Excel_inventarios.Cod_Barra, Inserciones_Excel_inventarios.Nombre_prod, Inserciones_Excel_inventarios.Cantidad, Inserciones_Excel_inventarios.Sucursal, Inserciones_Excel_inventarios.Tipo_ajuste, Inserciones_Excel_inventarios.Agrego, Inserciones_Excel_inventarios.Fecha_registro,
+    $sqlSelect = "SELECT Inserciones_Excel_inventarios.Id_Insert, Inserciones_Excel_inventarios.Cod_Barra, Inserciones_Excel_inventarios.Nombre_prod, Inserciones_Excel_inventarios.Cantidad_Ajuste, Inserciones_Excel_inventarios.Sucursal, Inserciones_Excel_inventarios.Tipo_ajuste, Inserciones_Excel_inventarios.Agrego, Inserciones_Excel_inventarios.Fecha_registro,
     SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Inserciones_Excel_inventarios, SucursalesCorre WHERE Inserciones_Excel_inventarios.Sucursal = SucursalesCorre.ID_SucursalC";
     $result = mysqli_query($con, $sqlSelect);
 
