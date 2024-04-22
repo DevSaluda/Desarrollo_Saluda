@@ -139,7 +139,7 @@ $fcha = date("Y-m-d");
 </div>
 <script type="text/javascript">
 $(document).ready( function () {
-    $('#SignosVitales').DataTable({
+    $('#resultadosinventarios').DataTable({
       "order": [[ 0, "desc" ]],
       "stateSave":true,
       "language": {
@@ -197,9 +197,11 @@ $(document).ready( function () {
 
 if (mysqli_num_rows($result) > 0)
 {
-?>
+?>  <div class="text-center">
+<div class="table-responsive">
+  
         
-        <table id="SignosVitales" class="table">
+        <table id="resultadosinventarios" class="table">
         <thead>
             <tr>
                 <th>Cod_Barra</th>
@@ -235,7 +237,8 @@ if (mysqli_num_rows($result) > 0)
   </div>
     </div>
   </div>
-</div>
+  </div>
+</div></div></div>
 </div></div>
       
 
