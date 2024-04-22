@@ -157,8 +157,8 @@ include "Consultas/ConsultaCaja.php";
 <a id="DatosGenerales" class="d-block">
     <small>
         <?php
-        if ($ValorCaja !== null && isset($ValorCaja['EstadoSucursalInv'])) {
-            echo 'Modo de venta: <strong>' . $ValorCaja['EstadoSucursalInv'] . '</strong>';
+        if ($row !== null && isset($row['EstadoSucursalInv'])) {
+            echo 'Modo de venta: <strong>' . $row['EstadoSucursalInv'] . '</strong>';
         } else {
             echo ''; // o cualquier otro mensaje que desees mostrar
         }
