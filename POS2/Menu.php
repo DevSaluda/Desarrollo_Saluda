@@ -151,6 +151,20 @@ include "Consultas/ConsultaCaja.php";
         }
         ?>
     </small>
+    
+</a>
+
+<a id="DatosGenerales" class="d-block">
+    <small>
+        <?php
+        if ($ValorCaja !== null && isset($ValorCaja['EstadoSucursalInv'])) {
+            echo 'Modo de venta: <strong>' . $ValorCaja['EstadoSucursalInv'] . '</strong>';
+        } else {
+            echo ''; // o cualquier otro mensaje que desees mostrar
+        }
+        ?>
+    </small>
+    
 </a>
 
         </div>
