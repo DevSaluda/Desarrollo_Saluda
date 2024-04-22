@@ -1,17 +1,3 @@
-<script type="text/javascript">
-$(document).ready( function () {
-    $('#resultadosinventarios').DataTable({
-      "order": [[ 0, "desc" ]],
-      "stateSave":true,
-      "language": {
-        "url": "Componentes/Spanish.json"
-		}
-		
-	  } 
-	  
-	  );
-} );
-</script>
 <?php
 include('dbconect.php');
 require_once('vendor/php-excel-reader/excel_reader2.php');
@@ -151,7 +137,20 @@ $fcha = date("Y-m-d");
 
 
 </div>
-
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#resultadosinventarios').DataTable({
+      "order": [[ 0, "desc" ]],
+      "stateSave":true,
+      "language": {
+        "url": "Componentes/Spanish.json"
+		}
+		
+	  } 
+	  
+	  );
+} );
+</script>
 <!-- MOBILIARIO VIGENTE -->
 <div class="tab-pane fade show active" id="MobiVigente" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
