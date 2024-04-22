@@ -217,7 +217,7 @@ if (mysqli_num_rows($result) > 0)
         <tr>
             <td><?php  echo $row['Cod_Barra']; ?></td>
             <td><?php  echo $row['Nombre_prod']; ?></td>
-            <td><?php  echo $row['Cantidad']; ?></td>
+            <td><?php  echo $row['Cantidad_Ajuste']; ?></td>
             <td><?php  echo $row['Nombre_Sucursal']; ?></td>
             <td><?php  echo $row['Tipo_ajuste']; ?></td>
             <td><?php  echo $row['Agrego']; ?></td>
