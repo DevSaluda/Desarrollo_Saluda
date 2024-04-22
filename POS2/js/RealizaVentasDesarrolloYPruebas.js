@@ -46,7 +46,7 @@ $('document').ready(function ($) {
   
       $.ajax({
         type: 'POST',
-        url: "Consultas/VentasAlmomentoDesarrollo.php",
+        url: "Consultas/VentasAlmomentoDesarrolloYPruebas.php",
         data: $('#VentasAlmomento').serialize(),
         cache: false,
         beforeSend: function () {
