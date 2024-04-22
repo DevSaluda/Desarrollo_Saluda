@@ -136,9 +136,7 @@ $fcha = date("Y-m-d");
 
     </style>
 
-     <script>
-     
-     </script>
+    
 
 
 </head>
@@ -190,7 +188,7 @@ $fcha = date("Y-m-d");
     </div>
     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
     
-         
+    </div>   
 <?php
     $sqlSelect = "SELECT Inserciones_Excel_inventarios.Id_Insert, Inserciones_Excel_inventarios.Cod_Barra, Inserciones_Excel_inventarios.Nombre_prod, Inserciones_Excel_inventarios.Cantidad_Ajuste, Inserciones_Excel_inventarios.Sucursal, Inserciones_Excel_inventarios.Tipo_ajuste, Inserciones_Excel_inventarios.Agrego, Inserciones_Excel_inventarios.Fecha_registro,
     SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Inserciones_Excel_inventarios, SucursalesCorre WHERE Inserciones_Excel_inventarios.Sucursal = SucursalesCorre.ID_SucursalC";
@@ -237,7 +235,7 @@ if (mysqli_num_rows($result) > 0)
     </div>
   </div>
     </div>
-  </div>
+ 
   </div>
 </div></div></div>
 </div></div>
