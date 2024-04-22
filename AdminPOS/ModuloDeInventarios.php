@@ -141,15 +141,15 @@ $fcha = date("Y-m-d");
 $(document).ready( function () {
     $('#resultadosinventarios').DataTable({
       "order": [[ 0, "desc" ]],
-      "stateSave":true,
+      "paging": true, // Activar paginación
+      "lengthMenu": [10, 25, 50, 75, 100], // Opciones de longitud de página
+      "stateSave": true,
       "language": {
         "url": "Componentes/Spanish.json"
-		}
-		
-	  } 
-	  
-	  );
-} );
+      }
+    });
+});
+
 </script>
 <!-- MOBILIARIO VIGENTE -->
 <div class="tab-pane fade show active" id="MobiVigente" role="tabpanel" aria-labelledby="pills-profile-tab">
