@@ -140,7 +140,7 @@ $fcha = date("Y-m-d");
 <script type="text/javascript">
 $(document).ready( function () {
     $('#SignosVitales').DataTable({
-      
+      "order": [[ 0, "desc" ]],
       "stateSave":true,
       "language": {
         "url": "Componentes/Spanish.json"
@@ -199,7 +199,7 @@ if (mysqli_num_rows($result) > 0)
 {
 ?>
         
-        <table id="SignosVitales" class="table ">
+        <table id="SignosVitales" class="table">
         <thead>
             <tr>
                 <th>Cod_Barra</th>
