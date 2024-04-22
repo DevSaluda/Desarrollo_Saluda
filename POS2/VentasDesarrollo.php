@@ -208,7 +208,7 @@ $(".btn-aperturacaja").click(function() {
   
       
    
-     <script src="js/RealizaVentasDesarrollo.js"></script>
+     <script src="js/RealizaVentasDesarrolloYPruebas.js"></script>
      <script src="js/CapturaDataFacturacion.js"></script>
      <script src="js/BuscaDataPacientes.js"></script>
 
