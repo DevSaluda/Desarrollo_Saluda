@@ -36,35 +36,37 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     $Nombre_prod = mysqli_real_escape_string($con,$Row[1]);
                 }
 				
-                $Cantidad = "";
+                $Cantidad_Ajuste= "";
                 if(isset($Row[2])) {
-                    $Cantidad = mysqli_real_escape_string($con,$Row[2]);
+                    $Cantidad_Ajuste= mysqli_real_escape_string($con,$Row[2]);
                 }
-				
+                $Existencia = "";
+                if(isset($Row[2])) {
+                    $Cantidad_Ajuste= mysqli_real_escape_string($con,$Row[2]);
+                }
                 
                 if (!empty($Cod_Barra) || !empty($Nombre_prod) || !empty($Cantidad) || !empty($Sucursal)) {
-                    $query = "INSERT INTO Inserciones_Excel_inventarios (Cod_Barra, Nombre_prod, Cantidad, Sucursal,Tipo_ajuste, Agrego) values('".$Cod_Barra."','".$Nombre_prod."','".$Cantidad."','".$Sucursal."','".$Tipo_ajuste."','".$Agrego."')";
+                    $query = "INSERT INTO Inserciones_Excel_inventarios (Cod_Barra, Nombre_prod, Cantidad_Ajuste,ExistenciaReal, Sucursal,Tipo_ajuste, Agrego) values('".$Cod_Barra."','".$Nombre_prod."','".$Cantidad_Ajuste."','".$Existencia."','".$Sucursal."','".$Tipo_ajuste."','".$Agrego."')";
                     $resultados = mysqli_query($con, $query);
                 
-                    if (! empty($resultados)) {
-                        $type = "success";
-                        $message = "Excel importado correctamente";
-                    } else {
-                        $type = "error";
-                        $message = "Hubo un problema al importar registros";
-                    }
-                }
-             }
-        
-         }
-  }
-  else
-  { 
-        $type = "error";
-        $message = "El archivo enviado es invalido. Por favor vuelva a intentarlo";
+                    if (!empty($resultados)) {
+                      $type = "success";
+                      $message = "Excel importado correctamente";
+                  } else {
+                      $type = "error";
+                      $message = "Hubo un problema al importar registros";
+                  }
+              }
+          }
+      }
+      // Redirigir a una nueva página
+      header("Location:https://saludapos.com/AdminPOS/ResultadoInventarios");
+      exit(); // Asegura que el script se detenga después de la redirección
+  } else { 
+      $type = "error";
+      $message = "El archivo enviado es inválido. Por favor vuelva a intentarlo";
   }
 }
-
 include "Consultas/Consultas.php";
 
 $fcha = date("Y-m-d");
