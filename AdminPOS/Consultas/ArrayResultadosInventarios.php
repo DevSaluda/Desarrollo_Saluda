@@ -4,11 +4,8 @@ include("db_connection.php");
 include "Consultas.php";
 
 
-$sql = "SELECT Productos_POS.ID_Prod_POS,Productos_POS.Nombre_Prod,Productos_POS.Cod_Barra,Productos_POS.Cod_Enfermeria,Productos_POS.Proveedor1,Productos_POS.Proveedor2,
-Productos_POS.ID_H_O_D,Productos_POS.Clave_adicional,Productos_POS.Clave_Levic,Productos_POS.FkMarca,Productos_POS.FkCategoria,Productos_POS.FkPresentacion,Productos_POS.Tipo,
-Productos_POS.Precio_Venta,Productos_POS.Precio_C,Productos_POS.Stock,Productos_POS.Saldo,Productos_POS.AgregadoPor,Productos_POS.Vendido,Productos_POS.Tipo_Servicio,
-Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv,Productos_POS.AgregadoEl FROM Productos_POS,Servicios_POS where 
-Servicios_POS.Servicio_ID = Productos_POS.Tipo_Servicio  AND Productos_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
+$sql = "SELECT Inserciones_Excel_inventarios.Id_Insert, Inserciones_Excel_inventarios.Cod_Barra, Inserciones_Excel_inventarios.Nombre_prod, Inserciones_Excel_inventarios.Cantidad_Ajuste, Inserciones_Excel_inventarios.Sucursal, Inserciones_Excel_inventarios.Tipo_ajuste, Inserciones_Excel_inventarios.Agrego, Inserciones_Excel_inventarios.Fecha_registro,
+SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Inserciones_Excel_inventarios, SucursalesCorre WHERE Inserciones_Excel_inventarios.Sucursal = SucursalesCorre.ID_SucursalC";
  
 $result = mysqli_query($conn, $sql);
  
