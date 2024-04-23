@@ -241,7 +241,7 @@ tabla = $('#Productos').DataTable({
     <th>Cod Interno</th>
     <th>Cod Levic</th>
     <th>Cod Enfermeria</th>
-    <
+    
 
 
 </thead>
