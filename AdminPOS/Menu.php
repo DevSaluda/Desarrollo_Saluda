@@ -966,13 +966,22 @@
             <a href="ModuloDeInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
-        Inventarios desarrollo
+        Carga de inventarios
                
               </p>
             </a>
           
           </li>
-
+          <li class="nav-item has-treeview">
+            <a href="CuentaInventarios" class="nav-link">
+            <i class="fas fa-boxes"></i>
+              <p>
+        Conteo de productos
+               
+              </p>
+            </a>
+          
+          </li>
           <li class="nav-item has-treeview">
             <a href="GeneracionReportesInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
