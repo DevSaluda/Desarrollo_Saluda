@@ -30,13 +30,7 @@ include "Consultas/Consultas.php";
 
   
  
-  <!-- <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#PorCaducar" role="tab" aria-controls="pills-contact" aria-selected="false">Productos prontos a caducar</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-MoreVentas" role="tab" aria-controls="pills-contact" aria-selected="false">Mas vendidos</a>
-  </li> -->
-</ul>
+ 
 
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -46,9 +40,7 @@ include "Consultas/Consultas.php";
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
-  Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+ 
 </div>
 </div>
     
@@ -57,19 +49,7 @@ include "Consultas/Consultas.php";
 </div>
 
 
- <!--  <div class="tab-pane fade" id="PorCaducar" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Productos por caducar de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
  
-</div>
-
-</div>
-<div id="TableProdCaducaPronto"></div>
-  </div> -->
 
 </div>
 
