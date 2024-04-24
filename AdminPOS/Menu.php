@@ -974,7 +974,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="CuentaInventarios" class="nav-link">
-            <i class="fas fa-boxes"></i>
+            <i class="fa-solid fa-box-open"></i>
               <p>
         Conteo de productos
                
