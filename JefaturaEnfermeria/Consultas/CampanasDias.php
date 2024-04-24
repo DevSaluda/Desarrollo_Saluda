@@ -62,6 +62,9 @@ $query = $conn->query($sql1);
 </td>
 
      <td>
+		 <!-- Basic dropdown -->
+<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
+  aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
 
   
