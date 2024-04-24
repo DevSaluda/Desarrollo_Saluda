@@ -13,8 +13,8 @@ $(document).ready( function () {
 </script>
 <?php
 
-include "JefaturaEnfermeria\Consultas\db_connection.php";
-include "JefaturaEnfermeria/Consultas/Consultas.php";
+include "../Consultas/db_connection.php";
+include "../Consultas/Consultas.php";
 
 
 $user_id=null;
