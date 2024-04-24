@@ -144,9 +144,6 @@
       
             <li class="nav-header">Punto de venta <i class="fas fa-store"></i></li>
            
- 
-
-
 
 
 
@@ -178,7 +175,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="Desgloseticketscreditoenfermeria" class="nav-link">
+        <a href="TicketsCredito" class="nav-link">
           <i class="fas fa-print"></i>
           <p>
             Desglose Tickets crédito 

@@ -1,163 +1,159 @@
-<?php
-include "Consultas/Consultas.php";
+<?
+include "../Consultas/db_connection.php";
+include "../Consultas/Consultas.php";
+include "../Consultas/Sesion.php";
 
 
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+$fcha = date("Y-m-d");
+$user_id=null;
+$sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
+Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
+Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
+Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
+ FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND  Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
+ Ventas_POS.Fk_sucursal= '".$row['Fk_Sucursal']."'  AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
+ 
 
-  <title>Consulta de tickets | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
-
-<?php include "Header.php"?>
- <style>
-        .error {
-  color: red;
-  margin-left: 5px; 
-  
+$query = $conn->query($sql1);
+$Especialistas = null;
+if($query->num_rows>0){
+while ($r=$query->fetch_object()){
+  $Especialistas=$r;
+  break;
 }
 
-    </style>
-</head>
-<div id="loading-overlay">
-  <div class="loader"></div>
-  <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
-</div>
-<?php include_once ("Menu.php")?>
+  }
+  $user_id=null;
+  $sql2= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,Ventas_POS.Fecha_venta,
+  Ventas_POS.FormaDePago,
+  Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
+  Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
+  Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
+   FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
+   Ventas_POS.Fk_sucursal= '".$row['Fk_Sucursal']."'   AND Ventas_POS.Identificador_tipo=Servicios_POS.Servicio_ID";
+   $query = $conn->query($sql2);
+?>
 
 
 
-<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #0057b8 !important; color: white;">
-  Desglose de tickets  <?php echo $row['Nombre_Sucursal']?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+<? if($Especialistas!=null):?>
+    <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">N° Ticket</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
   </div>
-  
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroPorSucursalesIngresos" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
-</div>
-</div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Folio_Ticket; ?>">
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Sucursal </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Nombre_Sucursal; ?>">
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Vendedor</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas-> AgregadoPor; ?>">
+    </div>
+    </div>
+   </div>
+
+<?php if($query->num_rows>0):?>
+  <div class="text-center">
+  <div class="table-responsive">
+  <table  id="HistorialCajas" class="table table-hover">
+<thead>
+
+<th>Servicio</th>
+<th>Cod barra</th>
+<th>Prod</th>
+<th>Lote</th>
+<th>Cantidad</th>
+<th>P.U</th>
+<th>Descuento</th>
+<th>Importe</th>
+
+<th>Fecha | Hora</th>
+    <th>Vendedor</th>
     
-<div id="TableVentasDelDia"></div>
-
-</div>
 
 
+
+</thead>
+<?php while ($Tickets=$query->fetch_array()):?>
+<tr>
+
+<td><?php echo $Tickets["Nom_Serv"]; ?></td>
     
-</div></div>
-
-
-
-
-
+<td><?php echo $Tickets["Cod_Barra"]; ?></td>
+<td><?php echo $Tickets["Nombre_Prod"]; ?></td>
+<td><?php echo $Tickets["Lote"]; ?></td>
+<td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
+<td><?php echo $Tickets["Total_Venta"]; ?></td>
+<td><?php echo $Tickets["DescuentoAplicado"]; ?> %</td>
+<td><?php echo $Tickets["Importe"]; ?></td>
+    <td><?php echo fechaCastellano($Tickets["AgregadoEl"]); ?> <br>
+    <?php echo date("g:i a",strtotime($Tickets["AgregadoEl"])); ?>
+  </td>
+  <td><?php echo $Tickets["AgregadoPor"]; ?></button></td>
      
+      
+   
+</tr>
+<?php endwhile;?>
+</table>
+</div>
+</div>
+
+<div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Total de venta</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Total_VentaG; ?>">
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">El cliente pago </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->CantidadPago; ?>">
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Cambio</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Cambio; ?>">
+    </div>
+    </div>
+    <div class="col">
+    <label for="exampleFormControlInput1">Forma de pago</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
+  </div>
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->FormaDePago; ?>">
+    </div>
+    </div>
+   </div>
+<?php else:?>
+  <p class="alert alert-warning">No hay resultados</p>
+<?php endif;?>
+
   
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
- 
-  <!-- Main Footer -->
-<?php
-
-  include ("Modales/Error.php");
-  include ("Modales/Exito.php");
-  include ("Modales/ExitoActualiza.php");
-  include ("Modales/FiltroDeIngresosSucursales.php");
-  include ("footer.php")?>
-
-<!-- ./wrapper -->
-
-
-<script src="js/ControlTicketsVentas.js"></script>
-<script src="js/RealizaCambioDeSucursalPorFiltroDeBusqueda.js"></script>
-
-
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-
-
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
-<script>
-  $(document).ready(function() {
-    // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
-    $(document).on("click", ".btn-desglose", function() {
-        var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/DesgloseTicketCreditoEnfermeria.php", { id: id }, function(data) {
-            $("#FormCancelacion").html(data);
-            $("#TituloCancelacion").html("Desglose del ticket");
-            $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-primary");
-        });
-        $('#Cancelacionmodal').modal('show');
-    });
-
-    // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
-    $(document).on("click", ".btn-Reimpresion", function() {
-        var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/ReimpresionTicketVentaCreditoEnfermeria.php", { id: id }, function(data) {
-            $("#FormCancelacion").html(data);
-            $("#TituloCancelacion").html("Reimpresion de tickets");
-            $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-success");
-        });
-        $('#Cancelacionmodal').modal('show');
-    });
-
-
-     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
-     $(document).on("click", ".btn-EditarData", function() {
-        var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/EdicionTicketVentaCreditoEnfermeria.php", { id: id }, function(data) {
-            $("#FormCancelacion").html(data);
-            $("#TituloCancelacion").html("Edicion de datos de ticket");
-            $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-success");
-        });
-        $('#Cancelacionmodal').modal('show');
-    });
-});
-
-</script>
-<!-- PAGE PLUGINS -->
-<div class="modal fade" id="Cancelacionmodal" tabindex="-2" role="dialog" style="overflow-y: scroll;" aria-labelledby="CancelacionmodalLabel" aria-hidden="true">
-  <div id="Di3" class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloCancelacion">Confirmacion de ticket</p>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-       
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="FormCancelacion"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-</body>
-</html>
-<?php
+<? else:?>
+  <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
+<? endif;?>
+<?
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
