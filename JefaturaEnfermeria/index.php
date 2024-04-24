@@ -57,7 +57,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $TomaSignosVitales['SignosVitales']?></h3>
+                <h3><?php echo $TotalSignosVitales['SignosVitales']?></h3>
 
                 <p>Registros de <br> signos vitales</p>
               </div>
