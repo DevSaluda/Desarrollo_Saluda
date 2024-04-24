@@ -61,19 +61,6 @@ $query = $conn->query($sql1);
 	<?php echo date('h:i A', strtotime($Especialista["Horario_Disponibilidad"])); ?>
 </td>
 
-<td>
-		 <!-- Basic dropdown -->
-<button class="btn btn-info dropdown-toggle " type="button" data-toggle="dropdown"
-  aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i></button>
-
-<div class="dropdown-menu">
-    <div class="text-center">
-<a class="dropdown-item" >Cita</a>
-
-</div>
-</div>
-<!-- Basic dropdown -->
-	 </td>
      <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
