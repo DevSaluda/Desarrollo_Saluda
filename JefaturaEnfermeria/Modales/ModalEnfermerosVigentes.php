@@ -14,7 +14,7 @@ $(document).ready( function () {
 <?php
 
 
-include "../Consultas/Consultas.php";
+
 
 
 $user_id=null;
