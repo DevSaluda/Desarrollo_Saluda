@@ -3,8 +3,7 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
-include "mcript.php";
+
 
 $sql = "SELECT AjustesDeInventarios.Folio_Ingreso,AjustesDeInventarios.ID_Prod_POS,AjustesDeInventarios.Fk_sucursal,AjustesDeInventarios.Existencias_R, 
 AjustesDeInventarios.ExistenciaPrev,AjustesDeInventarios.Recibido,AjustesDeInventarios.AgregadoPor,AjustesDeInventarios.AgregadoEl, 
