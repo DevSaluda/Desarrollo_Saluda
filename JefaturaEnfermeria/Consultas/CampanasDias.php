@@ -18,8 +18,7 @@ $sql1="SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,AgendaCitas_Es
 AgendaCitas_EspecialistasExt.Fk_Especialista,AgendaCitas_EspecialistasExt.Fk_Sucursal,
 AgendaCitas_EspecialistasExt.Fecha,AgendaCitas_EspecialistasExt.Hora,AgendaCitas_EspecialistasExt.Nombre_Paciente,
 AgendaCitas_EspecialistasExt.Tipo_Consulta,AgendaCitas_EspecialistasExt.Estatus_cita,
-AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ColorEstatusCita,AgendaCitas_EspecialistasExt.Estatus_Seguimiento,
-AgendaCitas_EspecialistasExt.Color_Seguimiento,AgendaCitas_EspecialistasExt.ID_H_O_D,AgendaCitas_EspecialistasExt.AgendadoPor,AgendaCitas_EspecialistasExt.Sistema,AgendaCitas_EspecialistasExt.Folio_Paciente,
+AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ID_H_O_D,AgendaCitas_EspecialistasExt.AgendadoPor,AgendaCitas_EspecialistasExt.Sistema,
 Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,EspecialistasV2.ID_Especialista,EspecialistasV2.Nombre_Apellidos,
 Sucursales_CampañasV2.ID_SucursalC ,Sucursales_CampañasV2.Nombre_Sucursal,Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad,
 Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad
@@ -70,10 +69,7 @@ $query = $conn->query($sql1);
 <div class="dropdown-menu">
     <div class="text-center">
 <a class="dropdown-item" >Cita</a>
-<button class="btn btn-default btn-sm" style="<?php echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button> 
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" >Pago</a>
-<button class="btn btn-default btn-sm" style="<?php echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button>
+
 </div>
 </div>
 <!-- Basic dropdown -->
