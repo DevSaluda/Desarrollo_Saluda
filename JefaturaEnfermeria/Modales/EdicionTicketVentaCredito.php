@@ -136,9 +136,9 @@ while ($r=$query->fetch_object()){
 <?php endif;?>
 
   
-<?php else:?>
-  <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
-<?php endif;?>
+<? else:?>
+  <p class="alert alert-danger">404 No se encuentra  <br>El ticket no corresponde a un credito, te sugerimos revisar el area de tickets  </p>
+<? endif;?>
 <script src="js/ActualizaLainfoDelTicket.js"></script>
 <?php
 

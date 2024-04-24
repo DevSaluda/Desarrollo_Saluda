@@ -163,7 +163,7 @@ while ($r=$query->fetch_object()){
 
   
 <?php else:?>
-  <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
+  <p class="alert alert-danger">404 No se encuentra  <br>El ticket no corresponde a un credito, te sugerimos revisar el area de tickets  </p>
 <?php endif;?>
 <?php
 
