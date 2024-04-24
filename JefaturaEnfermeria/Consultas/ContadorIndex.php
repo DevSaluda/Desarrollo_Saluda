@@ -19,7 +19,7 @@ $TotalGanancia = mysqli_fetch_assoc($resultset);
 
 $sql ="SELECT Estatus,ID_SignoV,COUNT(*) as SignosVitales FROM Signos_VitalesV2 WHERE Fecha_Visita =CURRENT_DATE;";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TotalPacientesdias = mysqli_fetch_assoc($resultset);
+$TotalSignosVitales = mysqli_fetch_assoc($resultset);
 
 
 $sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as Farmaceuticos FROM `PersonalPOS` WHERE Fk_Usuario = 7 AND Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'";
