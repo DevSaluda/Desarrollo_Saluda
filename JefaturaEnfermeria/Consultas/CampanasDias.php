@@ -48,8 +48,6 @@ $query = $conn->query($sql1);
     <th>Estatus</th>
     <th>Acciones</th>
 
-
-
 </thead>
 <?php while ($Especialista=$query->fetch_array()):?>
 <tr>
