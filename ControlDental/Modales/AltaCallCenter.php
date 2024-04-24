@@ -18,7 +18,8 @@ if(!empty($_POST['name']) || !empty($_FILES['file']['name'])){
         }
     }
 
-
+    
+$Nombre_Apellidos=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['nombres']))));
 $Fk_Usuario=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['usuario']))));
 $Fecha_Nacimiento=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['fecha']))));
 $Correo_Electronico=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['correo']))));
