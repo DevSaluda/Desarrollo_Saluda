@@ -23,7 +23,7 @@ Personal_Enfermeria.ID_H_O_D,Personal_Enfermeria.Estatus,Personal_Enfermeria.Col
 Personal_Enfermeria.Correo_Electronico,Personal_Enfermeria. Estatus,
 Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
 FROM Personal_Enfermeria,Roles_Puestos,SucursalesCorre where Personal_Enfermeria.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-and Personal_Enfermeria.Fk_Usuario = Roles_Puestos.ID_rol AND Personal_Enfermeria.Estatus='Vigente'  AND Personal_Enfermeria.Fk_Usuario ='4' and Personal_Enfermeria.ID_H_O_D ='".$row['ID_H_O_D']."'";  
+and Personal_Enfermeria.Fk_Usuario = Roles_Puestos.ID_rol AND Personal_Enfermeria.Estatus='Vigente'  AND Personal_Enfermeria.Fk_Usuario ='4''";  
 $query = $conn->query($sql1);
 ?>
 
