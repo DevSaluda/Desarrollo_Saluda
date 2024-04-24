@@ -51,7 +51,7 @@ include "Consultas/ContadorIndex.php";
             </div>
           </div>  
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+         
     <!-- Tarjeta de pequeño tamaño -->
     <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -67,11 +67,9 @@ include "Consultas/ContadorIndex.php";
                 <a  data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div> 
-</div>
 
-<div>
 
-</div>
+
 <div class="card text-center">
   <div class="card-header" style="background-color: #33b5e5 !important;color: white;">
    Citas con especialista del dia , <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?> 
