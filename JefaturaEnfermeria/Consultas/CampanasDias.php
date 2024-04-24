@@ -25,13 +25,13 @@ Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialida
 Sucursales_CampañasV2.ID_SucursalC ,Sucursales_CampañasV2.Nombre_Sucursal,Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad,
 Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad, Costos_EspecialistasV2.ID_Costo_Esp,Costos_EspecialistasV2.Costo_Especialista
 FROM AgendaCitas_EspecialistasExt,Especialidades_Express,EspecialistasV2,Sucursales_CampañasV2,Fechas_EspecialistasExt,Horarios_Citas_Ext,
-Costos_EspecialistasV2 WHEREc
+Costos_EspecialistasV2 WHERE
 AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista =EspecialistasV2.ID_Especialista AND
 AgendaCitas_EspecialistasExt.Fk_Sucursal =Sucursales_CampañasV2.ID_SucursalC AND
 AgendaCitas_EspecialistasExt.Fk_Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp AND
 AgendaCitas_EspecialistasExt.Fk_Hora = Horarios_Citas_Ext.ID_Horario AND
 AgendaCitas_EspecialistasExt.Fk_Costo =  Costos_EspecialistasV2.ID_Costo_Esp AND 
- Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY AND
+Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY AND
 AgendaCitas_EspecialistasExt.Fk_Sucursal ='".$row['Fk_Sucursal']."' AND
 AgendaCitas_EspecialistasExt.ID_H_O_D='".$row['ID_H_O_D']."'  order by Horarios_Citas_Ext.Horario_Disponibilidad ASC";
 
@@ -51,10 +51,6 @@ $query = $conn->query($sql1);
     <th>Fecha | Hora</th>
     <th>Estatus</th>
     <th>Acciones</th>
-
-	
-
-	
 
 
 

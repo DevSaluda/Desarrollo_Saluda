@@ -31,7 +31,6 @@ $query = $conn->query($sql1);
        <!--Header-->
        <div class="modal-header">
          <p class="heading lead">Farmacéuticos Vigentes</p>
-
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-="true" class="white-text">&times;</span>
          </button>
