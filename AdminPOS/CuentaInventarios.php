@@ -252,7 +252,7 @@ include("Consultas/db_connection.php");
 
       <div class="col-md-9">
 
-      <div class="card card-gray shadow" style="width: 103%">
+      <
 
           <div class="card-body p-3">
             
@@ -260,7 +260,7 @@ include("Consultas/db_connection.php");
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="row">
                   <!-- INPUT PARA INGRESO DEL CODIGO DE BARRAS O DESCRIPCION DEL PRODUCTO -->
-                  
+                  <div class="col-md-12 mb-3">
 
                     <div class="form-group mb-2">
                       <div class="row">
