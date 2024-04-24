@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "somosgr1_SHWEB";
-$password = "yH.0a-v?T*1R";
-$dbname = "somosgr1_Sistema_Hospitalario";
+$username = "u155356178_SaludDevCenter";
+$password = "uE;bAISz;*6c|I4PvEnfSys324\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>";
+$dbname = "u155356178_saludapos";
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
