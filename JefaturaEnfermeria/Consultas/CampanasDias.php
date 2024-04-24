@@ -14,26 +14,24 @@ include "Consultas.php";
 include "../js/Fecha.php";
 
 $user_id=null;
-$sql1="SELECT AgendaCitas_EspecialistasV2.ID_Agenda_Especialista,AgendaCitas_EspecialistasV2.Fk_Especialidad,
-AgendaCitas_EspecialistasV2.Fk_Especialista,AgendaCitas_EspecialistasV2.Fk_Sucursal,
-AgendaCitas_EspecialistasV2.Fk_Fecha,AgendaCitas_EspecialistasV2.Fk_Hora,AgendaCitas_EspecialistasV2.Nombre_Paciente,
-AgendaCitas_EspecialistasV2.Tipo_Consulta,
-AgendaCitas_EspecialistasV2.Estatus_pago,AgendaCitas_EspecialistasV2.Color_Pago,AgendaCitas_EspecialistasV2.Estatus_cita,
-AgendaCitas_EspecialistasV2.Observaciones,AgendaCitas_EspecialistasV2.ColorEstatusCita,AgendaCitas_EspecialistasV2.Estatus_Seguimiento,
-AgendaCitas_EspecialistasV2.Color_Seguimiento,AgendaCitas_EspecialistasV2.ID_H_O_D,AgendaCitas_EspecialistasV2.AgendadoPor,AgendaCitas_EspecialistasV2.Sistema,AgendaCitas_EspecialistasV2.Folio_Paciente,
-EspecialidadesV2.ID_Especialidad,EspecialidadesV2.Nombre_Especialidad,EspecialistasV2.ID_Especialista,EspecialistasV2.Nombre_Apellidos,
-Sucursales_CampañasV2.ID_SucursalC ,Sucursales_CampañasV2.Nombre_Sucursal,Fechas_EspecialistasV2.ID_Fecha_Esp,Fechas_EspecialistasV2.Fecha_Disponibilidad,
-Horarios_Citas_especialistasV2.ID_Horario,Horarios_Citas_especialistasV2.Horario_Disponibilidad, Costos_EspecialistasV2.ID_Costo_Esp,Costos_EspecialistasV2.Costo_Especialista
-FROM AgendaCitas_EspecialistasV2,EspecialidadesV2,EspecialistasV2,Sucursales_CampañasV2,Fechas_EspecialistasV2,Horarios_Citas_especialistasV2,
-Costos_EspecialistasV2 WHERE
-AgendaCitas_EspecialistasV2.Fk_Especialidad = EspecialidadesV2.ID_Especialidad AND AgendaCitas_EspecialistasV2.Fk_Especialista =EspecialistasV2.ID_Especialista AND
-AgendaCitas_EspecialistasV2.Fk_Sucursal =Sucursales_CampañasV2.ID_SucursalC AND
-AgendaCitas_EspecialistasV2.Fk_Fecha = Fechas_EspecialistasV2.ID_Fecha_Esp AND
-AgendaCitas_EspecialistasV2.Fk_Hora = Horarios_Citas_especialistasV2.ID_Horario AND
-AgendaCitas_EspecialistasV2.Fk_Costo =  Costos_EspecialistasV2.ID_Costo_Esp AND 
- Fechas_EspecialistasV2.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY AND
-AgendaCitas_EspecialistasV2.Fk_Sucursal ='".$row['Fk_Sucursal']."' AND
-AgendaCitas_EspecialistasV2.ID_H_O_D='".$row['ID_H_O_D']."'  order by Horarios_Citas_especialistasV2.Horario_Disponibilidad ASC";
+$sql1="SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,AgendaCitas_EspecialistasExt.Fk_Especialidad,
+AgendaCitas_EspecialistasExt.Fk_Especialista,AgendaCitas_EspecialistasExt.Fk_Sucursal,
+AgendaCitas_EspecialistasExt.Fecha,AgendaCitas_EspecialistasExt.Hora,AgendaCitas_EspecialistasExt.Nombre_Paciente,
+AgendaCitas_EspecialistasExt.Tipo_Consulta,
+AgendaCitas_EspecialistasExt.Estatus_pago,AgendaCitas_EspecialistasExt.Color_Pago,AgendaCitas_EspecialistasExt.Estatus_cita,
+AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ColorEstatusCita,AgendaCitas_EspecialistasExt.Estatus_Seguimiento,
+AgendaCitas_EspecialistasExt.Color_Seguimiento,AgendaCitas_EspecialistasExt.ID_H_O_D,AgendaCitas_EspecialistasExt.AgendadoPor,AgendaCitas_EspecialistasExt.Sistema,AgendaCitas_EspecialistasExt.Folio_Paciente,
+Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,EspecialistasV2.ID_Especialista,EspecialistasV2.Nombre_Apellidos,
+Sucursales_CampañasV2.ID_SucursalC ,Sucursales_CampañasV2.Nombre_Sucursal,Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad,
+Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad
+FROM AgendaCitas_EspecialistasExt,Especialidades_Express,EspecialistasV2,Sucursales_CampañasV2,Fechas_EspecialistasExt,Horarios_Citas_Ext WHERE
+AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista =EspecialistasV2.ID_Especialista AND
+AgendaCitas_EspecialistasExt.Fk_Sucursal =Sucursales_CampañasV2.ID_SucursalC AND
+AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp AND
+AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario AND
+Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 1 DAY AND
+AgendaCitas_EspecialistasExt.Fk_Sucursal ='".$row['Fk_Sucursal']."' AND
+AgendaCitas_EspecialistasExt.ID_H_O_D='".$row['ID_H_O_D']."'  order by Horarios_Citas_Ext.Horario_Disponibilidad ASC";
 
 $query = $conn->query($sql1);
 ?>
@@ -51,10 +49,6 @@ $query = $conn->query($sql1);
     <th>Fecha | Hora</th>
     <th>Estatus</th>
     <th>Acciones</th>
-
-	
-
-	
 
 
 
