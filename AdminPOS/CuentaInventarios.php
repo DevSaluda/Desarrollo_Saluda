@@ -252,7 +252,7 @@ include("Consultas/db_connection.php");
 
       <div class="col-md-9">
 
-      <
+      <div class="card card-gray shadow" style="width: 103%">
 
           <div class="card-body p-3">
             
