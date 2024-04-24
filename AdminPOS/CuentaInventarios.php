@@ -304,17 +304,15 @@ include("Consultas/db_connection.php");
                   </div>
 
                   <!-- ETIQUETA QUE MUESTRA LA SUMA TOTAL DE LOS PRODUCTOS AGREGADOS AL LISTADO -->
-                  <div class="col-md-7 mb-3 rounded-3" style="background-color:#C80096;color: white;text-align:center;border:1px solid #C80096;">
-                    <h2 class="fw-bold m-0">MXN <span class="fw-bold" id="totalVenta"></span></h2>
-                  </div>
+               
 
                   <!-- BOTONES PARA VACIAR LISTADO Y COMPLETAR LA VENTA -->
-                  <div class="col-md-5 text-right">
+                  <!-- <div class="col-md-5 text-right">
 
                     <button class="btn btn-danger btn-sm" id="btnVaciarListado">
                       <i class="far fa-trash-alt"></i> Vaciar Listado
                     </button>
-                  </div>
+                  </div> -->
 
                   <!-- LISTADO QUE CONTIENE LOS PRODUCTOS QUE SE VAN AGREGANDO PARA LA COMPRA -->
                   <div class="table-responsive">
