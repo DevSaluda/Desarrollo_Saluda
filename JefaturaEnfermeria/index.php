@@ -57,7 +57,7 @@ include "Consultas/ContadorIndex.php";
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $TomaSignosVitales['SignosVitales']?></h3>
+                <h3><?php echo $TotalSignosVitales['SignosVitales']?></h3>
 
                 <p>Registros de <br> signos vitales</p>
               </div>
@@ -69,42 +69,9 @@ include "Consultas/ContadorIndex.php";
           </div> 
 </div>
 
-          <!-- ./col -->
-        
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
+<div>
 
-                <p>Registros de  <br> procedimientos</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-procedures"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#ConsulProcedimientos" class="fas fa-arrow-circle-right">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div> 
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-    <!-- Tarjeta para mostrar registros de procedimientos -->
-    <div class="card card-danger">
-        <div class="card-body">
-            <!-- Título de la tarjeta -->
-            <h5 class="card-title">Registros de Incidencias</h5>
-        </div>
-        <div class="card-footer">
-            <!-- Botón para consultar procedimientos -->
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProcedimientos">
-                Consultar <i class="fas fa-arrow-circle-right ml-1"></i>
-            </a>
-        </div>
-    </div>
 </div>
-
-         
-    
 <div class="card text-center">
   <div class="card-header" style="background-color: #33b5e5 !important;color: white;">
    Citas con especialista del dia , <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?> 
@@ -114,10 +81,12 @@ include "Consultas/ContadorIndex.php";
 <div class="row">
 <div class="col-md-12">
     
+
 <div id="TablaCampanas"></div>
 
 
 </div>
+
 </div>
 </div>
             
@@ -148,8 +117,7 @@ include ("Modales/ModalSignosVitales.php");
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="js/ControlCampanasDias.js"></script>
-<script src="js/Logs.js"></script>
-<script src="js/CalculaIMC.js"></script>
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
