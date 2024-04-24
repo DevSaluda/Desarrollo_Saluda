@@ -69,9 +69,9 @@ include "Consultas/ContadorIndex.php";
           </div> 
 </div>
 
+<div>
 
-         
-    
+</div>
 <div class="card text-center">
   <div class="card-header" style="background-color: #33b5e5 !important;color: white;">
    Citas con especialista del dia , <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?> 
@@ -81,10 +81,12 @@ include "Consultas/ContadorIndex.php";
 <div class="row">
 <div class="col-md-12">
     
+
 <div id="TablaCampanas"></div>
 
 
 </div>
+
 </div>
 </div>
             
