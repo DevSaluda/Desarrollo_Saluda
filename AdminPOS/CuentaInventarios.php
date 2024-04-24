@@ -3,17 +3,6 @@ include "Consultas/Consultas.php";
 
 include("Consultas/db_connection.php");
 
-// Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
-$primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
-
-
-// Concatenar las primeras 3 letras con el valor de $totalmonto
-$resultado_concatenado = $primeras_tres_letras . $totalmonto;
-
-// Convertir el resultado a mayúsculas
-$resultado_en_mayusculas = strtoupper($resultado_concatenado);
-
-// Imprimir el resultado en mayúsculas
 
 
 
@@ -1068,24 +1057,19 @@ $('#abrirSweetAlertBtn').on('click', function() {
 <?php
 
 include("Modales/Error.php");
-include("Modales/Exito.php");
 
-include("Modales/AdvierteDeCaja.php");
-
-include("Modales/ReimpresionTicketsVistaVentas.php");
-include("Modales/ExitoActualiza.php");
 
 include("footer.php") ?>
 
 
   <!-- ./wrapper -->
-  <script src="js/ControlDeTicketsVentas.js"></script>
+
 
 
 
   <script src="js/FinalizaLasVentas.js"></script>
   
-  <script src="js/BuscaDataPacientes.js"></script>
+
   <script src="js/BusquedaProductos.js"></script>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
