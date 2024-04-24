@@ -1,7 +1,7 @@
 <?
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
-include "../Consultas/Sesion.php";
+
 
 
 $fcha = date("Y-m-d");
@@ -140,7 +140,7 @@ while ($r=$query->fetch_object()){
   <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
 <? endif;?>
 <script src="js/ActualizaLainfoDelTicket.js"></script>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
