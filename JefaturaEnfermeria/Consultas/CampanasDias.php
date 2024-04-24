@@ -62,6 +62,9 @@ $query = $conn->query($sql1);
 </td>
 
      <td>
+		 <!-- Basic dropdown -->
+<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
+  aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
 
 <div class="dropdown-menu">
 <a data-id="<?php echo $Especialista["ID_Agenda_Especialista"];?>" class="btn-edit1 dropdown-item" >Contacto a paciente <i class="fas fa-id-card-alt"></i></a>
