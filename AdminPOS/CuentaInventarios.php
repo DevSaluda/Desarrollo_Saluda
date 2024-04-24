@@ -15,7 +15,7 @@ include("Consultas/db_connection.php");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>VENTAS | <?php echo $row['ID_H_O_D'] ?> </title>
+  <title>CONTEO DE PRODCTOS <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php" ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -255,23 +255,12 @@ include("Consultas/db_connection.php");
       <div class="card card-gray shadow" style="width: 103%">
 
           <div class="card-body p-3">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="font-weight: 600;">Ventas</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" style="font-weight: 600">Reimpresion de tickets </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab2" data-toggle="pill" href="#pills-contact2" role="tab" aria-controls="pills-contact2" aria-selected="false" style="font-weight: 600">Búsqueda de productos</a>
-              </li>
-            </ul>
+            
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="row">
                   <!-- INPUT PARA INGRESO DEL CODIGO DE BARRAS O DESCRIPCION DEL PRODUCTO -->
-                  <div class="col-md-12 mb-3">
+                  
 
                     <div class="form-group mb-2">
                       <div class="row">
@@ -279,36 +268,26 @@ include("Consultas/db_connection.php");
 
                         <div class="col">
 
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Caja</label>
+                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Sucursal</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
                             </div>
-                            <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo $ValorCaja['Valor_Total_Caja'] ?>">
+                            <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo $row['Nombre_Sucursal'] ?>">
                            
                           </div>
                         </div>
 
                         <div class="col">
 
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Turno</label>
+                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Tipo de ajuste</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
-                            <input type="text" class="form-control "  style="font-size: 0.75rem !important;" readonly value="<?php echo $ValorCaja['Turno'] ?>">
+                            <input type="text" class="form-control "  style="font-size: 0.75rem !important;" readonly value="">
 
                           </div>
                         </div>
-                        <div class="col">
-
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;"># de ticket</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-receipt"></i></span>
-                            </div>
-                            <input type="text" class="form-control "  style="font-size: 0.75rem !important;" value="<?php echo $resultado_en_mayusculas; ?>" readonly>
-
-                          </div>
-                        </div>
-
+                        
 
 
                       </div>
