@@ -142,117 +142,8 @@
               </p>
             </a>
       
-         
             <li class="nav-header">Punto de venta <i class="fas fa-store"></i></li>
-            <div style="<?php
-  switch ($row['Permisos']) {
-    case 10:
-      echo "display:none;";
-      break;
-    case 0:
-      echo "display:block;";
-      break;
-  }
-?>">
-  <li class="nav-item">
-    <a href="https://saludapos.com/JefaturaEnfermeria/RegistrosEnergiaElectrica" class="nav-link">
-      <i class="fas fa-lightbulb"></i>
-      <p>
-        Control de energía
-      </p>
-    </a>
-  </li>
-</div>
-
-
-          <div style="
-  <?php
-    switch ($row['Permisos']) {
-      case 10:
-        echo "display:none;";
-        break;
-      case 0:
-        echo "display:block;";
-        break;
-      default:
-                echo "";
-        break;
-    }
-  ?>
-">
-  <li class="nav-item">
-    <a href="https://saludapos.com/JefaturaEnfermeria/RegistroDeCombustible" class="nav-link">
-      <i class="fas fa-gas-pump"></i>
-      <p>
-        Control de combustible
-      </p>
-    </a>
-  </li>
-</div>
-
-
-<div style="<?php switch ($row['Permisos']) {
-    case 10:
-        echo 'display:none;';
-        break;
-    case 0:
-        echo 'display:block;';
-        break;
-    default:
-        echo ''; // Puedes cambiar esto según lo que desees hacer cuando no se cumple ninguna de las condiciones anteriores
-} ?>">
-    <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-            <i class="fas fa-cash-register"></i>
-            <p>
-                Caja
-                <i class="fas fa-angle-left right"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="AdministraCaja" class="nav-link">
-                    <i class="fas fa-dot-circle"></i>
-                    <p>
-                        Administrar Caja
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="HistorialCaja" class="nav-link">
-                    <i class="fas fa-dot-circle"></i>
-                    <p>
-                        Historial Caja
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="ReimpresionCortes" class="nav-link">
-                    <i class="fas fa-dot-circle"></i>
-                    <p>
-                        Cortes de caja
-                    </p>
-                </a>
-            </li>
-            <!-- <li class="nav-item">
-                <a href="Totalesdeventas" class="nav-link">
-                    <i class="fas fa-dot-circle"></i>
-                    <p>
-                        Totales
-                    </p>
-                </a>
-            </li> -->
-            <!--<li class="nav-item">
-                <a href="ControlGastos" class="nav-link">
-                    <i class="fas fa-dot-circle"></i>
-                    <p>
-                        Otros gastos
-                    </p>
-                </a>
-            </li>-->
-        </ul>
-    </li>
-</div>
+           
 
 
 
@@ -284,7 +175,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="Desglosaticketscreditoenfermeria" class="nav-link">
+        <a href="TicketsCredito" class="nav-link">
           <i class="fas fa-print"></i>
           <p>
             Desglose Tickets crédito 
