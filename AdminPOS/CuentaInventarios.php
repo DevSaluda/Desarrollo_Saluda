@@ -1,8 +1,6 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/ConsultaCaja.php";
-include "Consultas/SumadeFolioTicketsNuevo.php";
+
 include("Consultas/db_connection.php");
 
 // Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
