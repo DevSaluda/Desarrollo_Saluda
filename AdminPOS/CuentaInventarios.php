@@ -1041,11 +1041,6 @@ include("footer.php") ?>
 
 
 
-
-  <script src="js/FinalizaLasVentas.js"></script>
-  
-
-  <script src="js/BusquedaProductos.js"></script>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- overlayScrollbars -->
