@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 include "../Consultas/Sesion.php";
@@ -35,7 +35,7 @@ while ($r=$query->fetch_object()){
 
 
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
   <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/ReimpresionTicketVentas.php/"
@@ -162,9 +162,9 @@ while ($r=$query->fetch_object()){
 <?php endif;?>
 
   
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
-<? endif;?>
+<?php endif;?>
 <?
 
 function fechaCastellano ($fecha) {

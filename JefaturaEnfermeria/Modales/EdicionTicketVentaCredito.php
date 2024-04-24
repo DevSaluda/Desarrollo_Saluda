@@ -1,4 +1,4 @@
-<?php
+<?
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 include "../Consultas/Sesion.php";
@@ -6,7 +6,7 @@ include "../Consultas/Sesion.php";
 
 $fcha = date("Y-m-d");
 $user_id=null;
-$sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
+$sql1= "SELECT Ventas_POS.Venta_POS_ID,Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
 Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
 Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
 Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
@@ -34,9 +34,21 @@ while ($r=$query->fetch_object()){
    $query = $conn->query($sql2);
 ?>
 
+<style>
+    .table-container {
+    width: 100%; /* Ancho del contenedor */
+    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal */
+    max-height: 400px; /* Altura máxima del contenedor, ajusta según tus necesidades */
+}
 
+#HistorialCajas {
+    width: 120%; /* Ancho de la tabla, ajusta según tus necesidades */
+}
 
-<?php if($Especialistas!=null):?>
+</style>
+
+<? if($Especialistas!=null):?>
+    
     <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">N° Ticket</label>
@@ -59,26 +71,28 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
   </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas-> AgregadoPor; ?>">
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->	AgregadoPor; ?>">
     </div>
     </div>
    </div>
 
 <?php if($query->num_rows>0):?>
-  <div class="text-center">
-  <div class="table-responsive">
-  <table  id="HistorialCajas" class="table table-hover">
+    <div class="text-center">
+    <div class="table-container">
+        <table id="HistorialCajas" class="table table-hover">
+            <!-- Contenido de la tabla -->
 <thead>
-
+<th>ID de caja</th>
 <th>Servicio</th>
 <th>Cod barra</th>
-<th>Prod</th>
-<th>Lote</th>
+<th style="width: 10%;">Prod</th>
+<th style="width: 10%;">#Ticket</th>
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Descuento</th>
 <th>Importe</th>
-
+<th>Forma de pago</th>
+<th>Turno</th>
 <th>Fecha | Hora</th>
     <th>Vendedor</th>
     
@@ -88,16 +102,19 @@ while ($r=$query->fetch_object()){
 </thead>
 <?php while ($Tickets=$query->fetch_array()):?>
 <tr>
-
+<form action="javascript:void(0)" method="post" id="ActualizameLadatadelTicket" >
+<td><?php echo $Tickets["Venta_POS_ID"]; ?></td>
 <td><?php echo $Tickets["Nom_Serv"]; ?></td>
-    
-<td><?php echo $Tickets["Cod_Barra"]; ?></td>
-<td><?php echo $Tickets["Nombre_Prod"]; ?></td>
-<td><?php echo $Tickets["Lote"]; ?></td>
+<td><input type="text" name="CodBarraActualizable" class="form-control" value="<?php echo $Tickets["Cod_Barra"]; ?>"> </td>
+<td><textarea class="form-control" name="NombreProdActualizable[]" rows="4"><?php echo $Tickets["Nombre_Prod"]; ?></textarea></td>
+
+<td><input type="text" class="form-control" name="TicketPorActualizar[]" value="<?php echo $Tickets["Folio_Ticket"]; ?>"> </td>
 <td><?php echo $Tickets["Cantidad_Venta"]; ?></td>
 <td><?php echo $Tickets["Total_Venta"]; ?></td>
 <td><?php echo $Tickets["DescuentoAplicado"]; ?> %</td>
-<td><?php echo $Tickets["Importe"]; ?></td>
+<td><input type="text" class="form-control" name="ImporteActualizable[]" value="<?php echo $Tickets["Importe"]; ?>"></td>
+<td><input type="text" class="form-control" name="FormaPagoActualizable[]" value="<?php echo $Tickets["FormaDePago"]; ?>"></td>
+<td><input type="text" class="form-control" name="TurnoActualizable[]" value="<?php echo $Tickets["Turno"]; ?>"></td>
     <td><?php echo fechaCastellano($Tickets["AgregadoEl"]); ?> <br>
     <?php echo date("g:i a",strtotime($Tickets["AgregadoEl"])); ?>
   </td>
@@ -111,48 +128,18 @@ while ($r=$query->fetch_object()){
 </div>
 </div>
 
-<div class="row">
-    <div class="col">
-    <label for="exampleFormControlInput1">Total de venta</label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
-  </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Total_VentaG; ?>">
-    </div>
-    </div>
-    <div class="col">
-    <label for="exampleFormControlInput1">El cliente pago </label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
-  </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->CantidadPago; ?>">
-    </div>
-    </div>
-    <div class="col">
-    <label for="exampleFormControlInput1">Cambio</label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
-  </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->Cambio; ?>">
-    </div>
-    </div>
-    <div class="col">
-    <label for="exampleFormControlInput1">Forma de pago</label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
-  </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->FormaDePago; ?>">
-    </div>
-    </div>
-   </div>
+
+   </form>  
+   <button type="submit"   value="Guardar" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
 <?php else:?>
-  <p class="alert alert-warning">No hay resultados</p>
+	<p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
 
   
-<?php else:?>
+<? else:?>
   <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
-<?php endif;?>
+<? endif;?>
+<script src="js/ActualizaLainfoDelTicket.js"></script>
 <?
 
 function fechaCastellano ($fecha) {

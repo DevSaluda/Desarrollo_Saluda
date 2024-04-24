@@ -99,7 +99,7 @@ include "Consultas/Consultas.php";
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-desglose", function() {
         var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/Desgloseticketscreditoenfermeria.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/DesgloseTicketCreditoEnfermeria.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -124,7 +124,7 @@ include "Consultas/Consultas.php";
      // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
      $(document).on("click", ".btn-EditarData", function() {
         var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/EdicionTicket.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/EdicionTicketVentaCredito.php", { id: id }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Edicion de datos de ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
