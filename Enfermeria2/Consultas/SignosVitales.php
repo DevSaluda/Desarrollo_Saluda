@@ -18,8 +18,19 @@ include "Consultas.php";
 
 
 $user_id=null;
-$sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente,Signos_VitalesV2.Motivo_Consulta, Signos_VitalesV2.Nombre_Doctor,
-Signos_VitalesV2.Fk_Enfermero,Signos_VitalesV2.Fk_Sucursal,Signos_VitalesV2.FK_ID_H_O_D,Signos_VitalesV2.Fecha_Visita,Signos_VitalesV2.Estatus,Signos_VitalesV2.CodigoEstatus, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
+$sql1="SELECT Signos_VitalesV2.ID_SignoV,
+Signos_VitalesV2.Folio_Paciente,
+Signos_VitalesV2.Nombre_Paciente,
+Signos_VitalesV2.Motivo_Consulta,
+Signos_VitalesV2.Nombre_Doctor,
+Signos_VitalesV2.Fk_Enfermero,
+Signos_VitalesV2.Fk_Sucursal,
+Signos_VitalesV2.FK_ID_H_O_D,
+Signos_VitalesV2.Fecha_Visita,
+Signos_VitalesV2.Estatus,
+Signos_VitalesV2.CodigoEstatus,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal 
 FROM Signos_VitalesV2,SucursalesCorre where DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND Signos_VitalesV2.Fk_Enfermero='".$row['Nombre_Apellidos']."' and Signos_VitalesV2.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
 AND Signos_VitalesV2.FK_ID_H_O_D='".$row['ID_H_O_D']."' ORDER BY Signos_VitalesV2.ID_SignoV DESC";  
 $query = $conn->query($sql1);
