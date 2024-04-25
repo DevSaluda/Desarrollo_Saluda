@@ -9,7 +9,7 @@ include "db_connection.php";
 
         $sql = "UPDATE `PersonalPOS` 
         SET 
-        `Fk_Sucursal`='$Fk_Sucursal' 
+        `Fk_sucursal`='$Fk_Sucursal' 
         WHERE Pos_ID=$Pos_ID";
        if (mysqli_query($conn, $sql)) {
 		echo json_encode(array("statusCode"=>200));
