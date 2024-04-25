@@ -20,7 +20,6 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 
-
 $sql = "
     SELECT
         Ventas_POS.Folio_Ticket,
@@ -43,7 +42,7 @@ $sql = "
         Ventas_POS
         JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
     WHERE
-        Ventas_POS.Fk_Sucursal = '" . $row['Fk_Sucursal'] . "'
+        Ventas_POS.Fk_sucursal = '" . $row['Fk_sucursal'] . "'
         AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
         AND Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
     GROUP BY
@@ -76,6 +75,10 @@ $data[$c]["Reimpresion"] = '
 <a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item " style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a>
 </td>';
 
+$data[$c]["EditarData"] = '
+<td>
+<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-EditarData dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-edit"></i> Editar ticket</a>
+</td>';
     $c++; 
  
 }
