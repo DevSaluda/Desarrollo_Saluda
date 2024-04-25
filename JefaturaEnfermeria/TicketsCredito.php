@@ -121,17 +121,7 @@ include "Consultas/Consultas.php";
     });
 
 
-     // Delegación de eventos para el botón ".btn-Reimpresion" dentro de .dropdown-menu
-     $(document).on("click", ".btn-EditarData", function() {
-        var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/EdicionTicketVentaCredito.php", { id: id }, function(data) {
-            $("#FormCancelacion").html(data);
-            $("#TituloCancelacion").html("Edicion de datos de ticket");
-            $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-success");
-        });
-        $('#Cancelacionmodal').modal('show');
-    });
+     
 });
 
 </script>
