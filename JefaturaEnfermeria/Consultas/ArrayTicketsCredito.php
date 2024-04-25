@@ -50,7 +50,6 @@ Ventas_POS.Folio_Ticket
 ORDER BY
 Ventas_POS.AgregadoEl DESC;";
 
- 
 $result = mysqli_query($conn, $sql);
  
 $c=0;
