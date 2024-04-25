@@ -1,3 +1,4 @@
+
 <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoMesxd" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success">
         <div class="modal-content">
@@ -57,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Buscar por mes <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>
