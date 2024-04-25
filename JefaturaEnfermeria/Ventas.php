@@ -56,8 +56,6 @@ include "Consultas/Consultas.php";
 
 <!-- POR CADUCAR -->
   
- 
-
     
 </div></div>
 
@@ -72,8 +70,8 @@ include "Consultas/Consultas.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraEspecificamente.php");
-  include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltroPorProducto.php");
+  include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltraPorMes.php");
 include ("footer.php")?>
 
