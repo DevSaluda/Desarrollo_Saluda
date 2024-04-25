@@ -17,9 +17,9 @@ $sql ="SELECT Fecha_Apertura,ID_H_O_D,SUM(Valor_Total_Caja - Cantidad_Fondo) as 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $TotalGanancia = mysqli_fetch_assoc($resultset);
 
-$sql ="SELECT Estatus,ID_SignoV,COUNT(*) as SignosVitales FROM Signos_VitalesV2 WHERE Fecha_Visita = CURRENT_DATE;";
+$sql ="SELECT Estatus,Id_SignoV COUNT(*) FROM Signos_VitalesV2,SucursalesCorre WHERE DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND Signos_VitalesV2.Fk_Sucursal= SucursalesCorre.ID_SucursalC";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-$TotalSignosVitales = mysqli_fetch_assoc($resultset);
+$TotalSignosVitales = mysqli_fetch_assoc($resultset);   
 
 $sql ="SELECT Estatus,ID_H_O_D,COUNT(*) as Farmaceuticos FROM `PersonalPOS` WHERE Fk_Usuario = 7 AND Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
