@@ -43,7 +43,7 @@ include "Consultas/Consultas.php";
 </div>
 </div>
     
-<div id="TableVentasDelDiaCredito"></div>
+<div id="TableVentasDelDia"></div>
 
 </div>
 
