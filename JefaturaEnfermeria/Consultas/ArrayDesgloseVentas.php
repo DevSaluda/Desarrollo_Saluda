@@ -40,6 +40,7 @@ Servicios_POS.Nom_Serv,
 Ventas_POS.DescuentoAplicado -- Agregamos la columna DescuentoAplicado
 FROM 
 Ventas_POS
+JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 INNER JOIN 
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 INNER JOIN 
@@ -57,6 +58,8 @@ OR
     Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') -- Primer día del mes anterior
     AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW() - INTERVAL 1 MONTH) -- Último día del mes anterior
 )
+Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
+AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
 ";
 
