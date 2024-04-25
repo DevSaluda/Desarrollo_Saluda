@@ -73,7 +73,7 @@ include "Consultas/Consultas.php";
 <!-- ./wrapper -->
 
 
-<script src="js/ControlTicketsVentas.js"></script>
+<script src="js/ControlTicketsVentasCredito.js"></script>
 <script src="js/RealizaCambioDeSucursalPorFiltroDeBusqueda.js"></script>
 
 

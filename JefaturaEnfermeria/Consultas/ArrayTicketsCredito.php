@@ -20,38 +20,35 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 
-
-$sql = "
-    SELECT
-        Ventas_POS.Folio_Ticket,
-        Ventas_POS.Fk_Caja,
-        Ventas_POS.Venta_POS_ID,
-        Ventas_POS.Identificador_tipo,
-        Ventas_POS.Cod_Barra,
-        Ventas_POS.Clave_adicional,
-        Ventas_POS.Nombre_Prod,
-        Ventas_POS.Cantidad_Venta,
-        Ventas_POS.Fk_sucursal,
-        Ventas_POS.AgregadoPor,
-        Ventas_POS.AgregadoEl,
-        Ventas_POS.Total_Venta,
-        Ventas_POS.Lote,
-        Ventas_POS.ID_H_O_D,
-        SucursalesCorre.ID_SucursalC,
-        SucursalesCorre.Nombre_Sucursal
-    FROM
-        Ventas_POS
-        JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-    WHERE
-        Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
-        AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-        AND Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
-    GROUP BY
-        Ventas_POS.Folio_Ticket
-    ORDER BY
-        Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes
-";
-
+$sql = "SELECT
+Ventas_POS.Folio_Ticket,
+Ventas_POS.Fk_Caja,
+Ventas_POS.Venta_POS_ID,
+Ventas_POS.Identificador_tipo,
+Ventas_POS.Cod_Barra,
+Ventas_POS.Clave_adicional,
+Ventas_POS.Nombre_Prod,
+Ventas_POS.Cantidad_Venta,
+Ventas_POS.Fk_sucursal,
+Ventas_POS.AgregadoPor,
+Ventas_POS.AgregadoEl,
+Ventas_POS.Total_Venta,
+Ventas_POS.Lote,
+Ventas_POS.ID_H_O_D,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal
+FROM
+Ventas_POS
+JOIN
+SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+WHERE
+Ventas_POS.FormaDePago LIKE 'Credito' AND
+Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."'
+AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
+GROUP BY
+Ventas_POS.Folio_Ticket
+ORDER BY
+Ventas_POS.AgregadoEl DESC;";
 
  
 $result = mysqli_query($conn, $sql);
