@@ -26,119 +26,86 @@ include "Consultas/ContadorIndex.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-  <title>Enfermería | Página de inicio  </title>
-
+  <title>Enfermería | Página de inicio</title>
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
 </head>
-<?php include_once ("Menu.php")?>
-<div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-         <div class="row">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
+<body>
+  <?php include_once ("Menu.php")?>
+  <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <!-- Enfermeros vigentes -->
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
+            <p>Enfermeros <br> vigentes</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-user-nurse"></i>
+          </div>
+          <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- Registros de signos vitales -->
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3><?php echo $TotalSignosVitales['SignosVitales']?></h3>
+            <p>Registros de <br> signos vitales</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-file-medical-alt"></i>
+          </div>
+          <a  data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- Citas con especialistas -->
+    <div class="card text-center">
+      <div class="card-header" style="background-color: #33b5e5 !important; color: white;">
+        Citas con especialista del día, <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="TablaCampanas"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
 
-                <p>Enfermeros <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-nurse"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>  
-          <!-- ./col -->
-         
-    <!-- Tarjeta de pequeño tamaño -->
-    <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?php echo $TotalSignosVitales['SignosVitales']?></h3>
-
-                <p>Registros de <br> signos vitales</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-file-medical-alt"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div> 
-
-
-
-<div class="card text-center">
-  <div class="card-header" style="background-color: #33b5e5 !important;color: white;">
-   Citas con especialista del dia , <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?> 
-   </div>
-   </div>
-  <div class="container">
-<div class="row">
-<div class="col-md-12">
-    
-
-<div id="TablaCampanas"></div>
-
-
-</div>
-
-</div>
-</div>
-            
-</div>
-</div>
-</div>             
-        <!-- /.row -->
-     
-  
-  <!-- /.content-wrapper -->
-
+  <?php include ("footer.php");?>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <?php include ("Modales/Ingreso.php");
-include ("Modales/Confirmacion.php");
-include ("Modales/Exito.php");
-include ("Modales/ModalEnfermerosVigentes.php");
-include ("Modales/ModalSignosVitales.php");
-
-  include ("footer.php");?>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="js/ControlCampanasDias.js"></script>
-
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
-
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="plugins/raphael/raphael.min.js"></script>
-<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-
-
-
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="js/ControlCampanasDias.js"></script>
+  <!-- Bootstrap -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- OPTIONAL SCRIPTS -->
+  <script src="dist/js/demo.js"></script>
+  <!-- PAGE PLUGINS -->
+  <!-- jQuery Mapael -->
+  <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="plugins/raphael/raphael.min.js"></script>
+  <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+  <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
 </body>
 </html>
+
 <?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
 <script>
 $(document).ready(function()
