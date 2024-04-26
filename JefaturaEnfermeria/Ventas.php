@@ -12,6 +12,8 @@ include "Consultas/Consultas.php";
   <title>Ventas realizadas por  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
 <?php include "Header.php"?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
  <style>
         .error {
   color: red;
@@ -36,14 +38,20 @@ include "Consultas/Consultas.php";
   </div>
  
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
   Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
 </button>
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
   Busqueda por mes <i class="fas fa-calendar-week"></i>
 </button>
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
   Filtrar por producto <i class="fas fa-prescription-bottle"></i>
+</button>
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
+  Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
+</button>
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#" class="btn btn-default">
+  Filtrar por rango de fechas <i class="fas fa-prescription-bottle"></i>
 </button>
 </div>
 </div>
@@ -56,9 +64,17 @@ include "Consultas/Consultas.php";
 
 <!-- POR CADUCAR -->
   
+ 
+
     
 </div></div>
 
+
+
+
+
+     
+  
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -70,8 +86,10 @@ include "Consultas/Consultas.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraEspecificamente.php");
-  include ("Modales/FiltroPorProducto.php");
   include ("Modales/FiltraFechasEspecialesVenta.php");
+  include ("Modales/FiltraPorMes.php");
+  include ("Modales/FiltroPorProducto.php");
+  include ("Modales/FiltroPorFormaDePago.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
@@ -88,6 +106,34 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
+   <script>
+    $(document).ready(function() {
+    // Inicializar Select2
+    $('#buscador').select2({
+        ajax: {
+            url: 'Consultas/BuscarProductosParaFiltro.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        placeholder: 'Ingrese un código o nombre',
+        minimumInputLength: 1,
+        // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
+        select: function(event) {
+            var nombreProd = event.params.data.id; // Accedemos al nombre del producto
+            var codBarra = event.params.data.cod_barra; // Accedemos al código de barras
+            $('#nombreprod').val(nombreProd);
+            $('#codbarra').val(codBarra);
+        }
+    });
+});
+
+   </script>
 
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
