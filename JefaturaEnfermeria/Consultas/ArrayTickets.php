@@ -20,43 +20,59 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 
-$sql = "
-    SELECT
-        Ventas_POS.Folio_Ticket,
-        Ventas_POS.Fk_Caja,
-        Ventas_POS.Venta_POS_ID,
-        Ventas_POS.Identificador_tipo,
-        Ventas_POS.Cod_Barra,
-        Ventas_POS.Clave_adicional,
-        Ventas_POS.Nombre_Prod,
-        Ventas_POS.Cantidad_Venta,
-        Ventas_POS.Fk_sucursal,
-        Ventas_POS.AgregadoPor,
-        Ventas_POS.AgregadoEl,
-        Ventas_POS.Total_Venta,
-        Ventas_POS.Lote,
-        Ventas_POS.ID_H_O_D,
-        SucursalesCorre.ID_SucursalC,
-        SucursalesCorre.Nombre_Sucursal
-    FROM
-        Ventas_POS
-        JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-    WHERE
-        Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
-        AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-        AND Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
-    GROUP BY
-        Ventas_POS.Folio_Ticket
-    ORDER BY
-        Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes
-";
+$sql = "SELECT
+    Ventas_POS.Folio_Ticket,
+    Ventas_POS.Fk_Caja,
+    Ventas_POS.Venta_POS_ID,
+    Ventas_POS.Identificador_tipo,
+    Ventas_POS.Cod_Barra,
+    Ventas_POS.Clave_adicional,
+    Ventas_POS.Nombre_Prod,
+    Ventas_POS.Cantidad_Venta,
+    Ventas_POS.Fk_sucursal,
+    Ventas_POS.AgregadoPor,
+    Ventas_POS.AgregadoEl,
+    Ventas_POS.Total_Venta,
+    Ventas_POS.Lote,
+    Ventas_POS.ID_H_O_D,
+    SucursalesCorre.ID_SucursalC,
+    SucursalesCorre.Nombre_Sucursal
+FROM
+    Ventas_POS
+JOIN
+    SucursalesCorre ON Ventas_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC
+WHERE
+    Ventas_POS.FormaDePago LIKE '%Credito%' 
+    AND Ventas_POS.Fk_sucursal = ?
+    AND Ventas_POS.ID_H_O_D = ?
+GROUP BY
+    Ventas_POS.Folio_Ticket
+ORDER BY
+    Ventas_POS.AgregadoEl DESC";
+
+// Preparar la sentencia
+$stmt = $conn->prepare($sql);
+
+// Vincular los parámetros
+$stmt->bind_param("ss", $fk_sucursal, $id_h_o_d);
+
+// Aquí se asignan las variables que contienen los datos que necesitas filtrar.
+// Asegúrate de que estas variables están definidas y contienen los datos correctos.
+$fk_sucursal = $row['Fk_Sucursal'];
+$id_h_o_d = $row['ID_H_O_D'];
+
+// Ejecutar la consulta
+$stmt->execute();
+
+$results = ["sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data ];
+ 
+echo json_encode($results);
 
 
- 
-$result = mysqli_query($conn, $sql);
- 
-$c=0;
- 
+
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
@@ -83,12 +99,6 @@ $data[$c]["EditarData"] = '
  
 }
  
-$results = ["sEcho" => 1,
-            "iTotalRecords" => count($data),
-            "iTotalDisplayRecords" => count($data),
-            "aaData" => $data ];
- 
-echo json_encode($results);
+
+
 ?>
-
-
