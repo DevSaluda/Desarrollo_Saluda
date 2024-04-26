@@ -31,4 +31,5 @@ $hora = date('G'); if (($hora >= 0) AND ($hora < 6))
   $mensaje = "Buenas noches"; 
   } 
 
-   
+   ?>
+
