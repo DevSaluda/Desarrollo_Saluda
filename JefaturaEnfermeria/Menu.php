@@ -265,7 +265,7 @@
       break;
   }
 ?>">
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/EstadisticasFarmacias" class="nav-link">
       <i class="fas fa-chart-area"></i>
       <p>
@@ -273,7 +273,7 @@
       </p>
     </a>
   </li>
-</div>
+</div> -->
 
 <div style="<?php
   switch ($row['Permisos']) {
@@ -354,7 +354,7 @@
         <i class="fas fa-angle-left right"></i>
       </p>
     </a>
-    <ul class="nav nav-treeview">
+   <!--  <ul class="nav nav-treeview">
       <li class="nav-item">
         <a href="Categorias" class="nav-link">
           <i class="fas fa-dot-circle"></i>
@@ -370,7 +370,7 @@
             Componente activo
           </p>
         </a>
-      </li>
+      </li> -->
        <li class="nav-item">
             <a href="https://saludapos.com/JefaturaEnfermeria/ProductosV2" class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -404,14 +404,14 @@
               </p>
             </a>
           </li>
-            <li class="nav-item">
+           <!--  <li class="nav-item">
             <a href="UltimaInsercionEnStock" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Consultar distribuciones               
               </p>
             </a>
-          </li>
+          </li> -->
            <li class="nav-item">
             <a href="BajaDeProductos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -423,7 +423,7 @@
     </ul>
   </li>
 
-  <li class="nav-item has-treeview">
+  <!-- <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
       <i class="fas fa-shopping-cart"></i>
       <p>
@@ -448,9 +448,9 @@
           </p>
         </a>
       </li>
-      <!-- Otros elementos del menú... -->
+       Otros elementos del menú... 
     </ul>
-  </li>
+  </li> -->
 </div>
 
 <div style="<?php
@@ -463,7 +463,7 @@
       break;
   }
 ?>">
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a href="Ingresosrealizados" class="nav-link">
       <i class="fas fa-prescription-bottle"></i>
       <p>
@@ -471,7 +471,7 @@
       </p>
     </a>
   </li>
-</div>
+</div> -->
 
 
         
@@ -525,7 +525,7 @@
   }
   ?>
 ">
-  <li class="nav-header">Inventarios <i class="fas fa-store"></i></li>
+ <!--  <li class="nav-header">Inventarios <i class="fas fa-store"></i></li>
   
   <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
@@ -561,7 +561,7 @@
         </a>
       </li>
     </ul>
-  </li>
+  </li> -->
 </div>
 
 
@@ -584,23 +584,23 @@
     </a>
   </li>-->
 
-  <li class="nav-item has-treeview">
+  <!-- <li class="nav-item has-treeview">
     <a href="CodigosBarras" class="nav-link">
       <i class="fas fa-barcode"></i>
       <p>
         Códigos de barras
       </p>
     </a>
-  </li>
+  </li> -->
 
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/InventarioRapidoResultado" class="nav-link">
       <i class="fas fa-boxes"></i>
       <p>
         Conteo diario
       </p>
     </a>
-  </li>
+  </li> -->
 
   <li class="nav-header">Reportes <i class="fas fa-dolly"></i></li>
 
@@ -757,7 +757,7 @@
 		
 		} 	
 ?>>  
-  <li class="nav-header">Configuraciones</li>
+ <!--  <li class="nav-header">Configuraciones</li>
   <li class="nav-item has-treeview">
     <li class="nav-item">
       <a href="https://saludapos.com/JefaturaEnfermeria/Roles" class="nav-link">
@@ -773,7 +773,7 @@
     </li>
   </li>
 </div>
-
+ -->
           
          <li class="nav-header">Control de enfermería <i class="fas fa-user-nurse"></i></li>
 <li class="nav-item has-treeview">
