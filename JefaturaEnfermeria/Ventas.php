@@ -72,7 +72,6 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraEspecificamente.php");
   include ("Modales/FiltroPorProducto.php");
   include ("Modales/FiltraFechasEspecialesVenta.php");
-
 include ("footer.php")?>
 
 <!-- ./wrapper -->
