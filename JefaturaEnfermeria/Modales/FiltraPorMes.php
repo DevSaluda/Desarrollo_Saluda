@@ -1,24 +1,21 @@
-
 <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoMesxd" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success">
         <div class="modal-content">
             <div class="text-center">
                 <div class="modal-header">
-                    <p class="heading lead">Filtrado de ventas por mes y año<i class="fas fa-credit-card"></i></p>
+                    <h5 class="modal-title">Filtrado de ventas por sucursal <i class="fas fa-credit-card"></i></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" method="post" id="Filtrapormediodesucursalconajax">
-                        <div class="row">
-                            
-                           
+                    <form action="FiltroPorMesVentas" method="POST">
+                        <div class="form-row">
                             <div class="col">
-                                <label for="exampleFormControlInput1">Seleccione un mes</label>
+                                <label for="mesesSelect">Seleccione un mes</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="Calendario"><i class="far fa-calendar"></i></span>
+                                        <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
                                     <select id="mesesSelect" class="form-control" name="Mes" required>
                                         <option value="">Seleccione un mes:</option>
@@ -37,31 +34,31 @@
                                     </select>
                                 </div>
                             </div>
-
-                             
                             <div class="col">
-                                <label for="exampleFormControlInput1">Seleccione un año</label>
+                                <label for="añosSelect">Seleccione un año</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="Calendario"><i class="far fa-calendar"></i></span>
+                                        <span class="input-group-text" id="calendario"><i class="far fa-calendar"></i></span>
                                     </div>
-                                    <select id="añosSelect" class="form-control" name="Año" required>
-    <option value="">Seleccione un año:</option>
-    <?php
-    $añoActual = date('Y');
-    $añosAtras = 5; // Puedes ajustar este valor para mostrar más años pasados
-    for ($i = $añoActual; $i >= ($añoActual - $añosAtras); $i--) {
-        echo "<option value='$i'>$i</option>";
-    }
-    ?>
-</select>
+                                    <select id="añosSelect" class="form-control" name="anual" required>
+                                        <option value="">Seleccione un año:</option>
+                                        <?php
+                                        $añoActual = date('Y');
+                                        $añosAtras = 5; // Puedes ajustar este valor para mostrar más años pasados
+                                        for ($i = $añoActual; $i >= ($añoActual - $añosAtras); $i--) {
+                                            echo "<option value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Buscar por mes <i class="fas fa-exchange-alt"></i></button>
+                        <button type="submit" class="btn btn-success">Realizar Busqueda <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
