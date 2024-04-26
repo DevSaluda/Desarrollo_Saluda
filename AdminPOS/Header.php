@@ -20,20 +20,19 @@
   <!-- JS, Popper.js, and jQuery -->
   
 
-<!-- DataTables -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 
-<!-- DataTables Buttons -->
+<!-- DataTables JavaScript -->
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
+<!-- DataTables Buttons JavaScript -->
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
 
-
-
-
-<link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
-  <script type="text/javascript" src="Componentes/datatables.min.js"></script>
   <script src="Componentes/sweetalert2@9.js"></script>
   <link href="Componentes/mdb.min.css" rel="stylesheet">
   <script src="js/validation.min.js"></script><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
