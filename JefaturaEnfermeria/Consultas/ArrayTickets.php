@@ -56,7 +56,7 @@ $sql = "
 $result = mysqli_query($conn, $sql);
  
 $c=0;
- 
+$data = []; 
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
