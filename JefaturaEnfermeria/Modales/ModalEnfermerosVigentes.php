@@ -18,29 +18,12 @@ $(document).ready( function () {
 
 
 $user_id=null;
-$sql1="SELECT Personal_Enfermeria.Enfermero_ID,
-Personal_Enfermeria.Nombre_Apellidos,
-Personal_Enfermeria.Fk_Usuario,
-Personal_Enfermeria.file_name,
-Personal_Enfermeria.Fk_Sucursal,
-Personal_Enfermeria.ID_H_O_D,
-Personal_Enfermeria.Estatus,
-Personal_Enfermeria.ColorEstatus,
-Personal_Enfermeria.Telefono,
-Personal_Enfermeria.AgregadoEl,
-Personal_Enfermeria.Password,
-Personal_Enfermeria.Correo_Electronico,
-Personal_Enfermeria.Estatus,
-Roles_Puestos.ID_rol,
-Roles_Puestos.Nombre_rol,
-SucursalesCorre.ID_SucursalC,
-SucursalesCorre.Nombre_Sucursal 
-FROM Personal_Enfermeria,Roles_Puestos,SucursalesCorre 
-WHERE Personal_Enfermeria.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-AND Personal_Enfermeria.Fk_Usuario = Roles_Puestos.ID_rol 
-AND Personal_Enfermeria.Estatus='Vigente' 
-AND Personal_Enfermeria.Fk_Usuario ='4' 
-AND Personal_Enfermeria.ID_H_O_D ='".$row['ID_H_O_D']."'";  
+$sql1="SELECT Personal_Enfermeria.Enfermero_ID,Personal_Enfermeria.Nombre_Apellidos,Personal_Enfermeria.Fk_Usuario,Personal_Enfermeria.file_name,Personal_Enfermeria.Fk_Sucursal,
+Personal_Enfermeria.ID_H_O_D,Personal_Enfermeria.Estatus,Personal_Enfermeria.ColorEstatus,Personal_Enfermeria.Telefono,Personal_Enfermeria.AgregadoEl,Personal_Enfermeria.Password,
+Personal_Enfermeria.Correo_Electronico,Personal_Enfermeria. Estatus,
+Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal 
+FROM Personal_Enfermeria,Roles_Puestos,SucursalesCorre where Personal_Enfermeria.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
+and Personal_Enfermeria.Fk_Usuario = Roles_Puestos.ID_rol AND Personal_Enfermeria.Estatus='Vigente'  AND Personal_Enfermeria.Fk_Usuario ='4' and Personal_Enfermeria.ID_H_O_D ='".$row['ID_H_O_D']."'";  
 $query = $conn->query($sql1);
 ?>
 
@@ -82,7 +65,7 @@ $query = $conn->query($sql1);
 <td><?php echo $PersonalEnfermeria["Nombre_Apellidos"]; ?></td>   
 <td><?php echo $PersonalEnfermeria["Telefono"]; ?></td>   
 
-<td><?php echo $PersonalEnfermeria["Nombre_Sucursal"]; ?></td>
+    <td><?php echo $PersonalEnfermeria["Nombre_Sucursal"]; ?></td>
 
    
 
