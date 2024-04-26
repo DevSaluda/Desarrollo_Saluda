@@ -33,6 +33,11 @@
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
 
+
+
+
+<link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
+  <script type="text/javascript" src="Componentes/datatables.min.js"></script>
   <script src="Componentes/sweetalert2@9.js"></script>
   <link href="Componentes/mdb.min.css" rel="stylesheet">
   <script src="js/validation.min.js"></script><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
