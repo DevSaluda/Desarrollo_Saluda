@@ -56,17 +56,9 @@ include "Consultas/Consultas.php";
 
 <!-- POR CADUCAR -->
   
- 
-
     
 </div></div>
 
-
-
-
-
-     
-  
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -78,6 +70,7 @@ include "Consultas/Consultas.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraEspecificamente.php");
+  include ("Modales/FiltroPorProducto.php");
   include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltraPorMes.php");
 include ("footer.php")?>
@@ -96,7 +89,7 @@ include ("footer.php")?>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-s
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->

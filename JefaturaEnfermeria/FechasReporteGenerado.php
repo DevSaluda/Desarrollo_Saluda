@@ -6,38 +6,12 @@ include "Consultas/AnalisisIndex.php";
 $fecha1=($_POST['Fecha1']);
 $fecha2=($_POST['Fecha2']);
 
-$sql1="SELECT Ventas_POS.Folio_Ticket,
-Ventas_POS.Fk_Caja,
-Ventas_POS.Venta_POS_ID,
-Ventas_POS.Identificador_tipo,
-Ventas_POS.Fecha_venta, 
-Ventas_POS.Total_Venta,
-Ventas_POS.Importe,
-Ventas_POS.Total_VentaG,
-Ventas_POS.FormaDePago,
-Ventas_POS.Turno,
-Ventas_POS.FolioSignoVital,
-Ventas_POS.Cliente,
-Cajas_POS.ID_Caja,
-Cajas_POS.Sucursal,
-Cajas_POS.MedicoEnturno,
-Cajas_POS.EnfermeroEnturno,
-Ventas_POS.Cod_Barra,
-Ventas_POS.Clave_adicional,
-Ventas_POS.Identificador_tipo,
-Ventas_POS.Nombre_Prod,
-Ventas_POS.Cantidad_Venta,
-Ventas_POS.Fk_sucursal,
-Ventas_POS.AgregadoPor,
-Ventas_POS.AgregadoEl, 
-Ventas_POS.Total_Venta,
-Ventas_POS.Lote,
-Ventas_POS.ID_H_O_D,
-SucursalesCorre.ID_SucursalC, 
-SucursalesCorre.Nombre_Sucursal,
-Servicios_POS.Servicio_ID,
-Servicios_POS.Nom_Serv FROM Ventas_POS,SucursalesCorre,
-Servicios_POS,Cajas_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC AND Cajas_POS.ID_Caja=Ventas_POS.Fk_Caja
+$sql1="SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Fecha_venta, 
+Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.FormaDePago,Ventas_POS.Turno,Ventas_POS.FolioSignoVital,Ventas_POS.Cliente,
+Cajas_POS.ID_Caja,Cajas_POS.Sucursal,Cajas_POS.MedicoEnturno,Cajas_POS.EnfermeroEnturno,
+Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional, Ventas_POS.Identificador_tipo, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,
+Ventas_POS.Fk_sucursal,Ventas_POS.AgregadoPor, Ventas_POS.AgregadoEl, Ventas_POS.Total_Venta,Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC, 
+SucursalesCorre.Nombre_Sucursal,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv FROM Ventas_POS,SucursalesCorre,Servicios_POS,Cajas_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC AND Cajas_POS.ID_Caja=Ventas_POS.Fk_Caja
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID AND Ventas_POS.Fecha_venta BETWEEN '$fecha1' AND '$fecha2' "
 ?>
 <!DOCTYPE html>

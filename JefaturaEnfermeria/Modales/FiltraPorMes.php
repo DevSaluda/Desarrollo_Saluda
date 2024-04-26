@@ -1,9 +1,10 @@
+
 <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoMesxd" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success">
         <div class="modal-content">
             <div class="text-center">
                 <div class="modal-header">
-                    <p class="heading lead">Filtrado de ventas por sucursal<i class="fas fa-credit-card"></i></p>
+                    <p class="heading lead">Filtrado de ventas por mes y año<i class="fas fa-credit-card"></i></p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">&times;</span>
                     </button>
@@ -57,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                        <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Buscar por mes <i class="fas fa-exchange-alt"></i></button>
                     </form>
                 </div>
             </div>

@@ -17,7 +17,10 @@ $sql ="SELECT Fecha_Apertura,ID_H_O_D,SUM(Valor_Total_Caja - Cantidad_Fondo) as 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $TotalGanancia = mysqli_fetch_assoc($resultset);
 
-$sql ="SELECT Estatus,ID_SignoV,COUNT(*) as SignosVitales FROM Signos_VitalesV2 WHERE Fecha_Visita = CURRENT_DATE;";
+$sql ="SELECT Estatus, ID_SignoV, COUNT(*) as SignosVitales 
+FROM Signos_VitalesV2 
+WHERE DATE(Fecha_Visita) = CURRENT_DATE
+";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $TotalSignosVitales = mysqli_fetch_assoc($resultset);
 

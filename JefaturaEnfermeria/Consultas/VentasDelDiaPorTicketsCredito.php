@@ -207,7 +207,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayTickets.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayTicketsCredito.php",
  "aoColumns": [
   { mData: 'NumberTicket' },  
   { mData: 'Fecha' },
@@ -215,6 +215,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'Vendedor' },
        { mData: 'Desglose' },
        { mData: 'Reimpresion' },
+
        
       
   
@@ -272,6 +273,7 @@ tabla = $('#Productos').DataTable({
     <th>Vendedor</th>
     <th>Desglose</th>
     <th>Reimpresion</th>
+
 
 </thead>
 

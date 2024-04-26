@@ -21,58 +21,39 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 
 $sql = "SELECT
-    Ventas_POS.Folio_Ticket,
-    Ventas_POS.Fk_Caja,
-    Ventas_POS.Venta_POS_ID,
-    Ventas_POS.Identificador_tipo,
-    Ventas_POS.Cod_Barra,
-    Ventas_POS.Clave_adicional,
-    Ventas_POS.Nombre_Prod,
-    Ventas_POS.Cantidad_Venta,
-    Ventas_POS.Fk_sucursal,
-    Ventas_POS.AgregadoPor,
-    Ventas_POS.AgregadoEl,
-    Ventas_POS.Total_Venta,
-    Ventas_POS.Lote,
-    Ventas_POS.ID_H_O_D,
-    SucursalesCorre.ID_SucursalC,
-    SucursalesCorre.Nombre_Sucursal
+Ventas_POS.Folio_Ticket,
+Ventas_POS.Fk_Caja,
+Ventas_POS.Venta_POS_ID,
+Ventas_POS.Identificador_tipo,
+Ventas_POS.Cod_Barra,
+Ventas_POS.Clave_adicional,
+Ventas_POS.Nombre_Prod,
+Ventas_POS.Cantidad_Venta,
+Ventas_POS.Fk_sucursal,
+Ventas_POS.AgregadoPor,
+Ventas_POS.AgregadoEl,
+Ventas_POS.Total_Venta,
+Ventas_POS.Lote,
+Ventas_POS.ID_H_O_D,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal
 FROM
-    Ventas_POS
+Ventas_POS
 JOIN
-    SucursalesCorre ON Ventas_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC
+SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE
-    Ventas_POS.FormaDePago LIKE '%Credito%' 
-    AND Ventas_POS.Fk_sucursal = ?
-    AND Ventas_POS.ID_H_O_D = ?
+Ventas_POS.FormaDePago LIKE '%Credito%' AND
+Ventas_POS.Fk_sucursal = '".$row['Fk_Sucursal']."'
+AND Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
 GROUP BY
-    Ventas_POS.Folio_Ticket
+Ventas_POS.Folio_Ticket
 ORDER BY
-    Ventas_POS.AgregadoEl DESC";
+Ventas_POS.AgregadoEl DESC;";
 
-// Preparar la sentencia
-$stmt = $conn->prepare($sql);
-
-// Vincular los parámetros
-$stmt->bind_param("ss", $fk_sucursal, $id_h_o_d);
-
-// Aquí se asignan las variables que contienen los datos que necesitas filtrar.
-// Asegúrate de que estas variables están definidas y contienen los datos correctos.
-$fk_sucursal = $row['Fk_Sucursal'];
-$id_h_o_d = $row['ID_H_O_D'];
-
-// Ejecutar la consulta
-$stmt->execute();
-
-$results = ["sEcho" => 1,
-            "iTotalRecords" => count($data),
-            "iTotalDisplayRecords" => count($data),
-            "aaData" => $data ];
+$result = mysqli_query($conn, $sql);
  
-echo json_encode($results);
-
-
-
+$c=0;
+ 
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
@@ -91,14 +72,17 @@ $data[$c]["Reimpresion"] = '
 <a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item " style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a>
 </td>';
 
-$data[$c]["EditarData"] = '
-<td>
-<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-EditarData dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-edit"></i> Editar ticket</a>
-</td>';
+
     $c++; 
  
 }
  
-
-
+$results = ["sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data ];
+ 
+echo json_encode($results);
 ?>
+
+
