@@ -42,7 +42,10 @@ include "Consultas/ContadorIndex.php";
             <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
             <p>Enfermeros <br> vigentes</p>
           </div>
-          <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></a>
+          <div class="icon">
+            <i class="fas fa-user-nurse"></i>
+          </div>
+          <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- Registros de signos vitales -->
