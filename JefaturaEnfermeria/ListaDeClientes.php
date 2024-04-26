@@ -36,11 +36,7 @@ include "Consultas/Consultas.php";
   Lista De Clientes    al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
-  <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroPorSucursalesIngresos" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
-</div>
+  
 </div>
     
 <div id="ListaDeClientes"></div>
