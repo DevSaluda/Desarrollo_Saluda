@@ -177,7 +177,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentas.php",
+ "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentasMes.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
