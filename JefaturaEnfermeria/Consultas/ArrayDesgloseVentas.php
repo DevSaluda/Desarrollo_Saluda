@@ -28,7 +28,7 @@ Ventas_POS.Clave_adicional,
 Ventas_POS.Identificador_tipo,
 Ventas_POS.Nombre_Prod,
 Ventas_POS.Cantidad_Venta,
-Ventas_POS.Fk_Sucursal,
+Ventas_POS.Fk_sucursal,
 Ventas_POS.AgregadoPor,
 Ventas_POS.AgregadoEl,
 Ventas_POS.Lote,
@@ -56,7 +56,7 @@ OR
     Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') -- Primer día del mes anterior
     AND Ventas_POS.Fecha_venta <= LAST_DAY(NOW() - INTERVAL 1 MONTH) -- Último día del mes anterior
 )
-AND Ventas_POS.Fk_Sucursal = '" . $row['Fk_sucursal'] . "'
+AND Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
 AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
 ";
