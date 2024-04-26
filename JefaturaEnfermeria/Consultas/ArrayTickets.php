@@ -42,7 +42,7 @@ $sql = "
         Ventas_POS
         JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
     WHERE
-       
+    Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."' AND
         Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
     GROUP BY
         Ventas_POS.Folio_Ticket
