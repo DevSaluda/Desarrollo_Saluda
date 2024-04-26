@@ -55,9 +55,7 @@ include "Consultas/Consultas.php";
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroFechasEspecificasFarmaciasVendedores" class="btn btn-default">
   Filtrar por vendedor <i class="fas fa-clinic-medical"></i>
 </button>
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroDeServicios" class="btn btn-default">
-  Filtrar por servicio <i class="fas fa-calendar-week"></i>
-</button>
+
 
 </div>
 </div>
