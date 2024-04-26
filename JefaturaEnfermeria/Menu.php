@@ -316,7 +316,7 @@
       break;
   }
 ?>">
-  <!-- <li class="nav-item">
+  <li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/CreditoEnfermeriaGeneral" class="nav-link">
       <i class="fas fa-user-nurse"></i>
       <p>
@@ -331,7 +331,7 @@
         Créditos Farmaceutico
       </p>
     </a>
-  </li> -->
+  </li>
 </div>
 
 <div style="<?php
