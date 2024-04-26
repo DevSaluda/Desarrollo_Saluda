@@ -1,4 +1,3 @@
-
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
@@ -14,7 +13,7 @@ function fechaCastellano ($fecha) {
   $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
   $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
   $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+  $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
   $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
@@ -72,11 +71,12 @@ $data[$c]["Reimpresion"] = '
 <a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item " style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a>
 </td>';
 
-
     $c++; 
- 
 }
- 
+
+// Agrega esta línea para verificar el contenido de $data en la consola del navegador
+echo "<script>console.log(" . json_encode($data) . ");</script>";
+
 $results = ["sEcho" => 1,
             "iTotalRecords" => count($data),
             "iTotalDisplayRecords" => count($data),
@@ -84,5 +84,3 @@ $results = ["sEcho" => 1,
  
 echo json_encode($results);
 ?>
-
-
