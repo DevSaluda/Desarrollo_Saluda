@@ -265,15 +265,15 @@
       break;
   }
 ?>">
-  <!-- <li class="nav-item">
+ <!--  <li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/EstadisticasFarmacias" class="nav-link">
       <i class="fas fa-chart-area"></i>
       <p>
         Estadísticas Farmacia
       </p>
     </a>
-  </li>
-</div> -->
+  </li> -->
+</div>
 
 <div style="<?php
   switch ($row['Permisos']) {
@@ -316,7 +316,7 @@
       break;
   }
 ?>">
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a href="https://saludapos.com/JefaturaEnfermeria/CreditoEnfermeriaGeneral" class="nav-link">
       <i class="fas fa-user-nurse"></i>
       <p>
@@ -331,7 +331,7 @@
         Créditos Farmaceutico
       </p>
     </a>
-  </li>
+  </li> -->
 </div>
 
 <div style="<?php
@@ -354,7 +354,7 @@
         <i class="fas fa-angle-left right"></i>
       </p>
     </a>
-   <!--  <ul class="nav nav-treeview">
+    <ul class="nav nav-treeview">
       <li class="nav-item">
         <a href="Categorias" class="nav-link">
           <i class="fas fa-dot-circle"></i>
@@ -370,7 +370,7 @@
             Componente activo
           </p>
         </a>
-      </li> -->
+      </li>
        <li class="nav-item">
             <a href="https://saludapos.com/JefaturaEnfermeria/ProductosV2" class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -404,14 +404,14 @@
               </p>
             </a>
           </li>
-           <!--  <li class="nav-item">
+            <li class="nav-item">
             <a href="UltimaInsercionEnStock" class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
             Consultar distribuciones               
               </p>
             </a>
-          </li> -->
+          </li>
            <li class="nav-item">
             <a href="BajaDeProductos" class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -448,7 +448,7 @@
           </p>
         </a>
       </li>
-       Otros elementos del menú... 
+     
     </ul>
   </li> -->
 </div>
@@ -470,8 +470,8 @@
         Ingreso de medicamentos
       </p>
     </a>
-  </li>
-</div> -->
+  </li> -->
+</div>
 
 
         
@@ -757,7 +757,7 @@
 		
 		} 	
 ?>>  
- <!--  <li class="nav-header">Configuraciones</li>
+  <li class="nav-header">Configuraciones</li>
   <li class="nav-item has-treeview">
     <li class="nav-item">
       <a href="https://saludapos.com/JefaturaEnfermeria/Roles" class="nav-link">
@@ -773,7 +773,7 @@
     </li>
   </li>
 </div>
- -->
+
           
          <li class="nav-header">Control de enfermería <i class="fas fa-user-nurse"></i></li>
 <li class="nav-item has-treeview">
