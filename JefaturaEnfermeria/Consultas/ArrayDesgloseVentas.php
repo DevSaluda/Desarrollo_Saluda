@@ -47,6 +47,8 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 WHERE 
+Ventas_POS.Fecha_venta >= DATE_FORMAT(NOW(), '%Y-%m-01') -- Primer día del mes en curso
+AND Ventas_POS.Fecha_venta <= LAST_DAzY(NOW()) -- Último día del mes en curso
 AND Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
 AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
 AND Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID;
