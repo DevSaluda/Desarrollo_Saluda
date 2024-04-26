@@ -44,7 +44,7 @@
           }
                         ?>
        
-       </select>
+        ?>  </select>
     </div>
     
     <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
