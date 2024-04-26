@@ -7,7 +7,7 @@ include "db_connection.php";
         
         
 
-        $sql = "UPDATE `PersonalPOS` 
+        $sql = "UPDATE `PersonalPOS`
         SET 
         `Fk_Sucursal`='$Fk_Sucursal' 
         WHERE Pos_ID=$Pos_ID";
@@ -19,4 +19,5 @@ include "db_connection.php";
 	}
 	mysqli_close($conn);
 
+        
 ?>
