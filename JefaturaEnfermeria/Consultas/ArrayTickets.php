@@ -42,9 +42,7 @@ $sql = "
         Ventas_POS
         JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
     WHERE
-        Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
-        AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-        AND Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
+        Ventas_POS.FormaDePago NOT LIKE '%credito%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
     GROUP BY
         Ventas_POS.Folio_Ticket
     ORDER BY
@@ -56,7 +54,7 @@ $sql = "
 $result = mysqli_query($conn, $sql);
  
 $c=0;
-$data = []; 
+ 
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
