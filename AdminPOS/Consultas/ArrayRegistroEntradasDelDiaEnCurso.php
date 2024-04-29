@@ -42,12 +42,12 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["PrecioCompra"] = $fila["Precio_C"];
     $data[$c]["PrecioVenta"] = $fila["Cargo_rol"];
     $data[$c]["Sucursal"] = $fila["Domicilio"];
-    $data[$c]["Turno"] = FechaCastellano($fila["FechaAsis"]);
+    $data[$c]["Turno"] = $fila["FechaAsis"];
     $data[$c]["Cantidad_Venta"] = $fila["FechaAsis"];
     $data[$c]["Importe"] = $fila["HoIngreso"];
     $data[$c]["Total_Venta"] = $fila["HoSalida"];
     $data[$c]["Descuento"] = $fila["EstadoAsis"];
-    $data[$c]["FormaPago"] = convertirDecimalAHoraMinutosSegundos($fila["totalhora_tr"]);
+    $data[$c]["FormaPago"] = $fila["totalhora_tr"];
    
     $c++; 
  
