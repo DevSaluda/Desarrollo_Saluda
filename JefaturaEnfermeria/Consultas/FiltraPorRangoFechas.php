@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(document).ready( function () {
     var printCounter = 0;
-    $('#Signos_VitalesV2').DataTable({
+    $('#Ventas_POS').DataTable({
       "order": [[ 0, "desc" ]],
       "lengthMenu": [[10,50, 150, 200, -1], [10,50, 150, 200, "Todos"]],   
         language: {
