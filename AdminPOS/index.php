@@ -34,10 +34,6 @@
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
 </head>
-<div id="loading-overlay">
-  <div class="loader"></div>
-  <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
-</div>
 <?php include_once ("Menu.php")?>
 
 <div class="container-fluid">
@@ -170,7 +166,17 @@
       
   <!-- Content Wrapper. Contains page content -->
   
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   
+  
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="color:black !important;">Entradas Personal</a>
+  </li>
+ 
+  <!-- <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-MoreVentas" role="tab" aria-controls="pills-contact" aria-selected="false" style="color:black !important;">Mas vendidos</a>
+  </li> -->
+</ul>
 
 <div class="tab-content" id="pills-tabContent">
 
@@ -188,9 +194,21 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </div>
 
 </div>
-<div id="RegistrosHuellas"></div>
+<div id="RegistrosEntradas"></div>
+  </div>
+  <!-- <div class="tab-pane fade" id="pills-MoreVentas" role="tabpanel" aria-labelledby="pills-profile-tab">
+  <div class="card text-center">
+  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+Productos mas vendidos  
   </div>
   
+  <div >
+  
+</div>
+
+</div>
+<div id="RegistrosMasVendidosDias"></div>
+  </div> -->
 </div>
 
     
@@ -232,16 +250,16 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 <!-- jQuery -->
 <script src="js/Logs.js"></script>
 
-<!-- <script src="js/EntradasDelPersonal.js"></script>
-<script src="js/RegistroMasVendidosDelDia.js"></script> -->
-
-<?php
-include "datatables.php"; 
-
-?>
-
+<script src="js/RegistroDiasEntradas.js"></script>
+<!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 <!-- Bootstrap -->
-
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -249,8 +267,13 @@ include "datatables.php";
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
-
-
+<script src="js/Cookies.js"></script>
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 
 </body>
