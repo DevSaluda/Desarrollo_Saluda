@@ -79,8 +79,8 @@ include "Consultas/ContadorIndex.php";
   <!-- /.container-fluid -->
 
   <?php include ("footer.php");
-    include ("JefaturaEnfermeria/Modales/ModalEnfermetosVigentes.php");
-    include ("JefaturaEnfermeria/Modales/ModalSignosVitales.php");
+    include ("Modales/ModalEnfermerosVigentes.php");
+    include ("Modales/ModalSignosVitales.php");
   ?>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
