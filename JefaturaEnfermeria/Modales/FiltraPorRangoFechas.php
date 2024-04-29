@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/Consultas/FiltraPorRangoFechas">
+ <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/Consultas/FiltraPorRangoFechas.php">
     
  
  
