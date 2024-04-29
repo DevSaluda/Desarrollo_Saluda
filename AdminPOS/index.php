@@ -34,6 +34,10 @@
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
 </head>
+<div id="loading-overlay">
+  <div class="loader"></div>
+  <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
+</div>
 <?php include_once ("Menu.php")?>
 
 <div class="container-fluid">
