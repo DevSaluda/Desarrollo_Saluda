@@ -43,7 +43,7 @@ include "Consultas/Consultas.php";
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
   Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
 </button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorRangoVentas" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#" class="btn btn-default">
   Filtrar por rango de fechas <i class="fas fa-prescription-bottle"></i>
 </button>
 </div>
@@ -53,15 +53,15 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+          if (isset($_POST['nombreprod']) && isset($_POST['codbarra'])) {
               // Obtener los valores del formulario
-              $mes = $_POST['Mes'];
-              $anual = $_POST['anual'];
+              $nombreprod = $_POST['nombreprod'];
+              $codbarra = $_POST['codbarra'];
 
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
-              echo "Mes seleccionado: $mes<br>";
-              echo "Año seleccionado: $anual<br>";
+              echo "nombreprod seleccionado: $nombreprod<br>";
+              echo "Año seleccionado: $codbarra<br>";
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
@@ -231,16 +231,16 @@ include "Consultas/Consultas.php";
             "order": [[ 0, "desc" ]],
             "ajax": {
               "type": "POST", // Especifica el método de envío de la solicitud AJAX
-              "url": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentasPorFormasDePago.php",
+              "url": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayProductos.php",
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
-        var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-        var anual = '<?php echo $anual; ?>'; // Obtén el valor de anual desde PHP
+        var nombreprod = '<?php echo $nombreprod; ?>'; // Obtén el valor de nombreprod desde PHP
+        var codbarra = '<?php echo $codbarra; ?>'; // Obtén el valor de codbarra desde PHP
 
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
-            "Mes": mes,
-            "anual": anual
+            "nombreprod": nombreprod,
+            "codbarra": codbarra
         };
 
         return dataToSend;
