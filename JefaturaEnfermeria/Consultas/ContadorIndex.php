@@ -19,8 +19,7 @@ $TotalGanancia = mysqli_fetch_assoc($resultset);
 
 $sql ="SELECT Estatus, ID_SignoV, COUNT(*) as SignosVitales 
 FROM Signos_VitalesV2 
-WHERE DATE(Fecha_Visita) = CURRENT_DATE
-";
+WHERE DATE(Fecha_Visita) = CURRENT_DATE";
 
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $TotalSignosVitales = mysqli_fetch_assoc($resultset);
