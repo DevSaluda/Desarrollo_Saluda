@@ -1,6 +1,6 @@
 <?php
 # Iniciando la variable de control que permitirá mostrar o no el modal
-$exibirModal = false;
+$exibirModal = true;
 # Verificando si existe o no la cookie
 if(!isset($_COOKIE["IngresoAdminEnfer"]))
 {
@@ -18,7 +18,7 @@ if(!isset($_COOKIE["IngresoAdminEnfer"]))
 }
 include "Consultas/Consultas.php";
 include "Consultas/ContadorIndex.php";
-include "Modales/ModalEnfermerosVigentes.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
