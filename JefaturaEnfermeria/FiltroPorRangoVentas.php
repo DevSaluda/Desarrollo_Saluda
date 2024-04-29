@@ -223,7 +223,7 @@ include "Consultas/Consultas.php";
 
         var tabla;
         $(document).ready(function() {
-          tabla = $('#Ventas_POS').DataTable({
+          tabla = $('#Productos').DataTable({
             "processing": true,
             "ordering": true,
             "stateSave": true,
