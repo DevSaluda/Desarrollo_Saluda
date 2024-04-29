@@ -188,17 +188,43 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </div>
 
 </div>
-<div id="RegistrosHuellas"></div>
-  </div>
-  
-</div>
 
-    
-</div></div>
+<div id="resultados_div" class="table-responsive"></div></div></div>
 
-</div></div>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'Consultas/consulta_api.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                var html = '<table id="resultados_tabla" class="display">';
+                html += '<thead><tr><th>ID</th><th>Cedula</th><th>Nombre</th><th>Sexo</th><th>Cargo</th><th>Domicilio</th><th>Fecha Asistencia</th><th>...</th></tr></thead>';
+                html += '<tbody>';
+                $.each(data, function(index, item){
+                    html += '<tr>';
+                    html += '<td>' + item.Id_Pernl + '</td>';
+                    html += '<td>' + item.Cedula + '</td>';
+                    html += '<td>' + item.Nombre_Completo + '</td>';
+                    html += '<td>' + item.Sexo + '</td>';
+                    html += '<td>' + item.Cargo_rol + '</td>';
+                    html += '<td>' + item.Domicilio + '</td>';
+                    html += '<td>' + item.FechaAsis + '</td>';
+                    // Continuar con las otras columnas...
+                    html += '</tr>';
+                });
+                html += '</tbody></table>';
+                $('#resultados_div').html(html);
 
-</div></div>
+                // Inicializar Datatables
+                $('#resultados_tabla').DataTable();
+            },
+            error: function(xhr, status, error){
+                console.error(error);
+            }
+        });
+    });
+</script>
 
             
          
@@ -232,8 +258,8 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 <!-- jQuery -->
 <script src="js/Logs.js"></script>
 
-<script src="js/EntradasDelPersonal.js"></script>
-<!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
+<!-- <script src="js/EntradasDelPersonal.js"></script>
+<script src="js/RegistroMasVendidosDelDia.js"></script> -->
 
 <?php
 include "datatables.php"; 
