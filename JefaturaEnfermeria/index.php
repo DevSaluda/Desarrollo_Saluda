@@ -18,7 +18,7 @@ if(!isset($_COOKIE["IngresoAdminEnfer"]))
 }
 include "Consultas/Consultas.php";
 include "Consultas/ContadorIndex.php";
-
+include "Modales/ModalEnfermerosVigentes.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
