@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['FechaInicio']) && isse
     $fechaFin = date('Y-m-d', strtotime($fechaFin));
 
     // Query SQL para filtrar por rango de fechas
-    $sql = "SELECT * FROM NombreDeTuTabla WHERE Fecha BETWEEN '$fechaInicio' AND '$fechaFin'";
+    $sql = "SELECT * FROM Ventas_POS WHERE Fecha_venta BETWEEN '$fechaInicio' AND '$fechaFin'";
     $result = mysqli_query($conn, $sql);
 
     // Aquí debes incluir tu código para manejar los resultados de la consulta, como mostrarlos en una tabla
