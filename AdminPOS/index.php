@@ -184,7 +184,7 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </div>
 
 </div>
-<div id="RegistrosEntradas"></div>
+<div id="Registros"></div>
   </div>
   
 </div>
