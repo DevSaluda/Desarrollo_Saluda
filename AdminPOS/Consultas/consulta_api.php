@@ -25,30 +25,75 @@ $sql = "SELECT
             DATE(a.FechaAsis) = CURDATE()";
 
 $result = $conn->query($sql);
-$data = '';
+?>
 
+<?php
 if ($result->num_rows > 0) {
-    $data .= '<table id="resultados_tabla" class="display">';
-    $data .= '<thead><tr><th>ID</th><th>Cedula</th><th>Nombre</th><th>Sexo</th><th>Cargo</th><th>Domicilio</th><th>Fecha Asistencia</th><th>...</th></tr></thead>';
-    $data .= '<tbody>';
-    while ($row = $result->fetch_assoc()) {
-        $data .= '<tr>';
-        $data .= '<td>' . $row['Id_Pernl'] . '</td>';
-        $data .= '<td>' . $row['Cedula'] . '</td>';
-        $data .= '<td>' . $row['Nombre_Completo'] . '</td>';
-        $data .= '<td>' . $row['Sexo'] . '</td>';
-        $data .= '<td>' . $row['Cargo_rol'] . '</td>';
-        $data .= '<td>' . $row['Domicilio'] . '</td>';
-        $data .= '<td>' . $row['FechaAsis'] . '</td>';
-        // Continuar con las otras columnas...
-        $data .= '</tr>';
+    echo '<div class="text-center">';
+    echo '<div class="table-responsive">';
+    echo '<table id="SalidaEmpleados" class="table table-hover">';
+    echo '<thead>';
+    echo '<th>ID</th>';
+    echo '<th>Nombre completo</th>';
+    echo '<th>Puesto</th>';
+    echo '<th>Sucursal</th>';
+    echo '<th>Fecha de asistencia</th>';
+    echo '<th>Fecha de corta</th>';
+    echo '<th>Hora de entrada</th>';
+    echo '<th>Hora de salida</th>';
+    echo '<th>Estado</th>';
+    echo '<th>Horas trabajadas</th>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    while ($Usuarios = $result->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>' . $Usuarios["Id_asis"] . '</td>';
+        echo '<td>' . $Usuarios["Nombre_Completo"] . '</td>';
+        echo '<td>' . $Usuarios["Cargo_rol"] . '</td>';
+        echo '<td>' . $Usuarios["Domicilio"] . '</td>';
+        echo '<td>' . fechaCastellano($Usuarios["FechaAsis"]) . '</td>';
+        echo '<td>' . $Usuarios["FechaAsis"] . '</td>';
+        echo '<td>' . $Usuarios["HoIngreso"] . '</td>';
+        echo '<td>' . $Usuarios["HoSalida"] . '</td>';
+        echo '<td>' . $Usuarios["EstadoAsis"] . '</td>';
+        echo '<td>' . convertirDecimalAHoraMinutosSegundos($Usuarios["totalhora_tr"]) . '</td>';
+        echo '</tr>';
     }
-    $data .= '</tbody></table>';
+
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
+    echo '</div>';
 } else {
-    $data .= 'No se encontraron resultados.';
+    echo '<p class="alert alert-warning">No hay resultados</p>';
 }
 
-$conn->close();
+function fechaCastellano($fecha)
+{
+    $fecha = substr($fecha, 0, 10);
+    $numeroDia = date('d', strtotime($fecha));
+    $dia = date('l', strtotime($fecha));
+    $mes = date('F', strtotime($fecha));
+    $anio = date('Y', strtotime($fecha));
+    $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+    $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+    $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+    $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+    return $nombredia . " " . $numeroDia . " de " . $nombreMes . " de " . $anio;
+}
 
-echo $data;
-?>
+function convertirDecimalAHoraMinutosSegundos($decimalHoras)
+{
+    $horas = floor($decimalHoras); // Parte entera: horas
+    $minutosDecimal = ($decimalHoras - $horas) * 60; // Decimal a minutos
+    $minutos = floor($minutosDecimal); // Parte entera: minutos
+    $segundosDecimal = ($minutosDecimal - $minutos) * 60; // Decimal a segundos
+    $segundos = round($segundosDecimal); // Redondear a segundos
+
+
+    return sprintf("%02d:%02d:%02d", $horas, $minutos, $segundos);  // Formatear como HH:MM:SS
+}
+
