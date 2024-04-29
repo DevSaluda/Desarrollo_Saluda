@@ -90,6 +90,7 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraPorMes.php");
   include ("Modales/FiltroPorProducto.php");
   include ("Modales/FiltroPorFormaDePago.php");
+  include ("Modales/FiltraPorRangoFechas.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
