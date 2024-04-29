@@ -1,22 +1,22 @@
 <?php
 
-  // # Iniciando la variable de control que permitirá mostrar o no el modal
-  // $exibirModal = false;
-  // # Verificando si existe o no la cookie
-  // if(!isset($_COOKIE["mostrarModal"]))
-  // {
-  //   # Caso no exista la cookie entra aqui
-  //   # Creamos la cookie con la duración que queramos
+  # Iniciando la variable de control que permitirá mostrar o no el modal
+  $exibirModal = false;
+  # Verificando si existe o no la cookie
+  if(!isset($_COOKIE["mostrarModal"]))
+  {
+    # Caso no exista la cookie entra aqui
+    # Creamos la cookie con la duración que queramos
      
-  //   //$expirar = 3600; // muestra cada 1 hora
-  //   //$expirar = 10800; // muestra cada 3 horas
-  //   //$expirar = 21600; //muestra cada 6 horas
-  //   $expirar = 43200; //muestra cada 12 horas
-  //   //$expirar = 86400;  // muestra cada 24 horas
-  //   setcookie('mostrarModal', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
-  //   # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
-  //   $exibirModal = true;
-  // }
+    //$expirar = 3600; // muestra cada 1 hora
+    //$expirar = 10800; // muestra cada 3 horas
+    //$expirar = 21600; //muestra cada 6 horas
+    $expirar = 43200; //muestra cada 12 horas
+    //$expirar = 86400;  // muestra cada 24 horas
+    setcookie('mostrarModal', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
+    # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
+    $exibirModal = true;
+  }
   include "Consultas/Consultas.php";
   include "Consultas/ContadorIndex.php";
 
@@ -193,7 +193,32 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </button>
 </div>
 
+</div>
+<div id="RegistrosEntradas"></div>
+  </div>
+  <!-- <div class="tab-pane fade" id="pills-MoreVentas" role="tabpanel" aria-labelledby="pills-profile-tab">
+  <div class="card text-center">
+  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+Productos mas vendidos  
+  </div>
+  
+  <div >
+  
+</div>
 
+</div>
+<div id="RegistrosMasVendidosDias"></div>
+  </div> -->
+</div>
+
+    
+</div></div>
+
+</div></div>
+
+</div></div>
+
+            
          
 
      
@@ -221,6 +246,18 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
   include ("footer.php");?>
 <!-- ./wrapper -->
 
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="js/Logs.js"></script>
+
+<script src="js/RegistroDiasEntradas.js"></script>
+<!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -241,7 +278,7 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 
 </body>
 </html>
-<!-- <?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
+<?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
 <script>
 $(document).ready(function()
 {
@@ -266,4 +303,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?> -->
+?>
