@@ -188,49 +188,17 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </div>
 
 </div>
-
-<div id="resultados_div" class="table-responsive">
-    <table id="SalidaEmpleados" class="display"></table>
+<div id="RegistrosHuellas"></div>
+  </div>
+  
 </div>
-<script>
-  $(document).ready(function(){
-    $('#SalidaEmpleados').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            url: 'Consultas/consulta_api.php',
-            type: 'POST'
-        },
-        "columns": [
-            { "data": "Id_asis" },
-            { "data": "Nombre_Completo" },
-            { "data": "Cargo_rol" },
-            { "data": "Domicilio" },
-            { "data": "FechaAsis" },
-            { "data": "HoIngreso" },
-            { "data": "HoSalida" },
-            { "data": "EstadoAsis" },
-            { "data": "totalhora_tr" }
-        ],
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "No se encontraron resultados",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrados de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-            }
-        }
-    });
-});
 
-</script>
+    
+</div></div>
 
+</div></div>
+
+</div></div>
 
             
          
@@ -264,8 +232,8 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 <!-- jQuery -->
 <script src="js/Logs.js"></script>
 
-<!-- <script src="js/EntradasDelPersonal.js"></script>
-<script src="js/RegistroMasVendidosDelDia.js"></script> -->
+<script src="js/EntradasDelPersonal.js"></script>
+<!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
 
 <?php
 include "datatables.php"; 
