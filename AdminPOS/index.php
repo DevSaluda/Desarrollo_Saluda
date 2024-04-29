@@ -228,7 +228,7 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 <!-- jQuery -->
 <script src="js/Logs.js"></script>
 
-<script src="js/RegistroDiasEntradas.js"></script>
+<script src="js/Registrodiariodehuellas.js"></script>
 <!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
 
 <?php

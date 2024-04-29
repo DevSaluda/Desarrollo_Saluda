@@ -1,4 +1,4 @@
-function CargaSignosVitales(){
+function Cargalashuellas(){
 
 
     $.post("https://saludapos.com/AdminPOS/Consultas/RegistroDeEntradasPorDiasHuellas.php","",function(data){
@@ -8,6 +8,6 @@ function CargaSignosVitales(){
   }
   
   
-  CargaSignosVitales();
+  Cargalashuellas();
 
   
