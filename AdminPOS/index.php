@@ -1,27 +1,7 @@
 <?php
-
-  # Iniciando la variable de control que permitirá mostrar o no el modal
-  $exibirModal = false;
-  # Verificando si existe o no la cookie
-  if(!isset($_COOKIE["mostrarModal"]))
-  {
-    # Caso no exista la cookie entra aqui
-    # Creamos la cookie con la duración que queramos
-     
-    //$expirar = 3600; // muestra cada 1 hora
-    //$expirar = 10800; // muestra cada 3 horas
-    //$expirar = 21600; //muestra cada 6 horas
-    $expirar = 43200; //muestra cada 12 horas
-    //$expirar = 86400;  // muestra cada 24 horas
-    setcookie('mostrarModal', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
-    # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
-    $exibirModal = true;
-  }
-  include "Consultas/Consultas.php";
-  include "Consultas/ContadorIndex.php";
+include "Consultas/Consultas.php";
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,235 +9,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?php echo $row['ID_H_O_D']?> PUNTO DE VENTA  </title>
+  <title>Ventas realizadas por  <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-  <!-- Font Awesome Icons -->
-  <?php include "Header.php"?>
+<?php include "Header.php"?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ <style>
+        .error {
+  color: red;
+  margin-left: 5px; 
+  
+}
+
+    </style>
 </head>
+<div id="loading-overlay">
+  <div class="loader"></div>
+  <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
+</div>
 <?php include_once ("Menu.php")?>
 
-<div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-         
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?php echo $CajasAbiertas['CajasAbiertas']?></h3>
-
-                <p>Cajas abiertas</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-cash-register"></i>
-              </div>
-              <a data-toggle="modal" data-target="#ConsultaCajas" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3><?php echo $Tickets['Folio_Ticket']?></h3>
-
-                <p>Productos vendidos</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-barcode"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#VentasProd" class="small-box-footer">Consultar Ventas <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-              <h3><?php echo $TraspasosPendientes['TraspasosPendientes']?></h3>
-                <p>Traspasos</p>
-
-               
-              </div>
-              <div class="icon">
-              <i class="fas fa-boxes"></i>
-              </div>
-              <a data-toggle="modal" data-target="#ConsultaTraspasos" class="small-box-footer">Ver traspasos <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-              <h3><?php echo $TotalGanancia['totaldia']?></h3>
-              <p>Ganancia global</p>
-               
-              </div>
-              <div class="icon">
-              <i class="fas fa-hand-holding-usd"></i>
-              </div>
-              <a data-toggle="modal" data-target="#TotalesporSucursalesindex" class="small-box-footer">Ver totales <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?php echo $TotalFarmaceuticos['Farmaceuticos']?></h3>
-
-                <p>Farmacéuticos <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-pills"></i>
-              </div>
-              <a data-toggle="modal" data-target="#FarmasVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
-
-                <p>Enfermeros <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-nurse"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>  
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <h3><?php echo $TotalMedicos['Medicos']?></h3>
-
-                <p>Medicos <br> vigentes</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-md"></i>
-              </div>
-                <a  data-toggle="modal" data-target="#MedVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-       
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-              <div class="inner">
-              <h3><?php echo $TotalLimpieza['Intendentes']?></h3>
-              <p>Intendencia/Limpieza <br> Vigentes</p>
-               
-              </div>
-              <div class="icon">
-              <i class="fas fa-hand-sparkles"></i>
-              </div>
-              <a data-toggle="modal" data-target="#LimpiezaVigente" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-      
-  <!-- Content Wrapper. Contains page content -->
-  
-  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  
-  
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="color:black !important;">Entradas Personal</a>
-  </li>
- 
-  <!-- <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-MoreVentas" role="tab" aria-controls="pills-contact" aria-selected="false" style="color:black !important;">Mas vendidos</a>
-  </li> -->
-</ul>
 
 <div class="tab-content" id="pills-tabContent">
-
-<!-- PRESENTACIONES -->
-<div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+<div class="card text-center">
+  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
+   Registro de ventas de Saluda al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
  
   <div >
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoFecha" class="btn btn-default">
-  Filtrar por fechas <i class="fas fa-calendar-week"></i>
+  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+</button>
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+  Busqueda por mes <i class="fas fa-calendar-week"></i>
+</button>
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
+  Filtrar por producto <i class="fas fa-prescription-bottle"></i>
+</button>
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
+  Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
+</button>
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#" class="btn btn-default">
+  Filtrar por rango de fechas <i class="fas fa-prescription-bottle"></i>
 </button>
 </div>
+</div>
+    
+<div id="TableVentasDelDia"></div>
 
 </div>
-<div id="RegistrosEntradas"></div>
-  </div>
-  <!-- <div class="tab-pane fade" id="pills-MoreVentas" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-Productos mas vendidos  
-  </div>
-  
-  <div >
-  
-</div>
 
-</div>
-<div id="RegistrosMasVendidosDias"></div>
-  </div> -->
-</div>
+<!-- PRESENTACIONES -->
+
+<!-- POR CADUCAR -->
+  
+ 
 
     
 </div></div>
 
-</div></div>
 
-</div></div>
 
-            
-         
+
 
      
   
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
+ 
   <!-- Main Footer -->
-  <?php include ("Modales/Ingreso.php");
-  include ("Modales/ConsultaCajasAbiertas.php");
-  include ("Modales/ModalConsultaVentas.php");
-  include ("Modales/ModalTraspasos.php");
-  include ("Modales/ModalTotalesSincortes.php");
-  include ("Modales/ModalFarmaceuticosVigentes.php");
-  include ("Modales/ModalEnfermerosVigentes.php");
-  include ("Modales/ModalMedicosVigentes.php");
-  include ("Modales/ModalLimpiezaVigentes.php");
-  include("Modales/FiltraEspecificamenteEntradas.php");
-  include("Modales/FiltraEspecificamenteSalidas.php");
-  include ("footer.php");?>
+<?php
+
+  include ("Modales/Error.php");
+  include ("Modales/Exito.php");
+  include ("Modales/ExitoActualiza.php");
+  include ("Modales/FiltraEspecificamente.php");
+  include ("Modales/FiltraFechasEspecialesVenta.php");
+  include ("Modales/FiltraPorMes.php");
+  include ("Modales/FiltroPorProducto.php");
+  include ("Modales/FiltroPorFormaDePago.php");
+include ("footer.php")?>
+
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="js/Logs.js"></script>
 
-<script src="js/RegistroDiasEntradas.js"></script>
-<!-- <script src="js/RegistroMasVendidosDelDia.js"></script> -->
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<script src="js/ControlVentas.js"></script>
+
+<script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
+<?php include "datatables.php"?>
+
+   <script>
+    $(document).ready(function() {
+    // Inicializar Select2
+    $('#buscador').select2({
+        ajax: {
+            url: 'Consultas/BuscarProductosParaFiltro.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        placeholder: 'Ingrese un código o nombre',
+        minimumInputLength: 1,
+        // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
+        select: function(event) {
+            var nombreProd = event.params.data.id; // Accedemos al nombre del producto
+            var codBarra = event.params.data.cod_barra; // Accedemos al código de barras
+            $('#nombreprod').val(nombreProd);
+            $('#codbarra').val(codBarra);
+        }
+    });
+});
+
+   </script>
+
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -267,26 +139,28 @@ Productos mas vendidos
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
-<script src="js/Cookies.js"></script>
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="plugins/raphael/raphael.min.js"></script>
-<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-<!-- ChartJS -->
 
-</body>
-</html>
-<?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
-<script>
-$(document).ready(function()
-{
-  // id de nuestro modal
-  $("#Ingreso").modal("show");
+<!-- PAGE PLUGINS -->
+
+</body><script>const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const modal = document.getElementById("modal");
+
+openModalBtn.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
 });
 </script>
-<?php endif; ?>
+</html>
 <?php
 
 function fechaCastellano ($fecha) {
