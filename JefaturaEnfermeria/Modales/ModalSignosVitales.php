@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready( function () {
-    $('#SignosVitaless').DataTable({
+    $('#SignosVitalessssss').DataTable({
       "order": [[ 0, "desc" ]],
       "language": {
         "url": "Componentes/Spanish.json"
@@ -29,7 +29,8 @@ Signos_VitalesV2.Fecha_Visita,
 Signos_VitalesV2.Estatus,
 Signos_VitalesV2.CodigoEstatus,SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal
-FROM Signos_VitalesV2,SucursalesCorre WHERE DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND Signos_VitalesV2.Fk_Enfermero='".$row['Nombre_Apellidos']."' ";
+FROM Signos_VitalesV2,SucursalesCorre where DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND Signos_VitalesV2.Fk_Enfermero='".$row['Nombre_Apellidos']."' and Signos_VitalesV2.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
+AND Signos_VitalesV2.FK_ID_H_O_D='".$row['ID_H_O_D']."' ";
 $query = $conn->query($sql1);
 ?>
 
@@ -52,7 +53,7 @@ $query = $conn->query($sql1);
          <div class="text-center">
          <?php if($query->num_rows>0):?>
   <div class="text-center">
-  <table id="SignosVitaless" class="table ">
+  <table id="SignosVitalessssss" class="table ">
 <thead><th>Folio</th>
     <th>Nombre </th>
     <th>Sucursal</th>
