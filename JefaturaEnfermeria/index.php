@@ -58,7 +58,7 @@ include "Consultas/ContadorIndex.php";
           <div class="icon">
             <i class="fas fa-file-medical-alt"></i>
           </div>
-          <a  data-toggle="modal" data-target="#SignosVitalesModal" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+          <a  data-toggle="modal" data-target="#ModalSignosVitales" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
     </div>
