@@ -26,7 +26,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " name="Fecha1">
+  <input type="date" class="form-control " name="Mes">
     </div>
     </div>
     
@@ -35,7 +35,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " name="Fecha2">
+  <input type="date" class="form-control " name="anual">
     </div>
     
 
@@ -47,7 +47,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <select name="FormaPago" id="formapago" class="form-control">
+  <select name="forma" id="formapago" class="form-control">
   <option value="">Seleccione una forma de pago:</option>
         <?php
           $query = $conn -> query ("SELECT DISTINCT FormaDePago FROM Ventas_POS GROUP BY FormaDePago");

@@ -6,11 +6,11 @@ include "Consultas.php";
 // Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si las variables están seteadas y no son nulas
-    if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+    if (isset($_POST['Mes']) && isset($_POST['anual'])&& isset($_POST['forma'])) {
         // Obtén los valores del formulario
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
-
+        $forma = $_POST['forma'];
         // Concatena los valores en la consulta SQL
         $sql = "SELECT DISTINCT
                 Ventas_POS.Venta_POS_ID,
@@ -56,7 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE 
                 YEAR(Ventas_POS.Fecha_venta) = $anual
-                AND MONTH(Ventas_POS.Fecha_venta) = $mes";
+                AND MONTH(Ventas_POS.Fecha_venta) = $mes
+                AND Ventas_POS.FormaDePago = $forma";
 
         $result = mysqli_query($conn, $sql);
 
