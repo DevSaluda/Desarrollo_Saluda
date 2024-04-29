@@ -14,9 +14,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <label for="buscador">Seleccione un producto a buscar</label>
-                                <select class="form-control" id="buscador" style="width: 300px;">
-                                    <option value="">Ingrese un código o nombre</option>
-                                </select>
+                                <label for="buscador">Ingrese un codigo o nombre</label>
                             </div>
                         </div>
 
