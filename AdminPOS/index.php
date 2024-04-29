@@ -36,7 +36,207 @@
 </head>
 <?php include_once ("Menu.php")?>
 
+<div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+         
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $CajasAbiertas['CajasAbiertas']?></h3>
 
+                <p>Cajas abiertas</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-cash-register"></i>
+              </div>
+              <a data-toggle="modal" data-target="#ConsultaCajas" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3><?php echo $Tickets['Folio_Ticket']?></h3>
+
+                <p>Productos vendidos</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-barcode"></i>
+              </div>
+                <a  data-toggle="modal" data-target="#VentasProd" class="small-box-footer">Consultar Ventas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+              <h3><?php echo $TraspasosPendientes['TraspasosPendientes']?></h3>
+                <p>Traspasos</p>
+
+               
+              </div>
+              <div class="icon">
+              <i class="fas fa-boxes"></i>
+              </div>
+              <a data-toggle="modal" data-target="#ConsultaTraspasos" class="small-box-footer">Ver traspasos <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+              <h3><?php echo $TotalGanancia['totaldia']?></h3>
+              <p>Ganancia global</p>
+               
+              </div>
+              <div class="icon">
+              <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <a data-toggle="modal" data-target="#TotalesporSucursalesindex" class="small-box-footer">Ver totales <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $TotalFarmaceuticos['Farmaceuticos']?></h3>
+
+                <p>Farmacéuticos <br> vigentes</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-pills"></i>
+              </div>
+              <a data-toggle="modal" data-target="#FarmasVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $TotalEnfermeros['Enfermeros']?></h3>
+
+                <p>Enfermeros <br> vigentes</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-user-nurse"></i>
+              </div>
+                <a  data-toggle="modal" data-target="#EnferVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>  
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?php echo $TotalMedicos['Medicos']?></h3>
+
+                <p>Medicos <br> vigentes</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-user-md"></i>
+              </div>
+                <a  data-toggle="modal" data-target="#MedVigentes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+       
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+              <h3><?php echo $TotalLimpieza['Intendentes']?></h3>
+              <p>Intendencia/Limpieza <br> Vigentes</p>
+               
+              </div>
+              <div class="icon">
+              <i class="fas fa-hand-sparkles"></i>
+              </div>
+              <a data-toggle="modal" data-target="#LimpiezaVigente" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+      
+  <!-- Content Wrapper. Contains page content -->
+  
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  
+  
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="color:black !important;">Entradas Personal</a>
+  </li>
+ 
+  <!-- <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-MoreVentas" role="tab" aria-controls="pills-contact" aria-selected="false" style="color:black !important;">Mas vendidos</a>
+  </li> -->
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+
+<!-- PRESENTACIONES -->
+<div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+  <div class="card text-center">
+  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  </div>
+ 
+  <div >
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoFecha" class="btn btn-default">
+  Filtrar por fechas <i class="fas fa-calendar-week"></i>
+</button>
+</div>
+
+
+         
+
+     
+  
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <?php include ("Modales/Ingreso.php");
+  include ("Modales/ConsultaCajasAbiertas.php");
+  include ("Modales/ModalConsultaVentas.php");
+  include ("Modales/ModalTraspasos.php");
+  include ("Modales/ModalTotalesSincortes.php");
+  include ("Modales/ModalFarmaceuticosVigentes.php");
+  include ("Modales/ModalEnfermerosVigentes.php");
+  include ("Modales/ModalMedicosVigentes.php");
+  include ("Modales/ModalLimpiezaVigentes.php");
+  include("Modales/FiltraEspecificamenteEntradas.php");
+  include("Modales/FiltraEspecificamenteSalidas.php");
+  include ("footer.php");?>
+<!-- ./wrapper -->
+
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+<script src="js/Cookies.js"></script>
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 
 </body>
