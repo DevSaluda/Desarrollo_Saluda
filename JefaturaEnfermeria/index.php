@@ -10,7 +10,7 @@ if(!isset($_COOKIE["IngresoAdminEnfer"]))
   //$expirar = 3600; // muestra cada 1 hora
   //$expirar = 10800; // muestra cada 3 horas
   //$expirar = 21600; //muestra cada 6 horas
-  $expirar = 43200; //muestra cada 12 horas
+  $expirar = 200; //muestra cada 12 horas
   //$expirar = 86400;  // muestra cada 24 horas
   setcookie('IngresoAdminEnfer', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
   # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
