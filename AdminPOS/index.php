@@ -193,47 +193,42 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
     <table id="SalidaEmpleados" class="display"></table>
 </div>
 <script>
-   $(document).ready(function(){
-    $.ajax({
-        url: 'Consultas/consulta_api.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data){
-            $('#SalidaEmpleados').DataTable({
-                data: data,
-                columns: [
-                    { data: 'Id_asis' },
-                    { data: 'Nombre_Completo' },
-                    { data: 'Cargo_rol' },
-                    { data: 'Domicilio' },
-                    { data: 'FechaAsis' },
-                    { data: 'FechaAsis' }, // Aquí puedes cambiar el formato de fecha si lo deseas
-                    { data: 'HoIngreso' },
-                    { data: 'HoSalida' },
-                    { data: 'EstadoAsis' },
-                    { data: 'totalhora_tr' }
-                ],
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrados de _MAX_ registros totales)",
-                    "search": "Buscar:",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
+  $(document).ready(function(){
+    $('#SalidaEmpleados').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            url: 'Consultas/consulta_api.php',
+            type: 'POST'
         },
-        error: function(xhr, status, error){
-            console.error(error);
+        "columns": [
+            { "data": "Id_asis" },
+            { "data": "Nombre_Completo" },
+            { "data": "Cargo_rol" },
+            { "data": "Domicilio" },
+            { "data": "FechaAsis" },
+            { "data": "HoIngreso" },
+            { "data": "HoSalida" },
+            { "data": "EstadoAsis" },
+            { "data": "totalhora_tr" }
+        ],
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrados de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
         }
     });
 });
+
 </script>
 
 

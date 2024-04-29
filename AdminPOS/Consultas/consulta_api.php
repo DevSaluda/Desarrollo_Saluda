@@ -1,5 +1,20 @@
 <?php
 include("db_connection_Huellas.php");
+
+// Definir las columnas que se pueden ordenar
+$sortable_columns = array(
+    'Id_asis',
+    'Nombre_Completo',
+    'Cargo_rol',
+    'Domicilio',
+    'FechaAsis',
+    'HoIngreso',
+    'HoSalida',
+    'EstadoAsis',
+    'totalhora_tr'
+);
+
+// Configurar la consulta base
 $sql = "SELECT
             p.Id_pernl AS Id_Pernl,
             p.Cedula AS Cedula,
@@ -20,80 +35,46 @@ $sql = "SELECT
         FROM
             u155356178_SaludaHuellas.personal p
         JOIN u155356178_SaludaHuellas.asistenciaper a
-            ON a.Id_Pernl = p.Id_pernl
-        WHERE
-            DATE(a.FechaAsis) = CURDATE()";
+            ON a.Id_Pernl = p.Id_pernl";
 
+// Filtrar por fecha
+$sql .= " WHERE DATE(a.FechaAsis) = CURDATE()";
+
+// Obtener el número total de registros (sin paginación)
+$total_records = $conn->query($sql)->num_rows;
+
+// Obtener los parámetros de DataTables
+$draw = $_POST['draw'];
+$start = $_POST['start'];
+$length = $_POST['length'];
+$search = $_POST['search']['value'];
+$order_column = $_POST['order'][0]['column'];
+$order_dir = $_POST['order'][0]['dir'];
+
+// Construir la consulta para ordenar y paginar los datos
+$order_by = isset($sortable_columns[$order_column]) ? $sortable_columns[$order_column] : null;
+$order_dir = ($order_dir == 'desc') ? 'DESC' : 'ASC';
+$sql .= " ORDER BY $order_by $order_dir";
+$sql .= " LIMIT $start, $length";
+
+// Ejecutar la consulta
 $result = $conn->query($sql);
+
+// Construir el array de datos para DataTables
+$data = array();
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
+
+// Preparar la respuesta JSON
+$response = array(
+    "draw" => intval($draw),
+    "recordsTotal" => $total_records,
+    "recordsFiltered" => $total_records,
+    "data" => $data
+);
+
+// Devolver la respuesta JSON
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>
-
-<?php
-if ($result->num_rows > 0) {
-    echo '<div class="text-center">';
-    echo '<div class="table-responsive">';
-    echo '<table id="SalidaEmpleados" class="table table-hover">';
-    echo '<thead>';
-    echo '<th>ID</th>';
-    echo '<th>Nombre completo</th>';
-    echo '<th>Puesto</th>';
-    echo '<th>Sucursal</th>';
-    echo '<th>Fecha de asistencia</th>';
-    echo '<th>Fecha de corta</th>';
-    echo '<th>Hora de entrada</th>';
-    echo '<th>Hora de salida</th>';
-    echo '<th>Estado</th>';
-    echo '<th>Horas trabajadas</th>';
-    echo '</thead>';
-    echo '<tbody>';
-
-    while ($Usuarios = $result->fetch_assoc()) {
-        echo '<tr>';
-        echo '<td>' . $Usuarios["Id_asis"] . '</td>';
-        echo '<td>' . $Usuarios["Nombre_Completo"] . '</td>';
-        echo '<td>' . $Usuarios["Cargo_rol"] . '</td>';
-        echo '<td>' . $Usuarios["Domicilio"] . '</td>';
-        echo '<td>' . fechaCastellano($Usuarios["FechaAsis"]) . '</td>';
-        echo '<td>' . $Usuarios["FechaAsis"] . '</td>';
-        echo '<td>' . $Usuarios["HoIngreso"] . '</td>';
-        echo '<td>' . $Usuarios["HoSalida"] . '</td>';
-        echo '<td>' . $Usuarios["EstadoAsis"] . '</td>';
-        echo '<td>' . convertirDecimalAHoraMinutosSegundos($Usuarios["totalhora_tr"]) . '</td>';
-        echo '</tr>';
-    }
-
-    echo '</tbody>';
-    echo '</table>';
-    echo '</div>';
-    echo '</div>';
-} else {
-    echo '<p class="alert alert-warning">No hay resultados</p>';
-}
-
-function fechaCastellano($fecha)
-{
-    $fecha = substr($fecha, 0, 10);
-    $numeroDia = date('d', strtotime($fecha));
-    $dia = date('l', strtotime($fecha));
-    $mes = date('F', strtotime($fecha));
-    $anio = date('Y', strtotime($fecha));
-    $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-    $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-    $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-    $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-    $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-    return $nombredia . " " . $numeroDia . " de " . $nombreMes . " de " . $anio;
-}
-
-function convertirDecimalAHoraMinutosSegundos($decimalHoras)
-{
-    $horas = floor($decimalHoras); // Parte entera: horas
-    $minutosDecimal = ($decimalHoras - $horas) * 60; // Decimal a minutos
-    $minutos = floor($minutosDecimal); // Parte entera: minutos
-    $segundosDecimal = ($minutosDecimal - $minutos) * 60; // Decimal a segundos
-    $segundos = round($segundosDecimal); // Redondear a segundos
-
-
-    return sprintf("%02d:%02d:%02d", $horas, $minutos, $segundos);  // Formatear como HH:MM:SS
-}
-
