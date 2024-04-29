@@ -1,250 +1,95 @@
-<style>
-  /* Personalizar el diseño de la paginación con CSS */
-  .dataTables_wrapper .dataTables_paginate {
-    text-align: center !important; /* Centrar los botones de paginación */
-    margin-top: 10px !important;
-  }
-
-  .dataTables_paginate .paginate_button {
-    padding: 5px 10px !important;
-    border: 1px solid #007bff !important;
-    margin: 2px !important;
-    cursor: pointer !important;
-    font-size: 16px !important;
-    color: #007bff !important;
-    background-color: #fff !important;
-  }
-
-  /* Cambiar el color del paginado seleccionado */
-  .dataTables_paginate .paginate_button.current {
-    background-color: #007bff !important;
-    color: #fff !important;
-    border-color: #007bff !important;
-  }
-
-  /* Cambiar el color del hover */
-  .dataTables_paginate .paginate_button:hover {
-    background-color: #C80096 !important;
-    color: #fff !important;
-    border-color: #C80096 !important;
-  }
-</style>
-
-<style>
-  /* Estilos personalizados para la tabla */
-  #Productos th {
-    font-size: 12px; /* Tamaño de letra para los encabezados */
-    padding: 4px; /* Ajustar el espaciado entre los encabezados */
-    white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
-  }
-</style>
-
-<style>
-  /* Estilos para la tabla */
-  #Productos {
-    font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
-    border-collapse: collapse; /* Colapsar los bordes de las celdas */
-    width: 100%;
-    text-align: center; /* Centrar el contenido de las celdas */
-  }
-
-  #Productos th {
-    font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
-    background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
-    color: white; /* Cambiar el color del texto a blanco para contrastar */
-    padding: 10px; /* Ajustar el espaciado de los encabezados */
-  }
-
-  #Productos td {
-    font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
-    padding: 8px; /* Ajustar el espaciado de las celdas */
-    border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
-  }
-
-  /* Estilos para el botón de Excel */
-  .dt-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  .dt-buttons button {
-    font-size: 14px;
-    margin: 0 5px;
-    color: white; /* Cambiar el color del texto a blanco */
-    background-color: #fff; /* Cambiar el color de fondo a blanco */
-  }
-
- 
-</style>
-
-<style>
-  /* Estilos para la capa de carga */
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Asegurarse de que el overlay esté encima de todo */
-    display: none; /* Ocultar inicialmente el overlay */
-  }
-
-  /* Estilo para el ícono de carga */
-  .loader {
-    border: 6px solid #f3f3f3; /* Color del círculo externo */
-    border-top: 6px solid #C80096; /* Color del círculo interno */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite; /* Animación de rotación */
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
-
-<script>
-  // Definir una lista de mensajes para el mensaje de carga
-  var mensajesCarga = [
-    "Consultando ventas...",
-    "Estamos realizando la búsqueda...",
-    "Cargando datos...",
-    "Procesando la información...",
-    "Espere un momento...",
-    "Cargando... ten paciencia, incluso los planetas tardaron millones de años en formarse.",
-
-"¡Espera un momento! Estamos contando hasta el infinito... otra vez.",
-
-"¿Sabías que los pingüinos también tienen que esperar mientras cargan su comida?",
-
-"¡Zapateando cucarachas de carga! ¿Quién necesita un exterminador?",
-
-"Cargando... ¿quieres un chiste para hacer más amena la espera? ¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
-
-"¡Alerta! Un koala está jugando con los cables de carga. Espera un momento mientras lo persuadimos.",
-
-"¿Sabías que las tortugas cargan a una velocidad épica? Bueno, estamos intentando superarlas.",
-
-"¡Espera un instante! Estamos pidiendo ayuda a los unicornios para acelerar el proceso.",
-
-"Cargando... mientras nuestros programadores disfrutan de una buena taza de café.",
-"Cargando... No estamos seguros de cómo llegamos aquí, pero estamos trabajando en ello.",
-
-"Estamos contando en binario... 10%, 20%, 110%... espero que esto no sea un error de desbordamiento.",
-
-"Cargando... mientras cazamos pokémons para acelerar el proceso.",
-
-"Error 404: Mensaje gracioso no encontrado. Estamos trabajando en ello.",
-
-"Cargando... ¿Sabías que los programadores también tienen emociones? Bueno, nosotros tampoco.",
-
-"Estamos buscando la respuesta a la vida, el universo y todo mientras cargamos... Pista: es un número entre 41 y 43.",
-
-"Cargando... mientras los gatos toman el control. ¡Meowtrix está en marcha!",
-
-"Estamos ajustando tu espera a la velocidad de la luz. Aún no es suficientemente rápida, pero pronto llegaremos.",
-
-"Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
-
-"Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
-  ];
-
-  // Función para mostrar el mensaje de carga con un texto aleatorio
-  function mostrarCargando(event, settings) {
-    var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
-    var mensaje = mensajesCarga[randomIndex];
-    document.getElementById('loading-text').innerText = mensaje;
-    document.getElementById('loading-overlay').style.display = 'flex';
-  }
-
-  // Función para ocultar el mensaje de carga
-  function ocultarCargando() {
-    document.getElementById('loading-overlay').style.display = 'none';
-  }
-  
-
-tabla = $('#Productos').DataTable({
-
- "bProcessing": true,
- "ordering": true,
- "stateSave":true,
- "bAutoWidth": true,
- "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayRegistroEntradasDelPersonal.php",
- "aoColumns": [
-       { mData: 'Cod_Barra' },
-       { mData: 'Nombre_Prod' },
-       { mData: 'PrecioCompra' },
-       { mData: 'PrecioVenta' },
-       { mData: 'Sucursal' },
-       { mData: 'Turno' },
-       { mData: 'Cantidad_Venta' },
-       { mData: 'Total_Venta' },
-       { mData: 'Importe' },
-       { mData: 'Descuento' },
-       { mData: 'FormaPago' },
-      
-      
-  
-      ],
-     
-    
-      "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
-  
-      "language": {
-      "lengthMenu": "Mostrar _MENU_ registros",
-      "sPaginationType": "extStyle",
-      "zeroRecords": "No se encontraron resultados",
-      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sSearch": "Buscar:",
-      "paginate": {
-        "first": '<i class="fas fa-angle-double-left"></i>',
-        "last": '<i class="fas fa-angle-double-right"></i>',
-        "next": '<i class="fas fa-angle-right"></i>',
-        "previous": '<i class="fas fa-angle-left"></i>'
-      },
-      "processing": function () {
-        mostrarCargando();
-      }
-    },
-    "initComplete": function() {
-      // Al completar la inicialización de la tabla, ocultar el mensaje de carga
-      ocultarCargando();
-    },
-    // Para personalizar el estilo del botón de Excel
-    "buttons": [
-      {
-        extend: 'excelHtml5',
-        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-        titleAttr: 'Exportar a Excel',
-        title: 'registro de ventas ',
-        className: 'btn btn-success',
-        exportOptions: {
-          columns: ':visible' // Exportar solo las columnas visibles
-        }
-      }
-    ],
-    // Personalizar la posición de los elementos del encabezado
-    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
-    "responsive": true
-  });
-
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#SalidaEmpleados').DataTable({
+      "order": [[ 0, "desc" ]],
+      "lengthMenu": [[10,50, 150, 200, -1], [10,50, 150, 200, "Todos"]],   
+        language: {
+            "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast":"Último",
+                    "sNext":"Siguiente",
+                    "sPrevious": "Anterior"
+			     },
+			     "sProcessing":"Procesando...",
+            },
+          
+        //para usar los botones   
+        responsive: "true",
+          dom: "B<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+                title: 'Entradas del personal ',
+				className: 'btn btn-success'
+			},
+			{
+				extend:    'pdfHtml5',
+				text:      'Exportar a PDF <i class="fas fa-file-pdf"></i> ',
+				titleAttr: 'Exportar a PDF',
+                title: 'Entradas del personal ',
+				className: 'btn btn-danger '
+			},
+		
+        ],
+       
+   
+	   
+        	        
+    });     
+});
+   
+	  
+	 
 </script>
-<div class="text-center">
-	<div class="table-responsive">
-	<table  id="Productos" class="hover" style="width:100%">
-<thead>
+<?php
 
-<th>ID</th>
+include("db_connection_Huellas.php");
+
+
+
+$user_id=null;
+//$sql1="SELECT * FROM Reloj_ChecadorV2 WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')  UNION ALL SELECT * FROM Reloj_ChecadorV2_Salidas WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') ORDER BY Nombre";
+$sql1 = "SELECT
+    p.Id_pernl AS Id_Pernl,
+    p.Cedula AS Cedula,
+    p.Nombre_Completo AS Nombre_Completo,
+    p.Sexo AS Sexo,
+    p.Cargo_rol AS Cargo_rol,
+    p.Domicilio AS Domicilio,
+    a.Id_asis AS Id_asis,
+    a.FechaAsis AS FechaAsis,
+    a.Nombre_dia AS Nombre_dia,
+    a.HoIngreso AS HoIngreso,
+    a.HoSalida AS HoSalida,
+    a.Tardanzas AS Tardanzas,
+    a.Justifacion AS Justifacion,
+    a.tipoturno AS tipoturno,
+    a.EstadoAsis AS EstadoAsis,
+    a.totalhora_tr AS totalhora_tr
+FROM
+u155356178_SaludaHuellas.personal p
+JOIN u155356178_SaludaHuellas.asistenciaper a
+    ON a.Id_Pernl = p.Id_pernl
+WHERE
+    a.FechaAsis = CURDATE()"; 
+$query = $conn->query($sql1);
+?>
+
+<?php if($query->num_rows>0):?>
+  <div class="text-center">
+	<div class="table-responsive">
+	<table  id="SalidaEmpleados" class="table table-hover">
+<thead>
+  
+    <th>ID</th>
     <th>Nombre completo</th>
     <th>Puesto</th>
     <th>Sucursal</th>
@@ -257,8 +102,54 @@ tabla = $('#Productos').DataTable({
 
 
 </thead>
+<?php while ($Usuarios=$query->fetch_array()):?>
+<tr>
+  <td><?php echo $Usuarios["Id_asis"]; ?></td>
+  <td><?php echo $Usuarios["Nombre_Completo"]; ?></td>
+  <td><?php echo $Usuarios["Cargo_rol"]; ?></td>
+  <td><?php echo $Usuarios["Domicilio"]; ?></td>
+  <td><?php echo FechaCastellano($Usuarios["FechaAsis"]); ?></td>
+  <td><?php echo $Usuarios["FechaAsis"]; ?></td>
+  <td><?php echo $Usuarios["HoIngreso"]; ?></td>
+  <td><?php echo $Usuarios["HoSalida"]; ?></td>
+  <td><?php echo $Usuarios["EstadoAsis"]; ?></td>
+  <td><?php echo convertirDecimalAHoraMinutosSegundos($Usuarios["totalhora_tr"]); ?></td>
 
+		
+</tr>
+<?php endwhile;?>
+</table>
 </div>
 </div>
+<?php else:?>
+	<p class="alert alert-warning">No hay resultados</p>
+<?php endif;?>
+<?php
+
+function fechaCastellano ($fecha) {
+  $fecha = substr($fecha, 0, 10);
+  $numeroDia = date('d', strtotime($fecha));
+  $dia = date('l', strtotime($fecha));
+  $mes = date('F', strtotime($fecha));
+  $anio = date('Y', strtotime($fecha));
+  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+}
+
+function convertirDecimalAHoraMinutosSegundos($decimalHoras) {
+  $horas = floor($decimalHoras);  // Parte entera: horas
+  $minutosDecimal = ($decimalHoras - $horas) * 60;  // Decimal a minutos
+  $minutos = floor($minutosDecimal);  // Parte entera: minutos
+  $segundosDecimal = ($minutosDecimal - $minutos) * 60;  // Decimal a segundos
+  $segundos = round($segundosDecimal);  // Redondear a segundos
+
+  return sprintf("%02d:%02d:%02d", $horas, $minutos, $segundos);  // Formatear como HH:MM:SS
+}
 
 
+?>
