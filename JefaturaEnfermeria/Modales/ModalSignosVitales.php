@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready( function () {
-    $('#SignosVitalessssss').DataTable({
+    $('#SignosVitaless').DataTable({
       "order": [[ 0, "desc" ]],
       "language": {
         "url": "Componentes/Spanish.json"
@@ -53,7 +53,7 @@ $query = $conn->query($sql1);
          <div class="text-center">
          <?php if($query->num_rows>0):?>
   <div class="text-center">
-  <table id="SignosVitalessssss" class="table ">
+  <table id="SignosVitaless" class="table ">
 <thead><th>Folio</th>
     <th>Nombre </th>
     <th>Sucursal</th>
