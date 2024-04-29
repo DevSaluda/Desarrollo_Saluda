@@ -1,5 +1,5 @@
 <!-- Ajustes en el HTML -->
-<div class="modal fade bd-example-modal-xl" id="FiltroPorProducto" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl" id="" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success">
         <div class="modal-content">
             <div class="text-center">
