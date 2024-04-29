@@ -190,7 +190,7 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 </div>
 
 <div id="resultados_div" class="table-responsive">
-    <?php include 'consulta_api.php'; ?>
+    <?php include 'Consultas/consulta_api.php'; ?>
 </div>
 
 <script>
