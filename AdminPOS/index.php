@@ -189,54 +189,28 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 
 </div>
 
-<div id="resultados_div" class="table-responsive"></div>
+<div id="resultados_div" class="table-responsive">
+    <?php include 'consulta_api.php'; ?>
+</div>
 
 <script>
     $(document).ready(function(){
-        $.ajax({
-            url: 'consulta_api.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data){
-                var html = '<table id="resultados_tabla" class="display">';
-                html += '<thead><tr><th>ID</th><th>Cedula</th><th>Nombre</th><th>Sexo</th><th>Cargo</th><th>Domicilio</th><th>Fecha Asistencia</th><th>...</th></tr></thead>';
-                html += '<tbody>';
-                $.each(data, function(index, item){
-                    html += '<tr>';
-                    html += '<td>' + item.Id_Pernl + '</td>';
-                    html += '<td>' + item.Cedula + '</td>';
-                    html += '<td>' + item.Nombre_Completo + '</td>';
-                    html += '<td>' + item.Sexo + '</td>';
-                    html += '<td>' + item.Cargo_rol + '</td>';
-                    html += '<td>' + item.Domicilio + '</td>';
-                    html += '<td>' + item.FechaAsis + '</td>';
-                    // Continuar con las otras columnas...
-                    html += '</tr>';
-                });
-                html += '</tbody></table>';
-                $('#resultados_div').html(html);
-
-                // Inicializar Datatables con los estilos
-                $('#resultados_tabla').DataTable({
-                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                    "language": {
-                        "lengthMenu": "Mostrar _MENU_ registros por página",
-                        "zeroRecords": "No se encontraron resultados",
-                        "info": "Mostrando página _PAGE_ de _PAGES_",
-                        "infoEmpty": "No hay registros disponibles",
-                        "infoFiltered": "(filtrados de _MAX_ registros totales)",
-                        "search": "Buscar:",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Último",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        }
-                    }
-                });
-            },
-            error: function(xhr, status, error){
-                console.error(error);
+        // Inicializar Datatables con los estilos
+        $('#resultados_tabla').DataTable({
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrados de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
         });
     });
