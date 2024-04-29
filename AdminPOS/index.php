@@ -1,22 +1,22 @@
 <?php
 
-  # Iniciando la variable de control que permitirá mostrar o no el modal
-  $exibirModal = false;
-  # Verificando si existe o no la cookie
-  if(!isset($_COOKIE["mostrarModal"]))
-  {
-    # Caso no exista la cookie entra aqui
-    # Creamos la cookie con la duración que queramos
+  // # Iniciando la variable de control que permitirá mostrar o no el modal
+  // $exibirModal = false;
+  // # Verificando si existe o no la cookie
+  // if(!isset($_COOKIE["mostrarModal"]))
+  // {
+  //   # Caso no exista la cookie entra aqui
+  //   # Creamos la cookie con la duración que queramos
      
-    //$expirar = 3600; // muestra cada 1 hora
-    //$expirar = 10800; // muestra cada 3 horas
-    //$expirar = 21600; //muestra cada 6 horas
-    $expirar = 43200; //muestra cada 12 horas
-    //$expirar = 86400;  // muestra cada 24 horas
-    setcookie('mostrarModal', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
-    # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
-    $exibirModal = true;
-  }
+  //   //$expirar = 3600; // muestra cada 1 hora
+  //   //$expirar = 10800; // muestra cada 3 horas
+  //   //$expirar = 21600; //muestra cada 6 horas
+  //   $expirar = 43200; //muestra cada 12 horas
+  //   //$expirar = 86400;  // muestra cada 24 horas
+  //   setcookie('mostrarModal', 'SI', (time() + $expirar)); // mostrará cada 12 horas.
+  //   # Ahora nuestra variable de control pasará a tener el valor TRUE (Verdadero)
+  //   $exibirModal = true;
+  // }
   include "Consultas/Consultas.php";
   include "Consultas/ContadorIndex.php";
 
@@ -241,7 +241,7 @@ Registros del reloj checador de <?php echo $row['ID_H_O_D']?> al <?php echo Fech
 
 </body>
 </html>
-<?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
+<!-- <?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
 <script>
 $(document).ready(function()
 {
@@ -266,4 +266,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?>
+?> -->
