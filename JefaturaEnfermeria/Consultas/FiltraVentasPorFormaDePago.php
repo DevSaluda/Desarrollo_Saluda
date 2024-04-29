@@ -24,30 +24,23 @@ include "Consultas/Consultas.php";
   </div>
   <?php include_once ("Menu.php")?>
   <div class="tab-content" id="pills-tabContent">
-<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-   Registro de ventas de Saluda al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
- 
-  <div >
-  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-  Busqueda por mes <i class="fas fa-calendar-week"></i>
-</button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
-  Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-</button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
-  Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
-</button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#" class="btn btn-default">
-  Filtrar por rango de fechas <i class="fas fa-prescription-bottle"></i>
-</button>
-</div>
-</div>
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="card text-center">
+        <div class="card-header" style="background-color:#0057b8 !important;color: white;">
+          Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
+        </div>
+        <div >
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+          </button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+            Busqueda por mes <i class="fas fa-calendar-week"></i>
+          </button>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
+            Filtrar por producto <i class="fas fa-prescription-bottle"></i>
+          </button>
+        </div>
+      </div>
 
       <?php
       // Verificar si el formulario ha sido enviado
@@ -231,7 +224,7 @@ include "Consultas/Consultas.php";
             "order": [[ 0, "desc" ]],
             "ajax": {
               "type": "POST", // Especifica el método de envío de la solicitud AJAX
-              "url": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentasMes.php",
+              "url": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentasPorFormasDePago.php",
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
         var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
@@ -350,11 +343,6 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltroPorProducto.php");
   include ("footer.php");
   ?>
-
-<script src="js/ControlVentas.js"></script>
-
-<script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
-
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    

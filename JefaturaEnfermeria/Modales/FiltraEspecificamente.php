@@ -46,10 +46,10 @@
     <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
   <div>     </div>
   </div>  </div>
-      <button type="submit"  id="submit_registro" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
-          </form>
-       </div>
-       </div>
+      <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                                        </form>
+                                        </div>
+                                        </div>
      
     </div>
   </div>

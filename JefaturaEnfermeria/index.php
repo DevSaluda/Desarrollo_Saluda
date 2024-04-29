@@ -78,7 +78,10 @@ include "Consultas/ContadorIndex.php";
   </div>
   <!-- /.container-fluid -->
 
-  <?php include ("footer.php");?>
+  <?php include ("footer.php");
+    include ("Modales/ModalEnfermerosVigentes.php");
+    include ("Modales/ModalSignosVitales.php");
+  ?>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
