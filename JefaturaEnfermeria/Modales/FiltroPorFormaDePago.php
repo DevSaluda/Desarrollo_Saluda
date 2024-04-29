@@ -6,7 +6,7 @@
     
     <div class="text-center">
     <div class="modal-header">
-         <p class="heading lead">Filtra por Rango de Fecha<i class="fas fa-credit-card"></i></p>
+         <p class="heading lead">Filtra por forma de pago<i class="fas fa-credit-card"></i></p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true" class="white-text">&times;</span>

@@ -50,7 +50,7 @@ include "Consultas/Consultas.php";
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
   Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
 </button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="FiltraPorRangoFechas" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorRangoFechas" class="btn btn-default">
   Filtrar por rango de fechas <i class="fas fa-prescription-bottle"></i>
 </button>
 </div>
