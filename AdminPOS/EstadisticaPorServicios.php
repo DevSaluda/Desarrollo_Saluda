@@ -108,11 +108,11 @@ $(document).ready(function() {
     // Función para obtener los datos de venta del día en curso mediante AJAX
     function getSalesData() {
         $.ajax({
-            url: 'tu_servidor.php', // URL de tu backend que maneja la consulta SQL y devuelve los datos en formato JSON
+            url: 'Consultas/EstadisticaEntrada.php', // URL de tu backend que maneja la consulta SQL y devuelve los datos en formato JSON
             method: 'GET',
             dataType: 'json',
             success: function(response) {
-                renderChart(response);
+                renderCharts(response);
             },
             error: function(xhr, status, error) {
                 console.error('Error al obtener datos de ventas:', error);
@@ -120,9 +120,9 @@ $(document).ready(function() {
         });
     }
 
-    // Función para renderizar el gráfico de ventas por sucursal
-    function renderChart(data) {
-        // Crear un nuevo contenedor para el gráfico
+    // Función para renderizar los gráficos de ventas por sucursal y servicio
+    function renderCharts(data) {
+        // Crear un nuevo contenedor para los gráficos
         var chartsContainer = $('#chartsContainer');
 
         // Crear un nuevo canvas para el gráfico
@@ -132,9 +132,19 @@ $(document).ready(function() {
         // Obtener el contexto del lienzo del gráfico
         var salesChartCanvas = document.getElementById('salesChart').getContext('2d');
 
-        // Crear arrays para almacenar las etiquetas de las sucursales y los datos de ventas
-        var labels = Object.keys(data);
-        var values = Object.values(data);
+        // Crear un array para almacenar los datos de etiquetas y datos
+        var labels = [];
+        var dataValues = [];
+
+        // Recorrer los datos para cada sucursal
+        $.each(data, function(sucursal, servicios) {
+            // Recorrer los datos de servicio para la sucursal actual
+            $.each(servicios, function(servicio, total_vendido) {
+                // Agregar los datos de etiquetas y valores
+                labels.push(sucursal + ' - ' + servicio);
+                dataValues.push(total_vendido);
+            });
+        });
 
         // Crear el gráfico utilizando Chart.js
         var salesChart = new Chart(salesChartCanvas, {
@@ -143,8 +153,8 @@ $(document).ready(function() {
                 labels: labels,
                 datasets: [{
                     label: 'Total Vendido',
-                    data: values,
-                    backgroundColor: randomColor(), // Función para generar un color aleatorio
+                    data: dataValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
@@ -159,18 +169,9 @@ $(document).ready(function() {
         });
     }
 
-    // Función para generar un color aleatorio en formato RGBA
-    function randomColor() {
-        var r = Math.floor(Math.random() * 256);
-        var g = Math.floor(Math.random() * 256);
-        var b = Math.floor(Math.random() * 256);
-        return 'rgba(' + r + ', ' + g + ', ' + b + ', 0.2)';
-    }
-
     // Llamar a la función para obtener los datos de venta del día en curso
     getSalesData();
 });
-
 </script>
       </section>
       <aside class="control-sidebar control-sidebar-dark">
