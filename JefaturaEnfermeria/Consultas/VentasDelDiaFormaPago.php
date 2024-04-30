@@ -1,7 +1,7 @@
 
 <script>
 
-tabla = $('#ProductosEnfermeria').DataTable({
+tabla = $('#Productos').DataTable({
 
  "bProcessing": true,
  "ordering": true,
@@ -13,17 +13,22 @@ tabla = $('#ProductosEnfermeria').DataTable({
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
        { mData: 'FolioTicket' },
+       { mData: 'Sucursal' },
        { mData: 'Turno' },
        { mData: 'Cantidad_Venta' },
        { mData: 'Total_Venta' },
        { mData: 'Importe' },
+       { mdata: "Descuento" },
        { mData: 'FormaPago' },
+       { mData: "Cliente" },
+       { mData: "FolioSignoVital" },
        { mData: 'NomServ' },
-       { mData: 'Sucursal' },
        { mData: 'Cliente' },
        { mData: 'AgregadoEl' },
        { mData: 'AgregadoEnMomento' },
        { mData: 'AgregadoPor' },
+       { mData: "Enfermero" },
+       { mData: "Doctor" }
       ],
      
     
