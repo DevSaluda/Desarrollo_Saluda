@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/Consultas/FiltraVentasPorFormaDePago.php">
+ <form  method="POST" action="FiltraVentasPorFormaDePago">
     
  
  
