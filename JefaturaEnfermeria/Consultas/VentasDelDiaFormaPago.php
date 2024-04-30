@@ -1,7 +1,7 @@
 
 <script>
 
-tabla = $('#Productos').DataTable({
+tabla = $('#ProductosEnfermeria').DataTable({
 
  "bProcessing": true,
  "ordering": true,
