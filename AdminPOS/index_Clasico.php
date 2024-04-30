@@ -220,7 +220,7 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
-        </div>
+        </div> </div> </div>
       
       </section>
       <aside class="control-sidebar control-sidebar-dark">
