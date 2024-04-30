@@ -14,7 +14,10 @@
        </div>
      
       <div class="modal-body">
-     
+
+
+
+      
  <form  method="POST" action="FiltraVentasPorFormaDePago">
     
  
@@ -47,7 +50,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <select name="FormaPago" id="FormaPago" class="form-control">
+  <select name="FormaPago" id="formapago" class="form-control">
   <option value="">Seleccione una forma de pago:</option>
         <?php
           $query = $conn -> query ("SELECT DISTINCT FormaDePago FROM Ventas_POS GROUP BY FormaDePago");
