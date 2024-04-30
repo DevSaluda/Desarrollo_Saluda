@@ -9,14 +9,14 @@
 <script src="Componentes/jquery-3.5.0.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="Componentes/bootstrap.min.css">
-  
+  <!-- <link rel="stylesheet" href="Componentes/bootstrap.min.css">
+   -->
 
   <!-- JS, Popper.js, and jQuery -->
 
-  <script src="Componentes/popper.min.js"></script>
+  <!-- <script src="Componentes/popper.min.js"></script>
   <script src="Componentes/bootstrap.min.js"></script>
-  
+   -->
   <!-- JS, Popper.js, and jQuery -->
   
 
