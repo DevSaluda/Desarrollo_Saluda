@@ -14,8 +14,8 @@
 
   <!-- JS, Popper.js, and jQuery -->
 
-  <script src="Componentes/popper.min.js"></script>
-  <script src="Componentes/bootstrap.min.js"></script>
+  <!-- <script src="Componentes/popper.min.js"></script>
+  <script src="Componentes/bootstrap.min.js"></script> -->
   
   <!-- JS, Popper.js, and jQuery -->
   
