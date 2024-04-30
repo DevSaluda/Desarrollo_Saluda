@@ -91,39 +91,12 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-              <h5 class="card-title">Monthly Recap Report</h5>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
+              <h5 class="card-title">Ventas del día</h5>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="text-center">
-                                <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                            </p>
-                            <div class="chart">
-                                <!-- Sales Chart Canvas -->
-                                <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
-                            </div>
-                            <!-- /.chart-responsive -->
-                        </div>
-                        <!-- /.col -->
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- ./card-body -->
-                <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
+                <div id="chartsContainer" class="row"></div>
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
 </div>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -132,44 +105,68 @@
 <!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
 <script>
-    // Datos de ejemplo para el gráfico de ventas
-    var salesData = {
-        labels: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan'],
-        datasets: [{
-            label: 'Product A',
-            data: [10, 20, 30, 40, 50, 60, 70],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-        }, {
-            label: 'Product B',
-            data: [20, 30, 40, 50, 60, 70, 80],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }, {
-            label: 'Product C',
-            data: [30, 40, 50, 60, 70, 80, 90],
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
-            borderColor: 'rgba(255, 206, 86, 1)',
-            borderWidth: 1
-        }]
-    };
-
-    // Obtener el contexto del gráfico de ventas
-    var salesChartCanvas = document.getElementById('salesChart').getContext('2d');
-    // Crear el gráfico de ventas
-    var salesChart = new Chart(salesChartCanvas, {
-        type: 'bar',
-        data: salesData,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+$(document).ready(function() {
+    // Función para obtener los datos de venta del día en curso mediante AJAX
+    function getSalesData() {
+        $.ajax({
+            url: 'Consultas/EstadisticaEntrada.php', // URL de tu backend que maneja la consulta SQL y devuelve los datos en formato JSON
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                renderCharts(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al obtener datos de ventas:', error);
             }
-        }
-    });
+        });
+    }
+
+    // Función para renderizar los gráficos de ventas por sucursal y servicio
+    function renderCharts(data) {
+        var chartsContainer = $('#chartsContainer');
+        // Recorrer los datos por sucursal
+        $.each(data, function(sucursal, servicios) {
+            // Crear un nuevo contenedor de tarjeta Bootstrap para la sucursal
+            var sucursalContainer = $('<div class="col-md-12 mb-4"><div class="card"><div class="card-header"><h5 class="card-title">' + sucursal + '</h5></div><div class="card-body row"></div></div></div>');
+            chartsContainer.append(sucursalContainer);
+
+            // Recorrer los datos de servicio para la sucursal actual
+            $.each(servicios, function(servicio, total_vendido) {
+                // Crear un nuevo contenedor para el gráfico del servicio
+                var chartContainer = $('<div class="col-md-6"><div class="card"><div class="card-body"><canvas class="salesChart" height="180"></canvas></div></div></div>');
+                sucursalContainer.find('.card-body').append(chartContainer);
+
+                // Obtener el contexto del lienzo del gráfico
+                var salesChartCanvas = chartContainer.find('.salesChart').get(0).getContext('2d');
+
+                // Crear el gráfico para este servicio
+                var salesChart = new Chart(salesChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: [servicio],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [total_vendido],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+    // Llamar a la función para obtener los datos de venta del día en curso
+    getSalesData();
+});
 </script>
       </section>
       <aside class="control-sidebar control-sidebar-dark">
