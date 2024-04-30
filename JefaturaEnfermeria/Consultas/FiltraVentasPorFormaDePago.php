@@ -46,11 +46,11 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes']) && isset($_POST['anual']) && isset($_POST['forma'])) {
+          if (isset($_POST['Fecha1']) && isset($_POST['Fecha2']) && isset($_POST['FormaPago'])) {
               // Obtener los valores del formulario
-              $mes = $_POST['Mes'];
-              $anual = $_POST['anual'];
-              $forma = $_POST['forma'];
+              $Fecha1 = $_POST['Fecha1'];
+              $Fecha2 = $_POST['anual'];
+              $FormaPago = $_POST['FormaPago'];
 
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
@@ -229,14 +229,14 @@ include "Consultas/Consultas.php";
               "url": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayDesgloseVentasPorFormasDePago.php",
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
-        var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-        var anual = '<?php echo $anual; ?>'; // Obtén el valor de anual desde PHP
-        var forma = '<?php echo $forma; ?>'; // Obtén el valor de forma desde PHP
+        var Fecha1 = '<?php echo $Fecha1; ?>'; // Obtén el valor de mes desde PHP
+        var Fecha2 = '<?php echo $Fecha2; ?>'; // Obtén el valor de anual desde PHP
+        var FormaPago = '<?php echo $FormaPago; ?>'; // Obtén el valor de forma desde PHP
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
-            "Mes": mes,
-            "anual": anual,
-            "forma": forma
+            "Fecha1": Fecha1,
+            "Fecha2": Fecha2,
+            "FormaPago": FormaPago
         };
 
         return dataToSend;
