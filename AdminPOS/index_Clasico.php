@@ -112,40 +112,11 @@
                             <!-- /.chart-responsive -->
                         </div>
                         <!-- /.col -->
-                        <div class="col-md-4">
-                            <p class="text-center">
-                                <strong>Goal Completion</strong>
-                            </p>
-                            <div class="progress-group">
-                                Add Products to Cart
-                                <span class="float-right"><b>160</b>/200</span>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-primary" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
-                            <!-- More progress groups... -->
-                        </div>
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
                 </div>
                 <!-- ./card-body -->
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-sm-3 col-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                                <h5 class="description-header">$35,210.43</h5>
-                                <span class="description-text">TOTAL REVENUE</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <!-- More description blocks... -->
-                    </div>
-                    <!-- /.row -->
-                </div>
                 <!-- /.card-footer -->
             </div>
             <!-- /.card -->
@@ -162,22 +133,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
 <script>
     // Datos de ejemplo para el gráfico de ventas
-    var salesData = [10, 20, 30, 40, 50, 60, 70];
+    var salesData = {
+        labels: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan'],
+        datasets: [{
+            label: 'Product A',
+            data: [10, 20, 30, 40, 50, 60, 70],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Product B',
+            data: [20, 30, 40, 50, 60, 70, 80],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Product C',
+            data: [30, 40, 50, 60, 70, 80, 90],
+            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1
+        }]
+    };
+
     // Obtener el contexto del gráfico de ventas
     var salesChartCanvas = document.getElementById('salesChart').getContext('2d');
     // Crear el gráfico de ventas
     var salesChart = new Chart(salesChartCanvas, {
-        type: 'line',
-        data: {
-            labels: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan'],
-            datasets: [{
-                label: 'Sales',
-                data: salesData,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
+        type: 'bar',
+        data: salesData,
         options: {
             scales: {
                 y: {
