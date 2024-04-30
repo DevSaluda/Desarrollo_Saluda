@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Fecha2 = $_POST['Fecha2'];
         $FormaPago = $_POST['FormaPago'];
         // Concatena los valores en la consulta SQL
-        $sql = "SELECT DISTINCT
+        $sql = "SELECT 
                 Ventas_POS.Venta_POS_ID,
                 Ventas_POS.Folio_Ticket,
                 Ventas_POS.FolioSucursal,
@@ -55,7 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE 
-                Ventas_POS.FormaDePago = $FormaPago";
+                Ventas_POS.Fecha_venta BETWEEN CAST($Fecha1 AS DATE) AND CAST($Fecha2 AS DATE)
+                AND Ventas_POS.FormaDePago = $FormaPago";
                
 
         $result = mysqli_query($conn, $sql);
