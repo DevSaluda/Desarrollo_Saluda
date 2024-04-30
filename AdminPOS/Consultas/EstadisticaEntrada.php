@@ -1,5 +1,5 @@
 <?php
-include "db_connection";
+include("db_connection.php");
 // Consulta SQL para obtener las estadísticas de venta por sucursal y servicio del día en curso
 $query = "SELECT 
             SucursalesCorre.ID_SucursalC AS id_sucursal,
