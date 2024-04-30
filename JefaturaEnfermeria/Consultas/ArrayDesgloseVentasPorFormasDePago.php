@@ -55,8 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE 
-                Ventas_POS.Fecha_venta BETWEEN CAST($Fecha1 AS DATE) AND CAST($Fecha2 AS DATE)
-                AND Ventas_POS.FormaDePago = $FormaPago";
+                Ventas_POS.FormaDePago = $FormaPago";
                
 
         $result = mysqli_query($conn, $sql);
