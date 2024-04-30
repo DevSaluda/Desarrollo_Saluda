@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Fecha2 = $_POST['Fecha2'];
         $FormaPago = $_POST['FormaPago'];
         // Concatena los valores en la consulta SQL
-        $sql = "SELECT 
+        $sql = "SELECT DISTINCT
                 Ventas_POS.Venta_POS_ID,
                 Ventas_POS.Folio_Ticket,
                 Ventas_POS.FolioSucursal,
