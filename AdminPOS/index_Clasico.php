@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?php echo $row['ID_H_O_D']?> INICIO  </title>
+  <title>INICIO <?php echo $row['ID_H_O_D']?>  </title>
 
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
