@@ -108,7 +108,7 @@ $(document).ready(function() {
     // Función para obtener los datos de venta del día en curso mediante AJAX
     function getSalesData() {
         $.ajax({
-            url: 'tu_servidor.php', // URL de tu backend que maneja la consulta SQL y devuelve los datos en formato JSON
+            url: 'Consultas/EstadisticaDeVentaTotalDia.php', // URL de tu backend que maneja la consulta SQL y devuelve los datos en formato JSON
             method: 'GET',
             dataType: 'json',
             success: function(response) {
