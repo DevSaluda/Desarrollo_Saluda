@@ -235,7 +235,7 @@ include "Consultas/Consultas.php";
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
             "Fecha1": Fecha1,
-            "Fecha2": Fecha2,
+            "Fecha2": Fecha2, 
             "FormaPago": FormaPago
         };
 

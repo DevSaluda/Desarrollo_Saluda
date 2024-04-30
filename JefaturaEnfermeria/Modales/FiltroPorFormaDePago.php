@@ -18,7 +18,7 @@
 
 
       
- <form  method="POST" action="FiltraVentasPorFormaDePago">
+ <form  method="POST" action="https://saludapos.com/JefaturaEnfermeria/FiltraVentasPorFormaDePago.php">
     
  
  
