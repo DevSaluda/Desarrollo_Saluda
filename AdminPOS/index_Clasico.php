@@ -120,44 +120,50 @@ $(document).ready(function() {
 
     // Función para renderizar los gráficos de ventas por sucursal y servicio
     function renderCharts(data) {
+        // Crear un nuevo contenedor para los gráficos
         var chartsContainer = $('#chartsContainer');
-        // Recorrer los datos por sucursal
-        $.each(data, function(sucursal, servicios) {
-            // Crear un nuevo contenedor de tarjeta Bootstrap para la sucursal
-            var sucursalContainer = $('<div class="col-md-12 mb-4"><div class="card"><div class="card-header"><h5 class="card-title">' + sucursal + '</h5></div><div class="card-body row"></div></div></div>');
-            chartsContainer.append(sucursalContainer);
 
+        // Crear un nuevo canvas para el gráfico
+        var canvas = $('<canvas id="salesChart" height="400"></canvas>');
+        chartsContainer.append(canvas);
+
+        // Obtener el contexto del lienzo del gráfico
+        var salesChartCanvas = document.getElementById('salesChart').getContext('2d');
+
+        // Crear un array para almacenar los datos de etiquetas y datos
+        var labels = [];
+        var dataValues = [];
+
+        // Recorrer los datos para cada sucursal
+        $.each(data, function(sucursal, servicios) {
             // Recorrer los datos de servicio para la sucursal actual
             $.each(servicios, function(servicio, total_vendido) {
-                // Crear un nuevo contenedor para el gráfico del servicio
-                var chartContainer = $('<div class="col-md-6"><div class="card"><div class="card-body"><canvas class="salesChart" height="180"></canvas></div></div></div>');
-                sucursalContainer.find('.card-body').append(chartContainer);
-
-                // Obtener el contexto del lienzo del gráfico
-                var salesChartCanvas = chartContainer.find('.salesChart').get(0).getContext('2d');
-
-                // Crear el gráfico para este servicio
-                var salesChart = new Chart(salesChartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: [servicio],
-                        datasets: [{
-                            label: 'Sales',
-                            data: [total_vendido],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
+                // Agregar los datos de etiquetas y valores
+                labels.push(sucursal + ' - ' + servicio);
+                dataValues.push(total_vendido);
             });
+        });
+
+        // Crear el gráfico utilizando Chart.js
+        var salesChart = new Chart(salesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Vendido',
+                    data: dataValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         });
     }
 
