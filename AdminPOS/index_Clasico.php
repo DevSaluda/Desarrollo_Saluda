@@ -88,7 +88,7 @@
       
       
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
               <h5 class="card-title">Ventas del día</h5>
