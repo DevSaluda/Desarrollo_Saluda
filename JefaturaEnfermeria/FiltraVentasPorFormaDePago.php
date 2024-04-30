@@ -49,7 +49,7 @@ include "Consultas/Consultas.php";
           if (isset($_POST['Fecha1']) && isset($_POST['Fecha2']) && isset($_POST['FormaPago'])) {
               // Obtener los valores del formulario
               $Fecha1 = $_POST['Fecha1'];
-              $Fecha2 = $_POST['anual'];
+              $Fecha2 = $_POST['Fecha2'];
               $FormaPago = $_POST['FormaPago'];
 
               // Realizar las operaciones que necesites con estas variables
