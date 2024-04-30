@@ -20,10 +20,10 @@
   <!-- JS, Popper.js, and jQuery -->
   
 
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
   
-  <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-  
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
 <!-- DataTables Buttons CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
 
