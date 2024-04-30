@@ -348,7 +348,7 @@ include "Consultas/Consultas.php";
   include ("footer.php");
   ?>
 
-<script src="js/ControlVentas.js"></script>
+<script src="js/ControlVentasFormaPago.js"></script>
 
 <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
 
