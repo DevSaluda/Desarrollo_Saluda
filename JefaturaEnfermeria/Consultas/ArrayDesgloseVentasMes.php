@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
-                WHERE 
+                WHERE
                 Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
                 AND YEAR(Ventas_POS.Fecha_venta) = $anual
                 AND MONTH(Ventas_POS.Fecha_venta) = $mes";
