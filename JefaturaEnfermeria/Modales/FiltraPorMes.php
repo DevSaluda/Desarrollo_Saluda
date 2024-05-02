@@ -1,9 +1,9 @@
 <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoMesxd" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-success">
+    <div class="modal-dialog modal-notify modal-info">
         <div class="modal-content">
             <div class="text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title">Filtrado de ventas por sucursal <i class="fas fa-credit-card"></i></h5>
+                    <h5 class="modal-title">Filtrado de ventas por mes y año <i class="fas fa-credit-card"></i></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">&times;</span>
                     </button>
