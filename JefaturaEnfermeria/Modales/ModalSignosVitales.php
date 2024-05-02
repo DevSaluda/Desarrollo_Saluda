@@ -32,7 +32,6 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal
 FROM Signos_VitalesV2,SucursalesCorre 
 WHERE DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
-AND Signos_VitalesV2.Fk_Enfermero='".$row['Nombre_Apellidos']."' 
 AND Signos_VitalesV2.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
 AND Signos_VitalesV2.FK_ID_H_O_D='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
