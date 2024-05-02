@@ -54,7 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
-                WHERE 
+                WHERE
+                Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
+                AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
                 Ventas_POS.Fecha_venta BETWEEN CAST($Fecha1 AS DATE) AND CAST($Fecha2 AS DATE)
                 AND Ventas_POS.FormaDePago = $FormaPago";
                
