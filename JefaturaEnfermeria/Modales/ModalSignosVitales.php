@@ -27,10 +27,12 @@ Signos_VitalesV2.Fk_Sucursal,
 Signos_VitalesV2.FK_ID_H_O_D, 
 Signos_VitalesV2.Fecha_Visita,
 Signos_VitalesV2.Estatus,
-Signos_VitalesV2.CodigoEstatus,SucursalesCorre.ID_SucursalC,
+Signos_VitalesV2.CodigoEstatus,
+SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal
-FROM Signos_VitalesV2,SucursalesCorre where DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND Signos_VitalesV2.Fk_Enfermero='".$row['Nombre_Apellidos']."' and Signos_VitalesV2.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-AND Signos_VitalesV2.FK_ID_H_O_D='".$row['ID_H_O_D']."' ";
+FROM Signos_VitalesV2,SucursalesCorre 
+WHERE DATE(Signos_VitalesV2.Fecha_Visita) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') 
+AND Signos_VitalesV2.FK_ID_H_O_D='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
 ?>
 
@@ -67,8 +69,7 @@ $query = $conn->query($sql1);
 
 </thead>
 <?php while ($DataPacientes=$query->fetch_array()):?>
-<tr>
-<td><?php echo $DataPacientes["Folio_Paciente"]; ?></td>
+<tr><td><?php echo $DataPacientes["Folio_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Sucursal"]; ?></td>
     <td><?php echo $DataPacientes["Motivo_Consulta"]; ?></td>
@@ -76,7 +77,8 @@ $query = $conn->query($sql1);
       </td>
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
-    <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>"><?php echo $DataPacientes["Estatus"]; ?></button></td>
+    <td><button class="btn btn-default btn-sm" style="<?php echo $DataPacientes['CodigoEstatus'];?>">
+    <?php echo $DataPacientes["Estatus"]; ?></button></td>
 	
  
 
