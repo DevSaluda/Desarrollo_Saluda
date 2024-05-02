@@ -55,7 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 INNER JOIN 
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE 
-                YEAR(Ventas_POS.Fecha_venta) = $anual
+                Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
+                AND YEAR(Ventas_POS.Fecha_venta) = $anual
                 AND MONTH(Ventas_POS.Fecha_venta) = $mes";
 
         $result = mysqli_query($conn, $sql);
