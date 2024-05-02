@@ -56,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
                 WHERE
                 Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
-                AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-                Ventas_POS.Fecha_venta BETWEEN CAST($Fecha1 AS DATE) AND CAST($Fecha2 AS DATE)
+                ANDVentas_POS.Fecha_venta BETWEEN CAST($Fecha1 AS DATE) 
+                AND CAST($Fecha2 AS DATE)
                 AND Ventas_POS.FormaDePago = $FormaPago";
                
 
