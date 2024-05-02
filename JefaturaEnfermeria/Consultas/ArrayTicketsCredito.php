@@ -66,7 +66,7 @@ $stmt = mysqli_prepare($conn, $sql);
 // Verificar si la preparación fue exitosa
 if ($stmt) {
     // Enlazar parámetros
-    mysqli_stmt_bind_param($stmt, "iss", $fk_sucursal, $fila['AgregadoPor'], $id_h_o_d);
+        
 
     // Ejecutar la consulta
     mysqli_stmt_execute($stmt);
