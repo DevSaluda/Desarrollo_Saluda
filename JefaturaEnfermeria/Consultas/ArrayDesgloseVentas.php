@@ -49,7 +49,9 @@ Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 INNER JOIN 
 Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 INNER JOIN 
-Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS";
+Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
+WHERE
+Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'";
 
 
 
