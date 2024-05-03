@@ -44,7 +44,6 @@ $sql = "
     WHERE
         Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
         AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-        AND Ventas_POS.Identificador_tipo LIKE '%00000000001%' -- Excluye ventas con cualquier forma de pago que contenga 'credito'
     GROUP BY
         Ventas_POS.Folio_Ticket
     ORDER BY
