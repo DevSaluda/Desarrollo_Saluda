@@ -44,7 +44,15 @@ $sql = "
     WHERE
         Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
         AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-        AND Ventas_POS.Identificador_tipo = 00000000001
+        AND 
+        (
+        Ventas_POS.Identificador_tipo = 00000000001 OR
+        Ventas_POS.Identificador_tipo = 00000000002 OR
+        Ventas_POS.Identificador_tipo = 00000000003 OR
+        Ventas_POS.Identificador_tipo = 00000000004 OR
+        Ventas_POS.Identificador_tipo = 00000000005
+        )
+
     GROUP BY
         Ventas_POS.Folio_Ticket
     ORDER BY
