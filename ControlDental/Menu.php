@@ -248,7 +248,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="Desglosaticketscreditoenfermeria" class="nav-link">
+            <a href="TicketsCredito" class="nav-link">
             <i class="fas fa-credit-card"></i>
               <p>
               Desglose Tickets crédito 

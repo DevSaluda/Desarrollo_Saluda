@@ -52,7 +52,7 @@ $sql = "
         Ventas_POS.Identificador_tipo = 00000000004 OR
         Ventas_POS.Identificador_tipo = 00000000005
         )
-
+        AND Ventas_POS.FormaDePago NOT LIKE '%credito%'
     GROUP BY
         Ventas_POS.Folio_Ticket
     ORDER BY
