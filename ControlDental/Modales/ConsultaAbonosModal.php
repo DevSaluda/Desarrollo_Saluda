@@ -49,11 +49,23 @@ $(document).ready( function () {
 include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
 $user_id=null;
-$sql1="SELECT AbonoCreditos_POS.Folio_Abono, AbonoCreditos_POS.Fk_Folio_Credito, AbonoCreditos_POS.Fk_tipo_Credi, AbonoCreditos_POS.Nombre_Cred, 
-AbonoCreditos_POS.Cant_Apertura, AbonoCreditos_POS.Cant_Abono, AbonoCreditos_POS.Fecha_Abono, AbonoCreditos_POS.Fk_Sucursal, 
-AbonoCreditos_POS.Saldo, AbonoCreditos_POS.Estatus, AbonoCreditos_POS.CodigoEstatus, AbonoCreditos_POS.ID_H_O_D, 
-Tipos_Credit_POS.ID_Tip_Cred, Tipos_Credit_POS.Nombre_Tip, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
-FROM AbonoCreditos_POS, Tipos_Credit_POS, SucursalesCorre 
+$sql1="SELECT AbonoCreditos_POS.Folio_Abono,
+AbonoCreditos_POS.Fk_Folio_Credito, 
+AbonoCreditos_POS.Fk_tipo_Credi,
+AbonoCreditos_POS.Nombre_Cred, 
+AbonoCreditos_POS.Cant_Apertura,
+AbonoCreditos_POS.Cant_Abono,
+AbonoCreditos_POS.Fecha_Abono,
+AbonoCreditos_POS.Fk_Sucursal, 
+AbonoCreditos_POS.Saldo,
+AbonoCreditos_POS.Estatus,
+AbonoCreditos_POS.CodigoEstatus,
+AbonoCreditos_POS.ID_H_O_D, 
+Tipos_Credit_POS.ID_Tip_Cred,
+Tipos_Credit_POS.Nombre_Tip,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal 
+FROM AbonoCreditos_POS,Tipos_Credit_POS,SucursalesCorre 
 WHERE AbonoCreditos_POS.Fk_tipo_Credi = Tipos_Credit_POS.ID_Tip_Cred 
 AND AbonoCreditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC  
 AND AbonoCreditos_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
@@ -120,7 +132,7 @@ $query = $conn->query($sql1);
 </div>
 </div>
 <?php else:?>
-	<h3 class="alert alert-warning"> No se encontraron Especialidades <i class="fas fa-exclamation-circle"></i> </h3>
+	<h3 class="alert alert-warning"> No se encontraron abonos <i class="fas fa-exclamation-circle"></i> </h3>
 <?php endif;?>
   
      </div>
