@@ -1,17 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "u155356178_SaludDevCenter";
-$password = "uE;bAISz;*6c|I4PvEnfSys324\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>";
-$dbname = "u155356178_saludapos";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
+include_once "db_connection.php";
 // Obtener el código de barras enviado por AJAX
 $codigo = $_POST['codigoEscaneado'];
 

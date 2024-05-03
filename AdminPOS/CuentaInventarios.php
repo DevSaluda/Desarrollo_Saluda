@@ -489,25 +489,7 @@ include("Consultas/db_connection.php");
 
 
 
-<script>
-  $(function() {
-    $("#clienteInput").autocomplete({
-      source: function(request, response) {
-        $.ajax({
-          url: "Consultas/clientes.php",
-          dataType: "json",
-          data: {
-            term: request.term
-          },
-          success: function(data) {
-            response(data);
-          }
-        });
-      },
-      minLength: 0
-    });
-  });
-</script>
+
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
     searching: false, // Deshabilitar la funcionalidad de búsqueda
