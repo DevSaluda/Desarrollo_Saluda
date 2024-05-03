@@ -721,7 +721,8 @@ $('#codigoEscaneado').autocomplete({
         tr += '<td   style="visibility:collapse; display:none;" class="FormaPago"> <input hidden type="text" class="form-control forma-pago-input" id="FormaPagoCliente" name="FormaDePago[]" value="Efectivo"> </td>';
         
         tr += '<td  style="visibility:collapse; display:none;" class="Descuentosugerido"> <input hidden type="text" class="form-control descuento-aplicado" id="descuentoaplicado_' + articulo.id + '" name="DescuentoAplicado[]" readonly > </td>';
-        tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container">' + inputId + inputCantidad + '</div></td>';
+        tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container">' + inputId + inputCantidad + '</div><div class="btn-container">' +
+      '<a class="btn btn-info btn-sm" href="#" onclick="abrirSweetAlert(this); return false;"><i class="fas fa-percentage"></i></a></div></td>';
       
 
         tr += '</tr>';
