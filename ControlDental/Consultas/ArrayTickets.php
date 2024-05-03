@@ -42,8 +42,6 @@ FROM
 Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-JOIN
-Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 WHERE
 Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "' AND
 
