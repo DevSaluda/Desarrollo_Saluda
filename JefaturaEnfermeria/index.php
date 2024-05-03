@@ -79,7 +79,6 @@ include "Consultas/ContadorIndex.php";
   <!-- /.container-fluid -->
 
   <?php include ("footer.php");
-    include ("Modales/Ingreso.php");
     include ("Modales/ModalEnfermerosVigentes.php");
     include ("Modales/ModalSignosVitales.php");
   ?>
