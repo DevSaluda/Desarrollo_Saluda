@@ -15,7 +15,7 @@ include("Consultas/db_connection.php");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>CONTEO DE PRODCTOS <?php echo $row['ID_H_O_D'] ?> </title>
+  <title>Conteo de productos <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php" ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
