@@ -59,15 +59,15 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"> <i class="fas fa-info-circle"></i></span>
   </div>
-  <input type="text" class="form-control" readonly value="<?php echo $Especialistas->	AgregadoPor; ?>">
+  <input type="text" class="form-control" readonly value="<?php echo $Especialistas-> AgregadoPor; ?>">
     </div>
     </div>
    </div>
 
 <?php if($query->num_rows>0):?>
   <div class="text-center">
-	<div class="table-responsive">
-	<table  id="HistorialCajas" class="table table-hover">
+  <div class="table-responsive">
+  <table  id="HistorialCajas" class="table table-hover">
 <thead>
 
 <th>Servicio</th>
@@ -146,7 +146,7 @@ while ($r=$query->fetch_object()){
     </div>
    </div>
 <?php else:?>
-	<p class="alert alert-warning">No hay resultados</p>
+  <p class="alert alert-warning">No hay resultados</p>
 <?php endif;?>
 
   
