@@ -207,7 +207,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayTickets.php",
+ "sAjaxSource": "https://saludapos.com/ControlDental/Consultas/ArrayTickets.php",
  "aoColumns": [
   { mData: 'NumberTicket' },  
   { mData: 'FolioSucursal' },  
