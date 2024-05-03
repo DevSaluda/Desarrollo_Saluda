@@ -3,7 +3,6 @@ include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 
 
-
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
@@ -81,7 +80,7 @@ while ($r=$query->fetch_object()){
 <th>Cantidad</th>
 <th>P.U</th>
 <th>Descuento</th>
-<th>Import</th>
+<th>Importe</th>
 
     
 
@@ -165,9 +164,7 @@ while ($r=$query->fetch_object()){
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra  <br>El ticket puede corresponder a un crédito, te sugerimos revisar el área de créditos  </p>
 <?php endif;?>
-
 <?php
-
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
