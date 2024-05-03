@@ -722,7 +722,7 @@ $('#codigoEscaneado').autocomplete({
         
         tr += '<td  style="visibility:collapse; display:none;" class="Descuentosugerido"> <input hidden type="text" class="form-control descuento-aplicado" id="descuentoaplicado_' + articulo.id + '" name="DescuentoAplicado[]" readonly > </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container">' + inputId + inputCantidad + '</div></td>';
-
+      
 
         tr += '</tr>';
 
