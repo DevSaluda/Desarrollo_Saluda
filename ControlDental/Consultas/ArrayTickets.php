@@ -44,7 +44,6 @@ JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE
 Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "' AND
-Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "' AND
 (
     Ventas_POS.Identificador_tipo = '00000000001' OR
     Ventas_POS.Identificador_tipo = '00000000002' OR
