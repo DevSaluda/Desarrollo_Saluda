@@ -37,8 +37,7 @@ Ventas_POS.Total_Venta,
 Ventas_POS.Lote,
 Ventas_POS.ID_H_O_D,
 SucursalesCorre.ID_SucursalC,
-SucursalesCorre.Nombre_Sucursal,
-Servicios_POS.Nom_Serv
+SucursalesCorre.Nombre_Sucursal
 FROM
 Ventas_POS
 JOIN
