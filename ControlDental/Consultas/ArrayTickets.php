@@ -20,8 +20,8 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 
-$sql = "SELECT
-Ventas_POS.FolioSucursal,
+$sql = "
+SELECT
 Ventas_POS.Folio_Ticket,
 Ventas_POS.Fk_Caja,
 Ventas_POS.Venta_POS_ID,
@@ -43,12 +43,22 @@ Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE
-Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
+Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "' AND
+Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "' AND
+(
+    Ventas_POS.Identificador_tipo = '00000000001' OR
+    Ventas_POS.Identificador_tipo = '00000000002' OR
+    Ventas_POS.Identificador_tipo = '00000000003' OR
+    Ventas_POS.Identificador_tipo = '00000000004' OR
+    Ventas_POS.Identificador_tipo = '00000000005'
+)
 GROUP BY
 Ventas_POS.Folio_Ticket
 ORDER BY
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
-;
+Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes
+";
+
+
  
 $result = mysqli_query($conn, $sql);
  
@@ -56,7 +66,6 @@ $c=0;
  
 while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
-    $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
     
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));
@@ -73,11 +82,7 @@ $data[$c]["Reimpresion"] = '
 <a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item " style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a>
 </td>';
 
-$data[$c]["EditarData"] = '
-<td>
-<a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-EditarData dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-edit"></i> Editar ticket</a>
-</td>';
-    $c++; 
+$c++; 
  
 }
  

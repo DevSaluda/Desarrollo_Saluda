@@ -207,16 +207,14 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayTickets.php",
+ "sAjaxSource": "https://saludapos.com/ControlDental/Consultas/ArrayTickets.php",
  "aoColumns": [
   { mData: 'NumberTicket' },  
-  { mData: 'FolioSucursal' },  
   { mData: 'Fecha' },
   { mData: 'Hora' },
        { mData: 'Vendedor' },
        { mData: 'Desglose' },
        { mData: 'Reimpresion' },
-       { mData: 'EditarData' },
        
       
   
@@ -269,13 +267,11 @@ tabla = $('#Productos').DataTable({
 	<table  id="Productos" class="table table-hover">
 <thead>
 <th>N° Ticket</th>
-<th>Folio Sucursal</th>
 <th>Fecha</th>
 <th>Hora</th>
     <th>Vendedor</th>
     <th>Desglose</th>
     <th>Reimpresion</th>
-    <th>Editar datos</th>
 
 </thead>
 
