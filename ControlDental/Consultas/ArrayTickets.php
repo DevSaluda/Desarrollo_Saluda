@@ -37,13 +37,16 @@ $sql = "
         Ventas_POS.Lote,
         Ventas_POS.ID_H_O_D,
         SucursalesCorre.ID_SucursalC,
-        SucursalesCorre.Nombre_Sucursal
+        SucursalesCorre.Nombre_Sucursal,
+        Servicios_POS.ServicioID
     FROM
         Ventas_POS
         JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+        JOIN Servicios_POS ON Ventas_Pos.Identificador_tipo = Servicios_POS.ServicioID
     WHERE
         Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
         AND Ventas_POS.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
+        
     GROUP BY
         Ventas_POS.Folio_Ticket
     ORDER BY
