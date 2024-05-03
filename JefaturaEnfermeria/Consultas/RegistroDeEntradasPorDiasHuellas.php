@@ -52,34 +52,35 @@ $(document).ready( function () {
 <?php
 
 include("db_connection.php");
+include("db_connection_Huellas.php");
 include "Consultas.php";
 include "Sesion.php";
 
 $user_id=null;
 //$sql1="SELECT * FROM Reloj_ChecadorV2 WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d')  UNION ALL SELECT * FROM Reloj_ChecadorV2_Salidas WHERE DATE(Fecha_Registro) = DATE_FORMAT(CURDATE(),'%Y-%m-%d') ORDER BY Nombre";
 $sql1 = "SELECT
-    p.Id_pernl AS Id_Pernl,
-    p.Cedula AS Cedula,
-    p.Nombre_Completo AS Nombre_Completo,
-    p.Sexo AS Sexo,
-    p.Cargo_rol AS Cargo_rol,
-    p.Domicilio AS Domicilio,
-    a.Id_asis AS Id_asis,
-    a.FechaAsis AS FechaAsis,
-    a.Nombre_dia AS Nombre_dia,
-    a.HoIngreso AS HoIngreso,
-    a.HoSalida AS HoSalida,
-    a.Tardanzas AS Tardanzas,
-    a.Justifacion AS Justifacion,
-    a.tipoturno AS tipoturno,
-    a.EstadoAsis AS EstadoAsis,
-    a.totalhora_tr AS totalhora_tr
+p.Id_pernl AS Id_Pernl,
+p.Cedula AS Cedula,
+p.Nombre_Completo AS Nombre_Completo,
+p.Sexo AS Sexo,
+p.Cargo_rol AS Cargo_rol,
+p.Domicilio AS Domicilio,
+a.Id_asis AS Id_asis,
+a.FechaAsis AS FechaAsis,
+a.Nombre_dia AS Nombre_dia,
+a.HoIngreso AS HoIngreso,
+a.HoSalida AS HoSalida,
+a.Tardanzas AS Tardanzas,
+a.Justifacion AS Justifacion,
+a.tipoturno AS tipoturno,
+a.EstadoAsis AS EstadoAsis,
+a.totalhora_tr AS totalhora_tr
 FROM
-    somosgr1_Huellas.personal p
-JOIN somosgr1_Huellas.asistenciaper a
-    ON a.Id_Pernl = p.Id_pernl
+u155356178_SaludaHuellas.personal p
+JOIN u155356178_SaludaHuellas.asistenciaper a
+ON a.Id_Pernl = p.Id_pernl
 WHERE
-    a.FechaAsis = CURDATE()"; 
+a.FechaAsis = CURDATE()";
 $query = $conn->query($sql1);
 ?>
 
