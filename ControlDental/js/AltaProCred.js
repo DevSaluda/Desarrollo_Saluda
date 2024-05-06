@@ -67,7 +67,7 @@ required:true,
 
       $.ajax({				
           type : 'POST',
-          url: "Consultas/AltaPromosCreditos.php",
+          url: "https://saludapos.com/ControlDental/Consultas/AltaPromosCreditos.php",
           data: $('#AgregaPromoCreditos').serialize(),
           cache: false,
           beforeSend: function(){	
