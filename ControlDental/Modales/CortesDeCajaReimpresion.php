@@ -2,6 +2,7 @@
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 
+include "../Consultas/ConsultaCaja.php";
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Venta_POS_ID,Folio_Ticket,Fk_Caja,Fk_sucursal,ID_H_O_D FROM Ventas_POS WHERE Fk_Caja = '".$_POST['id']."'  AND Fk_sucursal ='".$row['Fk_Sucursal']."' 
@@ -217,7 +218,7 @@ $query8888 = $conn->query($sql8888);
 
 ?>
 
-<?php if($Especialistas!=null):?>
+<? if($Especialistas!=null):?>
 
   <form method="post" 
       target="print_popup" 
@@ -242,9 +243,9 @@ $query8888 = $conn->query($sql8888);
       <input type="text" class="form-control "   name="TotalCreditoFarmaceutico"  readonly value="<?php echo $Especialistas11->VentaTotalCreditoFarmaceutico; ?>" aria-describedby="basic-addon1" >  
       <input type="text" class="form-control "   name="TurnoCorteticket"  readonly value="<?php echo $Especialistas3->Turno; ?>" aria-describedby="basic-addon1" >  
 
-      <input type="text" class="form-control "   name="TotalDeEfectivo"  readonly value="<?php echo $Especialistas20->VentaTotalDeEfectivo; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalDeEfectivo"  readonly value="<?php  echo $Especialistas20->VentaTotalDeEfectivo; ?>" aria-describedby="basic-addon1" >  
       <input type="text" class="form-control "   name="TotalDeTarjeta"  readonly value="<?php echo $Especialistas21->VentaTotalTarjeta; ?>" aria-describedby="basic-addon1" >  
-      <input type="text" class="form-control "   name="TotalDeCreditos"  readonly value="<?php echo $Especialistas22->VentaTotalCreditosGlobales; ?>" aria-describedby="basic-addon1" >  
+      <input type="text" class="form-control "   name="TotalDeCreditos"  readonly value="<?php  echo $Especialistas22->VentaTotalCreditosGlobales; ?>" aria-describedby="basic-addon1" >  
       
       </div>
 
