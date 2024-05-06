@@ -59,7 +59,7 @@
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-list-ol"></i></span>
   </div>
   <select id = "tratamiento" class = "form-control" name = "Tratamiento">
-                                               <option value="">Seleccione un tratamiento:</option>
+    <option value="">Seleccione un tratamiento:</option>
         <?
           $query = $conn -> query ("SELECT 	ID_Tip_Cred,Nombre_Tip FROM Tipos_Credit_POS WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Vigente'");
           while ($valores = mysqli_fetch_array($query)) {
