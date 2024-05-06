@@ -15,7 +15,7 @@ $ID_H_O_D=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Emp
 //include database configuration file
     
     $sql = "SELECT Nombre_Promo,CantidadADescontar,Fk_Tratamiento,Estatus,ID_H_O_D FROM Promos_Credit_POS WHERE Nombre_Promo='$Nombre_Promo' AND 
-     ID_H_O_D='$ID_H_O_D' AND Estatus='$Estatus' AND Fk_Tratamiento='$Fk_Tratamiento' AND CantidadADescontar='$CantidadADescontar'";
+     ID_H_O_D='$ID_H_O_D' AND Estatus='$Estatus' AND Fk_Tratamiento=$row['Fk_Tratamiento'] AND CantidadADescontar='$CantidadADescontar'";
     $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
     $row = mysqli_fetch_assoc($resultset);	
         //include database configuration file
