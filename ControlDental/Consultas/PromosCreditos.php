@@ -87,7 +87,6 @@ $query = $conn->query($sql1);
  
  
  
-</div>
 <!-- Basic dropdown -->
 	 </td>
      
@@ -95,12 +94,12 @@ $query = $conn->query($sql1);
 </tr>
 <?php endwhile;?>
 </table>
-</div>
+
 
 <?php else:?>
 	<p class="alert alert-warning">Aun no hay áreas </p>
 <?php endif;?>
-
+</div>
 <script>
   	$(".btn-editPromos").click(function(){
   		id = $(this).data("id");
