@@ -65,8 +65,9 @@
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores[ID_Tip_Cred].'">'.$valores[Nombre_Tip].'</option>';
           }
-        ?>  </select>
+        ?>  
              </div>
+             </select>
     </div>
       
     <div class="col">
