@@ -3,7 +3,7 @@ include_once "db_connection.php";
 include_once "Consultas.php";
 // Obtener el código de barras enviado por AJAX
 $codigo = $_POST['codigoEscaneado'];
-$sucursalbusqueda=$row['Nombre_Sucursal'];
+$sucursalbusqueda=$row['Fk_Sucursal'];
 
 echo "El valor es " . $sucursalbusqueda;
 // Consultar la base de datos para obtener el artículo correspondiente al código de barras
