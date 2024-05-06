@@ -1,5 +1,6 @@
 <?php
 include_once 'db_connection.php';
+var_dump($_POST);
 
 $Nombre_Promo = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['NombrePromo']))));
 $CantidadADescontar = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CantidadDesc']))));
@@ -32,6 +33,16 @@ if (mysqli_num_rows($resultset) > 0) {
         echo json_encode(array("statusCode" => 201, "message" => "Failed to add promotion."));
     }
 }
+
+$(document).ready(function() {
+    $('#AgregaPromoCreditos').on('submit', function(e) {
+        e.preventDefault(); // Previene el envío normal del formulario
+        var formData = $(this).serialize(); // Serializa los datos del formulario
+        console.log(formData); // Imprime los datos en la consola para verificar
+
+        // Aquí iría el código para enviar los datos mediante AJAX si así lo deseas
+    });
+});
 
 mysqli_close($conn);
 ?>
