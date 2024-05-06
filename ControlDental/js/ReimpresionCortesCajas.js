@@ -1,12 +1,12 @@
 function CargaVentasDelDia(){
 
 
-    $.post("https://saludapos.com/AdminPOS/Consultas/CortesDeCajaReimpresiones.php","",function(data){
-      $("#TableVentasDelDia").html(data);
-    })
+  $.post("https://saludapos.com/ControlDental/Consultas/CortesDeCajaReimpresiones.php","",function(data){
+    $("#TableVentasDelDia").html(data);
+  })
 
-  }
-  
-  
-  
-  CargaVentasDelDia();
+}
+
+
+
+CargaVentasDelDia();
