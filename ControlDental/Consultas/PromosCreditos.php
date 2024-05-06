@@ -96,7 +96,7 @@ $query = $conn->query($sql1);
 <?php endwhile;?>
 </table>
 </div>
-</div>
+
 <?php else:?>
 	<p class="alert alert-warning">Aun no hay áreas </p>
 <?php endif;?>
