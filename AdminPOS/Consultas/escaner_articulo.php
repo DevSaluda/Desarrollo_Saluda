@@ -1,18 +1,18 @@
 <?php
 include_once "db_connection.php";
 include_once "Consultas.php";
-// Obtener el código de barras enviado por AJAX
-$codigo = $_POST['codigoEscaneado'];
-$sucursalbusqueda=$row['Fk_Sucursal'];
 
-echo "El valor es " . $sucursalbusqueda;
+// Obtener el código de barras y la sucursal buscada enviado por AJAX
+$codigo = $_POST['codigoEscaneado'];
+$sucursalbusqueda = $row['Fk_Sucursal'];
+
 // Consultar la base de datos para obtener el artículo correspondiente al código de barras
-$sql = "SELECT Cod_Barra, GROUP_CONCAT(ID_Prod_POS) AS IDs, GROUP_CONCAT(Nombre_Prod) AS descripciones, GROUP_CONCAT(Precio_Venta) AS precios, GROUP_CONCAT(Lote) AS lotes, GROUP_CONCAT(Clave_adicional) AS claves, GROUP_CONCAT(Tipo_Servicio) AS tipos
+$sql = "SELECT Cod_Barra, Fk_sucursal, GROUP_CONCAT(ID_Prod_POS) AS IDs, GROUP_CONCAT(Nombre_Prod) AS descripciones, GROUP_CONCAT(Precio_Venta) AS precios, GROUP_CONCAT(Lote) AS lotes, GROUP_CONCAT(Clave_adicional) AS claves, GROUP_CONCAT(Tipo_Servicio) AS tipos
         FROM Stock_POS
-        WHERE Cod_Barra = ?
+        WHERE Cod_Barra = ? AND Fk_sucursal = ?
         GROUP BY Cod_Barra";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $codigo);
+$stmt->bind_param("ss", $codigo, $sucursalbusqueda);
 $stmt->execute();
 $result = $stmt->get_result();
 
