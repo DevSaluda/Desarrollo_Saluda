@@ -48,7 +48,7 @@ Promos_Credit_POS.ID_H_O_D,
 Tipos_Credit_POS.ID_Tip_Cred,
 Tipos_Credit_POS.Nombre_Tip
 FROM Promos_Credit_POS,Tipos_Credit_POS
-WHERE Promos_Credit_POS.Fk_Tratamiento = Tipos_Credit_POS.ID_Tip_Cred AND Promos_Credit_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
+WHERE Promos_Credit_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
 ?>
 
@@ -87,6 +87,7 @@ $query = $conn->query($sql1);
  
  
  
+</div>
 <!-- Basic dropdown -->
 	 </td>
      
@@ -94,12 +95,12 @@ $query = $conn->query($sql1);
 </tr>
 <?php endwhile;?>
 </table>
-
+</div>
 
 <?php else:?>
 	<p class="alert alert-warning">Aun no hay áreas </p>
 <?php endif;?>
-</div>
+
 <script>
   	$(".btn-editPromos").click(function(){
   		id = $(this).data("id");
