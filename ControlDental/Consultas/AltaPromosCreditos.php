@@ -1,37 +1,39 @@
+
 <?php
-include_once 'db_connection.php';
+    include_once 'db_connection.php';
 
-$Nombre_Promo = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['NombrePromo']))));
-$CantidadADescontar = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CantidadDesc']))));
-$Fk_Tratamiento = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Tratamiento']))));
-$Estatus = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['VigenciaEstPromo']))));
-$CodigoEstatus = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['VigenciaPromo']))));
-$Agrega = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['UsuarioPromo']))));
-$Sistema = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['SistemaPromo']))));
-$ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['EmpresaPromo']))));
+$Nombre_Promo=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['NombrePromo']))));
+$CantidadADescontar=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['CantidadDesc']))));
+$Fk_Tratamiento=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Tratamiento']))));
 
-// Consulta para verificar si ya existe una promoción con el mismo nombre y tratamiento en la empresa especificada.
-$sql = "SELECT 1 FROM Promos_Credit_POS 
-        WHERE Nombre_Promo = '$Nombre_Promo' 
-        AND Fk_Tratamiento = '$Fk_Tratamiento' 
-        AND ID_H_O_D = '$ID_H_O_D'";
+$Estatus=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['VigenciaEstPromo']))));
+$CodigoEstatus=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['VigenciaPromo']))));
+$Agrega=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['UsuarioPromo']))));
+$Sistema=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['SistemaPromo']))));
 
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+$ID_H_O_D=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['EmpresaPromo']))));    
+//include database configuration file
+    
+    $sql = "SELECT Nombre_Promo,CantidadADescontar,Fk_Tratamiento,Estatus,ID_H_O_D FROM Promos_Credit_POS WHERE Nombre_Promo='$Nombre_Promo' AND 
+     ID_H_O_D='$ID_H_O_D' AND Estatus='$Estatus' AND Fk_Tratamiento='$Fk_Tratamiento' AND CantidadADescontar='$CantidadADescontar'";
+    $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+    $row = mysqli_fetch_assoc($resultset);	
+        //include database configuration file
+        if($row['Nombre_Promo']==$Nombre_Promo AND $row['CantidadADescontar']==$CantidadADescontar AND $row['Fk_Tratamiento']==$Fk_Tratamiento AND $row['Estatus']==$Estatus AND  $row['ID_H_O_D']==$ID_H_O_D){				
+            echo json_encode(array("statusCode"=>250));
+          
+        } 
+        else{
+            $sql = "INSERT INTO `Promos_Credit_POS`( `Nombre_Promo`,`CantidadADescontar`,`Fk_Tratamiento`,`Estatus`,`CodigoEstatus`,`Agrega`,`Sistema`,`ID_H_O_D`) 
+            VALUES ('$Nombre_Promo','$CantidadADescontar','$Fk_Tratamiento','$Estatus','$CodigoEstatus','$Agrega','$Sistema','$ID_H_O_D')";
+        
+            if (mysqli_query($conn, $sql)) {
+                echo json_encode(array("statusCode"=>200));
+            } 
+            else {
+                echo json_encode(array("statusCode"=>201));
+            }
+            mysqli_close($conn);
+        }
 
-if (mysqli_num_rows($resultset) > 0) {
-    // Mensaje de error si esa promocion ya existe
-    echo json_encode(array("statusCode" => 250, "message" => "Ya existe una promocion con el mismo nombre."));
-} else {
-    // Inserta la nueva promocion si no estaba añadida
-    $insertSql = "INSERT INTO `Promos_Credit_POS`(`Nombre_Promo`, `CantidadADescontar`, `Fk_Tratamiento`, `Estatus`, `CodigoEstatus`, `Agrega`, `Sistema`, `ID_H_O_D`) 
-                  VALUES ('$Nombre_Promo', '$CantidadADescontar', '$Fk_Tratamiento', '$Estatus', '$CodigoEstatus', '$Agrega', '$Sistema', '$ID_H_O_D')";
-
-    if (mysqli_query($conn, $insertSql)) {
-        echo json_encode(array("statusCode" => 200, "message" => "Promotion added successfully."));
-    } else {
-        echo json_encode(array("statusCode" => 201, "message" => "Failed to add promotion."));
-    }
-}
-
-mysqli_close($conn);
 ?>
