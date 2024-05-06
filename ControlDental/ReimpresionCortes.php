@@ -100,7 +100,7 @@ include "Consultas/Consultas.php";
     $(document).on("click", ".btn-edit", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/JefaturaEnfermeria/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/ControlDental/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Corte de caja");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
