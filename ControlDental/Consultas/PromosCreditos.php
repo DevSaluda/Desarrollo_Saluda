@@ -47,8 +47,7 @@ Promos_Credit_POS.CodigoEstatus,
 Promos_Credit_POS.ID_H_O_D, 
 Tipos_Credit_POS.ID_Tip_Cred,
 Tipos_Credit_POS.Nombre_Tip
-FROM Promos_Credit_POS,Tipos_Credit_POS
-WHERE Promos_Credit_POS.Fk_Tratamiento = Tipos_Credit_POS.ID_Tip_Cred AND Promos_Credit_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
+FROM Promos_Credit_POS,Tipos_Credit_POS";
 $query = $conn->query($sql1);
 ?>
 
@@ -96,7 +95,7 @@ $query = $conn->query($sql1);
 <?php endwhile;?>
 </table>
 </div>
-</div>
+
 <?php else:?>
 	<p class="alert alert-warning">Aun no hay áreas </p>
 <?php endif;?>

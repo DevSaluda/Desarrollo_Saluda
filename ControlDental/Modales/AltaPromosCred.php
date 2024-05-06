@@ -66,8 +66,7 @@
             echo '<option value="'.$valores["ID_Tip_Cred"].'">'.$valores["Nombre_Tip"].'</option>';
           }
         ?>  </select>
-             </div>
-    </div>
+      </div>
       
     <div class="col">
 <label for="exampleFormControlInput1">Vigencia<span class="text-danger">*</span></label>
@@ -111,7 +110,7 @@
 </div>
 <input type="text" class="form-control " hidden  readonly name="UsuarioPromo" id="usuarioPromo"  readonly value="<?echo $row['Nombre_Apellidos']?>">
 <input type="text"  class="form-control " hidden  readonly name="VigenciaEstPromo" id="vigenciaestPromo">
-<input type="text" class="form-control "  hidden  readonly id="sistemaPromo" name="SistemaPromo" readonly value="POS <?echo $row['Nombre_rol']?>">
+<input type="text" class="form-control "  hidden  readonly id="sistemaPromo" name="SistemaPromo" readonly value=" <?echo $row['Nombre_rol']?>">
 <input type="text" class="form-control "  hidden id="empresaPromo" name="EmpresaPromo" readonly value="<?echo $row['ID_H_O_D']?>">
   <div>
    
