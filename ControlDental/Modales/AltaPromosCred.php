@@ -66,9 +66,9 @@
         echo '<option value="'.$valores["ID_Tip_Cred"].'">'.$valores["Nombre_Tip"].'</option>';
     }
     ?>
-</select>
+
       </div>
-      
+      </select>
     <div class="col">
 <label for="exampleFormControlInput1">Vigencia<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
