@@ -1,62 +1,100 @@
 <?php
 include "Consultas/Consultas.php";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Promociones Credito | <?php echo $row['ID_H_O_D']; ?></title>
-    <?php include "Header.php"; ?>
-    <style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Promociones Credito | <?php echo $row['ID_H_O_D']?> </title>
+
+<?php include "Header.php"?>
+ <style>
         .error {
-            color: red;
-            margin-left: 5px;
-        }
+  color: red;
+  margin-left: 5px; 
+  
+}
+
     </style>
 </head>
-<body>
-    <?php include_once("Menu.php"); ?>
+<?php include_once ("Menu.php")?>
+<div class="tab-pane fade show " id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
+ <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+  Promociones de creditos de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  </div>
+  
+  <div >
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaPromosCreditos" class="btn btn-default">
+Añadir nueva promoción <i class="far fa-plus-square"></i>
+</button>
+</div>
+</div>
+</div>
+    
+<div id="TablePromosCreditos"></div>
 
-    <div class="tab-pane fade show" id="pills-TipPro" role="tabpanel" aria-labelledby="pills-home-tab">
-        <div class="card-header" style="background-color:#2b73bb; color: white;">
-            Promociones de créditos de <?php echo $row['ID_H_O_D']; ?> al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>
-        </div>
-        <div>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaPromosCreditos">
-                Añadir nueva promoción <i class="far fa-plus-square"></i>
-            </button>
-        </div>
+</div>
+
+
+
+      </div>
     </div>
+  </div>
+</div>
 
-    <div id="TablePromosCreditos"></div>
+</div>
+  </div>
+</div>
 
-    <?php
-    include("Modales/AltaPromosCred.php");
-    include("Modales/Error.php");
-    include("Modales/Exito.php");
-    include("Modales/ExitoActualiza.php");
-    include("footer.php");
-    ?>
+  
+         
+</div>
+</div>
 
-    <!-- Scripts -->
-    <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
+     
+  
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+ 
+  <!-- Main Footer -->
+<?php
+  include ("Modales/AltaPromosCred.php");
+  include ("Modales/Error.php");
+  include ("Modales/Exito.php");
+  include ("Modales/ExitoActualiza.php");
+  include ("footer.php");?>
+<!-- ./wrapper -->
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-    <script src="js/PromosCredito.js"></script>
-    <script src="js/AltaProCred.js"></script>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="dist/js/adminlte.js"></script>
-    <script src="dist/js/demo.js"></script>
-    
+<!-- REQUIRED SCRIPTS -->
+
+<script src="js/PromosCredito.js"></script>
+<script src="js/AltaProCred.js"></script>
+
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+
+<!-- PAGE PLUGINS -->
+
 </body>
 </html>
-
 <?php
 
 function fechaCastellano ($fecha) {
