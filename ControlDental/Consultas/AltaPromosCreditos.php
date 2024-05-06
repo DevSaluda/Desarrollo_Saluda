@@ -1,6 +1,5 @@
 <?php
 include_once 'db_connection.php';
-var_dump($_POST);
 
 $Nombre_Promo = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['NombrePromo']))));
 $CantidadADescontar = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CantidadDesc']))));
