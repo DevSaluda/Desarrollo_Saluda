@@ -1,5 +1,6 @@
 <?php
 include_once "db_connection.php";
+include_once "Consultas.php";
 // Obtener el código de barras enviado por AJAX
 $codigo = $_POST['codigoEscaneado'];
 
