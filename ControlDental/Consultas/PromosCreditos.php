@@ -40,10 +40,15 @@ include "Consultas.php";
 
 $user_id=null;
 $sql1="SELECT Promos_Credit_POS.ID_Promo_Cred,Promos_Credit_POS.Nombre_Promo,
-Promos_Credit_POS.CantidadADescontar, Promos_Credit_POS.Fk_Tratamiento,
-Promos_Credit_POS.Estatus,Promos_Credit_POS.CodigoEstatus,Promos_Credit_POS.ID_H_O_D, 
-Tipos_Credit_POS.ID_Tip_Cred,Tipos_Credit_POS.Nombre_Tip FROM Promos_Credit_POS,Tipos_Credit_POS where 
-Promos_Credit_POS.Fk_Tratamiento = Tipos_Credit_POS.ID_Tip_Cred and Promos_Credit_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
+Promos_Credit_POS.CantidadADescontar,
+Promos_Credit_POS.Fk_Tratamiento,
+Promos_Credit_POS.Estatus,
+Promos_Credit_POS.CodigoEstatus,
+Promos_Credit_POS.ID_H_O_D, 
+Tipos_Credit_POS.ID_Tip_Cred,
+Tipos_Credit_POS.Nombre_Tip
+FROM Promos_Credit_POS,Tipos_Credit_POS
+WHERE Promos_Credit_POS.Fk_Tratamiento = Tipos_Credit_POS.ID_Tip_Cred AND Promos_Credit_POS.ID_H_O_D ='".$row['ID_H_O_D']."'";
 $query = $conn->query($sql1);
 ?>
 
@@ -99,7 +104,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editPromos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/EditaPromo.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ControlDental/Modales/EditaPromo.php","id="+id,function(data){
   			$("#EditPromos").html(data);
           $("#TituloPromos").html("Editar área de crédito");
         
@@ -111,7 +116,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-HistorialPromos").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialPromosCreditos.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ControlDental/Modales/HistorialPromosCreditos.php","id="+id,function(data){
               $("#EditPromos").html(data);
               $("#TituloPromos").html("Movimientos aplicados en el área");
               $("#DiPromos").removeClass(" modal-dialog modal-lg modal-notify modal-info");
