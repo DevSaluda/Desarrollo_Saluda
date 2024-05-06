@@ -61,9 +61,9 @@
   <select id = "tratamiento" class = "form-control" name = "Tratamiento">
                                                <option value="">Seleccione un tratamiento:</option>
         <?
-          $query = $conn -> query ("SELECT 	ID_Tip_Cred,Nombre_Tip FROM Tipos_Credit_POS WHERE Estatus='Vigente'");
+          $query = $conn -> query ("SELECT ID_Tip_Cred,Nombre_Tip FROM Tipos_Credit_POS WHERE ID_H_O_D='".$row['ID_H_O_D']."' AND Estatus='Vigente'");
           while ($valores = mysqli_fetch_array($query))  {
-            echo '<option value="'.$valores[ID_Tip_Cred].'">'.$valores[Nombre_Tip].'</option>';
+            echo '<option value="'.$valores["ID_Tip_Cred"].'">'.$valores["Nombre_Tip"].'</option>';
           }
         ?>  </select>
              </div>
