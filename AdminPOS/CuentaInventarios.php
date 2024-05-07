@@ -362,7 +362,7 @@ include("Consultas/db_connection.php");
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th>Acciones</th>
+                              <th>Eliminar</th>
                             
                             </tr>
                           </thead>
