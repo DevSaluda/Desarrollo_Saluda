@@ -669,6 +669,17 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
+// Función para calcular y mostrar la diferencia
+function calcularDiferencia() {
+    var cantidadVendida = parseFloat($(this).val());
+    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val());
+    var diferencia = cantidadVendida - cantidadExistencias;
+    $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
+}
+
+// Agregar un evento onchange a los inputs relevantes
+$('.cantidad-vendida-input').on('input', calcularDiferencia);
+$('.cantidad-existencias-input').on('input', calcularDiferencia);
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
@@ -695,6 +706,7 @@ $('#codigoEscaneado').autocomplete({
         }
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
+        calcularDiferencia(); // AQUÍ SE LLAMA A LA FUNCIÓN calcularDiferencia()
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
@@ -712,9 +724,10 @@ $('#codigoEscaneado').autocomplete({
         tr += '<tr data-id="' + articulo.id + '">';
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
-        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="CantidadVendida[]" value="' + articulo.cantidad + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
-        tr += '<td class="cantidad"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="' + articulo.existencia + '" /></td>';
-        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
+        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="CantidadVendida[]" value="' + articulo.cantidad + '" /></td>';
+tr += '<td class="cantidad"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="' + articulo.existencia + '" /></td>';
+tr += '<td class="cantidad"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
+
         tr += '<td class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"  value="' + articulo.precio + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '"class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVentaProd[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
         tr += '<td><input id="importe_' + articulo.id + '" class="form-control importe" name="ImporteGenerado[]"style="font-size: 0.75rem !important;" type="number" readonly /></td>';
@@ -740,6 +753,7 @@ $('#codigoEscaneado').autocomplete({
 
         $('#tablaAgregarArticulos tbody').append(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:last-child'));
+        calcularDiferencia(); // AQUÍ SE LLAMA A LA FUNCIÓN calcularDiferencia()
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
