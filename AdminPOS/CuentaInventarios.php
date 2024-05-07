@@ -718,14 +718,10 @@ $('#codigoEscaneado').autocomplete({
         tr += '<td  style="visibility:collapse; display:none;"  class="claveess"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="' + articulo.clave + '" name="ClaveAdicional[]" /></td>';
         tr += '<td  style="visibility:collapse; display:none;" class="tiposservicios"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="' + articulo.tipo + '" name="TiposDeServicio[]" /></td>';
 
-        tr += '<td  style="visibility:collapse; display:none;" class="Vendedor"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Sucursal"> <input hidden type="text" class="form-control " name="SucursalEnVenta[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="Sistema"> <input hidden type="text" class="form-control " name="Sistema[]"readonly value="POSVENTAS">  </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="Liquidado"> <input hidden type="text" class="form-control " name="Liquidado[]"readonly value="N/A">  </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="N/A"> <input hidden type="text" class="form-control " name="Estatus[]"readonly value="Pagado">  </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Empresa[]"readonly value="Doctor Consulta">  </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Empresa[]"readonly value="Saluda">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaDeVenta[]"readonly value="<? echo $fechaActual;?>"  </td>';
-        tr += '<td   style="visibility:collapse; display:none;" class="FormaPago"> <input hidden type="text" class="form-control forma-pago-input" id="FormaPagoCliente" name="FormaDePago[]" value="Efectivo"> </td>';
         
         tr += '<td  style="visibility:collapse; display:none;" class="Descuentosugerido"> <input hidden type="text" class="form-control descuento-aplicado" id="descuentoaplicado_' + articulo.id + '" name="DescuentoAplicado[]" readonly > </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
