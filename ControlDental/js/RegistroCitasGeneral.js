@@ -1,7 +1,7 @@
 function CargaSignosVitalesLibre(){
 
 
-    $.get("https://saludapos.com/AdminPOS/Consultas/RegistroLibre.php","",function(data){
+    $.get("https://saludapos.com/ControlDental/Consultas/RegistroLibre.php","",function(data){
       $("#sv").html(data);
     })
   
