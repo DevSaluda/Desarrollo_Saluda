@@ -36,9 +36,9 @@ include "Consultas/Consultas.php";
   </div>
  
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+  <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
   Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
+</button> -->
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
   Busqueda por mes <i class="fas fa-calendar-week"></i>
 </button>
@@ -80,6 +80,7 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraEspecificamente.php");
   include ("Modales/FiltraFechasEspecialesVenta.php");
   include ("Modales/FiltraPorMes.php");
+  include("Modales/FiltroPorProducto.php")
 include ("footer.php")?>
 
 <!-- ./wrapper -->
