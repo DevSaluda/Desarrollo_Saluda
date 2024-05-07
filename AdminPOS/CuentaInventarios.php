@@ -282,8 +282,9 @@ include("Consultas/db_connection.php");
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
                             <select class="form-control" style="font-size: 0.75rem !important;">
+                            <option value="">Seleccione un tipo de ajuste </option>
                   <option value="Ajuste positivo">Ajuste de inventario</option>
-              <option value="Ajuste negativo">Inventario inicial</option>
+              <option value="Inventario inicial">Inventario inicial</option>
                  <option value="Ajuste por daño">Ajuste por daño</option>
               <option value="Ajuste por caducidad">Ajuste por caducidad</option>
 </select>
