@@ -679,7 +679,7 @@ function calcularDiferencias() {
 }
 
 // Agregar un evento onchange solo al primer input
-$('.cantidad-vendida-input').on('input', calcularDiferencia);
+$('.cantidad-vendida-input').on('input', calcularDiferencias);
 
 
 
