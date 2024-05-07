@@ -670,15 +670,18 @@ $('#codigoEscaneado').autocomplete({
   }
 });
 // Función para calcular y mostrar la diferencia
+// Función para calcular y mostrar la diferencia
 function calcularDiferencia() {
-    var cantidadVendida = parseFloat($(this).closest('tr').find('.cantidad-vendida-input').val());
-    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val());
+    var cantidadVendida = parseFloat($(this).closest('tr').find('.cantidad-vendida-input').val()) || 0;
+    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
     var diferencia = cantidadVendida - cantidadExistencias;
     $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
 }
 
-// Agregar un evento onchange a los inputs relevantes
-$('.cantidad-vendida-input, .cantidad-existencias-input').on('input', calcularDiferencia);
+// Agregar un evento onchange solo al primer input
+$('.cantidad-vendida-input').on('input', calcularDiferencia);
+
+
 
 
 
