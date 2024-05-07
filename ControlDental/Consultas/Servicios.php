@@ -94,7 +94,7 @@ $query = $conn->query($sql1);
 <script>
   	$(".btn-editServ").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/EditaServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ControlDental/Modales/EditaServicio.php","id="+id,function(data){
   			$("#form-Serv").html(data);
           $("#TituloServ").html("Editar datos de categoría");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -107,7 +107,7 @@ $query = $conn->query($sql1);
   	});
     $(".btn-editServ2").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/DetallesServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ControlDental/Modales/DetallesServicio.php","id="+id,function(data){
               $("#form-Serv").html(data);
               $("#TituloServ").html("Detalles de categoría ");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -119,7 +119,7 @@ $query = $conn->query($sql1);
     });
     $(".btn-historialServ").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialServicio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/ControlDental/Modales/HistorialServicio.php","id="+id,function(data){
               $("#form-Serv").html(data);
               $("#TituloServ").html("Actualizaciones y ediciones realizadas");
               $("#DiServ").removeClass("modal-dialog modal-lg modal-notify modal-info");
