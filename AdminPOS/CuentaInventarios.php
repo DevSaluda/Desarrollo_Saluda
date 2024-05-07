@@ -672,7 +672,7 @@ $('#codigoEscaneado').autocomplete({
 // Función para calcular y mostrar la diferencia
 // Función para calcular y mostrar la diferencia
 // Función para calcular y mostrar la diferencia
-function calcularDiferencia() {
+function calcularDiferencias() {
     var cantidadVendida = parseFloat($(this).val()) || 0;
     var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
     var diferencia = cantidadVendida - cantidadExistencias;
@@ -680,7 +680,7 @@ function calcularDiferencia() {
 }
 
 // Agregar un evento onchange solo al primer input
-$('.cantidad-vendida-input').on('input', calcularDiferencia);
+$('.cantidad-vendida-input').on('input', calcularDiferencias);
 
 
 
