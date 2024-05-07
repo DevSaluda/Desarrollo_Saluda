@@ -57,16 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 WHERE
                 Ventas_POS.Fk_sucursal = '" . $row['Fk_Sucursal'] . "'
                 AND YEAR(Ventas_POS.Fecha_venta) = $anual
-                AND MONTH(Ventas_POS.Fecha_venta) = $mes
-                AND 
-                (
-                Ventas_POS.Identificador_tipo = 00000000001 OR
-                Ventas_POS.Identificador_tipo = 00000000002 OR
-                Ventas_POS.Identificador_tipo = 00000000003 OR
-                Ventas_POS.Identificador_tipo = 00000000004 OR
-                Ventas_POS.Identificador_tipo = 00000000005
-                )";
-                
+                AND MONTH(Ventas_POS.Fecha_venta) = $mes";
 
         $result = mysqli_query($conn, $sql);
 
