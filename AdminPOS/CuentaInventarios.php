@@ -736,7 +736,7 @@ $('#codigoEscaneado').autocomplete({
         mostrarTotalVenta();
         mostrarSubTotal();
         mostrarIvaTotal();
-       
+        CapturaFormadePago();
       }
     }
 
