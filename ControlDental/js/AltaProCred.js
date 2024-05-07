@@ -72,7 +72,7 @@ required:true,
           cache: false,
           beforeSend: function(){	
     
-            $("#submit_registro").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+            $("#submit_registroPromo").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
       
                   
     },
@@ -90,12 +90,12 @@ required:true,
           $('.modal').on('hidden.bs.modal', function (e) {
             modal_lv--
           });	
-          $("#submit_registro").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
+          $("#submit_registroPromo").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
           $('#ErrorDupli').modal('toggle'); 
           setTimeout(function(){ 
       }, 2000); // abrir
       setTimeout(function(){ 
-          $("#submit_registro").html("Guardar <i class='fas fa-save'></i>");
+          $("#submit_registroPromo").html("Guardar <i class='fas fa-save'></i>");
       }, 3000); // abrir
 
          
@@ -103,7 +103,7 @@ required:true,
      
       else if(dataResult.statusCode==200){
           
-           $("#submit_registro").html("Enviado <i class='fas fa-check'></i>")	
+           $("#submit_registroPromo").html("Enviado <i class='fas fa-check'></i>")	
          
            $("#AgregaPromoCreditos")[0].reset();
            $("#AltaPromosCreditos").removeClass("in");
