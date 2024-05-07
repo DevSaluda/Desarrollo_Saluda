@@ -515,7 +515,11 @@ include("Consultas/db_connection.php");
       {
         "data": "cantidad"
       },
-
+      {
+        "data": "stockactual"
+      },{
+        "data": "diferencia"
+      },
       {
         "data": "precio"
       },
