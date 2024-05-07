@@ -47,7 +47,8 @@ Promos_Credit_POS.CodigoEstatus,
 Promos_Credit_POS.ID_H_O_D, 
 Tipos_Credit_POS.ID_Tip_Cred,
 Tipos_Credit_POS.Nombre_Tip
-FROM Promos_Credit_POS,Tipos_Credit_POS";
+FROM Promos_Credit_POS,Tipos_Credit_POS
+WHERE Promos_Credit_POS.Fk_Tratamiento = Tipos_Credit_POS";
 $query = $conn->query($sql1);
 ?>
 
