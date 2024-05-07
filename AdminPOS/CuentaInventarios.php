@@ -684,6 +684,24 @@ $('.cantidad-vendida-input').on('input', calcularDiferencias);
 
 
 
+// Agregar un listener al elemento padre
+document.addEventListener('input', function(event) {
+    // Verificar si el evento fue desencadenado por un input de cantidad vendida o cantidad en existencias
+    if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('cantidad-existencias-input')) {
+        // Obtener la fila padre del input actual
+        var fila = event.target.closest('tr');
+        
+        // Obtener el valor de cantidad vendida y cantidad en existencias
+        var cantidadVendida = parseFloat(fila.querySelector('.cantidad-vendida-input').value);
+        var stockActual = parseFloat(fila.querySelector('.cantidad-existencias-input').value);
+        
+        // Calcular la diferencia
+        var diferencia = cantidadVendida - stockActual;
+        
+        // Actualizar el campo de diferencia en la misma fila
+        fila.querySelector('.cantidad-diferencia-input').value = diferencia;
+    }
+});
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
