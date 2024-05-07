@@ -671,15 +671,15 @@ $('#codigoEscaneado').autocomplete({
 });
 // Función para calcular y mostrar la diferencia
 function calcularDiferencia() {
-    var cantidadVendida = parseFloat($(this).val());
+    var cantidadVendida = parseFloat($(this).closest('tr').find('.cantidad-vendida-input').val());
     var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val());
     var diferencia = cantidadVendida - cantidadExistencias;
     $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
 }
 
 // Agregar un evento onchange a los inputs relevantes
-$('.cantidad-vendida-input').on('input', calcularDiferencia);
-$('.cantidad-existencias-input').on('input', calcularDiferencia);
+$('.cantidad-vendida-input, .cantidad-existencias-input').on('input', calcularDiferencia);
+
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
