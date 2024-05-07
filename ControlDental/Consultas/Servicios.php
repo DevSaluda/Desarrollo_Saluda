@@ -39,7 +39,7 @@ include "Consultas.php";
 
 
 $user_id=null;
-$sql1="SELECT * FROM `Servicios_POS` ";
+$sql1="SELECT * FROM `Servicios_POS`  ";
 $query = $conn->query($sql1);
 ?>
 
