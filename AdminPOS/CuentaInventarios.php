@@ -669,44 +669,21 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
-
-// Define una función para calcular y actualizar la diferencia
-function calcularDiferencia() {
-    // Buscar todas las filas de la tabla
-    var filas = document.querySelectorAll('tr');
-    
-    // Iterar sobre cada fila
-    filas.forEach(function(fila) {
-        // Obtener el valor de cantidad vendida y cantidad en existencias
-        var cantidadVendida = parseFloat(fila.querySelector('.cantidad-vendida-input').value);
-        var stockActual = parseFloat(fila.querySelector('.cantidad-existencias-input').value);
-        
-        // Calcular la diferencia
-        var diferencia = cantidadVendida - stockActual;
-        
-        // Actualizar el campo de diferencia en la misma fila
-        fila.querySelector('.cantidad-diferencia-input').value = diferencia;
-    });
+// Función para calcular y mostrar la diferencia
+// Función para calcular y mostrar la diferencia
+// Función para calcular y mostrar la diferencia
+function calcularDiferencias() {
+    var cantidadVendida = parseFloat($(this).val()) || 0;
+    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
+    var diferencia = cantidadVendida - cantidadExistencias;
+    $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
 }
 
-// Llamar a la función para calcular y actualizar la diferencia cuando la página se carga inicialmente
-window.addEventListener('DOMContentLoaded', function() {
-    calcularDiferencia();
-});
-
-// Agregar un listener al documento para manejar eventos en elementos dinámicos
-document.addEventListener('input', function(event) {
-    // Verificar si el evento fue desencadenado por un input de cantidad vendida o cantidad en existencias
-    if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('cantidad-existencias-input')) {
-        // Llamar a la función para calcular y actualizar la diferencia cuando se cambia una entrada existente
-        calcularDiferencia();
-    }
-});
+// Agregar un evento onchange solo al primer input
+$('.cantidad-vendida-input').on('input', calcularDiferencia);
 
 
 
-
-// Agregar un listener al elemento padre
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
@@ -752,8 +729,8 @@ document.addEventListener('input', function(event) {
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
         tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="CantidadVendida[]" value="' + articulo.cantidad + '" /></td>';
-tr += '<td class="existencia"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="' + articulo.existencia + '" /></td>';
-tr += '<td class="diferencia"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
+tr += '<td class="cantidad"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="' + articulo.existencia + '" /></td>';
+tr += '<td class="cantidad"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
 
         tr += '<td class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"  value="' + articulo.precio + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '"class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVentaProd[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
