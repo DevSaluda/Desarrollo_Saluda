@@ -67,8 +67,6 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal 
 FROM AbonoCreditos_POS,Tipos_Credit_POS,SucursalesCorre 
 WHERE AbonoCreditos_POS.Fk_tipo_Credi = Tipos_Credit_POS.ID_Tip_Cred 
-AND AbonoCreditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC  
-AND AbonoCreditos_POS.ID_H_O_D = '".$row['ID_H_O_D']."' 
 AND DATE(AbonoCreditos_POS.Fecha_Abono) =  CURRENT_DATE();";
 $query = $conn->query($sql1);
 ?>
