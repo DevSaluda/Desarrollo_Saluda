@@ -669,28 +669,14 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
-// Función para calcular y mostrar la diferencia
-// Función para calcular y mostrar la diferencia
-// Función para calcular y mostrar la diferencia
-function calcularDiferencias() {
-    var cantidadVendida = parseFloat($(this).val()) || 0;
-    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
-    var diferencia = cantidadVendida - cantidadExistencias;
-    $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
-}
 
-// Agregar un evento onchange solo al primer input
-$('.cantidad-vendida-input').on('input', calcularDiferencias);
-
-
-
-// Agregar un listener al elemento padre
-document.addEventListener('input', function(event) {
-    // Verificar si el evento fue desencadenado por un input de cantidad vendida o cantidad en existencias
-    if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('cantidad-existencias-input')) {
-        // Obtener la fila padre del input actual
-        var fila = event.target.closest('tr');
-        
+// Define una función para calcular y actualizar la diferencia
+function calcularDiferencia() {
+    // Buscar todas las filas de la tabla
+    var filas = document.querySelectorAll('tr');
+    
+    // Iterar sobre cada fila
+    filas.forEach(function(fila) {
         // Obtener el valor de cantidad vendida y cantidad en existencias
         var cantidadVendida = parseFloat(fila.querySelector('.cantidad-vendida-input').value);
         var stockActual = parseFloat(fila.querySelector('.cantidad-existencias-input').value);
@@ -700,8 +686,27 @@ document.addEventListener('input', function(event) {
         
         // Actualizar el campo de diferencia en la misma fila
         fila.querySelector('.cantidad-diferencia-input').value = diferencia;
+    });
+}
+
+// Llamar a la función para calcular y actualizar la diferencia cuando la página se carga inicialmente
+window.addEventListener('DOMContentLoaded', function() {
+    calcularDiferencia();
+});
+
+// Agregar un listener al documento para manejar eventos en elementos dinámicos
+document.addEventListener('input', function(event) {
+    // Verificar si el evento fue desencadenado por un input de cantidad vendida o cantidad en existencias
+    if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('cantidad-existencias-input')) {
+        // Llamar a la función para calcular y actualizar la diferencia cuando se cambia una entrada existente
+        calcularDiferencia();
     }
 });
+
+
+
+
+// Agregar un listener al elemento padre
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
