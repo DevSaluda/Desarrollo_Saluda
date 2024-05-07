@@ -710,7 +710,7 @@ $('.cantidad-vendida-input').on('input', calcularDiferencia);
         }
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
-        calcularDiferencia.call($('.cantidad-vendida-input').last()[0]);
+        calcularDiferencias.call($('.cantidad-vendida-input').last()[0]);
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
