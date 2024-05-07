@@ -1006,7 +1006,7 @@ $('#abrirSweetAlertBtn').on('click', function() {
 <script>
             document.addEventListener("DOMContentLoaded", function(){
                 // Invocamos cada 5 segundos ;)
-                const milisegundos = 5 *1000;
+                const milisegundos = 600 *1000;
                 setInterval(function(){
                     // No esperamos la respuesta de la petición porque no nos importa
                     fetch("./Refrescacontenido.php");
