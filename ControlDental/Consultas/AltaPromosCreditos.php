@@ -24,6 +24,9 @@ $ID_H_O_D=  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Emp
           
         } 
         else{
+            echo "Tratamiento recibido: " . $Fk_Tratamiento . "<br>";
+
+
             $sql = "INSERT INTO `Promos_Credit_POS`( `Nombre_Promo`,`CantidadADescontar`,`Fk_Tratamiento`,`Estatus`,`CodigoEstatus`,`Agrega`,`Sistema`,`ID_H_O_D`) 
             VALUES ('$Nombre_Promo','$CantidadADescontar','$Fk_Tratamiento','$Estatus','$CodigoEstatus','$Agrega','$Sistema','$ID_H_O_D')";
         
