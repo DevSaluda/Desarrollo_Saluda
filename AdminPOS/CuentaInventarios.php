@@ -669,16 +669,6 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
-// Función para calcular y mostrar la diferencia
-function calcularDiferencia() {
-    var cantidadVendida = parseFloat($(this).closest('tr').find('.cantidad-vendida-input').val());
-    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val());
-    var diferencia = cantidadVendida - cantidadExistencias;
-    $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
-}
-
-// Agregar un evento onchange a los inputs relevantes
-$('.cantidad-vendida-input, .cantidad-existencias-input').on('input', calcularDiferencia);
 
 
 
@@ -700,6 +690,12 @@ $('.cantidad-vendida-input, .cantidad-existencias-input').on('input', calcularDi
       if (row.length) {
         var cantidadActual = parseInt(row.find('.cantidad input').val());
         var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+        $('.cantidad-vendida-input, .cantidad-existencias-input').off('change').on('change', function() {
+        var cantidadVendida = parseFloat($(this).closest('tr').find('.cantidad-vendida-input').val()) || 0;
+        var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
+        var diferencia = cantidadVendida - cantidadExistencias;
+        $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
+    });
         if (nuevaCantidad < 0) {
           mostrarMensaje('La cantidad no puede ser negativa');
           return;
