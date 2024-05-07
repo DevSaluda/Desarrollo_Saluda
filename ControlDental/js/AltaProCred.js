@@ -67,7 +67,7 @@ required:true,
 
       $.ajax({				
           type : 'POST',
-          url: "Consultas/AltaPromosCredito.php",
+          url: "Consultas/AltaPromosCreditos.php",
           data: $('#AgregaPromoCreditos').serialize(),
           cache: false,
           beforeSend: function(){	
