@@ -355,7 +355,7 @@ include("Consultas/db_connection.php");
                           <thead>
                             <tr>
                               <th>Codigo</th>
-                              <th style="width:30%">Producto</th>
+                              <th style="width:20%">Producto</th>
                               <th style="width:6%">Contabilizado</th>
                               <th style="width:6%">Stock actual</th>
                               <th style="width:6%">Diferencia</th>
