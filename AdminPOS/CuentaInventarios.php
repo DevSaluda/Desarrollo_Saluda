@@ -688,6 +688,18 @@ $(document).on('change', '.cantidad-vendida-input', function() {
     // Actualizar el valor del input de diferencia
     fila.find('.cantidad-diferencia-input').val(diferencia);
 });
+// Función para calcular la diferencia entre la cantidad vendida y las existencias en la base de datos
+function calcularDiferencia(fila) {
+    // Obtener la cantidad vendida y las existencias de la fila actual
+    var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
+    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+
+    // Calcular la diferencia
+    var diferencia = cantidadVendida - existenciasBd;
+
+    // Actualizar el valor del input de diferencia en la fila actual
+    fila.find('.cantidad-diferencia-input').val(diferencia);
+}
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
@@ -714,24 +726,13 @@ $(document).on('change', '.cantidad-vendida-input', function() {
         }
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
         mostrarSubTotal();
         mostrarIvaTotal();
-        var fila = $(this).closest('tr');
-    
-    // Obtener el valor del input de cantidad vendida
-    var cantidadVendida = parseInt($(this).val());
-    
-    // Obtener el valor del input de existencias en la base de datos
-    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
-    
-    // Calcular la diferencia
-    var diferencia = cantidadVendida - existenciasBd;
-    
-    // Actualizar el valor del input de diferencia
-    fila.find('.cantidad-diferencia-input').val(diferencia);
+        
       } else {
        
         var tr = '';
@@ -773,7 +774,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
         $('#tablaAgregarArticulos tbody').append(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:last-child'));
-      
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
