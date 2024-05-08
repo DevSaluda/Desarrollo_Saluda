@@ -671,7 +671,23 @@ $('#codigoEscaneado').autocomplete({
 });
   
 
-
+// Agregar evento change al input de cantidad vendida
+$(document).on('change', '.cantidad-vendida-input', function() {
+    // Obtener la fila actual
+    var fila = $(this).closest('tr');
+    
+    // Obtener el valor del input de cantidad vendida
+    var cantidadVendida = parseInt($(this).val());
+    
+    // Obtener el valor del input de existencias en la base de datos
+    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+    
+    // Calcular la diferencia
+    var diferencia = cantidadVendida - existenciasBd;
+    
+    // Actualizar el valor del input de diferencia
+    fila.find('.cantidad-diferencia-input').val(diferencia);
+});
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
