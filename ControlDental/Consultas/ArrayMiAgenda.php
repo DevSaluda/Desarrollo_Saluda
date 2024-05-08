@@ -47,7 +47,10 @@ LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
 AgendaCitas_EspecialistasExt.Fk_Especialista BETWEEN 14 AND 17
-AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE());";
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())
+ORDER BY
+    AgendaCitas_EspecialistasExt.Fecha_Hora DESC;
+";
 
 
 $result = mysqli_query($conn, $sql);
