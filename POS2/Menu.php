@@ -14,7 +14,7 @@ include "Consultas/ConsultaCaja.php";
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: white;"></i></a>
       </li>
       <li class="nav-item">
-    <marquee behavior="scroll" direction="left" scrollamount="8" style="color: white; font-weight: bold;">
+    <!-- <marquee behavior="scroll" direction="left" scrollamount="8" style="color: white; font-weight: bold;">
         Hola, <?php echo $row['Nombre_Apellidos']?> te recordamos que tenemos promociones vigentes hasta el 30 de Abril, 
         🎉💊 10% descuento en Laboratorios 💊🎉 * RECUERDA VALIDAR CUALES SI APLICAN * 
         📋⚡ 20% descuento en Ultrasonidos *Sujeto a previa agenda
@@ -22,7 +22,7 @@ include "Consultas/ConsultaCaja.php";
  🎉🦷 ¡10% de descuento en Servicios Dentales! 💊🦷 Aprovecha esta oferta especial en todos nuestros servicios dentales (validar cuales servicios).
 
         recuerda aplicarlos antes de cobrarle al cliente. 
-    </marquee> 
+    </marquee>  -->
 </li>
 
     </ul>
