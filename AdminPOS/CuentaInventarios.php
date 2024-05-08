@@ -4,7 +4,7 @@ include "Consultas/Consultas.php";
 include("Consultas/db_connection.php");
 
 
-
+$fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 
 ?>
 <!DOCTYPE html>
@@ -275,6 +275,16 @@ include("Consultas/db_connection.php");
                           </div>
                         </div>
 
+                        <div class="col">
+
+                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Fecha</label>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+                            </div>
+                            <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo $fechaActual ?>">
+                           
+                          </div>
+                        </div>
                         <div class="col">
 
                           <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Tipo de ajuste</label>
@@ -763,7 +773,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Sucursal"> <input hidden type="text" class="form-control " name="SucursalEnVenta[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Empresa[]"readonly value="Saluda">  </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaDeVenta[]"readonly value="<? echo $fechaActual;?>"  </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaDeVenta[]"readonly value="<?php echo $fechaActual;?>"  </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
 
