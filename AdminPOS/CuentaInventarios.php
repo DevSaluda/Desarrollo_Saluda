@@ -669,6 +669,18 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
+// Función para calcular y mostrar la diferencia
+// Función para calcular y mostrar la diferencia
+// Función para calcular y mostrar la diferencia
+function calcularDiferencias() {
+    var cantidadVendida = parseFloat($(this).val()) || 0;
+    var cantidadExistencias = parseFloat($(this).closest('tr').find('.cantidad-existencias-input').val()) || 0;
+    var diferencia = cantidadVendida - cantidadExistencias;
+    $(this).closest('tr').find('.cantidad-diferencia-input').val(diferencia);
+}
+
+// Agregar un evento onchange solo al primer input
+$('.cantidad-vendida-input').on('input', calcularDiferencias);
 
 
 
@@ -745,7 +757,7 @@ tr += '<td class="cantidad"><input class="form-control cantidad-diferencia-input
 
         $('#tablaAgregarArticulos tbody').append(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:last-child'));
-       
+        calcularDiferencias(); // AQUÍ SE LLAMA A LA FUNCIÓN calcularDiferencia()
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
