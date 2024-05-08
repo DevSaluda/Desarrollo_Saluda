@@ -20,9 +20,7 @@ include "Consultas/ConsultaCaja.php";
         📋⚡ 20% descuento en Ultrasonidos *Sujeto a previa agenda
  ⚡📋💓📈 20% descuento en Electrocardiogramas 📈💓
  🎉🦷 De igual forma contamos con promociones en dental, las claves son ,8056-3 | PROFILAXIS INICIAL PROMO,8056-2 | PROFILAXIS SEGUIMIENTO PROMO,7123 | PRUEBA RAPIDA DE INFLUENZA (NUEVO
-PRECIO) 💊🦷 
-
-        recuerda aplicarlos antes de cobrarle al cliente. 
+PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!. 
     </marquee> 
 </li>
 
