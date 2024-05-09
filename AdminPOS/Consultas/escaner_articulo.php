@@ -7,7 +7,8 @@ $codigo = $_POST['codigoEscaneado'];
 $sucursalbusqueda = $row['Fk_Sucursal'];
 
 // Consultar la base de datos para obtener el artículo correspondiente al código de barras
-$sql = "SELECT Cod_Barra, Fk_sucursal, GROUP_CONCAT(ID_Prod_POS) AS IDs, GROUP_CONCAT(Nombre_Prod) AS descripciones, GROUP_CONCAT(Precio_Venta) AS precios, GROUP_CONCAT(Lote) AS lotes, GROUP_CONCAT(Clave_adicional) AS claves, GROUP_CONCAT(Tipo_Servicio) AS tipos, GROUP_CONCAT(Existencias_R) AS stockactual
+$sql = "SELECT Cod_Barra, Fk_sucursal, GROUP_CONCAT(ID_Prod_POS) AS IDs, GROUP_CONCAT(Nombre_Prod) AS descripciones, GROUP_CONCAT(Precio_Venta) AS precios, GROUP_CONCAT(Lote) AS lotes,
+ GROUP_CONCAT(Clave_adicional) AS claves, GROUP_CONCAT(Tipo_Servicio) AS tipos, GROUP_CONCAT(Existencias_R)  AS stockactual ,GROUP_CONCAT(Precio_C) as precioscompra
 FROM Stock_POS
         WHERE Cod_Barra = ? AND Fk_sucursal = ?
         GROUP BY Cod_Barra";
@@ -22,6 +23,7 @@ if ($result->num_rows > 0) {
     $ids = explode(',', $row['IDs']);
     $descripciones = explode(',', $row['descripciones']);
     $precios = explode(',', $row['precios']);
+    $precioscompra = explode(',', $row['precioscompra']);
     $stockactual = explode(',', $row['stockactual']);
     $lotes = explode(',', $row['lotes']);
     $claves = explode(',', $row['claves']);
@@ -35,6 +37,7 @@ if ($result->num_rows > 0) {
         "cantidad" => [1],
         "existencia" => $stockactual[0],
         "precio" => $precios[0],
+        "preciocompra" => $precioscompra[0],
         "lote" => $lotes[0],
         "clave" => $claves[0],
         "tipo" => $tipos[0],
