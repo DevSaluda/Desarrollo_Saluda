@@ -911,7 +911,7 @@ function eliminarFila(element) {
 <?php
 
 include("Modales/Error.php");
-
+include ("Modales/FiltraEspecificamenteInventarios.php");
 
 include("footer.php") ?>
 
@@ -919,6 +919,7 @@ include("footer.php") ?>
   <!-- ./wrapper -->
 
 
+  <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
 
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
