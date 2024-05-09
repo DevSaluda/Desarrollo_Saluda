@@ -394,7 +394,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                 
               </div>
             
-             
+              </form>
 
               
 
