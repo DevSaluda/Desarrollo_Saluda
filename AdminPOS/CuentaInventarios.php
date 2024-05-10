@@ -373,7 +373,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                               <th style="width:6%">Stock actual</th>
                               <th style="width:6%">Diferencia</th>
                               <th>Precio</th>
-                              <th>Precio venta</th>
+                              <th>Precio compra</th>
                               <th>Importe</th>
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
@@ -439,52 +439,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </script>
 
 
-<script>
-  $(document).ready(function() {
-    // Bloquear el botón al cargar la página
-    $('#btnIniciarVenta').prop('disabled', true);
-
-    // Agregar un controlador de eventos al input
-    $('#iptEfectivoRecibido').on('input', function() {
-      var valorInput = $(this).val();
-      var miBoton = $('#btnIniciarVenta');
-
-      if (valorInput.length > 0) {
-        // Desbloquear el botón si el input contiene datos
-        miBoton.prop('disabled', false);
-      } else {
-        // Bloquear el botón si el input está vacío
-        miBoton.prop('disabled', true);
-      }
-    });
-  });
-
-
-  $(document).ready(function() {
-    $("#chkEfectivoExacto").change(function() {
-      if ($(this).is(":checked")) {
-        var boletaTotal = parseFloat($("#boleta_total").text());
-        $("#Vuelto").text("0.00");
-        $("#iptEfectivoRecibido").val(boletaTotal.toFixed(2));
-      }
-    });
-
-    $("#iptEfectivoRecibido").change(function() {
-      var boletaTotal = parseFloat($("#boleta_total").text());
-      var efectivoRecibido = parseFloat($(this).val());
-
-      if ($("#chkEfectivoExacto").is(":checked") && boletaTotal >= efectivoRecibido) {
-        $("#Vuelto").text("0.00");
-        $("#boleta_total").text(efectivoRecibido.toFixed(2));
-      } else {
-        var vuelto = efectivoRecibido - boletaTotal;
-        $("#Vuelto").text(vuelto.toFixed(2));
-        $("#cambiorecibidocliente").val(vuelto.toFixed(2));
-        
-      }
-    });
-  });
-</script>
 
 <script>
   $("#btnVaciarListado").click(function() {
