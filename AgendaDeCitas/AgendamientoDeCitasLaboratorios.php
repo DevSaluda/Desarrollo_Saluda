@@ -1,8 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
-include "Consultas/Sesion.php";
-include "Consultas/Conexion_selects.php";
-include "Consultas/ConeSelectDinamico.php";
+
+
 
 ?>
 <!DOCTYPE html>
@@ -12,36 +11,49 @@ include "Consultas/ConeSelectDinamico.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Punto de venta | Pacientes agendados</title>
+  <title>Agendamiento de citas de revaloracion </title>
 
-
-  <? include "Header.php"?>
-
-  
+  <?php include "Header.php"?>
+  <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
+
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
-  <div class="card-header" style="background-color:#2bbbad  !important;color: white;">
-    Pacientes agendados al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  <div class="card-header" style="background-color: #2bbbad !important;color: white;">
+  Revaloraciones 
   </div>
+ 
   <div >
-  
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaEspecialistaDeSucursal" class="btn btn-default">
+  Agendar nueva cita<i class="fas fa-user-plus"></i>
+</button>
 </div>
 
 </div>
-  
-  
 
-  <div class="container">
-<div class="row">
-<div class="col-md-12">
+
     
-<div id="Pacientes"></div>
+<div id="CitasEnLaSucursal"></div>
+</div>
+<div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
+<div class="card text-center">
+  <div class="card-header" style="background-color: #2bbbad !important;color: white;">
+Citas de especialistas
+  </div>
+ 
+  <div >
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">
+  Agendar nueva cita <i class="fas fa-file-medical"></i>
+</button>
+</div>
 
+</div>
+<div id="CitasDeRevaloracion"></div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -49,18 +61,22 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <!-- Main Footer -->
-  <?
-    include ("Modales/Error.php");
-    include ("Modales/Eliminar.php");
-  include ("Modales/NuevoPaciente.php");
-  include ("Modales/EstatusAgendaGuardado.php");
- 
+  <?php 
+   include ("Modales/Error.php");
+  
+   include ("Modales/Exito.php");
+
+   include ("Modales/Precarga.php");
+   include ("Modales/ExitoActualiza.php");
+   include ("Modales/EstatusAgendaGuardado.php");
+  include ("Modales/AgendarCitaLaboratorio.php");
+ include ("Modales/AltaEspecialista.php");
   include ("footer.php")?>
-<!-- ./wrapper -->
 
-<script src="js/ControlPacientesAgendados.js"></script>
+<script src="js/RevaloracionesControl.js"></script>
 
+
+<script src="js/AGendarevaloraciones.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -74,11 +90,11 @@ include "Consultas/ConeSelectDinamico.php";
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
-
+ 
 
 </body>
 </html>
-<?
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
