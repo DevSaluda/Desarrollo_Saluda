@@ -583,6 +583,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
         // msjError('No Encontrado');
       } else if (data.codigo) {
         agregarArticulo(data);
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       }
 
       limpiarCampo();
