@@ -53,7 +53,6 @@ $query = $conn->query($sql1);
 <th>Fecha </th>
 <th>Sucursal</th>
 <th>Turno</th>
-<th>Motivo_Consulta</th>
 <th>¿El paciente asistio?</th>
 <th>Contacto por whatsaap</th>
 <th>Acciones</th>
