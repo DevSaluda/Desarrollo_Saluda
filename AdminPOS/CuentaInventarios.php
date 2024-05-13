@@ -364,6 +364,10 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         }
                       </style>
                       <form action="javascript:void(0)" target="print_popup" method="post" id="VentasAlmomento">
+                      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Guardar datos</button>
+    </div>
+               
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
@@ -448,7 +452,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
-    mostrarSubTotal();
     mostrarIvaTotal()
   });
 
@@ -542,19 +545,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
 
-  function mostrarSubTotal() {
-    var subtotal = 0;
-    $('#tablaAgregarArticulos tbody tr').each(function() {
-      var importeSinIVA = parseFloat($(this).find('.importe_siniva').val().replace(/[^\d.-]/g, ''));
-      if (!isNaN(importeSinIVA)) {
-        subtotal += importeSinIVA;
-      }
-    });
-
-    $('#boleta_subtotal').text(subtotal.toFixed(2));
-  }
-
-
+  
   function mostrarIvaTotal() {
     var subtotal = 0;
     $('#tablaAgregarArticulos tbody tr').each(function() {
@@ -699,7 +690,7 @@ function calcularDiferencia(fila) {
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
-        mostrarSubTotal();
+        
         mostrarIvaTotal();
         
       } else {
@@ -741,7 +732,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
-        mostrarSubTotal();
+      
         mostrarIvaTotal();
        
       }
@@ -788,7 +779,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
   // Llamar a la función para recalcular la suma de importes
   actualizarSuma();
   mostrarTotalVenta();
-  mostrarSubTotal();
+
   mostrarIvaTotal();
 }
 
@@ -837,7 +828,7 @@ function eliminarFila(element) {
   calcularIVA();
   actualizarSuma();
   mostrarTotalVenta();
-  mostrarSubTotal();
+ 
   mostrarIvaTotal();
 }
 
