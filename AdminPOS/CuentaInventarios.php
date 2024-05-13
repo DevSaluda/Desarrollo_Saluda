@@ -452,7 +452,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
-    mostrarIvaTotal()
+
   });
 
 
@@ -546,17 +546,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
   
-  function mostrarIvaTotal() {
-    var subtotal = 0;
-    $('#tablaAgregarArticulos tbody tr').each(function() {
-      var importeSinIVA = parseFloat($(this).find('.valordelniva').val().replace(/[^\d.-]/g, ''));
-      if (!isNaN(importeSinIVA)) {
-        subtotal += importeSinIVA;
-      }
-    });
 
-    $('#ivatotal').text(subtotal.toFixed(2));
-  }
 
   function buscarArticulo(codigoEscaneado) {
   var formData = new FormData();
@@ -691,7 +681,7 @@ function calcularDiferencia(fila) {
         actualizarSuma();
         mostrarTotalVenta();
         
-        mostrarIvaTotal();
+      
         
       } else {
        
@@ -733,7 +723,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         actualizarSuma();
         mostrarTotalVenta();
       
-        mostrarIvaTotal();
+        
        
       }
     }
@@ -780,7 +770,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
   actualizarSuma();
   mostrarTotalVenta();
 
-  mostrarIvaTotal();
+
 }
 
 
@@ -829,7 +819,7 @@ function eliminarFila(element) {
   actualizarSuma();
   mostrarTotalVenta();
  
-  mostrarIvaTotal();
+
 }
 
 
