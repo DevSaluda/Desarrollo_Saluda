@@ -363,7 +363,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                           margin-bottom: 5px !important;
                         }
                       </style>
-                      <form action="javascript:void(0)" target="print_popup" method="post" id="VentasAlmomento">
+                      <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
