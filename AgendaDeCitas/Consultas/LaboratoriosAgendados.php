@@ -39,7 +39,7 @@ $user_id=null;
 $sql1="SELECT Agenda_Labs.Id_genda,Agenda_Labs.Nombres_Apellidos,Agenda_Labs.Telefono,Agenda_Labs.Fk_sucursal,
 Agenda_Labs.Medico,Agenda_Labs.Fecha,Agenda_Labs.Asistio,Agenda_Labs.Turno,Agenda_Labs.Motivo_Consulta,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
 Agenda_Labs, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal 
-AND Agenda_Labs.Fk_sucursal='".$row['Fk_Sucursal']."'";
+AND Agenda_Labs.Fk_sucursal='".$row['Fk_sucursal']."'";
 $query = $conn->query($sql1);
 ?>
 
