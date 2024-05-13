@@ -73,10 +73,10 @@ Citas de especialistas
  include ("Modales/AltaEspecialista.php");
   include ("footer.php")?>
 
-<script src="js/RevaloracionesControl.js"></script>
+<script src="js/LaboratoriosControl.js"></script>
 
 
-<script src="js/AGendarevaloraciones.js"></script>
+<script src="js/AgendaLaboratorios.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -90,7 +90,7 @@ Citas de especialistas
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
- 
+
 
 </body>
 </html>
