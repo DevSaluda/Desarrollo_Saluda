@@ -3,7 +3,7 @@
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
       <div class="modal-header">
-         <p class="heading lead" id="Titulo">Agendamiento de cita de revaloracion </p>
+         <p class="heading lead" id="Titulo">Agendamiento de cita de laboratorio </p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true" class="white-text">&times;</span>
@@ -146,4 +146,4 @@
 
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  </div><!-- /.modal --> 
