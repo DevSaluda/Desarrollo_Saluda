@@ -122,13 +122,6 @@
   <textarea id="MotConsulta" class="form-control form-control-sm"  name="MotConsulta" rows="2" cols="50">
   </textarea>
 </div>
-    </div>
-     
-    <input type="text" class="form-control" name="Agendo" id="Agendo"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
-  
-    <input type="text" class="form-control" name="Sucursal" id="sucursal"  value="<?php echo $row['Fk_Sucursal']?>" hidden  readonly >
-
-    <div class="text-center">
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
 <!-- FINALIZA DATA DE AGENDA -->
