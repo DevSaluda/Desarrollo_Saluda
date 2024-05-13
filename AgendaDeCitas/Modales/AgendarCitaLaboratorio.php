@@ -60,11 +60,7 @@
     </div>
               
     <div class="row">
-    <div class="col">
-    <label for="exampleFormControlInput1">Medico</label>
-     <div class="input-group mb-3">
- 
-    <div class="col">
+    
     <label for="exampleFormControlInput1">Fecha</label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
