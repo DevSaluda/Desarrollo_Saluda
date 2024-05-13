@@ -53,6 +53,7 @@ $query = $conn->query($sql1);
 <th>Fecha </th>
 <th>Sucursal</th>
 <th>Turno</th>
+<th>Agendo</th>
 <th>¿El paciente asistio?</th>
 <th>Contacto por whatsaap</th>
 <th>Acciones</th>
@@ -69,6 +70,7 @@ $query = $conn->query($sql1);
     <td> <?php echo fechaCastellano($Usuarios["Fecha"]); ?> </td>
     <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td> <?php echo $Usuarios["Turno"]; ?></td>
+    <td> <?php echo $Usuarios["Agrego"]; ?></td>
     <td> <?php echo $Usuarios["Asistio"]; ?></td>
     <td> <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola <?php echo $Usuarios["Nombres_Apellidos"]; ?> ! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕Te invitamos a tu próxima revaloración, programada para el día *<?php echo fechaCastellano($Usuarios["Fecha"]); ?>* en *Saluda Centro Médico Familiar <?php echo $Usuarios["Nombre_Sucursal"]; ?>*  ¿Confirmamos tu asistencia?  Tu bienestar es nuestra prioridad. ¡Gracias por confiar tu salud con nosotros! 🩷" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a></td>
     <td>
