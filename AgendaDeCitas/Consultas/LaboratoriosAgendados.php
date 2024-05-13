@@ -37,7 +37,7 @@ include "Consultas.php";
 
 $user_id=null;
 $sql1="SELECT Agenda_Labs.Id_genda,Agenda_Labs.Nombres_Apellidos,Agenda_Labs.Telefono,Agenda_Labs.Fk_sucursal,
-Agenda_Labs.Medico,Agenda_Labs.Fecha,Agenda_Labs.Asistio,Agenda_Labs.Turno,Agenda_Labs.Motivo_Consulta,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
+Agenda_Labs.Fecha,Agenda_Labs.Asistio,Agenda_Labs.Turno,Agenda_Labs.Motivo_Consulta,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
 Agenda_Labs, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal ";
 $query = $conn->query($sql1);
 ?>
@@ -46,13 +46,12 @@ $query = $conn->query($sql1);
   <div class="text-center">
 	<div class="table-responsive">
 	<table  id="CitasExteriores" class="table table-hover">
-<thead>
+<thead> 
 <th>Folio</th>
 <th>Paciente</th>
 <th>Telefono</th>
 <th>Fecha </th>
 <th>Sucursal</th>
-<th>Medico</th>
 <th>Turno</th>
 <th>Motivo_Consulta</th>
 <th>¿El paciente asistio?</th>
