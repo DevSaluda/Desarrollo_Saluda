@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="CitaExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="CitaLab" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,7 @@
 	        <div class="modal-body">
           <div class="text-center">
      
-<form action="javascript:void(0)" method="post" id="AgendaExternoRevaloraciones" >
+<form action="javascript:void(0)" method="post" id="AgendaExternoLaboratorio" >
 
 <div class="row">
     <div class="col">
@@ -90,21 +90,8 @@
 
 <label for="fecha" class="error">
     </div>
-    </div>
-   
-
-   
     
-    <div class="form-group">
-    <label for="exampleFormControlInput1">Motivo de consulta</label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
-  </div>
-  <textarea id="MotConsulta" class="form-control form-control-sm"  name="MotConsulta" rows="2" cols="50">
-  </textarea>
-</div>
-<button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
+<button type="submit"  name="submit_AgeLab" id="submit_AgeLab"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
 <!-- FINALIZA DATA DE AGENDA -->
                   

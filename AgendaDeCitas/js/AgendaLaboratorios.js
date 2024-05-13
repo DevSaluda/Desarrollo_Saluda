@@ -1,6 +1,6 @@
 $('document').ready(function($) {
 
-    $("#AgendaExternoRevaloraciones").validate({
+    $("#AgendaExternoLaboratorios").validate({
         rules: {
             Folio: {
                 requiered: true,
@@ -10,10 +10,7 @@ $('document').ready(function($) {
 
             },
 
-            CitaExt: {
-                required: true,
-            },
-            Medico: {
+            CitaLab: {
                 required: true,
             },
             Fecha: {
@@ -21,12 +18,6 @@ $('document').ready(function($) {
             },
             Hora: {
                 required: true,
-            },
-            Costo: {
-                required: true,
-            },
-            TipoConsulta: {
-                required: true
             },
 
         },
@@ -35,25 +26,16 @@ $('document').ready(function($) {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
 
-            CitaExt: {
+            CitaLab: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Sucursal: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
-            },
-            Medico: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Fecha: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Hora: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
-            },
-            Costo: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
-            },
-            TipoConsulta: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
         },
@@ -68,7 +50,7 @@ $('document').ready(function($) {
         $.ajax({
             type: 'POST',
             url: "https://saludapos.com/AgendaDeCitas/Consultas/GuardaCitasDeLaboratorio.php",
-            data: $('#AgendaExternoRevaloraciones').serialize(),
+            data: $('#AgendaExternoLaboratorios').serialize(),
             cache: false,
             beforeSend: function() {
 
@@ -104,11 +86,11 @@ $('document').ready(function($) {
 
 
                     $("#submit_Age").html("Completo <i class='fas fa-check'></i>");
-                    $("#CitaExt").removeClass("in");
+                    $("#CitaLab").removeClass("in");
                     $(".modal-backdrop").remove();
-                    $("#CitaExt").hide();
+                    $("#CitaLab").hide();
                     $('#Exito').modal('toggle');
-                    $("#AgendaExternoRevaloraciones")[0].reset();
+                    $("#AgendaExternoLaboratorios")[0].reset();
 
                     setTimeout(function() {
                         $('#Exito').modal('hide')

@@ -44,13 +44,13 @@ Citas de especialistas
   </div>
  
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaLab" class="btn btn-default">
   Agendar nueva cita <i class="fas fa-file-medical"></i>
 </button>
 </div>
 
 </div>
-<div id="CitasDeRevaloracion"></div>
+<div id="CitasDeLaboratorio"></div>
 </div>
 </div>
 

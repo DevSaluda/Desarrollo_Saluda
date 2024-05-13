@@ -5,10 +5,8 @@ include_once 'db_connection.php';
 $Nombres_Apellidos = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['NombresExt']))));
 $Telefono = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['TelExt']))));
 $Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Sucursal']))));
-$Medico = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Medico']))));
 $Fecha = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Fecha']))));
 $Turno = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Turno']))));
-$Motivo_Consulta = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['MotConsulta']))));
 $Agrego = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Agendo']))));
 
 // Insertar datos del formulario en la base de datos
@@ -20,8 +18,8 @@ $row = mysqli_fetch_assoc($resultset);
 if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha") {
     echo json_encode(array("statusCode" => 250));
 } else {
-    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`, `Medico`, `Fecha`, `Turno`, `Motivo_Consulta`, `Agrego`) 
-    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Medico','$Fecha','$Turno','$Motivo_Consulta','$Agrego')";
+    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha`, `Turno`,`Agrego`) 
+    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$Turno','$Agrego')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
