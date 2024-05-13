@@ -58,7 +58,24 @@
    
     
     </div>
-              
+        
+    <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Medico</label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-md"></i></span>
+  </div>
+  <select  id = "sucursal" name = "Sucursal"  class = "form-control "  >
+								<option value = "">Selecciona un medico</option>
+                <?php
+          $query = $conn -> query ("SELECT Nombre_Sucursal,ID_SucursalC FROM  SucursalesCorre");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?> 
+							</select>
+</div>
     <div class="row">
     
     <label for="exampleFormControlInput1">Fecha</label>
@@ -66,14 +83,11 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-calendar-day"></i></span>
   </div>
-  
   <input type="date" class="form-control"   name="Fecha" id="fecha" aria-describedby="basic-addon1">
 </div>
 
 <label for="fecha" class="error">
     </div>
-   
-
     <div class="col">
     <label for="exampleFormControlInput1">Turno</label>
      <div class="input-group mb-3">
@@ -90,13 +104,7 @@
 
 <label for="fecha" class="error">
     </div>
-    
-  <div class="input-group-prepend">
-  <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
-  </div>
-  <textarea id="MotConsulta" class="form-control form-control-sm"  name="MotConsulta" rows="2" cols="50">
-  </textarea>
-</div>
+
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
 <!-- FINALIZA DATA DE AGENDA -->
