@@ -31,7 +31,7 @@ $c=0;
  
 while($fila=$result->fetch_assoc()){
     $data[$c]["IdbD"] = $fila["Cod_Barra"];
-    $data[$c]["Cod_Barra"] = $fila["Nombre_prod"];
+    $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
     $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
     $data[$c]["PrecioCompra"] = $fila["Precio_C"];
