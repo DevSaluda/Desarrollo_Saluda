@@ -1,6 +1,6 @@
 $('document').ready(function($) {
 
-    $("#AgendaExternoLaboratorios").validate({
+    $("#AgendaExternoRevaloraciones").validate({
         rules: {
             Folio: {
                 requiered: true,
@@ -10,7 +10,7 @@ $('document').ready(function($) {
 
             },
 
-            CitaLab: {
+            CitaExt: {
                 required: true,
             },
             Fecha: {
@@ -26,7 +26,7 @@ $('document').ready(function($) {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
 
-            CitaLab: {
+            CitaExt: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Sucursal: {
@@ -50,7 +50,7 @@ $('document').ready(function($) {
         $.ajax({
             type: 'POST',
             url: "https://saludapos.com/AgendaDeCitas/Consultas/GuardaCitasDeLaboratorio.php",
-            data: $('#AgendaExternoLaboratorios').serialize(),
+            data: $('#AgendaExternoRevaloraciones').serialize(),
             cache: false,
             beforeSend: function() {
 
@@ -86,11 +86,11 @@ $('document').ready(function($) {
 
 
                     $("#submit_Age").html("Completo <i class='fas fa-check'></i>");
-                    $("#CitaLab").removeClass("in");
+                    $("#CitaExt").removeClass("in");
                     $(".modal-backdrop").remove();
-                    $("#CitaLab").hide();
+                    $("#CitaExt").hide();
                     $('#Exito').modal('toggle');
-                    $("#AgendaExternoLaboratorios")[0].reset();
+                    $("#AgendaExternoRevaloraciones")[0].reset();
 
                     setTimeout(function() {
                         $('#Exito').modal('hide')

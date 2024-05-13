@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="CitaLab" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="CitaExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,7 @@
 	        <div class="modal-body">
           <div class="text-center">
      
-<form action="javascript:void(0)" method="post" id="AgendaExternoLaboratorio" >
+<form action="javascript:void(0)" method="post" id="AgendaExternoRevaloraciones" >
 
 <div class="row">
     <div class="col">
@@ -58,7 +58,24 @@
    
     
     </div>
-              
+        
+    <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Sucursal</label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-md"></i></span>
+  </div>
+  <select  id = "sucursal" name = "Sucursal"  class = "form-control "  >
+								<option value = "">Selecciona una sucursal</option>
+                <?php
+          $query = $conn -> query ("SELECT Nombre_Sucursal,ID_SucursalC FROM  SucursalesCorre");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?> 
+							</select>
+</div>
     <div class="row">
     
     <label for="exampleFormControlInput1">Fecha</label>
@@ -66,14 +83,11 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-calendar-day"></i></span>
   </div>
-  
   <input type="date" class="form-control"   name="Fecha" id="fecha" aria-describedby="basic-addon1">
 </div>
 
 <label for="fecha" class="error">
     </div>
-   
-
     <div class="col">
     <label for="exampleFormControlInput1">Turno</label>
      <div class="input-group mb-3">
@@ -90,10 +104,12 @@
 
 <label for="fecha" class="error">
     </div>
-    
-<button type="submit"  name="submit_AgeLab" id="submit_AgeLab"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
+
+<button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
 <!-- FINALIZA DATA DE AGENDA -->
+
+<input type="text" class="form-control" name="Agendo" id="Agendo"  value="<?php echo $row['Nombre_Apellidos']?>" hidden  readonly >
                   
 </form>
 
