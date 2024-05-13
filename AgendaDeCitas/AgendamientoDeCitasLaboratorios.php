@@ -22,7 +22,7 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-  Revaloraciones 
+  Laboratorios 
   </div>
  
   <div >
