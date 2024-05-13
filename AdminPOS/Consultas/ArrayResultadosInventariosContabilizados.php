@@ -41,7 +41,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
     $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
     $data[$c]["Clave_Levic"] = $fila["Diferencia"];
-    $data[$c]["Cod_Enfermeria"] = $fila["AgregoPor"];
+    $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
     $data[$c]["FechaInventario"] = $fila["FechaInventario"];
    
    
