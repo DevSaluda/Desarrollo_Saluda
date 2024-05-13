@@ -61,13 +61,13 @@
         
     <div class="row">
     <div class="col">
-    <label for="exampleFormControlInput1">Medico</label>
+    <label for="exampleFormControlInput1">Sucursal</label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-md"></i></span>
   </div>
   <select  id = "sucursal" name = "Sucursal"  class = "form-control "  >
-								<option value = "">Selecciona un medico</option>
+								<option value = "">Selecciona una sucursal</option>
                 <?php
           $query = $conn -> query ("SELECT Nombre_Sucursal,ID_SucursalC FROM  SucursalesCorre");
           while ($valores = mysqli_fetch_array($query)) {
@@ -108,6 +108,8 @@
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
 <!-- FINALIZA DATA DE AGENDA -->
+
+<input type="text" class="form-control" name="Agendo" id="Agendo"  value="<?php echo $row['Nombre_Apellidos']?>" hidden  readonly >
                   
 </form>
 
