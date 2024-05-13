@@ -1,7 +1,14 @@
 <?php
 include_once 'db_connection.php';
 
-$contador = count($_POST["IdBasedatos"]); // Cambiado el nombre del campo según la nueva data
+// Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
+if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
+    $contador = count($_POST["IdBasedatos"]); 
+} else {
+    // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
+    $contador = 0;
+}
+
 $ProContador = 0;
 $query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`) VALUES ";
 
@@ -10,6 +17,7 @@ $values = [];
 $valueTypes = '';
 
 for ($i = 0; $i < $contador; $i++) {
+    // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
         $ProContador++;
         $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
