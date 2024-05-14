@@ -545,7 +545,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
 
-  function buscarArticulo(codigoEscaneado) {
+function buscarArticulo(codigoEscaneado) {
   var formData = new FormData();
   formData.append('codigoEscaneado', codigoEscaneado);
 
@@ -558,7 +558,12 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     dataType: 'json',
     success: function (data) {
       if (data.length === 0) {
-        // msjError('No Encontrado');
+        // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
+        Swal.fire({
+          icon: 'warning',
+          title: 'No existe',
+          text: 'No se encontraron resultados para este código.'
+        });
       } else if (data.codigo) {
         agregarArticulo(data);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
@@ -567,10 +572,11 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       limpiarCampo();
     },
     error: function (data) {
-      
+      // Manejar errores aquí si es necesario
     }
   });
 }
+
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
