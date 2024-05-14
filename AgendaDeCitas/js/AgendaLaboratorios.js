@@ -9,7 +9,9 @@ $('document').ready(function($) {
                 required: true,
 
             },
-
+            LabAgendado: {
+                required: true,
+            },
             CitaExt: {
                 required: true,
             },
@@ -25,8 +27,10 @@ $('document').ready(function($) {
             Folio: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
-
             CitaExt: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
+            },
+            LabAgendado: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Sucursal: {

@@ -8,7 +8,6 @@ $Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Su
 $Fecha = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Fecha']))));
 $Hora = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Hora']))));
 $LabAgendado = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['LabAgendado']))));
-$Turno = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Turno']))));
 $Agrego = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Agendo']))));
 
 // Insertar datos del formulario en la base de datos
@@ -20,8 +19,8 @@ $row = mysqli_fetch_assoc($resultset);
 if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha"  && $row['LabAgendado'] == "$LabAgendado" && $row['Hora'] == "$Hora") {
     echo json_encode(array("statusCode" => 250));
 } else {
-    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha`,`Hora`, `Turno`,`Agrego`) 
-    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Turno','$Agrego')";
+    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha``LabAgendado`,`Hora`,`Agrego`) 
+    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Agrego')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
