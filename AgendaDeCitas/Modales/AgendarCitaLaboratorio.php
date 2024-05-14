@@ -54,12 +54,12 @@
               </div>
             </div>
             <div class="col">
-              <label for="LabAgendado">Laboratorio</label>
+              <label for="labAgendado">Laboratorio</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-flask"></i></span>
                 </div>
-                <select class="form-control" id="LabAgendado" name="LabAgendado">
+                <select class="form-control" id="labAgendado" name="LabAgendado">
                   <option value="">Selecciona un laboratorio</option>
                   <?php
           $query = $conn -> query ("SELECT Nombre_Prod,ID_Prod_POS,Tipo_Servicio FROM  Productos_POS WHERE Productos_POS.Tipo_Servicio = '00000000012'");
@@ -92,7 +92,9 @@
               </div>
             </div>
           </div>
-
+          
+          <input type="text" class="form-control" name="Agendo" id="Agendo"  value="<?php echo $row['Nombre_Apellidos']?>" hidden  readonly >
+          
           <button type="submit" class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
         </form>
       </div>
