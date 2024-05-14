@@ -673,7 +673,7 @@ function calcularDiferencia(fila) {
         }
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        calcularDiferencia(row);
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
@@ -681,10 +681,7 @@ function calcularDiferencia(fila) {
       
         
       } else {
-         // Después de agregar la fila, agregar controlador de eventos para calcular diferencia
-         $('.cantidad-vendida-input').off('change').on('change', function() {
-                calcularDiferencia($(this).closest('tr'));
-            });
+         
        
         var tr = '';
         var btnEliminar = '<button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button>';
@@ -739,9 +736,6 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
 
 
-  $('#tablaAgregarArticulos tbody').on('change', '.cantidad-vendida-input', function() {
-    calcularDiferencia(this);
-});
 
 
 
