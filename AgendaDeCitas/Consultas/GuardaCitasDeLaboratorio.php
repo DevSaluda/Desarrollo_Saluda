@@ -19,8 +19,9 @@ $row = mysqli_fetch_assoc($resultset);
 if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha"  && $row['LabAgendado'] == "$LabAgendado" && $row['Hora'] == "$Hora") {
     echo json_encode(array("statusCode" => 250));
 } else {
-    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha``LabAgendado`,`Hora`,`Agrego`) 
-    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Agrego')";
+    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`, `Fecha`, `LabAgendado`, `Hora`, `Agrego`) 
+VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Agrego')";
+
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
