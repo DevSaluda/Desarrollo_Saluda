@@ -543,12 +543,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     
 }
 
-$('.cantidad-vendida-input').change(function() {
-    // Llamar a la función cuando el valor cambie
-    calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
-});
-
-  
 
 
   function buscarArticulo(codigoEscaneado) {
@@ -741,6 +735,9 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
 
 
+  $('#tablaAgregarArticulos tbody').on('change', '.cantidad-vendida-input', function() {
+    calcularDiferencia(this);
+});
 
 
 
