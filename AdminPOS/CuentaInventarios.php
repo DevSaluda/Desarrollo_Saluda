@@ -543,7 +543,10 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     
 }
 
-
+$('.cantidad-vendida-input').change(function() {
+    // Llamar a la función cuando el valor cambie
+    calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+});
 
   
 
