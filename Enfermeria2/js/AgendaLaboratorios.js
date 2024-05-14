@@ -1,55 +1,65 @@
 $('document').ready(function($) {
 
-    $("#AgendaLaboratorios").validate({
+    $("#AgendaExternoRevaloraciones").validate({
         rules: {
-            Nombres: {
+            Folio: {
+                requiered: true,
+            },
+            Sucursal: {
+                required: true,
+
+            },
+            LabAgendado: {
                 required: true,
             },
-            Tel: {
+            CitaExt: {
                 required: true,
             },
             Fecha: {
                 required: true,
             },
-            Enfermero: {
+            Hora: {
                 required: true,
-            },
-            Indicaciones: {
-                required: true
             },
 
         },
         messages: {
-            Nombres: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+            Folio: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
-
-            Tel: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+            CitaExt: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
+            },
+            LabAgendado: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
+            },
+            Sucursal: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
             Fecha: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
-            Enfermero: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
-            },
-            Indicaciones: {
-                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
+            Hora: {
+                required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido ",
             },
         },
         submitHandler: submitForm
     });
+    // hide messages 
+
+
     function submitForm() {
+
 
         $.ajax({
             type: 'POST',
-            url: "https://controlconsulta.com/Enfermeria2/Consultas/GuardarAgendaLaboratorio.php",
-            data: $('#AgendaLaboratorios').serialize(),
+            url: "https://saludapos.com/Enfermeria2/Consultas/GuardaCitasDeLaboratorio.php",
+            data: $('#AgendaExternoRevaloraciones').serialize(),
             cache: false,
             beforeSend: function() {
 
 
-                $("#submit_Lab").html("Un momento... <i class='fas fa-check'></i>");
+                $("#submit_Age").html("Un momento... <i class='fas fa-check'></i>");
 
 
             },
@@ -68,29 +78,30 @@ $('document').ready(function($) {
                     $('.modal').on('hidden.bs.modal', function(e) {
                         modal_lv--
                     });
-                    $("#submit_Lab").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
+                    $("#submit_Age").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
                     $('#ErrorDupli').modal('toggle');
                     setTimeout(function() {}, 2000); // abrir
                     setTimeout(function() {
-                        $("#submit_Lab").html("Guardar <i class='fas fa-save'></i>");
+                        $("#submit_Age").html("Guardar <i class='fas fa-save'></i>");
                     }, 3000); // abrir
 
 
                 } else if (dataResult.statusCode == 200) {
 
 
-                    $("#submit_Lab").html("Completo <i class='fas fa-check'></i>");
+                    $("#submit_Age").html("Completo <i class='fas fa-check'></i>");
                     $("#CitaExt").removeClass("in");
                     $(".modal-backdrop").remove();
                     $("#CitaExt").hide();
                     $('#Exito').modal('toggle');
-                    $("#AgendaLaboratorios")[0].reset();
+                    $("#AgendaExternoRevaloraciones")[0].reset();
 
                     setTimeout(function() {
                         $('#Exito').modal('hide')
                     }, 2000); // abrir
 
-                    $("#submit_Lab").html("Guardar <i class='fas fa-save'></i>");
+                    $("#submit_Age").html("Guardar <i class='fas fa-save'></i>");
+                    CargaRevaloraciones();
                 } else if (dataResult.statusCode == 201) {
                     var modal_lv = 0;
                     $('.modal').on('shown.bs.modal', function(e) {
@@ -102,11 +113,11 @@ $('document').ready(function($) {
                     $('.modal').on('hidden.bs.modal', function(e) {
                         modal_lv--
                     });
-                    $("#submit_Lab").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
+                    $("#submit_Age").html("Algo no salio bien.. <i class='fas fa-exclamation-triangle'></i>");
                     $('#ErrorData').modal('toggle');
                     setTimeout(function() {}, 2000); // abrir
                     setTimeout(function() {
-                        $("#submit_Lab").html("Guardar <i class='fas fa-save'></i>");
+                        $("#submit_Age").html("Guardar <i class='fas fa-save'></i>");
                     }, 3000); // abrir
 
                 }
@@ -121,4 +132,4 @@ $('document').ready(function($) {
         });
         return false;
     }
-});
+});0
