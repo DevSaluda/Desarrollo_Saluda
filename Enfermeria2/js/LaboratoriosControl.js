@@ -1,12 +1,11 @@
-function CargaLaboratorios() {
+function CargaRevaloraciones() {
 
 
-    $.post("https://controlconsulta.com/Enfermeria2/Consultas/laboratoriosAgendados.php", "", function(data) {
-        $("#CargaCitasLabs").html(data);
+    $.post("https://saludapos.com/Enfermeria2/Consultas/LaboratoriosAgendados.php", "", function(data) {
+        $("#CitasDeLaboratorio").html(data);
     })
 
 }
+CargaRevaloraciones();
 
 
-
-CargaLaboratorios();
