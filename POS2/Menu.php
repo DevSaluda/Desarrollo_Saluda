@@ -223,7 +223,7 @@ include "Consultas/ConsultaCaja.php";
             </a>
           </li>
           <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/AgendamientoDeCitasLaboratorios" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/POS2/AgendamientoDeCitasLaboratorios" class="nav-link" style="color: white;">
                   <i class="fas fa-flask"></i>
                     <p>
                    Laboratorios
