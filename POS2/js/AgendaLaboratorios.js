@@ -53,7 +53,7 @@ $('document').ready(function($) {
 
         $.ajax({
             type: 'POST',
-            url: "https://saludapos.com/Enfermeria2/Consultas/GuardaCitaLaboratorio.php",
+            url: "https://saludapos.com/POS2/Consultas/GuardaCitasDeLaboratorio.php",
             data: $('#AgendaExternoRevaloraciones').serialize(),
             cache: false,
             beforeSend: function() {
