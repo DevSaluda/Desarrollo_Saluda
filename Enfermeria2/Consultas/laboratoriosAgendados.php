@@ -107,7 +107,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Cancela").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AgendaDeCitas/Modales/CancelaCitaLab.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/CancelaCitaLab.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("Cancelación");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
@@ -119,7 +119,7 @@ $query = $conn->query($sql1);
 
     $(".btn-Asiste").click(function(){
   		id = $(this).data("id");
-  		$.post("https://saludapos.com/AgendaDeCitas/Modales/AsistenciaPacienteLaboratorio.php","id="+id,function(data){
+  		$.post("https://saludapos.com/Enfermeria2/Modales/AsistenciaPacienteLaboratorio.php","id="+id,function(data){
               $("#form-editExt").html(data);
               $("#TituloExt").html("¿El paciente asistió?");
               $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
