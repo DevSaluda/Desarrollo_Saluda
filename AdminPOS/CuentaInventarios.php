@@ -681,7 +681,8 @@ function calcularDiferencia(fila) {
       
         
       } else {
-        $('.cantidad-vendida-input').off('change').on('change', function() {
+         // Después de agregar la fila, agregar controlador de eventos para calcular diferencia
+         $('.cantidad-vendida-input').off('change').on('change', function() {
                 calcularDiferencia($(this).closest('tr'));
             });
        
