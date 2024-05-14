@@ -681,6 +681,9 @@ function calcularDiferencia(fila) {
       
         
       } else {
+        $('.cantidad-vendida-input').off('change').on('change', function() {
+                calcularDiferencia($(this).closest('tr'));
+            });
        
         var tr = '';
         var btnEliminar = '<button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button>';
