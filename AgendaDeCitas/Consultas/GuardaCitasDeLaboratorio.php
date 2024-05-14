@@ -11,7 +11,7 @@ $LabAgendado = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['La
 $Agrego = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Agendo']))));
 
 // Insertar datos del formulario en la base de datos
-$sql = "SELECT Nombres_Apellidos, Fecha FROM Agenda_Labs WHERE Nombres_Apellidos='$Nombres_Apellidos' AND Fecha='$Fecha'";
+$sql = "SELECT Nombres_Apellidos,Fecha,LabAgendado,Hora FROM Agenda_Labs WHERE Nombres_Apellidos='$Nombres_Apellidos' AND Fecha='$Fecha' AND LabAgendado = '$LabAgendado' AND Hora = '$Hora'";
 $resultset = mysqli_query($conn, $sql) or die("error de la base de datos: " . mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
