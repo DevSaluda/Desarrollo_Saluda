@@ -11,7 +11,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Agendamiento de citas de revaloracion </title>
+  <title>Agendamiento de citas de Laboratorio </title>
 
   <?php include "Header.php"?>
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
@@ -40,7 +40,7 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #2bbbad !important;color: white;">
-Citas de especialistas
+Citas de laboratorio
   </div>
  
   <div >
@@ -50,7 +50,7 @@ Citas de especialistas
 </div>
 
 </div>
-<div id="CitasDeRevaloracion"></div>
+<div id="CitasDeLaboratorio"></div>
 </div>
 </div>
 
