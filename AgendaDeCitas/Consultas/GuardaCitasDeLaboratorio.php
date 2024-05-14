@@ -16,7 +16,7 @@ $resultset = mysqli_query($conn, $sql) or die("error de la base de datos: " . my
 $row = mysqli_fetch_assoc($resultset);
 
 // Verificar si hay resultados antes de acceder al índice del array
-if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha"  && $row['LabAgendado'] == "$LabAgendado" && $row['Hora'] == "$Hora") {
+if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha" && $row['Hora'] == "$Hora") {
     echo json_encode(array("statusCode" => 250));
 } else {
     $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha``LabAgendado`,`Hora`,`Agrego`) 
