@@ -11,7 +11,7 @@ $LabAgendado = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['La
 $Agrego = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['Agendo']))));
 
 // Insertar datos del formulario en la base de datos
-$sql = "SELECT Nombres_Apellidos, Fecha FROM Agenda_Labs WHERE Nombres_Apellidos='$Nombres_Apellidos' AND Fecha='$Fecha'";
+$sql = "SELECT Nombres_Apellidos,Fecha,LabAgendado,Hora FROM Agenda_Labs WHERE Nombres_Apellidos='$Nombres_Apellidos' AND Fecha='$Fecha' AND LabAgendado = '$LabAgendado' AND Hora = '$Hora'";
 $resultset = mysqli_query($conn, $sql) or die("error de la base de datos: " . mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
@@ -19,8 +19,9 @@ $row = mysqli_fetch_assoc($resultset);
 if ($row && $row['Nombres_Apellidos'] == $Nombres_Apellidos && $row['Fecha'] == "$Fecha"  && $row['LabAgendado'] == "$LabAgendado" && $row['Hora'] == "$Hora") {
     echo json_encode(array("statusCode" => 250));
 } else {
-    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`,`Fecha``LabAgendado`,`Hora`,`Agrego`) 
-    VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Agrego')";
+    $sql = "INSERT INTO `Agenda_Labs`(`Nombres_Apellidos`, `Telefono`, `Fk_sucursal`, `Fecha`, `LabAgendado`, `Hora`, `Agrego`) 
+VALUES ('$Nombres_Apellidos','$Telefono','$Fk_sucursal','$Fecha','$LabAgendado','$Hora','$Agrego')";
+
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
