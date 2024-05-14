@@ -64,7 +64,7 @@
                   <?php
           $query = $conn -> query ("SELECT Nombre_Prod,ID_Prod_POS,Tipo_Servicio FROM  Productos_POS WHERE Productos_POS.Tipo_Servicio = '00000000012'");
           while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["ID_Prod_POS"].'">'.$valores["Nombre_Prod"].'</option>';
+            echo '<option value="'.$valores["Nombre_Prod"].'">'.$valores["Nombre_Prod"].'</option>';
           }
         ?> 
                 </select>
@@ -94,7 +94,7 @@
           </div>
           
           <input type="text" class="form-control" name="Agendo" id="Agendo"  value="<?php echo $row['Nombre_Apellidos']?>" hidden  readonly >
-          
+
           <button type="submit" class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
         </form>
       </div>
