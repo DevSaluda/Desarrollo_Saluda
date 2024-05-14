@@ -36,8 +36,8 @@ include "Consultas.php";
 
 
 $user_id=null;
-$sql1="SELECT Agenda_Labs.Id_genda,Agenda_Labs.Nombres_Apellidos,Agenda_Labs.Telefono,Agenda_Labs.Fk_sucursal,
-Agenda_Labs.Fecha,Agenda_Labs.LabAgendado,Agenda_Labs.Asistio,Agenda_Labs.Turno,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
+$sql1="SELECT Agenda_Labs.Id_genda,Agenda_Labs.Nombres_Apellidos,Agenda_Labs.Telefono,Agenda_Labs.Fk_sucursal,Agenda_Labs.Hora,
+Agenda_Labs.Fecha,Agenda_Labs.LabAgendado,Agenda_Labs.Asistio,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
 Agenda_Labs, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal ";
 $query = $conn->query($sql1);
 ?>
@@ -51,9 +51,9 @@ $query = $conn->query($sql1);
 <th>Paciente</th>
 <th>Telefono</th>
 <th>Fecha </th>
+<th>Hora </th>
 <th>Sucursal</th>
 <th>Laboratorio Agendado</th>
-<th>Turno</th>
 <th>Agendo</th>
 <th>¿El paciente asistio?</th>
 <th>Contacto por whatsaap</th>
@@ -69,9 +69,9 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
     <td> <?php echo $Usuarios["Telefono"]; ?></td>
     <td> <?php echo fechaCastellano($Usuarios["Fecha"]); ?> </td>
+    <td> <?php echo $Usuarios["Hora"]; ?></td>
     <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td> <?php echo $Usuarios["LabAgendado"]; ?></td>
-    <td> <?php echo $Usuarios["Turno"]; ?></td>
     <td> <?php echo $Usuarios["Agrego"]; ?></td>
     <td> <?php echo $Usuarios["Asistio"]; ?></td>
     <td> <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola <?php echo $Usuarios["Nombres_Apellidos"]; ?>
