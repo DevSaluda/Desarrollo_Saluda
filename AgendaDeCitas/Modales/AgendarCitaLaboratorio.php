@@ -83,12 +83,12 @@
               </div>
             </div>
             <div class="col">
-              <label for="horaMinuto">Hora</label>
+              <label for="Hora">Hora</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i the class="fas fa-clock"></i></span>
                 </div>
-                <input type="time" class="form-control" id="horaMinuto" name="horaMinuto">
+                <input type="time" class="form-control" id="Hora" name="Hora">
               </div>
             </div>
           </div>
