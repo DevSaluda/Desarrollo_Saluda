@@ -38,7 +38,7 @@ include "Consultas.php";
 $user_id=null;
 $sql1="SELECT Agenda_Labs.Id_genda,Agenda_Labs.Nombres_Apellidos,Agenda_Labs.Telefono,Agenda_Labs.Fk_sucursal,Agenda_Labs.Hora,
 Agenda_Labs.Fecha,Agenda_Labs.LabAgendado,Agenda_Labs.Asistio,Agenda_Labs.Agrego,Agenda_Labs.AgregadoEl,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
-Agenda_Labs, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal ";
+Agenda_Labs, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal AND Agenda_Labs.Fk_sucursal='".$row['Fk_Sucursal']."' ";
 $query = $conn->query($sql1);
 ?>
 
