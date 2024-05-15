@@ -562,7 +562,13 @@ function buscarArticulo(codigoEscaneado) {
         Swal.fire({
           icon: 'warning',
           title: 'No existe',
-          text: 'No se encontraron resultados para este código.'
+          text: 'No se encontraron resultados para este código.',
+          showCancelButton: true,
+          confirmButtonText: 'Agregar de todos modos'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            agregarCodigoInexistente(codigoEscaneado);
+          }
         });
       } else if (data.codigo) {
         agregarArticulo(data);
@@ -572,6 +578,22 @@ function buscarArticulo(codigoEscaneado) {
       limpiarCampo();
     },
     error: function (data) {
+      // Manejar errores aquí si es necesario
+    }
+  });
+}
+
+function agregarCodigoInexistente(codigo) {
+  // Enviar el código al backend para insertarlo en la tabla de la base de datos
+  $.ajax({
+    url: "Consultas/insertar_codigo_inexistente.php",
+    type: 'POST',
+    data: { codigo: codigo },
+    dataType: 'json',
+    success: function (response) {
+      // Manejar la respuesta del servidor si es necesario
+    },
+    error: function (error) {
       // Manejar errores aquí si es necesario
     }
   });
