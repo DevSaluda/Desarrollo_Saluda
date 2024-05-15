@@ -545,60 +545,63 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
 
-function buscarArticulo(codigoEscaneado) {
-  var formData = new FormData();
-  formData.append('codigoEscaneado', codigoEscaneado);
+var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
+  
+  // Aquí colocar el resto de tu script JavaScript
+  function buscarArticulo(codigoEscaneado) {
+    var formData = new FormData();
+    formData.append('codigoEscaneado', codigoEscaneado);
 
-  $.ajax({
-    url: "Consultas/escaner_articulo.php",
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    dataType: 'json',
-    success: function (data) {
-      if (data.length === 0) {
-        // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
-        Swal.fire({
-          icon: 'warning',
-          title: 'No existe',
-          text: 'No se encontraron resultados para este código.',
-          showCancelButton: true,
-          confirmButtonText: 'Agregar de todos modos'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarCodigoInexistente(codigoEscaneado);
-          }
-        });
-      } else if (data.codigo) {
-        agregarArticulo(data);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+    $.ajax({
+      url: "Consultas/escaner_articulo.php",
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'json',
+      success: function (data) {
+        if (data.length === 0) {
+          // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
+          Swal.fire({
+            icon: 'warning',
+            title: 'No existe',
+            text: 'No se encontraron resultados para este código.',
+            showCancelButton: true,
+            confirmButtonText: 'Agregar de todos modos'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Pasar la variable Fk_sucursal al agregar el código inexistente
+              agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
+            }
+          });
+        } else if (data.codigo) {
+          agregarArticulo(data);
+          calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        }
+
+        limpiarCampo();
+      },
+      error: function (data) {
+        // Manejar errores aquí si es necesario
       }
+    });
+  }
 
-      limpiarCampo();
-    },
-    error: function (data) {
-      // Manejar errores aquí si es necesario
-    }
-  });
-}
-
-function agregarCodigoInexistente(codigo) {
-  // Enviar el código al backend para insertarlo en la tabla de la base de datos
-  $.ajax({
-    url: "Consultas/insertar_codigo_inexistente.php",
-    type: 'POST',
-    data: { codigo: codigo },
-    dataType: 'json',
-    success: function (response) {
-      // Manejar la respuesta del servidor si es necesario
-    },
-    error: function (error) {
-      // Manejar errores aquí si es necesario
-    }
-  });
-}
-
+  function agregarCodigoInexistente(codigo, sucursal) {
+    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
+    $.ajax({
+      url: "Consultas/insertar_codigo_inexistente.php",
+      type: 'POST',
+      data: { codigo: codigo, sucursal: sucursal },
+      dataType: 'json',
+      success: function (response) {
+        // Manejar la respuesta del servidor si es necesario
+      },
+      error: function (error) {
+        // Manejar errores aquí si es necesario
+      }
+    });
+  }
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
