@@ -69,9 +69,9 @@ Citas de laboratorios
    include ("Modales/Precarga.php");
    include ("Modales/ExitoActualiza.php");
    include ("Modales/EstatusAgendaGuardado.php");
-  include ("Modales/AgendarCitaLaboratorio.php");
- include ("Modales/AltaEspecialista.php");
-  include ("footer.php")?>
+   include ("Modales/AgendarCitaLaboratorio.php");
+   include ("Modales/AltaEspecialista.php");
+   include ("footer.php")?>
 
 <script src="js/LaboratoriosControl.js"></script>
 
