@@ -5,12 +5,32 @@ if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
     // Recibir los datos del formulario
     $codigo = $_POST['codigo'];
     $sucursal = $_POST['sucursal'];
+    
+    // Obtener la fecha actual para FechaInventario
+    $fechaInventario = date("Y-m-d"); // Formato: AAAA-MM-DD
 
-    // Imprimir las variables para verificar que se recibieron correctamente
-    echo "Código recibido: " . $codigo . "<br>";
-    echo "Sucursal recibida: " . $sucursal . "<br>";
+    // Preparar la consulta SQL para insertar los datos en tu tabla
+    $sql = "INSERT INTO CodigosSinResultadosEnStockInventario (Cod_Barra, Fk_sucursal, FechaInventario) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $codigo, $sucursal, $fechaInventario);
+
+    // Ejecutar la consulta
+    if ($stmt->execute() === TRUE) {
+        // La inserción fue exitosa
+        $response = array('success' => true, 'message' => 'Datos insertados correctamente.');
+        echo json_encode($response);
+    } else {
+        // Hubo un error al ejecutar la consulta
+        $response = array('success' => false, 'message' => 'Error al insertar los datos: ' . $conn->error);
+        echo json_encode($response);
+    }
+
+    // Cerrar la conexión
+    $stmt->close();
+    $conn->close();
 } else {
     // Si no se recibieron los datos esperados, retornar un mensaje de error
-    echo "No se recibieron los datos esperados.";
+    $response = array('success' => false, 'message' => 'No se recibieron los datos esperados.');
+    echo json_encode($response);
 }
 ?>
