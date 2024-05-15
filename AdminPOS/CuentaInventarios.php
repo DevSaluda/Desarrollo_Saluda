@@ -590,7 +590,7 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
   function agregarCodigoInexistente(codigo, sucursal) {
     // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
     $.ajax({
-      url: "Consultas/insertar_codigo_inexistente.php",
+      url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
       type: 'POST',
       data: { codigo: codigo, sucursal: sucursal },
       dataType: 'json',
