@@ -67,6 +67,9 @@ include ("footer.php")?>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <!-- Bootstrap -->
+<script src="js/ControlSugerencias"></script>
+<script src="js/ControlSugerenciasDias"></script>
+<script src="js/ControlSugerenciasPeriodo"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
