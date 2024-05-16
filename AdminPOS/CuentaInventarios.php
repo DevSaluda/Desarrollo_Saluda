@@ -472,7 +472,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
-    searching: true, // Deshabilitar la funcionalidad de búsqueda
+    searching: false, // Deshabilitar la funcionalidad de búsqueda
     paging: true, // Deshabilitar el paginador
     "columns": [{
         "data": "id"
