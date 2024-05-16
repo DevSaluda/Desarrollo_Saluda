@@ -472,40 +472,60 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
-    searching: false,
-    paging: false,
-    columns: [{
-        data: "id"
+    searching: false, // Deshabilitar la funcionalidad de búsqueda
+    paging: false, // Deshabilitar el paginador
+    "columns": [{
+        "data": "id"
       },
       {
-        data: "codigo"
+        "data": "codigo"
       },
       {
-        data: "descripcion"
+        "data": "descripcion"
       },
       {
-        data: "cantidad"
+        "data": "cantidad"
       },
       {
-        data: "stockactual"
+        "data": "stockactual"
+      },{
+        "data": "diferencia"
       },
       {
-        data: "diferencia"
+        "data": "precio"
       },
-      
+      // {
+      //     "data": "importesiniva"
+      // },
+      // {
+      //     "data": "ivatotal"
+      // },
+      // {
+      //     "data": "ieps"
+      // },
       {
-        data: "eliminar"
+        "data": "eliminar"
       },
-    
+      {
+        "data": "descuentos"
+
+      },
+      {
+        "data": "descuentos2"
+      },
     ],
-    order: [
+
+    "order": [
       [0, 'desc']
+
     ],
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
     },
-    responsive: true, // Cambiado a booleano
-})
+    //para usar los botones   
+    responsive: "true",
+
+  });
 
   function mostrarTotalVenta() {
     var totalVenta = 0;
