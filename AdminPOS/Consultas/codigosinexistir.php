@@ -5,14 +5,14 @@ if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
     // Recibir los datos del formulario
     $codigo = $_POST['codigo'];
     $sucursal = $_POST['sucursal'];
-    
+    $licencia = "Saluda";
     // Obtener la fecha actual para FechaInventario
     $fechaInventario = date("Y-m-d"); // Formato: AAAA-MM-DD
 
     // Preparar la consulta SQL para insertar los datos en tu tabla
-    $sql = "INSERT INTO CodigosSinResultadosEnStockInventario (Cod_Barra, Fk_sucursal, FechaInventario) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO CodigosSinResultadosEnStockInventario (Cod_Barra, Fk_sucursal, FechaInventario,ID_HO_D) VALUES (?, ?, ?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $codigo, $sucursal, $fechaInventario);
+    $stmt->bind_param("ssss", $codigo, $sucursal, $fechaInventario, $licencia);
 
     // Ejecutar la consulta
     if ($stmt->execute() === TRUE) {

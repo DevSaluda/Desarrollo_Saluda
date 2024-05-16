@@ -506,13 +506,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       {
         "data": "eliminar"
       },
-      {
-        "data": "descuentos"
-
-      },
-      {
-        "data": "descuentos2"
-      },
+     
     ],
 
     "order": [
