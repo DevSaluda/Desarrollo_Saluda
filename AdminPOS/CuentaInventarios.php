@@ -492,9 +492,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       {
         data: "diferencia"
       },
-      {
-        data: "precio"
-      },
+      
       {
         data: "eliminar"
       },
