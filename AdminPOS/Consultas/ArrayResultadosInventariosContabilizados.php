@@ -23,7 +23,10 @@ ic.FechaInventario
 FROM 
 InventariosStocks_Conteos AS ic
 JOIN 
-SucursalesCorre AS sc ON ic.Fk_sucursal = sc.ID_SucursalC;";
+SucursalesCorre AS sc ON ic.Fk_sucursal = sc.ID_SucursalC
+WHERE 
+CAST(ic.FechaInventario AS DATE) = CAST(GETDATE() AS DATE);
+";
  
 $result = mysqli_query($conn, $sql);
  
