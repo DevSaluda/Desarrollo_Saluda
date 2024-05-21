@@ -46,9 +46,10 @@ include "Consultas/Consultas.php";
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
-  Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroPorFechasInventarios"
+      class="btn btn-default">
+      Busqueda por fechas <i class="fas fa-search"></i>
+    </button>
 </div>
 </div>
     
