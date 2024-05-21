@@ -5,7 +5,7 @@
 
       <div class="text-center">
         <div class="modal-header">
-          <p class="heading lead">Busqueda de traspasos por fechas<i class="fas fa-credit-card"></i></p>
+          <p class="heading lead">Busqueda de inventarios por fechas<i class="fas fa-credit-card"></i></p>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">&times;</span>
