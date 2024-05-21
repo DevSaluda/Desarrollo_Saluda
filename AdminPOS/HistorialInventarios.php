@@ -89,7 +89,7 @@ include "Consultas/Consultas.php";
  
   <!-- Main Footer -->
 <?php
-  include ("Modales/AltaProductos.php");
+  include ("Modales/BusquedaInventariosFechas.php");
 
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
