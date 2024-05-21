@@ -1004,7 +1004,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="HistorialInventarios" class="nav-link">
-            <i class="fa-solid fa-calendar-minus"></i>
+            <i class="fas fa-calendar-day"></i>
               <p>
         Prontos a caducar
                
@@ -1014,7 +1014,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="RegistraProductoAcaducar" class="nav-link">
-            <i class="fas fa-boxes"></i>
+            <i class="fas fa-recycle"></i>
               <p>
         Registrar caducado
                
