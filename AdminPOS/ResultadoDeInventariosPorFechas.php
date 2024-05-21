@@ -8,7 +8,7 @@ include "Consultas/Consultas.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Busqueda de traspasos por fechas <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
+  <title>Busqueda de inventarios por fecha <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
   <?php include "Header.php"?>
   <style>
     .error {
