@@ -13,38 +13,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Consulta SQL con parámetros preparados
         $sql = "SELECT 
-            Traspasos_generados.ID_Traspaso_Generado,
-            Traspasos_generados.Folio_Prod_Stock,
-            Traspasos_generados.TraspasoRecibidoPor,
-            Traspasos_generados.TraspasoGeneradoPor,
-            Traspasos_generados.Num_Orden,
-            Traspasos_generados.Num_Factura,
-            Traspasos_generados.TotaldePiezas,
-            Traspasos_generados.Cod_Barra,
-            Traspasos_generados.Nombre_Prod,
-            Traspasos_generados.Fk_sucursal,
-            Traspasos_generados.Fk_Sucursal_Destino,
-            Traspasos_generados.Proveedor1,
-            Traspasos_generados.Proveedor2,
-            Traspasos_generados.Precio_Venta,
-            Traspasos_generados.Precio_Compra,
-            Traspasos_generados.Total_traspaso,
-            Traspasos_generados.TotalVenta,
-            Traspasos_generados.Existencias_R,
-            Traspasos_generados.ProveedorFijo,
-            Traspasos_generados.Cantidad_Enviada,
-            Traspasos_generados.Existencias_D_envio,
-            Traspasos_generados.FechaEntrega,
-            Traspasos_generados.Estatus,
-            Traspasos_generados.ID_H_O_D,
-            SucursalesCorre.ID_SucursalC,
-            SucursalesCorre.Nombre_Sucursal 
-        FROM 
-            Traspasos_generados,
-            SucursalesCorre 
-        WHERE 
-            Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-            AND Traspasos_generados.FechaEntrega BETWEEN ? AND ?";
+        ic.Cod_Barra, 
+        ic.Nombre_Prod, 
+        sc.Nombre_Sucursal AS Nombre_Sucursal,
+        ic.Precio_Venta,
+        ic.Precio_C,
+        ic.Precio_Venta * ic.Contabilizado AS Total_Precio_Venta, 
+        ic.Precio_C * ic.Contabilizado AS Total_Precio_Compra, 
+        ic.Contabilizado, 
+        ic.StockEnMomento, 
+        ic.Diferencia, 
+        ic.Sistema, 
+        ic.AgregadoPor, 
+        ic.AgregadoEl, 
+        ic.ID_H_O_D, 
+        ic.FechaInventario
+    FROM 
+        InventariosStocks_Conteos AS ic
+    JOIN 
+        SucursalesCorre AS sc ON ic.Fk_sucursal = sc.ID_SucursalC
+        WHERE ic.FechaInventario BETWEEN ? AND ?";
         
         // Prepara la consulta
         $stmt = $conn->prepare($sql);
@@ -58,27 +46,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = [];
         $c = 0;
         while ($fila = $result->fetch_assoc()) {
-            $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
-            $data[$c]["NumberOrden"] = $fila["Num_Orden"];
-            if (empty($fila["Num_Factura"])) {
-                $sucursalDestino = substr($fila["Fk_Sucursal_Destino"], 0, 4);
-                $data[$c]["NumberFactura"] = $sucursalDestino  . $fila["Num_Orden"];
-            } else {
-                $data[$c]["NumberFactura"] = $fila["Num_Factura"];
-            }
-            $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-            $data[$c]["ProveedorFijo"] = $fila["ProveedorFijo"];
-            $data[$c]["Fk_sucursal"] = $fila["Nombre_Sucursal"];
-            $data[$c]["Destino"] = $fila["Fk_Sucursal_Destino"];
-            $data[$c]["Cantidad"] = $fila["Cantidad_Enviada"];
-            $data[$c]["PrecioCompra"] = $fila["Precio_Venta"];
-            $data[$c]["PrecioVenta"] = $fila["Precio_Compra"];
-            $data[$c]["TotaldePiezas"] = $fila["TotaldePiezas"];
-            $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];
-            $data[$c]["Estatus"] = $fila["Estatus"];
-            $data[$c]["Envio"] = $fila["TraspasoGeneradoPor"];
-            $data[$c]["Recibio"] = $fila["TraspasoRecibidoPor"];
+            $data[$c]["IdbD"] = $fila["Cod_Barra"];
+            $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
+            $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
+            $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
+            $data[$c]["PrecioCompra"] = $fila["Precio_C"];
+            $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];
+            $data[$c]["TotalPrecioCompra"] = $fila["Total_Precio_Compra"];
+            $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
+            $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
+            $data[$c]["Clave_Levic"] = $fila["Diferencia"];
+            $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
+            $data[$c]["FechaInventario"] = $fila["FechaInventario"];
             $c++;
         }
         
