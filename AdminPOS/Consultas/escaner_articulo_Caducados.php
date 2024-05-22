@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
         "codigo" => $row["Cod_Barra"],
         "descripcion" => $descripciones[0],
         "cantidad" => [1],
-        "existencia" => $fechacaducidad[0],
+        "fechacaducidad" => $fechacaducidad[0],
         "precio" => $precios[0],
         "preciocompra" => $precioscompra[0],
         "lote" => $lotes[0],
