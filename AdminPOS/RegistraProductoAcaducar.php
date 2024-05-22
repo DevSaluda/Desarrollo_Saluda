@@ -295,7 +295,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
                             <select class="form-control" style="font-size: 0.75rem !important;">
-                            <option value="">Seleccione un tipo de ajuste </option>
+                            <option value="">Seleccione el motivo de baja </option>
                   <option value="Caducado">Caducado</option>
               <option value="Proximo a caducar">Proximo a caducar</option>
               
@@ -374,7 +374,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                               <th style="width:20%">Producto</th>
                               <th style="width:6%">Cantidad</th>
                               <th style="width:6%">Fecha de caducidad</th>
-                              <th style="width:6%">Motivo de baja</th>
                               
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
@@ -692,7 +691,7 @@ function calcularDiferencia(fila) {
         tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" onchange="calcularDiferencia(this)" /></td>';
 
 tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="StockActual[]" value="' + articulo.fechacaducidad + '" /></td>';
-tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
+
 
         tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"   value="' + articulo.precio + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;"  name="PrecioCompra[]"  value="' + articulo.preciocompra + '"  /></td>';
