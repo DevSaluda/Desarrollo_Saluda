@@ -375,7 +375,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                               <th style="width:6%">Cantidad</th>
                               <th style="width:6%">Fecha de caducidad</th>
                               <th style="width:6%">Motivo de baja</th>
-                              <th>Precio</th>
+                              
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
