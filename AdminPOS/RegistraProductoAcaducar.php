@@ -15,7 +15,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Conteo de productos <?php echo $row['ID_H_O_D'] ?> </title>
+  <title>Registra medicamentos pronto a caducar <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php" ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
