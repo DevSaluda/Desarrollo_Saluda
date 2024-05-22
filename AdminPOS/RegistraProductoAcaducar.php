@@ -290,16 +290,15 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         </div>
                         <div class="col">
 
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Tipo de ajuste</label>
+                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Motivo de baja</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
                             <select class="form-control" style="font-size: 0.75rem !important;">
                             <option value="">Seleccione un tipo de ajuste </option>
-                  <option value="Ajuste positivo">Ajuste de inventario</option>
-              <option value="Inventario inicial">Inventario inicial</option>
-                 <option value="Ajuste por daño">Ajuste por daño</option>
-              <option value="Ajuste por caducidad">Ajuste por caducidad</option>
+                  <option value="Caducado">Caducado</option>
+              <option value="Proximo a caducar">Proximo a caducar</option>
+              
 </select>
 
 
@@ -373,9 +372,9 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:6%">Contabilizado</th>
-                              <th style="width:6%">Stock actual</th>
-                              <th style="width:6%">Diferencia</th>
+                              <th style="width:6%">Cantidad</th>
+                              <th style="width:6%">Fecha de caducidad</th>
+                              <th style="width:6%">Motivo de baja</th>
                               <th>Precio</th>
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
@@ -415,34 +414,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </div>
 </div>
 <!-- function actualizarSumaTotal  -->
-<script>
-
-  
-  function actualizarSumaTotal() {
-  var iptTarjeta = parseFloat(document.getElementById("iptTarjeta").value);
-  var iptEfectivo = parseFloat(document.getElementById("iptEfectivoRecibido").value);
-  var cambio;
-
-  if (iptTarjeta > 0) {
-    cambio = 0; // Si se ingresa un valor en el campo de tarjeta, el cambio se establece en cero
-  } else {
-    cambio = iptEfectivo; // Si no se ingresa un valor en el campo de tarjeta, el cambio se calcula como el efectivo recibido
-  }
-
-  // Actualizar el valor del elemento <span> con el cambio
-  document.getElementById("Vuelto").textContent = cambio.toFixed(2);
-}
-
-
-
-
-
-
-
-
-</script>
-
-
 
 <script>
   $("#btnVaciarListado").click(function() {
@@ -547,7 +518,7 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
     formData.append('codigoEscaneado', codigoEscaneado);
 
     $.ajax({
-      url: "Consultas/escaner_articulo.php",
+      url: "Consultas/escaner_articulo_Caducados.php",
       type: 'POST',
       data: formData,
       processData: false,
@@ -621,7 +592,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado.php',
+      url: 'Consultas/autocompletadoCaducados.php',
       type: 'GET',
       dataType: 'json',
       data: {
