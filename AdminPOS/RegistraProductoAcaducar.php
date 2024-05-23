@@ -364,7 +364,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                       </style>
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Guardar datos</button>
+        <button type="submit" class="btn btn-primary">Confirmar caducados</button>
     </div>
                
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
@@ -706,6 +706,7 @@ tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existenci
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Sistema[]"readonly value="POS">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="ID_H_O_D[]"readonly value="Saluda">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaInv[]"readonly value="<?php echo $fechaActual;?>"  </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="MotivoBaja[]"readonly   </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
 
