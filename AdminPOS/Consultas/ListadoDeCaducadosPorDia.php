@@ -181,11 +181,16 @@ tabla = $('#Productos').DataTable({
  "aoColumns": [
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
+       { mData: 'NombreSucursal' },
+       { mData: 'PrecioVenta' },
+       { mData: 'PrecioCompra' },
+       { mData: 'TotalPrecioVenta' },
+       { mData: 'TotalPrecioCompra' },
        { mData: 'Nombre_Prod' },
        { mData: 'Clave_interna' },
        { mData: 'Clave_Levic' },
        { mData: 'Cod_Enfermeria' },
-       
+       { mData: 'FechaInventario' },
   
       ],
      
@@ -237,10 +242,16 @@ tabla = $('#Productos').DataTable({
 <thead>
 <th>ID_BD</th>
 <th>Cod Barra</th>
-    <th>Nombre</th>
-    <th>Cod Interno</th>
-    <th>Cod Levic</th>
-    <th>Cod Enfermeria</th>
+    <th>Sucursal</th>
+    <th>PV</th>
+    <th>PC</th>
+    <th>Total PV</th>
+    <th>Total PC</th>
+    <th>Contabilizado</th>
+    <th>Stock Previo</th>
+    <th>Diferencia</th>
+    <th>Agregado por</th>
+    <th>Fecha Inventario</th>
     
 
 
@@ -248,5 +259,3 @@ tabla = $('#Productos').DataTable({
 
 </div>
 </div>
-
-
