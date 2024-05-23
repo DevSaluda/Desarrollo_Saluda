@@ -45,13 +45,13 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
     $data[$c]["PrecioCompra"] = $fila["Precio_C"];
-    $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];
-    $data[$c]["TotalPrecioCompra"] = $fila["Total_Precio_Compra"];
-    $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
-    $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
-    $data[$c]["Clave_Levic"] = $fila["Diferencia"];
-    $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
-    $data[$c]["FechaInventario"] = $fila["FechaInventario"];
+    $data[$c]["TotalPrecioVenta"] = $fila["Total_Venta"];
+    $data[$c]["TotalPrecioCompra"] = $fila["Total_Compra"];
+    $data[$c]["Nombre_Prod"] = $fila["Cantidad"];
+    $data[$c]["Clave_interna"] = $fila["Fecha_Caducidad"];
+    $data[$c]["Clave_Levic"] = $fila["Lote"];
+    $data[$c]["Cod_Enfermeria"] = $fila["MotivoBaja"];
+    $data[$c]["FechaInventario"] = $fila["AgregadoPor"];
     $c++;
 }
 
