@@ -1023,6 +1023,16 @@
           
           </li>
           <li class="nav-item has-treeview">
+            <a href="ReporteCaducados" class="nav-link">
+            <i class="fas fa-recycle"></i>
+              <p>
+        Reporte de caducados
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
             <a href="Mobiliarios" class="nav-link">
             <i class="fas fa-barcode"></i>
               <p>
