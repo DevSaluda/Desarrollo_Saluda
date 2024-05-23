@@ -240,18 +240,18 @@ tabla = $('#Productos').DataTable({
 	<div class="table-responsive">
 	<table  id="Productos" class="table table-hover">
 <thead>
-<th>ID_BD</th>
 <th>Cod Barra</th>
+<th>Nombre del producto</th>
     <th>Sucursal</th>
     <th>PV</th>
     <th>PC</th>
     <th>Total PV</th>
     <th>Total PC</th>
-    <th>Contabilizado</th>
-    <th>Stock Previo</th>
-    <th>Diferencia</th>
+    <th>Cantidad</th>
+    <th>Fecha caducidad</th>
+    <th>Lote</th>
+    <th>Motivo baja</th>
     <th>Agregado por</th>
-    <th>Fecha Inventario</th>
     
 
 
