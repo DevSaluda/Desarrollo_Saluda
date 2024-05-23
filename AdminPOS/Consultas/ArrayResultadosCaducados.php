@@ -30,9 +30,7 @@ Stock_Bajas sb
 JOIN
 SucursalesCorre sc
 ON
-sb.Fk_sucursal = sc.ID_SucursalC;
-WHERE 
-    CAST(ic.FechaInventario AS DATE) = '$today';
+sb.Fk_sucursal = sc.ID_SucursalC
 ";
 
 // Ejecuta la consulta
