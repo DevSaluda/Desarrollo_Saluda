@@ -2,7 +2,7 @@
 include_once 'db_connection.php';
 
 // Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
-if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
+if (isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
     $contador = count($_POST["IdBasedatos"]); 
 } else {
     // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
@@ -20,21 +20,20 @@ for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, )";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $values[] = $_POST["IdBasedatos"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
-        $values[] = $_POST["Fk_sucursal"][$i]; // Cambiado el nombre del campo según la nueva data
+        $values[] = $_POST["Fk_sucursal"][$i];
         $values[] = $_POST["PrecioVenta"][$i];
         $values[] = $_POST["PrecioCompra"][$i];
+        $values[] = $_POST["Cantidad"][$i]; // Ensure this field is included in the values
+        $values[] = $_POST["Lote"][$i];
         $values[] = $_POST["FechaCaducidad"][$i];
-        $values[] = $_POST["Lote"][$i]; // Cambiado el nombre del campo según la nueva data
-        $values[] = $_POST["MotivoBaja"][$i]; // Agregar el campo 'Sistema' según la nueva data
+        $values[] = $_POST["MotivoBaja"][$i];
         $values[] = $_POST["AgregoElVendedor"][$i];
-      
         $values[] = $_POST["ID_H_O_D"][$i];
-        $values[] = $_POST["FechaInv"][$i]; // Agregar el campo 'ID_H_O_D' según la nueva data
-        $valueTypes .= 'sssssssssss'; // Ajustar tipos según corresponda
+        $valueTypes .= 'ssssssssssss'; // Adjust types according to your data types
     }
 }
 
