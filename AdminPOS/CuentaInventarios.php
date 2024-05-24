@@ -418,22 +418,12 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
 <script>
-        let selectedAdjustment = "";
+       let selectedAdjustment = "";
 
-        document.getElementById('Tipodeajuste').addEventListener('change', function() {
-            selectedAdjustment = this.value;
-        });
+document.getElementById('Tipodeajuste').addEventListener('change', function() {
+    selectedAdjustment = this.value;
+});
 
-        // Tu propia función para crear los campos
-        function createInputField() {
-            const tr = document.getElementById('table-row');
-            tr.innerHTML = '<td class="tipoajuste"><input id="tipoajuste-input" class="form-control tipoajuste-input" type="number" value="" /></td>';
-            const input = document.getElementById('tipoajuste-input');
-            input.value = selectedAdjustment;
-        }
-
-        // Llama a esta función en el momento adecuado en tu flujo de trabajo
-        // createInputField();
     </script>
 <!-- function actualizarSumaTotal  -->
 <script>
@@ -778,6 +768,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         $('#tablaAgregarArticulos tbody').prepend(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:first-child'));
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:first-child'));
+        $('#tablaAgregarArticulos tbody tr:first-child').find('.tipoajuste-input').val(selectedAdjustment);
         createInputField();
         calcularIVA();
         actualizarSuma();
