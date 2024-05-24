@@ -703,9 +703,10 @@ function calcularDiferencia(fila) {
           mostrarMensaje('La cantidad no puede ser negativa');
           return;
         }
+        calcularDiferencia(row);
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
-        calcularDiferencia(row);
+        
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
