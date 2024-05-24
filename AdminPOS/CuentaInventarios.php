@@ -307,7 +307,30 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         </div>
                         
 
-
+                        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("Tipodeajuste").addEventListener("change", function() {
+        var selectedOption = this.value;
+        if (selectedOption === "Inventario inicial") {
+            swal({
+                title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((confirm) => {
+                if (confirm) {
+                    // Aquí puedes agregar la lógica para establecer el stock de la sucursal
+                    // Por ejemplo, puedes hacer una llamada AJAX para procesar la acción.
+                    // Si quieres que no haga nada más que mostrar el mensaje, puedes eliminar este bloque "if".
+                } else {
+                    // Si el usuario cancela, puedes revertir cualquier cambio hecho.
+                }
+            });
+        }
+    });
+});
+</script>
                       </div>
 
                       <label class="col-form-label" for="iptCodigoVenta">
