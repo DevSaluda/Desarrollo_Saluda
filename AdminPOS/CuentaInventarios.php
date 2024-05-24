@@ -524,9 +524,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       // {
       //     "data": "ieps"
       // },
-      {
-        "data": "eliminar"
-      },
+     
      
     ],
 
