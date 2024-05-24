@@ -751,7 +751,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
         $('#tablaAgregarArticulos tbody').prepend(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:last-child'));
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        calcularDiferencia(row);
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
