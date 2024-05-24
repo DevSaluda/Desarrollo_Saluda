@@ -704,7 +704,7 @@ function calcularDiferencia(fila) {
         return;
       }
       row.find('.cantidad input').val(nuevaCantidad);
-      mostrarToast('Cantidad actualizada para el producto: ' + articulo.nombre);  // Aquí mostramos el toast
+      mostrarToast('Cantidad actualizada para el producto: ' + articulo.descripcion );  // Aquí mostramos el toast
       actualizarImporte(row);
       calcularDiferencia(row);
       calcularIVA();
