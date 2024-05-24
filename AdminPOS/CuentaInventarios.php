@@ -315,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
             swal({
                 title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
                 icon: "warning",
-                buttons: true,
+                buttons: ["Cancelar", "Sí, establecer stock"],
                 dangerMode: true,
             })
             .then((confirm) => {
@@ -323,8 +323,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Aquí puedes agregar la lógica para establecer el stock de la sucursal
                     // Por ejemplo, puedes hacer una llamada AJAX para procesar la acción.
                     // Si quieres que no haga nada más que mostrar el mensaje, puedes eliminar este bloque "if".
+                    alert("Stock de la sucursal establecido.");
                 } else {
                     // Si el usuario cancela, puedes revertir cualquier cambio hecho.
+                    alert("Acción cancelada.");
                 }
             });
         }
