@@ -543,6 +543,9 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
   
   // Aquí colocar el resto de tu script JavaScript
   function buscarArticulo(codigoEscaneado) {
+    if (codigoEscaneado.trim() === "") {
+    return; // No hacer nada si el código está vacío
+  }
     var formData = new FormData();
     formData.append('codigoEscaneado', codigoEscaneado);
 
