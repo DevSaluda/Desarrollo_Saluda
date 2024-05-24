@@ -294,9 +294,9 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
-                            <select class="form-control" style="font-size: 0.75rem !important;">
+                            <select class="form-control" style="font-size: 0.75rem !important;" id="Tipodeajuste">
                             <option value="">Seleccione un tipo de ajuste </option>
-                  <option value="Ajuste positivo">Ajuste de inventario</option>
+                  <option value="Ajuste de inventario">Ajuste de inventario</option>
               <option value="Inventario inicial">Inventario inicial</option>
                  <option value="Ajuste por daño">Ajuste por daño</option>
               <option value="Ajuste por caducidad">Ajuste por caducidad</option>
@@ -414,6 +414,26 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </div>
 </div>
 </div>
+
+
+<script>
+        let selectedAdjustment = "";
+
+        document.getElementById('Tipodeajuste').addEventListener('change', function() {
+            selectedAdjustment = this.value;
+        });
+
+        // Tu propia función para crear los campos
+        function createInputField() {
+            const tr = document.getElementById('table-row');
+            tr.innerHTML = '<td class="tipoajuste"><input id="tipoajuste-input" class="form-control tipoajuste-input" type="number" value="" /></td>';
+            const input = document.getElementById('tipoajuste-input');
+            input.value = selectedAdjustment;
+        }
+
+        // Llama a esta función en el momento adecuado en tu flujo de trabajo
+        // createInputField();
+    </script>
 <!-- function actualizarSumaTotal  -->
 <script>
 
@@ -732,6 +752,7 @@ tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existenci
 tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
 
         tr += '<td class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"   value="' + articulo.precio + '"  /></td>';
+        tr += '<td class="tipoajuste"><input class="form-control tipoajuste-input" style="font-size: 0.75rem !important;" type="number" value=""   /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;"  name="PrecioCompra[]"  value="' + articulo.preciocompra + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '"class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
         tr += '<td style="visibility:collapse; display:none;" ><input id="importe_' + articulo.id + '" class="form-control importe" name="ImporteGenerado[]"style="font-size: 0.75rem !important;" type="number" readonly /></td>';
@@ -744,6 +765,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Sistema[]"readonly value="POS">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="ID_H_O_D[]"readonly value="Saluda">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaInv[]"readonly value="<?php echo $fechaActual;?>"  </td>';
+        
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
 
@@ -752,6 +774,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         $('#tablaAgregarArticulos tbody').prepend(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:first-child'));
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:first-child'));
+        createInputField();
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
