@@ -703,10 +703,9 @@ function calcularDiferencia(fila) {
           mostrarMensaje('La cantidad no puede ser negativa');
           return;
         }
-        calcularDiferencia(row);
         row.find('.cantidad input').val(nuevaCantidad);
         actualizarImporte(row);
-        
+        calcularDiferencia(row);
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
@@ -751,7 +750,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
         $('#tablaAgregarArticulos tbody').prepend(tr);
         actualizarImporte($('#tablaAgregarArticulos tbody tr:first-child'));
-        calcularDiferencia(row);
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:first-child'));
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
