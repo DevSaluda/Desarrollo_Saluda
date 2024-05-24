@@ -38,8 +38,7 @@ include "Consultas.php";
 $user_id=null;
 $sql1="SELECT Agenda_revaloraciones.Id_genda,Agenda_revaloraciones.Nombres_Apellidos,Agenda_revaloraciones.Telefono,Agenda_revaloraciones.Fk_sucursal,
 Agenda_revaloraciones.Medico,Agenda_revaloraciones.Fecha,Agenda_revaloraciones.Asistio,Agenda_revaloraciones.Turno,Agenda_revaloraciones.Motivo_Consulta,Agenda_revaloraciones.Agrego,Agenda_revaloraciones.AgregadoEl, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM
-Agenda_revaloraciones, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_revaloraciones.Fk_sucursal 
-AND Agenda_revaloraciones.Fk_Sucursal='".$row['Fk_Sucursal']."'";
+Agenda_revaloraciones, SucursalesCorre WHERE SucursalesCorre.ID_SucursalC = Agenda_revaloraciones.Fk_sucursal ";
 $query = $conn->query($sql1);
 ?>
 
