@@ -690,25 +690,26 @@ function calcularDiferencia(fila) {
 
   // Función para agregar un artículo
   function agregarArticulo(articulo) {
-    if (!articulo || !articulo.id) {
-      mostrarMensaje('El artículo no es válido');
-    } else if ($('#detIdModal' + articulo.id).length) {
-      mostrarMensaje('El artículo ya se encuentra incluido');
-    } else {
-      var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
-      if (row.length) {
-        var cantidadActual = parseInt(row.find('.cantidad input').val());
-        var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
-        if (nuevaCantidad < 0) {
-          mostrarMensaje('La cantidad no puede ser negativa');
-          return;
-        }
-        row.find('.cantidad input').val(nuevaCantidad);
-        actualizarImporte(row);
-        calcularDiferencia(row);
-        calcularIVA();
-        actualizarSuma();
-        mostrarTotalVenta();
+  if (!articulo || !articulo.id) {
+    mostrarMensaje('El artículo no es válido');
+  } else if ($('#detIdModal' + articulo.id).length) {
+    mostrarMensaje('El artículo ya se encuentra incluido');
+  } else {
+    var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
+    if (row.length) {
+      var cantidadActual = parseInt(row.find('.cantidad input').val());
+      var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+      if (nuevaCantidad < 0) {
+        mostrarMensaje('La cantidad no puede ser negativa');
+        return;
+      }
+      row.find('.cantidad input').val(nuevaCantidad);
+      mostrarToast('Cantidad actualizada para el producto: ' + articulo.nombre);  // Aquí mostramos el toast
+      actualizarImporte(row);
+      calcularDiferencia(row);
+      calcularIVA();
+      actualizarSuma();
+      mostrarTotalVenta(); 
         
       
         
@@ -771,7 +772,13 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
 
 
-  
+  function mostrarToast(mensaje) {
+  var toast = $('<div class="toast"></div>').text(mensaje);
+  $('body').append(toast);
+  toast.fadeIn(400).delay(3000).fadeOut(400, function() {
+    $(this).remove();
+  });
+}
   function actualizarImporte(row) {
   var cantidad = parseInt(row.find('.cantidad-vendida-input').val());
   var precio = parseFloat(row.find('.precio input').val());
@@ -870,7 +877,20 @@ function eliminarFila(element) {
                 },milisegundos);
             });
         </script>
-
+<style>
+.toast {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0.9;
+  z-index: 1000;
+  display: none;
+}
+</style>
 <!-- Control Sidebar -->
 
 <!-- Main Footer -->
