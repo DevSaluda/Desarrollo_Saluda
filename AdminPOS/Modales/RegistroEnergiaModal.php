@@ -18,7 +18,7 @@
           <div class="text-center">
           <form enctype="multipart/form-data" id="RegistroDiarioEnergiaWats">
 <div class="form-group">
-    <label for="exampleFormControlInput1">Ingrese el valor de kilowatts </label>
+    <label for="exampleFormControlInput1">Ingrese el valor de kilowatt </label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-lightbulb"></i></span>
@@ -64,9 +64,9 @@
     
     
      
-    <input type="text" class="form-control" name="Registro" id="registro" hidden value="<?echo $row['Nombre_Apellidos']?>"  readonly >
+    <input type="text" class="form-control" name="Registro" id="registro" hidden value="<?php echo $row['Nombre_Apellidos']?>"  readonly >
   
-    <input type="text" class="form-control" name="Sucursal" id="sucursal"  hidden value="<?echo $row['Nombre_Sucursal']?>"   readonly >
+    <input type="text" class="form-control" name="Sucursal" id="sucursal"  hidden value="<?php echo $row['Nombre_Sucursal']?>"   readonly >
     <input type="text" class="form-control" name="Empresa" id="Empresa" hidden value="Doctor Consulta"   readonly >
     <div class="text-center">
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
