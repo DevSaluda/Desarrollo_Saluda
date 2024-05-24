@@ -312,14 +312,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
-            swal({
+            // Utiliza Swal.fire en lugar de swal
+            Swal.fire({
                 title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
                 icon: "warning",
-                buttons: ["Cancelar", "Sí, establecer stock"],
-                dangerMode: true,
-            })
-            .then((confirm) => {
-                if (confirm) {
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, establecer stock"
+            }).then((result) => {
+                if (result.isConfirmed) {
                     // Aquí puedes agregar la lógica para establecer el stock de la sucursal
                     // Por ejemplo, puedes hacer una llamada AJAX para procesar la acción.
                     // Si quieres que no haga nada más que mostrar el mensaje, puedes eliminar este bloque "if".
