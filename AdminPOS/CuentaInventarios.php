@@ -314,6 +314,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  var fkSucursal = <?php echo json_encode($row['Fk_sucursal']); ?>; // Obtén el valor PHP y escápalo correctamente
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
@@ -332,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         method: 'POST',
                         data: {
                             tipoAjuste: selectedOption,
-                            var fkSucursal = <?php echo json_encode($row['Fk_sucursal']); ?>; // Obtén el valor PHP y escápalo correctamente
+                            fkSucursal: fkSucursal // Incluye el valor PHP aquí
                         },
                         success: function(response) {
                             // Maneja la respuesta de éxito
