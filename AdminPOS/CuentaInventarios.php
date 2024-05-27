@@ -308,9 +308,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         
 
                      <!-- Importa SweetAlert 2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- Importa jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
