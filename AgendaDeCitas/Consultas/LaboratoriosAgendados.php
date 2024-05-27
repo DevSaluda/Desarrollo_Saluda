@@ -74,8 +74,19 @@ $query = $conn->query($sql1);
     <td> <?php echo $Usuarios["LabAgendado"]; ?></td>
     <td> <?php echo $Usuarios["Agrego"]; ?></td>
     <td> <?php echo $Usuarios["Asistio"]; ?></td>
-    <td> <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola <?php echo $Usuarios["Nombres_Apellidos"]; ?>
-     ! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕Te invitamos asistir a tu laboratorio: <?php echo $Usuarios["LabAgendado"]; ?> , programado para el día <?php echo fechaCastellano($Usuarios["Fecha"]); ?>  a las <?php echo $Usuarios["Hora"]; ?> en Saluda Centro Médico Familiar <?php echo $Usuarios["Nombre_Sucursal"]; ?>*  ¿Confirmamos tu asistencia?  Tu bienestar es nuestra prioridad. ¡Gracias por confiar tu salud con nosotros! 🩷" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a></td>
+    <td>
+    <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola <?php echo $Usuarios["Nombres_Apellidos"]; ?>! 
+    Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕ 
+    Te invitamos a asistir a tu laboratorio programado para el día <?php echo fechaCastellano($Usuarios["Fecha"]); ?> a las <?php echo $Usuarios["Hora"]; ?> 
+    en Saluda Centro Médico Familiar <?php echo $Usuarios["Nombre_Sucursal"]; ?>. 
+    ¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad.
+    Te recordamos leer las recomendaciones en el reverso de tu hoja de laboratorio. 
+    ¡Gracias por confiar en nosotros para cuidar tu salud! 🩷"
+    target="_blank">
+        <span class="fab fa-whatsapp"></span><span class="hidden-xs"></span>
+    </a>
+</td>
+
     <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
