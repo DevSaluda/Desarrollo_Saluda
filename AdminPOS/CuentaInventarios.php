@@ -307,34 +307,71 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         </div>
                         
 
-                        <script>
+                     <!-- Importa SweetAlert 2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- Importa jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
-            // Utiliza Swal.fire en lugar de swal
             Swal.fire({
                 title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, establecer stock"
+                confirmButtonText: "Sí, establecer stock en 0"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Aquí puedes agregar la lógica para establecer el stock de la sucursal
-                    // Por ejemplo, puedes hacer una llamada AJAX para procesar la acción.
-                    // Si quieres que no haga nada más que mostrar el mensaje, puedes eliminar este bloque "if".
-                    alert("Stock de la sucursal establecido.");
+                    // Aquí hacemos la llamada AJAX para actualizar la base de datos
+                    $.ajax({
+                        url: 'Consultas/EstableceStock.php', // URL del archivo PHP que maneja la actualización
+                        method: 'POST',
+                        data: {
+                            tipoAjuste: selectedOption,
+                            fkSucursal:<?php echo $row['Fk_sucursal']?>,
+                        },
+                        success: function(response) {
+                            // Maneja la respuesta de éxito
+                            if(response.success) {
+                                Swal.fire({
+                                    title: 'Éxito',
+                                    text: 'Stock de la sucursal establecido correctamente.',
+                                    icon: 'success'
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Hubo un problema al establecer el stock de la sucursal.',
+                                    icon: 'error'
+                                });
+                            }
+                        },
+                        error: function() {
+                            // Maneja los errores de la llamada AJAX
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+                                icon: 'error'
+                            });
+                        }
+                    });
                 } else {
-                    // Si el usuario cancela, puedes revertir cualquier cambio hecho.
-                    alert("Acción cancelada.");
+                    Swal.fire({
+                        title: 'Acción cancelada',
+                        text: 'No se realizaron cambios.',
+                        icon: 'info'
+                    });
                 }
             });
         }
     });
 });
 </script>
+
                       </div>
 
                       <label class="col-form-label" for="iptCodigoVenta">
