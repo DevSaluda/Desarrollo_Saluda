@@ -314,7 +314,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>
+  var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>;
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
