@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         method: 'POST',
                         data: {
                             tipoAjuste: selectedOption,
-                            fkSucursal:<?php echo $row['Fk_sucursal']?>,
+                            var fkSucursal = <?php echo json_encode($row['Fk_sucursal']); ?>; // Obtén el valor PHP y escápalo correctamente
                         },
                         success: function(response) {
                             // Maneja la respuesta de éxito
