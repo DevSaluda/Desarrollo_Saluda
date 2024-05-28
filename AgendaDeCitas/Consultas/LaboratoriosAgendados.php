@@ -77,7 +77,8 @@
                   Seleccione el tipo de laboratorio
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item lab-option" href="#" data-lab="sangre">Laboratorio de Sangre</a>
+                <a class="dropdown-item lab-option" href="#" data-lab="colesterol,trigliceridos,lipidos">Colesterol,Trigliceridos,Lipidos</a>
+                  <a class="dropdown-item lab-option" href="#" data-lab="sangre">Sangre</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="urocultivo">Urocultivo</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="coprologicos">Coprologicos</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="isopados">Isopados</a>
