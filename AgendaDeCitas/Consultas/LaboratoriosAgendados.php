@@ -31,7 +31,8 @@
         </thead>
         <tbody>
           <!-- Aquí se generarán las filas de la tabla con datos dinámicos -->
-          <?php
+            <!-- Aquí se generarán las filas de la tabla con datos dinámicos -->
+            <?php
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));
@@ -56,7 +57,8 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
                   Agenda_Labs.Fk_sucursal, Agenda_Labs.Hora, Agenda_Labs.Fecha, Agenda_Labs.LabAgendado, 
                   Agenda_Labs.Agrego, Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC, 
                   SucursalesCorre.Nombre_Sucursal FROM Agenda_Labs, SucursalesCorre 
-                  WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal";
+                  WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal
+                  ORDER BY ASC;
           $query = $conn->query($sql1);
           if ($query->num_rows > 0):
             while ($Usuarios = $query->fetch_array()):
@@ -104,7 +106,7 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
       $('.lab-option').click(function(e) {
         e.preventDefault();
         var labType = $(this).data('lab');
-        var mensajeBase = '¡Hola %nombre%! Queremos recordarte lo importante que es darle seguimiento a tu salud. Te invitamos a asistir a tu laboratorio programado';
+        var mensajeBase = '¡Hola <?php echo $Usuarios["Nombres_Apellidos"] ?>! Queremos recordarte lo importante que es darle seguimiento a tu salud. Te invitamos a asistir a tu laboratorio programado';
         var telefono = $(this).closest('tr').find('.telefono').text();
         var fecha = $(this).closest('tr').find('td:eq(3)').text();
         var hora = $(this).closest('tr').find('td:eq(4)').text();
@@ -131,6 +133,4 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
         window.open(whatsappLink, '_blank');
       });
     });
-  </script>
-</body>
-</html>
+  </script
