@@ -27,28 +27,7 @@ include "Consultas/Consultas.php";
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">Sugerencia por periodo<i class="fas fa-file-medical"></i></button>
       </div>
     </div>
-    <form id="prePedidoForm" action="nueva_pagina.php" method="POST" style="display: none;">
-        <input type="hidden" name="Fk_sucursal" value="3">
-        <input type="hidden" name="fechadeldia" value="<?php echo date('Y-m-d'); ?>">
-    </form>
-
-    <script>
-        document.getElementById('prePedidoButton').addEventListener('click', function() {
-            Swal.fire({
-                title: '¿Desea generar un pre-pedido?',
-                text: "Esta acción generará un pre-pedido para el día de hoy.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, generar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('prePedidoForm').submit();
-                }
-            });
-        });
-    </script>
+    
     <div id="TablaPedidos" class="table-responsive">
       <table class="table table-hover">
         <thead>
