@@ -60,6 +60,7 @@ include "Consultas/Consultas.php";
 <!-- /.control-sidebar -->
 <?php 
 include ("Modales/Error.php");
+include ("Modales/GeneraPedidoPorDia.php");
 include ("Modales/Exito.php");
 include ("Modales/Precarga.php");
 include ("Modales/ExitoActualiza.php");
