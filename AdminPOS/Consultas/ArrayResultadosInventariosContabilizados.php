@@ -17,6 +17,7 @@ $sql = "SELECT
     ic.Precio_C * ic.Contabilizado AS Total_Precio_Compra, 
     ic.Contabilizado, 
     ic.StockEnMomento, 
+    ic.Tipo_Ajuste,
     ic.Diferencia, 
     ic.Sistema, 
     ic.AgregadoPor, 
@@ -41,6 +42,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["IdbD"] = $fila["Cod_Barra"];
     $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
     $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
+    $data[$c]["Tipo_Ajuste"] = $fila["Tipo_Ajuste"];
     $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
     $data[$c]["PrecioCompra"] = $fila["Precio_C"];
     $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];

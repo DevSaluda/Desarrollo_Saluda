@@ -182,6 +182,7 @@ tabla = $('#Productos').DataTable({
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
+       { mData: 'Tipo_Ajuste' },
        { mData: 'PrecioVenta' },
        { mData: 'PrecioCompra' },
        { mData: 'TotalPrecioVenta' },
