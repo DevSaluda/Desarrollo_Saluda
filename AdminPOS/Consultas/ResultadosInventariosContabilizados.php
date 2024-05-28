@@ -244,6 +244,7 @@ tabla = $('#Productos').DataTable({
 <th>ID_BD</th>
 <th>Cod Barra</th>
     <th>Sucursal</th>
+    <th>Tipo de inventario</th>
     <th>PV</th>
     <th>PC</th>
     <th>Total PV</th>
