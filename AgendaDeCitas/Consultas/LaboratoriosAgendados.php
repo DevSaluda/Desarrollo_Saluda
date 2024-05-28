@@ -6,15 +6,15 @@
   <title>Agendamiento de laboratorios</title>
   <!-- Agrega los enlaces a las librerías necesarias -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="text-center">
-      <h2>Lista de Citas</h2>
-    </div>
+  <div class="container-fluid">
     <div class="table-responsive">
       <table id="CitasExteriores" class="table table-hover">
         <thead>
@@ -101,6 +101,27 @@
 
   <script>
     $(document).ready(function() {
+      $('#CitasExteriores').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "pageLength": 10,
+        "language": {
+          "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente"
+          },
+          "search": "Buscar:",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+          "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+          "zeroRecords": "No se encontraron resultados",
+          "infoFiltered": "(filtrado de _MAX_ entradas totales)"
+        }
+      });
+
       $('.lab-option').click(function(e) {
         e.preventDefault();
         var labType = $(this).data('lab');
@@ -109,8 +130,8 @@
         var fecha = $(this).closest('tr').find('td:eq(3)').text();
         var hora = $(this).closest('tr').find('td:eq(4)').text();
         var sucursal = $(this).closest('tr').find('td:eq(5)').text();
-        var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. Te invitamos a asistir a tu laboratorio programado';
-        var mensaje = mensajeBase + ' el ' + fecha + ' a las ' + hora + ' en ' + sucursal + '.';
+        var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕  Te invitamos a asistir a tu laboratorio programado';
+        var mensaje = mensajeBase + ' el dia' + fecha + ' a las ' + hora + ' en Sucursal Saluda' + sucursal + ' ¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad.';
         switch (labType) {
           case 'sangre':
             mensaje += ' Recuerda no ingerir alimentos grasos antes de la prueba.';
