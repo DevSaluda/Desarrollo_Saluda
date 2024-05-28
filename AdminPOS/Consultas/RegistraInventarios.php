@@ -36,7 +36,7 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["ID_H_O_D"][$i];
         $values[] = $_POST["FechaInv"][$i]; // Agregar el campo 'ID_H_O_D' según la nueva data
         $values[] = $_POST["Tipodeajusteaplicado"][$i];
-        $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
+        $valueTypes .= 'ssssssssssssss'; // Ajustar tipos según corresponda
     }
 }
 
