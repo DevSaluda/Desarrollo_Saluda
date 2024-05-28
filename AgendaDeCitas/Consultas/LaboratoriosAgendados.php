@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Botón Dropdown y Mensaje de WhatsApp</title>
+  <title>Agendamiento de laboratorios</title>
   <!-- Agrega los enlaces a las librerías necesarias -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -32,23 +32,23 @@
         <tbody>
           <!-- Aquí se generarán las filas de la tabla con datos dinámicos -->
           <?php
-function fechaCastellano ($fecha) {
-  $fecha = substr($fecha, 0, 10);
-  $numeroDia = date('d', strtotime($fecha));
-  $dia = date('l', strtotime($fecha));
-  $mes = date('F', strtotime($fecha));
-  $anio = date('Y', strtotime($fecha));
-  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
-}
+          function fechaCastellano ($fecha) {
+            $fecha = substr($fecha, 0, 10);
+            $numeroDia = date('d', strtotime($fecha));
+            $dia = date('l', strtotime($fecha));
+            $mes = date('F', strtotime($fecha));
+            $anio = date('Y', strtotime($fecha));
+            $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+            $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+            $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+            $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+            $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+            return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+          }
+
           // Incluye el código PHP para obtener los datos de la base de datos
           // y generar las filas de la tabla
-          
           include "db_connection.php";
           include "Consultas.php";
           $user_id = null;
@@ -57,14 +57,14 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
                   Agenda_Labs.Agrego, Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC, 
                   SucursalesCorre.Nombre_Sucursal FROM Agenda_Labs, SucursalesCorre 
                   WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal
-                  ORDER BY ASC";
+                  ORDER BY Agenda_Labs.Fecha ASC";
           $query = $conn->query($sql1);
           if ($query->num_rows > 0):
             while ($Usuarios = $query->fetch_array()):
           ?>
           <tr>
             <td><?php echo $Usuarios["Id_genda"]; ?></td>
-            <td><?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
+            <td class="nombre"><?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
             <td class="telefono"><?php echo $Usuarios["Telefono"]; ?></td>
             <td><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
             <td><?php echo $Usuarios["Hora"]; ?></td>
@@ -99,17 +99,17 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
     </div>
   </div>
 
-    <script>
-    
+  <script>
     $(document).ready(function() {
       $('.lab-option').click(function(e) {
         e.preventDefault();
         var labType = $(this).data('lab');
-        var mensajeBase = '¡Hola <?php echo $Usuarios["Nombres_Apellidos"] ?>! Queremos recordarte lo importante que es darle seguimiento a tu salud. Te invitamos a asistir a tu laboratorio programado';
+        var nombre = $(this).closest('tr').find('.nombre').text();
         var telefono = $(this).closest('tr').find('.telefono').text();
         var fecha = $(this).closest('tr').find('td:eq(3)').text();
         var hora = $(this).closest('tr').find('td:eq(4)').text();
         var sucursal = $(this).closest('tr').find('td:eq(5)').text();
+        var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. Te invitamos a asistir a tu laboratorio programado';
         var mensaje = mensajeBase + ' el ' + fecha + ' a las ' + hora + ' en ' + sucursal + '.';
         switch (labType) {
           case 'sangre':
