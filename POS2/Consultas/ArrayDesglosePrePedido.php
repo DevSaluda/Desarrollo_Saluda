@@ -57,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Nombre_Prod"] = '<input type="text" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["Sucursal"] = '<input type="text" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
             $data[$c]["Turno"] = '<input type="text" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
-            $data[$c]["Cantidad_Venta"] = '<input type="text" value="' . $fila["Cantidad_Venta"] . '" readonly>';
             $data[$c]["Importe"] = '<input type="text" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" value="' . $fila["Proveedor2"] . '" readonly>';
             $data[$c]["Descuento"] = '<input type="text" value="' . $fila["FkPresentacion"] . '" readonly>';
