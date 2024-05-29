@@ -299,14 +299,13 @@ include "Consultas/Consultas.php";
           <table id="Productos" class="hover" style="width:100%">
             <thead>
               <th>Cod</th>
-              <th>Nombre</th>
-              <th>N° Ticket</th>
+              <th>Nombre comercial</th>
               <th>Sucursal</th>
-              <th>Turno</th>
               <th>Cantidad</th>
-              <th>P.U</th>
-              <th>Importe</th> 
-              <th>Descuento</th>
+              <th>Proveedor</th>
+              <th>Proveedor</th>
+              <th>Presentacion</th>
+            
               
             </thead>
           </table>
