@@ -15,7 +15,7 @@
             <i class="fas fa-store fa-5x animated bounceIn"></i>
           </div>
           
-          <form action="PrepedidoPorDia" method="post" >
+          <form action="PrePedidoPorDia" method="post" >
             
             
             
