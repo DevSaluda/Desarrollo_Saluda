@@ -24,7 +24,7 @@
                 <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
               </div>
             </div>
-            <input type="text" class="form-control" disabled readonly value="<?php echo $row['Nombre_Sucursal']?>">
+            <input type="text" class="form-control" value="<?php echo $row['Fk_Sucursal']?>">
             <div class="row">
               <div class="col text-center">
                 <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success btn-lg animated rubberBand">Generar <i class="fas fa-exchange-alt ml-2"></i></button>
