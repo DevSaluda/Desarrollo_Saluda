@@ -224,7 +224,7 @@ include "Consultas/Consultas.php";
             "order": [[ 0, "desc" ]],
             "ajax": {
               "type": "POST", // Especifica el método de envío de la solicitud AJAX
-              "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesglosePrePedido.php",
+              "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
         var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
