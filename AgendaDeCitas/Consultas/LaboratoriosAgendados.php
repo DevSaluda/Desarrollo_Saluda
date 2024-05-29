@@ -43,7 +43,7 @@
             $nombredia = str_replace($dias_EN, $dias_ES, $dia);
             $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
             $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-            $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+            $nombreMes = str_replace($meses_EN, $mes);
             return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
           }
 
@@ -77,7 +77,7 @@
                   Seleccione el tipo de laboratorio
                 </button>
                 <div class="dropdown-menu">
-                <a class="dropdown-item lab-option" href="#" data-lab="colesterol,trigliceridos,lipidos">Colesterol,Trigliceridos,Lipidos</a>
+                  <a class="dropdown-item lab-option" href="#" data-lab="colesterol,trigliceridos,lipidos">Colesterol,Trigliceridos,Lipidos</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="sangre">Sangre</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="urocultivo">Urocultivo</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="coprologicos">Coprologicos</a>
@@ -101,29 +101,8 @@
   </div>
 
   <script>
-    $(document).ready(function() {
-      $('#CitasExteriores').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "pageLength": 10,
-        "language": {
-          "paginate": {
-            "previous": "Anterior",
-            "next": "Siguiente"
-          },
-          "search": "Buscar:",
-          "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-          "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-          "zeroRecords": "No se encontraron resultados",
-          "infoFiltered": "(filtrado de _MAX_ entradas totales)"
-        }
-      });
-
-      $('.lab-option').click(function(e) {
+    function attachDropdownHandlers() {
+      $('.lab-option').off('click').on('click', function(e) {
         e.preventDefault();
         var labType = $(this).data('lab');
         var nombre = $(this).closest('tr').find('.nombre').text();
@@ -156,6 +135,35 @@
         var mensaje = mensajeBase + recomendaciones;
         var whatsappLink = 'https://api.whatsapp.com/send?phone=+52' + telefono + '&text=' + encodeURIComponent(mensaje);
         window.open(whatsappLink, '_blank');
+      });
+    }
+
+    $(document).ready(function() {
+      var table = $('#CitasExteriores').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "pageLength": 10,
+        "language": {
+          "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente"
+          },
+          "search": "Buscar:",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+          "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+          "zeroRecords": "No se encontraron resultados",
+          "infoFiltered": "(filtrado de _MAX_ entradas totales)"
+        }
+      });
+
+      attachDropdownHandlers();
+
+      table.on('draw.dt', function() {
+        attachDropdownHandlers();
       });
     });
   </script>
