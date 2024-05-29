@@ -17,24 +17,14 @@
           
           <form action="javascript:void(0)" method="post" id="Filtrapormediodesucursalconajax">
             
-            <div class="row mb-4">
-              <div class="col">
-                <label for="exampleFormControlInput1">Sucursal Actual</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-                  </div>
-                  <input type="text" class="form-control" disabled readonly value="<?php echo $row['Nombre_Sucursal']?>">
-                </div>
-              </div>
-            </div>
+            
             
             <div class="row mb-4">
               <div class="col text-center">
                 <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
               </div>
             </div>
-            
+            <input type="text" class="form-control" disabled readonly value="<?php echo $row['Nombre_Sucursal']?>">
             <div class="row">
               <div class="col text-center">
                 <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success btn-lg animated rubberBand">Generar <i class="fas fa-exchange-alt ml-2"></i></button>
