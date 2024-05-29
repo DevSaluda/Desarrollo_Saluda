@@ -974,7 +974,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="CuentaInventarios" class="nav-link">
-            <i class="fas fa-boxes"></i>
+            <i class="fas fa-dolly-flatbed"></i>
               <p>
         Conteo de productos
                
@@ -993,6 +993,46 @@
           
           </li>
           <li class="nav-item has-treeview">
+            <a href="HistorialInventarios" class="nav-link">
+            <i class="fas fa-boxes"></i>
+              <p>
+        Reporte de inventarios
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="HistorialInventarios" class="nav-link">
+            <i class="fas fa-calendar-day"></i>
+              <p>
+        Prontos a caducar
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="RegistraProductoAcaducar" class="nav-link">
+            <i class="fas fa-recycle"></i>
+              <p>
+        Registrar caducado
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="ReporteCaducados" class="nav-link">
+            <i class="fas fa-recycle"></i>
+              <p>
+        Reporte de caducados
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
             <a href="Mobiliarios" class="nav-link">
             <i class="fas fa-barcode"></i>
               <p>
@@ -1003,7 +1043,7 @@
           
           </li>
           
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="CodigosBarras" class="nav-link">
             <i class="fas fa-barcode"></i>
               <p>
@@ -1012,7 +1052,7 @@
               </p>
             </a>
           
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="https://saludapos.com/AdminPOS/InventarioRapidoResultado" class="nav-link">
             <i class="fas fa-boxes"></i>

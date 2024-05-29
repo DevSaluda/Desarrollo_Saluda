@@ -23,10 +23,11 @@ include "Consultas/Consultas.php";
     <div class="card text-center">
       <div class="card-header" style="background-color: #2bbbad !important;color: white;">Sugerencias de pedidos</div>
       <div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">Sugerencia por día<i class="fas fa-file-medical"></i></button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PedidoPorDia" class="btn btn-default">Sugerencia por día<i class="fas fa-file-medical"></i></button>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">Sugerencia por periodo<i class="fas fa-file-medical"></i></button>
       </div>
     </div>
+    
     <div id="TablaPedidos" class="table-responsive">
       <table class="table table-hover">
         <thead>
@@ -60,6 +61,7 @@ include "Consultas/Consultas.php";
 <!-- /.control-sidebar -->
 <?php 
 include ("Modales/Error.php");
+include ("Modales/GeneraPedidoPorDia.php");
 include ("Modales/Exito.php");
 include ("Modales/Precarga.php");
 include ("Modales/ExitoActualiza.php");

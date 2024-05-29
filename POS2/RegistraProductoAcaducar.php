@@ -15,7 +15,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Conteo de productos <?php echo $row['ID_H_O_D'] ?> </title>
+  <title>Registra medicamentos pronto a caducar <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php" ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -290,16 +290,15 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         </div>
                         <div class="col">
 
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Tipo de ajuste</label>
+                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Motivo de baja</label>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
                             </div>
-                            <select class="form-control" style="font-size: 0.75rem !important;" id="Tipodeajuste">
-                            <option value="">Seleccione un tipo de ajuste </option>
-                  <option value="Ajuste de inventario">Ajuste de inventario</option>
-              <option value="Inventario inicial">Inventario inicial</option>
-                 <option value="Ajuste por daño">Ajuste por daño</option>
-              <option value="Ajuste por caducidad">Ajuste por caducidad</option>
+                            <select class="form-control" style="font-size: 0.75rem !important;">
+                            <option value="">Seleccione el motivo de baja </option>
+                  <option value="Caducado">Caducado</option>
+              <option value="Proximo a caducar">Proximo a caducar</option>
+              
 </select>
 
 
@@ -307,68 +306,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         </div>
                         
 
-                     <!-- Importa SweetAlert 2 -->
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>;
-    document.getElementById("Tipodeajuste").addEventListener("change", function() {
-        var selectedOption = this.value;
-        if (selectedOption === "Inventario inicial") {
-            Swal.fire({
-                title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, establecer stock en 0"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Aquí hacemos la llamada AJAX para actualizar la base de datos
-                    $.ajax({
-                        url: 'Consultas/EstableceStock.php', // URL del archivo PHP que maneja la actualización
-                        method: 'POST',
-                        data: {
-                            tipoAjuste: selectedOption,
-                            fkSucursal: fkSucursal // Incluye el valor PHP aquí
-                        },
-                        success: function(response) {
-                            // Maneja la respuesta de éxito
-                            if(response.success) {
-                                Swal.fire({
-                                    title: 'Éxito',
-                                    text: 'Stock de la sucursal establecido correctamente.',
-                                    icon: 'success'
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: 'Error',
-                                    text: 'Hubo un problema al establecer el stock de la sucursal.',
-                                    icon: 'error'
-                                });
-                            }
-                        },
-                        error: function() {
-                            // Maneja los errores de la llamada AJAX
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                                icon: 'error'
-                            });
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Acción cancelada',
-                        text: 'No se realizaron cambios.',
-                        icon: 'info'
-                    });
-                }
-            });
-        }
-    });
-});
-</script>
 
                       </div>
 
@@ -427,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function() {
                       </style>
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Guardar datos</button>
+        <button type="submit" class="btn btn-primary">Confirmar caducados</button>
     </div>
                
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
@@ -435,17 +372,15 @@ document.addEventListener("DOMContentLoaded", function() {
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:6%">Contabilizado</th>
-                              <th style="width:6%">Stock actual</th>
-                              <th style="width:6%">Diferencia</th>
-                              <th>Precio</th>
-                              <th>Tipo de ajuste</th>
+                              <th style="width:6%">Cantidad</th>
+                              <th >Fecha de caducidad</th>
+                              
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th>Eliminar</th>
+                              <th style="width:6%">Eliminar</th>
                             
                             </tr>
                           </thead>
@@ -477,45 +412,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 </div>
 </div>
-
-
-<script>
-       let selectedAdjustment = "";
-
-document.getElementById('Tipodeajuste').addEventListener('change', function() {
-    selectedAdjustment = this.value;
-});
-
-    </script>
 <!-- function actualizarSumaTotal  -->
-<script>
-
-  
-  function actualizarSumaTotal() {
-  var iptTarjeta = parseFloat(document.getElementById("iptTarjeta").value);
-  var iptEfectivo = parseFloat(document.getElementById("iptEfectivoRecibido").value);
-  var cambio;
-
-  if (iptTarjeta > 0) {
-    cambio = 0; // Si se ingresa un valor en el campo de tarjeta, el cambio se establece en cero
-  } else {
-    cambio = iptEfectivo; // Si no se ingresa un valor en el campo de tarjeta, el cambio se calcula como el efectivo recibido
-  }
-
-  // Actualizar el valor del elemento <span> con el cambio
-  document.getElementById("Vuelto").textContent = cambio.toFixed(2);
-}
-
-
-
-
-
-
-
-
-</script>
-
-
 
 <script>
   $("#btnVaciarListado").click(function() {
@@ -567,9 +464,6 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
       {
         "data": "precio"
       },
-      {
-        "data": "tipodeajuste"
-      },
       // {
       //     "data": "importesiniva"
       // },
@@ -619,14 +513,11 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
   
   // Aquí colocar el resto de tu script JavaScript
   function buscarArticulo(codigoEscaneado) {
-    if (codigoEscaneado.trim() === "") {
-    return; // No hacer nada si el código está vacío
-  }
     var formData = new FormData();
     formData.append('codigoEscaneado', codigoEscaneado);
 
     $.ajax({
-      url: "Consultas/escaner_articulo.php",
+      url: "Consultas/escaner_articulo_Caducados.php",
       type: 'POST',
       data: formData,
       processData: false,
@@ -661,10 +552,6 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
   }
 
   function agregarCodigoInexistente(codigo, sucursal) {
-
-    if (codigo.trim() === "" || sucursal.trim() === "") {
-    return; // No hacer nada si el código o la sucursal están vacíos
-  }
     // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
     $.ajax({
       url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
@@ -704,7 +591,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado.php',
+      url: 'Consultas/autocompletadoCaducados.php',
       type: 'GET',
       dataType: 'json',
       data: {
@@ -766,26 +653,25 @@ function calcularDiferencia(fila) {
 
   // Función para agregar un artículo
   function agregarArticulo(articulo) {
-  if (!articulo || !articulo.id) {
-    mostrarMensaje('El artículo no es válido');
-  } else if ($('#detIdModal' + articulo.id).length) {
-    mostrarMensaje('El artículo ya se encuentra incluido');
-  } else {
-    var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
-    if (row.length) {
-      var cantidadActual = parseInt(row.find('.cantidad input').val());
-      var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
-      if (nuevaCantidad < 0) {
-        mostrarMensaje('La cantidad no puede ser negativa');
-        return;
-      }
-      row.find('.cantidad input').val(nuevaCantidad);
-      mostrarToast('Cantidad actualizada para el producto: ' + articulo.descripcion );  // Aquí mostramos el toast
-      actualizarImporte(row);
-      calcularDiferencia(row);
-      calcularIVA();
-      actualizarSuma();
-      mostrarTotalVenta(); 
+    if (!articulo || !articulo.id) {
+      mostrarMensaje('El artículo no es válido');
+    } else if ($('#detIdModal' + articulo.id).length) {
+      mostrarMensaje('El artículo ya se encuentra incluido');
+    } else {
+      var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
+      if (row.length) {
+        var cantidadActual = parseInt(row.find('.cantidad input').val());
+        var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+        if (nuevaCantidad < 0) {
+          mostrarMensaje('La cantidad no puede ser negativa');
+          return;
+        }
+        row.find('.cantidad input').val(nuevaCantidad);
+        actualizarImporte(row);
+        calcularDiferencia(row);
+        calcularIVA();
+        actualizarSuma();
+        mostrarTotalVenta();
         
       
         
@@ -802,18 +688,19 @@ function calcularDiferencia(fila) {
         tr += '<tr data-id="' + articulo.id + '">';
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
-        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" onchange="calcularDiferencia(this)" /></td>';
+        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Cantidad[]" value="' + articulo.cantidad + '" onchange="calcularDiferencia(this)" /></td>';
 
-tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="' + articulo.existencia + '" /></td>';
-tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>';
+tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
 
-        tr += '<td class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"   value="' + articulo.precio + '"  /></td>';
-        tr += '<td class="tipoajuste"><input class="form-control tipoajuste-input" style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text"    /></td>';
+
+        tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number"   value="' + articulo.precio + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;"  name="PrecioCompra[]"  value="' + articulo.preciocompra + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '"class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
         tr += '<td style="visibility:collapse; display:none;" ><input id="importe_' + articulo.id + '" class="form-control importe" name="ImporteGenerado[]"style="font-size: 0.75rem !important;" type="number" readonly /></td>';
         
+        
         tr += '<td style="visibility:collapse; display:none;" "class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="' + articulo.id + '" name="IdBasedatos[]" /></td>';
+        tr += '<td style="visibility:collapse; display:none;" "class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="' + articulo.lote + '" name="Lote[]" /></td>';
 
 
         tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
@@ -821,17 +708,15 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="Sistema[]"readonly value="POS">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Empresa"> <input hidden type="text" class="form-control " name="ID_H_O_D[]"readonly value="Saluda">  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaInv[]"readonly value="<?php echo $fechaActual;?>"  </td>';
-        
+        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " value="Caducado" name="MotivoBaja[]"readonly   </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
 
         tr += '</tr>';
 
         $('#tablaAgregarArticulos tbody').prepend(tr);
-        actualizarImporte($('#tablaAgregarArticulos tbody tr:first-child'));
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:first-child'));
-        $('#tablaAgregarArticulos tbody tr:first-child').find('.tipoajuste-input').val(selectedAdjustment);
-       
+        actualizarImporte($('#tablaAgregarArticulos tbody tr:last-child'));
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         calcularIVA();
         actualizarSuma();
         mostrarTotalVenta();
@@ -852,13 +737,7 @@ tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-dife
 
 
 
-  function mostrarToast(mensaje) {
-  var toast = $('<div class="toast"></div>').text(mensaje);
-  $('body').append(toast);
-  toast.fadeIn(400).delay(3000).fadeOut(400, function() {
-    $(this).remove();
-  });
-}
+  
   function actualizarImporte(row) {
   var cantidad = parseInt(row.find('.cantidad-vendida-input').val());
   var precio = parseFloat(row.find('.precio input').val());
@@ -957,20 +836,7 @@ function eliminarFila(element) {
                 },milisegundos);
             });
         </script>
-<style>
-.toast {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  opacity: 0.9;
-  z-index: 1000;
-  display: none;
-}
-</style>
+
 <!-- Control Sidebar -->
 
 <!-- Main Footer -->
@@ -986,7 +852,7 @@ include("footer.php") ?>
 
 
   <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
-  <script src="js/RegistraInventariosEnModoConteo.js"></script>
+  <script src="js/RegistraBajaCaducados.js"></script>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- overlayScrollbars -->

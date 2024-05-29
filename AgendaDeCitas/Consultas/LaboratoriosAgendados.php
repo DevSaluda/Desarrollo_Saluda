@@ -44,7 +44,11 @@
             $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
             $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
             $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+
             return $nombredia . " " . $numeroDia . " de " . $nombreMes . " de " . $anio;
+
+            return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+
           }
 
           // Incluye el código PHP para obtener los datos de la base de datos
@@ -77,12 +81,11 @@
                   Seleccione el tipo de laboratorio
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item lab-option" href="#" data-lab="colesterol,trigliceridos,lipidos">Colesterol,Trigliceridos,Lipidos</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="sangre">Sangre</a>
+                  <a class="dropdown-item lab-option" href="#" data-lab="sangre">Laboratorio de Sangre</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="urocultivo">Urocultivo</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="coprologicos">Coprologicos</a>
                   <a class="dropdown-item lab-option" href="#" data-lab="isopados">Isopados</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="exudado faringeo">Exudado faringeo</a>
+                  <a class="dropdown-item lab-option" href="#" data-lab="exudados">Exudados</a>
                 </div>
               </div>
             </td>
@@ -101,45 +104,8 @@
   </div>
 
   <script>
-    function attachDropdownHandlers() {
-      $('.lab-option').off('click').on('click', function(e) {
-        e.preventDefault();
-        var labType = $(this).data('lab');
-        var nombre = $(this).closest('tr').find('.nombre').text();
-        var telefono = $(this).closest('tr').find('.telefono').text();
-        var fecha = $(this).closest('tr').find('td:eq(3)').text();
-        var hora = $(this).closest('tr').find('td:eq(4)').text();
-        var sucursal = $(this).closest('tr').find('td:eq(5)').text();
-        var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕%0A Te invitamos a asistir a tu laboratorio programado el día ' + fecha + ' a las ' + hora + ' en la Sucursal ' + sucursal + '.%0A¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad.%0A';
-        var recomendaciones = '';
-        switch (labType) {
-          case 'colesterol,trigliceridos,lipidos':
-            recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas.%0AEvitar consumir alimentos grasosos o abundantes por lo menos 24 horas antes de los ánalisis.';
-            break;
-          case 'sangre':
-            recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas.%0ANo realizar ejercicio intenso antes de la toma.';
-            break;
-          case 'urocultivo':
-            recomendaciones += 'Recomendaciones: Realiza el aseo del área genital con abundante agua con jabón y seca de forma correcta.%0ARecolecta en un vaso copro la primera orina de la mañana.%0AEn pacientes pediátricos, se deberá asear con agua y con jabón, secar correctamente y colocar la bolsa recolectora de orina.%0AEvitar usar talcos,cremas,aceites o cualquier sustancia que pueda contaminar la muestra';
-            break;
-          case 'coprologicos':
-            recomendaciones += 'Recomendaciones: Recolectar una cantidad de materia fecal del tamaño de una nuez y colocar dentro de un vaso copro.%0ASi la muestra es liquida solo se llena hasta la mitad.%0ASi la muestra se acompaña de moco y/o sangre eso deberá incluirse dentro de el vaso copro.%0AEvite contaminar la muestra con papel agua u orina. Cierre el vaso hermeticamente, coloquelo dentro de una bolsa y cierre perfectamente';
-            break;
-          case 'isopados':
-            recomendaciones += 'Recomendaciones: Seguir las instrucciones para la toma de muestra.';
-            break;
-          case 'exudado faringeo':
-            recomendaciones += 'Recomendaciones: Acudir sin haber ingerido liquidos o alimentos previamente.%0A Evitar lavarse los dientes y/o haber usado enjuague bucal.%0A Evitar masticar chicle o consumi cualquier pastilla para el alimento';
-            break;
-        }
-        var mensaje = mensajeBase + recomendaciones;
-        var whatsappLink = 'https://api.whatsapp.com/send?phone=+52' + telefono + '&text=' + encodeURIComponent(mensaje);
-        window.open(whatsappLink, '_blank');
-      });
-    }
-
     $(document).ready(function() {
-      var table = $('#CitasExteriores').DataTable({
+      $('#CitasExteriores').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": true,
@@ -160,10 +126,35 @@
         }
       });
 
-      attachDropdownHandlers();
-
-      table.on('draw.dt', function() {
-        attachDropdownHandlers();
+      $('.lab-option').click(function(e) {
+        e.preventDefault();
+        var labType = $(this).data('lab');
+        var nombre = $(this).closest('tr').find('.nombre').text();
+        var telefono = $(this).closest('tr').find('.telefono').text();
+        var fecha = $(this).closest('tr').find('td:eq(3)').text();
+        var hora = $(this).closest('tr').find('td:eq(4)').text();
+        var sucursal = $(this).closest('tr').find('td:eq(5)').text();
+        var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕  Te invitamos a asistir a tu laboratorio programado';
+        var mensaje = mensajeBase + ' el dia' + fecha + ' a las ' + hora + ' en Sucursal Saluda' + sucursal + ' ¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad.';
+        switch (labType) {
+          case 'sangre':
+            mensaje += ' Recuerda no ingerir alimentos grasos antes de la prueba.';
+            break;
+          case 'urocultivo':
+            mensaje += ' Es importante que recolectes la muestra de orina correctamente.';
+            break;
+          case 'coprologicos':
+            mensaje += ' Recuerda seguir las indicaciones para la recolección de la muestra de heces.';
+            break;
+          case 'isopados':
+            mensaje += ' No olvides seguir las instrucciones para la toma de muestra.';
+            break;
+          case 'exudados':
+            mensaje += ' Se te recomienda no usar cremas o lociones en la zona a examinar.';
+            break;
+        }
+        var whatsappLink = 'https://api.whatsapp.com/send?phone=+52' + telefono + '&text=' + encodeURIComponent(mensaje);
+        window.open(whatsappLink, '_blank');
       });
     });
   </script>

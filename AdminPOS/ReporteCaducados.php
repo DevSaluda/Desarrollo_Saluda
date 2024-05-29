@@ -9,7 +9,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Base general de productos de <?php echo $row['ID_H_O_D']?> </title>
+  <title>Resultados de inventarios<?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 
@@ -30,25 +30,17 @@ include "Consultas/Consultas.php";
 
   
  
-  <!-- <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#PorCaducar" role="tab" aria-controls="pills-contact" aria-selected="false">Productos prontos a caducar</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-MoreVentas" role="tab" aria-controls="pills-contact" aria-selected="false">Mas vendidos</a>
-  </li> -->
-</ul>
+ 
 
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+    Listado de caducados de  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
-  Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+ 
 </div>
 </div>
     
@@ -57,19 +49,7 @@ include "Consultas/Consultas.php";
 </div>
 
 
- <!--  <div class="tab-pane fade" id="PorCaducar" role="tabpanel" aria-labelledby="pills-profile-tab">
-  <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Productos por caducar de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
-  </div>
-  
-  <div >
  
-</div>
-
-</div>
-<div id="TableProdCaducaPronto"></div>
-  </div> -->
 
 </div>
 
@@ -100,15 +80,16 @@ include "Consultas/Consultas.php";
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ControlProductos2.js"></script>
+<script src="js/ControlDeCaducados.js"></script>
 
-<!-- <script src="js/ProductosPovencer.js"></script> -->
-<script src="js/ControlStockSucursales.js"></script>
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-<script src="js/AltaProductos.js"></script>
 
-
-<?php include ("datatables.php"); ?>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->

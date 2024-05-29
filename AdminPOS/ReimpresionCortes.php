@@ -75,14 +75,13 @@ include "Consultas/Consultas.php";
 <script src="js/ReimpresionCortesCajas.js"></script>
 <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
 
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<!-- DataTables Buttons JavaScript -->
 
 
+<?php
+include "datatables.php"; 
+
+?>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->

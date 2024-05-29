@@ -9,7 +9,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Base general de productos de <?php echo $row['ID_H_O_D']?> </title>
+  <title>Resultados de conteo de inventario <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 
@@ -42,13 +42,14 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-    Productos de <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+ Resultados de conteo de inventario <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
-  Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroPorFechasInventarios"
+      class="btn btn-default">
+      Busqueda por fechas <i class="fas fa-search"></i>
+    </button>
 </div>
 </div>
     
@@ -88,7 +89,7 @@ include "Consultas/Consultas.php";
  
   <!-- Main Footer -->
 <?php
-  include ("Modales/AltaProductos.php");
+  include ("Modales/BusquedaInventariosFechas.php");
 
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
@@ -100,12 +101,8 @@ include "Consultas/Consultas.php";
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ControlProductos2.js"></script>
+<script src="js/ControlResultadosDelosInventarios.js"></script>
 
-<!-- <script src="js/ProductosPovencer.js"></script> -->
-<script src="js/ControlStockSucursales.js"></script>
-
-<script src="js/AltaProductos.js"></script>
 
 
 <?php include ("datatables.php"); ?>
