@@ -49,20 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $result = mysqli_query($conn, $sql);
 
-        $c=0;
+        $data = []; // Inicializa $data como un array vacío
+        $c = 0;
 
-        while($fila=$result->fetch_assoc()){
-
-            $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-            $data[$c]["Turno"] = $fila["Total_Cantidad_Vendida"];
-            $data[$c]["Importe"] = $fila["Proveedor1"];
-            $data[$c]["Total_Venta"] = $fila["Proveedor2"];
-            $data[$c]["Descuento"] = $fila["FkPresentacion"];
-          
+        while($fila = $result->fetch_assoc()) {
+            $data[$c]["Cod_Barra"] = '<input type="text" value="' . $fila["Cod_Barra"] . '" readonly>';
+            $data[$c]["Nombre_Prod"] = '<input type="text" value="' . $fila["Nombre_Prod"] . '" readonly>';
+            $data[$c]["Sucursal"] = '<input type="text" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
+            $data[$c]["Turno"] = '<input type="text" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
+            $data[$c]["Cantidad_Venta"] = '<input type="text" value="' . $fila["Cantidad_Venta"] . '" readonly>';
+            $data[$c]["Importe"] = '<input type="text" value="' . $fila["Proveedor1"] . '" readonly>';
+            $data[$c]["Total_Venta"] = '<input type="text" value="' . $fila["Proveedor2"] . '" readonly>';
+            $data[$c]["Descuento"] = '<input type="text" value="' . $fila["FkPresentacion"] . '" readonly>';
             $c++; 
-
         }
 
         $results = [
