@@ -15,7 +15,7 @@
             <i class="fas fa-store fa-5x animated bounceIn"></i>
           </div>
           
-          <form action="javascript:void(0)" method="post" id="Filtrapormediodesucursalconajax">
+          <form action="PrepedidoPorDia" method="post" id="Filtrapormediodesucursalconajax">
             
             
             
@@ -24,7 +24,7 @@
                 <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
               </div>
             </div>
-            <input type="text" class="form-control" value="<?php echo $row['Fk_Sucursal']?>">
+            <input type="text" class="form-control" name="mes"value="<?php echo $row['Fk_Sucursal']?>">
             <div class="row">
               <div class="col text-center">
                 <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success btn-lg animated rubberBand">Generar <i class="fas fa-exchange-alt ml-2"></i></button>

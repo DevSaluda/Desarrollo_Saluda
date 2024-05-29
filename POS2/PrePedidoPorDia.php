@@ -228,12 +228,12 @@ include "Consultas/Consultas.php";
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
         var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-        var anual = '<?php echo $anual; ?>'; // Obtén el valor de anual desde PHP
+        
 
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
             "Mes": mes,
-            "anual": anual
+            
         };
 
         return dataToSend;
