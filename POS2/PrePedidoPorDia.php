@@ -247,7 +247,7 @@ include "Consultas/Consultas.php";
               { "data": "Nombre_Prod" },
               { "data": "Sucursal" },
               { "data": "Turno" },
-              { "data": "Cantidad_Venta" },
+             
               { "data": "Importe" },
               { "data": "Total_Venta" },
             { "data": "Descuento" },
