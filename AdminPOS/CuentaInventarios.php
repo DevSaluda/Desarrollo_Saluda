@@ -305,7 +305,28 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
                           </div>
                         </div>
-                        
+                        <script>
+        document.getElementById('Tipodeajuste').addEventListener('change', function() {
+            var selectElement = document.getElementById('Tipodeajuste');
+            var inputElement = document.getElementById('codigoEscaneado');
+            if (selectElement.value === "") {
+                inputElement.disabled = true;
+            } else {
+                inputElement.disabled = false;
+            }
+        });
+
+        // Inicializar el estado del input basado en el valor inicial del select
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectElement = document.getElementById('Tipodeajuste');
+            var inputElement = document.getElementById('codigoEscaneado');
+            if (selectElement.value === "") {
+                inputElement.disabled = true;
+            } else {
+                inputElement.disabled = false;
+            }
+        });
+    </script>
 
                      <!-- Importa SweetAlert 2 -->
 
