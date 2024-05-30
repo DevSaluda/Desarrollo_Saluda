@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
             Swal.fire({
-                title: "¿Estás seguro que deseas establecer en 0 las existencisa de la sucursal?",
+                title: '¿Estás seguro que deseas establecer en 0 las existencias de la sucursal ' + namedesucursal + '?',
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
