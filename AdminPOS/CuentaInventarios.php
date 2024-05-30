@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
             Swal.fire({
-                title: "¿Estás seguro que deseas establecer el stock de la sucursal?",
+                title: "¿Estás seguro que deseas establecer en 0 las existencisa de la sucursal?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             if(response.success) {
                                 Swal.fire({
                                     title: 'Éxito',
-                                    text: 'Stock de la sucursal establecido correctamente.',
+                                    text: 'El stock de la sucursal se ha ajustado a 0',
                                     icon: 'success'
                                 });
                             } else {
@@ -637,10 +637,10 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
           // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
           Swal.fire({
             icon: 'warning',
-            title: 'No existe',
-            text: 'No se encontraron resultados para este código.',
+            title: 'No encontramos coincidencias',
+            text: 'Oh, al parecer el codigo no esta asignado en la sucursal ¿deseas asignarlo?',
             showCancelButton: true,
-            confirmButtonText: 'Agregar de todos modos'
+            confirmButtonText: 'Agregar producto a la sucursal'
           }).then((result) => {
             if (result.isConfirmed) {
               // Pasar la variable Fk_sucursal al agregar el código inexistente
