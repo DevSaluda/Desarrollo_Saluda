@@ -672,10 +672,19 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
       data: { codigo: codigo, sucursal: sucursal },
       dataType: 'json',
       success: function (response) {
-        // Manejar la respuesta del servidor si es necesario
-      },
+      // Mostrar mensaje de éxito con SweetAlert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Producto agregado',
+        text: 'Producto agregado con éxito'
+      });
+    },
       error: function (error) {
-        // Manejar errores aquí si es necesario
+        Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al agregar el producto'
+      });
       }
     });
   }
