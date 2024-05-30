@@ -1,5 +1,6 @@
 <?php
 include_once "db_connection.php";
+
 // Verificar si se recibieron los datos esperados
 if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
     // Recibir los datos del formulario
@@ -9,15 +10,29 @@ if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
     // Obtener la fecha actual para FechaInventario
     $fechaInventario = date("Y-m-d"); // Formato: AAAA-MM-DD
 
+    // Obtener el nombre del producto basado en el código
+    $sqlProducto = "SELECT Nombre_Prod FROM Stock_POS WHERE Cod_Barra = ?";
+    $stmtProducto = $conn->prepare($sqlProducto);
+    $stmtProducto->bind_param("s", $codigo);
+    $stmtProducto->execute();
+    $resultProducto = $stmtProducto->get_result();
+    
+    if ($resultProducto->num_rows > 0) {
+        $rowProducto = $resultProducto->fetch_assoc();
+        $nombreProducto = $rowProducto['Nombre_Prod'];
+    } else {
+        $nombreProducto = "Nombre no encontrado";
+    }
+
     // Preparar la consulta SQL para insertar los datos en tu tabla
-    $sql = "INSERT INTO CodigosSinResultadosEnStockInventario (Cod_Barra, Fk_sucursal, FechaInventario,ID_HO_D) VALUES (?, ?, ?,?)";
+    $sql = "INSERT INTO CodigosSinResultadosEnStockInventario (Cod_Barra, Fk_sucursal, FechaInventario, ID_HO_D) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $codigo, $sucursal, $fechaInventario, $licencia);
 
     // Ejecutar la consulta
     if ($stmt->execute() === TRUE) {
         // La inserción fue exitosa
-        $response = array('success' => true, 'message' => 'Datos insertados correctamente.');
+        $response = array('success' => true, 'message' => 'Datos insertados correctamente.', 'nombreProducto' => $nombreProducto);
         echo json_encode($response);
     } else {
         // Hubo un error al ejecutar la consulta
@@ -27,6 +42,7 @@ if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
 
     // Cerrar la conexión
     $stmt->close();
+    $stmtProducto->close();
     $conn->close();
 } else {
     // Si no se recibieron los datos esperados, retornar un mensaje de error
