@@ -289,7 +289,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>;
-  var namedesucursal = <?php echo $row['Nombre_Sucursal'] ?>;
+  var namedesucursal = "<?php echo addslashes($row['Nombre_Sucursal']); ?>"; // Escapa las comillas para nombres de sucursal
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
