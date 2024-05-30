@@ -305,6 +305,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
                           </div>
                         </div>
+                        
                         <script>
         document.getElementById('Tipodeajuste').addEventListener('change', function() {
             var selectElement = document.getElementById('Tipodeajuste');
@@ -322,6 +323,23 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
             var inputElement = document.getElementById('codigoEscaneado');
             if (selectElement.value === "") {
                 inputElement.disabled = true;
+                // Mostrar alerta de SweetAlert2
+                Swal.fire({
+                    title: '¡Campo Bloqueado!',
+                    html: '<p>El campo <b>"Código Escaneado"</b> está bloqueado.</p>' +
+                          '<p>Para desbloquearlo, por favor seleccione un tipo de ajuste del menú desplegable.</p>' +
+                          '<p><b>Instrucciones:</b></p>' +
+                          '<ul>' +
+                          '<li>Haz clic en el menú desplegable "Tipo de ajuste".</li>' +
+                          '<li>Selecciona una de las opciones disponibles.</li>' +
+                          '<li>El campo se desbloqueará automáticamente.</li>' +
+                          '</ul>',
+                    icon: 'info',
+                    confirmButtonText: 'Entendido',
+                    customClass: {
+                        popup: 'animated tada' // Clase de animación opcional para llamar más la atención
+                    }
+                });
             } else {
                 inputElement.disabled = false;
             }
