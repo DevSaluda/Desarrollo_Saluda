@@ -11,7 +11,7 @@ if (isset($_POST['codigo']) && isset($_POST['sucursal'])) {
     $fechaInventario = date("Y-m-d"); // Formato: AAAA-MM-DD
 
     // Obtener el nombre del producto basado en el código
-    $sqlProducto = "SELECT Nombre_Prod FROM Stock_POS WHERE Cod_Barra = ?";
+    $sqlProducto = "SELECT Nombre_Prod FROM Productos_POS WHERE Cod_Barra = ?";
     $stmtProducto = $conn->prepare($sqlProducto);
     $stmtProducto->bind_param("s", $codigo);
     $stmtProducto->execute();
