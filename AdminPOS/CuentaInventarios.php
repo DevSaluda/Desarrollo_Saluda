@@ -639,40 +639,42 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
   }
 
   function agregarCodigoInexistente(codigo, sucursal) {
-
-if (codigo.trim() === "" || sucursal.trim() === "") {
-    return; // No hacer nada si el código o la sucursal están vacíos
-}
-// Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
-$.ajax({
-    url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
-    type: 'POST',
-    data: { codigo: codigo, sucursal: sucursal },
-    dataType: 'json',
-    success: function (response) {
-        if (response.success) {
-            // Mostrar mensaje de éxito con SweetAlert2, incluyendo el nombre del producto
-            Swal.fire({
-                icon: 'success',
-                title: 'Producto agregado',
-                text: 'Producto "' + response.nombreProducto + '" agregado con éxito'
-            });
-        } else {
+    if (codigo.trim() === "" || sucursal.trim() === "") {
+        return; // No hacer nada si el código o la sucursal están vacíos
+    }
+    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
+    $.ajax({
+        url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
+        type: 'POST',
+        data: { codigo: codigo, sucursal: sucursal },
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                // Mostrar mensaje de éxito con SweetAlert2, incluyendo el nombre del producto
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto agregado',
+                    text: 'Producto "' + response.nombreProducto + '" agregado con éxito'
+                }).then(() => {
+                    // Ejecutar la función buscarArticulo con el código escaneado después de cerrar la alerta
+                    buscarArticulo(codigo);
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al agregar el producto: ' + response.message
+                });
+            }
+        },
+        error: function (error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Error al agregar el producto: ' + response.message
+                text: 'Error al agregar el producto'
             });
         }
-    },
-    error: function (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error al agregar el producto'
-        });
-    }
-});
+    });
 }
 
 
