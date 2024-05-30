@@ -289,6 +289,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>;
+  var namesucursal = <?php echo $row['Nombre_Sucursal'] ?>;
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
@@ -314,13 +315,13 @@ document.addEventListener("DOMContentLoaded", function() {
                             if(response.success) {
                                 Swal.fire({
                                     title: 'Éxito',
-                                    text: 'El stock de la sucursal se ha ajustado a 0',
+                                    text: 'El stock de la sucursal ' + namesucursal + '  se ha ajustado a 0',
                                     icon: 'success'
                                 });
                             } else {
                                 Swal.fire({
                                     title: 'Error',
-                                    text: 'Hubo un problema al establecer el stock de la sucursal.',
+                                    text: 'Hubo un problema al establecer el stock en 0 de la sucursal ' + namesucursal + '',
                                     icon: 'error'
                                 });
                             }
