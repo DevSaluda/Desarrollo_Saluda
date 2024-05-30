@@ -638,7 +638,7 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
           Swal.fire({
             icon: 'warning',
             title: 'No encontramos coincidencias',
-            text: 'Oh, al parecer el codigo no esta asignado en la sucursal ¿deseas asignarlo?',
+            text: 'Al parecer el codigo no esta asignado en la sucursal ¿deseas asignarlo?',
             showCancelButton: true,
             confirmButtonText: 'Agregar producto a la sucursal'
           }).then((result) => {
