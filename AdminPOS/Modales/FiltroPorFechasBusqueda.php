@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="SugerenciaFechas">
+ <form  method="POST" action="FiltroPorFechasVentas">
     
  
  <div class="row">
