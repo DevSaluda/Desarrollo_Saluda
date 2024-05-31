@@ -67,8 +67,7 @@
                   Agenda_Labs.Fk_sucursal, Agenda_Labs.Hora, Agenda_Labs.Fecha, Agenda_Labs.LabAgendado, 
                   Agenda_Labs.Agrego, Agenda_Labs.AgregadoEl, SucursalesCorre.ID_SucursalC, 
                   SucursalesCorre.Nombre_Sucursal FROM Agenda_Labs, SucursalesCorre 
-                  WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal
-                  ORDER BY Agenda_Labs.Fecha DESC";
+                  WHERE SucursalesCorre.ID_SucursalC = Agenda_Labs.Fk_sucursal";
           $query = $conn->query($sql1);
           if ($query->num_rows > 0):
             while ($Usuarios = $query->fetch_array()):
