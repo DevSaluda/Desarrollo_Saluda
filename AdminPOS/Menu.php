@@ -384,8 +384,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="Ventas" class="nav-link">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <a href="CotizacionesRegistradas" class="nav-link">
+            <i class="fas fa-file-invoice-dollar"></i>
               <p>
               Cotizaciones
               
