@@ -377,3 +377,5 @@ function fechaCastellano ($fecha) {
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 ?>
+
+
