@@ -76,7 +76,7 @@
             <td><?php echo $Usuarios["Id_genda"]; ?></td>
             <td class="nombre"><?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
             <td class="telefono"><?php echo $Usuarios["Telefono"]; ?></td>
-            <td><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
+            <td data-order="<?php echo date('Y-m-d', strtotime($Usuarios["Fecha"])); ?>"><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
             <td><?php echo $Usuarios["Hora"]; ?></td>
             <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
             <td><?php echo $Usuarios["LabAgendado"]; ?></td>
@@ -120,7 +120,7 @@
         "info": true,
         "autoWidth": false,
         "pageLength": 10,
-        "order": [[3, "desc"]],
+        "order": [[3, "asc"]],
         "language": {
           "paginate": {
             "previous": "Anterior",
