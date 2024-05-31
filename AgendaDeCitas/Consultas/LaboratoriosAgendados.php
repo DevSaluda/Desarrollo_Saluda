@@ -224,6 +224,8 @@
 
           window.open(url, '_blank');
           $('#labModal').modal('hide');
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
         });
       });
     });
