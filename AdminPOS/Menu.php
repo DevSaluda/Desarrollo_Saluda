@@ -382,7 +382,24 @@
               </p>
             </a>
           </li>
-        
+
+          <li class="nav-item">
+            <a href="Ventas" class="nav-link">
+            <i class="Cotizaciones"></i>
+              <p>
+              Cotizaciones
+              
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="Cotizador" class="nav-link">
+            <i class="fas fa-barcode"></i>
+              <p>
+              Cotizador
+              </p>
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a href="VentasEnGeneral" class="nav-link">
             <i class="fas fa-barcode"></i>
