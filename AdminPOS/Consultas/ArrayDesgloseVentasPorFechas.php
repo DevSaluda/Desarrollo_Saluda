@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Ventas_POS.Fecha_venta BETWEEN '$anual' AND '$mes'";
 
         $result = mysqli_query($conn, $sql);
-
+        $data = []; // Inicializar $data como un array vacío
         $c=0;
 
         while($fila=$result->fetch_assoc()){
