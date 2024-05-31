@@ -13,13 +13,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
-    .dropdown-toggle {
+    .whatsapp-button {
       padding: 5px 10px;
       font-size: 14px;
       background-color: #25d366;
       color: white;
+      border: none;
+      cursor: pointer;
     }
-    .dropdown-toggle .whatsapp-icon {
+    .whatsapp-button .whatsapp-icon {
       margin-right: 5px;
     }
   </style>
@@ -81,20 +83,11 @@
             <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
             <td><?php echo $Usuarios["LabAgendado"]; ?></td>
             <td>
-              <!-- Botón Dropdown -->
-              <div class="dropdown">
-                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" width="16" height="16" alt="WhatsApp">
-                  Seleccione el tipo de laboratorio
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item lab-option" href="#" data-lab="sangre">Laboratorio de Sangre</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="urocultivo">Urocultivo</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="coprologicos">Coprologicos</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="isopados">Isopados</a>
-                  <a class="dropdown-item lab-option" href="#" data-lab="exudados">Exudados</a>
-                </div>
-              </div>
+              <!-- Botón para abrir el modal -->
+              <button class="btn whatsapp-button" data-toggle="modal" data-target="#labModal" data-id="<?php echo $Usuarios["Id_genda"]; ?>">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" width="16" height="16" alt="WhatsApp">
+                Seleccione el tipo de laboratorio
+              </button>
             </td>
           </tr>
           <?php
@@ -107,6 +100,40 @@
           <?php endif; ?>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="labModal" tabindex="-1" role="dialog" aria-labelledby="labModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="labModalLabel">Seleccione el tipo de laboratorio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="labForm">
+            <div class="form-group">
+              <label><input type="checkbox" name="labs" value="Hematológicos Generales"> Hematológicos Generales</label><br>
+              <label><input type="checkbox" name="labs" value="Orina/Uroánalisis"> Orina/Uroánalisis</label><br>
+              <label><input type="checkbox" name="labs" value="Heces/Coporanálisis"> Heces/Coporanálisis</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Orina"> Cultivos: Orina</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Heces"> Cultivos: Heces</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Faringeo"> Cultivos: Faringeo</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Vaginal/Vulvar"> Cultivos: Vaginal/Vulvar</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Herida"> Cultivos: Herida</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Oidos"> Cultivos: Oidos</label><br>
+              <label><input type="checkbox" name="labs" value="Cultivos: Ojos"> Cultivos: Ojos</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="sendMessage">Enviar Mensaje</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -134,83 +161,70 @@
         }
       });
 
-      function attachDropdownHandlers() {
-        $('.lab-option').off('click').on('click', function(e) {
-          e.preventDefault();
-          var labType = $(this).data('lab');
-          var nombre = $(this).closest('tr').find('.nombre').text();
-          var telefono = $(this).closest('tr').find('.telefono').text();
-          var fecha = $(this).closest('tr').find('td:eq(3)').text();
-          var hora = $(this).closest('tr').find('td:eq(4)').text();
-          var sucursal = $(this).closest('tr').find('td:eq(5)').text();
+      $('#labModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Botón que abrió el modal
+        var id = button.data('id'); // Extrae información del atributo data-*
+        var modal = $(this);
+
+        $('#sendMessage').off('click').on('click', function() {
+          var selectedLabs = [];
+          modal.find('input[name="labs"]:checked').each(function() {
+            selectedLabs.push($(this).val());
+          });
+
+          var row = button.closest('tr');
+          var nombre = row.find('.nombre').text();
+          var telefono = row.find('.telefono').text();
+          var fecha = row.find('td:eq(3)').text();
+          var hora = row.find('td:eq(4)').text();
+          var sucursal = row.find('td:eq(5)').text();
           var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕ Te invitamos a asistir a tu laboratorio programado el día ' + fecha + ' a las ' + hora + ' en la Sucursal ' + sucursal + '. ¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad. ';
           var recomendaciones = '';
-          switch (labType) {
-            case 'colesterol,trigliceridos,lipidos':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar consumir alimentos grasosos o abundantes por lo menos 24 horas antes de los ánalisis.';
-              break;
-            case 'sangre':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. No realizar ejercicio intenso antes de la toma.';
-              break;
-            case 'urocultivo':
-              recomendaciones += 'Recomendaciones: Lavar la zona genital con agua y jabón antes de recolectar la muestra de orina. Recoger la muestra a mitad de la micción.';
-              break;
-            case 'coprologicos':
-              recomendaciones += 'Recomendaciones: Recolectar la muestra en un recipiente limpio y seco. Evitar el contacto con la orina.';
-              break;
-            case 'isopados':
-              recomendaciones += 'Recomendaciones: Evitar el uso de antibióticos al menos 48 horas antes de la toma de la muestra, a menos que el médico indique lo contrario.';
-              break;
-            case 'exudados':
-              recomendaciones += 'Recomendaciones: No usar cremas o lociones en la zona a examinar antes de la toma de la muestra. Evitar el uso de duchas vaginales en caso de exudado vaginal.';
-              break;
-            case 'antidoping':
-              recomendaciones += 'Recomendaciones: Informar al personal sobre cualquier medicamento o suplemento que esté tomando.';
-              break;
-            case 'prequirurgicos':
-              recomendaciones += 'Recomendaciones: Presentarse con ayuno de 8 horas para los estudios de sangre. Evitar el uso de maquillaje, cremas o lociones el día de los estudios.';
-              break;
-            case 'pruebaCOVID':
-              recomendaciones += 'Recomendaciones: No consumir alimentos ni bebidas al menos 30 minutos antes de la toma de la muestra. Informar si ha tenido síntomas recientes de COVID-19.';
-              break;
-            case 'pruebaETS':
-              recomendaciones += 'Recomendaciones: Abstenerse de tener relaciones sexuales al menos 24 horas antes de la toma de la muestra. Evitar el uso de cremas, lociones o medicamentos en la zona genital.';
-              break;
-            case 'pruebaInfluenza':
-              recomendaciones += 'Recomendaciones: No consumir alimentos ni bebidas al menos 30 minutos antes de la toma de la muestra. Evitar el uso de medicamentos que puedan interferir con la prueba.';
-              break;
-            case 'panelHormonal':
-              recomendaciones += 'Recomendaciones: Informar sobre el uso de anticonceptivos o tratamientos hormonales. Evitar realizar ejercicio intenso antes de la toma de la muestra.';
-              break;
-            case 'pruebasHepaticas':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar consumir alcohol al menos 24 horas antes de los análisis.';
-              break;
-            case 'glucosa':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar consumir alimentos o bebidas azucaradas antes de la prueba.';
-              break;
-            case 'perfilTiroideo':
-              recomendaciones += 'Recomendaciones: Informar sobre el uso de medicamentos para la tiroides. Evitar consumir alimentos o bebidas al menos 4 horas antes de la toma de la muestra.';
-              break;
-            case 'electrolitos':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar el consumo de bebidas deportivas o suplementos antes de la prueba.';
-              break;
-            case 'perfilRenal':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar el consumo de alimentos ricos en proteínas antes de la prueba.';
-              break;
-            case 'perfilLipidico':
-              recomendaciones += 'Recomendaciones: Realizar ayuno de 8 horas. Evitar el consumo de alimentos grasos antes de la prueba.';
-              break;
-          }
+
+          selectedLabs.forEach(function(lab) {
+            switch (lab) {
+              case 'Hematológicos Generales':
+                recomendaciones += 'Recomendaciones para Hematológicos Generales: Realizar ayuno de 8 horas. ';
+                break;
+              case 'Orina/Uroánalisis':
+                recomendaciones += 'Recomendaciones para Orina/Uroánalisis: Lavar la zona genital antes de recolectar la muestra. ';
+                break;
+              case 'Heces/Coporanálisis':
+                recomendaciones += 'Recomendaciones para Heces/Coporanálisis: Recolectar la muestra en un recipiente limpio y seco. ';
+                break;
+              case 'Cultivos: Orina':
+                recomendaciones += 'Recomendaciones para Cultivos de Orina: Lavar la zona genital y recolectar la muestra a mitad de la micción. ';
+                break;
+              case 'Cultivos: Heces':
+                recomendaciones += 'Recomendaciones para Cultivos de Heces: Recolectar la muestra en un recipiente limpio y seco. ';
+                break;
+              case 'Cultivos: Faringeo':
+                recomendaciones += 'Recomendaciones para Cultivos Faringeos: No comer ni beber al menos 30 minutos antes de la toma de la muestra. ';
+                break;
+              case 'Cultivos: Vaginal/Vulvar':
+                recomendaciones += 'Recomendaciones para Cultivos Vaginal/Vulvar: No usar cremas o lociones en la zona antes de la toma de la muestra. ';
+                break;
+              case 'Cultivos: Herida':
+                recomendaciones += 'Recomendaciones para Cultivos de Herida: No aplicar medicamentos tópicos antes de la toma de la muestra. ';
+                break;
+              case 'Cultivos: Oidos':
+                recomendaciones += 'Recomendaciones para Cultivos de Oídos: No limpiar los oídos antes de la toma de la muestra. ';
+                break;
+              case 'Cultivos: Ojos':
+                recomendaciones += 'Recomendaciones para Cultivos de Ojos: No usar colirios antes de la toma de la muestra. ';
+                break;
+              default:
+                recomendaciones += '';
+                break;
+            }
+          });
+
           var mensaje = mensajeBase + recomendaciones;
-          var whatsappLink = 'https://api.whatsapp.com/send?phone=+52' + telefono + '&text=' + encodeURIComponent(mensaje);
-          window.open(whatsappLink, '_blank');
+          var url = 'https://wa.me/' + telefono + '?text=' + encodeURIComponent(mensaje);
+
+          window.open(url, '_blank');
+          $('#labModal').modal('hide');
         });
-      }
-
-      attachDropdownHandlers();
-
-      table.on('draw.dt', function() {
-        attachDropdownHandlers();
       });
     });
   </script>
