@@ -385,7 +385,7 @@
 
           <li class="nav-item">
             <a href="Ventas" class="nav-link">
-            <i class="Cotizaciones"></i>
+            <i class="fa-solid fa-file-invoice-dollar"></i>
               <p>
               Cotizaciones
               
@@ -394,7 +394,7 @@
           </li>
           <li class="nav-item">
             <a href="Cotizador" class="nav-link">
-            <i class="fas fa-barcode"></i>
+            <i class="fa-solid fa-scale-balanced"></i>
               <p>
               Cotizador
               </p>
