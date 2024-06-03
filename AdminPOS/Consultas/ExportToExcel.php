@@ -29,15 +29,15 @@ Ventas_POS.Cantidad_Venta,
 Ventas_POS.Importe,
 Ventas_POS.Total_Venta,
 Ventas_POS.DescuentoAplicado AS Descuento,
-Ventas_POS.FormaDePago AS FormaPago,
-Ventas_POS.Cliente,
+CONVERT(Ventas_POS.FormaDePago USING utf8) AS FormaPago,
+CONVERT(Ventas_POS.Cliente USING utf8) AS Cliente,
 Ventas_POS.FolioSignoVital,
 Servicios_POS.Nom_Serv AS NomServ,
 DATE_FORMAT(Ventas_POS.Fecha_venta, '%d/%m/%Y') AS AgregadoEl,
 Ventas_POS.AgregadoEl AS AgregadoEnMomento,
 Ventas_POS.AgregadoPor,
-Cajas_POS.EnfermeroEnturno AS Enfermero,
-Cajas_POS.MedicoEnturno AS Doctor
+CONVERT(Cajas_POS.EnfermeroEnturno USING utf8) AS Enfermero,
+CONVERT(Cajas_POS.MedicoEnturno USING utf8) AS Doctor
 FROM 
 Ventas_POS
 INNER JOIN 
