@@ -15,6 +15,12 @@ if (isset($_POST['Mes']) && isset($_POST['anual'])) {
 } else {
     die("Error: Las variables 'Mes' y 'anual' no están definidas.");
 }
+// Ejecutar la consulta
+$resultado = $conexion->query($query);
+
+if (!$resultado) {
+    die("Error en la consulta SQL: " . $conexion->error);
+}
 
 // Consulta SQL
 $query = "SELECT DISTINCT
@@ -65,12 +71,6 @@ Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
 Ventas_POS.Fecha_venta BETWEEN '$mes' AND '$anual'";
 
-// Ejecutar la consulta
-$resultado = $conexion->query($query);
-
-if (!$resultado) {
-    die("Error en la consulta SQL: " . $conexion->error);
-}
 
 // Crear un nuevo archivo de Excel
 $spreadsheet = new Spreadsheet();
