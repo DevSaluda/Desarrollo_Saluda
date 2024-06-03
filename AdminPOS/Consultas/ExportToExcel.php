@@ -57,7 +57,7 @@ INNER JOIN
 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
 Ventas_POS.Fecha_venta BETWEEN '$mes' AND '$anual'";
-$resultado = $conexion->query($query);
+
 
 // Crear un nuevo archivo de Excel
 $spreadsheet = new Spreadsheet();
