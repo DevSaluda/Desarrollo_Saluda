@@ -2,10 +2,7 @@
 require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
-// Iniciar el buffer de salida
-ob_start();
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 // Conexión a la base de datos
 include("db_connection.php");
@@ -91,15 +88,15 @@ while ($row = $resultado->fetch_assoc()) {
 }
 
 // Generar el nombre del archivo incluyendo las variables
-$filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.xlsx';
+$filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.xls';
 
 // Configurar las cabeceras HTTP
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Cache-Control: max-age=0');
 
 // Guardar el archivo
-$writer = new Xlsx($spreadsheet);
+$writer = new Xls($spreadsheet);
 $writer->save('php://output');
 
 // Limpiar el buffer de salida y enviar al navegador
