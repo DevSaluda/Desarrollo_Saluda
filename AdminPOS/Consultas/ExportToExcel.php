@@ -73,7 +73,8 @@ if (!$resultado) {
 }
 
 // Crear un nuevo archivo CSV
-$output = fopen('php://output', 'w');
+$filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv';
+$output = fopen($filename, 'w');
 stream_filter_append($output, 'convert.iconv.UTF-8/ISO-8859-1', STREAM_FILTER_WRITE);
 $header = [
     "Cod_Barra",
@@ -119,7 +120,7 @@ while ($row = $resultado->fetch_assoc()) {
         $row["Nom_Serv"],
         date("d/m/Y", strtotime($row["Fecha_venta"])),
         $row["AgregadoEl"],
-        $row["AgregadoPor"],
+        utf8_decode($row["AgregadoPor"]),
         $row["EnfermeroEnturno"],
         $row["MedicoEnturno"]
     ];
@@ -128,4 +129,12 @@ while ($row = $resultado->fetch_assoc()) {
 
 // Cerrar el archivo CSV
 fclose($output);
+
+// Descargar el archivo CSV
+header('Content-Type: text/csv; charset=ISO-8859-1');
+header('Content-Disposition: attachment; filename="' . $filename . '"');
+readfile($filename);
+
+// Eliminar el archivo CSV del servidor
+unlink($filename);
 ?>
