@@ -151,7 +151,7 @@
           { "targets": [3], "visible": false },
           { "orderData": [3], "targets": [0] }
         ],
-        "order": [[3, "asc"]],
+        "order": [[3, "desc"]],
         "language": {
           "paginate": {
             "first": "Primero",
