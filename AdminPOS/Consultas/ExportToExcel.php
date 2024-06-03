@@ -1,6 +1,9 @@
 <?php
 require '../vendor/autoload.php';
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 // Conexión a la base de datos
 include("db_connection.php");
 include "Consultas.php";
@@ -15,40 +18,26 @@ if (isset($_POST['Mes']) && isset($_POST['anual'])) {
 
 // Consulta SQL
 $query = "SELECT DISTINCT
-Ventas_POS.Venta_POS_ID,
-Ventas_POS.Folio_Ticket,
-Ventas_POS.FolioSucursal,
-Ventas_POS.Fk_Caja,
-Ventas_POS.Identificador_tipo,
-Ventas_POS.Fecha_venta, 
-Ventas_POS.Total_Venta,
-Ventas_POS.Importe,
-Ventas_POS.Total_VentaG,
-Ventas_POS.FormaDePago,
-Ventas_POS.Turno,
-Ventas_POS.FolioSignoVital,
-Ventas_POS.Cliente,
-Cajas_POS.ID_Caja,
-Cajas_POS.Sucursal,
-Cajas_POS.MedicoEnturno,
-Cajas_POS.EnfermeroEnturno,
 Ventas_POS.Cod_Barra,
-Ventas_POS.Clave_adicional,
 Ventas_POS.Nombre_Prod,
+Stock_POS.Precio_C AS PrecioCompra,
+Stock_POS.Precio_Venta AS PrecioVenta,
+CONCAT(Ventas_POS.FolioSucursal, Ventas_POS.Folio_Ticket) AS FolioTicket,
+SucursalesCorre.Nombre_Sucursal AS Sucursal,
+Ventas_POS.Turno,
 Ventas_POS.Cantidad_Venta,
-Ventas_POS.Fk_sucursal,
+Ventas_POS.Importe,
+Ventas_POS.Total_Venta,
+Ventas_POS.DescuentoAplicado AS Descuento,
+Ventas_POS.FormaDePago AS FormaPago,
+Ventas_POS.Cliente,
+Ventas_POS.FolioSignoVital,
+Servicios_POS.Nom_Serv AS NomServ,
+DATE_FORMAT(Ventas_POS.Fecha_venta, '%d/%m/%Y') AS AgregadoEl,
+Ventas_POS.AgregadoEl AS AgregadoEnMomento,
 Ventas_POS.AgregadoPor,
-Ventas_POS.AgregadoEl,
-Ventas_POS.Lote,
-Ventas_POS.ID_H_O_D,
-SucursalesCorre.ID_SucursalC, 
-SucursalesCorre.Nombre_Sucursal,
-Servicios_POS.Servicio_ID,
-Servicios_POS.Nom_Serv,
-Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
-Stock_POS.ID_Prod_POS,
-Stock_POS.Precio_Venta,
-Stock_POS.Precio_C
+Cajas_POS.EnfermeroEnturno AS Enfermero,
+Cajas_POS.MedicoEnturno AS Doctor
 FROM 
 Ventas_POS
 INNER JOIN 
@@ -77,13 +66,37 @@ header('Cache-Control: max-age=0');
 // Abrir el puntero de archivo de salida
 $output = fopen('php://output', 'w');
 
-// Escribir los encabezados del archivo CSV
-$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Total_Venta", "Importe", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
+// Escribir los encabezados en el archivo CSV
+$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
 fputcsv($output, $encabezados);
 
 // Escribir los datos del archivo CSV
-while ($row = $resultado->fetch_assoc()) {
-    fputcsv($output, $row);
+while ($fila = $resultado->fetch_assoc()) {
+    // Construir una fila con los datos específicos
+    $data = [
+        $fila["Cod_Barra"],
+        $fila["Nombre_Prod"],
+        $fila["PrecioCompra"],
+        $fila["PrecioVenta"],
+        $fila["FolioTicket"],
+        $fila["Sucursal"],
+        $fila["Turno"],
+        $fila["Cantidad_Venta"],
+        $fila["Importe"],
+        $fila["Total_Venta"],
+        $fila["Descuento"],
+        $fila["FormaPago"],
+        $fila["Cliente"],
+        $fila["FolioSignoVital"],
+        $fila["NomServ"],
+        $fila["AgregadoEl"],
+        $fila["AgregadoEnMomento"],
+        $fila["AgregadoPor"],
+        $fila["Enfermero"],
+        $fila["Doctor"]
+    ];
+    // Escribir la fila en el archivo CSV
+    fputcsv($output, $data);
 }
 
 // Cerrar el puntero de archivo de salida
