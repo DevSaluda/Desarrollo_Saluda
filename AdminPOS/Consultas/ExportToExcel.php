@@ -45,7 +45,7 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv,
-Ventas_POS.DescuentoAplicado,
+Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
 Stock_POS.ID_Prod_POS,
 Stock_POS.Precio_Venta,
 Stock_POS.Precio_C
