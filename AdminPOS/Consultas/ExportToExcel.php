@@ -88,16 +88,17 @@ while ($row = $resultado->fetch_assoc()) {
 }
 
 // Generar el nombre del archivo incluyendo las variables
-$filename = 'registro_de_ventas_del_' . $mes . '_al_' . $anual . '.xlsx';
+$filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.xlsx';
 
 // Guardar el archivo
 $writer = new Xlsx($spreadsheet);
-$writer->save($filename);
+$writer->save('php://output'); // Enviar el archivo al cliente directamente
 
 // Enviar el archivo al cliente
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Cache-Control: max-age=0');
+
 readfile($filename);
 
 // Eliminar el archivo temporal
