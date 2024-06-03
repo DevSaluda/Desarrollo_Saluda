@@ -74,7 +74,7 @@ if (!$resultado) {
 
 // Crear un nuevo archivo CSV
 $filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv';
-$output = fopen($filename, 'w');
+$output = fopen('php://output', 'w');
 
 // Escribir la BOM para forzar la codificación UTF-8
 fwrite($output, "\xEF\xBB\xBF");
@@ -139,5 +139,3 @@ header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Pragma: no-cache');
 readfile($filename);
 exit;
-
-?>
