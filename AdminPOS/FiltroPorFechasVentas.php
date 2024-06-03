@@ -294,17 +294,31 @@ include "Consultas/Consultas.php";
             "buttons": [
       {
         text: 'Exportar a Excel <i class="fas fa-file-excel"></i>',
-        titleAttr: 'Exportar a Excel',
-        className: 'btn btn-success',
-        action: function(e, dt, button, config) {
-          var form = $('<form method="POST" action="https://saludapos.com/AdminPOS/Consultas/ExportToExcel" target="_blank"></form>');
-          var mesInput = $('<input type="hidden" name="Mes" value="' + mes + '">');
-          var anualInput = $('<input type="hidden" name="anual" value="' + anual + '">');
-          form.append(mesInput);
-          form.append(anualInput);
-          $('body').append(form);
-          form.submit();
+titleAttr: 'Exportar a Excel',
+className: 'btn btn-success',
+action: function(e, dt, button, config) {
+    // Mostrar una alerta con SweetAlert2
+    Swal.fire({
+        title: 'Advertencia',
+        html: 'Estimado usuario, te comentamos que el archivo se descarga en formato .csv. Te recomendamos que, una vez completada la descarga, lo conviertas al formato necesario que requieras.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Exportar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Crear y enviar el formulario si el usuario confirma
+            var form = $('<form method="POST" action="https://saludapos.com/AdminPOS/Consultas/ExportToExcel" target="_blank"></form>');
+            var mesInput = $('<input type="hidden" name="Mes" value="' + mes + '">');
+            var anualInput = $('<input type="hidden" name="anual" value="' + anual + '">');
+            form.append(mesInput);
+            form.append(anualInput);
+            $('body').append(form);
+            form.submit();
         }
+    });
+}
+
       }
     ],
             "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
