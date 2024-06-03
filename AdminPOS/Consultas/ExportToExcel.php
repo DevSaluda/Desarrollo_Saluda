@@ -2,7 +2,7 @@
 require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 // Conexión a la base de datos
 include("db_connection.php");
@@ -18,40 +18,26 @@ if (isset($_POST['Mes']) && isset($_POST['anual'])) {
 
 // Consulta SQL
 $query = "SELECT DISTINCT
-Ventas_POS.Venta_POS_ID,
-Ventas_POS.Folio_Ticket,
-Ventas_POS.FolioSucursal,
-Ventas_POS.Fk_Caja,
-Ventas_POS.Identificador_tipo,
-Ventas_POS.Fecha_venta, 
-Ventas_POS.Total_Venta,
-Ventas_POS.Importe,
-Ventas_POS.Total_VentaG,
-Ventas_POS.FormaDePago,
-Ventas_POS.Turno,
-Ventas_POS.FolioSignoVital,
-Ventas_POS.Cliente,
-Cajas_POS.ID_Caja,
-Cajas_POS.Sucursal,
-Cajas_POS.MedicoEnturno,
-Cajas_POS.EnfermeroEnturno,
 Ventas_POS.Cod_Barra,
-Ventas_POS.Clave_adicional,
 Ventas_POS.Nombre_Prod,
+Stock_POS.Precio_C AS PrecioCompra,
+Stock_POS.Precio_Venta AS PrecioVenta,
+CONCAT(Ventas_POS.FolioSucursal, Ventas_POS.Folio_Ticket) AS FolioTicket,
+SucursalesCorre.Nombre_Sucursal AS Sucursal,
+Ventas_POS.Turno,
 Ventas_POS.Cantidad_Venta,
-Ventas_POS.Fk_sucursal,
+Ventas_POS.Importe,
+Ventas_POS.Total_Venta,
+Ventas_POS.DescuentoAplicado AS Descuento,
+Ventas_POS.FormaDePago AS FormaPago,
+Ventas_POS.Cliente,
+Ventas_POS.FolioSignoVital,
+Servicios_POS.Nom_Serv AS NomServ,
+DATE_FORMAT(Ventas_POS.Fecha_venta, '%d/%m/%Y') AS AgregadoEl,
+Ventas_POS.AgregadoEl AS AgregadoEnMomento,
 Ventas_POS.AgregadoPor,
-Ventas_POS.AgregadoEl,
-Ventas_POS.Lote,
-Ventas_POS.ID_H_O_D,
-SucursalesCorre.ID_SucursalC, 
-SucursalesCorre.Nombre_Sucursal,
-Servicios_POS.Servicio_ID,
-Servicios_POS.Nom_Serv,
-Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
-Stock_POS.ID_Prod_POS,
-Stock_POS.Precio_Venta,
-Stock_POS.Precio_C
+Cajas_POS.EnfermeroEnturno AS Enfermero,
+Cajas_POS.MedicoEnturno AS Doctor
 FROM 
 Ventas_POS
 INNER JOIN 
@@ -72,73 +58,50 @@ if (!$resultado) {
     die("Error en la consulta SQL: " . $conn->error);
 }
 
-// Crear un nuevo archivo temporal CSV
-$filename = tempnam(sys_get_temp_dir(), 'csv');
-$output = fopen($filename, 'w');
+// Establecer las cabeceras HTTP para un archivo CSV
+header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv"');
+header('Cache-Control: max-age=0');
 
-// Escribir la BOM para forzar la codificación UTF-8
-fwrite($output, "\xEF\xBB\xBF");
+// Abrir el puntero de archivo de salida
+$output = fopen('php://output', 'w');
 
-$header = [
-    "Cod_Barra",
-    "Nombre_Prod",
-    "PrecioCompra",
-    "PrecioVenta",
-    "FolioTicket",
-    "Sucursal",
-    "Turno",
-    "Cantidad_Venta",
-    "Importe",
-    "Total_Venta",
-    "Descuento",
-    "FormaPago",
-    "Cliente",
-    "FolioSignoVital",
-    "NomServ",
-    "AgregadoEl",
-    "AgregadoEnMomento",
-    "AgregadoPor",
-    "Enfermero",
-    "Doctor"
-];
-fputcsv($output, $header);
+// Escribir los encabezados en el archivo CSV
+$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
+fputcsv($output, $encabezados);
 
-// Escribir los datos en el archivo CSV
-while ($row = $resultado->fetch_assoc()) {
+// Escribir los datos del archivo CSV
+while ($fila = $resultado->fetch_assoc()) {
+    // Construir una fila con los datos específicos
     $data = [
-        $row["Cod_Barra"],
-        $row["Nombre_Prod"],
-        $row["Precio_C"],
-        $row["Precio_Venta"],
-        $row["FolioSucursal"] . ' ' . $row["Folio_Ticket"],
-        $row["Nombre_Sucursal"],
-        $row["Turno"],
-        $row["Cantidad_Venta"],
-        $row["Importe"],
-        $row["Total_Venta"],
-        $row["DescuentoAplicado"],
-        $row["FormaDePago"],
-        $row["Cliente"],
-        $row["FolioSignoVital"],
-        $row["Nom_Serv"],
-        date("d/m/Y", strtotime($row["Fecha_venta"])),
-        $row["AgregadoEl"],
-        $row["AgregadoPor"],
-        $row["EnfermeroEnturno"],
-        $row["MedicoEnturno"]
+        $fila["Cod_Barra"],
+        $fila["Nombre_Prod"],
+        $fila["PrecioCompra"],
+        $fila["PrecioVenta"],
+        $fila["FolioTicket"],
+        $fila["Sucursal"],
+        $fila["Turno"],
+        $fila["Cantidad_Venta"],
+        $fila["Importe"],
+        $fila["Total_Venta"],
+        $fila["Descuento"],
+        $fila["FormaPago"],
+        $fila["Cliente"],
+        $fila["FolioSignoVital"],
+        $fila["NomServ"],
+        $fila["AgregadoEl"],
+        $fila["AgregadoEnMomento"],
+        $fila["AgregadoPor"],
+        $fila["Enfermero"],
+        $fila["Doctor"]
     ];
+    // Escribir la fila en el archivo CSV
     fputcsv($output, $data);
 }
 
-// Cerrar el archivo CSV
+// Cerrar el puntero de archivo de salida
 fclose($output);
 
-// Descargar el archivo CSV
-header('Content-Type: text/csv; charset=UTF-8');
-header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
-header('Pragma: no-cache');
-header('Expires: 0');
-readfile($filename);
-unlink($filename);
-exit;
-
+// Limpiar el buffer de salida y enviar al navegador
+ob_end_flush();
+?>
