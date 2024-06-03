@@ -137,5 +137,7 @@ fclose($output);
 header('Content-Type: text/csv; charset=UTF-8');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Pragma: no-cache');
+header('Expires: 0');
 readfile($filename);
 exit;
+?>
