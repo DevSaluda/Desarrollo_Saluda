@@ -218,6 +218,7 @@ include "Consultas/Consultas.php";
         $(document).ready(function() {
   tabla = $('#Productos').DataTable({
     "processing": true,
+    "serverSide": true,
     "ordering": true,
     "stateSave": true,
     "autoWidth": true,
@@ -228,10 +229,10 @@ include "Consultas/Consultas.php";
       "data": function(d) {
         var mes = '<?php echo $mes; ?>';
         var anual = '<?php echo $anual; ?>';
-        return {
+        return $.extend({}, d, {
           "Mes": mes,
           "anual": anual
-        };
+        });
       },
       "error": function(xhr, error, thrown) {
         console.log("Error en la solicitud AJAX:", error);
@@ -284,9 +285,9 @@ include "Consultas/Consultas.php";
     "buttons": [
       {
         extend: 'excelHtml5',
-        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+        text: 'Exportar a Excel  <i class="fas fa-file-excel"></i>',
         titleAttr: 'Exportar a Excel',
-        title: 'registro de ventas ',
+        title: 'registro de ventas',
         className: 'btn btn-success',
         exportOptions: {
           columns: ':visible' // Exportar solo las columnas visibles
@@ -296,8 +297,7 @@ include "Consultas/Consultas.php";
     "dom": '<"d-flex justify-content-between"lBf>rtip',
     "responsive": true,
     "deferRender": true,
-    "scroller": true,
-    "scrollY": 400 // Ajusta el valor según la altura de tu contenedor
+   
   });
 });
 
