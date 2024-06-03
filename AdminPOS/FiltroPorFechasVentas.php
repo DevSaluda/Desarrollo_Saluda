@@ -171,6 +171,10 @@ include "Consultas/Consultas.php";
           100% { transform: rotate(360deg); }
         }
       </style>
+<script type="text/javascript">
+    var mes = "<?php echo $mes; ?>";
+    var anual = "<?php echo $anual; ?>";
+</script>
 
       <script>
         // Definir una lista de mensajes para el mensaje de carga
@@ -294,11 +298,10 @@ include "Consultas/Consultas.php";
   title: 'registro de ventas',
   className: 'btn btn-success',
   action: function(e, dt, button, config) {
-    var mes = '<?php echo $mes; ?>';
-    var anual = '<?php echo $anual; ?>';
     window.location.href = 'https://saludapos.com/AdminPOS/Consultas/ExportToExcel.php?Mes=' + mes + '&anual=' + anual;
   }
 }
+
             ],
             "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
             "responsive": true

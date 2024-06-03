@@ -4,12 +4,19 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-// Conexión a la base de datos y consulta
-$mes = $_POST['Mes'];
-$anual = $_POST['anual'];
+// Conexión a la base de datos
 include("db_connection.php");
 include "Consultas.php";
 
+// Obtener las variables POST
+if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+    $mes = $_POST['Mes'];
+    $anual = $_POST['anual'];
+} else {
+    die("Error: Las variables 'Mes' y 'anual' no están definidas.");
+}
+
+// Consulta SQL
 $query = "SELECT DISTINCT
 Ventas_POS.Venta_POS_ID,
 Ventas_POS.Folio_Ticket,
@@ -41,7 +48,7 @@ SucursalesCorre.ID_SucursalC,
 SucursalesCorre.Nombre_Sucursal,
 Servicios_POS.Servicio_ID,
 Servicios_POS.Nom_Serv,
-Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
+Ventas_POS.DescuentoAplicado,
 Stock_POS.ID_Prod_POS,
 Stock_POS.Precio_Venta,
 Stock_POS.Precio_C
@@ -58,6 +65,12 @@ Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
 Ventas_POS.Fecha_venta BETWEEN '$mes' AND '$anual'";
 
+// Ejecutar la consulta
+$resultado = $conexion->query($query);
+
+if (!$resultado) {
+    die("Error en la consulta SQL: " . $conexion->error);
+}
 
 // Crear un nuevo archivo de Excel
 $spreadsheet = new Spreadsheet();
@@ -74,9 +87,11 @@ while ($row = $resultado->fetch_assoc()) {
     $fila++;
 }
 
+// Generar el nombre del archivo incluyendo las variables
+$filename = 'registro_de_ventas_del_' . $mes . '_al_' . $anual . '.xlsx';
+
 // Guardar el archivo
 $writer = new Xlsx($spreadsheet);
-$filename = 'registro_de_ventas del' . $mes . 'al' . $anual . '.xlsx';
 $writer->save($filename);
 
 // Enviar el archivo al cliente
