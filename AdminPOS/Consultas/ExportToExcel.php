@@ -92,13 +92,12 @@ $filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . s
 
 // Guardar el archivo
 $writer = new Xlsx($spreadsheet);
-$writer->save('php://output'); // Enviar el archivo al cliente directamente
+$writer->save($filename);
 
 // Enviar el archivo al cliente
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Cache-Control: max-age=0');
-
 readfile($filename);
 
 // Eliminar el archivo temporal
