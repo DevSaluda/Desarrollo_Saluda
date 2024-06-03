@@ -72,9 +72,9 @@ fputcsv($output, $encabezados);
 
 // Escribir los datos del archivo CSV
 while ($fila = $resultado->fetch_assoc()) {
-    // Convertir los caracteres especiales a UTF-8
+    // Convertir los caracteres HTML codificados a UTF-8
     array_walk($fila, function (&$value) {
-        $value = utf8_decode($value);
+        $value = html_entity_decode($value);
     });
 
     // Construir una fila con los datos específicos
