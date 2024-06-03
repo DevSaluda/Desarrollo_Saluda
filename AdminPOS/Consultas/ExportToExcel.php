@@ -72,9 +72,9 @@ if (!$resultado) {
     die("Error en la consulta SQL: " . $conn->error);
 }
 
-// Crear un nuevo archivo CSV
-$filename = 'registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv';
-$output = fopen('php://output', 'w');
+// Crear un nuevo archivo temporal CSV
+$filename = tempnam(sys_get_temp_dir(), 'csv');
+$output = fopen($filename, 'w');
 
 // Escribir la BOM para forzar la codificación UTF-8
 fwrite($output, "\xEF\xBB\xBF");
@@ -135,9 +135,10 @@ fclose($output);
 
 // Descargar el archivo CSV
 header('Content-Type: text/csv; charset=UTF-8');
-header('Content-Disposition: attachment; filename="' . $filename . '"');
+header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
 header('Pragma: no-cache');
 header('Expires: 0');
 readfile($filename);
+unlink($filename);
 exit;
-?>
+
