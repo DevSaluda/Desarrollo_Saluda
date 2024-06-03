@@ -1,9 +1,6 @@
 <?php
 require '../vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 // Conexión a la base de datos
 include("db_connection.php");
 include "Consultas.php";
@@ -72,29 +69,25 @@ if (!$resultado) {
     die("Error en la consulta SQL: " . $conn->error);
 }
 
-// Crear un nuevo archivo de Excel
-$spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
-
-// Añadir encabezados
-$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Total_Venta", "Importe", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
-$sheet->fromArray($encabezados, NULL, 'A1');
-
-// Añadir datos
-$fila = 2;
-while ($row = $resultado->fetch_assoc()) {
-    $sheet->fromArray(array_values($row), NULL, 'A' . $fila);
-    $fila++;
-}
-
-// Configurar las cabeceras HTTP para un archivo XLSX
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.xlsx"');
+// Establecer las cabeceras HTTP para un archivo CSV
+header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv"');
 header('Cache-Control: max-age=0');
 
-// Guardar el archivo
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
+// Abrir el puntero de archivo de salida
+$output = fopen('php://output', 'w');
+
+// Escribir los encabezados del archivo CSV
+$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Total_Venta", "Importe", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
+fputcsv($output, $encabezados);
+
+// Escribir los datos del archivo CSV
+while ($row = $resultado->fetch_assoc()) {
+    fputcsv($output, $row);
+}
+
+// Cerrar el puntero de archivo de salida
+fclose($output);
 
 // Limpiar el buffer de salida y enviar al navegador
 ob_end_flush();
