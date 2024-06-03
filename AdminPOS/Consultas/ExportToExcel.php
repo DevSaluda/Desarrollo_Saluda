@@ -74,7 +74,7 @@ fputcsv($output, $encabezados);
 while ($fila = $resultado->fetch_assoc()) {
     // Convertir los caracteres HTML codificados a UTF-8
     array_walk($fila, function (&$value) {
-        $value = html_entity_decode($value);
+        $value = utf8_decode($value);
     });
 
     // Construir una fila con los datos específicos
