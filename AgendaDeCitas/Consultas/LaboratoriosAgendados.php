@@ -147,12 +147,19 @@
         "info": true,
         "autoWidth": false,
         "pageLength": 10,
-        "order": [[3, "desc"]],
+        "columnDefs": [
+          { "targets": [3], "visible": false },
+          { "orderData": [3], "targets": [0] }
+        ],
+        "order": [[3, "asc"]],
         "language": {
           "paginate": {
-            "previous": "Anterior",
-            "next": "Siguiente"
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
           },
+          "lengthMenu": "Mostrar _MENU_ registros por página",
           "search": "Buscar:",
           "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
           "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
@@ -162,8 +169,8 @@
       });
 
       $('#labModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Botón que abrió el modal
-        var id = button.data('id'); // Extrae información del atributo data-*
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
         var modal = $(this);
 
         $('#sendMessage').off('click').on('click', function() {
