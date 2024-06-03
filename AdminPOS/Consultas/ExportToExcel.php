@@ -136,10 +136,3 @@ fclose($output);
 // Descargar el archivo CSV
 header('Content-Type: text/csv; charset=UTF-8');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-// Enviar el contenido del archivo CSV
-readfile($filename);
-
-// Eliminar el archivo CSV del servidor
-unlink($filename);
-
