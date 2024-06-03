@@ -147,7 +147,7 @@
         "info": true,
         "autoWidth": false,
         "pageLength": 10,
-        "order": [[3, "desc"]],
+        "order": [[3, "asc"]],
         "language": {
           "paginate": {
             "previous": "Anterior",
