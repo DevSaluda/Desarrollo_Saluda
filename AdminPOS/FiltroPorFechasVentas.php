@@ -297,7 +297,7 @@ include "Consultas/Consultas.php";
         titleAttr: 'Exportar a Excel',
         className: 'btn btn-success',
         action: function(e, dt, button, config) {
-          var form = $('<form method="POST" action="https://saludapos.com/AdminPOS/Consultas/ExportToExcel.php"></form>');
+          var form = $('<form method="POST" action="https://saludapos.com/AdminPOS/Consultas/ExportToExcel" target="_blank"></form>');
           var mesInput = $('<input type="hidden" name="Mes" value="' + mes + '">');
           var anualInput = $('<input type="hidden" name="anual" value="' + anual + '">');
           form.append(mesInput);
