@@ -99,7 +99,7 @@ header('Cache-Control: max-age=0');
 $writer = new Xlsx($spreadsheet);
 $writer->save('php://output');
 
+// Eliminar el archivo temporal (comenta o elimina esta línea)
+// unlink($filename);
 
-// Eliminar el archivo temporal
-unlink($filename);
 ?>
