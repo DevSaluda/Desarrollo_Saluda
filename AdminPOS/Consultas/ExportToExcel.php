@@ -4,6 +4,9 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+// Iniciar el buffer de salida
+ob_start();
+
 // Conexión a la base de datos
 include("db_connection.php");
 include "Consultas.php";
@@ -99,7 +102,6 @@ header('Cache-Control: max-age=0');
 $writer = new Xlsx($spreadsheet);
 $writer->save('php://output');
 
-// Eliminar el archivo temporal (comenta o elimina esta línea)
-// unlink($filename);
-
+// Limpiar el buffer de salida y enviar al navegador
+ob_end_flush();
 ?>
