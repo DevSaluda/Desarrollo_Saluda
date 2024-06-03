@@ -245,6 +245,8 @@ include "Consultas/Consultas.php";
             "columns": [
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
+              { "data": "PrecioCompra" },
+              { "data": "PrecioVenta" },
               { "data": "FolioTicket" },
               { "data": "Sucursal" },
               { "data": "Turno" },
@@ -309,6 +311,8 @@ include "Consultas/Consultas.php";
             <thead>
               <th>Cod</th>
               <th>Nombre</th>
+              <th>PC</th>
+              <th>PV</th>
               <th>N° Ticket</th>
               <th>Sucursal</th>
               <th>Turno</th>
