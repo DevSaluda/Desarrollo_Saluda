@@ -1,5 +1,5 @@
 <?php
-require 'https://saludapos.com/AdminPOS/vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
