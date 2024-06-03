@@ -106,26 +106,26 @@ fputcsv($output, $header);
 // Escribir los datos en el archivo CSV
 while ($row = $resultado->fetch_assoc()) {
     $data = [
-        utf8_decode($row["Cod_Barra"]),
-        utf8_decode($row["Nombre_Prod"]),
-        utf8_decode($row["Precio_C"]),
-        utf8_decode($row["Precio_Venta"]),
-        utf8_decode($row["FolioSucursal"]) . ' ' . utf8_decode($row["Folio_Ticket"]),
-        utf8_decode($row["Nombre_Sucursal"]),
-        utf8_decode($row["Turno"]),
-        utf8_decode($row["Cantidad_Venta"]),
-        utf8_decode($row["Importe"]),
-        utf8_decode($row["Total_Venta"]),
-        utf8_decode($row["DescuentoAplicado"]),
-        utf8_decode($row["FormaDePago"]),
-        utf8_decode($row["Cliente"]),
-        utf8_decode($row["FolioSignoVital"]),
-        utf8_decode($row["Nom_Serv"]),
+        $row["Cod_Barra"],
+        $row["Nombre_Prod"],
+        $row["Precio_C"],
+        $row["Precio_Venta"],
+        $row["FolioSucursal"] . ' ' . $row["Folio_Ticket"],
+        $row["Nombre_Sucursal"],
+        $row["Turno"],
+        $row["Cantidad_Venta"],
+        $row["Importe"],
+        $row["Total_Venta"],
+        $row["DescuentoAplicado"],
+        $row["FormaDePago"],
+        $row["Cliente"],
+        $row["FolioSignoVital"],
+        $row["Nom_Serv"],
         date("d/m/Y", strtotime($row["Fecha_venta"])),
-        utf8_decode($row["AgregadoEl"]),
-        utf8_decode($row["AgregadoPor"]),
-        utf8_decode($row["EnfermeroEnturno"]),
-        utf8_decode($row["MedicoEnturno"])
+        $row["AgregadoEl"],
+        $row["AgregadoPor"],
+        $row["EnfermeroEnturno"],
+        $row["MedicoEnturno"]
     ];
     fputcsv($output, $data);
 }
@@ -134,9 +134,8 @@ while ($row = $resultado->fetch_assoc()) {
 fclose($output);
 
 // Descargar el archivo CSV
-header('Content-Type: text/csv; charset=ISO-8859-1');
+header('Content-Type: text/csv; charset=UTF-8');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Pragma: no-cache');
-readfile('php://output');
+readfile($filename);
 exit;
-?>
