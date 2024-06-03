@@ -43,7 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             SucursalesCorre.Nombre_Sucursal,
             Servicios_POS.Servicio_ID,
             Servicios_POS.Nom_Serv,
-            Ventas_POS.DescuentoAplicado -- Agregamos la columna DescuentoAplicado
+            Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
+            Stock_POS.ID_Prod_POS,
+            Stock_POS.Precio_Venta,
+            Stock_POS.Precio_C
         FROM 
             Ventas_POS
         INNER JOIN 
@@ -55,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         INNER JOIN 
             Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
         WHERE 
-            Ventas_POS.Fecha_venta BETWEEN '$mes' AND '$anual'";
+            YEAR(Ventas_POS.Fecha_venta) = '$anual' AND MONTH(Ventas_POS.Fecha_venta) = '$mes'";
 
         $result = mysqli_query($conn, $sql);
 
@@ -66,6 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($fila = $result->fetch_assoc()) {
             $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
             $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+            $data[$c]["PrecioCompra"] = $fila["Precio_C"];
+            $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
             $data[$c]["FolioTicket"] = $fila["FolioSucursal"] . '' . $fila["Folio_Ticket"];
             $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
             $data[$c]["Turno"] = $fila["Turno"];
