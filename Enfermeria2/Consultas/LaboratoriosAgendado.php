@@ -36,6 +36,7 @@
             <th>Paciente</th>
             <th>Telefono</th>
             <th>Fecha</th>
+            <th hidden>Fecha Orden</th>
             <th>Hora</th>
             <th>Sucursal</th>
             <th>Laboratorio Agendado</th>
@@ -78,7 +79,8 @@
             <td><?php echo $Usuarios["Id_genda"]; ?></td>
             <td class="nombre"><?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
             <td class="telefono"><?php echo $Usuarios["Telefono"]; ?></td>
-            <td data-order="<?php echo date('Y-m-d', strtotime($Usuarios["Fecha"])); ?>"><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
+            <td><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
+            <td hidden><?php echo date('Y-m-d', strtotime($Usuarios["Fecha"])); ?></td>
             <td><?php echo $Usuarios["Hora"]; ?></td>
             <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
             <td><?php echo $Usuarios["LabAgendado"]; ?></td>
@@ -95,7 +97,7 @@
           else:
           ?>
           <tr>
-            <td colspan="8" class="text-center">Por el momento no hay citas</td>
+            <td colspan="9" class="text-center">Por el momento no hay citas</td>
           </tr>
           <?php endif; ?>
         </tbody>
@@ -147,11 +149,7 @@
         "info": true,
         "autoWidth": false,
         "pageLength": 10,
-        "columnDefs": [
-          { "targets": [3], "visible": false },
-          { "orderData": [3], "targets": [0] }
-        ],
-        "order": [[3, "desc"]],
+        "order": [[4, "desc"]],
         "language": {
           "paginate": {
             "first": "Primero",
@@ -165,7 +163,10 @@
           "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
           "zeroRecords": "No se encontraron resultados",
           "infoFiltered": "(filtrado de _MAX_ entradas totales)"
-        }
+        },
+        "columnDefs": [
+          { "targets": [4], "visible": false }
+        ]
       });
 
       $('#labModal').on('show.bs.modal', function(event) {
@@ -183,8 +184,8 @@
           var nombre = row.find('.nombre').text();
           var telefono = row.find('.telefono').text();
           var fecha = row.find('td:eq(3)').text();
-          var hora = row.find('td:eq(4)').text();
-          var sucursal = row.find('td:eq(5)').text();
+          var hora = row.find('td:eq(5)').text();
+          var sucursal = row.find('td:eq(6)').text();
           var mensajeBase = '¡Hola ' + nombre + '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕ Te invitamos a asistir a tu laboratorio programado el día ' + fecha + ' a las ' + hora + ' en la Sucursal ' + sucursal + '. ¿Podrías confirmar tu asistencia? Tu bienestar es nuestra prioridad. ';
           var recomendaciones = '';
 
