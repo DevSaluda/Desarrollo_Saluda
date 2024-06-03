@@ -58,19 +58,20 @@ if (!$resultado) {
     die("Error en la consulta SQL: " . $conn->error);
 }
 
-// Establecer las cabeceras HTTP para un archivo CSV
-header('Content-Type: text/csv');
+// Establecer la codificación de caracteres UTF-8 para el archivo CSV
+header('Content-Encoding: UTF-8');
+header('Content-Type: text/csv; charset=UTF-8');
 header('Content-Disposition: attachment; filename="registro_de_ventas_del_' . str_replace('-', '_', $mes) . '_al_' . str_replace('-', '_', $anual) . '.csv"');
 header('Cache-Control: max-age=0');
 
-// Abrir el puntero de archivo de salida
+// Abrir el puntero de archivo de salida con codificación UTF-8
 $output = fopen('php://output', 'w');
 
-// Escribir los encabezados en el archivo CSV
+// Escribir los encabezados en el archivo CSV con la codificación UTF-8
 $encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
 fputcsv($output, $encabezados);
 
-// Escribir los datos del archivo CSV
+// Escribir los datos del archivo CSV con la codificación UTF-8
 while ($fila = $resultado->fetch_assoc()) {
     // Construir una fila con los datos específicos
     $data = [
@@ -95,7 +96,7 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Enfermero"],
         $fila["Doctor"]
     ];
-    // Escribir la fila en el archivo CSV
+    // Escribir la fila en el archivo CSV con la codificación UTF-8
     fputcsv($output, $data);
 }
 
