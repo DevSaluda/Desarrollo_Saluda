@@ -289,15 +289,16 @@ include "Consultas/Consultas.php";
             },
             "buttons": [
               {
-                extend: 'excelHtml5',
-                text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-                titleAttr: 'Exportar a Excel',
-                title: 'registro de ventas ',
-                className: 'btn btn-success',
-                exportOptions: {
-                  columns: ':visible' // Exportar solo las columnas visibles
-                }
-              }
+  text: 'Exportar a Excel <i class="fas fa-file-excel"></i>',
+  titleAttr: 'Exportar a Excel',
+  title: 'registro de ventas',
+  className: 'btn btn-success',
+  action: function(e, dt, button, config) {
+    var mes = '<?php echo $mes; ?>';
+    var anual = '<?php echo $anual; ?>';
+    window.location.href = 'https://saludapos.com/AdminPOS/Consultas/ExportToExcel.php?Mes=' + mes + '&anual=' + anual;
+  }
+}
             ],
             "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
             "responsive": true
