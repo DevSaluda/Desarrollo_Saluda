@@ -13,7 +13,7 @@ include "Consultas/ConsultaCaja.php";
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: white;"></i></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
     <marquee behavior="scroll" direction="left" scrollamount="8" style="color: white; font-weight: bold;">
         Hola, <?php echo $row['Nombre_Apellidos']?> te recordamos que tenemos promociones vigentes hasta el 31 de Mayo, 
         🎉💊 10% descuento en Laboratorios 💊🎉 * RECUERDA VALIDAR CUALES SI APLICAN * 
@@ -22,7 +22,7 @@ include "Consultas/ConsultaCaja.php";
  🎉🦷 De igual forma contamos con promociones en dental, las claves son ,8056-3 | PROFILAXIS INICIAL PROMO,8056-2 | PROFILAXIS SEGUIMIENTO PROMO,7123 | PRUEBA RAPIDA DE INFLUENZA (NUEVO
 PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!. 
     </marquee> 
-</li>
+</li> -->
 
     </ul>
 
