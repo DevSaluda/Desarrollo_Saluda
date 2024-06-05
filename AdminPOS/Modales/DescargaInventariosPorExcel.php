@@ -1,34 +1,41 @@
 
   
-     <style>
-        .animate__animated {
-            --animate-duration: 1.5s;
-        }
-    </style>
+      <div class="modal fade bd-example-modal-xl" id="DescargarInventarios" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-notify modal-success">
+    <div class="modal-content">
+    
+    <div class="text-center">
+    <div class="modal-header">
+         <p class="heading lead">Filtrado de ventas por sucursal<i class="fas fa-credit-card"></i></p>
 
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col">
-                <label for="exampleFormControlInput1">Sucursal Actual</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-                    </div>
-                    <input type="text" class="form-control" disabled readonly value="<?php echo $row['Nombre_Sucursal']?>">
-                </div>
-                <button id="descargarBtn" class="btn btn-primary">Mostrar Mensaje</button>
-                <p id="mensaje" class="mt-3"></p>
-            </div>
-        </div>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true" class="white-text">&times;</span>
+         </button>
+       </div>
+     
+      <div class="modal-body">
+     
+ <form action="javascript:void(0)" method="post" id="Filtrapormediodesucursalconajax">
+    
+ 
+ <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Sucursal Actual </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <input type="text" class="form-control " disabled readonly  value="<?php echo $row['Nombre_Sucursal']?>">
     </div>
-
-
-    <script>
-        document.getElementById('descargarBtn').addEventListener('click', function() {
-            var sucursal = '<?php echo $row['Nombre_Sucursal']; ?>';
-            var mensaje = document.getElementById('mensaje');
-            mensaje.textContent = `¿Deseas descargar el inventario de la sucursal ${sucursal}?`;
-            mensaje.classList.add('animate__animated', 'animate__fadeIn');
-        });
-    </script>
+    </div>
+    
+    </div>
+      <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+                                        </form>
+                                        </div>
+                                        </div>
+     
+    </div>
+  </div>
+  </div>
+  </div>
   
