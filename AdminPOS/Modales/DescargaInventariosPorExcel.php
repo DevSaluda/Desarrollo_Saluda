@@ -22,8 +22,7 @@
     <div class="col">
    
     <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-  </div>
+ 
   <p> Tu sucursal actual es <?php echo $row['Nombre_Sucursal']?> </p>
 
     </div>
