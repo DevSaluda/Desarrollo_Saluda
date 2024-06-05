@@ -202,6 +202,12 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
  Cambiar de sucursal <i class="fas fa-clinic-medical"></i>
 </button>
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+ Descargar inventario <i class="fas fa-boxes"></i>
+</button>
+
+
                       <div class="row">
                         <input hidden type="text" class="form-control " readonly value="<?php echo $row['Nombre_Apellidos'] ?>">
 
