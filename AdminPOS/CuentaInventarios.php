@@ -982,7 +982,7 @@ function eliminarFila(element) {
 
 include("Modales/Error.php");
 include ("Modales/FiltraEspecificamenteInventarios.php");
-
+include ("Modales/DescargaInventariosPorExcel.php");
 include("footer.php") ?>
 
 
