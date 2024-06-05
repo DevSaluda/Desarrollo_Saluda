@@ -20,25 +20,17 @@
  
  <div class="row">
     <div class="col">
-        <label for="exampleFormControlInput1">Sucursal Actual</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-            </div>
-            <input type="text" class="form-control" disabled readonly value="<?php echo $row['Nombre_Sucursal']?>">
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col">
-        <p>Si desea descargar el inventario de la sucursal <?php echo $row['Nombre_Sucursal']; ?>, haga clic en el botón a continuación.</p>
-        <button type="button" class="btn btn-primary" onclick="descargarInventario('<?php echo $row['Nombre_Sucursal']; ?>')">Descargar Inventario</button>
-    </div>
-</div>
+   
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <p> Tu sucursal actual es <?php echo $row['Nombre_Sucursal']?> </p>
 
     </div>
-      <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Aplicar cambio de sucursal <i class="fas fa-exchange-alt"></i></button>
+    </div>
+    
+    </div>
+      <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Descargar Inventario <i class="fas fa-exchange-alt"></i></button>
                                         </form>
                                         </div>
                                         </div>
