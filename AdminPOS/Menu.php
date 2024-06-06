@@ -747,7 +747,14 @@
               </p>
             </a>
           </li>
-         
+          <li class="nav-item">
+            <a href="StockAuditoria" class="nav-link">
+            <i class="fas fa-dot-circle"></i>
+              <p>
+            Movimientos del stock               
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="UltimaInsercionEnStock" class="nav-link">
             <i class="fas fa-dot-circle"></i>
