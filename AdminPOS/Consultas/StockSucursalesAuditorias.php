@@ -9,11 +9,10 @@
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayStockSucursales.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayStockSucursalesAuditorias.php",
  "aoColumns": [
        { mData: 'Cod_Barra' },
-       { mData: 'Clave_adicional' },
-       { mData: 'Clave_Levic' },
+    
        { mData: 'Nombre_Prod' },
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
@@ -96,9 +95,8 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
 	<table  id="Productos" class="table table-hover">
 <thead>
 
-<th style="background-color:#0057b8 !important;">Clave</th>
-<th style="background-color:#0057b8 !important;">Cod interno</th>
-<th style="background-color:#0057b8 !important;">Cod levic</th>
+<th style="background-color:#0057b8 !important;">Cod Barra</th>
+
 <th style="background-color:#0057b8 !important;">Nombre</th>
 <th style="background-color:#0057b8 !important;">PV</th>
 <th style="background-color:#0057b8 !important;">Servicio</th>
