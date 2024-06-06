@@ -20,6 +20,8 @@ tabla = $('#Productos').DataTable({
        { mData: 'Precio_Compra' },
        { mData: 'Nom_Serv' },
        { mData: 'Sucursal' },
+       { mData: 'Contabilizado' },
+       { mData: 'FechaDeInventario' },
       
        
       
@@ -83,8 +85,8 @@ tabla = $('#Productos').DataTable({
     <th>PC</th>
     <th>Servicio </th>
     <th>Sucursal </th>
-    
-   
+    <th>Contabilizado </th>
+    <th>Ultima fecha inventario </th>
   
  
 
