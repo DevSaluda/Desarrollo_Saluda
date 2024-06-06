@@ -21,8 +21,6 @@ $c=0;
 while($fila=$result->fetch_assoc()){
  
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-    $data[$c]["Clave_adicional"] = $fila["Clave_adicional"];
-    $data[$c]["Clave_Levic"] = $fila["Clave_Levic"];
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
     $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
     $data[$c]["Nom_Serv"] = $fila["Nom_Serv"];
