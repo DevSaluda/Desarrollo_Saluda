@@ -91,12 +91,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
 });
 </script>
 <div class="text-center">
-<div>
-        Mostrar / Ocultar <a class="btn btn-outline-info btn-sm toggle-vis" data-column="0">Cod barra</a> - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="1">Nombre</a> -
-         <a class="btn btn-outline-info btn-sm toggle-vis" data-column="2">Precio venta</a> - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="3">Servicio</a> -
-          <a class="btn btn-outline-info btn-sm toggle-vis" data-column="4">Proveedor 1 </a> - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="5">Proveedor 2</a> - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="6">Sucursal</a>
-          - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="9">Minimo</a> - <a class="btn btn-outline-info btn-sm toggle-vis" data-column="10">Maximo</a><a class="btn btn-outline-info btn-sm toggle-vis" data-column="13">Traspaso</a> <a class="btn btn-outline-info btn-sm toggle-vis" data-column="14">Ingreso</a>
-    </div>
+
 	<div class="table-responsive">
 	<table  id="Productos" class="table table-hover">
 <thead>
