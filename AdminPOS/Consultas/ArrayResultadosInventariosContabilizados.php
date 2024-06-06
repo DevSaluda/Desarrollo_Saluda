@@ -52,6 +52,8 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Clave_Levic"] = $fila["Diferencia"];
     $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
     $data[$c]["FechaInventario"] = $fila["FechaInventario"];
+    $horaInventario = date("g:i A", strtotime($fila["AgregadoEl"]));
+    $data[$c]["HoraInventario"] = $horaInventario;
     $c++;
 }
 
