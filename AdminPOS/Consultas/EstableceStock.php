@@ -6,7 +6,7 @@ $fkSucursal = $_POST['fkSucursal'];
 
 // Aquí puedes agregar la lógica para actualizar el stock en la base de datos
 // Este es un ejemplo básico, ajusta la consulta según tus necesidades
-$sql = "UPDATE Stock_POS_PruebasInv SET Existencias_R = 0 WHERE Fk_sucursal = '$fkSucursal'";
+$sql = "UPDATE Stock_POS SET Existencias_R = 0 WHERE Fk_sucursal = '$fkSucursal'";
 
 $response = array();
 
