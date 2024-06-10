@@ -11,7 +11,7 @@ $sql = "SELECT
     Stock_POS_Audita.ID_Prod_POS,
     Stock_POS_Audita.AgregadoEl,
     Stock_POS_Audita.Clave_adicional,
-    Stock_POS_Audita.Clave_Levic,
+
     Stock_POS_Audita.Cod_Barra,
     Stock_POS_Audita.Nombre_Prod,
     Stock_POS_Audita.Tipo_Servicio,
