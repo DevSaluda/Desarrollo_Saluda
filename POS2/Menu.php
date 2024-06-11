@@ -458,14 +458,15 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
             </a>
           </li> -->
 
-          <li class="nav-item" id="solicitudTraspasos" >
-    <a href="https://saludapos.com/POS2/SolicitudDeTraspasosProveedores" class="nav-link">
-        <i class="fas fa-tasks"></i>
-        <p>
-            Solicitar Traspasos
-        </p>
-    </a>
-</li>
+
+          <li class="nav-item">
+            <a  href="https://saludapos.com/POS2/SolicitudDeTraspasosProveedores"  class="nav-link">
+            <i class="fas fa-tasks"></i>
+              <p>
+          Solicitar Traspasos           
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a  href="https://saludapos.com/POS2/ListadoDeTraspasos"  class="nav-link">
             <i class="fas fa-exchange-alt"></i>
@@ -488,17 +489,7 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
             </ul>
           </li>
 
-          <script>
-$(document).ready(function(){
-    var sucursal = "<?php echo $sucursal ?>";
-    
-    if(sucursal === "Capacitación"){
-        $("#solicitudTraspasos").show();
-    } else {
-        $("#solicitudTraspasos").hide();
-    }
-});
-</script>
+
           
         <div style=<?php if($row['Nombre_Sucursal'] != "Oficinas"){
    
