@@ -1,5 +1,5 @@
 <?php
-include_once "Controladores/ControladorUsuario.php";
+include_once "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'$fecha
   $sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis  DESC LIMIT 1";
   $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
@@ -163,7 +163,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-        <?php include "navbar.php";?>
+     
             <!-- Navbar End -->
 
 
@@ -227,32 +227,7 @@ function showInstructions() {
             });
         }
         // Mostrar SweetAlert2 de carga al iniciar la página
-        Swal.fire({
-            title: 'Cargando',
-            html: '<div class="loader-container">' +
-                    '<img src="https://doctorpez.mx/PuntoDeVenta/FotosMedidores/pez.gif" alt="Peces nadando" class="fish">' +
-                    '<div class="loaderPill-text">' + getRandomMessage() + '</div>' +
-                  '</div>',
-            showCancelButton: false,
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            onBeforeOpen: () => {
-                Swal.showLoading();
-            },
-            customClass: {
-                container: 'animated fadeInDown'
-            }
-        });
-
-        // Actualizar mensaje aleatoriamente cada 2 segundos
-        setInterval(() => {
-            const messageElement = document.querySelector('.loaderPill-text');
-            if (messageElement) {
-                messageElement.textContent = getRandomMessage();
-            }
-        }, 2000);
-
+       
         // Ocultar SweetAlert2 de carga cuando la página se haya cargado por completo
         window.addEventListener('load', function() {
             Swal.close();
