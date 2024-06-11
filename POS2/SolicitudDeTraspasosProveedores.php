@@ -10,9 +10,7 @@ if (!$resultset) {
 
 $Ticketss = mysqli_fetch_assoc($resultset);
 
-if ($Ticketss === null) {
-    die("No se encontraron filas en la consulta.");
-}
+
 
 $monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
 $monto2 = 1;
