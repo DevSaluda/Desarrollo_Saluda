@@ -26,9 +26,8 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
    
 
     <?php
-   include "header.php";?>
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   include "Header.php";?>
+  
 
    <div id="loading-overlay">
   <div class="loader"></div>
