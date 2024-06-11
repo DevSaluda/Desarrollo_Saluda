@@ -6,8 +6,8 @@ if (isset($_GET['term']) && isset($_GET['sucursal'])) {
   
     $return_arr = array();
     $term = mysqli_real_escape_string($conn, $_GET['term']);
-    $sucursal = mysqli_real_escape_string($conn, $_GET['sucursal']);
-
+    $sucursal = $row['Fk_Sucursal'];
+echo  $row['Fk_Sucursal'];
     // Consulta SQL para buscar por Cod_Barra o Nombre_Prod y filtrar por sucursal
     $sql = "SELECT * FROM Stock_POS 
             WHERE (Cod_Barra LIKE '%$term%' OR Nombre_Prod LIKE '%$term%') 
