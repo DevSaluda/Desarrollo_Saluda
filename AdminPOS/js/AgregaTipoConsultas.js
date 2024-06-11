@@ -38,7 +38,7 @@ $('document').ready(function ($) {
     function submitForm() {
         $.ajax({
             type: 'POST',
-            url: "Consultas/AgregaTipoConsultaNueva.php",
+            url: "Consultas/AgregaTipoConsultaNuevo.php",
             data: $('#AgregaTipoConsultaNueva').serialize(),
             cache: false,
             beforeSend: function () {
