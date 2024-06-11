@@ -70,7 +70,7 @@ include "Consultas/Consultas.php";
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ControlTipoConsultas.js"></script>
+<script src="js/ControlTiposConsultas.js"></script>
 <script src="js/AgregaTipoConsultas.js"></script>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
