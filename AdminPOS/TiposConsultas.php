@@ -27,7 +27,7 @@ include "Consultas/Consultas.php";
   </div>
   
   <div >
- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaDeConsultas"class="btn btn-default">
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltadeTiposConsultas"class="btn btn-default">
   Añadir nuevo tipo <i class="far fa-plus-square"></i>
 </button>
 
