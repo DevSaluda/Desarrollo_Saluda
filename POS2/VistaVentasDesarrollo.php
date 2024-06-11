@@ -175,7 +175,7 @@ function multiplicar() {
 <script>
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
-        source: "Consultas/VentaDeProductos.php",
+        source: "Consultas/VentaDeProductosPruebas.php",
         minLength: 2,
         appendTo: "#productos",
         select: function (event, ui) {
