@@ -225,6 +225,7 @@ $(document).ready(function () {
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
+                    <input class="form-control" readonly type="text" value="<?php echo $row['EstadoSucursalInv']?>" name="EstadoVenta[]"> </div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm" onclick="setFilaActual(this)"><i class="fas fa-percent"></i></a>\
