@@ -5,7 +5,7 @@ $contador = isset($_POST["pro_FKID"]) ? count($_POST["pro_FKID"]) : 0;
 $ProContador = 0;
 
 $query = "INSERT INTO Ventas_POS_Pruebas (ID_Prod_POS, Identificador_tipo, Turno, FolioSucursal, Folio_Ticket, Clave_adicional, Cod_Barra, Nombre_Prod, Cantidad_Venta,
-        Fk_sucursal, Total_Venta, Importe, Total_VentaG, DescuentoAplicado, FormaDePago, CantidadPago, Cambio, Cliente, Fecha_venta, Fk_Caja, Lote, Sistema, AgregadoPor, ID_H_O_D, FolioSignoVital, TicketAnterior) VALUES ";
+        Fk_sucursal, Total_Venta, Importe, Total_VentaG, DescuentoAplicado, FormaDePago, CantidadPago, Cambio, Cliente, Fecha_venta, Fk_Caja, Lote, Estatus,Sistema, AgregadoPor, ID_H_O_D, FolioSignoVital, TicketAnterior) VALUES ";
 $queryValues = array();
 
 for ($i = 0; $i < $contador; $i++) {
@@ -39,6 +39,7 @@ for ($i = 0; $i < $contador; $i++) {
             mysqli_real_escape_string($conn, $_POST["Fecha"][$i]),
             mysqli_real_escape_string($conn, $_POST["CajaSucursal"][$i]),
             mysqli_real_escape_string($conn, $_POST["pro_lote"][$i]),
+            mysqli_real_escape_string($conn, $_POST["EstadoVenta"][$i]),
             mysqli_real_escape_string($conn, $_POST["Sistema"][$i]),
             mysqli_real_escape_string($conn, $_POST["Vendedor"][$i]),
             mysqli_real_escape_string($conn, $_POST["Empresa"][$i]),
