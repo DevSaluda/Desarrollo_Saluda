@@ -18,7 +18,7 @@
                             </div>
       <div class="modal-body">
      
- <form action="javascript:void(0)" method="post" id="AgregaTipoConsultaNueva">
+ <form action="javascript:void(0)" method="post" id="AgregaTipoConsultaNuevo">
     
     <label for="exampleFormControlInput1">Folio <span class="text-danger">AUTOGENERADO</span> </label>
     <div class="input-group mb-3">
