@@ -967,8 +967,15 @@ function eliminarFila(element) {
 
 <script src="js/ConectaProveedores.js"></script>
 <!-- Control Sidebar -->
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
 
-<!-- Main Footer -->
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
 <?php
 
 include("Modales/Error.php");
