@@ -38,7 +38,7 @@ $('document').ready(function ($) {
     function submitForm() {
         $.ajax({
             type: 'POST',
-            url: "Consultas/AgregaTipoConsultaNueva.php",
+            url: "Consultas/AgregaTipoConsultaNuevo.php",
             data: $('#AgregaTipoConsultaNueva').serialize(),
             cache: false,
             beforeSend: function () {
@@ -46,12 +46,42 @@ $('document').ready(function ($) {
             },
             success: function (dataResult) {
                 var dataResult = JSON.parse(dataResult);
+
                 if (dataResult.statusCode == 250) {
-                    // Código para manejar el estado 250 (duplicado)
+                    var modal_lv = 0;
+                    $('.modal').on('shown.bs.modal', function (e) {
+                        $('.modal-backdrop:last').css('zIndex', 1051 + modal_lv);
+                        $(e.currentTarget).css('zIndex', 1052 + modal_lv);
+                        modal_lv++
+                    });
+                    $('.modal').on('hidden.bs.modal', function (e) {
+                        modal_lv--
+                    });
+                    $("#submit_registro").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                    $('#ErrorDupli').modal('toggle');
+                    setTimeout(function () {
+                    }, 2000); // abrir
+                    setTimeout(function () {
+                        $("#submit_registro").html("Guardar <i class='fas fa-save'></i>");
+                    }, 3000); // abrir
                 } else if (dataResult.statusCode == 200) {
-                    // Código para manejar el estado 200 (éxito)
+                    $("#submit_registro").html("Enviado <i class='fas fa-check'></i>")
+                    $("#AgregaTipoConsultaNueva")[0].reset();
+                    $("#AltadeTiposConsultas").removeClass("in");
+                    $(".modal-backdrop").remove();
+                    $("#AltadeTiposConsultas").hide();
+                    $('#Exito').modal('toggle');
+                    setTimeout(function () {
+                        $('#Exito').modal('hide')
+                    }, 2000); // abrir
+                    // ServiciosCarga();
                 } else if (dataResult.statusCode == 201) {
-                    // Código para manejar el estado 201 (error)
+                    $("#submit_registro").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                    $('#ErrorData').modal('toggle');
+                   
+                    setTimeout(function () {
+                        $("#submit_registro").html("Guardar <i class='fas fa-save'></i>");
+                    }, 3000); // abrir
                 }
             }
         });
