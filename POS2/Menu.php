@@ -459,7 +459,7 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
           </li> -->
 
 
-          <li class="nav-item">
+          <li class="nav-item" style="display: none;">
             <a  href="https://saludapos.com/POS2/SolicitudDeTraspasosProveedores"  class="nav-link">
             <i class="fas fa-tasks"></i>
               <p>
