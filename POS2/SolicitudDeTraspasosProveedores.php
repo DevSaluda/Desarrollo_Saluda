@@ -1,13 +1,23 @@
 <?php
 include_once "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'$fecha
-  $sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis  DESC LIMIT 1";
-  $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
-  $Ticketss = mysqli_fetch_assoc($resultset);
-  
-  $monto1 = $Ticketss['NumOrden'];
-  $monto2 = 1;
-  $totalmonto = $monto1 + $monto2;
+$sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis DESC LIMIT 1";
+$resultset = mysqli_query($conn, $sql);
+
+if (!$resultset) {
+    die("database error: " . mysqli_error($conn));
+}
+
+$Ticketss = mysqli_fetch_assoc($resultset);
+
+if ($Ticketss === null) {
+    die("No se encontraron filas en la consulta.");
+}
+
+$monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
+$monto2 = 1;
+$totalmonto = $monto1 + $monto2;
+
   
 
   
