@@ -21,7 +21,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 <head>
     <meta charset="utf-8">
-    <title>Realizar Ventas de <?php echo $row['Licencia']?></title>
+    <title>Solicitud de traspasos</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
    
 
@@ -128,7 +128,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
   #tablaAgregarArticulos th {
     font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
-    background-color: #ef7980 !important; /* Nuevo color de fondo para los encabezados */
+    background-color: #e83e8c !important; /* Nuevo color de fondo para los encabezados */
     color: white; /* Cambiar el color del texto a blanco para contrastar */
     padding: 10px; /* Ajustar el espaciado de los encabezados */
   }
