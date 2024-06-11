@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['term']) && isset($_GET['sucursal'])) {
+if (isset($_GET['term']) ) {
     // Conectarse a la base de datos
     include ("db_connection.php");
     include "Consultas.php";
