@@ -45,28 +45,30 @@
             </div>
             <div><label for="vigencia" class="error"></label></div>
             
+            <div class="row">
             <div class="col">
-              <label for="exampleFormControlInput1">Especialidad</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
-                </div>
-                <select name="Especialidad" class="form-control form-control-sm" id="especialidadExt">
-                  <option value="">Elige una especialidad</option>
-                  <?php
-                  $sql = "SELECT DISTINCT Nombre_Especialidad FROM Especialidades_Express WHERE Estatus_Especialidad = 'Disponible'";
-                  $result = $conn->query($sql);
-                  if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                      echo "<option value='" . htmlspecialchars($row["Nombre_Especialidad"]) . "'>" . htmlspecialchars($row["Nombre_Especialidad"]) . "</option>";
-                    }
-                  } else {
-                    echo "<option value=''>No hay especialidades disponibles</option>";
-                  }
-                  ?>
-                </select>
-              </div>
+        <label for="especialidadExt">Especialidad</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
             </div>
+            <select name="Especialidad" class="form-control form-control-sm" id="especialidadExt">
+                <option value="">Elige una especialidad</option>
+                <?php
+                $sql = "SELECT DISTINCT Nombre_Especialidad FROM Especialidades_Express WHERE Estatus_Especialidad = 'Disponible'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row["Nombre_Especialidad"] . "'>" . $row["Nombre_Especialidad"] . "</option>";
+                    }
+                } else {
+                    echo "<option value=''>No hay especialidades disponibles</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+</div>
             
             <div class="table-responsive">
               <table class="table table-bordered">
