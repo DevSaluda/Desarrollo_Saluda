@@ -44,6 +44,7 @@
               </select>
             </div>
             <div><label for="vigencia" class="error"></label></div>
+            
             <div class="row">
             <div class="col">
         <label for="especialidadExt">Especialidad</label>
@@ -67,7 +68,7 @@
             </select>
         </div>
     </div>
-
+</div>
             
             <div class="table-responsive">
               <table class="table table-bordered">
