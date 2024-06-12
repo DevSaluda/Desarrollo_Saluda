@@ -776,7 +776,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
   formData.append('codigoEscaneado', codigoEscaneado);
 
   $.ajax({
-    url: "Controladores/BusquedaPorEscaner.php",
+    url: "Consultas/BusquedaPorEscanerTraspasos.php",
     type: 'POST',
     data: formData,
     processData: false,
@@ -821,7 +821,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Controladores/DespliegaAutoComplete.php',
+      url: 'Consultas/DespliegaAutoCompleteTraspasos.php',
       type: 'GET',
       dataType: 'json',
       data: {
