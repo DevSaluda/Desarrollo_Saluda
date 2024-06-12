@@ -3,7 +3,10 @@ header('Content-Type: application/json');
 include("db_connection.php");
 
 // Consulta para obtener los proveedores
-$sql = "SELECT DISTINCT Nombre_Proveedor FROM Proveedores_POS"; // Ajusta el nombre de la tabla y la columna según tu estructura
+$sql = "SELECT DISTINCT Nombre_Proveedor 
+FROM Proveedores_POS 
+WHERE Nombre_Proveedor NOT IN ('CEDIS', 'COLGATE', 'CLINICAS SALUDA');
+"; // Ajusta el nombre de la tabla y la columna según tu estructura
 
 // Ejecutar la consulta
 $result = $conn->query($sql);
