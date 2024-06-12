@@ -7,7 +7,7 @@ $term = $_GET['term'];
 
 
 // Realiza la consulta utilizando el término de búsqueda, la sucursal y DISTINCT
-$query = "SELECT DISTINCT Cod_Barra, Nombre_Prod FROM  FROM Stock_POS  WHERE (Cod_Barra LIKE '%{$term}%' OR Nombre_Prod LIKE '%{$term}%') ";
+$query = "SELECT DISTINCT Cod_Barra, Nombre_Prod   FROM Stock_POS  WHERE (Cod_Barra LIKE '%{$term}%' OR Nombre_Prod LIKE '%{$term}%') ";
 $result = mysqli_query($conn, $query);
 
 // Genera un array con los resultados de autocompletado
