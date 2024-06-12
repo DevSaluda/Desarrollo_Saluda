@@ -552,7 +552,7 @@ function showInstructions() {
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:6%">Contabilizado</th>
+                              <th style="width:6%">Piezas</th>
                               <th >Fecha caducidad</th>
                               <th >Lote</th>
                               <th>Precio Maximo</th>
