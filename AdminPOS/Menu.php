@@ -631,6 +631,17 @@
         
       
 ?>>
+
+          <li class="nav-header" style="color: white;">Motivos de consulta</li>
+            <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeCitas/TiposConsultas" class="nav-link" style="color: white;">
+                    <i class="fas fa-calendar-check"></i>
+                    <p>
+                     Agregar nuevo motivo de consulta
+                    </p>
+                  </a>
+                </li>
+
             <li class="nav-header" style="font-size:medium; font-weight: bold; color: white;" >Almacenaje y productos <i class="fas fa-dolly"></i>
 
             <li class="nav-item has-treeview">
