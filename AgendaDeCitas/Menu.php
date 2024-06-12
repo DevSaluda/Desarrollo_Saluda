@@ -320,6 +320,17 @@
                     </p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeCitas/TiposConsultas" class="nav-link" style="color: white;">
+                  <i class="fas fa-user-md"></i>
+                    <p>
+                     Agregar motivo de consulta
+
+                    </p>
+                  </a>
+                </li>
+
                 <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeCitas/CitasEspecialistasExt" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
@@ -388,6 +399,17 @@
                     </p>
                   </a>
                 </li>
+
+            <li class="nav-header" style="color: white;">Motivos de consulta</li>
+            <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeCitas/TiposConsultas" class="nav-link" style="color: white;">
+                    <i class="fas fa-book"></i>
+                    <p>
+                    Agregar motivo consulta
+                    </p>
+                  </a>
+                </li>
+
 
             <li class="nav-header">Reportes y data de pacientes </li>
             <li class="nav-item">
