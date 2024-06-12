@@ -54,7 +54,7 @@
                 <select name="Especialidad" class="form-control form-control-sm" id="especialidadExt">
                   <option value="">Elige una especialidad</option>
                   <?php
-                  $sql = "SELECT DISTINCT Nombre_Especialidad FROM Especialidades_Express WHERE Estatus_Especialidad = 'Activo'";
+                  $sql = "SELECT DISTINCT Nombre_Especialidad FROM Especialidades_Express WHERE Estatus_Especialidad = 'Disponible'";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
