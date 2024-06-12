@@ -143,16 +143,28 @@
     <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Tipo de consulta </label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
-  </div>
-  <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt" >
-									  <option value="">Elige un tipo de consulta</option>
-				
-              <option  value="Primera vez">Primera vez</option>		
-              <option  value="Revaloración">Revaloración</option>						  
-						 </select>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
+        </div>
+        <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt">
+            <option value="">Elige un tipo de consulta</option>
+            <?php
+            
+            $sql = "SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Generar las opciones del select
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row["Tipo_ID"] . "'>" . $row["Nom_Tipo"] . "</option>";
+                }
+            } else {
+                echo "<option value=''>No hay tipos de consulta disponibles</option>";
+            }
+            ?>
+        </select>
+    </div>
 </div>
 <label for="tipoconsulta" class="error">
     </div>
