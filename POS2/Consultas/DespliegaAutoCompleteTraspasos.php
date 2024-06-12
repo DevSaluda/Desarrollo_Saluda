@@ -1,6 +1,6 @@
 <?php
-include_once "db_connect.php";
-include_once "ControladorUsuario.php";
+include_once "db_connection.php";
+include_once "Consultas.php";
 // Obtén el término de búsqueda enviado desde el campo de autocompletado
 $term = $_GET['term'];
 
