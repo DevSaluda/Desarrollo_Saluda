@@ -24,33 +24,6 @@
     });
 </script>
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#TiposConsultasDoc').DataTable({
-            "order": [[0, "desc"]],
-            "lengthMenu": [[25, 50, 150, 200, -1], [25, 50, 150, 200, "Todos"]],
-            language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "sProcessing": "Procesando...",
-            },
-            responsive: "true",
-            dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>",
-        });
-    });
-</script>
-
 <?php
 
 include("db_connection.php");
@@ -68,6 +41,7 @@ $query = $conn->query($sql1);
                 <thead>
                     <th style="background-color:#0057b8 !important;">N°</th>
                     <th style="background-color:#0057b8 !important;">Tipo de Consulta</th>
+                    <th style="background-color:#0057b8 !important;">Especialidad</th>
                     <th style="background-color:#0057b8 !important;">Estatus</th>
                     <th style="background-color:#0057b8 !important;">Agregado el</th>
                     <th style="background-color:#0057b8 !important;">Acciones</th>
@@ -76,6 +50,7 @@ $query = $conn->query($sql1);
                     <tr>
                         <td><?php echo $Categorias["Tipo_ID"]; ?></td>
                         <td><?php echo $Categorias["Nom_Tipo"]; ?></td>
+                        <td><?php echo $Categorias["Especialidad"]; ?></td> <!-- Aquí se muestra la especialidad -->
                         <td>
                             <?php
                             $estado = $Categorias["Estado"];
