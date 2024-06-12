@@ -405,7 +405,7 @@
                   <a href="https://saludapos.com/AgendaDeCitas/TiposConsultas" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
-                     Agregar nuevo motivo de consulta
+                    Agregar motivo consulta
                     </p>
                   </a>
                 </li>
