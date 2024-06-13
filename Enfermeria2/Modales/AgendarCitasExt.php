@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="CitaExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
@@ -23,17 +22,11 @@
     <div class="col">
     <label for="exampleFormControlInput1">Nombre del paciente</label>
      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-        <span class="input-group-text" id="Tarjeta"><i class="fas fa-user"></i></span>
-        </div>
-        <input type="text" class="form-control"   name="NombresExt" id="nombresExt" aria-describedby="basic-addon1">
-    </div>
-
-    <div>
-      <!-- AQUI SE ANEXA EL MARGEN DE ERROR -->
-    <label for="nombresExt" class="error">
-    </div>
-
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="Tarjeta"><i class="fas fa-user"></i></span>
+  </div>
+  <input type="text" class="form-control"   name="NombresExt" id="nombresExt" aria-describedby="basic-addon1">
+</div>
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Telefono</label>
@@ -43,14 +36,11 @@
   </div>
   <input type="text" class="form-control"   name="TelExt" id="telExt" oninput="formatPhoneNumber(this)" aria-describedby="basic-addon1">
 </div>
-        <div>
-        <!-- AQUI SE ANEXA EL MARGEN DE ERROR -->
-          <label for="telExt" class="error">
-      </div>
     </div>
     
     </div>
    
+    
     <script>
 function formatPhoneNumber(input) {
     // Eliminar todos los caracteres que no sean dígitos
@@ -69,8 +59,6 @@ function formatPhoneNumber(input) {
 }
 </script>
   
- 
-  
 <!-- INICIA DATA DE AGENDA -->
 
 <div class="row">
@@ -81,21 +69,15 @@ function formatPhoneNumber(input) {
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital"></i></span>
   </div>
   <select id = "sucursalExt" class = "form-control" name = "SucursalExt"  >
-                    <option value="">Seleccione una Sucursal:</option>
+                                               <option value="">Seleccione una Sucursal:</option>
         <?php
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz' AND Nombre_Sucursal !='Akil' AND
-         Nombre_Sucursal !='Teabo'  AND Nombre_Sucursal !='Oficinas' AND Nombre_Sucursal !='CEDIS'");
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
           while ($valores = mysqli_fetch_array($query)) {
-           echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
         ?>  </select>
 </div>
-
-     <div>
-      <!-- AQUI SE ANEXA EL MARGEN DE ERROR -->
-    <label for="sucursalExt" class="error">
-    </div>
-
+<label for="sucursal" class="error">
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Especialidad</label>
@@ -107,11 +89,7 @@ function formatPhoneNumber(input) {
 								<option value = "">Selecciona una especialidad</option>
 							</select>
 </div>
-    <div>
-      <!-- AQUI SE ANEXA EL MARGEN DE ERROR -->
-    <label for="especialidadExt" class="error">
-    </div>
-
+<label for="especialidad" class="error">
     </div>
     
     </div>
@@ -127,10 +105,6 @@ function formatPhoneNumber(input) {
 								<option value = "">Selecciona un medico</option>
 							</select>
 </div>
-<div>
-      <!-- AQUI SE ANEXA EL MARGEN DE ERROR -->
-    <label for="medicoExt" class="error">
-    </div>
 
     </div>
     <div class="col">
@@ -190,23 +164,16 @@ function formatPhoneNumber(input) {
         </div>
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt">
             <option value="">Elige un tipo de consulta</option>
-            <?php
             
-            $sql = "SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Generar las opciones del select
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["Tipo_ID"] . "'>" . $row["Nom_Tipo"] . "</option>";
-                }
-            } else {
-                echo "<option value=''>No hay tipos de consulta disponibles</option>";
-            }
-            ?>
+             <?php
+          $query = $conn -> query ("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["Nom_Tipo"].'">'.$valores["Nom_Tipo"].'</option>';
+          }
+        ?> 
         </select>
     </div>
-</div>
+
 <label for="tipoconsulta" class="error">
     </div>
     <div class="col">
@@ -220,10 +187,10 @@ function formatPhoneNumber(input) {
 </div>
     </div>
     </div>  
-    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden  readonly >
     <input type="text" class="form-control" name="SistemaExt" id="sistemaExt"  value="Agenda de citas" hidden  readonly >
-    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
-
+    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>"   hidden readonly >
+    </div>
     
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div>
