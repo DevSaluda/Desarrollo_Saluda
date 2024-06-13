@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                       <div class="input-group">
 
-                        <input type="text" class="form-control producto" name="codigoEscaneado" id="codigoEscaneado" style="position: relative;" onchange="buscarArticulo(this.value);">
+                        <input type="text" class="form-control producto" name="codigoEscaneado" id="codigoEscaneado" style="position: relative;" onchange="buscarArticulo();">
                       </div>
                     </div>
 
@@ -630,7 +630,7 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = [];
-var scanInterval = 50; // Milisegundos
+var scanInterval = 0; // Milisegundos
 
 function procesarBuffer() {
   if (scanBuffer.length > 0) {
@@ -640,7 +640,6 @@ function procesarBuffer() {
 }
 
 function agregarEscaneo(escaneo) {
-  escaneo += '\n'; // Agregar el carácter especial al final del escaneo
   scanBuffer.push(escaneo);
 }
   // Aquí colocar el resto de tu script JavaScript
@@ -648,17 +647,9 @@ function agregarEscaneo(escaneo) {
     if (codigoEscaneado.trim() === "") {
     return; // No hacer nada si el código está vacío
   }
-   
-  
-  var ultimoCaracter = codigoEscaneado.slice(-1);
-  if (ultimoCaracter === '\n') {
-    // Eliminar el carácter especial "\n"
-    codigoEscaneado = codigoEscaneado.slice(0, -1);
-    // Procesar el escaneo
-
     var formData = new FormData();
     formData.append('codigoEscaneado', codigoEscaneado);
-  }
+
     $.ajax({
       url: "Consultas/escaner_articulo.php",
       type: 'POST',
@@ -744,7 +735,7 @@ var isScannerInput = false;
 $('#codigoEscaneado').keyup(function (event) {
   if (event.which === 13) { // Verificar si la tecla presionada es "Enter"
     if (!isScannerInput) { // Verificar si el evento no viene del escáner
-      var codigoEscaneado = $('#codigoEscaneado').val() + '\n'; // Agregar "Enter" al final del código
+      var codigoEscaneado = $('#codigoEscaneado').val();
       agregarEscaneo(codigoEscaneado); // Agregar el código escaneado al buffer de escaneo
       event.preventDefault(); // Evitar que el formulario se envíe al presionar "Enter"
     }
