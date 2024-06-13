@@ -743,7 +743,7 @@ var isScannerInput = false;
 $('#codigoEscaneado').keyup(function (event) {
   if (event.which === 13) { // Verificar si la tecla presionada es "Enter"
     if (!isScannerInput) { // Verificar si el evento no viene del escáner
-      var codigoEscaneado = $('#codigoEscaneado').val();
+      var codigoEscaneado = $('#codigoEscaneado').val() + '~'; // Agregar "Enter" al final del código
       agregarEscaneo(codigoEscaneado); // Agregar el código escaneado al buffer de escaneo
       event.preventDefault(); // Evitar que el formulario se envíe al presionar "Enter"
     }
