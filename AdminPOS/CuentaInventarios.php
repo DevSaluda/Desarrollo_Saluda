@@ -630,7 +630,7 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = [];
-var scanInterval = 100; // Milisegundos
+var scanInterval = 50; // Milisegundos
 
 function procesarBuffer() {
   if (scanBuffer.length > 0) {
@@ -640,6 +640,7 @@ function procesarBuffer() {
 }
 
 function agregarEscaneo(escaneo) {
+  escaneo += '~'; // Agregar el carácter especial al final del escaneo
   scanBuffer.push(escaneo);
 }
   // Aquí colocar el resto de tu script JavaScript
@@ -647,9 +648,16 @@ function agregarEscaneo(escaneo) {
     if (codigoEscaneado.trim() === "") {
     return; // No hacer nada si el código está vacío
   }
+   
+  
+  var ultimoCaracter = codigoEscaneado.slice(-1);
+  if (ultimoCaracter === '~') {
+    // Eliminar el carácter especial "~"
+    codigoEscaneado = codigoEscaneado.slice(0, -1);
+    // Procesar el escaneo
     var formData = new FormData();
     formData.append('codigoEscaneado', codigoEscaneado);
-
+  }
     $.ajax({
       url: "Consultas/escaner_articulo.php",
       type: 'POST',
