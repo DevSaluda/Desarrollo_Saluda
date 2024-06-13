@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="CitaExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
@@ -35,14 +34,30 @@
   <div class="input-group-prepend">
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-mobile-alt"></i></span>
   </div>
-  <input type="text" class="form-control"   name="TelExt" id="telExt" aria-describedby="basic-addon1">
+  <input type="text" class="form-control"   name="TelExt" id="telExt" oninput="formatPhoneNumber(this)" aria-describedby="basic-addon1">
 </div>
     </div>
     
     </div>
    
     
- 
+    <script>
+function formatPhoneNumber(input) {
+    // Eliminar todos los caracteres que no sean dígitos
+    var phoneNumber = input.value.replace(/\D/g, '');
+
+    // Aplicar formato solo si hay dígitos suficientes
+    if (phoneNumber.length >= 3) {
+        phoneNumber = phoneNumber.substring(0, 3) + '-' + phoneNumber.substring(3);
+    }
+    if (phoneNumber.length >= 7) {
+        phoneNumber = phoneNumber.substring(0, 7) + '-' + phoneNumber.substring(7, 11);
+    }
+
+    // Establecer el valor formateado en el campo de entrada
+    input.value = phoneNumber;
+}
+</script>
   
 <!-- INICIA DATA DE AGENDA -->
 
@@ -149,23 +164,16 @@
         </div>
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt">
             <option value="">Elige un tipo de consulta</option>
-            <?php
             
-            $sql = "SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Generar las opciones del select
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["Tipo_ID"] . "'>" . $row["Nom_Tipo"] . "</option>";
-                }
-            } else {
-                echo "<option value=''>No hay tipos de consulta disponibles</option>";
-            }
-            ?>
+             <?php
+          $query = $conn -> query ("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["Nom_Tipo"].'">'.$valores["Nom_Tipo"].'</option>';
+          }
+        ?> 
         </select>
     </div>
-</div>
+
 <label for="tipoconsulta" class="error">
     </div>
     <div class="col">
@@ -179,10 +187,10 @@
 </div>
     </div>
     </div>  
-    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
+    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden  readonly >
     <input type="text" class="form-control" name="SistemaExt" id="sistemaExt"  value="Agenda de citas" hidden  readonly >
-    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
-
+    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>"   hidden readonly >
+    </div>
     
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div>
