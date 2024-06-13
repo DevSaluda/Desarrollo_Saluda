@@ -22,7 +22,7 @@ if ($row && $row['inventario_inicial_establecido']) {
 // Código para establecer el inventario en 0
 if ($tipoAjuste === 'Inventario inicial') {
     // Actualiza la tabla de inventario
-    $updateInventario = "UPDATE inventarios SET stock = 0 WHERE fkSucursal = ?";
+    $updateInventario = "UPDATE Stock_POS SET Existencias_R = 0 WHERE Fk_sucursal = ?";
     $stmt = $conn->prepare($updateInventario);
     $stmt->bind_param("i", $fkSucursal);
     $stmt->execute();
