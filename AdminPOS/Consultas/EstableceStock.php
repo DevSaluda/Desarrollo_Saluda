@@ -1,26 +1,32 @@
 <?php
-include "db_connection.php";
-// Obtener datos del POST
+// Conectar a la base de datos
+require 'config.php';
+
 $tipoAjuste = $_POST['tipoAjuste'];
 $fkSucursal = $_POST['fkSucursal'];
 
-// Aquí puedes agregar la lógica para actualizar el stock en la base de datos
-// Este es un ejemplo básico, ajusta la consulta según tus necesidades
-$sql = "UPDATE Stock_POS SET Existencias_R = 0 WHERE Fk_sucursal = '$fkSucursal'";
+// Verificar si el inventario inicial ya ha sido establecido
+$query = $pdo->prepare("SELECT inventario_inicial_establecido FROM inventario_inicial_estado WHERE fkSucursal = ?");
+$query->execute([$fkSucursal]);
+$result = $query->fetch();
 
-$response = array();
-
-if ($conn->query($sql) === TRUE) {
-    $response['success'] = true;
-} else {
-    $response['success'] = false;
-    $response['error'] = "Error: " . $sql . "<br>" . $conn->error;
+if ($result && $result['inventario_inicial_establecido']) {
+    echo json_encode(['success' => false, 'message' => 'El inventario inicial ya ha sido establecido.']);
+    exit;
 }
 
-// Cerrar conexión
-$conn->close();
+// Código para establecer el inventario en 0
+if ($tipoAjuste === 'Inventario inicial') {
+    // Actualiza la tabla de inventario
+    $updateInventario = $pdo->prepare("UPDATE inventarios SET stock = 0 WHERE fkSucursal = ?");
+    $updateInventario->execute([$fkSucursal]);
 
-// Enviar respuesta como JSON
-header('Content-Type: application/json');
-echo json_encode($response);
+    // Marca el inventario inicial como establecido
+    $updateEstado = $pdo->prepare("INSERT INTO inventario_inicial_estado (fkSucursal, inventario_inicial_establecido) VALUES (?, TRUE) ON DUPLICATE KEY UPDATE inventario_inicial_establecido = TRUE");
+    $updateEstado->execute([$fkSucursal]);
+
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Ajuste no permitido.']);
+}
 ?>
