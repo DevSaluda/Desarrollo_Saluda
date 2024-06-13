@@ -630,7 +630,7 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = [];
-var scanInterval = 500; // Milisegundos
+var scanInterval = 100; // Milisegundos
 
 function procesarBuffer() {
   if (scanBuffer.length > 0) {
