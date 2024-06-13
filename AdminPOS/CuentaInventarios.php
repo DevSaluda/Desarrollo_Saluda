@@ -629,105 +629,89 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
-var scanBuffer = [];
-var scanInterval = 500; // Milisegundos
-
-function procesarBuffer() {
-  if (scanBuffer.length > 0) {
-    var codigoEscaneado = scanBuffer.shift();
-    buscarArticulo(codigoEscaneado);
-  }
-}
-
-function agregarEscaneo(escaneo) {
-  scanBuffer.push(escaneo);
-}
-
-// Aquí colocar el resto de tu script JavaScript
-
-function buscarArticulo(codigoEscaneado) {
-  if (codigoEscaneado.trim() === "") {
+  
+  // Aquí colocar el resto de tu script JavaScript
+  function buscarArticulo(codigoEscaneado) {
+    if (codigoEscaneado.trim() === "") {
     return; // No hacer nada si el código está vacío
   }
-  var formData = new FormData();
-  formData.append('codigoEscaneado', codigoEscaneado);
+    var formData = new FormData();
+    formData.append('codigoEscaneado', codigoEscaneado);
 
-  $.ajax({
-    url: "Consultas/escaner_articulo.php",
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    dataType: 'json',
-    success: function(data) {
-      if (data.length === 0) {
-        // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
-        Swal.fire({
-          icon: 'warning',
-          title: 'No encontramos coincidencias',
-          text: 'Al parecer el codigo no está asignado en la sucursal ¿deseas asignarlo?',
-          showCancelButton: true,
-          confirmButtonText: 'Agregar producto a la sucursal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Pasar la variable Fk_sucursal al agregar el código inexistente
-            agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-          }
-        });
-      } else if (data.codigo) {
-        agregarArticulo(data);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+    $.ajax({
+      url: "Consultas/escaner_articulo.php",
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'json',
+      success: function (data) {
+        if (data.length === 0) {
+          // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
+          Swal.fire({
+            icon: 'warning',
+            title: 'No encontramos coincidencias',
+            text: 'Al parecer el codigo no esta asignado en la sucursal ¿deseas asignarlo?',
+            showCancelButton: true,
+            confirmButtonText: 'Agregar producto a la sucursal'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Pasar la variable Fk_sucursal al agregar el código inexistente
+              agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
+            }
+          });
+        } else if (data.codigo) {
+          agregarArticulo(data);
+          calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        }
+
+        limpiarCampo();
+      },
+      error: function (data) {
+        // Manejar errores aquí si es necesario
       }
-
-      limpiarCampo();
-    },
-    error: function(data) {
-      // Manejar errores aquí si es necesario
-    }
-  });
-}
-
-function agregarCodigoInexistente(codigo, sucursal) {
-  if (codigo.trim() === "" || sucursal.trim() === "") {
-    return; // No hacer nada si el código o la sucursal están vacíos
+    });
   }
-  // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
-  $.ajax({
-    url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
-    type: 'POST',
-    data: {
-      codigo: codigo,
-      sucursal: sucursal
-    },
-    dataType: 'json',
-    success: function(response) {
-      if (response.success) {
-        // Mostrar mensaje de éxito con SweetAlert2, incluyendo el nombre del producto
-        Swal.fire({
-          icon: 'success',
-          title: 'Producto agregado',
-          text: 'Producto "' + response.nombreProducto + '" agregado con éxito'
-        }).then(() => {
-          // Ejecutar la función buscarArticulo con el código escaneado después de cerrar la alerta
-          buscarArticulo(codigo);
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error al agregar el producto: ' + response.message
-        });
-      }
-    },
-    error: function(error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al agregar el producto'
-      });
+
+  function agregarCodigoInexistente(codigo, sucursal) {
+    if (codigo.trim() === "" || sucursal.trim() === "") {
+        return; // No hacer nada si el código o la sucursal están vacíos
     }
-  });
+    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
+    $.ajax({
+        url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
+        type: 'POST',
+        data: { codigo: codigo, sucursal: sucursal },
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                // Mostrar mensaje de éxito con SweetAlert2, incluyendo el nombre del producto
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto agregado',
+                    text: 'Producto "' + response.nombreProducto + '" agregado con éxito'
+                }).then(() => {
+                    // Ejecutar la función buscarArticulo con el código escaneado después de cerrar la alerta
+                    buscarArticulo(codigo);
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al agregar el producto: ' + response.message
+                });
+            }
+        },
+        error: function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al agregar el producto'
+            });
+        }
+    });
 }
+
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
@@ -737,11 +721,11 @@ function limpiarCampo() {
 var isScannerInput = false;
 
 // Escucha el evento keyup en el campo de búsqueda
-$('#codigoEscaneado').keyup(function(event) {
+$('#codigoEscaneado').keyup(function (event) {
   if (event.which === 13) { // Verifica si la tecla presionada es "Enter"
     if (!isScannerInput) { // Verifica si el evento no viene del escáner
       var codigoEscaneado = $('#codigoEscaneado').val();
-      agregarEscaneo(codigoEscaneado);
+      buscarArticulo(codigoEscaneado);
       event.preventDefault(); // Evita que el formulario se envíe al presionar "Enter"
     }
     isScannerInput = false; // Restablece la bandera del escáner
@@ -750,7 +734,7 @@ $('#codigoEscaneado').keyup(function(event) {
 
 // Agrega el autocompletado al campo de búsqueda
 $('#codigoEscaneado').autocomplete({
-  source: function(request, response) {
+  source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
       url: 'Consultas/autocompletado.php',
@@ -759,13 +743,13 @@ $('#codigoEscaneado').autocomplete({
       data: {
         term: request.term
       },
-      success: function(data) {
+      success: function (data) {
         response(data);
       }
     });
   },
   minLength: 3, // Especifica la cantidad mínima de caracteres para activar el autocompletado
-  select: function(event, ui) {
+  select: function (event, ui) {
     // Cuando se selecciona un resultado del autocompletado, llamar a la función buscarArticulo() con el código seleccionado
     var codigoEscaneado = ui.item.value;
     isScannerInput = true; // Establece la bandera del escáner
@@ -773,39 +757,41 @@ $('#codigoEscaneado').autocomplete({
     buscarArticulo(codigoEscaneado);
   }
 });
+  
 
 // Agregar evento change al input de cantidad vendida
 $(document).on('change', '.cantidad-vendida-input', function() {
-  // Obtener la fila actual
-  var fila = $(this).closest('tr');
-
-  // Obtener el valor del input de cantidad vendida
-  var cantidadVendida = parseInt($(this).val());
-
-  // Obtener el valor del input de existencias en la base de datos
-  var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
-
-  // Calcular la diferencia
-  var diferencia = cantidadVendida - existenciasBd;
-
-  // Actualizar el valor del input de diferencia
-  fila.find('.cantidad-diferencia-input').val(diferencia);
+    // Obtener la fila actual
+    var fila = $(this).closest('tr');
+    
+    // Obtener el valor del input de cantidad vendida
+    var cantidadVendida = parseInt($(this).val());
+    
+    // Obtener el valor del input de existencias en la base de datos
+    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+    
+    // Calcular la diferencia
+    var diferencia = cantidadVendida - existenciasBd;
+    
+    // Actualizar el valor del input de diferencia
+    fila.find('.cantidad-diferencia-input').val(diferencia);
 });
-
 // Función para calcular la diferencia entre la cantidad vendida y las existencias en la base de datos
 function calcularDiferencia(fila) {
-  // Obtener la cantidad vendida y las existencias de la fila actual
-  var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
-  var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+    // Obtener la cantidad vendida y las existencias de la fila actual
+    var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
+    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
 
-  // Calcular la diferencia
-  var diferencia = cantidadVendida - existenciasBd;
+    // Calcular la diferencia
+    var diferencia = cantidadVendida - existenciasBd;
 
-  // Actualizar el valor del input de diferencia en la fila actual
-  fila.find('.cantidad-diferencia-input').val(diferencia);
+    // Actualizar el valor del input de diferencia en la fila actual
+    fila.find('.cantidad-diferencia-input').val(diferencia);
 }
 
-var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
+
+  var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
+
 
 
   // Variable para almacenar el total del IVA
