@@ -119,7 +119,9 @@ function formatPhoneNumber(input) {
 								<option value = "">Selecciona un medico</option>
 							</select>
 </div>
-
+<input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"   readonly >
+    <input type="text" class="form-control" name="SistemaExt" id="sistemaExt"  value="Agenda de citas" hidden  readonly >
+    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
 <label for="fecha" class="error">
     </div>
    
@@ -195,10 +197,8 @@ function formatPhoneNumber(input) {
 </div>
     </div>
     </div>  
-    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"   readonly >
-    <input type="text" class="form-control" name="SistemaExt" id="sistemaExt"  value="Agenda de citas" hidden  readonly >
-    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>" readonly >
 
+    </div>
     
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div>
