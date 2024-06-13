@@ -300,53 +300,80 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Tipodeajuste").addEventListener("change", function() {
         var selectedOption = this.value;
         if (selectedOption === "Inventario inicial") {
-            Swal.fire({
-                title: '¿Estás seguro que deseas establecer en 0 las existencias de la sucursal ' + namedesucursal + '?',
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, establecer stock en 0"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Aquí hacemos la llamada AJAX para actualizar la base de datos
-                    $.ajax({
-                        url: 'Consultas/EstableceStock.php', // URL del archivo PHP que maneja la actualización
-                        method: 'POST',
-                        data: {
-                            tipoAjuste: selectedOption,
-                            fkSucursal: fkSucursal // Incluye el valor PHP aquí
-                        },
-                        success: function(response) {
-                            var res = JSON.parse(response);
-                            if(res.success) {
-                                Swal.fire({
-                                    title: 'Éxito',
-                                    text: 'El stock de la sucursal ' + namedesucursal + ' se ha ajustado a 0',
-                                    icon: 'success'
+            // Aquí hacemos la llamada AJAX para verificar el estado del inventario inicial
+            $.ajax({
+                url: 'Consultas/VerificaEstadoInventario.php', // Nuevo archivo PHP que maneja la verificación
+                method: 'POST',
+                data: {
+                    fkSucursal: fkSucursal // Incluye el valor PHP aquí
+                },
+                success: function(response) {
+                    var res = JSON.parse(response);
+                    if(res.success) {
+                        Swal.fire({
+                            title: 'Inventario ya establecido',
+                            text: 'El inventario inicial ya ha sido establecido el ' + res.fecha_establecido,
+                            icon: 'info'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¿Estás seguro que deseas establecer en 0 las existencias de la sucursal ' + namedesucursal + '?',
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Sí, establecer stock en 0"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Aquí hacemos la llamada AJAX para actualizar la base de datos
+                                $.ajax({
+                                    url: 'Consultas/EstableceStock.php', // URL del archivo PHP que maneja la actualización
+                                    method: 'POST',
+                                    data: {
+                                        tipoAjuste: selectedOption,
+                                        fkSucursal: fkSucursal // Incluye el valor PHP aquí
+                                    },
+                                    success: function(response) {
+                                        var res = JSON.parse(response);
+                                        if(res.success) {
+                                            Swal.fire({
+                                                title: 'Éxito',
+                                                text: 'El stock de la sucursal ' + namedesucursal + ' se ha ajustado a 0',
+                                                icon: 'success'
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Error',
+                                                text: res.message || 'Hubo un problema al establecer el stock en 0 de la sucursal ' + namedesucursal,
+                                                icon: 'error'
+                                            });
+                                        }
+                                    },
+                                    error: function() {
+                                        // Maneja los errores de la llamada AJAX
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+                                            icon: 'error'
+                                        });
+                                    }
                                 });
                             } else {
                                 Swal.fire({
-                                    title: 'Error',
-                                    text: res.message || 'Hubo un problema al establecer el stock en 0 de la sucursal ' + namedesucursal,
-                                    icon: 'error'
+                                    title: 'Acción cancelada',
+                                    text: 'No se realizaron cambios.',
+                                    icon: 'info'
                                 });
                             }
-                        },
-                        error: function() {
-                            // Maneja los errores de la llamada AJAX
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                                icon: 'error'
-                            });
-                        }
-                    });
-                } else {
+                        });
+                    }
+                },
+                error: function() {
+                    // Maneja los errores de la llamada AJAX
                     Swal.fire({
-                        title: 'Acción cancelada',
-                        text: 'No se realizaron cambios.',
-                        icon: 'info'
+                        title: 'Error',
+                        text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+                        icon: 'error'
                     });
                 }
             });
