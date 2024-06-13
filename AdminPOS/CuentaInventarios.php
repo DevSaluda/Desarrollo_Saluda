@@ -629,7 +629,19 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
-  
+var scanBuffer = [];
+var scanInterval = 500; // Milisegundos
+
+function procesarBuffer() {
+  if (scanBuffer.length > 0) {
+    var codigoEscaneado = scanBuffer.shift();
+    buscarArticulo(codigoEscaneado);
+  }
+}
+
+function agregarEscaneo(escaneo) {
+  scanBuffer.push(escaneo);
+}
   // Aquí colocar el resto de tu script JavaScript
   function buscarArticulo(codigoEscaneado) {
     if (codigoEscaneado.trim() === "") {
@@ -720,18 +732,19 @@ function limpiarCampo() {
 
 var isScannerInput = false;
 
-// Escucha el evento keyup en el campo de búsqueda
 $('#codigoEscaneado').keyup(function (event) {
-  if (event.which === 13) { // Verifica si la tecla presionada es "Enter"
-    if (!isScannerInput) { // Verifica si el evento no viene del escáner
+  if (event.which === 13) { // Verificar si la tecla presionada es "Enter"
+    if (!isScannerInput) { // Verificar si el evento no viene del escáner
       var codigoEscaneado = $('#codigoEscaneado').val();
-      buscarArticulo(codigoEscaneado);
-      event.preventDefault(); // Evita que el formulario se envíe al presionar "Enter"
+      agregarEscaneo(codigoEscaneado); // Agregar el código escaneado al buffer de escaneo
+      event.preventDefault(); // Evitar que el formulario se envíe al presionar "Enter"
     }
-    isScannerInput = false; // Restablece la bandera del escáner
+    isScannerInput = false; // Restablecer la bandera del escáner
   }
 });
 
+// Configurar un intervalo para procesar el buffer de escaneo a intervalos regulares
+setInterval(procesarBuffer, scanInterval);
 // Agrega el autocompletado al campo de búsqueda
 $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
