@@ -640,7 +640,7 @@ function procesarBuffer() {
 }
 
 function agregarEscaneo(escaneo) {
-  escaneo += '~'; // Agregar el carácter especial al final del escaneo
+  escaneo += '\n'; // Agregar el carácter especial al final del escaneo
   scanBuffer.push(escaneo);
 }
   // Aquí colocar el resto de tu script JavaScript
@@ -651,10 +651,11 @@ function agregarEscaneo(escaneo) {
    
   
   var ultimoCaracter = codigoEscaneado.slice(-1);
-  if (ultimoCaracter === '~') {
-    // Eliminar el carácter especial "~"
+  if (ultimoCaracter === '\n') {
+    // Eliminar el carácter especial "\n"
     codigoEscaneado = codigoEscaneado.slice(0, -1);
     // Procesar el escaneo
+
     var formData = new FormData();
     formData.append('codigoEscaneado', codigoEscaneado);
   }
