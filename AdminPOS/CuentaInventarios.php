@@ -510,10 +510,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:3%">Contado</th>
+                              <th style="width:5%">Contado</th>
                               <th style="width:3%">Actual</th>
-                              <th style="width:3%">Diferencia</th>
-                              <th>Precio</th>
+                              <th style="width:5%">Diferencia</th>
+                              <th style="width:15%">Precio</th>
                               <th>Tipo de ajuste</th>
                               <th style="width:3%">Anaquel</th>
                               <!-- <th>Precio compra</th>
