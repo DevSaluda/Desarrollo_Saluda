@@ -630,7 +630,7 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = '';
-var scanInterval = 300; // Ajusta este valor según la velocidad del escáner
+var scanInterval = 300; // Milisegundos, ajusta según la velocidad del escáner
 
 function procesarBuffer() {
   if (scanBuffer.length > 0) {
@@ -661,8 +661,6 @@ function esCodigoBarrasValido(codigoEscaneado) {
   var longitud = codigoEscaneado.length;
   return longitud >= 2 && longitud <= 13; // Ajusta el rango según sea necesario
 }
-
-
   // Aquí colocar el resto de tu script JavaScript
   function buscarArticulo(codigoEscaneado) {
     if (codigoEscaneado.trim() === "") {
