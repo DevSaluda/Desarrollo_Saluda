@@ -184,19 +184,13 @@ function formatPhoneNumber(input) {
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt">
             <option value="">Elige un tipo de consulta</option>
             <?php
-            
-            $sql = "SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Generar las opciones del select
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row["Tipo_ID"] . "'>" . $row["Nom_Tipo"] . "</option>";
-                }
-            } else {
-                echo "<option value=''>No hay tipos de consulta disponibles</option>";
-            }
-            ?>
+          $query = $conn -> query ("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["Nom_Tipo"].'">'.$valores["Nom_Tipo"].'</option>';
+          }
+        ?> 
+           
+           
         </select>
     </div>
 </div>
