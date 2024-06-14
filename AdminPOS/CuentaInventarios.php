@@ -561,6 +561,12 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
     selectedAdjustment = this.value;
 });
 
+
+let selectAnaquel = "";
+
+document.getElementById('alphabetSelect').addEventListener('change', function() {
+  selectAnaquel = this.value;
+});
     </script>
 <!-- function actualizarSumaTotal  -->
 <script>
@@ -916,6 +922,7 @@ function calcularDiferencia(fila) {
         <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.precio}" /></td>
         <td class="tipoajuste"><input class="form-control tipoajuste-input" readonly style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text" /></td>
+          <td class="anaquel"><input class="form-control anaquel-input" readonly style="font-size: 0.75rem !important;" name="AnaquelSeleccionado[]" type="text" /></td>
         <td style="display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
@@ -933,6 +940,8 @@ function calcularDiferencia(fila) {
     actualizarImporte(newRow);
     calcularDiferencia(newRow);
     newRow.find('.tipoajuste-input').val(selectedAdjustment);
+    newRow.find('.anaquel-input').val(selectAnaquel);
+    
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
