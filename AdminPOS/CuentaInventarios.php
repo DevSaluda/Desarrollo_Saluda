@@ -251,10 +251,11 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                           
                         </div>
                         <div class="col">
-                <label for="alphabetSelect" style="font-size: 0.75rem !important;">Seleccione una letra</label>
+                <label for="alphabetSelect" style="font-size: 0.75rem !important;">Seleccione anaquel</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="Alphabet"><i class="fas fa-font"></i></span>
+                        <span class="input-group-text" style="    background-color: #e83e8c !important;
+    color: white;" id="Alphabet"><i class="fas fa-font"></i></span>
                     </div>
                     <select class="form-control" style="font-size: 0.75rem !important;" id="alphabetSelect"></select>
                 </div>
@@ -262,7 +263,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
             <!-- Tercer Select: Números del 1 al 30 -->
             <div class="col">
-                <label for="numberSelect" style="font-size: 0.75rem !important;">Seleccione un número</label>
+                <label for="numberSelect" style="font-size: 0.75rem !important;">Seleccione repisa</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Number"><i class="fas fa-hashtag"></i></span>
