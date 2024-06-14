@@ -470,8 +470,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   </div> -->
 
                   <!-- LISTADO QUE CONTIENE LOS PRODUCTOS QUE SE VAN AGREGANDO PARA LA COMPRA -->
-                  <div class="table-responsive">
-                    <div class="col-md-12">
+                
                       <style>
                         #tablaAgregarArticulos {
                           width: 100%;
@@ -500,14 +499,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         
                       </style>
-                      <style>
-  #tablaAgregarArticulos_wrapper {
-    width: 100%;
-  }
-  #tablaAgregarArticulos {
-    width: 100% !important;
-  }
-</style>
+                      
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
