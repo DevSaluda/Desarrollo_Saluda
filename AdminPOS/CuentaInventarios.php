@@ -248,6 +248,44 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
                           </div>
+                          <label for="alphabetSelect">Seleccione una letra:</label>
+    <select id="alphabetSelect"></select>
+
+    <label for="numberSelect">Seleccione un número:</label>
+    <select id="numberSelect"></select>
+
+    <script>
+        // Función para llenar el select con el abecedario
+        function populateAlphabetSelect() {
+            const alphabetSelect = document.getElementById('alphabetSelect');
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            
+            alphabet.forEach(letter => {
+                const option = document.createElement('option');
+                option.value = letter;
+                option.textContent = letter;
+                alphabetSelect.appendChild(option);
+            });
+        }
+
+        // Función para llenar el select con números del 1 al 30
+        function populateNumberSelect() {
+            const numberSelect = document.getElementById('numberSelect');
+            
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                numberSelect.appendChild(option);
+            }
+        }
+
+        // Llamar a las funciones para llenar los selects cuando la página se carga
+        window.onload = function() {
+            populateAlphabetSelect();
+            populateNumberSelect();
+        }
+    </script>
                         </div>
                         
                         <script>
