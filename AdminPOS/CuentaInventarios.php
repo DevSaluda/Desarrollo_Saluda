@@ -702,7 +702,7 @@ document.getElementById('alphabetSelect').addEventListener('change', function() 
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = "";
-var scanInterval = 100; // Milisegundos
+var scanInterval = 5; // Milisegundos
 
 function procesarBuffer() {
   // Buscar el carácter delimitador
