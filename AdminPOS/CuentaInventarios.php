@@ -248,11 +248,30 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
                           </div>
-                          <label for="alphabetSelect">Seleccione una letra:</label>
-    <select id="alphabetSelect"></select>
+                          
+                        </div>
+                        <div class="col">
+                <label for="alphabetSelect" style="font-size: 0.75rem !important;">Seleccione una letra</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Alphabet"><i class="fas fa-font"></i></span>
+                    </div>
+                    <select class="form-control" style="font-size: 0.75rem !important;" id="alphabetSelect"></select>
+                </div>
+            </div>
 
-    <label for="numberSelect">Seleccione un número:</label>
-    <select id="numberSelect"></select>
+            <!-- Tercer Select: Números del 1 al 30 -->
+            <div class="col">
+                <label for="numberSelect" style="font-size: 0.75rem !important;">Seleccione un número</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Number"><i class="fas fa-hashtag"></i></span>
+                    </div>
+                    <select class="form-control" style="font-size: 0.75rem !important;" id="numberSelect"></select>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Función para llenar el select con el abecedario
@@ -286,7 +305,8 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
             populateNumberSelect();
         }
     </script>
-                        </div>
+
+
                         
                         <script>
         document.getElementById('Tipodeajuste').addEventListener('change', function() {
