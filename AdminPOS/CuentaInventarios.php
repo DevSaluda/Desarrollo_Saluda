@@ -618,8 +618,7 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
-    searching: false, // Deshabilitar la funcionalidad de búsqueda
-    paging: true, // Deshabilitar el paginador
+    
     "columns": [{
         "data": "id"
       },
