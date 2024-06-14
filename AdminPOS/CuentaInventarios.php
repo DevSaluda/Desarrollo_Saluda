@@ -652,6 +652,9 @@ document.getElementById('alphabetSelect').addEventListener('change', function() 
       {
         "data": "tipodeajuste"
       },
+      {
+        "data": "anaquel"
+      },
       // {
       //     "data": "importesiniva"
       // },
