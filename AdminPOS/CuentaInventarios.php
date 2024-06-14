@@ -497,7 +497,17 @@ document.addEventListener("DOMContentLoaded", function() {
                           margin-top: -10px !important;
                           margin-bottom: 5px !important;
                         }
+
+                        
                       </style>
+                      <style>
+  #tablaAgregarArticulos_wrapper {
+    width: 100%;
+  }
+  #tablaAgregarArticulos {
+    width: 100% !important;
+  }
+</style>
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
