@@ -618,7 +618,8 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
-    
+    searching: false, // Deshabilitar la funcionalidad de búsqueda
+    paging: false, // Deshabilitar el paginador
     "columns": [{
         "data": "id"
       },
@@ -664,7 +665,8 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
     "language": {
       "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
     },
-   
+    //para usar los botones   
+    responsive: "false",
 
   });
 
