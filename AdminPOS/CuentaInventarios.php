@@ -630,32 +630,27 @@ document.getElementById('Tipodeajuste').addEventListener('change', function() {
 
 var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
 var scanBuffer = [];
-var scanInterval = 0; // Milisegundos
-
-function agregarEscaneo(escaneo) {
-  // Verificar si el código de barras ya está en el buffer
-  if (!scanBuffer.includes(escaneo)) {
-    // Agregar el escaneo al buffer
-    scanBuffer.push(escaneo);
-  }
-}
+var scanInterval = 100; // Milisegundos
 
 function procesarBuffer() {
   if (scanBuffer.length > 0) {
     var codigoEscaneado = scanBuffer.shift();
-    // Verificar si el código de barras es válido antes de procesarlo
     if (esCodigoBarrasValido(codigoEscaneado)) {
       buscarArticulo(codigoEscaneado);
     } else {
-      // Mostrar mensaje de error o ignorar el código de barras no válido
-      console.log("Código de barras no válido: " + codigoEscaneado);
+      console.warn('Código de barras inválido:', codigoEscaneado);
     }
   }
 }
 
+function agregarEscaneo(escaneo) {
+  scanBuffer.push(escaneo);
+}
+
 function esCodigoBarrasValido(codigoEscaneado) {
   // Verificar si el código de barras tiene una longitud válida
-  return codigoEscaneado.length === 13; // Se asume que un código válido tiene 13 caracteres
+  var longitud = codigoEscaneado.length;
+  return longitud >= 2 && longitud <= 13; // Ajusta el rango según sea necesario
 }
 
   // Aquí colocar el resto de tu script JavaScript
