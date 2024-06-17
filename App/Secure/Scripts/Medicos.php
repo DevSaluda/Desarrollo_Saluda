@@ -4,7 +4,7 @@ include_once("../db_connect.php");
 if(isset($_POST['login_button'])) {
 	$Correo_electronico = trim($_POST['user_email']);
 	$Password = trim($_POST['password']);
-	$Fk_Usuario= $_POST['nivel'];
+
 	
 	$sql = "SELECT Pos_ID,Nombre_Apellidos,Password,Correo_Electronico,ID_H_O_D,Fk_Usuario 
 	FROM PersonalPOS WHERE Fk_Usuario='$Fk_Usuario' AND Correo_electronico='$Correo_electronico'";
