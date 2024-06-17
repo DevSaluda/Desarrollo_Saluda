@@ -324,7 +324,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
                         
-                        <script>
+                        
   <script>
     document.getElementById('Tipodeajuste').addEventListener('change', function() {
         var selectElement = document.getElementById('Tipodeajuste');
