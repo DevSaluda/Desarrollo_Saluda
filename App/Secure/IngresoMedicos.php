@@ -33,7 +33,7 @@ include("Cookies/Mensaje.php");
 <link rel="stylesheet" type="text/css" href="Componentes/Preloader.css">
 <!--===============================================================================================-->
 <script type="text/javascript" src="Consultas/validation.min.js"></script>
-<script type="text/javascript" src="Consultas/AgendaV3.js"></script>
+<script type="text/javascript" src="Consultas/Medicos.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -160,7 +160,7 @@ body, html {
           
                     <div class="wrap-input100 " >
                         <span class="label-input100">Correo electronico</span>
-                        <input class="input100" input type="email" autocomplete="off" required placeholder="farmacia@saluda.com" name="user_email" id="user_email" maxlength="50">
+                        <input class="input100" input type="email" autocomplete="off" required placeholder="farmacia@saluda.mx" name="user_email" id="user_email" maxlength="50">
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
                     </div>
 
