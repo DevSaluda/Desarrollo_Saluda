@@ -6,10 +6,14 @@ if(isset($_POST['login_button'])) {
 	$Password = trim($_POST['password']);
 	
 	$sql = "SELECT Pos_ID,Nombre_Apellidos,Password,Correo_Electronico,ID_H_O_D,Fk_Usuario 
-	FROM PersonalPOS WHERE Correo_electronico='$Correo_electronico'";
+	FROM PersonalPOS WHERE Fk_Usuario='$Fk_Usuario' AND Correo_electronico='$Correo_electronico'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 	$row = mysqli_fetch_assoc($resultset);	
 		
-
+	if($row['Password']==$Password){				
+		echo "ok";
+		$_SESSION['Médico'] = $row['Pos_ID'];
+	} 
+	
 }
 ?>
