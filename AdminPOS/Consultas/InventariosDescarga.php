@@ -16,6 +16,8 @@ tabla = $('#Productos').DataTable({
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
        { mData: 'Existencias_R' },
+       { mData: 'Anaquel' },
+       { mData: 'Repisa' },
        { mData: 'Precio_Venta' },
        { mData: 'Precio_Compra' },
        { mData: 'Nom_Serv' },
@@ -81,6 +83,8 @@ tabla = $('#Productos').DataTable({
 <th>Clave</th>
     <th>Nombre</th>
     <th>Stock </th>
+    <th>Anaquel </th>
+    <th>Repisa </th>
     <th>PV </th>
     <th>PC</th>
     <th>Servicio </th>

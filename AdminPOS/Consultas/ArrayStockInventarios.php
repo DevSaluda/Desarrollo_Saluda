@@ -28,7 +28,9 @@ $sql = "SELECT
             sp.Precio_C,
             pp.Precio_C,
             sp.Contabilizado,         -- New field
-            sp.FechaDeInventario      -- New field
+            sp.FechaDeInventario,
+             sp.Anaquel,
+              sp.Repisa     -- New field
         FROM 
             Stock_POS sp
         JOIN 
@@ -50,6 +52,8 @@ while($fila = $result->fetch_assoc()){
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
+    $data[$c]["Anaquel"] = $fila["Anaquel"];
+    $data[$c]["Repisa"] = $fila["Repisa"];
     $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
     $data[$c]["Precio_Compra"] = $fila["Precio_C"];
     $data[$c]["Nom_Serv"] = $fila["Nom_Serv"];
