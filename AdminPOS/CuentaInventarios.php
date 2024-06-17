@@ -516,6 +516,7 @@ document.addEventListener("DOMContentLoaded", function() {
                               <th style="width:5%">Precio</th>
                               <th>Tipo de ajuste</th>
                               <th style="width:3%">Anaquel</th>
+                              <th style="width:3%">Repisa</th>
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
