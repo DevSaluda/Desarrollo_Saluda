@@ -10,7 +10,7 @@ if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`,`Tipo_Ajuste`) VALUES ";
+$query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`,`Tipo_Ajuste`,`Anaquel`,`Repisa`) VALUES ";
 
 $placeholders = [];
 $values = [];
