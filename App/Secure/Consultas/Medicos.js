@@ -8,9 +8,6 @@ $('document').ready(function() {
 			password: {
 				required: true,
 			},
-			nivel: {
-				required: true,
-			},
 			user_email: {
 				required: true,
 				email: true
