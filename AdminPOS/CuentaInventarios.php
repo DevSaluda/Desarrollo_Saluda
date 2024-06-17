@@ -324,7 +324,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 
                         
-                        
+                       
   <script>
     document.getElementById('Tipodeajuste').addEventListener('change', function() {
         var selectElement = document.getElementById('Tipodeajuste');
@@ -364,7 +364,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
             inputElement.disabled = false;
         }
     });
-</script>
+
 
         // Inicializar el estado del input basado en el valor inicial del select
         document.addEventListener('DOMContentLoaded', function() {
