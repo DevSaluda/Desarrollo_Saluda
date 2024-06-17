@@ -376,10 +376,14 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                 Swal.fire({
                     title: '¡Campo Bloqueado!',
                     html: '<p>El campo <b>"Código Escaneado"</b> está bloqueado.</p>' +
-                          '<p>Para desbloquearlo, por favor seleccione un tipo de ajuste del menú desplegable.</p>' +
+                          '<p>Para desbloquearlo, por favor seleccione un tipo de ajuste,el anaquel y la repisa con la que estaras realizando el conteo.</p>' +
                           '<p><b>Instrucciones:</b></p>' +
                           '<ul>' +
                           '<li>Haz clic en el menú desplegable "Tipo de ajuste".</li>' +
+                          '<li>Selecciona una de las opciones disponibles.</li>' +
+                          '<li>Haz clic en el menú desplegable "Anaquel".</li>' +
+                          '<li>Selecciona una de las opciones disponibles.</li>' +
+                          '<li>Haz clic en el menú desplegable "Repisa".</li>' +
                           '<li>Selecciona una de las opciones disponibles.</li>' +
                           '<li>El campo se desbloqueará automáticamente.</li>' +
                           '</ul>',
