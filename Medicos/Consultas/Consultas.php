@@ -20,7 +20,7 @@ $hora = date('G'); if (($hora >= 0) AND ($hora < 6))
   } 
   else if (($hora >= 6) AND ($hora < 12)) 
   { 
-    $mensaje = "Buenos días"; 
+    $mensaje = "Buenos díass"; 
   } 
   else if (($hora >= 12) AND ($hora < 18)) 
   { 
