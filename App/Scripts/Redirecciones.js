@@ -15,6 +15,11 @@ function Citas(){
   location.href="https://saludapos.com/App/Secure/IngresoAgenda" 
 }
 
+function Medicos(){
+  location.href="https://saludapos.com/App/Secure/IngresoMedicos" 
+}
+
+
 /*Redirecciones para volver a identificacion de perfiles, y soporte tecnico */
 
 
