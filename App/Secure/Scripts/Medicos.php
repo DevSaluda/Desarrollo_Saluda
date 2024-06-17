@@ -10,10 +10,6 @@ if(isset($_POST['login_button'])) {
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 	$row = mysqli_fetch_assoc($resultset);	
 		
-	if($row['Password']==$Password and $row['Fk_Usuario']=="12" ){				
-		echo "ok";
-		$_SESSION['Médico'] = $row['Pos_ID'];
-	} 
-	
+
 }
 ?>
