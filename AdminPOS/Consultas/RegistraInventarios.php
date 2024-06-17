@@ -20,7 +20,7 @@ for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
         $values[] = $_POST["IdBasedatos"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
@@ -36,7 +36,9 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["ID_H_O_D"][$i];
         $values[] = $_POST["FechaInv"][$i]; // Agregar el campo 'ID_H_O_D' según la nueva data
         $values[] = $_POST["Tipodeajusteaplicado"][$i];
-        $valueTypes .= 'ssssssssssssss'; // Ajustar tipos según corresponda
+        $values[] = $_POST["AnaquelSeleccionado"][$i];
+        $values[] = $_POST["RepisaSeleccionada"][$i];
+        $valueTypes .= 'ssssssssssssssss'; // Ajustar tipos según corresponda
     }
 }
 
