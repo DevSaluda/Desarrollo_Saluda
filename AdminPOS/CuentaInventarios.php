@@ -325,15 +325,46 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
                         
                         <script>
-        document.getElementById('Tipodeajuste').addEventListener('change', function() {
-            var selectElement = document.getElementById('Tipodeajuste');
-            var inputElement = document.getElementById('codigoEscaneado');
-            if (selectElement.value === "") {
-                inputElement.disabled = true;
-            } else {
-                inputElement.disabled = false;
-            }
-        });
+  <script>
+    document.getElementById('Tipodeajuste').addEventListener('change', function() {
+        var selectElement = document.getElementById('Tipodeajuste');
+        var alphabetSelect = document.getElementById('alphabetSelect');
+        var numberSelect = document.getElementById('numberSelect');
+        var inputElement = document.getElementById('codigoEscaneado');
+
+        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
+            inputElement.disabled = true;
+        } else {
+            inputElement.disabled = false;
+        }
+    });
+
+    document.getElementById('alphabetSelect').addEventListener('change', function() {
+        var selectElement = document.getElementById('Tipodeajuste');
+        var alphabetSelect = document.getElementById('alphabetSelect');
+        var numberSelect = document.getElementById('numberSelect');
+        var inputElement = document.getElementById('codigoEscaneado');
+
+        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
+            inputElement.disabled = true;
+        } else {
+            inputElement.disabled = false;
+        }
+    });
+
+    document.getElementById('numberSelect').addEventListener('change', function() {
+        var selectElement = document.getElementById('Tipodeajuste');
+        var alphabetSelect = document.getElementById('alphabetSelect');
+        var numberSelect = document.getElementById('numberSelect');
+        var inputElement = document.getElementById('codigoEscaneado');
+
+        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
+            inputElement.disabled = true;
+        } else {
+            inputElement.disabled = false;
+        }
+    });
+</script>
 
         // Inicializar el estado del input basado en el valor inicial del select
         document.addEventListener('DOMContentLoaded', function() {
