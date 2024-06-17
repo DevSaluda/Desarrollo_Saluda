@@ -997,7 +997,7 @@
             </a>
           
           </li>
-<li class="nav-item has-treeview">
+<!-- <li class="nav-item has-treeview">
             <a href="ModuloDeInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
@@ -1006,7 +1006,7 @@
               </p>
             </a>
           
-          </li>
+          </li> -->
           <li class="nav-item has-treeview">
             <a href="CuentaInventarios" class="nav-link">
             <i class="fas fa-barcode"></i>
@@ -1017,7 +1017,7 @@
             </a>
           
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="GeneracionReportesInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
               <p>
@@ -1026,7 +1026,7 @@
               </p>
             </a>
           
-          </li>
+          </li> -->
           <li class="nav-item has-treeview">
             <a href="HistorialInventarios" class="nav-link">
             <i class="fas fa-boxes"></i>
