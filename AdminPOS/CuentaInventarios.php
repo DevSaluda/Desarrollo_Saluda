@@ -568,6 +568,12 @@ let selectAnaquel = "";
 document.getElementById('alphabetSelect').addEventListener('change', function() {
   selectAnaquel = this.value;
 });
+
+let selectRepisa = "";
+
+document.getElementById('numberSelect').addEventListener('change', function() {
+  selectRepisa = this.value;
+});
     </script>
 <!-- function actualizarSumaTotal  -->
 <script>
@@ -654,6 +660,9 @@ document.getElementById('alphabetSelect').addEventListener('change', function() 
       },
       {
         "data": "anaquel"
+      },
+      {
+        "data": "repisa"
       },
       // {
       //     "data": "importesiniva"
@@ -927,6 +936,7 @@ function calcularDiferencia(fila) {
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.precio}" /></td>
         <td class="tipoajuste"><input class="form-control tipoajuste-input" readonly style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text" /></td>
           <td class="anaquel"><input class="form-control anaquel-input" readonly style="font-size: 0.75rem !important;" name="AnaquelSeleccionado[]" type="text" /></td>
+          <td class="repisa"><input class="form-control repisa-input" readonly style="font-size: 0.75rem !important;" name="RepisaSeleccionada[]" type="text" /></td>
         <td style="display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
@@ -945,7 +955,7 @@ function calcularDiferencia(fila) {
     calcularDiferencia(newRow);
     newRow.find('.tipoajuste-input').val(selectedAdjustment);
     newRow.find('.anaquel-input').val(selectAnaquel);
-    
+    newRow.find('.repisa-input').val(selectRepisa);
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
