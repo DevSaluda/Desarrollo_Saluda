@@ -279,8 +279,15 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
         // Función para llenar el select con el abecedario
         function populateAlphabetSelect() {
             const alphabetSelect = document.getElementById('alphabetSelect');
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
             
+            // Añadir la primera opción con valor vacío
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Seleccione Repisa';
+            alphabetSelect.appendChild(defaultOption);
+            
+            // Llenar con el abecedario
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
             alphabet.forEach(letter => {
                 const option = document.createElement('option');
                 option.value = letter;
@@ -293,6 +300,13 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
         function populateNumberSelect() {
             const numberSelect = document.getElementById('numberSelect');
             
+            // Añadir la primera opción con valor vacío
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Seleccione Anaquel';
+            numberSelect.appendChild(defaultOption);
+            
+            // Llenar con números del 1 al 30
             for (let i = 1; i <= 30; i++) {
                 const option = document.createElement('option');
                 option.value = i;
