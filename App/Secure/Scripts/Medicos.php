@@ -6,7 +6,8 @@ if(isset($_POST['login_button'])) {
 	$Password = trim($_POST['password']);
 	
 	$sql = "SELECT Pos_ID,Nombre_Apellidos,Password,Correo_Electronico,ID_H_O_D,Fk_Usuario
-	FROM PersonalPOS WHERE Correo_electronico='$Correo_electronico'";
+	FROM PersonalPOS WHERE Correo_electronico='$Correo_electronico' AND Fk_Usuario = '12'";
+	
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 	$row = mysqli_fetch_assoc($resultset);	
 		
