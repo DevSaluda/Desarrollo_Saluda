@@ -28,7 +28,7 @@ include "Consultas/Consultas.php";
       </div>
     </div>
     
-    <div id="TablaPedidos" class="table-responsive">
+    <!-- <div id="TablaPedidos" class="table-responsive">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -51,7 +51,7 @@ include "Consultas/Consultas.php";
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
 </div>
 <!-- Control Sidebar -->
