@@ -62,6 +62,7 @@ include "Consultas/Consultas.php";
 <?php 
 include ("Modales/Error.php");
 include ("Modales/GeneraPedidoPorDia.php");
+include ("Modales/GeneraPedidoPorPeriodo.php");
 include ("Modales/Exito.php");
 include ("Modales/Precarga.php");
 include ("Modales/ExitoActualiza.php");
