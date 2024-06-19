@@ -1170,45 +1170,6 @@
           </div>
 
        
-            <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-            <i class="fas fa-file-medical-alt"></i>
-              <p>
-            Motivos de consulta
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-            <a href="https://saludapos.com/ControlDental/RegistroDiarioMotivoConsulta" class="nav-link">
-          <i class="fas fa-calendar-day"></i>
-              <p>
-              Registro por dia
-              
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://saludapos.com/ControlDental/RegistrosMotivosConsultaGeneral" class="nav-link">
-            <i class="fas fa-calendar-alt"></i>
-              <p>
-              Registro en general
-              
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://saludapos.com/ControlDental/RegistrosMotivosConsultaGeneral" class="nav-link">
-            <i class="fab fa-searchengin"></i>
-              <p>
-              Registro personalizado
-              
-              </p>
-            </a>
-          </li>
-            </ul>
-          </li>
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
