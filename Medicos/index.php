@@ -45,38 +45,38 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $PacientesGeneralDentalTotal['TotalResultados']?></h3>
+                <h3>Pacientes</h3>
 
                 <p>Pacientes</p>
               </div>
               <div class="icon">
-              <i class="fas fa-cash-register"></i>
+              <i class="fas fa-head-side-mask"></i>
               </div>
-              <a data-toggle="modal" data-target="#PacientesDentalModalVista" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
+              <a data-toggle="modal" data-target="#PacientesMedicos" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
+           <!-- ./col -->
+           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3><?php echo $CreditosVigentes['CreditosVigentes']?></h3>
+                <h3>Expedientes</h3>
 
-                <p>Créditos dentales</p>
+                <p>Expedientes</p>
               </div>
               <div class="icon">
-              <i class="fas fa-barcode"></i>
+              <i class="fas fa-clipboard-user"></i>
               </div>
-                <a  data-toggle="modal" data-target="#CreditosDentalesModales" class="small-box-footer">Consultar Ventas <i class="fas fa-arrow-circle-right"></i></a>
+              <a data-toggle="modal" data-target="#PacientesExpedientes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?php echo $AbonosRealizados['AbonosDelDia']?></h3>
-                <p>abonos realizados</p>
+              <h3></h3>
+                <p>Signos vitales</p>
 
                
               </div>
@@ -91,12 +91,12 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3><?php echo $TotalProcedimientos['VentasDelDia']?></h3>
+              <h3>Procedimientos</h3>
               <p>Procedimientos realizados</p>
                
               </div>
               <div class="icon">
-              <i class="fas fa-hand-holding-usd"></i>
+              <i class="fas fa-proceedures"></i>
               </div>
               <a data-toggle="modal" data-target="#TotalesporSucursalesindex" class="small-box-footer">Ver totales <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -162,8 +162,6 @@ Productos mas vendidos
   <!-- Main Footer -->
   <?php include ("Modales/Ingreso.php");
   include ("Modales/ConsultaPacientesModal.php");
-  include ("Modales/ConsultaCreditosModal.php");
-  include ("Modales/ConsultaAbonosModal.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 
