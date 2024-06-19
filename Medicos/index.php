@@ -65,7 +65,7 @@
                 <p>Expedientes</p>
               </div>
               <div class="icon">
-              <i class="fas fa-clipboard-user"></i>
+              <i class="fas fa-file-medical-alt"></i>
               </div>
               <a data-toggle="modal" data-target="#PacientesExpedientes" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -75,13 +75,13 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-              <h3></h3>
+              <h3>Signos Vitales</h3>
                 <p>Signos vitales</p>
 
                
               </div>
               <div class="icon">
-              <i class="fas fa-boxes"></i>
+              <i class="fas fa-heartbeat"></i>
               </div>
               <a data-toggle="modal" data-target="#AbonosDentalesRealizadosModales" class="small-box-footer">Consultar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -96,7 +96,7 @@
                
               </div>
               <div class="icon">
-              <i class="fas fa-proceedures"></i>
+              <i class="fas fa-procedures"></i>
               </div>
               <a data-toggle="modal" data-target="#TotalesporSucursalesindex" class="small-box-footer">Ver totales <i class="fas fa-arrow-circle-right"></i></a>
             </div>
