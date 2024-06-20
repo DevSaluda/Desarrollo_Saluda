@@ -67,7 +67,7 @@ header('Cache-Control: max-age=0');
 $output = fopen('php://output', 'w');
 
 // Escribir los encabezados en el archivo CSV
-$encabezados = ["Cod_Barra", "Nombre_Prod", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
+$encabezados = ["Codigo de Barras", "Nombre del Producto", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
 fputcsv($output, $encabezados);
 
 // Escribir los datos del archivo CSV
