@@ -16,7 +16,6 @@ if (isset($_POST['Mes']) && isset($_POST['anual'])) {
     die("Error: Las variables 'Mes' y 'anual' no están definidas.");
 }
 
-// Consulta SQL
 $query = "SELECT DISTINCT
 Ventas_POS.Cod_Barra,
 Ventas_POS.Nombre_Prod,
@@ -33,7 +32,7 @@ CONVERT(Ventas_POS.FormaDePago USING utf8) AS FormaPago,
 CONVERT(Ventas_POS.Cliente USING utf8) AS Cliente,
 Ventas_POS.FolioSignoVital,
 Servicios_POS.Nom_Serv AS NomServ,
-DATE_FORMAT(Ventas_POS.Fecha_venta, '%d/%m/%Y') AS AgregadoEl,
+Ventas_POS.Fecha_venta AS AgregadoEl,
 Ventas_POS.AgregadoEl AS AgregadoEnMomento,
 Ventas_POS.AgregadoPor,
 CONVERT(Cajas_POS.EnfermeroEnturno USING utf8) AS Enfermero,
