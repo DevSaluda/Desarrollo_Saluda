@@ -908,70 +908,7 @@ function eliminarFila(element) {
 
 <!-- Main Footer -->
 
-<div class="text-center">
-    
-   
-            
-                
 
-            
-   <input type="text" name="SucursalDestino[]"  hidden id="SucDestino" class="form-control" value="<?php echo $SucursalDestino?>">
-   <input type="text" name="SucursalDestinoLetras[]" hidden id="SucDestinoLetras" class="form-control" value="<?php echo $SucursalDestinoLetras?>">
-   <input type="text" name="TipodeServicio[]" hidden id="tipodeservicio" class="form-control" >
-   <input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" >
-   <input type="date" class="form-control "  hidden name="FechaAprox[]" id="fechaaprox" value="<?php echo date("Y-m-d")?>"  > 
-   <input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  >
-      <input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  >
-      <input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" >
-      <input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" >
-      <input type="text" hidden name="Estatus[]" value="Generado" class="form-control" >
-      <input type="text" hidden name="Existencia1[]" value="0" class="form-control" >
-      <input type="text" hidden name="Existencia2[]" value="0" class="form-control" >
-      <input type="text" hidden name="Recibio[]" value="" class="form-control" >
-      <input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
-      <input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  >
-      <input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > 
-  </form>    
-
-              	</li>
- </ul>      
-              </div> </div> 
-              
-              <script>
-                function contarTotal() {
-    inputsPrecio = document.getElementsByClassName('input-precio');
-    inputsPreciocompra = document.getElementsByClassName('input-preciocompra');
-    inputsCantidad = document.getElementsByClassName('input-cantidad');
-
-    var totalAPagar = 0;
-    for (let index = 0; index < inputsCantidad.length; index++) {
-        totalAPagar += (Number(inputsPrecio[index].value) * Number(inputsCantidad[index].value));
-    }
-    var totalAPagarcompra = 0;
-    for (let index = 0; index < inputsCantidad.length; index++) {
-      totalAPagarcompra  += (Number(inputsPreciocompra[index].value) * Number(inputsCantidad[index].value));
-    }
-    document.getElementById("resultadoventas").value=totalAPagar;
-    document.getElementById("resultadocompras").value=totalAPagarcompra;
-      
-
-    var totalpiezas = 0;
-    for (let index = 0; index < inputsCantidad.length; index++) {
-      totalpiezas  += (Number(inputsCantidad[index].value));
-    }
-
-    document.getElementById("resultadopiezas").value=totalpiezas;
-
-
-
-}
-
-
-
-
-
-          </script>
-    </div>   </div>   </div>   </div>   </div>   </div>   </div>   </div>   </div>   </div>
       <!-- Fin Contenido --> 
 <!-- POR CADUCAR -->
   
