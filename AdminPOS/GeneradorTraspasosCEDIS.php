@@ -340,27 +340,7 @@ table td {
 </div>
 
 
-<script>
-       let selectedAdjustment = "";
 
-document.getElementById('Tipodeajuste').addEventListener('change', function() {
-    selectedAdjustment = this.value;
-});
-
-
-let selectAnaquel = "";
-
-document.getElementById('alphabetSelect').addEventListener('change', function() {
-  selectAnaquel = this.value;
-});
-
-let selectRepisa = "";
-
-document.getElementById('numberSelect').addEventListener('change', function() {
-  selectRepisa = this.value;
-});
-    </script>
-<!-- function actualizarSumaTotal  -->
 <script>
 
   
