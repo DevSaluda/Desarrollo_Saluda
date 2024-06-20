@@ -77,6 +77,10 @@ while ($fila = $resultado->fetch_assoc()) {
         $value = utf8_decode($value);
     });
 
+       // Formatear la fecha en 'dd/mm/yyyy'
+       $date = new DateTime($fila["AgregadoEl"]);
+       $formattedDate = $date->format('d/m/Y');
+   
     // Construir una fila con los datos específicos
     $data = [
         $fila["Cod_Barra"],
@@ -92,7 +96,7 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Cliente"],
         $fila["FolioSignoVital"],
         $fila["NomServ"],
-        $fila["Fecha_venta"],
+        $formattedDate,
         $fila["AgregadoEnMomento"],
         $fila["AgregadoPor"],
         $fila["Enfermero"],
