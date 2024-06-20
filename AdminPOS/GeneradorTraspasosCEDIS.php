@@ -151,16 +151,7 @@ table td {
         
    
             
-    <div class="col">
-      
-    <label for="exampleFormControlInput1"># de orden</label> 
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
-  </div>
-  <input type="text" class="form-control " readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
-  
-  
-    </div>  </div>
+ 
     <div class="col">
       
     <label for="exampleFormControlInput1"># de factura</label> 
