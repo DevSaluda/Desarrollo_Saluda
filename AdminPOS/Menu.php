@@ -861,10 +861,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a  href="ListadoDeTraspasos"  class="nav-link">
-            <i class="fa-solid fa-truck-arrow-right"></i>
+            <a  href="ListadoCedis"  class="nav-link">
+            <i class="fas fa-shuttle-van"></i>
               <p>
-           Generar Traspasos Cedis             
+          Traspasos Cedis             
               </p>
             </a>
           </li>
