@@ -134,18 +134,6 @@ table td {
 
         </script>
 
-<script>
- $(function () {
-    $("body").keypress(function (e) {
-        var key;
-        if (window.event)
-            key = window.event.keyCode; //IE
-        else
-            key = e.which; //firefox     
-        return (key != 13);
-    });
-});
-  </script>
         <a href="javascript:void(0)" id="agregarmasproductos"class="btn btn-info addMore"> Agregar producto <i class="fa-solid fa-plus"></i></a>
 <button class="btn btn-primary" id="ajustador" onclick="contarTotal()">Ajustar total <i class="fa-solid fa-sliders"></i></button>
 <form action="javascript:void(0)" method="post" id="Generamelostraspasos" >
@@ -262,6 +250,16 @@ table td {
 </div>
 </div>
 </div>
+<div class="content">
+
+
+  <div class="container-fluid">
+
+    <div class="row mb-3">
+
+  
+
+          <div class="card-body p-3"></div>
 <label class="col-form-label" for="iptCodigoVenta">
                         <i class="fas fa-barcode fs-6"></i>
                         <span class="small">Productos</span>
