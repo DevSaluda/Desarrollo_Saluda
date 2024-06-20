@@ -26,7 +26,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Generar ordenes de traspasos <?php echo $row['ID_H_O_D']?> </title>
+  <title>Generar traspasos de cedis <?php echo $row['ID_H_O_D']?> </title>
 
 <?php include "Header.php"?>
 
@@ -58,14 +58,7 @@ table td {
 </head>
 <?php include_once ("Menu.php")?>
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  
-  
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Ordenes de traspasos</a>
-  </li>
- 
-</ul>
+
 
 <div class="tab-content" id="pills-tabContent">
 
