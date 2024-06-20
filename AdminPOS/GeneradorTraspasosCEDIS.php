@@ -327,13 +327,11 @@ table td {
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:5%">Contado</th>
-                              <th style="width:3%">Actual</th>
-                              <th style="width:5%">Diferencia</th>
-                              <th style="width:5%">Precio</th>
-                              <th>Tipo de ajuste</th>
-                              <th style="width:3%">Anaquel</th>
-                              <th style="width:3%">Repisa</th>
+                              <th style="width:5%">Precio compra</th>
+                              <th style="width:3%">Precio Venta</th>
+                              <th style="width:5%">Piezas</th>
+                             
+                            
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
