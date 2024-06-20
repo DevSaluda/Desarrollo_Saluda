@@ -37,16 +37,8 @@
     <div class="form-group">
   <label for="exampleInputEmail1">Elija proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
-    <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
-    <option value="">Seleccione un proveedor:</option>
-                                                 <?php
-            $query = $conn -> query ("SELECT ID_Proveedor,Nombre_Proveedor,ID_H_O_D,Estatus FROM Proveedores_POS WHERE Estatus='Alta' AND  ID_H_O_D='".$row['ID_H_O_D']."'");
-          
-            while ($valores = mysqli_fetch_array($query)) {
-              echo '<option value="'.$valores["Nombre_Proveedor"].'">'.$valores["Nombre_Proveedor"].'</option>';
-            }
-                          ?>
-          </select>   
+    <input type="text" class="form-control" name="NombreProveedor" value="CEDIS">
+   
     </div>  </div> 
  
     <div class="form-group">
