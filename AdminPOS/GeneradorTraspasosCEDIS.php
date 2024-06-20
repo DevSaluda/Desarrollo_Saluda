@@ -76,63 +76,6 @@ table td {
 
 
 
-<script type="text/javascript">  
-        $(function() {
-          
-        $(document).ready(function(){
-
-             var maxGroup = 41;
-             var id = 0;
-            $(".addMore").click(function(){
-                id = id + 1;
-                if($('body').find('.form-group').length <= maxGroup){
-                    var fieldHTML = '<div class="form-group fieldGroup selector-' + id + '">'+$(".fieldGroupCopy").html()+'</div>';
-                    $('body').find('.fieldGroupCopy:last').before(fieldHTML);
-                }else{
-                  Swal.fire({
-        icon: 'warning',
-        title: '¡Alerta!',
-        text: `El máximo de productos son 40 para la generacion del traspaso, por favor en caso de hacer falta productos inicie un nuevo proceso`,
-        confirmButtonText: 'Entendido'
-    });
-                }
-                $(".selector-" + id + " #codbarra").focus();
-                $(".selector-" + id + " #codbarra").autocomplete({
-                        source: "Consultas/BusquedaCedisProductos.php",
-                        minLength: 2,
-                        select: function(event, ui) {
-                        event.preventDefault();
-                       
-                        $('.selector-' + id + ' #idprod').val(ui.item.idprod);
-                        $('.selector-' + id + ' #codbarra').val(ui.item.codbarra);
-                        $('.selector-' + id + ' #nombres').val(ui.item.nombres);
-                        $('.selector-' + id + ' #precioventa').val(ui.item.precioventa);
-                        $('.selector-' + id + ' #preciodecompra').val(ui.item.preciodecompra);
-                         $('.selector-' + id + ' #tipodeservicio').val(ui.item.tipodeservicio);
-                         $('.selector-' + id + ' #proveedor1').val(ui.item.proveedor1);
-                         $('.selector-' + id + ' #proveedor2').val(ui.item.proveedor2);
-                         $('.selector-' + id + ' #proveedor1vista1').val(ui.item.proveedor1vista1);
-                         $('.selector-' + id + ' #proveedor2vista2').val(ui.item.proveedor2vista2);
-                        $('#ajustador').trigger('click');
-                        $('#agregarmasproductos').trigger('click');
-                        
-                        
-                        }
-                        
-                    });
-                    
-                });
-            });
-            //remover
-            $("body").on("click",".remove",function(){ 
-                $(this).parents(".fieldGroup").remove();
-                contarTotal();
-            });
-        });
-
-                
-
-        </script>
 
   <div class="container">
 <div class="row">
@@ -225,6 +168,35 @@ table td {
 </div>
 </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona todos los inputs con la clase "cantidad-vendida-input"
+    var inputs = document.querySelectorAll('.cantidad-vendida-input');
+
+    // Añade un event listener a cada input para escuchar cambios
+    inputs.forEach(function(input) {
+        input.addEventListener('input', updateTotal);
+    });
+
+    function updateTotal() {
+        var total = 0;
+        
+        // Recorre todos los inputs y suma sus valores
+        inputs.forEach(function(input) {
+            var value = parseFloat(input.value);
+            if (!isNaN(value)) {
+                total += value;
+            }
+        });
+
+        // Actualiza el input con id "TotalPiezas" con el total calculado
+        document.getElementById('resultadopiezas').value = total;
+    }
+
+    // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
+    updateTotal();
+});
+</script>
 <div class="content">
 
 
