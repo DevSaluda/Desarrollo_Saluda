@@ -149,17 +149,7 @@ table td {
   
     </div>  </div>
         
-    <div class="col">
-      
-    <label for="exampleFormControlInput1">Proveedor</label> 
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
-  </div>
-  <input type="text" class="form-control " readonly  value="<?php echo $ProveedorFijo?>"  > 
-  
-  
-    </div>  </div>
-
+   
             
     <div class="col">
       
