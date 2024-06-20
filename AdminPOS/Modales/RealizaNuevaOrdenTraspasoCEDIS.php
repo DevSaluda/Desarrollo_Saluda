@@ -73,19 +73,10 @@
    <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumOrden" readonly>
     </div>  </div>  
 
-    <div class="form-group" id="numFacturaContainer">
-    <label for="exampleInputEmail1"># de factura</label>
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="Tarjeta2"><i class="fas fa-file-invoice"></i></span>
-        <input type="Text" class="form-control" name="NumFactura" id="NumFactura" onchange="comprobarFactura()">
-    </div>
-    <span id="estadousuario"></span>
-
-    <p><img src="https://saludapos.com/AdminPOS/loadergif.gif" id="loaderIcon" style="display:none;width: 50%;height: 32%;" /></p>
-</div>
+   
 </div>
 
-  <div class="form-group" style="display:none;">
+  <div class="form-group" >
     
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
     <input type="text" name="sucursalLetras" id="sucursalLetras" class="form-control">
