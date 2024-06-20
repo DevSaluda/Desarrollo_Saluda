@@ -67,7 +67,7 @@ header('Cache-Control: max-age=0');
 $output = fopen('php://output', 'w');
 
 // Escribir los encabezados en el archivo CSV
-$encabezados = ["Codigo de Barras", "Nombre del Producto", "PrecioCompra", "PrecioVenta", "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "Importe", "Total_Venta", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor"];
+$encabezados = ["Codigo de Barras", "Nombre del Producto",  "FolioTicket", "Sucursal", "Turno", "Cantidad_Venta", "P.U", "Importe", "Descuento", "FormaPago", "Cliente", "FolioSignoVital", "NomServ", "AgregadoEl", "AgregadoEnMomento", "AgregadoPor", "Enfermero", "Doctor","PrecioCompra", "PrecioVenta"];
 fputcsv($output, $encabezados);
 
 // Escribir los datos del archivo CSV
@@ -81,8 +81,6 @@ while ($fila = $resultado->fetch_assoc()) {
     $data = [
         $fila["Cod_Barra"],
         $fila["Nombre_Prod"],
-        $fila["PrecioCompra"],
-        $fila["PrecioVenta"],
         $fila["FolioTicket"],
         $fila["Sucursal"],
         $fila["Turno"],
@@ -94,11 +92,13 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Cliente"],
         $fila["FolioSignoVital"],
         $fila["NomServ"],
-        $fila["AgregadoEl"],
+        $fila["Fecha_venta"],
         $fila["AgregadoEnMomento"],
         $fila["AgregadoPor"],
         $fila["Enfermero"],
-        $fila["Doctor"]
+        $fila["Doctor"],
+        $fila["PrecioCompra"],
+        $fila["PrecioVenta"],
     ];
     // Escribir la fila en el archivo CSV
     fputcsv($output, $data);
