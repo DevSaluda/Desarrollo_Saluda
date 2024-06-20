@@ -914,23 +914,7 @@ function eliminarFila(element) {
             
                 
 
-            <div class="form-group fieldGroupCopy" style="display: none;">
             
-            <div class="lista-producto float-clear" style="clear:both;">
-            <ul class="list-group">
-   <li class="list-group-item">
-   <div class="form-row">
-     <input class="form-control" hidden  type="text" id="idprod" autofocus name="Idprod[]"  placeholder="Codigo de barra o nombre de producto"/>
-     
-  
- 
-  
-   <div class="col">  <label for="exampleFormControlInput1">Codigo de barra <span class="text-danger">*</span> </label>  <input class="form-control"  type="text" id="codbarra" autofocus name="CodBarra[]"  placeholder="Codigo de barra o nombre de producto"/></div>
-   <div class="col">     <label for="exampleFormControlInput1">Nombre/Descripcion <span class="text-danger">*</span>   </label>   <input class="form-control" readonly type="text" id="nombres" name="NombreProducto[]" placeholder="Nombres"/></div>
-   <div class="col" hidden>     <label for="exampleFormControlInput1">Proveedor 1<span class="text-danger">*</span>   </label>   <input class="form-control" readonly type="text" id="proveedor1vista1" placeholder="Nombres"/></div>
-   <div class="col" hidden>     <label for="exampleFormControlInput1">Proveedor 2 <span class="text-danger">*</span>   </label>   <input class="form-control" readonly type="text" id="proveedor2vista2" placeholder="Nombres"/></div>
-   <div class="col">     <label for="exampleFormControlInput1">Precio de venta <span class="text-danger">*</span>  </label>   <input class="input-precio form-control"   type="text" id="precioventa" name="PrecioVenta[]" placeholder="Cargo"/></div>
-  
    <div class="col">  <label for="exampleFormControlInput1">Precio de compra <span class="text-danger">*</span>  </label>  <input class="input-preciocompra form-control"   type="text" id="preciodecompra" name="PrecioDeCompra[]" placeholder="Grado"/></div>
    <div class="col"> <label for="exampleFormControlInput1">Cantidad a traspasar <span class="text-danger">*</span> </label><input class="input-cantidad form-control" value="0" onchange="contarTotal()" type="number" id="traspasocant" name="NTraspasos[]" placeholder="Cantidad traspasada"/></div>
    <input type="text" name="SucursalDestino[]"  hidden id="SucDestino" class="form-control" value="<?php echo $SucursalDestino?>">
