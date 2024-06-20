@@ -10,7 +10,7 @@ if ($ProveedorFijo === "CEDIS") {
     $primerasCuatroLetras = substr($SucursalDestinoLetras, 0, 4);
 
     // Combinar $primerasCuatroLetras con $NumeroDeFacturaTrapaso
-    $valorCombinado = $primerasCuatroLetras . $NumeroDeFacturaTrapaso;
+    $valorCombinado = $primerasCuatroLetras . $NumeroOrdenTraspaso;
 } else {
     // Utilizar solo el valor original de $NumeroDeFacturaTrapaso
     $valorCombinado = $NumeroDeFacturaTrapaso;
