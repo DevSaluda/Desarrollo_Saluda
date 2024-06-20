@@ -88,8 +88,9 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Sucursal"],
         $fila["Turno"],
         $fila["Cantidad_Venta"],
-        $fila["Importe"],
+       
         $fila["Total_Venta"],
+        $fila["Importe"],
         $fila["Descuento"],
         $fila["FormaPago"],
         $fila["Cliente"],
