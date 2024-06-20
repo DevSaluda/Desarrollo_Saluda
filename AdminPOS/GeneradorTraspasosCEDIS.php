@@ -134,13 +134,7 @@ table td {
 
         </script>
 
-        <a href="javascript:void(0)" id="agregarmasproductos"class="btn btn-info addMore"> Agregar producto <i class="fa-solid fa-plus"></i></a>
-<button class="btn btn-primary" id="ajustador" onclick="contarTotal()">Ajustar total <i class="fa-solid fa-sliders"></i></button>
-<form action="javascript:void(0)" method="post" id="Generamelostraspasos" >
-  <div class="text-center">
-  <button type="submit"   value="Guardar" class="btn btn-success">Generar traspaso <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-  
-  <div class="container" style="max-width: 1600px !important;">
+  <div class="container">
 <div class="row">
 
 
