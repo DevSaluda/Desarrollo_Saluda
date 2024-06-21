@@ -340,56 +340,7 @@ table td {
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona todos los inputs con la clase "cantidad-vendida-input"
-    var inputs = document.querySelectorAll('.cantidad-vendida-input');
-    console.log('Inputs encontrados:', inputs);
-
-    // Añade un event listener a cada input para escuchar cambios
-    inputs.forEach(function(input) {
-        input.addEventListener('input', updateTotal);
-    });
-
-    // Función para actualizar el total
-    function updateTotal() {
-        var total = 0;
-        console.log('Actualizando total...');
-
-        // Recorre todos los inputs y suma sus valores
-        inputs.forEach(function(input) {
-            var value = parseFloat(input.value);
-            if (!isNaN(value)) {
-                total += value;
-            }
-        });
-
-        // Actualiza el input con id "resultadopiezas" con el total calculado
-        console.log('Total calculado:', total);
-        document.getElementById('resultadopiezas').value = total;
-    }
-
-    // Observer para detectar cambios en el DOM y agregar event listeners a nuevos inputs
-    var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1 && node.classList.contains('cantidad-vendida-input')) {
-                    node.addEventListener('input', updateTotal);
-                    inputs = document.querySelectorAll('.cantidad-vendida-input');
-                }
-            });
-        });
-    });
-
-    // Configura el observer para observar cambios en el body
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
-    // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
-    updateTotal();
-});
-
+  
 </script>
 
 <script>
@@ -724,6 +675,55 @@ function calcularDiferencia(fila) {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona todos los inputs con la clase "cantidad-vendida-input"
+    var inputs = document.querySelectorAll('.cantidad-vendida-input');
+    console.log('Inputs encontrados:', inputs);
+
+    // Añade un event listener a cada input para escuchar cambios
+    inputs.forEach(function(input) {
+        input.addEventListener('input', updateTotal);
+    });
+
+    // Función para actualizar el total
+    function updateTotal() {
+        var total = 0;
+        console.log('Actualizando total...');
+
+        // Recorre todos los inputs y suma sus valores
+        inputs.forEach(function(input) {
+            var value = parseFloat(input.value);
+            if (!isNaN(value)) {
+                total += value;
+            }
+        });
+
+        // Actualiza el input con id "resultadopiezas" con el total calculado
+        console.log('Total calculado:', total);
+        document.getElementById('resultadopiezas').value = total;
+    }
+
+    // Observer para detectar cambios en el DOM y agregar event listeners a nuevos inputs
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1 && node.classList.contains('cantidad-vendida-input')) {
+                    node.addEventListener('input', updateTotal);
+                    inputs = document.querySelectorAll('.cantidad-vendida-input');
+                }
+            });
+        });
+    });
+
+    // Configura el observer para observar cambios en el body
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
+    updateTotal();
+});
 
 
 
