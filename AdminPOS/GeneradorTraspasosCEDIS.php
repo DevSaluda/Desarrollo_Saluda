@@ -721,8 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
         subtree: true
     });
 
-    // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
-    updateTotal();
+    
 });
 
 
