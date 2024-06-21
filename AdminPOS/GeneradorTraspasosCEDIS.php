@@ -792,21 +792,25 @@ function eliminarFila(element) {
             }
 
             // Añade un event listener a cada input para escuchar cambios
-            document.body.addEventListener('input', function(event) {
-                if (event.target && event.target.classList.contains('cantidad-vendida-input')) {
-                    updateTotal();
-                }
-            });
+            function addInputListeners() {
+                var inputs = document.querySelectorAll('.cantidad-vendida-input');
+                inputs.forEach(function(input) {
+                    input.addEventListener('input', updateTotal);
+                });
+            }
 
             // Observer para detectar cambios en el DOM y agregar event listeners a nuevos inputs
             var observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
                     mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1 && node.classList.contains('cantidad-vendida-input')) {
-                            node.addEventListener('input', updateTotal);
-                            updateTotal();
+                        if (node.nodeType === 1 && node.querySelectorAll) {
+                            var newInputs = node.querySelectorAll('.cantidad-vendida-input');
+                            newInputs.forEach(function(input) {
+                                input.addEventListener('input', updateTotal);
+                            });
                         }
                     });
+                    updateTotal(); // Actualizar el total si se agrega un nuevo nodo
                 });
             });
 
@@ -815,6 +819,9 @@ function eliminarFila(element) {
                 childList: true,
                 subtree: true
             });
+
+            // Añade event listeners a los inputs existentes al cargar la página
+            addInputListeners();
 
             // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
             updateTotal();
