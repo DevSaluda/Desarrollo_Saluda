@@ -655,19 +655,19 @@ function calcularDiferencia(fila) {
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
         <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
-        <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
-       <td> <input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" ></td>
-     <td><input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  ></td>
-       <td> <input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  ></td>
-        <td><input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" ></td>
-        <td><input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" ></td>
-        <td><input type="text" hidden name="Estatus[]" value="Generado" class="form-control" ></td>
-        <td><input type="text" hidden name="Existencia1[]" value="0" class="form-control" ></td>
-        <td><input type="text" hidden name="Existencia2[]" value="0" class="form-control" ></td>
-        <td><input type="text" hidden name="Recibio[]" value="" class="form-control" ></td>
-        <td><input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > </td>
-        <td><input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  ></td>
-        <td><input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > </td>
+        <td>style="display:none;"<div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
+       <td> style="display:none;"<input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" ></td>
+     <td>style="display:none;"<input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  ></td>
+       <td> style="display:none;"<input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  ></td>
+        <td>style="display:none;"<input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" hidden name="Estatus[]" value="Generado" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" hidden name="Existencia1[]" value="0" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" hidden name="Existencia2[]" value="0" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" hidden name="Recibio[]" value="" class="form-control" ></td>
+        <td>style="display:none;"<input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > </td>
+        <td>style="display:none;"<input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  ></td>
+        <td>style="display:none;"<input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > </td>
      
      
         </tr>`;
