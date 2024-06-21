@@ -654,9 +654,23 @@ function calcularDiferencia(fila) {
         <td style="display:none;" class="Sucursal"><input hidden type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
-        <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaInv[]" readonly value="<?php echo $fechaActual; ?>" /></td>
+        <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
         <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
-      </tr>`;
+      <input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" >
+   <input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  >
+      <input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  >
+      <input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" >
+      <input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" >
+      <input type="text" hidden name="Estatus[]" value="Generado" class="form-control" >
+      <input type="text" hidden name="Existencia1[]" value="0" class="form-control" >
+      <input type="text" hidden name="Existencia2[]" value="0" class="form-control" >
+      <input type="text" hidden name="Recibio[]" value="" class="form-control" >
+      <input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
+      <input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  >
+      <input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > 
+     
+     
+        </tr>`;
 
     $('#tablaAgregarArticulos tbody').prepend(tr);
     let newRow = $('#tablaAgregarArticulos tbody tr:first-child');
