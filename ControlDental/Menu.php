@@ -227,6 +227,16 @@
         
       
 ?>>   
+  <li class="nav-header" style="color: white;">Motivos de consulta</li>
+            <li class="nav-item">
+                  <a href="https://saludapos.com/ControlDental/TiposConsultas" class="nav-link" style="color: white;">
+                    <i class="fas fa-book"></i>
+                    <p>
+                     Agregar motivo consulta
+                    </p>
+                  </a>
+                </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-receipt"></i>
