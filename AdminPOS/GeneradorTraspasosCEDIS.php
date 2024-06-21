@@ -86,7 +86,7 @@ table td {
     <label for="exampleFormControlInput1">Sucursal destino</label> 
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-  <input type="text" name=""  id="" readonly class="form-control" value="<?php echo $SucursalDestino?>">
+  <input type="text" name="" hidden id="" readonly class="form-control" value="<?php echo $SucursalDestino?>">
   <input type="text" name="" id=""  readonly class="form-control" value="<?php echo $SucursalDestinoLetras?>">
   </div>
   
@@ -214,7 +214,7 @@ table td {
                         #tablaAgregarArticulos td,
                         #tablaAgregarArticulos th {
                           white-space: nowrap;
-                          overflow: ;
+                          overflow: hidden;
                           text-overflow: visible;
 
 
@@ -646,28 +646,28 @@ function calcularDiferencia(fila) {
 <td  class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.precio}" /></td>
         
-        <td style="display:none;" class="precio"><input  id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
+        <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
           <td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="${articulo.cantidad}" onchange="calcularDiferencia(this)" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
         <td style="display:none;" class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="${articulo.id}" name="IdBasedatos[]" /></td>
-        <td style="display:none;" class="ResponsableInventario"><input  id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']; ?>" /></td>
-        <td style="display:none;" class="Sucursal"><input  type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
-        <td style="display:none;" class="Empresa"><input  type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
-        <td style="display:none;" class="Empresa"><input  type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
-        <td style="display:none;" class="Fecha"><input  type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
+        <td style="display:none;" class="ResponsableInventario"><input hidden id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']; ?>" /></td>
+        <td style="display:none;" class="Sucursal"><input hidden type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
+        <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
+        <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
+        <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
         <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
-      <input type="text" name="SucursalTraspasa[]"  value="21" class="form-control" >
-   <input type="text" class="form-control "   name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  >
-      <input type="text" class="form-control "   name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  >
-      <input type="text"   name="Proveedor1[]" id="proveedor1" class="form-control" >
-      <input type="text"  name="Proveedor2[]" id="proveedor2" class="form-control" >
-      <input type="text"  name="Estatus[]" value="Generado" class="form-control" >
-      <input type="text"  name="Existencia1[]" value="0" class="form-control" >
-      <input type="text"  name="Existencia2[]" value="0" class="form-control" >
-      <input type="text"  name="Recibio[]" value="" class="form-control" >
-      <input type="text" class="form-control "  name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
-      <input type="text" class="form-control "   name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  >
-      <input type="text" class="form-control "  name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > 
+       <td> <input type="text" name="SucursalTraspasa[]" hidden value="21" class="form-control" ></td>
+     <td><input type="text" class="form-control "  hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly  ></td>
+       <td> <input type="text" class="form-control " hidden  name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>"readonly  ></td>
+        <td><input type="text"  hidden name="Proveedor1[]" id="proveedor1" class="form-control" ></td>
+        <td><input type="text" hidden name="Proveedor2[]" id="proveedor2" class="form-control" ></td>
+        <td><input type="text" hidden name="Estatus[]" value="Generado" class="form-control" ></td>
+        <td><input type="text" hidden name="Existencia1[]" value="0" class="form-control" ></td>
+        <td><input type="text" hidden name="Existencia2[]" value="0" class="form-control" ></td>
+        <td><input type="text" hidden name="Recibio[]" value="" class="form-control" ></td>
+        <td><input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > </td>
+        <td><input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  ></td>
+        <td><input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > </td>
      
      
         </tr>`;
