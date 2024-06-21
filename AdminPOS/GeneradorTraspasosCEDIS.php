@@ -168,35 +168,7 @@ table td {
 </div>
 </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona todos los inputs con la clase "cantidad-vendida-input"
-    var inputs = document.querySelectorAll('.cantidad-vendida-input');
 
-    // Añade un event listener a cada input para escuchar cambios
-    inputs.forEach(function(input) {
-        input.addEventListener('input', updateTotal);
-    });
-
-    function updateTotal() {
-        var total = 0;
-        
-        // Recorre todos los inputs y suma sus valores
-        inputs.forEach(function(input) {
-            var value = parseFloat(input.value);
-            if (!isNaN(value)) {
-                total += value;
-            }
-        });
-
-        // Actualiza el input con id "TotalPiezas" con el total calculado
-        document.getElementById('resultadopiezas').value = total;
-    }
-
-    // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
-    updateTotal();
-});
-</script>
 <div class="content">
 
 
@@ -795,7 +767,38 @@ function eliminarFila(element) {
 
 </script>
 
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selecciona todos los inputs con la clase "cantidad-vendida-input"
+            var inputs = document.querySelectorAll('.cantidad-vendida-input');
+            console.log('Inputs encontrados:', inputs);
 
+            // Añade un event listener a cada input para escuchar cambios
+            inputs.forEach(function(input) {
+                input.addEventListener('input', updateTotal);
+            });
+
+            function updateTotal() {
+                var total = 0;
+                console.log('Actualizando total...');
+
+                // Recorre todos los inputs y suma sus valores
+                inputs.forEach(function(input) {
+                    var value = parseFloat(input.value);
+                    if (!isNaN(value)) {
+                        total += value;
+                    }
+                });
+
+                // Actualiza el input con id "resultadopiezas" con el total calculado
+                console.log('Total calculado:', total);
+                document.getElementById('resultadopiezas').value = total;
+            }
+
+            // Llama a updateTotal al cargar la página por si ya hay valores predefinidos
+            updateTotal();
+        });
+    </script>
 
 
 <script>
