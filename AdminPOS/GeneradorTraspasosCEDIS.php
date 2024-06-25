@@ -172,7 +172,7 @@ table td {
 <div class="content">
 
 
-  <div class="container-fluid">
+  
 
     <div class="row mb-3">
 
