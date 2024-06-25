@@ -60,7 +60,7 @@ table td {
 
 
 
-
+<div class="tab-content" id="pills-tabContent">
 
 
   <div class="card text-center">
@@ -77,7 +77,7 @@ table td {
 
 
 
-  <div class="container">
+
 <div class="row">
 
 
