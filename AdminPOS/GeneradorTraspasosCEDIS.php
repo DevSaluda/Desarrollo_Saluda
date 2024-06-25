@@ -169,13 +169,16 @@ table td {
 </div>
 </div>
 
+<div class="content">
 
 
+  <div class="container-fluid">
 
+    <div class="row mb-3">
 
   
 
-         
+          <div class="card-body p-3"></div>
 <label class="col-form-label" for="iptCodigoVenta">
                         <i class="fas fa-barcode fs-6"></i>
                         <span class="small">Productos</span>
