@@ -60,7 +60,19 @@ table td {
 
 
 
+<div class="tab-content" id="pills-tabContent">
 
+
+  <div class="card text-center">
+  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
+ Traspasos de cedis de <?php echo $row['ID_H_O_D']?>  
+  </div>
+ 
+  <div >
+ 
+                
+</div>
+</div>
 
 
 
@@ -157,12 +169,9 @@ table td {
 </div>
 </div>
 
-<div class="content">
 
 
-  <div class="container-fluid">
 
-   
 
   
 
