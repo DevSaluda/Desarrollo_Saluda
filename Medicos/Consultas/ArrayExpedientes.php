@@ -3,7 +3,6 @@ header('Content-Type: application/json');
 include("db_connection.php"); // Incluye el archivo de conexión a la base de datos
 // Incluye los archivos necesarios
 include "Consultas.php";
-include "Sesion.php";
 
 // Consulta SQL para obtener los datos de expedientes
 $sql = "SELECT Id_expediente, Antecedentes_personales, Antecedentes_familiares, Medicamentos_actuales, Diagnosticos, Estudios_realizados, Tratamientos, Notas, Notas_adicionales
