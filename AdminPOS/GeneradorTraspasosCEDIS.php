@@ -169,7 +169,7 @@ table td {
 </div>
 </div>
 
-<div class="content">
+
 
 
   <div class="container-fluid">
@@ -260,7 +260,7 @@ table td {
                         </table>
                         <!-- / table -->
                         
-                    </div>
+                    </d>
                   </div>
                   <!-- /.col -->
                 </div>
