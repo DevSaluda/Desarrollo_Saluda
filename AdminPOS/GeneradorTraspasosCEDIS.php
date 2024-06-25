@@ -234,7 +234,7 @@ table td {
                         
                       </style>
                       
-                      <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
+                      <form action="javascript:void(0)"  method="post" id="Generamelostraspasos">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
@@ -889,7 +889,6 @@ function eliminarFila(element) {
   include ("footer.php")?>
 
 <!-- ./wrapper -->
-
 <script src="js/RealizaTraspasosV2.js"></script>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
