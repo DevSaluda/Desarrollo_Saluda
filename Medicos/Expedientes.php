@@ -176,7 +176,7 @@ include "Consultas/Consultas.php";
       "stateSave": true,
       "bAutoWidth": false,
       "order": [[ 0, "desc" ]],
-      "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayClientes.php",
+      "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayExpedientes.php",
       "aoColumns": [
         { mData: 'Folio' },
         { mData: 'Nombre_Paciente' },
@@ -226,7 +226,7 @@ include "Consultas/Consultas.php";
 
      // Función para redirigir al expediente completo
   window.verExpediente = function(idExpediente) {
-    window.location.href = "https://saludapos.com/AdminPOS/ExpedienteCompleto.php?id=" + idExpediente;
+    window.location.href = "https://saludapos.com/Medicos/ExpedienteCompleto.php?id=" + idExpediente;
   };
 });
 </script>
