@@ -2,6 +2,7 @@
 include "Consultas/Consultas.php";
 include "Header.php";
 include "dbconect.php";
+
 // Procesar el formulario si se ha enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $idExpediente = $_POST['id_expediente'];
@@ -11,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $tratamiento = $_POST['tratamiento'];
   $estudios = $_POST['estudios'];
   $recomendaciones = $_POST['recomendaciones'];
-  $medico = $_POST['medico'];
-
+  $medico = $_POST['medico']; // El médico se selecciona automáticamente
+  
   $query = "INSERT INTO Consultas (Id_expediente, Fecha_consulta, Motivo_consulta, Observaciones, Diagnostico, Tratamiento, Estudios, Recomendaciones, Medico) 
             VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?)";
   
@@ -27,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
   $stmt->close();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -39,89 +39,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <title>Nueva Consulta | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
 
-  <style>
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      font-weight: bold;
-    }
-    .form-control {
-      width: 100%;
-    }
-    .btn-primary {
-      background-color: #0057b8;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #004494;
-    }
-  </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- AdminLTE -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 
 <?php include_once ("Menu.php")?>
 
-<div class="container">
-  <div class="card">
-    <div class="card-header" style="background-color: #0057b8; color: white;">
-      Nueva Consulta Médica
-    </div>
-    <div class="card-body">
-      <form method="POST" action="">
-        <div class="form-group">
-          <label for="id_expediente">ID de Expediente:</label>
-          <input type="number" id="id_expediente" name="id_expediente" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="motivo_consulta">Motivo de la Consulta:</label>
-          <textarea id="motivo_consulta" name="motivo_consulta" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones" name="observaciones" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="diagnostico">Diagnóstico:</label>
-          <textarea id="diagnostico" name="diagnostico" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="tratamiento">Tratamiento:</label>
-          <textarea id="tratamiento" name="tratamiento" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="estudios">Estudios:</label>
-          <textarea id="estudios" name="estudios" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="recomendaciones">Recomendaciones:</label>
-          <textarea id="recomendaciones" name="recomendaciones" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="medico">Médico Responsable:</label>
-          <select id="medico" name="medico" class="form-control" required>
-            <?php
-            $queryMedicos = "SELECT Medico_ID, Nombre FROM Personal_Medico";
-            $resultMedicos = $conn->query($queryMedicos);
-            while ($medico = $resultMedicos->fetch_assoc()) {
-              echo "<option value='" . $medico['Medico_ID'] . "'>" . $medico['Nombre'] . "</option>";
-            }
-            ?>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar Consulta</button>
-      </form>
-    </div>
-  </div>
-</div>
+<div class="wrapper">
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header" style="background-color: #0057b8; color: white;">
+            Nueva Consulta Médica
+          </div>
+          <div class="card-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="id_expediente">ID de Expediente:</label>
+                <input type="text" id="id_expediente" name="id_expediente" class="form-control" value="<?php echo obtenerNuevoIdExpediente(); ?>" readonly>
+              </div>
+              <div class="form-group">
+                <label for="motivo_consulta">Motivo de la Consulta:</label>
+                <textarea id="motivo_consulta" name="motivo_consulta" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" name="observaciones" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="diagnostico">Diagnóstico:</label>
+                <textarea id="diagnostico" name="diagnostico" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="tratamiento">Tratamiento:</label>
+                <textarea id="tratamiento" name="tratamiento" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="estudios">Estudios:</label>
+                <textarea id="estudios" name="estudios" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="recomendaciones">Recomendaciones:</label>
+                <textarea id="recomendaciones" name="recomendaciones" class="form-control" required></textarea>
+              </div>
+              <input type="text" class="form-control" name="medico" id="medico"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden  readonly >
+ 
 
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
+              <button type="submit" class="btn btn-primary">Guardar Consulta</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE -->
+  <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
+
+<?php
+// Función para simular la obtención del nuevo ID de expediente (autoincremental)
+function obtenerNuevoIdExpediente() {
+  return 1; // Aquí deberías implementar la lógica real para obtener el próximo ID
+}
+
+// Función para simular la obtención del ID del médico logueado
+function obtenerIdMedicoLogueado() {
+  return 1; // Simplemente se devuelve un valor fijo, debes adaptarlo a tu lógica de autenticación
+}
+?>
