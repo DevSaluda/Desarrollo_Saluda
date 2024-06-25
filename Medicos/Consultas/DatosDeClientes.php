@@ -207,7 +207,7 @@ tabla = $('#Clientes').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayClientes.php",
+ "sAjaxSource": "https://saludapos.com/Medicos/Consultas/ArrayClientes.php",
  "aoColumns": [
   { mData: 'Folio' },  
   { mData: 'Nombre_Paciente' },

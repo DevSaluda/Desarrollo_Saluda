@@ -1,7 +1,7 @@
 function CargaExpedientes(){
 
 
-    $.post("https://saludapos.com/AdminPOS/Consultas/DatosDeExpedientes.php","",function(data){
+    $.post("https://saludapos.com/Medicos/Consultas/DatosDeExpedientes.php","",function(data){
       $("#ListaDeClientes").html(data);
     })
 
