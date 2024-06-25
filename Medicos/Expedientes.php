@@ -176,7 +176,7 @@ include "Consultas/Consultas.php";
       "stateSave": true,
       "bAutoWidth": false,
       "order": [[ 0, "desc" ]],
-      "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayExpedientes.php",
+      "sAjaxSource": "https://saludapos.com/Medicos/Consultas/ArrayExpedientes.php",
       "aoColumns": [
         { mData: 'Folio' },
         { mData: 'Nombre_Paciente' },
