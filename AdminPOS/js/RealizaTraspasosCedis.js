@@ -46,7 +46,7 @@ $('document').ready(function($) {
 
         $.ajax({
             type: 'POST',
-            url: "Consultas/TraspasoAlMomento.php",
+            url: "Consultas/TraspasoAlMomentoCedis.php",
             data: $('#Generamelostraspasos').serialize(),
             cache: false,
             beforeSend: function() {
