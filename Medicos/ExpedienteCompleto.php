@@ -2,6 +2,7 @@
 include "Consultas/Consultas.php";
 include "Header.php";
 include "dbconect.php";
+
 // Procesar el formulario si se ha enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editar_expediente'])) {
     $idExpediente = $_POST['id_expediente'];
@@ -26,26 +27,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editar_expediente'])) 
               Fecha_ultima_modificacion = NOW() 
               WHERE Id_expediente = ?";
     
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssssi", 
-        $antecedentesPersonales,
-        $antecedentesFamiliares,
-        $medicamentosActuales,
-        $diagnosticos,
-        $estudiosRealizados,
-        $tratamientos,
-        $notas,
-        $notasAdicionales,
-        $idExpediente
-    );
-    
-    if ($stmt->execute()) {
-        echo "<script>alert('Expediente actualizado exitosamente.'); window.location.href = 'ExpedienteCompleto.php?id=$idExpediente';</script>";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("ssssssssi", 
+            $antecedentesPersonales,
+            $antecedentesFamiliares,
+            $medicamentosActuales,
+            $diagnosticos,
+            $estudiosRealizados,
+            $tratamientos,
+            $notas,
+            $notasAdicionales,
+            $idExpediente
+        );
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Expediente actualizado exitosamente.'); window.location.href = 'ExpedienteCompleto.php?id=$idExpediente';</script>";
+        } else {
+            echo "<script>alert('Error al actualizar el expediente.');</script>";
+        }
+
+        $stmt->close();
     } else {
-        echo "<script>alert('Error al actualizar el expediente.');</script>";
+        echo "<script>alert('Error en la preparación de la consulta SQL.');</script>";
     }
-    
-    $stmt->close();
 }
 ?>
 
@@ -55,27 +59,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editar_expediente'])) 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
   <title>Expediente Completo | <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
-
   <style>
     .error {
       color: red;
       margin-left: 5px;
     }
-
     .table-details {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
     }
-
     .table-details th, .table-details td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
     }
-
     .table-details th {
       background-color: #0057b8;
       color: white;
