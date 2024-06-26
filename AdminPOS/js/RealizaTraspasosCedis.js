@@ -1,4 +1,7 @@
-$('document').ready(function($) {
+// Incluir SweetAlert2 en tu HTML
+// <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+$(document).ready(function($) {
     $.validator.addMethod("Sololetras", function(value, element) {
         return this.optional(element) || /[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
@@ -15,61 +18,55 @@ $('document').ready(function($) {
         return this.optional(element) || /^[\u00F1A-Za-z _]*[\u00F1A-Za-z][\u00F1A-Za-z _]*$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
 
-
     $("#Generamelostraspasos").validate({
         rules: {
-
-
             codbarras: {
                 required: true,
             },
-
-
         },
         messages: {
             codbarras: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Dato requerido",
             },
-
-
-
-
         },
         submitHandler: submitForm
     });
-    // hide messages 
-
 
     function submitForm() {
-
-
-
         $.ajax({
             type: 'POST',
             url: "Consultas/TraspasoAlMomentoCedis.php",
             data: $('#Generamelostraspasos').serialize(),
             cache: false,
             beforeSend: function() {
-
                 $("#submit_registro").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
-
-
             },
-            success: function() {
-
-
-
-                $('#TraspasoCorrecto').modal('toggle');
-                setTimeout(function() {
-                    $('#TraspasoCorrecto').modal('hide')
-                }, 2000); // abrir
-
-
-                setTimeout(' window.location.href = "https://saludapos.com/AdminPOS/ListadoDeTraspasos"; ', 3000);
-
+            success: function(response) {
+                let result = JSON.parse(response);
+                if (result.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: result.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = "https://saludapos.com/AdminPOS/ListadoDeTraspasos";
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: result.message
+                    });
+                }
             },
             error: function() {
-                $("#show_error").fadeIn();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al procesar la solicitud.'
+                });
             }
         });
         return false;
