@@ -73,14 +73,10 @@
           <thead>
             <tr>
               <th>ID Expediente</th>
-              <th>Antecedentes Personales</th>
-              <th>Antecedentes Familiares</th>
-              <th>Medicamentos Actuales</th>
               <th>Diagnósticos</th>
               <th>Estudios Realizados</th>
               <th>Tratamientos</th>
-              <th>Notas</th>
-              <th>Notas Adicionales</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -95,18 +91,15 @@
               while ($expediente = $resultExpedientes->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $expediente['Id_expediente'] . "</td>";
-                echo "<td>" . $expediente['Antecedentes_personales'] . "</td>";
-                echo "<td>" . $expediente['Antecedentes_familiares'] . "</td>";
-                echo "<td>" . $expediente['Medicamentos_actuales'] . "</td>";
                 echo "<td>" . $expediente['Diagnosticos'] . "</td>";
                 echo "<td>" . $expediente['Estudios_realizados'] . "</td>";
                 echo "<td>" . $expediente['Tratamientos'] . "</td>";
-                echo "<td>" . $expediente['Notas'] . "</td>";
-                echo "<td>" . $expediente['Notas_adicionales'] . "</td>";
+
+                echo "<td><a href='ExpedienteCompleto.php?id=" . $expediente['Id_expediente'] . "' class='btn btn-primary btn-sm'>Ver Completo</a></td>";
                 echo "</tr>";
               }
             } else {
-              echo "<tr><td colspan='9'>No hay expedientes registrados.</td></tr>";
+              echo "<tr><td colspan='10'>No hay expedientes registrados.</td></tr>";
             }
             ?>
           </tbody>
