@@ -460,7 +460,7 @@ function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
   $.ajax({
-    url: "Consultas/escaner_articulo.php",
+    url: "Consultas/escaner_articuloCedis.php",
     type: 'POST',
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
@@ -556,7 +556,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado.php',
+      url: 'Consultas/autocompletado_Cedis.php',
       type: 'GET',
       dataType: 'json',
       data: {
