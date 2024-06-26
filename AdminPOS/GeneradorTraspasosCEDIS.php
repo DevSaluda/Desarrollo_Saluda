@@ -17,7 +17,7 @@ if ($ProveedorFijo === "CEDIS") {
 }
 
 include "Consultas/Consultas.php";
-
+$fechaActual = date('Y-m-d H:i:s');
 ?>
 <!DOCTYPE html>
 <html lang="es">
