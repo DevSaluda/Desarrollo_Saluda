@@ -1,5 +1,4 @@
-// Incluir SweetAlert2 en tu HTML
-// <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 $(document).ready(function($) {
     $.validator.addMethod("Sololetras", function(value, element) {
