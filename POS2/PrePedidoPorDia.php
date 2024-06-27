@@ -286,7 +286,7 @@ include "Consultas/Consultas.php";
             var data = tabla.ajax.json().aaData;
 
             $.ajax({
-              url: 'GuardarPrePedido.php',
+              url: 'Consultas/GuardarPrePedido.php',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(data),
