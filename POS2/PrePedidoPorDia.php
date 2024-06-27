@@ -30,37 +30,18 @@ include "Consultas/Consultas.php";
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div >
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+          <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
+            Guardar PrePedido <i class="fas fa-book-medical"></i>
           </button>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
             Busqueda por mes <i class="fas fa-calendar-week"></i>
           </button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
             Filtrar por producto <i class="fas fa-prescription-bottle"></i>
           </button>
-        </div>
+        </div> -->
       </div>
 
-      <?php
-      // Verificar si el formulario ha sido enviado
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes']) ) {
-              // Obtener los valores del formulario
-              $mes = $_POST['Mes'];
-             
-
-              // Realizar las operaciones que necesites con estas variables
-              // Por ejemplo, imprimir su valor
-              echo "Mes seleccionado: $mes<br>";
-           
-          } else {
-              // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
-              echo "Error: No se recibieron todas las variables necesarias.";
-          }
-      }
-      ?>
 
       <style>
         /* Personalizar el diseño de la paginación con CSS */
@@ -216,71 +197,94 @@ include "Consultas/Consultas.php";
 
         var tabla;
         $(document).ready(function() {
-          tabla = $('#Productos').DataTable({
-            "processing": true,
-            "ordering": true,
-            "stateSave": true,
-            "autoWidth": true,
-            "order": [[ 0, "desc" ]],
-            "ajax": {
-              "type": "POST", // Especifica el método de envío de la solicitud AJAX
-              "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
-              "data": function (d) {
-        // Aquí puedes definir el código PHP directamente
-        var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-        
-
-        // Construye el objeto de datos para enviar al servidor
+  tabla = $('#Productos').DataTable({
+    "processing": true,
+    "ordering": true,
+    "stateSave": true,
+    "autoWidth": true,
+    "order": [[ 0, "desc" ]],
+    "ajax": {
+      "type": "POST",
+      "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
+      "data": function (d) {
+        var mes = '<?php echo $mes; ?>';
         var dataToSend = {
-            "Mes": mes,
-            
+          "Mes": mes,
         };
-
         return dataToSend;
+      },
+      "error": function(xhr, error, thrown) {
+        console.log("Error en la solicitud AJAX:", error);
+      }
     },
-              "error": function(xhr, error, thrown) {
-            console.log("Error en la solicitud AJAX:", error);
-        }
+    "columns": [
+      { "data": "Cod_Barra" },
+      { "data": "Nombre_Prod" },
+      { "data": "Sucursal" },
+      { "data": "Turno" },
+      { "data": "Importe" },
+      { "data": "Total_Venta" },
+      { "data": "Descuento" },
+    ],
+    "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+    "language": {
+      "lengthMenu": "Mostrar _MENU_ registros",
+      "sPaginationType": "extStyle",
+      "zeroRecords": "No se encontraron resultados",
+      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sSearch": "Buscar:",
+      "paginate": {
+        "first": '<i class="fas fa-angle-double-left"></i>',
+        "last": '<i class="fas fa-angle-double-right"></i>',
+        "next": '<i class="fas fa-angle-right"></i>',
+        "previous": '<i class="fas fa-angle-left"></i>'
+      },
+      "processing": function () {
+        mostrarCargando();
+      }
     },
-            "columns": [
-              { "data": "Cod_Barra" },
-              { "data": "Nombre_Prod" },
-              { "data": "Sucursal" },
-              { "data": "Turno" },
-             
-              { "data": "Importe" },
-              { "data": "Total_Venta" },
-            { "data": "Descuento" },
-              
-            ],
-            "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
-            "language": {
-              "lengthMenu": "Mostrar _MENU_ registros",
-              "sPaginationType": "extStyle",
-              "zeroRecords": "No se encontraron resultados",
-              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-              "sSearch": "Buscar:",
-              "paginate": {
-                "first": '<i class="fas fa-angle-double-left"></i>',
-                "last": '<i class="fas fa-angle-double-right"></i>',
-                "next": '<i class="fas fa-angle-right"></i>',
-                "previous": '<i class="fas fa-angle-left"></i>'
-              },
-              "processing": function () {
-                mostrarCargando();
-              }
-            },
-            "initComplete": function() {
-              // Al completar la inicialización de la tabla, ocultar el mensaje de carga
-              ocultarCargando();
-            },
-            
-            "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
-            "responsive": true
-          });
-        });
+    "initComplete": function() {
+      ocultarCargando();
+    },
+    "dom": '<"d-flex justify-content-between"lBf>rtip',
+    "buttons": [
+      {
+        extend: 'csvHtml5',
+        text: 'Exportar a CSV',
+        className: 'btn btn-primary',
+        titleAttr: 'CSV'
+      },
+      {
+        extend: 'excelHtml5',
+        text: 'Exportar a Excel',
+        className: 'btn btn-success',
+        titleAttr: 'Excel'
+      }
+    ],
+    "responsive": true
+  });
+
+  $('#guardarDatos').on('click', function() {
+    var data = tabla.ajax.json().aaData;
+
+    $.ajax({
+      url: 'GuardarPrePedido.php',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function(response) {
+        alert(response.message);
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr);
+        alert('Ocurrió un error al guardar los datos');
+      }
+    });
+  });
+});
+
       </script>
 
       <div class="text-center">
