@@ -46,13 +46,13 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
             $ProContador++;
             $values[] = "(
                 '" . mysqli_real_escape_string($conn, $_POST["IdBasedatos"][$i]) . "',
+                '" . mysqli_real_escape_string($conn, $_POST["IdBasedatos"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["NumeroDelTraspaso"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["NumeroDeFacturaTraspaso"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["CodBarras"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["NombreDelProducto"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Fk_sucursal"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["SucursalTraspasa"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, $_POST["SucursalDestino"][$i]) . "',
                  '" . mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioVenta"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioCompra"][$i]) . "',
