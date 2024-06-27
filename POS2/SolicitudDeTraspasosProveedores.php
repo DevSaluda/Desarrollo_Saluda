@@ -871,7 +871,6 @@ $(document).on('change', '.cantidad-vendida-input', function() {
   // Variable para almacenar el total del IVA
   var totalIVA = 0;
 
-  // Función para agregar un artículo
   function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
     mostrarMensaje('El artículo no es válido');
@@ -892,9 +891,26 @@ $(document).on('change', '.cantidad-vendida-input', function() {
         }
         row.find('.cantidad input').val(nuevaCantidad);
       } else {
-        if (confirm('El lote o la fecha de caducidad es diferente. ¿Desea agregar el artículo como una nueva entrada?')) {
-          agregarFilaArticulo(articulo);
-        }
+        Swal.fire({
+          title: 'El lote o la fecha de caducidad es diferente',
+          text: '¿Desea agregar el artículo como una nueva entrada?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, agregar como nueva',
+          cancelButtonText: 'No, actualizar cantidad'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            agregarFilaArticulo(articulo);
+          } else {
+            var cantidadActual = parseInt(row.find('.cantidad input').val());
+            var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+            if (nuevaCantidad < 0) {
+              mostrarMensaje('La cantidad no puede ser negativa');
+              return;
+            }
+            row.find('.cantidad input').val(nuevaCantidad);
+          }
+        });
       }
     } else {
       agregarFilaArticulo(articulo);
@@ -942,12 +958,13 @@ function agregarFilaArticulo(articulo) {
   $('#tablaAgregarArticulos tbody').append(tr);
   $('#tablaAgregarArticulos tbody tr:last-child').find('.proveedor-input').val(selectedAdjustment);
   $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
+}
 
 
   $('#codigoEscaneado').val('');
     $('#codigoEscaneado').focus();
   
-}
+
 
      
        
@@ -955,7 +972,14 @@ function agregarFilaArticulo(articulo) {
     
 
 
-  
+function mostrarMensaje(mensaje) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: mensaje
+  });
+}
+
 
 
 
