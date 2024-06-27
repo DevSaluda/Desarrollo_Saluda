@@ -30,15 +30,15 @@ include "Consultas/Consultas.php";
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div >
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+          <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
+            Guardar Sugerencia <i class="fas fa-clinic-medical"></i>
           </button>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
             Busqueda por mes <i class="fas fa-calendar-week"></i>
           </button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
             Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-          </button>
+          </button> -->
         </div>
       </div>
 
@@ -200,8 +200,6 @@ include "Consultas/Consultas.php";
           "Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
           "Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
         ];
-
-        // Función para mostrar el mensaje de carga con un texto aleatorio
         function mostrarCargando(event, settings) {
           var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
           var mensaje = mensajesCarga[randomIndex];
@@ -209,7 +207,6 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'flex';
         }
 
-        // Función para ocultar el mensaje de carga
         function ocultarCargando() {
           document.getElementById('loading-overlay').style.display = 'none';
         }
@@ -223,37 +220,29 @@ include "Consultas/Consultas.php";
             "autoWidth": true,
             "order": [[ 0, "desc" ]],
             "ajax": {
-              "type": "POST", // Especifica el método de envío de la solicitud AJAX
+              "type": "POST",
               "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
               "data": function (d) {
-        // Aquí puedes definir el código PHP directamente
-        var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-        
-
-        // Construye el objeto de datos para enviar al servidor
-        var dataToSend = {
-            "Mes": mes,
-            
-        };
-
-        return dataToSend;
-    },
+                var mes = '<?php echo $mes; ?>';
+                var dataToSend = {
+                  "Mes": mes,
+                };
+                return dataToSend;
+              },
               "error": function(xhr, error, thrown) {
-            console.log("Error en la solicitud AJAX:", error);
-        }
-    },
+                console.log("Error en la solicitud AJAX:", error);
+              }
+            },
             "columns": [
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
               { "data": "Sucursal" },
               { "data": "Turno" },
-             
               { "data": "Importe" },
               { "data": "Total_Venta" },
-            { "data": "Descuento" },
-              
+              { "data": "Descuento" },
             ],
-            "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
+            "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
             "language": {
               "lengthMenu": "Mostrar _MENU_ registros",
               "sPaginationType": "extStyle",
@@ -273,12 +262,42 @@ include "Consultas/Consultas.php";
               }
             },
             "initComplete": function() {
-              // Al completar la inicialización de la tabla, ocultar el mensaje de carga
               ocultarCargando();
             },
-            
-            "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
+            "dom": '<"d-flex justify-content-between"lBf>rtip',
+            "buttons": [
+              {
+                extend: 'csvHtml5',
+                text: 'Exportar a CSV',
+                className: 'btn btn-primary',
+                titleAttr: 'CSV'
+              },
+              {
+                extend: 'excelHtml5',
+                text: 'Exportar a Excel',
+                className: 'btn btn-success',
+                titleAttr: 'Excel'
+              }
+            ],
             "responsive": true
+          });
+
+          $('#guardarDatos').on('click', function() {
+            var data = tabla.ajax.json().aaData;
+
+            $.ajax({
+              url: 'guardar_sugerencias.php',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(data),
+              success: function(response) {
+                alert(response.message);
+              },
+              error: function(xhr, status, error) {
+                console.error(xhr);
+                alert('Ocurrió un error al guardar los datos');
+              }
+            });
           });
         });
       </script>
@@ -294,8 +313,6 @@ include "Consultas/Consultas.php";
               <th>Proveedor</th>
               <th>Proveedor</th>
               <th>Presentacion</th>
-            
-              
             </thead>
           </table>
         </div>
@@ -304,26 +321,17 @@ include "Consultas/Consultas.php";
   </div>
   </div>
   </div>
-  <!-- Modales y scripts -->
-  <?php
-
-  include ("footer.php");
-  ?>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-  <!-- Bootstrap -->
+  <?php include ("footer.php"); ?>
+  <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+  <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- overlayScrollbars -->
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <!-- OPTIONAL SCRIPTS -->
   <script src="dist/js/demo.js"></script>
-  
 </body>
 </html>
 
@@ -343,3 +351,4 @@ function fechaCastellano ($fecha) {
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 ?>
+
