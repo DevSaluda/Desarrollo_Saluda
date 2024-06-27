@@ -30,18 +30,37 @@ include "Consultas/Consultas.php";
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div >
-          <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
-            Guardar PrePedido <i class="fas fa-book-medical"></i>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
           </button>
-        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
             Busqueda por mes <i class="fas fa-calendar-week"></i>
           </button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
             Filtrar por producto <i class="fas fa-prescription-bottle"></i>
           </button>
-        </div> -->
+        </div>
       </div>
 
+      <?php
+      // Verificar si el formulario ha sido enviado
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          // Verificar si las variables están seteadas y no son nulas
+          if (isset($_POST['Mes']) ) {
+              // Obtener los valores del formulario
+              $mes = $_POST['Mes'];
+             
+
+              // Realizar las operaciones que necesites con estas variables
+              // Por ejemplo, imprimir su valor
+              echo "Mes seleccionado: $mes<br>";
+           
+          } else {
+              // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
+              echo "Error: No se recibieron todas las variables necesarias.";
+          }
+      }
+      ?>
 
       <style>
         /* Personalizar el diseño de la paginación con CSS */
