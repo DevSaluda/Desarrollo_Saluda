@@ -902,13 +902,19 @@ $(document).on('change', '.cantidad-vendida-input', function() {
           if (result.isConfirmed) {
             agregarFilaArticulo(articulo);
           } else {
-            var cantidadActual = parseInt(row.find('.cantidad input').val());
-            var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
-            if (nuevaCantidad < 0) {
-              mostrarMensaje('La cantidad no puede ser negativa');
-              return;
+            // Buscar la fila correcta para actualizar la cantidad
+            var rowToUpdate = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]:has(.ExistenciasEnBd input[value="' + articulo.fechacaducidad + '"]):has(.Diferenciaresultante input[value="' + articulo.lote + '"])');
+            if (rowToUpdate.length) {
+              var cantidadActual = parseInt(rowToUpdate.find('.cantidad input').val());
+              var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+              if (nuevaCantidad < 0) {
+                mostrarMensaje('La cantidad no puede ser negativa');
+                return;
+              }
+              rowToUpdate.find('.cantidad input').val(nuevaCantidad);
+            } else {
+              mostrarMensaje('No se encontró una fila para actualizar.');
             }
-            row.find('.cantidad input').val(nuevaCantidad);
           }
         });
       }
