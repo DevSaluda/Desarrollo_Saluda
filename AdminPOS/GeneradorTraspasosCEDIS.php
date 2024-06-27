@@ -654,7 +654,7 @@ function calcularDiferencia(fila) {
     <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
     <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
     <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
-    <td style="display:none;"><input type="text" name="SucursalTraspasa[]" hidden value="CEDIS" class="form-control" ></td>
+    <td style="display:none;"><input type="text" name="SucursalTraspasa[]" hidden value="<?php echo $SucursalDestinoLetras; ?>" class="form-control" ></td>
     <td style="display:none;"><input type="text" class="form-control " hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>" readonly ></td>
     <td style="display:none;"><input type="text" class="form-control " hidden name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>" readonly ></td>
     <td style="display:none;"><input type="text" hidden name="Proveedor1[]" id="proveedor1" class="form-control" ></td>
