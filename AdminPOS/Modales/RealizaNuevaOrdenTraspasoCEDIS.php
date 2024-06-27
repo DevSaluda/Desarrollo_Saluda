@@ -22,7 +22,7 @@
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
-    <div class="text-center">
+    < class="text-center">
     <div class="modal-header">
          <p class="heading lead">Seleccion de sucursal para traspaso <i class="fas fa-credit-card"></i></p>
 
@@ -68,11 +68,9 @@
    
 </div>
 
-  <div class="form-group" >
-  <label for="exampleInputEmail1">Sucursal</label>
-    <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-    <input type="text" name="sucursalLetras" id="sucursalLetras" class="form-control">
-    </div>  </div>
+  
+    <input hidden type="text" name="sucursalLetras" id="sucursalLetras" class="form-control">
+    
     <button type="submit"  id="registrotraspaso" value="Guardar" class="btn btn-success">Generar orden de traspaso <i class="fas fa-exchange-alt"></i></button>
 </div>
     
