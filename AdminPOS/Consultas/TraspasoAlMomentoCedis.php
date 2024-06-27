@@ -54,6 +54,7 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
                 '" . mysqli_real_escape_string($conn, $_POST["Fk_sucursal"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["SucursalTraspasa"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["SucursalDestino"][$i]) . "',
+                 '" . mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioVenta"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioCompra"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["ImporteGenerado"][$i]) . "',
