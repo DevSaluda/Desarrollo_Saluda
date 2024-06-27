@@ -22,7 +22,7 @@
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
-    < class="text-center">
+   <div class="text-center">
     <div class="modal-header">
          <p class="heading lead">Seleccion de sucursal para traspaso <i class="fas fa-credit-card"></i></p>
 
