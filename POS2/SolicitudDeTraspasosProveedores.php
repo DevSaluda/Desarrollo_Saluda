@@ -960,18 +960,6 @@ function agregarFilaArticulo(articulo) {
   $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
 }
 
-
-  $('#codigoEscaneado').val('');
-    $('#codigoEscaneado').focus();
-  
-
-
-     
-       
-      
-    
-
-
 function mostrarMensaje(mensaje) {
   Swal.fire({
     icon: 'error',
@@ -979,7 +967,6 @@ function mostrarMensaje(mensaje) {
     text: mensaje
   });
 }
-
 
 
 
