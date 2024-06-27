@@ -46,7 +46,6 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
             $ProContador++;
             $values[] = "(
                 '" . mysqli_real_escape_string($conn, $_POST["IdBasedatos"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, $_POST["IdBasedatos"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["NumeroDelTraspaso"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["NumeroDeFacturaTraspaso"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["CodBarras"][$i]) . "',
