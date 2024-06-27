@@ -53,25 +53,25 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
                 '" . mysqli_real_escape_string($conn, $_POST["NombreDelProducto"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Fk_sucursal"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["SucursalTraspasa"][$i]) . "',
-                 '" . mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"][$i]) . "',
+                '" . mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioVenta"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["PrecioCompra"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["ImporteGenerado"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, $_POST["resultadoventas"][$i]) . "',
+                '" . mysqli_real_escape_string($conn, @$_POST["resultadoventas"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Existencia1"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Contabilizado"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Existencia2"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $fechaActual) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["GeneradoPor"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Recibio"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, $_POST["TipodeServicio"][$i]) . "',
+                '" . mysqli_real_escape_string($conn, @$_POST["TipodeServicio"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Proveedor1"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Proveedor2"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["ProveedorDelTraspaso"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["Estatus"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["AgregoElVendedor"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["ID_H_O_D"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, $_POST["resultadepiezas"][$i]) . "'
+                '" . mysqli_real_escape_string($conn, @$_POST["resultadepiezas"][$i]) . "'
             )";
         }
     }
