@@ -30,18 +30,12 @@ include "Consultas/Consultas.php";
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div >
-          <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
-            Guardar PrePedido <i class="fas fa-book-medical"></i>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+            Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
           </button>
-        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-            Busqueda por mes <i class="fas fa-calendar-week"></i>
-          </button>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
-            Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-          </button>
-        </div> -->
       </div>
 
+   
 
       <style>
         /* Personalizar el diseño de la paginación con CSS */
