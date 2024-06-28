@@ -27,7 +27,7 @@ include "Consultas/Consultas.php";
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div class="card text-center">
         <div class="card-header" style="background-color:#0057b8 !important;color: white;">
-          Registro de ventas de Saluda <?php echo $row['Nombre_Sucursal']?> te al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
+          Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div>
           <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
@@ -40,11 +40,10 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes'])) {
+          if (isset($_POST['Mes']) ) {
               // Obtener los valores del formulario
               $mes = $_POST['Mes'];
               echo "Mes seleccionado: $mes<br>";
-              echo "Fk_Sucursal: " . $row['Fk_Sucursal']; // Mostrar el valor de Fk_Sucursal
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
@@ -227,19 +226,19 @@ include "Consultas/Consultas.php";
             "drawCallback": ocultarCargando
           });
         });
-
+        
         document.getElementById('guardarDatos').addEventListener('click', function() {
           $('#guardarDatos').prop('disabled', true);
           setTimeout(function() {
             $('#guardarDatos').prop('disabled', false);
           }, 5000);
         });
+        var fkSucursal = $('#Fk_Sucursal').val();
 
         $(document).ready(function() {
           $("#guardarDatos").click(function() {
             var mesSeleccionado = $("#mes").val();
-            var fkSucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>; // Pasar el valor de PHP a JavaScript
-
+            var fkSucursal = $("#fk_sucursal").val(); // Obtener el valor del campo oculto
             if (mesSeleccionado === null || mesSeleccionado === "") {
               alert("Por favor, seleccione un mes antes de continuar.");
               return;
