@@ -8,14 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($data as $item) {
             $codBarra = $item['Cod_Barra'];
             $nombreProd = $item['Nombre_Prod'];
-            $sucursal = $item['Sucursal'];
             $turno = $item['Turno'];
             $importe = $item['Importe'];
             $totalVenta = $item['Total_Venta'];
             $descuento = $item['Descuento'];
+            $fkSucursal = $item['Fk_Sucursal'];  // Nuevo campo Fk_Sucursal
 
-            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod, Sucursal, Turno, Importe, Total_Venta, Descuento) 
-                    VALUES ('$codBarra', '$nombreProd', '$sucursal', '$turno', '$importe', '$totalVenta', '$descuento')";
+            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod,Turno, Importe, Total_Venta, Descuento, Fk_Sucursal) 
+                    VALUES ('$codBarra', '$nombreProd','$turno', '$importe', '$totalVenta', '$descuento', '$fkSucursal')";
 
             if (!mysqli_query($conn, $sql)) {
                 echo json_encode(["status" => "error", "message" => "Error al insertar: " . mysqli_error($conn)]);

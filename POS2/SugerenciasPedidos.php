@@ -27,31 +27,6 @@ include "Consultas/Consultas.php";
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" class="btn btn-default">Sugerencia por periodo<i class="fas fa-file-medical"></i></button>
       </div>
     </div>
-    
-    <!-- <div id="TablaPedidos" class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Proveedor</th>
-            <th>Nombre comercial</th>
-            <th>Ingrediente Activo</th>
-            <th>Presentación</th>
-            <th>Cantidad a pedir</th>
-            <th>Stock actual</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" class="form-control" name="proveedor"></td>
-            <td><input type="text" class="form-control" name="nombre_comercial"></td>
-            <td><input type="text" class="form-control" name="ingrediente_activo"></td>
-            <td><input type="text" class="form-control" name="presentacion"></td>
-            <td><input type="number" class="form-control" name="cantidad_pedir"></td>
-            <td><input type="number" class="form-control" name="stock_actual"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
   </div>
 </div>
 <!-- Control Sidebar -->
