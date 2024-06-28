@@ -226,14 +226,13 @@ include "Consultas/Consultas.php";
             "drawCallback": ocultarCargando
           });
         });
-        
+
         document.getElementById('guardarDatos').addEventListener('click', function() {
           $('#guardarDatos').prop('disabled', true);
           setTimeout(function() {
             $('#guardarDatos').prop('disabled', false);
           }, 5000);
         });
-        var fkSucursal = $('#Fk_Sucursal').val();
 
         $(document).ready(function() {
           $("#guardarDatos").click(function() {
