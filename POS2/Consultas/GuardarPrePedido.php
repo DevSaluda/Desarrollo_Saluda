@@ -12,9 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $importe = $item['Importe'];
             $totalVenta = $item['Total_Venta'];
             $descuento = $item['Descuento'];
-            $fkSucursal = $item['Fk_Sucursal'];  // Nuevo campo Fk_Sucursal
+            $fkSucursal = $item['Fk_sucursal'];  // Nuevo campo Fk_Sucursal
 
-            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod,Turno, Importe, Total_Venta, Descuento, Fk_Sucursal) 
+            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod,Cantidad, Proveedor1, Proveedor2, Presentacion, Fk_Sucursal) 
                     VALUES ('$codBarra', '$nombreProd','$turno', '$importe', '$totalVenta', '$descuento', '$fkSucursal')";
 
             if (!mysqli_query($conn, $sql)) {
