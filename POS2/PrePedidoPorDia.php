@@ -29,16 +29,10 @@ include "Consultas/Consultas.php";
         <div class="card-header" style="background-color:#0057b8 !important;color: white;">
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
-        <div >
+        <div>
           <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
             Guardar Sugerencia <i class="fas fa-clinic-medical"></i>
           </button>
-        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-            Busqueda por mes <i class="fas fa-calendar-week"></i>
-          </button>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
-            Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-          </button> -->
         </div>
       </div>
 
@@ -49,12 +43,7 @@ include "Consultas/Consultas.php";
           if (isset($_POST['Mes']) ) {
               // Obtener los valores del formulario
               $mes = $_POST['Mes'];
-             
-
-              // Realizar las operaciones que necesites con estas variables
-              // Por ejemplo, imprimir su valor
               echo "Mes seleccionado: $mes<br>";
-           
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
@@ -211,117 +200,79 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'none';
         }
 
-        var tabla;
         $(document).ready(function() {
-          tabla = $('#Productos').DataTable({
-            "processing": true,
-            "ordering": true,
-            "stateSave": true,
-            "autoWidth": true,
-            "order": [[ 0, "desc" ]],
-            "ajax": {
-              "type": "POST",
-              "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
-              "data": function (d) {
-                var mes = '<?php echo $mes; ?>';
-                var dataToSend = {
-                  "Mes": mes,
-                };
-                return dataToSend;
-              },
-              "error": function(xhr, error, thrown) {
-                console.log("Error en la solicitud AJAX:", error);
-              }
-            },
-            "columns": [
-              { "data": "Cod_Barra" },
-              { "data": "Nombre_Prod" },
-              { "data": "Sucursal" },
-              { "data": "Turno" },
-              { "data": "Importe" },
-              { "data": "Total_Venta" },
-              { "data": "Descuento" },
-            ],
-            "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+          $('#Productos').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
             "language": {
-              "lengthMenu": "Mostrar _MENU_ registros",
-              "sPaginationType": "extStyle",
-              "zeroRecords": "No se encontraron resultados",
-              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-              "sSearch": "Buscar:",
-              "paginate": {
-                "first": '<i class="fas fa-angle-double-left"></i>',
-                "last": '<i class="fas fa-angle-double-right"></i>',
-                "next": '<i class="fas fa-angle-right"></i>',
-                "previous": '<i class="fas fa-angle-left"></i>'
-              },
-              "processing": function () {
-                mostrarCargando();
-              }
+              "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
             },
-            "initComplete": function() {
-              ocultarCargando();
-            },
-            "dom": '<"d-flex justify-content-between"lBf>rtip',
+            "dom": 'Bfrtip',
             "buttons": [
-              {
-                extend: 'csvHtml5',
-                text: 'Exportar a CSV',
-                className: 'btn btn-primary',
-                titleAttr: 'CSV'
-              },
               {
                 extend: 'excelHtml5',
                 text: 'Exportar a Excel',
-                className: 'btn btn-success',
-                titleAttr: 'Excel'
+                className: 'btn btn-primary',
+                titleAttr: 'Exportar a Excel',
+                exportOptions: {
+                  columns: ':visible' // Exportar todas las columnas visibles
+                }
               }
             ],
-            "responsive": true
+            "initComplete": function(settings, json) {
+              ocultarCargando(); // Ocultar el overlay de carga cuando la tabla esté lista
+            },
+            "preDrawCallback": mostrarCargando,
+            "drawCallback": ocultarCargando
           });
+        });
 
-          $('#guardarDatos').on('click', function() {
-            var data = tabla.ajax.json().aaData;
+        document.getElementById('guardarDatos').addEventListener('click', function() {
+          $('#guardarDatos').prop('disabled', true);
+          setTimeout(function() {
+            $('#guardarDatos').prop('disabled', false);
+          }, 5000);
+        });
+
+        $(document).ready(function() {
+          $("#guardarDatos").click(function() {
+            var mesSeleccionado = $("#mes").val();
+            var fkSucursal = $("#fk_sucursal").val(); // Obtener el valor del campo oculto
+            if (mesSeleccionado === null || mesSeleccionado === "") {
+              alert("Por favor, seleccione un mes antes de continuar.");
+              return;
+            }
 
             $.ajax({
-              url: 'Consultas/GuardarPrePedido.php',
-              type: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify(data),
+              url: 'consultas/ConsultasVentas.php',
+              method: 'POST',
+              data: {
+                Mes: mesSeleccionado,
+                Fk_Sucursal: fkSucursal // Incluir Fk_Sucursal en la solicitud
+              },
               success: function(response) {
-                alert(response.message);
+                console.log("Datos enviados correctamente: ", response);
+                alert('Datos guardados correctamente');
+                $('#guardarDatos').prop('disabled', true);
+                setTimeout(function() {
+                  $('#guardarDatos').prop('disabled', false);
+                }, 5000);
               },
               error: function(xhr, status, error) {
-                console.error(xhr);
-                alert('Ocurrió un error al guardar los datos');
+                console.error("Error al enviar los datos: ", error);
+                alert('Hubo un problema al guardar los datos');
               }
             });
           });
         });
       </script>
-
-      <div class="text-center">
-        <div class="table-responsive">
-          <table id="Productos" class="hover" style="width:100%">
-            <thead>
-              <th>Cod</th>
-              <th>Nombre comercial</th>
-              <th>Sucursal</th>
-              <th>Cantidad</th>
-              <th>Proveedor</th>
-              <th>Proveedor</th>
-              <th>Presentacion</th>
-            </thead>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
-  </div>
-  </div>
-  <?php include ("footer.php"); ?>
+
+  <script src="js/ControlEstadoVentas.js"></script>
+</body>
+</html>
+<?php include ("footer.php"); ?>
   <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
   <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
   <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
@@ -351,4 +302,3 @@ function fechaCastellano ($fecha) {
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 ?>
-
