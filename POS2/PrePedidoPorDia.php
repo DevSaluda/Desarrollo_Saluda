@@ -211,7 +211,7 @@ include "Consultas/Consultas.php";
             "columns": [
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
-              { "data": "Sucursal" },
+              { "data": "Fk_sucursal" },
               { "data": "Turno" },
               { "data": "Importe" },
               { "data": "Total_Venta" },
@@ -240,20 +240,6 @@ include "Consultas/Consultas.php";
               ocultarCargando();
             },
             "dom": '<"d-flex justify-content-between"lBf>rtip',
-            "buttons": [
-              {
-                extend: 'csvHtml5',
-                text: 'Exportar a CSV',
-                className: 'btn btn-primary',
-                titleAttr: 'CSV'
-              },
-              {
-                extend: 'excelHtml5',
-                text: 'Exportar a Excel',
-                className: 'btn btn-success',
-                titleAttr: 'Excel'
-              }
-            ],
             "responsive": true
           });
 
@@ -261,7 +247,7 @@ include "Consultas/Consultas.php";
             var data = tabla.ajax.json().aaData;
 
             $.ajax({
-              url: 'GuardarPrePedido.php',
+              url: 'Consultas/GuardarPrePedido.php',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(data),
@@ -283,7 +269,6 @@ include "Consultas/Consultas.php";
             <thead>
               <th>Cod</th>
               <th>Nombre comercial</th>
-              <th>Sucursal</th>
               <th>Cantidad</th>
               <th>Proveedor</th>
               <th>Proveedor</th>
