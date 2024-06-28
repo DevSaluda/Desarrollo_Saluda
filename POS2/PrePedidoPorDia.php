@@ -29,24 +29,16 @@ include "Consultas/Consultas.php";
         <div class="card-header" style="background-color:#0057b8 !important;color: white;">
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
-        <div >
+        <div>
           <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
             Guardar PrePedido <i class="fas fa-book-medical"></i>
           </button>
-        <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-            Busqueda por mes <i class="fas fa-calendar-week"></i>
-          </button>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroPorProducto" class="btn btn-default">
-            Filtrar por producto <i class="fas fa-prescription-bottle"></i>
-          </button>
-        </div> -->
+        </div>
       </div>
 
-
       <style>
-        /* Personalizar el diseño de la paginación con CSS */
         .dataTables_wrapper .dataTables_paginate {
-          text-align: center !important; /* Centrar los botones de paginación */
+          text-align: center !important;
           margin-top: 10px !important;
         }
 
@@ -60,53 +52,44 @@ include "Consultas/Consultas.php";
           background-color: #fff !important;
         }
 
-        /* Cambiar el color del paginado seleccionado */
         .dataTables_paginate .paginate_button.current {
           background-color: #007bff !important;
           color: #fff !important;
           border-color: #007bff !important;
         }
 
-        /* Cambiar el color del hover */
         .dataTables_paginate .paginate_button:hover {
           background-color: #C80096 !important;
           color: #fff !important;
           border-color: #C80096 !important;
         }
-      </style>
 
-      <style>
-        /* Estilos personalizados para la tabla */
         #Productos th {
-          font-size: 12px; /* Tamaño de letra para los encabezados */
-          padding: 4px; /* Ajustar el espaciado entre los encabezados */
-          white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
+          font-size: 12px;
+          padding: 4px;
+          white-space: nowrap;
         }
-      </style>
 
-      <style>
-        /* Estilos para la tabla */
         #Productos {
-          font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
-          border-collapse: collapse; /* Colapsar los bordes de las celdas */
+          font-size: 12px;
+          border-collapse: collapse;
           width: 100%;
-          text-align: center; /* Centrar el contenido de las celdas */
+          text-align: center;
         }
 
         #Productos th {
-          font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
-          background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
-          color: white; /* Cambiar el color del texto a blanco para contrastar */
-          padding: 10px; /* Ajustar el espaciado de los encabezados */
+          font-size: 16px;
+          background-color: #0057b8 !important;
+          color: white;
+          padding: 10px;
         }
 
         #Productos td {
-          font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
-          padding: 8px; /* Ajustar el espaciado de las celdas */
-          border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
+          font-size: 14px;
+          padding: 8px;
+          border-bottom: 1px solid #ccc;
         }
 
-        /* Estilos para el botón de Excel */
         .dt-buttons {
           display: flex;
           justify-content: center;
@@ -116,13 +99,10 @@ include "Consultas/Consultas.php";
         .dt-buttons button {
           font-size: 14px;
           margin: 0 5px;
-          color: white; /* Cambiar el color del texto a blanco */
-          background-color: #fff; /* Cambiar el color de fondo a blanco */
+          color: white;
+          background-color: #fff;
         }
-      </style>
 
-      <style>
-        /* Estilos para la capa de carga */
         #loading-overlay {
           position: fixed;
           top: 0;
@@ -133,18 +113,17 @@ include "Consultas/Consultas.php";
           display: flex;
           justify-content: center;
           align-items: center;
-          z-index: 9999; /* Asegurarse de que el overlay esté encima de todo */
-          display: none; /* Ocultar inicialmente el overlay */
+          z-index: 9999;
+          display: none;
         }
 
-        /* Estilo para el ícono de carga */
         .loader {
-          border: 6px solid #f3f3f3; /* Color del círculo externo */
-          border-top: 6px solid #C80096; /* Color del círculo interno */
+          border: 6px solid #f3f3f3;
+          border-top: 6px solid #C80096;
           border-radius: 50%;
           width: 60px;
           height: 60px;
-          animation: spin 1s linear infinite; /* Animación de rotación */
+          animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -154,7 +133,6 @@ include "Consultas/Consultas.php";
       </style>
 
       <script>
-        // Definir una lista de mensajes para el mensaje de carga
         var mensajesCarga = [
           "Consultando ventas...",
           "Estamos realizando la búsqueda...",
@@ -182,7 +160,6 @@ include "Consultas/Consultas.php";
           "Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
         ];
 
-        // Función para mostrar el mensaje de carga con un texto aleatorio
         function mostrarCargando(event, settings) {
           var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
           var mensaje = mensajesCarga[randomIndex];
@@ -190,101 +167,99 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'flex';
         }
 
-        // Función para ocultar el mensaje de carga
         function ocultarCargando() {
           document.getElementById('loading-overlay').style.display = 'none';
         }
 
         var tabla;
         $(document).ready(function() {
-  tabla = $('#Productos').DataTable({
-    "processing": true,
-    "ordering": true,
-    "stateSave": true,
-    "autoWidth": true,
-    "order": [[ 0, "desc" ]],
-    "ajax": {
-      "type": "POST",
-      "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
-      "data": function (d) {
-        var mes = '<?php echo $mes; ?>';
-        var dataToSend = {
-          "Mes": mes,
-        };
-        return dataToSend;
-      },
-      "error": function(xhr, error, thrown) {
-        console.log("Error en la solicitud AJAX:", error);
-      }
-    },
-    "columns": [
-      { "data": "Cod_Barra" },
-      { "data": "Nombre_Prod" },
-      { "data": "Sucursal" },
-      { "data": "Turno" },
-      { "data": "Importe" },
-      { "data": "Total_Venta" },
-      { "data": "Descuento" },
-    ],
-    "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
-    "language": {
-      "lengthMenu": "Mostrar _MENU_ registros",
-      "sPaginationType": "extStyle",
-      "zeroRecords": "No se encontraron resultados",
-      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sSearch": "Buscar:",
-      "paginate": {
-        "first": '<i class="fas fa-angle-double-left"></i>',
-        "last": '<i class="fas fa-angle-double-right"></i>',
-        "next": '<i class="fas fa-angle-right"></i>',
-        "previous": '<i class="fas fa-angle-left"></i>'
-      },
-      "processing": function () {
-        mostrarCargando();
-      }
-    },
-    "initComplete": function() {
-      ocultarCargando();
-    },
-    "dom": '<"d-flex justify-content-between"lBf>rtip',
-    "buttons": [
-      {
-        extend: 'csvHtml5',
-        text: 'Exportar a CSV',
-        className: 'btn btn-primary',
-        titleAttr: 'CSV'
-      },
-      {
-        extend: 'excelHtml5',
-        text: 'Exportar a Excel',
-        className: 'btn btn-success',
-        titleAttr: 'Excel'
-      }
-    ],
-    "responsive": true
-  });
+          tabla = $('#Productos').DataTable({
+            "processing": true,
+            "ordering": true,
+            "stateSave": true,
+            "autoWidth": true,
+            "order": [[ 0, "desc" ]],
+            "ajax": {
+              "type": "POST",
+              "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
+              "data": function (d) {
+                var mes = '<?php echo $mes; ?>';
+                var dataToSend = {
+                  "Mes": mes,
+                };
+                return dataToSend;
+              },
+              "error": function(xhr, error, thrown) {
+                console.log("Error en la solicitud AJAX:", error);
+              }
+            },
+            "columns": [
+              { "data": "Cod_Barra" },
+              { "data": "Nombre_Prod" },
+              { "data": "Sucursal" },
+              { "data": "Turno" },
+              { "data": "Importe" },
+              { "data": "Total_Venta" },
+              { "data": "Descuento" },
+            ],
+            "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+            "language": {
+              "lengthMenu": "Mostrar _MENU_ registros",
+              "sPaginationType": "extStyle",
+              "zeroRecords": "No se encontraron resultados",
+              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+              "sSearch": "Buscar:",
+              "paginate": {
+                "first": '<i class="fas fa-angle-double-left"></i>',
+                "last": '<i class="fas fa-angle-double-right"></i>',
+                "next": '<i class="fas fa-angle-right"></i>',
+                "previous": '<i class="fas fa-angle-left"></i>'
+              },
+              "processing": function () {
+                mostrarCargando();
+              }
+            },
+            "initComplete": function() {
+              ocultarCargando();
+            },
+            "dom": '<"d-flex justify-content-between"lBf>rtip',
+            "buttons": [
+              {
+                extend: 'csvHtml5',
+                text: 'Exportar a CSV',
+                className: 'btn btn-primary',
+                titleAttr: 'CSV'
+              },
+              {
+                extend: 'excelHtml5',
+                text: 'Exportar a Excel',
+                className: 'btn btn-success',
+                titleAttr: 'Excel'
+              }
+            ],
+            "responsive": true
+          });
 
-  $('#guardarDatos').on('click', function() {
-    var data = tabla.ajax.json().aaData;
+          $('#guardarDatos').on('click', function() {
+            var data = tabla.ajax.json().aaData;
 
-    $.ajax({
-      url: 'GuardarPrePedido.php',
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function(response) {
-        alert(response.message);
-      },
-      error: function(xhr, status, error) {
-        console.error(xhr);
-        alert('Ocurrió un error al guardar los datos');
-      }
-    });
-  });
-});
-
+            $.ajax({
+              url: 'GuardarPrePedido.php',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(data),
+              success: function(response) {
+                alert(response.message);
+              },
+              error: function(xhr, status, error) {
+                console.error(xhr);
+                alert('Ocurrió un error al guardar los datos');
+              }
+            });
+          });
+        });
       </script>
 
       <div class="text-center">
@@ -298,8 +273,6 @@ include "Consultas/Consultas.php";
               <th>Proveedor</th>
               <th>Proveedor</th>
               <th>Presentacion</th>
-            
-              
             </thead>
           </table>
         </div>
@@ -308,26 +281,17 @@ include "Consultas/Consultas.php";
   </div>
   </div>
   </div>
-  <!-- Modales y scripts -->
-  <?php
-
-  include ("footer.php");
-  ?>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-  <!-- Bootstrap -->
+  <?php include ("footer.php"); ?>
+  <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+  <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- overlayScrollbars -->
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <!-- OPTIONAL SCRIPTS -->
   <script src="dist/js/demo.js"></script>
-  
 </body>
 </html>
 
