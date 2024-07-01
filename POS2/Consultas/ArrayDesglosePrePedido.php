@@ -58,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
             $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
             $data[$c]["Fk_sucursal"] = $fila["Fk_sucursal"];
-            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
             $data[$c]["Turno"] = $fila["Total_Cantidad_Vendida"];
             $data[$c]["Importe"] = $fila["Proveedor1"];
             $data[$c]["Total_Venta"] = $fila["Proveedor2"];
