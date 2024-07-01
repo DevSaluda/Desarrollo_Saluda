@@ -1,0 +1,29 @@
+$(document).ready(function(){
+    $('#sucursalExt').on('change', function(){
+        var sucursalValue = $(this).val();
+
+        if(sucursalValue === ""){
+            $('#especialidadExt').empty().append('<option value="">Selecciona una especialidad</option>').prop('disabled', true);
+        } else {
+            console.log('Consultas/ObtieneMedExt.php?sucursalExt=' + sucursalValue);
+
+            $('#especialidadExt')
+                .prop('disabled', false)
+                .load('Consultas/ObtieneMedExt.php?sucursalExt=' + sucursalValue);
+        }
+    });
+
+    $('#especialidadExt').on('change', function(){
+        var especialidadValue = $(this).val();
+
+        if(especialidadValue === ""){
+            $('#tipoconsultaExt').empty().append('<option value="">Elige un tipo de consulta</option>').prop('disabled', true);
+        } else {
+            console.log('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + especialidadValue);
+
+            $('#tipoconsultaExt')
+                .prop('disabled', false)
+                .load('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + especialidadValue);
+        }
+    });
+});
