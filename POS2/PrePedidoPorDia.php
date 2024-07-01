@@ -272,8 +272,7 @@ include "Consultas/Consultas.php";
             <table id="Productos" class="hover" style="width:100%">
               <thead>
                 <th>Cod</th>
-                <th>Nombre comercial</th>
-                <th>Sucursal</th>
+                <th>Nombre comercial</th>s
                 <th>Cantidad</th>
                 <th>Proveedor</th>
                 <th>Proveedor</th>
