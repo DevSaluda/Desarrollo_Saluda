@@ -481,7 +481,26 @@ function showInstructions() {
  
 </div>
 </div>            
+<div class="col">
 
+<label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Motivo devolucion
+</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+  </div>
+  <select id="devolucionesselect" class="form-control" style="font-size: 0.75rem !important;">
+            <option value="">Seleccione motivo</option>
+            <option value="Mal surtido (Tipo, presentación, marca, gramaje, precio o cantidad)">
+                Mal surtido (Tipo, presentación, marca, gramaje, precio o cantidad)</option>
+                <option value="Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima caducidad)">
+Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima caducidad)
+</option>
+<option value="Producto surtido sin factura o nota.">Producto surtido sin factura o nota.</option>
+        </select>
+                
+ 
+</div>
+</div>  
 
                       </div>
 
