@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         sp.FkPresentacion,
         sp.Precio_Venta,
         sp.Precio_C,
-        vp.Fk_sucursal
+        sc.Nombre_Sucursal
     FROM 
         Ventas_POS vp
     INNER JOIN 
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         sp.FkPresentacion, 
         sp.Precio_Venta, 
         sp.Precio_C, 
-        vp_Fk_sucursal
+        sc.Nombre_Sucursal
     ORDER BY 
         vp.Cod_Barra";
 
