@@ -23,7 +23,13 @@ $(document).ready(function(){
 
             $('#tipoconsultaExt')
                 .prop('disabled', false)
-                .load('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + especialidadValue);
+                .load('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + especialidadValue, function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error("Error al cargar tipos de consulta: " + xhr.status + " " + xhr.statusText);
+                    } else {
+                        console.log("Tipos de consulta cargados correctamente");
+                    }
+                });
         }
     });
 });
