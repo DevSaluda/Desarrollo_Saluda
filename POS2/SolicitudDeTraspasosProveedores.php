@@ -42,14 +42,7 @@ $totalmonto = $monto1 + $monto2;
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
 <body>
-<style>
-        .fish {
-            animation: swim 10s linear infinite;
-            width: 30%; /* Reducir el tamaño de la imagen al 50% */
-            display: block; /* Asegurar que se comporte como un bloque */
-            margin: 0 auto; /* Centrar la imagen */
-        }
-        .loader-container {
+<style>        .loader-container {
             text-align: center; /* Centrar el contenido */
         }
         .loaderPill-text {
