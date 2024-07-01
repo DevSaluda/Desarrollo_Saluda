@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while($fila = $result->fetch_assoc()) {
             $data[$c]["Cod_Barra"] = '<input type="text" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" value="' . $fila["Nombre_Prod"] . '" readonly>';
-            $data[$c]["Fk_sucursal"] = '<input type="text" value="' . $fila["Fk_sucursal"] . '" hidden readonly>';
+            $data[$c]["Sucursal"] = '<input type="text" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
             $data[$c]["Turno"] = '<input type="text" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
             $data[$c]["Importe"] = '<input type="text" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" value="' . $fila["Proveedor2"] . '" readonly>';
