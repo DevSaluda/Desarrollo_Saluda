@@ -190,6 +190,7 @@ include "Consultas/Consultas.php";
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
               { "data": "Fk_sucursal" },
+              { "data": "Nombre_Sucursal" },
               { "data": "Turno" },
               { "data": "Importe" },
               { "data": "Total_Venta" },
