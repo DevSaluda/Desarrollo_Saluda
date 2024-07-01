@@ -2,7 +2,7 @@
     include("ConeSelectDinamico.php");
     $especialidad = intval($_REQUEST['especialidadExt']);
     
-    $tiposConsulta = $conn->prepare("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado='Vigente' AND Especialidad = $especialidad") or die(mysqli_error($conn));
+    $tiposConsulta = $conn->prepare("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado='Vigente' AND Especialidad = ?") or die(mysqli_error($conn));
     $tiposConsulta->bind_param("i", $especialidad);
     
     echo '<option value="">Elige un tipo de consulta</option>';
@@ -14,6 +14,6 @@
         }
     }
     
-    $tiposConsulta->close();
+    $tiposConsulta->close(); 
     $conn->close();
 ?>
