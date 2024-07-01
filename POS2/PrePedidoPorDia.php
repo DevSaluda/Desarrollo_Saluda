@@ -40,10 +40,12 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes']) ) {
+          if (isset($_POST['mes']) ) {
               // Obtener los valores del formulario
-              $mes = $_POST['Mes'];
-              
+              $mes = $_POST['mes'];
+              // Aquí puedes agregar el código para procesar y guardar los datos del formulario
+              // ...
+              echo "Datos guardados correctamente.";
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
               echo "Error: No se recibieron todas las variables necesarias.";
@@ -264,19 +266,23 @@ include "Consultas/Consultas.php";
       </script>
 
       <div class="text-center">
-        <div class="table-responsive">
-          <table id="Productos" class="hover" style="width:100%">
-            <thead>
-              <th>Cod</th>
-              <th>Nombre comercial</th>
-              <th>Sucursal</th>
-              <th>Cantidad</th>
-              <th>Proveedor</th>
-              <th>Proveedor</th>
-              <th>Presentacion</th>
-            </thead>
-          </table>
-        </div>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+          <input type="hidden" name="mes" value="<?php echo $mes; ?>">
+          <div class="table-responsive">
+            <table id="Productos" class="hover" style="width:100%">
+              <thead>
+                <th>Cod</th>
+                <th>Nombre comercial</th>
+                <th>Sucursal</th>
+                <th>Cantidad</th>
+                <th>Proveedor</th>
+                <th>Proveedor</th>
+                <th>Presentacion</th>
+              </thead>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
