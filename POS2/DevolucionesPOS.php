@@ -568,8 +568,7 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                               <th style="width:20%">Producto</th>
                               <th style="width:6%">Piezas</th>
                               <th >Fecha caducidad</th>
-                              <th >Lote</th>
-                              <th>Precio Maximo</th>
+                             
                               
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
@@ -920,8 +919,8 @@ function agregarArticulo(articulo) {
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
         tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" /></td>';
 tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
-tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" /></td>';
-tr += '<td class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
+tr += '<td style="visibility:collapse; display:none;" class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" /></td>';
+tr += '<td style="visibility:collapse; display:none;" class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input class="form-control proveedor-input" style="font-size: 0.75rem !important;" id="proveedor" type="text" name="Proveedor[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="numerorden"><input class="form-control" style="font-size: 0.75rem !important;" value="<?php echo  $totalmonto?>" type="text" name="NumberOrden[]" /></td>';
