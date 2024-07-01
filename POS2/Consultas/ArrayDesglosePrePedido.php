@@ -21,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         sp.FkPresentacion,
         sp.Precio_Venta,
         sp.Precio_C,
-        sc.Nombre_Sucursal
         vp.Fk_sucursal
     FROM 
         Ventas_POS vp
@@ -44,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         sp.FkPresentacion, 
         sp.Precio_Venta, 
         sp.Precio_C, 
-        sc.Nombre_Sucursal
         vp_Fk_sucursal
     ORDER BY 
         vp.Cod_Barra";
