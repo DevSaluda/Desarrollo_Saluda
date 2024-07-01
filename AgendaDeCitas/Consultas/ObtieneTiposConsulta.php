@@ -3,7 +3,7 @@
     $especialidad = intval($_REQUEST['especialidadExt']);
 
     if ($conn) {
-        $tiposConsulta = $conn->prepare("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado='Vigente' AND Especialidad = ?");
+        $tiposConsulta = $conn->prepare("SELECT * FROM Tipos_Consultas WHERE Estado='Vigente' AND Especialidad = ?");
 
         if ($tiposConsulta) {
             $tiposConsulta->bind_param("i", $especialidad);
