@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $descuento = $item['Descuento'];
             $fkSucursal = $item['Fk_sucursal'];  // Nuevo campo Fk_Sucursal
 
-            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod,Cantidad, Proveedor1, Proveedor2, Presentacion, Fk_Sucursal) 
+            $sql = "INSERT INTO Sugerencias_POS (Cod_Barra, Nombre_Prod,Cantidad, Proveedor1, Proveedor2, FkPresentacion, Fk_Sucursal) 
                     VALUES ('$codBarra', '$nombreProd','$turno', '$importe', '$totalVenta', '$descuento', '$fkSucursal')";
 
             if (!mysqli_query($conn, $sql)) {
