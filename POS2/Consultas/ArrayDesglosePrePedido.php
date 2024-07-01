@@ -55,14 +55,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $c = 0;
 
         while($fila = $result->fetch_assoc()) {
-            $data[$c]["Cod_Barra"] = '<input type="text" value="' . $fila["Cod_Barra"] . '" readonly>';
-            $data[$c]["Nombre_Prod"] = '<input type="text" value="' . $fila["Nombre_Prod"] . '" readonly>';
-            $data[$c]["Fk_sucursal"] = '<input type="text" value="' . $fila["Fk_sucursal"] . '" hidden readonly>';
-            $data[$c]["Sucursal"] = '<input type="text" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
-            $data[$c]["Turno"] = '<input type="text" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
-            $data[$c]["Importe"] = '<input type="text" value="' . $fila["Proveedor1"] . '" readonly>';
-            $data[$c]["Total_Venta"] = '<input type="text" value="' . $fila["Proveedor2"] . '" readonly>';
-            $data[$c]["Descuento"] = '<input type="text" value="' . $fila["FkPresentacion"] . '" readonly>';
+            $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
+            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+            $data[$c]["Fk_sucursal"] = $fila["Fk_sucursal"];
+            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
+            $data[$c]["Turno"] = $fila["Total_Cantidad_Vendida"];
+            $data[$c]["Importe"] = $fila["Proveedor1"];
+            $data[$c]["Total_Venta"] = $fila["Proveedor2"];
+            $data[$c]["Descuento"] = $fila["FkPresentacion"];
             $c++; 
         }
 
