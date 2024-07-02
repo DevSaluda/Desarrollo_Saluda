@@ -193,7 +193,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'AgregadoPor' },
        { mData: 'AgregadoEl' },
        
-       { mData: 'Doctor' },
+  
       
   
       ],
