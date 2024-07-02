@@ -177,18 +177,23 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDevolucionesDelMes.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
  "aoColumns": [
-    { "data": "Cod_Barra", "title": "Cod" },
-            { "data": "Nombre_Produc", "title": "Nombre" },
-            { "data": "Cantidad", "title": "Cantidad" },
-            { "data": "Num_Factura", "title": "N° Factura" },
-            { "data": "Nombre_Sucursal", "title": "Sucursal" },
-            { "data": "Motivo_Devolucion", "title": "Motivo Devolución" },
-            { "data": "Fecha", "title": "Fecha" },
-            { "data": "HoraAgregado", "title": "Hora" },
-            { "data": "Agrego", "title": "Agregado Por" },
-            { "data": "NumOrde", "title": "N° Orden" }
+    { mData: 'Id_Sugerencia' },
+       { mData: 'Cod_Barra' },
+       { mData: 'Nombre_Prod' },
+       { mData: 'Nombre_Sucursal' },
+       { mData: 'Precio_Venta' },
+       { mData: 'Precio_C' },
+       { mData: 'Cantidad' },
+       { mData: 'Fecha_Ingreso' },
+       { mData: 'FkPresentacion' },
+       { mData: 'Proveedor1' },
+       { mData: 'Proveedor2' },
+       { mData: 'AgregadoPor' },
+       { mData: 'AgregadoEl' },
+       
+  
       
   
       ],
