@@ -926,7 +926,7 @@ function agregarArticulo(articulo) {
 
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
-        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" /></td>';
+        tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Cantidad[]" value="' + articulo.cantidad + '" /></td>';
 tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
@@ -944,9 +944,9 @@ tr += '<td   style="visibility:collapse; display:none;"class="numerorden"><input
         tr += '<td style="visibility:collapse; display:none;"><input id="ieps_' + articulo.id + '" class="form-control ieps" type="number" readonly /></td>';
         tr += '<td style="visibility:collapse; display:none;"class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="' + articulo.id + '" name="IdBasedatos[]" /></td>';
         tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="estatussolicitud" type="text" class="form-control " name="Estatusdesolicitud[]"readonly value="Pendiente"  </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="sucursal" type="text" class="form-control " name="FkSucursal[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="sucursal" type="text" class="form-control " name="Fk_Suc_Salida[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
-        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="FechaDeInventario[]"readonly value="<?php echo $fechaActual;?>"  </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="Fecha[]"readonly value="<?php echo $fechaActual;?>"  </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
 

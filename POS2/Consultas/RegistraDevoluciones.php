@@ -1,16 +1,16 @@
 <?php
 include_once 'db_connection.php';
 
-// Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
-if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
-    $contador = count($_POST["IdBasedatos"]); 
+// Verificar si $_POST["FacturaNumber"] está definido y es un arreglo antes de contar sus elementos
+if(isset($_POST["FacturaNumber"]) && is_array($_POST["FacturaNumber"])) {
+    $contador = count($_POST["FacturaNumber"]); 
 } else {
-    // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
+    // Manejar el caso en el que $_POST["FacturaNumber"] no está definido o no es un arreglo
     $contador = 0;
 }
 
 $ProContador = 0;
-$query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`,`Tipo_Ajuste`,`Anaquel`,`Repisa`) VALUES ";
+$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `HoraAgregado`, `NumOrde`, `FacturaNumber`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -18,27 +18,20 @@ $valueTypes = '';
 
 for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
-    if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
+    if (!empty($_POST["FacturaNumber"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
-        $values[] = $_POST["IdBasedatos"][$i];
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $values[] = $_POST["FacturaNumber"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
-        $values[] = $_POST["Fk_sucursal"][$i]; // Cambiado el nombre del campo según la nueva data
-        $values[] = $_POST["PrecioVenta"][$i];
-        $values[] = $_POST["PrecioCompra"][$i];
-        $values[] = $_POST["Contabilizado"][$i];
-        $values[] = $_POST["StockActual"][$i]; // Cambiado el nombre del campo según la nueva data
-        $values[] = $_POST["Diferencia"][$i];
-        $values[] = $_POST["Sistema"][$i]; // Agregar el campo 'Sistema' según la nueva data
+        $values[] = $_POST["Cantidad"][$i];
+        $values[] = $_POST["Fk_Suc_Salida"][$i];
+        $values[] = $_POST["MotivoDevolucion"][$i];
+        $values[] = $_POST["Fecha"][$i];
         $values[] = $_POST["AgregoElVendedor"][$i];
-      
-        $values[] = $_POST["ID_H_O_D"][$i];
-        $values[] = $_POST["FechaInv"][$i]; // Agregar el campo 'ID_H_O_D' según la nueva data
-        $values[] = $_POST["Tipodeajusteaplicado"][$i];
-        $values[] = $_POST["AnaquelSeleccionado"][$i];
-        $values[] = $_POST["RepisaSeleccionada"][$i];
-        $valueTypes .= 'ssssssssssssssss'; // Ajustar tipos según corresponda
+        $values[] = $_POST["HoraAgregado"][$i];
+        $values[] = $_POST["NumberOrden"][$i];
+        $valueTypes .= 'ssssssssss'; // Ajustar tipos según corresponda
     }
 }
 
