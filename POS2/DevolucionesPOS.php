@@ -557,7 +557,7 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                           margin-bottom: 5px !important;
                         }
                       </style>
-                      <form action="javascript:void(0)" target="print_popup" method="post" id="VentasAlmomento">
+                      <form action="javascript:void(0)"  method="post" id="DevolucionesAlMomento">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Enviar Información</button>
     </div>
@@ -567,7 +567,7 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
                               <th style="width:6%">Piezas</th>
-                              <th >Fecha caducidad</th>
+                              <th >¿Cuando llego?</th>
                              
                               
                               <!-- <th>importe_Sin_Iva</th>
