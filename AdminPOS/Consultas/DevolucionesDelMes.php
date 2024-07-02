@@ -251,13 +251,7 @@ tabla = $('#Productos').DataTable({
 <th>Fecha pedido</th>
 <th>Presentacion</th>
 <th>Cantidad</th>
-<th>Proveedor</th>
-<th>Proveedor</th> 
 
-
-
-<th>Pedido realizado por</th>
-<th>Generado el </th>
 
 
 </thead>
