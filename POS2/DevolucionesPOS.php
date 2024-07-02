@@ -722,6 +722,15 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 });
 
     </script>
+<script>
+       let selectedmotivodevolucion = "";
+
+document.getElementById('devolucionesselect').addEventListener('change', function() {
+  selectedmotivodevolucion = this.value;
+});
+
+    </script>
+
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
@@ -923,6 +932,7 @@ tr += '<td style="visibility:collapse; display:none;" class="Diferenciaresultant
 tr += '<td style="visibility:collapse; display:none;" class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input class="form-control proveedor-input" style="font-size: 0.75rem !important;" id="proveedor" type="text" name="Proveedor[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
+tr += '<td   style="visibility:collapse; display:none;"class="MotDev"><input class="form-control motivodevolucion-input" style="font-size: 0.75rem !important;" id="MotDev" type="text" name="MotivoDevolucion[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="numerorden"><input class="form-control" style="font-size: 0.75rem !important;" value="<?php echo  $totalmonto?>" type="text" name="NumberOrden[]" /></td>';
 
         tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '"  /></td>';
@@ -945,6 +955,7 @@ tr += '<td   style="visibility:collapse; display:none;"class="numerorden"><input
         $('#tablaAgregarArticulos tbody').append(tr);
         $('#tablaAgregarArticulos tbody tr:last-child').find('.proveedor-input').val(selectedAdjustment);
         $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
+        $('#tablaAgregarArticulos tbody tr:last-child').find('.motivodevolucion-input').val(selectedmotivodevolucion);
         
      
        
@@ -968,7 +979,7 @@ function eliminarFila(element) {
 
 </script>
 
-<script src="js/CompletaSolicitudTraspaso.js"></script>
+<script src="js/RealizaDevolucionProductos.js"></script>
 
 <script src="js/ConectaProveedores.js"></script>
 <!-- Control Sidebar -->
