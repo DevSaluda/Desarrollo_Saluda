@@ -179,6 +179,7 @@ tabla = $('#Productos').DataTable({
  "order": [[ 0, "desc" ]],
  "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDevolucionesDelMes.php",
  "aoColumns": [
+    { "data": "NumOrde", "title": "N° Orden" },
     { "data": "Cod_Barra", "title": "Cod" },
             { "data": "Nombre_Produc", "title": "Nombre" },
             { "data": "Cantidad", "title": "Cantidad" },
@@ -188,7 +189,7 @@ tabla = $('#Productos').DataTable({
             { "data": "Fecha", "title": "Fecha" },
             { "data": "HoraAgregado", "title": "Hora" },
             { "data": "Agrego", "title": "Agregado Por" },
-            { "data": "NumOrde", "title": "N° Orden" }
+            
       
   
       ],
@@ -241,16 +242,6 @@ tabla = $('#Productos').DataTable({
 	<div class="table-responsive">
 	<table  id="Productos" class="hover" style="width:100%">
 <thead>
-<th>Id</th>
-<th>Cod</th>
-<th>Nombre</th>
-<th>Sucursal</th>
-<th>Precio Venta</th>
-<th>Precio compra</th>
-<th>Cantidad</th>
-<th>Fecha pedido</th>
-<th>Presentacion</th>
-<th>Cantidad</th>
 
 
 

@@ -30,17 +30,21 @@ $data = [];
 $c = 0;
 
 while($fila = $result->fetch_assoc()) {
-    $data[$c]["ID_Registro"] = $fila["ID_Registro"];
-    $data[$c]["Num_Factura"] = $fila["Num_Factura"];
+    $data[$c]["NumOrde"] = $fila["NumOrde"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Produc"] = $fila["Nombre_Produc"];
     $data[$c]["Cantidad"] = $fila["Cantidad"];
+    $data[$c]["Num_Factura"] = $fila["Num_Factura"];
+   
+  
+
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Motivo_Devolucion"] = $fila["Motivo_Devolucion"];
     $data[$c]["Fecha"] = date("d/m/Y", strtotime($fila["Fecha"]));
-    $data[$c]["Agrego"] = $fila["Agrego"];
     $data[$c]["HoraAgregado"] = $fila["HoraAgregado"];
-    $data[$c]["NumOrde"] = $fila["NumOrde"];
+    $data[$c]["Agrego"] = $fila["Agrego"];
+
+   
     $c++;
 }
 
