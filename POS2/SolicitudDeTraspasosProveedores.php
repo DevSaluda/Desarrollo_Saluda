@@ -536,7 +536,7 @@ function showInstructions() {
                           margin-bottom: 5px !important;
                         }
                       </style>
-                      <form action="javascript:void(0)" target="print_popup" method="post" id="VentasAlmomento">
+                      <form action="javascript:void(0)"  method="post" id="SolicitaTraspasos">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Enviar Información</button>
     </div>
