@@ -1,6 +1,21 @@
 $(document).ready(function () {
+    // Agregar los métodos de validación personalizados
+    function validarFormulario() {
+        var clienteInput = $("#clienteInput");
+
+        if (clienteInput.val() === "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Campo requerido',
+                text: 'El nombre del cliente es necesario',
+            });
+            return false;
+        }
+        return true;
+    }
+
     // Validar el formulario
-    $("#SolicitaTraspasos").validate({
+    $("#SolicitaTraspasosPOs").validate({
         rules: {
             clienteInput: {
                 required: true,
@@ -8,46 +23,54 @@ $(document).ready(function () {
         },
         messages: {
             clienteInput: {
-                required: "El nombre del cliente es necesario",
-            },
-        },
-        submitHandler: function (form) {
-            $.ajax({
-                type: 'POST',
-                url: "Consultas/RegistraSolicitudesTraspasos.php",
-                data: $(form).serialize(),
-                cache: false,
-                success: function (data) {
-                    var response = JSON.parse(data);
-
-                    if (response.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Datos guardados con éxito!',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            didOpen: () => {
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1500);
-                            },
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Algo salió mal',
-                            text: response.message,
-                        });
-                    }
-                },
-                error: function () {
+                required: function () {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error en la petición',
-                        text: 'No se pudieron guardar los datos. Por favor, inténtalo de nuevo.',
+                        title: 'Campo requerido',
+                        text: 'El nombre del cliente es necesario',
                     });
-                }
-            });
+                },
+            },
+        },
+        submitHandler: function () {
+            if (validarFormulario()) {
+                $.ajax({
+                    type: 'POST',
+                    url: "Consultas/RegistraSolicitudesTraspasos.php",
+                    data: $('#SolicitaTraspasosPOs').serialize(),
+                    cache: false,
+                    success: function (data) {
+                        var response = JSON.parse(data);
+
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Datos guardados con exito!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                didOpen: () => {
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 1500);
+                                },
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Algo salió mal',
+                                text: response.message,
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error en la petición',
+                            text: 'No se pudieron guardar los datos. Por favor, inténtalo de nuevo.',
+                        });
+                    }
+                });
+            }
         },
     });
 });
