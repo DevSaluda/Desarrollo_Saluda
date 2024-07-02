@@ -11,7 +11,7 @@ if (!$conn) {
 
 $contador = count($_POST["CodBarra"]);
 $ProContador = 0;
-$query = "INSERT INTO Sugerencias_POS (`Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Ingreso`, `Tipo`, `FkCategoria`, `FkMarca`, `FkPresentacion`, `Proveedor1`, `Proveedor2`, `AgregadoPor`, `AgregadoEl`, `ID_H_O_D`) VALUES ";
+$query = "INSERT INTO Sugerencias_POS (`Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`,  `Fecha_Ingreso`,  `FkPresentacion`, `Proveedor1`, `Proveedor2`, `AgregadoPor`, `AgregadoEl`, `ID_H_O_D`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -20,25 +20,24 @@ $valueTypes = '';
 for ($i = 0; $i < $contador; $i++) {
     if (!empty($_POST["CodBarra"][$i]) || !empty($_POST["NombreProd"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)";
         $values[] = $_POST["CodBarra"][$i];
         $values[] = $_POST["NombreProd"][$i];
         $values[] = $_POST["Sucursal"][$i];
         $values[] = $_POST["PrecioVenta"][$i];
         $values[] = $_POST["PrecioCompra"][$i];
         $values[] = $_POST["Cantidadd"][$i];
-        $values[] = $_POST["Lote"][$i];
+       
         $values[] = $_POST["FechaIngreso"][$i];
-        $values[] = $_POST["Tipo"][$i];
-        $values[] = $_POST["FkCategoria"][$i];
-        $values[] = $_POST["FkMarca"][$i];
+      
+      
         $values[] = $_POST["FkPresentacion"][$i];
         $values[] = $_POST["Prov1"][$i];
         $values[] = $_POST["Prov2"][$i];
         $values[] = $_POST["AgregadoPor"][$i];
         $values[] = $_POST["AgregadoEl"][$i];
         $values[] = $_POST["ID_H_O_D"][$i];
-        $valueTypes .= 'sssssssssssssssss'; // Ajustar tipos según corresponda
+        $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
     }
 }
 

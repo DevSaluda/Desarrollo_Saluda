@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" >
            <input type="text" class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>
            <input type="text" class="form-control" name="FechaIngreso[]" value="' .$fechaActual. '" readonly >
-           <input type="text" class="form-control" name="FechaIngreso[]"  value="' . $fila["Precio_Venta"] . '" readonly >
-           <input type="text" class="form-control" name="FechaIngreso[]"  value="' . $fila["Precio_C"] . '" readonly >';
+           <input type="text" class="form-control" name="PrecioVenta[]"  value="' . $fila["Precio_Venta"] . '" readonly >
+           <input type="text" class="form-control" name="PrecioCompra[]"  value="' . $fila["Precio_C"] . '" readonly >';
 
            
             $c++; 
