@@ -246,30 +246,24 @@ tabla = $('#Productos').DataTable({
 	<div class="table-responsive">
 	<table  id="Productos" class="hover" style="width:100%">
 <thead>
-
+<th>Id</th>
 <th>Cod</th>
 <th>Nombre</th>
-<th>Precio compra</th>
-<th>Precio Venta</th>
-<th>N° Ticket</th>
 <th>Sucursal</th>
-<th>Turno</th>
+<th>Precio Venta</th>
+<th>Precio compra</th>
 <th>Cantidad</th>
-<th>P.U</th>
-<th>Importe</th> 
+<th>Fecha pedido</th>
+<th>Presentacion</th>
+<th>Cantidad</th>
+<th>Proveedor</th>
+<th>Proveedor</th> 
 
 
 
-<th>Descuento</th>
-<th>Forma de pago</th>
-<th>Cliente</th>
-<th>Folio Signo Vital</th>
-<th>Servicio</th>
-<th>Fecha</th>
-<th>Hora</th>   
-<th>Vendedor</th>
-<th>Enfermero</th>
-<th>Doctor</th>
+<th>Pedido realizado por</th>
+<th>Generado el </th>
+
 
 </thead>
 
