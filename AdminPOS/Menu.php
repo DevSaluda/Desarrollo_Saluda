@@ -1067,6 +1067,16 @@
           
           </li>
           <li class="nav-item has-treeview">
+            <a href="DevolucionesProductos" class="nav-link">
+            <i class="fas fa-recycle"></i>
+              <p>
+        Devoluciones
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
             <a href="Mobiliarios" class="nav-link">
             <i class="fas fa-barcode"></i>
               <p>
