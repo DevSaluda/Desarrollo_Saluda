@@ -15,7 +15,7 @@ $(document).ready(function () {
     }
 
     // Validar el formulario
-    $("#VentasAlmomento").validate({
+    $("#DevolucionesAlMomento").validate({
         rules: {
             clienteInput: {
                 required: true,
@@ -37,7 +37,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: 'POST',
                     url: "Consultas/RegistraDevoluciones.php",
-                    data: $('#VentasAlmomento').serialize(),
+                    data: $('#DevolucionesAlMomento').serialize(),
                     cache: false,
                     success: function (data) {
                         var response = JSON.parse(data);
