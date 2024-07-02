@@ -20,22 +20,18 @@ $valueTypes = '';
 for ($i = 0; $i < $contador; $i++) {
     if (!empty($_POST["CodBarra"][$i]) || !empty($_POST["NombreProd"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, )";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $values[] = $_POST["CodBarra"][$i];
         $values[] = $_POST["NombreProd"][$i];
         $values[] = $_POST["Sucursal"][$i];
         $values[] = $_POST["PrecioVenta"][$i];
         $values[] = $_POST["PrecioCompra"][$i];
         $values[] = $_POST["Cantidadd"][$i];
-       
         $values[] = $_POST["FechaIngreso"][$i];
-      
-      
         $values[] = $_POST["Presentacion"][$i];
         $values[] = $_POST["Prov1"][$i];
         $values[] = $_POST["Prov2"][$i];
         $values[] = $_POST["AgregadoPor"][$i];
-
         $values[] = $_POST["ID_H_O_D"][$i];
         $valueTypes .= 'ssssssssssss'; // Ajustar tipos según corresponda
     }
