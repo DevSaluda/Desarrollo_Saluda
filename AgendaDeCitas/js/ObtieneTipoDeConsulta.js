@@ -14,16 +14,16 @@ $(document).ready(function(){
     });
 
     $('#especialidadExt').on('change', function(){
-        var especialidadValue = $('#especialidadExt option:selected').text();
+        var especialidadText = $('#especialidadExt option:selected').text();
 
-        if(especialidadValue === ""){
+        if(especialidadText === "" || especialidadText === "Selecciona una especialidad"){
             $('#tipoconsultaExt').empty().append('<option value="">Elige un tipo de consulta</option>').prop('disabled', true);
         } else {
-            console.log('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadValue));
+            console.log('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadText));
 
             $('#tipoconsultaExt')
                 .prop('disabled', false)
-                .load('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadValue), function(response, status, xhr) {
+                .load('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadText), function(response, status, xhr) {
                     if (status === "error") {
                         console.error("Error al cargar tipos de consulta: " + xhr.status + " " + xhr.statusText);
                     } else {
