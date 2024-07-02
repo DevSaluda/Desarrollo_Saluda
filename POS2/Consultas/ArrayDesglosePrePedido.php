@@ -60,9 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Turno"] = '<input type="text" class="form-control"name="Cantidadd[]" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
             $data[$c]["Importe"] = '<input type="text" class="form-control" name="Prov1[]" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" class="form-control" name="Prov2[] "value="' . $fila["Proveedor2"] . '" readonly>';
-            $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" readonly>
+            $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" >
            <input type="text" class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>
-           <input type="text" class="form-control" name="Sucursal[]" value="' .$fechaActual. '"  >';
+           <input type="text" class="form-control" name="FechaIngreso[]" value="' .$fechaActual. '" readonly >
+           <input type="text" class="form-control" name="FechaIngreso[]"  value="' . $fila["Precio_Venta"] . '" readonly >
+           <input type="text" class="form-control" name="FechaIngreso[]"  value="' . $fila["Precio_C"] . '" readonly >';
 
            
             $c++; 
