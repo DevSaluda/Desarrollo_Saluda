@@ -49,7 +49,7 @@ $(document).ready(function () {
                                 showConfirmButton: false,
                                 timer: 2000,
                             }).then(() => {
-                                location.reload();
+                                window.location.href = "https://saludapos.com/POS2/SugerenciasPedidos";
                             });
                         } else {
                             Swal.fire({
