@@ -61,12 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Importe"] = '<input type="text" class="form-control" name="Prov1[]" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" class="form-control" name="Prov2[] "value="' . $fila["Proveedor2"] . '" readonly>';
             $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" >
-           <input type="text" class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>
-           <input type="text" class="form-control" name="FechaIngreso[]" value="' .$fechaActual. '" readonly >
-           <input type="text" class="form-control" name="PrecioVenta[]"  value="' . $fila["Precio_Venta"] . '" readonly >
-           <input type="text" class="form-control" name="PrecioCompra[]"  value="' . $fila["Precio_C"] . '" readonly >
-            <input type="text" class="form-control" name="ID_H_O_D[]"  value="Saluda" readonly >
-            <input type="text" class="form-control" name="AgregadoPor[]"  value="'.$row['Nombre_Apellidos'].'" readonly >';
+           <input type="text" hidden class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>
+           <input type="text" hidden class="form-control" name="FechaIngreso[]" value="' .$fechaActual. '" readonly >
+           <input type="text" hidden class="form-control" name="PrecioVenta[]"  value="' . $fila["Precio_Venta"] . '" readonly >
+           <input type="text" hidden class="form-control" name="PrecioCompra[]"  value="' . $fila["Precio_C"] . '" readonly >
+            <input type="text" hidden class="form-control" name="ID_H_O_D[]"  value="Saluda" readonly >
+            <input type="text" hidden class="form-control" name="AgregadoPor[]"  value="'.$row['Nombre_Apellidos'].'" readonly >';
 
            
             $c++; 
