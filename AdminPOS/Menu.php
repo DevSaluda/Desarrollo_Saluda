@@ -836,6 +836,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="PedidosSugerencias" class="nav-link">
+            <i class="fas fa-prescription-bottle"></i>
+              <p>
+            Pedidos               
+              </p>
+            </a>
+          </li>
 </div>
 
 <div  style=<?php switch($row){
@@ -1068,7 +1077,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="DevolucionesProductos" class="nav-link">
-            <i class="fas fa-recycle"></i>
+            <i class="fas fa-undo"></i>
               <p>
         Devoluciones
                
