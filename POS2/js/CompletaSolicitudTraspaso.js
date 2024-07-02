@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Validar el formulario
-    $("#DevolucionesAlMomento").validate({
+    $("#SolicitaTraspasos").validate({
         rules: {
             clienteInput: {
                 required: true,
