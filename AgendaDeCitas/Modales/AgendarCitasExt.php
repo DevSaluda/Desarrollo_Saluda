@@ -87,6 +87,7 @@ function formatPhoneNumber(input) {
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-tag"></i></span>
   </div>
   <select  id = "especialidadExt" name = "EspecialidadExt"  class = "form-control" disabled = "disabled" >
+                                
 								<option value = "">Selecciona una especialidad</option>
 							</select>
 </div>
@@ -164,6 +165,8 @@ function formatPhoneNumber(input) {
             <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt" disabled="disabled">
+        <option>Primera cita</option>
+        <option>Revaloracion</option>
     <option value="">Elige un tipo de consulta</option>
 </select>
 
