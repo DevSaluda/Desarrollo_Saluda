@@ -1,5 +1,5 @@
 <?php
-include_once 'db_connect.php';
+include("db_connection.php");
 
 // Verifica que la conexión a la base de datos se haya realizado correctamente
 if (!$conn) {
