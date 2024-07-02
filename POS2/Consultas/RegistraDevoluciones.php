@@ -10,7 +10,7 @@ if(isset($_POST["FacturaNumber"]) && is_array($_POST["FacturaNumber"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `NumOrde`, `NumFactura`) VALUES ";
+$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `NumOrde`) VALUES ";
 
 $placeholders = [];
 $values = [];
