@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $c = 0;
 
         while($fila = $result->fetch_assoc()) {
-            $data[$c]["Cod_Barra"] = '<input type="text" value="' . $fila["Cod_Barra"] . '" readonly>';
+            $data[$c]["Cod_Barra"] = '<input type="text" class="control-form" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["Fk_sucursal"] = '<input type="text" value="' . $fila["Fk_sucursal"] . '" hidden readonly>';
             $data[$c]["Turno"] = '<input type="text" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
