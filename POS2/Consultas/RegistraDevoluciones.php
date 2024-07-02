@@ -10,7 +10,7 @@ if(isset($_POST["FacturaNumber"]) && is_array($_POST["FacturaNumber"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `HoraAgregado`, `NumOrde`, `FacturaNumber`) VALUES ";
+$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `NumOrde`, `NumFactura`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -18,9 +18,9 @@ $valueTypes = '';
 
 for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
-    if (!empty($_POST["FacturaNumber"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
+    if (!empty($_POST["FacturaNumber"][$i]) && !empty($_POST["CodBarras"][$i]) && !empty($_POST["NombreDelProducto"][$i]) && !empty($_POST["Cantidad"][$i]) && !empty($_POST["Fk_Suc_Salida"][$i]) && !empty($_POST["MotivoDevolucion"][$i]) && !empty($_POST["Fecha"][$i]) && !empty($_POST["AgregoElVendedor"][$i]) && !empty($_POST["NumberOrden"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $values[] = $_POST["FacturaNumber"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
@@ -29,9 +29,8 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["MotivoDevolucion"][$i];
         $values[] = $_POST["Fecha"][$i];
         $values[] = $_POST["AgregoElVendedor"][$i];
-        $values[] = $_POST["HoraAgregado"][$i];
         $values[] = $_POST["NumberOrden"][$i];
-        $valueTypes .= 'ssssssssss'; // Ajustar tipos según corresponda
+        $valueTypes .= 'sssssssss'; // Ajustar tipos según corresponda
     }
 }
 
@@ -63,7 +62,7 @@ if ($ProContador != 0) {
     mysqli_stmt_close($stmt);
 } else {
     $response['status'] = 'error';
-    $response['message'] = 'No se encontraron registros para agregar.';
+    $response['message'] = 'No se encontraron registros para agregar o faltan campos obligatorios.';
 }
 
 echo json_encode($response);
