@@ -165,10 +165,11 @@ function formatPhoneNumber(input) {
             <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt" disabled="disabled">
-        <option>Primera cita</option>
-        <option>Revaloracion</option>
     <option value="">Elige un tipo de consulta</option>
+    <option value="primera_cita">Primera cita</option>
+    <option value="revaloracion">Revaloración</option>
 </select>
+
 
     </div>
 
