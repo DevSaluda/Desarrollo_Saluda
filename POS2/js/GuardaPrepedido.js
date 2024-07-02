@@ -45,14 +45,11 @@ $(document).ready(function () {
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Datos guardados con exito!',
+                                title: 'Datos guardados con éxito!',
                                 showConfirmButton: false,
                                 timer: 2000,
-                                didOpen: () => {
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 1500);
-                                },
+                            }).then(() => {
+                                location.reload();
                             });
                         } else {
                             Swal.fire({
