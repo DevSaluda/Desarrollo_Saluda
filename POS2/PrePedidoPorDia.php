@@ -209,7 +209,7 @@ include "Consultas/Consultas.php";
             "columns": [
               { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
-              { "data": "Fk_sucursal" },
+            
               { "data": "Turno" },
               { "data": "Importe" },
               { "data": "Total_Venta" },
@@ -253,7 +253,7 @@ include "Consultas/Consultas.php";
             <thead>
               <th>Cod</th>
               <th>Nombre comercial</th>
-              <th>Sucursal</th>
+              
               <th>Cantidad</th>
               <th>Proveedor</th>
               <th>Proveedor</th>

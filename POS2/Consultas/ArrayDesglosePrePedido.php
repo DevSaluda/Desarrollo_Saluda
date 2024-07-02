@@ -55,12 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while($fila = $result->fetch_assoc()) {
             $data[$c]["Cod_Barra"] = '<input type="text" class="form-control" name="CodBarra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" class="form-control" name="NombreProd[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
-            $data[$c]["Fk_sucursal"] = '<input type="text" class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>';
             $data[$c]["Turno"] = '<input type="text" class="form-control"name="Cantidadd[]" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
             $data[$c]["Importe"] = '<input type="text" class="form-control" name="Prov1[]" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" class="form-control" name="Prov2[] "value="' . $fila["Proveedor2"] . '" readonly>';
             $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" readonly>
-            <input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" readonly>';
+           <input type="text" class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>';
             $c++; 
         }
 
