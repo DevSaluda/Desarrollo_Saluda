@@ -23,7 +23,6 @@ $(document).ready(function(){
 
             $.get('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadText), function(data) {
                 var fixedOptions = `
-                    <option value="">Elige un tipo de consulta</option>
                     <option value="primera_cita">Primera cita</option>
                     <option value="revaloracion">Revaloración</option>
                 `;
