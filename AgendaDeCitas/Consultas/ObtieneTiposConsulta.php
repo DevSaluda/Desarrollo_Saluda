@@ -7,9 +7,6 @@
         if ($tiposConsulta) {
             $tiposConsulta->bind_param("s", $especialidad);
             if ($tiposConsulta->execute()) {
-                echo ' <option value="">Elige un tipo de consulta</option>';
-                echo ' <option value="primera_cita">Primera cita</option>';
-                echo  '<option value="revaloracion">Revaloración</option>';
 
                 $result = $tiposConsulta->get_result();
                 while ($row = $result->fetch_array()) {
