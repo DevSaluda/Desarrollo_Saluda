@@ -189,7 +189,7 @@ tabla = $('#Productos').DataTable({
             { "data": "Fecha", "title": "Fecha" },
             { "data": "HoraAgregado", "title": "Hora" },
             { "data": "Agrego", "title": "Agregado Por" },
-            
+            { "data": "Acciones", "title": "Acciones" },
       
   
       ],
