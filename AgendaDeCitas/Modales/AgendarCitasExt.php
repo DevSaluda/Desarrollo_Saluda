@@ -166,8 +166,6 @@ function formatPhoneNumber(input) {
         </div>
         <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt" disabled="disabled">
     <option value="">Elige un tipo de consulta</option>
-    <option value="primera_cita">Primera cita</option>
-    <option value="revaloracion">Revaloración</option>
 </select>
 
 
