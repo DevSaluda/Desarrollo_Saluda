@@ -45,7 +45,7 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Agrego"] = $fila["Agrego"];
     $data[$c]["Acciones"] = '
     <td>
-    <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-print"></i></a>
+    <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-primary btn-sm btn-success"><i class="fas fa-exchange-alt"></i></a>
      <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-print"></i></a>
       <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-print"></i></a>
        <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-print"></i></a>
