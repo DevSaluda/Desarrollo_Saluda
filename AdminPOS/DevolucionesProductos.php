@@ -93,7 +93,18 @@ include ("footer.php")?>
   	
     $(document).ready(function() {
     // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
-    $(document).on("click", ".btn-edit", function() {
+    $(document).on("click", ".btn-Traspaso", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Corte de caja");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
+    $(document).on("click", ".btn-Caducado", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
