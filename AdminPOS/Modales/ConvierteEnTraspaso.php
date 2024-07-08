@@ -86,9 +86,7 @@ if($query->num_rows>0){
                     <th>Cantidad</th>
                     <th>Motivo Devolución</th>
                     <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Orden</th>
-                   
+                 
                 </thead>
                 <tbody>
                     <?php 
@@ -101,8 +99,7 @@ if($query->num_rows>0){
                             <td><?php echo $Devolucion["Cantidad"]; ?></td>
                             <td><?php echo $Devolucion["Motivo_Devolucion"]; ?></td>
                             <td><?php echo fechaCastellano($Devolucion["Fecha"]); ?></td>
-                            <td><?php echo date("g:i a", strtotime($Devolucion["HoraAgregado"])); ?></td>
-                            <td><?php echo $Devolucion["NumOrde"]; ?></td>
+                            
                       
                         </tr>
                     <?php endwhile; ?>
