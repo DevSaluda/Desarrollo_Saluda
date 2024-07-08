@@ -100,7 +100,7 @@ include ("footer.php")?>
             $("#form-edit").html(data);
             $("#Titulo").html("Convertir en traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+            $("#Di").addClass("modal-dialog .modal-xl modal-notify modal-success");
         });
         $('#editModal').modal('show');
     });
@@ -109,8 +109,9 @@ include ("footer.php")?>
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/CortesDeCajaReimpresion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
-            $("#Titulo").html("Corte de caja");
+            $("#Titulo").html("Productos Caducados");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
             $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
         });
         $('#editModal').modal('show');
