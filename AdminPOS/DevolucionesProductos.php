@@ -100,7 +100,7 @@ include ("footer.php")?>
             $("#form-edit").html(data);
             $("#Titulo").html("Convertir en traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di").addClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-xl modal-notify modal-success");
         });
         $('#editModal').modal('show');
     });
