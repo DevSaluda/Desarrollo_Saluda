@@ -65,7 +65,7 @@ if($query->num_rows>0){
         </div>
 
         <div class="col">
-            <label for="exampleFormControlInput1">Agregado por</label>
+            <label for="exampleFormControlInput1">Numero de orden</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Agrego"> <i class="fas fa-info-circle"></i></span>
@@ -80,7 +80,7 @@ if($query->num_rows>0){
         <div class="table-responsive">
             <table id="HistorialDevoluciones" class="table table-hover">
                 <thead>
-                    <th>ID Registro</th>
+                  
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
@@ -88,14 +88,14 @@ if($query->num_rows>0){
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Orden</th>
-                    <th>Movimiento</th>
+                   
                 </thead>
                 <tbody>
                     <?php 
                     $query = $conn->query($sql1);
                     while ($Devolucion = $query->fetch_array()): ?>
                         <tr>
-                            <td><?php echo $Devolucion["ID_Registro"]; ?></td>
+                            
                             <td><?php echo $Devolucion["Cod_Barra"]; ?></td>
                             <td><?php echo $Devolucion["Nombre_Produc"]; ?></td>
                             <td><?php echo $Devolucion["Cantidad"]; ?></td>
@@ -103,7 +103,7 @@ if($query->num_rows>0){
                             <td><?php echo fechaCastellano($Devolucion["Fecha"]); ?></td>
                             <td><?php echo date("g:i a", strtotime($Devolucion["HoraAgregado"])); ?></td>
                             <td><?php echo $Devolucion["NumOrde"]; ?></td>
-                            <td><?php echo $Devolucion["Movimiento"]; ?></td>
+                      
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
