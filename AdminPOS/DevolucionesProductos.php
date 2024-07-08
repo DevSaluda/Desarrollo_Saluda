@@ -94,11 +94,11 @@ include ("footer.php")?>
     $(document).ready(function() {
     // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
     $(document).on("click", ".btn-Traspaso", function() {
-    console.log("Botón de edición clickeado");
+    
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/ConvierteEnTraspaso.php", { id: id }, function(data) {
             $("#form-edit").html(data);
-            $("#Titulo").html("Corte de caja");
+            $("#Titulo").html("Convertir en traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
             $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
         });
