@@ -1,6 +1,20 @@
 <?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
+ $sql = "SELECT * FROM Traspasos_generados ORDER BY ID_Traspaso_Generado DESC LIMIT 1";
+ $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
+ $Ticketss = mysqli_fetch_assoc($resultset);
+ 
+ $monto1 = $Ticketss['Num_Orden'];
+ $monto2 = 1;
+ $totalmonto = $monto1 + $monto2;
+ 
+ // Obtener la longitud original de $Ticketss['Num_Orden']
+ $longitud_original = strlen($Ticketss['Num_Orden']);
+ 
+ // Mostrar $totalmonto con los caracteres '0000000000' (ajustando la longitud)
+ $totalmonto_con_ceros = str_pad($totalmonto, $longitud_original, '0', STR_PAD_LEFT);
+
 
 $fcha = date("Y-m-d");
 $user_id=null;
@@ -46,6 +60,18 @@ if($query->num_rows>0){
                     <span class="input-group-text" id="Agrego"> <i class="fas fa-info-circle"></i></span>
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Agrego; ?>">
+               
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="exampleFormControlInput1">Agregado por</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Agrego"> <i class="fas fa-info-circle"></i></span>
+                </div>
+               
+                <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumOrden" readonly>
             </div>
         </div>
     </div>
