@@ -81,7 +81,7 @@ if($query->num_rows>0){
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Sucursal"> <i class="fas fa-info-circle"></i></span>
                 </div>
-                <input type="text" class="form-control" name="SucurSalSalida" hidden readonly value="<?php echo $Devoluciones->Fk_Suc_Salida; ?>">
+                <input type="text" class="form-control" name="Fk_sucursal" hidden readonly value="<?php echo $Devoluciones->Fk_Suc_Salida; ?>">
                 <input type="text" class="form-control"  readonly value="<?php echo $Devoluciones->Nombre_Sucursal; ?>">
             </div>
         </div>

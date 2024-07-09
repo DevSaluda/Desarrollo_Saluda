@@ -14,40 +14,36 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     $Cod_Barra = mysqli_real_escape_string($conn, $_POST["CodBarra"]);
     $Nombre_Prod = mysqli_real_escape_string($conn, $_POST["NombreProd"]);
     $Fk_sucursal = mysqli_real_escape_string($conn, $_POST["Fk_sucursal"]);
-    $Fk_Sucursal_Destino = mysqli_real_escape_string($conn, $_POST["SucursalTraspasa"]);
-    $Fk_SucDestino = mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"]);
+    $Fk_Sucursal_Destino = mysqli_real_escape_string($conn, $_POST["selectedSucursal"]);
+    $Fk_SucDestino = mysqli_real_escape_string($conn, $_POST["SucursalConOrdenDestino"]);
     $Precio_Venta = mysqli_real_escape_string($conn, $_POST["PrecioVenta"]);
     $Precio_Compra = mysqli_real_escape_string($conn, $_POST["PrecioCompra"]);
     $Total_traspaso = mysqli_real_escape_string($conn, $_POST["ImporteGenerado"]);
     $TotalVenta = mysqli_real_escape_string($conn, $_POST["resultadoventas"]);
-    $Existencias_R = mysqli_real_escape_string($conn, $_POST["Existencia1"]);
-    $Cantidad_Enviada = mysqli_real_escape_string($conn, $_POST["Contabilizado"]);
-    $Existencias_D_envio = mysqli_real_escape_string($conn, $_POST["Existencia2"]);
+    $Cantidad_Enviada = mysqli_real_escape_string($conn, $_POST["Cantidad"]);
     $FechaEntrega = $fechaActual;
     $TraspasoGeneradoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
-    $TraspasoRecibidoPor = mysqli_real_escape_string($conn, $_POST["Recibio"]);
     $Tipo_Servicio = mysqli_real_escape_string($conn, $_POST["TipodeServicio"]);
    
     $ProveedorFijo = mysqli_real_escape_string($conn, $_POST["ProveedorDelTraspaso"]);
     $Estatus = mysqli_real_escape_string($conn, $_POST["Estatus"]);
-    $AgregadoPor = mysqli_real_escape_string($conn, $_POST["AgregoElVendedor"]);
+    $AgregadoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
     $ID_H_O_D = mysqli_real_escape_string($conn, $_POST["ID_H_O_D"]);
-    $TotaldePiezas = mysqli_real_escape_string($conn, $_POST["resultadepiezas"]);
+    $TotaldePiezas = mysqli_real_escape_string($conn, $_POST["Cantidad"]);
 
     // Construir la consulta SQL
-    $sql = "INSERT INTO Traspasos_generados (
-        Folio_Prod_Stock, ID_Prod_POS, Num_Orden, Num_Factura, Cod_Barra, Nombre_Prod, 
-        Fk_sucursal, Fk_Sucursal_Destino, Fk_SucDestino, Precio_Venta, Precio_Compra, 
-        Total_traspaso, TotalVenta, Existencias_R, Cantidad_Enviada, Existencias_D_envio, 
-        FechaEntrega, TraspasoGeneradoPor, TraspasoRecibidoPor, Tipo_Servicio, 
-        Proveedor1, Proveedor2, ProveedorFijo, Estatus, AgregadoPor, ID_H_O_D, TotaldePiezas
-    ) VALUES (
-        '$Folio_Prod_Stock', '$ID_Prod_POS', '$Num_Orden', '$Num_Factura', '$Cod_Barra', '$Nombre_Prod', 
-        '$Fk_sucursal', '$Fk_Sucursal_Destino', '$Fk_SucDestino', '$Precio_Venta', '$Precio_Compra', 
-        '$Total_traspaso', '$TotalVenta', '$Existencias_R', '$Cantidad_Enviada', '$Existencias_D_envio', 
-        '$FechaEntrega', '$TraspasoGeneradoPor', '$TraspasoRecibidoPor', '$Tipo_Servicio', 
-        '$Proveedor1', '$Proveedor2', '$ProveedorFijo', '$Estatus', '$AgregadoPor', '$ID_H_O_D', '$TotaldePiezas'
-    )";
+$sql = "INSERT INTO Traspasos_generados (
+    Folio_Prod_Stock, ID_Prod_POS, Num_Orden, Num_Factura, Cod_Barra, Nombre_Prod, 
+    Fk_sucursal, Fk_Sucursal_Destino, Fk_SucDestino, Precio_Venta, Precio_Compra, 
+    Total_traspaso, TotalVenta, Cantidad_Enviada, FechaEntrega, TraspasoGeneradoPor, 
+    Tipo_Servicio, ProveedorFijo, Estatus, AgregadoPor, ID_H_O_D, TotaldePiezas
+) VALUES (
+    '$Folio_Prod_Stock', '$ID_Prod_POS', '$Num_Orden', '$Num_Factura', '$Cod_Barra', '$Nombre_Prod', 
+    '$Fk_sucursal', '$Fk_Sucursal_Destino', '$Fk_SucDestino', '$Precio_Venta', '$Precio_Compra', 
+    '$Total_traspaso', '$TotalVenta', '$Cantidad_Enviada', '$FechaEntrega', '$TraspasoGeneradoPor', 
+    '$Tipo_Servicio', '$ProveedorFijo', '$Estatus', '$AgregadoPor', '$ID_H_O_D', '$TotaldePiezas'
+)";
+
 
     // Ejecutar la consulta
     if (mysqli_query($conn, $sql)) {
