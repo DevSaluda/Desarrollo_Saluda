@@ -73,8 +73,8 @@ if($query->num_rows>0){
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Sucursal"> <i class="fas fa-info-circle"></i></span>
                 </div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Fk_Suc_Salida; ?>">
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Sucursal; ?>">
+                <input type="text" class="form-control" name="SucurSalSalida" hidden readonly value="<?php echo $Devoluciones->Fk_Suc_Salida; ?>">
+                <input type="text" class="form-control"  readonly value="<?php echo $Devoluciones->Nombre_Sucursal; ?>">
             </div>
         </div>
         <div class="col">
@@ -118,9 +118,9 @@ if($query->num_rows>0){
                     while ($Devolucion = $query->fetch_array()): ?>
                         <tr>
                             
-                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="NumOrden" name="NumOrden" readonly></td>
-                            <td><?php echo $Devolucion["Nombre_Produc"]; ?></td>
-                            <td><?php echo $Devolucion["Cantidad"]; ?></td>
+                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
+                            <td><input type="text" value="<?php echo $Devolucion["Nombre_Produc"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
+                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
                             <td><?php echo $Devolucion["Motivo_Devolucion"]; ?></td>
                             <td><?php echo fechaCastellano($Devolucion["Fecha"]); ?></td>
                             
