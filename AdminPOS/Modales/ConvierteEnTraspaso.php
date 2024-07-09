@@ -118,7 +118,7 @@ if($query->num_rows>0){
                     while ($Devolucion = $query->fetch_array()): ?>
                         <tr>
                             
-                            <td> <input type="number" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="NumOrden" name="NumOrden" readonly></td>
+                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="NumOrden" name="NumOrden" readonly></td>
                             <td><?php echo $Devolucion["Nombre_Produc"]; ?></td>
                             <td><?php echo $Devolucion["Cantidad"]; ?></td>
                             <td><?php echo $Devolucion["Motivo_Devolucion"]; ?></td>
