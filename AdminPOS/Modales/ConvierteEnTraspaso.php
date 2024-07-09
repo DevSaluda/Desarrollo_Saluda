@@ -57,6 +57,7 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
+    <form action="javascript:void(0)" method="post" id="BajaEmpleados" >
     <div class="row">
         <div class="col">
             <label for="exampleFormControlInput1">Número de Factura</label>
@@ -149,8 +150,10 @@ if($query->num_rows>0){
                     <?php endwhile; ?>
                 </tbody>
             </table>
+            <button type="submit"  id="submit"  class="btn btn-danger">Confirmar baja <i class="fas fa-check"></i></button>
         </div>
     </div>
+    </form>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
