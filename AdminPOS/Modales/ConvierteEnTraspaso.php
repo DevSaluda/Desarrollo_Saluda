@@ -74,6 +74,7 @@ if($query->num_rows>0){
                     <span class="input-group-text" id="Sucursal"> <i class="fas fa-info-circle"></i></span>
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Fk_Suc_Salida; ?>">
+                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Sucursal; ?>">
             </div>
         </div>
         <div class="col">
