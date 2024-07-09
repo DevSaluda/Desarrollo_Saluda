@@ -9,10 +9,10 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     // Obtener y limpiar datos del formulario
     $Folio_Prod_Stock = mysqli_real_escape_string($conn, $_POST["IdBasedatos"]);
     $ID_Prod_POS = mysqli_real_escape_string($conn, $_POST["IdBasedatos"]);
-    $Num_Orden = mysqli_real_escape_string($conn, $_POST["NumeroDelTraspaso"]);
+    $Num_Orden = mysqli_real_escape_string($conn, $_POST["NumeroDeFacturaTraspaso"]);
     $Num_Factura = mysqli_real_escape_string($conn, $_POST["NumeroDeFacturaTraspaso"]);
-    $Cod_Barra = mysqli_real_escape_string($conn, $_POST["CodBarras"]);
-    $Nombre_Prod = mysqli_real_escape_string($conn, $_POST["NombreDelProducto"]);
+    $Cod_Barra = mysqli_real_escape_string($conn, $_POST["CodBarra"]);
+    $Nombre_Prod = mysqli_real_escape_string($conn, $_POST["NombreProd"]);
     $Fk_sucursal = mysqli_real_escape_string($conn, $_POST["Fk_sucursal"]);
     $Fk_Sucursal_Destino = mysqli_real_escape_string($conn, $_POST["SucursalTraspasa"]);
     $Fk_SucDestino = mysqli_real_escape_string($conn, $_POST["SucursalDestinoFK"]);
@@ -27,8 +27,7 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     $TraspasoGeneradoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
     $TraspasoRecibidoPor = mysqli_real_escape_string($conn, $_POST["Recibio"]);
     $Tipo_Servicio = mysqli_real_escape_string($conn, $_POST["TipodeServicio"]);
-    $Proveedor1 = mysqli_real_escape_string($conn, $_POST["Proveedor1"]);
-    $Proveedor2 = mysqli_real_escape_string($conn, $_POST["Proveedor2"]);
+   
     $ProveedorFijo = mysqli_real_escape_string($conn, $_POST["ProveedorDelTraspaso"]);
     $Estatus = mysqli_real_escape_string($conn, $_POST["Estatus"]);
     $AgregadoPor = mysqli_real_escape_string($conn, $_POST["AgregoElVendedor"]);

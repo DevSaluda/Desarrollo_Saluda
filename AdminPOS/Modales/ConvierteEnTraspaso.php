@@ -36,7 +36,8 @@ $sql1 = "SELECT
     Stock_POS.Fk_sucursal AS Stock_Fk_sucursal,
     Stock_POS.Precio_Venta,
     Stock_POS.Precio_C,
-    Stock_POS.ID_Prod_POS
+    Stock_POS.ID_Prod_POS,
+    Stock_POS.Tipo_Servicio
 FROM 
     Devolucion_POS
 LEFT JOIN 
@@ -69,6 +70,7 @@ if($query->num_rows>0){
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
                 <input type="text" class="form-control"  name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+                <input type="text" class="form-control" value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
             </div>
         </div>
         <div class="col">
@@ -104,7 +106,7 @@ if($query->num_rows>0){
                     <span class="input-group-text" id="Agrego"> <i class="fas fa-info-circle"></i></span>
                 </div>
                
-                <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumOrden" readonly>
+                <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumeroDeFacturaTraspaso" readonly>
             </div>
         </div>
 
