@@ -43,7 +43,7 @@ LEFT JOIN
 LEFT JOIN 
     Stock_POS ON Devolucion_POS.Cod_Barra = Stock_POS.Cod_Barra 
     AND Stock_POS.Fk_sucursal= Devolucion_POS.Fk_Suc_Salida
-         WHERE `Devolucion_POS.ID_Registro` = '".$_POST["id"]."' ";
+         WHERE Devolucion_POS.ID_Registro = '".$_POST["id"]."' ";
 
 $query = $conn->query($sql1);
 $Devoluciones = null;
