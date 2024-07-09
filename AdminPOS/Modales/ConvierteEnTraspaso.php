@@ -18,9 +18,32 @@ include "../Consultas/Consultas.php";
 
 $fcha = date("Y-m-d");
 $user_id=null;
-$sql1 = "SELECT `ID_Registro`, `Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `HoraAgregado`, `NumOrde`, `Movimiento` 
-         FROM `Devolucion_POS` 
-         WHERE `ID_Registro` = '".$_POST["id"]."' ";
+$sql1 = "SELECT 
+    Devolucion_POS.ID_Registro,
+    Devolucion_POS.Num_Factura,
+    Devolucion_POS.Cod_Barra,
+    Devolucion_POS.Nombre_Produc,
+    Devolucion_POS.Cantidad,
+    Devolucion_POS.Fk_Suc_Salida,
+    Devolucion_POS.Motivo_Devolucion,
+    Devolucion_POS.Fecha,
+    Devolucion_POS.Agrego,
+    Devolucion_POS.HoraAgregado,
+    Devolucion_POS.NumOrde,
+    Devolucion_POS.Movimiento,
+    SucursalesCorre.Nombre_Sucursal,
+    Stock_POS.Cod_Barra AS Stock_Cod_Barra,
+    Stock_POS.Fk_sucursal AS Stock_Fk_sucursal,
+    Stock_POS.Precio_Venta,
+    Stock_POS.Precio_C
+FROM 
+    Devolucion_POS
+LEFT JOIN 
+    SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
+LEFT JOIN 
+    Stock_POS ON Devolucion_POS.Cod_Barra = Stock_POS.Cod_Barra 
+    AND Stock_POS.Fk_sucursal= Devolucion_POS.Fk_Suc_Salida
+         WHERE `Devolucion_POS.ID_Registro` = '".$_POST["id"]."' ";
 
 $query = $conn->query($sql1);
 $Devoluciones = null;
