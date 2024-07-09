@@ -109,6 +109,16 @@ if($query->num_rows>0){
                 </div>
                
                 <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumeroDeFacturaTraspaso" readonly>
+                <input type="text" id="selectedSucursal" name="selectedSucursal" class="form-control" readonly>
+
+<script>
+  document.getElementById('sucursalconordenDestino').addEventListener('change', function() {
+    // Obtiene el texto de la opción seleccionada
+    var selectedText = this.options[this.selectedIndex].text;
+    // Actualiza el valor del input con el texto seleccionado
+    document.getElementById('selectedSucursal').value = selectedText;
+  });
+</script>
             </div>
         </div>
 
