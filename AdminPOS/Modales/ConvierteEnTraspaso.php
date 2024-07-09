@@ -35,7 +35,8 @@ $sql1 = "SELECT
     Stock_POS.Cod_Barra AS Stock_Cod_Barra,
     Stock_POS.Fk_sucursal AS Stock_Fk_sucursal,
     Stock_POS.Precio_Venta,
-    Stock_POS.Precio_C
+    Stock_POS.Precio_C,
+    Stock_POS.ID_Prod_POS
 FROM 
     Devolucion_POS
 LEFT JOIN 
