@@ -154,6 +154,8 @@ if($query->num_rows>0){
         </div>
     </div>
     </form>
+
+    <script src="js/RealizaTraspasoDesdeDevolucion.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
