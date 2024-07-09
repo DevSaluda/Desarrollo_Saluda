@@ -78,6 +78,7 @@ if($query->num_rows>0){
             </div>
         </div>
         <div class="col">
+        <label for="exampleFormControlInput1">Sucursal destino</label>
         <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   <select id = "sucursalconordenDestino" name="SucursalConOrdenDestino" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
