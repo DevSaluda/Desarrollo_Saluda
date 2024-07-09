@@ -150,7 +150,7 @@ if($query->num_rows>0){
                     <?php endwhile; ?>
                 </tbody>
             </table>
-            <button type="submit"  id="submit"  class="btn btn-danger">Confirmar baja <i class="fas fa-check"></i></button>
+            <button type="submit"  id="submit"  class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
         </div>
     </div>
     </form>
