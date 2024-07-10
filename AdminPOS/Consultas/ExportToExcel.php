@@ -27,6 +27,7 @@ Ventas_POS.Turno,
 Ventas_POS.Cantidad_Venta,
 Ventas_POS.Importe,
 Ventas_POS.Total_Venta,
+Ventas_POS.Fk_Caja,
 Ventas_POS.DescuentoAplicado AS Descuento,
 CONVERT(Ventas_POS.FormaDePago USING utf8) AS FormaPago,
 CONVERT(Ventas_POS.Cliente USING utf8) AS Cliente,
@@ -43,6 +44,8 @@ INNER JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
 INNER JOIN 
 Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
+INNER JOIN 
+Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
 INNER JOIN 
 Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
 WHERE 
