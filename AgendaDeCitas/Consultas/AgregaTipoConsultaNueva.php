@@ -9,12 +9,12 @@ $Agregado_Por = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['U
 $Sistema = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['SistemaTipoConsulta']))));
 $ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['EmpresaTipoConsulta']))));
 
-// Verificar si ya existe el tipo de consulta
-$sql = "SELECT Nom_Tipo, ID_H_O_D FROM Tipos_Consultas WHERE Nom_Tipo='$Nom_Tipo' AND ID_H_O_D='$ID_H_O_D'";
+// Verificar si ya existe el tipo de consulta para la misma especialidad
+$sql = "SELECT Nom_Tipo, Especialidad, ID_H_O_D FROM Tipos_Consultas WHERE Nom_Tipo='$Nom_Tipo' AND Especialidad='$Especialidad' AND ID_H_O_D='$ID_H_O_D'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
-if ($row['Nom_Tipo'] == $Nom_Tipo AND $row['ID_H_O_D'] == $ID_H_O_D) {
+if ($row['Nom_Tipo'] == $Nom_Tipo && $row['Especialidad'] == $Especialidad && $row['ID_H_O_D'] == $ID_H_O_D) {
     echo json_encode(array("statusCode" => 250));
 } else {
     // Insertar el nuevo tipo de consulta en la base de datos
