@@ -87,6 +87,7 @@ Citas de especialistas
 <script src="js/ObtieneFechas.js"></script>
 <script src="js/ObtieneHoras.js"></script>
 <script src="js/ObtieneEspecialidadMedicoExt.js"></script>
+<script src="js/ObtieneTipoDeConsulta.js"></script>
 <script src="js/ObtieneMedicoDeSucursalExt.js"></script>
 <script src="js/ObtieneFechasExt.js"></script>
 <script src="js/ObtieneHorasExt.js"></script>
