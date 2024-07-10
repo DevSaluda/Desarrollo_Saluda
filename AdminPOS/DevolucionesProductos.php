@@ -104,7 +104,7 @@ include ("footer.php")?>
         });
         $('#editModal').modal('show');
     });
-    $(document).on("click", ".btn-Caducado", function() {
+    $(document).on("click", ".btn-caducado", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/RegistraEnCaducado.php", { id: id }, function(data) {
