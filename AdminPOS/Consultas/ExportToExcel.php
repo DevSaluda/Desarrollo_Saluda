@@ -104,8 +104,7 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Doctor"],
         $fila["PrecioCompra"],
         $fila["PrecioVenta"],
-        $fila["Proveedor1"],
-        $fila["Proveedor2"],
+       
     ];
     // Escribir la fila en el archivo CSV
     fputcsv($output, $data);
