@@ -20,7 +20,7 @@ $query = "SELECT DISTINCT
 Ventas_POS.Cod_Barra,
 Ventas_POS.Nombre_Prod,
 Stock_POS.Precio_C AS PrecioCompra,
-Stock_POS.Precio_Venta AS PrecioVenta
+Stock_POS.Precio_Venta AS PrecioVenta,
 CONCAT(Ventas_POS.FolioSucursal, Ventas_POS.Folio_Ticket) AS FolioTicket,
 SucursalesCorre.Nombre_Sucursal AS Sucursal,
 Ventas_POS.Turno,
