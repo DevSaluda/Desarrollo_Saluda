@@ -72,7 +72,7 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
                 <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
-                <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="Saluda">
+                <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
             </div>
         </div>
         <div class="col">
