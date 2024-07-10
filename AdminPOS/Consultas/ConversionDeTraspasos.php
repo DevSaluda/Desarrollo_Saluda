@@ -24,7 +24,6 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     $FechaEntrega = $fechaActual;
     $TraspasoGeneradoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
     $Tipo_Servicio = mysqli_real_escape_string($conn, $_POST["TipodeServicio"]);
-   
     $ProveedorFijo = isset($_POST["ProveedorDelTraspaso"]) ? mysqli_real_escape_string($conn, $_POST["ProveedorDelTraspaso"]) : '';
     $Estatus = isset($_POST["Estatus"]) ? mysqli_real_escape_string($conn, $_POST["Estatus"]) : '';
     $AgregadoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
