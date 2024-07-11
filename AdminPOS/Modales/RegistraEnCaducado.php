@@ -101,26 +101,7 @@ if($query->num_rows>0){
   </div> 
         </div>
 
-        <div class="col">
-            <label for="exampleFormControlInput1">Numero de orden</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Agrego"> <i class="fas fa-info-circle"></i></span>
-                </div>
-               
-                <input type="number" value="<?php echo  $totalmonto_con_ceros?>"  class="form-control"  id="NumOrden" name="NumeroDeFacturaTraspaso" readonly>
-                <input type="text" id="selectedSucursal" name="selectedSucursal" class="form-control" readonly>
-
-<script>
-  document.getElementById('sucursalconordenDestino').addEventListener('change', function() {
-    // Obtiene el texto de la opción seleccionada
-    var selectedText = this.options[this.selectedIndex].text;
-    // Actualiza el valor del input con el texto seleccionado
-    document.getElementById('selectedSucursal').value = selectedText;
-  });
-</script>
-            </div>
-        </div>
+      
 
         <div class="col">
             <label for="exampleFormControlInput1">Motivo de baja</label>
