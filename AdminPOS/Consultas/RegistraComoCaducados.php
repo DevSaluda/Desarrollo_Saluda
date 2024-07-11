@@ -10,7 +10,7 @@ if (empty($_POST["CodBarra"])) {
     $errores[] = 'CodBarra';
 }
 if (empty($_POST["NombreProd"])) {
-    $errores[] = 'NombreDelProducto';
+    $errores[] = 'NombreProd';
 }
 if (empty($_POST["Fk_sucursal"])) {
     $errores[] = 'Fk_sucursal';
@@ -39,9 +39,12 @@ if (empty($_POST["AgregoElVendedor"])) {
 if (empty($_POST["ID_H_O_D"])) {
     $errores[] = 'ID_H_O_D';
 }
+if (empty($_POST["TipoMovimiento"])) {
+    $errores[] = 'TipoMovimiento';
+}
 
 if (empty($errores)) {
-    $query = "INSERT INTO Stock_Bajas (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`, `MotivoBaja`, `AgregadoPor`, `ID_H_O_D`,`TipoMovimiento`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    $query = "INSERT INTO Stock_Bajas (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`, `MotivoBaja`, `AgregadoPor`, `ID_H_O_D`, `TipoMovimiento`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($conn, $query);
 
@@ -62,7 +65,7 @@ if (empty($errores)) {
             $_POST["MotivoBaja"],
             $_POST["AgregoElVendedor"],
             $_POST["ID_H_O_D"],
-            $_POST["MotivoBaja"]
+            $_POST["TipoMovimiento"]
         );
 
         // Ejecución de consulta
