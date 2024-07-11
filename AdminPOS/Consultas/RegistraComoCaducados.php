@@ -9,7 +9,7 @@ if (empty($_POST["IdBasedatos"])) {
 if (empty($_POST["CodBarra"])) {
     $errores[] = 'CodBarra';
 }
-if (empty($_POST["NombreDelProducto"])) {
+if (empty($_POST["NombreProd"])) {
     $errores[] = 'NombreDelProducto';
 }
 if (empty($_POST["Fk_sucursal"])) {
