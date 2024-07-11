@@ -49,7 +49,7 @@ if (empty($errores)) {
         // Enlace de parámetros
         mysqli_stmt_bind_param(
             $stmt, 
-            'ssssssssssss', // Ajusta los tipos de datos según sea necesario
+            'sssssssssssss', // Ajusta los tipos de datos según sea necesario
             $_POST["IdBasedatos"],
             $_POST["CodBarra"],
             $_POST["NombreProd"],
