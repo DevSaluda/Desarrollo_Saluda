@@ -123,15 +123,15 @@ if($query->num_rows>0){
                             <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Produc"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
-                            <td><?php echo $Devolucion["Motivo_Devolucion"]; ?><input type="text" hidden value="<?php echo $Devolucion["Precio_Venta"]; ?>"class="form-control"  id="Precioventa" name="PrecioVenta" readonly></td>
-                            <td><?php echo fechaCastellano($Devolucion["Fecha"]); ?><input type="text" hidden value="<?php echo $Devolucion["Precio_C"]; ?>"class="form-control"  id="Preciocompra" name="PrecioCompra" readonly></td>
+                            <td><input type="date" class="form-control"  id="fechacaducidad" name="FechaCaducidad" ><input hidden value="<?php echo $Devolucion["Precio_Venta"]; ?>"class="form-control"  id="Precioventa" name="PrecioVenta" readonly></td>
+                            <td> <input type="text" class="form-control"  id="lote" name="Lote"><input hidden value="<?php echo $Devolucion["Precio_C"]; ?> class="form-control"  id="Preciocompra" name="PrecioCompra" readonly></td>
                             
                       
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
-            <button type="submit"  id="submit"  class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
+            <button type="submit"  id="submit"  class="btn btn-success">Registrar caducado <i class="fas fa-check"></i></button>
         </div>
     </div>
     </form>
