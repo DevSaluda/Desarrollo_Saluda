@@ -7,10 +7,10 @@
         if ($tiposConsulta) {
             $tiposConsulta->bind_param("s", $especialidad);
             if ($tiposConsulta->execute()) {
-
                 $result = $tiposConsulta->get_result();
                 while ($row = $result->fetch_array()) {
-                    echo '<option value="' . $row['Tipo_ID'] . '">' . $row['Nom_Tipo'] . '</option>';
+                    // Cambiar el valor de Tipo_ID a Nom_Tipo
+                    echo '<option value="' . htmlspecialchars($row['Nom_Tipo']) . '">' . htmlspecialchars($row['Nom_Tipo']) . '</option>';
                 }
             } else {
                 echo '<option value="">Error en la ejecución de la consulta</option>';

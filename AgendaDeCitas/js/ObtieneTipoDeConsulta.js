@@ -23,8 +23,8 @@ $(document).ready(function(){
 
             $.get('Consultas/ObtieneTiposConsulta.php?especialidadExt=' + encodeURIComponent(especialidadText), function(data) {
                 var fixedOptions = `
-                    <option value="primera_cita">Primera cita</option>
-                    <option value="revaloracion">Revaloración</option>
+                    <option value="Primera cita">Primera cita</option>
+                    <option value="Revaloración">Revaloración</option>
                 `;
                 $('#tipoconsultaExt').html(fixedOptions).append(data).prop('disabled', false);
             }).fail(function(xhr, status, error) {
