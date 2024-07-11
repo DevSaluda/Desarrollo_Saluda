@@ -206,7 +206,7 @@
       { mData: 'AgendamientoRealizado' },
       { mData: 'ConWhatsapp' },
       { mData: 'BotonCancelar' },
-      { mData: 'Tipo_consultas' } // Se agregó esta línea
+      { mData: 'Tipo_Consulta' } // Se agregó esta línea
     ],
     "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
     "language": {
