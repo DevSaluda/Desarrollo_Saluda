@@ -110,8 +110,8 @@ if($query->num_rows>0){
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
-                    <th>Motivo Devolución</th>
-                    <th>Fecha</th>
+                    <th>Fecha caducidad</th>
+                    <th>Lote</th>
                  
                 </thead>
                 <tbody>
