@@ -206,7 +206,7 @@
       { mData: 'AgendamientoRealizado' },
       { mData: 'ConWhatsapp' },
       { mData: 'BotonCancelar' },
-      { mData: 'tipos_consultas' } // Se agregó esta línea
+      { mData: 'Tipo_consultas' } // Se agregó esta línea
     ],
     "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
     "language": {
@@ -268,7 +268,7 @@
           <th>Registrado el</th>
           <th>Enviar Mensaje</th>
           <th>Cancelar</th>
-          <th>Tipos de Consulta</th> <!-- Nueva columna -->
+          <th>Motivo De Consulta</th> <!-- Nueva columna -->
         </tr>
       </thead>
     </table>
