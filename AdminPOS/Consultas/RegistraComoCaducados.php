@@ -52,7 +52,7 @@ if (empty($errores)) {
             'ssssssssssss', // Ajusta los tipos de datos según sea necesario
             $_POST["IdBasedatos"],
             $_POST["CodBarra"],
-            $_POST["NombreDelProducto"],
+            $_POST["NombreProd"],
             $_POST["Fk_sucursal"],
             $_POST["PrecioVenta"],
             $_POST["PrecioCompra"],
