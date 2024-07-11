@@ -35,7 +35,7 @@ $sql = "SELECT
             AgendaCitas_EspecialistasExt.Telefono,
             AgendaCitas_EspecialistasExt.Observaciones,
             AgendaCitas_EspecialistasExt.Fecha_Hora,
-            AgendaCitas_EspecialistasExt.Tipos_Consulta
+            AgendaCitas_EspecialistasExt.Tipo_Consulta
         FROM
             AgendaCitas_EspecialistasExt
             LEFT JOIN Especialidades_Express ON AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad
@@ -61,7 +61,7 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Especialidad"] = $fila["Nombre_Especialidad"];
     $data[$c]["Doctor"] = $fila["Nombre_Apellidos"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Tipo_Consulta"] = $fila["Tipos_Consulta"]; // Nuevo campo Tipo_Consulta
+    $data[$c]["Tipo_Consulta"] = $fila["Tipo_Consulta"]; // Nuevo campo Tipo_Consulta
     $data[$c]["Observaciones"] = $fila["Observaciones"];
     $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
     $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
