@@ -60,7 +60,7 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
-    <form action="javascript:void(0)" method="post" id="BajaEmpleados" >
+    <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
     <div class="row">
         <div class="col">
             <label for="exampleFormControlInput1">Número de Factura</label>
@@ -123,18 +123,15 @@ if($query->num_rows>0){
         </div>
 
         <div class="col">
-            <label for="exampleFormControlInput1">Motivo de traspaso</label>
+            <label for="exampleFormControlInput1">Motivo de baja</label>
             <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-    <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
-    <option value="">Seleccione un opcion:</option>
-    <option value="Devolucion a cedis">Devolucion a cedis</option>
-    <!-- <option value="Traspaso entre sucursales">Traspaso entre sucursales</option>    -->
-    <option value="Retiro por sobre stock">Retiro por sobre stock</option>  
-    <option value="Prontos a caducar">Prontos a caducar</option>    
-    <option value="Producto dañado">Producto dañado</option>    
+            <select class="form-control" style="font-size: 0.75rem !important;">
+                            <option value="">Seleccione el motivo de baja </option>
+                  <option value="Caducado">Caducado</option>
+              <option value="Proximo a caducar">Proximo a caducar</option>
+              
+</select>
 
-         
-          </select>   
     </div> 
     </div>
 
