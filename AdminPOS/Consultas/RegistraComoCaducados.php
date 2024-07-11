@@ -1,8 +1,46 @@
 <?php
 include_once 'db_connection.php';
 
-// Verificar si los campos relevantes están definidos y no están vacíos
-if (!empty($_POST["IdBasedatos"]) && !empty($_POST["CodBarra"]) && !empty($_POST["NombreDelProducto"])) {
+$errores = [];
+
+if (empty($_POST["IdBasedatos"])) {
+    $errores[] = 'IdBasedatos';
+}
+if (empty($_POST["CodBarra"])) {
+    $errores[] = 'CodBarra';
+}
+if (empty($_POST["NombreDelProducto"])) {
+    $errores[] = 'NombreDelProducto';
+}
+if (empty($_POST["Fk_sucursal"])) {
+    $errores[] = 'Fk_sucursal';
+}
+if (empty($_POST["PrecioVenta"])) {
+    $errores[] = 'PrecioVenta';
+}
+if (empty($_POST["PrecioCompra"])) {
+    $errores[] = 'PrecioCompra';
+}
+if (empty($_POST["Cantidad"])) {
+    $errores[] = 'Cantidad';
+}
+if (empty($_POST["Lote"])) {
+    $errores[] = 'Lote';
+}
+if (empty($_POST["FechaCaducidad"])) {
+    $errores[] = 'FechaCaducidad';
+}
+if (empty($_POST["MotivoBaja"])) {
+    $errores[] = 'MotivoBaja';
+}
+if (empty($_POST["AgregoElVendedor"])) {
+    $errores[] = 'AgregoElVendedor';
+}
+if (empty($_POST["ID_H_O_D"])) {
+    $errores[] = 'ID_H_O_D';
+}
+
+if (empty($errores)) {
     $query = "INSERT INTO Stock_Bajas (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`, `MotivoBaja`, `AgregadoPor`, `ID_H_O_D`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($conn, $query);
@@ -14,11 +52,11 @@ if (!empty($_POST["IdBasedatos"]) && !empty($_POST["CodBarra"]) && !empty($_POST
             'ssssssssssss', // Ajusta los tipos de datos según sea necesario
             $_POST["IdBasedatos"],
             $_POST["CodBarra"],
-            $_POST["NombreProd"],
+            $_POST["NombreDelProducto"],
             $_POST["Fk_sucursal"],
             $_POST["PrecioVenta"],
             $_POST["PrecioCompra"],
-            $_POST["Cantidad"], // Asegúrate de incluir este campo
+            $_POST["Cantidad"],
             $_POST["Lote"],
             $_POST["FechaCaducidad"],
             $_POST["MotivoBaja"],
@@ -44,7 +82,7 @@ if (!empty($_POST["IdBasedatos"]) && !empty($_POST["CodBarra"]) && !empty($_POST
     mysqli_stmt_close($stmt);
 } else {
     $response['status'] = 'error';
-    $response['message'] = 'Faltan datos requeridos para agregar el registro.';
+    $response['message'] = 'Faltan los siguientes datos requeridos: ' . implode(', ', $errores);
 }
 
 echo json_encode($response);
