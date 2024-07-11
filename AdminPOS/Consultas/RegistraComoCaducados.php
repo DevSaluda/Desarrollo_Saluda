@@ -41,7 +41,7 @@ if (empty($_POST["ID_H_O_D"])) {
 }
 
 if (empty($errores)) {
-    $query = "INSERT INTO Stock_Bajas (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`, `MotivoBaja`, `AgregadoPor`, `ID_H_O_D`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Stock_Bajas (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`, `MotivoBaja`, `AgregadoPor`, `ID_H_O_D`,`TipoMovimiento`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     
     $stmt = mysqli_prepare($conn, $query);
 
@@ -61,7 +61,8 @@ if (empty($errores)) {
             $_POST["FechaCaducidad"],
             $_POST["MotivoBaja"],
             $_POST["AgregoElVendedor"],
-            $_POST["ID_H_O_D"]
+            $_POST["ID_H_O_D"],
+            $_POST["MotivoBaja"]
         );
 
         // Ejecución de consulta
