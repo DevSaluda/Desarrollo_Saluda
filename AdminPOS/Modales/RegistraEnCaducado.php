@@ -70,7 +70,7 @@ if($query->num_rows>0){
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
                 <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
-                <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
+                <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregoElVendedor">
                 <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
             </div>
@@ -92,7 +92,7 @@ if($query->num_rows>0){
         <div class="col">
             <label for="exampleFormControlInput1">Motivo de baja</label>
             <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-            <select class="form-control" style="font-size: 0.75rem !important;">
+            <select class="form-control" style="font-size: 0.75rem !important;" name="MotivoBaja">
                             <option value="">Seleccione el motivo de baja </option>
                   <option value="Caducado">Caducado</option>
               <option value="Proximo a caducar">Proximo a caducar</option>
