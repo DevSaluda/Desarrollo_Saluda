@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="CitaExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di"class="modal-dialog modal-lg modal-notify modal-success">
       <div class="modal-content">
@@ -86,6 +87,7 @@ function formatPhoneNumber(input) {
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-user-tag"></i></span>
   </div>
   <select  id = "especialidadExt" name = "EspecialidadExt"  class = "form-control" disabled = "disabled" >
+                                
 								<option value = "">Selecciona una especialidad</option>
 							</select>
 </div>
@@ -162,16 +164,11 @@ function formatPhoneNumber(input) {
         <div class="input-group-prepend">
             <span class="input-group-text" id="Tarjeta"><i class="far fa-address-card"></i></span>
         </div>
-        <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt">
-            <option value="">Elige un tipo de consulta</option>
-            
-             <?php
-          $query = $conn -> query ("SELECT Tipo_ID, Nom_Tipo FROM Tipos_Consultas WHERE Estado = 'Vigente'");
-          while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["Nom_Tipo"].'">'.$valores["Nom_Tipo"].'</option>';
-          }
-        ?> 
-        </select>
+        <select name="TipoConsultaExt" class="form-control form-control-sm" id="tipoconsultaExt" disabled="disabled">
+    <option value="">Elige un tipo de consulta</option>
+</select>
+
+
     </div>
 
 <label for="tipoconsulta" class="error">
