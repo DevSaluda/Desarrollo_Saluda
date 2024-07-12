@@ -114,7 +114,7 @@ include "Consultas/Consultas.php";
 
   <!-- Main Footer -->
   <?php include ("Modales/Ingreso.php");
-
+ include ("Modales/ModalConsultaProductos.php");
  include ("Modales/Confirmacion.php"); 
  include ("Modales/AltaProcedimiento.php");
 include ("Modales/Exito.php");
