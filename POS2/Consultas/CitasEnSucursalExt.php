@@ -59,8 +59,8 @@ $query = $conn->query($sql1);
 <th>Fecha | Hora </th>
 <th>Especialidad | Doctor</th>
 <th>Sucursal</th>
+<th>Motivo consulta</th>
 <th>Observaciones</th>
-<th>Tipo consulta</th>
 <th>¿Paciente asiste?</th>
 <th>Recordartorio</th>
 <th>Acciones</th>
@@ -79,8 +79,8 @@ $query = $conn->query($sql1);
     <td> <?php echo  $Usuarios["Nombre_Especialidad"]; ?> <br>
     <?php echo $Usuarios["Nombre_Apellidos"]; ?></td>
     <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
-    <td> <?php echo $Usuarios["Observaciones"]; ?></td>
     <td> <?php echo $Usuarios["Tipo_Consulta"]; ?></td>
+    <td> <?php echo $Usuarios["Observaciones"]; ?></td>
     <td> <?php echo $Usuarios["Asistio"]; ?></td>
     <td>
     <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=<?php
