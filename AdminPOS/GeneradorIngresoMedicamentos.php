@@ -203,9 +203,6 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
  Cambiar de sucursal <i class="fas fa-clinic-medical"></i>
 </button>
 
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#DescargarInventarios" class="btn btn-default">
- Descargar inventario <i class="fas fa-boxes"></i>
-</button>
 
 
                       <div class="row">
