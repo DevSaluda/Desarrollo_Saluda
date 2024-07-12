@@ -232,46 +232,9 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                            
                           </div>
                         </div>
-                        <div class="col">
+                        
+                     
 
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Tipo de ajuste</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
-                            </div>
-                            <select class="form-control" style="font-size: 0.75rem !important;" id="Tipodeajuste">
-                            <option value="">Seleccione un tipo de ajuste </option>
-                  <option value="Ajuste de inventario">Ajuste de inventario</option>
-              <option value="Inventario inicial">Inventario inicial</option>
-                 <option value="Ajuste por daño">Ajuste por daño</option>
-              <option value="Ajuste por caducidad">Ajuste por caducidad</option>
-</select>
-
-
-                          </div>
-                          
-                        </div>
-                        <div class="col">
-                <label for="alphabetSelect" style="font-size: 0.75rem !important;">Seleccione anaquel</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #e83e8c !important;
-    color: white;" id="Alphabet"><i class="fas fa-font"></i></span>
-                    </div>
-                    <select class="form-control" style="font-size: 0.75rem !important;" id="alphabetSelect"></select>
-                </div>
-            </div>
-
-            <!-- Tercer Select: Números del 1 al 30 -->
-            <div class="col">
-                <label for="numberSelect" style="font-size: 0.75rem !important;">Seleccione repisa</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"  style="background-color: #e83e8c !important;
-    color: white;" id="Number"><i class="fas fa-hashtag"></i></span>
-                    </div>
-                    <select class="form-control" style="font-size: 0.75rem !important;" id="numberSelect"></select>
-                </div>
-            </div>
         </div>
     </div>
 
