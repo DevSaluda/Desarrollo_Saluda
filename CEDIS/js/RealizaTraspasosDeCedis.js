@@ -51,7 +51,7 @@ $(document).ready(function($) {
                         timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = "https://saludapos.com/AdminPOS/ListadoDeTraspasos";
+                        window.location.href = "https://saludapos.com/CEDIS/ListadoCedis";
                     });
                 } else {
                     Swal.fire({
