@@ -201,11 +201,11 @@
       { mData: 'Especialidad' },
       { mData: 'Doctor' },
       { mData: 'Sucursal' },
+      { mData: 'Tipo_Consulta' },// Se agregó esta línea
       { mData: 'Observaciones' },
       { mData: 'AgendadoPor' },
       { mData: 'AgendamientoRealizado' },
-      { mData: 'ConWhatsapp' },
-      { mData: 'Tipo_Consulta' } // Se agregó esta línea
+      { mData: 'ConWhatsapp' }
     ],
     "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
     "language": {
@@ -262,11 +262,11 @@
           <th>Especialidad</th>
           <th>Doctor</th>
           <th>Sucursal</th>
+          <th>Motivo De Consulta</th> <!-- Nueva columna -->
           <th>Observaciones</th>
           <th>Agendado por</th>
           <th>Registrado el</th>
           <th>Enviar Mensaje</th>
-          <th>Motivo De Consulta</th> <!-- Nueva columna -->
         </tr>
       </thead>
     </table>

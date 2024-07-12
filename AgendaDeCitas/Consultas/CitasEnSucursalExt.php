@@ -263,8 +263,8 @@
           <th>Especialidad</th>
           <th>Doctor</th>
           <th>Sucursal</th>
-          <th>Observaciones</th>
           <th>Motivo De Consulta</th> <!-- Nueva columna -->
+          <th>Observaciones</th>
           <th>Agendado por</th>
           <th>Registrado el</th>
           <th>Enviar Mensaje</th>
