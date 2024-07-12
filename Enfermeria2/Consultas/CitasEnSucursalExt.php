@@ -191,7 +191,7 @@
     "stateSave": true,
     "bAutoWidth": false,
     "order": [[0, "desc"]],
-    "sAjaxSource": "https://saludapos.com/Medicos/Consultas/ArrayMedicosExpress.php",
+    "sAjaxSource": "https://saludapos.com/Enfermeria2/Consultas/ArrayMedicosExpress.php",
     "aoColumns": [
       { mData: 'Folio' },
       { mData: 'Paciente' },
