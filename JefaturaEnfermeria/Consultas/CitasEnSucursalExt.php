@@ -1,166 +1,286 @@
-<script type="text/javascript">
-$(document).ready( function () {
-    $('#CitasExpress').DataTable({
-      "order": [[ 0, "desc" ]],
-      bFilter: true,
-      "info": false,
-      "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
-    
-		
-	  } 
-	  
-	  );
-} );
+<style>
+  /* Personalizar el diseño de la paginación con CSS */
+  .dataTables_wrapper .dataTables_paginate {
+    text-align: center !important; /* Centrar los botones de paginación */
+    margin-top: 10px !important;
+  }
+
+  .dataTables_paginate .paginate_button {
+    padding: 5px 10px !important;
+    border: 1px solid #007bff !important;
+    margin: 2px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    color: #007bff !important;
+    background-color: #fff !important;
+  }
+
+  /* Cambiar el color del paginado seleccionado */
+  .dataTables_paginate .paginate_button.current {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Cambiar el color del hover */
+  .dataTables_paginate .paginate_button:hover {
+    background-color: #C80096 !important;
+    color: #fff !important;
+    border-color: #C80096 !important;
+  }
+</style>
+
+<style>
+  /* Estilos personalizados para la tabla */
+  #CitasExpress th {
+    font-size: 12px; /* Tamaño de letra para los encabezados */
+    padding: 4px; /* Ajustar el espaciado entre los encabezados */
+    white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
+  }
+</style>
+
+<style>
+  /* Estilos para la tabla */
+  #CitasExpress {
+    font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
+    border-collapse: collapse; /* Colapsar los bordes de las celdas */
+    width: 100%;
+    text-align: center; /* Centrar el contenido de las celdas */
+  }
+
+  #CitasExpress th {
+    font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
+    background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
+    color: white; /* Cambiar el color del texto a blanco para contrastar */
+    padding: 10px; /* Ajustar el espaciado de los encabezados */
+  }
+
+  #CitasExpress td {
+    font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
+    padding: 8px; /* Ajustar el espaciado de las celdas */
+    border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
+  }
+
+  /* Estilos para el botón de Excel */
+  .dt-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .dt-buttons button {
+    font-size: 14px;
+    margin: 0 5px;
+    color: white; /* Cambiar el color del texto a blanco */
+    background-color: #fff; /* Cambiar el color de fondo a blanco */
+  }
+</style>
+
+<style>
+  /* Estilos para la capa de carga */
+  #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegurarse de que el overlay esté encima de todo */
+    display: none; /* Ocultar inicialmente el overlay */
+  }
+
+  /* Estilo para el ícono de carga */
+  .loader {
+    border: 6px solid #f3f3f3; /* Color del círculo externo */
+    border-top: 6px solid #C80096; /* Color del círculo interno */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite; /* Animación de rotación */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Definir una lista de mensajes para el mensaje de carga
+  var mensajesCarga = [
+    "Estamos realizando la búsqueda...",
+    "Cargando datos...",
+    "Procesando la información...",
+    "Espere un momento...",
+    "Cargando... ten paciencia, incluso los planetas tardaron millones de años en formarse.",
+    "¡Espera un momento! Estamos contando hasta el infinito... otra vez.",
+    "¿Sabías que los pingüinos también tienen que esperar mientras cargan su comida?",
+    "¡Zapateando cucarachas de carga! ¿Quién necesita un exterminador?",
+    "Cargando... ¿quieres un chiste para hacer más amena la espera? ¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
+    "¡Alerta! Un koala está jugando con los cables de carga. Espera un momento mientras lo persuadimos.",
+    "¿Sabías que las tortugas cargan a una velocidad épica? Bueno, estamos intentando superarlas.",
+    "¡Espera un instante! Estamos pidiendo ayuda a los unicornios para acelerar el proceso.",
+    "Cargando... mientras nuestros programadores disfrutan de una buena taza de café.",
+    "Cargando... No estamos seguros de cómo llegamos aquí, pero estamos trabajando en ello.",
+    "Estamos contando en binario... 10%, 20%, 110%... espero que esto no sea un error de desbordamiento.",
+    "Cargando... mientras cazamos pokémons para acelerar el proceso.",
+    "Error 404: Mensaje gracioso no encontrado. Estamos trabajando en ello.",
+    "Cargando... ¿Sabías que los programadores también tienen emociones? Bueno, nosotros tampoco.",
+    "Estamos buscando la respuesta a la vida, el universo y todo mientras cargamos... Pista: es un número entre 41 y 43.",
+    "Cargando... mientras los gatos toman el control. ¡Meowtrix está en marcha!",
+    "Estamos ajustando tu espera a la velocidad de la luz. Aún no es suficientemente rápida, pero pronto llegaremos.",
+    "Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
+    "Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
+    "⏳ Esperando mientras cargamos con paciencia y cuidado.",
+    "⌛ Cargando energía y sonrisas para iluminar el día.",
+    "⏰ En la espera, tejemos hilos de compasión y empatía.",
+    "⚕️ Cargando salud y bienestar, un byte a la vez.",
+    "🩹 Paciencia es la medicina que administramos mientras carga la recuperación",
+    "⏳ Cargando tareas, completando metas, un minuto a la vez.",
+    "⌛ Organizando pensamientos mientras el reloj carga su siguiente paso.",
+    "⏰ En la pausa de carga, recalibrando el rumbo hacia la productividad.",
+    "📅 Cargando planes para un futuro lleno de posibilidades.",
+    "📝 Preparando una lista de tareas mientras el mundo carga su siguiente capítulo.",
+    "⏳ Cargando la próxima revolución tecnológica... ¡patience.exe!",
+    "⌛ En el mundo digital, incluso la paciencia debe ser procesada.",
+    "⏰ La espera es el precio que pagamos por la maravilla de la tecnología.",
+    "🔌 Cargando conexiones mientras la red teje su tela invisible.",
+    "💻 Esperando mientras la línea de código se carga en el lienzo digital.",
+    "🗓️ Organiza tu tiempo, controla tus citas y haz que cada momento cuente.",
+    "⏰ La agenda es tu aliada para no perder ni un instante importante. ¡Aprovecha al máximo tu día!",
+    "📅 Cada página de tu agenda es una oportunidad para planificar y crear recuerdos.",
+    "📆 Un día bien agendado es un paso más cerca de tus objetivos.",
+    "🕰️ La gestión de citas te da el poder de dirigir tu tiempo y escribir tu historia.",
+    "🗂️ Archiva tus días con citas bien planificadas y observa cómo se construye tu éxito.",
+    "🖊️ Cada cita agendada es un compromiso contigo mismo y tus metas.",
+    "💼 Controla tus citas como un profesional: organización es clave.",
+    "🕊️ El agendamiento libera tu mente, permitiéndote concentrarte en lo que realmente importa.",
+    "🛤️ La agenda es tu camino hacia la eficiencia y la productividad.",
+    "📝 Escribiendo tu futuro con cada cita agendada.",
+    "🗃️ Citas organizadas, día por día, paso a paso hacia el éxito.",
+    "🌟 Un agendamiento efectivo ilumina tu camino hacia tus sueños.",
+    "📊 Controla tus citas y observa cómo se despliega tu progreso.",
+    "🎯 Cada cita es un objetivo, y tu agenda es el mapa hacia su logro.",
+    "🗺️ La agenda es tu brújula en el viaje de la productividad personal.",
+    "🌈 Agendar citas es pintar tu vida con colores de planificación y logros.",
+    "✍️ Cada cita es una firma de tu compromiso con el éxito.",
+    "📌 Agendando momentos que importan, uno tras otro.",
+    "🧩 Las citas son piezas del rompecabezas de tus días productivos."
+  ];
+
+  // Función para mostrar el mensaje de carga con un texto aleatorio
+  function mostrarCargando(event, settings) {
+    var randomIndex = Math.floor(Math.random() * mensajesCarga.length);
+    var mensaje = mensajesCarga[randomIndex];
+    document.getElementById('loading-text').innerText = mensaje;
+    document.getElementById('loading-overlay').style.display = 'flex';
+  }
+
+  // Función para ocultar el mensaje de carga
+  function ocultarCargando() {
+    document.getElementById('loading-overlay').style.display = 'none';
+  }
+
+  // Iniciar la tabla DataTable
+  var tabla = $('#CitasExpress').DataTable({
+    "bProcessing": true,
+    "ordering": true,
+    "stateSave": true,
+    "bAutoWidth": false,
+    "order": [[0, "desc"]],
+    "sAjaxSource": "https://saludapos.com/JefaturaEnfermeria/Consultas/ArrayAgendaEspecialidades.php",
+    "aoColumns": [
+      { mData: 'Folio' },
+      { mData: 'Paciente' },
+      { mData: 'Telefono' },
+      { mData: 'Fecha' },
+      { mData: 'Hora' },
+      { mData: 'Especialidad' },
+      { mData: 'Doctor' },
+      { mData: 'Sucursal' },
+      { mData: 'Observaciones' },
+      { mData: 'AgendadoPor' },
+      { mData: 'AgendamientoRealizado' },
+      { mData: 'ConWhatsapp' },
+      { mData: 'BotonCancelar' },
+      { mData: 'Tipo_Consulta' } // Se agregó esta línea
+    ],
+    "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+    "language": {
+      "lengthMenu": "Mostrar _MENU_ registros",
+      "sPaginationType": "extStyle",
+      "zeroRecords": "No se encontraron resultados",
+      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sSearch": "Buscar:",
+      "paginate": {
+        "first": '<i class="fas fa-angle-double-left"></i>',
+        "last": '<i class="fas fa-angle-double-right"></i>',
+        "next": '<i class="fas fa-angle-right"></i>',
+        "previous": '<i class="fas fa-angle-left"></i>'
+      },
+      "processing": function () {
+        mostrarCargando();
+      }
+    },
+    "initComplete": function () {
+      // Al completar la inicialización de la tabla, ocultar el mensaje de carga
+      ocultarCargando();
+    },
+    // Para personalizar el estilo del botón de Excel
+    "buttons": [
+      {
+        extend: 'excelHtml5',
+        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+        titleAttr: 'Exportar a Excel',
+        title: 'Base de CitasIndex',
+        className: 'btn btn-success',
+        exportOptions: {
+          columns: ':visible' // Exportar solo las columnas visibles
+        }
+      }
+    ],
+    // Personalizar la posición de los elementos del encabezado
+    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
+    "responsive": true
+  });
 </script>
-<?php
-function fechaCastellano ($fecha) {
-  $fecha = substr($fecha, 0, 10);
-  $numeroDia = date('d', strtotime($fecha));
-  $dia = date('l', strtotime($fecha));
-  $mes = date('F', strtotime($fecha));
-  $anio = date('Y', strtotime($fecha));
-  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
-}
-$fcha = date("Y-m-d");
-include("db_connection.php");
-include "Consultas.php";
-include "Sesion.php";
 
-$user_id=null;
-$sql1="SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,AgendaCitas_EspecialistasExt.Fk_Especialidad,AgendaCitas_EspecialistasExt.Fk_Especialista,
-AgendaCitas_EspecialistasExt.Fk_Sucursal,AgendaCitas_EspecialistasExt.Fecha,AgendaCitas_EspecialistasExt.Hora,
-AgendaCitas_EspecialistasExt.Nombre_Paciente,AgendaCitas_EspecialistasExt.Telefono,AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ID_H_O_D, Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,Personal_Medico_Express.Medico_ID,
-Personal_Medico_Express.Nombre_Apellidos, Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad, Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fechas_EspecialistasExt,Horarios_Citas_Ext,SucursalesCorre WHERE AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID AND AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND AgendaCitas_EspecialistasExt.Fecha =Fechas_EspecialistasExt.ID_Fecha_Esp AND AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario AND 
-AgendaCitas_EspecialistasExt.ID_H_O_D ='".$row['ID_H_O_D']."'";
-$query = $conn->query($sql1);
-?>
-
-<?php if($query->num_rows>0):?>
-  <div class="text-center">
-	<div class="table-responsive">
-	<table  id="CitasExpress" class="table table-hover">
-<thead>
-<th>Folio</th>
-<th>Paciente</th>
-<th>Telefono</th>
-<th>Fecha | Hora </th>
-<th>Especialidad | Doctor</th>
-<th>Sucursal</th>
-<th>Observaciones</th>
-<th>Acciones</th>
-
-
-</thead>
-<?php while ($Usuarios=$query->fetch_array()):?>
-<tr>
-
-    <td> <?php echo $Usuarios["ID_Agenda_Especialista"]; ?></td>
-    <td> <?php echo $Usuarios["Nombre_Paciente"]; ?></td>
-    <td> <?php echo $Usuarios["Telefono"]; ?></td>
-    <td> <?php echo fechaCastellano($Usuarios["Fecha_Disponibilidad"]); ?> <br>
-    <?php echo date('h:i A', strtotime(($Usuarios["Horario_Disponibilidad"]))); ?></td>
-    <td> <?php echo  $Usuarios["Nombre_Especialidad"]; ?> <br>
-    <?php echo $Usuarios["Nombre_Apellidos"]; ?></td>
-    <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
-    <td> <?php echo $Usuarios["Observaciones"]; ?></td>
-
-    <td>
-		 <!-- Basic dropdown -->
-<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
-  aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
-
-<div class="dropdown-menu">
-<a data-id="<?php echo $Usuarios["ID_Agenda_Especialista"];?>" class="btn-DetallesExt dropdown-item" >Detalles <i class="fas fa-calendar-week"></i></a>
-  
-  <a data-id="<?php echo $Usuarios["ID_Agenda_Especialista"];?>" class="btn-CancelaExt dropdown-item" >Cancelar <i class="fas fa-ban"></i></a>
-   
-  <a style=<?if($Usuarios['Fecha_Disponibilidad'] >= $fcha){
-   
-   echo "display:block;";
-} else {
-  echo "display:none;";
-}
-?> data-id="<?php echo $Usuarios["ID_Agenda_Especialista"];?>" class="btn-WhatsExt dropdown-item" >Whatsapp <i class="fab fa-whatsapp"></i></a>
+<div class="text-center">
+  <div class="table-responsive">
+    <table id="CitasExpress" class="table table-hover">
+      <thead>
+        <tr>
+          <th>Folio</th>
+          <th>Paciente</th>
+          <th>Telefono</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Especialidad</th>
+          <th>Doctor</th>
+          <th>Sucursal</th>
+          <th>Observaciones</th>
+          <th>Agendado por</th>
+          <th>Registrado el</th>
+          <th>Enviar Mensaje</th>
+          <th>Cancelar</th>
+          <th>Motivo De Consulta</th> <!-- Nueva columna -->
+        </tr>
+      </thead>
+    </table>
+  </div>
 </div>
-<!-- Basic dropdown -->
-	 </td>
-	
-		
-</tr>
-<?php endwhile;?>
-</table>
-</div>
-</div>
-<?php else:?>
-	<p class="alert alert-warning">Por el momento no hay citas</p>
-<?php endif;?>
-  <!-- Modal -->
-  <script>
-  	
-    $(".btn-DetallesExt").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/DetallesCitaSucursalExt.php","id="+id,function(data){
-              $("#form-editExt").html(data);
-              $("#TituloExt").html("Detalles de cita");
-              $("#DiExt").removeClass("modal-dialog modal-notify modal-success");
-              $("#DiExt").addClass("modal-dialog modal-lg modal-notify modal-success");
-  		});
-  		$('#editModalExt').modal('show');
-    });
 
+<style>
+  .custom-bg-color {
+    background-color: #C80096 !important;
+  }
 
-    $(".btn-CancelaExt").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/CancelaCitaExt.php","id="+id,function(data){
-              $("#form-editExt").html(data);
-              $("#TituloExt").html("Cancelación");
-              $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
-              $("#DiExt").addClass("modal-dialog modal-lg modal-notify modal-success");
-  		});
-  		$('#editModalExt').modal('show');
-    });
-    $(".btn-WhatsExt").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://controlfarmacia.com/AgendaDeCitas/Modales/ContactaWhatsSucursalesExt.php","id="+id,function(data){
-              $("#form-editExt").html(data);
-              $("#TituloExt").html("Cancelación");
-              $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
-              $("#DiExt").addClass("modal-dialog modal-lg modal-notify modal-success");
-  		});
-  		$('#editModalExt').modal('show');
-    });
-  </script>
-  <div class="modal fade" id="editModalExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalExtLabel" aria-hidden="true">
-  <div id="DiExt"class="modal-dialog  modal-notify modal-success">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloExt"></p>
-
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-        <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold"><?echo $row['Nombre_Apellidos']?>
-                            Verifique los campos antes de realizar alguna accion</span>
-						                <button type="button" class="close" data-dismiss="alert">×</button>
-                            </div>
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="form-editExt"></div>
-        
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  .custom-bg-color .fa-whatsapp {
+    font-size: 1.5em; /* Ajusta el tamaño según tus preferencias */
+  }
+</style>
