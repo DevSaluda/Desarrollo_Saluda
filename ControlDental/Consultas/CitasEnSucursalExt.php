@@ -191,7 +191,7 @@
     "stateSave": true,
     "bAutoWidth": false,
     "order": [[0, "desc"]],
-    "sAjaxSource": "https://saludapos.com/Medicos/Consultas/ArrayAgendaEspecialidades.php",
+    "sAjaxSource": "https://saludapos.com/ControlDental/Consultas/ArrayAgendaEspecialidades.php",
     "aoColumns": [
       { mData: 'Folio' },
       { mData: 'Paciente' },
