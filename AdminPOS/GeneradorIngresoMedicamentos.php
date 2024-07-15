@@ -328,9 +328,9 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                             <tr>
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
-                              <th style="width:5%">Contado</th>
-                              <th style="width:3%">Actual</th>
-                              <th style="width:5%">Diferencia</th>
+                              <th style="width:5%">Enviado</th>
+                              <th style="width:3%">Existencia actual</th>
+                              <th style="width:5%">Nueva existencias</th>
                               <th style="width:5%">Precio</th>
                               <th>Tipo de ajuste</th>
                      
