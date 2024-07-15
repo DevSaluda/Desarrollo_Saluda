@@ -768,11 +768,9 @@ function calcularDiferencia(fila) {
 
     $('#tablaAgregarArticulos tbody').prepend(tr);
     let newRow = $('#tablaAgregarArticulos tbody tr:first-child');
+    $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
     actualizarImporte(newRow);
     calcularDiferencia(newRow);
-    newRow.find('.tipoajuste-input').val(selectedAdjustment);
-    newRow.find('.anaquel-input').val(selectAnaquel);
-    newRow.find('.repisa-input').val(selectRepisa);
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
