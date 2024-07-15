@@ -752,7 +752,7 @@ function calcularDiferencia(fila) {
         <td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" /></td>
         <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.precio}" /></td>
-        <td class="tipoajuste"><input class="form-control tipoajuste-input" readonly style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text" /></td>
+        tr += '<td  class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
       
         <td style="display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
