@@ -229,7 +229,17 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                            
                           </div>
                         </div>
-                        
+                        <div class="col">
+
+<label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Factura</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+  </div>
+  <input type="text" class="form-control " id="numerofactura" style="font-size: 0.75rem !important;" >
+ 
+</div>
+</div>
+      
                      
 
         </div>
