@@ -244,223 +244,22 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
         </div>
     </div>
-
     <script>
-        // Función para llenar el select con el abecedario
-        function populateAlphabetSelect() {
-            const alphabetSelect = document.getElementById('alphabetSelect');
-            
-            // Añadir la primera opción con valor vacío
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.textContent = 'Seleccione Repisa';
-            alphabetSelect.appendChild(defaultOption);
-            
-            // Llenar con el abecedario
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-            alphabet.forEach(letter => {
-                const option = document.createElement('option');
-                option.value = letter;
-                option.textContent = letter;
-                alphabetSelect.appendChild(option);
-            });
-        }
+       let selectedfactura = "";
 
-        // Función para llenar el select con números del 1 al 30
-        function populateNumberSelect() {
-            const numberSelect = document.getElementById('numberSelect');
-            
-            // Añadir la primera opción con valor vacío
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.textContent = 'Seleccione Anaquel';
-            numberSelect.appendChild(defaultOption);
-            
-            // Llenar con números del 1 al 30
-            for (let i = 1; i <= 30; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                numberSelect.appendChild(option);
-            }
-        }
+document.getElementById('numerofactura').addEventListener('change', function() {
+  selectedfactura = this.value;
+});
 
-        // Llamar a las funciones para llenar los selects cuando la página se carga
-        window.onload = function() {
-            populateAlphabetSelect();
-            populateNumberSelect();
-        }
     </script>
 
 
                         
                        
-  <script>
-    document.getElementById('Tipodeajuste').addEventListener('change', function() {
-        var selectElement = document.getElementById('Tipodeajuste');
-        var alphabetSelect = document.getElementById('alphabetSelect');
-        var numberSelect = document.getElementById('numberSelect');
-        var inputElement = document.getElementById('codigoEscaneado');
 
-        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
-            inputElement.disabled = true;
-        } else {
-            inputElement.disabled = false;
-        }
-    });
-
-    document.getElementById('alphabetSelect').addEventListener('change', function() {
-        var selectElement = document.getElementById('Tipodeajuste');
-        var alphabetSelect = document.getElementById('alphabetSelect');
-        var numberSelect = document.getElementById('numberSelect');
-        var inputElement = document.getElementById('codigoEscaneado');
-
-        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
-            inputElement.disabled = true;
-        } else {
-            inputElement.disabled = false;
-        }
-    });
-
-    document.getElementById('numberSelect').addEventListener('change', function() {
-        var selectElement = document.getElementById('Tipodeajuste');
-        var alphabetSelect = document.getElementById('alphabetSelect');
-        var numberSelect = document.getElementById('numberSelect');
-        var inputElement = document.getElementById('codigoEscaneado');
-
-        if (selectElement.value === "" || alphabetSelect.value === "" || numberSelect.value === "") {
-            inputElement.disabled = true;
-        } else {
-            inputElement.disabled = false;
-        }
-    });
-
-
-        // Inicializar el estado del input basado en el valor inicial del select
-        document.addEventListener('DOMContentLoaded', function() {
-            var selectElement = document.getElementById('Tipodeajuste');
-            var inputElement = document.getElementById('codigoEscaneado');
-            if (selectElement.value === "") {
-                inputElement.disabled = true;
-                // Mostrar alerta de SweetAlert2
-                Swal.fire({
-                    title: '¡Campo Bloqueado!',
-                    html: '<p>El campo <b>"Código Escaneado"</b> está bloqueado.</p>' +
-                          '<p>Para desbloquearlo, por favor seleccione un tipo de ajuste,el anaquel y la repisa con la que estaras realizando el conteo.</p>' +
-                          '<p><b>Instrucciones:</b></p>' +
-                          '<ul>' +
-                          '<li>Haz clic en el menú desplegable "Tipo de ajuste".</li>' +
-                          '<li>Selecciona una de las opciones disponibles.</li>' +
-                          '<li>Haz clic en el menú desplegable "Anaquel".</li>' +
-                          '<li>Selecciona una de las opciones disponibles.</li>' +
-                          '<li>Haz clic en el menú desplegable "Repisa".</li>' +
-                          '<li>Selecciona una de las opciones disponibles.</li>' +
-                          '<li>El campo se desbloqueará automáticamente.</li>' +
-                          '</ul>',
-                    icon: 'info',
-                    confirmButtonText: 'Entendido',
-                    customClass: {
-                        popup: 'animated tada' // Clase de animación opcional para llamar más la atención
-                    }
-                });
-            } else {
-                inputElement.disabled = false;
-            }
-        });
-    </script>
 
                      <!-- Importa SweetAlert 2 -->
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var fkSucursal = <?php echo $row['Fk_Sucursal'] ?>;
-    var namedesucursal = "<?php echo addslashes($row['Nombre_Sucursal']); ?>"; // Escapa las comillas para nombres de sucursal
-
-    document.getElementById("Tipodeajuste").addEventListener("change", function() {
-        var selectedOption = this.value;
-        if (selectedOption === "Inventario inicial") {
-            // Aquí hacemos la llamada AJAX para verificar el estado del inventario inicial
-            $.ajax({
-                url: 'Consultas/VerificaEstadoInventario.php', // Nuevo archivo PHP que maneja la verificación
-                method: 'POST',
-                data: {
-                    fkSucursal: fkSucursal // Incluye el valor PHP aquí
-                },
-                success: function(response) {
-                    var res = JSON.parse(response);
-                    if(res.success) {
-                        Swal.fire({
-                            title: 'Inventario ya establecido',
-                            text: 'El inventario inicial ya ha sido establecido el ' + res.fecha_establecido,
-                            icon: 'info'
-                        });
-                    } else {
-                        Swal.fire({
-                            title: '¿Estás seguro que deseas establecer en 0 las existencias de la sucursal ' + namedesucursal + '?',
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Sí, establecer stock en 0"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Aquí hacemos la llamada AJAX para actualizar la base de datos
-                                $.ajax({
-                                    url: 'Consultas/EstableceStock.php', // URL del archivo PHP que maneja la actualización
-                                    method: 'POST',
-                                    data: {
-                                        tipoAjuste: selectedOption,
-                                        fkSucursal: fkSucursal // Incluye el valor PHP aquí
-                                    },
-                                    success: function(response) {
-                                        var res = JSON.parse(response);
-                                        if(res.success) {
-                                            Swal.fire({
-                                                title: 'Éxito',
-                                                text: 'El stock de la sucursal ' + namedesucursal + ' se ha ajustado a 0',
-                                                icon: 'success'
-                                            });
-                                        } else {
-                                            Swal.fire({
-                                                title: 'Error',
-                                                text: res.message || 'Hubo un problema al establecer el stock en 0 de la sucursal ' + namedesucursal,
-                                                icon: 'error'
-                                            });
-                                        }
-                                    },
-                                    error: function() {
-                                        // Maneja los errores de la llamada AJAX
-                                        Swal.fire({
-                                            title: 'Error',
-                                            text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                                            icon: 'error'
-                                        });
-                                    }
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: 'Acción cancelada',
-                                    text: 'No se realizaron cambios.',
-                                    icon: 'info'
-                                });
-                            }
-                        });
-                    }
-                },
-                error: function() {
-                    // Maneja los errores de la llamada AJAX
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                        icon: 'error'
-                    });
-                }
-            });
-        }
-    });
-});
-
-</script>
 
                       </div>
 
