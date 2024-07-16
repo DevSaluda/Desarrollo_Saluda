@@ -240,7 +240,16 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </div>
 </div>
       
-                     
+<div class="col">
+
+<label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Valor Total Factura</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+  </div>
+  <input type="text" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
+ 
+</div>
+</div>      
 
         </div>
     </div>
@@ -397,19 +406,31 @@ document.getElementById('numberSelect').addEventListener('change', function() {
 <script>
 
   
-  function actualizarSumaTotal() {
-  var iptTarjeta = parseFloat(document.getElementById("iptTarjeta").value);
-  var iptEfectivo = parseFloat(document.getElementById("iptEfectivoRecibido").value);
-  var cambio;
+function actualizarSuma() {
+    // Obtener todos los inputs dinámicos
+    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+    let suma = 0;
 
-  if (iptTarjeta > 0) {
-    cambio = 0; // Si se ingresa un valor en el campo de tarjeta, el cambio se establece en cero
-  } else {
-    cambio = iptEfectivo; // Si no se ingresa un valor en el campo de tarjeta, el cambio se calcula como el efectivo recibido
+    // Calcular la suma de los valores
+    cantidadInputs.forEach(input => {
+      suma += parseFloat(input.value) || 0;
+    });
+
+    // Actualizar el valor del input #numerofactura
+    document.getElementById('totalfactura').value = suma;
   }
 
-  // Actualizar el valor del elemento <span> con el cambio
-  document.getElementById("Vuelto").textContent = cambio.toFixed(2);
+  // Añadir el evento input a todos los inputs dinámicos
+  document.addEventListener('DOMContentLoaded', () => {
+    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+
+    cantidadInputs.forEach(input => {
+      input.addEventListener('input', actualizarSuma);
+    });
+
+    // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
+    actualizarSuma();
+  });
 }
 
 
