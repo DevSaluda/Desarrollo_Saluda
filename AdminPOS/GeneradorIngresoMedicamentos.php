@@ -246,7 +246,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <div class="input-group mb-3">
   <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
+  <input type="number" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
  
 </div>
 </div>      
@@ -421,7 +421,28 @@ function actualizarSuma() {
 
 </script>
 
+<script>
+        function actualizarTotal() {
+            let total = 0;
 
+            // Obtén todos los elementos de cantidad y precio
+            const cantidades = document.querySelectorAll('.cantidad-vendida-input');
+            const precios = document.querySelectorAll('.preciou-input');
+
+            // Itera sobre cada fila para calcular el total
+            for (let i = 0; i < cantidades.length; i++) {
+                const cantidad = parseFloat(cantidades[i].value) || 0;
+                const precio = parseFloat(precios[i].value) || 0;
+                total += cantidad * precio;
+            }
+
+            // Actualiza el valor del input totalfactura
+            document.getElementById('totalfactura').value = total.toFixed(2);
+        }
+
+        // Asegúrate de que la función actualizarTotal se llama cuando se cargan los inputs dinámicos
+        document.addEventListener('DOMContentLoaded', actualizarTotal);
+    </script>
 
 <script>
   $("#btnVaciarListado").click(function() {
