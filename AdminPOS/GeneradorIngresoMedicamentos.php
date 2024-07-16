@@ -723,8 +723,8 @@ $(document).on('change', '.cantidad-vendida-input', function() {
     fila.find('.cantidad-diferencia-input').val(diferencia);
 });
 // Función para calcular la diferencia entre la cantidad vendida y las existencias en la base de datos
-function calcularDiferencia(fila) {
-    // Obtener la cantidad vendida y las existencias de la fila actual
+function calcularDiferencia(input) {
+    var fila = $(input).closest('tr');  // Convierte el input a jQuery y luego busca el tr más cercano
     var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
     var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
 
@@ -732,9 +732,10 @@ function calcularDiferencia(fila) {
     var diferencia = cantidadVendida - existenciasBd;
 
     // Actualizar el valor del input de diferencia en la fila actual
-    actualizarTotal()
     fila.find('.cantidad-diferencia-input').val(diferencia);
-    
+
+    // Llama a actualizarTotal para recalcular el total de la factura
+    actualizarTotal();
 }
 
 
