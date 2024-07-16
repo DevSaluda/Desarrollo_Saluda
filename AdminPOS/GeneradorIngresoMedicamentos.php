@@ -327,14 +327,15 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                         
                       </style>
                       
-                      <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
+                      <form action="javascript:void(0)"  method="post" id="IngresoDeMedicamentos">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
-               
+    <input type="number" class="form-control " id="totalfacturareal" name="CostototalFactura" style="font-size: 0.75rem !important;" >
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
+
                               <th>Codigo</th>
                               <th style="width:20%">Producto</th>
                               <th style="width:5%">Enviado</th>
@@ -775,7 +776,7 @@ function calcularDiferencia(input) {
         <td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="${articulo.cantidad}" onchange="calcularDiferencia(this)" /></td>
         <td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" /></td>
         <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>
-        <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.preciocompra}" /></td>
+        <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" name="preciocompraAguardar[]" value="${articulo.preciocompra}" /></td>
         tr += '<td  class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
         <td style="display:none;" class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="${articulo.id}" name="IdBasedatos[]" /></td>
@@ -783,6 +784,8 @@ function calcularDiferencia(input) {
         <td style="display:none;" class="Sucursal"><input hidden type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
+                <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Loteeee[]" readonly value="Saluda" /></td>
+                        <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="fechacadd[]" readonly value="Saluda" /></td>
         <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaInv[]" readonly value="<?php echo $fechaActual; ?>" /></td>
         <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
       </tr>`;
@@ -942,7 +945,7 @@ include("footer.php") ?>
 
 
   <script src="js/RealizaCambioDeSucursalPorFiltro.js"></script>
-  <script src="js/RegistraInventariosEnModoConteo.js"></script>
+  <script src="js/RegistraIngresoDeMedicamentos.js"></script>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- overlayScrollbars -->
