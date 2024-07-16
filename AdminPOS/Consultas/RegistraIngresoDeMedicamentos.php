@@ -1,44 +1,72 @@
 <?php
 include_once 'db_connection.php';
 
-$ID_Prod_POS = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['IdBasedatos']))));
-$Cod_Barras = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CodBarras']))));
-$Lote = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Loteeee']))));
-$Fecha_Caducidad = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['fechacadd']))));
-$AgregadoPor = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['AgregoElVendedor']))));
-$Sistema = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Sistema']))));
-$Existencias_R = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Diferencia']))));
-$ExistenciaPrev = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['StockActual']))));
-$Recibido = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Contabilizado']))));
-$Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fk_sucursal']))));
-$ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
-$Factura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['FacturaNumber']))));
-$Precio_compra = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['preciocompraAguardar']))));
-$Total_Factura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CostototalFactura']))));
+// Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
+if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
+    $contador = count($_POST["IdBasedatos"]); 
+} else {
+    // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
+    $contador = 0;
+}
 
-$sql = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`,`Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+$ProContador = 0;
+$query = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`, `Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES ";
 
-$stmt = mysqli_prepare($conn, $sql);
+$placeholders = [];
+$values = [];
+$valueTypes = '';
+
+for ($i = 0; $i < $contador; $i++) {
+    // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
+    if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["Loteeee"][$i])) {
+        $ProContador++;
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Fk_sucursal"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Diferencia"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["StockActual"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Contabilizado"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Loteeee"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["fechacadd"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["AgregoElVendedor"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i]))));
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][$i]))));
+        $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
+    }
+}
 
 $response = array();
 
-if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "sssssssssssss", $ID_Prod_POS,$Cod_Barras, $Fk_sucursal, $Existencias_R, $ExistenciaPrev, $Recibido, $Lote, $Fecha_Caducidad, $AgregadoPor, $ID_H_O_D, $Factura, $Precio_compra, $Total_Factura);
+if ($ProContador != 0) {
+    $query .= implode(', ', $placeholders);
+    $stmt = mysqli_prepare($conn, $query);
 
-    $resultadocon = mysqli_stmt_execute($stmt);
+    if ($stmt) {
+        // Enlace de parámetros
+        mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
-    if ($resultadocon) {
-        $response['status'] = 'success';
-        $response['message'] = 'Registro agregado correctamente.';
+        // Ejecución de consulta
+        $resultadocon = mysqli_stmt_execute($stmt);
+
+        if ($resultadocon) {
+            $response['status'] = 'success';
+            $response['message'] = 'Registro(s) agregado(s) correctamente.';
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Error en la consulta de inserción: ' . mysqli_stmt_error($stmt);
+        }
     } else {
         $response['status'] = 'error';
-        $response['message'] = 'Error en la consulta de inserción: ' . mysqli_stmt_error($stmt);
+        $response['message'] = 'Error en la preparación de la consulta: ' . mysqli_error($conn);
     }
 
     mysqli_stmt_close($stmt);
 } else {
     $response['status'] = 'error';
-    $response['message'] = 'Error en la preparación de la consulta: ' . mysqli_error($conn);
+    $response['message'] = 'No se encontraron registros para agregar.';
 }
 
 echo json_encode($response);
