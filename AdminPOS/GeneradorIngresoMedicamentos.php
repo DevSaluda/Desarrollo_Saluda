@@ -723,17 +723,38 @@ $(document).on('change', '.cantidad-vendida-input', function() {
     fila.find('.cantidad-diferencia-input').val(diferencia);
 });
 // Función para calcular la diferencia entre la cantidad vendida y las existencias en la base de datos
-function calcularDiferencia(fila) {
-    // Obtener la cantidad vendida y las existencias de la fila actual
-    var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
-    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+function calcularDiferencia(input) {
+            var fila = input.closest('tr');
+            var cantidadVendida = parseInt(input.value);
+            var precioUnitario = parseFloat(fila.querySelector('.preciou-input').value);
 
-    // Calcular la diferencia
-    var diferencia = cantidadVendida - existenciasBd;
+            // Calcula el total de la fila
+            var totalFila = cantidadVendida * precioUnitario;
 
-    // Actualizar el valor del input de diferencia en la fila actual
-    fila.find('.cantidad-diferencia-input').val(diferencia);
-}
+            // Actualiza el total de la fila
+            fila.querySelector('.total-fila').value = totalFila.toFixed(2);
+
+            // Llama a actualizarTotal para recalcular el total de la factura
+            actualizarTotal();
+        }
+
+        // Función para actualizar el total de la factura
+        function actualizarTotal() {
+            var total = 0;
+
+            // Itera sobre cada fila para calcular el total de la factura
+            document.querySelectorAll('#tablaArticulos tr').forEach(function(row) {
+                var totalFila = parseFloat(row.querySelector('.total-fila').value) || 0;
+                total += totalFila;
+            });
+
+            // Actualiza el valor del input totalfactura
+            document.getElementById('totalfactura').value = total.toFixed(2);
+        }
+
+        // Llama a actualizarTotal inicialmente para calcular el total de la factura al cargar la página
+        actualizarTotal();
+      
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
