@@ -431,7 +431,6 @@ function actualizarSuma() {
     // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
     actualizarSuma();
   });
-}
 
 
 
