@@ -246,7 +246,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <div class="input-group mb-3">
   <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="number" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
+  <input type="text" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
  
 </div>
 </div>      
@@ -384,29 +384,39 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
 <!-- function actualizarSumaTotal  -->
 <script>
+
+  
 function actualizarSuma() {
-        const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
-        const precioInputs = document.querySelectorAll('.preciou-input');
-        let suma = 0;
+    // Obtener todos los inputs dinámicos
+    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+    let suma = 0;
 
-        cantidadInputs.forEach((input, index) => {
-            const cantidad = parseFloat(input.value) || 0;
-            const precio = parseFloat(precioInputs[index].value) || 0;
-            suma += cantidad * precio;
-        });
-
-        document.getElementById('totalfactura').value = suma.toFixed(2);
-    }
-
-    document.addEventListener('input', function(event) {
-        if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('preciou-input')) {
-            actualizarSuma();
-        }
+    // Calcular la suma de los valores
+    cantidadInputs.forEach(input => {
+      suma += parseFloat(input.value) || 0;
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        actualizarSuma();
+    // Actualizar el valor del input #numerofactura
+    document.getElementById('totalfactura').value = suma;
+  }
+
+  // Añadir el evento input a todos los inputs dinámicos
+  document.addEventListener('DOMContentLoaded', () => {
+    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+
+    cantidadInputs.forEach(input => {
+      input.addEventListener('input', actualizarSuma);
     });
+
+    // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
+    actualizarSuma();
+  });
+
+
+
+
+
+
 
 
 </script>
@@ -755,7 +765,7 @@ function calcularDiferencia(fila) {
 
     $('#tablaAgregarArticulos tbody').prepend(tr);
     let newRow = $('#tablaAgregarArticulos tbody tr:first-child');
-    $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
+    $('#tablaAgregarArticulos tbody tr:first-child').find('.factura-input').val(selectedfactura);
     actualizarImporte(newRow);
     calcularDiferencia(newRow);
     calcularIVA();
