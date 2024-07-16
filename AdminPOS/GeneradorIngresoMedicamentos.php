@@ -385,19 +385,21 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 <!-- function actualizarSumaTotal  -->
 <script>
 
-  
 function actualizarSuma() {
-    // Obtener todos los inputs dinámicos
+    // Obtener todos los inputs dinámicos de cantidad y precio
     const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+    const precioInputs = document.querySelectorAll('.preciou-input');
     let suma = 0;
 
-    // Calcular la suma de los valores
-    cantidadInputs.forEach(input => {
-      suma += parseFloat(input.value) || 0;
+    // Calcular la suma de los productos de cantidad y precio
+    cantidadInputs.forEach((input, index) => {
+      const cantidad = parseFloat(input.value) || 0;
+      const precio = parseFloat(precioInputs[index].value) || 0;
+      suma += cantidad * precio;
     });
 
-    // Actualizar el valor del input #numerofactura
-    document.getElementById('totalfactura').value = suma;
+    // Actualizar el valor del input #totalfactura
+    document.getElementById('totalfactura').value = suma.toFixed(2); // Mostrar dos decimales
   }
 
   // Añadir el evento input a todos los inputs dinámicos
@@ -411,12 +413,6 @@ function actualizarSuma() {
     // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
     actualizarSuma();
   });
-
-
-
-
-
-
 
 
 </script>
