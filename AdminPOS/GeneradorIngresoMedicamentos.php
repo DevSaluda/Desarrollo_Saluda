@@ -384,35 +384,29 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
 <!-- function actualizarSumaTotal  -->
 <script>
-
 function actualizarSuma() {
-    // Obtener todos los inputs dinámicos de cantidad y precio
-    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
-    const precioInputs = document.querySelectorAll('.preciou-input');
-    let suma = 0;
+        const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+        const precioInputs = document.querySelectorAll('.preciou-input');
+        let suma = 0;
 
-    // Calcular la suma de los productos de cantidad y precio
-    cantidadInputs.forEach((input, index) => {
-      const cantidad = parseFloat(input.value) || 0;
-      const precio = parseFloat(precioInputs[index].value) || 0;
-      suma += cantidad * precio;
+        cantidadInputs.forEach((input, index) => {
+            const cantidad = parseFloat(input.value) || 0;
+            const precio = parseFloat(precioInputs[index].value) || 0;
+            suma += cantidad * precio;
+        });
+
+        document.getElementById('totalfactura').value = suma.toFixed(2);
+    }
+
+    document.addEventListener('input', function(event) {
+        if (event.target.classList.contains('cantidad-vendida-input') || event.target.classList.contains('preciou-input')) {
+            actualizarSuma();
+        }
     });
 
-    // Actualizar el valor del input #totalfactura
-    document.getElementById('totalfactura').value = suma.toFixed(2); // Mostrar dos decimales
-  }
-
-  // Añadir el evento input a todos los inputs dinámicos
-  document.addEventListener('DOMContentLoaded', () => {
-    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
-
-    cantidadInputs.forEach(input => {
-      input.addEventListener('input', actualizarSuma);
+    document.addEventListener('DOMContentLoaded', function() {
+        actualizarSuma();
     });
-
-    // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
-    actualizarSuma();
-  });
 
 
 </script>
@@ -748,7 +742,7 @@ function calcularDiferencia(fila) {
         <td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" /></td>
         <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.preciocompra}" /></td>
-        tr += '<td  class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
+        <td class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
         <td style="display:none;" class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="${articulo.id}" name="IdBasedatos[]" /></td>
         <td style="display:none;" class="ResponsableInventario"><input hidden id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']; ?>" /></td>
