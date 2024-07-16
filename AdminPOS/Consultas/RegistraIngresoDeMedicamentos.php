@@ -14,7 +14,7 @@ $Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fk
 $ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
 $Factura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['FacturaNumber']))));
 $Precio_compra = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['preciocompraAguardar']))));
-$Total_Factura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['TotalDeFacturaPorGuardar']))));
+$Total_Factura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CostototalFactura']))));
 
 $sql = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`,`Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 

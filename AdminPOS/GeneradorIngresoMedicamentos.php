@@ -399,6 +399,8 @@ function actualizarSuma() {
 
     // Actualizar el valor del input #numerofactura
     document.getElementById('totalfactura').value = suma;
+    document.getElementById('totalfacturareal').value = suma;
+    
   }
 
   // Añadir el evento input a todos los inputs dinámicos
