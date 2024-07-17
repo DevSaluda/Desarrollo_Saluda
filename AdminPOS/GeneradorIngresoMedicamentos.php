@@ -383,7 +383,6 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 </div>
 
 
-<!-- function actualizarSumaTotal  -->
 <script>
     function actualizarSuma() {
       // Obtener todos los inputs dinámicos
@@ -395,9 +394,25 @@ document.getElementById('numerofactura').addEventListener('change', function() {
         suma += parseFloat(input.value) || 0;
       });
 
-      // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
-      document.getElementById('totalfactura').value = suma;
-      document.getElementById('totalfactura2').value = suma;
+      console.log("Suma calculada:", suma);
+
+      // Actualizar el valor de los inputs #totalfactura y #totalfactura2
+      const totalfactura = document.getElementById('totalfactura');
+      const totalfactura2 = document.getElementById('totalfactura2');
+
+      if (totalfactura) {
+        totalfactura.value = suma;
+        console.log("totalfactura actualizado:", totalfactura.value);
+      } else {
+        console.error("Elemento con id 'totalfactura' no encontrado.");
+      }
+
+      if (totalfactura2) {
+        totalfactura2.value = suma;
+        console.log("totalfactura2 actualizado:", totalfactura2.value);
+      } else {
+        console.error("Elemento con id 'totalfactura2' no encontrado.");
+      }
     }
 
     // Añadir el evento input a todos los inputs dinámicos
