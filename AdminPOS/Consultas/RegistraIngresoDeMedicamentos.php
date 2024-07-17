@@ -2,8 +2,8 @@
 include_once 'db_connection.php';
 
 // Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
-if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
-    $contador = count($_POST["IdBasedatos"]); 
+if (isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
+    $contador = count($_POST["IdBasedatos"]);
 } else {
     // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
     $contador = 0;
@@ -16,25 +16,29 @@ $placeholders = [];
 $values = [];
 $valueTypes = '';
 
-for ($i = 0; $i < $contador; $i++) {
-    // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
-    if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["Loteeee"][$i])) {
-        $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Fk_sucursal"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Diferencia"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["StockActual"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Contabilizado"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Loteeee"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["fechacadd"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["AgregoElVendedor"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][$i]))));
-        $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
+if ($contador > 0 && !empty($_POST["CostototalFactura"])) {
+    $costototalFactura = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][0]))));
+
+    for ($i = 0; $i < $contador; $i++) {
+        // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
+        if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["Loteeee"][$i])) {
+            $ProContador++;
+            $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Fk_sucursal"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Diferencia"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["StockActual"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Contabilizado"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Loteeee"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["fechacadd"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["AgregoElVendedor"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i]))));
+            $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i]))));
+            $values[] = $costototalFactura; // Usar el valor guardado fuera del bucle
+            $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
+        }
     }
 }
 
