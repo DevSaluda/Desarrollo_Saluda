@@ -836,7 +836,14 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="https://saludapos.com/AdminPOS/Ingresosrealizados" class="nav-link">
+            <i class="fas fa-prescription-bottle"></i>
+              <p>
+            Reporte de ingresos de medicamentos              
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="PedidosSugerencias" class="nav-link">
             <i class="fas fa-prescription-bottle"></i>
