@@ -393,7 +393,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
       });
 
       // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
-      document.getElementById('totalfacturainterfaz').value = suma;
+      document.getElementById('totalfactura').value = suma;
     
     }
 
