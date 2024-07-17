@@ -2,7 +2,7 @@
 include_once 'db_connection.php';
 
 // Verificar si $_POST["IdBasedatos"] está definido y es un arreglo antes de contar sus elementos
-if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
+if (isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
     $contador = count($_POST["IdBasedatos"]); 
 } else {
     // Manejar el caso en el que $_POST["IdBasedatos"] no está definido o no es un arreglo
@@ -21,19 +21,21 @@ for ($i = 0; $i < $contador; $i++) {
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["Loteeee"][$i])) {
         $ProContador++;
         $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Fk_sucursal"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Diferencia"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["StockActual"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Contabilizado"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Loteeee"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["fechacadd"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["AgregoElVendedor"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda"))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i]))));
-        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][$i]))));
+        
+        $values[] = isset($_POST["IdBasedatos"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i])))) : null;
+        $values[] = isset($_POST["CodBarras"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i])))) : null;
+        $values[] = isset($_POST["Fk_sucursal"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Fk_sucursal"][$i])))) : null;
+        $values[] = isset($_POST["Diferencia"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Diferencia"][$i])))) : null;
+        $values[] = isset($_POST["StockActual"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["StockActual"][$i])))) : null;
+        $values[] = isset($_POST["Contabilizado"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Contabilizado"][$i])))) : null;
+        $values[] = isset($_POST["Loteeee"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["Loteeee"][$i])))) : null;
+        $values[] = isset($_POST["fechacadd"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["fechacadd"][$i])))) : null;
+        $values[] = isset($_POST["AgregoElVendedor"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["AgregoElVendedor"][$i])))) : null;
+        $values[] = $conn->real_escape_string(htmlentities(strip_tags(trim("Saluda")))); // Esto es constante
+        $values[] = isset($_POST["FacturaNumber"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i])))) : null;
+        $values[] = isset($_POST["preciocompraAguardar"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i])))) : null;
+        $values[] = isset($_POST["CostototalFactura"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][$i])))) : null;
+        
         $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
     }
 }
