@@ -720,7 +720,7 @@ function calcularDiferencia(input) {
         <td style="display:none;" class="Sucursal"><input hidden type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
-                <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Loteeee[]" readonly value="Saluda" /></td>
+                <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Loteeee[]" readonly  /></td>
                         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="fechacadd[]" readonly value="Saluda" /></td>
         <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaInv[]" readonly value="<?php echo $fechaActual; ?>" /></td>
         <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
