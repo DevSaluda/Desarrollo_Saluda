@@ -235,7 +235,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <div class="input-group mb-3">
   <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="text" class="form-control " id="numerofactura" style="font-size: 0.75rem !important;" >
+
  
 </div>
 </div>
@@ -262,18 +262,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
     </script>
 
-<script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var totalFactura = document.getElementById('totalfactura');
-            var totalFactura2 = document.getElementById('totalfactura2');
 
-            totalFactura.addEventListener('change', function() {
-                var selectedfacturatotal = this.value;
-                totalFactura2.value = selectedfacturatotal;
-            });
-        });
-    </script>
-               
                        
 
 
@@ -405,7 +394,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
       // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
       document.getElementById('totalfactura').value = suma;
-      document.getElementById('totalfactura2').value = suma;
+    
     }
 
     // Añadir el evento input a todos los inputs dinámicos
