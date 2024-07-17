@@ -386,15 +386,17 @@ document.getElementById('numerofactura').addEventListener('change', function() {
       // Obtener todos los inputs dinámicos
       const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
       let suma = 0;
-
+      let sumav2 = 0;
       // Calcular la suma de los valores
       cantidadInputs.forEach(input => {
         suma += parseFloat(input.value) || 0;
+      }); cantidadInputs.forEach(input => {
+        sumav2 += parseFloat(input.value) || 0;
       });
 
       // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
       document.getElementById('totalfactura').value = suma;
-      document.getElementById('totalfactura2').value = suma;
+      document.getElementById('totalfactura2').value = sumav2;
     }
 
     // Añadir el evento input a todos los inputs dinámicos
