@@ -427,6 +427,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
             // Actualiza el valor del input totalfactura
             document.getElementById('totalfactura').value = total.toFixed(2);
+            document.getElementById('totalfactura2').value = total.toFixed(2);
         }
 
         // Asegúrate de que la función actualizarTotal se llama cuando se cargan los inputs dinámicos
