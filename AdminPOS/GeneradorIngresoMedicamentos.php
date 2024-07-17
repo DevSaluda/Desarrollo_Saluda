@@ -247,7 +247,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
   <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
   <input type="number" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
- 
+  <input type="number" class="form-control " id="totalfactura2" name="CostototalFactura" style="font-size: 0.75rem !important;" >
 </div>
 </div>      
 
@@ -331,7 +331,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
-    <input type="number" class="form-control " id="totalfactura2" name="CostototalFactura" style="font-size: 0.75rem !important;" >
+    
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
