@@ -330,7 +330,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
-    <input type="number" class="form-control " id="totalfactura2" name="CostototalFactura[]" style="font-size: 0.75rem !important;" >
+    <input type="number" class="form-control " hidden id="totalfactura2" name="CostototalFactura[]" style="font-size: 0.75rem !important;" >
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
