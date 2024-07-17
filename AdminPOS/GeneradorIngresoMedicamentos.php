@@ -385,44 +385,33 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
 <!-- function actualizarSumaTotal  -->
 <script>
+    function actualizarSuma() {
+      // Obtener todos los inputs dinámicos
+      const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+      let suma = 0;
 
-  
-function actualizarSuma() {
-    // Obtener todos los inputs dinámicos
-    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
-    let suma = 0;
+      // Calcular la suma de los valores
+      cantidadInputs.forEach(input => {
+        suma += parseFloat(input.value) || 0;
+      });
 
-    // Calcular la suma de los valores
-    cantidadInputs.forEach(input => {
-      suma += parseFloat(input.value) || 0;
+      // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
+      document.getElementById('totalfactura').value = suma;
+      document.getElementById('totalfacturareaal').value = suma;
+    }
+
+    // Añadir el evento input a todos los inputs dinámicos
+    document.addEventListener('DOMContentLoaded', () => {
+      const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
+
+      cantidadInputs.forEach(input => {
+        input.addEventListener('input', actualizarSuma);
+      });
+
+      // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
+      actualizarSuma();
     });
-
-    // Actualizar el valor del input #numerofactura
-    document.getElementById('totalfactura').value = suma;
-    document.getElementById('totalfacturareaal').value = suma;
-    
-  }
-
-  // Añadir el evento input a todos los inputs dinámicos
-  document.addEventListener('DOMContentLoaded', () => {
-    const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
-
-    cantidadInputs.forEach(input => {
-      input.addEventListener('input', actualizarSuma);
-    });
-
-    // Llamar a la función para inicializar la suma en caso de que haya valores predeterminados
-    actualizarSuma();
-  });
-
-
-
-
-
-
-
-
-</script>
+  </script>
 
 <script>
         function actualizarTotal() {
