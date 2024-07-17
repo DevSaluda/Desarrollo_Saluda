@@ -829,7 +829,7 @@
       
 ?>>
           <li class="nav-item">
-            <a href="Ingresosrealizados" class="nav-link">
+            <a href="https://saludapos.com/AdminPOS/GeneradorIngresoMedicamentos" class="nav-link">
             <i class="fas fa-prescription-bottle"></i>
               <p>
             Ingreso de medicamentos               
