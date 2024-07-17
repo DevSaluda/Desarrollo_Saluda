@@ -246,7 +246,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <div class="input-group mb-3">
   <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
   </div>
-  <input type="number" class="form-control "   id="totalfactura2" style="font-size: 0.75rem !important;" >
+  <input type="number" class="form-control " id="totalfactura" style="font-size: 0.75rem !important;" >
  
 </div>
 </div>      
@@ -326,12 +326,25 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
                         
                       </style>
-                      
+                       <script>
+        function syncInputs() {
+            var totalFactura = document.getElementById('totalfactura');
+            var totalFactura2 = document.getElementById('totalfactura2');
+
+            totalFactura2.value = totalFactura.value;
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var totalFactura = document.getElementById('totalfactura');
+
+            totalFactura.addEventListener('input', syncInputs);
+        });
+    </script>
                       <form action="javascript:void(0)"  method="post" id="IngresoDeMedicamentos">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
-    <input type="number" class="form-control " id="totalfactura" name="CostototalFactura" style="font-size: 0.75rem !important;" >
+    <input type="number" class="form-control " id="totalfactura2" name="CostototalFactura" style="font-size: 0.75rem !important;" >
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
@@ -389,16 +402,15 @@ document.getElementById('numerofactura').addEventListener('change', function() {
       // Obtener todos los inputs dinámicos
       const cantidadInputs = document.querySelectorAll('.cantidad-vendida-input');
       let suma = 0;
-      let sumav2 = 0;
+
       // Calcular la suma de los valores
       cantidadInputs.forEach(input => {
         suma += parseFloat(input.value) || 0;
-        sumav2 += parseFloat(input.value) || 0;
       });
 
       // Actualizar el valor de los inputs #totalfactura y #totalfacturareaal
       document.getElementById('totalfactura').value = suma;
-      document.getElementById('totalfactura2').value = sumav2;
+    
     }
 
     // Añadir el evento input a todos los inputs dinámicos
