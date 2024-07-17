@@ -326,20 +326,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
                         
                       </style>
-                       <script>
-        function syncInputs() {
-            var totalFactura = document.getElementById('totalfactura');
-            var totalFactura2 = document.getElementById('totalfactura2');
-
-            totalFactura2.value = totalFactura.value;
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var totalFactura = document.getElementById('totalfactura');
-
-            totalFactura.addEventListener('input', syncInputs);
-        });
-    </script>
+                      
                       <form action="javascript:void(0)"  method="post" id="IngresoDeMedicamentos">
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
@@ -394,7 +381,20 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 </div>
 </div>
 </div>
+<script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var totalFactura = document.getElementById('totalfactura');
+            var totalFactura2 = document.getElementById('totalfactura2');
 
+            if (totalFactura) {
+                totalFactura.addEventListener('input', function() {
+                    totalFactura2.value = totalFactura.value;
+                });
+            } else {
+                console.error("No se encontró el elemento con id 'totalfactura'");
+            }
+        });
+    </script>
 
 <!-- function actualizarSumaTotal  -->
 <script>
