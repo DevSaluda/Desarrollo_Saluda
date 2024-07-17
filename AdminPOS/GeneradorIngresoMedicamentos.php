@@ -262,8 +262,18 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
     </script>
 
+<script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var totalFactura = document.getElementById('totalfactura');
+            var totalFactura2 = document.getElementById('totalfactura2');
 
-                        
+            totalFactura.addEventListener('change', function() {
+                var selectedfacturatotal = this.value;
+                totalFactura2.value = selectedfacturatotal;
+            });
+        });
+    </script>
+               
                        
 
 
