@@ -331,7 +331,7 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                       <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
-    <input type="number" class="form-control " id="totalfacturareal" name="CostototalFactura" style="font-size: 0.75rem !important;" >
+    <input type="number" class="form-control " id="totalfacturareaal" name="CostototalFactura" style="font-size: 0.75rem !important;" >
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
@@ -399,7 +399,7 @@ function actualizarSuma() {
 
     // Actualizar el valor del input #numerofactura
     document.getElementById('totalfactura').value = suma;
-    document.getElementById('totalfacturareal').value = suma;
+    document.getElementById('totalfacturareaal').value = suma;
     
   }
 
