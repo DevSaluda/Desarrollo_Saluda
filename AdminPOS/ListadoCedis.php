@@ -33,7 +33,7 @@ include "Consultas/Consultas.php";
   </div>
 
   <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroTraspasos"
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#FiltroTraspasos"
       class="btn btn-default">
       Busqueda por fechas <i class="fas fa-search"></i>
     </button>
