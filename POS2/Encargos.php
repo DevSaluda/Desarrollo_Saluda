@@ -6,81 +6,90 @@ if (!isset($_SESSION['encargo'])) {
     $_SESSION['encargo'] = [];
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buscar_producto'])) {
-    $Cod_Barra = $_POST['Cod_Barra'];
+function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
     $result = mysqli_query($conn, $query);
-    $producto = mysqli_fetch_assoc($result);
-
-    if ($producto) {
-        $_SESSION['producto_encontrado'] = $producto;
-    } else {
-        $_SESSION['producto_no_encontrado'] = $Cod_Barra;
-    }
+    return mysqli_fetch_assoc($result);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregar_producto'])) {
-    $Cod_Barra = $_POST['Cod_Barra'];
-    $Nombre_Prod = $_POST['Nombre_Prod'];
-    $Precio_Venta = $_POST['Precio_Venta'];
-    $Cantidad = (int)$_POST['Cantidad'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['buscar_producto'])) {
+        $Cod_Barra = $_POST['Cod_Barra'];
+        $producto = buscarProducto($conn, $Cod_Barra);
 
-    $producto_existe = false;
-    foreach ($_SESSION['encargo'] as &$producto) {
-        if ($producto['Cod_Barra'] === $Cod_Barra) {
-            $producto['Cantidad'] += $Cantidad;
-            $producto['Total'] = $producto['Precio_Venta'] * $producto['Cantidad'];
-            $producto_existe = true;
-            break;
+        if ($producto) {
+            $_SESSION['producto_encontrado'] = $producto;
+        } else {
+            $_SESSION['producto_no_encontrado'] = $Cod_Barra;
         }
     }
-    if (!$producto_existe) {
-        $producto = [
-            'Cod_Barra' => $Cod_Barra,
-            'Nombre_Prod' => $Nombre_Prod,
-            'Precio_Venta' => $Precio_Venta,
-            'Cantidad' => $Cantidad,
-            'Total' => $Precio_Venta * $Cantidad
-        ];
-        $_SESSION['encargo'][] = $producto;
-    }
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_producto'])) {
-    $Cod_Barra = $_POST['Cod_Barra'];
-    foreach ($_SESSION['encargo'] as $index => $producto) {
-        if ($producto['Cod_Barra'] === $Cod_Barra) {
-            unset($_SESSION['encargo'][$index]);
-            $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
-            break;
+    if (isset($_POST['agregar_producto'])) {
+        $Cod_Barra = $_POST['Cod_Barra'];
+        $Nombre_Prod = $_POST['Nombre_Prod'];
+        $Precio_Venta = $_POST['Precio_Venta'];
+        $Cantidad = (int)$_POST['Cantidad'];
+
+        $producto_existe = false;
+        foreach ($_SESSION['encargo'] as &$producto) {
+            if ($producto['Cod_Barra'] === $Cod_Barra) {
+                $producto['Cantidad'] += $Cantidad;
+                $producto['Total'] = $producto['Precio_Venta'] * $producto['Cantidad'];
+                $producto_existe = true;
+                break;
+            }
+        }
+        if (!$producto_existe) {
+            $producto = [
+                'Cod_Barra' => $Cod_Barra,
+                'Nombre_Prod' => $Nombre_Prod,
+                'Precio_Venta' => $Precio_Venta,
+                'Cantidad' => $Cantidad,
+                'Total' => $Precio_Venta * $Cantidad
+            ];
+            $_SESSION['encargo'][] = $producto;
+        }
+
+        unset($_SESSION['producto_encontrado']);
+        unset($_SESSION['producto_no_encontrado']);
+    }
+
+    if (isset($_POST['eliminar_producto'])) {
+        $Cod_Barra = $_POST['Cod_Barra'];
+        foreach ($_SESSION['encargo'] as $index => $producto) {
+            if ($producto['Cod_Barra'] === $Cod_Barra) {
+                unset($_SESSION['encargo'][$index]);
+                $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
+                break;
+            }
         }
     }
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['guardar_encargo'])) {
-    $Fk_sucursal = $_POST['Fk_sucursal'];
-    $MontoAbonado = $_POST['MontoAbonado'];
-    $AgregadoPor = $_POST['AgregadoPor'];
-    $ID_H_O_D = $_POST['ID_H_O_D'];
-    $Estado = $_POST['Estado'];
-    $TipoEncargo = $_POST['TipoEncargo'];
-    $Fecha_Ingreso = date('Y-m-d');
-    $AgregadoEl = date('Y-m-d');
+    if (isset($_POST['guardar_encargo'])) {
+        $Fk_sucursal = $_POST['Fk_sucursal'];
+        $MontoAbonado = $_POST['MontoAbonado'];
+        $AgregadoPor = $_POST['AgregadoPor'];
+        $ID_H_O_D = $_POST['ID_H_O_D'];
+        $Estado = $_POST['Estado'];
+        $TipoEncargo = $_POST['TipoEncargo'];
+        $Fecha_Ingreso = date('Y-m-d');
+        $AgregadoEl = date('Y-m-d');
 
-    foreach ($_SESSION['encargo'] as $producto) {
-        $Cod_Barra = $producto['Cod_Barra'];
-        $Nombre_Prod = $producto['Nombre_Prod'];
-        $Precio_Venta = $producto['Precio_Venta'];
-        $Cantidad = $producto['Cantidad'];
-        $sql = "INSERT INTO Encargos_POS (Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo)
-                VALUES ('$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$MontoAbonado', '$Precio_Venta', '', '$Cantidad', '$Fecha_Ingreso', '', '', '', '$AgregadoPor', '$AgregadoEl', '$ID_H_O_D', '$Estado', '$TipoEncargo')";
-        mysqli_query($conn, $sql);
+        foreach ($_SESSION['encargo'] as $producto) {
+            $Cod_Barra = $producto['Cod_Barra'];
+            $Nombre_Prod = $producto['Nombre_Prod'];
+            $Precio_Venta = $producto['Precio_Venta'];
+            $Cantidad = $producto['Cantidad'];
+            $sql = "INSERT INTO Encargos_POS (Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo)
+                    VALUES ('$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$MontoAbonado', '$Precio_Venta', '', '$Cantidad', '$Fecha_Ingreso', '', '', '', '$AgregadoPor', '$AgregadoEl', '$ID_H_O_D', '$Estado', '$TipoEncargo')";
+            mysqli_query($conn, $sql);
+        }
+        $_SESSION['encargo'] = [];
+        unset($_SESSION['producto_encontrado']);
+        unset($_SESSION['producto_no_encontrado']);
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
     }
-    $_SESSION['encargo'] = [];
-    $_SESSION['producto_encontrado'] = null;
-    $_SESSION['producto_no_encontrado'] = null;
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit;
 }
 
 function calcularTotalEncargo($encargo) {
@@ -148,7 +157,6 @@ function calcularPagoMinimo($total) {
                     </div>
                     <button type="submit" name="agregar_producto" class="btn btn-primary">Agregar Producto</button>
                 </form>
-                <?php unset($_SESSION['producto_encontrado']); ?>
             <?php elseif (isset($_SESSION['producto_no_encontrado'])): ?>
                 <!-- Modal -->
                 <div class="modal fade" id="productoNoEncontradoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -189,11 +197,10 @@ function calcularPagoMinimo($total) {
                         $('#productoNoEncontradoModal').modal('show');
                     });
                 </script>
-                <?php unset($_SESSION['producto_no_encontrado']); ?>
             <?php endif; ?>
 
-            <h3>Productos en el Encargo</h3>
-            <table class="table table-striped">
+            <h3>Productos en el encargo</h3>
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Código de Barra</th>
@@ -201,7 +208,7 @@ function calcularPagoMinimo($total) {
                         <th>Precio de Venta</th>
                         <th>Cantidad</th>
                         <th>Total</th>
-                        <th>Acción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -213,7 +220,7 @@ function calcularPagoMinimo($total) {
                             <td><?php echo $producto['Cantidad']; ?></td>
                             <td><?php echo $producto['Total']; ?></td>
                             <td>
-                                <form method="post" action="" style="display:inline;">
+                                <form method="post" action="">
                                     <input type="hidden" name="Cod_Barra" value="<?php echo $producto['Cod_Barra']; ?>">
                                     <button type="submit" name="eliminar_producto" class="btn btn-danger">Eliminar</button>
                                 </form>
@@ -223,27 +230,29 @@ function calcularPagoMinimo($total) {
                 </tbody>
             </table>
 
-            <?php 
-            $total = calcularTotalEncargo($_SESSION['encargo']);
-            $pago_minimo = calcularPagoMinimo($total);
-            ?>
-            <p class="highlight">Total del Encargo: <?php echo $total; ?></p>
-            <p class="highlight">Pago Mínimo: <?php echo $pago_minimo; ?></p>
+            <h4 class="highlight">Total del encargo: <?php echo calcularTotalEncargo($_SESSION['encargo']); ?></h4>
+            <h4 class="highlight">Pago mínimo requerido: <?php echo calcularPagoMinimo(calcularTotalEncargo($_SESSION['encargo'])); ?></h4>
 
             <form method="post" action="">
-                <input type="hidden" name="Fk_sucursal" value="1">
-                <input type="hidden" name="MontoAbonado" value="<?php echo $pago_minimo; ?>">
-                <input type="hidden" name="AgregadoPor" value="UsuarioX">
-                <input type="hidden" name="ID_H_O_D" value="1">
-                <input type="hidden" name="Estado" value="Pendiente">
-                <input type="hidden" name="TipoEncargo" value="TipoX">
+                <div class="form-group">
+                    <label for="Fk_sucursal">Sucursal</label>
+                    <input type="text" class="form-control" id="Fk_sucursal" name="Fk_sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="MontoAbonado">Monto Abonado</label>
+                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+                </div>
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $current_user; ?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $current_id_hod; ?>">
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                </div>
                 <button type="submit" name="guardar_encargo" class="btn btn-success">Guardar Encargo</button>
             </form>
         </div>
     </section>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php include("footer.php");?>
 </body>
 </html>
