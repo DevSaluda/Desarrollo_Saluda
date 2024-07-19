@@ -219,7 +219,6 @@ function calcularPagoMinimo($total) {
                     <label for="MontoAbonado">Monto Abonado</label>
                     <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
                 </div>
-                <input type="hidden" name="AgregadoPor" value="<?php echo $_SESSION['usuario']; ?>">
                 <input type="hidden" name="ID_H_O_D" value="1">
                 <input type="hidden" name="Estado" value="Pendiente">
                 <input type="hidden" name="TipoEncargo" value="Normal">
