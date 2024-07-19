@@ -41,7 +41,7 @@ include "Consultas/Consultas.php";
       Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
     </button>
     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
-      Generar impresion  <i class="fas fa-exchange-alt"></i>
+      Generar impresion <i class="fas fa-print"></i>
     </button>
   </div>
 </div>
