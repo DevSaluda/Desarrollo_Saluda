@@ -99,7 +99,7 @@ $(document).ready(function() {
     $('#buscarProductoForm').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: 'ManejoEncargos.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
             dataType: 'json',
@@ -157,7 +157,7 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         $.ajax({
-            url: 'ManejoEncargos.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: $(this).serialize() + '&agregar_producto=true',
             dataType: 'json',
@@ -171,7 +171,7 @@ $(document).ready(function() {
     $(document).on('click', '.eliminar-producto', function() {
         const Cod_Barra = $(this).data('cod-barra');
         $.ajax({
-            url: 'ManejoEncargos.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: { eliminar_producto: true, Cod_Barra: Cod_Barra },
             dataType: 'json',
