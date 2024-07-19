@@ -1,6 +1,5 @@
 <?php
 include "Consultas.php";
-session_start();
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
