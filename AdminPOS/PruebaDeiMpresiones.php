@@ -9,7 +9,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Traspasos generados <?php echo $row['ID_H_O_D'] ?> </title>
+  <title>Prueba de impresiones <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php"?>
   <style>
