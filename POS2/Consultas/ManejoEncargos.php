@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include "Consultas.php";
 
 function buscarProducto($conn, $Cod_Barra) {
