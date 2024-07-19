@@ -1,6 +1,6 @@
 <?php
+session_start();
 include "Consultas.php";
-
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
@@ -72,17 +72,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo json_encode($response);
     exit;
-}
-
-function calcularTotalEncargo($encargo) {
-    $total = 0;
-    foreach ($encargo as $producto) {
-        $total += $producto['Total'];
-    }
-    return $total;
-}
-
-function calcularPagoMinimo($total) {
-    return $total * 0.5;
 }
 ?>

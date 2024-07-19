@@ -92,8 +92,8 @@ $(document).ready(function() {
                 </tr>`
             );
         });
-        $('#totalEncargo').text(total);
-        $('#pagoMinimo').text(total * 0.5);
+        $('#totalEncargo').text(total.toFixed(2));
+        $('#pagoMinimo').text((total * 0.5).toFixed(2));
     }
 
     $('#buscarProductoForm').submit(function(e) {
@@ -190,6 +190,7 @@ $(document).ready(function() {
         // Aquí puedes agregar la lógica para guardar el encargo en la base de datos
     });
 });
+
 
 </script>
 </body>
