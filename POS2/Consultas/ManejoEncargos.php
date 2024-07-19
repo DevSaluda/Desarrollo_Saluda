@@ -1,5 +1,6 @@
 <?php
 include "Consultas.php";
+session_start();
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
@@ -27,6 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Precio_Venta = $_POST['Precio_Venta'];
         $Cantidad = (int)$_POST['Cantidad'];
 
+        if (!isset($_SESSION['encargo'])) {
+            $_SESSION['encargo'] = [];
+        }
+
         $producto_existe = false;
         foreach ($_SESSION['encargo'] as &$producto) {
             if ($producto['Cod_Barra'] === $Cod_Barra) {
@@ -52,11 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST['eliminar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        foreach ($_SESSION['encargo'] as $index => $producto) {
-            if ($producto['Cod_Barra'] === $Cod_Barra) {
-                unset($_SESSION['encargo'][$index]);
-                $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
-                break;
+        if (isset($_SESSION['encargo'])) {
+            foreach ($_SESSION['encargo'] as $index => $producto) {
+                if ($producto['Cod_Barra'] === $Cod_Barra) {
+                    unset($_SESSION['encargo'][$index]);
+                    $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
+                    break;
+                }
             }
         }
 

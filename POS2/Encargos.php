@@ -75,28 +75,26 @@
 <script>
 $(document).ready(function() {
     function actualizarTablaEncargo(encargo) {
-    let total = 0;
-    $('#encargoTable tbody').empty();
-    encargo.forEach(function(producto) {
-        total += producto.Total;
-        $('#encargoTable tbody').append(
-            `<tr>
-                <td>${producto.Cod_Barra}</td>
-                <td>${producto.Nombre_Prod}</td>
-                <td>${producto.Precio_Venta}</td>
-                <td>${producto.Cantidad}</td>
-                <td>${producto.Total}</td>
-                <td>
-                    <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
-                </td>
-            </tr>`
-        );
-    });
-    $('#totalEncargo').text(total);
-    $('#pagoMinimo').text(total * 0.5);
-}
-
-
+        let total = 0;
+        $('#encargoTable tbody').empty();
+        encargo.forEach(function(producto) {
+            total += producto.Total;
+            $('#encargoTable tbody').append(
+                `<tr>
+                    <td>${producto.Cod_Barra}</td>
+                    <td>${producto.Nombre_Prod}</td>
+                    <td>${producto.Precio_Venta}</td>
+                    <td>${producto.Cantidad}</td>
+                    <td>${producto.Total}</td>
+                    <td>
+                        <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
+                    </td>
+                </tr>`
+            );
+        });
+        $('#totalEncargo').text(total);
+        $('#pagoMinimo').text(total * 0.5);
+    }
 
     $('#buscarProductoForm').submit(function(e) {
         e.preventDefault();
@@ -106,7 +104,6 @@ $(document).ready(function() {
             data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
             dataType: 'json',
             success: function(response) {
-                console.log(response); // Agregar para depuración
                 if (response.producto_encontrado) {
                     const producto = response.producto_encontrado;
                     $('#productoFormContainer').html(
@@ -165,7 +162,9 @@ $(document).ready(function() {
             data: $(this).serialize() + '&agregar_producto=true',
             dataType: 'json',
             success: function(response) {
-                actualizarTablaEncargo(response.encargo);
+                if (response.encargo) {
+                    actualizarTablaEncargo(response.encargo);
+                }
                 $('#productoFormContainer').empty();
             }
         });
@@ -179,7 +178,9 @@ $(document).ready(function() {
             data: { eliminar_producto: true, Cod_Barra: Cod_Barra },
             dataType: 'json',
             success: function(response) {
-                actualizarTablaEncargo(response.encargo);
+                if (response.encargo) {
+                    actualizarTablaEncargo(response.encargo);
+                }
             }
         });
     });
@@ -189,6 +190,7 @@ $(document).ready(function() {
         // Aquí puedes agregar la lógica para guardar el encargo en la base de datos
     });
 });
+
 </script>
 </body>
 </html>
