@@ -73,7 +73,8 @@
 </div>
 <?php include("footer.php");?>
 <script>
-function actualizarTablaEncargo(encargo) {
+$(document).ready(function() {
+    function actualizarTablaEncargo(encargo) {
     let total = 0;
     $('#encargoTable tbody').empty();
     encargo.forEach(function(producto) {
@@ -94,6 +95,8 @@ function actualizarTablaEncargo(encargo) {
     $('#totalEncargo').text(total);
     $('#pagoMinimo').text(total * 0.5);
 }
+
+
 
     $('#buscarProductoForm').submit(function(e) {
         e.preventDefault();
