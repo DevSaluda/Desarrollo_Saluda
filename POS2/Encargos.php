@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregar_producto'])) {
     $Cod_Barra = $_POST['Cod_Barra'];
     $Nombre_Prod = $_POST['Nombre_Prod'];
     $Precio_Venta = $_POST['Precio_Venta'];
-    $Cantidad = $_POST['Cantidad'];
+    $Cantidad = (int)$_POST['Cantidad'];
 
     $producto_existe = false;
     foreach ($_SESSION['encargo'] as &$producto) {
@@ -43,6 +43,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregar_producto'])) {
             'Total' => $Precio_Venta * $Cantidad
         ];
         $_SESSION['encargo'][] = $producto;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_producto'])) {
+    $Cod_Barra = $_POST['Cod_Barra'];
+    foreach ($_SESSION['encargo'] as $index => $producto) {
+        if ($producto['Cod_Barra'] === $Cod_Barra) {
+            unset($_SESSION['encargo'][$index]);
+            $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
+            break;
+        }
     }
 }
 
@@ -84,7 +95,6 @@ function calcularPagoMinimo($total) {
     return $total * 0.5;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -183,7 +193,7 @@ function calcularPagoMinimo($total) {
             <?php endif; ?>
 
             <h3>Productos en el Encargo</h3>
-            <table class="table table-bordered">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Código de Barra</th>
@@ -191,6 +201,7 @@ function calcularPagoMinimo($total) {
                         <th>Precio de Venta</th>
                         <th>Cantidad</th>
                         <th>Total</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -201,52 +212,38 @@ function calcularPagoMinimo($total) {
                             <td><?php echo $producto['Precio_Venta']; ?></td>
                             <td><?php echo $producto['Cantidad']; ?></td>
                             <td><?php echo $producto['Total']; ?></td>
+                            <td>
+                                <form method="post" action="" style="display:inline;">
+                                    <input type="hidden" name="Cod_Barra" value="<?php echo $producto['Cod_Barra']; ?>">
+                                    <button type="submit" name="eliminar_producto" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php
+
+            <?php 
             $total = calcularTotalEncargo($_SESSION['encargo']);
             $pago_minimo = calcularPagoMinimo($total);
             ?>
-            <div class="form-group highlight">
-                <label for="total_encargo">Total del Encargo:</label>
-                <span id="total_encargo"><?php echo $total; ?></span>
-            </div>
-            <div class="form-group highlight">
-                <label for="pago_minimo">Pago Mínimo:</label>
-                <span id="pago_minimo"><?php echo $pago_minimo; ?></span>
-            </div>
+            <p class="highlight">Total del Encargo: <?php echo $total; ?></p>
+            <p class="highlight">Pago Mínimo: <?php echo $pago_minimo; ?></p>
 
             <form method="post" action="">
-                <input type="hidden" name="Fk_sucursal" value="1"> <!-- hidden field -->
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" value="0" required>
-                </div>
-                <input type="hidden" name="AgregadoPor" value="admin"> <!-- hidden field -->
-                <input type="hidden" name="ID_H_O_D" value="1"> <!-- hidden field -->
-                <input type="hidden" name="Estado" value="Activo"> <!-- hidden field -->
-                <input type="hidden" name="TipoEncargo" value="Venta"> <!-- hidden field -->
+                <input type="hidden" name="Fk_sucursal" value="1">
+                <input type="hidden" name="MontoAbonado" value="<?php echo $pago_minimo; ?>">
+                <input type="hidden" name="AgregadoPor" value="UsuarioX">
+                <input type="hidden" name="ID_H_O_D" value="1">
+                <input type="hidden" name="Estado" value="Pendiente">
+                <input type="hidden" name="TipoEncargo" value="TipoX">
                 <button type="submit" name="guardar_encargo" class="btn btn-success">Guardar Encargo</button>
             </form>
         </div>
     </section>
 </div>
-<?php include ("footer.php")?>
-<!-- REQUIRED SCRIPTS -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
-<script>
-    // Limpia los campos del formulario al cerrar la página
-    window.addEventListener('beforeunload', function() {
-        if (<?php echo json_encode(isset($_POST['guardar_encargo'])); ?>) {
-            // Si se ha hecho un encargo, limpia los datos de la sesión
-            <?php $_SESSION['encargo'] = []; ?>
-        }
-    });
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
