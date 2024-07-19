@@ -37,20 +37,20 @@ include "Consultas/Consultas.php";
       class="btn btn-default">
       Busqueda por fechas <i class="fas fa-search"></i>
     </button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
+    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
       Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
     </button>
 
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroParaSucursalesVarias"
+    <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#FiltroParaSucursalesVarias"
       class="btn btn-default">
       Traspaso entre sucursales <i class="fas fa-clinic-medical"></i> <i class="fas fa-exchange-alt"></i> <i
         class="fas fa-clinic-medical"></i>
     </button>
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModificarTraspasoModal"
+    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModificarTraspasoModal"
       class="btn btn-default">
       Modificar traspaso <i class="fas fa-edit"></i>
     </button>
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#CancelarTraspasoModal"
+    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#CancelarTraspasoModal"
       class="btn btn-default">
       Cancelar Traspaso <i class="fas fa-ban"></i>
     </button>
