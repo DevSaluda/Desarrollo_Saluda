@@ -79,6 +79,13 @@ function calcularPagoMinimo($total) {
             color: red;
             margin-left: 5px; 
         }
+        .hidden-field {
+            display: none;
+        }
+        .highlight {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -114,23 +121,45 @@ function calcularPagoMinimo($total) {
                 </form>
                 <?php unset($_SESSION['producto_encontrado']); ?>
             <?php elseif (isset($_SESSION['producto_no_encontrado'])): ?>
-                <div class="alert alert-warning">Producto no encontrado. ¿Desea agregarlo de todos modos?</div>
-                <form method="post" action="">
-                    <input type="hidden" name="Cod_Barra" value="<?php echo $_SESSION['producto_no_encontrado']; ?>">
-                    <div class="form-group">
-                        <label for="Nombre_Prod">Nombre del Producto</label>
-                        <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" required>
+                <!-- Modal -->
+                <div class="modal fade" id="productoNoEncontradoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Producto no encontrado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Producto no encontrado. ¿Desea agregarlo de todos modos?
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="">
+                                    <input type="hidden" name="Cod_Barra" value="<?php echo $_SESSION['producto_no_encontrado']; ?>">
+                                    <div class="form-group">
+                                        <label for="Nombre_Prod">Nombre del Producto</label>
+                                        <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Precio_Venta">Precio de Venta</label>
+                                        <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Cantidad">Cantidad</label>
+                                        <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                                    </div>
+                                    <button type="submit" name="agregar_producto" class="btn btn-primary">Agregar Producto</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Precio_Venta">Precio de Venta</label>
-                        <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Cantidad">Cantidad</label>
-                        <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                    </div>
-                    <button type="submit" name="agregar_producto" class="btn btn-primary">Agregar Producto</button>
-                </form>
+                </div>
+                <script>
+                    $(document).ready(function() {
+                        $('#productoNoEncontradoModal').modal('show');
+                    });
+                </script>
                 <?php unset($_SESSION['producto_no_encontrado']); ?>
             <?php endif; ?>
 
@@ -161,84 +190,31 @@ function calcularPagoMinimo($total) {
             $total = calcularTotalEncargo($_SESSION['encargo']);
             $pago_minimo = calcularPagoMinimo($total);
             ?>
-            <div class="form-group">
-                <label>Total: </label>
-                <span><?php echo $total; ?></span>
+            <div class="form-group highlight">
+                <label for="total_encargo">Total del Encargo:</label>
+                <span id="total_encargo"><?php echo $total; ?></span>
             </div>
-            <div class="form-group">
-                <label>Pago Mínimo: </label>
-                <span><?php echo $pago_minimo; ?></span>
+            <div class="form-group highlight">
+                <label for="pago_minimo">Pago Mínimo:</label>
+                <span id="pago_minimo"><?php echo $pago_minimo; ?></span>
             </div>
 
-            <h3>Datos del Encargo</h3>
             <form method="post" action="">
-                <div class="form-group">
-                    <label for="Fk_sucursal">Sucursal</label>
-                    <input type="text" class="form-control" id="Fk_sucursal" name="Fk_sucursal" required>
-                </div>
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
-                <div class="form-group">
-                    <label for="AgregadoPor">Agregado Por</label>
-                    <input type="text" class="form-control" id="AgregadoPor" name="AgregadoPor" required>
-                </div>
-                <div class="form-group">
-                    <label for="ID_H_O_D">ID H O D</label>
-                    <input type="text" class="form-control" id="ID_H_O_D" name="ID_H_O_D" required>
-                </div>
-                <div class="form-group">
-                    <label for="Estado">Estado</label>
-                    <input type="text" class="form-control" id="Estado" name="Estado" required>
-                </div>
-                <div class="form-group">
-                    <label for="TipoEncargo">Tipo de Encargo</label>
-                    <input type="text" class="form-control" id="TipoEncargo" name="TipoEncargo" required>
-                </div>
+                <input type="hidden" name="Fk_sucursal" value="1"> <!-- hidden field -->
+                <input type="hidden" name="MontoAbonado" value="0"> <!-- hidden field -->
+                <input type="hidden" name="AgregadoPor" value="admin"> <!-- hidden field -->
+                <input type="hidden" name="ID_H_O_D" value="1"> <!-- hidden field -->
+                <input type="hidden" name="Estado" value="Activo"> <!-- hidden field -->
+                <input type="hidden" name="TipoEncargo" value="Venta"> <!-- hidden field -->
                 <button type="submit" name="guardar_encargo" class="btn btn-success">Guardar Encargo</button>
             </form>
         </div>
     </section>
 </div>
-
-<?php
-include("Modales/Error.php");
-include("Modales/Exito.php");
-include("Modales/ExitoActualiza.php");
-include("footer.php");
-?>
-
-<!-- ./wrapper -->
-
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
-<script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-<script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<?php include ("footer.php")?>
+<!-- REQUIRED SCRIPTS -->
+<script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="dist/js/adminlte.js"></script>
-<script src="dist/js/demo.js"></script>
-
+<script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
-
-<?php
-function fechaCastellano($fecha) {
-    $fecha = substr($fecha, 0, 10);
-    $numeroDia = date('d', strtotime($fecha));
-    $dia = date('l', strtotime($fecha));
-    $mes = date('F', strtotime($fecha));
-    $anio = date('Y', strtotime($fecha));
-    $dias_ES = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-    $dias_EN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-    $meses_ES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    $meses_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-    return "$nombredia $numeroDia de $nombreMes de $anio";
-}
-?>
-
