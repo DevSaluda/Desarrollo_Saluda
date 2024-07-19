@@ -1,5 +1,5 @@
 <?php
-include "Consultas/Consultas.php";
+include "Consultas.php";
 session_start();
 
 if (!isset($_SESSION['encargo'])) {
