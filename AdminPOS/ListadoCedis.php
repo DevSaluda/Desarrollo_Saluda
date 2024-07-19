@@ -37,8 +37,11 @@ include "Consultas/Consultas.php";
       class="btn btn-default">
       Busqueda por fechas <i class="fas fa-search"></i>
     </button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
+    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
       Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
+    </button>
+    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
+      Generar impresion  <i class="fas fa-exchange-alt"></i>
     </button>
   </div>
 </div>
