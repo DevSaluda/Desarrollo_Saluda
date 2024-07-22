@@ -55,25 +55,44 @@ include 'Consultas/Consultas.php'
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
-                <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                </div>
-                <button type="submit" class="btn btn-success">Guardar Encargo</button>
-            </form>
+    <div class="form-group">
+        <label for="MontoAbonado">Monto Abonado</label>
+        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+    </div>
+    <div class="form-group hidden-field">
+        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
+        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo"> <!-- Identificador único -->
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Encargo</button>
+</form>
+
         </div>
     </section>
 </div>
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
+    function generarIdentificadorEncargo() {
+        let identificador = 1;
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            async: false,
+            data: { obtener_ultimo_identificador: true },
+            dataType: 'json',
+            success: function(response) {
+                if (response.ultimo_identificador) {
+                    identificador = parseInt(response.ultimo_identificador) + 1;
+                }
+            }
+        });
+        return identificador;
+    }
+
     function actualizarTablaEncargo(encargo) {
         let total = 0;
         $('#encargoTable tbody').empty();
@@ -183,26 +202,29 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serialize() + '&guardar_encargo=true';
-        
+        const identificadorEncargo = generarIdentificadorEncargo();
+        $('#IdentificadorEncargo').val(identificadorEncargo);
+
+        const formData = $(this).serialize();
+
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: formData,
+            data: { guardar_encargo: true, formData: formData, productos: <?php echo json_encode($_SESSION['VentasPOS']['encargo']); ?> },
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    alert(response.success);
-                    $('#encargoTable tbody').empty();
-                    $('#totalEncargo').text('0');
-                    $('#pagoMinimo').text('0');
-                } else if (response.error) {
-                    alert(response.error);
+                    alert('Encargo guardado con éxito');
+                    // Limpiar la sesión de productos después de guardar
+                    <?php unset($_SESSION['VentasPOS']['encargo']); ?>
+                } else {
+                    alert('Error al guardar el encargo');
                 }
             }
         });
     });
 });
+</script>
 
 </script>
 </body>
