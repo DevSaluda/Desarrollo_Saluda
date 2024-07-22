@@ -37,26 +37,29 @@
    
   <div>     </div>
   </div> 
-  <div id="resultados">
-    <!-- Aquí se mostrarán los resultados de la consulta -->
-</div>
-
+  <div class="col">
+  <select id="facturas" class="form-control" name="Facturas">
+        <option value="">Seleccione una Factura:</option>
+    </select>
+</div></div>
 <script>
-    document.getElementById('sucursal').addEventListener('change', function() {
-        var sucursal = this.value;
-        if (sucursal) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('resultados').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send('sucursal=' + sucursal);
-        }
-    });
-</script>
+        document.getElementById('sucursal').addEventListener('change', function() {
+            var sucursal = this.value;
+            if (sucursal) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'obtener_facturas.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        document.getElementById('facturas').innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.send('sucursal=' + encodeURIComponent(sucursal));
+            } else {
+                document.getElementById('facturas').innerHTML = '<option value="">Seleccione una Factura:</option>';
+            }
+        });
+    </script>
             </div>
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
