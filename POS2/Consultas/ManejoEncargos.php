@@ -1,10 +1,35 @@
 <?php
-include "Consultas.php";
+include 'Consultas.php';
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($result);
+}
+
+function guardarEncargo($conn, $encargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
+    $response = [];
+
+    foreach ($encargo as $producto) {
+        $Cod_Barra = $producto['Cod_Barra'];
+        $Nombre_Prod = $producto['Nombre_Prod'];
+        $Precio_Venta = $producto['Precio_Venta'];
+        $Cantidad = $producto['Cantidad'];
+        $Total = $producto['Total'];
+
+        $query = "INSERT INTO Encargos_POS 
+            (Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) 
+            VALUES 
+            ('$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '0', '$Cantidad', NOW(), '0', '0', '0', '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo')";
+
+        if (!mysqli_query($conn, $query)) {
+            $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
+            return $response;
+        }
+    }
+
+    $response['success'] = "Encargo guardado exitosamente.";
+    return $response;
 }
 
 $response = [];
@@ -69,6 +94,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
+    }
+
+    if (isset($_POST['guardar_encargo'])) {
+        $montoAbonado = $_POST['MontoAbonado'];
+        $fkSucursal = $_POST['FkSucursal'];
+        $agregadoPor = $_POST['AgregadoPor'];
+        $idHOD = $_POST['ID_H_O_D'];
+        $estado = $_POST['Estado'];
+        $tipoEncargo = $_POST['TipoEncargo'];
+
+        if (isset($_SESSION['VentasPOS']['encargo'])) {
+            $response = guardarEncargo($conn, $_SESSION['VentasPOS']['encargo'], $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
+            unset($_SESSION['VentasPOS']['encargo']); // Limpiar el encargo después de guardar
+        } else {
+            $response['error'] = "No hay productos en el encargo.";
+        }
     }
 
     echo json_encode($response);

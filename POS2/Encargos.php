@@ -55,22 +55,21 @@ include 'Consultas/Consultas.php'
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-                <div class="form-group">
-                    <label for="Fk_sucursal">Sucursal</label>
-                    <input type="text" class="form-control" id="Fk_sucursal" name="Fk_sucursal" required>
-                </div>
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
-                <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $current_user; ?>">
-                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $current_id_hod; ?>">
-                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                </div>
-                <button type="submit" class="btn btn-success">Guardar Encargo</button>
-            </form>
+    <div class="form-group">
+        <label for="MontoAbonado">Monto Abonado</label>
+        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+    </div>
+    <div class="form-group hidden-field">
+        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
+        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo"> <!-- Identificador único -->
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Encargo</button>
+</form>
+
         </div>
     </section>
 </div>
@@ -141,7 +140,6 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         
-        // Crear un nuevo objeto producto cada vez que se agregue
         const producto = {
             Cod_Barra: $('#Cod_Barra').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
@@ -187,9 +185,24 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serialize();
-        // Aquí puedes agregar la lógica para guardar el encargo en la base de datos.
-        console.log('Guardar encargo:', formData);
+        const formData = $(this).serialize() + '&guardar_encargo=true';
+        
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alert(response.success);
+                    $('#encargoTable tbody').empty();
+                    $('#totalEncargo').text('0');
+                    $('#pagoMinimo').text('0');
+                } else if (response.error) {
+                    alert(response.error);
+                }
+            }
+        });
     });
 });
 
