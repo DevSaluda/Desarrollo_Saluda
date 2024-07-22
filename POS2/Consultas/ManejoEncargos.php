@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['agregar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
         $Nombre_Prod = $_POST['Nombre_Prod'];
-        $Precio_Venta = $_POST['Precio_Venta'];
+        $Precio_Venta = (float)$_POST['Precio_Venta'];
         $Cantidad = (int)$_POST['Cantidad'];
 
         if (!isset($_SESSION['VentasPOS']['encargo'])) {
@@ -42,14 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (!$producto_existe) {
-            $producto = [
+            // Crear un nuevo objeto producto
+            $nuevo_producto = [
                 'Cod_Barra' => $Cod_Barra,
                 'Nombre_Prod' => $Nombre_Prod,
                 'Precio_Venta' => $Precio_Venta,
                 'Cantidad' => $Cantidad,
                 'Total' => $Precio_Venta * $Cantidad
             ];
-            $_SESSION['VentasPOS']['encargo'][] = $producto;
+            $_SESSION['VentasPOS']['encargo'][] = $nuevo_producto;
         }
 
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
