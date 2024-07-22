@@ -150,6 +150,9 @@ $(document).ready(function() {
                         </form>`
                     );
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud:', status, error);
             }
         });
     });
@@ -162,10 +165,11 @@ $(document).ready(function() {
             data: $(this).serialize() + '&agregar_producto=true',
             dataType: 'json',
             success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                }
                 $('#productoFormContainer').empty();
+                actualizarTablaEncargo(response.encargo);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud:', status, error);
             }
         });
     });
@@ -178,20 +182,27 @@ $(document).ready(function() {
             data: { eliminar_producto: true, Cod_Barra: Cod_Barra },
             dataType: 'json',
             success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                }
+                actualizarTablaEncargo(response.encargo);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud:', status, error);
             }
         });
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        // Aquí puedes agregar la lógica para guardar el encargo en la base de datos
+        const total = parseFloat($('#totalEncargo').text());
+        const montoAbonado = parseFloat($('#MontoAbonado').val());
+
+        if (montoAbonado >= (total * 0.5)) {
+            // Aquí puedes agregar el código para guardar el encargo en la base de datos.
+            alert('Encargo guardado correctamente.');
+        } else {
+            alert('El monto abonado debe ser al menos el 50% del total del encargo.');
+        }
     });
 });
-
-
 </script>
 </body>
 </html>
