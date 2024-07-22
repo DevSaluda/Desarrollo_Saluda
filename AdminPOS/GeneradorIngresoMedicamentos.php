@@ -665,14 +665,6 @@ function calcularDiferencia(input) {
     var cantidadVendida = parseInt(fila.find('.cantidad-vendida-input').val());
     var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
 
-    // Verifica si cantidadVendida y existenciasBd son números válidos
-    if (isNaN(cantidadVendida)) {
-        cantidadVendida = 0;
-    }
-    if (isNaN(existenciasBd)) {
-        existenciasBd = 0;
-    }
-
     // Calcular la diferencia
     var diferencia = cantidadVendida - existenciasBd;
 
@@ -682,7 +674,6 @@ function calcularDiferencia(input) {
     // Llama a actualizarTotal para recalcular el total de la factura
     actualizarTotal();
 }
-
 
 
   var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
