@@ -1,6 +1,5 @@
 <?php
 include "Consultas.php";
-session_start(); // Asegúrate de iniciar la sesión
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
@@ -28,12 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Precio_Venta = $_POST['Precio_Venta'];
         $Cantidad = (int)$_POST['Cantidad'];
 
-        if (!isset($_SESSION['encargo'])) {
-            $_SESSION['encargo'] = [];
+        if (!isset($_SESSION['VentasPOS']['encargo'])) {
+            $_SESSION['VentasPOS']['encargo'] = [];
         }
 
         $producto_existe = false;
-        foreach ($_SESSION['encargo'] as &$producto) {
+        foreach ($_SESSION['VentasPOS']['encargo'] as &$producto) {
             if ($producto['Cod_Barra'] === $Cod_Barra) {
                 $producto['Cantidad'] += $Cantidad;
                 $producto['Total'] = $producto['Precio_Venta'] * $producto['Cantidad'];
@@ -50,25 +49,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'Cantidad' => $Cantidad,
                 'Total' => $Precio_Venta * $Cantidad
             ];
-            $_SESSION['encargo'][] = $producto;
+            $_SESSION['VentasPOS']['encargo'][] = $producto;
         }
 
-        $response['encargo'] = $_SESSION['encargo'];
+        $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
     if (isset($_POST['eliminar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        if (isset($_SESSION['encargo'])) {
-            foreach ($_SESSION['encargo'] as $index => $producto) {
+        if (isset($_SESSION['VentasPOS']['encargo'])) {
+            foreach ($_SESSION['VentasPOS']['encargo'] as $index => $producto) {
                 if ($producto['Cod_Barra'] === $Cod_Barra) {
-                    unset($_SESSION['encargo'][$index]);
-                    $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
+                    unset($_SESSION['VentasPOS']['encargo'][$index]);
+                    $_SESSION['VentasPOS']['encargo'] = array_values($_SESSION['VentasPOS']['encargo']); // Reindexar el array
                     break;
                 }
             }
         }
 
-        $response['encargo'] = $_SESSION['encargo'];
+        $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
     echo json_encode($response);
