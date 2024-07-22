@@ -5,7 +5,7 @@
 
       <div class="text-center">
         <div class="modal-header">
-          <p class="heading lead">Busqueda de inventarios por fechas<i class="fas fa-credit-card"></i></p>
+          <p class="heading lead">Generacion de archivo para impresion<i class="fas fa-credit-card"></i></p>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">&times;</span>
@@ -34,11 +34,29 @@
           }
         ?>  </select>
     </div>
-    
-    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
+   
   <div>     </div>
   </div> 
+  <div id="resultados">
+    <!-- Aquí se mostrarán los resultados de la consulta -->
+</div>
 
+<script>
+    document.getElementById('sucursal').addEventListener('change', function() {
+        var sucursal = this.value;
+        if (sucursal) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('resultados').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send('sucursal=' + sucursal);
+        }
+    });
+</script>
             </div>
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
