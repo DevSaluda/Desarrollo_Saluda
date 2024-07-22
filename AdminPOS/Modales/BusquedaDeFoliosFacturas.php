@@ -47,7 +47,7 @@
             var sucursal = this.value;
             if (sucursal) {
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'obtener_facturas.php', true);
+                xhr.open('POST', 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4 && xhr.status == 200) {
