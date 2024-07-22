@@ -1,5 +1,6 @@
 <?php
 
+
 include "Consultas.php";
 
 function buscarProducto($conn, $Cod_Barra) {
@@ -28,12 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Precio_Venta = $_POST['Precio_Venta'];
         $Cantidad = (int)$_POST['Cantidad'];
 
-        if (!isset($_SESSION['encargo'])) {
-            $_SESSION['encargo'] = [];
+        if (!isset($_SESSION['VentasPos'])) {
+            $_SESSION['VentasPos'] = [];
         }
 
         $producto_existe = false;
-        foreach ($_SESSION['encargo'] as &$producto) {
+        foreach ($_SESSION['VentasPos'] as &$producto) {
             if ($producto['Cod_Barra'] === $Cod_Barra) {
                 $producto['Cantidad'] += $Cantidad;
                 $producto['Total'] = $producto['Precio_Venta'] * $producto['Cantidad'];
@@ -49,25 +50,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'Cantidad' => $Cantidad,
                 'Total' => $Precio_Venta * $Cantidad
             ];
-            $_SESSION['encargo'][] = $producto;
+            $_SESSION['VentasPos'][] = $producto;
         }
 
-        $response['encargo'] = $_SESSION['encargo'];
+        $response['VentasPos'] = $_SESSION['VentasPos'];
     }
 
     if (isset($_POST['eliminar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        if (isset($_SESSION['encargo'])) {
-            foreach ($_SESSION['encargo'] as $index => $producto) {
+        if (isset($_SESSION['VentasPos'])) {
+            foreach ($_SESSION['VentasPos'] as $index => $producto) {
                 if ($producto['Cod_Barra'] === $Cod_Barra) {
-                    unset($_SESSION['encargo'][$index]);
-                    $_SESSION['encargo'] = array_values($_SESSION['encargo']); // Reindexar el array
+                    unset($_SESSION['VentasPos'][$index]);
+                    $_SESSION['VentasPos'] = array_values($_SESSION['VentasPos']); // Reindexar el array
                     break;
                 }
             }
         }
 
-        $response['encargo'] = $_SESSION['encargo'];
+        $response['VentasPos'] = $_SESSION['VentasPos'];
     }
 
     echo json_encode($response);
