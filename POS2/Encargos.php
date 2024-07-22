@@ -1,3 +1,6 @@
+<?php
+include "Consultas/Consultas.php";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -137,11 +140,24 @@ $(document).ready(function() {
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        const formData = $(this).serialize() + '&agregar_producto=true';
+        // Crear un objeto producto antes de enviarlo
+        const producto = {
+            Cod_Barra: $('#Cod_Barra').val(),
+            Nombre_Prod: $('#Nombre_Prod').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta').val()),
+            Cantidad: parseInt($('#Cantidad').val()),
+            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
+        };
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: formData,
+            data: {
+                agregar_producto: true,
+                Cod_Barra: producto.Cod_Barra,
+                Nombre_Prod: producto.Nombre_Prod,
+                Precio_Venta: producto.Precio_Venta,
+                Cantidad: producto.Cantidad
+            },
             dataType: 'json',
             success: function(response) {
                 if (response.encargo) {
