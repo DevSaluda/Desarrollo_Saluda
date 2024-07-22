@@ -42,17 +42,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (!$producto_existe) {
-            $producto = [
+            // Crear un nuevo objeto producto
+            $nuevo_producto = [
                 'Cod_Barra' => $Cod_Barra,
                 'Nombre_Prod' => $Nombre_Prod,
                 'Precio_Venta' => $Precio_Venta,
                 'Cantidad' => $Cantidad,
                 'Total' => $Precio_Venta * $Cantidad
             ];
-            $_SESSION['VentasPOS']['encargo'][] = $producto;
+            $_SESSION['VentasPOS']['encargo'][] = $nuevo_producto;
         }
 
-        // Enviar la respuesta con el estado actualizado del encargo
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
@@ -68,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // Enviar la respuesta con el estado actualizado del encargo
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
