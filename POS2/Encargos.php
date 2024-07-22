@@ -1,6 +1,3 @@
-<?php
-include "Consultas/Consultas.php";
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -139,6 +136,9 @@ $(document).ready(function() {
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
+        e.preventDefault();
+        const form
+        $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const formData = $(this).serialize() + '&agregar_producto=true';
         $.ajax({
