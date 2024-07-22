@@ -76,23 +76,6 @@ include 'Consultas/Consultas.php'
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
-    function generarIdentificadorEncargo() {
-        let identificador = 1;
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            async: false,
-            data: { obtener_ultimo_identificador: true },
-            dataType: 'json',
-            success: function(response) {
-                if (response.ultimo_identificador) {
-                    identificador = parseInt(response.ultimo_identificador) + 1;
-                }
-            }
-        });
-        return identificador;
-    }
-
     function actualizarTablaEncargo(encargo) {
         let total = 0;
         $('#encargoTable tbody').empty();
@@ -202,29 +185,26 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const identificadorEncargo = generarIdentificadorEncargo();
-        $('#IdentificadorEncargo').val(identificadorEncargo);
-
-        const formData = $(this).serialize();
-
+        const formData = $(this).serialize() + '&guardar_encargo=true';
+        
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: { guardar_encargo: true, formData: formData, productos: <?php echo json_encode($_SESSION['VentasPOS']['encargo']); ?> },
+            data: formData,
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    alert('Encargo guardado con éxito');
-                    // Limpiar la sesión de productos después de guardar
-                    <?php unset($_SESSION['VentasPOS']['encargo']); ?>
-                } else {
-                    alert('Error al guardar el encargo');
+                    alert(response.success);
+                    $('#encargoTable tbody').empty();
+                    $('#totalEncargo').text('0');
+                    $('#pagoMinimo').text('0');
+                } else if (response.error) {
+                    alert(response.error);
                 }
             }
         });
     });
 });
-</script>
 
 </script>
 </body>
