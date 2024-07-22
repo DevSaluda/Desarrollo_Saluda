@@ -15,33 +15,37 @@
         <div class="modal-body">
 
           <form method="POST" action="https://saludapos.com/AdminPOS/Preresultadoparaimpresionescedis.php">
-
-
-
-
             <div class="row">
-            <div class="col">
-    <label for="exampleFormControlInput1">Sucursal a elegir </label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-  </div>
-  <select id = "sucursal" class = "form-control" name = "Sucursal" required >
-                                               <option value="">Seleccione una Sucursal:</option>
-        <?php 
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
-          while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
-          }
-        ?>  </select>
+            <!-- Columna para el select de sucursales -->
+            <div class="col-md-6 mb-3">
+                <label for="sucursal">Sucursal a elegir</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+                    </div>
+                    <select id="sucursal" class="form-control" name="Sucursal" required>
+                        <option value="">Seleccione una Sucursal:</option>
+                        <?php 
+                        // Asumiendo que $conn es tu conexión a la base de datos
+                        $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+                        while ($valores = mysqli_fetch_array($query)) {
+                            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+                        }
+                        ?>  
+                    </select>
+                </div>
+            </div>
+
+            <!-- Columna para el select de facturas -->
+            <div class="col-md-6 mb-3">
+                <label for="facturas">Factura</label>
+                <select id="facturas" class="form-control" name="Facturas">
+                    <option value="">Seleccione una Factura:</option>
+                </select>
+            </div>
+        </div>
     </div>
-   
-  <div>     </div>
-  </div> 
-  <div class="col">
-  <select id="facturas" class="form-control" name="Facturas">
-        <option value="">Seleccione una Factura:</option>
-    </select>
-</div></div>
+
 <script>
         document.getElementById('sucursal').addEventListener('change', function() {
             var sucursal = this.value;
