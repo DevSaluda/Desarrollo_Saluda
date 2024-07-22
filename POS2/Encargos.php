@@ -163,7 +163,6 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.encargo) {
-                    // Actualizar tabla con el nuevo encargo
                     actualizarTablaEncargo(response.encargo);
                     $('#productoFormContainer').empty();
                 }
@@ -193,6 +192,7 @@ $(document).ready(function() {
         console.log('Guardar encargo:', formData);
     });
 });
+
 </script>
 </body>
 </html>
