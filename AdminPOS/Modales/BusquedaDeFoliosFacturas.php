@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-xl" id="FiltroPorFechasInventarios" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-xl" id="FiltroDeFacturas" tabindex="-1" role="dialog"
   aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-primary">
     <div class="modal-content">
@@ -14,7 +14,7 @@
 
         <div class="modal-body">
 
-          <form method="POST" action="https://saludapos.com/AdminPOS/ResultadoDeInventariosPorFechas">
+          <form method="POST" action="https://saludapos.com/AdminPOS/Preresultadoparaimpresionescedis.php">
 
 
 
