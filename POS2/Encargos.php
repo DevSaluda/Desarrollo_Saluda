@@ -137,9 +137,6 @@ $(document).ready(function() {
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        const form
-        $(document).on('submit', '#agregarProductoForm', function(e) {
-        e.preventDefault();
         const formData = $(this).serialize() + '&agregar_producto=true';
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
