@@ -128,79 +128,50 @@ $(document).ready(function() {
                     $('#productoFormContainer').html(
                         `<div class="alert alert-danger" role="alert">
                             Producto no encontrado. ¿Desea agregarlo de todos modos?
-                        </div>
-                        <form id="agregarProductoForm">
-                            <div class="form-group">
-                                <label for="Cod_Barra">Código de Barra</label>
-                                <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra" value="${response.producto_no_encontrado}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Nombre_Prod">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Precio_Venta">Precio de Venta</label>
-                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </form>`
+                        </div>`
                     );
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error en la solicitud:', status, error);
             }
         });
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
+        const formData = $(this).serialize() + '&agregar_producto=true';
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: $(this).serialize() + '&agregar_producto=true',
+            data: formData,
             dataType: 'json',
             success: function(response) {
-                $('#productoFormContainer').empty();
-                actualizarTablaEncargo(response.encargo);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error en la solicitud:', status, error);
+                if (response.encargo) {
+                    actualizarTablaEncargo(response.encargo);
+                    $('#productoFormContainer').empty();
+                }
             }
         });
     });
 
     $(document).on('click', '.eliminar-producto', function() {
-        const Cod_Barra = $(this).data('cod-barra');
+        const codBarra = $(this).data('cod-barra');
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: { eliminar_producto: true, Cod_Barra: Cod_Barra },
+            data: { eliminar_producto: true, Cod_Barra: codBarra },
             dataType: 'json',
             success: function(response) {
-                actualizarTablaEncargo(response.encargo);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error en la solicitud:', status, error);
+                if (response.encargo) {
+                    actualizarTablaEncargo(response.encargo);
+                }
             }
         });
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const total = parseFloat($('#totalEncargo').text());
-        const montoAbonado = parseFloat($('#MontoAbonado').val());
-
-        if (montoAbonado >= (total * 0.5)) {
-            // Aquí puedes agregar el código para guardar el encargo en la base de datos.
-            alert('Encargo guardado correctamente.');
-        } else {
-            alert('El monto abonado debe ser al menos el 50% del total del encargo.');
-        }
+        const formData = $(this).serialize();
+        // Aquí puedes agregar la lógica para guardar el encargo en la base de datos.
+        console.log('Guardar encargo:', formData);
     });
 });
 </script>
