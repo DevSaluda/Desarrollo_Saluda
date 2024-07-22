@@ -20,28 +20,25 @@
 
 
             <div class="row">
-              <div class="col">
-                <label for="exampleFormControlInput1">Fecha inicio </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta"><i
-                        class="far fa-hospital"></i></span>
-                  </div>
-                  <input type="date" class="form-control " name="Fecha1">
-                </div>
-              </div>
+            <div class="col">
+    <label for="exampleFormControlInput1">Sucursal a elegir </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <select id = "sucursal" class = "form-control" name = "Sucursal" required >
+                                               <option value="">Seleccione una Sucursal:</option>
+        <?php 
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>
+    </div>
+    
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
+  <div>     </div>
+  </div> 
 
-              <div class="col">
-                <label for="exampleFormControlInput1">Fecha fin </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta"><i
-                        class="far fa-hospital"></i></span>
-                  </div>
-                  <input type="date" class="form-control " name="Fecha2">
-                </div>
-
-
-                <div> </div>
-              </div>
             </div>
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
