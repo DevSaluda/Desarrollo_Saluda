@@ -1,5 +1,5 @@
 <?php
-include 'Consultas/Consultas.php';
+include 'Consultas.php';
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
@@ -7,11 +7,8 @@ function buscarProducto($conn, $Cod_Barra) {
     return mysqli_fetch_assoc($result);
 }
 
-function obtenerUltimoIdentificadorEncargo($conn) {
-    $query = "SELECT MAX(IdentificadorEncargo) AS UltimoId FROM Encargos_POS";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['UltimoId'];
+function generarIdentificadorEncargo() {
+    return uniqid('encargo_', true); // Genera un identificador único basado en el tiempo actual
 }
 
 $response = [];
@@ -85,5 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response['success'] = true;
     }
 
+    if (isset($_POST['generar_identificador'])) {
+        $response['IdentificadorEncargo'] = generarIdentificadorEncargo();
+    }
+
     echo json_encode($response);
 }
+?>
