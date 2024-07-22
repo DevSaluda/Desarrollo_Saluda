@@ -1,5 +1,5 @@
 <?php
-include "Consultas.php";
+include 'Consultas/Consultas.php';
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
