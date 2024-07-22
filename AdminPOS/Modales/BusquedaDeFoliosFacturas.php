@@ -60,7 +60,7 @@
             }
         });
     </script>
-            </div>
+            
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
           </form>
