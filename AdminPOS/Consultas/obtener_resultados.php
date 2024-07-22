@@ -10,7 +10,7 @@ if (isset($_POST['sucursal'])) {
             FROM 
                 Traspasos_generados
             WHERE 
-                Fk_SucDestino = '$sucursal'
+                Fk_SucDestino = '$sucursal' AND ProveedorFijo='CEDIS'
             ORDER BY Factura DESC";
 
     $result = $conn->query($sql);
