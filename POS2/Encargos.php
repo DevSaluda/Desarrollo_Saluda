@@ -1,5 +1,5 @@
 <?php
-include "Consultas/Consultas.php";
+include 'Consultas/Consultas.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -140,7 +140,8 @@ $(document).ready(function() {
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        // Crear un objeto producto antes de enviarlo
+        
+        // Crear un nuevo objeto producto cada vez que se agregue
         const producto = {
             Cod_Barra: $('#Cod_Barra').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
@@ -148,6 +149,7 @@ $(document).ready(function() {
             Cantidad: parseInt($('#Cantidad').val()),
             Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
         };
+        
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
@@ -161,6 +163,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.encargo) {
+                    // Actualizar tabla con el nuevo encargo
                     actualizarTablaEncargo(response.encargo);
                     $('#productoFormContainer').empty();
                 }

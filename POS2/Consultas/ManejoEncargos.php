@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['agregar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
         $Nombre_Prod = $_POST['Nombre_Prod'];
-        $Precio_Venta = $_POST['Precio_Venta'];
+        $Precio_Venta = (float)$_POST['Precio_Venta'];
         $Cantidad = (int)$_POST['Cantidad'];
 
         if (!isset($_SESSION['VentasPOS']['encargo'])) {
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['VentasPOS']['encargo'][] = $producto;
         }
 
+        // Enviar la respuesta con el estado actualizado del encargo
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
@@ -67,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
+        // Enviar la respuesta con el estado actualizado del encargo
         $response['encargo'] = $_SESSION['VentasPOS']['encargo'];
     }
 
