@@ -55,21 +55,20 @@ include 'Consultas/Consultas.php'
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-    <div class="form-group">
-        <label for="MontoAbonado">Monto Abonado</label>
-        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-    </div>
-    <div class="form-group hidden-field">
-        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo"> <!-- Identificador único -->
-    </div>
-    <button type="submit" class="btn btn-success">Guardar Encargo</button>
-</form>
-
+                <div class="form-group">
+                    <label for="MontoAbonado">Monto Abonado</label>
+                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+                </div>
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo uniqid(); ?>"> <!-- Identificador único -->
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Encargo</button>
+            </form>
         </div>
     </section>
 </div>
@@ -205,7 +204,6 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
 </body>
 </html>
