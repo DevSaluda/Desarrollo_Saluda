@@ -1,5 +1,5 @@
 <?php
-include 'Consultas/Consultas.php';
+
 
 // Consulta para obtener el último IdentificadorEncargo
 $query = "SELECT MAX(IdentificadorEncargo) as last_id FROM Encargos_POS";
@@ -7,6 +7,7 @@ $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 $last_id = $row['last_id'] ?? 0;
 $new_id = $last_id + 1;
+include 'Consultas/Consultas.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
