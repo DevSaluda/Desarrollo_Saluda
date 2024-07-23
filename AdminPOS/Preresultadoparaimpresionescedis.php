@@ -266,7 +266,7 @@ $(document).ready(function() {
         padding: 0; /* Elimina rellenos */
     }
     @page {
-        size: portrait; /* Define la orientación vertical */
+        size: landscape; /* Define la orientación vertical */
         margin: 0; /* Elimina márgenes de la página */
     }
 }
