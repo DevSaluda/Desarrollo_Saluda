@@ -39,10 +39,6 @@ function guardarEncargo($conn, $encargo, $identificadorEncargo, $montoAbonado, $
     return $response;
 }
 
-session_start();
-
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
 if (isset($_POST['buscar_producto'])) {
     $Cod_Barra = $_POST['Cod_Barra'];
     $producto = buscarProducto($conn, $Cod_Barra);
