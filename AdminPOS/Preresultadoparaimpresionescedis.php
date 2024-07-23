@@ -306,7 +306,7 @@ $(document).ready(function() {
               <th>Nombre del producto</th>
               <th>Cantidad</th>
              
-              <th>Fecha de traspaso</th>
+              <th>Observaciones</th>
             </thead>
           </table>
         </div>

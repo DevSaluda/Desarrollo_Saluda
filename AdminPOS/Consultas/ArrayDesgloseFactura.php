@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
                 $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
                 $data[$c]["Cantidad_Prod"] = $fila["Cantidad_Enviada"];
-                $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];
+                $data[$c]["FechaEntrega"] = "";
 
                 // Asignar valores adicionales (solo en el primer registro)
                 if ($c === 0) {
