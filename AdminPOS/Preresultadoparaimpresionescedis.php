@@ -240,19 +240,27 @@ $(document).ready(function() {
 
 <style>
 @media print {
-            body * {
-                visibility: hidden;
-            }
-            #printArea, #printArea * {
-                visibility: visible;
-            }
-            #printArea {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-        }
-    </style>
+    body * {
+        visibility: hidden;
+    }
+    #printArea, #printArea * {
+        visibility: visible;
+    }
+    #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
+        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
+        margin: 0; /* Elimina márgenes */
+        padding: 0; /* Elimina rellenos */
+    }
+    @page {
+        size: auto; /* Ajusta el tamaño de la página automáticamente */
+        margin: 0; /* Elimina márgenes de la página */
+    }
+}
+</style>
   <button id="printButton">Imprimir</button>
     <div id="printArea">
     <div class="text-center">
