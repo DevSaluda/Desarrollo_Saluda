@@ -84,8 +84,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Envio"] =$fila["TraspasoGeneradoPor"];
     $data[$c]["Recibio"] =$fila["TraspasoRecibidoPor"];
     if ($data[$c]["ProveedorFijo"] == "Devolucion a cedis" && $fila["Estatus"] != "Entregado") {
-      $traspasoLink = "<a href='https://saludapos.com/CEDIS/TraspasoOKV2?traspasoid=" . base64_encode($fila["ID_Traspaso_Generado"]) . "' type='button' class='btn btn-success btn-sm'><i class='fas fa-check'></i></a>";
-      $data[$c]["Traspasocorrecto"] = [$traspasoLink];
+      $data[$c]["Traspasocorrecto"] = ["<a href=https://saludapos.com/AdminPOS/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
   } else {
       $data[$c]["Traspasocorrecto"] = [];
   }
