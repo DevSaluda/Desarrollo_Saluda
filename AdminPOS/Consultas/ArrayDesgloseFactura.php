@@ -34,7 +34,7 @@ Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_ge
     $data[$c]["Destino"] = $fila["Fk_Sucursal_Destino"];
     $data[$c]["Cantidad"] = $fila["Cantidad_Enviada"];
  
-    $data[$c]["FechaEntrega"] = fechaCastellano($fila["FechaEntrega"]);
+    $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];
    
             $c++;
         }
