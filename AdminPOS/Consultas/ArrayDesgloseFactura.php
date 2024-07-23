@@ -16,7 +16,7 @@ Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generad
 Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_generados.Total_traspaso,Traspasos_generados.TotalVenta,Traspasos_generados.Existencias_R,
  Traspasos_generados.Cantidad_Enviada,Traspasos_generados.Existencias_D_envio,Traspasos_generados.FechaEntrega,Traspasos_generados.Estatus,Traspasos_generados.ID_H_O_D,
  SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Traspasos_generados,SucursalesCorre WHERE Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC 
- AND Traspasos_generados.Estatus ='Generado' AND 
+  AND 
  Traspasos_generados.Num_Factura='$factura'";
 
         $result = mysqli_query($conn, $sql);
