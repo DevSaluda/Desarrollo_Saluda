@@ -1,12 +1,5 @@
 <?php
 include 'Consultas/Consultas.php';
-
-// Consulta para obtener el último IdentificadorEncargo
-$query = "SELECT MAX(IdentificadorEncargo) as last_id FROM Encargos_POS";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
-$last_id = $row['last_id'] ?? 0;
-$new_id = $last_id + 1;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -75,7 +68,7 @@ $new_id = $last_id + 1;
                     <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
                     <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
                     <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo $new_id; ?>"> <!-- Identificador único -->
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo uniqid("ENC_"); ?>"> <!-- Identificador único -->
                 </div>
                 <button type="submit" class="btn btn-success">Guardar Encargo</button>
             </form>
@@ -182,10 +175,15 @@ $(document).ready(function() {
             Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
             Precio_Compra: parseFloat($('#Precio_Compra').val()),
             Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
-            Cantidad: parseInt($('#Cantidad_Solicitud').val(), 10),
-            Cod_Barra: $('#Cod_Barra').val()
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
+            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
+            Precio_C: $('#Precio_Compra').val(),
+            FkPresentacion: null,
+            Proveedor1: null,
+            Proveedor2: null
         };
-        producto.Total = producto.Precio_Venta * producto.Cantidad;
+
         encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
@@ -194,16 +192,17 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
+            Cod_Barra: $('#Cod_Barra').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
             Precio_Venta: parseFloat($('#Precio_Venta').val()),
-            Precio_C: parseFloat($(this).find('input[name="Precio_C"]').val()),
-            Cantidad: parseInt($('#Cantidad').val(), 10),
-            FkPresentacion: $(this).find('input[name="FkPresentacion"]').val(),
-            Proveedor1: $(this).find('input[name="Proveedor1"]').val(),
-            Proveedor2: $(this).find('input[name="Proveedor2"]').val()
+            Cantidad: parseInt($('#Cantidad').val()),
+            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
+            Precio_C: $('input[name="Precio_C"]').val(),
+            FkPresentacion: $('input[name="FkPresentacion"]').val() || null,
+            Proveedor1: $('input[name="Proveedor1"]').val() || null,
+            Proveedor2: $('input[name="Proveedor2"]').val() || null
         };
-        producto.Total = producto.Precio_Venta * producto.Cantidad;
+
         encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
@@ -217,26 +216,25 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const encargoData = {
-            IdentificadorEncargo: $('#IdentificadorEncargo').val(),
-            MontoAbonado: parseFloat($('#MontoAbonado').val()),
-            FkSucursal: $('#FkSucursal').val(),
-            AgregadoPor: $('#AgregadoPor').val(),
-            ID_H_O_D: $('#ID_H_O_D').val(),
-            Estado: $('#Estado').val(),
-            TipoEncargo: $('#TipoEncargo').val(),
-            productos: encargo
-        };
+        const formData = $(this).serializeArray();
+        formData.push({ name: 'guardar_encargo', value: true });
+        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: { guardar_encargo: true, encargo: encargoData },
+            data: formData,
+            dataType: 'json',
             success: function(response) {
-                alert('Encargo guardado exitosamente');
-                location.reload();
-            },
-            error: function() {
-                alert('Error al guardar el encargo');
+                if (response.success) {
+                    alert(response.success);
+                    $('#encargoTable tbody').empty();
+                    $('#totalEncargo').text('0');
+                    $('#pagoMinimo').text('0');
+                    encargo = [];
+                } else if (response.error) {
+                    alert(response.error);
+                }
             }
         });
     });
