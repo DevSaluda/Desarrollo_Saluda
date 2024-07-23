@@ -44,38 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['producto_encontrado' => $producto]);
     }
 
-    if (isset($_POST['agregar_producto'])) {
-        if (!isset($_SESSION['encargo'])) {
-            $_SESSION['encargo'] = [];
-        }
-        $producto = [
-            'Cod_Barra' => $_POST['Cod_Barra'],
-            'Nombre_Prod' => $_POST['Nombre_Prod'],
-            'Precio_Venta' => $_POST['Precio_Venta'],
-            'Cantidad' => $_POST['Cantidad'],
-            'Total' => $_POST['Precio_Venta'] * $_POST['Cantidad'],
-            'Precio_C' => $_POST['Precio_C'],
-            'FkPresentacion' => $_POST['FkPresentacion'] ? $_POST['FkPresentacion'] : null,
-            'Proveedor1' => $_POST['Proveedor1'] ? $_POST['Proveedor1'] : null,
-            'Proveedor2' => $_POST['Proveedor2'] ? $_POST['Proveedor2'] : null
-        ];
-        $_SESSION['encargo'][] = $producto;
-        echo json_encode(['encargo' => $_SESSION['encargo']]);
-    }
-
-    if (isset($_POST['eliminar_producto'])) {
-        $Cod_Barra = $_POST['Cod_Barra'];
-        $_SESSION['encargo'] = array_filter($_SESSION['encargo'], function($producto) use ($Cod_Barra) {
-            return $producto['Cod_Barra'] !== $Cod_Barra;
-        });
-        echo json_encode(['encargo' => array_values($_SESSION['encargo'])]);
-    }
-
     if (isset($_POST['guardar_encargo'])) {
-        if (!isset($_SESSION['encargo']) || empty($_SESSION['encargo'])) {
+        $encargo = json_decode($_POST['encargo'], true);
+        if (empty($encargo)) {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
         }
+
         $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
         $montoAbonado = $_POST['MontoAbonado'];
         $fkSucursal = $_POST['FkSucursal'];
@@ -83,10 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoEncargo = $_POST['TipoEncargo'];
-        $response = guardarEncargo($conn, $_SESSION['encargo'], $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
-        if (isset($response['success'])) {
-            unset($_SESSION['encargo']);
-        }
+        
+        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
         echo json_encode($response);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-include 'Consultas/Consultas.php'
+include 'Consultas/Consultas.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,6 +20,9 @@ include 'Consultas/Consultas.php'
         .highlight {
             font-size: 1.2em;
             font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -75,7 +78,9 @@ include 'Consultas/Consultas.php'
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
-    function actualizarTablaEncargo(encargo) {
+    let encargo = [];
+
+    function actualizarTablaEncargo() {
         let total = 0;
         $('#encargoTable tbody').empty();
         encargo.forEach(function(producto) {
@@ -132,7 +137,7 @@ $(document).ready(function() {
                 } else {
                     $('#productoFormContainer').html(
                         `<div class="alert alert-danger" role="alert">
-                            Producto no encontrado. ¿Desea agregarlo de todos modos?
+                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
                         </div>`
                     );
                 }
@@ -140,9 +145,52 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('click', '#solicitarProducto', function() {
+        $('#productoFormContainer').html(
+            `<form id="solicitarProductoForm">
+                <div class="form-group">
+                    <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
+                </div>
+                <div class="form-group">
+                    <label for="Precio_Compra">Precio de Compra</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Compra" name="Precio_Compra" required>
+                </div>
+                <div class="form-group">
+                    <label for="Precio_Venta_Solicitud">Precio de Venta</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
+                </div>
+                <div class="form-group">
+                    <label for="Cantidad_Solicitud">Cantidad</label>
+                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
+            </form>`
+        );
+    });
+
+    $(document).on('submit', '#solicitarProductoForm', function(e) {
+        e.preventDefault();
+        const producto = {
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Compra: parseFloat($('#Precio_Compra').val()),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
+            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
+            Precio_C: $('#Precio_Compra').val(),
+            FkPresentacion: null,
+            Proveedor1: null,
+            Proveedor2: null
+        };
+
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
+
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        
         const producto = {
             Cod_Barra: $('#Cod_Barra').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
@@ -154,50 +202,24 @@ $(document).ready(function() {
             Proveedor1: $('input[name="Proveedor1"]').val() || null,
             Proveedor2: $('input[name="Proveedor2"]').val() || null
         };
-        
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: {
-                agregar_producto: true,
-                Cod_Barra: producto.Cod_Barra,
-                Nombre_Prod: producto.Nombre_Prod,
-                Precio_Venta: producto.Precio_Venta,
-                Cantidad: producto.Cantidad,
-                Precio_C: producto.Precio_C,
-                FkPresentacion: producto.FkPresentacion,
-                Proveedor1: producto.Proveedor1,
-                Proveedor2: producto.Proveedor2
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                    $('#productoFormContainer').empty();
-                }
-            }
-        });
+
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
     });
 
     $(document).on('click', '.eliminar-producto', function() {
         const codBarra = $(this).data('cod-barra');
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: { eliminar_producto: true, Cod_Barra: codBarra },
-            dataType: 'json',
-            success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                }
-            }
-        });
+        encargo = encargo.filter(producto => producto.Cod_Barra !== codBarra);
+        actualizarTablaEncargo();
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serialize() + '&guardar_encargo=true';
-        
+        const formData = $(this).serializeArray();
+        formData.push({ name: 'guardar_encargo', value: true });
+        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
@@ -209,6 +231,7 @@ $(document).ready(function() {
                     $('#encargoTable tbody').empty();
                     $('#totalEncargo').text('0');
                     $('#pagoMinimo').text('0');
+                    encargo = [];
                 } else if (response.error) {
                     alert(response.error);
                 }
