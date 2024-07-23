@@ -106,34 +106,39 @@ $(document).ready(function() {
             data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
             dataType: 'json',
             success: function(response) {
-                if (response.producto_encontrado) {
-                    const producto = response.producto_encontrado;
-                    $('#productoFormContainer').html(
-                        `<form id="agregarProductoForm">
-                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
-                            <div class="form-group">
-                                <label for="Nombre_Prod">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Precio_Venta">Precio de Venta</label>
-                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </form>`
-                    );
-                } else {
-                    $('#productoFormContainer').html(
-                        `<div class="alert alert-danger" role="alert">
-                            Producto no encontrado. ¿Desea agregarlo de todos modos?
-                        </div>`
-                    );
-                }
-            }
+    if (response.producto_encontrado) {
+        const producto = response.producto_encontrado;
+        $('#productoFormContainer').html(
+            `<form id="agregarProductoForm">
+                <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion}">
+                <input type="hidden" name="Proveedor1" value="${producto.Proveedor1}">
+                <input type="hidden" name="Proveedor2" value="${producto.Proveedor2}">
+                <div class="form-group">
+                    <label for="Nombre_Prod">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="Precio_Venta">Precio de Venta</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="Cantidad">Cantidad</label>
+                    <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>`
+        );
+    } else {
+        $('#productoFormContainer').html(
+            `<div class="alert alert-danger" role="alert">
+                Producto no encontrado. ¿Desea agregarlo de todos modos?
+            </div>`
+        );
+    }
+}
+
         });
     });
 
@@ -148,24 +153,42 @@ $(document).ready(function() {
             Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
         };
         
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: {
-                agregar_producto: true,
-                Cod_Barra: producto.Cod_Barra,
-                Nombre_Prod: producto.Nombre_Prod,
-                Precio_Venta: producto.Precio_Venta,
-                Cantidad: producto.Cantidad
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                    $('#productoFormContainer').empty();
-                }
-            }
-        });
+        const producto = {
+    Cod_Barra: $('#Cod_Barra').val(),
+    Nombre_Prod: $('#Nombre_Prod').val(),
+    Precio_Venta: parseFloat($('#Precio_Venta').val()),
+    Cantidad: parseInt($('#Cantidad').val()),
+    Precio_C: parseFloat($('input[name="Precio_C"]').val()),
+    FkPresentacion: $('input[name="FkPresentacion"]').val(),
+    Proveedor1: $('input[name="Proveedor1"]').val(),
+    Proveedor2: $('input[name="Proveedor2"]').val(),
+    Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
+};
+
+$.ajax({
+    url: 'Consultas/ManejoEncargos.php',
+    type: 'POST',
+    data: {
+        agregar_producto: true,
+        Cod_Barra: producto.Cod_Barra,
+        Nombre_Prod: producto.Nombre_Prod,
+        Precio_Venta: producto.Precio_Venta,
+        Cantidad: producto.Cantidad,
+        Precio_C: producto.Precio_C,
+        FkPresentacion: producto.FkPresentacion,
+        Proveedor1: producto.Proveedor1,
+        Proveedor2: producto.Proveedor2
+    },
+    dataType: 'json',
+    success: function(response) {
+        if (response.encargo) {
+            actualizarTablaEncargo(response.encargo);
+            $('#productoFormContainer').empty();
+        }
+    }
+});
+
+
     });
 
     $(document).on('click', '.eliminar-producto', function() {
@@ -184,26 +207,27 @@ $(document).ready(function() {
     });
 
     $('#guardarEncargoForm').submit(function(e) {
-        e.preventDefault();
-        const formData = $(this).serialize() + '&guardar_encargo=true';
-        
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    alert(response.success);
-                    $('#encargoTable tbody').empty();
-                    $('#totalEncargo').text('0');
-                    $('#pagoMinimo').text('0');
-                } else if (response.error) {
-                    alert(response.error);
-                }
+    e.preventDefault();
+    const formData = $(this).serialize() + '&guardar_encargo=true';
+    
+    $.ajax({
+        url: 'Consultas/ManejoEncargos.php',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                alert(response.success);
+                $('#encargoTable tbody').empty();
+                $('#totalEncargo').text('0');
+                $('#pagoMinimo').text('0');
+            } else if (response.error) {
+                alert(response.error);
             }
-        });
+        }
     });
+});
+
 });
 </script>
 </body>
