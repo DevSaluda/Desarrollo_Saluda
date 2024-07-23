@@ -225,7 +225,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         { "data": "Cantidad_Prod" },
         { "data": "Fk_sucursal" },
         { "data": "Destino" },
-        { "data": "Cantidad" },
+      
         { "data": "FechaEntrega" },
       ],
       "language": {
