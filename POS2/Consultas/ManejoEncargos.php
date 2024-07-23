@@ -7,7 +7,7 @@ function buscarProducto($conn, $Cod_Barra) {
     return mysqli_fetch_assoc($result);
 }
 
-function guardarEncargo($conn, $encargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
+function guardarEncargo($conn, $encargo,$IdentificadorEncargo ,$montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
     $response = [];
 
     foreach ($encargo as $producto) {
