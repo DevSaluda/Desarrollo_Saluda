@@ -246,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     </style>
-
+  <button id="printButton">Imprimir</button>
     <div id="printArea">
     <div class="text-center">
         <div class="table-responsive">
