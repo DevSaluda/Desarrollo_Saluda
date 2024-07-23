@@ -260,13 +260,13 @@ $(document).ready(function() {
       
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-              <th>Cod</th>
-              <th>Nombre</th>
-              <th>PC</th>
-              <th>PV</th>
-              <th>N° Ticket</th>
+              <th>Id del traspaso</th>
+              <th>Codigo de barras</th>
+              <th>Nombre del producto</th>
+              <th>Cantidad</th>
+              <th>Traspaso de </th>
               <th>Sucursal</th>
-              <th>Sucursal</th>
+              <th>Fecha de traspaso</th>
             </thead>
           </table>
         </div>
