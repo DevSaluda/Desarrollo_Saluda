@@ -200,9 +200,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $(document).ready(function() {
     tabla = $('#Productos').DataTable({
       "processing": true,
-      "ordering": true,
-      "stateSave": true,
-      "autoWidth": true,
+    "ordering": true,
+    "stateSave": true,
+    "autoWidth": true,
+    "order": [[ 0, "desc" ]],
+    "paging": false, // Desactiva la paginación
+    "info": false, // Oculta la información del número de registros
+    "lengthChange": false, // Oculta la opción de cambiar el número de registros mostrados
       "order": [[ 0, "desc" ]],
       "ajax": {
         "type": "POST",
