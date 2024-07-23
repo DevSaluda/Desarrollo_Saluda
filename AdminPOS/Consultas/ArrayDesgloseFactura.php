@@ -30,8 +30,7 @@ Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_ge
     $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-    $data[$c]["Fk_sucursal"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Destino"] = $fila["Fk_Sucursal_Destino"];
+
     $data[$c]["Cantidad_Prod"] = $fila["Cantidad_Enviada"];
  
     $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];

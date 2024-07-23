@@ -226,8 +226,7 @@ $(document).ready(function() {
       { "data": "Cod_Barra" },
       { "data": "Nombre_Prod" },
       { "data": "Cantidad_Prod" },
-      { "data": "Fk_sucursal" },
-      { "data": "Destino" },
+
       { "data": "FechaEntrega" }
     ],
     "language": {
@@ -272,8 +271,7 @@ $(document).ready(function() {
               <th>Codigo de barras</th>
               <th>Nombre del producto</th>
               <th>Cantidad</th>
-              <th>Traspaso de </th>
-              <th>Sucursal</th>
+             
               <th>Fecha de traspaso</th>
             </thead>
           </table>
