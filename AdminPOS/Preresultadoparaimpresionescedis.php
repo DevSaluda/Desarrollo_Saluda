@@ -263,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <th>PV</th>
               <th>N° Ticket</th>
               <th>Sucursal</th>
-              
+              <th>Sucursal</th>
             </thead>
           </table>
         </div>
