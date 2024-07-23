@@ -238,22 +238,24 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: { guardar_encargo: true, encargo: encargoData },
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    alert('Encargo guardado con éxito.');
-                    encargo = [];
-                    actualizarTablaEncargo();
-                    generarIdentificadorUnico();
-                    $('#MontoAbonado').val('');
-                } else {
-                    alert('Error al guardar el encargo.');
-                }
-            }
-        });
+    url: 'Consultas/ManejoEncargos.php',
+    type: 'POST',
+    data: JSON.stringify({ guardar_encargo: true, encargo: encargoData }),
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(response) {
+        if (response.success) {
+            alert('Encargo guardado con éxito.');
+            encargo = [];
+            actualizarTablaEncargo();
+            generarIdentificadorUnico();
+            $('#MontoAbonado').val('');
+        } else {
+            alert('Error al guardar el encargo.');
+        }
+    }
+});
+
     });
 });
 </script>
