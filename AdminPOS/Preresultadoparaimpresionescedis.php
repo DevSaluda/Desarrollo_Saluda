@@ -256,7 +256,7 @@ $(document).ready(function() {
         padding: 0; /* Elimina rellenos */
     }
     @page {
-        size: auto; /* Ajusta el tamaño de la página automáticamente */
+        size: portrait; /* Define la orientación vertical */
         margin: 0; /* Elimina márgenes de la página */
     }
 }
