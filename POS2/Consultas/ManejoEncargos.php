@@ -1,6 +1,12 @@
 <?php
 include 'Consultas.php';
 
+function buscarProducto($conn, $Cod_Barra) {
+    $query = "SELECT * FROM Productos_POS WHERE Cod_Barra='$Cod_Barra'";
+    $result = mysqli_query($conn, $query);
+    return mysqli_fetch_assoc($result);
+}
+
 function guardarEncargo($conn, $encargo, $identificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
     $response = [];
     
