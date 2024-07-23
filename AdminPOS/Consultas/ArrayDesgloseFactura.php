@@ -6,18 +6,19 @@ include "Consultas.php";
 // Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si las variables están seteadas y no son nulas
-    if (isset($_POST['Factura']) ) {
+    if (isset($_POST['Factura'])) {
         // Obtén los valores del formulario
         $factura = $_POST['Factura'];
-      
+
         // Concatena los valores en la consulta SQL
-        $sql = "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.Fk_SucDestino,Traspasos_generados.Estatus,
-Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, 
-Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_generados.Total_traspaso,Traspasos_generados.TotalVenta,Traspasos_generados.Existencias_R,
- Traspasos_generados.Cantidad_Enviada,Traspasos_generados.Existencias_D_envio,Traspasos_generados.FechaEntrega,Traspasos_generados.Estatus,Traspasos_generados.ID_H_O_D,
- SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Traspasos_generados,SucursalesCorre WHERE Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-  AND 
- Traspasos_generados.Num_Factura='$factura'";
+        $sql = "SELECT Traspasos_generados.ID_Traspaso_Generado, Traspasos_generados.Folio_Prod_Stock, Traspasos_generados.Fk_SucDestino, Traspasos_generados.Estatus,
+                Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod, Traspasos_generados.Fk_sucursal, Traspasos_generados.Fk_Sucursal_Destino,
+                Traspasos_generados.Precio_Venta, Traspasos_generados.Precio_Compra, Traspasos_generados.Total_traspaso, Traspasos_generados.TotalVenta,
+                Traspasos_generados.Existencias_R, Traspasos_generados.Cantidad_Enviada, Traspasos_generados.Existencias_D_envio, Traspasos_generados.FechaEntrega,
+                Traspasos_generados.Estatus, Traspasos_generados.ID_H_O_D, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal
+                FROM Traspasos_generados, SucursalesCorre
+                WHERE Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC
+                AND Traspasos_generados.Num_Factura='$factura'";
 
         $result = mysqli_query($conn, $sql);
 
@@ -26,23 +27,28 @@ Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_ge
         $c = 0;
 
         while ($fila = $result->fetch_assoc()) {
-           
-    $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
-    $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-    $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-
-    $data[$c]["Cantidad_Prod"] = $fila["Cantidad_Enviada"];
- 
-    $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];
-   
+            $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
+            $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
+            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+            $data[$c]["Cantidad_Prod"] = $fila["Cantidad_Enviada"];
+            $data[$c]["FechaEntrega"] = $fila["FechaEntrega"];
             $c++;
         }
+
+        // Ejemplo de información adicional
+        $additionalInfo = [
+            "totalCantidad" => array_sum(array_column($data, "Cantidad_Prod")),
+            "factura" => $factura,
+            // Puedes agregar
+            // Puedes agregar más información aquí si es necesario
+        ];
 
         $results = [
             "sEcho" => 1,
             "iTotalRecords" => count($data),
             "iTotalDisplayRecords" => count($data),
-            "aaData" => $data
+            "aaData" => $data,
+            "additionalInfo" => $additionalInfo // Agrega la información adicional aquí
         ];
 
         echo json_encode($results);

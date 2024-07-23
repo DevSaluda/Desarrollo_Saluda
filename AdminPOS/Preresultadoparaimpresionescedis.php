@@ -198,42 +198,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   var tabla;
 $(document).ready(function() {
-  tabla = $('#Productos').DataTable({
-    "processing": true,
-    "ordering": false,
-    "stateSave": true,
-    "autoWidth": true,
-    "order": [[ 0, "desc" ]],
-    "paging": false, // Desactiva la paginación
-    "info": false, // Oculta la información del número de registros
-    "lengthChange": false, // Oculta la opción de cambiar el número de registros mostrados
-    "ajax": {
-      "type": "POST",
-      "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseFactura.php",
-      "data": function (d) {
-        var factura = '<?php echo $factura; ?>';
-        var dataToSend = {
-            "Factura": factura,
-        };
-        return dataToSend;
-      },
-      "error": function(xhr, error, code) {
-        console.log(xhr);
-      }
-    },
-    "columns": [
-      { "data": "IDTraspasoGenerado" },
-      { "data": "Cod_Barra" },
-      { "data": "Nombre_Prod" },
-      { "data": "Cantidad_Prod" },
+    tabla = $('#Productos').DataTable({
+        "processing": true,
+        "ordering": false, // Desactiva la capacidad de ordenar columnas
+        "stateSave": true,
+        "autoWidth": true,
+        "order": [[ 0, "desc" ]],
+        "paging": false, // Desactiva la paginación
+        "info": false, // Oculta la información del número de registros
+        "lengthChange": false, // Oculta la opción de cambiar el número de registros mostrados
+        "ajax": {
+            "type": "POST",
+            "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseFactura.php",
+            "data": function (d) {
+                var factura = '<?php echo $factura; ?>';
+                var dataToSend = {
+                    "Factura": factura,
+                };
+                return dataToSend;
+            },
+            "dataSrc": function (json) {
+                // Actualiza el contenido adicional en la parte superior
+                if (json.additionalInfo) {
+                    $('#totalCantidad').text('Total Cantidad: ' + json.additionalInfo.totalCantidad);
+                    $('#facturaNumber').text('Factura: ' + json.additionalInfo.factura);
+                }
 
-      { "data": "FechaEntrega" }
-    ],
-    "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-    },
-    "dom": 't' // Solo muestra la tabla, sin botones ni opciones adicionales
-  });
+                // Retorna los datos para la DataTable
+                return json.aaData;
+            },
+            "error": function(xhr, error, code) {
+                console.log(xhr);
+            }
+        },
+        "columns": [
+            { "data": "IDTraspasoGenerado" },
+            { "data": "Cod_Barra" },
+            { "data": "Nombre_Prod" },
+            { "data": "Cantidad_Prod" },
+            { "data": "FechaEntrega" }
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        },
+        "dom": 't' // Solo muestra la tabla, sin botones ni opciones adicionales
+    });
 });
 </script>
 
@@ -261,6 +270,10 @@ $(document).ready(function() {
 }
 </style>
   <button id="printButton">Imprimir</button>
+  <div id="additionalInfo">
+        <div id="totalCantidad"></div>
+        <div id="facturaNumber"></div>
+    </div>
     <div id="printArea">
     <div class="text-center">
         <div class="table-responsive">
