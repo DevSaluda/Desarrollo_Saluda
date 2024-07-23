@@ -41,9 +41,7 @@ include "Consultas/Consultas.php";
 // Verificar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Depurar el contenido de $_POST para verificar los datos recibidos
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+   
 
     // Verificar si las variables están seteadas y no son nulas
     if (isset($_POST['Factura'])) {
