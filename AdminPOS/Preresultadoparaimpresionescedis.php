@@ -250,7 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="printArea">
     <div class="text-center">
         <div class="table-responsive">
-        <button id="printButton">Imprimir</button>
+      
           <table id="Productos" class="hover" style="width:100%">
             <thead>
               <th>Cod</th>
