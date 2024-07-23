@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $(document).ready(function() {
   tabla = $('#Productos').DataTable({
     "processing": true,
-    "ordering": true,
+    "ordering": false,
     "stateSave": true,
     "autoWidth": true,
     "order": [[ 0, "desc" ]],
