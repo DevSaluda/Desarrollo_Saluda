@@ -270,11 +270,12 @@ $(document).ready(function() {
 }
 </style>
   <button id="printButton">Imprimir</button>
-  <div id="additionalInfo">
+ 
+    <div id="printArea">
+    <div id="additionalInfo">
         <div id="totalCantidad"></div>
         <div id="facturaNumber"></div>
     </div>
-    <div id="printArea">
     <div class="text-center">
         <div class="table-responsive">
       
