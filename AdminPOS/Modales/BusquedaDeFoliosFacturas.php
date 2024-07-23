@@ -39,7 +39,7 @@
             <!-- Columna para el select de facturas -->
             <div class="col-md-6 mb-3">
                 <label for="facturas">Factura</label>
-                <select id="facturas" class="form-control" name="Facturas">
+                <select id="facturas" class="form-control" name="Factura">
                     <option value="">Seleccione una Factura:</option>
                 </select>
             </div>
