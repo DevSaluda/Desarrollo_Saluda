@@ -218,10 +218,12 @@ $(document).ready(function() {
                 return dataToSend;
             },
             "dataSrc": function (json) {
-                // Actualiza el contenido adicional en la parte superior
+                // Actualiza la información adicional en los divs correspondientes
                 if (json.additionalInfo) {
-                    $('#totalCantidad').text('Total Cantidad: ' + json.additionalInfo.totalCantidad);
-                    $('#facturaNumber').text('Factura: ' + json.additionalInfo.factura);
+                    $('#providerInfo').text('Proveedor: ' + json.additionalInfo.provider);
+                    $('#destinationBranch').text('Sucursal Destino: ' + json.additionalInfo.destinationBranch);
+                    $('#invoiceNumber').text('Número de Factura: ' + json.additionalInfo.invoiceNumber);
+                    $('#transferDate').text('Fecha del Traspaso: ' + json.additionalInfo.transferDate);
                 }
 
                 // Retorna los datos para la DataTable
@@ -269,12 +271,30 @@ $(document).ready(function() {
     }
 }
 </style>
+
+<style>
+        /* CSS para alinear los divs horizontalmente */
+        #additionalInfo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
+        }
+        #additionalInfo div {
+            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+            margin-right: 10px; /* Espacio entre divs */
+        }
+        #additionalInfo div:last-child {
+            margin-right: 0; /* Quita el margen del último div */
+        }
+    </style>
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
     <div id="additionalInfo">
-        <div id="totalCantidad"></div>
-        <div id="facturaNumber"></div>
+        <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
+        <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
+        <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
+        <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
     </div>
     <div class="text-center">
         <div class="table-responsive">
