@@ -41,7 +41,7 @@ include "Consultas/Consultas.php";
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Verificar si las variables están seteadas y no son nulas
-          if (isset($_POST['Mes'])) {
+          if (isset($_POST['Factura'])) {
               // Obtener los valores del formulario
               $factura = $_POST['Factura'];
               
