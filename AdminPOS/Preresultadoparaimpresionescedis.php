@@ -197,9 +197,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   var tabla;
-  $(document).ready(function() {
-    tabla = $('#Productos').DataTable({
-      "processing": true,
+$(document).ready(function() {
+  tabla = $('#Productos').DataTable({
+    "processing": true,
     "ordering": true,
     "stateSave": true,
     "autoWidth": true,
@@ -207,36 +207,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     "paging": false, // Desactiva la paginación
     "info": false, // Oculta la información del número de registros
     "lengthChange": false, // Oculta la opción de cambiar el número de registros mostrados
-      "order": [[ 0, "desc" ]],
-      "ajax": {
-        "type": "POST",
-        "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseFactura.php",
-        "data": function (d) {
-          var factura = '<?php echo $factura; ?>';
-          var dataToSend = {
-              "Factura": factura,
-          };
-          return dataToSend;
-        },
-        "error": function(xhr, error, code) {
-          console.log(xhr);
-        }
+    "ajax": {
+      "type": "POST",
+      "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseFactura.php",
+      "data": function (d) {
+        var factura = '<?php echo $factura; ?>';
+        var dataToSend = {
+            "Factura": factura,
+        };
+        return dataToSend;
       },
-      "columns": [
-        { "data": "IDTraspasoGenerado" },
-        { "data": "Cod_Barra" },
-        { "data": "Nombre_Prod" },
-        { "data": "Cantidad_Prod" },
-        { "data": "Fk_sucursal" },
-        { "data": "Destino" },
-      
-        { "data": "FechaEntrega" },
-      ],
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+      "error": function(xhr, error, code) {
+        console.log(xhr);
       }
-    });
+    },
+    "columns": [
+      { "data": "IDTraspasoGenerado" },
+      { "data": "Cod_Barra" },
+      { "data": "Nombre_Prod" },
+      { "data": "Cantidad_Prod" },
+      { "data": "Fk_sucursal" },
+      { "data": "Destino" },
+      { "data": "FechaEntrega" }
+    ],
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+    },
+    "dom": 't' // Solo muestra la tabla, sin botones ni opciones adicionales
   });
+});
 </script>
 
 <style>
