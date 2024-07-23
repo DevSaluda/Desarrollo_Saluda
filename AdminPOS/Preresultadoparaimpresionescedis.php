@@ -258,20 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <th>PV</th>
               <th>N° Ticket</th>
               <th>Sucursal</th>
-              <th>Turno</th>
-              <th>Cantidad</th>
-              <th>P.U</th>
-              <th>Importe</th> 
-              <th>Descuento</th>
-              <th>Forma de pago</th>
-              <th>Cliente</th>
-              <th>Folio Signo Vital</th>
-              <th>Servicio</th>
-              <th>Fecha</th>
-              <th>Hora</th>   
-              <th>Vendedor</th>
-              <th>Enfermero</th>
-              <th>Doctor</th>
+              
             </thead>
           </table>
         </div>
