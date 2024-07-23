@@ -68,7 +68,7 @@ include 'Consultas/Consultas.php';
                     <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
                     <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
                     <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo">
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo uniqid("ENC_"); ?>"> <!-- Identificador único -->
                 </div>
                 <button type="submit" class="btn btn-success">Guardar Encargo</button>
             </form>
@@ -79,6 +79,8 @@ include 'Consultas/Consultas.php';
 <script>
 $(document).ready(function() {
     let encargo = [];
+
+    
 
     function actualizarTablaEncargo() {
         let total = 0;
@@ -101,13 +103,6 @@ $(document).ready(function() {
         $('#totalEncargo').text(total.toFixed(2));
         $('#pagoMinimo').text((total * 0.5).toFixed(2));
     }
-
-    function generarIdentificadorUnico() {
-        const identificador = 'ENC_' + Math.random().toString(36).substr(2, 9);
-        $('#IdentificadorEncargo').val(identificador);
-    }
-
-    generarIdentificadorUnico();
 
     $('#buscarProductoForm').submit(function(e) {
         e.preventDefault();
@@ -171,39 +166,45 @@ $(document).ready(function() {
                     <label for="Cantidad_Solicitud">Cantidad</label>
                     <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
             </form>`
         );
-    });
-
-    $(document).on('submit', '#agregarProductoForm', function(e) {
-        e.preventDefault();
-        const producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-            Nombre_Prod: $(this).find('input[name="Nombre_Prod"]').val(),
-            Precio_Venta: parseFloat($(this).find('input[name="Precio_Venta"]').val()),
-            Precio_C: parseFloat($(this).find('input[name="Precio_C"]').val()),
-            Cantidad: parseInt($(this).find('input[name="Cantidad"]').val()),
-            Total: parseFloat($(this).find('input[name="Precio_Venta"]').val()) * parseInt($(this).find('input[name="Cantidad"]').val()),
-            FkPresentacion: $(this).find('input[name="FkPresentacion"]').val(),
-            Proveedor1: $(this).find('input[name="Proveedor1"]').val(),
-            Proveedor2: $(this).find('input[name="Proveedor2"]').val()
-        };
-        encargo.push(producto);
-        actualizarTablaEncargo();
-        $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
-            Cod_Barra: $('#Cod_Barra').val(),
-            Nombre_Prod: $(this).find('input[name="Nombre_Prod_Solicitud"]').val(),
-            Precio_Venta: parseFloat($(this).find('input[name="Precio_Venta_Solicitud"]').val()),
-            Precio_C: parseFloat($(this).find('input[name="Precio_Compra"]').val()),
-            Cantidad: parseInt($(this).find('input[name="Cantidad_Solicitud"]').val()),
-            Total: parseFloat($(this).find('input[name="Precio_Venta_Solicitud"]').val()) * parseInt($(this).find('input[name="Cantidad_Solicitud"]').val())
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Compra: parseFloat($('#Precio_Compra').val()),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
+            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
+            Precio_C: $('#Precio_Compra').val(),
+            FkPresentacion: null,
+            Proveedor1: null,
+            Proveedor2: null
         };
+
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
+
+    $(document).on('submit', '#agregarProductoForm', function(e) {
+        e.preventDefault();
+        const producto = {
+            Cod_Barra: $('#Cod_Barra').val(),
+            Nombre_Prod: $('#Nombre_Prod').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta').val()),
+            Cantidad: parseInt($('#Cantidad').val()),
+            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
+            Precio_C: $('input[name="Precio_C"]').val(),
+            FkPresentacion: $('input[name="FkPresentacion"]').val() || null,
+            Proveedor1: $('input[name="Proveedor1"]').val() || null,
+            Proveedor2: $('input[name="Proveedor2"]').val() || null
+        };
+
         encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
@@ -216,47 +217,31 @@ $(document).ready(function() {
     });
 
     $('#guardarEncargoForm').submit(function(e) {
-        e.preventDefault();
-        const MontoAbonado = parseFloat($('#MontoAbonado').val());
-        const totalEncargo = parseFloat($('#totalEncargo').text());
-        const pagoMinimo = parseFloat($('#pagoMinimo').text());
+    e.preventDefault();
+    const formData = $(this).serializeArray();
+    formData.push({ name: 'guardar_encargo', value: true });
+    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
-        if (MontoAbonado < pagoMinimo) {
-            alert('El monto abonado es inferior al pago mínimo requerido.');
-            return;
+    $.ajax({
+        url: 'Consultas/ManejoEncargos.php',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                alert('Encargo guardado con éxito.');
+                // Recargar la página
+                location.reload();
+            } else if (response.error) {
+                alert('Error al guardar el encargo: ' + response.error);
+            }
+        },
+        error: function() {
+            alert('Error en la solicitud.');
         }
-
-        const encargoData = {
-            productos: encargo,
-            IdentificadorEncargo: $('#IdentificadorEncargo').val(),
-            MontoAbonado,
-            FkSucursal: $('#FkSucursal').val(),
-            AgregadoPor: $('#AgregadoPor').val(),
-            ID_H_O_D: $('#ID_H_O_D').val(),
-            Estado: $('#Estado').val(),
-            TipoEncargo: $('#TipoEncargo').val()
-        };
-
-        $.ajax({
-    url: 'Consultas/ManejoEncargos.php',
-    type: 'POST',
-    data: JSON.stringify({ guardar_encargo: true, encargo: encargoData }),
-    contentType: 'application/json',
-    dataType: 'json',
-    success: function(response) {
-        if (response.success) {
-            alert('Encargo guardado con éxito.');
-            encargo = [];
-            actualizarTablaEncargo();
-            generarIdentificadorUnico();
-            $('#MontoAbonado').val('');
-        } else {
-            alert('Error al guardar el encargo.');
-        }
-    }
+    });
 });
 
-    });
 });
 </script>
 </body>
