@@ -11,11 +11,11 @@ function guardarEncargo($conn, $encargo, $identificadorEncargo, $montoAbonado, $
     $response = [];
     
     foreach ($encargo as $producto) {
-        $query = "INSERT INTO Encargos_POS (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?, ?, ?)";
+        $query = "INSERT INTO Encargos_POS (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?, ?)";
         
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssiddddsssssdsd",
+            "sssiddidssssds",
             $identificadorEncargo,
             $producto['Cod_Barra'],
             $producto['Nombre_Prod'],
