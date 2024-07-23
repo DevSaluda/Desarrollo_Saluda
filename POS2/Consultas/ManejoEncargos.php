@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['agregar_producto'])) {
-        session_start();
         if (!isset($_SESSION['encargo'])) {
             $_SESSION['encargo'] = [];
         }
@@ -65,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['eliminar_producto'])) {
-        session_start();
         $Cod_Barra = $_POST['Cod_Barra'];
         $_SESSION['encargo'] = array_filter($_SESSION['encargo'], function($producto) use ($Cod_Barra) {
             return $producto['Cod_Barra'] !== $Cod_Barra;
@@ -74,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['guardar_encargo'])) {
-        session_start();
         if (!isset($_SESSION['encargo']) || empty($_SESSION['encargo'])) {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
