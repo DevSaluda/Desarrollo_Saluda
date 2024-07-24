@@ -251,19 +251,26 @@ $(document).ready(function() {
 <style>
 @media print {
     body * {
-        visibility: hidden;
+        visibility: hidden; /* Oculta todos los elementos en la impresión */
     }
     #printArea, #printArea * {
-        visibility: visible;
+        visibility: visible; /* Muestra solo el área de impresión */
+    }
+    #footer {
+        position: fixed; /* Fija el pie de página en la parte inferior de la página */
+        bottom: 0; /* Ubica el pie de página en la parte inferior */
+        width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
+        text-align: center; /* Centra el texto en el pie de página */
+        visibility: visible; /* Asegura que el pie de página sea visible */
     }
     #printArea {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
-        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
-        margin: 0; /* Elimina márgenes */
-        padding: 0; /* Elimina rellenos */
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
     @page {
         size: landscape; /* Define la orientación vertical */
@@ -271,7 +278,6 @@ $(document).ready(function() {
     }
 }
 </style>
-
 <style>
         /* CSS para alinear los divs horizontalmente */
         #additionalInfo {
