@@ -246,6 +246,22 @@ $(document).ready(function() {
         "dom": 't' // Solo muestra la tabla, sin botones ni opciones adicionales
     });
 });
+
+document.getElementById('printButton').addEventListener('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'pt', 'letter');
+
+      doc.html(document.getElementById('printArea'), {
+        callback: function (pdf) {
+          pdf.text('Page 1 of 1', 10, 10); // Ajustar según sea necesario
+          pdf.save('document.pdf');
+        }
+      });
+    });
+
+    tabla.on('preXhr.dt', mostrarCargando);
+    tabla.on('xhr.dt', ocultarCargando);
+
 </script>
 
 <style>
