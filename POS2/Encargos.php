@@ -93,7 +93,7 @@ $(document).ready(function() {
                     <td>${producto.Cantidad}</td>
                     <td>${producto.Total}</td>
                     <td>
-                        <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
+                        <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Nombre_Prod}">Eliminar</button>
                     </td>
                 </tr>
             `);
@@ -214,21 +214,10 @@ $(document).ready(function() {
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
-
+    
     $(document).on('click', '.eliminar-producto', function() {
-        const codBarra = $(this).data('cod-barra');
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: { eliminar_producto: true, Cod_Barra: codBarra },
-            dataType: 'json',
-            success: function(response) {
-                if (response.encargo) {
-                    actualizarTablaEncargo(response.encargo);
-                }
-            }
-        });
-        encargo = encargo.filter(producto => producto.Cod_Barra !== codBarra);
+        const nomProd = $(this).data('Nombre_Prod');
+        encargo = encargo.filter(producto => producto.Nombre_Prod !== nomProd);
         actualizarTablaEncargo();
     });
 
