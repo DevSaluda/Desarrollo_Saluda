@@ -261,7 +261,7 @@ $(document).ready(function() {
         bottom: 0;
         width: 100%;
         text-align: center;
-        font-size: 12px;
+        font-size: 24px;
         visibility: visible;
     }
     #printArea {
