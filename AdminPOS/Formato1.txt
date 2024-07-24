@@ -12,6 +12,8 @@ include "Consultas/Consultas.php";
   <title>Prueba de impresiones <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php"?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     .error {
       color: red;
@@ -50,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Realizar las operaciones que necesites con estas variables
         // Por ejemplo, imprimir su valor
-        echo "Factura seleccionada: $factura<br>";
+        
     } else {
         // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
         echo "Error: No se recibieron todas las variables necesarias.";
@@ -221,8 +223,8 @@ $(document).ready(function() {
                 // Actualiza la información adicional en los divs correspondientes
                 if (json.additionalInfo) {
                     $('#providerInfo').text('Proveedor: ' + json.additionalInfo.provider);
-                    $('#destinationBranch').text('Destino: ' + json.additionalInfo.destinationBranch);
-                    $('#invoiceNumber').text('Factura: ' + json.additionalInfo.invoiceNumber);
+                    $('#destinationBranch').text('Sucursal: ' + json.additionalInfo.destinationBranch);
+                    $('#invoiceNumber').text('# De Factura: ' + json.additionalInfo.invoiceNumber);
                     $('#transferDate').text('Fecha del Traspaso: ' + json.additionalInfo.transferDate);
                 }
 
@@ -246,6 +248,22 @@ $(document).ready(function() {
         "dom": 't' // Solo muestra la tabla, sin botones ni opciones adicionales
     });
 });
+
+document.getElementById('printButton').addEventListener('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'pt', 'letter');
+
+      doc.html(document.getElementById('printArea'), {
+        callback: function (pdf) {
+          pdf.text('Page 1 of 1', 10, 10); // Ajustar según sea necesario
+          pdf.save('document.pdf');
+        }
+      });
+    });
+
+    tabla.on('preXhr.dt', mostrarCargando);
+    tabla.on('xhr.dt', ocultarCargando);
+
 </script>
 
 <style>
@@ -260,40 +278,48 @@ $(document).ready(function() {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
-        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
-        margin: 0; /* Elimina márgenes */
-        padding: 0; /* Elimina rellenos */
+        width: 100%; /* Ensures the print area covers the full width */
+        height: 90%; /* Ensures the print area covers the full height */
+        margin: 0; /* Removes margins */
+        padding: 0; /* Removes padding */
     }
     @page {
-        size: landscape; /* Define la orientación vertical */
-       
+        size: letter; /* Sets the page size to letter (8.5 x 11 inches) */
+        margin: 0; /* Removes margins from the page */
+    }
+    .page-number::after {
+        content: counter(page) " of " counter(pages);
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        color: #000;
     }
 }
 </style>
 
 <style>
-        /* CSS para alinear los divs horizontalmente */
-        #additionalInfo {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px; /* Espacio entre la información y la tabla */
-        }
-        #additionalInfo div {
-            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-            margin-right: 10px; /* Espacio entre divs */
-        }
-        #additionalInfo div:last-child {
-            margin-right: 0; /* Quita el margen del último div */
-        }
-    </style>
+/* CSS for aligning the divs horizontally */
+#additionalInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Space between information and table */
+}
+#additionalInfo div {
+    flex: 1; /* Ensures all divs take up equal space */
+    margin-right: 10px; /* Space between divs */
+}
+#additionalInfo div:last-child {
+    margin-right: 0; /* Removes margin from the last div */
+}
+</style>
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
-        <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
-        <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
+        <div id="destinationBranch">Sucursal: </div> <!-- Sucursal destino -->
+        <div id="invoiceNumber"># Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
     </div>
     <div class="text-center">
