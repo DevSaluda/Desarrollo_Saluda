@@ -251,10 +251,18 @@ $(document).ready(function() {
 <style>
 @media print {
     body * {
-        visibility: hidden; /* Oculta todos los elementos en la impresión */
+        visibility: hidden;
     }
     #printArea, #printArea * {
-        visibility: visible; /* Muestra solo el área de impresión */
+        visibility: visible;
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        visibility: visible;
     }
     #printArea {
         position: absolute;
@@ -265,23 +273,9 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
-    #footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 12px;
-        visibility: visible;
-    }
-    @page {
-        size: landscape;
-        margin: 0;
-        @bottom-right {
-            content: "Página " counter(page) " de " counter(pages);
-        }
-    }
 }
 </style>
+
 
 <style>
         /* CSS para alinear los divs horizontalmente */
@@ -323,10 +317,35 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+    <div id="footer">
+    <p id="pageNumber"></p>
+</div>
   </div>
 
     </div>
-  
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Asegúrate de que el contenido esté completamente cargado antes de imprimir
+    window.onafterprint = function() {
+        // Resetear el pie de página después de imprimir
+        document.getElementById('footer').style.visibility = 'hidden';
+    };
+
+    window.onbeforeprint = function() {
+        // Mostrar el pie de página antes de imprimir
+        var footer = document.getElementById('footer');
+        footer.style.visibility = 'visible';
+        updatePageNumber();
+    };
+
+    function updatePageNumber() {
+        var footer = document.getElementById('footer');
+        var totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
+        var pageNumber = 1; // Solo se muestra la página actual; para manejo de múltiples páginas, esto es un desafío
+        footer.querySelector('#pageNumber').textContent = `Página ${pageNumber} de ${totalPages}`;
+    }
+});
+</script>
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
