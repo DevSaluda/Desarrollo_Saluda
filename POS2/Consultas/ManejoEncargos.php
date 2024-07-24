@@ -6,10 +6,13 @@ if (isset($_POST['buscar_producto'])) {
     $searchTerm = $_POST['searchTerm'];
 
     $query = "SELECT * FROM Productos_POS WHERE Cod_Barra LIKE ? OR Nombre_Prod LIKE ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute(["%$searchTerm%", "%$searchTerm%"]);
+    $stmt = mysqli_prepare($conn, $query);
+    $searchTermParam = "%$searchTerm%";
+    mysqli_stmt_bind_param($stmt, 'ss', $searchTermParam, $searchTermParam);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $productos = mysqli_fetch_all($result, MYSQLI_ASSOC);
     echo json_encode(['productos_encontrados' => $productos]);
     exit;
 }
