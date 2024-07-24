@@ -260,33 +260,41 @@ $(document).ready(function() {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
-        height: 90%; /* Asegura que el área de impresión ocupe el 100% del alto */
-        margin: 0; /* Elimina márgenes */
-        padding: 0; /* Elimina rellenos */
+        width: 100%; /* Ensures the print area covers the full width */
+        height: 90%; /* Ensures the print area covers the full height */
+        margin: 0; /* Removes margins */
+        padding: 0; /* Removes padding */
     }
     @page {
-        size: landscape; /* Define la orientación vertical */
-        margin: 0; /* Elimina márgenes de la página */
+        size: letter; /* Sets the page size to letter (8.5 x 11 inches) */
+        margin: 0; /* Removes margins from the page */
+    }
+    .page-number::after {
+        content: counter(page) " of " counter(pages);
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        color: #000;
     }
 }
 </style>
 
 <style>
-        /* CSS para alinear los divs horizontalmente */
-        #additionalInfo {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px; /* Espacio entre la información y la tabla */
-        }
-        #additionalInfo div {
-            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-            margin-right: 10px; /* Espacio entre divs */
-        }
-        #additionalInfo div:last-child {
-            margin-right: 0; /* Quita el margen del último div */
-        }
-    </style>
+/* CSS for aligning the divs horizontally */
+#additionalInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Space between information and table */
+}
+#additionalInfo div {
+    flex: 1; /* Ensures all divs take up equal space */
+    margin-right: 10px; /* Space between divs */
+}
+#additionalInfo div:last-child {
+    margin-right: 0; /* Removes margin from the last div */
+}
+</style>
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
