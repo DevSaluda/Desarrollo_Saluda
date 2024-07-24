@@ -5,7 +5,7 @@ include 'Consultas.php';
 if (isset($_POST['buscar_producto'])) {
     $searchTerm = $_POST['searchTerm'];
 
-    $query = "SELECT * FROM Productos_POS WHERE Cod_Barra LIKE ? OR Nombre_Prod LIKE ?";
+    $query = "SELECT DISTINCT * FROM Productos_POS WHERE Cod_Barra LIKE ? OR Nombre_Prod LIKE ?";
     $stmt = mysqli_prepare($conn, $query);
     $searchTermParam = "%$searchTerm%";
     mysqli_stmt_bind_param($stmt, 'ss', $searchTermParam, $searchTermParam);

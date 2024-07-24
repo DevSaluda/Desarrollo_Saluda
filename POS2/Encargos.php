@@ -1,6 +1,3 @@
-<?php
-include 'Consultas/Consultas.php';
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +21,13 @@ include 'Consultas/Consultas.php';
         .alert {
             margin-top: 10px;
         }
+        .dropdown-menu {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -34,13 +38,12 @@ include 'Consultas/Consultas.php';
         <div class="container-fluid">
             <h2>Crear Encargo</h2>
             <form id="buscarProductoForm">
-    <div class="form-group">
-        <label for="searchField">Buscar Producto</label>
-        <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
-    <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
-</form>
+                <div class="form-group">
+                    <label for="searchField">Buscar Producto</label>
+                    <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
+                </div>
+                <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
+            </form>
 
             <div id="productoFormContainer"></div>
             <h3>Productos en el encargo</h3>
@@ -104,43 +107,48 @@ $(document).ready(function() {
         $('#pagoMinimo').text((total * 0.5).toFixed(2));
     }
 
-    $('#buscarProductoForm').submit(function(e) {
-        e.preventDefault();
-        const searchTerm = $('#searchField').val();
+    $('#searchField').on('input', function() {
+        const searchTerm = $(this).val();
 
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: {
-                buscar_producto: true,
-                searchTerm: searchTerm
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.productos_encontrados.length > 0) {
-                    $('#resultadoBusqueda').empty().show();
-                    response.productos_encontrados.forEach(producto => {
-                        $('#resultadoBusqueda').append(`
-                            <a class="dropdown-item" href="#" data-producto='${JSON.stringify(producto)}'>
-                                ${producto.Nombre_Prod} (${producto.Cod_Barra})
-                            </a>
+        if (searchTerm.length > 2) {
+            $.ajax({
+                url: 'Consultas/ManejoEncargos.php',
+                type: 'POST',
+                data: {
+                    buscar_producto: true,
+                    searchTerm: searchTerm
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#resultadoBusqueda').empty();
+                    if (response.productos_encontrados.length > 0) {
+                        response.productos_encontrados.forEach(producto => {
+                            $('#resultadoBusqueda').append(`
+                                <a class="dropdown-item" href="#" data-producto='${JSON.stringify(producto)}'>
+                                    ${producto.Nombre_Prod} (${producto.Cod_Barra})
+                                </a>
+                            `);
+                        });
+                        $('#resultadoBusqueda').show();
+                    } else {
+                        $('#resultadoBusqueda').empty().hide();
+                        $('#productoFormContainer').html(`
+                            <div class="alert alert-danger" role="alert">
+                                Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+                            </div>
                         `);
-                    });
-                } else {
-                    $('#resultadoBusqueda').empty().hide();
-                    $('#productoFormContainer').html(`
-                        <div class="alert alert-danger" role="alert">
-                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
-                        </div>
-                    `);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            $('#resultadoBusqueda').empty().hide();
+        }
     });
 
     $(document).on('click', '.dropdown-item', function() {
         const producto = $(this).data('producto');
         $('#searchField').val(producto.Nombre_Prod);
+        $('#resultadoBusqueda').hide();
         $('#productoFormContainer').html(`
             <form id="agregarProductoForm">
                 <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
@@ -163,31 +171,6 @@ $(document).ready(function() {
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>
             </form>
         `);
-        $('#resultadoBusqueda').hide();
-    });
-
-
-
-
-
-    $(document).on('submit', '#solicitarProductoForm', function(e) {
-        e.preventDefault();
-        const producto = {
-            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
-            Precio_Compra: parseFloat($('#Precio_Compra').val()),
-            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
-            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
-            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
-            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
-            Precio_C: $('#Precio_Compra').val(),
-            FkPresentacion: null,
-            Proveedor1: null,
-            Proveedor2: null
-        };
-
-        encargo.push(producto);
-        actualizarTablaEncargo();
-        $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
@@ -215,10 +198,10 @@ $(document).ready(function() {
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
-    
+
     $(document).on('click', '.eliminar-producto', function() {
         const nomProd = $(this).data('nombre_prod');
-        encargo = encargo.find(producto => producto.Nombre_Prod !== nomProd);
+        encargo = encargo.filter(producto => producto.Nombre_Prod !== nomProd);
         actualizarTablaEncargo();
     });
 
