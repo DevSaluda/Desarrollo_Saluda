@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Realizar las operaciones que necesites con estas variables
         // Por ejemplo, imprimir su valor
-        echo "Factura seleccionada: $factura<br>";
+        
     } else {
         // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
         echo "Error: No se recibieron todas las variables necesarias.";
