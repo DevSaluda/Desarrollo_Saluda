@@ -14,7 +14,7 @@
 
         <div class="modal-body">
 
-          <form method="POST" action="https://saludapos.com/AdminPOS/Preresultadoparaimpresionescedis.php">
+          <form method="POST" action="https://saludapos.com/AdminPOS/Preresultadoparaimpresionescedis">
             <div class="row">
             <!-- Columna para el select de sucursales -->
             <div class="col-md-6 mb-3">
