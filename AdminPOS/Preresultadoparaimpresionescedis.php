@@ -316,10 +316,11 @@ $(document).ready(function() {
           </table>
         </div>
       </div>
-    </div>
-    <div id="footer">
+      <div id="footer">
     <p id="pageNumber"></p>
 </div>
+    </div>
+   
   </div>
 
     </div>
