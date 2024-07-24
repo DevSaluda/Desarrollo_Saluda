@@ -221,8 +221,8 @@ $(document).ready(function() {
                 // Actualiza la información adicional en los divs correspondientes
                 if (json.additionalInfo) {
                     $('#providerInfo').text('Proveedor: ' + json.additionalInfo.provider);
-                    $('#destinationBranch').text('Destino: ' + json.additionalInfo.destinationBranch);
-                    $('#invoiceNumber').text('Factura: ' + json.additionalInfo.invoiceNumber);
+                    $('#destinationBranch').text('Sucursal Destino: ' + json.additionalInfo.destinationBranch);
+                    $('#invoiceNumber').text('Número de Factura: ' + json.additionalInfo.invoiceNumber);
                     $('#transferDate').text('Fecha del Traspaso: ' + json.additionalInfo.transferDate);
                 }
 
@@ -257,28 +257,20 @@ $(document).ready(function() {
         visibility: visible;
     }
     #printArea {
-        position: relative;
-        width: auto; /* Ajusta el ancho al contenido */
-        height: auto; /* Ajusta la altura al contenido */
-        margin: 0;
-        padding: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
+        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
+        margin: 0; /* Elimina márgenes */
+        padding: 0; /* Elimina rellenos */
     }
     @page {
-        size: letter; /* Tamaño de página carta */
-        margin: 1in; /* Margen predeterminado */
-    }
-    .page-number {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        font-size: 12px;
-        color: #000;
-        padding: 0.5em;
+        size: landscape; /* Define la orientación vertical */
+        margin: 0; /* Elimina márgenes de la página */
     }
 }
 </style>
-
-
 
 <style>
         /* CSS para alinear los divs horizontalmente */
@@ -295,9 +287,6 @@ $(document).ready(function() {
             margin-right: 0; /* Quita el margen del último div */
         }
     </style>
-
-
-
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
