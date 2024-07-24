@@ -1,3 +1,6 @@
+<?php
+include 'Consultas/Consultas.php'
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,9 +27,18 @@
         .dropdown-menu {
             max-height: 200px;
             overflow-y: auto;
+            z-index: 1000;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .dropdown-item {
+            cursor: pointer;
         }
         .dropdown-item:hover {
             background-color: #f8f9fa;
+        }
+        #productoFormContainer {
+            margin-top: 10px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -172,7 +184,6 @@ $(document).ready(function() {
             </form>
         `);
     });
-
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
@@ -187,10 +198,11 @@ $(document).ready(function() {
             Proveedor2: $('input[name="Proveedor2"]').val()
         };
 
+        // Verificar si el producto ya existe en el encargo
         let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
         if (productoExistente) {
             productoExistente.Cantidad += producto.Cantidad;
-            productoExistente.Total += producto.Total;
+            productoExistente.Total = productoExistente.Precio_Venta * productoExistente.Cantidad;
         } else {
             encargo.push(producto);
         }
