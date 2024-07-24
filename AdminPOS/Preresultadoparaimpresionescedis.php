@@ -221,8 +221,8 @@ $(document).ready(function() {
                 // Actualiza la información adicional en los divs correspondientes
                 if (json.additionalInfo) {
                     $('#providerInfo').text('Proveedor: ' + json.additionalInfo.provider);
-                    $('#destinationBranch').text('Sucursal Destino: ' + json.additionalInfo.destinationBranch);
-                    $('#invoiceNumber').text('Número de Factura: ' + json.additionalInfo.invoiceNumber);
+                    $('#destinationBranch').text('Sucursal: ' + json.additionalInfo.destinationBranch);
+                    $('#invoiceNumber').text('Factura: ' + json.additionalInfo.invoiceNumber);
                     $('#transferDate').text('Fecha del Traspaso: ' + json.additionalInfo.transferDate);
                 }
 
@@ -251,42 +251,24 @@ $(document).ready(function() {
 <style>
 @media print {
     body * {
-        visibility: hidden; /* Oculta todos los elementos en la impresión */
+        visibility: hidden;
     }
     #printArea, #printArea * {
-        visibility: visible; /* Muestra solo el área de impresión */
-    }
-    #footer {
-        position: fixed; /* Fija el pie de página en la parte inferior */
-        bottom: 0; /* Ubica el pie de página en la parte inferior de la página */
-        left: 0;
-        width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
-        text-align: center;
-        font-size: 24px; /* Ajusta el tamaño del texto si es necesario */
-        visibility: visible; /* Asegura que el pie de página sea visible */
+        visibility: visible;
     }
     #printArea {
-        position: relative;
-        width: 100%;
-        margin: 0;
-        padding: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
+        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
+        margin: 0; /* Elimina márgenes */
+        padding: 0; /* Elimina rellenos */
     }
-}
-</style>
-
-<style>
-/* CSS para alinear los divs horizontalmente */
-#additionalInfo {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px; /* Espacio entre la información y la tabla */
-}
-#additionalInfo div {
-    flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-    margin-right: 10px; /* Espacio entre divs */
-}
-#additionalInfo div:last-child {
-    margin-right: 0; /* Quita el margen del último div */
+    @page {
+        size: landscape; /* Define la orientación vertical */
+        margin: 0; /* Elimina márgenes de la página */
+    }
 }
 </style>
 
@@ -329,53 +311,11 @@ $(document).ready(function() {
           </table>
         </div>
       </div>
-     
     </div>
-    <div id="footer">
-    <p id="pageNumber">Página </p>
-</div>
-
-<script>
-document.getElementById('printButton').addEventListener('click', function() {
-    window.print();
-});
-
-// Establecer números de página usando un script de impresión personalizado
-function updatePageNumber() {
-    var pageNumber = 1; // El manejo dinámico del número de página en múltiples páginas no es soportado por CSS puro
-    var totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
-    var footer = document.getElementById('footer');
-    footer.querySelector('#pageNumber').textContent = `Página ${pageNumber} de ${totalPages}`;
-}
-
-window.onbeforeprint = updatePageNumber;
-</script>
   </div>
 
     </div>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Asegúrate de que el contenido esté completamente cargado antes de imprimir
-    window.onafterprint = function() {
-        // Resetear el pie de página después de imprimir
-        document.getElementById('footer').style.visibility = 'hidden';
-    };
-
-    window.onbeforeprint = function() {
-        // Mostrar el pie de página antes de imprimir
-        var footer = document.getElementById('footer');
-        footer.style.visibility = 'visible';
-        updatePageNumber();
-    };
-
-    function updatePageNumber() {
-        var footer = document.getElementById('footer');
-        var totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
-        var pageNumber = 1; // Solo se muestra la página actual; para manejo de múltiples páginas, esto es un desafío
-        footer.querySelector('#pageNumber').textContent = `Página ${pageNumber} de ${totalPages}`;
-    }
-});
-</script>
+  
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
