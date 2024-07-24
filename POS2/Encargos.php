@@ -88,7 +88,7 @@ $(document).ready(function() {
         encargo.forEach(function(producto) {
             total += producto.Total;
             $('#encargoTable tbody').append(
-                `<tr>
+                <tr>
                     <td>${producto.Cod_Barra}</td>
                     <td>${producto.Nombre_Prod}</td>
                     <td>${producto.Precio_Venta}</td>
@@ -97,7 +97,7 @@ $(document).ready(function() {
                     <td>
                         <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
                     </td>
-                </tr>`
+                </tr>
             );
         });
         $('#totalEncargo').text(total.toFixed(2));
@@ -115,7 +115,7 @@ $(document).ready(function() {
                 if (response.producto_encontrado) {
                     const producto = response.producto_encontrado;
                     $('#productoFormContainer').html(
-                        `<form id="agregarProductoForm">
+                        <form id="agregarProductoForm">
                             <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
                             <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
                             <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
@@ -134,13 +134,13 @@ $(document).ready(function() {
                                 <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </form>`
+                        </form>
                     );
                 } else {
                     $('#productoFormContainer').html(
-                        `<div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger" role="alert">
                             Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
-                        </div>`
+                        </div>
                     );
                 }
             }
@@ -149,7 +149,7 @@ $(document).ready(function() {
 
     $(document).on('click', '#solicitarProducto', function() {
         $('#productoFormContainer').html(
-            `<form id="solicitarProductoForm">
+            <form id="solicitarProductoForm">
                 <div class="form-group">
                     <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
                     <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
@@ -167,7 +167,7 @@ $(document).ready(function() {
                     <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
-            </form>`
+            </form>
         );
     });
 
@@ -217,31 +217,30 @@ $(document).ready(function() {
     });
 
     $('#guardarEncargoForm').submit(function(e) {
-    e.preventDefault();
-    const formData = $(this).serializeArray();
-    formData.push({ name: 'guardar_encargo', value: true });
-    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+        e.preventDefault();
+        const formData = $(this).serializeArray();
+        formData.push({ name: 'guardar_encargo', value: true });
+        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
-    $.ajax({
-        url: 'Consultas/ManejoEncargos.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                alert('Encargo guardado con éxito.');
-                // Recargar la página
-                location.reload();
-            } else if (response.error) {
-                alert('Error al guardar el encargo: ' + response.error);
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alert(response.success);
+                    $('#encargoTable tbody').empty();
+                    $('#totalEncargo').text('0');
+                    $('#pagoMinimo').text('0');
+                    encargo = [];
+                    location.reload();
+                } else if (response.error) {
+                    alert(response.error);
+                }
             }
-        },
-        error: function() {
-            alert('Error en la solicitud.');
-        }
+        });
     });
-});
-
 });
 </script>
 </body>
