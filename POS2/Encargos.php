@@ -217,7 +217,7 @@ $(document).ready(function() {
     
     $(document).on('click', '.eliminar-producto', function() {
         const nomProd = $(this).data('nombre_prod');
-        encargo = encargo.filter(producto => producto.Nombre_Prod !== nomProd);
+        encargo = encargo.find(producto => producto.Nombre_Prod !== nomProd);
         actualizarTablaEncargo();
     });
 
