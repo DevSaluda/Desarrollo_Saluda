@@ -258,8 +258,8 @@ $(document).ready(function() {
     }
     #printArea {
         position: relative;
-        width: auto;
-        height: auto;
+        width: auto; /* Ajusta el ancho al contenido */
+        height: auto; /* Ajusta la altura al contenido */
         margin: 0;
         padding: 0;
     }
@@ -278,22 +278,24 @@ $(document).ready(function() {
 }
 </style>
 
-
 <style>
-        /* CSS para alinear los divs horizontalmente */
-        #additionalInfo {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px; /* Espacio entre la información y la tabla */
-        }
-        #additionalInfo div {
-            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-            margin-right: 10px; /* Espacio entre divs */
-        }
-        #additionalInfo div:last-child {
-            margin-right: 0; /* Quita el margen del último div */
-        }
-    </style>
+    /* CSS para alinear los divs horizontalmente */
+    #additionalInfo {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    }
+    #additionalInfo div {
+        flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+        margin-right: 10px; /* Espacio entre divs */
+    }
+    #additionalInfo div:last-child {
+        margin-right: 0; /* Quita el margen del último div */
+    }
+</style>
+
+
+
 
 <script type="text/javascript">
 document.getElementById('printButton').addEventListener('click', function() {
@@ -310,8 +312,8 @@ document.getElementById('printButton').addEventListener('click', function() {
             }
             pdf.save('document.pdf');
         },
-        x: 10,
-        y: 10,
+        x: 10,  // Ajusta el margen izquierdo
+        y: 10,  // Ajusta el margen superior
         html2canvas: { scale: 2 },
     });
 });
