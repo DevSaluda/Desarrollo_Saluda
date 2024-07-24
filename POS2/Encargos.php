@@ -34,12 +34,14 @@ include 'Consultas/Consultas.php';
         <div class="container-fluid">
             <h2>Crear Encargo</h2>
             <form id="buscarProductoForm">
-                <div class="form-group">
-                    <label for="Cod_Barra">Código de Barra</label>
-                    <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra" required>
-                    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
-                </div>
-            </form>
+    <div class="form-group">
+        <label for="searchField">Buscar Producto</label>
+        <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
+    <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
+</form>
+
             <div id="productoFormContainer"></div>
             <h3>Productos en el encargo</h3>
             <table class="table table-bordered" id="encargoTable">
@@ -68,7 +70,7 @@ include 'Consultas/Consultas.php';
                     <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
                     <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
                     <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo uniqid("ENC_"); ?>"> <!-- Identificador único -->
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid("ENC_")); ?>"> <!-- Identificador único -->
                 </div>
                 <button type="submit" class="btn btn-success">Guardar Encargo</button>
             </form>
@@ -104,37 +106,28 @@ $(document).ready(function() {
 
     $('#buscarProductoForm').submit(function(e) {
         e.preventDefault();
+        const searchTerm = $('#searchField').val();
+
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
+            data: {
+                buscar_producto: true,
+                searchTerm: searchTerm
+            },
             dataType: 'json',
             success: function(response) {
-                if (response.producto_encontrado) {
-                    const producto = response.producto_encontrado;
-                    $('#productoFormContainer').html(`
-                        <form id="agregarProductoForm">
-                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
-                            <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
-                            <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
-                            <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
-                            <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
-                            <div class="form-group">
-                                <label for="Nombre_Prod">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Precio_Venta">Precio de Venta</label>
-                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </form>
-                    `);
+                if (response.productos_encontrados.length > 0) {
+                    $('#resultadoBusqueda').empty().show();
+                    response.productos_encontrados.forEach(producto => {
+                        $('#resultadoBusqueda').append(`
+                            <a class="dropdown-item" href="#" data-producto='${JSON.stringify(producto)}'>
+                                ${producto.Nombre_Prod} (${producto.Cod_Barra})
+                            </a>
+                        `);
+                    });
                 } else {
+                    $('#resultadoBusqueda').empty().hide();
                     $('#productoFormContainer').html(`
                         <div class="alert alert-danger" role="alert">
                             Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
@@ -145,29 +138,37 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('click', '#solicitarProducto', function() {
+    $(document).on('click', '.dropdown-item', function() {
+        const producto = $(this).data('producto');
+        $('#searchField').val(producto.Nombre_Prod);
         $('#productoFormContainer').html(`
-            <form id="solicitarProductoForm">
+            <form id="agregarProductoForm">
+                <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
+                <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
+                <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
                 <div class="form-group">
-                    <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
+                    <label for="Nombre_Prod">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="Precio_Compra">Precio de Compra</label>
-                    <input type="number" step="0.01" class="form-control" id="Precio_Compra" name="Precio_Compra" required>
+                    <label for="Precio_Venta">Precio de Venta</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="Precio_Venta_Solicitud">Precio de Venta</label>
-                    <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
+                    <label for="Cantidad">Cantidad</label>
+                    <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
                 </div>
-                <div class="form-group">
-                    <label for="Cantidad_Solicitud">Cantidad</label>
-                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
             </form>
         `);
+        $('#resultadoBusqueda').hide();
     });
+
+
+
+
 
     $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
