@@ -93,7 +93,7 @@ $(document).ready(function() {
                     <td>${producto.Cantidad}</td>
                     <td>${producto.Total}</td>
                     <td>
-                        <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Nombre_Prod}">Eliminar</button>
+                        <button class="btn btn-danger eliminar-producto" data-nombre-prod="${producto.Nombre_Prod}">Eliminar</button>
                     </td>
                 </tr>
             `);
@@ -216,7 +216,7 @@ $(document).ready(function() {
     });
     
     $(document).on('click', '.eliminar-producto', function() {
-        const nomProd = $(this).data('Nombre_Prod');
+        const nomProd = $(this).data('nombre_prod');
         encargo = encargo.filter(producto => producto.Nombre_Prod !== nomProd);
         actualizarTablaEncargo();
     });
