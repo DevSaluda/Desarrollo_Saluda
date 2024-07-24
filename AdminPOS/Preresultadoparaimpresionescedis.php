@@ -256,13 +256,6 @@ $(document).ready(function() {
     #printArea, #printArea * {
         visibility: visible; /* Muestra solo el área de impresión */
     }
-    #footer {
-        position: fixed; /* Fija el pie de página en la parte inferior de la página */
-        bottom: 0; /* Ubica el pie de página en la parte inferior */
-        width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
-        text-align: center; /* Centra el texto en el pie de página */
-        visibility: visible; /* Asegura que el pie de página sea visible */
-    }
     #printArea {
         position: absolute;
         left: 0;
@@ -272,12 +265,24 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        visibility: visible;
+    }
     @page {
-        size: landscape; /* Define la orientación vertical */
-        margin: 0; /* Elimina márgenes de la página */
+        size: landscape;
+        margin: 0;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+        }
     }
 }
 </style>
+
 <style>
         /* CSS para alinear los divs horizontalmente */
         #additionalInfo {
