@@ -260,7 +260,7 @@ $(document).ready(function() {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
+        width: 90%; /* Asegura que el área de impresión ocupe el 100% del ancho */
         height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
         margin: 0; /* Elimina márgenes */
         padding: 0; /* Elimina rellenos */
