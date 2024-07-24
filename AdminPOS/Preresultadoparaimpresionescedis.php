@@ -250,7 +250,7 @@ $(document).ready(function() {
 
 <style>
 @media print {
-  body * {
+    body * {
         visibility: hidden;
     }
     #printArea, #printArea * {
@@ -258,14 +258,14 @@ $(document).ready(function() {
     }
     #printArea {
         position: relative;
-       
+        width: 100%;
+        height: auto;
         margin: 0;
         padding: 0;
     }
     @page {
-        size: landscape; /* Define la orientación vertical */
-        size: letter; /* Usa el tamaño de página carta (8.5 x 11 pulgadas) */
-        margin: 1in; /* Establece un margen de 1 pulgada alrededor */
+        size: letter; /* Tamaño de página carta */
+        margin: 1in; /* Margen predeterminado */
     }
     .page-number {
         position: fixed;
@@ -275,9 +275,9 @@ $(document).ready(function() {
         color: #000;
         padding: 0.5em;
     }
-
 }
 </style>
+
 
 <style>
         /* CSS para alinear los divs horizontalmente */
