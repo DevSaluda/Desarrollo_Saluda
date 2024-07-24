@@ -221,8 +221,8 @@ $(document).ready(function() {
                 // Actualiza la información adicional en los divs correspondientes
                 if (json.additionalInfo) {
                     $('#providerInfo').text('Proveedor: ' + json.additionalInfo.provider);
-                    $('#destinationBranch').text('Sucursal Destino: ' + json.additionalInfo.destinationBranch);
-                    $('#invoiceNumber').text('Número de Factura: ' + json.additionalInfo.invoiceNumber);
+                    $('#destinationBranch').text('Sucursal: ' + json.additionalInfo.destinationBranch);
+                    $('#invoiceNumber').text('# De Factura: ' + json.additionalInfo.invoiceNumber);
                     $('#transferDate').text('Fecha del Traspaso: ' + json.additionalInfo.transferDate);
                 }
 
