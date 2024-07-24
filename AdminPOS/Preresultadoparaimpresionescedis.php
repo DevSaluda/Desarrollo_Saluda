@@ -251,18 +251,20 @@ $(document).ready(function() {
 <style>
 @media print {
     body * {
-        visibility: hidden;
+        visibility: hidden; /* Oculta todos los elementos en la impresión */
     }
     #printArea, #printArea * {
-        visibility: visible;
+        visibility: visible; /* Muestra solo el área de impresión */
     }
     #footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+        position: fixed; /* Fija el pie de página en la parte inferior */
+        bottom: 0; /* Ubica el pie de página en la parte inferior de la página */
+        left: 0;
+        width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
         text-align: center;
-        font-size: 24px;
-        visibility: visible;
+        font-size: 24px; /* Ajusta el tamaño del texto si es necesario */
+        visibility: visible; /* Asegura que el pie de página sea visible */
+        page-break-before: auto; /* Asegura que el pie de página aparezca en cada página */
     }
     #printArea {
         position: absolute;
