@@ -34,14 +34,12 @@ include 'Consultas/Consultas.php';
         <div class="container-fluid">
             <h2>Crear Encargo</h2>
             <form id="buscarProductoForm">
-    <div class="form-group">
-        <label for="searchField">Buscar Producto</label>
-        <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
-    <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
-</form>
-
+                <div class="form-group">
+                    <label for="Cod_Barra">Código de Barra</label>
+                    <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra" required>
+                    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
+                </div>
+            </form>
             <div id="productoFormContainer"></div>
             <h3>Productos en el encargo</h3>
             <table class="table table-bordered" id="encargoTable">
