@@ -217,12 +217,20 @@ $(document).ready(function() {
 
     $(document).on('click', '.eliminar-producto', function() {
         const codBarra = $(this).data('cod-barra');
-        console.log("Eliminando producto con código de barra:", codBarra); // Log para depuración
-        encargo = encargo.filter(p => p.Cod_Barra !== codBarra);
-        console.log("Productos restantes después de eliminar:", encargo); // Log para depuración
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: { eliminar_producto: true, Cod_Barra: codBarra },
+            dataType: 'json',
+            success: function(response) {
+                if (response.encargo) {
+                    actualizarTablaEncargo(response.encargo);
+                }
+            }
+        });
+        encargo = encargo.filter(producto => producto.Cod_Barra !== codBarra);
         actualizarTablaEncargo();
     });
-
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
