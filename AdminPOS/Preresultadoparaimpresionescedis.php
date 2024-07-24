@@ -290,9 +290,24 @@ $(document).ready(function() {
 }
 </style>
 
-<button id="printButton">Imprimir</button>
-
-<div id="printArea">
+<style>
+        /* CSS para alinear los divs horizontalmente */
+        #additionalInfo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
+        }
+        #additionalInfo div {
+            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+            margin-right: 10px; /* Espacio entre divs */
+        }
+        #additionalInfo div:last-child {
+            margin-right: 0; /* Quita el margen del último div */
+        }
+    </style>
+  <button id="printButton">Imprimir</button>
+ 
+    <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
@@ -301,25 +316,22 @@ $(document).ready(function() {
     </div>
     <div class="text-center">
         <div class="table-responsive">
-            <table id="Productos" class="hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Id del traspaso</th>
-                        <th>Codigo de barras</th>
-                        <th>Nombre del producto</th>
-                        <th>Cantidad</th>
-                        <th>Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Datos aquí -->
-                </tbody>
-            </table>
+      
+          <table id="Productos" class="hover" style="width:100%">
+            <thead>
+              <th>Id del traspaso</th>
+              <th>Codigo de barras</th>
+              <th>Nombre del producto</th>
+              <th>Cantidad</th>
+             
+              <th>Observaciones</th>
+            </thead>
+          </table>
         </div>
+      </div>
+     
     </div>
-</div>
-
-<div id="footer">
+    <div id="footer">
     <p id="pageNumber">Página </p>
 </div>
 
@@ -338,7 +350,32 @@ function updatePageNumber() {
 
 window.onbeforeprint = updatePageNumber;
 </script>
+  </div>
 
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Asegúrate de que el contenido esté completamente cargado antes de imprimir
+    window.onafterprint = function() {
+        // Resetear el pie de página después de imprimir
+        document.getElementById('footer').style.visibility = 'hidden';
+    };
+
+    window.onbeforeprint = function() {
+        // Mostrar el pie de página antes de imprimir
+        var footer = document.getElementById('footer');
+        footer.style.visibility = 'visible';
+        updatePageNumber();
+    };
+
+    function updatePageNumber() {
+        var footer = document.getElementById('footer');
+        var totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
+        var pageNumber = 1; // Solo se muestra la página actual; para manejo de múltiples páginas, esto es un desafío
+        footer.querySelector('#pageNumber').textContent = `Página ${pageNumber} de ${totalPages}`;
+    }
+});
+</script>
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
