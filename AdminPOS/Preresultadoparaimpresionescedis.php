@@ -292,7 +292,7 @@ $(document).ready(function() {
     <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
-        <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
+        <div id="destinationBranch">Sucursal: </div> <!-- Sucursal destino -->
         <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
     </div>
