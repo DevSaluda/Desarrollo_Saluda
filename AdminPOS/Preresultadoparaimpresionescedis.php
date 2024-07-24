@@ -310,9 +310,7 @@ document.getElementById('printButton').addEventListener('click', function() {
             }
             pdf.save('document.pdf');
         },
-        x: 10,
-        y: 10,
-        html2canvas: { scale: 2 },
+        
     });
 });
 </script>
