@@ -295,25 +295,7 @@ $(document).ready(function() {
         }
     </style>
 
-<script type="text/javascript">
-document.getElementById('printButton').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'pt', 'letter');
 
-    doc.html(document.getElementById('printArea'), {
-        callback: function (pdf) {
-            // Añadir número de página al pie de página
-            const totalPages = pdf.internal.getNumberOfPages();
-            for (let i = 1; i <= totalPages; i++) {
-                pdf.setPage(i);
-                pdf.text(`Página ${i} de ${totalPages}`, 10, pdf.internal.pageSize.height - 10);
-            }
-            pdf.save('document.pdf');
-        },
-        
-    });
-});
-</script>
 
   <button id="printButton">Imprimir</button>
  
