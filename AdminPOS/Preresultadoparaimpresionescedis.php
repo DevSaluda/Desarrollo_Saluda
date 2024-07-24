@@ -278,46 +278,25 @@ $(document).ready(function() {
 }
 </style>
 
+
+
 <style>
-    /* CSS para alinear los divs horizontalmente */
-    #additionalInfo {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
-    }
-    #additionalInfo div {
-        flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-        margin-right: 10px; /* Espacio entre divs */
-    }
-    #additionalInfo div:last-child {
-        margin-right: 0; /* Quita el margen del último div */
-    }
-</style>
+        /* CSS para alinear los divs horizontalmente */
+        #additionalInfo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
+        }
+        #additionalInfo div {
+            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+            margin-right: 10px; /* Espacio entre divs */
+        }
+        #additionalInfo div:last-child {
+            margin-right: 0; /* Quita el margen del último div */
+        }
+    </style>
 
 
-
-
-<script type="text/javascript">
-document.getElementById('printButton').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'pt', 'letter');
-
-    doc.html(document.getElementById('printArea'), {
-        callback: function (pdf) {
-            // Añadir número de página al pie de página
-            const totalPages = pdf.internal.getNumberOfPages();
-            for (let i = 1; i <= totalPages; i++) {
-                pdf.setPage(i);
-                pdf.text(`Página ${i} de ${totalPages}`, 10, pdf.internal.pageSize.height - 10);
-            }
-            pdf.save('document.pdf');
-        },
-        x: 10,  // Ajusta el margen izquierdo
-        y: 10,  // Ajusta el margen superior
-        html2canvas: { scale: 2 },
-    });
-});
-</script>
 
   <button id="printButton">Imprimir</button>
  
