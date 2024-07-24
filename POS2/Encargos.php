@@ -80,14 +80,12 @@ include 'Consultas/Consultas.php';
 $(document).ready(function() {
     let encargo = [];
 
-    
-
     function actualizarTablaEncargo() {
         let total = 0;
         $('#encargoTable tbody').empty();
         encargo.forEach(function(producto) {
             total += producto.Total;
-            $('#encargoTable tbody').append(
+            $('#encargoTable tbody').append(`
                 <tr>
                     <td>${producto.Cod_Barra}</td>
                     <td>${producto.Nombre_Prod}</td>
@@ -98,7 +96,7 @@ $(document).ready(function() {
                         <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
                     </td>
                 </tr>
-            );
+            `);
         });
         $('#totalEncargo').text(total.toFixed(2));
         $('#pagoMinimo').text((total * 0.5).toFixed(2));
@@ -114,7 +112,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.producto_encontrado) {
                     const producto = response.producto_encontrado;
-                    $('#productoFormContainer').html(
+                    $('#productoFormContainer').html(`
                         <form id="agregarProductoForm">
                             <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
                             <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
@@ -135,20 +133,20 @@ $(document).ready(function() {
                             </div>
                             <button type="submit" class="btn btn-primary">Agregar Producto</button>
                         </form>
-                    );
+                    `);
                 } else {
-                    $('#productoFormContainer').html(
+                    $('#productoFormContainer').html(`
                         <div class="alert alert-danger" role="alert">
                             Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
                         </div>
-                    );
+                    `);
                 }
             }
         });
     });
 
     $(document).on('click', '#solicitarProducto', function() {
-        $('#productoFormContainer').html(
+        $('#productoFormContainer').html(`
             <form id="solicitarProductoForm">
                 <div class="form-group">
                     <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
@@ -168,7 +166,7 @@ $(document).ready(function() {
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
             </form>
-        );
+        `);
     });
 
     $(document).on('submit', '#solicitarProductoForm', function(e) {
@@ -194,50 +192,59 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
-            Cod_Barra: $('#Cod_Barra').val(),
+            Cod_Barra: $('input[name="Cod_Barra"]').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
             Precio_Venta: parseFloat($('#Precio_Venta').val()),
             Cantidad: parseInt($('#Cantidad').val()),
             Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
             Precio_C: $('input[name="Precio_C"]').val(),
-            FkPresentacion: $('input[name="FkPresentacion"]').val() || null,
-            Proveedor1: $('input[name="Proveedor1"]').val() || null,
-            Proveedor2: $('input[name="Proveedor2"]').val() || null
+            FkPresentacion: $('input[name="FkPresentacion"]').val(),
+            Proveedor1: $('input[name="Proveedor1"]').val(),
+            Proveedor2: $('input[name="Proveedor2"]').val()
         };
 
-        encargo.push(producto);
+        let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
+        if (productoExistente) {
+            productoExistente.Cantidad += producto.Cantidad;
+            productoExistente.Total += producto.Total;
+        } else {
+            encargo.push(producto);
+        }
+
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
 
     $(document).on('click', '.eliminar-producto', function() {
-        const codBarra = $(this).data('cod-barra');
-        encargo = encargo.filter(producto => producto.Cod_Barra !== codBarra);
+        const Cod_Barra = $(this).data('cod-barra');
+        encargo = encargo.filter(producto => producto.Cod_Barra !== Cod_Barra);
         actualizarTablaEncargo();
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serializeArray();
-        formData.push({ name: 'guardar_encargo', value: true });
-        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+        const IdentificadorEncargo = $('#IdentificadorEncargo').val();
+        encargo.forEach(function(producto) {
+            producto.IdentificadorEncargo = IdentificadorEncargo;
+        });
 
         $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
+            url: 'Consultas/GuardarEncargo.php',
             type: 'POST',
-            data: formData,
-            dataType: 'json',
+            data: {
+                encargo: encargo,
+                FkSucursal: $('#FkSucursal').val(),
+                AgregadoPor: $('#AgregadoPor').val(),
+                ID_H_O_D: $('#ID_H_O_D').val(),
+                Estado: $('#Estado').val(),
+                TipoEncargo: $('#TipoEncargo').val(),
+                MontoAbonado: $('#MontoAbonado').val()
+            },
             success: function(response) {
-                if (response.success) {
-                    alert(response.success);
-                    $('#encargoTable tbody').empty();
-                    $('#totalEncargo').text('0');
-                    $('#pagoMinimo').text('0');
-                    encargo = [];
-                    location.reload();
-                } else if (response.error) {
-                    alert(response.error);
-                }
+                alert('Encargo guardado correctamente.');
+                encargo = [];
+                actualizarTablaEncargo();
+                $('#guardarEncargoForm')[0].reset();
             }
         });
     });
