@@ -1,10 +1,10 @@
 <?php
 include 'Consultas.php';
 
-function buscarProducto($conn, $Cod_Barra) {
+function buscarProducto($conn, $Cod_Barra, $Nombre_Prod) {
     $query = "SELECT ID_Prod_POS, Cod_Barra, Clave_adicional, Cod_Enfermeria, Clave_Levic, Nombre_Prod, Precio_Venta, Precio_C, Min_Existencia, Max_Existencia, Porcentaje, Descuento, Precio_Promo, Lote_Med, Fecha_Caducidad, Stock, Vendido, Saldo, Tipo_Servicio, Componente_Activo, Tipo, FkCategoria, FkMarca, FkPresentacion, Proveedor1, Proveedor2, RecetaMedica, Estatus, CodigoEstatus, Sistema, AgregadoPor, AgregadoEl, ID_H_O_D, Cod_Paquete 
               FROM Productos_POS 
-              WHERE Cod_Barra='$Cod_Barra'";
+              WHERE Cod_Barra='$Cod_Barra' OR Nombre_Prod LIKE '%$Nombre_Prod%'";
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($result);
 }
@@ -40,7 +40,8 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['buscar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        $producto = buscarProducto($conn, $Cod_Barra);
+        $Nombre_Prod = $_POST['Nombre_Prod'];
+        $producto = buscarProducto($conn, $Cod_Barra, $Nombre_Prod);
         echo json_encode(['producto_encontrado' => $producto]);
     }
 
