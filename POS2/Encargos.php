@@ -35,7 +35,7 @@ include 'Consultas/Consultas.php';
             <h2>Crear Encargo</h2>
             <form id="buscarProductoForm">
                 <div class="form-group">
-                    <label for="Cod_Barra">Código de Barra</label>
+                    <label for="Cod_Barra">Código de Barra o Nombre del Producto</label>
                     <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra" required>
                     <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
                 </div>
@@ -57,18 +57,7 @@ include 'Consultas/Consultas.php';
             </table>
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
-            <form id="buscarProductoForm">
-    <div class="form-group">
-        <label for="Cod_Barra">Código de Barra</label>
-        <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra">
-    </div>
-    <div class="form-group">
-        <label for="Nombre_Prod">Nombre del Producto</label>
-        <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod">
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
-</form>
-
+            <form id="guardarEncargoForm">
                 <div class="form-group hidden-field">
                     <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
                     <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
@@ -117,8 +106,8 @@ $(document).ready(function() {
             data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
             dataType: 'json',
             success: function(response) {
-                if (response.producto_encontrado) {
-                    const producto = response.producto_encontrado;
+                if (response.productos.length === 1) {
+                    const producto = response.productos[0];
                     $('#productoFormContainer').html(`
                         <form id="agregarProductoForm">
                             <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
@@ -141,6 +130,28 @@ $(document).ready(function() {
                             <button type="submit" class="btn btn-primary">Agregar Producto</button>
                         </form>
                     `);
+                } else if (response.productos.length > 1) {
+                    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoMultipleForm">
+                            <div class="form-group">
+                                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                                    ${dropdownOptions}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta_Multiple">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad_Multiple">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                    $('#ProductoSeleccionado').change();
                 } else {
                     $('#productoFormContainer').html(`
                         <div class="alert alert-danger" role="alert">
@@ -150,6 +161,11 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    $(document).on('change', '#ProductoSeleccionado', function() {
+        let productoSeleccionado = JSON.parse($(this).val());
+        $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
     });
 
     $(document).on('click', '#solicitarProducto', function() {
@@ -167,89 +183,105 @@ $(document).ready(function() {
                     <label for="Precio_Venta_Solicitud">Precio de Venta</label>
                     <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
                 </div>
-                <div class="form-group">
-                    <label for="Cantidad_Solicitud">Cantidad</label>
-                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
+                <button type="submit" class="btn btn-primary">Solicitar Producto</button>
             </form>
         `);
     });
 
     $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
-        const producto = {
-            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
-            Precio_Compra: parseFloat($('#Precio_Compra').val()),
-            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
-            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
-            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
-            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
-            Precio_C: $('#Precio_Compra').val(),
-            FkPresentacion: null,
-            Proveedor1: null,
-            Proveedor2: null
-        };
+        let nombreProd = $('#Nombre_Prod_Solicitud').val();
+        let precioVenta = parseFloat($('#Precio_Venta_Solicitud').val());
+        let cantidad = parseInt($('#Cantidad_Solicitud').val());
 
-        encargo.push(producto);
+        let producto = encargo.find(p => p.Nombre_Prod === nombreProd);
+        if (producto) {
+            producto.Cantidad += cantidad;
+            producto.Total = producto.Cantidad * producto.Precio_Venta;
+        } else {
+            encargo.push({
+                Cod_Barra: "",
+                Nombre_Prod: nombreProd,
+                Precio_Venta: precioVenta,
+                Cantidad: cantidad,
+                Total: precioVenta * cantidad
+            });
+        }
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        const producto = {
-            Cod_Barra: $('input[name="Cod_Barra"]').val(),
-            Nombre_Prod: $('#Nombre_Prod').val(),
-            Precio_Venta: parseFloat($('#Precio_Venta').val()),
-            Cantidad: parseInt($('#Cantidad').val()),
-            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
-            Precio_C: $('input[name="Precio_C"]').val(),
-            FkPresentacion: $('input[name="FkPresentacion"]').val(),
-            Proveedor1: $('input[name="Proveedor1"]').val(),
-            Proveedor2: $('input[name="Proveedor2"]').val()
-        };
+        let codBarra = $('input[name="Cod_Barra"]').val();
+        let nombreProd = $('#Nombre_Prod').val();
+        let precioVenta = parseFloat($('#Precio_Venta').val());
+        let cantidad = parseInt($('#Cantidad').val());
 
-        let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
-        if (productoExistente) {
-            productoExistente.Cantidad += producto.Cantidad;
-            productoExistente.Total += producto.Total;
+        let producto = encargo.find(p => p.Cod_Barra === codBarra);
+        if (producto) {
+            producto.Cantidad += cantidad;
+            producto.Total = producto.Cantidad * producto.Precio_Venta;
         } else {
-            encargo.push(producto);
+            encargo.push({
+                Cod_Barra: codBarra,
+                Nombre_Prod: nombreProd,
+                Precio_Venta: precioVenta,
+                Cantidad: cantidad,
+                Total: precioVenta * cantidad
+            });
         }
-
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
-    
+
+    $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
+        let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        let codBarra = productoSeleccionado.Cod_Barra;
+        let nombreProd = productoSeleccionado.Nombre_Prod;
+        let precioVenta = parseFloat($('#Precio_Venta_Multiple').val());
+        let cantidad = parseInt($('#Cantidad_Multiple').val());
+
+        let producto = encargo.find(p => p.Cod_Barra === codBarra);
+        if (producto) {
+            producto.Cantidad += cantidad;
+            producto.Total = producto.Cantidad * producto.Precio_Venta;
+        } else {
+            encargo.push({
+                Cod_Barra: codBarra,
+                Nombre_Prod: nombreProd,
+                Precio_Venta: precioVenta,
+                Cantidad: cantidad,
+                Total: precioVenta * cantidad
+            });
+        }
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
+
     $(document).on('click', '.eliminar-producto', function() {
-        const nomProd = $(this).data('nombre_prod');
-        encargo = encargo.find(producto => producto.Nombre_Prod !== nomProd);
+        let nombreProd = $(this).data('nombre-prod');
+        encargo = encargo.filter(p => p.Nombre_Prod !== nombreProd);
         actualizarTablaEncargo();
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serializeArray();
-        formData.push({ name: 'guardar_encargo', value: true });
+        let formData = $(this).serializeArray();
         formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: formData,
-            dataType: 'json',
             success: function(response) {
-                if (response.success) {
-                    alert(response.success);
-                    $('#encargoTable tbody').empty();
-                    $('#totalEncargo').text('0');
-                    $('#pagoMinimo').text('0');
-                    encargo = [];
-                    location.reload();
-                } else if (response.error) {
-                    alert(response.error);
-                }
+                alert('Encargo guardado exitosamente');
+                encargo = [];
+                actualizarTablaEncargo();
+            },
+            error: function() {
+                alert('Error al guardar el encargo');
             }
         });
     });
