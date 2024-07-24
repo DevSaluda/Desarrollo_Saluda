@@ -216,35 +216,33 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.eliminar-producto', function() {
-        const Cod_Barra = $(this).data('cod-barra');
-        encargo = encargo.filter(producto => producto.Cod_Barra !== Cod_Barra);
+        const codBarra = $(this).data('cod-barra');
+        encargo = encargo.filter(producto => producto.Cod_Barra !== codBarra);
         actualizarTablaEncargo();
     });
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const IdentificadorEncargo = $('#IdentificadorEncargo').val();
-        encargo.forEach(function(producto) {
-            producto.IdentificadorEncargo = IdentificadorEncargo;
-        });
+        const formData = $(this).serializeArray();
+        formData.push({ name: 'guardar_encargo', value: true });
+        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
         $.ajax({
-            url: 'Consultas/GuardarEncargo.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: {
-                encargo: encargo,
-                FkSucursal: $('#FkSucursal').val(),
-                AgregadoPor: $('#AgregadoPor').val(),
-                ID_H_O_D: $('#ID_H_O_D').val(),
-                Estado: $('#Estado').val(),
-                TipoEncargo: $('#TipoEncargo').val(),
-                MontoAbonado: $('#MontoAbonado').val()
-            },
+            data: formData,
+            dataType: 'json',
             success: function(response) {
-                alert('Encargo guardado correctamente.');
-                encargo = [];
-                actualizarTablaEncargo();
-                $('#guardarEncargoForm')[0].reset();
+                if (response.success) {
+                    alert(response.success);
+                    $('#encargoTable tbody').empty();
+                    $('#totalEncargo').text('0');
+                    $('#pagoMinimo').text('0');
+                    encargo = [];
+                    location.reload();
+                } else if (response.error) {
+                    alert(response.error);
+                }
             }
         });
     });
