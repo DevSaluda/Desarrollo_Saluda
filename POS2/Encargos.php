@@ -1,5 +1,5 @@
 <?php
-include 'Consultas/Consultas.php'
+include 'Consultas/Consultas.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,22 +24,6 @@ include 'Consultas/Consultas.php'
         .alert {
             margin-top: 10px;
         }
-        .dropdown-menu {
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            border: 1px solid #ccc;
-            background-color: #fff;
-        }
-        .dropdown-item {
-            cursor: pointer;
-        }
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
-        }
-        #productoFormContainer {
-            margin-top: 10px;
-        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -50,12 +34,13 @@ include 'Consultas/Consultas.php'
         <div class="container-fluid">
             <h2>Crear Encargo</h2>
             <form id="buscarProductoForm">
-                <div class="form-group">
-                    <label for="searchField">Buscar Producto</label>
-                    <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
-                </div>
-                <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
-            </form>
+    <div class="form-group">
+        <label for="searchField">Buscar Producto</label>
+        <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Buscar por código de barras o nombre del producto">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
+    <div id="resultadoBusqueda" class="dropdown-menu" style="width: 100%;"></div>
+</form>
 
             <div id="productoFormContainer"></div>
             <h3>Productos en el encargo</h3>
@@ -119,71 +104,93 @@ $(document).ready(function() {
         $('#pagoMinimo').text((total * 0.5).toFixed(2));
     }
 
-    $('#searchField').on('input', function() {
-        const searchTerm = $(this).val();
-
-        if (searchTerm.length > 2) {
-            $.ajax({
-                url: 'Consultas/ManejoEncargos.php',
-                type: 'POST',
-                data: {
-                    buscar_producto: true,
-                    searchTerm: searchTerm
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('#resultadoBusqueda').empty();
-                    if (response.productos_encontrados.length > 0) {
-                        response.productos_encontrados.forEach(producto => {
-                            $('#resultadoBusqueda').append(`
-                                <a class="dropdown-item" href="#" data-producto='${JSON.stringify(producto)}'>
-                                    ${producto.Nombre_Prod} (${producto.Cod_Barra})
-                                </a>
-                            `);
-                        });
-                        $('#resultadoBusqueda').show();
-                    } else {
-                        $('#resultadoBusqueda').empty().hide();
-                        $('#productoFormContainer').html(`
-                            <div class="alert alert-danger" role="alert">
-                                Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+    $('#buscarProductoForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
+            dataType: 'json',
+            success: function(response) {
+                if (response.producto_encontrado) {
+                    const producto = response.producto_encontrado;
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoForm">
+                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                            <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                            <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
+                            <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
+                            <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
+                            <div class="form-group">
+                                <label for="Nombre_Prod">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
                             </div>
-                        `);
-                    }
+                            <div class="form-group">
+                                <label for="Precio_Venta">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                } else {
+                    $('#productoFormContainer').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+                        </div>
+                    `);
                 }
-            });
-        } else {
-            $('#resultadoBusqueda').empty().hide();
-        }
+            }
+        });
     });
 
-    $(document).on('click', '.dropdown-item', function() {
-        const producto = $(this).data('producto');
-        $('#searchField').val(producto.Nombre_Prod);
-        $('#resultadoBusqueda').hide();
+    $(document).on('click', '#solicitarProducto', function() {
         $('#productoFormContainer').html(`
-            <form id="agregarProductoForm">
-                <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
-                <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
-                <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
-                <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
-                <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
+            <form id="solicitarProductoForm">
                 <div class="form-group">
-                    <label for="Nombre_Prod">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+                    <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
                 </div>
                 <div class="form-group">
-                    <label for="Precio_Venta">Precio de Venta</label>
-                    <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                    <label for="Precio_Compra">Precio de Compra</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Compra" name="Precio_Compra" required>
                 </div>
                 <div class="form-group">
-                    <label for="Cantidad">Cantidad</label>
-                    <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                    <label for="Precio_Venta_Solicitud">Precio de Venta</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                <div class="form-group">
+                    <label for="Cantidad_Solicitud">Cantidad</label>
+                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto Solicitado</button>
             </form>
         `);
     });
+
+    $(document).on('submit', '#solicitarProductoForm', function(e) {
+        e.preventDefault();
+        const producto = {
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Compra: parseFloat($('#Precio_Compra').val()),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
+            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
+            Precio_C: $('#Precio_Compra').val(),
+            FkPresentacion: null,
+            Proveedor1: null,
+            Proveedor2: null
+        };
+
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
+
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
@@ -198,11 +205,10 @@ $(document).ready(function() {
             Proveedor2: $('input[name="Proveedor2"]').val()
         };
 
-        // Verificar si el producto ya existe en el encargo
         let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
         if (productoExistente) {
             productoExistente.Cantidad += producto.Cantidad;
-            productoExistente.Total = productoExistente.Precio_Venta * productoExistente.Cantidad;
+            productoExistente.Total += producto.Total;
         } else {
             encargo.push(producto);
         }
@@ -210,10 +216,10 @@ $(document).ready(function() {
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
-
+    
     $(document).on('click', '.eliminar-producto', function() {
         const nomProd = $(this).data('nombre_prod');
-        encargo = encargo.filter(producto => producto.Nombre_Prod !== nomProd);
+        encargo = encargo.find(producto => producto.Nombre_Prod !== nomProd);
         actualizarTablaEncargo();
     });
 
