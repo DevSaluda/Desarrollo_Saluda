@@ -330,10 +330,7 @@ $(document).ready(function() {
           </table>
         </div>
       </div>
-      <div id="footer">
-    <!-- Contenido del pie de página -->
-    <p>Pie de Página - Página <span class="pageNumber"></span></p>
-</div>
+   
     </div>
     
   </div>
