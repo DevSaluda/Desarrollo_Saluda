@@ -250,25 +250,33 @@ $(document).ready(function() {
 
 <style>
 @media print {
-    body * {
+  body * {
         visibility: hidden;
     }
     #printArea, #printArea * {
         visibility: visible;
     }
     #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
-        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
-        margin: 0; /* Elimina márgenes */
-        padding: 0; /* Elimina rellenos */
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
     }
     @page {
         size: landscape; /* Define la orientación vertical */
-       
+        size: letter; /* Usa el tamaño de página carta (8.5 x 11 pulgadas) */
+        margin: 1in; /* Establece un margen de 1 pulgada alrededor */
     }
+    .page-number {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        color: #000;
+        padding: 0.5em;
+    }
+
 }
 </style>
 
@@ -287,6 +295,29 @@ $(document).ready(function() {
             margin-right: 0; /* Quita el margen del último div */
         }
     </style>
+
+<script type="text/javascript">
+document.getElementById('printButton').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'pt', 'letter');
+
+    doc.html(document.getElementById('printArea'), {
+        callback: function (pdf) {
+            // Añadir número de página al pie de página
+            const totalPages = pdf.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                pdf.setPage(i);
+                pdf.text(`Página ${i} de ${totalPages}`, 10, pdf.internal.pageSize.height - 10);
+            }
+            pdf.save('document.pdf');
+        },
+        x: 10,
+        y: 10,
+        html2canvas: { scale: 2 },
+    });
+});
+</script>
+
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
