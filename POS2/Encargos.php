@@ -208,10 +208,11 @@ $(document).ready(function() {
 
     $(document).on('click', '.eliminar-producto', function() {
         const codBarra = $(this).data('cod-barra');
+        console.log("Eliminando producto con código de barra:", codBarra); // Log para depuración
         encargo = encargo.filter(p => p.Cod_Barra !== codBarra);
+        console.log("Productos restantes después de eliminar:", encargo); // Log para depuración
         actualizarTablaEncargo();
     });
-
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
@@ -240,5 +241,6 @@ $(document).ready(function() {
     });
 });
 </script>
+
 </body>
 </html>
