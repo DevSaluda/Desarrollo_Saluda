@@ -258,7 +258,7 @@ $(document).ready(function() {
     }
     #printArea {
         position: relative;
-        width: 100%;
+        width: auto;
         height: auto;
         margin: 0;
         padding: 0;
@@ -284,7 +284,7 @@ $(document).ready(function() {
         #additionalInfo {
             display: flex;
             justify-content: space-between;
-            
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
         }
         #additionalInfo div {
             flex: 1; /* Asegura que todos los divs ocupen espacio igual */
