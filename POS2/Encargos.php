@@ -57,11 +57,18 @@ include 'Consultas/Consultas.php';
             </table>
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
-            <form id="guardarEncargoForm">
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
+            <form id="buscarProductoForm">
+    <div class="form-group">
+        <label for="Cod_Barra">Código de Barra</label>
+        <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra">
+    </div>
+    <div class="form-group">
+        <label for="Nombre_Prod">Nombre del Producto</label>
+        <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
+</form>
+
                 <div class="form-group hidden-field">
                     <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
                     <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
@@ -103,47 +110,52 @@ $(document).ready(function() {
     }
 
     $('#buscarProductoForm').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
-            dataType: 'json',
-            success: function(response) {
-                if (response.producto_encontrado) {
-                    const producto = response.producto_encontrado;
-                    $('#productoFormContainer').html(`
-                        <form id="agregarProductoForm">
-                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
-                            <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
-                            <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
-                            <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
-                            <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
-                            <div class="form-group">
-                                <label for="Nombre_Prod">Nombre del Producto</label>
-                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Precio_Venta">Precio de Venta</label>
-                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </form>
-                    `);
-                } else {
-                    $('#productoFormContainer').html(`
-                        <div class="alert alert-danger" role="alert">
-                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+    e.preventDefault();
+    $.ajax({
+        url: 'Consultas/ManejoEncargos.php',
+        type: 'POST',
+        data: { 
+            buscar_producto: true, 
+            Cod_Barra: $('#Cod_Barra').val(), 
+            Nombre_Prod: $('#Nombre_Prod').val() 
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.producto_encontrado) {
+                const producto = response.producto_encontrado;
+                $('#productoFormContainer').html(`
+                    <form id="agregarProductoForm">
+                        <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                        <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                        <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
+                        <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
+                        <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
+                        <div class="form-group">
+                            <label for="Nombre_Prod">Nombre del Producto</label>
+                            <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
                         </div>
-                    `);
-                }
+                        <div class="form-group">
+                            <label for="Precio_Venta">Precio de Venta</label>
+                            <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="Cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                    </form>
+                `);
+            } else {
+                $('#productoFormContainer').html(`
+                    <div class="alert alert-danger" role="alert">
+                        Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+                    </div>
+                `);
             }
-        });
+        }
     });
+});
+
 
     $(document).on('click', '#solicitarProducto', function() {
         $('#productoFormContainer').html(`
