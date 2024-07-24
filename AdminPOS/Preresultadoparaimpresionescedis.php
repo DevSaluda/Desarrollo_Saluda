@@ -12,6 +12,8 @@ include "Consultas/Consultas.php";
   <title>Prueba de impresiones <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php"?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     .error {
       color: red;
