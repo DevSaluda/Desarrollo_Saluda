@@ -91,7 +91,7 @@ $(document).ready(function() {
                     <td>${producto.Nombre_Prod}</td>
                     <td>${producto.Precio_Venta}</td>
                     <td>${producto.Cantidad}</td>
-                    <td>${producto.Total.toFixed(2)}</td>
+                    <td>${producto.Total}</td>
                     <td>
                         <button class="btn btn-danger eliminar-producto" data-cod-barra="${producto.Cod_Barra}">Eliminar</button>
                     </td>
@@ -176,11 +176,17 @@ $(document).ready(function() {
             Precio_Compra: parseFloat($('#Precio_Compra').val()),
             Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
             Cantidad: parseInt($('#Cantidad_Solicitud').val()),
-            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val())
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val()),
+            Cod_Barra: '', // Para productos solicitados el código de barra estará vacío.
+            Precio_C: $('#Precio_Compra').val(),
+            FkPresentacion: null,
+            Proveedor1: null,
+            Proveedor2: null
         };
+
         encargo.push(producto);
         actualizarTablaEncargo();
-        $('#productoFormContainer').html('');
+        $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
@@ -189,12 +195,15 @@ $(document).ready(function() {
             Cod_Barra: $('input[name="Cod_Barra"]').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
             Precio_Venta: parseFloat($('#Precio_Venta').val()),
-            Precio_C: parseFloat($('input[name="Precio_C"]').val()),
             Cantidad: parseInt($('#Cantidad').val()),
-            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
+            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
+            Precio_C: $('input[name="Precio_C"]').val(),
+            FkPresentacion: $('input[name="FkPresentacion"]').val(),
+            Proveedor1: $('input[name="Proveedor1"]').val(),
+            Proveedor2: $('input[name="Proveedor2"]').val()
         };
 
-        const productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
+        let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
         if (productoExistente) {
             productoExistente.Cantidad += producto.Cantidad;
             productoExistente.Total += producto.Total;
@@ -203,7 +212,7 @@ $(document).ready(function() {
         }
 
         actualizarTablaEncargo();
-        $('#productoFormContainer').html('');
+        $('#productoFormContainer').empty();
     });
 
     $(document).on('click', '.eliminar-producto', function() {
@@ -213,6 +222,7 @@ $(document).ready(function() {
         console.log("Productos restantes después de eliminar:", encargo); // Log para depuración
         actualizarTablaEncargo();
     });
+
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
@@ -241,6 +251,5 @@ $(document).ready(function() {
     });
 });
 </script>
-
 </body>
 </html>
