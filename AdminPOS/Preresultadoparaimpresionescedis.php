@@ -260,16 +260,35 @@ $(document).ready(function() {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%; /* Asegura que el área de impresión ocupe el 100% del ancho */
-        height: 100%; /* Asegura que el área de impresión ocupe el 100% del alto */
-        margin: 0; /* Elimina márgenes */
-        padding: 0; /* Elimina rellenos */
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
     @page {
-        size: landscape; /* Define la orientación vertical */
-        margin: 0; /* Elimina márgenes de la página */
+        size: landscape;
+        margin: 0;
+    }
+    #header {
+        display: none; /* Oculta el encabezado */
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #000;
+        padding: 10px;
     }
 }
+@page {
+    size: landscape;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
+    }
+}
+
 </style>
 
 <style>
@@ -312,10 +331,14 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+    
   </div>
 
     </div>
-  
+    <div id="footer">
+    <!-- Contenido del pie de página -->
+    <p>Pie de Página - Página <span class="pageNumber"></span></p>
+</div>
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
