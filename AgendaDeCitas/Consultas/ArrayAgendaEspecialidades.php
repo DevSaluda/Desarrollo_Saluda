@@ -71,7 +71,7 @@ while($fila = $result->fetch_assoc()) {
 
     $nombreSucursal = ($fila["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $fila["Nombre_Sucursal"];
 
-    $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal. Esperamos tu confirmación ☺️";
+    $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal,☺️ ¡¡Recuerda que en nuestro perfil puedes conocer la ubicación!!. Esperamos tu confirmación ☺️";
     $data[$c]["ConWhatsapp"] = "<a class='btn-sm btn btn-success custom-bg-color' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
     $data[$c]["BotonCancelar"] = '<td><a data-id="' . $fila["ID_Agenda_Especialista"] . '"class="btn btn-danger btn-sm btn-edit"><i class="fas fa-ban"></i>  </a></td>';
     
