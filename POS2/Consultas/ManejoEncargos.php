@@ -21,7 +21,6 @@ function buscarProducto($conn, $Cod_Barra) {
         }
     }
 }
-
 function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
     $response = [];
 
@@ -53,33 +52,24 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['buscar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        $producto = buscarProducto($conn, $Cod_Barra);
+        $producto = buscarProducto($conn, $Cod_Barra, $Cod_Barra);
         echo json_encode(['productos' => $producto]);
     }
 
     if (isset($_POST['guardar_encargo'])) {
-        $encargo = $_POST['encargo'];
-
-        // Verifica si $encargo es una cadena
-        if (is_string($encargo)) {
-            $encargo = json_decode($encargo, true);
-        } else {
-            echo json_encode(['error' => 'Datos de encargo no válidos.']);
-            exit;
-        }
-
+        $encargo = json_decode($_POST['encargo'], true);
         if (empty($encargo)) {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
         }
 
-        $IdentificadorEncargo = $_POST['IdentificadorEncargo'] ?? ''; // Usa el operador ?? para establecer un valor por defecto
-        $montoAbonado = $_POST['MontoAbonado'] ?? 0;
-        $fkSucursal = $_POST['FkSucursal'] ?? '';
-        $agregadoPor = $_POST['AgregadoPor'] ?? '';
-        $idHOD = $_POST['ID_H_O_D'] ?? '';
-        $estado = $_POST['Estado'] ?? 'Pendiente';
-        $tipoEncargo = $_POST['TipoEncargo'] ?? 'Producto';
+        $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
+        $montoAbonado = $_POST['MontoAbonado'];
+        $fkSucursal = $_POST['FkSucursal'];
+        $agregadoPor = $_POST['AgregadoPor'];
+        $idHOD = $_POST['ID_H_O_D'];
+        $estado = $_POST['Estado'];
+        $tipoEncargo = $_POST['TipoEncargo'];
         
         $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
         echo json_encode($response);

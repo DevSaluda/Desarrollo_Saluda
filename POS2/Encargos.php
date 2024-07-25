@@ -58,16 +58,23 @@ include 'Consultas/Consultas.php';
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-                <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
-                </div>
-                <button type="submit" class="btn btn-success">Guardar Encargo</button>
-            </form>
+    <div class="form-group hidden-field">
+        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
+        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+    </div>
+    
+    <div class="form-group">
+        <label for="MontoAbonado">Monto Abonado</label>
+        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+    </div>
+    
+    <button type="submit" class="btn btn-success">Guardar Encargo</button>
+</form>
+
         </div>
     </section>
 </div>
@@ -239,39 +246,31 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
     e.preventDefault();
-    const datosEncargo = encargo.map(producto => ({
-        IdentificadorEncargo: $('#IdentificadorEncargo').val(),
-        Cod_Barra: producto.Cod_Barra,
-        Nombre_Prod: producto.Nombre_Prod,
-        Precio_Venta: producto.Precio_Venta,
-        Precio_C: producto.Precio_C || 0,
-        Cantidad: producto.Cantidad,
-        FkPresentacion: producto.FkPresentacion || '',
-        Proveedor1: producto.Proveedor1 || '',
-        Proveedor2: producto.Proveedor2 || '',
-        FkSucursal: $('#FkSucursal').val(),
-        MontoAbonado: 0,
-        Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
-        ID_H_O_D: $('#ID_H_O_D').val(),
-        Estado: $('#Estado').val(),
-        TipoEncargo: $('#TipoEncargo').val()
-    }));
+    const formData = $(this).serializeArray();
+    formData.push({ name: 'guardar_encargo', value: true });
+    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
     $.ajax({
         url: 'Consultas/ManejoEncargos.php',
         type: 'POST',
-        data: {
-            guardar_encargo: true,
-            encargo: JSON.stringify(datosEncargo) // Asegúrate de enviar los datos como una cadena JSON
-        },
+        data: formData,
+        dataType: 'json',
         success: function(response) {
-            alert(response.message);
-            encargo = [];
-            actualizarTablaEncargo();
-            $('#guardarEncargoForm')[0].reset();
+            if (response.success) {
+                alert(response.success);
+                $('#encargoTable tbody').empty();
+                $('#totalEncargo').text('0');
+                $('#pagoMinimo').text('0');
+                $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
+                encargo = [];
+                location.reload();
+            } else if (response.error) {
+                alert(response.error);
+            }
         }
     });
 });
+
 
 });
 </script>
