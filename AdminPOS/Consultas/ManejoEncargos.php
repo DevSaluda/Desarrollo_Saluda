@@ -2,7 +2,7 @@
 include 'Consultas.php';
 
 function obtenerEncargos($conn) {
-    $query = "SELECT * FROM Encargos_POS WHERE Estado IN ('Pendiente', 'Aceptado', 'Rechazado')";
+    $query = "SELECT * FROM Encargos_POS WHERE Estado IN ('Entregado', 'Pendiente', 'Rechazado')";
     return mysqli_query($conn, $query);
 }
 
