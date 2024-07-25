@@ -2,21 +2,20 @@
 include 'Consultas.php';
 
 function buscarProducto($conn, $Cod_Barra) {
-    $query = "SELECT ID_Prod_POS, Cod_Barra, Clave_adicional, Cod_Enfermeria, Clave_Levic, Nombre_Prod, Precio_Venta, Precio_C, Min_Existencia, Max_Existencia, Porcentaje, Descuento, Precio_Promo, Lote_Med, Fecha_Caducidad, Stock, Vendido, Saldo, Tipo_Servicio, Componente_Activo, Tipo, FkCategoria, FkMarca, FkPresentacion, Proveedor1, Proveedor2, RecetaMedica, Estatus, CodigoEstatus, Sistema, AgregadoPor, AgregadoEl, ID_H_O_D, Cod_Paquete 
+    $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
               FROM Productos_POS 
               WHERE Cod_Barra='$Cod_Barra'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         return mysqli_fetch_assoc($result);
     } else {
-        $query = "SELECT ID_Prod_POS, Cod_Barra, Clave_adicional, Cod_Enfermeria, Clave_Levic, Nombre_Prod, Precio_Venta, Precio_C, Min_Existencia, Max_Existencia, Porcentaje, Descuento, Precio_Promo, Lote_Med, Fecha_Caducidad, Stock, Vendido, Saldo, Tipo_Servicio, Componente_Activo, Tipo, FkCategoria, FkMarca, FkPresentacion, Proveedor1, Proveedor2, RecetaMedica, Estatus, CodigoEstatus, Sistema, AgregadoPor, AgregadoEl, ID_H_O_D, Cod_Paquete 
+        $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
                   FROM Productos_POS 
                   WHERE Nombre_Prod LIKE '%$Cod_Barra%'";
         $result = mysqli_query($conn, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 }
-
 function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
     $response = [];
 
