@@ -64,7 +64,7 @@ include 'Consultas/Consultas.php';
                     <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
                     <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
                     <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid("ENC_")); ?>"> <!-- Identificador único -->
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
                 </div>
                 <button type="submit" class="btn btn-success">Guardar Encargo</button>
             </form>
@@ -238,39 +238,41 @@ $(document).ready(function() {
     });
 
     $('#guardarEncargoForm').submit(function(e) {
-        e.preventDefault();
-        const datosEncargo = encargo.map(producto => ({
-            IdentificadorEncargo: $('#IdentificadorEncargo').val(),
-            Cod_Barra: producto.Cod_Barra,
-            Nombre_Prod: producto.Nombre_Prod,
-            Precio_Venta: producto.Precio_Venta,
-            Precio_C: producto.Precio_C || 0,
-            Cantidad: producto.Cantidad,
-            FkPresentacion: producto.FkPresentacion || '',
-            Proveedor1: producto.Proveedor1 || '',
-            Proveedor2: producto.Proveedor2 || '',
-            FkSucursal: $('#FkSucursal').val(),
-            MontoAbonado: 0,
-            Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
-            ID_H_O_D: $('#ID_H_O_D').val(),
-            Estado: $('#Estado').val(),
-            TipoEncargo: $('#TipoEncargo').val()
-        }));
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: {
-                guardar_encargo: true,
-                encargo: datosEncargo
-            },
-            success: function(response) {
-                alert(response.message);
-                encargo = [];
-                actualizarTablaEncargo();
-                $('#guardarEncargoForm')[0].reset();
-            }
-        });
+    e.preventDefault();
+    const datosEncargo = encargo.map(producto => ({
+        IdentificadorEncargo: $('#IdentificadorEncargo').val(),
+        Cod_Barra: producto.Cod_Barra,
+        Nombre_Prod: producto.Nombre_Prod,
+        Precio_Venta: producto.Precio_Venta,
+        Precio_C: producto.Precio_C || 0,
+        Cantidad: producto.Cantidad,
+        FkPresentacion: producto.FkPresentacion || '',
+        Proveedor1: producto.Proveedor1 || '',
+        Proveedor2: producto.Proveedor2 || '',
+        FkSucursal: $('#FkSucursal').val(),
+        MontoAbonado: 0,
+        Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
+        ID_H_O_D: $('#ID_H_O_D').val(),
+        Estado: $('#Estado').val(),
+        TipoEncargo: $('#TipoEncargo').val()
+    }));
+
+    $.ajax({
+        url: 'Consultas/ManejoEncargos.php',
+        type: 'POST',
+        data: {
+            guardar_encargo: true,
+            encargo: JSON.stringify(datosEncargo) // Asegúrate de enviar los datos como una cadena JSON
+        },
+        success: function(response) {
+            alert(response.message);
+            encargo = [];
+            actualizarTablaEncargo();
+            $('#guardarEncargoForm')[0].reset();
+        }
     });
+});
+
 });
 </script>
 </body>

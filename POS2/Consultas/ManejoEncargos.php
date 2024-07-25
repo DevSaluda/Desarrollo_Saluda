@@ -58,12 +58,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['guardar_encargo'])) {
-        $encargo = json_decode($_POST['encargo'], true);
+        $encargo = $_POST['encargo'];
+    
+        // Verifica si $encargo es una cadena
+        if (is_string($encargo)) {
+            $encargo = json_decode($encargo, true);
+        } else {
+            echo json_encode(['error' => 'Datos de encargo no válidos.']);
+            exit;
+        }
+    
         if (empty($encargo)) {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
         }
-
+    
         $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
         $montoAbonado = $_POST['MontoAbonado'];
         $fkSucursal = $_POST['FkSucursal'];
@@ -75,5 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
         echo json_encode($response);
     }
-}
+}    
 ?>
