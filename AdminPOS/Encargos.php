@@ -1,7 +1,6 @@
 <?php
 include 'Consultas/Consultas.php';
 include 'Consultas/ManejoEncargos.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,7 +69,7 @@ include 'Consultas/ManejoEncargos.php';
                                         Acciones
                                     </button>
                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton{$row['Id_Encargo']}'>
-                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='aceptar' href='#'>Aceptar</a>
+                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='entregar' href='#'>Entregar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar' href='#'>Rechazar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar' href='#'>Eliminar</a>
                                     </div>
@@ -116,7 +115,7 @@ $(document).ready(function() {
         idEncargo = $(this).data('id');
         accion = $(this).data('accion');
         var accionTexto = {
-            'aceptar': 'aceptar',
+            'entregar': 'entregar',
             'rechazar': 'rechazar',
             'eliminar': 'eliminar'
         };
