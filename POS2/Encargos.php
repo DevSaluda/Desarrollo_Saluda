@@ -191,7 +191,6 @@ $(document).ready(function() {
     $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
         const nuevoProducto = {
-            Cod_Barra: $('#Cod_Barra').val(),
             Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
             Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
             Cantidad: parseInt($('#Cantidad_Solicitud').val()),
@@ -205,6 +204,7 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
+            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
             Precio_Venta: parseFloat($('#Precio_Venta').val()),
             Cantidad: parseInt($('#Cantidad').val()),
