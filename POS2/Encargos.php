@@ -100,81 +100,78 @@ $(document).ready(function() {
     }
 
     $('#buscarProductoForm').submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-        url: 'Consultas/ManejoEncargos.php',
-        type: 'POST',
-        data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
-        dataType: 'json',
-        success: function(response) {
-            if (response.productos.length === 1) {
-                // Producto encontrado por código de barras
-                const producto = response.productos[0];
-                productoEncontradoPorCodigo = true;
-                $('#productoFormContainer').html(`
-                    <form id="agregarProductoForm">
-                        <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
-                        <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
-                        <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
-                        <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
-                        <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
-                        <div class="form-group">
-                            <label for="Nombre_Prod">Nombre del Producto</label>
-                            <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+        e.preventDefault();
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
+            dataType: 'json',
+            success: function(response) {
+                if (response.productos.length === 1) {
+                    // Producto encontrado por código de barras
+                    const producto = response.productos[0];
+                    productoEncontradoPorCodigo = true; // Indicar que se encontró por código de barras
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoForm">
+                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                            <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                            <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
+                            <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
+                            <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
+                            <div class="form-group">
+                                <label for="Nombre_Prod">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                } else if (response.productos.length > 1) {
+                    // Producto encontrado por nombre
+                    productoEncontradoPorCodigo = false; // Indicar que se encontró por nombre
+                    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoMultipleForm">
+                            <div class="form-group">
+                                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                                    ${dropdownOptions}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta_Multiple">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad_Multiple">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                    $('#ProductoSeleccionado').change(); // Actualiza el precio al seleccionar un producto
+                } else {
+                    $('#productoFormContainer').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
                         </div>
-                        <div class="form-group">
-                            <label for="Precio_Venta">Precio de Venta</label>
-                            <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="Cantidad">Cantidad</label>
-                            <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                    </form>
-                `);
-            } else if (response.productos.length > 1) {
-                // Producto encontrado por nombre
-                productoEncontradoPorCodigo = false;
-                let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
-                $('#productoFormContainer').html(`
-                    <form id="agregarProductoMultipleForm">
-                        <div class="form-group">
-                            <label for="ProductoSeleccionado">Seleccionar Producto</label>
-                            <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
-                                ${dropdownOptions}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="Precio_Venta_Multiple">Precio de Venta</label>
-                            <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="Cantidad_Multiple">Cantidad</label>
-                            <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                    </form>
-                `);
-                $('#ProductoSeleccionado').change(); 
-            } else {
-                $('#productoFormContainer').html(`
-                    <div class="alert alert-danger" role="alert">
-                        Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
-                    </div>
-                `);
+                    `);
+                }
             }
-        }
-    });
-});
-
+        });
     });
 
     $(document).on('change', '#ProductoSeleccionado', function() {
-    let productoSeleccionado = JSON.parse($(this).val());
-    $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
-});
-
+        let productoSeleccionado = JSON.parse($(this).val());
+        $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
+    });
 
     $(document).on('click', '#solicitarProducto', function() {
         $('#productoFormContainer').html(`
