@@ -80,7 +80,7 @@ while($fila = $result->fetch_assoc()) {
         case "Oxkutzcab":
             $mapLink = "https://maps.app.goo.gl/z7NNZ1Df7zNqoRUf6";
             break;
-        case "Teabo Clinica":
+        case "TeaClinica":
             $mapLink = "https://maps.app.goo.gl/xj5pC5RLJbbeNxEP9";
             break;
         case "Itzincab":
