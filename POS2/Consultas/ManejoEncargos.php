@@ -6,16 +6,22 @@ function buscarProducto($conn, $Cod_Barra) {
               FROM Productos_POS 
               WHERE Cod_Barra='$Cod_Barra'";
     $result = mysqli_query($conn, $query);
+
     if (mysqli_num_rows($result) > 0) {
-        return mysqli_fetch_assoc($result);
+        return [mysqli_fetch_assoc($result)]; // Devuelve un array con un solo producto
     } else {
         $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
                   FROM Productos_POS 
                   WHERE Nombre_Prod LIKE '%$Cod_Barra%'";
         $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        if (mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            return []; // Devuelve un array vacío si no se encuentran productos
+        }
     }
 }
+
 function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
     $response = [];
 
@@ -47,7 +53,7 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['buscar_producto'])) {
         $Cod_Barra = $_POST['Cod_Barra'];
-        $producto = buscarProducto($conn, $Cod_Barra, $Cod_Barra);
+        $producto = buscarProducto($conn, $Cod_Barra);
         echo json_encode(['productos' => $producto]);
     }
 
