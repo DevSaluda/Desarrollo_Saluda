@@ -1,5 +1,6 @@
 <?php
 include 'Consultas/Consultas.php';
+include 'Consultas/ManejoEncargos.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
