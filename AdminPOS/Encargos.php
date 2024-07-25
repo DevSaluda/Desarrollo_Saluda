@@ -54,7 +54,7 @@ include 'Consultas/ManejoEncargos.php';
                     <?php
                     $result = obtenerEncargos($conn);
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
+                         echo "<tr>";
                         echo "<td>{$row['IdentificadorEncargo']}</td>";
                         echo "<td>{$row['Cod_Barra']}</td>";
                         echo "<td>{$row['Nombre_Prod']}</td>";
@@ -64,10 +64,9 @@ include 'Consultas/ManejoEncargos.php';
                         echo "<td>{$row['Cantidad']}</td>";
                         echo "<td>{$row['Estado']}</td>";
                         echo "<td>
-                                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton{$row['Id_Encargo']}'>
-                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='entregar' href='#'>Entregar</a>
-                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar' href='#'>Rechazar</a>
-                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar' href='#'>Eliminar</a>
+                                <button class='btn btn-success accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='entregar'>Entregado</button>
+                                <button class='btn btn-warning accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar'>Rechazar</button>
+                                <button class='btn btn-danger accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar'>Eliminar</button>
                               </td>";
                         echo "</tr>";
                     }
