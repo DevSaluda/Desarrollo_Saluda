@@ -205,7 +205,6 @@ $(document).ready(function() {
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
         const producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
             Nombre_Prod: $('#Nombre_Prod').val(),
             Precio_Venta: parseFloat($('#Precio_Venta').val()),
             Cantidad: parseInt($('#Cantidad').val()),
