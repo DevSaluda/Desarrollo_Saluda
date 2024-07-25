@@ -29,10 +29,11 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
         $Nombre_Prod = $producto['Nombre_Prod'];
         $Precio_Venta = $producto['Precio_Venta'];
         $Cantidad = $producto['Cantidad'];
-        $Precio_C = $producto['Precio_C'];
-        $FkPresentacion = $producto['FkPresentacion'] ? "'{$producto['FkPresentacion']}'" : "NULL";
-        $Proveedor1 = $producto['Proveedor1'] ? "'{$producto['Proveedor1']}'" : "NULL";
-        $Proveedor2 = $producto['Proveedor2'] ? "'{$producto['Proveedor2']}'" : "NULL";
+        $Precio_C = isset($producto['Precio_C']) && $producto['Precio_C'] !== '' ? $producto['Precio_C'] : "NULL";
+        $FkPresentacion = isset($producto['FkPresentacion']) && $producto['FkPresentacion'] !== '' ? "'{$producto['FkPresentacion']}'" : "NULL";
+        $Proveedor1 = isset($producto['Proveedor1']) && $producto['Proveedor1'] !== '' ? "'{$producto['Proveedor1']}'" : "NULL";
+        $Proveedor2 = isset($producto['Proveedor2']) && $producto['Proveedor2'] !== '' ? "'{$producto['Proveedor2']}'" : "NULL";
+        
 
         $query = "INSERT INTO Encargos_POS 
             (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) 
