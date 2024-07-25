@@ -27,6 +27,8 @@ include 'Consultas/ManejoEncargos.php';
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <?php include_once("Menu.php")?>
@@ -62,9 +64,16 @@ include 'Consultas/ManejoEncargos.php';
                         echo "<td>{$row['Cantidad']}</td>";
                         echo "<td>{$row['Estado']}</td>";
                         echo "<td>
-                                <button class='btn btn-success accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='aceptar'>Aceptar</button>
-                                <button class='btn btn-warning accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar'>Rechazar</button>
-                                <button class='btn btn-danger accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar'>Eliminar</button>
+                                <div class='dropdown'>
+                                    <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                        Acciones
+                                    </button>
+                                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='aceptar' href='#'>Aceptar</a>
+                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar' href='#'>Rechazar</a>
+                                        <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar' href='#'>Eliminar</a>
+                                    </div>
+                                </div>
                               </td>";
                         echo "</tr>";
                     }
@@ -74,19 +83,54 @@ include 'Consultas/ManejoEncargos.php';
         </div>
     </section>
 </div>
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar Acción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas <span id="modalAction"></span> este encargo?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
-    $('.accion-encargo').click(function() {
-        var idEncargo = $(this).data('id');
-        var accion = $(this).data('accion');
+    var idEncargo;
+    var accion;
 
+    $('.accion-encargo').click(function() {
+        idEncargo = $(this).data('id');
+        accion = $(this).data('accion');
+        var accionTexto = {
+            'aceptar': 'aceptar',
+            'rechazar': 'rechazar',
+            'eliminar': 'eliminar'
+        };
+        $('#modalAction').text(accionTexto[accion]);
+        $('#confirmModal').modal('show');
+    });
+
+    $('#confirmBtn').click(function() {
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: { idEncargo: idEncargo, accion: accion },
             dataType: 'json',
             success: function(response) {
+                $('#confirmModal').modal('hide');
                 if (response.success) {
                     alert(response.success);
                     location.reload();
