@@ -240,37 +240,10 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serializeArray();
-        formData.push({ name: 'guardar_encargo', value: true });
-        let formData = $(this).serializeArray();
-        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
-
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    alert(response.success);
-                    $('#encargoTable tbody').empty();
-                    $('#totalEncargo').text('0');
-                    $('#pagoMinimo').text('0');
-                    encargo = [];
-                    location.reload();
-                } else if (response.error) {
-                    alert(response.error);
-                }
-                alert('Encargo guardado exitosamente');
-                encargo = [];
-                actualizarTablaEncargo();
-            },
-            error: function() {
-                alert('Error al guardar el encargo');
-            }
-        });
+        // Aquí puedes agregar la lógica para guardar el encargo en la base de datos
+        console.log("Encargo guardado:", encargo);
     });
-     });
+});
 </script>
 </body>
 </html>
