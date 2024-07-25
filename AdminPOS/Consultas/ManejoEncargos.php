@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $accion = $_POST['accion'];
         $nuevoEstado = '';
 
-        if ($accion === 'aceptar') {
-            $nuevoEstado = 'Aceptado';
+        if ($accion === 'entregar') {
+            $nuevoEstado = 'Entregado';
         } elseif ($accion === 'rechazar') {
             $nuevoEstado = 'Rechazado';
         } elseif ($accion === 'eliminar') {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        if (actualizarEstadoEncargo($conn, $idEncargo, $nuevoEstado)) {
+        if ($nuevoEstado && actualizarEstadoEncargo($conn, $idEncargo, $nuevoEstado)) {
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
         } else {
             echo json_encode(['error' => 'Error al actualizar el estado del encargo: ' . mysqli_error($conn)]);
