@@ -61,7 +61,7 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Especialidad"] = $fila["Nombre_Especialidad"];
     $data[$c]["Doctor"] = $fila["Nombre_Apellidos"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Tipo_Consulta"] = $fila["Tipo_Consulta"]; // Nuevo campo Tipo_Consulta
+    $data[$c]["Tipo_Consulta"] = $fila["Tipo_Consulta"];
     $data[$c]["Observaciones"] = $fila["Observaciones"];
     $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
     $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
@@ -71,9 +71,41 @@ while($fila = $result->fetch_assoc()) {
 
     $nombreSucursal = ($fila["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $fila["Nombre_Sucursal"];
 
-    $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal,☺️ ¡¡Recuerda que en nuestro perfil puedes conocer la ubicación!!. Esperamos tu confirmación ☺️";
+    // Definir los enlaces de Google Maps para cada sucursal
+    $mapLink = "";
+    switch ($fila["Nombre_Sucursal"]) {
+        case "Tekax":
+            $mapLink = "https://maps.app.goo.gl/jw1NT3s4uTPGu6Vv7";
+            break;
+        case "Oxkutzcab":
+            $mapLink = "https://maps.app.goo.gl/z7NNZ1Df7zNqoRUf6";
+            break;
+        case "Teabo Clinica":
+            $mapLink = "https://maps.app.goo.gl/xj5pC5RLJbbeNxEP9";
+            break;
+        case "Itzincab":
+            $mapLink = "https://maps.app.goo.gl/v9rRcZm5LrLQUmCCA";
+            break;
+        case "Tekit":
+            $mapLink = "https://maps.app.goo.gl/gfDgh7jjBrfP7GDz7";
+            break;
+        case "Teabo":
+            $mapLink = "https://maps.app.goo.gl/dcfa8XeK5xAN5vKaA";
+            break;
+        case "Tixkokob":
+        $mapLink = "https://maps.app.goo.gl/wv1QVJHiXAeVGzcd6";
+            break;     
+        case "Uman":
+        $mapLink = "https://maps.app.goo.gl/hnE4FrG5Q7Jc89678";
+            break;               
+        default:
+            $mapLink = "¡¡Recuerda que en nuestro perfil puedes conocer la ubicación!!.";
+            break;
+    }
+
+    $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita de {$fila["Nombre_Especialidad"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de $nombreSucursal.☺️ $mapLink Esperamos tu confirmación ☺️ ";
     $data[$c]["ConWhatsapp"] = "<a class='btn-sm btn btn-success custom-bg-color' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
-    $data[$c]["BotonCancelar"] = '<td><a data-id="' . $fila["ID_Agenda_Especialista"] . '"class="btn btn-danger btn-sm btn-edit"><i class="fas fa-ban"></i>  </a></td>';
+    $data[$c]["BotonCancelar"] = '<td><a data-id="' . $fila["ID_Agenda_Especialista"] . '" class="btn btn-danger btn-sm btn-edit"><i class="fas fa-ban"></i>  </a></td>';
     
     $c++; 
 }
@@ -87,4 +119,3 @@ $results = [
 
 echo json_encode($results);
 ?>
- 
