@@ -191,6 +191,7 @@ $(document).ready(function() {
     $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
         const nuevoProducto = {
+            Cod_Barra: '',
             Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
             Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
             Cantidad: parseInt($('#Cantidad_Solicitud').val()),
