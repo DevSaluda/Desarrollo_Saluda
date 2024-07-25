@@ -1,6 +1,7 @@
 <?php
 include 'Consultas/Consultas.php';
 include 'Consultas/ManejoEncargos.php';
+$conn = openConnection(); // Asegúrate de que esta función abre y retorna la conexión
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,8 +27,8 @@ include 'Consultas/ManejoEncargos.php';
             margin-top: 10px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -65,10 +66,10 @@ include 'Consultas/ManejoEncargos.php';
                         echo "<td>{$row['Estado']}</td>";
                         echo "<td>
                                 <div class='dropdown'>
-                                    <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                    <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton{$row['Id_Encargo']}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                         Acciones
                                     </button>
-                                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton{$row['Id_Encargo']}'>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='aceptar' href='#'>Aceptar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar' href='#'>Rechazar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar' href='#'>Eliminar</a>
