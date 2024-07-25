@@ -238,10 +238,37 @@ $(document).ready(function() {
         actualizarTablaEncargo();
     });
 
-    $('#guardarEncargoForm').submit(function(e) {
-        e.preventDefault();
-        // Aquí puedes agregar la lógica para guardar el encargo en la base de datos
-        console.log("Encargo guardado:", encargo);
+    $('#guardarEncargoForm').submit(function(event) {
+        event.preventDefault();
+        if (productosEncargo.length === 0) {
+            alert('No hay productos en el encargo.');
+            return;
+        }
+
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            method: 'POST',
+            data: {
+                guardar_encargo: true,
+                encargo: JSON.stringify(productosEncargo),
+                IdentificadorEncargo: $('#IdentificadorEncargo').val(),
+                MontoAbonado: $('#totalEncargo').text(),
+                FkSucursal: $('#FkSucursal').val(),
+                AgregadoPor: $('#AgregadoPor').val(),
+                ID_H_O_D: $('#ID_H_O_D').val(),
+                Estado: $('#Estado').val(),
+                TipoEncargo: $('#TipoEncargo').val()
+            },
+            success: function(response) {
+                var data = JSON.parse(response);
+                if (data.success) {
+                    alert('Encargo guardado exitosamente.');
+                    location.reload();
+                } else {
+                    alert('Error al guardar el encargo: ' + data.error);
+                }
+            }
+        });
     });
 });
 </script>
