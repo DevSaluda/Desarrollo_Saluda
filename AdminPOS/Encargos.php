@@ -64,16 +64,10 @@ include 'Consultas/ManejoEncargos.php';
                         echo "<td>{$row['Cantidad']}</td>";
                         echo "<td>{$row['Estado']}</td>";
                         echo "<td>
-                                <div class='dropdown'>
-                                    <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton{$row['Id_Encargo']}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                                        Acciones
-                                    </button>
                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton{$row['Id_Encargo']}'>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='entregar' href='#'>Entregar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar' href='#'>Rechazar</a>
                                         <a class='dropdown-item accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar' href='#'>Eliminar</a>
-                                    </div>
-                                </div>
                               </td>";
                         echo "</tr>";
                     }
