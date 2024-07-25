@@ -1,7 +1,7 @@
 <?php
 include 'Consultas/Consultas.php';
 include 'Consultas/ManejoEncargos.php';
-$conn = openConnection(); // Asegúrate de que esta función abre y retorna la conexión
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
