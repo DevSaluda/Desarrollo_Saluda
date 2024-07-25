@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['guardar_encargo'])) {
         $encargo = $_POST['encargo'];
-    
+
         // Verifica si $encargo es una cadena
         if (is_string($encargo)) {
             $encargo = json_decode($encargo, true);
@@ -67,22 +67,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['error' => 'Datos de encargo no válidos.']);
             exit;
         }
-    
+
         if (empty($encargo)) {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
         }
-    
-        $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
-        $montoAbonado = $_POST['MontoAbonado'];
-        $fkSucursal = $_POST['FkSucursal'];
-        $agregadoPor = $_POST['AgregadoPor'];
-        $idHOD = $_POST['ID_H_O_D'];
-        $estado = $_POST['Estado'];
-        $tipoEncargo = $_POST['TipoEncargo'];
+
+        $IdentificadorEncargo = $_POST['IdentificadorEncargo'] ?? ''; // Usa el operador ?? para establecer un valor por defecto
+        $montoAbonado = $_POST['MontoAbonado'] ?? 0;
+        $fkSucursal = $_POST['FkSucursal'] ?? '';
+        $agregadoPor = $_POST['AgregadoPor'] ?? '';
+        $idHOD = $_POST['ID_H_O_D'] ?? '';
+        $estado = $_POST['Estado'] ?? 'Pendiente';
+        $tipoEncargo = $_POST['TipoEncargo'] ?? 'Producto';
         
         $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
         echo json_encode($response);
     }
-}    
+}
 ?>
