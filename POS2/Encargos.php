@@ -13,7 +13,7 @@ include 'Consultas/Consultas.php';
         .error {
             color: red;
             margin-left: 5px; 
-        }
+        }  
         .hidden-field {
             display: none;
         }
@@ -75,13 +75,12 @@ include 'Consultas/Consultas.php';
 <script>
 $(document).ready(function() {
     let encargo = [];
-    let productoEncontradoPorCodigo = false; // Variable para determinar el tipo de búsqueda
 
     function actualizarTablaEncargo() {
         let total = 0;
         $('#encargoTable tbody').empty();
         encargo.forEach(function(producto) {
-            total += producto.Total;
+            total += parseFloat(producto.Total);
             $('#encargoTable tbody').append(`
                 <tr>
                     <td>${producto.Cod_Barra}</td>
@@ -108,9 +107,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.productos.length === 1) {
-                    // Producto encontrado por código de barras
                     const producto = response.productos[0];
-                    productoEncontradoPorCodigo = true; // Indicar que se encontró por código de barras
                     $('#productoFormContainer').html(`
                         <form id="agregarProductoForm">
                             <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
@@ -179,10 +176,6 @@ $(document).ready(function() {
                     <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
                 </div>
                 <div class="form-group">
-                    <label for="Precio_Compra">Precio de Compra</label>
-                    <input type="number" step="0.01" class="form-control" id="Precio_Compra" name="Precio_Compra" required>
-                </div>
-                <div class="form-group">
                     <label for="Precio_Venta_Solicitud">Precio de Venta</label>
                     <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
                 </div>
@@ -195,56 +188,45 @@ $(document).ready(function() {
         `);
     });
 
-    $(document).on('submit', '#agregarProductoForm, #agregarProductoMultipleForm, #solicitarProductoForm', function(e) {
+    $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
-        let producto;
-        if ($(this).attr('id') === 'agregarProductoForm') {
-            const formData = $(this).serializeArray();
-            producto = {
-                Cod_Barra: formData.find(item => item.name === 'Cod_Barra').value,
-                Nombre_Prod: formData.find(item => item.name === 'Nombre_Prod').value,
-                Precio_Venta: parseFloat(formData.find(item => item.name === 'Precio_Venta').value),
-                Cantidad: parseInt(formData.find(item => item.name === 'Cantidad').value),
-                Precio_C: parseFloat(formData.find(item => item.name === 'Precio_C').value),
-                FkPresentacion: formData.find(item => item.name === 'FkPresentacion').value,
-                Proveedor1: formData.find(item => item.name === 'Proveedor1').value,
-                Proveedor2: formData.find(item => item.name === 'Proveedor2').value
-            };
-        } else if ($(this).attr('id') === 'agregarProductoMultipleForm') {
-            const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
-            producto = {
-                Cod_Barra: productoSeleccionado.Cod_Barra,
-                Nombre_Prod: productoSeleccionado.Nombre_Prod,
-                Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
-                Cantidad: parseInt($('#Cantidad_Multiple').val()),
-                Precio_C: parseFloat(productoSeleccionado.Precio_C),
-                FkPresentacion: productoSeleccionado.FkPresentacion,
-                Proveedor1: productoSeleccionado.Proveedor1,
-                Proveedor2: productoSeleccionado.Proveedor2
-            };
-        } else if ($(this).attr('id') === 'solicitarProductoForm') {
-            const formData = $(this).serializeArray();
-            producto = {
-                Cod_Barra: 'No disponible',
-                Nombre_Prod: formData.find(item => item.name === 'Nombre_Prod_Solicitud').value,
-                Precio_Venta: parseFloat(formData.find(item => item.name === 'Precio_Venta_Solicitud').value),
-                Cantidad: parseInt(formData.find(item => item.name === 'Cantidad_Solicitud').value),
-                Precio_C: parseFloat(formData.find(item => item.name === 'Precio_Compra').value),
-                FkPresentacion: '',
-                Proveedor1: '',
-                Proveedor2: ''
-            };
-        }
+        const nuevoProducto = {
+            Cod_Barra: $('#Cod_Barra').val(),
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val())
+        };
+        encargo.push(nuevoProducto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
 
-        const productoExistente = encargo.find(p => p.Nombre_Prod === producto.Nombre_Prod);
-        if (productoExistente) {
-            productoExistente.Cantidad += producto.Cantidad;
-            productoExistente.Total = productoExistente.Cantidad * productoExistente.Precio_Venta;
-        } else {
-            producto.Total = producto.Cantidad * producto.Precio_Venta;
-            encargo.push(producto);
-        }
+    $(document).on('submit', '#agregarProductoForm', function(e) {
+        e.preventDefault();
+        const producto = {
+            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
+            Nombre_Prod: $('#Nombre_Prod').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta').val()),
+            Cantidad: parseInt($('#Cantidad').val()),
+            Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())
+        };
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+    });
 
+    $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
+        const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        const producto = {
+            Cod_Barra: productoSeleccionado.Cod_Barra,
+            Nombre_Prod: productoSeleccionado.Nombre_Prod,
+            Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
+            Cantidad: parseInt($('#Cantidad_Multiple').val()),
+            Total: parseFloat($('#Precio_Venta_Multiple').val()) * parseInt($('#Cantidad_Multiple').val())
+        };
+        encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
@@ -257,30 +239,35 @@ $(document).ready(function() {
 
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-        const formData = $(this).serializeArray();
-        const data = {
-            encargo: encargo,
-            FkSucursal: formData.find(item => item.name === 'FkSucursal').value,
-            AgregadoPor: formData.find(item => item.name === 'AgregadoPor').value,
-            ID_H_O_D: formData.find(item => item.name === 'ID_H_O_D').value,
-            Estado: formData.find(item => item.name === 'Estado').value,
-            TipoEncargo: formData.find(item => item.name === 'TipoEncargo').value,
-            IdentificadorEncargo: formData.find(item => item.name === 'IdentificadorEncargo').value
-        };
-
+        const datosEncargo = encargo.map(producto => ({
+            IdentificadorEncargo: $('#IdentificadorEncargo').val(),
+            Cod_Barra: producto.Cod_Barra,
+            Nombre_Prod: producto.Nombre_Prod,
+            Precio_Venta: producto.Precio_Venta,
+            Precio_C: producto.Precio_C || 0,
+            Cantidad: producto.Cantidad,
+            FkPresentacion: producto.FkPresentacion || '',
+            Proveedor1: producto.Proveedor1 || '',
+            Proveedor2: producto.Proveedor2 || '',
+            FkSucursal: $('#FkSucursal').val(),
+            MontoAbonado: 0,
+            Fecha_Ingreso: new Date().toISOString().slice(0, 10), // Fecha actual
+            ID_H_O_D: $('#ID_H_O_D').val(),
+            Estado: $('#Estado').val(),
+            TipoEncargo: $('#TipoEncargo').val()
+        }));
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
-            data: { guardar_encargo: true, data: JSON.stringify(data) },
+            data: {
+                guardar_encargo: true,
+                encargo: datosEncargo
+            },
             success: function(response) {
-                if (response.success) {
-                    alert('Encargo guardado exitosamente.');
-                    encargo = [];
-                    actualizarTablaEncargo();
-                    $('#guardarEncargoForm')[0].reset();
-                } else {
-                    alert('Error al guardar el encargo.');
-                }
+                alert(response.message);
+                encargo = [];
+                actualizarTablaEncargo();
+                $('#guardarEncargoForm')[0].reset();
             }
         });
     });
