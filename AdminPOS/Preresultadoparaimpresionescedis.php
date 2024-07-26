@@ -257,9 +257,7 @@ $(document).ready(function() {
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
         <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
-        <div class="page-info">
-        Página <span class="page-number"></span> de <span class="page-count"></span>
-    </div>
+       
     </div>
     <div class="text-center">
         <div class="table-responsive">
