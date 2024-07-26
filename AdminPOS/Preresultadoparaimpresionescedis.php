@@ -330,7 +330,24 @@ $(document).ready(function() {
           </table>
         </div>
       </div>
-   
+   <!-- Sección para las firmas -->
+  <div style="margin-top: 20px; text-align: center;">
+    <div style="margin-bottom: 20px;">
+      <strong>Recibe:</strong>
+      <br><br>
+      <hr style="width: 200px; margin: 0 auto;">
+      <br>
+      <strong>Nombre y firma</strong>
+    </div>
+    <div>
+      <strong>Entrega:</strong>
+      <br><br>
+      <hr style="width: 200px; margin: 0 auto;">
+      <br>
+      <strong>Nombre y firma</strong>
+    </div>
+  </div>
+</div>
     </div>
     
   </div>
