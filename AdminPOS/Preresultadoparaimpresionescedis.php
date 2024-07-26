@@ -250,7 +250,7 @@ $(document).ready(function() {
 
 <style></style>
   <button id="printButton">Imprimir</button>
-  <div id="content">
+
     <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
