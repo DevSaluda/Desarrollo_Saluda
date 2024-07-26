@@ -249,7 +249,7 @@ $(document).ready(function() {
 </script>
 
 <style>
-@media print {
+  @media print {
     body * {
         visibility: hidden;
     }
@@ -265,13 +265,18 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
+
     @page {
-        size: landscape;
-        margin: 0;
+        size: landscape; /* Cambia a 'portrait' si prefieres tamaño vertical */
+        margin: 1in; /* Ajusta los márgenes */
     }
+
+    /* Oculta el encabezado en la impresión */
     #header {
-        display: none; /* Oculta el encabezado */
+        display: none;
     }
+
+    /* Configura el pie de página */
     #footer {
         position: fixed;
         bottom: 0;
@@ -279,55 +284,45 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
+        font-size: 12px;
     }
-}
-@page {
-    size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
-    }
-}
 
-
-@media print {
+    /* Añade el número de página al pie de página */
     @page {
-        margin: 1in;
+        @bottom-right {
+            content: counter(page) " de " counter(pages);
+        }
     }
 
+    /* Maneja los saltos de página */
     .page-break {
         page-break-before: always;
     }
 
-
+    /* Configura el número de página en las hojas */
     .page-number:before {
         content: counter(page);
     }
+}
 
-    .page-count:before {
-        content: counter(pages);
-    }
+/* CSS para alinear los divs horizontalmente */
+#additionalInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Espacio entre la información y la tabla */
+}
+
+#additionalInfo div {
+    flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+    margin-right: 10px; /* Espacio entre divs */
+}
+
+#additionalInfo div:last-child {
+    margin-right: 0; /* Quita el margen del último div */
 }
 
 </style>
-
-<style>
-        /* CSS para alinear los divs horizontalmente */
-        #additionalInfo {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px; /* Espacio entre la información y la tabla */
-        }
-        #additionalInfo div {
-            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
-            margin-right: 10px; /* Espacio entre divs */
-        }
-        #additionalInfo div:last-child {
-            margin-right: 0; /* Quita el margen del último div */
-        }
-    </style>
   <button id="printButton">Imprimir</button>
-  <button onclick="printDocument()">Imprimir</button>
   <div id="content">
     <div id="printArea">
     <div id="additionalInfo">
@@ -335,9 +330,10 @@ $(document).ready(function() {
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
         <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
-       
+        <div class="page-info">
+        Página <span class="page-number"></span> de <span class="page-count"></span>
     </div>
-    <div id="pageNumber"></div>
+    </div>
     <div class="text-center">
         <div class="table-responsive">
       
@@ -376,34 +372,7 @@ $(document).ready(function() {
   </div>
 
     </div>
-    <script>
-        function printDocument() {
-            const content = document.getElementById('content').innerHTML;
-
-            // Crear una ventana nueva para la impresión
-            const printWindow = window.open('', '', 'height=600,width=800');
-            printWindow.document.write('<html><head><title>Imprimir</title>');
-            printWindow.document.write('<style>@media print { @page { size: A4; margin: 1in; } body { margin: 0; padding: 0; } .page-break { page-break-before: always; } #additionalInfo { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 12px; } #pageNumber { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 12px; } }</style>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write(content);
-            printWindow.document.write('<div id="pageNumber"></div>');
-            printWindow.document.write('</body></html>');
-
-            // Añadir el script para la numeración de páginas
-            printWindow.document.write('<script>');
-            printWindow.document.write('window.onload = function() {');
-            printWindow.document.write('    var totalPages = Math.ceil(document.body.scrollHeight / document.documentElement.clientHeight);');
-            printWindow.document.write('    var pageNumber = document.getElementById("pageNumber");');
-            printWindow.document.write('    var pageCount = 1;'); // Start page number at 1
-            printWindow.document.write('    pageNumber.innerHTML = "Página " + pageCount + " de " + totalPages;');
-            printWindow.document.write('};');
-           
-
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-        }
-    </script>
+   
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
