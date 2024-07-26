@@ -249,6 +249,7 @@ $(document).ready(function() {
 </script>
 
 <style>
+
 @media print {
     body * {
         visibility: hidden;
@@ -265,13 +266,25 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
+
     @page {
-        size: landscape;
+        size: landscape; /* Cambia a 'portrait' si prefieres tamaño vertical */
         margin: 0;
     }
+
+    /* Estiliza el encabezado y asegúrate de que no esté oculto */
     #header {
-        display: none; /* Oculta el encabezado */
+        position: fixed;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        padding: 10px;
+        background-color: #ffffff; /* Fondo blanco */
+        color: #ffffff; /* Texto blanco */
     }
+
+    /* Estiliza el pie de página */
     #footer {
         position: fixed;
         bottom: 0;
@@ -279,18 +292,18 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
+        background-color: #ffffff; /* Fondo blanco */
+        color: #000000; /* Texto negro */
     }
-}
-@page {
-    size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
-    }
-}
 
+    /* Configura el pie de página para mostrar el número de página */
+    @page {
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+}
 </style>
-
 <style>
         /* CSS para alinear los divs horizontalmente */
         #additionalInfo {
