@@ -282,7 +282,7 @@ $(document).ready(function() {
     }
 }
 @page {
-    size: landscape;
+    size: portrait;
     margin: 0;
     @bottom-right {
         content: counter(page);
