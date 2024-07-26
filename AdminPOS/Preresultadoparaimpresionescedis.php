@@ -12,6 +12,8 @@ include "Consultas/Consultas.php";
   <title>Prueba de impresiones <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php"?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
+
   <style>
     .error {
       color: red;
@@ -358,26 +360,44 @@ $(document).ready(function() {
     </div>
    
 
+    <button id="generatePdf">Generar PDF</button>
     <script>
-       document.getElementById('printButton').addEventListener('click', function() {
-    var pageNumberDiv = document.getElementById('pageNumber');
-    pageNumberDiv.textContent = "Página: " + (document.querySelectorAll('#printArea').length + 1); // Simplemente para simular el número de página
+        document.getElementById('generatePdf').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
 
-    // Lógica para imprimir
-    window.print();
+            // Función para agregar contenido HTML al PDF
+            function addHTMLToPDF() {
+                return new Promise((resolve) => {
+                    const element = document.getElementById('printArea');
+                    html2pdf().from(element).toPdf().get('pdf').then(pdf => {
+                        resolve(pdf);
+                    });
+                });
+            }
 
-    // Enviar la solicitud AJAX al servidor
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'registrar_impresion.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            console.log('Impresión registrada con éxito');
-        }
-    };
-    xhr.send('estado=exito');
-});
+            addHTMLToPDF().then(pdf => {
+                const totalPages = pdf.internal.getNumberOfPages();
+                
+                pdf.internal.pages.forEach((page, index) => {
+                    pdf.setPage(index + 1);
+                    pdf.text(`Página ${index + 1} de ${totalPages}`, 15, pdf.internal.pageSize.height - 10);
+                });
 
+                pdf.save('documento.pdf');
+
+                // Enviar la solicitud AJAX al servidor después de guardar el PDF
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'registrar_impresion.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        console.log('Impresión registrada con éxito');
+                    }
+                };
+                xhr.send('estado=exito');
+            });
+        });
     </script>
 <!-- POR CADUCAR -->
 
