@@ -321,7 +321,7 @@ $(document).ready(function() {
           <table id="Productos" class="hover" style="width:100%">
             <thead>
               
-              <th>Codigo de barras</th>
+              <th style="width:10%">Codigo de barras</th>
               <th style="width:30%">Nombre del producto</th>
               <th>Cantidad</th>
              
