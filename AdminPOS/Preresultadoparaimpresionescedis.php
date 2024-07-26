@@ -272,6 +272,7 @@ $(document).ready(function() {
     #header {
         display: none; /* Oculta el encabezado */
     }
+   
     #footer {
         position: fixed;
         bottom: 0;
@@ -279,6 +280,11 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
+        font-size: 12px;
+    }
+
+    #footer .pageNumber:after {
+        content: "Página " counter(page) " de " counter(pages);
     }
 }
 @page {
@@ -357,20 +363,30 @@ $(document).ready(function() {
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
-            // Lógica para imprimir
-            window.print();
+    // Actualizar el contenido del pie de página con numeración
+    var footer = document.createElement('div');
+    footer.id = 'footer';
+    footer.innerHTML = 'Página <span class="pageNumber"></span>';
+    document.body.appendChild(footer);
 
-            // Enviar la solicitud AJAX al servidor
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'registrar_impresion.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    console.log('Impresión registrada con éxito');
-                }
-            };
-            xhr.send('estado=exito');
-        });
+    // Lógica para imprimir
+    window.print();
+
+    // Limpiar el pie de página después de imprimir
+    document.body.removeChild(footer);
+
+    // Enviar la solicitud AJAX al servidor
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'registrar_impresion.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log('Impresión registrada con éxito');
+        }
+    };
+    xhr.send('estado=exito');
+});
+
     </script>
 <!-- POR CADUCAR -->
 
