@@ -311,7 +311,7 @@ $(document).ready(function() {
         }
     </style>
   <button id="printButton">Imprimir</button>
- 
+  <button id="generatePdf">Generar PDF</button>
     <div id="printArea">
     <div id="additionalInfo">
     <div id="providerInfo">Proveedor: </div>
