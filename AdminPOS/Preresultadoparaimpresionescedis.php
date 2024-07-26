@@ -299,13 +299,6 @@ $(document).ready(function() {
         page-break-before: always;
     }
 
-    #additionalInfo {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 12px;
-    }
 
     .page-number:before {
         content: counter(page);
