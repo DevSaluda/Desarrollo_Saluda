@@ -322,8 +322,8 @@ $(document).ready(function() {
             <thead>
               
               <th style="width:10%">Codigo de barras</th>
-              <th style="width:30%">Nombre del producto</th>
-              <th>Cantidad</th>
+              <th style="width:40%">Nombre del producto</th>
+              <th style="width:6%" >Cantidad</th>
              
               <th style="width:20%">Observaciones</th>
             </thead>
