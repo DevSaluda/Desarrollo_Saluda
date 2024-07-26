@@ -397,7 +397,7 @@ $(document).ready(function() {
             printWindow.document.write('    var pageCount = 1;'); // Start page number at 1
             printWindow.document.write('    pageNumber.innerHTML = "Página " + pageCount + " de " + totalPages;');
             printWindow.document.write('};');
-            printWindow.document.write('</script>');
+           
 
             printWindow.document.close();
             printWindow.focus();
