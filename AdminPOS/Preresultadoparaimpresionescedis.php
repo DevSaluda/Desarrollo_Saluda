@@ -322,6 +322,9 @@ $(document).ready(function() {
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
+    <div id="header">
+        Encabezado de Prueba <!-- El contenido del encabezado -->
+    </div>
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
@@ -360,6 +363,9 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+<div id="footer">
+        Pie de Página
+    </div>
 </div>
     </div>
     
