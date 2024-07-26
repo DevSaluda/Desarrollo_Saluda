@@ -330,16 +330,15 @@ $(document).ready(function() {
           </table>
         </div>
       </div>
-   <!-- Sección para las firmas -->
-  <div style="margin-top: 20px; text-align: center;">
-    <div style="margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <div style="flex: 1; text-align: center;">
       <strong>Recibe:</strong>
       <br><br>
       <hr style="width: 200px; margin: 0 auto;">
       <br>
       <strong>Nombre y firma</strong>
     </div>
-    <div>
+    <div style="flex: 1; text-align: center;">
       <strong>Entrega:</strong>
       <br><br>
       <hr style="width: 200px; margin: 0 auto;">
@@ -347,6 +346,7 @@ $(document).ready(function() {
       <strong>Nombre y firma</strong>
     </div>
   </div>
+</div>
 </div>
     </div>
     
