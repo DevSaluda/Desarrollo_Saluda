@@ -234,7 +234,7 @@ $(document).ready(function() {
             }
         },
         "columns": [
-            { "data": "IDTraspasoGenerado" },
+            // { "data": "IDTraspasoGenerado" },
             { "data": "Cod_Barra" },
             { "data": "Nombre_Prod" },
             { "data": "Cantidad_Prod" },
@@ -320,7 +320,7 @@ $(document).ready(function() {
       
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-              <th>Id del traspaso</th>
+              
               <th>Codigo de barras</th>
               <th>Nombre del producto</th>
               <th>Cantidad</th>

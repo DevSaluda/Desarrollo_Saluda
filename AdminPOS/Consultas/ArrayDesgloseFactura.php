@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $c = 0;
             while ($fila = $result->fetch_assoc()) {
-                $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
+                // $data[$c]["IDTraspasoGenerado"] = $fila["ID_Traspaso_Generado"];
                 $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
                 $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
                 $data[$c]["Cantidad_Prod"] = $fila["Cantidad_Enviada"];
