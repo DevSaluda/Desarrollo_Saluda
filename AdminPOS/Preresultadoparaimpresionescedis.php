@@ -248,16 +248,72 @@ $(document).ready(function() {
 });
 </script>
 
-<style></style>
-  <button id="printButton">Imprimir</button>
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printArea, #printArea * {
+        visibility: visible;
+    }
+    #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+    #header {
+        display: none; /* Oculta el encabezado */
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #000;
+        padding: 10px;
+    }
+}
+@page {
+    size: portrait;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
+    }
+}
 
+</style>
+
+<style>
+        /* CSS para alinear los divs horizontalmente */
+        #additionalInfo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
+        }
+        #additionalInfo div {
+            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+            margin-right: 10px; /* Espacio entre divs */
+        }
+        #additionalInfo div:last-child {
+            margin-right: 0; /* Quita el margen del último div */
+        }
+    </style>
+  <button id="printButton">Imprimir</button>
+ 
     <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
         <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
-       
     </div>
     <div class="text-center">
         <div class="table-responsive">
@@ -291,7 +347,7 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
-</div></div>
+</div>
     </div>
     
   </div>
