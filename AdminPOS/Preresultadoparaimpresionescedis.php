@@ -333,14 +333,14 @@ $(document).ready(function() {
       <div style="display: flex; justify-content: space-between; margin-top: 20px;">
     <div style="flex: 1; text-align: center;">
       <strong>Recibe:</strong>
-      <br><br>
+      <br><br><br>
       <hr style="height: 2px; background-color: black; border: none; width: 200px; margin: 0 auto;">
       <br>
       <strong>Nombre y firma</strong>
     </div>
     <div style="flex: 1; text-align: center;">
       <strong>Entrega:</strong>
-      <br><br>
+      <br><br><br>
       <hr style="height: 2px; background-color: black; border: none; width: 200px; margin: 0 auto;">
       <br>
       <strong>Nombre y firma</strong>
