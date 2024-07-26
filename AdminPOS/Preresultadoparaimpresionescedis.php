@@ -364,8 +364,15 @@ $(document).ready(function() {
 
     <button id="generatePdf">Generar PDF</button>
     <script>
-        document.getElementById('generatePdf').addEventListener('click', function () {
-            const { jsPDF } = window.jspdf;
+        document.getElementById('generatePdf').addEventListener('click', async function () {
+            const { jsPDF } = window.jspdf; // Destructuración correcta
+
+            // Asegúrate de que jsPDF se haya cargado correctamente
+            if (!jsPDF) {
+                console.error('jsPDF no está disponible.');
+                return;
+            }
+
             const doc = new jsPDF('p', 'pt', 'a4');
 
             // Función para agregar contenido HTML al PDF
@@ -378,33 +385,28 @@ $(document).ready(function() {
                 });
             }
 
-            addHTMLToPDF().then(pdf => {
-                const totalPages = pdf.internal.getNumberOfPages();
-                
-                pdf.internal.pages.forEach((page, index) => {
-                    pdf.setPage(index + 1);
-                    pdf.text(`Página ${index + 1} de ${totalPages}`, 15, pdf.internal.pageSize.height - 10);
-                });
-
-                pdf.save('documento.pdf');
-
-                // Enviar la solicitud AJAX al servidor después de guardar el PDF
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'registrar_impresion.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        console.log('Impresión registrada con éxito');
-                    }
-                };
-                xhr.send('estado=exito');
+            const pdf = await addHTMLToPDF();
+            const totalPages = pdf.internal.getNumberOfPages();
+            
+            pdf.internal.pages.forEach((page, index) => {
+                pdf.setPage(index + 1);
+                pdf.text(`Página ${index + 1} de ${totalPages}`, 15, pdf.internal.pageSize.height - 10);
             });
+
+            pdf.save('documento.pdf');
+
+            // Enviar la solicitud AJAX al servidor después de guardar el PDF
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'registrar_impresion.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    console.log('Impresión registrada con éxito');
+                }
+            };
+            xhr.send('estado=exito');
         });
     </script>
-<!-- POR CADUCAR -->
-
-
-
 
 
 <!-- /.content-wrapper -->
