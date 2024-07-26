@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Asignar valores adicionales (solo en el primer registro)
                 if ($c === 0) {
-                    $destinationBranch = $fila["Nombre_Sucursal"];
+                    $destinationBranch = $fila["Fk_Sucursal_Destino"];
                     $transferDate = $fila["FechaEntrega"];
                 }
                 $c++;
