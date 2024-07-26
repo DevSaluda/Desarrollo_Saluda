@@ -327,17 +327,17 @@ $(document).ready(function() {
         }
     </style>
   <button id="printButton">Imprimir</button>
- 
+  <button onclick="printDocument()">Imprimir</button>
+  <div id="content">
     <div id="printArea">
     <div id="additionalInfo">
         <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
         <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
         <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
         <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
-        <div class="page-info">
-        Página <span class="page-number"></span> de <span class="page-count"></span>
+       
     </div>
-    </div>
+    <div id="pageNumber"></div>
     <div class="text-center">
         <div class="table-responsive">
       
@@ -370,13 +370,40 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
-</div>
+</div></div>
     </div>
     
   </div>
 
     </div>
-   
+    <script>
+        function printDocument() {
+            const content = document.getElementById('content').innerHTML;
+
+            // Crear una ventana nueva para la impresión
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Imprimir</title>');
+            printWindow.document.write('<style>@media print { @page { size: A4; margin: 1in; } body { margin: 0; padding: 0; } .page-break { page-break-before: always; } #additionalInfo { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 12px; } #pageNumber { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 12px; } }</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(content);
+            printWindow.document.write('<div id="pageNumber"></div>');
+            printWindow.document.write('</body></html>');
+
+            // Añadir el script para la numeración de páginas
+            printWindow.document.write('<script>');
+            printWindow.document.write('window.onload = function() {');
+            printWindow.document.write('    var totalPages = Math.ceil(document.body.scrollHeight / document.documentElement.clientHeight);');
+            printWindow.document.write('    var pageNumber = document.getElementById("pageNumber");');
+            printWindow.document.write('    var pageCount = 1;'); // Start page number at 1
+            printWindow.document.write('    pageNumber.innerHTML = "Página " + pageCount + " de " + totalPages;');
+            printWindow.document.write('};');
+            printWindow.document.write('</script>');
+
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+    </script>
 
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
