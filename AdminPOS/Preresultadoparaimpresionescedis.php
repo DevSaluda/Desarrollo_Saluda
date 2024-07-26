@@ -249,7 +249,7 @@ $(document).ready(function() {
 </script>
 
 <style>
-@media print {
+  @media print {
     body * {
         visibility: hidden;
     }
@@ -266,13 +266,12 @@ $(document).ready(function() {
         padding: 0;
     }
     @page {
-        size: landscape;
+        size: portrait;
         margin: 0;
     }
     #header {
         display: none; /* Oculta el encabezado */
     }
-   
     #footer {
         position: fixed;
         bottom: 0;
@@ -280,20 +279,16 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
+    }
+    #pageNumber {
+        position: fixed;
+        bottom: 50px; /* Ajusta la posición según tu diseño */
+        right: 20px;
         font-size: 12px;
+        color: #000;
     }
+}
 
-    #footer .pageNumber:after {
-        content: "Página " counter(page) " de " counter(pages);
-    }
-}
-@page {
-    size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
-    }
-}
 
 </style>
 
@@ -316,11 +311,13 @@ $(document).ready(function() {
  
     <div id="printArea">
     <div id="additionalInfo">
-        <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
-        <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
-        <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
-        <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
-    </div>
+    <div id="providerInfo">Proveedor: </div>
+    <div id="destinationBranch">Sucursal Destino: </div>
+    <div id="invoiceNumber">Número de Factura: </div>
+    <div id="transferDate">Fecha del Traspaso: </div>
+    <div id="pageNumber">Página: </div> <!-- Número de página -->
+</div>
+
     <div class="text-center">
         <div class="table-responsive">
       
@@ -362,18 +359,12 @@ $(document).ready(function() {
    
 
     <script>
-        document.getElementById('printButton').addEventListener('click', function() {
-    // Actualizar el contenido del pie de página con numeración
-    var footer = document.createElement('div');
-    footer.id = 'footer';
-    footer.innerHTML = 'Página <span class="pageNumber"></span>';
-    document.body.appendChild(footer);
+       document.getElementById('printButton').addEventListener('click', function() {
+    var pageNumberDiv = document.getElementById('pageNumber');
+    pageNumberDiv.textContent = "Página: " + (document.querySelectorAll('#printArea').length + 1); // Simplemente para simular el número de página
 
     // Lógica para imprimir
     window.print();
-
-    // Limpiar el pie de página después de imprimir
-    document.body.removeChild(footer);
 
     // Enviar la solicitud AJAX al servidor
     var xhr = new XMLHttpRequest();
