@@ -322,7 +322,7 @@ $(document).ready(function() {
             <thead>
               
               <th>Codigo de barras</th>
-              <th>Nombre del producto</th>
+              <th style="width:30%">Nombre del producto</th>
               <th>Cantidad</th>
              
               <th style="width:30%">Observaciones</th>
