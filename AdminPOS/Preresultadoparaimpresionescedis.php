@@ -12,10 +12,6 @@ include "Consultas/Consultas.php";
   <title>Prueba de impresiones <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php"?>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
   <style>
     .error {
       color: red;
@@ -253,7 +249,7 @@ $(document).ready(function() {
 </script>
 
 <style>
-  @media print {
+@media print {
     body * {
         visibility: hidden;
     }
@@ -270,7 +266,7 @@ $(document).ready(function() {
         padding: 0;
     }
     @page {
-        size: portrait;
+        size: landscape;
         margin: 0;
     }
     #header {
@@ -284,15 +280,14 @@ $(document).ready(function() {
         border-top: 1px solid #000;
         padding: 10px;
     }
-    #pageNumber {
-        position: fixed;
-        bottom: 50px; /* Ajusta la posición según tu diseño */
-        right: 20px;
-        font-size: 12px;
-        color: #000;
+}
+@page {
+    size: portrait;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
     }
 }
-
 
 </style>
 
@@ -312,16 +307,14 @@ $(document).ready(function() {
         }
     </style>
   <button id="printButton">Imprimir</button>
-  <button id="generatePdf">Generar PDF</button>
+ 
     <div id="printArea">
     <div id="additionalInfo">
-    <div id="providerInfo">Proveedor: </div>
-    <div id="destinationBranch">Sucursal Destino: </div>
-    <div id="invoiceNumber">Número de Factura: </div>
-    <div id="transferDate">Fecha del Traspaso: </div>
-    <div id="pageNumber">Página: </div> <!-- Número de página -->
-</div>
-
+        <div id="providerInfo">Proveedor: </div> <!-- Proveedor -->
+        <div id="destinationBranch">Sucursal Destino: </div> <!-- Sucursal destino -->
+        <div id="invoiceNumber">Número de Factura: </div> <!-- Número de factura -->
+        <div id="transferDate">Fecha del Traspaso: </div> <!-- Fecha del traspaso -->
+    </div>
     <div class="text-center">
         <div class="table-responsive">
       
@@ -362,40 +355,12 @@ $(document).ready(function() {
     </div>
    
 
-    <button id="generatePdf">Generar PDF</button>
     <script>
-        document.getElementById('generatePdf').addEventListener('click', async function () {
-            const { jsPDF } = window.jspdf; // Destructuración correcta
+        document.getElementById('printButton').addEventListener('click', function() {
+            // Lógica para imprimir
+            window.print();
 
-            // Asegúrate de que jsPDF se haya cargado correctamente
-            if (!jsPDF) {
-                console.error('jsPDF no está disponible.');
-                return;
-            }
-
-            const doc = new jsPDF('p', 'pt', 'a4');
-
-            // Función para agregar contenido HTML al PDF
-            function addHTMLToPDF() {
-                return new Promise((resolve) => {
-                    const element = document.getElementById('printArea');
-                    html2pdf().from(element).toPdf().get('pdf').then(pdf => {
-                        resolve(pdf);
-                    });
-                });
-            }
-
-            const pdf = await addHTMLToPDF();
-            const totalPages = pdf.internal.getNumberOfPages();
-            
-            pdf.internal.pages.forEach((page, index) => {
-                pdf.setPage(index + 1);
-                pdf.text(`Página ${index + 1} de ${totalPages}`, 15, pdf.internal.pageSize.height - 10);
-            });
-
-            pdf.save('documento.pdf');
-
-            // Enviar la solicitud AJAX al servidor después de guardar el PDF
+            // Enviar la solicitud AJAX al servidor
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'registrar_impresion.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -407,6 +372,10 @@ $(document).ready(function() {
             xhr.send('estado=exito');
         });
     </script>
+<!-- POR CADUCAR -->
+
+
+
 
 
 <!-- /.content-wrapper -->
