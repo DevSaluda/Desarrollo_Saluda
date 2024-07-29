@@ -538,21 +538,7 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
       contentType: false,
       dataType: 'json',
       success: function (data) {
-        if (data.length === 0) {
-          // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
-          Swal.fire({
-            icon: 'warning',
-            title: 'No existe',
-            text: 'No se encontraron resultados para este código.',
-            showCancelButton: true,
-            confirmButtonText: 'Agregar de todos modos'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // Pasar la variable Fk_sucursal al agregar el código inexistente
-              agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-            }
-          });
-        } else if (data.codigo) {
+        if (data.codigo) {
           agregarArticulo(data);
           calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         }
@@ -563,23 +549,24 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
         // Manejar errores aquí si es necesario
       }
     });
-  }
+}
 
-  function agregarCodigoInexistente(codigo, sucursal) {
-    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
-    $.ajax({
-      url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
-      type: 'POST',
-      data: { codigo: codigo, sucursal: sucursal },
-      dataType: 'json',
-      success: function (response) {
-        // Manejar la respuesta del servidor si es necesario
-      },
-      error: function (error) {
-        // Manejar errores aquí si es necesario
-      }
-    });
-  }
+
+  // function agregarCodigoInexistente(codigo, sucursal) {
+  
+  //   $.ajax({
+  //     url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
+  //     type: 'POST',
+  //     data: { codigo: codigo, sucursal: sucursal },
+  //     dataType: 'json',
+  //     success: function (response) {
+        
+  //     },
+  //     error: function (error) {
+       
+  //     }
+  //   });
+  // }
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
