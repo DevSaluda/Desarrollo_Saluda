@@ -443,7 +443,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
     searching: false, // Deshabilitar la funcionalidad de búsqueda
-    paging: true, // Deshabilitar el paginador
+    paging: false, // Deshabilitar el paginador
     "columns": [{
         "data": "id"
       },
@@ -488,7 +488,15 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     },
     //para usar los botones   
     responsive: "true",
-
+    "columnDefs": [
+      {
+        // Aplica la clase 'no-click' a las celdas en las columnas especificadas (índices 0 a 7)
+        targets: [0, 1, 2, 3, 4, 5, 6, 7],
+        createdCell: function (td, cellData, rowData, row, col) {
+          $(td).addClass('no-click');
+        }
+      }
+    ]
   });
 
   function mostrarTotalVenta() {
