@@ -296,7 +296,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                             <option value="">Seleccione el motivo de baja </option>
                   <option value="Caducado">Caducado</option>
               <option value="Proximo a caducar">Proximo a caducar</option>
-              
+              <option value="Dañado">Dañado</option>
 </select>
 
 
