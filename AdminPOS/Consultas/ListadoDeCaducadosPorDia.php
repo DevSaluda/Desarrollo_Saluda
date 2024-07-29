@@ -191,7 +191,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'Clave_Levic' },
        { mData: 'Cod_Enfermeria' },
        { mData: 'FechaInventario' },
-  
+       { mData: 'Estado' },
       ],
      
       "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
@@ -252,7 +252,7 @@ tabla = $('#Productos').DataTable({
     <th>Lote</th>
     <th>Motivo baja</th>
     <th>Agregado por</th>
-    
+    <th>Estado</th>
 
 
 </thead>

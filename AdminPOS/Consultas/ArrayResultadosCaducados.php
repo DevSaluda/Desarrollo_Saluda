@@ -23,6 +23,7 @@ sb.MotivoBaja,
 sb.AgregadoPor,
 sb.AgregadoEl,
 sb.ID_H_O_D,
+sb.Estado,
 (sb.Precio_C * sb.Cantidad) AS Total_Compra,
 (sb.Precio_Venta * sb.Cantidad) AS Total_Venta
 FROM
@@ -40,6 +41,15 @@ $data = [];  // Asegúrate de inicializar el array $data
 $c = 0;
 
 while ($fila = $result->fetch_assoc()) {
+    $estado = $fila["Estado"];
+    if ($estado == "Caducado") {
+        $estado = '<span style="background-color: red; color: white; padding: 2px 4px;">Caducado</span>';
+    } else if (empty($estado)) {
+        $estado = '<span style="background-color: gray; color: white; padding: 2px 4px;">Sin estado</span>';
+    } else {
+        $estado = '<span style="background-color: white; color: black; padding: 2px 4px;">' . htmlspecialchars($estado) . '</span>';
+    }
+
     $data[$c]["IdbD"] = $fila["Cod_Barra"];
     $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
     $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
@@ -52,6 +62,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Clave_Levic"] = $fila["Lote"];
     $data[$c]["Cod_Enfermeria"] = $fila["MotivoBaja"];
     $data[$c]["FechaInventario"] = $fila["AgregadoPor"];
+    $data[$c]["Estado"] = $estado; // Agrega el estado formateado
     $c++;
 }
 
