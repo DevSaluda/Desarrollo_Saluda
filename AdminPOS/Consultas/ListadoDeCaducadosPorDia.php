@@ -182,10 +182,10 @@ tabla = $('#Productos').DataTable({
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
-       { mData: 'PrecioVenta' },
-       { mData: 'PrecioCompra' },
-       { mData: 'TotalPrecioVenta' },
-       { mData: 'TotalPrecioCompra' },
+      //  { mData: 'PrecioVenta' },
+      //  { mData: 'PrecioCompra' },
+      //  { mData: 'TotalPrecioVenta' },
+      //  { mData: 'TotalPrecioCompra' },
        { mData: 'Nombre_Prod' },
        { mData: 'Clave_interna' },
        { mData: 'Clave_Levic' },
@@ -246,10 +246,10 @@ tabla = $('#Productos').DataTable({
 <th>Cod Barra</th>
 <th>Nombre del producto</th>
     <th>Sucursal</th>
-    <th>PV</th>
+    <!-- <th>PV</th>
     <th>PC</th>
     <th>Total PV</th>
-    <th>Total PC</th>
+    <th>Total PC</th> -->
     <th>Cantidad</th>
     <th>Fecha caducidad</th>
     <th>Lote</th>
