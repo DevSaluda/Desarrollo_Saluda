@@ -437,7 +437,11 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 
 </script>
 
-
+<style>
+  .no-click {
+  pointer-events: none;
+}
+</style>
 
 
 <script>
