@@ -3,10 +3,7 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Obtén la fecha actual en formato YYYY-MM-DD
-$today = date('Y-m-d');
-
-// Define la consulta SQL con la variable de fecha
+// Define la consulta SQL
 $sql = "SELECT
 sb.Id_Baja,
 sb.ID_Prod_POS,
@@ -37,17 +34,17 @@ sb.Fk_sucursal = sc.ID_SucursalC
 // Ejecuta la consulta
 $result = mysqli_query($conn, $sql);
 
-$data = [];  // Asegúrate de inicializar el array $data
+$data = [];  // Inicializa el array $data
 $c = 0;
 
 while ($fila = $result->fetch_assoc()) {
     $estado = $fila["Estado"];
     if ($estado == "Caducado") {
-        $estado = '<span style="background-color: red; color: white; padding: 2px 4px;">Caducado</span>';
+        $estado = '<span style="background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Caducado</span>';
     } else if (empty($estado)) {
-        $estado = '<span style="background-color: gray; color: white; padding: 2px 4px;">Sin estado</span>';
+        $estado = '<span style="background-color: gray; color: white; padding: 2px 4px; border-radius: 3px;">Sin estado</span>';
     } else {
-        $estado = '<span style="background-color: white; color: black; padding: 2px 4px;">' . htmlspecialchars($estado) . '</span>';
+        $estado = '<span style="background-color: white; color: black; padding: 2px 4px; border-radius: 3px;">' . htmlspecialchars($estado) . '</span>';
     }
 
     $data[$c]["IdbD"] = $fila["Cod_Barra"];

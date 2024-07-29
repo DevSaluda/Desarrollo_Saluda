@@ -191,7 +191,9 @@ tabla = $('#Productos').DataTable({
        { mData: 'Clave_Levic' },
        { mData: 'Cod_Enfermeria' },
        { mData: 'FechaInventario' },
-       { mData: 'Estado' },
+       { "data": "Estado", "render": function(data, type, row) {
+            return data; // Esto permitirá que se interprete el HTML
+        }}
       ],
      
       "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
