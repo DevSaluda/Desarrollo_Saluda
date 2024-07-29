@@ -193,7 +193,8 @@ tabla = $('#Productos').DataTable({
        { mData: 'FechaInventario' },
        { "data": "Estado", "render": function(data, type, row) {
             return data; // Esto permitirá que se interprete el HTML
-        }}
+        }},
+        { mData: 'Acciones' }
       ],
      
       "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
@@ -255,7 +256,7 @@ tabla = $('#Productos').DataTable({
     <th>Motivo baja</th>
     <th>Agregado por</th>
     <th>Estado</th>
-
+    <th>Acciones</th>
 
 </thead>
 

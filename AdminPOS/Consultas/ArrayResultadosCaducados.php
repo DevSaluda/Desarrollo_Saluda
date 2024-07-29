@@ -60,6 +60,13 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Cod_Enfermeria"] = $fila["MotivoBaja"];
     $data[$c]["FechaInventario"] = $fila["AgregadoPor"];
     $data[$c]["Estado"] = $estado; // Agrega el estado formateado
+    $data[$c]["Acciones"] = '
+    <td>
+    <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
+     <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
+ 
+    
+    </td>';
     $c++;
 }
 
