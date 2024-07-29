@@ -370,17 +370,17 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
-                              <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:6%">Cantidad</th>
-                              <th >Fecha de caducidad</th>
+                              <th class="no-click" >Codigo</th>
+                              <th class="no-click" style="width:20%">Producto</th>
+                              <th class="no-click" style="width:6%">Cantidad</th>
+                              <th class="no-click" >Fecha de caducidad</th>
                               
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th style="width:6%">Eliminar</th>
+                              <th class="no-click" style="width:6%">Eliminar</th>
                             
                             </tr>
                           </thead>
@@ -438,9 +438,11 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </script>
 
 <style>
-  .no-click {
-  pointer-events: none;
+.no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
 }
+
 </style>
 
 
