@@ -58,24 +58,20 @@ include 'Consultas/Consultas.php';
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-    <div class="form-group hidden-field">
-        
-        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
-    </div>
-    
-    <div class="form-group">
-        <label for="MontoAbonado">Monto Abonado</label>
-        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-    </div>
-    
-    <button type="submit" class="btn btn-success">Guardar Encargo</button>
-</form>
-
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+                </div>
+                <div class="form-group">
+                    <label for="MontoAbonado">Monto Abonado</label>
+                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Encargo</button>
+            </form>
         </div>
     </section>
 </div>
@@ -139,35 +135,34 @@ $(document).ready(function() {
                         </form>
                     `);
                 } else if (response.productos.length > 1) {
-    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
-    $('#productoFormContainer').html(`
-        <form id="agregarProductoMultipleForm">
-            <div class="form-group">
-                <label for="ProductoSeleccionado">Seleccionar Producto</label>
-                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
-                    ${dropdownOptions}
-                </select>
-            </div>
-            <div class="form-group hidden-field">
-                <input type="hidden" id="Precio_C_Multiple" name="Precio_C_Multiple">
-                <input type="hidden" id="FkPresentacion_Multiple" name="FkPresentacion_Multiple">
-                <input type="hidden" id="Proveedor1_Multiple" name="Proveedor1_Multiple">
-                <input type="hidden" id="Proveedor2_Multiple" name="Proveedor2_Multiple">
-            </div>
-            <div class="form-group">
-                <label for="Precio_Venta_Multiple">Precio de Venta</label>
-                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
-            </div>
-            <div class="form-group">
-                <label for="Cantidad_Multiple">Cantidad</label>
-                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-        </form>
-    `);
-    $('#ProductoSeleccionado').change();
-}
-else {
+                    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoMultipleForm">
+                            <div class="form-group">
+                                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                                    ${dropdownOptions}
+                                </select>
+                            </div>
+                            <div class="form-group hidden-field">
+                                <input type="hidden" id="Precio_C_Multiple" name="Precio_C_Multiple">
+                                <input type="hidden" id="FkPresentacion_Multiple" name="FkPresentacion_Multiple">
+                                <input type="hidden" id="Proveedor1_Multiple" name="Proveedor1_Multiple">
+                                <input type="hidden" id="Proveedor2_Multiple" name="Proveedor2_Multiple">
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta_Multiple">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad_Multiple">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                    $('#ProductoSeleccionado').change();
+                } else {
                     $('#productoFormContainer').html(`
                         <div class="alert alert-danger" role="alert">
                             Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
@@ -179,89 +174,44 @@ else {
     });
 
     $(document).on('change', '#ProductoSeleccionado', function() {
-    let productoSeleccionado = JSON.parse($(this).val());
-    $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
-    $('#Precio_C_Multiple').val(productoSeleccionado.Precio_C);
-    $('#FkPresentacion_Multiple').val(productoSeleccionado.FkPresentacion || '');
-    $('#Proveedor1_Multiple').val(productoSeleccionado.Proveedor1 || '');
-    $('#Proveedor2_Multiple').val(productoSeleccionado.Proveedor2 || '');
-});
-
-
-    $(document).on('click', '#solicitarProducto', function() {
-        $('#productoFormContainer').html(`
-            <form id="solicitarProductoForm">
-                <div class="form-group">
-                    <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
-                </div>
-                <div class="form-group">
-                    <label for="Precio_Venta_Solicitud">Precio de Venta</label>
-                    <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
-                </div>
-                <div class="form-group">
-                    <label for="Cantidad_Solicitud">Cantidad</label>
-                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Agregar Producto</button>
-            </form>
-        `);
-    });
-
-    $(document).on('submit', '#solicitarProductoForm', function(e) {
-        e.preventDefault();
-        const nuevoProducto = {
-            Cod_Barra: '',
-            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
-            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
-            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
-            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val())
-        };
-        encargo.push(nuevoProducto);
-        actualizarTablaEncargo();
-        $('#productoFormContainer').empty();
+        let productoSeleccionado = JSON.parse($(this).val());
+        $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
+        $('#Precio_C_Multiple').val(productoSeleccionado.Precio_C);
+        $('#FkPresentacion_Multiple').val(productoSeleccionado.FkPresentacion || '');
+        $('#Proveedor1_Multiple').val(productoSeleccionado.Proveedor1 || '');
+        $('#Proveedor2_Multiple').val(productoSeleccionado.Proveedor2 || '');
     });
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
-    e.preventDefault();
-    const producto = {
-        Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-        Nombre_Prod: $('#Nombre_Prod').val(),
-        Precio_Venta: parseFloat($('#Precio_Venta').val()),
-        Cantidad: parseInt($('#Cantidad').val()),
-        Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
-        Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
-        FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
-        Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
-        Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL'
-    };
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+        e.preventDefault();
+        const producto = {
+            Cod_Barra: $('input[name="Cod_Barra"]').val(),
+            Nombre_Prod: $('input[name="Nombre_Prod"]').val(),
+            Precio_Venta: parseFloat($('input[name="Precio_Venta"]').val()),
+            Cantidad: parseInt($('input[name="Cantidad"]').val()),
+            Total: parseFloat($('input[name="Precio_Venta"]').val()) * parseInt($('input[name="Cantidad"]').val())
+        };
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+        $('#Cod_Barra').val('');
+    });
 
-
-$(document).on('submit', '#agregarProductoMultipleForm', function(e) {
-    e.preventDefault();
-    
-    const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
-    
-    const producto = {
-        Cod_Barra: productoSeleccionado.Cod_Barra || 'NULL',
-        Nombre_Prod: productoSeleccionado.Nombre_Prod || 'NULL',
-        Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()) || 0,
-        Cantidad: parseInt($('#Cantidad_Multiple').val()) || 0,
-        Total: (parseFloat($('#Precio_Venta_Multiple').val()) || 0) * (parseInt($('#Cantidad_Multiple').val()) || 0),
-        Precio_C: $('#Precio_C_Multiple').val() || 'NULL',
-        FkPresentacion: $('#FkPresentacion_Multiple').val() || 'NULL',
-        Proveedor1: $('#Proveedor1_Multiple').val() || 'NULL',
-        Proveedor2: $('#Proveedor2_Multiple').val() || 'NULL'
-    };
-
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+    $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
+        let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        const producto = {
+            Cod_Barra: productoSeleccionado.Cod_Barra,
+            Nombre_Prod: productoSeleccionado.Nombre_Prod,
+            Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
+            Cantidad: parseInt($('#Cantidad_Multiple').val()),
+            Total: parseFloat($('#Precio_Venta_Multiple').val()) * parseInt($('#Cantidad_Multiple').val())
+        };
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+        $('#Cod_Barra').val('');
+    });
 
     $(document).on('click', '.eliminar-producto', function() {
         const nombreProd = $(this).data('nombre-prod');
@@ -270,33 +220,43 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
     });
 
     $('#guardarEncargoForm').submit(function(e) {
-    e.preventDefault();
-    const formData = $(this).serializeArray();
-    formData.push({ name: 'guardar_encargo', value: true });
-    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
-
-    $.ajax({
-        url: 'Consultas/ManejoEncargos.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                alert(response.success);
-                $('#encargoTable tbody').empty();
-                $('#totalEncargo').text('0');
-                $('#pagoMinimo').text('0');
-                $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        encargo.forEach(producto => {
+            formData.push(
+                { name: 'productos[]', value: JSON.stringify(producto) }
+            );
+        });
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                alert('Encargo guardado correctamente');
+                enviarDatosATicket(formData); // Llama a la función para enviar datos al script PHP externo
                 encargo = [];
-                location.reload();
-            } else if (response.error) {
-                alert(response.error);
+                actualizarTablaEncargo();
+                $('#guardarEncargoForm')[0].reset();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al guardar el encargo:', textStatus, errorThrown);
             }
-        }
+        });
     });
-});
 
-
+    function enviarDatosATicket(datos) {
+        $.ajax({
+            url: 'http://localhost:8080/ticket/TicketEncargos.php',
+            type: 'POST',
+            data: datos,
+            success: function(response) {
+                console.log('Datos enviados a TicketEncargos.php:', response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al enviar datos a TicketEncargos.php:', textStatus, errorThrown);
+            }
+        });
+    }
 });
 </script>
 </body>
