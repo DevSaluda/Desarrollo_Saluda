@@ -47,7 +47,7 @@ while ($fila = $result->fetch_assoc()) {
     } else {
         $estado = '<button style="background-color: white; color: black; padding: 2px 4px; border-radius: 3px; border: none;" class="btn btn-default btn-sm">' . htmlspecialchars($estado) . '</button>';
     }
-    // Luego usa $estado para mostrar en la tabla o donde lo necesites
+   
     
 
 
@@ -64,7 +64,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Clave_Levic"] = $fila["Lote"];
     $data[$c]["Cod_Enfermeria"] = $fila["MotivoBaja"];
     $data[$c]["FechaInventario"] = $fila["AgregadoPor"];
-    $data[$c]["Estado"] = $estado; // Agrega el estado formateado
+    $data[$c]["Estado"] = $estado; // Agrega el estado formateado, // Luego usa $estado para mostrar en la tabla o donde lo necesites
     $data[$c]["Acciones"] = '
     <td>
     <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a>
