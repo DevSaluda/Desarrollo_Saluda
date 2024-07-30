@@ -38,14 +38,21 @@ $data = [];  // Inicializa el array $data
 $c = 0;
 
 while ($fila = $result->fetch_assoc()) {
-    $estado = $fila["Estado"];
-    if ($estado == "Caducado") {
-        $estado = '<span style="background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Caducado</span>';
-    } else if (empty($estado)) {
-        $estado = '<span style="background-color: gray; color: white; padding: 2px 4px; border-radius: 3px;">Sin estado</span>';
-    } else {
-        $estado = '<span style="background-color: white; color: black; padding: 2px 4px; border-radius: 3px;">' . htmlspecialchars($estado) . '</span>';
+    while ($fila = $result->fetch_assoc()) {
+        $estado = $fila["Estado"];
+        
+        if ($estado == "Caducado") {
+            $estado = '<span style="background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Caducado</span>';
+        } else if (empty($estado)) {
+            $estado = '<span style="background-color: gray; color: white; padding: 2px 4px; border-radius: 3px;">Sin estado</span>';
+        } else {
+            $estado = '<span style="background-color: white; color: black; padding: 2px 4px; border-radius: 3px;">' . htmlspecialchars($estado) . '</span>';
+        }
+        
+        // Luego usa $estado para mostrar en la tabla o donde lo necesites
+    
     }
+    
 
     $data[$c]["IdbD"] = $fila["Cod_Barra"];
     $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
