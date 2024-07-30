@@ -88,7 +88,7 @@ include "Consultas/Consultas.php";
   	
     $(document).ready(function() {
     // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
-    $(document).on("click", ".btn-Traspaso", function() {
+    $(document).on("click", ".btn-ActualizarCaducado", function() {
     
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
@@ -99,7 +99,7 @@ include "Consultas/Consultas.php";
         });
         $('#editModal').modal('show');
     });
-    $(document).on("click", ".btn-caducado", function() {
+    $(document).on("click", ".btn-GeneraRotacion", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/RealizaRotacionMedicamentos.php", { id: id }, function(data) {
