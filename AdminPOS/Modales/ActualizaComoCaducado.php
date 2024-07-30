@@ -39,20 +39,13 @@ if($query->num_rows>0){
 
 <?php if($Devoluciones != null): ?>
     <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
-    <div class="row">
-        <div class="col">
-            <label for="exampleFormControlInput1">Número de Factura</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-                </div>
+    
                
                 <input type="text" class="form-control"  name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregoElVendedor">
              
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
-            </div>
-        </div>
+         
       
         
 
@@ -60,7 +53,7 @@ if($query->num_rows>0){
 
         
 
-    <!-- <div class="text-center">
+     <div class="text-center">
         <div class="table-responsive">
             <table id="HistorialDevoluciones" class="table table-hover">
                 <thead>
@@ -68,8 +61,7 @@ if($query->num_rows>0){
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
-                    <th>Fecha caducidad</th>
-                    <th>Lote</th>
+                 
                  
                 </thead>
                 <tbody>
@@ -80,16 +72,15 @@ if($query->num_rows>0){
                             
                             <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Produc"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
-                            <td><input type="text" value="Registrado en caducados"class="form-control"  id="TipoMoviento" name="TipoMovimiento" readonly></td>
+                           
                             <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
-                            <td><input type="date" class="form-control"  id="fechacaducidad" name="FechaCaducidad" ><input hidden value="<?php echo $Devolucion["Precio_Venta"]; ?>"class="form-control"  id="Precioventa" name="PrecioVenta" readonly></td>
-                            <td> <input type="text" class="form-control"  id="lote" name="Lote"><input hidden value="<?php echo $Devolucion["Precio_C"]; ?>" class="form-control"  id="Preciocompra" name="PrecioCompra" readonly></td>
+                          
                             
                       
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
-            </table> -->
+            </table> 
             <button type="submit"  id="submit"  class="btn btn-success">Registrar caducado <i class="fas fa-check"></i></button>
         </div>
     </div>
