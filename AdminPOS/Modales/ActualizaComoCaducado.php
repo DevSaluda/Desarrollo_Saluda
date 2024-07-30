@@ -61,7 +61,7 @@ if($query->num_rows>0){
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
-                 
+                    <th>Cantidad a registrar</th>
                  
                 </thead>
                 <tbody>
