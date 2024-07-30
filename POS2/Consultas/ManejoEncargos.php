@@ -1,79 +1,263 @@
 <?php
-include 'Consultas.php';
-
-function buscarProducto($conn, $Cod_Barra) {
-    $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
-              FROM Productos_POS 
-              WHERE Cod_Barra='$Cod_Barra'";
-    $result = mysqli_query($conn, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        return [mysqli_fetch_assoc($result)]; // Devuelve un array con un solo producto
-    } else {
-        $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
-                  FROM Productos_POS 
-                  WHERE Nombre_Prod LIKE '%$Cod_Barra%'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_all($result, MYSQLI_ASSOC);
-        } else {
-            return []; // Devuelve un array vacío si no se encuentran productos
-        }
-    }
-}
-function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
-    $response = [];
-
-    foreach ($encargo as $producto) {
-        $Cod_Barra = $producto['Cod_Barra'];
-        $Nombre_Prod = $producto['Nombre_Prod'];
-        $Precio_Venta = $producto['Precio_Venta'];
-        $Cantidad = $producto['Cantidad'];
-        $Precio_C = isset($producto['Precio_C']) && $producto['Precio_C'] !== '' ? $producto['Precio_C'] : "NULL";
-        $FkPresentacion = isset($producto['FkPresentacion']) && $producto['FkPresentacion'] !== '' ? "'{$producto['FkPresentacion']}'" : "NULL";
-        $Proveedor1 = isset($producto['Proveedor1']) && $producto['Proveedor1'] !== '' ? "'{$producto['Proveedor1']}'" : "NULL";
-        $Proveedor2 = isset($producto['Proveedor2']) && $producto['Proveedor2'] !== '' ? "'{$producto['Proveedor2']}'" : "NULL";
-        
-
-        $query = "INSERT INTO Encargos_POS 
-            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) 
-            VALUES 
-            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo')";
-
-        if (!mysqli_query($conn, $query)) {
-            $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
-            return $response;
-        }
-    }
-
-    $response['success'] = "Encargo guardado exitosamente.";
-    return $response;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['buscar_producto'])) {
-        $Cod_Barra = $_POST['Cod_Barra'];
-        $producto = buscarProducto($conn, $Cod_Barra, $Cod_Barra);
-        echo json_encode(['productos' => $producto]);
-    }
-
-    if (isset($_POST['guardar_encargo'])) {
-        $encargo = json_decode($_POST['encargo'], true);
-        if (empty($encargo)) {
-            echo json_encode(['error' => 'No hay productos en el encargo.']);
-            exit;
-        }
-
-        $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
-        $montoAbonado = $_POST['MontoAbonado'];
-        $fkSucursal = $_POST['FkSucursal'];
-        $agregadoPor = $_POST['AgregadoPor'];
-        $idHOD = $_POST['ID_H_O_D'];
-        $estado = $_POST['Estado'];
-        $tipoEncargo = $_POST['TipoEncargo'];
-        
-        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
-        echo json_encode($response);
-    }
-}
+include 'Consultas/Consultas.php';
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
+    <?php include "Header.php"?>
+    <style>
+        .error {
+            color: red;
+            margin-left: 5px; 
+        }  
+        .hidden-field {
+            display: none;
+        }
+        .highlight {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<?php include_once("Menu.php")?>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <h2>Crear Encargo</h2>
+            <form id="buscarProductoForm">
+                <div class="form-group">
+                    <label for="Cod_Barra">Código de Barra o Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Cod_Barra" name="Cod_Barra" required>
+                    <button type="submit" class="btn btn-primary mt-2">Buscar Producto</button>
+                </div>
+            </form>
+            <div id="productoFormContainer"></div>
+            <h3>Productos en el encargo</h3>
+            <table class="table table-bordered" id="encargoTable">
+                <thead>
+                    <tr>
+                        <th>Código de Barra</th>
+                        <th>Nombre del Producto</th>
+                        <th>Precio de Venta</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
+            <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
+            <form id="guardarEncargoForm">
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+                </div>
+                <div class="form-group">
+                    <label for="MontoAbonado">Monto Abonado</label>
+                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Encargo</button>
+            </form>
+        </div>
+    </section>
+</div>
+<?php include("footer.php");?>
+<script>
+$(document).ready(function() {
+    let encargo = [];
+
+    function actualizarTablaEncargo() {
+        let total = 0;
+        $('#encargoTable tbody').empty();
+        encargo.forEach(function(producto) {
+            total += parseFloat(producto.Total);
+            $('#encargoTable tbody').append(`
+                <tr>
+                    <td>${producto.Cod_Barra}</td>
+                    <td>${producto.Nombre_Prod}</td>
+                    <td>${producto.Precio_Venta}</td>
+                    <td>${producto.Cantidad}</td>
+                    <td>${producto.Total}</td>
+                    <td>
+                        <button class="btn btn-danger eliminar-producto" data-nombre-prod="${producto.Nombre_Prod}">Eliminar</button>
+                    </td>
+                </tr>
+            `);
+        });
+        $('#totalEncargo').text(total.toFixed(2));
+        $('#pagoMinimo').text((total * 0.5).toFixed(2));
+    }
+
+    $('#buscarProductoForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
+            dataType: 'json',
+            success: function(response) {
+                if (response.productos.length === 1) {
+                    const producto = response.productos[0];
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoForm">
+                            <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
+                            <input type="hidden" name="Precio_C" value="${producto.Precio_C}">
+                            <input type="hidden" name="FkPresentacion" value="${producto.FkPresentacion || ''}">
+                            <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
+                            <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
+                            <div class="form-group">
+                                <label for="Nombre_Prod">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                } else if (response.productos.length > 1) {
+                    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+                    $('#productoFormContainer').html(`
+                        <form id="agregarProductoMultipleForm">
+                            <div class="form-group">
+                                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                                    ${dropdownOptions}
+                                </select>
+                            </div>
+                            <div class="form-group hidden-field">
+                                <input type="hidden" id="Precio_C_Multiple" name="Precio_C_Multiple">
+                                <input type="hidden" id="FkPresentacion_Multiple" name="FkPresentacion_Multiple">
+                                <input type="hidden" id="Proveedor1_Multiple" name="Proveedor1_Multiple">
+                                <input type="hidden" id="Proveedor2_Multiple" name="Proveedor2_Multiple">
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta_Multiple">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Cantidad_Multiple">Cantidad</label>
+                                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    `);
+                    $('#ProductoSeleccionado').change();
+                } else {
+                    $('#productoFormContainer').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+                        </div>
+                    `);
+                }
+            }
+        });
+    });
+
+    $(document).on('change', '#ProductoSeleccionado', function() {
+        let productoSeleccionado = JSON.parse($(this).val());
+        $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
+        $('#Precio_C_Multiple').val(productoSeleccionado.Precio_C);
+        $('#FkPresentacion_Multiple').val(productoSeleccionado.FkPresentacion || '');
+        $('#Proveedor1_Multiple').val(productoSeleccionado.Proveedor1 || '');
+        $('#Proveedor2_Multiple').val(productoSeleccionado.Proveedor2 || '');
+    });
+
+    $(document).on('submit', '#agregarProductoForm', function(e) {
+        e.preventDefault();
+        const producto = {
+            Cod_Barra: $('input[name="Cod_Barra"]').val(),
+            Nombre_Prod: $('input[name="Nombre_Prod"]').val(),
+            Precio_Venta: parseFloat($('input[name="Precio_Venta"]').val()),
+            Cantidad: parseInt($('input[name="Cantidad"]').val()),
+            Total: parseFloat($('input[name="Precio_Venta"]').val()) * parseInt($('input[name="Cantidad"]').val())
+        };
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+        $('#Cod_Barra').val('');
+    });
+
+    $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
+        let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        const producto = {
+            Cod_Barra: productoSeleccionado.Cod_Barra,
+            Nombre_Prod: productoSeleccionado.Nombre_Prod,
+            Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
+            Cantidad: parseInt($('#Cantidad_Multiple').val()),
+            Total: parseFloat($('#Precio_Venta_Multiple').val()) * parseInt($('#Cantidad_Multiple').val())
+        };
+        encargo.push(producto);
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty();
+        $('#Cod_Barra').val('');
+    });
+
+    $(document).on('click', '.eliminar-producto', function() {
+        const nombreProd = $(this).data('nombre-prod');
+        encargo = encargo.filter(producto => producto.Nombre_Prod !== nombreProd);
+        actualizarTablaEncargo();
+    });
+
+    $('#guardarEncargoForm').submit(function(e) {
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        encargo.forEach(producto => {
+            formData.push(
+                { name: 'productos[]', value: JSON.stringify(producto) }
+            );
+        });
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                alert('Encargo guardado correctamente');
+                enviarDatosATicket(formData); // Llama a la función para enviar datos al script PHP externo
+                encargo = [];
+                actualizarTablaEncargo();
+                $('#guardarEncargoForm')[0].reset();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al guardar el encargo:', textStatus, errorThrown);
+            }
+        });
+    });
+
+    function enviarDatosATicket(datos) {
+        $.ajax({
+            url: 'http://localhost:8080/ticket/TicketEncargos.php',
+            type: 'POST',
+            data: datos,
+            success: function(response) {
+                console.log('Datos enviados a TicketEncargos.php:', response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al enviar datos a TicketEncargos.php:', textStatus, errorThrown);
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
