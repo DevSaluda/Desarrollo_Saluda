@@ -93,9 +93,9 @@ include "Consultas/Consultas.php";
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
             $("#form-edit").html(data);
-            $("#Titulo").html("Convertir en traspaso");
+            $("#Titulo").html("Registrando como caducados");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di").addClass("modal-dialog modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
         });
         $('#editModal').modal('show');
     });

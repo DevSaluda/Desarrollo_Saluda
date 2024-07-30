@@ -47,7 +47,7 @@ if($query->num_rows>0){
                     <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
                 </div>
                
-                <input type="text" class="form-control"  name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
+                <input type="text" class="form-control"  name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregoElVendedor">
              
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
