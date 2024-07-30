@@ -62,8 +62,8 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Estado"] = $estado; // Agrega el estado formateado
     $data[$c]["Acciones"] = '
     <td>
-    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
-     <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
+    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-exchange-alt"></i></a>
+     <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="far fa-calendar-times"></i></a>
  
     
     </td>';
