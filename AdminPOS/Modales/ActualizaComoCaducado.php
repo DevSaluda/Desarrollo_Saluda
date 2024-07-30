@@ -74,7 +74,7 @@ if($query->num_rows>0){
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Prod"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
                            
                             <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
-                          
+                            <td><input type="number" class="form-control"  id="Cantidadaregistrar" name="CantidadAregistrar"></td>
                             
                       
                         </tr>
