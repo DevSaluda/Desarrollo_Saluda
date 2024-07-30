@@ -41,7 +41,7 @@ if($query->num_rows>0){
     <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
     
                
-                <input type="text" class="form-control"  name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
+                <input type="text" class="form-control" hidden name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregoElVendedor">
              
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
