@@ -91,7 +91,7 @@ include "Consultas/Consultas.php";
     $(document).on("click", ".btn-Traspaso", function() {
     
         var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/ConvierteEnTraspaso.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Convertir en traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -102,7 +102,7 @@ include "Consultas/Consultas.php";
     $(document).on("click", ".btn-caducado", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/RegistraEnCaducado.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/RealizaRotacionMedicamentos.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Productos Caducados");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
