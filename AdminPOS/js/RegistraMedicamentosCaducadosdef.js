@@ -32,16 +32,15 @@ $(document).ready(function () {
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Venta realizada con éxito',
+                                title: 'Registro almacenado correctamente!',
                                 showConfirmButton: false,
                                 timer: 2000,
-                                didOpen: () => {
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 1500);
-                                },
+                                didClose: () => {
+                                    // Recargar la página cuando el mensaje se cierre automáticamente
+                                    location.reload();
+                                }
                             });
-                        } else {
+                        }else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Algo salió mal',
