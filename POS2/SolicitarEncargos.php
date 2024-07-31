@@ -304,7 +304,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert("Encargo guardado, pero no se pudo enviar a TicketsEncargos: " + error);
+                        alert("Encargo guardado, pero no se pudo enviar a TicketsEncargo: " + error);
                         location.reload();
                     }
                 });
