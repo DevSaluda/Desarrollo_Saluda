@@ -35,7 +35,7 @@ $(document).ready(function () {
                                 title: 'Registro almacenado correctamente!',
                                 text: 'Haz clic en el botón para recargar la página.',
                                 showConfirmButton: true,
-                                confirmButtonText: 'Recargar página',
+                                confirmButtonText: 'Ok',
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     // Recargar la página si el usuario hace clic en el botón
