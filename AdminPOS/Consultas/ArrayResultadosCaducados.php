@@ -67,7 +67,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Estado"] = $estado; // Agrega el estado formateado, // Luego usa $estado para mostrar en la tabla o donde lo necesites
     $data[$c]["Acciones"] = '
     <td>
-    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br>
+    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br><br>
      <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
  
     
