@@ -285,7 +285,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
             if (response.success) {
                 // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
                 $.ajax({
-                    url: 'http://localhost:8080/TicketsEncargos',
+                    url: 'http://localhost:8080/TicketsEncargos.php',
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
@@ -300,18 +300,22 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                             location.reload();
                         } else if (response.error) {
                             alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
                         alert("Encargo guardado, pero no se pudo enviar a TicketsEncargos: " + error);
+                        location.reload();
                     }
                 });
             } else if (response.error) {
                 alert(response.error);
+                location.reload();
             }
         },
         error: function(xhr, status, error) {
             alert("Error al guardar el encargo: " + error);
+            location.reload();
         }
     });
 });
