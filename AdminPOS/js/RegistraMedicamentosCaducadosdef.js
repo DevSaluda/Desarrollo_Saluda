@@ -19,11 +19,11 @@ $(document).ready(function () {
             },
             // Agrega mensajes aquí para otros campos según sea necesario
         },
-        submitHandler: function () {
+        submitHandler: function (form) {
             $.ajax({
                 type: 'POST',
                 url: "Consultas/ActualizaComoCaducadosLosProductos.php", // Asegúrate de que esta ruta sea correcta
-                data: $('#RegistraCaducados').serialize(),
+                data: $(form).serialize(),
                 cache: false,
                 success: function (data) {
                     try {
@@ -34,13 +34,12 @@ $(document).ready(function () {
                                 icon: 'success',
                                 title: 'Registro almacenado correctamente!',
                                 showConfirmButton: false,
-                                timer: 2000,
-                                didClose: () => {
-                                    // Recargar la página cuando el mensaje se cierre automáticamente
-                                    location.reload();
-                                }
+                                timer: 2000
+                            }).then(() => {
+                                // Recargar la página después de que el mensaje se haya cerrado
+                                location.reload();
                             });
-                        }else {
+                        } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Algo salió mal',
