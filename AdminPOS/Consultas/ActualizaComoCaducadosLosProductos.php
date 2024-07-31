@@ -8,7 +8,7 @@ $Nombre_Prod = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['No
 $Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fk_sucursal']))));
 $Precio_Venta = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Precio_Venta']))));
 $Precio_C = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Precio_C']))));
-$Cantidad = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Cantidad']))));
+$Cantidad = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Cantidadaregistrar']))));
 $Lote = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Lote']))));
 $Fecha_Caducidad = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fecha_Caducidad']))));
 
