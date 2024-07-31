@@ -285,7 +285,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
             if (response.success) {
                 // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
                 $.ajax({
-                    url: 'http://localhost:8080/TicketsEncargos.php',
+                    url: 'http://localhost:8080/TicketEncargos.php',
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
