@@ -13,13 +13,13 @@ $Lote = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Lote'])))
 $Fecha_Caducidad = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fecha_Caducidad']))));
 
 $AgregadoPor = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['AgregadoPor']))));
-$AgregadoEl = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['AgregadoEl']))));
+
 $ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['ID_H_O_D']))));
 
 // Preparar la consulta SQL para la inserción
 $sql = "INSERT INTO `MedicamentosCaducados` 
-        (`ID_BajaProd`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`,  `AgregadoPor`, `AgregadoEl`, `ID_H_O_D`) 
-        VALUES ('$ID_BajaProd', '$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$Precio_Venta', '$Precio_C', '$Cantidad', '$Lote', '$Fecha_Caducidad', '$AgregadoPor', '$AgregadoEl', '$ID_H_O_D')";
+        (`ID_BajaProd`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`,  `AgregadoPor`,  `ID_H_O_D`) 
+        VALUES ('$ID_BajaProd', '$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$Precio_Venta', '$Precio_C', '$Cantidad', '$Lote', '$Fecha_Caducidad', '$AgregadoPor',  '$ID_H_O_D')";
 
 // Ejecutar la consulta y enviar la respuesta en formato JSON
 if (mysqli_query($conn, $sql)) {
