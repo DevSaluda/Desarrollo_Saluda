@@ -219,6 +219,7 @@ $(document).ready(function() {
         actualizarTablaEncargo();
     });
 
+    $(document).ready(function() {
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
@@ -227,13 +228,28 @@ $(document).ready(function() {
                 { name: 'productos[]', value: JSON.stringify(producto) }
             );
         });
+
+        // Enviar datos para guardar el encargo
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: formData,
             success: function(response) {
                 alert('Encargo guardado correctamente');
-                enviarDatosATicket(formData); // Llama a la función para enviar datos al script PHP externo
+                
+                // Enviar los mismos datos al script para generar el ticket
+                $.ajax({
+                    url: 'http://localhost:8080/ticket/TicketEncargos.php',
+                    type: 'POST',
+                    data: formData,
+                    success: function(ticketResponse) {
+                        console.log('Datos enviados a TicketEncargos.php:', ticketResponse);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error al enviar datos a TicketEncargos.php:', textStatus, errorThrown);
+                    }
+                });
+
                 encargo = [];
                 actualizarTablaEncargo();
                 $('#guardarEncargoForm')[0].reset();
@@ -243,21 +259,8 @@ $(document).ready(function() {
             }
         });
     });
-
-    function enviarDatosATicket(datos) {
-        $.ajax({
-            url: 'http://localhost:8080/ticket/TicketEncargos.php',
-            type: 'POST',
-            data: datos,
-            success: function(response) {
-                console.log('Datos enviados a TicketEncargos.php:', response);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Error al enviar datos a TicketEncargos.php:', textStatus, errorThrown);
-            }
-        });
-    }
 });
+
 </script>
 </body>
 </html>
