@@ -1,5 +1,23 @@
 <?php
-include 'Consultas/Consultas.php';
+include "Consultas/Consultas.php";
+
+include "Consultas/ConsultaCaja.php";
+include "Consultas/SumadeFolioTickets.php";
+
+include ("Consultas/db_connection.php");
+$fcha = date("Y-m-d");
+
+// 
+$primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
+
+
+// Concatenar las primeras 3 letras con el valor de $totalmonto
+$resultado_concatenado = $primeras_tres_letras ;
+
+// Convertir el resultado a mayúsculas
+$resultado_en_mayusculas = strtoupper($resultado_concatenado);
+
+// Imprimir el resultado en mayúsculas
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,12 +77,23 @@ include 'Consultas/Consultas.php';
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
                 <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
-                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+                <input type="text" class="form-control " hidden name="Cambio[]" readonly id="cambioreal" >
+                <input type="datetime" name="Horadeimpresion" hidden value="<?php echo date('h:i:s A');?>">
+                <input type="date" class="form-control " hidden readonly name="FechaImpresion" id="FechaImpresion" value="<?php echo $fcha;?>">
+                <input type="text" class="form-control "  hidden readonly value="<?php echo $ValorCaja['Valor_Total_Caja']?>" >
+                <input type="text" class="form-control " hidden id="valcaja"name="CajaSucursal[]" readonly value="<?php echo $ValorCaja["ID_Caja"];?>" >
+                <input type="text" class="form-control " hidden id="ticketsucname" name="TicketSucursalName" value="<?php echo $resultado_en_mayusculas; ?>"readonly  >
+                <input type="text" class="form-control " hidden id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>"readonly  >
+                <input type="number" class="form-control " id="totalventa" hidden name ="TotalVentas[]" readonly  >
+                <input type="text" hidden class="form-control "  name="Sistema[]" readonly value="Ventas" >
+                <input type="date" hidden class="form-control "  name="Fecha[]" readonly value="<?php echo $fcha?>" >
+                <input type="text"hidden class="form-control " name="TurnoCaja[]" readonly value="<?php echo $ValorCaja['Turno']?>" >
+                <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
+                <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
                 </div>
                 <div class="form-group">
                     <label for="MontoAbonado">Monto Abonado</label>
