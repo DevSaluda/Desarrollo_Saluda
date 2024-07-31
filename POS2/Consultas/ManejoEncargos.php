@@ -1,138 +1,79 @@
 <?php
-include 'Consultas/Consultas.php';
+include 'Consultas.php';
+
+function buscarProducto($conn, $Cod_Barra) {
+    $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
+              FROM Productos_POS 
+              WHERE Cod_Barra='$Cod_Barra'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        return [mysqli_fetch_assoc($result)]; // Devuelve un array con un solo producto
+    } else {
+        $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
+                  FROM Productos_POS 
+                  WHERE Nombre_Prod LIKE '%$Cod_Barra%'";
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            return []; // Devuelve un array vacío si no se encuentran productos
+        }
+    }
+}
+function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
+    $response = [];
+
+    foreach ($encargo as $producto) {
+        $Cod_Barra = $producto['Cod_Barra'];
+        $Nombre_Prod = $producto['Nombre_Prod'];
+        $Precio_Venta = $producto['Precio_Venta'];
+        $Cantidad = $producto['Cantidad'];
+        $Precio_C = isset($producto['Precio_C']) && $producto['Precio_C'] !== '' ? $producto['Precio_C'] : "NULL";
+        $FkPresentacion = isset($producto['FkPresentacion']) && $producto['FkPresentacion'] !== '' ? "'{$producto['FkPresentacion']}'" : "NULL";
+        $Proveedor1 = isset($producto['Proveedor1']) && $producto['Proveedor1'] !== '' ? "'{$producto['Proveedor1']}'" : "NULL";
+        $Proveedor2 = isset($producto['Proveedor2']) && $producto['Proveedor2'] !== '' ? "'{$producto['Proveedor2']}'" : "NULL";
+        
+
+        $query = "INSERT INTO Encargos_POS 
+            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) 
+            VALUES 
+            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo')";
+
+        if (!mysqli_query($conn, $query)) {
+            $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
+            return $response;
+        }
+    }
+
+    $response['success'] = "Encargo guardado exitosamente.";
+    return $response;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['buscar_producto'])) {
+        $Cod_Barra = $_POST['Cod_Barra'];
+        $producto = buscarProducto($conn, $Cod_Barra, $Cod_Barra);
+        echo json_encode(['productos' => $producto]);
+    }
+
+    if (isset($_POST['guardar_encargo'])) {
+        $encargo = json_decode($_POST['encargo'], true);
+        if (empty($encargo)) {
+            echo json_encode(['error' => 'No hay productos en el encargo.']);
+            exit;
+        }
+
+        $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
+        $montoAbonado = $_POST['MontoAbonado'];
+        $fkSucursal = $_POST['FkSucursal'];
+        $agregadoPor = $_POST['AgregadoPor'];
+        $idHOD = $_POST['ID_H_O_D'];
+        $estado = $_POST['Estado'];
+        $tipoEncargo = $_POST['TipoEncargo'];
+        
+        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
+        echo json_encode($response);
+    }
+}
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Solicitar Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
-    <?php include "Header.php"?>
-    <style>
-        .error {
-            color: red;
-            margin-left: 5px; 
-        }  
-        .hidden-field {
-            display: none;
-        }
-        .highlight {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-<?php include_once("Menu.php")?>
-<div class="content-wrapper">
-    <section class="content">
-        <div class="container-fluid">
-            <h2>Encargos Pendientes</h2>
-            <table class="table table-bordered" id="encargosTable">
-                <thead>
-                    <tr>
-                        <th>Identificador</th>
-                        <th>Código de Barra</th>
-                        <th>Nombre del Producto</th>
-                        <th>Sucursal</th>
-                        <th>Monto Abonado</th>
-                        <th>Precio de Venta</th>
-                        <th>Cantidad</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $result = obtenerEncargos($conn);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                         echo "<tr>";
-                        echo "<td>{$row['IdentificadorEncargo']}</td>";
-                        echo "<td>{$row['Cod_Barra']}</td>";
-                        echo "<td>{$row['Nombre_Prod']}</td>";
-                        echo "<td>{$row['Fk_sucursal']}</td>";
-                        echo "<td>{$row['MontoAbonado']}</td>";
-                        echo "<td>{$row['Precio_Venta']}</td>";
-                        echo "<td>{$row['Cantidad']}</td>";
-                        echo "<td>{$row['Estado']}</td>";
-                        echo "<td>
-                                <button class='btn btn-success accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='entregar'>Entregado</button>
-                                <button class='btn btn-warning accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='rechazar'>Rechazar</button>
-                                <button class='btn btn-danger accion-encargo' data-id='{$row['Id_Encargo']}' data-accion='eliminar'>Eliminar</button>
-                              </td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
-</div>
-
-<!-- Modal de Confirmación -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Confirmar Acción</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que deseas <span id="modalAction"></span> este encargo?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirmBtn">Confirmar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php include("footer.php");?>
-<script>
-$(document).ready(function() {
-    var idEncargo;
-    var accion;
-
-    $('.accion-encargo').click(function() {
-        idEncargo = $(this).data('id');
-        accion = $(this).data('accion');
-        var accionTexto = {
-            'entregar': 'entregar',
-            'rechazar': 'rechazar',
-            'eliminar': 'eliminar'
-        };
-        $('#modalAction').text(accionTexto[accion]);
-        $('#confirmModal').modal('show');
-    });
-
-    $('#confirmBtn').click(function() {
-        $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
-            type: 'POST',
-            data: { idEncargo: idEncargo, accion: accion },
-            dataType: 'json',
-            success: function(response) {
-                $('#confirmModal').modal('hide');
-                if (response.success) {
-                    alert(response.success);
-                    location.reload();
-                } else if (response.error) {
-                    alert(response.error);
-                }
-            }
-        });
-    });
-});
-</script>
-</body>
-</html>
