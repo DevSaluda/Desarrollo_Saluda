@@ -33,11 +33,14 @@ $(document).ready(function () {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Registro almacenado correctamente!',
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(() => {
-                                // Recargar la página después de que el mensaje se haya cerrado
-                                location.reload();
+                                text: 'Haz clic en el botón para recargar la página.',
+                                showConfirmButton: true,
+                                confirmButtonText: 'Recargar página',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Recargar la página si el usuario hace clic en el botón
+                                    location.reload();
+                                }
                             });
                         } else {
                             Swal.fire({
