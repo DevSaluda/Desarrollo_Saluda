@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Validar el formulario
-    $("#VentasAlmomento").validate({
+    $("#RegistraCaducados").validate({
         rules: {
             clienteInput: {
                 required: true,
@@ -23,7 +23,7 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 url: "Consultas/InsertarMedicamentoCaducado.php", // Asegúrate de que esta ruta sea correcta
-                data: $('#VentasAlmomento').serialize(),
+                data: $('#RegistraCaducados').serialize(),
                 cache: false,
                 success: function (data) {
                     try {
