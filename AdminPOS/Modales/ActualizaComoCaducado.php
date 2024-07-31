@@ -54,7 +54,7 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" hidden name="Fecha_Caducidad"  value="<?php echo $Devoluciones->Fecha_Caducidad; ?>">
                 <input type="text" class="form-control" hidden name="Lote"  value="<?php echo $Devoluciones->Lote; ?>">
 
-      
+                <input type="text" class="form-control" hidden name="Fk_sucursal"  value="<?php echo $Devoluciones->Fk_sucursal; ?>">
 
         
 

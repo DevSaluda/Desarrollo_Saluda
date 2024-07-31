@@ -2,8 +2,8 @@
 include "db_connection.php";
 
 // Obtener y sanitizar los datos del formulario
-$ID_Prod_POS = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['IdBasedatos']))));
-$Cod_Barra = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Cod_Barra']))));
+$ID_BajaProd = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['IdBasedatos']))));
+$Cod_Barra = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['CodBarra']))));
 $Nombre_Prod = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['NombreProd']))));
 $Fk_sucursal = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Fk_sucursal']))));
 $Precio_Venta = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['Precio_Venta']))));
@@ -18,8 +18,8 @@ $ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['ID_H_
 
 // Preparar la consulta SQL para la inserción
 $sql = "INSERT INTO `MedicamentosCaducados` 
-        (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`,  `AgregadoPor`, `AgregadoEl`, `ID_H_O_D`) 
-        VALUES ('$ID_Prod_POS', '$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$Precio_Venta', '$Precio_C', '$Cantidad', '$Lote', '$Fecha_Caducidad', '$AgregadoPor', '$AgregadoEl', '$ID_H_O_D')";
+        (`ID_BajaProd`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Cantidad`, `Lote`, `Fecha_Caducidad`,  `AgregadoPor`, `AgregadoEl`, `ID_H_O_D`) 
+        VALUES ('$ID_BajaProd', '$Cod_Barra', '$Nombre_Prod', '$Fk_sucursal', '$Precio_Venta', '$Precio_C', '$Cantidad', '$Lote', '$Fecha_Caducidad', '$AgregadoPor', '$AgregadoEl', '$ID_H_O_D')";
 
 // Ejecutar la consulta y enviar la respuesta en formato JSON
 if (mysqli_query($conn, $sql)) {
