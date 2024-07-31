@@ -91,7 +91,7 @@ if($query->num_rows>0){
     </div>
     </form>
 
-    <script src="js/ActualizaLosDatosComoCaducados.js"></script>
+    <script src="js/RegistraMedicamentosCaducadosdef.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
