@@ -22,7 +22,7 @@ $(document).ready(function () {
         submitHandler: function () {
             $.ajax({
                 type: 'POST',
-                url: "Consultas/InsertarMedicamentoCaducado.php", // Asegúrate de que esta ruta sea correcta
+                url: "Consultas/ActualizaComoCaducadosLosProductos.php", // Asegúrate de que esta ruta sea correcta
                 data: $('#RegistraCaducados').serialize(),
                 cache: false,
                 success: function (data) {
