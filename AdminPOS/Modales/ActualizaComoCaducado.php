@@ -19,6 +19,8 @@ sb.MotivoBaja,
 sb.AgregadoPor,
 sb.AgregadoEl,
 sb.Estado,
+sb.Precio_C,
+sb.Precio_Venta,
 (sb.Precio_C * sb.Cantidad) AS Total_Compra,
 (sb.Precio_Venta * sb.Cantidad) AS Total_Venta
 FROM
@@ -42,12 +44,15 @@ if($query->num_rows>0){
     
                
                 <input type="text" class="form-control" hidden name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
-                <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregoElVendedor">
+                <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregadoPor">
              
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
          
       
-        
+                <input type="text" class="form-control" hidden name="Precio_Venta"  readonly value="<?php echo $Devoluciones->Precio_Venta; ?>">
+                <input type="text" class="form-control" hidden name="Precio_C"  readonly value="<?php echo $Devoluciones->Precio_C; ?>">
+                <input type="text" class="form-control" hidden name="Fecha_Caducidad"  value="<?php echo $Devoluciones->Fecha_Caducidad; ?>">
+                <input type="text" class="form-control" hidden name="Lote"  value="<?php echo $Devoluciones->Lote; ?>">
 
       
 
@@ -73,7 +78,7 @@ if($query->num_rows>0){
                             <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Prod"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
                            
-                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
+                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"   readonly></td>
                             <td><input type="number" class="form-control"  id="Cantidadaregistrar" name="CantidadAregistrar"></td>
                             
                       
