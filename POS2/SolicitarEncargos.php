@@ -275,6 +275,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
     formData.push({ name: 'guardar_encargo', value: true });
     formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
+    // Enviar a ManejoEncargos.php
     $.ajax({
         url: 'Consultas/ManejoEncargos.php',
         type: 'POST',
@@ -282,19 +283,39 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         dataType: 'json',
         success: function(response) {
             if (response.success) {
-                alert(response.success);
-                $('#encargoTable tbody').empty();
-                $('#totalEncargo').text('0');
-                $('#pagoMinimo').text('0');
-                $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
-                encargo = [];
-                location.reload();
+                // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
+                $.ajax({
+                    url: 'http://localhost:8080/TicketsEncargos',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            alert("Encargo guardado correctamente y ticket generado.");
+                            $('#encargoTable tbody').empty();
+                            $('#totalEncargo').text('0');
+                            $('#pagoMinimo').text('0');
+                            $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
+                            encargo = [];
+                            location.reload();
+                        } else if (response.error) {
+                            alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Encargo guardado, pero no se pudo enviar a TicketsEncargos: " + error);
+                    }
+                });
             } else if (response.error) {
                 alert(response.error);
             }
+        },
+        error: function(xhr, status, error) {
+            alert("Error al guardar el encargo: " + error);
         }
     });
 });
+
 
 
 });
