@@ -43,7 +43,7 @@ while ($fila = $result->fetch_assoc()) {
     if ($estado == "Caducado") {
         $estado = '<button style="background-color: #dc3545 !important;" class="btn btn-default btn-sm">Caducado</button>';
     } else if (empty($estado)) {
-        $estado = '<button style="background-color: #dee2e6 !important;" class="btn btn-default btn-sm">Sin estado</button>';
+        $estado = "";
     } else {
         $estado = '<button style="background-color: white; color: black; padding: 2px 4px; border-radius: 3px; border: none;" class="btn btn-default btn-sm">' . htmlspecialchars($estado) . '</button>';
     }
@@ -67,7 +67,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Estado"] = $estado; // Agrega el estado formateado, // Luego usa $estado para mostrar en la tabla o donde lo necesites
     $data[$c]["Acciones"] = '
     <td>
-    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br>
+    <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br><br><br>
      <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
  
     
