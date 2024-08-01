@@ -77,11 +77,11 @@ $combinedValue = $fcha . ''. $fkSucursal . '' . $idBasedatos;
                     while ($Devolucion = $query->fetch_array()): ?>
                         <tr>
                             
-                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
+                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="Cod_Barras" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Prod"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
                            
                             <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"   readonly></td>
-                            <td><input type="number" class="form-control"  id="Cantidadaregistrar" name="CantidadAregistrar"></td>
+                            <td><input type="number" class="form-control"  id="Cantidadaregistrar" name="Recibido"></td>
                             
                       
                         </tr>
