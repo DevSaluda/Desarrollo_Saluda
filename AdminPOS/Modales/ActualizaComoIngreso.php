@@ -66,7 +66,7 @@ if($query->num_rows>0){
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
-                    <th>Cantidad a registrar</th>
+                    <th>Cantidad a ingresar</th>
                  
                 </thead>
                 <tbody>
@@ -91,7 +91,7 @@ if($query->num_rows>0){
     </div>
     </form>
 
-    <script src="js/RegistraMedicamentosCaducadosdef.js"></script>
+    <script src="js/RegistraMedicamentosIngresos.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
