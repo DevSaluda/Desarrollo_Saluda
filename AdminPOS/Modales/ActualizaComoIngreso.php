@@ -53,7 +53,7 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" hidden name="Precio_C"  readonly value="<?php echo $Devoluciones->Precio_C; ?>">
                 <input type="text" class="form-control" hidden name="Fecha_Caducidad"  value="<?php echo $Devoluciones->Fecha_Caducidad; ?>">
                 <input type="text" class="form-control"  name="Lote"  value="<?php echo $Devoluciones->Lote; ?>">
-                <input type="text" class="form-control" id="facturaInpu" hidden name="Factura" >
+                <input type="text" class="form-control" id="facturaInput" hidden name="Factura" >
                 <input type="text" class="form-control" id="fkSucursalInput"hidden name="Fk_sucursal"  value="<?php echo $Devoluciones->Fk_sucursal; ?>">
 
                 <script>
