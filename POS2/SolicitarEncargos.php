@@ -110,6 +110,7 @@ $(document).ready(function() {
             data: { buscar_producto: true, Cod_Barra: $('#Cod_Barra').val() },
             dataType: 'json',
             success: function(response) {
+                console.log(response); // Verifica la respuesta
                 if (response.productos.length === 1) {
                     const producto = response.productos[0];
                     $('#productoFormContainer').html(`
@@ -191,6 +192,7 @@ $(document).ready(function() {
             Cantidad: $('#Cantidad').val(),
             Total: (parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val())).toFixed(2)
         };
+        console.log('Producto a agregar:', producto); // Verifica los datos del producto
         encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
@@ -201,6 +203,7 @@ $(document).ready(function() {
         const producto = JSON.parse($('#ProductoSeleccionado').val());
         producto.Cantidad = $('#Cantidad_Multiple').val();
         producto.Total = (parseFloat($('#Precio_Venta_Multiple').val()) * parseInt($('#Cantidad_Multiple').val())).toFixed(2);
+        console.log('Producto a agregar (múltiple):', producto); // Verifica los datos del producto múltiple
         encargo.push(producto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
@@ -229,7 +232,7 @@ $(document).ready(function() {
                         success: function(ticketResponse) {
                             if (ticketResponse.success) {
                                 alert('Encargo guardado y ticket generado con éxito');
-                                window.location.href = 'ver_encargos.php'; // Redirigir a la lista de encargos
+                                location.reload();
                             } else {
                                 alert('Error al generar el ticket. Inténtelo de nuevo.');
                             }
@@ -242,6 +245,3 @@ $(document).ready(function() {
         });
     });
 });
-</script>
-</body>
-</html>
