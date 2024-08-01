@@ -460,7 +460,7 @@ function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
   $.ajax({
-    url: "Consultas/escaner_articulosCEDISMOVIL.php",
+    url: "Consultas/escaner_articuloCEDISMOVIL.php",
     type: 'POST',
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
