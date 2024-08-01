@@ -305,18 +305,6 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
               // Al completar la inicialización de la tabla, ocultar el mensaje de carga
               ocultarCargando();
             },
-            "buttons": [
-              {
-                extend: 'excelHtml5',
-                text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-                titleAttr: 'Exportar a Excel',
-                title: 'Filtrado de traspasos del <?php echo $mes; ?> al <?php echo $anual; ?>', // Concatena los valores de $mes y $anual en el título
-                className: 'btn btn-success',
-                exportOptions: {
-                  columns: ':visible' // Exportar solo las columnas visibles
-                }
-              }
-            ],
             "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
             "responsive": true
           });

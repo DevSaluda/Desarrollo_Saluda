@@ -886,7 +886,7 @@ function eliminarFila(element) {
   include ("footer.php")?>
 
 <!-- ./wrapper -->
-<script src="js/RealizaTraspasosDeCedisMovil.js"></script>
+<script src="js/RealizaTraspasosDeCedisMovil2.js"></script>
 
 
 
