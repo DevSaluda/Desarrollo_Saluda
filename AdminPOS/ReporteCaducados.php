@@ -101,10 +101,10 @@ include "Consultas/Consultas.php";
     });
 
     // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
-    $(document).on("click", ".btn-ActualizarCaducado", function() {
+    $(document).on("click", ".btn-GeneraIngreso", function() {
     
     var id = $(this).data("id");
-    $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
+    $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoIngreso.php", { id: id }, function(data) {
         $("#form-edit").html(data);
         $("#Titulo").html("Registrando como caducados");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
