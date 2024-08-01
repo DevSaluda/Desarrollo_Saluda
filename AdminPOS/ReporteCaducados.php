@@ -108,6 +108,7 @@ include "Consultas/Consultas.php";
         $("#form-edit").html(data);
         $("#Titulo").html("Generando ingreso a cedis");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+        $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
         $("#Di").addClass("modal-dialog modal-xl modal-notify modal-primary");
     });
     $('#editModal').modal('show');
