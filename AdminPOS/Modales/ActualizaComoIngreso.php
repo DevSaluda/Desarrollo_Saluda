@@ -57,8 +57,8 @@ $combinedValue = $fcha . '|' . $fkSucursal . '|' . $idBasedatos;
 <input type="text" class="form-control" hidden name="Precio_Venta" readonly value="<?php echo htmlspecialchars($Devoluciones->Precio_Venta, ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" hidden name="Precio_C" readonly value="<?php echo htmlspecialchars($Devoluciones->Precio_C, ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" hidden name="Fecha_Caducidad" value="<?php echo htmlspecialchars($Devoluciones->Fecha_Caducidad, ENT_QUOTES, 'UTF-8'); ?>">
-<input type="text" class="form-control" name="Lote" value="<?php echo htmlspecialchars($Devoluciones->Lote, ENT_QUOTES, 'UTF-8'); ?>">
-<input type="text" class="form-control" id="facturaInput" hidden name="Factura" value="<?php echo $combinedValue; ?>">
+<input type="text" class="form-control" hidden name="Lote" value="<?php echo htmlspecialchars($Devoluciones->Lote, ENT_QUOTES, 'UTF-8'); ?>">
+<input type="text" class="form-control" id="facturaInput"  name="Factura" value="<?php echo $combinedValue; ?>">
 <input type="text" class="form-control" id="fkSucursalInput" hidden name="Fk_sucursal" value="<?php echo $fkSucursal; ?>">
      <div class="text-center">
         <div class="table-responsive">
