@@ -275,7 +275,12 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
     formData.push({ name: 'guardar_encargo', value: true });
     formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
-    // Enviar a ManejoEncargos.php
+    $('#guardarEncargoForm').submit(function(e) {
+    e.preventDefault();
+    const formData = $(this).serializeArray();
+    formData.push({ name: 'guardar_encargo', value: true });
+    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+
     $.ajax({
         url: 'Consultas/ManejoEncargos.php',
         type: 'POST',
@@ -283,7 +288,6 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         dataType: 'json',
         success: function(response) {
             if (response.success) {
-                // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
                 $.ajax({
                     url: 'http://localhost:8080/ticket/TicketEncargos.php',
                     type: 'POST',
@@ -295,7 +299,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                             $('#encargoTable tbody').empty();
                             $('#totalEncargo').text('0');
                             $('#pagoMinimo').text('0');
-                            $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
+                            $('#MontoAbonado').val('');
                             encargo = [];
                             location.reload();
                         } else if (response.error) {
@@ -304,11 +308,10 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                         }
                     },
                     error: function(xhr, status, error) {
-    console.log(xhr.responseText); // Muestra la respuesta completa del servidor en la consola
-    alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-    location.reload();
-}
-
+                        console.log(xhr.responseText);
+                        alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
+                        location.reload();
+                    }
                 });
             } else if (response.error) {
                 alert(response.error);
@@ -321,6 +324,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         }
     });
 });
+
 
 
 
