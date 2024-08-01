@@ -275,6 +275,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
     formData.push({ name: 'guardar_encargo', value: true });
     formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
+    // Enviar a ManejoEncargos.php
     $('#guardarEncargoForm').submit(function(e) {
     e.preventDefault();
     const formData = $(this).serializeArray();
@@ -328,6 +329,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
 
 
 
+});
 });
 </script>
 </body>
