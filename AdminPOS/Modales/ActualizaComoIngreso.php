@@ -47,7 +47,7 @@ $fkSucursal = htmlspecialchars($Devoluciones->Fk_sucursal, ENT_QUOTES, 'UTF-8');
 $fcha;
 
 // Concatenar los valores
-$combinedValue = $fcha . '|' . $fkSucursal . '|' . $idBasedatos;
+$combinedValue = $fcha . ''. $fkSucursal . '' . $idBasedatos;
 ?>
     <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
     
