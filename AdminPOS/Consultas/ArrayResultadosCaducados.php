@@ -70,7 +70,7 @@ while ($fila = $result->fetch_assoc()) {
     <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br><br>
      <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
  
-    
+     <a data-id="' . $fila["Id_Baja"] . '" class="btn btn-warning btn-sm btn-GeneraIngreso"><i class="fas fa-people-carry"></i></a>
     </td>';
     $c++;
 }

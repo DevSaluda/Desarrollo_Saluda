@@ -99,6 +99,19 @@ include "Consultas/Consultas.php";
         });
         $('#editModal').modal('show');
     });
+
+    // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
+    $(document).on("click", ".btn-ActualizarCaducado", function() {
+    
+    var id = $(this).data("id");
+    $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
+        $("#form-edit").html(data);
+        $("#Titulo").html("Registrando como caducados");
+        $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+        $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
+    });
+    $('#editModal').modal('show');
+});
     $(document).on("click", ".btn-GeneraRotacion", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
