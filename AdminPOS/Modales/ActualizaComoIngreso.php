@@ -40,36 +40,26 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
+    <?php
+// Obtener los valores
+$idBasedatos = htmlspecialchars($Devoluciones->Id_Baja, ENT_QUOTES, 'UTF-8');
+$fkSucursal = htmlspecialchars($Devoluciones->Fk_sucursal, ENT_QUOTES, 'UTF-8');
+$fcha = htmlspecialchars($row['Nombre_Apellidos'], ENT_QUOTES, 'UTF-8'); // Asumiendo que $fcha es en realidad $row['Nombre_Apellidos']
+
+// Concatenar los valores
+$combinedValue = $fcha . '|' . $fkSucursal . '|' . $idBasedatos;
+?>
     <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
     
-               
-    <input type="text" class="form-control" id="idBasedatosInput" hidden name="IdBasedatos" readonly value="<?php echo htmlspecialchars($Devoluciones->Id_Baja, ENT_QUOTES, 'UTF-8'); ?>">
-<input type="text" class="form-control" hidden value="<?php echo htmlspecialchars($row['Nombre_Apellidos'], ENT_QUOTES, 'UTF-8'); ?>" readonly name="AgregadoPor">
+    <input type="text" class="form-control" id="idBasedatosInput" hidden name="IdBasedatos" readonly value="<?php echo $idBasedatos; ?>">
+<input type="text" class="form-control" hidden name="AgregadoPor" readonly value="<?php echo htmlspecialchars($row['Nombre_Apellidos'], ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" hidden name="ID_H_O_D" readonly value="Saluda">
 <input type="text" class="form-control" hidden name="Precio_Venta" readonly value="<?php echo htmlspecialchars($Devoluciones->Precio_Venta, ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" hidden name="Precio_C" readonly value="<?php echo htmlspecialchars($Devoluciones->Precio_C, ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" hidden name="Fecha_Caducidad" value="<?php echo htmlspecialchars($Devoluciones->Fecha_Caducidad, ENT_QUOTES, 'UTF-8'); ?>">
 <input type="text" class="form-control" name="Lote" value="<?php echo htmlspecialchars($Devoluciones->Lote, ENT_QUOTES, 'UTF-8'); ?>">
-<input type="text" class="form-control" id="facturaInput" hidden name="Factura">
-<input type="text" class="form-control" id="fkSucursalInput" hidden name="Fk_sucursal" value="<?php echo htmlspecialchars($Devoluciones->Fk_sucursal, ENT_QUOTES, 'UTF-8'); ?>">
-
-
-<script>
-// Asegúrate de que el script se ejecute después de que la página se haya cargado
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtener los valores de los inputs
-    var fcha = ''; // No hay valor por defecto para `facturaInput` ya que es inicialmente vacío
-    var fkSucursal = document.getElementById('fkSucursalInput').value;
-    var idBasedatos = document.getElementById('idBasedatosInput').value;
-
-    // Concatenar los valores
-    var combinedValue = fcha + '|' + fkSucursal + '|' + idBasedatos;
-
-    // Establecer el valor en el input oculto
-    document.getElementById('facturaInput').value = combinedValue;
-});
-</script>
-
+<input type="text" class="form-control" id="facturaInput" hidden name="Factura" value="<?php echo $combinedValue; ?>">
+<input type="text" class="form-control" id="fkSucursalInput" hidden name="Fk_sucursal" value="<?php echo $fkSucursal; ?>">
      <div class="text-center">
         <div class="table-responsive">
             <table id="HistorialDevoluciones" class="table table-hover">
