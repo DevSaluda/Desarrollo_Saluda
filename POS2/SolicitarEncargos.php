@@ -273,7 +273,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         e.preventDefault();
         const formData = $(this).serialize();
         $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
+            url: 'http://localhost:8080/ticket/TicketEncargos.php',
             type: 'POST',
             data: { guardar_encargo: true, form_data: formData, encargo: encargo },
             success: function(response) {
