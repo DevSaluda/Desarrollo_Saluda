@@ -44,7 +44,7 @@ if($query->num_rows>0){
 // Obtener los valores
 $idBasedatos = htmlspecialchars($Devoluciones->Id_Baja, ENT_QUOTES, 'UTF-8');
 $fkSucursal = htmlspecialchars($Devoluciones->Fk_sucursal, ENT_QUOTES, 'UTF-8');
-$fcha = htmlspecialchars($row['Nombre_Apellidos'], ENT_QUOTES, 'UTF-8'); // Asumiendo que $fcha es en realidad $row['Nombre_Apellidos']
+$fcha;
 
 // Concatenar los valores
 $combinedValue = $fcha . '|' . $fkSucursal . '|' . $idBasedatos;
