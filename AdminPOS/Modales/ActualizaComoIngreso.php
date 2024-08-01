@@ -43,7 +43,7 @@ if($query->num_rows>0){
     <form action="javascript:void(0)" method="post" id="RegistraCaducados" >
     
                
-                <input type="text" class="form-control" hidden name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
+                <input type="text" class="form-control" id="idBasedatosInput" hidden name="IdBasedatos"  readonly value="<?php echo $Devoluciones->Id_Baja; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="AgregadoPor">
              
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
@@ -52,11 +52,22 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" hidden name="Precio_Venta"  readonly value="<?php echo $Devoluciones->Precio_Venta; ?>">
                 <input type="text" class="form-control" hidden name="Precio_C"  readonly value="<?php echo $Devoluciones->Precio_C; ?>">
                 <input type="text" class="form-control" hidden name="Fecha_Caducidad"  value="<?php echo $Devoluciones->Fecha_Caducidad; ?>">
-                <input type="text" class="form-control" hidden name="Lote"  value="<?php echo $Devoluciones->Lote; ?>">
+                <input type="text" class="form-control"  name="Lote"  value="<?php echo $Devoluciones->Lote; ?>">
+                <input type="text" class="form-control" id="facturaInpu" hidden name="Factura" >
+                <input type="text" class="form-control" id="fkSucursalInput"hidden name="Fk_sucursal"  value="<?php echo $Devoluciones->Fk_sucursal; ?>">
 
-                <input type="text" class="form-control" hidden name="Fk_sucursal"  value="<?php echo $Devoluciones->Fk_sucursal; ?>">
+                <script>
+    // Obtener los valores de los inputs
+    var fcha = document.getElementById('facturaInput').value;
+    var fkSucursal = document.getElementById('fkSucursalInput').value;
+    var idBasedatos = document.getElementById('idBasedatosInput').value;
 
-        
+    // Concatenar los valores
+    var combinedValue = fcha + '|' + fkSucursal + '|' + idBasedatos;
+
+    // Establecer el valor en el input oculto
+    document.getElementById('facturaInput').value = combinedValue;
+</script>
 
      <div class="text-center">
         <div class="table-responsive">
