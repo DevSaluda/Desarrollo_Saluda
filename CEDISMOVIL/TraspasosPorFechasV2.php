@@ -344,7 +344,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
 
   <!-- Modales y scripts -->
   <?php
-include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaTraspasosFechasV2.php");
   include ("footer.php");
   ?>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
