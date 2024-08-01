@@ -106,7 +106,7 @@ include "Consultas/Consultas.php";
     var id = $(this).data("id");
     $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoIngreso.php", { id: id }, function(data) {
         $("#form-edit").html(data);
-        $("#Titulo").html("Registrando como caducados");
+        $("#Titulo").html("Generando ingreso a cedis");
         $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
         $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
     });
@@ -117,7 +117,7 @@ include "Consultas/Consultas.php";
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/RealizaRotacionMedicamentos.php", { id: id }, function(data) {
             $("#form-edit").html(data);
-            $("#Titulo").html("Productos Caducados");
+            $("#Titulo").html("Generando traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
             $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
             $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
