@@ -14,7 +14,7 @@
 
         <div class="modal-body">
 
-          <form method="POST" action="https://saludapos.com/CEDISMOVIL/TraspasosPorFechasV2">
+          <form method="POST" action="https://saludapos.com/CEDISMOVIL/TraspasosPorFechas">
 
 
 
