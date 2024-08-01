@@ -283,47 +283,48 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
     formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
 
     $.ajax({
-        url: 'Consultas/ManejoEncargos.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                $.ajax({
-                    url: 'http://localhost:8080/ticket/TicketEncargos.php',
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            alert("Encargo guardado correctamente y ticket generado.");
-                            $('#encargoTable tbody').empty();
-                            $('#totalEncargo').text('0');
-                            $('#pagoMinimo').text('0');
-                            $('#MontoAbonado').val('');
-                            encargo = [];
-                            location.reload();
-                        } else if (response.error) {
-                            alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
-                            location.reload();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                        alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
+    url: 'Consultas/ManejoEncargos.php',
+    type: 'POST',
+    data: formData,
+    dataType: 'json',
+    success: function(response) {
+        if (response.success) {
+            $.ajax({
+                url: 'http://localhost:8080/ticket/TicketEncargos.php',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        alert("Encargo guardado correctamente y ticket generado.");
+                        $('#encargoTable tbody').empty();
+                        $('#totalEncargo').text('0');
+                        $('#pagoMinimo').text('0');
+                        $('#MontoAbonado').val('');
+                        encargo = [];
+                        location.reload();
+                    } else if (response.error) {
+                        alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
                         location.reload();
                     }
-                });
-            } else if (response.error) {
-                alert(response.error);
-                location.reload();
-            }
-        },
-        error: function(xhr, status, error) {
-            alert("Error al guardar el encargo: " + error);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText); // Agrega esta línea
+                    alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
+                    location.reload();
+                }
+            });
+        } else if (response.error) {
+            alert(response.error);
             location.reload();
         }
-    });
+    },
+    error: function(xhr, status, error) {
+        alert("Error al guardar el encargo: " + error);
+        location.reload();
+    }
+});
+
 });
 
 
