@@ -846,7 +846,7 @@
           </li>
           <li class="nav-item">
             <a href="PedidosSugerencias" class="nav-link">
-            <i class="fas fa-prescription-bottle"></i>
+            <i class="fas fa-shopping-cart"></i>
               <p>
             Pedidos               
               </p>
