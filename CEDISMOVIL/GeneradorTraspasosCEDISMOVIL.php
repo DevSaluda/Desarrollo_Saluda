@@ -497,7 +497,7 @@ function buscarArticulo(codigoEscaneado) {
     }
     // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
     $.ajax({
-        url: "https://saludapos.com/CEDISMOVIL/Consultas/codigosinexistir.php",
+        url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
         type: 'POST',
         data: { codigo: codigo, sucursal: sucursal },
         dataType: 'json',
@@ -556,7 +556,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado_CEDISMOVIL.php',
+      url: 'Consultas/autocompletado_Cedis.php',
       type: 'GET',
       dataType: 'json',
       data: {

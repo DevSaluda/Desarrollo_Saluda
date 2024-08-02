@@ -35,7 +35,7 @@ $(document).ready(function($) {
     function submitForm() {
         $.ajax({
             type: 'POST',
-            url: "Consultas/TraspasoAlMomentoCedisMovil.php",
+            url: "Consultas/TraspasoAlMomentoCedis.php",
             data: $('#Generamelostraspasos').serialize(),
             cache: false,
             beforeSend: function() {
