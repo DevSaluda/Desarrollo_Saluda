@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     vp.Fk_sucursal,
     -- Subconsulta para obtener el último valor de NumOrdPedido y sumarle 1
     (SELECT 
-        MAX(NumOrdPedido) + 1
+        IFNULL(MAX(NumOrdPedido), 0) + 1
      FROM 
         Sugerencias_POS
      WHERE 
