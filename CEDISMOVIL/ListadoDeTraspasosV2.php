@@ -78,15 +78,15 @@ include "Consultas/Consultas.php";
 
 <?php
 include("Modales/BusquedaTraspasosFechasV2.php");
-include("Modales/RealizaNuevaOrdenTraspaso.php");
-include("Modales/RealizaNuevaOrdenTraspasoPorSucursales.php");
+include("Modales/RealizaNuevaOrdenTraspasoCEDISMOVIL.php");
+include("Modales/RealizaNuevaOrdenTraspasoPorSucursalesCEDISMOVIL.php");
 
 include("footer.php") ?>
 
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ListaDeTraspasosV2.js"></script>
+<script src="js/ListaDeTraspasosCEDISMOVIL.js"></script>
 
 
 <?php include "datatables.php"?>
