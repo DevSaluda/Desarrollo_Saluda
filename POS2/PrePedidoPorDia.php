@@ -207,7 +207,8 @@ include "Consultas/Consultas.php";
               }
             },
             "columns": [
-              { "data": "Cod_Barra" },
+            { "data": "NumOrdPedidoModificado" },  
+            { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
             
               { "data": "Turno" },

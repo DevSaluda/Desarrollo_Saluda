@@ -14,47 +14,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         // Concatena los valores en la consulta SQL
         $sql = "SELECT 
-        vp.Cod_Barra,
-        vp.Nombre_Prod,
-        SUM(vp.Cantidad_Venta) AS Total_Cantidad_Vendida,
-        sp.Proveedor1,
-        sp.Proveedor2,
-        sp.Nombre_Prod AS Nombre_Prod_Stock,
-        sp.FkPresentacion,
-        sp.Precio_Venta,
-        sp.Precio_C,
-        vp.Fk_sucursal
-    FROM 
-        Ventas_POS vp
-    INNER JOIN 
-        Stock_POS sp ON vp.Cod_Barra = sp.Cod_Barra AND vp.Fk_sucursal = sp.Fk_sucursal
-    INNER JOIN 
-        Servicios_POS sv ON vp.Identificador_tipo = sv.Servicio_ID
-    INNER JOIN
-        SucursalesCorre sc ON vp.Fk_sucursal = sc.ID_SucursalC
-    WHERE 
-        vp.Fecha_venta = CURRENT_DATE
-        AND vp.Fk_sucursal = $mes
-        AND sv.Servicio_ID = '00000000024'
-    GROUP BY 
-        vp.Cod_Barra, 
-        vp.Nombre_Prod, 
-        sp.Proveedor1, 
-        sp.Proveedor2, 
-        sp.Nombre_Prod, 
-        sp.FkPresentacion, 
-        sp.Precio_Venta, 
-        sp.Precio_C, 
-        vp.Fk_sucursal
-    ORDER BY 
-        vp.Cod_Barra";
-
+    vp.Cod_Barra,
+    vp.Nombre_Prod,
+    SUM(vp.Cantidad_Venta) AS Total_Cantidad_Vendida,
+    sp.Proveedor1,
+    sp.Proveedor2,
+    sp.Nombre_Prod AS Nombre_Prod_Stock,
+    sp.FkPresentacion,
+    sp.Precio_Venta,
+    sp.Precio_C,
+    vp.Fk_sucursal,
+    -- Subconsulta para obtener el último valor de NumOrdPedido y sumarle 1
+    (SELECT 
+        MAX(NumOrdPedido) + 1
+     FROM 
+        Sugerencias_POS
+     WHERE 
+        Fk_sucursal = vp.Fk_sucursal
+    ) AS NumOrdPedidoModificado
+FROM 
+    Ventas_POS vp
+INNER JOIN 
+    Stock_POS sp ON vp.Cod_Barra = sp.Cod_Barra AND vp.Fk_sucursal = sp.Fk_sucursal
+INNER JOIN 
+    Servicios_POS sv ON vp.Identificador_tipo = sv.Servicio_ID
+INNER JOIN
+    SucursalesCorre sc ON vp.Fk_sucursal = sc.ID_SucursalC
+WHERE 
+    vp.Fecha_venta = CURRENT_DATE
+    AND vp.Fk_sucursal = '$mes' -- Asegúrate de escapar esta variable
+    AND sv.Servicio_ID = '00000000024'
+GROUP BY 
+    vp.Cod_Barra, 
+    vp.Nombre_Prod, 
+    sp.Proveedor1, 
+    sp.Proveedor2, 
+    sp.Nombre_Prod, 
+    sp.FkPresentacion, 
+    sp.Precio_Venta, 
+    sp.Precio_C, 
+    vp.Fk_sucursal
+ORDER BY 
+    vp.Cod_Barra";
         $result = mysqli_query($conn, $sql);
 
         $data = []; // Inicializa $data como un array vacío
         $c = 0;
 
         while($fila = $result->fetch_assoc()) {
+            $data[$c]["NumOrdPedidoModificado"] = '<input type="text" class="form-control" name="CodBarra[]" value="' . $fila["NumOrdPedidoModificado"] . '" readonly>';
             $data[$c]["Cod_Barra"] = '<input type="text" class="form-control" name="CodBarra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" class="form-control" name="NombreProd[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["Turno"] = '<input type="text" class="form-control"name="Cantidadd[]" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
