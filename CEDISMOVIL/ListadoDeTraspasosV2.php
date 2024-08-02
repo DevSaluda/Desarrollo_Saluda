@@ -77,7 +77,7 @@ include "Consultas/Consultas.php";
 <!-- Main Footer -->
 
 <?php
-include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaTraspasosFechasV2.php");
 include("Modales/RealizaNuevaOrdenTraspaso.php");
 include("Modales/RealizaNuevaOrdenTraspasoPorSucursales.php");
 
@@ -86,7 +86,7 @@ include("footer.php") ?>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/ListaDeTraspasos.js"></script>
+<script src="js/ListaDeTraspasosV2.js"></script>
 
 
 <?php include "datatables.php"?>
