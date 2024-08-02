@@ -24,6 +24,29 @@
                 <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
               </div>
             </div>
+            <div class="row">
+    <div class="col">
+    <label for="exampleFormControlInput1">Fecha inicio </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <input type="date" class="form-control " name="Fecha1">
+  <input type="text" name="Sucursal" hidden value="<?echo $row['Fk_Sucursal']?>">
+  
+    </div>
+    </div>
+    
+    <div class="col">
+    <label for="exampleFormControlInput1">Fecha fin</label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <input type="date" class="form-control " name="Fecha2">
+    </div>
+    
+
+  <div>     </div>
+  </div>  </div>
             <input type="text" hidden class="form-control" name="Mes"value="<?php echo $row['Fk_Sucursal']?>">
             <div class="row">
               <div class="col text-center">
