@@ -1,6 +1,19 @@
 <?php
 header('Content-Type: application/json');
+$sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis DESC LIMIT 1";
+$resultset = mysqli_query($conn, $sql);
 
+if (!$resultset) {
+    die("database error: " . mysqli_error($conn));
+}
+
+$Ticketss = mysqli_fetch_assoc($resultset);
+
+
+
+$monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
+$monto2 = 1;
+$totalmonto = $monto1 + $monto2;
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 include("db_connection.php");
 include "Consultas.php";
@@ -60,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Turno"] = '<input type="text" class="form-control"name="Cantidadd[]" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
             $data[$c]["Importe"] = '<input type="text" class="form-control" name="Prov1[]" value="' . $fila["Proveedor1"] . '" readonly>';
             $data[$c]["Total_Venta"] = '<input type="text" class="form-control" name="Prov2[] "value="' . $fila["Proveedor2"] . '" readonly>';
+            $data[$c]["NumOrden"] = '<input type="text" class="form-control" name="Prov2[] "value="' . $totalmonto. '" readonly>';
             $data[$c]["Descuento"] = '<input type="text" class="form-control" name="Presentacion[] value="' . $fila["FkPresentacion"] . '" >
            <input type="text" hidden class="form-control" name="Sucursal[]" value="' . $fila["Fk_sucursal"] . '"  readonly>
            <input type="text" hidden class="form-control" name="FechaIngreso[]" value="' .$fechaActual. '" readonly >
