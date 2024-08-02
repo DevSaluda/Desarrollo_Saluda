@@ -252,6 +252,7 @@ include "Consultas/Consultas.php";
         <button type="submit" class="btn btn-primary">Generar Pedido</button>
           <table id="Productos" class="hover" style="width:100%">
             <thead>
+            <th>Cod</th>
               <th>Cod</th>
               <th>Nombre comercial</th>
               
