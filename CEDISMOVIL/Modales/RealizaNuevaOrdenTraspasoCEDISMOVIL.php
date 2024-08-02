@@ -33,7 +33,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://saludapos.com/CEDISMOVIL/GeneradorTraspasosV2">
+ <form  method="POST" action="https://saludapos.com/CEDISMOVIL/GeneradorTraspasosCEDISMOVIL">
     <div class="form-group">
   <label for="exampleInputEmail1">Elija proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
