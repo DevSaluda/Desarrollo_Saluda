@@ -38,7 +38,9 @@ $query = $conn->query($sql1);
                 <th>Eliminar</th>
             </thead>
             <tbody>
-                <?php while ($Ultras = $query->fetch_array()): ?>
+                <?php while ($Ultras = $query->fetch_array()): 
+                    $nombreSucursal = ($Ultras['ID_Sucursal'] === "TeaClinica") ? "Teabo Clinica" : $Ultras['ID_Sucursal'];  
+                    ?>
                     <tr>
                         <td style="width:50px;"><?php echo $Ultras["ID_resultado"]; ?></td>
                         <td><?php echo $Ultras["Nombre_paciente"]; ?></td>
@@ -49,7 +51,7 @@ $query = $conn->query($sql1);
                             <a class="btn btn-secondary btn-sm" target="_blank" href="EntregaUltraM?Nombre_paciente=<?php echo $Ultras["Nombre_paciente"]; ?>"><span class="far fa-file-pdf"></span><span class="hidden-xs"></span></a>
                         </td>
                         <td>
-                            <a class="btn btn-success btn-sm" href="https://api.whatsapp.com/send?phone=+52<?php echo $Ultras['Telefono']; ?>&text=¡Hola, <?php echo $Ultras['Nombre_paciente']; ?>!✨, te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?php echo $Ultras['ID_Sucursal']; ?>, quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
+                            <a class="btn btn-success btn-sm" href="https://api.whatsapp.com/send?phone=+52<?php echo $Ultras['Telefono']; ?>&text=¡Hola, <?php echo $Ultras['Nombre_paciente']; ?>!✨, te enviamos tu ultrasonido realizado en nuestra Clínica Saluda <?php echo $nombreSucursal; ?>, quedamos atentos y te recordamos que contamos con farmacia, laboratorio, consulta médica y especialistas 😊¡Quedamos a tus órdenes! 🤗" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
                         </td>
                         <td><button data-id="<?php echo $Ultras["ID_resultado"]; ?>" class="btn-edit btn btn-info btn-sm"><i class="far fa-edit"></i></button></td>
                         <td><a href="#" id="del2-<?php echo $Ultras["ID_resultado"]; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
