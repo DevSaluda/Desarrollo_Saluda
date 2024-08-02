@@ -21,6 +21,7 @@ $query = $conn->query($sql1);
 ?>
 
 <?php if($query->num_rows>0):?>
+  
   <div class="text-center">
 	<div class="table-responsive">
 	<table id="Ultras" class="table ">
@@ -36,7 +37,9 @@ $query = $conn->query($sql1);
 
 
 </thead>
-<?php while ($Ultras=$query->fetch_array()):?>
+<?php while ($Ultras=$query->fetch_array()):
+  $nombreSucursal = ($Ultras['ID_Sucursal'] === "TeaClinica") ? "Teabo Clinica" : $Ultras['ID_Sucursal'];  
+?>
 <tr>
 	<td style="width:50px;" ><?php echo $Ultras["ID_resultado"]; ?></td>
 	<td><?php echo $Ultras["Nombre_paciente"]; ?></td>
