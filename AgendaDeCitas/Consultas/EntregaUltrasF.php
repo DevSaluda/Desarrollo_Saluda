@@ -38,7 +38,7 @@ $query = $conn->query($sql1);
 
 </thead>
 <?php while ($Ultras=$query->fetch_array()):
-  $nombreSucursal = ($Ultras["Nombre_Sucursal"] === "TeaClinica") ? "Teabo Clinica" : $Ultras["Nombre_Sucursal"];  
+  $nombreSucursal = ($Ultras['ID_Sucursal'] === "TeaClinica") ? "Teabo Clinica" : $Ultras['ID_Sucursal'];  
 ?>
 <tr>
 	<td style="width:50px;" ><?php echo $Ultras["ID_resultado"]; ?></td>
