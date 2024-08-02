@@ -62,7 +62,7 @@ ORDER BY
         $c = 0;
 
         while($fila = $result->fetch_assoc()) {
-            $data[$c]["NumOrdPedidoModificado"] = '<input type="text" class="form-control" name="CodBarra[]" value="' . $fila["NumOrdPedidoModificado"] . '" readonly>';
+            $data[$c]["NumOrdPedidoModificado"] = '<input type="text" class="form-control" name="CodigoPedido[]" value="' . $fila["NumOrdPedidoModificado"] . '" readonly>';
             $data[$c]["Cod_Barra"] = '<input type="text" class="form-control" name="CodBarra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" class="form-control" name="NombreProd[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["Turno"] = '<input type="text" class="form-control"name="Cantidadd[]" value="' . $fila["Total_Cantidad_Vendida"] . '" readonly>';
