@@ -4,20 +4,7 @@ header('Content-Type: application/json');
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 include("db_connection.php");
 include "Consultas.php";
-$sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis DESC LIMIT 1";
-$resultset = mysqli_query($conn, $sql);
 
-if (!$resultset) {
-    die("database error: " . mysqli_error($conn));
-}
-
-$Ticketss = mysqli_fetch_assoc($resultset);
-
-
-
-$monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
-$monto2 = 1;
-$totalmonto = $monto1 + $monto2;
 // Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si las variables están seteadas y no son nulas
