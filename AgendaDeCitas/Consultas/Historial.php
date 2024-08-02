@@ -62,7 +62,7 @@ $query = $conn->query($sql1);
                             event.preventDefault();
                             
                             $("#Celimina").click(function () {
-                                $.post("https://saludapos.com/ServiciosEspecializados/Consultas/Eliminaresultado.php", "id=" + <?php echo $Ultras["ID_resultado"]; ?>, function (data) {
+                                $.post("https://saludapos.com/AgendaDeCitas/Consultas/Eliminaresultado.php", "id=" + <?php echo $Ultras["ID_resultado"]; ?>, function (data) {
                                     CargaHistorial();
                                 });
                             });
@@ -79,7 +79,7 @@ $query = $conn->query($sql1);
 <script>
     $(".btn-edit").click(function(){
         id = $(this).data("id");
-        $.post("https://saludapos.com/ServiciosEspecializados/Modales/EditaEstatusUltraC.php", "id=" + id, function(data){
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/EditaEstatusUltraC.php", "id=" + id, function(data){
             $("#form-edit").html(data);
         });
         $('#editModal').modal('show');
