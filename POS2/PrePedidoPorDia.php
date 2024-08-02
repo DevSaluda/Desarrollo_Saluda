@@ -1,5 +1,19 @@
 <?php
 include "Consultas/Consultas.php";
+$sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis DESC LIMIT 1";
+$resultset = mysqli_query($conn, $sql);
+
+if (!$resultset) {
+    die("database error: " . mysqli_error($conn));
+}
+
+$Ticketss = mysqli_fetch_assoc($resultset);
+
+
+
+$monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
+$monto2 = 1;
+$totalmonto = $monto1 + $monto2;
 ?>
 
 <!DOCTYPE html>
