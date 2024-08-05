@@ -308,7 +308,7 @@ $(document).ready(function() {
               <th>Proveedor 1</th>
               <th>Proveedor 2</th>
               <th>Solicitante</th>
-              
+              <th>Solicitante</th>
              
             </thead>
           </table>
