@@ -54,7 +54,7 @@ if ($Sugerencias != null) {
                     </div>
                     
                     <!-- Formulario para registrar caducados -->
-                    <form action="javascript:void(0)" method="post" id="RegistraCaducados">
+                    <form action="GeneradorDeEncargos" method="post" >
                        
 
                         
@@ -67,7 +67,7 @@ if ($Sugerencias != null) {
         </div>
     </div>
 
-    <script src="js/RegistraMedicamentosCaducadosdef.js"></script>
+  
 
  
 
