@@ -32,7 +32,7 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Pedido"] = $fila["NumOrdPedido"];
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Fecha_Agregado"] = $fila["Fecha_Agregado"];
-    $data[$c]["Fk_sucursal"] = $fila["Fk_sucursal"];
+   
     $data[$c]["Acciones"] = '
     <td>
         <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>

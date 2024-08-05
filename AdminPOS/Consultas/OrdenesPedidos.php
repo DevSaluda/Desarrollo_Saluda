@@ -183,7 +183,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'Nombre_Sucursal' },
       
        { mData: 'Fecha_Agregado' },
-       { mData: 'Fk_sucursal' },
+     
        { mData: 'Acciones' },
       
   
@@ -240,7 +240,7 @@ tabla = $('#Productos').DataTable({
 <th>Numero de orden de pedido</th>
 <th>Sucursal</th>
 <th>Solicitado el</th>
-<th>Acciones</th>
+
 <th>Solicitado el</th>
 <th>Acciones</th>
 
