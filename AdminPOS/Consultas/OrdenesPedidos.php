@@ -177,21 +177,12 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiariosOrdenes.php",
  "aoColumns": [
     { mData: 'Id_Sugerencia' },
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
-       { mData: 'Nombre_Sucursal' },
-       { mData: 'Precio_Venta' },
-       { mData: 'Precio_C' },
-       { mData: 'Cantidad' },
-       { mData: 'Fecha_Ingreso' },
-       { mData: 'FkPresentacion' },
-       { mData: 'Proveedor1' },
-       { mData: 'Proveedor2' },
-       { mData: 'AgregadoPor' },
-       { mData: 'AgregadoEl' },
+      
        
   
       
