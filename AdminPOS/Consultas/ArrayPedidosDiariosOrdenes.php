@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-$sql = "SELECT 
+$sql = "SELECT DISTINCT
     Sugerencias_POS.NumOrdPedido, 
     Sugerencias_POS.Id_Sugerencia,
     SucursalesCorre.Nombre_Sucursal, 
