@@ -92,18 +92,26 @@ include ("footer.php")?>
 <script>
   	
     $(document).ready(function() {
-    // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
-    $(document).on("click", ".btn-ActualizarCaducado", function() {
-    
-        var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
-            $("#form-edit").html(data);
-            $("#Titulo").html("Registrando como caducados");
-            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
-        });
+    // Delegación de eventos para el botón ".btn-ActualizarCaducado" dentro de .dropdown-menu
+    $(document).on("click", ".btn-CreaPedido", function() {
+        var id = $(this).data("id"); // Obtiene el valor del atributo data-id
+        var sucursal = $(this).data("sucursal"); // Obtiene el valor del atributo data-sucursal
+
+        // Enviar los datos a través de una solicitud POST
+        $.post("https://saludapos.com/AdminPOS/Modales/ConfirmaGeneracionPedido.php", 
+            { id: id, sucursal: sucursal }, // Envía ambos datos
+            function(data) {
+                $("#form-edit").html(data);
+                $("#Titulo").html("Registrando como caducados");
+                $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+                $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
+            }
+        );
+
         $('#editModal').modal('show');
     });
+
+
 
     // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
     $(document).on("click", ".btn-GeneraIngreso", function() {
