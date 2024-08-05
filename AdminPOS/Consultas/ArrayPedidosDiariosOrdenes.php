@@ -28,7 +28,7 @@ $c = 0;
 while($fila = $result->fetch_assoc()) {
     $data[$c]["Id_Sugerencia"] = $fila["NumOrdPedido"];
     $data[$c]["Cod_Barra"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Nombre_Prod"] = $fila["AgregadoEl"];
+    $data[$c]["Nombre_Prod"] = $fila["Fecha_Ingreso"];
     $data[$c]["Acciones"] = '
     <td>
    
