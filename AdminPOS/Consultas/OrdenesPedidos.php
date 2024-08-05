@@ -240,7 +240,7 @@ tabla = $('#Productos').DataTable({
 <th>Numero de orden de pedido</th>
 <th>Sucursal</th>
 <th>Solicitado el</th>
-
+<th>Acciones</th>
 
 
 </thead>
