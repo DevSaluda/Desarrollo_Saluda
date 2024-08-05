@@ -245,7 +245,7 @@ $(document).ready(function() {
             { "data": "Proveedor1" },
             { "data": "Proveedor2" },
             { "data": "AgregadoPor" },
-            { "data": "AgregadoEl" }
+            
         ],
         "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
         "language": {
@@ -304,12 +304,11 @@ $(document).ready(function() {
              <th>Precio Compra</th>
              
               <th>Piezas</th>
-              <th>Importe</th> 
-              <th>Descuento</th>
-              <th>Forma de pago</th>
-              <th>Cliente</th>
-                <th>Forma de pago</th>
-              <th>Cliente</th>
+              <th>Fecha Solicitud</th> 
+              <th>Proveedor 1</th>
+              <th>Proveedor 2</th>
+              <th>Solicitante</th>
+              
              
             </thead>
           </table>

@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Proveedor1"] = $fila["Proveedor1"];
             $data[$c]["Proveedor2"] = $fila["Proveedor2"];
             $data[$c]["AgregadoPor"] = $fila["AgregadoPor"];
-            $data[$c]["AgregadoEl"] = $fila["AgregadoEl"];
+           
             $c++;
         }
 
