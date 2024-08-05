@@ -3,11 +3,10 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Consulta SQL
 $sql = "SELECT 
     Sugerencias_POS.NumOrdPedido, 
     SucursalesCorre.Nombre_Sucursal, 
-    DATE_FORMAT(Sugerencias_POS.AgregadoEl, '%Y-%m-%d') AS Fecha_Agregado
+    Sugerencias_POS.AgregadoEl
 FROM 
     Sugerencias_POS
 INNER JOIN 
@@ -19,27 +18,26 @@ GROUP BY
     Sugerencias_POS.NumOrdPedido, 
     SucursalesCorre.Nombre_Sucursal";
 
-// Ejecutar la consulta
 $result = mysqli_query($conn, $sql);
 
 $data = [];
 $c = 0;
 
-// Procesar los resultados
 while($fila = $result->fetch_assoc()) {
-    $data[$c]["NumOrdPedido"] = $fila["NumOrdPedido"];
-    $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Fecha_Agregado"] = $fila["Fecha_Agregado"];
+    $data[$c]["Id_Sugerencia"] = $fila["NumOrdPedido"];
+    $data[$c]["Cod_Barra"] = $fila["Nombre_Sucursal"];
+    $data[$c]["Nombre_Prod"] = $fila["AgregadoEl"];
     $data[$c]["Acciones"] = '
     <td>
-        <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
-        <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
+    <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br><br>
+     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
+  <br><br>
+     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
     </td>';
   
     $c++;
 }
 
-// Estructura de la respuesta
 $results = [
     "sEcho" => 1,
     "iTotalRecords" => count($data),
@@ -47,9 +45,7 @@ $results = [
     "aaData" => $data
 ];
 
-// Devolver la respuesta en formato JSON
 echo json_encode($results);
 
-// Cerrar la conexión
 mysqli_close($conn);
 ?>
