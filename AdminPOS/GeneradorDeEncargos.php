@@ -209,51 +209,78 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'none';
         }
 
-        
-        $('#Productos').DataTable({
+        var tabla;
+        $(document).ready(function() {
+          tabla = $('#Productos').DataTable({
             "processing": true,
-            "serverSide": true,
+            "ordering": true,
+            "stateSave": true,
+            "autoWidth": true,
+            "order": [[ 0, "desc" ]],
             "ajax": {
-                "type": "POST",
-                "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
-                "data": function(d) {
-                    return {
-                        "Mes": '<?php echo $mes; ?>',
-                        "Sucursal": '<?php echo $sucursal; ?>'
-                    };
-                },
-                "dataSrc": function(json) {
-                    return json.aaData;
-                }
-            },
-            "columns": [
-                { "data": "Cod_Barra" },
-                { "data": "Nombre_Prod" },
-                { "data": "Precio_C" },
-                { "data": "Precio_Venta" },
-                { "data": "Cantidad" },
-                { "data": "Fecha_Ingreso" },
-                { "data": "Proveedor1" },
-                { "data": "Proveedor2" }
-            ],
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "search": "Buscar:",
-                "paginate": {
-                    "first": '<i class="fas fa-angle-double-left"></i>',
-                    "last": '<i class="fas fa-angle-double-right"></i>',
-                    "next": '<i class="fas fa-angle-right"></i>',
-                    "previous": '<i class="fas fa-angle-left"></i>'
-                }
-            }
-        });
-    
-</script>
+              "type": "POST", // Especifica el método de envío de la solicitud AJAX
+              "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
+              "data": function (d) {
+        // Aquí puedes definir el código PHP directamente
+        var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
+        var sucursal = '<?php echo $sucursal; ?>'; // Obtén el valor de mes desde PHP
 
+        // Construye el objeto de datos para enviar al servidor
+        var dataToSend = {
+            "Mes": mes,
+            "Sucursal": sucursal
+        };
+
+        return dataToSend;
+    },
+              "error": function(xhr, error, thrown) {
+            console.log("Error en la solicitud AJAX:", error);
+        }
+    },
+            "columns": [
+              { "data": "Id_Sugerencia" },
+              { "data": "Cod_Barra" },
+              { "data": "Nombre_Prod" },
+              { "data": "Nombre_Sucursal" },
+              { "data": "Precio_Venta" },
+              { "data": "Precio_C" },
+              { "data": "Cantidad" },
+              { "data": "Fecha_Ingreso" },
+              { "data": "FkPresentacion" },
+              { "data": "Proveedor1" },
+              { "data": "Proveedor2" },
+              { "data": "AgregadoPor" },
+              { "data": "AgregadoEl" },
+              
+            ],
+            "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
+            "language": {
+              "lengthMenu": "Mostrar _MENU_ registros",
+              "sPaginationType": "extStyle",
+              "zeroRecords": "No se encontraron resultados",
+              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+              "sSearch": "Buscar:",
+              "paginate": {
+                "first": '<i class="fas fa-angle-double-left"></i>',
+                "last": '<i class="fas fa-angle-double-right"></i>',
+                "next": '<i class="fas fa-angle-right"></i>',
+                "previous": '<i class="fas fa-angle-left"></i>'
+              },
+              "processing": function () {
+                mostrarCargando();
+              }
+            },
+            "initComplete": function() {
+              // Al completar la inicialización de la tabla, ocultar el mensaje de carga
+              ocultarCargando();
+            },
+           
+            "dom": '<"d-flex justify-content-between"lf>rtip', // Modificar la disposición aquí
+            "responsive": true
+          });
+        });
       </script>
 
       <div class="text-center">
