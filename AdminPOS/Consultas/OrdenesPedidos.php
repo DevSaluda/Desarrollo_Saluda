@@ -182,7 +182,7 @@ tabla = $('#Productos').DataTable({
     { mData: 'Id_Sugerencia' },
        { mData: 'Cod_Barra' },
        { mData: 'Nombre_Prod' },
-      
+       { mData: 'Acciones' },
        
   
       

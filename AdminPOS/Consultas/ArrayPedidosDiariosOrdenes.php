@@ -27,7 +27,12 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Id_Sugerencia"] = $fila["NumOrdPedido"];
     $data[$c]["Cod_Barra"] = $fila["Nombre_Sucursal"];
     $data[$c]["Nombre_Prod"] = $fila["AgregadoEl"];
-    
+    $data[$c]["Acciones"] = '
+    <td>
+    <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-success btn-sm btn-ActualizarCaducado"><i class="fas fa-times"></i></a> <br><br>
+     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
+  
+    </td>';
   
     $c++;
 }
