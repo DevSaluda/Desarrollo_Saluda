@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['Mes'])) {
         // Obtén el valor del formulario
         $mes= $_POST['Mes'];
-
+        $sucursal= $_POST['Sucursal'];
         // Concatena el valor en la consulta SQL
         $sql = "SELECT 
             Sugerencias_POS.Id_Sugerencia, 
@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         INNER JOIN 
             SucursalesCorre ON Sugerencias_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
         WHERE 
-            Sugerencias_POS.NumOrdPedido = '$mes'"; // Filtrar por NumOrdPedido
+            Sugerencias_POS.NumOrdPedido = '$mes'
+            AND  Sugerencias_POS.Fk_sucursal='$sucursal'"; // Filtrar por NumOrdPedido
 
         $result = mysqli_query($conn, $sql);
 

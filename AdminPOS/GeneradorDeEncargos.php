@@ -41,7 +41,7 @@ include "Consultas/Consultas.php";
           if (isset($_POST['Mes']) ) {
               // Obtener los valores del formulario
               $mes = $_POST['Mes'];
-             
+              $sucursal = $_POST['Sucursal'];
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
               echo "Mes seleccionado: $mes<br>";
@@ -164,7 +164,7 @@ include "Consultas/Consultas.php";
       </style>
 <script type="text/javascript">
     var mes = "<?php echo $mes; ?>";
-  
+    var sucursal = "<?php echo $sucursal; ?>";
 </script>
 
       <script>
@@ -223,11 +223,12 @@ include "Consultas/Consultas.php";
               "data": function (d) {
         // Aquí puedes definir el código PHP directamente
         var mes = '<?php echo $mes; ?>'; // Obtén el valor de mes desde PHP
-      
+        var sucursal = '<?php echo $sucursal; ?>'; // Obtén el valor de mes desde PHP
 
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
-            "Mes": mes
+            "Mes": mes,
+            "Sucursal": sucursal
         };
 
         return dataToSend;
