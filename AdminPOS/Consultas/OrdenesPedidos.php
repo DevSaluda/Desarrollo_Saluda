@@ -181,7 +181,7 @@ tabla = $('#Productos').DataTable({
  "aoColumns": [
     { mData: 'Pedido' },
        { mData: 'Nombre_Sucursal' },
-       { mData: 'Nombre_Prod' },
+      
        { mData: 'Fecha_Agregado' },
        { mData: 'Fk_sucursal' },
        { mData: 'Acciones' },
