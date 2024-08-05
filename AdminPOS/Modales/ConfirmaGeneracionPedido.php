@@ -23,7 +23,8 @@ $sql = "SELECT
     sp.AgregadoPor,
     sp.AgregadoEl,
     sp.ID_H_O_D,
-    sp.NumOrdPedido
+    sp.NumOrdPedido,
+    SucursalesCorre.Nombre_Sucursal, 
 FROM 
     Sugerencias_POS sp
 INNER JOIN 
@@ -75,11 +76,7 @@ if ($Sugerencias != null) {
 
     <script src="js/RegistraMedicamentosCaducadosdef.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#editModal').modal('show'); // Mostrar el modal al cargar el contenido
-        });
-    </script>
+ 
 
     <?php
 } else {
