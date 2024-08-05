@@ -12,7 +12,7 @@ $sql = "SELECT
     sp.Cod_Barra,
     sp.Nombre_Prod,
     sp.Fk_sucursal,
-    sc.Nombre_Sucursal,  -- Asumiendo que 'Nombre_Sucursal' es una columna en 'SucursalesCorre'
+    sc.Nombre_Sucursal,  -- Asegúrate de que esta columna existe en 'SucursalesCorre'
     sp.Precio_Venta,
     sp.Precio_C,
     sp.Cantidad,
@@ -23,8 +23,7 @@ $sql = "SELECT
     sp.AgregadoPor,
     sp.AgregadoEl,
     sp.ID_H_O_D,
-    sp.NumOrdPedido,
-    sc.Nombre_Sucursal
+    sp.NumOrdPedido
 FROM 
     Sugerencias_POS sp
 INNER JOIN 
