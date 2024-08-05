@@ -43,16 +43,8 @@ if ($query->num_rows > 0) {
 if ($Sugerencias != null) {
     ?>
     <!-- Modal que se abre al cargar la página -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Registrar Caducados</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+  
+                
                     <!-- Mensaje de Confirmación -->
                     <div class="alert alert-info">
                         ¿Desea realizar el pedido para la sucursal "<?php echo $Sugerencias->Fk_sucursal; ?>" con número de orden de BD "<?php echo $Sugerencias->NumOrdPedido; ?>"?
