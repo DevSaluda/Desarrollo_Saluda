@@ -307,7 +307,7 @@ $(document).ready(function() {
               <th>Fecha Solicitud</th> 
               <th>Proveedor 1</th>
               <th>Proveedor 2</th>
-              <th>Solicitante</th>
+              <th>Presentacion</th>
               <th>Solicitante</th>
              
             </thead>
