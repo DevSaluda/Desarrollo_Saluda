@@ -3,11 +3,11 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-$sql = "SELECT DISTINCT
+$sql = "SELECT 
     Sugerencias_POS.NumOrdPedido, 
     Sugerencias_POS.Id_Sugerencia,
     SucursalesCorre.Nombre_Sucursal, 
-    Sugerencias_POS.AgregadoEl
+    DATE_FORMAT(Sugerencias_POS.AgregadoEl, '%Y-%m-%d') AS Fecha_Agregado
 FROM 
     Sugerencias_POS
 INNER JOIN 
@@ -17,7 +17,8 @@ WHERE
     AND MONTH(Sugerencias_POS.Fecha_Ingreso) = MONTH(CURDATE()) -- Mes actual
 GROUP BY 
     Sugerencias_POS.NumOrdPedido, 
-    SucursalesCorre.Nombre_Sucursal";
+    SucursalesCorre.Nombre_Sucursal;
+";
 
 $result = mysqli_query($conn, $sql);
 
