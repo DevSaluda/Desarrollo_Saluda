@@ -209,14 +209,14 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'none';
         }
 
-        var tabla;
+        
 $(document).ready(function() {
-    tabla = $('#Productos').DataTable({
+    var tabla = $('#Productos').DataTable({
         "processing": true,
         "ordering": true,
         "stateSave": true,
         "autoWidth": true,
-        "order": [[0, "desc"]],
+        "order": [[ 0, "desc" ]],
         "ajax": {
             "type": "POST",
             "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
@@ -225,7 +225,7 @@ $(document).ready(function() {
                 var sucursal = '<?php echo $sucursal; ?>';
                 return {
                     "Mes": mes,
-                    "Sucursal": sucursal,
+                    "Sucursal": sucursal
                 };
             },
             "error": function(xhr, error, thrown) {
@@ -250,6 +250,7 @@ $(document).ready(function() {
         "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros",
+            "sPaginationType": "extStyle",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
@@ -272,46 +273,23 @@ $(document).ready(function() {
         "responsive": true
     });
 
-    // Permitir la edición en línea
-    $('#Productos').on('click', 'td', function() {
+    // Hacer que las celdas sean editables
+    $('#Productos tbody').on('click', 'td', function () {
         var cell = tabla.cell(this);
         var oldValue = cell.data();
         var input = $('<input>', {
-            'type': 'text',
-            'value': oldValue
-        });
-
-        $(this).empty().append(input).focus();
-
-        input.on('blur', function() {
-            var newValue = $(this).val();
-            if (newValue !== oldValue) {
-                // Aquí puedes hacer la solicitud AJAX para actualizar el valor en la base de datos
-                var row = tabla.row(cell.index().row);
-                var data = row.data();
-                data[cell.index().column] = newValue;
-                row.invalidate().draw();
-
-                // Envía el nuevo valor al servidor
-                $.ajax({
-                    url: 'https://saludapos.com/AdminPOS/Consultas/UpdateData.php',
-                    type: 'POST',
-                    data: {
-                        'Id_Sugerencia': data['Id_Sugerencia'], // Identificador único para actualizar
-                        'column': cell.index().column,
-                        'value': newValue
-                    },
-                    success: function(response) {
-                        console.log("Actualización exitosa", response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error al actualizar", error);
-                    }
-                });
+            value: oldValue,
+            type: 'text',
+            blur: function () {
+                var newValue = $(this).val();
+                cell.data(newValue).draw();
+                // Aquí puedes enviar la actualización al servidor si es necesario
+                // Ejemplo:
+                // $.post('update_url.php', { id: cell.index().row, column: cell.index().column, value: newValue });
             }
-            $(this).parent().text(newValue);
-        });
-    });  });
+        }).appendTo($(this).empty()).focus();
+    });
+});
       </script>
 
       <div class="text-center">
