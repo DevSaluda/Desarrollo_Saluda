@@ -3,9 +3,10 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
+// Consulta SQL
 $sql = "SELECT 
     Sugerencias_POS.NumOrdPedido, 
-    Sugerencias_POS.Id_Sugerencia,
+    Sugerencias_POS.Fk_sucursal, 
     SucursalesCorre.Nombre_Sucursal, 
     DATE_FORMAT(Sugerencias_POS.AgregadoEl, '%Y-%m-%d') AS Fecha_Agregado
 FROM 
@@ -17,29 +18,31 @@ WHERE
     AND MONTH(Sugerencias_POS.Fecha_Ingreso) = MONTH(CURDATE()) -- Mes actual
 GROUP BY 
     Sugerencias_POS.NumOrdPedido, 
-    SucursalesCorre.Nombre_Sucursal;
-";
+    Sugerencias_POS.Fk_sucursal, 
+    SucursalesCorre.Nombre_Sucursal";
 
+// Ejecutar la consulta
 $result = mysqli_query($conn, $sql);
 
 $data = [];
 $c = 0;
 
+// Procesar los resultados
 while($fila = $result->fetch_assoc()) {
-    $data[$c]["Id_Sugerencia"] = $fila["NumOrdPedido"];
-    $data[$c]["Cod_Barra"] = $fila["Nombre_Sucursal"];
-    $data[$c]["Nombre_Prod"] = $fila["Fecha_Agregado"];
+    $data[$c]["NumOrdPedido"] = $fila["NumOrdPedido"];
+    $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
+    $data[$c]["Fecha_Agregado"] = $fila["Fecha_Agregado"];
+    $data[$c]["Fk_sucursal"] = $fila["Fk_sucursal"];
     $data[$c]["Acciones"] = '
     <td>
-   
-     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
-  
-     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
+        <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
+        <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
     </td>';
   
     $c++;
 }
 
+// Estructura de la respuesta
 $results = [
     "sEcho" => 1,
     "iTotalRecords" => count($data),
@@ -47,7 +50,9 @@ $results = [
     "aaData" => $data
 ];
 
+// Devolver la respuesta en formato JSON
 echo json_encode($results);
 
+// Cerrar la conexión
 mysqli_close($conn);
 ?>
