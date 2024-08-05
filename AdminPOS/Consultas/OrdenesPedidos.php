@@ -241,6 +241,8 @@ tabla = $('#Productos').DataTable({
 <th>Sucursal</th>
 <th>Solicitado el</th>
 <th>Acciones</th>
+<th>Solicitado el</th>
+<th>Acciones</th>
 
 
 </thead>
