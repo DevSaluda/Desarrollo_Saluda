@@ -24,7 +24,7 @@ $sql = "SELECT
     sp.AgregadoEl,
     sp.ID_H_O_D,
     sp.NumOrdPedido,
-    SucursalesCorre.Nombre_Sucursal
+    sc.Nombre_Sucursal
 FROM 
     Sugerencias_POS sp
 INNER JOIN 
