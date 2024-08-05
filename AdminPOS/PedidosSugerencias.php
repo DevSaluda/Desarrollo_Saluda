@@ -103,8 +103,8 @@ include ("footer.php")?>
             function(data) {
                 $("#form-edit").html(data);
                 $("#Titulo").html("Registrando como caducados");
-                $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
-                $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
+                $("#Di").removeClass("modal-dialog modal-notify modal-info");
+                $("#Di").addClass("modal-dialog  modal-notify modal-warning");
             }
         );
 
