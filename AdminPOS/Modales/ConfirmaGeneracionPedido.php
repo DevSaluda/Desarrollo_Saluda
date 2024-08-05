@@ -55,13 +55,7 @@ if ($Sugerencias != null) {
                     
                     <!-- Formulario para registrar caducados -->
                     <form action="javascript:void(0)" method="post" id="RegistraCaducados">
-                        <input type="text" class="form-control" hidden name="IdBasedatos" readonly value="<?php echo $Sugerencias->Id_Sugerencia; ?>">
-                        <input type="text" class="form-control" hidden name="AgregadoPor" value="<?php echo $Sugerencias->AgregadoPor; ?>">
-                        <input type="text" class="form-control" hidden name="ID_H_O_D" value="<?php echo $Sugerencias->ID_H_O_D; ?>">
-                        <input type="text" class="form-control" hidden name="Precio_Venta" value="<?php echo $Sugerencias->Precio_Venta; ?>">
-                        <input type="text" class="form-control" hidden name="Precio_C" value="<?php echo $Sugerencias->Precio_C; ?>">
-                        <input type="text" class="form-control" hidden name="Fecha_Ingreso" value="<?php echo $Sugerencias->Fecha_Ingreso; ?>">
-                        <input type="text" class="form-control" hidden name="Fk_sucursal" value="<?php echo $Sugerencias->Fk_sucursal; ?>">
+                       
 
                         
                                 <button type="submit" id="submit" class="btn btn-success">Generar pedido <i class="fas fa-file-invoice-dollar"></i></button>
