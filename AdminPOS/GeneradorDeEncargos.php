@@ -308,6 +308,8 @@ $(document).ready(function() {
               <th>Descuento</th>
               <th>Forma de pago</th>
               <th>Cliente</th>
+                <th>Forma de pago</th>
+              <th>Cliente</th>
              
             </thead>
           </table>
