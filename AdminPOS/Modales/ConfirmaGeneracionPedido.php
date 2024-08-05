@@ -12,6 +12,7 @@ $sql = "SELECT
     sp.Cod_Barra,
     sp.Nombre_Prod,
     sp.Fk_sucursal,
+    sc.Nombre_Sucursal,  -- Asumiendo que 'Nombre_Sucursal' es una columna en 'SucursalesCorre'
     sp.Precio_Venta,
     sp.Precio_C,
     sp.Cantidad,
@@ -25,6 +26,8 @@ $sql = "SELECT
     sp.NumOrdPedido
 FROM 
     Sugerencias_POS sp
+INNER JOIN 
+    SucursalesCorre sc ON sp.Fk_sucursal = sc.ID_SucursalC
 WHERE
     sp.NumOrdPedido = '$id_sugerencia' AND
     sp.Fk_sucursal = '$sucursal'";
@@ -60,24 +63,7 @@ if ($Sugerencias != null) {
                         <input type="text" class="form-control" hidden name="Fecha_Ingreso" value="<?php echo $Sugerencias->Fecha_Ingreso; ?>">
                         <input type="text" class="form-control" hidden name="Fk_sucursal" value="<?php echo $Sugerencias->Fk_sucursal; ?>">
 
-                        <div class="text-center">
-                            <div class="table-responsive">
-                                <table id="HistorialDevoluciones" class="table table-hover">
-                                    <thead>
-                                        <th>Código de Barra</th>
-                                        <th>Producto</th>
-                                        <th>Cantidad</th>
-                                        <th>Cantidad a registrar</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="text" value="<?php echo $Sugerencias->Cod_Barra; ?>" class="form-control" name="CodBarra" readonly></td>
-                                            <td><input type="text" value="<?php echo $Sugerencias->Nombre_Prod; ?>" class="form-control" name="NombreProd" readonly></td>
-                                            <td><input type="text" value="<?php echo $Sugerencias->Cantidad; ?>" class="form-control" readonly></td>
-                                            <td><input type="number" class="form-control" name="CantidadAregistrar"></td>
-                                        </tr>
-                                    </tbody>
-                                </table> 
+                        
                                 <button type="submit" id="submit" class="btn btn-success">Registrar caducado <i class="fas fa-check"></i></button>
                             </div>
                         </div>
