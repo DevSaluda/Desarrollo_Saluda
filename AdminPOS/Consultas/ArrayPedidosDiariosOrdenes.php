@@ -5,6 +5,7 @@ include "Consultas.php";
 
 $sql = "SELECT 
     Sugerencias_POS.NumOrdPedido, 
+    Sugerencias_POS.Id_Sugerencia,
     SucursalesCorre.Nombre_Sucursal, 
     Sugerencias_POS.AgregadoEl
 FROM 
@@ -30,9 +31,9 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Acciones"] = '
     <td>
    
-     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
+     <a data-id="' . $fila["Id_Sugerencia"] . '" class="btn btn-warning btn-sm btn-GeneraRotacion"><i class="fas fa-people-carry"></i></a>
   
-     <a data-id="' . $fila["NumOrdPedido"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
+     <a data-id="' . $fila["Id_Sugerencia"] . '" class="btn btn-primary btn-sm btn-GeneraIngreso"><i class="fas fa-pills"></i></a>
     </td>';
   
     $c++;
