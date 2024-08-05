@@ -89,36 +89,75 @@ include ("footer.php")?>
 <script src="js/SugerenciaPedidos.js"></script>
 <?php include "datatables.php"?>
 
-   <script>
+<script>
+  	
     $(document).ready(function() {
-    // Inicializar Select2
-    $('#buscador').select2({
-        ajax: {
-            url: 'Consultas/BuscarProductosParaFiltro.php',
-            dataType: 'json',
-            delay: 250,
-            processResults: function(data) {
-                return {
-                    results: data
-                };
-            },
-            cache: true
-        },
-        placeholder: 'Ingrese un código o nombre',
-        minimumInputLength: 1,
-        // Al seleccionar un resultado, asignar el nombre del producto y el código de barras a los inputs correspondientes
-        select: function(event) {
-            var nombreProd = event.params.data.id; // Accedemos al nombre del producto
-            var codBarra = event.params.data.cod_barra; // Accedemos al código de barras
-            $('#nombreprod').val(nombreProd);
-            $('#codbarra').val(codBarra);
-        }
+    // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
+    $(document).on("click", ".btn-ActualizarCaducado", function() {
+    
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoCaducado.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Registrando como caducados");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").addClass("modal-dialog modal-xl modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
+
+    // Delegación de eventos para el botón ".btn-edit" dentro de .dropdown-menu
+    $(document).on("click", ".btn-GeneraIngreso", function() {
+    
+    var id = $(this).data("id");
+    $.post("https://saludapos.com/AdminPOS/Modales/ActualizaComoIngreso.php", { id: id }, function(data) {
+        $("#form-edit").html(data);
+        $("#Titulo").html("Generando ingreso a cedis");
+        $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+        $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
+        $("#Di").addClass("modal-dialog modal-xl modal-notify modal-primary");
+    });
+    $('#editModal').modal('show');
+});
+    $(document).on("click", ".btn-GeneraRotacion", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/RealizaRotacionMedicamentos.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Generando traspaso");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
     });
 });
 
-   </script>
+</script>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div id="Di"class="modal-dialog  modal-notify modal-warning">
+      <div class="modal-content">
+      <div class="modal-header">
+         <p class="heading lead" id="Titulo"></p>
 
-<!-- Bootstrap -->
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true" class="white-text">&times;</span>
+         </button>
+       </div>
+        <div id="Mensaje "class="alert alert-info alert-styled-left text-blue-800 content-group">
+						                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos']?>
+                            Verifique los campos antes de realizar alguna accion</span>
+						                <button type="button" class="close" data-dismiss="alert">×</button>
+                            </div>
+	        <div class="modal-body">
+          <div class="text-center">
+        <div id="form-edit"></div>
+        
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
