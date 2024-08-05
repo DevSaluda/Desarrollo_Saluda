@@ -6,9 +6,9 @@ include "Consultas.php";
 // Verifica si se ha enviado el dato por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si la variable está seteada y no es nula
-    if (isset($_POST['NumOrdPedido'])) {
+    if (isset($_POST['mes'])) {
         // Obtén el valor del formulario
-        $mes= $_POST['NumOrdPedido'];
+        $mes= $_POST['mes'];
 
         // Concatena el valor en la consulta SQL
         $sql = "SELECT 
