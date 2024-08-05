@@ -50,7 +50,7 @@ if ($Sugerencias != null) {
                 
                     <!-- Mensaje de Confirmación -->
                     <div class="alert alert-info">
-                        ¿Desea realizar el pedido para la sucursal "<?php echo $Sugerencias->Nombre_Sucursal; ?>" con número de orden de BD "<?php echo $Sugerencias->NumOrdPedido; ?>"?
+                        ¿Desea realizar el pedido para la sucursal "<?php echo $Sugerencias->Nombre_Sucursal; ?>" con número de orden de "<?php echo $Sugerencias->NumOrdPedido; ?>"?
                     </div>
                     
                     <!-- Formulario para registrar caducados -->
