@@ -296,15 +296,15 @@ $(document).ready(function() {
         <div class="table-responsive">
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-              <th>Cod</th>
-              <th>Nombre</th>
-              <th>PC</th>
-              <th>PV</th>
+              <th>ID Pedido</th>
+              <th>Cod barra</th>
+              <th>Nombre Producto</th>
+              <th>Sucursal</th>
               <th>N° Ticket</th>
               <th>Sucursal</th>
-              <th>Turno</th>
-              <th>Cantidad</th>
-              <th>P.U</th>
+              <th>Precio venta</th>
+              <th>Precio Compra</th>
+              <th>Piezas</th>
               <th>Importe</th> 
               <th>Descuento</th>
               <th>Forma de pago</th>
