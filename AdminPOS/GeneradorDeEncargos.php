@@ -227,8 +227,7 @@ include "Consultas/Consultas.php";
 
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
-            "Mes": mes,
-            "anual": anual
+            "Mes": mes
         };
 
         return dataToSend;
