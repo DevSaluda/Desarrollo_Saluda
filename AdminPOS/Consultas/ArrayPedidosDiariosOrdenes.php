@@ -29,7 +29,7 @@ $c = 0;
 
 // Procesar los resultados
 while($fila = $result->fetch_assoc()) {
-    $data[$c]["NumOrdPedido"] = $fila["NumOrdPedido"];
+    $data[$c]["Pedido"] = $fila["NumOrdPedido"];
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Fecha_Agregado"] = $fila["Fecha_Agregado"];
     $data[$c]["Fk_sucursal"] = $fila["Fk_sucursal"];

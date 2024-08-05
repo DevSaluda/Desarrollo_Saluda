@@ -179,7 +179,7 @@ tabla = $('#Productos').DataTable({
  "order": [[ 0, "desc" ]],
  "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiariosOrdenes.php",
  "aoColumns": [
-    { mData: 'NumOrdPedido' },
+    { mData: 'Pedido' },
        { mData: 'Nombre_Sucursal' },
        { mData: 'Nombre_Prod' },
        { mData: 'Fecha_Agregado' },
