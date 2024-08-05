@@ -4,7 +4,7 @@ include("db_connection.php");
 include "Consultas.php";
 
 // Consulta SQL
-$sql = "SELECT 
+$sql = "SELECT DISTINCT
     Sugerencias_POS.NumOrdPedido, 
     Sugerencias_POS.Fk_sucursal, 
     SucursalesCorre.Nombre_Sucursal, 
