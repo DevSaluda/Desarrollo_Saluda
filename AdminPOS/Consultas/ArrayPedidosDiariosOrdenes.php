@@ -4,28 +4,19 @@ include("db_connection.php");
 include "Consultas.php";
 
 $sql = "SELECT 
-Sugerencias_POS.Id_Sugerencia, 
-Sugerencias_POS.Cod_Barra, 
-Sugerencias_POS.Nombre_Prod, 
-Sugerencias_POS.Fk_sucursal, 
-Sugerencias_POS.Precio_Venta, 
-Sugerencias_POS.Precio_C, 
-Sugerencias_POS.Cantidad, 
-Sugerencias_POS.Fecha_Ingreso, 
-Sugerencias_POS.FkPresentacion, 
-Sugerencias_POS.Proveedor1, 
-Sugerencias_POS.Proveedor2, 
-Sugerencias_POS.AgregadoPor, 
-Sugerencias_POS.AgregadoEl, 
-Sugerencias_POS.ID_H_O_D,
-SucursalesCorre.Nombre_Sucursal 
+    Sugerencias_POS.NumOrdPedido, 
+    SucursalesCorre.Nombre_Sucursal, 
+    Sugerencias_POS.AgregadoEl
 FROM 
-Sugerencias_POS 
+    Sugerencias_POS
 INNER JOIN 
-SucursalesCorre ON Sugerencias_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+    SucursalesCorre ON Sugerencias_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 WHERE 
-YEAR(Sugerencias_POS.Fecha_Ingreso) = YEAR(CURDATE()) -- Año actual
-AND MONTH(Sugerencias_POS.Fecha_Ingreso) = MONTH(CURDATE()); -- Mes actual";
+    YEAR(Sugerencias_POS.Fecha_Ingreso) = YEAR(CURDATE()) -- Año actual
+    AND MONTH(Sugerencias_POS.Fecha_Ingreso) = MONTH(CURDATE()) -- Mes actual
+GROUP BY 
+    Sugerencias_POS.NumOrdPedido, 
+    SucursalesCorre.Nombre_Sucursal";
 
 $result = mysqli_query($conn, $sql);
 
