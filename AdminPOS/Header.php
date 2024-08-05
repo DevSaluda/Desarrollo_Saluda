@@ -5,7 +5,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.css">
  
-  <script src="Componentes/jquery-3.5.1.slim.min.js"></script>
+
 <script src="Componentes/jquery-3.5.0.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
