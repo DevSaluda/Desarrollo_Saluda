@@ -209,36 +209,18 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'none';
         }
         $(document).ready(function() {
-    tabla = $('#Productos').DataTable({
+    $('#Productos').DataTable({
         "processing": true,
-        "serverSide": true,
         "ajax": {
-            "type": "POST",
-            "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
-            "data": function (d) {
-                return {
-                    "Mes": '<?php echo $mes; ?>',
-                    "Sucursal": '<?php echo $sucursal; ?>'
-                };
-            },
-            "error": function(xhr, error, thrown) {
-                console.log("Error en la solicitud AJAX:", error);
-            }
+            "url": "https://jsonplaceholder.typicode.com/posts",
+            "type": "GET",
+            "dataSrc": ""
         },
         "columns": [
-            { "data": "Id_Sugerencia" },
-            { "data": "Cod_Barra" },
-            { "data": "Nombre_Prod" },
-            { "data": "Nombre_Sucursal" },
-            { "data": "Precio_Venta" },
-            { "data": "Precio_C" },
-            { "data": "Cantidad" },
-            { "data": "Fecha_Ingreso" },
-            { "data": "FkPresentacion" },
-            { "data": "Proveedor1" },
-            { "data": "Proveedor2" },
-            { "data": "AgregadoPor" },
-            { "data": "AgregadoEl" }
+            { "data": "userId" },
+            { "data": "id" },
+            { "data": "title" },
+            { "data": "body" }
         ]
     });
 });
@@ -256,7 +238,13 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltroPorProducto.php");
   include ("footer.php");
   ?>
-
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- overlayScrollbars -->
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
