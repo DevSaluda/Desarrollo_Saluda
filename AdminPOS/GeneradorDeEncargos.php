@@ -209,93 +209,51 @@ include "Consultas/Consultas.php";
           document.getElementById('loading-overlay').style.display = 'none';
         }
 
-        var tabla = $('#Productos').DataTable({
-        "processing": true,
-        "ordering": true,
-        "stateSave": true,
-        "autoWidth": true,
-        "order": [[ 0, "desc" ]],
-        "ajax": {
-            "type": "POST",
-            "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
-            "data": function (d) {
-                return {
-                    "Mes": '<?php echo $mes; ?>',
-                    "Sucursal": '<?php echo $sucursal; ?>'
-                };
-            }
-        },
-        "columns": [
-            { "data": "Id_Sugerencia" },
-            { "data": "Cod_Barra" },
-            { "data": "Nombre_Prod" },
-            { "data": "Nombre_Sucursal" },
-            { "data": "Precio_Venta" },
-            { "data": "Precio_C" },
-            { "data": "Cantidad" },
-            { "data": "Fecha_Ingreso" },
-            { "data": "FkPresentacion" },
-            { "data": "Proveedor1" },
-            { "data": "Proveedor2" },
-            { "data": "AgregadoPor" },
-            { "data": "AgregadoEl" },
-            {
-                "data": null,
-                "defaultContent": "<button class='edit-btn'>Editar</button>",
-                "orderable": false
-            }
-        ],
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ registros",
-            "zeroRecords": "No se encontraron resultados",
-            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "search": "Buscar:",
-            "paginate": {
-                "first": '<i class="fas fa-angle-double-left"></i>',
-                "last": '<i class="fas fa-angle-double-right"></i>',
-                "next": '<i class="fas fa-angle-right"></i>',
-                "previous": '<i class="fas fa-angle-left"></i>'
-            }
-        },
-        "dom": '<"d-flex justify-content-between"lf>rtip',
-        "responsive": true
-    });
-
-    // Editar fila
-    $('#Productos').on('click', 'button.edit-btn', function() {
-        var row = $(this).closest('tr');
-        var rowData = tabla.row(row).data();
-
-        // Aquí puedes mostrar un formulario de edición en línea
-        var newValue = prompt("Editar valor:", rowData.Cod_Barra);
         
-        if (newValue !== null) {
-            // Actualizar el dato en la tabla
-            tabla.row(row).data({
-                ...rowData,
-                Cod_Barra: newValue
-            }).draw();
-
-            // Enviar los cambios al servidor
-            $.ajax({
-                url: 'https://saludapos.com/AdminPOS/Consultas/UpdateData.php',
-                type: 'POST',
-                data: {
-                    Id_Sugerencia: rowData.Id_Sugerencia,
-                    Cod_Barra: newValue,
-                    // Agrega aquí los demás campos que deseas actualizar
+        $('#Productos').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiarios.php",
+                "data": function(d) {
+                    return {
+                        "Mes": '<?php echo $mes; ?>',
+                        "Sucursal": '<?php echo $sucursal; ?>'
+                    };
                 },
-                success: function(response) {
-                    // Manejar respuesta del servidor si es necesario
-                },
-                error: function(xhr, error, thrown) {
-                    console.log("Error en la solicitud AJAX:", error);
+                "dataSrc": function(json) {
+                    return json.aaData;
                 }
-            });
-        }
-    });
+            },
+            "columns": [
+                { "data": "Cod_Barra" },
+                { "data": "Nombre_Prod" },
+                { "data": "Precio_C" },
+                { "data": "Precio_Venta" },
+                { "data": "Cantidad" },
+                { "data": "Fecha_Ingreso" },
+                { "data": "Proveedor1" },
+                { "data": "Proveedor2" }
+            ],
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": '<i class="fas fa-angle-double-left"></i>',
+                    "last": '<i class="fas fa-angle-double-right"></i>',
+                    "next": '<i class="fas fa-angle-right"></i>',
+                    "previous": '<i class="fas fa-angle-left"></i>'
+                }
+            }
+        });
+    
+</script>
+
       </script>
 
       <div class="text-center">
