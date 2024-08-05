@@ -300,10 +300,9 @@ $(document).ready(function() {
               <th>Cod barra</th>
               <th>Nombre Producto</th>
               <th>Sucursal</th>
-              <th>N° Ticket</th>
-              <th>Sucursal</th>
-              <th>Precio venta</th>
-              <th>Precio Compra</th>
+             <th>Precio venta</th>
+             <th>Precio Compra</th>
+             
               <th>Piezas</th>
               <th>Importe</th> 
               <th>Descuento</th>
