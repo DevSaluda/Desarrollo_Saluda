@@ -69,6 +69,7 @@ include "Consultas/ConsultaCaja.php";
         <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
         <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
         <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+        <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $row['ID_Caja'] ?>"> <!-- ID_Caja añadido -->
     </div>
     
     <div class="form-group">

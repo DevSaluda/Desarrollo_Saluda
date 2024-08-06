@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $estado = $_POST['Estado'];
         $tipoEncargo = $_POST['TipoEncargo'];
         $metodoDePago = $_POST['MetodoDePago'];
-        $fkCaja = $_POST['ValorCaja']; // Captura Fk_Caja
+        $fkCaja = $_POST['ID_Caja']; // Captura Fk_Caja
     
         $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja);
         echo json_encode($response);
