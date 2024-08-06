@@ -106,10 +106,19 @@ $(document).ready(function() {
     let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
     let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
     let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-    
-    // Si el monto abonado es mayor que el mínimo, el cambio se calcula en base al total
-    let cambio = montoAbonado - (montoAbonado >= minimoAbonar ? totalEncargo : minimoAbonar);
-    
+    let cambio = 0;
+
+    // Si el monto abonado excede el mínimo a abonar
+    if (montoAbonado > minimoAbonar) {
+        // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
+        if (montoAbonado > totalEncargo) {
+            cambio = montoAbonado - totalEncargo;
+        } else {
+            // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
+            cambio = montoAbonado - minimoAbonar;
+        }
+    }
+
     $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
 }
 
@@ -130,6 +139,7 @@ $('#MontoAbonado').on('input', function() {
         calcularCambio(); // Calcular el cambio si cambia el monto abonado
     }
 });
+
 
     function actualizarTablaEncargo() {
         let total = 0;
