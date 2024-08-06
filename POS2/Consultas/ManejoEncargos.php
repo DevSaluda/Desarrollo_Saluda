@@ -21,7 +21,7 @@ function buscarProducto($conn, $Cod_Barra) {
         }
     }
 }
-function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo) {
+function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago) {
     $response = [];
 
     foreach ($encargo as $producto) {
@@ -34,11 +34,11 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
         $Proveedor1 = isset($producto['Proveedor1']) && $producto['Proveedor1'] !== '' ? "'{$producto['Proveedor1']}'" : "NULL";
         $Proveedor2 = isset($producto['Proveedor2']) && $producto['Proveedor2'] !== '' ? "'{$producto['Proveedor2']}'" : "NULL";
         
-
+        // Incluir MetodoDePago en la consulta SQL
         $query = "INSERT INTO Encargos_POS 
-            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo) 
+            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo, MetodoDePago) 
             VALUES 
-            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo')";
+            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo', '$metodoDePago')";
 
         if (!mysqli_query($conn, $query)) {
             $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
@@ -49,6 +49,7 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
     $response['success'] = "Encargo guardado exitosamente.";
     return $response;
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['buscar_producto'])) {
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['error' => 'No hay productos en el encargo.']);
             exit;
         }
-
+    
         $IdentificadorEncargo = $_POST['IdentificadorEncargo'];
         $montoAbonado = $_POST['MontoAbonado'];
         $fkSucursal = $_POST['FkSucursal'];
@@ -71,9 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoEncargo = $_POST['TipoEncargo'];
-        
-        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo);
+        $metodoDePago = $_POST['MetodoDePago']; // Captura MetodoDePago
+    
+        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago);
         echo json_encode($response);
     }
+    
 }
 ?>

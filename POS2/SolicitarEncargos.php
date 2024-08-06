@@ -72,10 +72,28 @@ include 'Consultas/Consultas.php';
         <label for="MontoAbonado">Monto Abonado</label>
         <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
     </div>
+
+    <div class="form-group">
+        <label for="MetodoDePago">Método de Pago</label>
+        <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
+        </label>
+    </div>
+
+    <div class="form-group hidden-field" id="CambioContainer">
+        <label for="Cambio">Cambio</label>
+        <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
+    </div>
     
     <button type="submit" class="btn btn-success">Guardar Encargo</button>
 </form>
-
         </div>
     </section>
 </div>
@@ -83,6 +101,31 @@ include 'Consultas/Consultas.php';
 <script>
 $(document).ready(function() {
     let encargo = [];
+
+    function calcularCambio() {
+        let totalEncargo = parseFloat($('#totalEncargo').text());
+        let montoAbonado = parseFloat($('#MontoAbonado').val());
+        let cambio = montoAbonado - totalEncargo;
+        $('#Cambio').val(cambio.toFixed(2));
+    }
+
+    // Mostrar u ocultar el campo de cambio según el estado del checkbox
+    $('#RequiereCambio').change(function() {
+        if ($(this).is(':checked')) {
+            $('#CambioContainer').removeClass('hidden-field');
+            calcularCambio();
+        } else {
+            $('#CambioContainer').addClass('hidden-field');
+            $('#Cambio').val('');
+        }
+    });
+
+    // Recalcular el cambio si el monto abonado cambia
+    $('#MontoAbonado').on('input', function() {
+        if ($('#RequiereCambio').is(':checked')) {
+            calcularCambio();
+        }
+    });
 
     function actualizarTablaEncargo() {
         let total = 0;
