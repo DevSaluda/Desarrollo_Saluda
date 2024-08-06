@@ -124,7 +124,6 @@ $('#RequiereCambio').change(function() {
     }
 });
 
-
 // Recalcular el cambio si el monto abonado cambia
 $('#MontoAbonado').on('input', function() {
     if ($('#RequiereCambio').is(':checked')) {
