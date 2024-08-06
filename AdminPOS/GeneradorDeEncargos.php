@@ -35,10 +35,10 @@ include "Consultas/Consultas.php";
        
       </div>
       <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+  Agregar producto al pedido <i class="fas fa-clinic-medical"></i>
 </button>
 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-  Busqueda por mes <i class="fas fa-calendar-week"></i>
+  Agregar encargos al pedido <i class="fas fa-calendar-week"></i>
 </button>
       <?php
       // Verificar si el formulario ha sido enviado
