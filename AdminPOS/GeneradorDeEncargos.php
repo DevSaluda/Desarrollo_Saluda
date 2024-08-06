@@ -296,7 +296,7 @@ $(document).ready(function() {
                 cell.data(newValue).draw();
 
                 // Enviar la actualización al servidor
-                $.post('Controladores/update_url.php', {
+                $.post('Consulta/update_url.php', {
                     id: id,
                     column: columnName,
                     value: newValue
