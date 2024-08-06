@@ -32,14 +32,14 @@ include "Consultas/Consultas.php";
         <div >
           
         </div>
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
+       
+      </div>
+      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
   Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
 </button>
 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
   Busqueda por mes <i class="fas fa-calendar-week"></i>
 </button>
-      </div>
-
       <?php
       // Verificar si el formulario ha sido enviado
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
