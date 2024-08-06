@@ -245,7 +245,11 @@ $(document).ready(function() {
             { "data": "Proveedor1" },
             { "data": "Proveedor2" },
             { "data": "AgregadoPor" },
-            
+            {
+        "data": null,
+        "defaultContent": '<button class="btn btn-danger btn-sm delete">Eliminar</button>',
+        "orderable": false
+      }
         ],
         "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
         "language": {
@@ -317,6 +321,40 @@ $(document).ready(function() {
     }
 });
 });
+
+ // Manejar clic en botón de eliminación
+ $('#Productos tbody').on('click', 'button.delete', function () {
+    var row = $(this).closest('tr');
+    var rowData = tabla.row(row).data();
+    var id = rowData.Id_Sugerencia;
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás deshacer esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.post('Consultas/delete_url.php', { id: id })
+          .done(function(response) {
+            if (response.success) {
+              tabla.row(row).remove().draw();
+              Swal.fire('Eliminado', 'La fila ha sido eliminada.', 'success');
+            } else {
+              Swal.fire('Error', response.error, 'error');
+            }
+          })
+          .fail(function(xhr, status, error) {
+            Swal.fire('Error', 'Error en la eliminación: ' + error, 'error');
+          });
+      }
+    });
+  });
+
       </script>
 
       <div class="text-center">
