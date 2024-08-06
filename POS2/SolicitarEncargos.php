@@ -1,5 +1,6 @@
 <?php
 include 'Consultas/Consultas.php';
+include "Consultas/ConsultaCaja.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,6 +30,8 @@ include 'Consultas/Consultas.php';
 </head>
 <body>
 <?php include_once("Menu.php")?>
+<?php if ($ValorCaja): ?>'<div class="text-center">
+
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -66,23 +69,90 @@ include 'Consultas/Consultas.php';
         <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
         <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
         <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+        <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $row['ID_Caja'] ?>"> <!-- ID_Caja añadido -->
     </div>
     
     <div class="form-group">
         <label for="MontoAbonado">Monto Abonado</label>
         <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
     </div>
+
+    <div class="form-group">
+        <label for="MetodoDePago">Método de Pago</label>
+        <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
+        </label>
+    </div>
+
+    <div class="form-group hidden-field" id="CambioContainer">
+        <label for="Cambio">Cambio</label>
+        <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
+    </div>
     
     <button type="submit" class="btn btn-success">Guardar Encargo</button>
 </form>
-
         </div>
     </section>
 </div>
+<?php
+else:
+    // Mensaje en caso de que no haya caja abierta o asignada
+    echo '<div class="text-center alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
+    echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
+endif;
+?>
+</div>
+
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
     let encargo = [];
+
+    function calcularCambio() {
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    let cambio = 0;
+
+    // Si el monto abonado excede el mínimo a abonar
+    if (montoAbonado > minimoAbonar) {
+        // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
+        if (montoAbonado > totalEncargo) {
+            cambio = montoAbonado - totalEncargo;
+        } else {
+            // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
+            cambio = montoAbonado - minimoAbonar;
+        }
+    }
+
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
+
+// Mostrar u ocultar el campo de cambio según el estado del checkbox
+$('#RequiereCambio').change(function() {
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
+    }
+});
+
+// Recalcular el cambio si el monto abonado cambia
+$('#MontoAbonado').on('input', function() {
+    if ($('#RequiereCambio').is(':checked')) {
+        calcularCambio(); // Calcular el cambio si cambia el monto abonado
+    }
+});
+
 
     function actualizarTablaEncargo() {
         let total = 0;
@@ -269,55 +339,66 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         actualizarTablaEncargo();
     });
 
+    // Validar el monto abonado antes de enviar el formulario
     $('#guardarEncargoForm').submit(function(e) {
-    e.preventDefault();
-    const formData = $(this).serializeArray();
-    formData.push({ name: 'guardar_encargo', value: true });
-    formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+        e.preventDefault();
 
-    // Enviar a ManejoEncargos.php
-    $.ajax({
-        url: 'Consultas/ManejoEncargos.php',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
-                $.ajax({
-                    url: 'http://localhost:8080/ticket/TicketEncargos.php',
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            alert("Encargo guardado correctamente y ticket generado.");
-                            $('#encargoTable tbody').empty();
-                            $('#totalEncargo').text('0');
-                            $('#pagoMinimo').text('0');
-                            $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
-                            encargo = [];
-                            location.reload();
-                        } else if (response.error) {
-                            alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
+        let montoAbonado = parseFloat($('#MontoAbonado').val());
+        let pagoMinimo = parseFloat($('#pagoMinimo').text());
+
+        // Validar que el monto abonado no sea menor al mínimo requerido
+        if (montoAbonado < pagoMinimo) {
+            alert("El monto abonado no puede ser menor que el mínimo requerido.");
+            return; // No enviar el formulario si la validación falla
+        }
+
+        const formData = $(this).serializeArray();
+        formData.push({ name: 'guardar_encargo', value: true });
+        formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
+
+        // Enviar a ManejoEncargos.php
+        $.ajax({
+            url: 'Consultas/ManejoEncargos.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    // Si el primer envío es exitoso, proceder a enviar a TicketsEncargos
+                    $.ajax({
+                        url: 'http://localhost:8080/ticket/TicketEncargos.php',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                alert("Encargo guardado correctamente y ticket generado.");
+                                $('#encargoTable tbody').empty();
+                                $('#totalEncargo').text('0');
+                                $('#pagoMinimo').text('0');
+                                $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
+                                encargo = [];
+                                location.reload();
+                            } else if (response.error) {
+                                alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
                             location.reload();
                         }
-                    },
-                    error: function(xhr, status, error) {
-                        alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-                        location.reload();
-                    }
-                });
-            } else if (response.error) {
-                alert(response.error);
+                    });
+                } else if (response.error) {
+                    alert(response.error);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error al guardar el encargo: " + error);
                 location.reload();
             }
-        },
-        error: function(xhr, status, error) {
-            alert("Error al guardar el encargo: " + error);
-            location.reload();
-        }
-    });
+        });
 });
 
 
