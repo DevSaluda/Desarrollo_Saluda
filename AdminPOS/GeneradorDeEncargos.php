@@ -301,14 +301,19 @@ $(document).ready(function() {
                     column: columnName,
                     value: newValue
                 }).done(function(response) {
-                    console.log('Actualización exitosa:', response);
+                    // Manejar la respuesta
+                    if (response.success) {
+                        Swal.fire('Actualización exitosa', 'Los datos han sido actualizados correctamente.', 'success');
+                    } else {
+                        Swal.fire('Error', response.error, 'error');
+                    }
                 }).fail(function(xhr, status, error) {
-                    console.log('Error en la actualización:', error);
+                    Swal.fire('Error', 'Error en la actualización: ' + error, 'error');
                 });
             }
         }).appendTo($(this).empty()).focus();
     } else {
-        alert('No tienes permiso para editar esta columna.');
+        Swal.fire('Permiso denegado', 'No tienes permiso para editar esta columna.', 'warning');
     }
 });
 });
