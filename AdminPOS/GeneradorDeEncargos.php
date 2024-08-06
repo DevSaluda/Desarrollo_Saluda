@@ -277,53 +277,46 @@ $(document).ready(function() {
         "responsive": true
     });
 
-    $('#Productos tbody').on('click', 'td', function () {
+     // Manejar clic en celda para edición en línea
+  $('#Productos tbody').on('click', 'td', function () {
     var cell = tabla.cell(this);
     var oldValue = cell.data();
     var columnIndex = cell.index().column;
-    var columnName = tabla.settings().init().columns[columnIndex].data; // Nombre de la columna en el servidor
+    var columnName = tabla.settings().init().columns[columnIndex].data;
 
-    // Columnas permitidas para editar
     var editableColumns = ['Cantidad', 'FkPresentacion', 'Proveedor1', 'Proveedor2', 'Nombre_Prod'];
 
     if (editableColumns.includes(columnName)) {
-        // Crear un campo de entrada para editar el valor
-        var input = $('<input>', {
-            value: oldValue,
-            type: 'text',
-            blur: function () {
-                var newValue = $(this).val();
-                var rowData = tabla.row(cell.index().row).data();
-                var id = rowData.Id_Sugerencia; // Suponiendo que tienes una columna ID
+      var input = $('<input>', {
+        value: oldValue,
+        type: 'text',
+        blur: function () {
+          var newValue = $(this).val();
+          var rowData = tabla.row(cell.index().row).data();
+          var id = rowData.Id_Sugerencia;
 
-                // Actualizar los datos en la celda
-                cell.data(newValue).draw();
+          cell.data(newValue).draw();
 
-                // Enviar la actualización al servidor
-                $.post('Consultas/update_url.php', {
-                    id: id,
-                    column: columnName,
-                    value: newValue
-                }).done(function(response) {
-                    // Manejar la respuesta
-                    if (response.success) {
-                        Swal.fire('Actualización exitosa', 'Los datos han sido actualizados correctamente.', 'success');
-                    } else {
-                        Swal.fire('Error', response.error, 'error');
-                    }
-                }).fail(function(xhr, status, error) {
-                    Swal.fire('Error', 'Error en la actualización: ' + error, 'error');
-                });
+          $.post('Consultas/update_url.php', {
+            id: id,
+            column: columnName,
+            value: newValue
+          }).done(function(response) {
+            if (response.success) {
+              Swal.fire('Actualización exitosa', 'Los datos han sido actualizados correctamente.', 'success');
+            } else {
+              Swal.fire('Error', response.error, 'error');
             }
-        }).appendTo($(this).empty()).focus();
-    } else {
-        Swal.fire('Permiso denegado', 'No tienes permiso para editar esta columna.', 'warning');
-    }
-});
-});
+          }).fail(function(xhr, status, error) {
+            Swal.fire('Error', 'Error en la actualización: ' + error, 'error');
+          });
+        }
+      }).appendTo($(this).empty()).focus();
+    } 
+  });
 
- // Manejar clic en botón de eliminación
- $('#Productos tbody').on('click', 'button.delete', function () {
+  // Manejar clic en botón de eliminación
+  $('#Productos tbody').on('click', 'button.delete', function () {
     var row = $(this).closest('tr');
     var rowData = tabla.row(row).data();
     var id = rowData.Id_Sugerencia;
@@ -354,6 +347,7 @@ $(document).ready(function() {
       }
     });
   });
+});
 
       </script>
 
