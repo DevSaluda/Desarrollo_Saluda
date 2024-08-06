@@ -8,7 +8,7 @@ include "Consultas/Consultas.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Ventas realizadas por <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
+  <title>Generador de pedidos <?php echo $row['ID_H_O_D']?> <?php echo $row['Nombre_Sucursal']?> </title>
   <?php include "Header.php"?>
   <style>
     .error {
