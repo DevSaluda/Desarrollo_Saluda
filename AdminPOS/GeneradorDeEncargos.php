@@ -276,31 +276,42 @@ $(document).ready(function() {
     $('#Productos tbody').on('click', 'td', function () {
     var cell = tabla.cell(this);
     var oldValue = cell.data();
-    var input = $('<input>', {
-        value: oldValue,
-        type: 'text',
-        blur: function () {
-            var newValue = $(this).val();
-            var row = cell.index().row;
-            var column = cell.index().column;
-            var columnName = tabla.settings().init().columns[column].data;
+    var columnIndex = cell.index().column;
+    var columnName = tabla.settings().init().columns[columnIndex].data; // Nombre de la columna en el servidor
 
-            // Actualizar los datos en la celda
-            cell.data(newValue).draw();
+    // Columnas permitidas para editar
+    var editableColumns = ['Cantidad', 'FkPresentacion', 'Proveedor1', 'Proveedor2', 'Nombre_Prod'];
 
-            // Enviar la actualización al servidor
-            $.post('update_url.php', {
-                id: tabla.row(row).data().Id_Sugerencia, // Asumiendo que tienes una columna ID
-                column: columnName,
-                value: newValue
-            }).done(function(response) {
-                console.log('Actualización exitosa:', response);
-            }).fail(function(xhr, status, error) {
-                console.log('Error en la actualización:', error);
-            });
-        }
-    }).appendTo($(this).empty()).focus();
-});});
+    if (editableColumns.includes(columnName)) {
+        // Crear un campo de entrada para editar el valor
+        var input = $('<input>', {
+            value: oldValue,
+            type: 'text',
+            blur: function () {
+                var newValue = $(this).val();
+                var rowData = tabla.row(cell.index().row).data();
+                var id = rowData.Id_Sugerencia; // Suponiendo que tienes una columna ID
+
+                // Actualizar los datos en la celda
+                cell.data(newValue).draw();
+
+                // Enviar la actualización al servidor
+                $.post('Controladores/update_url.php', {
+                    id: id,
+                    column: columnName,
+                    value: newValue
+                }).done(function(response) {
+                    console.log('Actualización exitosa:', response);
+                }).fail(function(xhr, status, error) {
+                    console.log('Error en la actualización:', error);
+                });
+            }
+        }).appendTo($(this).empty()).focus();
+    } else {
+        alert('No tienes permiso para editar esta columna.');
+    }
+});
+});
       </script>
 
       <div class="text-center">
