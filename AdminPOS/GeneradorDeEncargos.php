@@ -237,8 +237,8 @@ $(document).ready(function() {
             { "data": "Cod_Barra" },
             { "data": "Nombre_Prod" },
             { "data": "Nombre_Sucursal" },
-            { "data": "Precio_Venta" },
-            { "data": "Precio_C" },
+            // { "data": "Precio_Venta" },
+            // { "data": "Precio_C" },
             { "data": "Cantidad" },
             { "data": "Fecha_Ingreso" },
             { "data": "FkPresentacion" },
@@ -327,16 +327,16 @@ $(document).ready(function() {
               <th>Cod barra</th>
               <th>Nombre Producto</th>
               <th>Sucursal</th>
-             <th>Precio venta</th>
+             <!-- <th>Precio venta</th>
              <th>Precio Compra</th>
-             
+              -->
               <th>Piezas</th>
               <th>Fecha Solicitud</th> 
               <th>Proveedor 1</th>
               <th>Proveedor 2</th>
               <th>Presentacion</th>
               <th>Solicitante</th>
-             
+              <th>Acciones</th>
             </thead>
           </table>
         </div>

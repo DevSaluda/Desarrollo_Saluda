@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
             $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
             $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
-            $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
-            $data[$c]["Precio_C"] = $fila["Precio_C"];
+            // $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
+            // $data[$c]["Precio_C"] = $fila["Precio_C"];
             $data[$c]["Cantidad"] = $fila["Cantidad"];
             $data[$c]["Fecha_Ingreso"] = date("d/m/Y", strtotime($fila["Fecha_Ingreso"]));
             $data[$c]["FkPresentacion"] = $fila["FkPresentacion"];
