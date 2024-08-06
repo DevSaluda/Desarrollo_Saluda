@@ -273,23 +273,34 @@ $(document).ready(function() {
         "responsive": true
     });
 
-    // Hacer que las celdas sean editables
     $('#Productos tbody').on('click', 'td', function () {
-        var cell = tabla.cell(this);
-        var oldValue = cell.data();
-        var input = $('<input>', {
-            value: oldValue,
-            type: 'text',
-            blur: function () {
-                var newValue = $(this).val();
-                cell.data(newValue).draw();
-                // Aquí puedes enviar la actualización al servidor si es necesario
-                // Ejemplo:
-                // $.post('update_url.php', { id: cell.index().row, column: cell.index().column, value: newValue });
-            }
-        }).appendTo($(this).empty()).focus();
-    });
-});
+    var cell = tabla.cell(this);
+    var oldValue = cell.data();
+    var input = $('<input>', {
+        value: oldValue,
+        type: 'text',
+        blur: function () {
+            var newValue = $(this).val();
+            var row = cell.index().row;
+            var column = cell.index().column;
+            var columnName = tabla.settings().init().columns[column].data;
+
+            // Actualizar los datos en la celda
+            cell.data(newValue).draw();
+
+            // Enviar la actualización al servidor
+            $.post('update_url.php', {
+                id: tabla.row(row).data().Id_Sugerencia, // Asumiendo que tienes una columna ID
+                column: columnName,
+                value: newValue
+            }).done(function(response) {
+                console.log('Actualización exitosa:', response);
+            }).fail(function(xhr, status, error) {
+                console.log('Error en la actualización:', error);
+            });
+        }
+    }).appendTo($(this).empty()).focus();
+});});
       </script>
 
       <div class="text-center">
