@@ -30,7 +30,8 @@ include "Consultas/ConsultaCaja.php";
 </head>
 <body>
 <?php include_once("Menu.php")?>
-<?php if ($ValorCaja): ?>
+<?php if ($ValorCaja): ?>'<div class="text-center">
+
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -60,94 +61,97 @@ include "Consultas/ConsultaCaja.php";
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-                <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
-                    <input type="hidden" id="ValorCaja" name="ValorCaja" value="<?php echo $ValorCaja; ?>"> <!-- ValorCaja agregado -->
-                </div>
-                
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
+    <div class="form-group hidden-field">
+        
+        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
+        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+    </div>
+    
+    <div class="form-group">
+        <label for="MontoAbonado">Monto Abonado</label>
+        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+    </div>
 
-                <div class="form-group">
-                    <label for="MetodoDePago">Método de Pago</label>
-                    <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
-                        <option value="Efectivo">Efectivo</option>
-                        <option value="Tarjeta">Tarjeta</option>
-                    </select>
-                </div>
+    <div class="form-group">
+        <label for="MetodoDePago">Método de Pago</label>
+        <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+        </select>
+    </div>
 
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
-                    </label>
-                </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
+        </label>
+    </div>
 
-                <div class="form-group hidden-field" id="CambioContainer">
-                    <label for="Cambio">Cambio</label>
-                    <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
-                </div>
-                
-                <button type="submit" class="btn btn-success">Guardar Encargo</button>
-            </form>
+    <div class="form-group hidden-field" id="CambioContainer">
+        <label for="Cambio">Cambio</label>
+        <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
+    </div>
+    
+    <button type="submit" class="btn btn-success">Guardar Encargo</button>
+</form>
         </div>
     </section>
 </div>
 <?php
 else:
     // Mensaje en caso de que no haya caja abierta o asignada
-    echo '<div class="alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
+    echo '<div class="text-center alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
     echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
 endif;
 ?>
+</div>
+
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-        let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
-        let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
-        let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-        let cambio = 0;
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    let cambio = 0;
 
-        // Si el monto abonado excede el mínimo a abonar
-        if (montoAbonado > minimoAbonar) {
-            // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
-            if (montoAbonado > totalEncargo) {
-                cambio = montoAbonado - totalEncargo;
-            } else {
-                // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
-                cambio = montoAbonado - minimoAbonar;
-            }
+    // Si el monto abonado excede el mínimo a abonar
+    if (montoAbonado > minimoAbonar) {
+        // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
+        if (montoAbonado > totalEncargo) {
+            cambio = montoAbonado - totalEncargo;
+        } else {
+            // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
+            cambio = montoAbonado - minimoAbonar;
         }
-
-        $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
     }
 
-    // Mostrar u ocultar el campo de cambio según el estado del checkbox
-    $('#RequiereCambio').change(function() {
-        if ($(this).is(':checked')) {
-            $('#CambioContainer').removeClass('hidden-field');
-            calcularCambio(); // Calcular el cambio si se requiere
-        } else {
-            $('#CambioContainer').addClass('hidden-field');
-            $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
-        }
-    });
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
 
-    // Recalcular el cambio si el monto abonado cambia
-    $('#MontoAbonado').on('input', function() {
-        if ($('#RequiereCambio').is(':checked')) {
-            calcularCambio(); // Calcular el cambio si cambia el monto abonado
-        }
-    });
+// Mostrar u ocultar el campo de cambio según el estado del checkbox
+$('#RequiereCambio').change(function() {
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
+    }
+});
+
+// Recalcular el cambio si el monto abonado cambia
+$('#MontoAbonado').on('input', function() {
+    if ($('#RequiereCambio').is(':checked')) {
+        calcularCambio(); // Calcular el cambio si cambia el monto abonado
+    }
+});
+
 
     function actualizarTablaEncargo() {
         let total = 0;
@@ -189,38 +193,148 @@ $(document).ready(function() {
                             <input type="hidden" name="Proveedor1" value="${producto.Proveedor1 || ''}">
                             <input type="hidden" name="Proveedor2" value="${producto.Proveedor2 || ''}">
                             <div class="form-group">
+                                <label for="Nombre_Prod">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="Nombre_Prod" name="Nombre_Prod" value="${producto.Nombre_Prod}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Precio_Venta">Precio de Venta</label>
+                                <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
+                            </div>
+                            <div class="form-group">
                                 <label for="Cantidad">Cantidad</label>
                                 <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
                             </div>
-                            <button type="submit" class="btn btn-success">Agregar Producto</button>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
                         </form>
                     `);
-                } else {
-                    $('#productoFormContainer').html('<p class="error">Producto no encontrado.</p>');
+                } else if (response.productos.length > 1) {
+    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+    $('#productoFormContainer').html(`
+        <form id="agregarProductoMultipleForm">
+            <div class="form-group">
+                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                    ${dropdownOptions}
+                </select>
+            </div>
+            <div class="form-group hidden-field">
+                <input type="hidden" id="Precio_C_Multiple" name="Precio_C_Multiple">
+                <input type="hidden" id="FkPresentacion_Multiple" name="FkPresentacion_Multiple">
+                <input type="hidden" id="Proveedor1_Multiple" name="Proveedor1_Multiple">
+                <input type="hidden" id="Proveedor2_Multiple" name="Proveedor2_Multiple">
+            </div>
+            <div class="form-group">
+                <label for="Precio_Venta_Multiple">Precio de Venta</label>
+                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
+            </div>
+            <div class="form-group">
+                <label for="Cantidad_Multiple">Cantidad</label>
+                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+        </form>
+    `);
+    $('#ProductoSeleccionado').change();
+}
+else {
+                    $('#productoFormContainer').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Producto no encontrado. <button id="solicitarProducto" class="btn btn-warning">Solicitar Producto</button>
+                        </div>
+                    `);
                 }
-            },
-            error: function() {
-                $('#productoFormContainer').html('<p class="error">Error al buscar producto.</p>');
             }
         });
     });
 
-    $('#productoFormContainer').on('submit', '#agregarProductoForm', function(e) {
+    $(document).on('change', '#ProductoSeleccionado', function() {
+    let productoSeleccionado = JSON.parse($(this).val());
+    $('#Precio_Venta_Multiple').val(productoSeleccionado.Precio_Venta);
+    $('#Precio_C_Multiple').val(productoSeleccionado.Precio_C);
+    $('#FkPresentacion_Multiple').val(productoSeleccionado.FkPresentacion || '');
+    $('#Proveedor1_Multiple').val(productoSeleccionado.Proveedor1 || '');
+    $('#Proveedor2_Multiple').val(productoSeleccionado.Proveedor2 || '');
+});
+
+
+    $(document).on('click', '#solicitarProducto', function() {
+        $('#productoFormContainer').html(`
+            <form id="solicitarProductoForm">
+                <div class="form-group">
+                    <label for="Nombre_Prod_Solicitud">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="Nombre_Prod_Solicitud" name="Nombre_Prod_Solicitud" required>
+                </div>
+                <div class="form-group">
+                    <label for="Precio_Venta_Solicitud">Precio de Venta</label>
+                    <input type="number" step="0.01" class="form-control" id="Precio_Venta_Solicitud" name="Precio_Venta_Solicitud" required>
+                </div>
+                <div class="form-group">
+                    <label for="Cantidad_Solicitud">Cantidad</label>
+                    <input type="number" class="form-control" id="Cantidad_Solicitud" name="Cantidad_Solicitud" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        `);
+    });
+
+    $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
-        const producto = $(this).serializeArray().reduce((acc, field) => {
-            acc[field.name] = field.value;
-            return acc;
-        }, {});
-        producto.Total = (producto.Precio_C * producto.Cantidad).toFixed(2);
-        encargo.push(producto);
+        const nuevoProducto = {
+            Cod_Barra: '',
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val())
+        };
+        encargo.push(nuevoProducto);
         actualizarTablaEncargo();
-        $(this).trigger('reset');
         $('#productoFormContainer').empty();
     });
 
-    $('#encargoTable').on('click', '.eliminar-producto', function() {
+    $(document).on('submit', '#agregarProductoForm', function(e) {
+    e.preventDefault();
+    const producto = {
+        Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
+        Nombre_Prod: $('#Nombre_Prod').val(),
+        Precio_Venta: parseFloat($('#Precio_Venta').val()),
+        Cantidad: parseInt($('#Cantidad').val()),
+        Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
+        Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
+        FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
+        Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
+        Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL'
+    };
+    encargo.push(producto);
+    actualizarTablaEncargo();
+    $('#productoFormContainer').empty();
+});
+
+
+$(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+    e.preventDefault();
+    
+    const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+    
+    const producto = {
+        Cod_Barra: productoSeleccionado.Cod_Barra || 'NULL',
+        Nombre_Prod: productoSeleccionado.Nombre_Prod || 'NULL',
+        Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()) || 0,
+        Cantidad: parseInt($('#Cantidad_Multiple').val()) || 0,
+        Total: (parseFloat($('#Precio_Venta_Multiple').val()) || 0) * (parseInt($('#Cantidad_Multiple').val()) || 0),
+        Precio_C: $('#Precio_C_Multiple').val() || 'NULL',
+        FkPresentacion: $('#FkPresentacion_Multiple').val() || 'NULL',
+        Proveedor1: $('#Proveedor1_Multiple').val() || 'NULL',
+        Proveedor2: $('#Proveedor2_Multiple').val() || 'NULL'
+    };
+
+    encargo.push(producto);
+    actualizarTablaEncargo();
+    $('#productoFormContainer').empty();
+});
+
+    $(document).on('click', '.eliminar-producto', function() {
         const nombreProd = $(this).data('nombre-prod');
-        encargo = encargo.filter(p => p.Nombre_Prod !== nombreProd);
+        encargo = encargo.filter(producto => producto.Nombre_Prod !== nombreProd);
         actualizarTablaEncargo();
     });
 
@@ -285,6 +399,9 @@ $(document).ready(function() {
             }
         });
 });
+
+
+
 });
 </script>
 </body>
