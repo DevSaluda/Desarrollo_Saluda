@@ -1,5 +1,6 @@
 <?php
 include 'Consultas/Consultas.php';
+include "Consultas/ConsultaCaja.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,6 +30,10 @@ include 'Consultas/Consultas.php';
 </head>
 <body>
 <?php include_once("Menu.php")?>
+<?php if ($ValorCaja): ?>'<div class="text-center">
+<button data-toggle="modal" data-target="#ConsultaProductos" class="btn btn-primary btn-sm"  >Consulta productos <i class="fas fa-search"></i></button>
+<button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-arqui btn btn-warning btn-sm " type="submit"  >Arqueo de caja <i class="fa-solid fa-money-bill-transfer"></i> </button> 
+<button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-edit btn btn-warning btn-sm " type="submit"  >Corte de caja <i class="fas fa-cut"></i> <i class="fas fa-money-bill"></i></button> 
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -97,6 +102,15 @@ include 'Consultas/Consultas.php';
         </div>
     </section>
 </div>
+<?php
+else:
+    // Mensaje en caso de que no haya caja abierta o asignada
+    echo '<div class="text-center alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
+    echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
+endif;
+?>
+</div>
+
 <?php include("footer.php");?>
 <script>
 $(document).ready(function() {
