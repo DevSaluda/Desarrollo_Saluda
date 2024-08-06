@@ -103,29 +103,34 @@ $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-        let totalEncargo = parseFloat($('#totalEncargo').text());
-        let montoAbonado = parseFloat($('#MontoAbonado').val());
-        let cambio = montoAbonado - totalEncargo;
-        $('#Cambio').val(cambio.toFixed(2));
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    
+    // Si el monto abonado es mayor que el mínimo, el cambio se calcula en base al total
+    let cambio = montoAbonado - (montoAbonado >= minimoAbonar ? totalEncargo : minimoAbonar);
+    
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
+
+// Mostrar u ocultar el campo de cambio según el estado del checkbox
+$('#RequiereCambio').change(function() {
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
     }
+});
 
-    // Mostrar u ocultar el campo de cambio según el estado del checkbox
-    $('#RequiereCambio').change(function() {
-        if ($(this).is(':checked')) {
-            $('#CambioContainer').removeClass('hidden-field');
-            calcularCambio();
-        } else {
-            $('#CambioContainer').addClass('hidden-field');
-            $('#Cambio').val('');
-        }
-    });
 
-    // Recalcular el cambio si el monto abonado cambia
-    $('#MontoAbonado').on('input', function() {
-        if ($('#RequiereCambio').is(':checked')) {
-            calcularCambio();
-        }
-    });
+// Recalcular el cambio si el monto abonado cambia
+$('#MontoAbonado').on('input', function() {
+    if ($('#RequiereCambio').is(':checked')) {
+        calcularCambio(); // Calcular el cambio si cambia el monto abonado
+    }
+});
 
     function actualizarTablaEncargo() {
         let total = 0;
