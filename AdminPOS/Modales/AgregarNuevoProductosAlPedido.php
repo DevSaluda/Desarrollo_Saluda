@@ -262,23 +262,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                            
                           </div>
                         </div>
-                        <div class="col">
-
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Motivo de baja</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
-                            </div>
-                            <select class="form-control" style="font-size: 0.75rem !important;">
-                            <option value="">Seleccione el motivo de baja </option>
-                  <option value="Caducado">Caducado</option>
-              <option value="Proximo a caducar">Proximo a caducar</option>
-              
-</select>
-
-
-                          </div>
-                        </div>
-                        
+                       
 
 
                       </div>
