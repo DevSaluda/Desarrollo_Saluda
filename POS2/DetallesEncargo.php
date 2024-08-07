@@ -1,9 +1,20 @@
 <?php
 include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargos.php';
+include 'Consultas/ManejoEncargosPendientes.php';
 
 $identificador = $_GET['identificador'];
 $query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
+$result = mysqli_query($conn, $query);
+
+// Calcular el total del encargo y el total abonado
+$totalVenta = 0;
+$montoAbonadoTotal = 0;
+while ($row = mysqli_fetch_assoc($result)) {
+    $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
+    $montoAbonadoTotal += $row['MontoAbonado'];
+}
+
+// Volver a ejecutar la consulta para mostrar los datos en la tabla
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -12,10 +23,31 @@ $result = mysqli_query($conn, $query);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detalles del Encargo</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
+    <?php include "Header.php"?>
+    <style>
+        .error {
+            color: red;
+            margin-left: 5px; 
+        }  
+        .hidden-field {
+            display: none;
+        }
+        .highlight {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<?php include_once("Menu.php")?>
 <div class="container">
     <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
     <table class="table table-bordered">
@@ -46,6 +78,78 @@ $result = mysqli_query($conn, $query);
             ?>
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Total Venta: <?php echo $totalVenta; ?></h4>
+            <h4>Monto Abonado: <?php echo $montoAbonadoTotal; ?></h4>
+            <h4>Faltante: <?php echo $totalVenta - $montoAbonadoTotal; ?></h4>
+        </div>
+        <div class="col-md-6">
+            <form id="abonarForm">
+                <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
+                <input type="hidden" name="accion" value="abonar">
+                <div class="form-group">
+                    <label for="montoAbonado">Abonar monto:</label>
+                    <input type="number" class="form-control" name="montoAbonado" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Abonar</button>
+            </form>
+            <form id="estadoForm" class="mt-3">
+                <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
+                <button type="button" name="accion" value="saldar" class="btn btn-success estado-btn">Marcar como Saldado</button>
+                <button type="button" name="accion" value="entregar" class="btn btn-success estado-btn">Marcar como Entregado</button>
+            </form>
+        </div>
+    </div>
+    <div id="responseMessage" class="alert alert-info" style="display: none;"></div>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Manejar el envío del formulario de abonar
+    $('#abonarForm').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
+    // Manejar los botones de estado (Saldar, Entregar)
+    $('.estado-btn').on('click', function() {
+        const accion = $(this).val();
+        $.ajax({
+            url: 'ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: {
+                idEncargo: '<?php echo $identificador; ?>',
+                accion: accion
+            },
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
+    function mostrarMensaje(result) {
+        $('#responseMessage').text(result.success || result.error).show();
+        if (result.success) {
+            $('#responseMessage').removeClass('alert-danger').addClass('alert-success');
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } else {
+            $('#responseMessage').removeClass('alert-success').addClass('alert-danger');
+        }
+    }
+});
+</script>
+
 </body>
 </html>
