@@ -72,12 +72,12 @@ $query = $conn->query($sql1);
                    <th>Precio</th>
                  </thead>
                  <tbody>
-                   <?php while ($Usuarios = $query->fetch_array()): ?>
+                   <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                     <td><?php echo $Usuarios['Cod_Barra']; ?></td>
-                     <td><?php echo $Usuarios['Nombre_Prod']; ?></td>
-                     <td><?php echo $Usuarios['Proveedor1']; ?><br><?php echo $Usuarios['Proveedor2']; ?></td>
-                     <td>$ <?php echo $Usuarios['Precio_Venta']; ?></td>
+                     <td><?php echo $encargo['Cod_Barra']; ?></td>
+                     <td><?php echo $encargo['Nombre_Prod']; ?></td>
+                     <td><?php echo $encargo['Proveedor1']; ?><br><?php echo $encargo['Proveedor2']; ?></td>
+                     <td>$ <?php echo $encargo['Precio_Venta']; ?></td>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
