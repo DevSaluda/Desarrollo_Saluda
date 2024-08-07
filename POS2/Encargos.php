@@ -54,7 +54,7 @@ include 'Consultas/ManejoEncargosPendientes.php';
                         echo "<td>{$row['Fk_sucursal']}</td>";
                         echo "<td>{$row['MontoAbonadoTotal']}</td>";
                         echo "<td>
-                                <a href='detallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
+                                <a href='DetallesEncargos.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
                               </td>";
                         echo "</tr>";
                     }
