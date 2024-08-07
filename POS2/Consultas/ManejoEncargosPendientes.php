@@ -1,11 +1,22 @@
 <?php
 include 'Consultas.php';
 
-function obtenerEncargos($conn) {
+function obtenerEncargos($conn, $search = '', $offset = 0, $perPage = 10) {
     $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, SUM(Precio_Venta * Cantidad) AS TotalVenta, Estado 
               FROM Encargos_POS 
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado";
+              WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado
+              LIMIT $offset, $perPage";
     return mysqli_query($conn, $query);
+}
+
+function contarEncargos($conn, $search = '') {
+    $query = "SELECT COUNT(DISTINCT IdentificadorEncargo) AS total 
+              FROM Encargos_POS 
+              WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
 }
 
 
