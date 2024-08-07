@@ -63,6 +63,7 @@ $query = $conn->query($sql1);
                    <th>Piezas</th>
                 
                    <th>Solicitado por</th>
+                   <th>Numero de orden</th>
                  </thead>
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
