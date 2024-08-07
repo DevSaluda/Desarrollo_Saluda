@@ -66,18 +66,20 @@ $query = $conn->query($sql1);
              <div class="table-responsive">
                <table id="StockSucursales" class="table table-hover">
                  <thead>
-                   <th>Clave</th>
+                   <th>Cod barra</th>
                    <th>Nombre producto</th>
-                   <th>Proveedor</th>
-                   <th>Precio</th>
+                   <th>Sucursal</th>
+                   <th>Piezas</th>
+                
+                   <th>Solicitado por</th>
                  </thead>
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
                      <td><?php echo $encargo['Cod_Barra']; ?></td>
                      <td><?php echo $encargo['Nombre_Prod']; ?></td>
-                     <td><?php echo $encargo['Proveedor1']; ?><br><?php echo $encargo['Proveedor2']; ?></td>
-                     <td>$ <?php echo $encargo['Precio_Venta']; ?></td>
+                     <td><?php echo $encargo['Cantidad']; ?></td>
+                     <td>$ <?php echo $encargo['AgregadoPor']; ?></td>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
