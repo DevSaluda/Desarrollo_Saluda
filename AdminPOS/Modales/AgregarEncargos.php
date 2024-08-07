@@ -38,12 +38,12 @@ $query = $conn->query($sql1);
 
 <!-- Central Modal Medium Info -->
 <div class="modal fade" id="MuestraEncargos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: scroll;">
-   <div class="modal-dialog modal-xl modal-notify modal-success" role="document">
+   <div class="modal-dialog modal-xl modal-notify modal-primary" role="document">
      <!--Content-->
      <div class="modal-content">
        <!--Header-->
        <div class="modal-header">
-         <p class="heading lead">Consulta de producto</p>
+         <p class="heading lead">Encargos por realizar de la sucursal </p>
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true" class="white-text">&times;</span>
          </button>
