@@ -206,6 +206,16 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       transform: translateY(-15px) scale(1, 1);
     }
   }
+
+  /* Modal */
+.modal {
+    z-index: 1050;
+}
+
+/* Autocomplete */
+.ui-autocomplete {
+    z-index: 1060; /* Debe ser mayor que el z-index del modal */
+}
 </style>
 
 <!-- Main content -->
