@@ -12,10 +12,31 @@ $result = mysqli_query($conn, $query);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detalles del Encargo</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
+    <?php include "Header.php"?>
+    <style>
+        .error {
+            color: red;
+            margin-left: 5px; 
+        }  
+        .hidden-field {
+            display: none;
+        }
+        .highlight {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<?php include_once("Menu.php")?>
 <div class="container">
     <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
     <table class="table table-bordered">
