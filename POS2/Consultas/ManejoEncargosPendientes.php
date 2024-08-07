@@ -14,8 +14,31 @@ function actualizarEstadoEncargo($conn, $identificadorEncargo, $nuevoEstado) {
 }
 
 function abonarEncargo($conn, $identificadorEncargo, $montoAbonado) {
-    $query = "UPDATE Encargos_POS SET MontoAbonado = MontoAbonado + '$montoAbonado' WHERE IdentificadorEncargo='$identificadorEncargo'";
-    return mysqli_query($conn, $query);
+    // Obtener la lista de productos relacionados con el IdentificadorEncargo
+    $query = "SELECT ID_Encargo FROM Encargos_POS WHERE IdentificadorEncargo='$identificadorEncargo'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $primero = true;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $idEncargo = $row['ID_Encargo'];
+
+            // Asignar el monto abonado solo al primer producto
+            if ($primero) {
+                $query = "UPDATE Encargos_POS SET MontoAbonado = MontoAbonado + '$montoAbonado' WHERE ID_Encargo='$idEncargo'";
+                $primero = false;
+            } else {
+                // No actualizar el monto abonado para los productos subsiguientes
+                $query = "UPDATE Encargos_POS SET MontoAbonado = MontoAbonado WHERE ID_Encargo='$idEncargo'";
+            }
+
+            if (!mysqli_query($conn, $query)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
