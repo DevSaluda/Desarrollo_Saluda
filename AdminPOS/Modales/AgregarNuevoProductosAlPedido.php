@@ -330,9 +330,8 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                       </style>
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Confirmar caducados</button>
-    </div>
-               
+        <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+    </div>               
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
