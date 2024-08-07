@@ -54,6 +54,7 @@ $query = $conn->query($sql1);
            <?php if($query->num_rows > 0): ?>
            <div class="text-center">
              <div class="table-responsive">
+             <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                <table id="StockSucursales" class="table table-hover">
                  <thead>
                    <th>Cod barra</th>
@@ -77,6 +78,7 @@ $query = $conn->query($sql1);
                </table>
              </div>
            </div>
+           </form>
            <?php else: ?>
            <p class="alert alert-warning">Aún no hay encargos registrados para <?php echo $row['ID_H_O_D']; ?></p>
            <?php endif; ?>
