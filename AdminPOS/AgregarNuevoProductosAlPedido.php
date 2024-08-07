@@ -1,7 +1,7 @@
 
 
 <!-- Central Modal Medium Info -->
-<div class="modal fade" id="AgregaPedidos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="AgregaProductosAPedidos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
    aria-="true" style="overflow-y: scroll;">
    <div class="modal-dialog modal-xl modal-notify modal-success" role="document">
      <!--Content-->
