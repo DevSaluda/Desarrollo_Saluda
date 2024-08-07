@@ -42,6 +42,7 @@ include 'Consultas/ManejoEncargosPendientes.php';
                         <th>Identificador</th>
                         <th>Sucursal</th>
                         <th>Monto Abonado</th>
+                        <th>Estado</th> <!-- Nueva columna -->
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -53,6 +54,7 @@ include 'Consultas/ManejoEncargosPendientes.php';
                         echo "<td>{$row['IdentificadorEncargo']}</td>";
                         echo "<td>{$row['Fk_sucursal']}</td>";
                         echo "<td>{$row['MontoAbonadoTotal']}</td>";
+                        echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
                         echo "<td>
                                 <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
                               </td>";
