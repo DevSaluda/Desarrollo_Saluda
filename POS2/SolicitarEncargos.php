@@ -114,48 +114,53 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
-    let montoAbonadoAsignado = false; // Variable para rastrear si el monto abonado ya ha sido asignado
 
     function calcularCambio() {
-        let totalEncargo = parseFloat($('#totalEncargo').text());
-        let minimoAbonar = totalEncargo * 0.5;
-        let montoAbonado = parseFloat($('#MontoAbonado').val());
-        let cambio = 0;
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    let cambio = 0;
 
-        if (montoAbonado > minimoAbonar) {
-            if (montoAbonado > totalEncargo) {
-                cambio = montoAbonado - totalEncargo;
-            } else {
-                cambio = montoAbonado - minimoAbonar;
-            }
+    // Si el monto abonado excede el mínimo a abonar
+    if (montoAbonado > minimoAbonar) {
+        // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
+        if (montoAbonado > totalEncargo) {
+            cambio = montoAbonado - totalEncargo;
+        } else {
+            // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
+            cambio = montoAbonado - minimoAbonar;
         }
-
-        $('#Cambio').val(cambio.toFixed(2));
     }
 
-    $('#RequiereCambio').change(function() {
-        if ($(this).is(':checked')) {
-            $('#CambioContainer').removeClass('hidden-field');
-            calcularCambio();
-        } else {
-            $('#CambioContainer').addClass('hidden-field');
-            $('#Cambio').val('');
-        }
-    });
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
 
-    $('#MontoAbonado').on('input', function() {
-        if ($('#RequiereCambio').is(':checked')) {
-            calcularCambio();
-        }
-    });
+// Mostrar u ocultar el campo de cambio según el estado del checkbox
+$('#RequiereCambio').change(function() {
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
+    }
+});
+
+// Recalcular el cambio si el monto abonado cambia
+$('#MontoAbonado').on('input', function() {
+    if ($('#RequiereCambio').is(':checked')) {
+        calcularCambio(); // Calcular el cambio si cambia el monto abonado
+    }
+});
+
 
     function actualizarTablaEncargo() {
         let total = 0;
         $('#encargoTable tbody').empty();
         encargo.forEach(function(producto) {
             total += parseFloat(producto.Total);
-            $('#encargoTable tbody').append(
-                `<tr>
+            $('#encargoTable tbody').append(`
+                <tr>
                     <td>${producto.Cod_Barra}</td>
                     <td>${producto.Nombre_Prod}</td>
                     <td>${producto.Precio_Venta}</td>
@@ -164,8 +169,8 @@ $(document).ready(function() {
                     <td>
                         <button class="btn btn-danger eliminar-producto" data-nombre-prod="${producto.Nombre_Prod}">Eliminar</button>
                     </td>
-                </tr>`
-            );
+                </tr>
+            `);
         });
         $('#totalEncargo').text(total.toFixed(2));
         $('#pagoMinimo').text((total * 0.5).toFixed(2));
@@ -273,36 +278,67 @@ else {
         `);
     });
 
-    $(document).on('submit', '#agregarProductoForm, #agregarProductoMultipleForm, #solicitarProductoForm', function(e) {
+    $(document).on('submit', '#solicitarProductoForm', function(e) {
         e.preventDefault();
-
-        const producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val() || 'NULL',
-            Nombre_Prod: $(this).find('input[name="Nombre_Prod"]').val(),
-            Precio_Venta: parseFloat($(this).find('input[name="Precio_Venta"]').val()) || 0,
-            Cantidad: parseInt($(this).find('input[name="Cantidad"]').val()) || 0,
-            Total: (parseFloat($(this).find('input[name="Precio_Venta"]').val()) || 0) * (parseInt($(this).find('input[name="Cantidad"]').val()) || 0),
-            Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
-            FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
-            Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
-            Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL',
-            MontoAbonado: montoAbonadoAsignado ? 0 : parseFloat($('#MontoAbonado').val()) // Asignar MontoAbonado solo una vez
+        const nuevoProducto = {
+            Cod_Barra: '',
+            Nombre_Prod: $('#Nombre_Prod_Solicitud').val(),
+            Precio_Venta: parseFloat($('#Precio_Venta_Solicitud').val()),
+            Cantidad: parseInt($('#Cantidad_Solicitud').val()),
+            Total: parseFloat($('#Precio_Venta_Solicitud').val()) * parseInt($('#Cantidad_Solicitud').val())
         };
-
-        if (!montoAbonadoAsignado) {
-            montoAbonadoAsignado = true; // Marcar que ya se asignó el monto abonado
-        }
-
-        encargo.push(producto);
+        encargo.push(nuevoProducto);
         actualizarTablaEncargo();
         $('#productoFormContainer').empty();
     });
+
+    $(document).on('submit', '#agregarProductoForm', function(e) {
+    e.preventDefault();
+    const producto = {
+        Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
+        Nombre_Prod: $('#Nombre_Prod').val(),
+        Precio_Venta: parseFloat($('#Precio_Venta').val()),
+        Cantidad: parseInt($('#Cantidad').val()),
+        Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
+        Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
+        FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
+        Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
+        Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL'
+    };
+    encargo.push(producto);
+    actualizarTablaEncargo();
+    $('#productoFormContainer').empty();
+});
+
+
+$(document).on('submit', '#agregarProductoMultipleForm', function(e) {
+    e.preventDefault();
+    
+    const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+    
+    const producto = {
+        Cod_Barra: productoSeleccionado.Cod_Barra || 'NULL',
+        Nombre_Prod: productoSeleccionado.Nombre_Prod || 'NULL',
+        Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()) || 0,
+        Cantidad: parseInt($('#Cantidad_Multiple').val()) || 0,
+        Total: (parseFloat($('#Precio_Venta_Multiple').val()) || 0) * (parseInt($('#Cantidad_Multiple').val()) || 0),
+        Precio_C: $('#Precio_C_Multiple').val() || 'NULL',
+        FkPresentacion: $('#FkPresentacion_Multiple').val() || 'NULL',
+        Proveedor1: $('#Proveedor1_Multiple').val() || 'NULL',
+        Proveedor2: $('#Proveedor2_Multiple').val() || 'NULL'
+    };
+
+    encargo.push(producto);
+    actualizarTablaEncargo();
+    $('#productoFormContainer').empty();
+});
 
     $(document).on('click', '.eliminar-producto', function() {
         const nombreProd = $(this).data('nombre-prod');
         encargo = encargo.filter(producto => producto.Nombre_Prod !== nombreProd);
         actualizarTablaEncargo();
     });
+
     // Validar el monto abonado antes de enviar el formulario
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
