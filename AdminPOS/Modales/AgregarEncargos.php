@@ -67,13 +67,11 @@ $query = $conn->query($sql1);
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                   <td><input type="text" value="<?php echo htmlspecialchars($encargo['Cod_Barra']); ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Nombre_Prod']); ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Proveedor1']); ?> <?php echo htmlspecialchars($encargo['Proveedor2']); ?>" readonly /></td>
-                     <td><input type="text" value="$ <?php echo htmlspecialchars($encargo['Precio_Venta']); ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Nombre_Sucursal']); ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['AgregadoPor']); ?>" readonly /></td>
-                   </tr>
+                     <td><input type="text" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
