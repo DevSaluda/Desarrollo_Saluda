@@ -54,7 +54,7 @@ $query = $conn->query($sql1);
            <?php if($query->num_rows > 0): ?>
            <div class="text-center">
              <div class="table-responsive">
-             <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
+             <form action="javascript:void(0)"  method="post" id="AgregaMedicamentosAlPedidoDesdeEncargos">
                <table id="StockSucursales" class="table table-hover">
                  <thead>
                    <th>Cod barra</th>
@@ -67,11 +67,13 @@ $query = $conn->query($sql1);
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                     <td><?php echo $encargo['Cod_Barra']; ?></td>
-                     <td><?php echo $encargo['Nombre_Prod']; ?></td>
-                     <td><?php echo $encargo['Nombre_Prod']; ?></td>
-                     <td><?php echo $encargo['Nombre_Sucursal']; ?></td>
-                     <td><?php echo $encargo['AgregadoPor']; ?></td>
+                   <td><input type="text" value="<?php echo htmlspecialchars($encargo['Cod_Barra']); ?>" readonly /></td>
+                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Nombre_Prod']); ?>" readonly /></td>
+                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Proveedor1']); ?> <?php echo htmlspecialchars($encargo['Proveedor2']); ?>" readonly /></td>
+                     <td><input type="text" value="$ <?php echo htmlspecialchars($encargo['Precio_Venta']); ?>" readonly /></td>
+                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['Nombre_Sucursal']); ?>" readonly /></td>
+                     <td><input type="text" value="<?php echo htmlspecialchars($encargo['AgregadoPor']); ?>" readonly /></td>
+                   </tr>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
