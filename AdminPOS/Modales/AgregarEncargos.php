@@ -28,7 +28,7 @@ $query = $conn->query($sql1);
 ?>
 
 <!-- Central Modal Medium Info -->
-<div class="modal fade" id="ConsultaProductos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="MuestraEncargos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
    aria-="true" style="overflow-y: scroll;">
    <div class="modal-dialog modal-xl modal-notify modal-success" role="document">
      <!--Content-->

@@ -37,7 +37,7 @@ include "Consultas/Consultas.php";
       <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#AgregaProductosAPedidos" class="btn btn-default">
   Agregar producto al pedido <i class="fas fa-clinic-medical"></i>
 </button>
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#MuestraEncargos" class="btn btn-default">
   Agregar encargos al pedido <i class="fas fa-calendar-week"></i>
 </button>
       <?php

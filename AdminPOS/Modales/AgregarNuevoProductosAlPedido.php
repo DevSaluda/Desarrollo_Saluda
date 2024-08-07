@@ -8,7 +8,7 @@
      <div class="modal-content">
        <!--Header-->
        <div class="modal-header">
-         <p class="heading lead">Consulta de producto</p>
+         <p class="heading lead">Agregando productos al pedido</p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-="true" class="white-text">&times;</span>
