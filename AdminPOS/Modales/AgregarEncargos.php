@@ -5,7 +5,6 @@
 include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
 
-
 $user_id = null;
 $sql1 = "SELECT 
         Encargos_POS.Id_Encargo,
@@ -29,17 +28,13 @@ $sql1 = "SELECT
         Encargos_POS.Estado,
         Encargos_POS.TipoEncargo,
         SucursalesCorre.ID_SucursalC,
-        SucursalesCorre.Nombre_Sucursal,
-        Sugerencias_POS.NumOrdPedido
+        SucursalesCorre.Nombre_Sucursal
     FROM 
         Encargos_POS
     INNER JOIN 
-        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-    INNER JOIN
-        Sugerencias_POS ON Encargos_POS.Id_Encargo = Sugerencias_POS.Id_Encargo"; // Asegúrate de que esta relación sea correcta
+        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC";
 $query = $conn->query($sql1);
 ?>
-
 
 <!-- Central Modal Medium Info -->
 <div class="modal fade" id="MuestraEncargos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: scroll;">
@@ -68,17 +63,16 @@ $query = $conn->query($sql1);
                    <th>Piezas</th>
                 
                    <th>Solicitado por</th>
-                   <th>Numero de orden</th>
                  </thead>
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                   <td><input type="text" value="<?php echo $encargo['Cod_Barra']; ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Nombre_Prod']; ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Cantidad']; ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>" readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['NumOrdPedido']; ?>" readonly /></td> <!-- Nueva celda -->
+                     <td><input type="text" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
+                     <td><input type="text" value="<?php echo $mes ?>"readonly /></td>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
