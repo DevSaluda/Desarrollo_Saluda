@@ -24,6 +24,7 @@ function buscarProducto($conn, $Cod_Barra) {
 
 function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja) {
     $response = [];
+    $montoAbonadoAsignado = false;
 
     foreach ($encargo as $producto) {
         $Cod_Barra = $producto['Cod_Barra'];
@@ -35,7 +36,11 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
         $Proveedor1 = isset($producto['Proveedor1']) && $producto['Proveedor1'] !== '' ? "'{$producto['Proveedor1']}'" : "NULL";
         $Proveedor2 = isset($producto['Proveedor2']) && $producto['Proveedor2'] !== '' ? "'{$producto['Proveedor2']}'" : "NULL";
         
-        // Incluir MetodoDePago y Fk_Caja en la consulta SQL
+        // Asignar monto abonado solo al primer producto
+        if ($montoAbonadoAsignado) {
+            $montoAbonado = 0;
+        }
+
         $query = "INSERT INTO Encargos_POS 
             (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo, MetodoDePago, Fk_Caja) 
             VALUES 
@@ -45,6 +50,9 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
             $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
             return $response;
         }
+
+        // Marcar que ya se ha asignado el monto abonado
+        $montoAbonadoAsignado = true;
     }
 
     $response['success'] = "Encargo guardado exitosamente.";
