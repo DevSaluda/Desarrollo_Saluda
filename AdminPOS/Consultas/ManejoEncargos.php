@@ -2,11 +2,12 @@
 include 'Consultas.php';
 
 function obtenerEncargos($conn) {
-    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal 
+    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, Estado 
               FROM Encargos_POS 
-              GROUP BY IdentificadorEncargo, Fk_sucursal";
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado";
     return mysqli_query($conn, $query);
 }
+
 
 
 function actualizarEstadoEncargo($conn, $idEncargo, $nuevoEstado) {
