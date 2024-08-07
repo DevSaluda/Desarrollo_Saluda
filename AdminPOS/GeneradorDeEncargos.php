@@ -49,8 +49,8 @@ include "Consultas/Consultas.php";
               $mes = $_POST['Mes'];
              $sucursal= $_POST['Sucursal'];
               // Realizar las operaciones que necesites con estas variables
-              // Por ejemplo, imprimir su valor
-              echo "Mes seleccionado: $mes<br>";
+              // Porn ejemplo, imprimir su valor
+              echo "Numero de orden: $mes<br>";
              
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
