@@ -1,14 +1,4 @@
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#StockSucursales').DataTable({
-        "order": [[ 0, "desc" ]],
-        "lengthMenu": [[5, 10, 50, -1], [5, 10, 50, "Todos"]],
-        "language": {
-            "url": "Componentes/Spanish.json"
-        }
-    });
-});
-</script>
+
 
 <?php
 
