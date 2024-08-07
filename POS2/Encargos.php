@@ -1,6 +1,25 @@
 <?php
 include 'Consultas/Consultas.php';
 include 'Consultas/ManejoEncargosPendientes.php';
+
+$search = '';
+$page = 1;
+$perPage = 10; // Número de resultados por página
+
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
+if (isset($_GET['page'])) {
+    $page = (int)$_GET['page'];
+}
+
+// Calcular el offset para la consulta SQL
+$offset = ($page - 1) * $perPage;
+
+$result = obtenerEncargos($conn, $search, $offset, $perPage);
+$totalEncargos = contarEncargos($conn, $search);
+$totalPages = ceil($totalEncargos / $perPage);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,7 +55,17 @@ include 'Consultas/ManejoEncargosPendientes.php';
     <section class="content">
         <div class="container-fluid">
             <h2>Encargos Pendientes</h2>
-            <table class="table table-bordered" id="encargosTable">
+
+            <!-- Formulario de búsqueda -->
+            <form method="GET" action="Encargos.php">
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por identificador, sucursal o estado" value="<?php echo htmlspecialchars($search); ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+
+            <!-- Tabla de resultados -->
+            <table class="table table-bordered mt-3" id="encargosTable">
                 <thead>
                     <tr>
                         <th>Identificador</th>
@@ -48,7 +77,6 @@ include 'Consultas/ManejoEncargosPendientes.php';
                 </thead>
                 <tbody>
                     <?php
-                    $result = obtenerEncargos($conn);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>{$row['IdentificadorEncargo']}</td>";
@@ -63,6 +91,18 @@ include 'Consultas/ManejoEncargosPendientes.php';
                     ?>
                 </tbody>
             </table>
+
+            <!-- Paginación -->
+            <nav aria-label="Paginación de resultados">
+                <ul class="pagination">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+
         </div>
     </section>
 </div>
