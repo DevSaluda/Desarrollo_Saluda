@@ -78,8 +78,9 @@ $query = $conn->query($sql1);
                    <tr>
                      <td><?php echo $encargo['Cod_Barra']; ?></td>
                      <td><?php echo $encargo['Nombre_Prod']; ?></td>
-                     <td><?php echo $encargo['Cantidad']; ?></td>
-                     <td>$ <?php echo $encargo['AgregadoPor']; ?></td>
+                     <td><?php echo $encargo['Nombre_Prod']; ?></td>
+                     <td><?php echo $encargo['Nombre_Sucursal']; ?></td>
+                     <td><?php echo $encargo['AgregadoPor']; ?></td>
                    </tr>
                    <?php endwhile; ?>
                  </tbody>
