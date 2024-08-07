@@ -346,8 +346,8 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                             <tr>
                               <th class="no-click" >Codigo</th>
                               <th class="no-click" style="width:20%">Producto</th>
-                              <th class="no-click" style="width:6%">Cantidad</th>
-                              <th class="no-click" >Fecha de caducidad</th>
+                              <th class="no-click" style="width:6%">Piezas</th>
+                             
                               
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
@@ -442,9 +442,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
       },{
         "data": "diferencia"
       },
-      {
-        "data": "precio"
-      },
+      
       // {
       //     "data": "importesiniva"
       // },
