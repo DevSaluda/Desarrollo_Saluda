@@ -110,7 +110,7 @@ $(document).ready(function() {
     $('#abonarForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: 'ManejoEncargosPendientes.php',
+            url: 'Consultas/ManejoEncargosPendientes.php',
             type: 'POST',
             data: $(this).serialize(),
             success: function(response) {
@@ -124,7 +124,7 @@ $(document).ready(function() {
     $('.estado-btn').on('click', function() {
         const accion = $(this).val();
         $.ajax({
-            url: 'ManejoEncargosPendientes.php',
+            url: 'Consultas/ManejoEncargosPendientes.php',
             type: 'POST',
             data: {
                 idEncargo: '<?php echo $identificador; ?>',
