@@ -1,5 +1,7 @@
 
-
+<?php
+$fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
+?>
 <!-- Central Modal Medium Info -->
 <div class="modal fade" id="AgregaProductosAPedidos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
    aria-="true" style="overflow-y: scroll;">
@@ -64,37 +66,7 @@
     return loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
   }
 
-  // Mostrar SweetAlert2 de carga al iniciar la página
-  Swal.fire({
-    title: 'Cargando',
-    html: '<div class="loader-container">' +
-            '<div class="absCenter">' +
-              '<div class="loaderPill">' +
-                '<div class="loaderPill-anim">' +
-                  '<div class="loaderPill-anim-bounce">' +
-                    '<div class="loaderPill-anim-flop">' +
-                      '<div class="loaderPill-pill"></div>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-                '<div class="loaderPill-floor">' +
-                  '<div class="loaderPill-floor-shadow"></div>' +
-                '</div>' +
-                `<div class="loaderPill-text" style="color: #C80096">${getRandomMessage()}</div>` +
-              '</div>' +
-            '</div>' +
-          '</div>',
-    showCancelButton: false,
-    showConfirmButton: false,
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    onBeforeOpen: () => {
-      Swal.showLoading();
-    },
-    customClass: {
-      container: 'animated fadeInDown'
-    }
-  });
+  
 
   // Actualizar mensaje aleatoriamente cada 2 segundos
   setInterval(() => {
@@ -255,9 +227,7 @@
                   <div class="col-md-12 mb-3">
 
                     <div class="form-group mb-2">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
- Cambiar de sucursal <i class="fas fa-clinic-medical"></i>
-</button>
+                  
                       <div class="row">
                         <input hidden type="text" class="form-control " readonly value="<?php echo $row['Nombre_Apellidos'] ?>">
 
@@ -267,7 +237,7 @@
                           <div class="input-group mb-3">
                             <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
                             </div>
-                            <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo $row['Nombre_Sucursal'] ?>">
+                          
                            
                           </div>
                         </div>
