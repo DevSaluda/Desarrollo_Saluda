@@ -85,7 +85,7 @@ $result = mysqli_query($conn, $query);
             <h4>Faltante: <?php echo $totalVenta - $montoAbonadoTotal; ?></h4>
         </div>
         <div class="col-md-6">
-            <form method="post" action="ManejoEncargosPendientes.php">
+            <form id="abonarForm">
                 <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
                 <input type="hidden" name="accion" value="abonar">
                 <div class="form-group">
@@ -94,13 +94,62 @@ $result = mysqli_query($conn, $query);
                 </div>
                 <button type="submit" class="btn btn-primary">Abonar</button>
             </form>
-            <form method="post" action="ManejoEncargosPendientes.php" class="mt-3">
+            <form id="estadoForm" class="mt-3">
                 <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
-                <button type="submit" name="accion" value="saldar" class="btn btn-success">Marcar como Saldado</button>
-                <button type="submit" name="accion" value="entregar" class="btn btn-success">Marcar como Entregado</button>
+                <button type="button" name="accion" value="saldar" class="btn btn-success estado-btn">Marcar como Saldado</button>
+                <button type="button" name="accion" value="entregar" class="btn btn-success estado-btn">Marcar como Entregado</button>
             </form>
         </div>
     </div>
+    <div id="responseMessage" class="alert alert-info" style="display: none;"></div>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Manejar el envío del formulario de abonar
+    $('#abonarForm').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
+    // Manejar los botones de estado (Saldar, Entregar)
+    $('.estado-btn').on('click', function() {
+        const accion = $(this).val();
+        $.ajax({
+            url: 'ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: {
+                idEncargo: '<?php echo $identificador; ?>',
+                accion: accion
+            },
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
+    function mostrarMensaje(result) {
+        $('#responseMessage').text(result.success || result.error).show();
+        if (result.success) {
+            $('#responseMessage').removeClass('alert-danger').addClass('alert-success');
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } else {
+            $('#responseMessage').removeClass('alert-success').addClass('alert-danger');
+        }
+    }
+});
+</script>
+
 </body>
 </html>
