@@ -384,13 +384,8 @@ $(document).ready(function() {
 
   <!-- Modales y scripts -->
   <?php
-  include ("Modales/Error.php");
-  include ("Modales/Exito.php");
-  include ("Modales/ExitoActualiza.php");
-  include ("Modales/FiltraEspecificamente.php");
-  include ("Modales/FiltraFechasEspecialesVenta.php");
-  include ("Modales/FiltraPorMes.php");
-  include ("Modales/FiltroPorProducto.php");
+  include ("Modales/AgregarNuevoProductosAlPedido.php");
+  include ("Modales/AgregarEncargos.php");
   include ("footer.php");
   ?>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
