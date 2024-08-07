@@ -242,15 +242,23 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         <input hidden type="text" class="form-control " readonly value="<?php echo $row['Nombre_Apellidos'] ?>">
 
                         <div class="col">
-
-                          <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Sucursal</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-                            </div>
-                          
-                           
-                          </div>
-                        </div>
+    <label for="exampleFormControlInput1">Sucursal </label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+  </div>
+  <select id = "sucursal" class = "form-control" name = "Sucursal" required >
+                                               <option value="">Seleccione una Sucursal:</option>
+        <?php 
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."'");
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+        ?>  </select>
+    </div>
+    
+    <input type="text"  name="user" hidden value="<?php echo $row['Pos_ID']?>">
+  <div>     </div>
+  </div> 
 
                         <div class="col">
 
