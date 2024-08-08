@@ -270,10 +270,7 @@ $(document).ready(function() {
 }
 @page {
     size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
-    }
+  
 }
 
 </style>
