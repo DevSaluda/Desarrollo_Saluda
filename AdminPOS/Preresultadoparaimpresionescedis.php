@@ -266,9 +266,7 @@ $(document).ready(function() {
         padding: 0;
     }
    
-    #header {
-        display: none; /* Oculta el encabezado */
-    }
+   
     #footer {
         position: fixed;
         bottom: 0;
