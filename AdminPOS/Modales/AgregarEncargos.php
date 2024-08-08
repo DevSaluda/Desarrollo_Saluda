@@ -55,6 +55,7 @@ $query = $conn->query($sql1);
            <div class="text-center">
              <div class="table-responsive">
              <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+             <button type="submit" class="btn btn-primary">Agregar al pedido</button>
                <table id="StockSucursales" class="table table-hover">
                  <thead>
                    <th>Cod barra</th>
