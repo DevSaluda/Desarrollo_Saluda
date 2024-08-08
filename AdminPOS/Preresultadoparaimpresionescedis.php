@@ -265,14 +265,17 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
-    @page {
-        size: landscape;
-        margin: 0;
-    }
     #header {
-        display: none; /* Oculta el encabezado */
+        display: block; /* Muestra el encabezado */
+        position: fixed;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        padding: 10px;
     }
     #footer {
+        display: block; /* Muestra el pie de página */
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -280,14 +283,20 @@ $(document).ready(function() {
         border-top: 1px solid #000;
         padding: 10px;
     }
+    @page {
+        size: landscape; /* Cambia a portrait si prefieres vertical */
+        margin: 0;
+    }
 }
 @page {
-    size: portrait;
+    size: portrait; /* Cambia a landscape si prefieres horizontal */
     margin: 0;
-   
+    @bottom-right {
+        content: counter(page);
+    }
 }
-
 </style>
+
 
 <style>
         /* CSS para alinear los divs horizontalmente */
@@ -343,6 +352,7 @@ $(document).ready(function() {
       <br>
       <strong>Nombre y firma</strong>
     </div>
+    <div id="footer">Pie de Página Personalizado - Página <span class="pageNumber"></span></div>
   </div>
 </div>
 </div>
