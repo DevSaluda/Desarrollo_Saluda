@@ -24,16 +24,15 @@
                         <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
                     </div>
                     <select id="sucursal" class="form-control" name="Sucursal" required>
-    <option value="">Seleccione una Sucursal:</option>
-    <?php 
-    // Asumiendo que $conn es tu conexión a la base de datos
-    $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
-    while ($valores = mysqli_fetch_array($query)) {
-        echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
-    }
-    ?>  
-</select>
-
+                        <option value="">Seleccione una Sucursal:</option>
+                        <?php 
+                        // Asumiendo que $conn es tu conexión a la base de datos
+                        $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+                        while ($valores = mysqli_fetch_array($query)) {
+                            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+                        }
+                        ?>  
+                    </select>
                 </div>
             </div>
 
@@ -48,32 +47,38 @@
     </div>
     <script>
 $(document).ready(function() {
-    $('#sucursal').select2({
-        placeholder: "Seleccione una Sucursal:",
+    // Inicializa Select2 en el select de facturas
+    $('#facturas').select2({
+        placeholder: "Seleccione una Factura:",
         allowClear: true
+    });
+
+    // Configura el evento change en el select de sucursales
+    $('#sucursal').on('change', function() {
+        var sucursal = $(this).val();
+        if (sucursal) {
+            $.ajax({
+                url: 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php',
+                type: 'POST',
+                data: { sucursal: sucursal },
+                success: function(response) {
+                    // Limpia las opciones actuales
+                    $('#facturas').empty();
+                    // Añade la opción por defecto
+                    $('#facturas').append('<option value="">Seleccione una Factura:</option>');
+                    // Añade las nuevas opciones
+                    $('#facturas').append(response);
+                    // Actualiza Select2
+                    $('#facturas').trigger('change');
+                }
+            });
+        } else {
+            $('#facturas').empty().append('<option value="">Seleccione una Factura:</option>').trigger('change');
+        }
     });
 });
 </script>
 
-<script>
-        document.getElementById('sucursal').addEventListener('change', function() {
-            var sucursal = this.value;
-            if (sucursal) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        document.getElementById('facturas').innerHTML = xhr.responseText;
-                    }
-                };
-                xhr.send('sucursal=' + encodeURIComponent(sucursal));
-            } else {
-                document.getElementById('facturas').innerHTML = '<option value="">Seleccione una Factura:</option>';
-            }
-        });
-    </script>
-            
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
           </form>
