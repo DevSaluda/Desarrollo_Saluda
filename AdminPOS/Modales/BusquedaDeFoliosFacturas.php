@@ -24,15 +24,16 @@
                         <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
                     </div>
                     <select id="sucursal" class="form-control" name="Sucursal" required>
-                        <option value="">Seleccione una Sucursal:</option>
-                        <?php 
-                        // Asumiendo que $conn es tu conexión a la base de datos
-                        $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
-                        while ($valores = mysqli_fetch_array($query)) {
-                            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
-                        }
-                        ?>  
-                    </select>
+    <option value="">Seleccione una Sucursal:</option>
+    <?php 
+    // Asumiendo que $conn es tu conexión a la base de datos
+    $query = $conn->query("SELECT ID_SucursalC, Nombre_Sucursal, ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+    while ($valores = mysqli_fetch_array($query)) {
+        echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+    }
+    ?>  
+</select>
+
                 </div>
             </div>
 
@@ -45,6 +46,14 @@
             </div>
         </div>
     </div>
+    <script>
+$(document).ready(function() {
+    $('#sucursal').select2({
+        placeholder: "Seleccione una Sucursal:",
+        allowClear: true
+    });
+});
+</script>
 
 <script>
         document.getElementById('sucursal').addEventListener('change', function() {
