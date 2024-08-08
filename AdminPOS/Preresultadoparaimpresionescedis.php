@@ -269,11 +269,7 @@ $(document).ready(function() {
    
    
 }
-@page {
-    size: portrait;
-    margin: 0;
-   
-}
+
 
 </style>
 
