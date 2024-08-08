@@ -248,7 +248,7 @@ $(document).ready(function() {
 });
 </script>
 <style>
-  @media print {
+ @media print {
     body * {
         visibility: hidden;
     }
@@ -256,9 +256,7 @@ $(document).ready(function() {
         visibility: visible;
     }
     #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
+        position: relative;
         width: 100%;
         height: 100%;
         margin: 0;
@@ -278,21 +276,10 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
-        background-color: #fff; /* Asegúrate de que el fondo sea blanco o del color deseado */
-        box-sizing: border-box; /* Incluye el padding y border en el tamaño total del elemento */
+        background-color: #fff;
     }
 }
 
-@page {
-    size: portrait;
-    margin: 0;
-}
-
-@page :left {
-    @bottom-right {
-        content: counter(page);
-    }
-}
 
 </style>
 
