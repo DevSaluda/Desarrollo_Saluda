@@ -248,7 +248,8 @@ $(document).ready(function() {
 });
 </script>
 
-<style>@media print {
+<style>
+@media print {
     body * {
         visibility: hidden;
     }
@@ -256,18 +257,20 @@ $(document).ready(function() {
         visibility: visible;
     }
     #printArea {
-        position: relative; /* Cambia a relative para evitar problemas de posicionamiento */
+        position: absolute;
+        left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
     }
     @page {
-        size: landscape;
+        size: portrait;
         margin: 0;
     }
     #header {
-        display: none; /* Asegúrate de que esto esté intencionalmente oculto */
+        display: none; /* Oculta el encabezado */
     }
     #footer {
         position: fixed;
@@ -276,7 +279,13 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
-        background-color: #fff; /* Asegúrate de que el fondo sea blanco o del color deseado */
+    }
+}
+@page {
+    size: portrait;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
     }
 }
 
