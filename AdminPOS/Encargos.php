@@ -1,7 +1,16 @@
 <?php
 include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargosPendientes.php';
+include 'Consultas/ManejoEncargos.php';
+
+// Parámetros de paginación
+$itemsPorPagina = 10;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaActual - 1) * $itemsPorPagina;
+
+// Parámetro de búsqueda
+$terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,6 +45,13 @@ include 'Consultas/ManejoEncargosPendientes.php';
     <section class="content">
         <div class="container-fluid">
             <h2>Encargos Pendientes</h2>
+            
+            <!-- Formulario de búsqueda -->
+            <form method="get" action="Encargos.php">
+                <input type="text" name="busqueda" placeholder="Buscar encargos" value="<?php echo $terminoBusqueda; ?>">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+            
             <table class="table table-bordered" id="encargosTable">
                 <thead>
                     <tr>
@@ -48,7 +64,7 @@ include 'Consultas/ManejoEncargosPendientes.php';
                 </thead>
                 <tbody>
                     <?php
-                    $result = obtenerEncargos($conn);
+                    $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>{$row['IdentificadorEncargo']}</td>";
@@ -56,13 +72,29 @@ include 'Consultas/ManejoEncargosPendientes.php';
                         echo "<td>{$row['MontoAbonadoTotal']}</td>";
                         echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
                         echo "<td>
-                                <a href='detallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
+                                <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
                               </td>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
+
+            <!-- Paginación -->
+            <?php
+            $totalEncargos = contarEncargos($conn, $terminoBusqueda);
+            $totalPaginas = ceil($totalEncargos / $itemsPorPagina);
+            ?>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                        <li class="page-item <?php if ($paginaActual == $i) echo 'active'; ?>">
+                            <a class="page-link" href="Encargos.php?pagina=<?php echo $i; ?>&busqueda=<?php echo $terminoBusqueda; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+
         </div>
     </section>
 </div>
