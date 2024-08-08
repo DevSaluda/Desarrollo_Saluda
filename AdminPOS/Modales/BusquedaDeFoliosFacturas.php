@@ -52,7 +52,7 @@ $(document).ready(function() {
         placeholder: "Seleccione una Factura:",
         allowClear: true,
         width: '100%', // Asegura que el select ocupe todo el ancho disponible
-        theme: "classic"
+        theme: 'bootstrap-5'
     });
 
     // Configura el evento change en el select de sucursales
