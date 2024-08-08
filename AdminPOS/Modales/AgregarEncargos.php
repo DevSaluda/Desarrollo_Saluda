@@ -4,7 +4,7 @@
 
 include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
-
+$fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 $user_id = null;
 $sql1 = "SELECT 
         Encargos_POS.Id_Encargo,
@@ -84,6 +84,7 @@ $query = $conn->query($sql1);
                      <input type="text" hidden name="Sucursal[]"  value="<?php echo $encargo['Fk_sucursal']?>"readonly />                     
                     
                      <input type="text" hidden name="Presentancion[]"  value="<?php echo $encargo['FkPresentacion']?>"readonly />
+                     <input type="text" hidden name="FechaIngreso[]"  value="<?php echo $fechaActual ?>"readonly />
                     </td>
 
                     </tr>
