@@ -51,7 +51,8 @@ $(document).ready(function() {
     $('#facturas').select2({
         placeholder: "Seleccione una Factura:",
         allowClear: true,
-        width: '100%' // Asegura que el select ocupe todo el ancho disponible
+        width: '100%', // Asegura que el select ocupe todo el ancho disponible
+        theme: "classic"
     });
 
     // Configura el evento change en el select de sucursales
