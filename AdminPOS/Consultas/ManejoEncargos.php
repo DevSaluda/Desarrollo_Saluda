@@ -1,14 +1,27 @@
 <?php
 include 'Consultas.php';
 
-function obtenerEncargos($conn) {
+function obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina) {
+    $terminoBusqueda = mysqli_real_escape_string($conn, $terminoBusqueda);
     $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, Estado 
               FROM Encargos_POS 
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado";
+              WHERE IdentificadorEncargo LIKE '%$terminoBusqueda%' 
+                 OR Fk_sucursal LIKE '%$terminoBusqueda%' 
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado
+              LIMIT $offset, $itemsPorPagina";
     return mysqli_query($conn, $query);
 }
 
-
+function contarEncargos($conn, $terminoBusqueda) {
+    $terminoBusqueda = mysqli_real_escape_string($conn, $terminoBusqueda);
+    $query = "SELECT COUNT(DISTINCT IdentificadorEncargo) AS total 
+              FROM Encargos_POS 
+              WHERE IdentificadorEncargo LIKE '%$terminoBusqueda%' 
+                 OR Fk_sucursal LIKE '%$terminoBusqueda%'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
+}
 
 function actualizarEstadoEncargo($conn, $idEncargo, $nuevoEstado) {
     $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE Id_Encargo='$idEncargo'";
