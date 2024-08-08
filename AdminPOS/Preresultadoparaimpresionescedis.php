@@ -269,9 +269,8 @@ $(document).ready(function() {
         size: portrait;
         margin: 0;
     }
-    #header {
-        display: none; /* Oculta el encabezado */
-    }
+    
+    
    
 }
 
