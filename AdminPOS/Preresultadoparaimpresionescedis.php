@@ -248,40 +248,20 @@ $(document).ready(function() {
 });
 </script>
 <style>
- @media print {
-    body * {
-        visibility: hidden;
-    }
-    #printArea, #printArea * {
-        visibility: visible;
-    }
-    #printArea {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    @page {
-        size: landscape;
-        margin: 0;
-    }
-    #header {
-        display: none; /* Oculta el encabezado */
-    }
-    #footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        border-top: 1px solid #000;
-        padding: 10px;
-        background-color: #fff;
-    }
-}
-
-
-</style>
+@media print {
+            body * {
+                visibility: hidden;
+            }
+            #printArea, #printArea * {
+                visibility: visible;
+            }
+            #printArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
 
 <style>
         /* CSS para alinear los divs horizontalmente */
