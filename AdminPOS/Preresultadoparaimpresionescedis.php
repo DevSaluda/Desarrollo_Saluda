@@ -275,13 +275,7 @@ $(document).ready(function() {
         border-top: 1px solid #000;
         padding: 10px;
     }
-}
-@page {
-    size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
-    }
+
 }
 
 </style>
