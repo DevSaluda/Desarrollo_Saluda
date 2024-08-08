@@ -250,9 +250,7 @@ $(document).ready(function() {
 
 <style>
 @media print {
-    body * {
-        visibility: hidden;
-    }
+   
     #printArea, #printArea * {
         visibility: visible;
     }
@@ -265,17 +263,14 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
+    @page {
+        size: landscape;
+        margin: 0;
+    }
     #header {
-        display: block; /* Muestra el encabezado */
-        position: fixed;
-        top: 0;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid #000;
-        padding: 10px;
+        display: none; /* Oculta el encabezado */
     }
     #footer {
-        display: block; /* Muestra el pie de página */
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -283,20 +278,16 @@ $(document).ready(function() {
         border-top: 1px solid #000;
         padding: 10px;
     }
-    @page {
-        size: landscape; /* Cambia a portrait si prefieres vertical */
-        margin: 0;
-    }
 }
 @page {
-    size: portrait; /* Cambia a landscape si prefieres horizontal */
+    size: portrait;
     margin: 0;
     @bottom-right {
         content: counter(page);
     }
 }
-</style>
 
+</style>
 
 <style>
         /* CSS para alinear los divs horizontalmente */
@@ -352,7 +343,6 @@ $(document).ready(function() {
       <br>
       <strong>Nombre y firma</strong>
     </div>
-    
   </div>
 </div>
 </div>
