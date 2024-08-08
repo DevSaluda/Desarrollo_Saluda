@@ -247,9 +247,8 @@ $(document).ready(function() {
     });
 });
 </script>
-
 <style>
-@media print {
+  @media print {
     body * {
         visibility: hidden;
     }
@@ -269,11 +268,27 @@ $(document).ready(function() {
         size: landscape;
         margin: 0;
     }
-  
+    #header {
+        display: none; /* Oculta el encabezado */
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #000;
+        padding: 10px;
+        background-color: #fff; /* Asegúrate de que el fondo sea blanco o del color deseado */
+        box-sizing: border-box; /* Incluye el padding y border en el tamaño total del elemento */
+    }
 }
+
 @page {
     size: portrait;
     margin: 0;
+}
+
+@page :left {
     @bottom-right {
         content: counter(page);
     }
