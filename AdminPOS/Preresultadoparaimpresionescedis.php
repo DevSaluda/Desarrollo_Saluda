@@ -265,8 +265,13 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
-   
-   
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+    #header {
+        display: none; /* Oculta el encabezado */
+    }
     #footer {
         position: fixed;
         bottom: 0;
@@ -275,7 +280,13 @@ $(document).ready(function() {
         border-top: 1px solid #000;
         padding: 10px;
     }
-
+}
+@page {
+    size: portrait;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
+    }
 }
 
 </style>
