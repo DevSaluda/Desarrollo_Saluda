@@ -69,13 +69,24 @@ $query = $conn->query($sql1);
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                     <td><input type="text" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
+                     <td><input type="text" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
+                     <td><input type="text" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
+                     <td><input type="text"  name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
-                     <td><input type="text" value="<?php echo $mes ?>"readonly /></td>
-                   </tr>
+                     <td><input type="text" name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
+                     <input type="text" hidden name="AgregadoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly />
+                     <input type="text" hidden name="PrecioVenta[]" value="<?php echo $encargo['Precio_Venta']?>"readonly />
+                     <input type="text" hidden name="PrecioCompra[]" value="<?php echo $encargo['Precio_C']?>"readonly />
+                     <input type="text" hidden name="ID_H_O_D[]" value="Saluda"readonly />
+                     <input type="text" hidden name="Prov1[]"  value="<?php echo $encargo['Proveedor1']?>"readonly />
+                     <input type="text" hidden name="Prov2[]"  value="<?php echo $encargo['Proveedor2']?>"readonly />
+                     
+                    
+                    
+                    </td>
+
+                    </tr>
                    <?php endwhile; ?>
                  </tbody>
                </table>
