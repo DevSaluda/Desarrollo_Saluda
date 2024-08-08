@@ -81,9 +81,9 @@ $query = $conn->query($sql1);
                      <input type="text" hidden name="ID_H_O_D[]" value="Saluda"readonly />
                      <input type="text" hidden name="Prov1[]"  value="<?php echo $encargo['Proveedor1']?>"readonly />
                      <input type="text" hidden name="Prov2[]"  value="<?php echo $encargo['Proveedor2']?>"readonly />
-                     
+                     <input type="text" hidden name="Sucursal[]"  value="<?php echo $encargo['Fk_sucursal']?>"readonly />                     
                     
-                    
+                     <input type="text" hidden name="Presentancion[]"  value="<?php echo $encargo['FkPresentacion']?>"readonly />
                     </td>
 
                     </tr>
