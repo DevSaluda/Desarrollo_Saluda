@@ -248,8 +248,7 @@ $(document).ready(function() {
 });
 </script>
 
-<style>
-@media print {
+<style>@media print {
     body * {
         visibility: hidden;
     }
@@ -257,9 +256,7 @@ $(document).ready(function() {
         visibility: visible;
     }
     #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
+        position: relative; /* Cambia a relative para evitar problemas de posicionamiento */
         width: 100%;
         height: 100%;
         margin: 0;
@@ -270,7 +267,7 @@ $(document).ready(function() {
         margin: 0;
     }
     #header {
-        display: none; /* Oculta el encabezado */
+        display: none; /* Asegúrate de que esto esté intencionalmente oculto */
     }
     #footer {
         position: fixed;
@@ -279,19 +276,27 @@ $(document).ready(function() {
         text-align: center;
         border-top: 1px solid #000;
         padding: 10px;
-    }
-}
-@page {
-    size: portrait;
-    margin: 0;
-    @bottom-right {
-        content: counter(page);
+        background-color: #fff; /* Asegúrate de que el fondo sea blanco o del color deseado */
     }
 }
 
 </style>
 
-
+<style>
+        /* CSS para alinear los divs horizontalmente */
+        #additionalInfo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Espacio entre la información y la tabla */
+        }
+        #additionalInfo div {
+            flex: 1; /* Asegura que todos los divs ocupen espacio igual */
+            margin-right: 10px; /* Espacio entre divs */
+        }
+        #additionalInfo div:last-child {
+            margin-right: 0; /* Quita el margen del último div */
+        }
+    </style>
   <button id="printButton">Imprimir</button>
  
     <div id="printArea">
