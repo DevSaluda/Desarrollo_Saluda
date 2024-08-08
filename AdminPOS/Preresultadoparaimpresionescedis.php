@@ -274,10 +274,7 @@ $(document).ready(function() {
     }
    
 }
-@page {
-    size: portrait;
-  
-}
+
 
 </style>
 
