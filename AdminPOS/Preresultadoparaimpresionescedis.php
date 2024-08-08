@@ -265,10 +265,6 @@ $(document).ready(function() {
         margin: 0;
         padding: 0;
     }
-    @page {
-        size: portrait;
-        margin: 0;
-    }
     
     
    
