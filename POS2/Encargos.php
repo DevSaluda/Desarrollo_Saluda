@@ -1,26 +1,16 @@
 <?php
 include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargosPendientes.php';
+include 'Consultas/ManejoEncargos.php';
 
-$search = '';
-$page = 1;
-$perPage = 10; // Número de resultados por página
+// Parámetros de paginación
+$itemsPorPagina = 10;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaActual - 1) * $itemsPorPagina;
 
-if (isset($_GET['search'])) {
-    $search = $_GET['search'];
-}
-
-if (isset($_GET['page'])) {
-    $page = (int)$_GET['page'];
-}
-
-// Calcular el offset para la consulta SQL
-$offset = ($page - 1) * $perPage;
-
-$result = obtenerEncargos($conn, $search, $offset, $perPage);
-$totalEncargos = contarEncargos($conn, $search);
-$totalPages = ceil($totalEncargos / $perPage);
+// Parámetro de búsqueda
+$terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -55,17 +45,14 @@ $totalPages = ceil($totalEncargos / $perPage);
     <section class="content">
         <div class="container-fluid">
             <h2>Encargos Pendientes</h2>
-
+            
             <!-- Formulario de búsqueda -->
-            <form method="GET" action="Encargos.php">
-                <div class="form-group">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar por identificador, sucursal o estado" value="<?php echo htmlspecialchars($search); ?>">
-                </div>
+            <form method="get" action="Encargos.php">
+                <input type="text" name="busqueda" placeholder="Buscar encargos" value="<?php echo $terminoBusqueda; ?>">
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
-
-            <!-- Tabla de resultados -->
-            <table class="table table-bordered mt-3" id="encargosTable">
+            
+            <table class="table table-bordered" id="encargosTable">
                 <thead>
                     <tr>
                         <th>Identificador</th>
@@ -77,6 +64,7 @@ $totalPages = ceil($totalEncargos / $perPage);
                 </thead>
                 <tbody>
                     <?php
+                    $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>{$row['IdentificadorEncargo']}</td>";
@@ -93,11 +81,15 @@ $totalPages = ceil($totalEncargos / $perPage);
             </table>
 
             <!-- Paginación -->
-            <nav aria-label="Paginación de resultados">
+            <?php
+            $totalEncargos = contarEncargos($conn, $terminoBusqueda);
+            $totalPaginas = ceil($totalEncargos / $itemsPorPagina);
+            ?>
+            <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"><?php echo $i; ?></a>
+                    <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                        <li class="page-item <?php if ($paginaActual == $i) echo 'active'; ?>">
+                            <a class="page-link" href="Encargos.php?pagina=<?php echo $i; ?>&busqueda=<?php echo $terminoBusqueda; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
                 </ul>
