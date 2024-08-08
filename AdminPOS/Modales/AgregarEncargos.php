@@ -83,7 +83,7 @@ $query = $conn->query($sql1);
                      <input type="text" hidden name="Prov2[]"  value="<?php echo $encargo['Proveedor2']?>"readonly />
                      <input type="text" hidden name="Sucursal[]"  value="<?php echo $encargo['Fk_sucursal']?>"readonly />                     
                     
-                     <input type="text" hidden name="Presentancion[]"  value="<?php echo $encargo['FkPresentacion']?>"readonly />
+                     <input type="text" hidden name="Presentacion[]"  value="<?php echo $encargo['FkPresentacion']?>"readonly />
                      <input type="text" hidden name="FechaIngreso[]"  value="<?php echo $fechaActual ?>"readonly />
                     </td>
 
