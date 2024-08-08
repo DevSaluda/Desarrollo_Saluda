@@ -266,10 +266,23 @@ $(document).ready(function() {
         padding: 0;
     }
     
-    
    
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #000;
+        padding: 10px;
+    }
 }
-
+@page {
+    size: portrait;
+    margin: 0;
+    @bottom-right {
+        content: counter(page);
+    }
+}
 
 </style>
 
