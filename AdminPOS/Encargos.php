@@ -56,7 +56,7 @@ include 'Consultas/ManejoEncargos.php';
                         echo "<td>{$row['MontoAbonadoTotal']}</td>";
                         echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
                         echo "<td>
-                                <a href='detallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
+                                <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
                               </td>";
                         echo "</tr>";
                     }
