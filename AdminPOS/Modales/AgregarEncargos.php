@@ -54,7 +54,7 @@ $query = $conn->query($sql1);
            <?php if($query->num_rows > 0): ?>
            <div class="text-center">
              <div class="table-responsive">
-             <form action="javascript:void(0)"  method="post" id="AgregaMedicamentosAlPedidoDesdeEncargos">
+             <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
                <table id="StockSucursales" class="table table-hover">
                  <thead>
                    <th>Cod barra</th>
