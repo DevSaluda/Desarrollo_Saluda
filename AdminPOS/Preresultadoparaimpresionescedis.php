@@ -352,7 +352,7 @@ $(document).ready(function() {
       <br>
       <strong>Nombre y firma</strong>
     </div>
-    <div id="footer">Pie de Página Personalizado - Página <span class="pageNumber"></span></div>
+    
   </div>
 </div>
 </div>
