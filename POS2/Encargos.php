@@ -29,25 +29,38 @@ $totalPages = ceil($totalEncargos / $perPage);
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Solicitar Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
     <?php include "Header.php"?>
-    <style>
-        .error {
-            color: red;
-            margin-left: 5px; 
-        }  
-        .hidden-field {
-            display: none;
-        }
-        .highlight {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .content-wrapper {
+            padding: 20px;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .search-form input {
+            flex: 1;
+            min-width: 200px;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        @media (max-width: 768px) {
+            .btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+            .search-form {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
 <?php include_once("Menu.php")?>
@@ -57,40 +70,40 @@ $totalPages = ceil($totalEncargos / $perPage);
             <h2>Encargos Pendientes</h2>
 
             <!-- Formulario de búsqueda -->
-            <form method="GET" action="Encargos.php">
-                <div class="form-group">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar por identificador, sucursal o estado" value="<?php echo htmlspecialchars($search); ?>">
-                </div>
+            <form method="GET" action="Encargos.php" class="search-form">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por identificador, sucursal o estado" value="<?php echo htmlspecialchars($search); ?>">
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
 
             <!-- Tabla de resultados -->
-            <table class="table table-bordered mt-3" id="encargosTable">
-                <thead>
-                    <tr>
-                        <th>Identificador</th>
-                        <th>Sucursal</th>
-                        <th>Monto Abonado</th>
-                        <th>Estado</th> <!-- Nueva columna -->
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>{$row['IdentificadorEncargo']}</td>";
-                        echo "<td>{$row['Fk_sucursal']}</td>";
-                        echo "<td>{$row['MontoAbonadoTotal']}</td>";
-                        echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
-                        echo "<td>
-                                <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
-                              </td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Identificador</th>
+                            <th>Sucursal</th>
+                            <th>Monto Abonado</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>{$row['IdentificadorEncargo']}</td>";
+                            echo "<td>{$row['Fk_sucursal']}</td>";
+                            echo "<td>{$row['MontoAbonadoTotal']}</td>";
+                            echo "<td>{$row['Estado']}</td>";
+                            echo "<td>
+                                    <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info btn-sm'>Ver Detalles</a>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Paginación -->
             <nav aria-label="Paginación de resultados">
@@ -102,7 +115,6 @@ $totalPages = ceil($totalEncargos / $perPage);
                     <?php endfor; ?>
                 </ul>
             </nav>
-
         </div>
     </section>
 </div>
