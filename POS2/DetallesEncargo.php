@@ -1,4 +1,23 @@
 <?php
+include 'Consultas/Consultas.php';
+include 'Consultas/ManejoEncargosPendientes.php';
+
+$identificador = $_GET['identificador'];
+$query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
+$result = mysqli_query($conn, $query);
+
+// Calcular el total del encargo y el total abonado
+$totalVenta = 0;
+$montoAbonadoTotal = 0;
+while ($row = mysqli_fetch_assoc($result)) {
+    $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
+    $montoAbonadoTotal += $row['MontoAbonado'];
+}
+
+// Volver a ejecutar la consulta para mostrar los datos en la tabla
+$result = mysqli_query($conn, $query);
+?>
+<?php
 include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
