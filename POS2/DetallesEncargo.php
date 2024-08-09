@@ -1,23 +1,5 @@
 <?php
-include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargosPendientes.php';
-
-$identificador = $_GET['identificador'];
-$query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
-$result = mysqli_query($conn, $query);
-
-// Calcular el total del encargo y el total abonado
-$totalVenta = 0;
-$montoAbonadoTotal = 0;
-while ($row = mysqli_fetch_assoc($result)) {
-    $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
-    $montoAbonadoTotal += $row['MontoAbonado'];
-}
-
-// Volver a ejecutar la consulta para mostrar los datos en la tabla
-$result = mysqli_query($conn, $query);
-?>
-
+include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,19 +9,36 @@ $result = mysqli_query($conn, $query);
     <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
     <?php include "Header.php"?>
     <style>
-        .error {
-            color: red;
-            margin-left: 5px; 
-        }  
-        .hidden-field {
-            display: none;
+        /* Asegura que la tabla y los elementos ocupen toda la pantalla */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
-        .highlight {
-            font-size: 1.2em;
-            font-weight: bold;
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
-        .alert {
-            margin-top: 10px;
+        table {
+            width: 100%;
+            height: 100%;
+        }
+        .table-responsive {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .row.mt-4 {
+            margin-top: auto; /* Empuja hacia abajo para ocupar el espacio sobrante */
+        }
+        .d-flex.justify-content-between {
+            margin-top: 20px;
+        }
+        .form-group, h4 {
+            margin-bottom: 20px;
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -51,37 +50,38 @@ $result = mysqli_query($conn, $query);
 <div class="container">
     <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
     <form id="estadoForm">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Seleccionar</th>
-                    <th>Código de Barra</th>
-                    <th>Nombre del Producto</th>
-                    <th>Sucursal</th>
-                    <th>Monto Abonado</th>
-                    <th>Precio de Venta</th>
-                    <th>Cantidad</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td><input type='checkbox' name='productosSeleccionados[]' value='{$row['Id_Encargo']}'></td>";
-                    echo "<td>{$row['Cod_Barra']}</td>";
-                    echo "<td>{$row['Nombre_Prod']}</td>";
-                    echo "<td>{$row['Fk_sucursal']}</td>";
-                    echo "<td>{$row['MontoAbonado']}</td>";
-                    echo "<td>{$row['Precio_Venta']}</td>";
-                    echo "<td>{$row['Cantidad']}</td>";
-                    echo "<td>{$row['Estado']}</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-        <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Seleccionar</th>
+                        <th>Código de Barra</th>
+                        <th>Nombre del Producto</th>
+                        <th>Sucursal</th>
+                        <th>Monto Abonado</th>
+                        <th>Precio de Venta</th>
+                        <th>Cantidad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td><input type='checkbox' name='productosSeleccionados[]' value='{$row['Id_Encargo']}'></td>";
+                        echo "<td>{$row['Cod_Barra']}</td>";
+                        echo "<td>{$row['Nombre_Prod']}</td>";
+                        echo "<td>{$row['Fk_sucursal']}</td>";
+                        echo "<td>{$row['MontoAbonado']}</td>";
+                        echo "<td>{$row['Precio_Venta']}</td>";
+                        echo "<td>{$row['Cantidad']}</td>";
+                        echo "<td>{$row['Estado']}</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
         <div class="d-flex justify-content-between">
             <button type="button" name="accion" value="saldar" class="btn btn-success flex-grow-1 mr-2 estado-btn">Marcar como Saldado</button>
             <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>

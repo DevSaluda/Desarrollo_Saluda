@@ -21,6 +21,8 @@ $result = obtenerEncargos($conn, $search, $offset, $perPage);
 $totalEncargos = contarEncargos($conn, $search);
 $totalPages = ceil($totalEncargos / $perPage);
 ?>
+<?php
+include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,8 +35,17 @@ $totalPages = ceil($totalEncargos / $perPage);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
         .content-wrapper {
+            flex: 1;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
         .search-form {
             display: flex;
@@ -46,10 +57,13 @@ $totalPages = ceil($totalEncargos / $perPage);
             min-width: 200px;
         }
         .table-responsive {
+            flex: 1;
             margin-top: 20px;
+            overflow-y: auto;
         }
         .pagination {
             justify-content: center;
+            margin-top: 20px;
         }
         @media (max-width: 768px) {
             .btn {

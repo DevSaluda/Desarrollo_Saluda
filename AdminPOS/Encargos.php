@@ -10,7 +10,8 @@ $offset = ($paginaActual - 1) * $itemsPorPagina;
 // Parámetro de búsqueda
 $terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 ?>
-
+<?php
+include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
