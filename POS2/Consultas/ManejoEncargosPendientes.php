@@ -54,8 +54,9 @@ function abonarEncargo($conn, $identificadorEncargo, $montoAbonado) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['idEncargo']) && isset($_POST['accion'])) {
+    if (isset($_POST['idEncargo']) && isset($_POST['accion']) && isset($_POST['productosSeleccionados'])) {
         $identificadorEncargo = $_POST['idEncargo'];
+        $productosSeleccionados = $_POST['productosSeleccionados'];
         $accion = $_POST['accion'];
         $nuevoEstado = '';
 
@@ -63,32 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nuevoEstado = 'Entregado';
         } elseif ($accion === 'saldar') {
             $nuevoEstado = 'Saldado';
-        } elseif ($accion === 'abonar' && isset($_POST['montoAbonado'])) {
-            $montoAbonado = $_POST['montoAbonado'];
-            if (abonarEncargo($conn, $identificadorEncargo, $montoAbonado)) {
-                echo json_encode(['success' => 'Monto abonado exitosamente.']);
-            } else {
-                echo json_encode(['error' => 'Error al abonar el monto: ' . mysqli_error($conn)]);
-            }
-            exit();
-        } elseif ($accion === 'rechazar') {
-            $nuevoEstado = 'Rechazado';
-        } elseif ($accion === 'eliminar') {
-            $query = "DELETE FROM Encargos_POS WHERE IdentificadorEncargo='$identificadorEncargo'";
-            if (mysqli_query($conn, $query)) {
-                echo json_encode(['success' => 'Encargo eliminado exitosamente.']);
-                exit();
-            } else {
-                echo json_encode(['error' => 'Error al eliminar el encargo: ' . mysqli_error($conn)]);
-                exit();
-            }
         }
 
-        if ($nuevoEstado && actualizarEstadoEncargo($conn, $identificadorEncargo, $nuevoEstado)) {
+        if ($nuevoEstado) {
+            foreach ($productosSeleccionados as $idProducto) {
+                $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE ID_Encargo='$idProducto'";
+                if (!mysqli_query($conn, $query)) {
+                    echo json_encode(['error' => 'Error al actualizar el estado del encargo: ' . mysqli_error($conn)]);
+                    exit();
+                }
+            }
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
-        } else {
-            echo json_encode(['error' => 'Error al actualizar el estado del encargo: ' . mysqli_error($conn)]);
         }
     }
-}
 ?>

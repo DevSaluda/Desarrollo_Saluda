@@ -64,60 +64,83 @@ $totalPages = ceil($totalEncargos / $perPage);
 </head>
 <body>
 <?php include_once("Menu.php")?>
-<div class="content-wrapper">
-    <section class="content">
-        <div class="container-fluid">
-            <h2>Encargos Pendientes</h2>
-
-            <!-- Formulario de búsqueda -->
-            <form method="GET" action="Encargos.php" class="search-form">
-                <input type="text" name="search" class="form-control" placeholder="Buscar por identificador, sucursal o estado" value="<?php echo htmlspecialchars($search); ?>">
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
-
-            <!-- Tabla de resultados -->
-            <div class="table-responsive">
-                <table class="table table-bordered mt-3">
+<div class="container my-4">
+        <h2 class="mb-4">Detalles del Encargo: <?php echo $identificador; ?></h2>
+        
+        <div class="table-responsive">
+            <form id="estadoForm">
+                <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Identificador</th>
+                            <th>Seleccionar</th> <!-- Añadido -->
+                            <th>Código de Barra</th>
+                            <th>Nombre del Producto</th>
                             <th>Sucursal</th>
                             <th>Monto Abonado</th>
+                            <th>Precio de Venta</th>
+                            <th>Cantidad</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td>{$row['IdentificadorEncargo']}</td>";
-                            echo "<td>{$row['Fk_sucursal']}</td>";
-                            echo "<td>{$row['MontoAbonadoTotal']}</td>";
-                            echo "<td>{$row['Estado']}</td>";
-                            echo "<td>
-                                    <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info btn-sm'>Ver Detalles</a>
-                                  </td>";
-                            echo "</tr>";
-                        }
-                        ?>
+                        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="productosSeleccionados[]" value="<?php echo $row['ID_Encargo']; ?>">
+                                </td>
+                                <td><?php echo $row['Cod_Barra']; ?></td>
+                                <td><?php echo $row['Nombre_Prod']; ?></td>
+                                <td><?php echo $row['Fk_sucursal']; ?></td>
+                                <td><?php echo $row['MontoAbonado']; ?></td>
+                                <td><?php echo $row['Precio_Venta']; ?></td>
+                                <td><?php echo $row['Cantidad']; ?></td>
+                                <td><?php echo $row['Estado']; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Paginación -->
-            <nav aria-label="Paginación de resultados">
-                <ul class="pagination">
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-                </ul>
-            </nav>
+                <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
+                <div class="d-flex justify-content-between">
+                    <button type="button" name="accion" value="saldar" class="btn btn-success flex-grow-1 mr-2 estado-btn">Marcar como Saldado</button>
+                    <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>
+                </div>
+            </form>
         </div>
-    </section>
-</div>
+
+        <div id="responseMessage" class="alert alert-info" style="display: none;"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Manejar los botones de estado (Saldar, Entregar)
+            $('.estado-btn').on('click', function() {
+                const accion = $(this).val();
+                $.ajax({
+                    url: 'Consultas/ManejoEncargosPendientes.php',
+                    type: 'POST',
+                    data: $('#estadoForm').serialize() + '&accion=' + accion,
+                    success: function(response) {
+                        const result = JSON.parse(response);
+                        mostrarMensaje(result);
+                    }
+                });
+            });
+
+            function mostrarMensaje(result) {
+                $('#responseMessage').text(result.success || result.error).show();
+                if (result.success) {
+                    $('#responseMessage').removeClass('alert-danger').addClass('alert-success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    $('#responseMessage').removeClass('alert-success').addClass('alert-danger');
+                }
+            }
+        });
+    </script>
 
 <?php include("footer.php");?>
 </body>
