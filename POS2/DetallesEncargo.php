@@ -17,7 +17,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 // Volver a ejecutar la consulta para mostrar los datos en la tabla
 $result = mysqli_query($conn, $query);
 ?>
-
+<?php
+include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
