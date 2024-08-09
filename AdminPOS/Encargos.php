@@ -34,6 +34,12 @@ $terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         .alert {
             margin-top: 10px;
         }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .pagination {
+            justify-content: center;
+        }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -47,38 +53,43 @@ $terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             <h2>Encargos Pendientes</h2>
             
             <!-- Formulario de búsqueda -->
-            <form method="get" action="Encargos.php">
-                <input type="text" name="busqueda" placeholder="Buscar encargos" value="<?php echo $terminoBusqueda; ?>">
+            <form method="get" action="Encargos.php" class="form-inline mb-3">
+                <div class="form-group mr-2">
+                    <input type="text" name="busqueda" class="form-control" placeholder="Buscar encargos" value="<?php echo htmlspecialchars($terminoBusqueda); ?>">
+                </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
             
-            <table class="table table-bordered" id="encargosTable">
-                <thead>
-                    <tr>
-                        <th>Identificador</th>
-                        <th>Sucursal</th>
-                        <th>Monto Abonado</th>
-                        <th>Estado</th> <!-- Nueva columna -->
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>{$row['IdentificadorEncargo']}</td>";
-                        echo "<td>{$row['Fk_sucursal']}</td>";
-                        echo "<td>{$row['MontoAbonadoTotal']}</td>";
-                        echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
-                        echo "<td>
-                                <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
-                              </td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <!-- Tabla de resultados -->
+            <div class="table-responsive">
+                <table class="table table-bordered" id="encargosTable">
+                    <thead>
+                        <tr>
+                            <th>Identificador</th>
+                            <th>Sucursal</th>
+                            <th>Monto Abonado</th>
+                            <th>Estado</th> <!-- Nueva columna -->
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>{$row['IdentificadorEncargo']}</td>";
+                            echo "<td>{$row['Fk_sucursal']}</td>";
+                            echo "<td>{$row['MontoAbonadoTotal']}</td>";
+                            echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
+                            echo "<td>
+                                    <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Paginación -->
             <?php
@@ -89,7 +100,7 @@ $terminoBusqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 <ul class="pagination">
                     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                         <li class="page-item <?php if ($paginaActual == $i) echo 'active'; ?>">
-                            <a class="page-link" href="Encargos.php?pagina=<?php echo $i; ?>&busqueda=<?php echo $terminoBusqueda; ?>"><?php echo $i; ?></a>
+                            <a class="page-link" href="Encargos.php?pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($terminoBusqueda); ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
                 </ul>
