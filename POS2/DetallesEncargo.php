@@ -68,7 +68,7 @@ $result = mysqli_query($conn, $query);
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
-                    echo "<td><input type='checkbox' name='productosSeleccionados[]' value='{$row['ID_Encargo']}'></td>";
+                    echo "<td><input type='checkbox' name='productosSeleccionados[]' value='{$row['Id_Encargo']}'></td>";
                     echo "<td>{$row['Cod_Barra']}</td>";
                     echo "<td>{$row['Nombre_Prod']}</td>";
                     echo "<td>{$row['Fk_sucursal']}</td>";
