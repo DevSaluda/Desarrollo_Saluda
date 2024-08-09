@@ -77,4 +77,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
         }
     }
+}
 ?>
