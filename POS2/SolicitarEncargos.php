@@ -73,6 +73,18 @@ include "Consultas/ConsultaCaja.php";
     </div>
     
     <div class="form-group">
+        <label for="Nombre_Paciente">Nombre del Paciente</label>
+        <input type="text" class="form-control" id="Nombre_Paciente" name="Nombre_Paciente" autocomplete="off" required>
+        <div id="sugerenciasPacientes" class="list-group"></div>
+    </div>
+    
+    <div class="form-group">
+        <label for="Telefono">Teléfono</label>
+        <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+    </div>
+    
+
+    <div class="form-group">
         <label for="MontoAbonado">Monto Abonado</label>
         <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
     </div>
@@ -134,6 +146,33 @@ $(document).ready(function() {
 
     $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
 }
+
+$(document).ready(function() {
+    $('#Nombre_Paciente').on('input', function() {
+        let nombre = $(this).val();
+        if (nombre.length > 2) {
+            $.ajax({
+                url: 'Consultas/BuscarPaciente.php',
+                type: 'POST',
+                data: { nombre: nombre },
+                success: function(data) {
+                    $('#sugerenciasPacientes').html(data);
+                }
+            });
+        } else {
+            $('#sugerenciasPacientes').empty();
+        }
+    });
+
+    $(document).on('click', '.paciente-sugerido', function() {
+        let nombre = $(this).data('nombre');
+        let telefono = $(this).data('telefono');
+        $('#Nombre_Paciente').val(nombre);
+        $('#Telefono').val(telefono);
+        $('#sugerenciasPacientes').empty();
+    });
+});
+
 
 // Mostrar u ocultar el campo de cambio según el estado del checkbox
 $('#RequiereCambio').change(function() {
