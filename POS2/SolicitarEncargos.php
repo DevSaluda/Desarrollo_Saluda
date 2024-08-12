@@ -13,8 +13,8 @@ include "Consultas/ConsultaCaja.php";
     <style>
         .error {
             color: red;
-            margin-left: 5px; 
-        }  
+            margin-left: 5px;
+        }
         .hidden-field {
             display: none;
         }
@@ -25,13 +25,15 @@ include "Consultas/ConsultaCaja.php";
         .alert {
             margin-top: 10px;
         }
+        .content-wrapper {
+            margin-left: 15px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <?php include_once("Menu.php")?>
-<?php if ($ValorCaja): ?>'<div class="text-center">
-
+<?php if ($ValorCaja): ?>
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -61,66 +63,63 @@ include "Consultas/ConsultaCaja.php";
             <h4 class="highlight">Total del encargo: <span id="totalEncargo">0</span></h4>
             <h4 class="highlight">Pago mínimo requerido: <span id="pagoMinimo">0</span></h4>
             <form id="guardarEncargoForm">
-    <div class="form-group hidden-field">
-        
-        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>" >
-        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-        <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
-        <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
-        <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $ValorCaja['ID_Caja']?>"> <!-- ID_Caja añadido -->
-    </div>
-    
-    <div class="form-group">
-        <label for="Nombre_Paciente">Nombre del Paciente</label>
-        <input type="text" class="form-control" id="Nombre_Paciente" name="Nombre_Paciente" autocomplete="off" required>
-        <div id="sugerenciasPacientes" class="list-group"></div>
-    </div>
-    
-    <div class="form-group">
-        <label for="Telefono">Teléfono</label>
-        <input type="text" class="form-control" id="Telefono" name="Telefono" required>
-    </div>
-    
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoEncargo" name="TipoEncargo" value="Producto">
+                    <input type="hidden" id="IdentificadorEncargo" name="IdentificadorEncargo" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+                    <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $ValorCaja['ID_Caja']?>"> <!-- ID_Caja añadido -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="Nombre_Paciente">Nombre del Paciente</label>
+                    <input type="text" class="form-control" id="Nombre_Paciente" name="Nombre_Paciente" autocomplete="off" required>
+                    <div id="sugerenciasPacientes" class="list-group"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Telefono">Teléfono</label>
+                    <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="MontoAbonado">Monto Abonado</label>
+                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+                </div>
 
-    <div class="form-group">
-        <label for="MontoAbonado">Monto Abonado</label>
-        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-    </div>
+                <div class="form-group">
+                    <label for="MetodoDePago">Método de Pago</label>
+                    <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                    </select>
+                </div>
 
-    <div class="form-group">
-        <label for="MetodoDePago">Método de Pago</label>
-        <select class="form-control" id="MetodoDePago" name="MetodoDePago" required>
-            <option value="Efectivo">Efectivo</option>
-            <option value="Tarjeta">Tarjeta</option>
-        </select>
-    </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
+                    </label>
+                </div>
 
-    <div class="form-group">
-        <label>
-            <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
-        </label>
-    </div>
-
-    <div class="form-group hidden-field" id="CambioContainer">
-        <label for="Cambio">Cambio</label>
-        <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
-    </div>
-    
-    <button type="submit" class="btn btn-success">Guardar Encargo</button>
-</form>
+                <div class="form-group hidden-field" id="CambioContainer">
+                    <label for="Cambio">Cambio</label>
+                    <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Guardar Encargo</button>
+            </form>
         </div>
     </section>
 </div>
 <?php
 else:
     // Mensaje en caso de que no haya caja abierta o asignada
-    echo '<div class="text-center alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
+    echo '<div class="alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
     echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
 endif;
 ?>
-</div>
 
 <?php include("footer.php");?>
 <script>
