@@ -26,7 +26,7 @@ include "Consultas/ConsultaCaja.php";
             margin-top: 10px;
         }
         .content-wrapper {
-            margin-left: 15px;
+            margin-left: -15px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
