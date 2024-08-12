@@ -18,7 +18,7 @@ Correo_Electronico='$Correo_Electronico'AND Telefono='$Telefono'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);	
     //include database configuration file
-    if($row['Nombre_Apellidos']==$Nombre_Apellidos and $row['Fk_Sucursal']=="$Fk_Sucursal"and $row['Especialidad']=="$Especialidad"){				
+    if($row['Nombre_Apellidos']==$Nombre_Apellidos and $row['Especialidad']=="$Especialidad"){				
         echo json_encode(array("statusCode"=>250));
       
     } 
