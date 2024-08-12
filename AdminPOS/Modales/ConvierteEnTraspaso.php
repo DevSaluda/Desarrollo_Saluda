@@ -31,21 +31,11 @@ $sql1 = "SELECT
     Devolucion_POS.HoraAgregado,
     Devolucion_POS.NumOrde,
     Devolucion_POS.Movimiento,
-    SucursalesCorre.Nombre_Sucursal,
-    Stock_POS.Cod_Barra AS Stock_Cod_Barra,
-    Stock_POS.Fk_sucursal AS Stock_Fk_sucursal,
-    Stock_POS.Precio_Venta,
-    Stock_POS.Precio_C,
-    Stock_POS.ID_Prod_POS,
-    Stock_POS.Tipo_Servicio
-FROM 
-    Devolucion_POS
-LEFT JOIN 
-    SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
-LEFT JOIN 
-    Stock_POS ON Devolucion_POS.Cod_Barra = Stock_POS.Cod_Barra 
-    
+     SucursalesCorre.Nombre_Sucursal,
+     SucursalesCorre.ID_SucursalC
+  FROM Devolucion_POS, SucursalesCorre    
 WHERE 
+Devolucion_POS.Fk_Suc_Salida= SucursalesCorre.ID_SucursalC AND 
     Devolucion_POS.ID_Registro = '".$_POST["id"]."' ";
 
 $query = $conn->query($sql1);
