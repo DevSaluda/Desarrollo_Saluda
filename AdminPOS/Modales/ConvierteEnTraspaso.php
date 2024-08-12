@@ -31,19 +31,36 @@ $sql1 = "SELECT
     Devolucion_POS.HoraAgregado,
     Devolucion_POS.NumOrde,
     Devolucion_POS.Movimiento,
-     SucursalesCorre.Nombre_Sucursal,
-     SucursalesCorre.ID_SucursalC,
-      Stock_POS.Cod_Barra,
-      Stock_POS.Precio_Venta,
-    Stock_POS.Precio_C,
-    Stock_POS.ID_Prod_POS,
-    Stock_POS.Tipo_Servicio
-  FROM Devolucion_POS, SucursalesCorre, Stock_POS
+    SucursalesCorre.Nombre_Sucursal,
+    SucursalesCorre.ID_SucursalC,
+    MAX(Stock_POS.Cod_Barra) AS Stock_Cod_Barra,
+    MAX(Stock_POS.Precio_Venta) AS Precio_Venta,
+    MAX(Stock_POS.Precio_C) AS Precio_C,
+    MAX(Stock_POS.ID_Prod_POS) AS ID_Prod_POS,
+    MAX(Stock_POS.Tipo_Servicio) AS Tipo_Servicio
+FROM 
+    Devolucion_POS
+LEFT JOIN 
+    SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
+LEFT JOIN 
+    Stock_POS ON Devolucion_POS.Cod_Barra = Stock_POS.Cod_Barra
 WHERE 
-Devolucion_POS.Fk_Suc_Salida= SucursalesCorre.ID_SucursalC AND 
-Devolucion_POS.Cod_Barra = Stock_POS.Cod_Barra
-AND
-    Devolucion_POS.ID_Registro = '".$_POST["id"]."' ";
+  Devolucion_POS.ID_Registro = '".$_POST["id"]."'
+GROUP BY 
+    Devolucion_POS.ID_Registro,
+    Devolucion_POS.Num_Factura,
+    Devolucion_POS.Cod_Barra,
+    Devolucion_POS.Nombre_Produc,
+    Devolucion_POS.Cantidad,
+    Devolucion_POS.Fk_Suc_Salida,
+    Devolucion_POS.Motivo_Devolucion,
+    Devolucion_POS.Fecha,
+    Devolucion_POS.Agrego,
+    Devolucion_POS.HoraAgregado,
+    Devolucion_POS.NumOrde,
+    Devolucion_POS.Movimiento,
+    SucursalesCorre.Nombre_Sucursal,
+    SucursalesCorre.ID_SucursalC";
 
 $query = $conn->query($sql1);
 $Devoluciones = null;
