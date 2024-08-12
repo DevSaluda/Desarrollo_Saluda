@@ -22,7 +22,7 @@ function buscarProducto($conn, $Cod_Barra) {
     }
 }
 
-function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja) {
+function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja, $nombreCliente, $telefonoCliente) {
     $response = [];
     $montoAbonadoAsignado = false;
 
@@ -42,9 +42,9 @@ function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $
         }
 
         $query = "INSERT INTO Encargos_POS 
-            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo, MetodoDePago, Fk_Caja) 
+            (IdentificadorEncargo, Cod_Barra, Nombre_Prod, Fk_sucursal, MontoAbonado, Precio_Venta, Precio_C, Cantidad, Fecha_Ingreso, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, AgregadoEl, ID_H_O_D, Estado, TipoEncargo, MetodoDePago, Fk_Caja, NombreCliente, TelefonoCliente) 
             VALUES 
-            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo', '$metodoDePago', '$fkCaja')";
+            ('$IdentificadorEncargo', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$montoAbonado', '$Precio_Venta', '$Precio_C', '$Cantidad', NOW(), $FkPresentacion, $Proveedor1, $Proveedor2, '$agregadoPor', NOW(), '$idHOD', '$estado', '$tipoEncargo', '$metodoDePago', '$fkCaja', '$nombreCliente', '$telefonoCliente')";
 
         if (!mysqli_query($conn, $query)) {
             $response['error'] = "Error al guardar el encargo: " . mysqli_error($conn);
@@ -82,8 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tipoEncargo = $_POST['TipoEncargo'];
         $metodoDePago = $_POST['MetodoDePago'];
         $fkCaja = $_POST['ID_Caja']; // Captura Fk_Caja
+        $nombreCliente = $_POST['NombreCliente']; // Captura el nombre del cliente
+        $telefonoCliente = $_POST['TelefonoCliente']; // Captura el teléfono del cliente
     
-        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja);
+        $response = guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja, $nombreCliente, $telefonoCliente);
         echo json_encode($response);
     }
 }
