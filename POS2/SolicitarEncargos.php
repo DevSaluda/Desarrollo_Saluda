@@ -78,14 +78,14 @@ include "Consultas/ConsultaCaja.php";
                 </div>
                 
                 <div class="form-group">
-                    <label for="Nombre_Paciente">Nombre del Paciente</label>
-                    <input type="text" class="form-control" id="Nombre_Paciente" name="Nombre_Paciente" autocomplete="off" required>
+                    <label for="NombreCliente">Nombre del Paciente</label>
+                    <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" autocomplete="off" required>
                     <div id="sugerenciasPacientes" class="list-group"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="Telefono">Teléfono</label>
-                    <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+                    <label for="TelefonoCliente">Teléfono</label>
+                    <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
                 </div>
                 
                 <div class="form-group">
@@ -151,7 +151,7 @@ $(document).ready(function() {
 }
 
 $(document).ready(function() {
-    $('#Nombre_Paciente').on('input', function() {
+    $('#NombreCliente').on('input', function() {
         let nombre = $(this).val();
         if (nombre.length > 2) {
             $.ajax({
@@ -170,8 +170,8 @@ $(document).ready(function() {
     $(document).on('click', '.paciente-sugerido', function() {
         let nombre = $(this).data('nombre');
         let telefono = $(this).data('telefono');
-        $('#Nombre_Paciente').val(nombre);
-        $('#Telefono').val(telefono);
+        $('#NombreCliente').val(nombre);
+        $('#TelefonoCliente').val(telefono);
         $('#sugerenciasPacientes').empty();
     });
 });
@@ -420,25 +420,25 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                                 $('#pagoMinimo').text('0');
                                 $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
                                 encargo = [];
-                                location.reload();
+
                             } else if (response.error) {
                                 alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
-                                location.reload();
+
                             }
                         },
                         error: function(xhr, status, error) {
                             alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-                            location.reload();
+
                         }
                     });
                 } else if (response.error) {
                     alert(response.error);
-                    location.reload();
+
                 }
             },
             error: function(xhr, status, error) {
                 alert("Error al guardar el encargo: " + error);
-                location.reload();
+
             }
         });
 });
