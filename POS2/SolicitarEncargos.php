@@ -131,24 +131,21 @@ $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
-    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
-    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-    let cambio = 0;
+        let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+        let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+        let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+        let cambio = 0;
 
-    // Si el monto abonado excede el mínimo a abonar
-    if (montoAbonado > minimoAbonar) {
-        // Si el monto abonado excede también el total del encargo, se calcula el cambio en base al total
-        if (montoAbonado > totalEncargo) {
-            cambio = montoAbonado - totalEncargo;
-        } else {
-            // Si solo excede el mínimo a abonar, se calcula el cambio en base al mínimo
-            cambio = montoAbonado - minimoAbonar;
+        if (montoAbonado > minimoAbonar) {
+            if (montoAbonado > totalEncargo) {
+                cambio = montoAbonado - totalEncargo;
+            } else {
+                cambio = montoAbonado - minimoAbonar;
+            }
         }
-    }
 
-    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
-}
+        $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+    }
 
 $(document).ready(function() {
     $('#NombreCliente').on('input', function() {
@@ -177,23 +174,22 @@ $(document).ready(function() {
 });
 
 
-// Mostrar u ocultar el campo de cambio según el estado del checkbox
 $('#RequiereCambio').change(function() {
-    if ($(this).is(':checked')) {
-        $('#CambioContainer').removeClass('hidden-field');
-        calcularCambio(); // Calcular el cambio si se requiere
-    } else {
-        $('#CambioContainer').addClass('hidden-field');
-        $('#Cambio').val(''); // Limpiar el campo de cambio si no se requiere
-    }
-});
+        if ($(this).is(':checked')) {
+            $('#CambioContainer').removeClass('hidden-field');
+            calcularCambio(); // Calcular el cambio si se requiere
+        } else {
+            $('#CambioContainer').addClass('hidden-field');
+            $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
+        }
+    });
 
-// Recalcular el cambio si el monto abonado cambia
-$('#MontoAbonado').on('input', function() {
-    if ($('#RequiereCambio').is(':checked')) {
-        calcularCambio(); // Calcular el cambio si cambia el monto abonado
-    }
-});
+    // Recalcular el cambio si el monto abonado cambia
+    $('#MontoAbonado').on('input', function() {
+        if ($('#RequiereCambio').is(':checked')) {
+            calcularCambio(); // Calcular el cambio si cambia el monto abonado
+        }
+    });
 
 
     function actualizarTablaEncargo() {
@@ -397,7 +393,7 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         const formData = $(this).serializeArray();
         formData.push({ name: 'guardar_encargo', value: true });
         formData.push({ name: 'encargo', value: JSON.stringify(encargo) });
-
+        formData.push({ name: 'Cambio', value: $('#Cambio').val() }); // Agregar el campo Cambio
         // Enviar a ManejoEncargos.php
         $.ajax({
             url: 'Consultas/ManejoEncargos.php',
