@@ -30,7 +30,7 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     $ID_H_O_D = mysqli_real_escape_string($conn, $_POST["ID_H_O_D"]);
     $TotaldePiezas = mysqli_real_escape_string($conn, $_POST["Cantidad"]);
     $Movimiento = mysqli_real_escape_string($conn, $_POST["Movimiento"]);
-    $Id_Devolucion = mysqli_real_escape_string($conn, $_POST["IdBasedatos"]);
+    $Id_Devolucion = mysqli_real_escape_string($conn, $_POST["IdDevuelve"]);
     // Construir la consulta SQL
     $sql = "INSERT INTO Traspasos_generados (
         Folio_Prod_Stock, ID_Prod_POS, Num_Orden, Num_Factura, Cod_Barra, Nombre_Prod, 
