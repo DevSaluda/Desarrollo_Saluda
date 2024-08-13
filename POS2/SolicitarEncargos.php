@@ -78,8 +78,8 @@ include "Consultas/ConsultaCaja.php";
                 </div>
                 
                 <div class="form-group">
-                    <label for="Nombre_Paciente">Nombre del Paciente</label>
-                    <input type="text" class="form-control" id="Nombre_Paciente" name="NombreCliente" autocomplete="off" required>
+                    <label for="NombreCliente">Nombre del Paciente</label>
+                    <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" autocomplete="off" required>
                     <div id="sugerenciasPacientes" class="list-group"></div>
                 </div>
                 
@@ -151,7 +151,7 @@ $(document).ready(function() {
 }
 
 $(document).ready(function() {
-    $('#Nombre_Paciente').on('input', function() {
+    $('#NombreCliente').on('input', function() {
         let nombre = $(this).val();
         if (nombre.length > 2) {
             $.ajax({
