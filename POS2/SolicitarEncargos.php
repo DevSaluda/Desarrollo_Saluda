@@ -420,25 +420,25 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                                 $('#pagoMinimo').text('0');
                                 $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
                                 encargo = [];
-                                location.reload();
+
                             } else if (response.error) {
                                 alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
-                                location.reload();
+
                             }
                         },
                         error: function(xhr, status, error) {
                             alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-                            location.reload();
+
                         }
                     });
                 } else if (response.error) {
                     alert(response.error);
-                    location.reload();
+
                 }
             },
             error: function(xhr, status, error) {
                 alert("Error al guardar el encargo: " + error);
-                location.reload();
+
             }
         });
 });
