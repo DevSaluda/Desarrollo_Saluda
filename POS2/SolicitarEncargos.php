@@ -79,13 +79,13 @@ include "Consultas/ConsultaCaja.php";
                 
                 <div class="form-group">
                     <label for="Nombre_Paciente">Nombre del Paciente</label>
-                    <input type="text" class="form-control" id="Nombre_Paciente" name="Nombre_Paciente" autocomplete="off" required>
+                    <input type="text" class="form-control" id="Nombre_Paciente" name="NombreCliente" autocomplete="off" required>
                     <div id="sugerenciasPacientes" class="list-group"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="Telefono">Teléfono</label>
-                    <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+                    <label for="TelefonoCliente">Teléfono</label>
+                    <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
                 </div>
                 
                 <div class="form-group">
@@ -170,8 +170,8 @@ $(document).ready(function() {
     $(document).on('click', '.paciente-sugerido', function() {
         let nombre = $(this).data('nombre');
         let telefono = $(this).data('telefono');
-        $('#Nombre_Paciente').val(nombre);
-        $('#Telefono').val(telefono);
+        $('#NombreCliente').val(nombre);
+        $('#TelefonoCliente').val(telefono);
         $('#sugerenciasPacientes').empty();
     });
 });
