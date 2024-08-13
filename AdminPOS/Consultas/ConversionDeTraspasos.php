@@ -29,18 +29,18 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
     $AgregadoPor = mysqli_real_escape_string($conn, $_POST["GeneradoPor"]);
     $ID_H_O_D = mysqli_real_escape_string($conn, $_POST["ID_H_O_D"]);
     $TotaldePiezas = mysqli_real_escape_string($conn, $_POST["Cantidad"]);
-
+    $Movimiento = mysqli_real_escape_string($conn, $_POST["Cantidad"]);
     // Construir la consulta SQL
     $sql = "INSERT INTO Traspasos_generados (
         Folio_Prod_Stock, ID_Prod_POS, Num_Orden, Num_Factura, Cod_Barra, Nombre_Prod, 
         Fk_sucursal, Fk_Sucursal_Destino, Fk_SucDestino, Precio_Venta, Precio_Compra, 
         Total_traspaso, TotalVenta, Cantidad_Enviada, FechaEntrega, TraspasoGeneradoPor, 
-        Tipo_Servicio, ProveedorFijo, Estatus, AgregadoPor, ID_H_O_D, TotaldePiezas
+        Tipo_Servicio, ProveedorFijo, Estatus, AgregadoPor, ID_H_O_D, TotaldePiezas,TipoMovimiento
     ) VALUES (
         '$Folio_Prod_Stock', '$ID_Prod_POS', '$Num_Orden', '$Num_Factura', '$Cod_Barra', '$Nombre_Prod', 
         '$Fk_sucursal', '$Fk_Sucursal_Destino', '$Fk_SucDestino', '$Precio_Venta', '$Precio_Compra', 
         '$Total_traspaso', '$TotalVenta', '$Cantidad_Enviada', '$FechaEntrega', '$TraspasoGeneradoPor', 
-        '$Tipo_Servicio', '$ProveedorFijo', '$Estatus', '$AgregadoPor', '$ID_H_O_D', '$TotaldePiezas'
+        '$Tipo_Servicio', '$ProveedorFijo', '$Estatus', '$AgregadoPor', '$ID_H_O_D', '$TotaldePiezas','$Movimiento'
     )";
 
     // Ejecutar la consulta

@@ -87,6 +87,7 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
                 <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
+                <input type="text" class="form-control" hidden name="Movimiento"  readonly value="Agregado desde devoluciones">
             </div>
         </div>
         <div class="col">
@@ -160,6 +161,7 @@ if($query->num_rows>0){
                     <th>Código de Barra</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
+                    <th>Cantidad a registrar</th>
                     <th>Motivo Devolución</th>
                     <th>Fecha</th>
                  
@@ -172,7 +174,8 @@ if($query->num_rows>0){
                             
                             <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
                             <td><input type="text" value="<?php echo $Devolucion["Nombre_Produc"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
-                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
+                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"   readonly></td>
+                            <td><input type="text"class="form-control"  id="Cantidad" name="Cantidad"></td>
                             <td><?php echo $Devolucion["Motivo_Devolucion"]; ?><input type="text" value="<?php echo $Devolucion["Precio_Venta"]; ?>"class="form-control"  id="Precioventa" name="PrecioVenta" readonly></td>
                             <td><?php echo fechaCastellano($Devolucion["Fecha"]); ?><input type="text" value="<?php echo $Devolucion["Precio_C"]; ?>"class="form-control"  id="Preciocompra" name="PrecioCompra" readonly></td>
                             
