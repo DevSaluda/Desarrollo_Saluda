@@ -6,7 +6,8 @@ $identificador = $_GET['identificador'];
 $query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
 $result = mysqli_query($conn, $query);
 ?>
-
+<?php
+include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
