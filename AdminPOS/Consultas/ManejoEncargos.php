@@ -3,11 +3,11 @@ include 'Consultas.php';
 
 function obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina) {
     $terminoBusqueda = mysqli_real_escape_string($conn, $terminoBusqueda);
-    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, Estado 
+    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, Estado, TelefonoCliente, NumeroCliente
               FROM Encargos_POS 
               WHERE IdentificadorEncargo LIKE '%$terminoBusqueda%' 
                  OR Fk_sucursal LIKE '%$terminoBusqueda%' 
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado, TelefonoCliente, NumeroCliente
               LIMIT $offset, $itemsPorPagina";
     return mysqli_query($conn, $query);
 }

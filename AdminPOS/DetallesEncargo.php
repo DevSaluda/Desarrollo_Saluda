@@ -38,7 +38,9 @@ $result = mysqli_query($conn, $query);
 <body>
 <?php include_once("Menu.php")?>
 <div class="container">
-    <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
+    <h3>Detalles del Encargo: <?php echo $identificador; ?></h3>
+    <h4>Nombre del Cliente: <?php echo $nombreCliente; ?></h4>
+    <h4>Teléfono del Cliente: <?php echo $telefonoCliente; ?></h4>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -68,5 +70,6 @@ $result = mysqli_query($conn, $query);
         </tbody>
     </table>
 </div>
+
 </body>
 </html>
