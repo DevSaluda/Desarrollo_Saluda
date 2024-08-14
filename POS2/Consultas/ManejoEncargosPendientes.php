@@ -2,10 +2,11 @@
 include 'Consultas.php';
 
 function obtenerEncargos($conn, $search = '', $offset = 0, $perPage = 10) {
-    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, SUM(Precio_Venta * Cantidad) AS TotalVenta, Estado 
+    // Ajusta la consulta SQL para incluir NombreCliente y TelefonoCliente
+    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, SUM(Precio_Venta * Cantidad) AS TotalVenta, Estado, NombreCliente, TelefonoCliente 
               FROM Encargos_POS 
               WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado, NombreCliente, TelefonoCliente
               LIMIT $offset, $perPage";
     return mysqli_query($conn, $query);
 }

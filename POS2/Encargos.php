@@ -21,8 +21,6 @@ $result = obtenerEncargos($conn, $search, $offset, $perPage);
 $totalEncargos = contarEncargos($conn, $search);
 $totalPages = ceil($totalEncargos / $perPage);
 ?>
-<?php
-include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -96,6 +94,8 @@ include 'Consultas/Consultas.php';?>
                         <tr>
                             <th>Identificador</th>
                             <th>Sucursal</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
                             <th>Monto Abonado</th>
                             <th>Estado</th>
                             <th>Acciones</th>
@@ -107,6 +107,8 @@ include 'Consultas/Consultas.php';?>
                             echo "<tr>";
                             echo "<td>{$row['IdentificadorEncargo']}</td>";
                             echo "<td>{$row['Fk_sucursal']}</td>";
+                            echo "<td>{$row['NombreCliente']}</td>";
+                            echo "<td>{$row['TelefonoCliente']}</td>";
                             echo "<td>{$row['MontoAbonadoTotal']}</td>";
                             echo "<td>{$row['Estado']}</td>";
                             echo "<td>

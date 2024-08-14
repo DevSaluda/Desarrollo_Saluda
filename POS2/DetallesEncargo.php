@@ -9,16 +9,19 @@ $result = mysqli_query($conn, $query);
 // Calcular el total del encargo y el total abonado
 $totalVenta = 0;
 $montoAbonadoTotal = 0;
+$nombreCliente = '';
+$telefonoCliente = '';
+
 while ($row = mysqli_fetch_assoc($result)) {
     $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
     $montoAbonadoTotal += $row['MontoAbonado'];
+    $nombreCliente = $row['NombreCliente'];
+    $telefonoCliente = $row['TelefonoCliente'];
 }
 
 // Volver a ejecutar la consulta para mostrar los datos en la tabla
 $result = mysqli_query($conn, $query);
 ?>
-<?php
-include 'Consultas/Consultas.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +31,6 @@ include 'Consultas/Consultas.php';?>
     <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
     <?php include "Header.php"?>
     <style>
-        /* Asegura que la tabla y los elementos ocupen toda la pantalla */
         html, body {
             height: 100%;
             margin: 0;
@@ -51,7 +53,7 @@ include 'Consultas/Consultas.php';?>
             overflow-y: auto;
         }
         .row.mt-4 {
-            margin-top: auto; /* Empuja hacia abajo para ocupar el espacio sobrante */
+            margin-top: auto;
         }
         .d-flex.justify-content-between {
             margin-top: 20px;
@@ -68,12 +70,14 @@ include 'Consultas/Consultas.php';?>
 <?php include_once("Menu.php")?>
 <div class="container">
     <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
+    <h4>Nombre del Cliente: <?php echo $nombreCliente; ?></h4>
+    <h4>Teléfono del Cliente: <?php echo $telefonoCliente; ?></h4>
     <form id="estadoForm">
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Seleccionar</th>
+                    <th>Seleccionar</th>
                         <th>Código de Barra</th>
                         <th>Nombre del Producto</th>
                         <th>Sucursal</th>

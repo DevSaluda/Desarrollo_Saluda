@@ -64,31 +64,35 @@ include 'Consultas/Consultas.php';?>
             <!-- Tabla de resultados -->
             <div class="table-responsive">
                 <table class="table table-bordered" id="encargosTable">
-                    <thead>
-                        <tr>
-                            <th>Identificador</th>
-                            <th>Sucursal</th>
-                            <th>Monto Abonado</th>
-                            <th>Estado</th> <!-- Nueva columna -->
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td>{$row['IdentificadorEncargo']}</td>";
-                            echo "<td>{$row['Fk_sucursal']}</td>";
-                            echo "<td>{$row['MontoAbonadoTotal']}</td>";
-                            echo "<td>{$row['Estado']}</td>"; // Mostrar el estado
-                            echo "<td>
-                                    <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
-                                  </td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
+                <thead>
+    <tr>
+        <th>Identificador</th>
+        <th>Sucursal</th>
+        <th>Monto Abonado</th>
+        <th>Estado</th>
+        <th>Teléfono Cliente</th> <!-- Nueva columna -->
+        <th>Número Cliente</th> <!-- Nueva columna -->
+        <th>Acciones</th>
+    </tr>
+</thead>
+<tbody>
+    <?php
+    $result = obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina);
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>{$row['IdentificadorEncargo']}</td>";
+        echo "<td>{$row['Fk_sucursal']}</td>";
+        echo "<td>{$row['MontoAbonadoTotal']}</td>";
+        echo "<td>{$row['Estado']}</td>";
+        echo "<td>{$row['TelefonoCliente']}</td>"; // Mostrar TelefonoCliente
+        echo "<td>{$row['NumeroCliente']}</td>"; // Mostrar NumeroCliente
+        echo "<td>
+                <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
+              </td>";
+        echo "</tr>";
+    }
+    ?>
+</tbody>
                 </table>
             </div>
 
