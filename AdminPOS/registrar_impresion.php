@@ -3,7 +3,7 @@ include_once 'Consultas/db_connection.php';
 
 // Obtener los valores de la solicitud POST
 $estado = $_POST['estado'];
-$factura = $_POST['factura'];
+$factura = $_POST['Factura'];
 $nombreApellidos = $_POST['nombreApellidos'];
 
 // Preparar la consulta SQL para insertar los datos
