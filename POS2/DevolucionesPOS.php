@@ -1,7 +1,9 @@
 <?php
 include_once "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'$fecha
-$sql = "SELECT * FROM Devolucion_POS ORDER BY ID_Registro DESC LIMIT 1";
+$fk_sucursal = $row['Fk_Sucursal']; // Asumiendo que $row['Fk_Sucursal'] ya contiene el valor necesario
+
+$sql = "SELECT * FROM Devolucion_POS WHERE Fk_Suc_Salida = '$fk_sucursal' ORDER BY ID_Registro DESC LIMIT 1";
 $resultset = mysqli_query($conn, $sql);
 
 if (!$resultset) {
