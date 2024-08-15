@@ -14,7 +14,7 @@ $Ticketss = mysqli_fetch_assoc($resultset);
 
 if ($Ticketss) {
     // Verifica y convierte el valor a entero
-    $monto1 = isset($Ticketss['NumOrde']) ? (int)$Ticketss['NumOrde'] : 0;
+    $monto1 = isset($Ticketss['NumOrde']) ? (int)$Ticketss['NumOrde'] : 1;
     $monto2 = 1;
     $totalmonto = $monto1 + $monto2;
 
