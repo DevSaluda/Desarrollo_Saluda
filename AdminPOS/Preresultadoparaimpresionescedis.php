@@ -345,22 +345,33 @@ $(document).ready(function() {
    
 
     <script>
-        document.getElementById('printButton').addEventListener('click', function() {
-            // Lógica para imprimir
-            window.print();
+    document.getElementById('printButton').addEventListener('click', function() {
+        // Lógica para imprimir
+        window.print();
 
-            // Enviar la solicitud AJAX al servidor
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'registrar_impresion.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    console.log('Impresión registrada con éxito');
-                }
-            };
-            xhr.send('estado=exito');
-        });
-    </script>
+        // Obtener valores de los campos adicionales
+        var factura = document.getElementById('factura').value;
+        var nombreApellidos = "<?php echo $row['Nombre_Apellidos']; ?>";
+
+        // Enviar la solicitud AJAX al servidor
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'registrar_impresion.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log('Impresión registrada con éxito');
+            }
+        };
+
+        // Preparar los datos a enviar
+        var data = 'estado=exito&factura=' + encodeURIComponent(factura) + 
+                   '&nombreApellidos=' + encodeURIComponent(nombreApellidos);
+
+        // Enviar los datos
+        xhr.send(data);
+    });
+</script>
+
 <!-- POR CADUCAR -->
 
 
