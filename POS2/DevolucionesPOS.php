@@ -10,21 +10,17 @@ if (!$resultset) {
 
 $Ticketss = mysqli_fetch_assoc($resultset);
 
-// Forzar la conversión a entero
-$monto1 = isset($Ticketss['NumOrden']) ? (int)$Ticketss['NumOrden'] : 0;
-$monto2 = 1;
-$totalmonto = $monto1 + $monto2;
+if ($Ticketss) {
+    // Verifica y convierte el valor a entero
+    $monto1 = isset($Ticketss['NumOrden']) ? (int)$Ticketss['NumOrden'] : 0;
+    $monto2 = 1;
+    $totalmonto = $monto1 + $monto2;
 
-
-
-
-  
-
-  
-  
-
-
-
+    echo "NumOrden: " . $Ticketss['NumOrden'] . "<br>";
+    echo "Total monto: " . $totalmonto;
+} else {
+    echo "No se encontraron registros.";
+}
 
 ?><!DOCTYPE html>
 <html lang="es">
