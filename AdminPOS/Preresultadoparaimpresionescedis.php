@@ -353,6 +353,10 @@ $(document).ready(function() {
         var factura = document.getElementById('factura').value;
         var nombreApellidos = "<?php echo $row['Nombre_Apellidos']; ?>";
 
+        // Depuración: Imprimir valores en la consola
+        console.log('Factura:', factura);
+        console.log('Nombre y Apellidos:', nombreApellidos);
+
         // Enviar la solicitud AJAX al servidor
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'registrar_impresion.php', true);
@@ -371,6 +375,7 @@ $(document).ready(function() {
         xhr.send(data);
     });
 </script>
+
 
 <!-- POR CADUCAR -->
 
