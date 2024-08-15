@@ -353,7 +353,7 @@ $(document).ready(function() {
             // Verificar si el elemento con ID factura existe
             var facturaElement = document.getElementById('factura');
             if (facturaElement) {
-                var factura = facturaElement.value;
+                var factura =  $factura;
                 var nombreApellidos = "<?php echo $row['Nombre_Apellidos']; ?>";
 
                 // Enviar la solicitud AJAX al servidor
