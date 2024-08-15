@@ -1,7 +1,7 @@
 <?php
 include_once "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'$fecha
-$sql = "SELECT * FROM Solicitudes_Ingresos ORDER BY IdProdCedis DESC LIMIT 1";
+$sql = "SELECT * FROM Devolucion_POS ORDER BY IdProdCedis DESC LIMIT 1";
 $resultset = mysqli_query($conn, $sql);
 
 if (!$resultset) {
