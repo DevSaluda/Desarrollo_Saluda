@@ -10,11 +10,13 @@ if (!$resultset) {
 
 $Ticketss = mysqli_fetch_assoc($resultset);
 
-
-
-$monto1 = isset($Ticketss['NumOrden']) ? $Ticketss['NumOrden'] : 0;
+// Forzar la conversión a entero
+$monto1 = isset($Ticketss['NumOrden']) ? (int)$Ticketss['NumOrden'] : 0;
 $monto2 = 1;
 $totalmonto = $monto1 + $monto2;
+
+
+
 
   
 
