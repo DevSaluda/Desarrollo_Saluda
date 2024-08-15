@@ -350,31 +350,26 @@ $(document).ready(function() {
             // Lógica para imprimir
             window.print();
 
-            // Verificar si el elemento con ID factura existe
-            var facturaElement = document.getElementById('factura');
-            if (facturaElement) {
-                var factura =  $factura;
-                var nombreApellidos = "<?php echo $row['Nombre_Apellidos']; ?>";
+            // Usar directamente la variable $factura de PHP en JavaScript
+            var factura = "<?php echo $factura; ?>";
+            var nombreApellidos = "<?php echo $row['Nombre_Apellidos']; ?>";
 
-                // Enviar la solicitud AJAX al servidor
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'registrar_impresion.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        console.log('Impresión registrada con éxito');
-                    }
-                };
+            // Enviar la solicitud AJAX al servidor
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'registrar_impresion.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    console.log('Impresión registrada con éxito');
+                }
+            };
 
-                // Preparar los datos a enviar
-                var data = 'estado=exito&Factura=' + encodeURIComponent(factura) + 
-                           '&nombreApellidos=' + encodeURIComponent(nombreApellidos);
+            // Preparar los datos a enviar
+            var data = 'estado=exito&Factura=' + encodeURIComponent(factura) + 
+                       '&nombreApellidos=' + encodeURIComponent(nombreApellidos);
 
-                // Enviar los datos
-                xhr.send(data);
-            } else {
-                console.error('Elemento con ID "factura" no encontrado.');
-            }
+            // Enviar los datos
+            xhr.send(data);
         });
     });
 </script>
