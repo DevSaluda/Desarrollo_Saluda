@@ -102,6 +102,34 @@ endif;
 
 <?php include("footer.php");?>
 <script>
+
+$(document).ready(function() {
+    $('#NombreCliente').on('input', function() {
+        let nombre = $(this).val();
+        if (nombre.length > 2) {
+            $.ajax({
+                url: 'Consultas/BuscarPaciente.php',
+                type: 'POST',
+                data: { nombre: nombre },
+                success: function(data) {
+                    $('#sugerenciasPacientes').html(data);
+                }
+            });
+        } else {
+            $('#sugerenciasPacientes').empty();
+        }
+    });
+
+    $(document).on('click', '.paciente-sugerido', function() {
+        let nombre = $(this).data('nombre');
+        let telefono = $(this).data('telefono');
+        $('#NombreCliente').val(nombre);
+        $('#TelefonoCliente').val(telefono);
+        $('#sugerenciasPacientes').empty();
+    });
+});
+
+
 $(document).ready(function() {
     let cotizacion = [];
 
