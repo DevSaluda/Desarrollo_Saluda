@@ -55,8 +55,8 @@ if ($Sugerencias != null) {
                     
                     <!-- Formulario para registrar caducados -->
                     <form action="GeneradorDeEncargos" method="post" >
-                       <input type="text" name="Mes" value="<?php echo $Sugerencias->NumOrdPedido; ?>">
-                       <input type="text" name="Sucursal" value="<?php echo $Sugerencias->Fk_sucursal; ?>">
+                       <input type="text" name="Mes" hidden value="<?php echo $Sugerencias->NumOrdPedido; ?>">
+                       <input type="text" name="Sucursal"  hidden value="<?php echo $Sugerencias->Fk_sucursal; ?>">
                         
                                 <button type="submit" id="submit" class="btn btn-success">Generar pedido <i class="fas fa-file-invoice-dollar"></i></button>
                             </div>
