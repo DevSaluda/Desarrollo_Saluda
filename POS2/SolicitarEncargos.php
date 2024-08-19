@@ -330,46 +330,46 @@ else {
         $('#productoFormContainer').empty();
     });
 
-    $(document).on('submit', '#agregarProductoForm', function(e) {
-    e.preventDefault();
-    const producto = {
-        Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-        Nombre_Prod: $('#Nombre_Prod').val(),
-        Precio_Venta: parseFloat($('#Precio_Venta').val()),
-        Cantidad: parseInt($('#Cantidad').val()),
-        Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
-        Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
-        FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
-        Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
-        Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL'
-    };
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+    $(document).on('submit', '#agregarProductoForm, #agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
 
+        let formId = $(this).attr('id');
+        let producto = {};
 
-$(document).on('submit', '#agregarProductoMultipleForm', function(e) {
-    e.preventDefault();
-    
-    const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
-    
-    const producto = {
-        Cod_Barra: productoSeleccionado.Cod_Barra || 'NULL',
-        Nombre_Prod: productoSeleccionado.Nombre_Prod || 'NULL',
-        Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()) || 0,
-        Cantidad: parseInt($('#Cantidad_Multiple').val()) || 0,
-        Total: (parseFloat($('#Precio_Venta_Multiple').val()) || 0) * (parseInt($('#Cantidad_Multiple').val()) || 0),
-        Precio_C: $('#Precio_C_Multiple').val() || 'NULL',
-        FkPresentacion: $('#FkPresentacion_Multiple').val() || 'NULL',
-        Proveedor1: $('#Proveedor1_Multiple').val() || 'NULL',
-        Proveedor2: $('#Proveedor2_Multiple').val() || 'NULL'
-    };
+        if (formId === 'agregarProductoForm') {
+            producto = {
+                Cod_Barra: $('input[name="Cod_Barra"]').val(),
+                Nombre_Prod: $('#Nombre_Prod').val(),
+                Precio_Venta: parseFloat($('#Precio_Venta').val()),
+                Cantidad: parseInt($('#Cantidad').val())
+            };
+        } else if (formId === 'agregarProductoMultipleForm') {
+            let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+            producto = {
+                Cod_Barra: productoSeleccionado.Cod_Barra,
+                Nombre_Prod: productoSeleccionado.Nombre_Prod,
+                Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
+                Cantidad: parseInt($('#Cantidad_Multiple').val())
+            };
+        }
 
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+        // Verificar si el producto ya está en el encargo
+        let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
+
+        if (productoExistente) {
+            // Si el producto ya existe, sumar la cantidad
+            productoExistente.Cantidad += producto.Cantidad;
+            productoExistente.Total = (productoExistente.Cantidad * productoExistente.Precio_Venta).toFixed(2);
+        } else {
+            // Si el producto no existe, añadirlo al encargo
+            producto.Total = (producto.Cantidad * producto.Precio_Venta).toFixed(2);
+            encargo.push(producto);
+        }
+
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty(); // Limpiar el formulario de producto después de agregarlo
+    });
+
 
     $(document).on('click', '.eliminar-producto', function() {
         const nombreProd = $(this).data('nombre-prod');
