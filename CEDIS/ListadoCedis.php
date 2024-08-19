@@ -40,6 +40,9 @@ include "Consultas/Consultas.php";
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
       Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
     </button>
+    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#FiltroDeFacturas" class="btn btn-default">
+      Generar impresion <i class="fas fa-print"></i>
+    </button>
   </div>
 </div>
 
@@ -64,6 +67,7 @@ include "Consultas/Consultas.php";
 
 <?php
 include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaDeFoliosFacturas.php");
 include("Modales/RealizaNuevaOrdenTraspasoCEDIS.php");
 
 include("footer.php") ?>
