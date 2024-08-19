@@ -131,21 +131,24 @@ $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-        let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
-        let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
-        let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-        let cambio = 0;
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    let cambio = 0;
 
-        if (montoAbonado > minimoAbonar) {
-            if (montoAbonado > totalEncargo) {
-                cambio = montoAbonado - totalEncargo;
-            } else {
-                cambio = montoAbonado - minimoAbonar;
-            }
-        }
-
-        $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+    if (montoAbonado < minimoAbonar) {
+        alert('El monto abonado no puede ser menor al mínimo requerido.');
+        $('#MontoAbonado').val(minimoAbonar.toFixed(2)); // Forzar el monto abonado al mínimo
+        montoAbonado = minimoAbonar;
+    } else if (montoAbonado >= totalEncargo) {
+        cambio = montoAbonado - totalEncargo;
+        $('#MontoAbonado').val(totalEncargo.toFixed(2)); // Ajustar el monto abonado al total si es mayor
+    } else {
+        cambio = 0; // No hay cambio si el monto abonado es válido pero menor al total
     }
+
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
 
 $(document).ready(function() {
     $('#NombreCliente').on('input', function() {
@@ -175,22 +178,18 @@ $(document).ready(function() {
 
 
 $('#RequiereCambio').change(function() {
-        if ($(this).is(':checked')) {
-            $('#CambioContainer').removeClass('hidden-field');
-            calcularCambio(); // Calcular el cambio si se requiere
-        } else {
-            $('#CambioContainer').addClass('hidden-field');
-            $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
-        }
-    });
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
+    }
+});
 
-    // Recalcular el cambio si el monto abonado cambia
     $('#MontoAbonado').on('input', function() {
-        if ($('#RequiereCambio').is(':checked')) {
-            calcularCambio(); // Calcular el cambio si cambia el monto abonado
-        }
-    });
-
+    calcularCambio(); // Recalcular cada vez que cambia el monto abonado
+});
 
     function actualizarTablaEncargo() {
         let total = 0;
@@ -416,25 +415,25 @@ else {
                                 $('#pagoMinimo').text('0');
                                 $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
                                 encargo = [];
-
+                                location.reload();
                             } else if (response.error) {
                                 alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
-
+                                location.reload();
                             }
                         },
                         error: function(xhr, status, error) {
                             alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-
+                            location.reload();
                         }
                     });
                 } else if (response.error) {
                     alert(response.error);
-
+                    location.reload();
                 }
             },
             error: function(xhr, status, error) {
                 alert("Error al guardar el encargo: " + error);
-
+                location.reload();
             }
         });
 });
