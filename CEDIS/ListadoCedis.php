@@ -29,7 +29,7 @@ include "Consultas/Consultas.php";
 <div class="card text-center">
   <div class="card-header" style="background-color:#0057b8 !important;color: white;">
     Traspasos realizados
-    <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
+    <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
   </div>
 
   <div>

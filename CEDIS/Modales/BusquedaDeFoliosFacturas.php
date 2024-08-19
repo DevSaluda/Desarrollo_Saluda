@@ -60,7 +60,7 @@ $(document).ready(function() {
         var sucursal = $(this).val();
         if (sucursal) {
             $.ajax({
-                url: 'https://saludapos.com/AdminPOS/Consultas/obtener_resultados.php',
+                url: 'https://saludapos.com/CEDIS/Consultas/obtener_resultados.php',
                 type: 'POST',
                 data: { sucursal: sucursal },
                 success: function(response) {
