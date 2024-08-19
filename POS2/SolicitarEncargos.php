@@ -129,8 +129,9 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
+    let typingTimer; // Temporizador para la función de validación
 
-    function calcularCambio() {
+function calcularCambio() {
     let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
     let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
     let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
@@ -149,6 +150,11 @@ $(document).ready(function() {
 
     $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
 }
+
+$('#MontoAbonado').on('input', function() {
+    clearTimeout(typingTimer); // Cancela el temporizador anterior
+    typingTimer = setTimeout(calcularCambio, 500); // Ejecuta la función después de 500ms de inactividad
+});
 
 $(document).ready(function() {
     $('#NombreCliente').on('input', function() {
