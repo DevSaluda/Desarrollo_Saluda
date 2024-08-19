@@ -75,17 +75,18 @@ include "Consultas/ConsultaCaja.php";
         <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $ValorCaja['ID_Caja']?>"> <!-- ID_Caja añadido -->
     </div>
     
+
     <div class="form-group">
-        <label for="NombreCliente">Nombre del Cliente</label>
-        <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" autocomplete="off" required>
-        <div id="sugerenciasPacientes" class="list-group"></div>
-    </div>
-    
-    <div class="form-group">
-        <label for="TelefonoCliente">Teléfono</label>
-        <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
-    </div>
-    
+                    <label for="NombreCliente">Nombre del Paciente</label>
+                    <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" autocomplete="off" required>
+                    <div id="sugerenciasPacientes" class="list-group"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="TelefonoCliente">Teléfono</label>
+                    <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
+                </div>
+                
     <button type="submit" class="btn btn-success">Guardar Cotización</button>
 </form>
 
