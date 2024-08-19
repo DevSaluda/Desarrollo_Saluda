@@ -209,7 +209,7 @@ $(document).ready(function() {
         "lengthChange": false, // Oculta la opción de cambiar el número de registros mostrados
         "ajax": {
             "type": "POST",
-            "url": "https://saludapos.com/AdminPOS/Consultas/ArrayDesgloseFactura.php",
+            "url": "https://saludapos.com/CEDIS/Consultas/ArrayDesgloseFactura.php",
             "data": function (d) {
                 var factura = '<?php echo $factura; ?>';
                 var dataToSend = {
