@@ -65,31 +65,29 @@ include "Consultas/ConsultaCaja.php";
             </table>
             <h4 class="highlight">Total de la cotización: <span id="totalCotizacion">0</span></h4>
             <form id="guardarCotizacionForm">
-    <div class="form-group hidden-field">
-        <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
-        <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
-        <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
-        <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
-        <input type="hidden" class="form-control" id="TipoCotizacion" name="TipoCotizacion" value="Producto">
-        <input type="hidden" id="IdentificadorCotizacion" name="IdentificadorCotizacion" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
-        <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $ValorCaja['ID_Caja']?>"> <!-- ID_Caja añadido -->
-    </div>
-    
+                <div class="form-group hidden-field">
+                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
+                    <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
+                    <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
+                    <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">
+                    <input type="hidden" class="form-control" id="TipoCotizacion" name="TipoCotizacion" value="Producto">
+                    <input type="hidden" id="IdentificadorCotizacion" name="IdentificadorCotizacion" value="<?php echo hexdec(uniqid()); ?>"> <!-- Identificador único -->
+                    <input type="hidden" id="ID_Caja" name="ID_Caja" value="<?php echo $ValorCaja['ID_Caja']?>"> <!-- ID_Caja añadido -->
+                </div>
 
-    <div class="form-group">
+                <div class="form-group">
                     <label for="NombreCliente">Nombre del Paciente</label>
                     <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" autocomplete="off" required>
                     <div id="sugerenciasPacientes" class="list-group"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="TelefonoCliente">Teléfono</label>
                     <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
                 </div>
-                
-    <button type="submit" class="btn btn-success">Guardar Cotización</button>
-</form>
 
+                <button type="submit" class="btn btn-success">Guardar Cotización</button>
+            </form>
         </div>
     </section>
 </div>
@@ -129,8 +127,6 @@ $(document).ready(function() {
         $('#sugerenciasPacientes').empty();
     });
 });
-
-
 $(document).ready(function() {
     let cotizacion = [];
 
@@ -144,7 +140,7 @@ $(document).ready(function() {
                     <td>${producto.Cod_Barra}</td>
                     <td>${producto.Nombre_Prod}</td>
                     <td>${producto.Precio_Venta}</td>
-                    <td>${producto.Cantidad}</td>
+                    <td>${producto.Cantidad || 'N/A'}</td>
                     <td>${producto.Total}</td>
                     <td>
                         <button class="btn btn-danger eliminar-producto" data-nombre-prod="${producto.Nombre_Prod}">Eliminar</button>
@@ -165,6 +161,8 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.productos.length === 1) {
                     const producto = response.productos[0];
+                    let esProcedimiento = producto.Cod_Barra.length === 4;
+
                     $('#productoFormContainer').html(`
                         <form id="agregarProductoForm">
                             <input type="hidden" name="Cod_Barra" value="${producto.Cod_Barra}">
@@ -180,10 +178,12 @@ $(document).ready(function() {
                                 <label for="Precio_Venta">Precio de Venta</label>
                                 <input type="number" step="0.01" class="form-control" id="Precio_Venta" name="Precio_Venta" value="${producto.Precio_Venta}" readonly>
                             </div>
+                            ${esProcedimiento ? '' : `
                             <div class="form-group">
                                 <label for="Cantidad">Cantidad</label>
                                 <input type="number" class="form-control" id="Cantidad" name="Cantidad" required>
                             </div>
+                            `}
                             <button type="submit" class="btn btn-primary">Agregar Producto</button>
                         </form>
                     `);
@@ -198,20 +198,9 @@ $(document).ready(function() {
                                 </select>
                             </div>
                             <div class="form-group hidden-field">
-                                <input type="hidden" id="Precio_C_Multiple" name="Precio_C_Multiple">
-                                <input type="hidden" id="FkPresentacion_Multiple" name="FkPresentacion_Multiple">
-                                <input type="hidden" id="Proveedor1_Multiple" name="Proveedor1_Multiple">
-                                <input type="hidden" id="Proveedor2_Multiple" name="Proveedor2_Multiple">
+                                <input type="hidden" id="CantidadMultiple" name="CantidadMultiple">
                             </div>
-                            <div class="form-group">
-                                <label for="Precio_Venta_Multiple">Precio de Venta</label>
-                                <input type="number" step="0.01" class="form-control" id="Precio_Venta_Multiple" name="Precio_Venta_Multiple" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="Cantidad_Multiple">Cantidad</label>
-                                <input type="number" class="form-control" id="Cantidad_Multiple" name="Cantidad_Multiple" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                            <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
                         </form>
                     `);
                 } else {
@@ -223,36 +212,57 @@ $(document).ready(function() {
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        let producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-            Nombre_Prod: $(this).find('input[name="Nombre_Prod"]').val(),
-            Precio_Venta: $(this).find('input[name="Precio_Venta"]').val(),
-            Cantidad: $(this).find('input[name="Cantidad"]').val(),
-            Total: (parseFloat($(this).find('input[name="Precio_Venta"]').val()) * parseFloat($(this).find('input[name="Cantidad"]').val())).toFixed(2)
-        };
-        cotizacion.push(producto);
+        let formData = $(this).serializeArray();
+        let productoData = {};
+        formData.forEach(field => {
+            productoData[field.name] = field.value;
+        });
+        
+        let esProcedimiento = productoData.Cod_Barra.length === 4;
+        productoData.Cantidad = esProcedimiento ? 'N/A' : $('#Cantidad').val();
+        productoData.Total = (esProcedimiento ? parseFloat(productoData.Precio_Venta) : parseFloat(productoData.Precio_Venta) * parseFloat(productoData.Cantidad)).toFixed(2);
+        
+        // Verifica si el producto ya está en la cotización
+        let productoExistente = cotizacion.find(p => p.Cod_Barra === productoData.Cod_Barra);
+        if (productoExistente) {
+            // Si el producto ya existe, suma la cantidad
+            productoExistente.Cantidad = parseFloat(productoExistente.Cantidad) + parseFloat(productoData.Cantidad);
+            productoExistente.Total = (parseFloat(productoExistente.Cantidad) * parseFloat(productoExistente.Precio_Venta)).toFixed(2);
+        } else {
+            // Si no existe, agrega un nuevo producto
+            cotizacion.push(productoData);
+        }
+
         actualizarTablaCotizacion();
         $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         e.preventDefault();
-        let productoSeleccionado = JSON.parse($(this).find('select[name="ProductoSeleccionado"]').val());
-        let producto = {
-            Cod_Barra: productoSeleccionado.Cod_Barra,
-            Nombre_Prod: productoSeleccionado.Nombre_Prod,
-            Precio_Venta: productoSeleccionado.Precio_Venta,
-            Cantidad: $(this).find('input[name="Cantidad_Multiple"]').val(),
-            Total: (parseFloat(productoSeleccionado.Precio_Venta) * parseFloat($(this).find('input[name="Cantidad_Multiple"]').val())).toFixed(2)
-        };
-        cotizacion.push(producto);
+        let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        
+        let esProcedimiento = productoSeleccionado.Cod_Barra.length === 4;
+        productoSeleccionado.Cantidad = esProcedimiento ? 'N/A' : $('#CantidadMultiple').val();
+        productoSeleccionado.Total = (esProcedimiento ? parseFloat(productoSeleccionado.Precio_Venta) : parseFloat(productoSeleccionado.Precio_Venta) * parseFloat(productoSeleccionado.Cantidad)).toFixed(2);
+        
+        // Verifica si el producto ya está en la cotización
+        let productoExistente = cotizacion.find(p => p.Cod_Barra === productoSeleccionado.Cod_Barra);
+        if (productoExistente) {
+            // Si el producto ya existe, suma la cantidad
+            productoExistente.Cantidad = parseFloat(productoExistente.Cantidad) + parseFloat(productoSeleccionado.Cantidad);
+            productoExistente.Total = (parseFloat(productoExistente.Cantidad) * parseFloat(productoExistente.Precio_Venta)).toFixed(2);
+        } else {
+            // Si no existe, agrega un nuevo producto
+            cotizacion.push(productoSeleccionado);
+        }
+
         actualizarTablaCotizacion();
         $('#productoFormContainer').empty();
     });
- 
+
     $(document).on('click', '.eliminar-producto', function() {
-        let nombreProducto = $(this).data('nombre-prod');
-        cotizacion = cotizacion.filter(producto => producto.Nombre_Prod !== nombreProducto);
+        let nombreProd = $(this).data('nombre-prod');
+        cotizacion = cotizacion.filter(producto => producto.Nombre_Prod !== nombreProd);
         actualizarTablaCotizacion();
     });
 
@@ -264,29 +274,19 @@ $(document).ready(function() {
             data: {
                 guardar_cotizacion: true,
                 cotizacion: cotizacion,
-                NombreCliente: $('#NombreCliente').val(),
-                TelefonoCliente: $('#TelefonoCliente').val(),
-                FkSucursal: $('#FkSucursal').val(),
-                AgregadoPor: $('#AgregadoPor').val(),
-                ID_H_O_D: $('#ID_H_O_D').val(),
-                Estado: $('#Estado').val(),
-                TipoCotizacion: $('#TipoCotizacion').val(),
-                IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
-                ID_Caja: $('#ID_Caja').val()
+                ...$(this).serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {})
             },
             success: function(response) {
-                if (response.success) {
-                    alert('Cotización guardada exitosamente.');
-                    cotizacion = [];
-                    actualizarTablaCotizacion();
-                    $('#guardarCotizacionForm')[0].reset();
-                } else {
-                    alert('Error al guardar la cotización.');
-                }
+                alert('Cotización guardada exitosamente.');
+                window.location.reload();
+            },
+            error: function() {
+                alert('Ocurrió un error al guardar la cotización.');
             }
         });
     });
 });
+
 </script>
 </body>
 </html>

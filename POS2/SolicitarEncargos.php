@@ -129,23 +129,32 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
+    let typingTimer; // Temporizador para la función de validación
 
-    function calcularCambio() {
-        let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
-        let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
-        let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-        let cambio = 0;
+function calcularCambio() {
+    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
+    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
+    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
+    let cambio = 0;
 
-        if (montoAbonado > minimoAbonar) {
-            if (montoAbonado > totalEncargo) {
-                cambio = montoAbonado - totalEncargo;
-            } else {
-                cambio = montoAbonado - minimoAbonar;
-            }
-        }
-
-        $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+    if (montoAbonado < minimoAbonar) {
+        alert('El monto abonado no puede ser menor al mínimo requerido.');
+        $('#MontoAbonado').val(minimoAbonar.toFixed(2)); // Forzar el monto abonado al mínimo
+        montoAbonado = minimoAbonar;
+    } else if (montoAbonado >= totalEncargo) {
+        cambio = montoAbonado - totalEncargo;
+        $('#MontoAbonado').val(totalEncargo.toFixed(2)); // Ajustar el monto abonado al total si es mayor
+    } else {
+        cambio = 0; // No hay cambio si el monto abonado es válido pero menor al total
     }
+
+    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
+}
+
+$('#MontoAbonado').on('input', function() {
+    clearTimeout(typingTimer); // Cancela el temporizador anterior
+    typingTimer = setTimeout(calcularCambio, 500); // Ejecuta la función después de 500ms de inactividad
+});
 
 $(document).ready(function() {
     $('#NombreCliente').on('input', function() {
@@ -175,22 +184,18 @@ $(document).ready(function() {
 
 
 $('#RequiereCambio').change(function() {
-        if ($(this).is(':checked')) {
-            $('#CambioContainer').removeClass('hidden-field');
-            calcularCambio(); // Calcular el cambio si se requiere
-        } else {
-            $('#CambioContainer').addClass('hidden-field');
-            $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
-        }
-    });
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+        calcularCambio(); // Calcular el cambio si se requiere
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
+    }
+});
 
-    // Recalcular el cambio si el monto abonado cambia
     $('#MontoAbonado').on('input', function() {
-        if ($('#RequiereCambio').is(':checked')) {
-            calcularCambio(); // Calcular el cambio si cambia el monto abonado
-        }
-    });
-
+    calcularCambio(); // Recalcular cada vez que cambia el monto abonado
+});
 
     function actualizarTablaEncargo() {
         let total = 0;
@@ -330,46 +335,46 @@ else {
         $('#productoFormContainer').empty();
     });
 
-    $(document).on('submit', '#agregarProductoForm', function(e) {
-    e.preventDefault();
-    const producto = {
-        Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-        Nombre_Prod: $('#Nombre_Prod').val(),
-        Precio_Venta: parseFloat($('#Precio_Venta').val()),
-        Cantidad: parseInt($('#Cantidad').val()),
-        Total: parseFloat($('#Precio_Venta').val()) * parseInt($('#Cantidad').val()),
-        Precio_C: $(this).find('input[name="Precio_C"]').val() || 'NULL',
-        FkPresentacion: $(this).find('input[name="FkPresentacion"]').val() || 'NULL',
-        Proveedor1: $(this).find('input[name="Proveedor1"]').val() || 'NULL',
-        Proveedor2: $(this).find('input[name="Proveedor2"]').val() || 'NULL'
-    };
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+    $(document).on('submit', '#agregarProductoForm, #agregarProductoMultipleForm', function(e) {
+        e.preventDefault();
 
+        let formId = $(this).attr('id');
+        let producto = {};
 
-$(document).on('submit', '#agregarProductoMultipleForm', function(e) {
-    e.preventDefault();
-    
-    const productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
-    
-    const producto = {
-        Cod_Barra: productoSeleccionado.Cod_Barra || 'NULL',
-        Nombre_Prod: productoSeleccionado.Nombre_Prod || 'NULL',
-        Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()) || 0,
-        Cantidad: parseInt($('#Cantidad_Multiple').val()) || 0,
-        Total: (parseFloat($('#Precio_Venta_Multiple').val()) || 0) * (parseInt($('#Cantidad_Multiple').val()) || 0),
-        Precio_C: $('#Precio_C_Multiple').val() || 'NULL',
-        FkPresentacion: $('#FkPresentacion_Multiple').val() || 'NULL',
-        Proveedor1: $('#Proveedor1_Multiple').val() || 'NULL',
-        Proveedor2: $('#Proveedor2_Multiple').val() || 'NULL'
-    };
+        if (formId === 'agregarProductoForm') {
+            producto = {
+                Cod_Barra: $('input[name="Cod_Barra"]').val(),
+                Nombre_Prod: $('#Nombre_Prod').val(),
+                Precio_Venta: parseFloat($('#Precio_Venta').val()),
+                Cantidad: parseInt($('#Cantidad').val())
+            };
+        } else if (formId === 'agregarProductoMultipleForm') {
+            let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+            producto = {
+                Cod_Barra: productoSeleccionado.Cod_Barra,
+                Nombre_Prod: productoSeleccionado.Nombre_Prod,
+                Precio_Venta: parseFloat($('#Precio_Venta_Multiple').val()),
+                Cantidad: parseInt($('#Cantidad_Multiple').val())
+            };
+        }
 
-    encargo.push(producto);
-    actualizarTablaEncargo();
-    $('#productoFormContainer').empty();
-});
+        // Verificar si el producto ya está en el encargo
+        let productoExistente = encargo.find(p => p.Cod_Barra === producto.Cod_Barra);
+
+        if (productoExistente) {
+            // Si el producto ya existe, sumar la cantidad
+            productoExistente.Cantidad += producto.Cantidad;
+            productoExistente.Total = (productoExistente.Cantidad * productoExistente.Precio_Venta).toFixed(2);
+        } else {
+            // Si el producto no existe, añadirlo al encargo
+            producto.Total = (producto.Cantidad * producto.Precio_Venta).toFixed(2);
+            encargo.push(producto);
+        }
+
+        actualizarTablaEncargo();
+        $('#productoFormContainer').empty(); // Limpiar el formulario de producto después de agregarlo
+    });
+
 
     $(document).on('click', '.eliminar-producto', function() {
         const nombreProd = $(this).data('nombre-prod');
@@ -416,25 +421,25 @@ $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
                                 $('#pagoMinimo').text('0');
                                 $('#MontoAbonado').val(''); // Limpia el campo MontoAbonado
                                 encargo = [];
-
+                                location.reload();
                             } else if (response.error) {
                                 alert("Encargo guardado, pero hubo un error al generar el ticket: " + response.error);
-
+                                location.reload();
                             }
                         },
                         error: function(xhr, status, error) {
                             alert("Encargo guardado, pero no se pudo enviar a TicketEncargos: " + error);
-
+                            location.reload();
                         }
                     });
                 } else if (response.error) {
                     alert(response.error);
-
+                    location.reload();
                 }
             },
             error: function(xhr, status, error) {
                 alert("Error al guardar el encargo: " + error);
-
+                location.reload();
             }
         });
 });
