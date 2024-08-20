@@ -131,43 +131,41 @@ $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-    let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
-    let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
-    let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
-    let cambio = 0;
+        let totalEncargo = parseFloat($('#totalEncargo').text());
+        let minimoAbonar = totalEncargo * 0.5;
+        let montoAbonado = parseFloat($('#MontoAbonado').val());
+        let cambio = 0;
 
-    if ($('#RequiereCambio').is(':checked')) {
-        if (montoAbonado > totalEncargo) {
-            cambio = montoAbonado - totalEncargo;
-            $('#MontoAbonado').val(totalEncargo.toFixed(2)); // Ajustar el monto abonado al total si es mayor
-        } else if (montoAbonado < minimoAbonar) {
-            alert(`El monto abonado no puede ser menor que el mínimo requerido de ${minimoAbonar.toFixed(2)}.`);
-            $('#MontoAbonado').val(minimoAbonar.toFixed(2)); // Ajustar al mínimo requerido
-        } else {
-            cambio = montoAbonado - minimoAbonar;
+        $('#errorMontoAbonado').hide();
+        $('#errorRequiereCambio').hide();
+
+        if ($('#RequiereCambio').is(':checked')) {
+            if (montoAbonado > totalEncargo) {
+                cambio = montoAbonado - totalEncargo;
+                $('#Cambio').val(cambio.toFixed(2));
+            } else {
+                $('#errorRequiereCambio').show();
+            }
         }
-    } else if (montoAbonado < totalEncargo) {
+
         if (montoAbonado < minimoAbonar) {
-            alert(`El monto abonado no puede ser menor que el mínimo requerido de ${minimoAbonar.toFixed(2)}.`);
+            $('#errorMontoAbonado').show();
         }
     }
 
-    $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
-}
+    $('#MontoAbonado').on('input', function() {
+        calcularCambio();
+    });
 
-// Recalcular el cambio si el monto abonado cambia
-$('#MontoAbonado').on('input', function() {
-    calcularCambio();
-});
+    $('#RequiereCambio').change(function() {
+        if ($(this).is(':checked')) {
+            $('#CambioContainer').removeClass('hidden-field');
+        } else {
+            $('#CambioContainer').addClass('hidden-field');
+            $('#Cambio').val('0');
+        }
+    });
 
-$('#RequiereCambio').change(function() {
-    if ($(this).is(':checked')) {
-        $('#CambioContainer').removeClass('hidden-field');
-    } else {
-        $('#CambioContainer').addClass('hidden-field');
-        $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
-    }
-});
 
 
 $(document).ready(function() {
