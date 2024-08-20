@@ -140,13 +140,22 @@ $(document).ready(function() {
         $('#errorRequiereCambio').hide();
 
         if ($('#RequiereCambio').is(':checked')) {
-            if (montoAbonado > totalEncargo) {
-                cambio = montoAbonado - totalEncargo;
-                $('#Cambio').val(cambio.toFixed(2));
-            } else {
-                $('#errorRequiereCambio').show();
-            }
-        }
+    $('#errorRequiereCambio').hide(); // Oculta el error si estaba visible
+
+    if (montoAbonado > totalEncargo) {
+        cambio = montoAbonado - totalEncargo;
+        $('#Cambio').val(cambio.toFixed(2));
+    } else if (montoAbonado > minimoAbonar && montoAbonado < totalEncargo) {
+        cambio = montoAbonado - minimoAbonar;
+        $('#Cambio').val(cambio.toFixed(2));
+    } else {
+        $('#errorRequiereCambio').show();
+        $('#Cambio').val(''); // Limpiar el valor de cambio si hay un error
+    }
+} else {
+    $('#Cambio').val(''); // Limpiar el campo si no requiere cambio
+    $('#errorRequiereCambio').hide(); // Asegurar que el error esté oculto
+}
 
         if (montoAbonado < minimoAbonar) {
             $('#errorMontoAbonado').show();
