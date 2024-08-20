@@ -15,7 +15,7 @@ $(document).ready( function () {
 
 include("db_connection.php");
 include "Consultas.php";
-include "Sesion.php";
+
 
 $user_id=null;
 $sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV 2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, 
@@ -50,7 +50,7 @@ $query = $conn->query($sql1);
     <td><?php echo $DataPacientes["Nombre_Paciente"]; ?></td>
     <td><?php echo $DataPacientes["Nombre_Sucursal"]; ?></td>
     <td><?php echo $DataPacientes["Motivo_Consulta"]; ?></td>
-    <td><?php echo fechaCastellano($DataPacientes["Fecha_Visita"]); ?>
+    <td><?php echo $DataPacientes["Fecha_Visita"]; ?>
       </td>
     <td><?php echo $DataPacientes["Nombre_Doctor"]; ?></td>
    
