@@ -32,7 +32,26 @@
   </div>
   <input type="date" class="form-control " name="Fecha1">
   <input type="text" name="Sucursal" hidden value="<?echo $row['Fk_Sucursal']?>">
-  
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById('Fecha1');
+    
+    // Obtenemos la fecha actual
+    const today = new Date();
+    
+    // Calculamos la fecha de hace 3 días
+    const threeDaysAgo = new Date();
+    threeDaysAgo.setDate(today.getDate() - 3);
+    
+    // Convertimos la fecha a formato 'YYYY-MM-DD' para que sea válida para el input de tipo date
+    const formattedThreeDaysAgo = threeDaysAgo.toISOString().split('T')[0];
+    const formattedToday = today.toISOString().split('T')[0];
+    
+    // Establecemos los atributos min y max para limitar la selección de fechas
+    dateInput.setAttribute('min', formattedThreeDaysAgo);
+    dateInput.setAttribute('max', formattedToday);
+  });
+</script>
     </div>
     </div>
     
