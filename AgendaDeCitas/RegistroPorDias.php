@@ -18,7 +18,7 @@ include "Consultas.php";
 include "Sesion.php";
 
 $user_id=null;
-$sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, 
+$sql1="SELECT Signos_VitalesV2.ID_SignoV,Signos_VitalesV 2.Folio_Paciente,Signos_VitalesV2.Nombre_Paciente, 
 Signos_VitalesV2.Motivo_Consulta, Signos_VitalesV2.Nombre_Doctor, Signos_VitalesV2.Fk_Enfermero,
 Signos_VitalesV2.Fk_Sucursal,Signos_VitalesV2.FK_ID_H_O_D, Signos_VitalesV2.Fecha_Visita,Signos_VitalesV2.Estatus,
 Signos_VitalesV2.CodigoEstatus, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Signos_VitalesV2,SucursalesCorre 
@@ -96,7 +96,7 @@ $query = $conn->query($sql1);
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-  <?
+  <?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
