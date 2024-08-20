@@ -129,32 +129,46 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
-    let typingTimer; // Temporizador para la función de validación
 
-function calcularCambio() {
+    function calcularCambio() {
     let totalEncargo = parseFloat($('#totalEncargo').text()); // Total del encargo
     let minimoAbonar = totalEncargo * 0.5; // Mínimo a abonar es el 50% del total
     let montoAbonado = parseFloat($('#MontoAbonado').val()); // Monto abonado por el cliente
     let cambio = 0;
 
-    if (montoAbonado < minimoAbonar) {
-        alert('El monto abonado no puede ser menor al mínimo requerido.');
-        $('#MontoAbonado').val(minimoAbonar.toFixed(2)); // Forzar el monto abonado al mínimo
-        montoAbonado = minimoAbonar;
-    } else if (montoAbonado >= totalEncargo) {
-        cambio = montoAbonado - totalEncargo;
-        $('#MontoAbonado').val(totalEncargo.toFixed(2)); // Ajustar el monto abonado al total si es mayor
-    } else {
-        cambio = 0; // No hay cambio si el monto abonado es válido pero menor al total
+    if ($('#RequiereCambio').is(':checked')) {
+        if (montoAbonado > totalEncargo) {
+            cambio = montoAbonado - totalEncargo;
+            $('#MontoAbonado').val(totalEncargo.toFixed(2)); // Ajustar el monto abonado al total si es mayor
+        } else if (montoAbonado < minimoAbonar) {
+            alert(`El monto abonado no puede ser menor que el mínimo requerido de ${minimoAbonar.toFixed(2)}.`);
+            $('#MontoAbonado').val(minimoAbonar.toFixed(2)); // Ajustar al mínimo requerido
+        } else {
+            cambio = montoAbonado - minimoAbonar;
+        }
+    } else if (montoAbonado < totalEncargo) {
+        if (montoAbonado < minimoAbonar) {
+            alert(`El monto abonado no puede ser menor que el mínimo requerido de ${minimoAbonar.toFixed(2)}.`);
+        }
     }
 
     $('#Cambio').val(cambio.toFixed(2)); // Mostrar el cambio calculado
 }
 
+// Recalcular el cambio si el monto abonado cambia
 $('#MontoAbonado').on('input', function() {
-    clearTimeout(typingTimer); // Cancela el temporizador anterior
-    typingTimer = setTimeout(calcularCambio, 500); // Ejecuta la función después de 500ms de inactividad
+    calcularCambio();
 });
+
+$('#RequiereCambio').change(function() {
+    if ($(this).is(':checked')) {
+        $('#CambioContainer').removeClass('hidden-field');
+    } else {
+        $('#CambioContainer').addClass('hidden-field');
+        $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
+    }
+});
+
 
 $(document).ready(function() {
     $('#NombreCliente').on('input', function() {
@@ -180,21 +194,6 @@ $(document).ready(function() {
         $('#TelefonoCliente').val(telefono);
         $('#sugerenciasPacientes').empty();
     });
-});
-
-
-$('#RequiereCambio').change(function() {
-    if ($(this).is(':checked')) {
-        $('#CambioContainer').removeClass('hidden-field');
-        calcularCambio(); // Calcular el cambio si se requiere
-    } else {
-        $('#CambioContainer').addClass('hidden-field');
-        $('#Cambio').val('0'); // Asignar 0 al campo de cambio si no se requiere
-    }
-});
-
-    $('#MontoAbonado').on('input', function() {
-    calcularCambio(); // Recalcular cada vez que cambia el monto abonado
 });
 
     function actualizarTablaEncargo() {
