@@ -60,9 +60,22 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " name="Fecha2">
+  <input type="date" class="form-control " name="Fecha2"  id="Fecha2">
     </div>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById('Fecha2');
     
+    // Obtenemos la fecha actual
+    const today = new Date();
+    
+    // Convertimos la fecha a formato 'YYYY-MM-DD'
+    const formattedToday = today.toISOString().split('T')[0];
+    
+    // Establecemos el valor por defecto en el campo de fecha
+    dateInput.value = formattedToday;
+  });
+</script>
 
   <div>     </div>
   </div>  </div>
