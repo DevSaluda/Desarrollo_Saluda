@@ -22,9 +22,8 @@ function buscarProducto($conn, $Cod_Barra) {
     }
 }
 
-function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $metodoDePago, $fkCaja, $nombreCliente, $telefonoCliente) {
+function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $fkCaja, $nombreCliente, $telefonoCliente) {
     $response = [];
-    $montoAbonadoAsignado = false;
 
     foreach ($cotizacion as $producto) {
         $Cod_Barra = $producto['Cod_Barra'];
@@ -48,9 +47,6 @@ function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $montoA
             $response['error'] = "Error al guardar la cotización: " . mysqli_error($conn);
             return $response;
         }
-
-        // Marcar que ya se ha asignado el monto abonado
-        $montoAbonadoAsignado = true;
     }
 
     $response['success'] = "Cotización guardada exitosamente.";
@@ -79,18 +75,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
         $IdentificadorCotizacion = $_POST['IdentificadorCotizacion'];
-        $montoAbonado = $_POST['MontoAbonado'];
         $fkSucursal = $_POST['FkSucursal'];
         $agregadoPor = $_POST['AgregadoPor'];
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoCotizacion = $_POST['TipoCotizacion'];
-        $metodoDePago = $_POST['MetodoDePago'];
-        $fkCaja = $_POST['ID_Caja']; // Captura Fk_Caja
+        $fkCaja = $_POST['ID_Caja']; // Captura ID_Caja
         $nombreCliente = $_POST['NombreCliente']; // Captura el nombre del cliente
         $telefonoCliente = $_POST['TelefonoCliente']; // Captura el teléfono del cliente
     
-        $response = guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $metodoDePago, $fkCaja, $nombreCliente, $telefonoCliente);
+        $response = guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $fkCaja, $nombreCliente, $telefonoCliente);
         echo json_encode($response);
     }
 }
