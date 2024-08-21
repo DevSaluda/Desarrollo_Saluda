@@ -36,15 +36,13 @@ function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $montoA
         $Proveedor1 = $producto['Proveedor1'] ?? '';
         $Proveedor2 = $producto['Proveedor2'] ?? '';
 
-
         // Verificar si el producto es un procedimiento (código de barras de 4 dígitos o formato USG-####)
         if (preg_match('/^\d{4}$/', $Cod_Barra) || preg_match('/^USG-\d{4}$/', $Cod_Barra)) {
             $Cantidad = 0; // No asignar cantidad a procedimientos
         }
 
         $query = "INSERT INTO Cotizaciones_POS (IdentificadorCotizacion, Cod_Barra, Nombre_Prod, Fk_sucursal, Precio_Venta, Cantidad, Total, FkPresentacion, Proveedor1, Proveedor2, AgregadoPor, ID_H_O_D, Estado, TipoCotizacion, ID_Caja, NombreCliente, TelefonoCliente)
-        VALUES ('$IdentificadorCotizacion', '$Cod_Barra', '$Nombre_Prod', '$FkSucursal', '$Precio_Venta', '$Cantidad', '$Total', '$FkPresentacion', '$Proveedor1', '$Proveedor2', '$AgregadoPor', '$ID_H_O_D', '$Estado', '$TipoCotizacion', '$ID_Caja', '$NombreCliente', '$TelefonoCliente')";
-
+                  VALUES ('$IdentificadorCotizacion', '$Cod_Barra', '$Nombre_Prod', '$fkSucursal', '$Precio_Venta', '$Cantidad', '$Total', '$FkPresentacion', '$Proveedor1', '$Proveedor2', '$agregadoPor', '$idHOD', '$estado', '$tipoCotizacion', '$fkCaja', '$nombreCliente', '$telefonoCliente')";
 
         if (!mysqli_query($conn, $query)) {
             $response['error'] = "Error al guardar la cotización: " . mysqli_error($conn);
@@ -67,7 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['guardar_cotizacion'])) {
-        $cotizacion = json_decode($_POST['cotizacion'], true);
+        $cotizacionData = $_POST['cotizacion'];
+
+        // Verificar si 'cotizacion' es un array y convertirlo a JSON si es necesario
+        if (is_array($cotizacionData)) {
+            $cotizacionData = json_encode($cotizacionData);
+        }
+
+        $cotizacion = json_decode($cotizacionData, true);
         if (empty($cotizacion)) {
             echo json_encode(['error' => 'No hay productos en la cotización.']);
             exit;
