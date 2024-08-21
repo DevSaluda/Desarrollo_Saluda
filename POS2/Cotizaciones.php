@@ -278,7 +278,7 @@ $(document).ready(function() {
             },
             success: function(response) {
                 alert('Cotización guardada exitosamente.');
-                window.location.reload();
+                
             },
             error: function() {
                 alert('Ocurrió un error al guardar la cotización.');
