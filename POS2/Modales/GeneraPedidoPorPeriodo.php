@@ -31,7 +31,7 @@
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
   <input type="date" class="form-control " id="Fecha1" name="Fecha1">
-  <input type="text" name="Sucursal" hidden value="<?echo $row['Fk_Sucursal']?>">
+  <input type="text" name="Sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     const dateInput = document.getElementById('Fecha1');
