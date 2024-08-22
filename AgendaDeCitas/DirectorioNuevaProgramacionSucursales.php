@@ -1,7 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 include "Consultas/Sesion.php";
-include "Consultas/Conexion_selects.php";
+
 include "Consultas/ConeSelectDinamico.php";
 
 ?>
@@ -14,13 +14,13 @@ include "Consultas/ConeSelectDinamico.php";
 
   <title>Programación de campañas de sucursales</title>
 
-  <? include "Header.php"?>
+  <?php include "Header.php"?>
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
   <div id="loading-text" style="color: white; margin-top: 10px; font-size: 18px;"></div>
 </div>
-<?include_once ("Menu.php")?>
+<?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color: #2E64FE !important;color: white;">
   Programación de campañas de sucursales
@@ -47,7 +47,7 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
 include ("Modales/Exito.php");
   include ("Modales/ProgramacionDeAgendas.php");
   include ("footer.php");?>
