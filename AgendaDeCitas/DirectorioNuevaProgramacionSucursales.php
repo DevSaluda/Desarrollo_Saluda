@@ -25,11 +25,11 @@ include "Consultas/ConeSelectDinamico.php";
   <div class="card-header" style="background-color: #2E64FE !important;color: white;">
   Programación de campañas de sucursales
   </div>
+  
+  <div >
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;"class="btn btn-default">
   Agendar nueva cita <i class="fas fa-file-medical"></i>
 </button>
-  <div >
-  
 </div>
 
 </div>
