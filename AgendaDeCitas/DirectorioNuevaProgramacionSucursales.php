@@ -27,8 +27,8 @@ include "Consultas/ConeSelectDinamico.php";
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;"class="btn btn-default">
-  Agendar nueva cita <i class="fas fa-file-medical"></i>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ProgramacionExt" class="btn btn-default">
+  Establecer nueva programación <i class="fas fa-calendar-week"></i>
 </button>
 </div>
 
@@ -51,40 +51,15 @@ include "Consultas/ConeSelectDinamico.php";
 
   <?php
 include ("Modales/Exito.php");
-include ("Modales/AgendarCitasExt.php");
-include ("Modales/Error.php");
-  
-include ("Modales/Exito.php");
+include ("Modales/ProgramacionExt.php");
 
-include ("Modales/Precarga.php");
-include ("Modales/ExitoActualiza.php");
-include ("Modales/EstatusAgendaGuardado.php");
-include ("Modales/AgendarCitasDeSucursales.php");
-include ("Modales/AgendarCitasExt.php");
-include ("Modales/AltaEspecialista.php");
-include("Modales/BusquedaPorFechas.php");
-include("Modales/BusquedaPorSucursales.php");
-include("Modales/BusquedaPorSucursalesYEspecialistas.php");
   include ("footer.php");?>
 
 <script src="js/ProgramacionSucursalesVersionFinal.js"></script>
 <script src="js/ObtieneEspecialidadExt.js"></script>
 <script src="js/ObtieneMedicoSucursalExt.js"></script>
 <script src="js/ProgramaEnSucursalesExt.js"></script>
-<script src="js/AgregaEspecialidad.js"></script>
-<script src="js/BuscaDataPacientes.js"></script>
-<script src="js/BuscaDataPacientesExt.js"></script>
-<!-- <script src="js/AgregaEspecialista.js"></script>
-<script src="js/ObtieneEspecialidadMedicoSucursal.js"></script>
-<script src="js/ObtieneMedicoDeSucursal.js"></script>
-<script src="js/ObtieneFechas.js"></script>
-<script src="js/ObtieneHoras.js"></script> -->
-<script src="js/ObtieneEspecialidadMedicoExt.js"></script>
-<script src="js/ObtieneMedicoDeSucursalExt.js"></script>
-<script src="js/ObtieneTipoDeConsulta.js"></script>
-<script src="js/ObtieneFechasExt.js"></script>
-<script src="js/ObtieneHorasExt.js"></script>
-<script src="js/AgendaEnSucursalesValidacion.js"></script>
+
 
 
 
