@@ -276,9 +276,7 @@ tabla = $('#CitasExpress').DataTable({
 });
 </script>
 <div class="text-center">
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ProgramacionExt" class="btn btn-default">
-  Establecer nueva programación <i class="fas fa-calendar-week"></i>
-</button>
+
 	<div class="table-responsive">
 	<table  id="CitasExpress" class="table table-hover">
 <thead>
