@@ -359,7 +359,7 @@ $(document).ready(function() {
 
       <div class="text-center">
         <div class="table-responsive">
-        <button type="submit" class="btn btn-primary">Generar pedido <i class="fa-solid fa-file-csv"></i></button>
+        <button type="submit" class="btn btn-primary">Generar pedido <i class="fas fa-file-csv"></i></button>
           <table id="Productos" class="hover" style="width:100%">
             <thead>
               <th>ID Pedido</th>
