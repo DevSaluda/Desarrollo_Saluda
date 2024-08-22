@@ -52,7 +52,7 @@ include ("Modales/Exito.php");
   include ("Modales/ProgramacionDeAgendas.php");
   include ("footer.php");?>
 
-<script src="js/ProgramacionSucursalesEspecialistasNuevos.js"></script>
+<script src="js/ProgramacionSucursalesVersionFinal.js"></script>
 <script src="js/ObtieneEspecialidadExt.js"></script>
 <script src="js/ObtieneMedicoSucursalExt.js"></script>
 <script src="js/ProgramaEnSucursalesExt.js"></script>
