@@ -67,7 +67,7 @@ include ("Modales/Exito.php");
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
     $(document).on("click", ".btn-AsigSucursal", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/AutorizaFechasExtNuevo.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/AutorizaFechasExtNuevo.php", { id: id }, function(data) {
           
           $("#form-edit").html(data);
           $("#Titulo").html("Apertura de fechas");
@@ -83,7 +83,7 @@ include ("Modales/Exito.php");
 
     $(document).on("click", ".btn-EditSucursal", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EdicionDeFechasEspecialidades.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/EdicionDeFechasEspecialidades.php", { id: id }, function(data) {
           
           $("#form-edit").html(data);
           $("#Titulo").html("Modificacion de fechas");
@@ -98,7 +98,7 @@ include ("Modales/Exito.php");
     
     $(document).on("click", ".btn-DeleteSucursalDatos", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EliminarFechasEspecialidades.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/EliminarFechasEspecialidades.php", { id: id }, function(data) {
           
           $("#form-edit").html(data);
           $("#Titulo").html("Modificacion de fechas");
@@ -114,7 +114,7 @@ include ("Modales/Exito.php");
     // Delegación de eventos para el botón "apertura de horarios" dentro de las opciones disponibles
     $(document).on("click", ".btn-NuevaAutorizacionHoras", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/NuevaAperturaDeHorarios.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/NuevaAperturaDeHorarios.php", { id: id }, function(data) {
          
           $("#form-edit").html(data);
           $("#Titulo").html("Despliegue de horas sobre fechas disponibles del especialista");
@@ -129,7 +129,7 @@ include ("Modales/Exito.php");
      // Delegación de eventos para el botón "Edicion de horas" dentro de las opciones disponibles
      $(document).on("click", ".EditHoras", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EdicionDeHorarios.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/EdicionDeHorarios.php", { id: id }, function(data) {
          
           $("#form-edit").html(data);
           $("#Titulo").html("Despliegue de horas sobre fechas disponibles del especialista");
