@@ -25,7 +25,9 @@ include "Consultas/ConeSelectDinamico.php";
   <div class="card-header" style="background-color: #2E64FE !important;color: white;">
   Programación de campañas de sucursales
   </div>
- 
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;"class="btn btn-default">
+  Agendar nueva cita <i class="fas fa-file-medical"></i>
+</button>
   <div >
   
 </div>
@@ -49,7 +51,7 @@ include "Consultas/ConeSelectDinamico.php";
 
   <?php
 include ("Modales/Exito.php");
-  include ("Modales/ProgramacionDeAgendas.php");
+include ("Modales/AgendarCitasExt.php");
   include ("footer.php");?>
 
 <script src="js/ProgramacionSucursalesVersionFinal.js"></script>
