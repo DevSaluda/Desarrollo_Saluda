@@ -1,7 +1,4 @@
-<?
 
-
-?>
 <style>
   /* Personalizar el diseño de la paginación con CSS */
   .dataTables_wrapper .dataTables_paginate {
