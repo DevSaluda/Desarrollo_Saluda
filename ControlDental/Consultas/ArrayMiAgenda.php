@@ -64,7 +64,8 @@ AgendaCitas_EspecialistasExt.Fk_Especialidad = 84 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 85 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 86 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 87)
-AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE()) AND
+AgendaCitas_EspecialistasExt.Fk_Especialista BETWEEN 14 AND 17
 ORDER BY
     AgendaCitas_EspecialistasExt.Fecha_Hora DESC;
 ";
