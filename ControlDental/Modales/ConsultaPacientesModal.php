@@ -89,7 +89,6 @@ $query = $conn->query($sql1);
   <div class="text-center">
   <table id="MedicosExpress" class="table ">
 <thead>
-<th>Folio</th>
 <th>Paciente</th>
 <th>Telefono</th>
 <th>Fecha</th>
@@ -98,17 +97,11 @@ $query = $conn->query($sql1);
 <th>Doctor </th>
 <th>Sucursal</th>
 <th>Observaciones</th>
-<th>Agendado por </th>
-<th>Registrado el </th>
-
-
-	
 
 
 </thead>
 <?php while ($Especialidades=$query->fetch_array()):?>
 <tr>
-	<td><?php echo $Especialidades["ID_Agenda_Especialista"]; ?></td>
 	
 	<td><?php echo $Especialidades["Nombre_Paciente"]; ?></td>
     <td><?php echo $Especialidades["Telefono"]; ?></td>
@@ -118,11 +111,7 @@ $query = $conn->query($sql1);
     <td><?php echo $Especialidades["Nombre_Apellidos"]; ?></td>
     <td><?php echo $Especialidades["Nombre_Sucursal"]; ?></td>
     <td><?php echo $Especialidades["Observaciones"]; ?></td>
-    <td><?php echo $Especialidades["AgendadoPor"]; ?></td>
-    <td><?php echo $Especialidades["Fecha_Hora"]; ?></td>
 	
-	
-		
 </tr>
 <?php endwhile;?>
 </table>
