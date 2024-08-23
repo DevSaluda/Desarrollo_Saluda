@@ -64,7 +64,7 @@ AgendaCitas_EspecialistasExt.Fk_Especialidad = 84 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 85 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 86 OR
 AgendaCitas_EspecialistasExt.Fk_Especialidad = 87)
-AND DATE(Fechas_EspecialistasExt.Fecha_Disponibilidad) = CURRENT_DATE()
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())
 ORDER BY
     AgendaCitas_EspecialistasExt.Fecha_Hora DESC;
 ";
