@@ -46,8 +46,25 @@ Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_Especiali
 LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
-AgendaCitas_EspecialistasExt.Fk_Especialista BETWEEN 14 AND 17
-AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())
+(AgendaCitas_EspecialistasExt.Fk_Especialidad = 14 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 15 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 16 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 17 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 18 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 19 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 20 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 65 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 66 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 67 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 68 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 76 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 80 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 81 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 84 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 85 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 86 OR
+AgendaCitas_EspecialistasExt.Fk_Especialidad = 87)
+AND DATE(Fechas_EspecialistasExt.Fecha_Disponibilidad) = CURRENT_DATE();
 ORDER BY
     AgendaCitas_EspecialistasExt.Fecha_Hora DESC;
 ";
