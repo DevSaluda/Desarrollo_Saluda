@@ -25,7 +25,7 @@ $(document).ready(function () {
                         // Segunda solicitud AJAX para imprimir tickets
                         $.ajax({
                             type: 'POST',
-                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php",  // Cambia esto al archivo PHP que imprime los tickets
+                            url: "localhost:8080/ticket/ImprimirTicketDevolucion.php",  // Cambia esto al archivo PHP que imprime los tickets
                             data: $(form).serialize(), // Reutilizar datos serializados
                             cache: false,
                             success: function (printData) {
