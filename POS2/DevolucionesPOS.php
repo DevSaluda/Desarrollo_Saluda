@@ -21,7 +21,7 @@ if ($Ticketss) {
     $totalmonto = 1;
 }
 
-echo "Total monto: " . $totalmonto;
+
 
 ?><!DOCTYPE html>
 <html lang="es">
