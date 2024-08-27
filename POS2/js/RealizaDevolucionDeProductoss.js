@@ -50,7 +50,13 @@ $(document).ready(function () {
                                             text: printResponse.message,
                                         });
                                     }
-                                } 
+                                } catch (e) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error en la respuesta del servidor',
+                                        text: 'No se pudo interpretar la respuesta del servidor.',
+                                    });
+                                }
                             },
                             error: function (error) {
                                 Swal.fire({
