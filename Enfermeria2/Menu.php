@@ -154,7 +154,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://saludapos.com/Enfermeria2/AgendamientoDeCitasLaboratorios.php" class="nav-link">
             <i class="fas fa-flask"></i>
               <p>
@@ -162,7 +162,7 @@
                
               </p>
             </a>
-          </li>
+          </li> -->
            <!--<li class="nav-item">
             <a href="https://controlconsulta.com/Enfermeria2/SolicitudDeinsumos" class="nav-link">
             <i class="fas fa-id-card-alt"></i>
