@@ -221,7 +221,7 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
               </p>
             </a>
           </li>
-          <li class="nav-item">
+         <!--  <li class="nav-item">
                   <a href="https://saludapos.com/POS2/AgendamientoDeCitasLaboratorios" class="nav-link" style="color: white;">
                   <i class="fas fa-flask"></i>
                     <p>
@@ -229,7 +229,7 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
 
                     </p>
                   </a>
-                </li>
+                </li> -->
           <li class="nav-item">
             <a href="https://saludapos.com/POS2/CancelacionesV2" class="nav-link">
             <i class="fas fa-calendar-times"></i>
