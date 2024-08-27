@@ -25,7 +25,7 @@ $(document).ready(function () {
                         // Segunda solicitud AJAX para imprimir tickets
                         $.ajax({
                             type: 'POST',
-                            url: "localhost:8080/ticket/ImprimirTicketDevolucion.php", 
+                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php", 
                             data: $(form).serialize(), 
                             cache: false,
                             success: function (printData) {
@@ -58,12 +58,13 @@ $(document).ready(function () {
                                     });
                                 }
                             },
-                            error: function () {
+                            error: function (error) {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error en la impresión del ticket',
                                     text: 'No se pudo imprimir el ticket. Por favor, inténtalo de nuevo.',
                                 });
+                                console.error("Error generating ticket:", error); // Añadir error a la consola para más detalles
                             }
                         });
                     } else {
