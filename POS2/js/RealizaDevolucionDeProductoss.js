@@ -25,29 +25,36 @@ $(document).ready(function () {
                         // Segunda solicitud AJAX para imprimir tickets
                         $.ajax({
                             type: 'POST',
-                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php", // Cambiar a la URL correcta
-                            data: $(form).serialize(), // Reutilizar datos serializados
+                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php", 
+                            data: $(form).serialize(), 
                             cache: false,
                             success: function (printData) {
-                                // Opcional: Manejo del éxito de la impresión del ticket
-                                var printResponse = JSON.parse(printData);
-                                if (printResponse.status === 'success') {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Ticket impreso con éxito!',
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                        didOpen: () => {
-                                            setTimeout(() => {
-                                                location.reload();
-                                            }, 1500);
-                                        },
-                                    });
-                                } else {
+                                try {
+                                    var printResponse = JSON.parse(printData);
+                                    if (printResponse.status === 'success') {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Ticket impreso con éxito!',
+                                            showConfirmButton: false,
+                                            timer: 2000,
+                                            didOpen: () => {
+                                                setTimeout(() => {
+                                                    location.reload();
+                                                }, 1500);
+                                            },
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error al imprimir el ticket',
+                                            text: printResponse.message,
+                                        });
+                                    }
+                                } catch (e) {
                                     Swal.fire({
                                         icon: 'error',
-                                        title: 'Error al imprimir el ticket',
-                                        text: printResponse.message,
+                                        title: 'Error en la respuesta del servidor',
+                                        text: 'No se pudo interpretar la respuesta del servidor.',
                                     });
                                 }
                             },
