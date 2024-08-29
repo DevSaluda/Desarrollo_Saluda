@@ -127,7 +127,7 @@ include ("Modales/Exito.php");
 
 
      // Delegación de eventos para el botón "Edicion de horas" dentro de las opciones disponibles
-     $(document).on("click", ".EditHoras", function() {
+     $(document).on("click", ".btn-EditHoras", function() {
         var id = $(this).data("id");
         $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EdicionDeHorarios.php", { id: id }, function(data) {
          
@@ -141,7 +141,7 @@ include ("Modales/Exito.php");
   	});
     
      // Delegación de eventos para el botón "Eliminacion de horas" dentro de .dropdown-menu
-     $(document).on("click", ".EditHoras", function() {
+     $(document).on("click", ".btn-DeleteHoras", function() {
         var id = $(this).data("id");
         $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EliminacionDeHorarios.php", { id: id }, function(data) {
          
