@@ -138,45 +138,51 @@ if ($query->num_rows > 0) {
             </div>
         </form>
     </div>
-
+    <?php endif; ?>
     <script>
+    
+    $(function(){
+  $('#FechasSeleccionadasxd').multiselect({
+          includeSelectAllOption: true,
+          enableFiltering: true,
+          selectAllText: 'Seleccionar Todas las fechas', 
+          nonSelectedText: 'Elija fechas',
+          enableFiltering: true,
+          filterPlaceholder: 'Buscar fecha',
+          selectAllValue: 'Marcar todo',
+        });
+});   
+</script>
+
+
+<script>
+    
+    $(function(){
+  $('#SeleccionHorarios').multiselect({
+          includeSelectAllOption: true,
+          enableFiltering: true,
+          selectAllText: 'Seleccionar todas las horas', 
+          nonSelectedText: 'Elija horas',
+          enableFiltering: true,
+          filterPlaceholder: 'Buscar hora',
+          selectAllValue: 'Marcar todo',
+        });
+});   
+</script>
+<script>
     function showContent() {
-        var checkBox = document.getElementById("check");
-        var content = document.getElementById("content");
-        content.style.display = checkBox.checked ? "block" : "none";
+        element = document.getElementById("content");
+        element2 = document.getElementById("AutorizaFin");
+        check = document.getElementById("check");
+        if (check.checked) {
+            element.style.display='block';
+            element2.style.display='none';
+        }
+        else {
+            element.style.display='none';
+            element2.style.display='block';
+        }
     }
 
-    $(document).ready(function() {
-        $('#ActualizaHorarios').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "ManejoHorarios.php",
-                data: $(this).serialize(),
-                success: function(response) {
-                    alert(response);
-                }
-            });
-        });
+</script>
 
-        $('#EliminarHoras').submit(function(e) {
-            e.preventDefault();
-            var horasEliminar = $('#SeleccionHorarios').val();
-            $('#HorasEliminar').val(horasEliminar);
-            $.ajax({
-                type: "POST",
-                url: "ManejoEliminarHoras.php",
-                data: $(this).serialize(),
-                success: function(response) {
-                    alert(response);
-                }
-            });
-        });
-
-        $('#CancelarEliminar').click(function() {
-            $('#check').prop('checked', false);
-            $('#content').hide();
-        });
-    });
-    </script>
-<?php endif; ?>

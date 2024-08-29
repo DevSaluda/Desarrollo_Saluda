@@ -142,13 +142,48 @@ if ($query->num_rows > 0) {
 <?php endif; ?>
 
 <script>
+    
+    $(function(){
+  $('#FechasSeleccionadasxd').multiselect({
+          includeSelectAllOption: true,
+          enableFiltering: true,
+          selectAllText: 'Seleccionar Todas las fechas', 
+          nonSelectedText: 'Elija fechas',
+          enableFiltering: true,
+          filterPlaceholder: 'Buscar fecha',
+          selectAllValue: 'Marcar todo',
+        });
+});   
+</script>
+
+
+<script>
+    
+    $(function(){
+  $('#SeleccionHorarios').multiselect({
+          includeSelectAllOption: true,
+          enableFiltering: true,
+          selectAllText: 'Seleccionar todas las horas', 
+          nonSelectedText: 'Elija horas',
+          enableFiltering: true,
+          filterPlaceholder: 'Buscar hora',
+          selectAllValue: 'Marcar todo',
+        });
+});   
+</script>
+<script>
     function showContent() {
-        var checkBox = document.getElementById("check");
-        var content = document.getElementById("content");
-        if (checkBox.checked == true) {
-            content.style.display = "block";
-        } else {
-            content.style.display = "none";
+        element = document.getElementById("content");
+        element2 = document.getElementById("AutorizaFin");
+        check = document.getElementById("check");
+        if (check.checked) {
+            element.style.display='block';
+            element2.style.display='none';
+        }
+        else {
+            element.style.display='none';
+            element2.style.display='block';
         }
     }
+
 </script>
