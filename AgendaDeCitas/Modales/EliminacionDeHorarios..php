@@ -138,7 +138,7 @@ if ($query->num_rows > 0) {
             </div>
         </form>
     </div>
-
+    <?php endif; ?>
     <script>
     
     $(function(){
@@ -185,4 +185,4 @@ if ($query->num_rows > 0) {
     }
 
 </script>
-<?php endif; ?>
+
