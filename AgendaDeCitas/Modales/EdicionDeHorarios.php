@@ -20,14 +20,12 @@ function fechaCastellano($fecha) {
 
 $user_id = null;
 $sql1 = "SELECT Programacion_MedicosExt.ID_Programacion, Programacion_MedicosExt.FK_Medico, Programacion_MedicosExt.Fk_Sucursal, 
-    Programacion_MedicosExt.Tipo_Programacion, Programacion_MedicosExt.Fecha_Inicio, Programacion_MedicosExt.Fecha_Fin, 
-    Programacion_MedicosExt.Hora_inicio, Programacion_MedicosExt.Hora_Fin, Programacion_MedicosExt.Intervalo, 
-    Programacion_MedicosExt.Sistema, Programacion_MedicosExt.ID_H_O_D, SucursalesCorre.ID_SucursalC, 
-    SucursalesCorre.Nombre_Sucursal, Personal_Medico_Express.Medico_ID, Personal_Medico_Express.Nombre_Apellidos 
-    FROM Personal_Medico_Express
-    JOIN SucursalesCorre ON SucursalesCorre.ID_SucursalC = Programacion_MedicosExt.Fk_Sucursal
-    JOIN Programacion_MedicosExt ON Personal_Medico_Express.Medico_ID = Programacion_MedicosExt.FK_Medico
-    WHERE Programacion_MedicosExt.ID_H_O_D ='".$row['ID_H_O_D']."' AND Programacion_MedicosExt.ID_Programacion = ".$_POST["id"];
+Programacion_MedicosExt.Tipo_Programacion, Programacion_MedicosExt.Fecha_Inicio, Programacion_MedicosExt.Fecha_Fin, Programacion_MedicosExt.Hora_inicio, 
+Programacion_MedicosExt.Hora_Fin, Programacion_MedicosExt.Intervalo, Programacion_MedicosExt.Sistema, Programacion_MedicosExt.ID_H_O_D, 
+SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Personal_Medico_Express.Medico_ID,Personal_Medico_Express.Nombre_Apellidos FROM 
+Personal_Medico_Express,SucursalesCorre,Programacion_MedicosExt WHERE 
+Personal_Medico_Express.Medico_ID = Programacion_MedicosExt.FK_Medico && SucursalesCorre.ID_SucursalC= Programacion_MedicosExt.Fk_Sucursal && 
+Programacion_MedicosExt.ID_H_O_D ='".$row['ID_H_O_D']."' && Programacion_MedicosExt.ID_Programacion = ".$_POST["id"];
 
 $query = $conn->query($sql1);
 $Especialistas = null;
