@@ -41,7 +41,7 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
         $sucursal = $_POST['Sucursal'];
         $empresa = $_POST['Empresa'];
 
-        $query =  "INSERT INTO Registros_antenimiento 
+        $query =  "INSERT INTO Registros_Mantenimiento 
         (Registro_mantenimiento, Fecha_registro, Sucursal, Comentario, Registro, Agregadoel, ID_H_O_D, file_name) 
         VALUES ('$tipoEquipo', '$fecha', '$sucursal', '$comentario', '$registro', NOW(), '$empresa', '$fileNames')";
         
