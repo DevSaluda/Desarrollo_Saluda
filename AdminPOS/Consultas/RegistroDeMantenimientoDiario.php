@@ -18,18 +18,22 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
             ) && in_array($file_extension, $valid_extensions)
         ) {
             $sourcePath = $_FILES['file']['tmp_name'][$key];
-            $targetPath = "RegistroMantenimiento/" . $fileName;
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/AdminPOS/RegistroMantenimiento/" . $fileName;
+
             if (move_uploaded_file($sourcePath, $targetPath)) {
-                $uploadedFiles[] = $targetPath; // Guarda la ruta de la imagen subida
+                $uploadedFiles[] = $fileName; // Guarda solo el nombre del archivo
+            } else {
+                $response = array("statusCode" => 202, "message" => "Error al mover el archivo: $targetPath");
+                echo json_encode($response);
+                exit;
             }
         }
     }
 
     if (!empty($uploadedFiles)) {
-        $fileNames = implode('|', $uploadedFiles); // Combina las rutas usando un carácter especial
+        $fileNames = implode('|', $uploadedFiles); // Combina los nombres de los archivos usando un carácter especial
 
         // Inserta la información en la base de datos
-        $tipoEquipo = $_POST['tipoEquipo'];
         $comentario = $_POST['Comentario'];
         $fecha = $_POST['Fecha'];
         $registro = $_POST['Registro'];
@@ -37,8 +41,8 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
         $empresa = $_POST['Empresa'];
 
         $query = "INSERT INTO Registros_Mantenimiento 
-                  (Registro_mantenimiento, Fecha_registro, Sucursal, Comentario, Registro, Agregadoel, ID_H_O_D, file_name) 
-                  VALUES ('$tipoEquipo', '$fecha', '$sucursal', '$comentario', '$registro', NOW(), '$empresa', '$fileNames')";
+                  (Fecha_registro, Sucursal, Comentario, Registro, Agregadoel, ID_H_O_D, file_name) 
+                  VALUES ('$fecha', '$sucursal', '$comentario', '$registro', NOW(), '$empresa', '$fileNames')";
         
         if (mysqli_query($conn, $query)) {
             $response = array("statusCode" => 200);
