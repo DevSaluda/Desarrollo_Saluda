@@ -34,6 +34,7 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
         $fileNames = implode('|', $uploadedFiles); // Combina los nombres de los archivos usando un carácter especial
 
         // Inserta la información en la base de datos
+        $tipoEquipo = $_POST['tipoEquipo'];
         $comentario = $_POST['Comentario'];
         $fecha = $_POST['Fecha'];
         $registro = $_POST['Registro'];
