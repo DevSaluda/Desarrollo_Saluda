@@ -9,7 +9,7 @@ $fcha = date("Y-m-d");
 $fechaActual = date("Y-m-d");
 
 // Consulta SQL adaptada con la variable de fecha
-$sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro = '$fechaActual' AND Sucursal = '" . $row['Nombre_Sucursal'] . "'";
+$sql = "SELECT * FROM `Registros_Mantenimiento` WHERE Fecha_registro = '$fechaActual' AND Sucursal = '" . $row['Nombre_Sucursal'] . "'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -20,7 +20,7 @@ if ($result && $result->num_rows > 0) {
 
     while ($fila = $result->fetch_assoc()) {
         $data[$c]["Id_Registro"] = $fila["Id_Registro"];
-        $data[$c]["Registro_energia"] = $fila["Registro_energia"];
+        $data[$c]["Registro_mantenimiento"] = $fila["Registro_mantenimiento"];
         $data[$c]["Fecha_registro"] = $fila["Fecha_registro"];
         $data[$c]["Sucursal"] = $fila["Sucursal"];
         $data[$c]["Comentario"] = $fila["Comentario"];
