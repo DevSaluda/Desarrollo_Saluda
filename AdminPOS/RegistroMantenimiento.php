@@ -35,7 +35,7 @@ table td {
   </div>
  
   <div >
-  <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#RegistroEnergiaVentanaModal" class="btn btn-default">
+  <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#RegistroMantenimientoModal" class="btn btn-default">
  Registrar mantenimiento <i class="fas fa-lightbulb"></i>
 </button>
 
