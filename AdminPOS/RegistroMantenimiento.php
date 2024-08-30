@@ -54,7 +54,7 @@ table td {
  
   <!-- Main Footer -->
 <?php
-  include ("Modales/RegistroMantenmientoModal.php");
+  include ("Modales/RegistroMantenimientoModal.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("footer.php")?>
