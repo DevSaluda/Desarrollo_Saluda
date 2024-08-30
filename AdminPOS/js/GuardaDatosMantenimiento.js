@@ -48,7 +48,7 @@ $('document').ready(function($) {
             e.preventDefault();
             $.ajax({
                 type: 'POST',
-                url: 'https://saludapos.com/POS2/Consultas/RegistroDeMantenimientoDiario.php',
+                url: 'https://saludapos.com/AdminPOS/Consultas/RegistroDeMantenimientoDiario.php',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
