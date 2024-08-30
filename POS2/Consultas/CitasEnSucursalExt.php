@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     // Filtra por especialidad y doctor
     $('#filter-doctor').on('keyup change', function () {
-        table.column(4).search(this.value).draw();
+        table.column(5).search(this.value).draw();
     });
 });
 </script>
