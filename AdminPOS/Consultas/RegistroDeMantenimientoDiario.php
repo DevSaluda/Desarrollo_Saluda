@@ -18,7 +18,7 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
             ) && in_array($file_extension, $valid_extensions)
         ) {
             $sourcePath = $_FILES['file']['tmp_name'][$key];
-            $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/AdminPOS/RegistroMantenimiento/" . $fileName;
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/RegistroMantenimiento/" . $fileName;
 
             if (move_uploaded_file($sourcePath, $targetPath)) {
                 $uploadedFiles[] = $fileName; // Guarda solo el nombre del archivo
