@@ -7,17 +7,23 @@ function buscarProducto($conn, $Cod_Barra) {
         return []; // Si el código de barras tiene 4 dígitos o contiene 'USG', retorna un array vacío
     }
 
+    // Consulta principal por código de barras
     $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
               FROM Productos_POS 
-              WHERE Cod_Barra='$Cod_Barra'";
+              WHERE Cod_Barra='$Cod_Barra'
+              AND LENGTH(Cod_Barra) != 4 
+              AND Cod_Barra NOT LIKE '%USG%'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
         return [mysqli_fetch_assoc($result)]; // Devuelve un array con un solo producto
     } else {
+        // Consulta alternativa por nombre del producto
         $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
                   FROM Productos_POS 
-                  WHERE Nombre_Prod LIKE '%$Cod_Barra%'";
+                  WHERE Nombre_Prod LIKE '%$Cod_Barra%'
+                  AND LENGTH(Cod_Barra) != 4 
+                  AND Cod_Barra NOT LIKE '%USG%'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -26,6 +32,7 @@ function buscarProducto($conn, $Cod_Barra) {
         }
     }
 }
+
 
 function guardarEncargo($conn, $encargo, $IdentificadorEncargo, $montoAbonado, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoEncargo, $metodoDePago, $fkCaja, $nombreCliente, $telefonoCliente) {
     $response = [];
