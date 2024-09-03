@@ -9,7 +9,7 @@ $fcha = date("Y-m-d");
 $fechaActual = date("Y-m-d");
 
 // Consulta SQL adaptada con la variable de fecha
-$sql = "SELECT * FROM `Registros_Mantenimiento` WHERE Fecha_registro = '$fechaActual' AND Sucursal = '" . $row['Nombre_Sucursal'] . "'";
+$sql = "SELECT * FROM `Registros_Mantenimiento`";
 
 $result = mysqli_query($conn, $sql);
 
