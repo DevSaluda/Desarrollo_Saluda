@@ -21,6 +21,14 @@ if ($Ticketss) {
     $totalmonto = 1;
 }
 
+if ($NumTicketss) {
+  // Si se encontró un registro, calcula el totalmonto basado en NumOrde
+  $valordeticket = isset($NumTicketss['NumTicket']) ? (int)$NumTicketss['NumTicket'] : 0;
+  $elnumdeticket = $valordeticket + 1;
+} else {
+  // Si no se encontraron registros, establece totalmonto como 1
+  $elnumdeticket = 1;
+}
 
 
 ?><!DOCTYPE html>
@@ -933,7 +941,7 @@ tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input c
 tr += '<td   style="visibility:collapse; display:none;"class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="MotDev"><input class="form-control motivodevolucion-input" style="font-size: 0.75rem !important;" id="MotDev" type="text" name="MotivoDevolucion[]" /></td>';
 tr += '<td   style="visibility:collapse; display:none;"class="numerorden"><input class="form-control" style="font-size: 0.75rem !important;" value="<?php echo  $totalmonto?>" type="text" name="NumberOrden[]" /></td>';
-
+tr += '<td   style="visibility:collapse; display:none;"class="numeroticket"><input class="form-control" style="font-size: 0.75rem !important;" value="<?php echo  $elnumdeticket?>" type="text" name="NumberTicket[]" /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;"class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" type="number"  name="PrecioCompra[]" value="' + articulo.preciocompra + '"  /></td>';
         tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '"class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVentaProd[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
