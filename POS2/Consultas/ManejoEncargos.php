@@ -2,6 +2,11 @@
 include 'Consultas.php';
 
 function buscarProducto($conn, $Cod_Barra) {
+    // Verificar que el código de barras no tenga 4 dígitos y que no contenga 'USG'
+    if (strlen($Cod_Barra) == 4 || strpos($Cod_Barra, 'USG') !== false) {
+        return []; // Si el código de barras tiene 4 dígitos o contiene 'USG', retorna un array vacío
+    }
+
     $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
               FROM Productos_POS 
               WHERE Cod_Barra='$Cod_Barra'";
