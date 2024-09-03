@@ -20,7 +20,7 @@ if ($Ticketss) {
     // Si no se encontraron registros, establece totalmonto como 1
     $totalmonto = 1;
 }
-
+$NumTicketss = mysqli_fetch_assoc($resultset);
 if ($NumTicketss) {
   // Si se encontró un registro, calcula el totalmonto basado en NumOrde
   $valordeticket = isset($NumTicketss['NumTicket']) ? (int)$NumTicketss['NumTicket'] : 0;
