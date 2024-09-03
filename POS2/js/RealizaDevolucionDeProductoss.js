@@ -25,8 +25,8 @@ $(document).ready(function () {
                         // Segunda solicitud AJAX para imprimir tickets
                         $.ajax({
                             type: 'POST',
-                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php", 
-                            data: $(form).serialize(), 
+                            url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php",
+                            data: $(form).serialize(),
                             cache: false,
                             success: function (printData) {
                                 try {
@@ -36,6 +36,9 @@ $(document).ready(function () {
                                             icon: 'success',
                                             title: 'Éxito',
                                             text: printResponse.message
+                                        }).then(function () {
+                                            // Recargar la página después de presionar "OK"
+                                            location.reload();
                                         });
                                     } else {
                                         Swal.fire({
