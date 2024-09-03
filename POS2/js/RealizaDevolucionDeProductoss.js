@@ -34,39 +34,33 @@ $(document).ready(function () {
                                     if (printResponse.status === 'success') {
                                         Swal.fire({
                                             icon: 'success',
-                                            title: 'Ticket impreso con éxito!',
-                                            showConfirmButton: false,
-                                            timer: 2000,
-                                            didOpen: () => {
-                                                setTimeout(() => {
-                                                    location.reload();
-                                                }, 1500);
-                                            },
+                                            title: 'Éxito',
+                                            text: printResponse.message
                                         });
                                     } else {
                                         Swal.fire({
                                             icon: 'error',
-                                            title: 'Error al imprimir el ticket',
-                                            text: printResponse.message,
+                                            title: 'Error',
+                                            text: printResponse.message
                                         });
                                     }
                                 } catch (e) {
                                     Swal.fire({
                                         icon: 'error',
-                                        title: 'Error en la respuesta del servidor',
-                                        text: 'No se pudo interpretar la respuesta del servidor.',
+                                        title: 'Error',
+                                        text: 'Error al procesar la respuesta del servidor.'
                                     });
                                 }
                             },
-                            error: function (error) {
+                            error: function () {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Error en la impresión del ticket',
-                                    text: 'No se pudo imprimir el ticket. Por favor, inténtalo de nuevo.',
+                                    title: 'Error',
+                                    text: 'Hubo un problema al realizar la solicitud.'
                                 });
-                                console.error("Error generating ticket:", error); // Añadir error a la consola para más detalles
                             }
                         });
+                        
                     } else {
                         Swal.fire({
                             icon: 'error',
