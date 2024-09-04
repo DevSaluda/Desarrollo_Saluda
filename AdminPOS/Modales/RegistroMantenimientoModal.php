@@ -1,5 +1,5 @@
-<div class="modal fade" id="RegistroMantenimientoModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="Di" class="modal-dialog modal-notify modal-success">
+<div class="modal fade" id="RegistroMantenimientoModal" tabindex="-1" role="dialog" style="overflow-y: auto;" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div id="Di" class="modal-dialog modal-lg modal-notify modal-success">
     <div class="modal-content">
       <div class="modal-header">
         <p class="heading lead" id="Titulo">Registro de Mantenimiento</p>
@@ -36,7 +36,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-comment"></i></span>
                 </div>
-                <textarea class="form-control" id="Comentario" name="Comentario" rows="3"></textarea>
+                <textarea class="form-control" id="Comentario" name="Comentario" rows="5" style="resize: vertical;"></textarea>
               </div>
             </div>
             <div class="form-group">
