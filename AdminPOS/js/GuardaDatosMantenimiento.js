@@ -1,5 +1,7 @@
 $('document').ready(function($) {
     $("#RegistroMantenimientoForm").validate({
+        onfocusout: false,  // Desactiva la validación en vivo cuando se pierde el foco
+        onkeyup: false,     // Desactiva la validación en vivo mientras se escribe
         rules: {
             tipoEquipo: {
                 required: true,
@@ -26,6 +28,7 @@ $('document').ready(function($) {
         },
         submitHandler: submitForm
     });
+    
 
     function submitForm() {
         $("#RegistroMantenimientoForm").on('submit', function(e) {
