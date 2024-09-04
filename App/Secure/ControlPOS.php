@@ -50,7 +50,9 @@ if ($_SESSION["SuperAdmin"]) {
 } elseif ($_SESSION["JefeEnfermeros"]) {
     redirectToRole("JefeEnfermeros");
 }
-
+elseif ($_SESSION["Gestoria"]) {
+    redirectToRole("Gestoria");
+}
 // Agrega aquí cualquier otra lógica que puedas necesitar
 
 // Redirección predeterminada o mensaje de error si ninguna condición se cumple
