@@ -15,6 +15,7 @@ $roleRedirects = [
     "CoordinadorDental" => "https://saludapos.com/ControlDental",
     "Supervisor" => "https://saludapos.com/CEDISMOVIL",
     "JefeEnfermeros" => "https://saludapos.com/JefaturaEnfermeria",
+    "Gestoria" => "https://saludapos.com/Gestoria",
     
 ];
 
