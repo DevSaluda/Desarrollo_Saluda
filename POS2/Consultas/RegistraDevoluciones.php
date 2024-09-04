@@ -20,7 +20,7 @@ for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["FacturaNumber"][$i]) && !empty($_POST["CodBarras"][$i]) && !empty($_POST["NombreDelProducto"][$i]) && !empty($_POST["Cantidad"][$i]) && !empty($_POST["Fk_Suc_Salida"][$i]) && !empty($_POST["MotivoDevolucion"][$i]) && !empty($_POST["Fecha"][$i]) && !empty($_POST["AgregoElVendedor"][$i]) && !empty($_POST["NumberOrden"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         $values[] = $_POST["FacturaNumber"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
@@ -30,8 +30,8 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["Fecha"][$i];
         $values[] = $_POST["AgregoElVendedor"][$i];
         $values[] = $_POST["NumberOrden"][$i];
-        $values[] = $_POST["NumberOrden"][$i];
-        $valueTypes .= 'sssssssss'; // Ajustar tipos según corresponda
+        $values[] = $_POST["NumberTicket"][$i];
+        $valueTypes .= 'ssssssssss'; // Ajustar tipos según corresponda
     }
 }
 
