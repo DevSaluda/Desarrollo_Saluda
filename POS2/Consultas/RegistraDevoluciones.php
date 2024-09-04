@@ -10,7 +10,7 @@ if(isset($_POST["FacturaNumber"]) && is_array($_POST["FacturaNumber"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `NumOrde`) VALUES ";
+$query = "INSERT INTO Devolucion_POS (`Num_Factura`, `Cod_Barra`, `Nombre_Produc`, `Cantidad`, `Fk_Suc_Salida`, `Motivo_Devolucion`, `Fecha`, `Agrego`, `NumOrde`,`NumTicket`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -29,6 +29,7 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["MotivoDevolucion"][$i];
         $values[] = $_POST["Fecha"][$i];
         $values[] = $_POST["AgregoElVendedor"][$i];
+        $values[] = $_POST["NumberOrden"][$i];
         $values[] = $_POST["NumberOrden"][$i];
         $valueTypes .= 'sssssssss'; // Ajustar tipos según corresponda
     }
