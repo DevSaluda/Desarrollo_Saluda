@@ -115,7 +115,7 @@ if ($query->num_rows > 0) {
         
         // Realiza una petición AJAX para obtener la hora asociada a la fecha seleccionada
         $.ajax({
-            url: 'ObtenerHoraPorFecha.php', // Archivo PHP que devuelve la hora correspondiente a la fecha
+            url: '../Consultas/ObtenerHoraPorFecha.php', // Archivo PHP que devuelve la hora correspondiente a la fecha
             method: 'POST',
             data: { fecha_id: fecha_id },
             success: function(data) {
