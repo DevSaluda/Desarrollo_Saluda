@@ -10,7 +10,7 @@ if (isset($_POST['fecha_id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo json_encode(['hora' => $row['Hora_Disponibilidad']]);
+        echo json_encode(['hora' => $row['Horario_Disponibilidad']]);
     } else {
         echo json_encode(['hora' => '']);
     }
