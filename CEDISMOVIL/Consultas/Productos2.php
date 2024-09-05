@@ -21,6 +21,7 @@ tabla = $('#Productos').DataTable({
         { mData: 'Nom_Serv' },
         { mData: 'Proveedor1' },
         { mData: 'Proveedor2' },
+        { mData: 'AgregadoPor' },
     //    { mData: 'Stock' },
     //    { mData: 'Vendido' },
     //    { mData: 'Saldo' },
