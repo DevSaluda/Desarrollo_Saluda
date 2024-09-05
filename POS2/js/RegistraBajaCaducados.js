@@ -47,7 +47,7 @@ $(document).ready(function () {
                             // Segunda solicitud AJAX para imprimir tickets
                             $.ajax({
                                 type: 'POST',
-                                url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php",
+                                url: "http://localhost:8080/ticket/ImprimirTicketCaducados.php",
                                 data: $(form).serialize(),
                                 cache: false,
                                 success: function (printData) {
