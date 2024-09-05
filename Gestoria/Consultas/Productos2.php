@@ -198,8 +198,8 @@ tabla = $('#Productos').DataTable({
     //    { mData: 'Stock' },
     //    { mData: 'Vendido' },
     //    { mData: 'Saldo' },
-       { mData: 'Acciones' },
-       { mData: 'AccionesEnfermeria' },
+     /*   { mData: 'Acciones' },
+       { mData: 'AccionesEnfermeria' }, */
   
       ],
      
@@ -268,8 +268,8 @@ tabla = $('#Productos').DataTable({
     <!-- <th>Stock </th>
     <th>Vendido </th>
     <th>Saldo </th>  -->
-        <th>Acciones Farmacia</th>
-        <th>Acciones Enfermeria</th>
+        <!-- <th>Acciones Farmacia</th>
+        <th>Acciones Enfermeria</th> -->
 	
 
 
