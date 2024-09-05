@@ -46,9 +46,9 @@ include "Consultas/Consultas.php";
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
+  <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltaProductos" class="btn btn-default">
   Agregar producto nuevo <i class="fas fa-pills"></i>
-</button>
+</button> -->
 </div>
 </div>
     
@@ -102,10 +102,7 @@ include "Consultas/Consultas.php";
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlProductos2.js"></script>
 
-<!-- <script src="js/ProductosPovencer.js"></script> -->
-<script src="js/ControlStockSucursales.js"></script>
 
-<script src="js/AltaProductos.js"></script>
 
 
 <?php include ("datatables.php"); ?>
