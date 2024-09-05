@@ -17,11 +17,11 @@ tabla = $('#Productos').DataTable({
     //    { mData: 'Clave_Levic' },
     //    { mData: 'Cod_Enfermeria' },
     //    { mData: 'Precio_C' },
-    //    { mData: 'Precio_Venta' },
-       { mData: 'Nom_Serv' },
-       { mData: 'Proveedor1' },
-       { mData: 'Proveedor2' },
-       { mData: 'AgregadoPor' },
+        { mData: 'Precio_Venta' },
+        { mData: 'Nom_Serv' },
+        { mData: 'Proveedor1' },
+        { mData: 'Proveedor2' },
+        { mData: 'AgregadoPor' },
     //    { mData: 'Stock' },
     //    { mData: 'Vendido' },
     //    { mData: 'Saldo' },
@@ -80,8 +80,8 @@ tabla = $('#Productos').DataTable({
     <!-- <th>Cod Interno</th>
     <th>Cod Levic</th>
     <th>Cod Enfermeria</th> -->
-    <!-- <th>PC</th>
-    <th>PV </th> -->
+    <!-- <th>PC</th> -->
+    <th>Precio de Venta </th> 
     <th>Servicio </th>
     <th>Proveedor</th>
     <th>Proveedor</th>
