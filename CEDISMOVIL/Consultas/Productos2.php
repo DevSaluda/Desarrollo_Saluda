@@ -21,7 +21,7 @@ tabla = $('#Productos').DataTable({
         { mData: 'Nom_Serv' },
         { mData: 'Proveedor1' },
         { mData: 'Proveedor2' },
-        { mData: 'AgregadoPor' },
+
     //    { mData: 'Stock' },
     //    { mData: 'Vendido' },
     //    { mData: 'Saldo' },
@@ -81,7 +81,7 @@ tabla = $('#Productos').DataTable({
     <th>Cod Levic</th>
     <th>Cod Enfermeria</th> -->
     <!-- <th>PC</th> -->
-    <th>Precio de Venta </th> 
+    <th>Precio Venta </th> 
     <th>Servicio </th>
     <th>Proveedor</th>
     <th>Proveedor</th>
