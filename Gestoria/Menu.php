@@ -196,7 +196,7 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
          
           
           <li class="nav-item">
-            <a href="https://saludapos.com/POS2/ProductosV2" class="nav-link">
+            <a href="https://saludapos.com/Gestoria/ProductosV2" class="nav-link">
             <i class="fas fa-prescription-bottle-alt"></i>
               <p>
             Productos
