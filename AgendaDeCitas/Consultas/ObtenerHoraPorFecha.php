@@ -5,7 +5,7 @@ if (isset($_POST['fecha_id'])) {
     $fecha_id = $_POST['fecha_id'];
 
     // Obtener la hora asociada a la fecha seleccionada
-    $sql = "SELECT Horario_Disponibilidad FROM Horarios_Citas_Ext WHERE ID_Fecha_Esp = '$fecha_id'";
+    $sql = "SELECT Horario_Disponibilidad FROM Horarios_Citas_Ext WHERE Fk_Fecha = '$fecha_id'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
