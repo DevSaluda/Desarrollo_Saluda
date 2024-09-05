@@ -32,27 +32,62 @@ $(document).ready(function () {
                 },
             },
         },
-        submitHandler: function () {
+        submitHandler: function (form) {
             if (validarFormulario()) {
+                // Primera solicitud AJAX para guardar datos
                 $.ajax({
                     type: 'POST',
                     url: "Consultas/RegistraCaducados.php",
-                    data: $('#VentasAlmomento').serialize(),
+                    data: $(form).serialize(),
                     cache: false,
                     success: function (data) {
                         var response = JSON.parse(data);
 
                         if (response.status === 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Venta realizada con éxito',
-                                showConfirmButton: false,
-                                timer: 2000,
-                                didOpen: () => {
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 1500);
+                            // Segunda solicitud AJAX para imprimir tickets
+                            $.ajax({
+                                type: 'POST',
+                                url: "http://localhost:8080/ticket/ImprimirTicketDevolucion.php",
+                                data: $(form).serialize(),
+                                cache: false,
+                                success: function (printData) {
+                                    try {
+                                        var printResponse = JSON.parse(printData);
+                                        if (printResponse.status === 'success') {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Venta realizada con éxito',
+                                                text: printResponse.message,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                                didOpen: () => {
+                                                    setTimeout(() => {
+                                                        location.reload();
+                                                    }, 1500);
+                                                },
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error al imprimir el ticket',
+                                                text: printResponse.message,
+                                            });
+                                        }
+                                    } catch (e) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'Error al procesar la respuesta del servidor.',
+                                        });
+                                    }
                                 },
+                                error: function () {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Hubo un problema al realizar la solicitud de impresión.',
+                                    });
+                                }
                             });
                         } else {
                             Swal.fire({
