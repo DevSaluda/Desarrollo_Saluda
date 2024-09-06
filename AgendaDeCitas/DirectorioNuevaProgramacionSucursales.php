@@ -51,7 +51,7 @@ include "Consultas/ConeSelectDinamico.php";
 include ("Modales/Exito.php");
   include ("Modales/ProgramacionDeAgendas.php");
   include ("footer.php");?>
-
+<script src="js/EditaHorasProgramacion.js"></script>
 <script src="js/ProgramacionSucursalesEspecialistasNuevos.js"></script>
 <script src="js/ObtieneEspecialidadExt.js"></script>
 <script src="js/ObtieneMedicoSucursalExt.js"></script>
