@@ -138,7 +138,7 @@ if ($query->num_rows > 0) {
 </div>
 
 <script>
-    document.getElementById('FechaSeleccionada').addEventListener('change', function() {
+document.getElementById('FechaSeleccionada').addEventListener('change', function() {
     var fecha_id = this.value;
 
     $.ajax({
@@ -152,12 +152,19 @@ if ($query->num_rows > 0) {
 
             horas.forEach(function(hora) {
                 var option = document.createElement('option');
+
+                // Crear un objeto Date con la hora en formato 24 horas
+                var [hour, minute] = hora.split(':').map(Number);
+                var date = new Date();
+                date.setHours(hour);
+                date.setMinutes(minute);
+                date.setSeconds(0);
+
+                // Convertir la hora a formato 12 horas con configuración regional es-MX
+                var time = date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true });
                 
-                var date = new Date('1970-01-01T' + hora + 'Z');
-                var time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-                
-                option.value = hora;
-                option.text = time;
+                option.value = hora; // Valor en formato 24 horas
+                option.text = time;  // Texto en formato 12 horas
                 horaSelect.appendChild(option);
             });
         }
@@ -170,8 +177,13 @@ document.getElementById('ProgramaHorasNuevas').addEventListener('submit', functi
     var nuevaHora = nuevaHoraInput.value;
 
     // Manejo del formato de hora 12 horas a 24 horas
-    var date = new Date('1970-01-01T' + nuevaHora + ':00');
-    var hora24 = date.toTimeString().slice(0, 5);
+    var [time, period] = nuevaHora.split(' ');
+    var [hours, minutes] = time.split(':').map(Number);
+
+    if (period === 'PM' && hours < 12) hours += 12;
+    if (period === 'AM' && hours === 12) hours = 0;
+
+    var hora24 = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
 
     nuevaHoraInput.value = hora24;
 
