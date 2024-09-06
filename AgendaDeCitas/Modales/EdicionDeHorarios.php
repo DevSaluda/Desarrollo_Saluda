@@ -136,7 +136,7 @@ if ($query->num_rows > 0) {
         </div>
     </form>
 </div>
-
+<script src="js/EditaHorasProgramacionV2.js"></script>
 <script>
 document.getElementById('FechaSeleccionada').addEventListener('change', function() {
     var fecha_id = this.value;
@@ -172,6 +172,8 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
 });
 
 </script>
+
+
 
 <?php else: ?>
 <p class="alert alert-danger">404 No se encuentra</p>
