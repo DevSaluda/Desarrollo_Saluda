@@ -829,10 +829,26 @@
       
 ?>>
           <li class="nav-item">
-            <a href="Ingresosrealizados" class="nav-link">
+            <a href="https://saludapos.com/AdminPOS/GeneradorIngresoMedicamentos" class="nav-link">
             <i class="fas fa-prescription-bottle"></i>
               <p>
             Ingreso de medicamentos               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://saludapos.com/AdminPOS/Ingresosrealizados" class="nav-link">
+            <i class="fas fa-prescription-bottle"></i>
+              <p>
+            Reporte de ingresos de medicamentos              
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="PedidosSugerencias" class="nav-link">
+            <i class="fas fa-shopping-cart"></i>
+              <p>
+            Pedidos               
               </p>
             </a>
           </li>
@@ -1061,6 +1077,16 @@
             <i class="fas fa-recycle"></i>
               <p>
         Reporte de caducados
+               
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="DevolucionesProductos" class="nav-link">
+            <i class="fas fa-undo"></i>
+              <p>
+        Devoluciones
                
               </p>
             </a>

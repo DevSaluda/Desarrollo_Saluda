@@ -30,9 +30,7 @@ include "Consultas/Consultas.php";
           Registro de ventas de Saluda al <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>  
         </div>
         <div>
-          <button type="button" class="btn btn-success" id="guardarDatos" class="btn btn-default">
-            Guardar PrePedido <i class="fas fa-book-medical"></i>
-          </button>
+         
         </div>
       </div>
 
@@ -209,9 +207,10 @@ include "Consultas/Consultas.php";
               }
             },
             "columns": [
-              { "data": "Cod_Barra" },
+            { "data": "NumOrdPedidoModificado" },  
+            { "data": "Cod_Barra" },
               { "data": "Nombre_Prod" },
-              { "data": "Fk_sucursal" },
+            
               { "data": "Turno" },
               { "data": "Importe" },
               { "data": "Total_Venta" },
@@ -243,39 +242,27 @@ include "Consultas/Consultas.php";
             "responsive": true
           });
 
-          $('#guardarDatos').on('click', function() {
-            var data = tabla.ajax.json().aaData;
-
-            $.ajax({
-              url: 'Consultas/GuardarPrePedido.php',
-              type: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify(data),
-              success: function(response) {
-                alert(response.message);
-              },
-              error: function(xhr, status, error) {
-                console.error(xhr);
-                alert('Ocurrió un error al guardar los datos');
-              }
-            });
-          });
+          
         });
       </script>
 
       <div class="text-center">
         <div class="table-responsive">
+        <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+        <button type="submit" class="btn btn-primary">Generar Pedido</button>
           <table id="Productos" class="hover" style="width:100%">
             <thead>
+            <th>Cod</th>
               <th>Cod</th>
               <th>Nombre comercial</th>
-              <th>Sucursal</th>
+              
               <th>Cantidad</th>
               <th>Proveedor</th>
               <th>Proveedor</th>
               <th>Presentacion</th>
             </thead>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -283,12 +270,8 @@ include "Consultas/Consultas.php";
   </div>
   </div>
   <?php include ("footer.php"); ?>
-  <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-  <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-  <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-  <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-  <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <script src="js/GuardaPrepedido.js"></script>
+  
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <script src="dist/js/adminlte.js"></script>

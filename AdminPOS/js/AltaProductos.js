@@ -27,8 +27,7 @@ $('document').ready(function ($) {
       },
       NombreProd: {
         required: true,
-        minlength: 6,
-        maxlength: 130,
+        maxlength: 6000,
       },
       PV: {
         required: true,

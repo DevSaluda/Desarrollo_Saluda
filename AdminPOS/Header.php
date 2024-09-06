@@ -5,7 +5,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.css">
  
-  <script src="Componentes/jquery-3.5.1.slim.min.js"></script>
+
 <script src="Componentes/jquery-3.5.0.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
@@ -19,23 +19,25 @@
   
   <!-- JS, Popper.js, and jQuery -->
   
+ <!-- DataTables CSS -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
-  
-<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <!-- DataTables Buttons CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 
-<!-- DataTables Buttons JavaScript -->
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+<!-- DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
-  <script type="text/javascript" src="Componentes/datatables.min.js"></script>
+
   <script src="Componentes/sweetalert2@9.js"></script>
   <link href="Componentes/mdb.min.css" rel="stylesheet">
   <script src="js/validation.min.js"></script><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

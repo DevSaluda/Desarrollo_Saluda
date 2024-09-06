@@ -261,9 +261,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                   <div class="col-md-12 mb-3">
 
                     <div class="form-group mb-2">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
- Cambiar de sucursal <i class="fas fa-clinic-medical"></i>
-</button>
+                  
                       <div class="row">
                         <input hidden type="text" class="form-control " readonly value="<?php echo $row['Nombre_Apellidos'] ?>">
 
@@ -298,7 +296,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                             <option value="">Seleccione el motivo de baja </option>
                   <option value="Caducado">Caducado</option>
               <option value="Proximo a caducar">Proximo a caducar</option>
-              
+              <option value="Dañado">Dañado</option>
 </select>
 
 
@@ -370,17 +368,17 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
-                              <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:6%">Cantidad</th>
-                              <th >Fecha de caducidad</th>
+                              <th class="no-click">Codigo</th>
+                              <th class="no-click" style="width:20%">Producto</th>
+                              <th class="no-click" style="width:6%">Cantidad</th>
+                              <th class="no-click" >Fecha de caducidad</th>
                               
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th style="width:6%">Eliminar</th>
+                              <th class="no-click" style="width:6%">Eliminar</th>
                             
                             </tr>
                           </thead>
@@ -438,12 +436,20 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
 </script>
 
 
+<style>
+.no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
+
+</style>
 
 
 <script>
   table = $('#tablaAgregarArticulos').DataTable({
     searching: false, // Deshabilitar la funcionalidad de búsqueda
-    paging: true, // Deshabilitar el paginador
+    paging: false, // Deshabilitar el paginador
+    lengthChange: false, // Ocultar el selector de número de registros
     "columns": [{
         "data": "id"
       },
@@ -488,7 +494,15 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
     },
     //para usar los botones   
     responsive: "true",
-
+    "columnDefs": [
+      {
+        // Aplica la clase 'no-click' a las celdas en las columnas especificadas (índices 0 a 7)
+        targets: [0, 1, 2, 3, 4, 5, 6, 7],
+        createdCell: function (td, cellData, rowData, row, col) {
+          $(td).addClass('no-click');
+        }
+      }
+    ]
   });
 
   function mostrarTotalVenta() {
@@ -524,21 +538,7 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
       contentType: false,
       dataType: 'json',
       success: function (data) {
-        if (data.length === 0) {
-          // Mostrar mensaje de advertencia con SweetAlert si no se encontraron datos
-          Swal.fire({
-            icon: 'warning',
-            title: 'No existe',
-            text: 'No se encontraron resultados para este código.',
-            showCancelButton: true,
-            confirmButtonText: 'Agregar de todos modos'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // Pasar la variable Fk_sucursal al agregar el código inexistente
-              agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-            }
-          });
-        } else if (data.codigo) {
+        if (data.codigo) {
           agregarArticulo(data);
           calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         }
@@ -549,23 +549,24 @@ var Fk_sucursal = <?php echo json_encode($row['Fk_Sucursal']); ?>;
         // Manejar errores aquí si es necesario
       }
     });
-  }
+}
 
-  function agregarCodigoInexistente(codigo, sucursal) {
-    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
-    $.ajax({
-      url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
-      type: 'POST',
-      data: { codigo: codigo, sucursal: sucursal },
-      dataType: 'json',
-      success: function (response) {
-        // Manejar la respuesta del servidor si es necesario
-      },
-      error: function (error) {
-        // Manejar errores aquí si es necesario
-      }
-    });
-  }
+
+  // function agregarCodigoInexistente(codigo, sucursal) {
+  
+  //   $.ajax({
+  //     url: "https://saludapos.com/AdminPOS/Consultas/codigosinexistir.php",
+  //     type: 'POST',
+  //     data: { codigo: codigo, sucursal: sucursal },
+  //     dataType: 'json',
+  //     success: function (response) {
+        
+  //     },
+  //     error: function (error) {
+       
+  //     }
+  //   });
+  // }
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');

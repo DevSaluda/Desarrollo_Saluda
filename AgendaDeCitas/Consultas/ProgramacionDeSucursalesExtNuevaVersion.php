@@ -1,7 +1,4 @@
-<?
 
-
-?>
 <style>
   /* Personalizar el diseño de la paginación con CSS */
   .dataTables_wrapper .dataTables_paginate {
@@ -219,7 +216,7 @@ tabla = $('#CitasExpress').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://controlfarmacia.com/AgendaDeCitas/Consultas/ArrayProgramacionAgenda.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/ArrayProgramacionAgenda.php",
  "aoColumns": [
     { mData: 'Folio' },
        { mData: 'Nombre' },
@@ -279,9 +276,7 @@ tabla = $('#CitasExpress').DataTable({
 });
 </script>
 <div class="text-center">
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ProgramacionExt" class="btn btn-default">
-  Establecer nueva programación <i class="fas fa-calendar-week"></i>
-</button>
+
 	<div class="table-responsive">
 	<table  id="CitasExpress" class="table table-hover">
 <thead>
