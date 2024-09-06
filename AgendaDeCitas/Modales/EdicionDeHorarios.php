@@ -152,11 +152,11 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
             horaSelect.innerHTML = '';
             var horas = JSON.parse(data);
 
-            horas.forEach(function(hora) {
+            horas.forEach(function(horaObj) {
                 var option = document.createElement('option');
 
                 // Crear un objeto Date con la hora en formato 24 horas
-                var [hour, minute] = hora.split(':').map(Number);
+                var [hour, minute] = horaObj.Horario_Disponibilidad.split(':').map(Number);
                 var date = new Date();
                 date.setHours(hour);
                 date.setMinutes(minute);
@@ -165,15 +165,17 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
                 // Convertir la hora a formato 12 horas con configuración regional es-MX
                 var time = date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true });
                 
-                option.value = hora; // Valor en formato 24 horas
-                option.text = time;  // Texto en formato 12 horas
+                // El valor del option es el ID_Horario, pero el texto visible es la hora en 12 horas
+                option.value = horaObj.ID_Horario; // Valor será el ID_Horario
+                option.text = time;  // Texto visible será la hora en formato 12 horas
+
                 horaSelect.appendChild(option);
             });
         }
     });
 });
-
 </script>
+
 
 
 
