@@ -47,7 +47,7 @@ include "Consultas/ConeSelectDinamico.php";
   </aside>
   <!-- /.control-sidebar -->
 
-  <?
+  <?php
 include ("Modales/Exito.php");
   include ("Modales/ProgramacionDeAgendas.php");
   include ("footer.php");?>
