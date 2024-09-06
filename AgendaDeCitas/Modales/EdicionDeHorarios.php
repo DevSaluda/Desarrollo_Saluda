@@ -115,15 +115,15 @@ if ($query->num_rows > 0) {
             </div>
 
             <div class="col">
-                <label for="NuevaHora">Nueva hora<span class="text-danger">*</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
-                    </div>
-                    <input type="text" class="form-control" id="NuevaHoraInput" name="NuevaHora" required>
-                </div>
-            </div>
+    <label for="NuevaHora">Nueva hora<span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
         </div>
+        <input type="time" class="form-control" id="NuevaHoraInput" name="NuevaHora" required>
+    </div>
+</div>
+
 
         <input type="text" class="form-control" hidden name="MedicoHoras[]" readonly value="<?php echo $Especialistas->FK_Medico; ?>">
         <input type="text" class="form-control" hidden name="NumberProgramaHoras[]" readonly value="<?php echo $Especialistas->ID_Programacion; ?>">
@@ -169,26 +169,6 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
             });
         }
     });
-});
-
-document.getElementById('ProgramaHorasNuevas').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var nuevaHoraInput = document.getElementById('NuevaHoraInput');
-    var nuevaHora = nuevaHoraInput.value;
-
-    // Manejo del formato de hora 12 horas a 24 horas
-    var [time, period] = nuevaHora.split(' ');
-    var [hours, minutes] = time.split(':').map(Number);
-
-    if (period === 'PM' && hours < 12) hours += 12;
-    if (period === 'AM' && hours === 12) hours = 0;
-
-    var hora24 = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
-
-    nuevaHoraInput.value = hora24;
-
-    console.log('Hora en formato 24 horas para enviar:', hora24);
-    this.submit();
 });
 
 </script>
