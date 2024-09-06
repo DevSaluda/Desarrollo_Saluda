@@ -22,6 +22,7 @@ $('document').ready(function ($) {
         required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa la nueva hora",
       },
     },
+    
     submitHandler: submitForm
   });
 
