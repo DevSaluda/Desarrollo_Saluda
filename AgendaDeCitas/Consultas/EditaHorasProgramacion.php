@@ -19,3 +19,5 @@ if (isset($_POST['FechaSeleccionada']) && isset($_POST['HoraSeleccionada']) && i
     }
 }
 ?>
+
+<script src="js/EditaHorasProgramacionV2.js"></script>
