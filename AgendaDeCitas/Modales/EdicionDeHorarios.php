@@ -40,10 +40,7 @@ if ($query->num_rows > 0) {
 }
 ?>
 <?php if($Especialistas != null): ?>
-<div class="text-center">
-    <b>Marcar como horario completado</b>
-    <input type="checkbox" name="check" id="check" value="1" onchange="showContent()" />
-</div>
+
 
 <div id="AutorizaFin">
     <form action="javascript:void(0)" method="post" id="ProgramaHorasNuevas">
@@ -87,12 +84,24 @@ if ($query->num_rows > 0) {
             </div>
 
             <div class="col">
-                <label for="HoraSeleccionada">Hora<span class="text-danger">*</span></label>
+                <label for="HoraSeleccionada">Hora disponible<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
                     </div>
-                    <input type="time" class="form-control" name="HoraSeleccionada" required>
+                    <select id="HoraSeleccionada" class="form-control" name="HoraSeleccionada" required>
+                        <option value="">Selecciona una hora</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <label for="NuevaHora">Nueva hora<span class="text-danger">*</span></label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
+                    </div>
+                    <input type="time" class="form-control" name="NuevaHora" required>
                 </div>
             </div>
         </div>
@@ -112,14 +121,23 @@ if ($query->num_rows > 0) {
 <script>
     document.getElementById('FechaSeleccionada').addEventListener('change', function() {
         var fecha_id = this.value;
-        
-        // Realiza una petición AJAX para obtener la hora asociada a la fecha seleccionada
+
+        // Realiza una petición AJAX para obtener las horas disponibles asociadas a la fecha seleccionada
         $.ajax({
-            url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHoraPorFecha.php', // Archivo PHP que devuelve la hora correspondiente a la fecha
+            url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHorasPorFecha.php', // Archivo PHP que devuelve las horas correspondientes a la fecha
             method: 'POST',
             data: { fecha_id: fecha_id },
             success: function(data) {
-                document.querySelector('input[name="HoraSeleccionada"]').value = data.hora;
+                var horaSelect = document.getElementById('HoraSeleccionada');
+                horaSelect.innerHTML = ''; // Limpiar opciones previas
+                var horas = JSON.parse(data);
+
+                horas.forEach(function(hora) {
+                    var option = document.createElement('option');
+                    option.value = hora;
+                    option.text = hora;
+                    horaSelect.appendChild(option);
+                });
             }
         });
     });

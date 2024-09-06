@@ -1,12 +1,16 @@
 <?php
 include "../Consultas/db_connection.php";
 
-if (isset($_POST['FechaSeleccionada']) && isset($_POST['HoraSeleccionada'])) {
+if (isset($_POST['FechaSeleccionada']) && isset($_POST['HoraSeleccionada']) && isset($_POST['HoraNueva'])) {
     $fecha_id = $_POST['FechaSeleccionada']; // ID de la fecha seleccionada
-    $hora_nueva = $_POST['HoraSeleccionada']; // Nueva hora seleccionada
-    
+    $hora_id = $_POST['HoraSeleccionada'];   // Hora actual seleccionada
+    $hora_nueva = $_POST['HoraNueva'];       // Nueva hora
+
     // Actualizar la hora en la base de datos
-    $sql = "UPDATE Fechas_EspecialistasExt SET Hora_Disponibilidad = '$hora_nueva' WHERE ID_Fecha_Esp = '$fecha_id'";
+    $sql = "UPDATE Horas_Disponibilidad 
+            SET Horario_Disponibilidad = '$hora_nueva' 
+            WHERE ID_Horario = '$hora_id' 
+            AND FK_Fecha = '$fecha_id'";
     
     if ($conn->query($sql) === TRUE) {
         echo "Hora actualizada correctamente";
