@@ -127,8 +127,8 @@ if ($query->num_rows > 0) {
 
         <input type="text" class="form-control" hidden name="MedicoHoras[]" readonly value="<?php echo $Especialistas->FK_Medico; ?>">
         <input type="text" class="form-control" hidden name="NumberProgramaHoras[]" readonly value="<?php echo $Especialistas->ID_Programacion; ?>">
-        <input type="text" class="form-control" hidden name="UsuarioHoras[]" readonly value=" <?php echo $row['Nombre_Apellidos']?>">
-        <input type="text" class="form-control" hidden name="EmpresaHoras[]" readonly value=" <?php echo $row['ID_H_O_D']?>">
+        <input type="text" class="form-control" hidden name="UsuarioHoras[]" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+        <input type="text" class="form-control" hidden name="EmpresaHoras[]" readonly value="<?php echo $row['ID_H_O_D']?>">
         <input type="text" class="form-control" hidden name="SistemaHoras[]" readonly value="<?php echo $row['Nombre_rol']?>">
 
         <div class="modal-footer justify-content-center">
@@ -139,49 +139,46 @@ if ($query->num_rows > 0) {
 
 <script>
     document.getElementById('FechaSeleccionada').addEventListener('change', function() {
-        var fecha_id = this.value;
+    var fecha_id = this.value;
 
-        // Realiza una petición AJAX para obtener las horas disponibles asociadas a la fecha seleccionada
-        $.ajax({
-            url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHoraPorFecha.php', // Archivo PHP que devuelve las horas correspondientes a la fecha
-            method: 'POST',
-            data: { fecha_id: fecha_id },
-            success: function(data) {
-                var horaSelect = document.getElementById('HoraSeleccionada');
-                horaSelect.innerHTML = ''; // Limpiar opciones previas
-                var horas = JSON.parse(data); // Asegurarnos que data es un array con varias horas
+    $.ajax({
+        url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHoraPorFecha.php',
+        method: 'POST',
+        data: { fecha_id: fecha_id },
+        success: function(data) {
+            var horaSelect = document.getElementById('HoraSeleccionada');
+            horaSelect.innerHTML = '';
+            var horas = JSON.parse(data);
 
-                horas.forEach(function(hora) {  // Iterar sobre todas las horas
-                    var option = document.createElement('option');
-                    
-                    // Convierte la hora a formato de 12 horas con AM/PM para la vista del usuario
-                    var date = new Date('1970-01-01T' + hora + 'Z'); // Asumiendo hora en formato 24 horas
-                    var time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-                    
-                    option.value = hora; // Valor de la hora (en formato 24 horas)
-                    option.text = time;  // Texto visible en formato 12 horas
-                    horaSelect.appendChild(option); // Agregar la opción al select
-                });
-            }
-        });
+            horas.forEach(function(hora) {
+                var option = document.createElement('option');
+                
+                var date = new Date('1970-01-01T' + hora + 'Z');
+                var time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+                
+                option.value = hora;
+                option.text = time;
+                horaSelect.appendChild(option);
+            });
+        }
     });
+});
 
-    document.getElementById('ProgramaHorasNuevas').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var nuevaHoraInput = document.getElementById('NuevaHoraInput');
-        var nuevaHora = nuevaHoraInput.value;
-        
-        // Convierte la hora de 12 horas a 24 horas
-        var date = new Date('1970-01-01T' + nuevaHora + ':00');
-        var hora24 = date.toTimeString().slice(0, 5);
-        
-        // Establece el valor del campo oculto con la hora en formato 24 horas
-        nuevaHoraInput.value = hora24;
-        
-        // Aquí puedes realizar la acción de envío del formulario
-        console.log('Hora en formato 24 horas para enviar:', hora24);
-        this.submit(); // Envía el formulario
-    });
+document.getElementById('ProgramaHorasNuevas').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var nuevaHoraInput = document.getElementById('NuevaHoraInput');
+    var nuevaHora = nuevaHoraInput.value;
+
+    // Manejo del formato de hora 12 horas a 24 horas
+    var date = new Date('1970-01-01T' + nuevaHora + ':00');
+    var hora24 = date.toTimeString().slice(0, 5);
+
+    nuevaHoraInput.value = hora24;
+
+    console.log('Hora en formato 24 horas para enviar:', hora24);
+    this.submit();
+});
+
 </script>
 
 <?php else: ?>
