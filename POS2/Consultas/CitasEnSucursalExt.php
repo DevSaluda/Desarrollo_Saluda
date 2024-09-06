@@ -1,21 +1,27 @@
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#CitasExteriores').DataTable({
-      "order": [[ 0, "desc" ]],
-     
-      "info": false,
-      "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
-    
-		
-	  } 
-	  
-	  );
-} );
+$(document).ready(function () {
+    // Inicializa la tabla DataTable
+    var table = $('#CitasExteriores').DataTable({
+        "order": [[0, "desc"]],
+        "info": false,
+        "lengthMenu": [[10, 50, 200, -1], [10, 50, 200, "Todos"]],
+        "language": {
+            "url": "Componentes/Spanish.json"
+        }
+    });
+
+    // Filtra por fecha
+    $('#filter-date').on('keyup change', function () {
+        table.column(3).search(this.value).draw();
+    });
+
+    // Filtra por especialidad y doctor
+    $('#filter-doctor').on('keyup change', function () {
+        table.column(5).search(this.value).draw();
+    });
+});
 </script>
+
 <?php
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
@@ -56,8 +62,8 @@ $query = $conn->query($sql1);
 <th>Folio</th>
 <th>Paciente</th>
 <th>Telefono</th>
-<th>Fecha | Hora </th>
-<th>Especialidad | Doctor</th>
+<th>Fecha | Hora <br><input type="text" id="filter-date" class="column-filter" placeholder="Buscar por fecha"></th>
+<th>Especialidad | Doctor <br><input type="text" id="filter-doctor" class="column-filter" placeholder="Buscar por especialidad"></th>
 <th>Sucursal</th>
 <th>Motivo consulta</th>
 <th>Observaciones</th>

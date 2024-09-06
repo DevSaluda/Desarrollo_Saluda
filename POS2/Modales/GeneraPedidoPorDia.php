@@ -4,7 +4,7 @@
       
       <div class="text-center">
         <div class="modal-header">
-          <p class="heading lead">Filtrado de ventas por sucursal<i class="fas fa-credit-card ml-2"></i></p>
+          <p class="heading lead">Generando pedidos...<i class="fas fa-credit-card ml-2"></i></p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">&times;</span>
           </button>

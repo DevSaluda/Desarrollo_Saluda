@@ -182,16 +182,19 @@ tabla = $('#Productos').DataTable({
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
-       { mData: 'PrecioVenta' },
-       { mData: 'PrecioCompra' },
-       { mData: 'TotalPrecioVenta' },
-       { mData: 'TotalPrecioCompra' },
+      //  { mData: 'PrecioVenta' },
+      //  { mData: 'PrecioCompra' },
+      //  { mData: 'TotalPrecioVenta' },
+      //  { mData: 'TotalPrecioCompra' },
        { mData: 'Nombre_Prod' },
        { mData: 'Clave_interna' },
        { mData: 'Clave_Levic' },
        { mData: 'Cod_Enfermeria' },
        { mData: 'FechaInventario' },
-  
+       { "data": "Estado", "render": function(data, type, row) {
+            return data; // Esto permitirá que se interprete el HTML
+        }},
+        { mData: 'Acciones' }
       ],
      
       "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
@@ -243,17 +246,17 @@ tabla = $('#Productos').DataTable({
 <th>Cod Barra</th>
 <th>Nombre del producto</th>
     <th>Sucursal</th>
-    <th>PV</th>
+    <!-- <th>PV</th>
     <th>PC</th>
     <th>Total PV</th>
-    <th>Total PC</th>
+    <th>Total PC</th> -->
     <th>Cantidad</th>
     <th>Fecha caducidad</th>
     <th>Lote</th>
     <th>Motivo baja</th>
     <th>Agregado por</th>
-    
-
+    <th>Estado</th>
+    <th>Acciones</th>
 
 </thead>
 

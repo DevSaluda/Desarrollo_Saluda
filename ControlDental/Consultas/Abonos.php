@@ -57,8 +57,7 @@ AbonoCreditos_POS.Saldo, AbonoCreditos_POS.Estatus, AbonoCreditos_POS.CodigoEsta
 Tipos_Credit_POS.ID_Tip_Cred, Tipos_Credit_POS.Nombre_Tip, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
 FROM AbonoCreditos_POS, Tipos_Credit_POS, SucursalesCorre 
 WHERE AbonoCreditos_POS.Fk_tipo_Credi = Tipos_Credit_POS.ID_Tip_Cred 
-AND AbonoCreditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC  
-AND DATE(AbonoCreditos_POS.Fecha_Abono) = CURDATE()";
+AND AbonoCreditos_POS.Fk_Sucursal = SucursalesCorre.ID_SucursalC ";
 $query = $conn->query($sql1);
 ?>
 
