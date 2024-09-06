@@ -132,7 +132,9 @@ if ($query->num_rows > 0) {
         <input type="text" class="form-control" hidden name="SistemaHoras[]" readonly value="<?php echo $row['Nombre_rol']?>">
 
         <div class="modal-footer justify-content-center">
-            <button type="submit" id="EnviarDatos" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
+           <!-- Cambiar el ID del botón a algo único -->
+<button type="submit" id="EnviarDatosUnico" value="Guardar" class="btn btn-success">Guardar <i class="fas fa-save"></i></button>
+
         </div>
     </form>
 </div>
