@@ -124,7 +124,7 @@ if ($query->num_rows > 0) {
 
         // Realiza una petición AJAX para obtener las horas disponibles asociadas a la fecha seleccionada
         $.ajax({
-            url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHorasPorFecha.php', // Archivo PHP que devuelve las horas correspondientes a la fecha
+            url: 'https://saludapos.com/AgendaDeCitas/Consultas/ObtenerHoraPorFecha.php', // Archivo PHP que devuelve las horas correspondientes a la fecha
             method: 'POST',
             data: { fecha_id: fecha_id },
             success: function(data) {
