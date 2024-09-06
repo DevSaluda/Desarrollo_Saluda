@@ -55,7 +55,7 @@ include ("Modales/ProgramacionExt.php");
 
   include ("footer.php");?>
 
-<script src="js/EditaHorasProgramacion.js"></script>
+<script src="js/EditaHorasProgramacionV2.js"></script>
 <script src="js/ProgramacionSucursalesEspecialistasNuevos.js"></script>
 
 
