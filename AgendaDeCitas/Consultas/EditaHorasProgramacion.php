@@ -7,7 +7,7 @@ if (isset($_POST['FechaSeleccionada']) && isset($_POST['HoraSeleccionada']) && i
     $hora_nueva = $_POST['HoraNueva'];       // Nueva hora
 
     // Actualizar la hora en la base de datos
-    $sql = "UPDATE Horas_Disponibilidad 
+    $sql = "UPDATE Horarios_Citas_Ext 
             SET Horario_Disponibilidad = '$hora_nueva' 
             WHERE ID_Horario = '$hora_id' 
             AND FK_Fecha = '$fecha_id'";
