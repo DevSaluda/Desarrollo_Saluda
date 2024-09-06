@@ -41,11 +41,23 @@ if ($query->num_rows > 0) {
 ?>
 <?php if($Especialistas != null): ?>
 
-<!-- Estilos para hacer los inputs más grandes -->
+<!-- Estilos para hacer la ventana modal más grande y el formato de 12 horas -->
 <style>
+    /* Hacer la ventana modal más grande */
+    .modal-dialog {
+        max-width: 80%;
+        width: 80%;
+    }
+    
+    /* Hacer el formulario más legible */
     .form-control {
-        font-size: 1.5rem;  /* Aumenta el tamaño del texto */
-        height: 50px;       /* Aumenta la altura del input */
+        font-size: 1rem;  
+        height: 40px;     
+    }
+
+    /* Aumentar el tamaño de los labels */
+    label {
+        font-size: 1.2rem;
     }
 </style>
 
@@ -108,7 +120,7 @@ if ($query->num_rows > 0) {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
                     </div>
-                    <input type="time" class="form-control" name="NuevaHora" required>
+                    <input type="text" class="form-control" id="NuevaHoraInput" name="NuevaHora" required>
                 </div>
             </div>
         </div>
@@ -141,12 +153,34 @@ if ($query->num_rows > 0) {
 
                 horas.forEach(function(hora) {  // Iterar sobre todas las horas
                     var option = document.createElement('option');
-                    option.value = hora; // Asignar el valor de la hora
-                    option.text = hora;  // Asignar el texto visible en el dropdown
+                    
+                    // Convierte la hora a formato de 12 horas con AM/PM para la vista del usuario
+                    var date = new Date('1970-01-01T' + hora + 'Z'); // Asumiendo hora en formato 24 horas
+                    var time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+                    
+                    option.value = hora; // Valor de la hora (en formato 24 horas)
+                    option.text = time;  // Texto visible en formato 12 horas
                     horaSelect.appendChild(option); // Agregar la opción al select
                 });
             }
         });
+    });
+
+    document.getElementById('ProgramaHorasNuevas').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var nuevaHoraInput = document.getElementById('NuevaHoraInput');
+        var nuevaHora = nuevaHoraInput.value;
+        
+        // Convierte la hora de 12 horas a 24 horas
+        var date = new Date('1970-01-01T' + nuevaHora + ':00');
+        var hora24 = date.toTimeString().slice(0, 5);
+        
+        // Establece el valor del campo oculto con la hora en formato 24 horas
+        nuevaHoraInput.value = hora24;
+        
+        // Aquí puedes realizar la acción de envío del formulario
+        console.log('Hora en formato 24 horas para enviar:', hora24);
+        this.submit(); // Envía el formulario
     });
 </script>
 
