@@ -5,7 +5,7 @@ $('document').ready(function ($) {
   }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
   
   // Validación para el formulario de edición de horas
-  $("#ProgramaHoras").validate({
+  $("#ProgramaHorasNuevas").validate({
     rules: {
      HoraSeleccionada: {
         required: true,
@@ -30,7 +30,7 @@ $('document').ready(function ($) {
     $.ajax({
       type: 'POST',
       url: "Consultas/EditaHorasProgramacion.php",  
-      data: $('#ProgramaHoras').serialize(),
+      data: $('#ProgramaHorasNuevas').serialize(),
       cache: false,
       beforeSend: function () {
         $("#submit_registro").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
