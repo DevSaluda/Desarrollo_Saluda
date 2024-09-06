@@ -1,56 +1,43 @@
-$('document').ready(function ($) {
-   
-  $.validator.addMethod("Sololetras", function (value, element) {
-    return this.optional(element) || /[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/.test(value);
-  }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras!");
-  
-  // Validación para el formulario de edición de horas
-  $("#ProgramaHorasNuevas").validate({
-    rules: {
-     HoraSeleccionada: {
-        required: true,
+$("#ProgramaHorasNuevas").validate({
+  rules: {
+      HoraSeleccionada: {
+          required: true,
       },
-      HoraNueva: {
-        required: true,
+      NuevaHora: {
+          required: true,
       },
-    },
-    messages: {
-     HoraSeleccionada: {
-        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Selecciona una hora existente",
+  },
+  messages: {
+      HoraSeleccionada: {
+          required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Selecciona una hora existente",
       },
-      HoraNueva: {
-        required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa la nueva hora",
+      NuevaHora: {
+          required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa la nueva hora",
       },
-    },
-    
-    submitHandler: submitForm
-  });
+  },
+  submitHandler: function(form) {
+      $.ajax({
+          type: 'POST',
+          url: "Consultas/EditaHorasProgramacion.php",
+          data: $(form).serialize(),
+          cache: false,
+          beforeSend: function() {
+              $("#EnviarDatosUnico").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+          },
+          success: function(response) {
+              $("#editModal").removeClass("in");
+              $(".modal-backdrop").remove();
+              $("#editModal").hide();
+              $('#ExitoEnFecha').modal('toggle');
+              setTimeout(function(){
+                  $('#ExitoEnFecha').modal('hide');
+              }, 2000);
 
-  // Función para el envío del formulario
-  function submitForm() {
-    $.ajax({
-      type: 'POST',
-      url: "Consultas/EditaHorasProgramacion.php",  
-      data: $('#ProgramaHorasNuevas').serialize(),
-      cache: false,
-      beforeSend: function () {
-        $("#submit_registro").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
-      },
-      success: function(){
-          $("#editModal").removeClass("in");
-          $(".modal-backdrop").remove(); 
-          $("#editModal").hide();
-          $('#ExitoEnFecha').modal('toggle'); 
-          setTimeout(function(){ 
-              $('#ExitoEnFecha').modal('hide') 
-          }, 2000);
-
-          CargaProgramaMedicosSucursalesExt();
-      },
-      error: function(){
-          $("#show_error").fadeIn();
-      }
-    });
-    return false;
+              CargaProgramaMedicosSucursalesExt();
+          },
+          error: function() {
+              $("#show_error").fadeIn();
+          }
+      });
   }
 });
