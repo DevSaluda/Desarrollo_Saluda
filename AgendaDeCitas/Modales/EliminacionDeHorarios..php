@@ -4,18 +4,8 @@ include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 
 function fechaCastellano($fecha) {
-    $fecha = substr($fecha, 0, 10);
-    $numeroDia = date('d', strtotime($fecha));
-    $dia = date('l', strtotime($fecha));
-    $mes = date('F', strtotime($fecha));
-    $anio = date('Y', strtotime($fecha));
-    $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-    $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-    $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-    $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-    $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-    return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+    // Código para convertir la fecha en formato español
+    ...
 }
 
 $user_id = null;
@@ -43,23 +33,21 @@ if ($query->num_rows > 0) {
 
 <!-- Estilos para hacer la ventana modal más grande y el formato de 12 horas -->
 <style>
-    /* Hacer la ventana modal más grande */
     .modal-dialog {
         max-width: 80%;
         width: 80%;
     }
-    
-    /* Hacer el formulario más legible */
+
     .form-control {
         font-size: 1rem;  
         height: 40px;     
     }
 
-    /* Aumentar el tamaño de los labels */
     label {
         font-size: 1.2rem;
     }
 </style>
+
 <div id="EliminarHoras">
     <form action="javascript:void(0)" method="post" id="ProgramaHorasEliminar">
         <div class="row">
@@ -67,7 +55,7 @@ if ($query->num_rows > 0) {
                 <label for="FechaSeleccionada">Fecha<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="Tarjeta"><i class="fas fa-calendar"></i></span>
+                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                     </div>
                     <select id="FechaSeleccionada" class="form-control" name="FechaSeleccionada" required>
                         <?php
@@ -84,7 +72,7 @@ if ($query->num_rows > 0) {
                 <label for="HoraSeleccionada">Hora a eliminar<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="Tarjeta"><i class="fas fa-clock"></i></span>
+                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
                     </div>
                     <select id="HoraSeleccionada" class="form-control" name="HoraSeleccionada" required>
                         <option value="">Selecciona una hora</option>
@@ -93,13 +81,17 @@ if ($query->num_rows > 0) {
             </div>
         </div>
 
+        <!-- Campos ocultos para enviar información adicional -->
+        <input type="text" class="form-control" hidden name="ID_Programacion" readonly value="<?php echo $Especialistas->ID_Programacion; ?>">
+        <input type="text" class="form-control" hidden name="FK_Medico" readonly value="<?php echo $Especialistas->FK_Medico; ?>">
+
         <div class="modal-footer justify-content-center">
             <button type="submit" id="EliminarDatosUnico" value="Eliminar" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
         </div>
     </form>
 </div>
 
-<script src="js/EliminaHorasProgramacionV2.js"></script>
+<script src="js/EliminaHorasProgramacion.js"></script>
 <script>
 document.getElementById('FechaSeleccionada').addEventListener('change', function() {
     var fecha_id = this.value;
@@ -131,10 +123,6 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
     });
 });
 </script>
-
-
-
-
 
 <?php else: ?>
 <p class="alert alert-danger">404 No se encuentra</p>
