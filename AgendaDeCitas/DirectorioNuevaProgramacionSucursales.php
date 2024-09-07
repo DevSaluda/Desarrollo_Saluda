@@ -151,7 +151,7 @@ include ("Modales/ProgramacionExt.php");
      // Delegación de eventos para el botón "Eliminacion de horas" dentro de .dropdown-menu
      $(document).on("click", ".btn-DeleteHoras", function() {
         var id = $(this).data("id");
-        $.post("https://controlfarmacia.com/AgendaDeCitas/Modales/EliminacionDeHorarios.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AgendaDeCitas/Modales/EliminacionDeHorarios.php", { id: id }, function(data) {
          
           $("#form-edit").html(data);
           $("#Titulo").html("Despliegue de horas sobre fechas disponibles del especialista");
