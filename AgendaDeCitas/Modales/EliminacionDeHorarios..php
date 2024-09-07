@@ -41,7 +41,25 @@ if ($query->num_rows > 0) {
 ?>
 <?php if($Especialistas != null): ?>
 
+<!-- Estilos para hacer la ventana modal más grande y el formato de 12 horas -->
+<style>
+    /* Hacer la ventana modal más grande */
+    .modal-dialog {
+        max-width: 80%;
+        width: 80%;
+    }
+    
+    /* Hacer el formulario más legible */
+    .form-control {
+        font-size: 1rem;  
+        height: 40px;     
+    }
 
+    /* Aumentar el tamaño de los labels */
+    label {
+        font-size: 1.2rem;
+    }
+</style>
 <div id="EliminarHoras">
     <form action="javascript:void(0)" method="post" id="ProgramaHorasEliminar">
         <div class="row">
@@ -113,5 +131,11 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
     });
 });
 </script>
+
+
+
+
+
 <?php else: ?>
-    <p class="alert alert-danger">404 No se encuentra</p><?php endif; ?>
+<p class="alert alert-danger">404 No se encuentra</p>
+<?php endif; ?>
