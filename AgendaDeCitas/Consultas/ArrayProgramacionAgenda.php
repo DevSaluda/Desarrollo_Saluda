@@ -75,9 +75,9 @@ while($fila=$result->fetch_assoc()){
    
     $data[$c]["AbreHorarios"] = '
     <td>
-    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-success btn-sm btn-NuevaAutorizacionHoras " style="background-color: #C80096 !important;" ><i class="fas fa-user-clock"></i></a>
-    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-success btn-sm btn-EditHoras " style="background-color: #C80096 !important;" ><i class="fas fa-user-clock"></i></a>
-    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-danger btn-sm btn-DeleteHoras "><i class="fas fa-user-clock"></i></a>
+    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-success btn-sm btn-NuevaAutorizacionHoras " style="background-color: #C80096 !important;" ><i class="fa-solid fa-timer"></i></a>
+    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-success btn-sm btn-EditHoras " style="background-color: #C80096 !important;" ><i class="fa-solid fa-pen-to-square"></i></a>
+    <a data-id="' . $fila["ID_Programacion"] . '" class="btn btn-danger btn-sm btn-DeleteHoras "><i class="fa-solid fa-circle-xmark"></i></a>
     </td>';
     
     
