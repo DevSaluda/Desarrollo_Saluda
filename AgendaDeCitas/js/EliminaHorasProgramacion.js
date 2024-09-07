@@ -12,7 +12,7 @@ $("#ProgramaHorasEliminar").validate({
     submitHandler: function(form) {
         $.ajax({
             type: 'POST',
-            url: "Consultas/EliminarHorarios.php",  // Archivo PHP que procesa la eliminación
+            url: "Consultas/EliminaHorarios.php",  // Archivo PHP que procesa la eliminación
             data: $(form).serialize(),  // Envía todos los datos del formulario
             cache: false,
             beforeSend: function() {
