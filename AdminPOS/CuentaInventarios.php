@@ -558,20 +558,20 @@ document.addEventListener("DOMContentLoaded", function() {
                           <thead>
                             <tr>
                               <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:5%">Contado</th>
-                              <th style="width:3%">Actual</th>
-                              <th style="width:5%">Diferencia</th>
-                              <th style="width:5%">Precio</th>
-                              <th>Tipo de ajuste</th>
-                              <th style="width:3%">Anaquel</th>
-                              <th style="width:3%">Repisa</th>
+                              <th class="no-click" style="width:20%">Producto</th>
+                              <th class="no-click" style="width:5%">Contado</th>
+                              <th class="no-click" style="width:3%">Actual</th>
+                              <th class="no-click" style="width:5%">Diferencia</th>
+                              <th class="no-click" style="width:5%">Precio</th>
+                              <th class="no-click" >Tipo de ajuste</th>
+                              <th  class="no-click"style="width:3%">Anaquel</th>
+                              <th  class="no-click" style="width:3%">Repisa</th>
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th>Eliminar</th>
+                              <th class="no-click">Eliminar</th>
                             
                             </tr>
                           </thead>
@@ -603,7 +603,13 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 </div>
 </div>
+<style>
+.no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
 
+</style>
 
 <script>
        let selectedAdjustment = "";
