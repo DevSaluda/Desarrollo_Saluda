@@ -45,7 +45,7 @@ foreach (json_decode($cotizacion, true) as $producto) {
 $pdf->Cell(140, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, $totalGeneral, 1);
 
-$folderPath = 'ArchivoPDF/';
+$folderPath = '/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
 $pdf->Output('F', $filePath);
 
