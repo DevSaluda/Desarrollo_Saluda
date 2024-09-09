@@ -1,6 +1,6 @@
 <?php
 include 'Consultas.php';
-require('Consultas/Pdf/fpdf.php');
+require('/Pdf/fpdf.php');
 
 function buscarProducto($conn, $Cod_Barra) {
     $query = "SELECT ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, FkPresentacion, Proveedor1, Proveedor2 
