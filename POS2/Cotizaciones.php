@@ -277,9 +277,9 @@ $(document).ready(function() {
             ...$(this).serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {})
         },
         success: function(response) {
-            // Llamar a GenerarPDF.php
+            // Llamar a GenerarPDF.phps
             $.ajax({
-                url: 'GenerarPDF.php',
+                url: 'Consultas/GenerarPDF.php',
                 type: 'POST',
                 data: {
                     IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
