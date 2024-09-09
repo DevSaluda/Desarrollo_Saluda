@@ -571,10 +571,10 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
-                              <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:6%">Piezas</th>
-                              <th >¿Cuando llego?</th>
+                              <th class="no-click" >Codigo</th>
+                              <th class="no-click" style="width:20%">Producto</th>
+                              <th class="no-click" style="width:6%">Piezas</th>
+                              <th class="no-click" >¿Cuando llego?</th>
                              
                               
                               <!-- <th>importe_Sin_Iva</th>
@@ -612,6 +612,17 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
 </div>
 </div>
 </div>
+
+
+<style>
+.no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
+
+</style>
+
+
 <!-- function actualizarSumaTotal  -->
 <script>
 
