@@ -217,9 +217,9 @@ function showInstructions() {
                         <li>Recuerda llenar los campos fecha de caducidad,lote y precio maximo de venta</li>
                     </ol>
                     <div style="margin-top: 20px;">
-                        <label>
-                            <input type="checkbox" id="noMostrar"> No volver a mostrar esta información durante una semana
-                        </label>
+                        // <label>
+                        //     <input type="checkbox" id="noMostrar"> No volver a mostrar esta información durante una semana
+                        // </label>
                     </div>
                 `,
                 icon: 'info',
