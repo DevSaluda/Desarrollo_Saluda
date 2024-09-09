@@ -1,5 +1,5 @@
 <?php
-include 'Consultas.php';
+
 require('Consultas/Pdf/fpdf.php');
 
 function buscarProducto($conn, $Cod_Barra) {
