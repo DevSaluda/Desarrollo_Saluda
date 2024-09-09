@@ -267,24 +267,55 @@ $(document).ready(function() {
     });
 
     $('#guardarCotizacionForm').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: 'Consultas/ManejoCotizaciones.php',
-            type: 'POST',
-            data: {
-                guardar_cotizacion: true,
-                cotizacion: cotizacion,
-                ...$(this).serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {})
-            },
-            success: function(response) {
-                alert('Cotización guardada exitosamente.');
-                
-            },
-            error: function() {
-                alert('Ocurrió un error al guardar la cotización.');
-            }
-        });
+    e.preventDefault();
+    $.ajax({
+        url: 'Consultas/ManejoCotizaciones.php',
+        type: 'POST',
+        data: {
+            guardar_cotizacion: true,
+            cotizacion: cotizacion,
+            ...$(this).serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {})
+        },
+        success: function(response) {
+            // Llamar a GenerarPDF.phps
+            $.ajax({
+                url: 'Consultas/GenerarPDF.php',
+                type: 'POST',
+                data: {
+                    IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
+                    NombreCliente: $('#NombreCliente').val(),
+                    TelefonoCliente: $('#TelefonoCliente').val(),
+                    cotizacion: JSON.stringify(cotizacion)
+                },
+                success: function(pdfResponse) {
+                    // Aquí puedes actualizar la base de datos con la ruta del PDF
+                    $.ajax({
+                        url: 'Consultas/ManejoCotizaciones.php',
+                        type: 'POST',
+                        data: {
+                            actualizar_pdf: true,
+                            IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
+                            ArchivoPDF: JSON.parse(pdfResponse).filePath
+                        },
+                        success: function() {
+                            alert('Cotización guardada y PDF generado exitosamente.');
+                        },
+                        error: function() {
+                            alert('Ocurrió un error al actualizar la ruta del PDF en la base de datos.');
+                        }
+                    });
+                },
+                error: function() {
+                    alert('Ocurrió un error al generar el PDF.');
+                }
+            });
+        },
+        error: function() {
+            alert('Ocurrió un error al guardar la cotización.');
+        }
     });
+});
+
 });
 
 </script>
