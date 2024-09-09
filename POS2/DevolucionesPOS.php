@@ -580,7 +580,7 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th>Eliminar</th>
+                              <th class="no-click">Eliminar</th>
                             
                             </tr>
                           </thead>
