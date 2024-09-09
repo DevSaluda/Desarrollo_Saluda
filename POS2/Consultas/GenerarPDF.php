@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('Consultas/Pdf/fpdf.php');
 
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
