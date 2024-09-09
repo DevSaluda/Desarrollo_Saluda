@@ -216,10 +216,10 @@ function showInstructions() {
                         <li>Escanea tu producto, si es un encargo recuerda generar la solicitud de encargo</li>
                         <li>Recuerda llenar los campos fecha de caducidad,lote y precio maximo de venta</li>
                     </ol>
-                    <div style="margin-top: 20px;">
-                        // <label>
-                        //     <input type="checkbox" id="noMostrar"> No volver a mostrar esta información durante una semana
-                        // </label>
+                    <div style=""display: none;margin-top: 20px;">
+                        <label >
+                            <input type="checkbox" id="noMostrar"> No volver a mostrar esta información durante una semana
+                        </label>
                     </div>
                 `,
                 icon: 'info',
