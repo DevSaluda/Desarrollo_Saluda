@@ -198,13 +198,13 @@ $(document).ready(function() {
                                 </select>
                             </div>
                             <div class="form-group hidden-field">
-                                                                <input type="hidden" id="CantidadMultiple" name="CantidadMultiple" value="1">
+                                <input type="hidden" id="CantidadMultiple" name="CantidadMultiple">
                             </div>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                            <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
                         </form>
                     `);
                 } else {
-                    $('#productoFormContainer').html('<p>No se encontraron productos.</p>');
+                    alert('Producto no encontrado.');
                 }
             }
         });
@@ -212,99 +212,112 @@ $(document).ready(function() {
 
     $(document).on('submit', '#agregarProductoForm', function(e) {
         e.preventDefault();
-        const producto = {
-            Cod_Barra: $(this).find('input[name="Cod_Barra"]').val(),
-            Nombre_Prod: $(this).find('input[name="Nombre_Prod"]').val(),
-            Precio_Venta: $(this).find('input[name="Precio_Venta"]').val(),
-            Cantidad: $(this).find('input[name="Cantidad"]').val(),
-            Total: (parseFloat($(this).find('input[name="Precio_Venta"]').val()) * parseFloat($(this).find('input[name="Cantidad"]').val())).toFixed(2)
-        };
-        cotizacion.push(producto);
+        let formData = $(this).serializeArray();
+        let productoData = {};
+        formData.forEach(field => {
+            productoData[field.name] = field.value;
+        });
+        
+        let esProcedimiento = productoData.Cod_Barra.length === 4;
+        productoData.Cantidad = esProcedimiento ? 'N/A' : $('#Cantidad').val();
+        productoData.Total = (esProcedimiento ? parseFloat(productoData.Precio_Venta) : parseFloat(productoData.Precio_Venta) * parseFloat(productoData.Cantidad)).toFixed(2);
+        
+        // Verifica si el producto ya está en la cotización
+        let productoExistente = cotizacion.find(p => p.Cod_Barra === productoData.Cod_Barra);
+        if (productoExistente) {
+            // Si el producto ya existe, suma la cantidad
+            productoExistente.Cantidad = parseFloat(productoExistente.Cantidad) + parseFloat(productoData.Cantidad);
+            productoExistente.Total = (parseFloat(productoExistente.Cantidad) * parseFloat(productoExistente.Precio_Venta)).toFixed(2);
+        } else {
+            // Si no existe, agrega un nuevo producto
+            cotizacion.push(productoData);
+        }
+
         actualizarTablaCotizacion();
         $('#productoFormContainer').empty();
     });
 
     $(document).on('submit', '#agregarProductoMultipleForm', function(e) {
         e.preventDefault();
-        const producto = JSON.parse($('#ProductoSeleccionado').val());
-        producto.Cantidad = $('#CantidadMultiple').val();
-        producto.Total = (parseFloat(producto.Precio_Venta) * parseFloat(producto.Cantidad)).toFixed(2);
-        cotizacion.push(producto);
+        let productoSeleccionado = JSON.parse($('#ProductoSeleccionado').val());
+        
+        let esProcedimiento = productoSeleccionado.Cod_Barra.length === 4;
+        productoSeleccionado.Cantidad = esProcedimiento ? 'N/A' : $('#CantidadMultiple').val();
+        productoSeleccionado.Total = (esProcedimiento ? parseFloat(productoSeleccionado.Precio_Venta) : parseFloat(productoSeleccionado.Precio_Venta) * parseFloat(productoSeleccionado.Cantidad)).toFixed(2);
+        
+        // Verifica si el producto ya está en la cotización
+        let productoExistente = cotizacion.find(p => p.Cod_Barra === productoSeleccionado.Cod_Barra);
+        if (productoExistente) {
+            // Si el producto ya existe, suma la cantidad
+            productoExistente.Cantidad = parseFloat(productoExistente.Cantidad) + parseFloat(productoSeleccionado.Cantidad);
+            productoExistente.Total = (parseFloat(productoExistente.Cantidad) * parseFloat(productoExistente.Precio_Venta)).toFixed(2);
+        } else {
+            // Si no existe, agrega un nuevo producto
+            cotizacion.push(productoSeleccionado);
+        }
+
         actualizarTablaCotizacion();
         $('#productoFormContainer').empty();
     });
 
     $(document).on('click', '.eliminar-producto', function() {
-        const nombreProducto = $(this).data('nombre-prod');
-        cotizacion = cotizacion.filter(producto => producto.Nombre_Prod !== nombreProducto);
+        let nombreProd = $(this).data('nombre-prod');
+        cotizacion = cotizacion.filter(producto => producto.Nombre_Prod !== nombreProd);
         actualizarTablaCotizacion();
     });
 
     $('#guardarCotizacionForm').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: 'Consultas/ManejoCotizaciones.php',
-            type: 'POST',
-            data: {
-                guardar_cotizacion: true,
-                productos: cotizacion,
-                NombreCliente: $('#NombreCliente').val(),
-                TelefonoCliente: $('#TelefonoCliente').val(),
-                FkSucursal: $('#FkSucursal').val(),
-                AgregadoPor: $('#AgregadoPor').val(),
-                ID_H_O_D: $('#ID_H_O_D').val(),
-                Estado: $('#Estado').val(),
-                TipoCotizacion: $('#TipoCotizacion').val(),
-                IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
-                ID_Caja: $('#ID_Caja').val()
-            },
-            success: function(response) {
-                if (response.success) {
-                    // Generar el PDF y guardar en la carpeta ArchivoPDF
-                    const pdfFileName = `Cotizacion_${$('#IdentificadorCotizacion').val()}.pdf`;
+    e.preventDefault();
+    $.ajax({
+        url: 'Consultas/ManejoCotizaciones.php',
+        type: 'POST',
+        data: {
+            guardar_cotizacion: true,
+            cotizacion: cotizacion,
+            ...$(this).serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {})
+        },
+        success: function(response) {
+            // Llamar a GenerarPDF.php
+            $.ajax({
+                url: 'GenerarPDF.php',
+                type: 'POST',
+                data: {
+                    IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
+                    NombreCliente: $('#NombreCliente').val(),
+                    TelefonoCliente: $('#TelefonoCliente').val(),
+                    cotizacion: JSON.stringify(cotizacion)
+                },
+                success: function(pdfResponse) {
+                    // Aquí puedes actualizar la base de datos con la ruta del PDF
                     $.ajax({
-                        url: 'Consultas/GenerarPDF.php',
+                        url: 'Consultas/ManejoCotizaciones.php',
                         type: 'POST',
                         data: {
-                            productos: cotizacion,
-                            NombreCliente: $('#NombreCliente').val(),
-                            TelefonoCliente: $('#TelefonoCliente').val(),
+                            actualizar_pdf: true,
                             IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
-                            pdfFileName: pdfFileName
+                            ArchivoPDF: JSON.parse(pdfResponse).filePath
                         },
-                        success: function(pdfResponse) {
-                            if (pdfResponse.success) {
-                                // Guardar la ruta del PDF en la base de datos
-                                $.ajax({
-                                    url: 'Consultas/ActualizarCotizacion.php',
-                                    type: 'POST',
-                                    data: {
-                                        update_pdf_path: true,
-                                        IdentificadorCotizacion: $('#IdentificadorCotizacion').val(),
-                                        pdfFilePath: `ArchivoPDF/${pdfFileName}`
-                                    },
-                                    success: function(updateResponse) {
-                                        if (updateResponse.success) {
-                                            alert('Cotización guardada con éxito y PDF generado.');
-                                            location.reload();
-                                        } else {
-                                            alert('Error al actualizar la ruta del PDF en la base de datos.');
-                                        }
-                                    }
-                                });
-                            } else {
-                                alert('Error al generar el PDF.');
-                            }
+                        success: function() {
+                            alert('Cotización guardada y PDF generado exitosamente.');
+                        },
+                        error: function() {
+                            alert('Ocurrió un error al actualizar la ruta del PDF en la base de datos.');
                         }
                     });
-                } else {
-                    alert('Error al guardar la cotización.');
+                },
+                error: function() {
+                    alert('Ocurrió un error al generar el PDF.');
                 }
-            }
-        });
+            });
+        },
+        error: function() {
+            alert('Ocurrió un error al guardar la cotización.');
+        }
     });
 });
+
+});
+
 </script>
 </body>
 </html>
-
