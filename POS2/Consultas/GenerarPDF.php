@@ -5,7 +5,15 @@ require('Pdf/fpdf.php');
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
 $telefonoCliente = $_POST['TelefonoCliente'];
-$cotizacion = $_POST['cotizacion']; // Asegúrate de decodificar el JSON en el backend si es necesario
+
+// Decodificar la cotización si llega en formato JSON
+$cotizacion = json_decode($_POST['cotizacion'], true);
+
+// Verificar si se decodificó correctamente
+if (empty($cotizacion)) {
+    echo json_encode(['error' => 'Error al decodificar la cotización.']);
+    exit;
+}
 
 // Crear instancia de FPDF
 $pdf = new FPDF();
@@ -31,7 +39,7 @@ $pdf->Cell(30, 10, 'Total', 1);
 $pdf->Ln();
 
 $totalGeneral = 0;
-foreach (json_decode($cotizacion, true) as $producto) {
+foreach ($cotizacion as $producto) {
     $totalGeneral += $producto['Total'];
     $pdf->Cell(30, 10, $producto['Cod_Barra'], 1);
     $pdf->Cell(80, 10, $producto['Nombre_Prod'], 1);
@@ -45,9 +53,20 @@ foreach (json_decode($cotizacion, true) as $producto) {
 $pdf->Cell(140, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, $totalGeneral, 1);
 
-$folderPath = '/ArchivoPDF/';
+// Definir ruta absoluta para guardar el archivo PDF
+$folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
-$pdf->Output('F', $filePath);
 
-echo json_encode(['filePath' => $filePath]);
+// Verificar si la carpeta existe, y si no, crearla
+if (!is_dir($folderPath)) {
+    mkdir($folderPath, 0777, true);
+}
+
+// Guardar el PDF y verificar errores
+if (!$pdf->Output('F', $filePath)) {
+    echo json_encode(['error' => 'Error al generar el PDF']);
+} else {
+    echo json_encode(['filePath' => $filePath]);
+}
+
 ?>
