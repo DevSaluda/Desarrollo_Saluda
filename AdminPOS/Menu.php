@@ -1356,6 +1356,15 @@
         
             </ul>
           </li>
+          <li class="nav-item">
+                  <a href="https://saludapos.com/AdminPOS/RegistroMantenimiento" class="nav-link" style="color: white;">
+                  <i class="fa-thin fa-screwdriver-wrench"></i>
+                    <p>
+                    Registro de Mantenimiento
+
+                    </p>
+                  </a>
+             </li>
           <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
   echo "display:none;";
