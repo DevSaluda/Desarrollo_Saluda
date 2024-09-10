@@ -465,30 +465,16 @@ function buscarArticulo(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (data) {
-      if (!data || !data.codigo) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'No encontramos coincidencias',
-          text: 'Al parecer el código no está asignado en la sucursal ¿deseas asignarlo?',
-          showCancelButton: true,
-          confirmButtonText: 'Agregar producto a la sucursal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-          }
-        });
-      } else {
+      if (data && data.codigo) {
         agregarArticulo(data);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       }
-
       limpiarCampo();
     },
     error: function (data) {
       console.error('Error en la solicitud AJAX', data);
     }
-  });
-}
+});
 
 
  
