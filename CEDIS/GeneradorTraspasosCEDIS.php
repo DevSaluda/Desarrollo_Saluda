@@ -475,7 +475,7 @@ function buscarArticulo(codigoEscaneado) {
       console.error('Error en la solicitud AJAX', data);
     }
 });
-
+}
 
  
 
