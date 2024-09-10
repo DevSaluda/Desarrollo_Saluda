@@ -210,7 +210,15 @@
               </p>
             </a>
           </li>
-         
+          <li class="nav-item">
+            <a  href="ListadoCedis"  class="nav-link">
+            <i class="fas fa-exchange-alt"></i>
+              <p>
+            Traspasos Menu 2
+               
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a  href="ListadoDeTraspasos"  class="nav-link">
             <i class="fas fa-exchange-alt"></i>
