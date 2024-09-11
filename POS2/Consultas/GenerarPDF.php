@@ -1,6 +1,6 @@
 <?php
 require('Pdf/fpdf.php');
-
+include ("Consultas.php");
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
@@ -65,8 +65,23 @@ if (!is_dir($folderPath)) {
 // Guardar el PDF y verificar errores
 if (!$pdf->Output('F', $filePath)) {
     echo json_encode(['error' => 'Error al generar el PDF']);
-} else {
-    echo json_encode(['filePath' => $filePath]);
+    exit;
 }
 
+
+
+// Definir la ruta relativa que se guardará en la base de datos
+$relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
+
+// Realizar el UPDATE en la tabla Cotizaciones_POS
+$sql = "UPDATE Cotizaciones_POS SET ArchivoPDF = '$relativeFilePath' WHERE Identificador = '$identificadorCotizacion'";
+
+if ($conexion->query($sql) === TRUE) {
+    echo json_encode(['message' => 'Cotización actualizada correctamente.', 'filePath' => $relativeFilePath]);
+} else {
+    echo json_encode(['error' => 'Error al actualizar la base de datos: ' . $conexion->error]);
+}
+
+// Cerrar la conexión
+$conexion->close();
 ?>
