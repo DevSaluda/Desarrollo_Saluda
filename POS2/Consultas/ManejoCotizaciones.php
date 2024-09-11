@@ -86,7 +86,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $response = guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $fkCaja, $nombreCliente, $telefonoCliente);
         
-       
+        // Guardar ruta del PDF si está presente
+        if (isset($_POST['actualizar_pdf']) && $_POST['actualizar_pdf']) {
+            $IdentificadorCotizacion = $_POST['IdentificadorCotizacion'];
+            $ArchivoPDF = $_POST['ArchivoPDF'];
+
+            $query = "UPDATE Cotizaciones_POS SET ArchivoPDF = ? WHERE IdentificadorCotizacion = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ss", $ArchivoPDF, $IdentificadorCotizacion);
+            $stmt->execute();
+            $stmt->close();
+        }
 
         echo json_encode($response);
     }
