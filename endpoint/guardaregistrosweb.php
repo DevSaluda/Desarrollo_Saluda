@@ -1,14 +1,14 @@
 <?php
 // Permitir solicitudes CORS desde otro dominio
-header("Access-Control-Allow-Origin: https://saluda.mx");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Origin: *"); // Permitir cualquier origen
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 // Verificar si el método es POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Guardar imagen en la carpeta
-    $target_dir = "https://saludapos.com/FotografiasCredenciales/";  // Ajusta esta ruta en tu servidor
+    $target_dir = "/home/u155356178/domains/saludapos.com/public_html/FotografiasCredenciales/";  // Ajusta esta ruta en tu servidor
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
 
