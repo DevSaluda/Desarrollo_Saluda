@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Guardar imagen en la carpeta
-    $target_dir = "/path/to/your/directory/FotografiasCredenciales/";  // Ajusta esta ruta en tu servidor
+    $target_dir = "https://saludapos.com/fotografiasCredenciales/";  // Ajusta esta ruta en tu servidor
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
 
