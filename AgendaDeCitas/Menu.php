@@ -341,7 +341,15 @@
                   </a>
                 </li>
                
-              
+                <li class="nav-item">
+                  <a href="https://saludapos.com/AgendaDeCitas/DirectorioNuevaProgramacionSucursales" class="nav-link" style="color: white;">
+                    <i class="fas fa-calendar-check"></i>
+                    <p>
+                     Programa Campañas Nueva
+
+                    </p>
+                  </a>
+                </li>
           
             
               </ul>
