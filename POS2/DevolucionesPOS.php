@@ -954,7 +954,7 @@ function agregarArticulo(articulo) {
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
         tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Cantidad[]" value="' + articulo.cantidad + '" /></td>';
-tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
+tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="'<?php echo $fechaActual ?>'" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input class="form-control proveedor-input" style="font-size: 0.75rem !important;" id="proveedor" type="text" name="Proveedor[]" /></td>';
