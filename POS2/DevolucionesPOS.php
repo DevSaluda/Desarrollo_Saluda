@@ -973,6 +973,7 @@ tr += '<td   style="visibility:collapse; display:none;"class="numeroticket"><inp
         tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="estatussolicitud" type="text" class="form-control " name="Estatusdesolicitud[]"readonly value="Pendiente"  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="sucursal" type="text" class="form-control " name="Fk_Suc_Salida[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="SucursalNombre[]"readonly value="<?php echo $row['Nombre_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="Fecha[]"readonly value="<?php echo $fechaActual;?>"  </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       
