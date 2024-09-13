@@ -7,28 +7,26 @@ $sql = "SELECT * FROM Devolucion_POS WHERE Fk_Suc_Salida = '$fk_sucursal' ORDER 
 $resultset = mysqli_query($conn, $sql);
 
 if (!$resultset) {
-    die("database error: " . mysqli_error($conn));
+    die("Error en la base de datos: " . mysqli_error($conn));
 }
 
-$Ticketss = mysqli_fetch_assoc($resultset);
+$registro = mysqli_fetch_assoc($resultset); // Solo hacemos un fetch porque es LIMIT 1
 
-if ($Ticketss) {
-    // Si se encontró un registro, calcula el totalmonto basado en NumOrde
-    $monto1 = isset($Ticketss['NumOrde']) ? (int)$Ticketss['NumOrde'] : 0;
+if ($registro) {
+    // Si se encontró un registro, calcula ambos valores basados en 'NumOrde' y 'NumTicket'
+    $monto1 = isset($registro['NumOrde']) ? (int)$registro['NumOrde'] : 0;
+    $valordeticket = isset($registro['NumTicket']) ? (int)$registro['NumTicket'] : 0;
+
     $totalmonto = $monto1 + 1;
+    $elnumdeticket = $valordeticket + 1;
 } else {
-    // Si no se encontraron registros, establece totalmonto como 1
+    // Si no se encontraron registros, establece valores predeterminados
     $totalmonto = 1;
+    $elnumdeticket = 1;
 }
-$NumTicketss = mysqli_fetch_assoc($resultset);
-if ($NumTicketss) {
-  // Si se encontró un registro, calcula el totalmonto basado en NumOrde
-  $valordeticket = isset($NumTicketss['NumTicket']) ? (int)$NumTicketss['NumTicket'] : 0;
-  $elnumdeticket = $valordeticket + 1;
-} else {
-  // Si no se encontraron registros, establece totalmonto como 1
-  $elnumdeticket = 1;
-}
+
+// Puedes ahora usar $totalmonto y $elnumdeticket según sea necesario
+
 
 
 ?><!DOCTYPE html>
