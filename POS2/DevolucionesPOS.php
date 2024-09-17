@@ -7,28 +7,26 @@ $sql = "SELECT * FROM Devolucion_POS WHERE Fk_Suc_Salida = '$fk_sucursal' ORDER 
 $resultset = mysqli_query($conn, $sql);
 
 if (!$resultset) {
-    die("database error: " . mysqli_error($conn));
+    die("Error en la base de datos: " . mysqli_error($conn));
 }
 
-$Ticketss = mysqli_fetch_assoc($resultset);
+$registro = mysqli_fetch_assoc($resultset); // Solo hacemos un fetch porque es LIMIT 1
 
-if ($Ticketss) {
-    // Si se encontró un registro, calcula el totalmonto basado en NumOrde
-    $monto1 = isset($Ticketss['NumOrde']) ? (int)$Ticketss['NumOrde'] : 0;
+if ($registro) {
+    // Si se encontró un registro, calcula ambos valores basados en 'NumOrde' y 'NumTicket'
+    $monto1 = isset($registro['NumOrde']) ? (int)$registro['NumOrde'] : 0;
+    $valordeticket = isset($registro['NumTicket']) ? (int)$registro['NumTicket'] : 0;
+
     $totalmonto = $monto1 + 1;
+    $elnumdeticket = $valordeticket + 1;
 } else {
-    // Si no se encontraron registros, establece totalmonto como 1
+    // Si no se encontraron registros, establece valores predeterminados
     $totalmonto = 1;
+    $elnumdeticket = 1;
 }
-$NumTicketss = mysqli_fetch_assoc($resultset);
-if ($NumTicketss) {
-  // Si se encontró un registro, calcula el totalmonto basado en NumOrde
-  $valordeticket = isset($NumTicketss['NumTicket']) ? (int)$NumTicketss['NumTicket'] : 0;
-  $elnumdeticket = $valordeticket + 1;
-} else {
-  // Si no se encontraron registros, establece totalmonto como 1
-  $elnumdeticket = 1;
-}
+
+// Puedes ahora usar $totalmonto y $elnumdeticket según sea necesario
+
 
 
 ?><!DOCTYPE html>
@@ -216,8 +214,8 @@ function showInstructions() {
                         <li>Escanea tu producto, si es un encargo recuerda generar la solicitud de encargo</li>
                         <li>Recuerda llenar los campos fecha de caducidad,lote y precio maximo de venta</li>
                     </ol>
-                    <div style="margin-top: 20px;">
-                        <label>
+                    <div style="display: none;margin-top: 20px;">
+                        <label >
                             <input type="checkbox" id="noMostrar"> No volver a mostrar esta información durante una semana
                         </label>
                     </div>
@@ -487,7 +485,18 @@ function showInstructions() {
   <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo  $totalmonto?>">
  
 </div>
-</div>            
+</div>          
+<div class="col">
+
+<label for="exampleFormControlInput1" style="font-size: 0.75rem !important;"># de ticket
+</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+  </div>
+  <input type="text" class="form-control " style="font-size: 0.75rem !important;" readonly value="<?php echo  $elnumdeticket?>">
+ 
+</div>
+</div>   
 <div class="col">
 
 <label for="exampleFormControlInput1" style="font-size: 0.75rem !important;">Motivo devolucion
@@ -571,16 +580,16 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
-                              <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:6%">Piezas</th>
-                              <th >¿Cuando llego?</th>
+                              <th class="no-click" >Codigo</th>
+                              <th class="no-click" style="width:20%">Producto</th>
+                              <th class="no-click" style="width:6%">Piezas</th>
+                              <th class="no-click" >¿Cuando llego?</th>
                              
                               
                               <!-- <th>importe_Sin_Iva</th>
             <th>Iva</th>
             <th>valorieps</th> -->
-                              <th>Eliminar</th>
+                              <th class="no-click">Eliminar</th>
                             
                             </tr>
                           </thead>
@@ -612,6 +621,17 @@ Producto Dañado (roto, mojado, aplastado, sello de seguridad violado o próxima
 </div>
 </div>
 </div>
+
+
+<style>
+.no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
+
+</style>
+
+
 <!-- function actualizarSumaTotal  -->
 <script>
 
@@ -934,7 +954,7 @@ function agregarArticulo(articulo) {
         tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
         tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto"name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
         tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Cantidad[]" value="' + articulo.cantidad + '" /></td>';
-tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
+tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="<?php echo $fechaActual ?>" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
 tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input class="form-control proveedor-input" style="font-size: 0.75rem !important;" id="proveedor" type="text" name="Proveedor[]" /></td>';
@@ -953,6 +973,7 @@ tr += '<td   style="visibility:collapse; display:none;"class="numeroticket"><inp
         tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="estatussolicitud" type="text" class="form-control " name="Estatusdesolicitud[]"readonly value="Pendiente"  </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="NumberSucursal"> <input hidden id="sucursal" type="text" class="form-control " name="Fk_Suc_Salida[]"readonly value="<?php echo $row['Fk_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="AgregoElVendedor[]"readonly value="<?php echo $row['Nombre_Apellidos'] ?>">   </td>';
+        tr += '<td  style="visibility:collapse; display:none;" class="ResponsableInventario"> <input hidden id="VendedorFarma" type="text" class="form-control " name="SucursalNombre[]"readonly value="<?php echo $row['Nombre_Sucursal'] ?>">   </td>';
         tr += '<td  style="visibility:collapse; display:none;" class="Fecha"> <input hidden type="text" class="form-control " name="Fecha[]"readonly value="<?php echo $fechaActual;?>"  </td>';
         tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
       

@@ -49,6 +49,7 @@ foreach ($cotizacion as $producto) {
     $pdf->Cell(30, 10, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
     $pdf->Cell(30, 10, intval($producto['Cantidad']), 1, 0, 'C');
     $pdf->Cell(30, 10, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
+
 }
 
 // Total general
