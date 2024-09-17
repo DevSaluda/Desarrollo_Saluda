@@ -32,7 +32,7 @@ $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 // Agregar productos
 $pdf->Cell(0, 10, '', 0, 1); // Espacio en blanco
 $pdf->Cell(0, 10, 'Productos:', 0, 1);
-$pdf->Cell(30, 10, 'Código', 1);
+// Eliminamos la columna de Código
 $pdf->Cell(80, 10, 'Nombre', 1);
 $pdf->Cell(30, 10, 'Precio', 1);
 $pdf->Cell(30, 10, 'Cantidad', 1);
@@ -41,19 +41,20 @@ $pdf->Ln();
 
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
-    // Asegurarse de que los valores sean numéricos antes de sumarlos o mostrarlos
     $totalGeneral += floatval($producto['Total']);
-    $pdf->Cell(30, 10, $producto['Cod_Barra'], 1);
-    $pdf->Cell(80, 10, $producto['Nombre_Prod'], 1);
-    $pdf->Cell(30, 10, floatval($producto['Precio_Venta']), 1);
-    $pdf->Cell(30, 10, intval($producto['Cantidad']), 1);
-    $pdf->Cell(30, 10, floatval($producto['Total']), 1);
-    $pdf->Ln();
+    // Usamos MultiCell para el nombre del producto y manejamos la alineación
+    $pdf->MultiCell(80, 10, utf8_decode($producto['Nombre_Prod']), 1);
+    // Ajustamos la posición de las celdas siguientes
+    $pdf->Cell(80, -10, '', 0, 0); // Espacio para alinear el resto de celdas
+    $pdf->Cell(30, 10, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
+    $pdf->Cell(30, 10, intval($producto['Cantidad']), 1, 0, 'C');
+    $pdf->Cell(30, 10, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
+
 }
 
 // Total general
 $pdf->Cell(140, 10, 'Total General:', 1);
-$pdf->Cell(30, 10, $totalGeneral, 1);
+$pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
 // Definir ruta absoluta para guardar el archivo PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
