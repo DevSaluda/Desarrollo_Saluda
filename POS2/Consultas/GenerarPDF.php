@@ -20,21 +20,27 @@ if (empty($cotizacion)) {
 $pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
 
-// Estilo del encabezado: fuente grande y centrada
+// Colores adaptados al diseño
+$colorHeader = [0, 87, 184]; // #0057b8 azul
+$colorHeaderText = [255, 255, 255]; // Blanco
+$colorTotal = [200, 0, 150]; // #C80096 magenta
+
+// Estilo del encabezado: fuente grande, centrada y colores personalizados
 $pdf->SetFont('Arial', 'B', 20);
-$pdf->SetTextColor(33, 136, 56); // Color verde oscuro
+$pdf->SetTextColor($colorHeader[0], $colorHeader[1], $colorHeader[2]); // Color azul oscuro
 $pdf->Cell(0, 15, 'Cotización de Servicios', 0, 1, 'C');
 $pdf->Ln(10); // Espacio después del título
 
 // Información del cliente: fuente más pequeña y alineada a la izquierda
 $pdf->SetFont('Arial', '', 12);
-$pdf->SetTextColor(0, 0, 0); // Negro para el texto regular
+$pdf->SetTextColor(0, 0, 0); // Texto negro
 $pdf->Cell(0, 10, 'Nombre del Paciente: ' . $nombreCliente, 0, 1);
 $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 $pdf->Ln(5); // Espacio después de la info del cliente
 
-// Sección de productos: encabezado estilizado con bordes y fondo gris claro
-$pdf->SetFillColor(230, 230, 230); // Fondo gris claro para el encabezado de la tabla
+// Sección de productos: encabezado estilizado con bordes y fondo azul personalizado
+$pdf->SetFillColor($colorHeader[0], $colorHeader[1], $colorHeader[2]); // Fondo azul oscuro para el encabezado de la tabla
+$pdf->SetTextColor($colorHeaderText[0], $colorHeaderText[1], $colorHeaderText[2]); // Texto blanco para el encabezado
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(80, 10, 'Nombre', 1, 0, 'C', true);
 $pdf->Cell(30, 10, 'Precio', 1, 0, 'C', true);
@@ -43,7 +49,9 @@ $pdf->Cell(30, 10, 'Total', 1, 1, 'C', true);
 
 // Contenido de la tabla de productos
 $pdf->SetFont('Arial', '', 12);
+$pdf->SetTextColor(0, 0, 0); // Texto negro
 $totalGeneral = 0;
+
 foreach ($cotizacion as $producto) {
     // Cálculo del total
     $totalGeneral += floatval($producto['Total']);
@@ -58,11 +66,11 @@ foreach ($cotizacion as $producto) {
     $pdf->Cell(30, 10, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
 }
 
-// Mostrar el total general en negrita y resaltado
+// Mostrar el total general con color destacado
 $pdf->Ln(5); // Espacio antes del total general
 $pdf->SetFont('Arial', 'B', 12);
+$pdf->SetTextColor($colorTotal[0], $colorTotal[1], $colorTotal[2]); // Texto en color magenta
 $pdf->Cell(140, 10, 'Total General:', 1, 0, 'R');
-$pdf->SetTextColor(33, 136, 56); // Resaltar en verde oscuro
 $pdf->Cell(30, 10, '$' . number_format($totalGeneral, 2), 1, 1, 'C');
 
 // Definir ruta absoluta para guardar el archivo PDF
