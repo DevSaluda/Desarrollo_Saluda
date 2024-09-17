@@ -188,24 +188,46 @@ $(document).ready(function() {
                         </form>
                     `);
                 } else if (response.productos.length > 1) {
-                    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
-                    $('#productoFormContainer').html(`
-                        <form id="agregarProductoMultipleForm">
-                            <div class="form-group">
-                                <label for="ProductoSeleccionado">Seleccionar Producto</label>
-                                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
-                                    ${dropdownOptions}
-                                </select>
-                            </div>
-                            <div class="form-group hidden-field">
-                                <input type="hidden" id="CantidadMultiple" name="CantidadMultiple">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
-                        </form>
-                    `);
-                } else {
-                    alert('Producto no encontrado.');
-                }
+    let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
+    
+    // Inicialmente ocultamos el campo de cantidad
+    $('#productoFormContainer').html(`
+        <form id="agregarProductoMultipleForm">
+            <div class="form-group">
+                <label for="ProductoSeleccionado">Seleccionar Producto</label>
+                <select class="form-control" id="ProductoSeleccionado" name="ProductoSeleccionado">
+                    ${dropdownOptions}
+                </select>
+            </div>
+            <div class="form-group hidden-field" id="cantidadField">
+                <label for="CantidadMultiple">Cantidad</label>
+                <input type="number" class="form-control" id="CantidadMultiple" name="CantidadMultiple" min="1">
+            </div>
+            <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
+        </form>
+    `);
+
+    // Cuando se seleccione un producto del dropdown, revisamos si se debe mostrar el campo de cantidad
+    $('#ProductoSeleccionado').change(function() {
+        let productoSeleccionado = JSON.parse($(this).val());
+        
+        // Verifica si es un procedimiento (4 dígitos o formato USG-####)
+        if (/^\d{4}$/.test(productoSeleccionado.Cod_Barra) || /^USG-\d{4}$/.test(productoSeleccionado.Cod_Barra)) {
+            // Si es un procedimiento, ocultar el campo de cantidad
+            $('#cantidadField').addClass('hidden-field');
+            $('#CantidadMultiple').val(1);  // Valor por defecto para procedimientos
+        } else {
+            // Si no es un procedimiento, mostrar el campo de cantidad
+            $('#cantidadField').removeClass('hidden-field');
+        }
+    });
+
+    // Disparar el evento change para manejar el producto por defecto seleccionado en el dropdown
+    $('#ProductoSeleccionado').trigger('change');
+} else {
+    alert('Producto no encontrado.');
+}
+
             }
         });
     });
