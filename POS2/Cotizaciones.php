@@ -190,7 +190,7 @@ $(document).ready(function() {
                 } else if (response.productos.length > 1) {
     let dropdownOptions = response.productos.map(producto => `<option value='${JSON.stringify(producto)}'>${producto.Nombre_Prod}</option>`).join('');
     
-    // Inicialmente ocultamos el campo de cantidad
+    // Inicialmente ocultamos el campo de cantidad y precio
     $('#productoFormContainer').html(`
         <form id="agregarProductoMultipleForm">
             <div class="form-group">
@@ -203,11 +203,15 @@ $(document).ready(function() {
                 <label for="CantidadMultiple">Cantidad</label>
                 <input type="number" class="form-control" id="CantidadMultiple" name="CantidadMultiple" min="1">
             </div>
+            <div class="form-group" id="precioField">
+                <label for="PrecioVenta">Precio de Venta</label>
+                <input type="text" class="form-control" id="PrecioVenta" name="PrecioVenta" readonly>
+            </div>
             <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
         </form>
     `);
 
-    // Cuando se seleccione un producto del dropdown, revisamos si se debe mostrar el campo de cantidad
+    // Cuando se seleccione un producto del dropdown, revisamos si se debe mostrar el campo de cantidad y actualizamos el precio
     $('#ProductoSeleccionado').change(function() {
         let productoSeleccionado = JSON.parse($(this).val());
         
@@ -220,6 +224,9 @@ $(document).ready(function() {
             // Si no es un procedimiento, mostrar el campo de cantidad
             $('#cantidadField').removeClass('hidden-field');
         }
+        
+        // Actualizamos el precio de venta en el campo correspondiente
+        $('#PrecioVenta').val(productoSeleccionado.Precio_Venta);
     });
 
     // Disparar el evento change para manejar el producto por defecto seleccionado en el dropdown
