@@ -1,6 +1,7 @@
 <?php
 require('Pdf/fpdf.php');
 include ("Consultas.php");
+
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
@@ -40,12 +41,13 @@ $pdf->Ln();
 
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
-    $totalGeneral += $producto['Total'];
+    // Asegurarse de que los valores sean numéricos antes de sumarlos o mostrarlos
+    $totalGeneral += floatval($producto['Total']);
     $pdf->Cell(30, 10, $producto['Cod_Barra'], 1);
     $pdf->Cell(80, 10, $producto['Nombre_Prod'], 1);
-    $pdf->Cell(30, 10, $producto['Precio_Venta'], 1);
-    $pdf->Cell(30, 10, $producto['Cantidad'], 1);
-    $pdf->Cell(30, 10, $producto['Total'], 1);
+    $pdf->Cell(30, 10, floatval($producto['Precio_Venta']), 1);
+    $pdf->Cell(30, 10, intval($producto['Cantidad']), 1);
+    $pdf->Cell(30, 10, floatval($producto['Total']), 1);
     $pdf->Ln();
 }
 
@@ -67,8 +69,6 @@ if (!$pdf->Output('F', $filePath)) {
     echo json_encode(['error' => 'Error al generar el PDF']);
     exit;
 }
-
-
 
 // Definir la ruta relativa que se guardará en la base de datos
 $relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
