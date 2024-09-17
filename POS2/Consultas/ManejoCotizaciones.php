@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['guardar_cotizacion'])) {
         $cotizacionData = $_POST['cotizacion'];
 
-        // Verificar si 'cotizacion' es un array y convertirlo a JSON si es necesario
         if (is_array($cotizacionData)) {
             $cotizacionData = json_encode($cotizacionData);
         }
@@ -80,13 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoCotizacion = $_POST['TipoCotizacion'];
-        $fkCaja = $_POST['ID_Caja']; // Captura ID_Caja
-        $nombreCliente = $_POST['NombreCliente']; // Captura el nombre del cliente
-        $telefonoCliente = $_POST['TelefonoCliente']; // Captura el teléfono del cliente
+        $fkCaja = $_POST['ID_Caja'];
+        $nombreCliente = $_POST['NombreCliente'];
+        $telefonoCliente = $_POST['TelefonoCliente'];
     
         $response = guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $fkCaja, $nombreCliente, $telefonoCliente);
         
-        // Guardar ruta del PDF si está presente
         if (isset($_POST['actualizar_pdf']) && $_POST['actualizar_pdf']) {
             $IdentificadorCotizacion = $_POST['IdentificadorCotizacion'];
             $ArchivoPDF = $_POST['ArchivoPDF'];
