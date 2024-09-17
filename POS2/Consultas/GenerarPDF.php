@@ -30,7 +30,7 @@ $pdf->Cell(0, 10, 'Nombre del Paciente: ' . $nombreCliente, 0, 1);
 $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 
 // Agregar productos
-$pdf->Cell(0, 10, '', 0, 1); // Espacio en blanco
+
 $pdf->Cell(0, 10, 'Productos:', 0, 1);
 // Eliminamos la columna de Código
 $pdf->Cell(80, 10, 'Nombre', 1);
