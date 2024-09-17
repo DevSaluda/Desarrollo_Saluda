@@ -1,6 +1,7 @@
 <?php
 require('Pdf/fpdf.php');
-include ("Consultas.php");
+include("Consultas.php");
+
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
@@ -31,7 +32,7 @@ $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 // Agregar productos
 $pdf->Cell(0, 10, '', 0, 1); // Espacio en blanco
 $pdf->Cell(0, 10, 'Productos:', 0, 1);
-$pdf->Cell(30, 10, 'Código', 1);
+// Eliminamos la columna de Código
 $pdf->Cell(80, 10, 'Nombre', 1);
 $pdf->Cell(30, 10, 'Precio', 1);
 $pdf->Cell(30, 10, 'Cantidad', 1);
@@ -41,12 +42,13 @@ $pdf->Ln();
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
     $totalGeneral += $producto['Total'];
-    $pdf->Cell(30, 10, $producto['Cod_Barra'], 1);
-    $pdf->Cell(80, 10, $producto['Nombre_Prod'], 1);
-    $pdf->Cell(30, 10, $producto['Precio_Venta'], 1);
-    $pdf->Cell(30, 10, $producto['Cantidad'], 1);
-    $pdf->Cell(30, 10, $producto['Total'], 1);
-    $pdf->Ln();
+    // Usamos MultiCell para el nombre del producto y manejamos la alineación
+    $pdf->MultiCell(80, 10, utf8_decode($producto['Nombre_Prod']), 1);
+    // Usamos Cell para las demás celdas
+    $pdf->Cell(80, -10, '', 0, 0); // Espacio para alinear el resto de celdas
+    $pdf->Cell(30, 10, $producto['Precio_Venta'], 1, 0, 'C');
+    $pdf->Cell(30, 10, $producto['Cantidad'], 1, 0, 'C');
+    $pdf->Cell(30, 10, $producto['Total'], 1, 1, 'C');
 }
 
 // Total general
@@ -67,8 +69,6 @@ if (!$pdf->Output('F', $filePath)) {
     echo json_encode(['error' => 'Error al generar el PDF']);
     exit;
 }
-
-
 
 // Definir la ruta relativa que se guardará en la base de datos
 $relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
