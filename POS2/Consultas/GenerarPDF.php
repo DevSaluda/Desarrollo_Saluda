@@ -1,6 +1,6 @@
 <?php
 require('Pdf/fpdf.php');
-include("Consultas.php");
+include ("Consultas.php");
 
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
@@ -41,19 +41,19 @@ $pdf->Ln();
 
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
-    $totalGeneral += $producto['Total'];
+    $totalGeneral += floatval($producto['Total']);
     // Usamos MultiCell para el nombre del producto y manejamos la alineación
     $pdf->MultiCell(80, 10, utf8_decode($producto['Nombre_Prod']), 1);
-    // Usamos Cell para las demás celdas
+    // Ajustamos la posición de las celdas siguientes
     $pdf->Cell(80, -10, '', 0, 0); // Espacio para alinear el resto de celdas
-    $pdf->Cell(30, 10, $producto['Precio_Venta'], 1, 0, 'C');
-    $pdf->Cell(30, 10, $producto['Cantidad'], 1, 0, 'C');
-    $pdf->Cell(30, 10, $producto['Total'], 1, 1, 'C');
+    $pdf->Cell(30, 10, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
+    $pdf->Cell(30, 10, intval($producto['Cantidad']), 1, 0, 'C');
+    $pdf->Cell(30, 10, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
 }
 
 // Total general
 $pdf->Cell(140, 10, 'Total General:', 1);
-$pdf->Cell(30, 10, $totalGeneral, 1);
+$pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
 // Definir ruta absoluta para guardar el archivo PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
