@@ -21,6 +21,16 @@ $pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
 
+// Agregar logo en la parte superior
+// Ruta relativa o absoluta del logo
+$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png'; // Actualiza la ruta según donde hayas almacenado el logo
+
+// Colocar el logo (x, y, ancho, alto)
+$pdf->Image($logoPath, 10, 10, 30, 30); // Ajusta el tamaño y la posición según tus necesidades
+
+// Mover el cursor debajo del logo para evitar sobreposición con el título
+$pdf->Ln(35); // Ajusta el valor de acuerdo a la altura del logo
+
 // Agregar título
 $pdf->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
 
