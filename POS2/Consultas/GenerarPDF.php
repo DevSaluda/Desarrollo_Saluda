@@ -69,11 +69,12 @@ foreach ($cotizacion as $producto) {
     $total = number_format(floatval($producto['Total']), 2);
 
     // Obtener la cantidad de líneas que ocupará el nombre del producto
-    $pdf->SetXY(10, $pdf->GetY()); // Ajustar la posición para la primera celda
-
-    // Calcula la altura de la fila
+    $yInicial = $pdf->GetY();
     $pdf->MultiCell(110, 10, $nombreProd, 1); 
-    $alturaFila = $pdf->GetY() - $pdf->GetY(); // Altura ocupada por MultiCell
+    $yFinal = $pdf->GetY();
+
+    // Calcular la altura de la fila (en caso de múltiples líneas en el nombre del producto)
+    $alturaFila = $yFinal - $yInicial;
 
     // Verificar si hay suficiente espacio en la página para la fila actual
     if ($pdf->GetY() + $alturaFila > $pdf->GetPageHeight()) {
@@ -82,12 +83,12 @@ foreach ($cotizacion as $producto) {
     }
 
     // Establecer la posición para las siguientes celdas en la misma fila
-    $pdf->SetXY(120, $pdf->GetY() - $alturaFila); // Ajusta 120 como inicio después de la celda de nombre
+    $pdf->SetXY(120, $yInicial); // Colocar las celdas de precio, cantidad y total al lado de la celda de nombre
 
-    // Celdas de precio, cantidad y total con la misma altura
+    // Celdas de precio, cantidad y total con la misma altura que el nombre
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); 
+    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila
 
     $totalGeneral += floatval($producto['Total']);
 }
