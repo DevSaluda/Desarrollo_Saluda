@@ -30,9 +30,7 @@ $pdf->Cell(0, 10, 'Nombre del Paciente: ' . $nombreCliente, 0, 1);
 $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 
 // Agregar productos
-
 $pdf->Cell(0, 10, 'Productos:', 0, 1);
-// Eliminamos la columna de Código
 $pdf->Cell(80, 10, 'Nombre', 1);
 $pdf->Cell(30, 10, 'Precio', 1);
 $pdf->Cell(30, 10, 'Cantidad', 1);
@@ -41,24 +39,26 @@ $pdf->Ln();
 
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
-    // Obtener el alto necesario para el texto en MultiCell (nombre del producto)
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
-    $pdf->SetFont('Arial', '', 12);
-    
+    $precio = number_format(floatval($producto['Precio_Venta']), 2);
+    $cantidad = intval($producto['Cantidad']);
+    $total = number_format(floatval($producto['Total']), 2);
+
     // Obtener la cantidad de líneas que ocupará el nombre del producto
-    $altoNombre = $pdf->GetStringWidth($nombreProd) > 80 ? 20 : 10;
+    $yInicial = $pdf->GetY();
+    $pdf->MultiCell(80, 10, $nombreProd, 1);
+    $yFinal = $pdf->GetY();
 
-    // Altura máxima que se usará para la fila
-    $alturaFila = max($altoNombre, 10); 
+    // Altura utilizada por la MultiCell
+    $alturaFila = $yFinal - $yInicial;
 
-    // Imprimir las celdas
-    $pdf->MultiCell(80, $alturaFila / 2, $nombreProd, 1); // Ajustamos la altura de la MultiCell
-    $pdf->Cell(80, -$alturaFila, '', 0, 0); // Para ajustar las siguientes celdas
+    // Establecer la posición para las siguientes celdas en la misma fila
+    $pdf->SetXY(90, $yInicial);  // Ajusta 90 como inicio después de la celda de nombre
 
     // Celdas de precio, cantidad y total con la misma altura
-    $pdf->Cell(30, $alturaFila, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, intval($producto['Cantidad']), 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
+    $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
+    $pdf->Cell(30, $alturaFila, $cantidad, 1, 0, 'C');
+    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila con 1
 
     $totalGeneral += floatval($producto['Total']);
 }
@@ -96,4 +96,5 @@ if ($conexion->query($sql) === TRUE) {
 
 // Cerrar la conexión
 $conexion->close();
+
 ?>
