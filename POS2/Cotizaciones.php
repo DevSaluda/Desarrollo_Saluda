@@ -36,7 +36,7 @@ include "Consultas/ConsultaCaja.php";
 </head>
 <body>
 <?php include_once("Menu.php")?>
-<?php if ($ValorCaja): ?>
+
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -91,13 +91,7 @@ include "Consultas/ConsultaCaja.php";
         </div>
     </section>
 </div>
-<?php
-else:
-    // Mensaje en caso de que no haya caja abierta o asignada
-    echo '<div class="alert alert-warning" style="margin-top: 20px; padding: 15px; background-color: #ffe8a1; border-color: #ffd966; color: #856404; border-radius: 8px;">';
-    echo '<strong>¡Ups!</strong> Por el momento no hay una caja abierta o asignada.</div>';
-endif;
-?>
+
 
 <?php include("footer.php");?>
 <script>
