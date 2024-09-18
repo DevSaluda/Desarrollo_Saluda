@@ -1,6 +1,6 @@
 <?php
 require('Pdf/fpdf.php');
-include ("Consultas.php");
+include("Consultas.php");
 
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
@@ -70,17 +70,22 @@ foreach ($cotizacion as $producto) {
 
     // Obtener la cantidad de líneas que ocupará el nombre del producto
     $yInicial = $pdf->GetY();
-    $pdf->MultiCell(110, 10, $nombreProd, 1); 
-    $yFinal = $pdf->GetY();
+    
+    // Simular MultiCell para obtener la altura estimada de la celda
+    $multiCellHeight = $pdf->GetMultiCellHeight(110, 10, $nombreProd);
 
-    // Calcular la altura de la fila (en caso de múltiples líneas en el nombre del producto)
-    $alturaFila = $yFinal - $yInicial;
-
-    // Verificar si hay suficiente espacio en la página para la fila actual
-    if ($pdf->GetY() + $alturaFila > $pdf->GetPageHeight()) {
-        $pdf->AddPage();
+    // Verificar si hay suficiente espacio en la página para el nombre del producto y las celdas adyacentes
+    if ($pdf->GetY() + $multiCellHeight > $pdf->GetPageHeight() - 20) {
+        $pdf->AddPage(); // Hacer el salto de página antes de imprimir
         HeaderTable($pdf); // Repetir el encabezado en la nueva página
+        $yInicial = $pdf->GetY(); // Actualizar la posición inicial tras el salto
     }
+
+    // Imprimir el nombre del producto con MultiCell
+    $pdf->MultiCell(110, 10, $nombreProd, 1);
+
+    $yFinal = $pdf->GetY();
+    $alturaFila = $yFinal - $yInicial;
 
     // Establecer la posición para las siguientes celdas en la misma fila
     $pdf->SetXY(120, $yInicial); // Colocar las celdas de precio, cantidad y total al lado de la celda de nombre
