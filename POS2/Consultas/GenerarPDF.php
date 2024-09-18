@@ -21,8 +21,8 @@ $pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
 
 // Agregar el logo
-$logoPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/LogoSaluda.png';
-$pdf->Image($logoPath, 10, 10, 30); // Ajusta la posición (10, 10) y el tamaño (30) según tus necesidades
+$logoPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/LogoSaluda.png ';
+$pdf->Image($logoPath.'?ext=.png', 10, 10, 30); // Ajusta la posición (10, 10) y el tamaño (30) según tus necesidades
 
 // Agregar título
 $pdf->SetFont('Arial', 'B', 16);
