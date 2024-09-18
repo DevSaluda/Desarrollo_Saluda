@@ -19,14 +19,10 @@ if (empty($cotizacion)) {
 // Crear instancia de FPDF con soporte UTF-8
 $pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
-
-// Agregar el logo
-$logoPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/LogoSaluda.png';
-$pdf->Image($logoPath.'?ext=.png', 10, 10, 30); // Ajusta la posición (10, 10) y el tamaño (30) según tus necesidades
+$pdf->SetFont('Arial', 'B', 16);
 
 // Agregar título
-$pdf->SetFont('Arial', 'B', 16);
-$pdf->Cell(0, 20, utf8_decode('Cotización'), 0, 1, 'C'); // Ajusta la altura (20) para dejar espacio para el logo
+$pdf->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
 
 // Agregar información del cliente con fuente más pequeña
 $pdf->SetFont('Arial', '', 10);
