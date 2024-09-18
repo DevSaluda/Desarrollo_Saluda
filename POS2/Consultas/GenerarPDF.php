@@ -1,6 +1,6 @@
 <?php
 require('Pdf/fpdf.php');
-include ("Consultas.php");
+include("Consultas.php");
 
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
@@ -18,14 +18,27 @@ if (empty($cotizacion)) {
 
 // Crear instancia de FPDF con soporte UTF-8
 $pdf = new FPDF('P', 'mm', 'A4');
+
+// Función para dibujar el encabezado de la tabla
+function HeaderTable($pdf) {
+    $pdf->SetFillColor(0, 102, 204); // Azul para fondo
+    $pdf->SetTextColor(255, 255, 255); // Blanco para texto
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true); 
+    $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
+    $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
+    $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
+    
+    // Restablecer color de texto a negro para el resto de la página
+    $pdf->SetTextColor(0, 0, 0);
+}
+
+// Agregar una nueva página
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
 
 // Agregar logo en la parte superior
-// Ruta relativa o absoluta del logo
-$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png'; // Actualiza la ruta según donde hayas almacenado el logo
-
-// Colocar el logo (x, y, ancho, alto)
+$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png';
 $pdf->Image($logoPath, 10, 10, 50, 30); // Ajusta el tamaño y la posición según tus necesidades
 
 // Mover el cursor debajo del logo para evitar sobreposición con el título
@@ -42,16 +55,8 @@ $pdf->Cell(0, 10, utf8_decode('Teléfono: ' . $telefonoCliente), 0, 1);
 // Agregar espacio antes de la tabla
 $pdf->Ln(5);
 
-// Establecer colores para los encabezados de la tabla
-$pdf->SetFillColor(0, 102, 204); // Azul para fondo
-$pdf->SetTextColor(255, 255, 255); // Blanco para texto
-
-// Encabezados de la tabla (ajustando para que ocupe toda la página)
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Aumentar ancho para ocupar más espacio
-$pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
-$pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
-$pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
+// Dibujar el encabezado de la tabla
+HeaderTable($pdf);
 
 // Restablecer color de texto a negro para los datos
 $pdf->SetTextColor(0, 0, 0);
@@ -59,6 +64,17 @@ $pdf->SetTextColor(0, 0, 0);
 // Iterar sobre los productos para agregarlos a la tabla
 $totalGeneral = 0;
 $pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
+
+function getMultiCellHeight($pdf, $w, $h, $text) {
+    // Dividir el texto en líneas para contar cuántas líneas ocupará
+    $lines = $pdf->GetStringWidth($text) / $w;
+    $lines = ceil($lines); // Redondear hacia arriba para obtener líneas completas
+
+    // Retornar la altura total basada en el número de líneas y la altura por línea
+    return $lines * $h;
+}
+
+// En el bucle que imprime los productos
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
@@ -67,22 +83,38 @@ foreach ($cotizacion as $producto) {
 
     // Obtener la cantidad de líneas que ocupará el nombre del producto
     $yInicial = $pdf->GetY();
-    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1); // Aumentar ancho
-    $yFinal = $pdf->GetY();
 
-    // Altura utilizada por la MultiCell
+    // Calcular la altura estimada de la celda
+    $multiCellHeight = getMultiCellHeight($pdf, 110, 10, $nombreProd);
+
+    // Verificar si hay suficiente espacio en la página para el nombre del producto y las celdas adyacentes
+    if ($pdf->GetY() + $multiCellHeight > $pdf->GetPageHeight() - 20) {
+        $pdf->AddPage(); // Hacer el salto de página antes de imprimir
+        HeaderTable($pdf); // Repetir el encabezado en la nueva página
+        
+        // Restablecer el color de texto a negro después de agregar una nueva página
+        $pdf->SetTextColor(0, 0, 0);
+        $yInicial = $pdf->GetY(); // Actualizar la posición inicial tras el salto
+    }
+    
+
+    // Imprimir el nombre del producto con MultiCell
+    $pdf->MultiCell(110, 10, $nombreProd, 1);
+
+    $yFinal = $pdf->GetY();
     $alturaFila = $yFinal - $yInicial;
 
     // Establecer la posición para las siguientes celdas en la misma fila
-    $pdf->SetXY(120, $yInicial);  // Ajusta 120 como inicio después de la celda de nombre
+    $pdf->SetXY(120, $yInicial); // Colocar las celdas de precio, cantidad y total al lado de la celda de nombre
 
-    // Celdas de precio, cantidad y total con la misma altura
+    // Celdas de precio, cantidad y total con la misma altura que el nombre
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila con 1
+    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila
 
     $totalGeneral += floatval($producto['Total']);
 }
+
 
 // Total general
 $pdf->SetFont('Arial', 'B', 12);
