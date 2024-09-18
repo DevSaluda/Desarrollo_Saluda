@@ -77,6 +77,9 @@ foreach ($cotizacion as $producto) {
     $cantidad = intval($producto['Cantidad']);
     $total = number_format(floatval($producto['Total']), 2);
 
+    // Verificar si el nombre es muy largo y dividir en múltiples líneas
+    $nombreProd = wordwrap($nombreProd, 50, "\n", true);  // Ajustar el valor 50 según lo que necesites
+
     // Altura inicial
     $yInicial = $pdf->GetY();
 
