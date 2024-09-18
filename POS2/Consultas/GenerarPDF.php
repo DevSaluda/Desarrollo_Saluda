@@ -79,6 +79,13 @@ $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(160, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
+// Agregar espacio antes del mensaje final
+$pdf->Ln(10);
+
+// Mensaje de validez de la cotización
+$pdf->SetFont('Arial', 'I', 10); // Cambiar a cursiva para el mensaje
+$pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 24 horas. Después de este periodo, los productos están sujetos a cambios de precio.'), 0, 'C');
+
 // Definir ruta absoluta para guardar el archivo PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
