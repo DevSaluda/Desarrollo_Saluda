@@ -36,7 +36,6 @@ include "Consultas/ConsultaCaja.php";
 </head>
 <body>
 <?php include_once("Menu.php")?>
-
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -91,7 +90,6 @@ include "Consultas/ConsultaCaja.php";
         </div>
     </section>
 </div>
-
 
 <?php include("footer.php");?>
 <script>
