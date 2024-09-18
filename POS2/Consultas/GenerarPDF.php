@@ -28,8 +28,10 @@ function HeaderTable($pdf) {
     $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
     $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
     $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
+    
+    // Restablecer color de texto a negro para el resto de la página
+    $pdf->SetTextColor(0, 0, 0);
 }
-
 
 // Agregar una nueva página
 $pdf->AddPage();
@@ -89,8 +91,12 @@ foreach ($cotizacion as $producto) {
     if ($pdf->GetY() + $multiCellHeight > $pdf->GetPageHeight() - 20) {
         $pdf->AddPage(); // Hacer el salto de página antes de imprimir
         HeaderTable($pdf); // Repetir el encabezado en la nueva página
+        
+        // Restablecer el color de texto a negro después de agregar una nueva página
+        $pdf->SetTextColor(0, 0, 0);
         $yInicial = $pdf->GetY(); // Actualizar la posición inicial tras el salto
     }
+    
 
     // Imprimir el nombre del producto con MultiCell
     $pdf->MultiCell(110, 10, $nombreProd, 1);
