@@ -19,25 +19,38 @@ if (empty($cotizacion)) {
 // Crear instancia de FPDF
 $pdf = new FPDF();
 $pdf->AddPage();
+
+// Establecer fuente y tamaño para el título
 $pdf->SetFont('Arial', 'B', 16);
 
 // Agregar título
 $pdf->Cell(0, 10, 'Cotización', 0, 1, 'C');
 
-// Agregar información del cliente
-$pdf->SetFont('Arial', '', 12);
+// Agregar información del cliente con fuente más pequeña
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 10, 'Nombre del Paciente: ' . $nombreCliente, 0, 1);
 $pdf->Cell(0, 10, 'Teléfono: ' . $telefonoCliente, 0, 1);
 
-// Agregar productos
-$pdf->Cell(0, 10, 'Productos:', 0, 1);
-$pdf->Cell(80, 10, 'Nombre', 1);
-$pdf->Cell(30, 10, 'Precio', 1);
-$pdf->Cell(30, 10, 'Cantidad', 1);
-$pdf->Cell(30, 10, 'Total', 1);
-$pdf->Ln();
+// Agregar espacio antes de la tabla
+$pdf->Ln(5);
 
+// Establecer colores para los encabezados de la tabla
+$pdf->SetFillColor(0, 102, 204); // Azul para fondo
+$pdf->SetTextColor(255, 255, 255); // Blanco para texto
+
+// Encabezados de la tabla con fondo azul y texto blanco
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(80, 10, 'Nombre', 1, 0, 'C', true);
+$pdf->Cell(30, 10, 'Precio', 1, 0, 'C', true);
+$pdf->Cell(30, 10, 'Cantidad', 1, 0, 'C', true);
+$pdf->Cell(30, 10, 'Total', 1, 1, 'C', true);
+
+// Restablecer color de texto a negro para los datos
+$pdf->SetTextColor(0, 0, 0);
+
+// Iterar sobre los productos para agregarlos a la tabla
 $totalGeneral = 0;
+$pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
@@ -64,6 +77,7 @@ foreach ($cotizacion as $producto) {
 }
 
 // Total general
+$pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(140, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
