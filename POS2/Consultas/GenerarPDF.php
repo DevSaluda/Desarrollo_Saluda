@@ -72,6 +72,7 @@ function getMultiCellHeight($pdf, $w, $h, $text) {
     return $lines * $h;
 }
 
+// En el bucle que imprime los productos
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
@@ -80,9 +81,9 @@ foreach ($cotizacion as $producto) {
 
     // Obtener la cantidad de líneas que ocupará el nombre del producto
     $yInicial = $pdf->GetY();
-    
-    // Simular MultiCell para obtener la altura estimada de la celda
-    $multiCellHeight = $pdf->getMultiCellHeight(110, 10, $nombreProd);
+
+    // Calcular la altura estimada de la celda
+    $multiCellHeight = getMultiCellHeight($pdf, 110, 10, $nombreProd);
 
     // Verificar si hay suficiente espacio en la página para el nombre del producto y las celdas adyacentes
     if ($pdf->GetY() + $multiCellHeight > $pdf->GetPageHeight() - 20) {
@@ -107,6 +108,7 @@ foreach ($cotizacion as $producto) {
 
     $totalGeneral += floatval($producto['Total']);
 }
+
 
 // Total general
 $pdf->SetFont('Arial', 'B', 12);
