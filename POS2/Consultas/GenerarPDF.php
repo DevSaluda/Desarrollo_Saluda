@@ -60,7 +60,7 @@ $pdf->SetTextColor(255, 255, 255); // Blanco para texto
 
 // Encabezados de la tabla
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true);
+$pdf->Cell(90, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Reducir ancho de Nombre
 $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
 $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
@@ -80,17 +80,17 @@ foreach ($cotizacion as $producto) {
     // Altura inicial
     $yInicial = $pdf->GetY();
 
-    // Nombre del producto en MultiCell para que se ajuste a varias líneas si es necesario
-    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1);
-
-    // Establecer la posición para las siguientes celdas en la misma fila
+    // Ajustar el nombre del producto para dividirse en líneas con MultiCell
+    $pdf->MultiCell(90, 10, utf8_decode($nombreProd), 1); // Ajustar a 90 de ancho
     $yFinal = $pdf->GetY();
+
+    // Calcular la altura usada por la celda de nombre
     $alturaFila = $yFinal - $yInicial;
 
-    // Regresar para continuar desde la columna de precios
-    $pdf->SetXY(120, $yInicial);
+    // Colocar las demás celdas en la misma fila
+    $pdf->SetXY(100, $yInicial); // Posición después de la columna Nombre
 
-    // Precio, cantidad y total con la misma altura que la celda de nombre
+    // Precio, cantidad y total con la misma altura
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
     $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C');
@@ -101,7 +101,7 @@ foreach ($cotizacion as $producto) {
 
 // Total general
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(160, 10, 'Total General:', 1);
+$pdf->Cell(140, 10, 'Total General:', 1); // Aumentar a 140 el ancho total
 $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
 // Agregar espacio antes del mensaje final
