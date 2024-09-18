@@ -2,6 +2,31 @@
 require('Pdf/fpdf.php');
 include ("Consultas.php");
 
+class PDF extends FPDF {
+    // Definir el header
+    function Header() {
+        // Agregar logo
+        $this->Image('https://saludapos.com/ArchivoPDF/LogoSaluda.png', 10, 10, 50, 30);
+        // Mover a la derecha para evitar sobreposición con el logo
+        $this->Ln(35);
+        // Agregar título
+        $this->SetFont('Arial', 'B', 16);
+        $this->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
+        // Espacio debajo del título
+        $this->Ln(10);
+    }
+
+    // Definir el footer
+    function Footer() {
+        // Posición a 1.5 cm del final
+        $this->SetY(-15);
+        // Fuente Arial italic 8
+        $this->SetFont('Arial', 'I', 8);
+        // Número de página
+        $this->Cell(0, 10, 'Página ' . $this->PageNo() . ' de {nb}', 0, 0, 'C');
+    }
+}
+
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
@@ -17,25 +42,12 @@ if (empty($cotizacion)) {
 }
 
 // Crear instancia de FPDF con soporte UTF-8
-$pdf = new FPDF('P', 'mm', 'A4');
+$pdf = new PDF();
+$pdf->AliasNbPages();  // Activar el conteo total de páginas
 $pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 16);
-
-// Agregar logo en la parte superior
-// Ruta relativa o absoluta del logo
-$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png'; // Actualiza la ruta según donde hayas almacenado el logo
-
-// Colocar el logo (x, y, ancho, alto)
-$pdf->Image($logoPath, 10, 10, 50, 30); // Ajusta el tamaño y la posición según tus necesidades
-
-// Mover el cursor debajo del logo para evitar sobreposición con el título
-$pdf->Ln(35); // Ajusta el valor de acuerdo a la altura del logo
-
-// Agregar título
-$pdf->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
-
-// Agregar información del cliente con fuente más pequeña
 $pdf->SetFont('Arial', '', 10);
+
+// Agregar información del cliente
 $pdf->Cell(0, 10, utf8_decode('Nombre del Paciente: ' . $nombreCliente), 0, 1);
 $pdf->Cell(0, 10, utf8_decode('Teléfono: ' . $telefonoCliente), 0, 1);
 
@@ -46,9 +58,9 @@ $pdf->Ln(5);
 $pdf->SetFillColor(0, 102, 204); // Azul para fondo
 $pdf->SetTextColor(255, 255, 255); // Blanco para texto
 
-// Encabezados de la tabla (ajustando para que ocupe toda la página)
+// Encabezados de la tabla
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Aumentar ancho para ocupar más espacio
+$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
 $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
@@ -58,7 +70,7 @@ $pdf->SetTextColor(0, 0, 0);
 
 // Iterar sobre los productos para agregarlos a la tabla
 $totalGeneral = 0;
-$pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
+$pdf->SetFont('Arial', '', 10);
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
@@ -67,19 +79,19 @@ foreach ($cotizacion as $producto) {
 
     // Obtener la cantidad de líneas que ocupará el nombre del producto
     $yInicial = $pdf->GetY();
-    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1); // Aumentar ancho
+    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1);
     $yFinal = $pdf->GetY();
 
     // Altura utilizada por la MultiCell
     $alturaFila = $yFinal - $yInicial;
 
     // Establecer la posición para las siguientes celdas en la misma fila
-    $pdf->SetXY(120, $yInicial);  // Ajusta 120 como inicio después de la celda de nombre
+    $pdf->SetXY(120, $yInicial);
 
     // Celdas de precio, cantidad y total con la misma altura
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila con 1
+    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C');
 
     $totalGeneral += floatval($producto['Total']);
 }
@@ -93,7 +105,7 @@ $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 $pdf->Ln(10);
 
 // Mensaje de validez de la cotización
-$pdf->SetFont('Arial', 'I', 10); // Cambiar a cursiva para el mensaje
+$pdf->SetFont('Arial', 'I', 10);
 $pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 24 horas. Después de este periodo, los productos están sujetos a cambios de precio.'), 0, 'C');
 
 // Definir ruta absoluta para guardar el archivo PDF
@@ -125,5 +137,3 @@ if ($conexion->query($sql) === TRUE) {
 
 // Cerrar la conexión
 $conexion->close();
-
-?>
