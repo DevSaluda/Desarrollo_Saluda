@@ -1,8 +1,22 @@
 <?php
-
 require('Pdf/fpdf.php');
 include ("Consultas.php");
 
+// Recibir los datos de la cotización desde una solicitud POST
+$identificadorCotizacion = $_POST['IdentificadorCotizacion'];
+$nombreCliente = $_POST['NombreCliente'];
+$telefonoCliente = $_POST['TelefonoCliente'];
+
+// Decodificar la cotización si llega en formato JSON
+$cotizacion = json_decode($_POST['cotizacion'], true);
+
+// Verificar si se decodificó correctamente
+if (empty($cotizacion)) {
+    echo json_encode(['error' => 'Error al decodificar la cotización.']);
+    exit;
+}
+
+// Crear instancia de FPDF con soporte UTF-8
 class PDF extends FPDF
 {
     // Cabecera de página
@@ -116,3 +130,5 @@ if ($conexion->query($sql) === TRUE) {
 
 $conexion->close();
 ?>
+
+
