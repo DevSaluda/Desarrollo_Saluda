@@ -41,15 +41,26 @@ $pdf->Ln();
 
 $totalGeneral = 0;
 foreach ($cotizacion as $producto) {
-    $totalGeneral += floatval($producto['Total']);
-    // Usamos MultiCell para el nombre del producto y manejamos la alineación
-    $pdf->MultiCell(80, 10, utf8_decode($producto['Nombre_Prod']), 1);
-    // Ajustamos la posición de las celdas siguientes
-    $pdf->Cell(80, -10, '', 0, 0); // Espacio para alinear el resto de celdas
-    $pdf->Cell(30, 10, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
-    $pdf->Cell(30, 10, intval($producto['Cantidad']), 1, 0, 'C');
-    $pdf->Cell(30, 10, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
+    // Obtener el alto necesario para el texto en MultiCell (nombre del producto)
+    $nombreProd = utf8_decode($producto['Nombre_Prod']);
+    $pdf->SetFont('Arial', '', 12);
+    
+    // Obtener la cantidad de líneas que ocupará el nombre del producto
+    $altoNombre = $pdf->GetStringWidth($nombreProd) > 80 ? 20 : 10;
 
+    // Altura máxima que se usará para la fila
+    $alturaFila = max($altoNombre, 10); 
+
+    // Imprimir las celdas
+    $pdf->MultiCell(80, $alturaFila / 2, $nombreProd, 1); // Ajustamos la altura de la MultiCell
+    $pdf->Cell(80, -$alturaFila, '', 0, 0); // Para ajustar las siguientes celdas
+
+    // Celdas de precio, cantidad y total con la misma altura
+    $pdf->Cell(30, $alturaFila, number_format(floatval($producto['Precio_Venta']), 2), 1, 0, 'C');
+    $pdf->Cell(30, $alturaFila, intval($producto['Cantidad']), 1, 0, 'C');
+    $pdf->Cell(30, $alturaFila, number_format(floatval($producto['Total']), 2), 1, 1, 'C');
+
+    $totalGeneral += floatval($producto['Total']);
 }
 
 // Total general
