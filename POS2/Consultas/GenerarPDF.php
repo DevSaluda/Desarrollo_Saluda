@@ -1,85 +1,86 @@
 <?php
+
 require('Pdf/fpdf.php');
 include ("Consultas.php");
 
-// Recibir los datos de la cotización desde una solicitud POST
-$identificadorCotizacion = $_POST['IdentificadorCotizacion'];
-$nombreCliente = $_POST['NombreCliente'];
-$telefonoCliente = $_POST['TelefonoCliente'];
+class PDF extends FPDF
+{
+    // Cabecera de página
+    function Header()
+    {
+        // Logo
+        $this->Image('https://saludapos.com/ArchivoPDF/LogoSaluda.png', 10, 10, 50, 30);
+        // Salto de línea para evitar superposición con el contenido
+        $this->Ln(35);
+    }
 
-// Decodificar la cotización si llega en formato JSON
-$cotizacion = json_decode($_POST['cotizacion'], true);
-
-// Verificar si se decodificó correctamente
-if (empty($cotizacion)) {
-    echo json_encode(['error' => 'Error al decodificar la cotización.']);
-    exit;
+    // Pie de página
+    function Footer()
+    {
+        // Posición a 1.5 cm del final
+        $this->SetY(-15);
+        // Fuente Arial itálica
+        $this->SetFont('Arial', 'I', 8);
+        // Número de página
+        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
+    }
 }
 
-// Crear instancia de FPDF con soporte UTF-8
-$pdf = new FPDF('P', 'mm', 'A4');
+// Crear instancia de PDF con soporte UTF-8
+$pdf = new PDF('P', 'mm', 'A4');
+$pdf->AliasNbPages(); // Para contar el número total de páginas
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
 
-// Agregar logo en la parte superior
-// Ruta relativa o absoluta del logo
-$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png'; // Actualiza la ruta según donde hayas almacenado el logo
-
-// Colocar el logo (x, y, ancho, alto)
-$pdf->Image($logoPath, 10, 10, 50, 30); // Ajusta el tamaño y la posición según tus necesidades
-
-// Mover el cursor debajo del logo para evitar sobreposición con el título
-$pdf->Ln(35); // Ajusta el valor de acuerdo a la altura del logo
-
-// Agregar título
+// Título
 $pdf->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
 
-// Agregar información del cliente con fuente más pequeña
+// Datos del cliente
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 10, utf8_decode('Nombre del Paciente: ' . $nombreCliente), 0, 1);
-$pdf->Cell(0, 10, utf8_decode('Teléfono: ' . $telefonoCliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('Nombre del Paciente: ' . $_POST['NombreCliente']), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('Teléfono: ' . $_POST['TelefonoCliente']), 0, 1);
 
-// Agregar espacio antes de la tabla
+// Espacio antes de la tabla
 $pdf->Ln(5);
 
 // Establecer colores para los encabezados de la tabla
 $pdf->SetFillColor(0, 102, 204); // Azul para fondo
 $pdf->SetTextColor(255, 255, 255); // Blanco para texto
-
-// Encabezados de la tabla (ajustando para que ocupe toda la página)
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Aumentar ancho para ocupar más espacio
+
+// Encabezados de la tabla
+$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
 $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
 
 // Restablecer color de texto a negro para los datos
 $pdf->SetTextColor(0, 0, 0);
+$pdf->SetFont('Arial', '', 10);
 
-// Iterar sobre los productos para agregarlos a la tabla
+// Iterar sobre los productos
 $totalGeneral = 0;
-$pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
+$cotizacion = json_decode($_POST['cotizacion'], true);
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
     $cantidad = intval($producto['Cantidad']);
     $total = number_format(floatval($producto['Total']), 2);
 
-    // Obtener la cantidad de líneas que ocupará el nombre del producto
-    $yInicial = $pdf->GetY();
-    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1); // Aumentar ancho
+    // Salto de página si es necesario
+    if ($pdf->GetY() > 260) { // Ajusta según el margen inferior deseado
+        $pdf->AddPage();
+    }
+
+    // Imprimir fila de la tabla
+    $pdf->MultiCell(110, 10, $nombreProd, 1);
     $yFinal = $pdf->GetY();
+    $alturaFila = $yFinal - $pdf->GetY(); // Obtener altura
 
-    // Altura utilizada por la MultiCell
-    $alturaFila = $yFinal - $yInicial;
-
-    // Establecer la posición para las siguientes celdas en la misma fila
-    $pdf->SetXY(120, $yInicial);  // Ajusta 120 como inicio después de la celda de nombre
-
-    // Celdas de precio, cantidad y total con la misma altura
-    $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
-    $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila con 1
+    $pdf->SetXY(120, $pdf->GetY() - $alturaFila); // Ajustar para que la siguiente celda esté en la misma línea
+    $pdf->Cell(30, 10, $precio, 1, 0, 'C');
+    $pdf->Cell(20, 10, $cantidad, 1, 0, 'C');
+    $pdf->Cell(30, 10, $total, 1, 1, 'C');
 
     $totalGeneral += floatval($producto['Total']);
 }
@@ -89,32 +90,22 @@ $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(160, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
-// Agregar espacio antes del mensaje final
+// Agregar mensaje final
 $pdf->Ln(10);
-
-// Mensaje de validez de la cotización
-$pdf->SetFont('Arial', 'I', 10); // Cambiar a cursiva para el mensaje
+$pdf->SetFont('Arial', 'I', 10);
 $pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 24 horas. Después de este periodo, los productos están sujetos a cambios de precio.'), 0, 'C');
 
-// Definir ruta absoluta para guardar el archivo PDF
+// Guardar el PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
-
-// Verificar si la carpeta existe, y si no, crearla
 if (!is_dir($folderPath)) {
     mkdir($folderPath, 0777, true);
 }
 
-// Guardar el PDF y verificar errores
-if (!$pdf->Output('F', $filePath)) {
-    echo json_encode(['error' => 'Error al generar el PDF']);
-    exit;
-}
+$pdf->Output('F', $filePath);
 
-// Definir la ruta relativa que se guardará en la base de datos
+// Guardar en base de datos
 $relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
-
-// Realizar el UPDATE en la tabla Cotizaciones_POS
 $sql = "UPDATE Cotizaciones_POS SET ArchivoPDF = '$relativeFilePath' WHERE Identificador = '$identificadorCotizacion'";
 
 if ($conexion->query($sql) === TRUE) {
@@ -123,7 +114,5 @@ if ($conexion->query($sql) === TRUE) {
     echo json_encode(['error' => 'Error al actualizar la base de datos: ' . $conexion->error]);
 }
 
-// Cerrar la conexión
 $conexion->close();
-
 ?>
