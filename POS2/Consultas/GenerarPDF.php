@@ -77,22 +77,25 @@ foreach ($cotizacion as $producto) {
     $cantidad = intval($producto['Cantidad']);
     $total = number_format(floatval($producto['Total']), 2);
 
-    // Obtener la cantidad de líneas que ocupará el nombre del producto
+    // Altura inicial
     $yInicial = $pdf->GetY();
-    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1);
-    $yFinal = $pdf->GetY();
 
-    // Altura utilizada por la MultiCell
-    $alturaFila = $yFinal - $yInicial;
+    // Nombre del producto en MultiCell para que se ajuste a varias líneas si es necesario
+    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1);
 
     // Establecer la posición para las siguientes celdas en la misma fila
+    $yFinal = $pdf->GetY();
+    $alturaFila = $yFinal - $yInicial;
+
+    // Regresar para continuar desde la columna de precios
     $pdf->SetXY(120, $yInicial);
 
-    // Celdas de precio, cantidad y total con la misma altura
+    // Precio, cantidad y total con la misma altura que la celda de nombre
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
     $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C');
 
+    // Sumar al total general
     $totalGeneral += floatval($producto['Total']);
 }
 
@@ -108,7 +111,7 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial', 'I', 10);
 $pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 24 horas. Después de este periodo, los productos están sujetos a cambios de precio.'), 0, 'C');
 
-// Definir ruta absoluta para guardar el archivo PDF
+// Guardar el PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
 
@@ -117,7 +120,7 @@ if (!is_dir($folderPath)) {
     mkdir($folderPath, 0777, true);
 }
 
-// Guardar el PDF y verificar errores
+// Guardar el archivo PDF
 if (!$pdf->Output('F', $filePath)) {
     echo json_encode(['error' => 'Error al generar el PDF']);
     exit;
@@ -126,7 +129,7 @@ if (!$pdf->Output('F', $filePath)) {
 // Definir la ruta relativa que se guardará en la base de datos
 $relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
 
-// Realizar el UPDATE en la tabla Cotizaciones_POS
+// Actualizar la base de datos
 $sql = "UPDATE Cotizaciones_POS SET ArchivoPDF = '$relativeFilePath' WHERE Identificador = '$identificadorCotizacion'";
 
 if ($conexion->query($sql) === TRUE) {
