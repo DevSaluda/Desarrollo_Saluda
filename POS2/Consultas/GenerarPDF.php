@@ -2,31 +2,6 @@
 require('Pdf/fpdf.php');
 include ("Consultas.php");
 
-class PDF extends FPDF {
-    // Definir el header
-    function Header() {
-        // Agregar logo
-        $this->Image('https://saludapos.com/ArchivoPDF/LogoSaluda.png', 10, 10, 50, 30);
-        // Mover a la derecha para evitar sobreposición con el logo
-        $this->Ln(35);
-        // Agregar título
-        $this->SetFont('Arial', 'B', 16);
-        $this->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
-        // Espacio debajo del título
-        $this->Ln(10);
-    }
-
-    // Definir el footer
-    function Footer() {
-        // Posición a 1.5 cm del final
-        $this->SetY(-15);
-        // Fuente Arial italic 8
-        $this->SetFont('Arial', 'I', 8);
-        // Número de página
-        $this->Cell(0, 10, 'Página ' . $this->PageNo() . ' de {nb}', 0, 0, 'C');
-    }
-}
-
 // Recibir los datos de la cotización desde una solicitud POST
 $identificadorCotizacion = $_POST['IdentificadorCotizacion'];
 $nombreCliente = $_POST['NombreCliente'];
@@ -42,12 +17,25 @@ if (empty($cotizacion)) {
 }
 
 // Crear instancia de FPDF con soporte UTF-8
-$pdf = new PDF();
-$pdf->AliasNbPages();  // Activar el conteo total de páginas
+$pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 10);
+$pdf->SetFont('Arial', 'B', 16);
 
-// Agregar información del cliente
+// Agregar logo en la parte superior
+// Ruta relativa o absoluta del logo
+$logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png'; // Actualiza la ruta según donde hayas almacenado el logo
+
+// Colocar el logo (x, y, ancho, alto)
+$pdf->Image($logoPath, 10, 10, 50, 30); // Ajusta el tamaño y la posición según tus necesidades
+
+// Mover el cursor debajo del logo para evitar sobreposición con el título
+$pdf->Ln(35); // Ajusta el valor de acuerdo a la altura del logo
+
+// Agregar título
+$pdf->Cell(0, 10, utf8_decode('Cotización'), 0, 1, 'C');
+
+// Agregar información del cliente con fuente más pequeña
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 10, utf8_decode('Nombre del Paciente: ' . $nombreCliente), 0, 1);
 $pdf->Cell(0, 10, utf8_decode('Teléfono: ' . $telefonoCliente), 0, 1);
 
@@ -58,9 +46,9 @@ $pdf->Ln(5);
 $pdf->SetFillColor(0, 102, 204); // Azul para fondo
 $pdf->SetTextColor(255, 255, 255); // Blanco para texto
 
-// Encabezados de la tabla
+// Encabezados de la tabla (ajustando para que ocupe toda la página)
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(90, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Reducir ancho de Nombre
+$pdf->Cell(110, 10, utf8_decode('Nombre'), 1, 0, 'C', true); // Aumentar ancho para ocupar más espacio
 $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
 $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
 $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
@@ -70,51 +58,45 @@ $pdf->SetTextColor(0, 0, 0);
 
 // Iterar sobre los productos para agregarlos a la tabla
 $totalGeneral = 0;
-$pdf->SetFont('Arial', '', 10);
+$pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
     $precio = number_format(floatval($producto['Precio_Venta']), 2);
     $cantidad = intval($producto['Cantidad']);
     $total = number_format(floatval($producto['Total']), 2);
 
-    // Verificar si el nombre es muy largo y dividir en múltiples líneas
-    $nombreProd = wordwrap($nombreProd, 50, "\n", true);  // Ajustar el valor 50 según lo que necesites
-
-    // Altura inicial
+    // Obtener la cantidad de líneas que ocupará el nombre del producto
     $yInicial = $pdf->GetY();
-
-    // Ajustar el nombre del producto para dividirse en líneas con MultiCell
-    $pdf->MultiCell(90, 10, utf8_decode($nombreProd), 1); // Ajustar a 90 de ancho
+    $pdf->MultiCell(110, 10, utf8_decode($nombreProd), 1); // Aumentar ancho
     $yFinal = $pdf->GetY();
 
-    // Calcular la altura usada por la celda de nombre
+    // Altura utilizada por la MultiCell
     $alturaFila = $yFinal - $yInicial;
 
-    // Colocar las demás celdas en la misma fila
-    $pdf->SetXY(100, $yInicial); // Posición después de la columna Nombre
+    // Establecer la posición para las siguientes celdas en la misma fila
+    $pdf->SetXY(120, $yInicial);  // Ajusta 120 como inicio después de la celda de nombre
 
-    // Precio, cantidad y total con la misma altura
+    // Celdas de precio, cantidad y total con la misma altura
     $pdf->Cell(30, $alturaFila, $precio, 1, 0, 'C');
     $pdf->Cell(20, $alturaFila, $cantidad, 1, 0, 'C');
-    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C');
+    $pdf->Cell(30, $alturaFila, $total, 1, 1, 'C'); // Mueve el cursor a la siguiente fila con 1
 
-    // Sumar al total general
     $totalGeneral += floatval($producto['Total']);
 }
 
 // Total general
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(140, 10, 'Total General:', 1); // Aumentar a 140 el ancho total
+$pdf->Cell(160, 10, 'Total General:', 1);
 $pdf->Cell(30, 10, number_format($totalGeneral, 2), 1);
 
 // Agregar espacio antes del mensaje final
 $pdf->Ln(10);
 
 // Mensaje de validez de la cotización
-$pdf->SetFont('Arial', 'I', 10);
+$pdf->SetFont('Arial', 'I', 10); // Cambiar a cursiva para el mensaje
 $pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 24 horas. Después de este periodo, los productos están sujetos a cambios de precio.'), 0, 'C');
 
-// Guardar el PDF
+// Definir ruta absoluta para guardar el archivo PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
 $filePath = $folderPath . $identificadorCotizacion . '.pdf';
 
@@ -123,7 +105,7 @@ if (!is_dir($folderPath)) {
     mkdir($folderPath, 0777, true);
 }
 
-// Guardar el archivo PDF
+// Guardar el PDF y verificar errores
 if (!$pdf->Output('F', $filePath)) {
     echo json_encode(['error' => 'Error al generar el PDF']);
     exit;
@@ -132,7 +114,7 @@ if (!$pdf->Output('F', $filePath)) {
 // Definir la ruta relativa que se guardará en la base de datos
 $relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
 
-// Actualizar la base de datos
+// Realizar el UPDATE en la tabla Cotizaciones_POS
 $sql = "UPDATE Cotizaciones_POS SET ArchivoPDF = '$relativeFilePath' WHERE Identificador = '$identificadorCotizacion'";
 
 if ($conexion->query($sql) === TRUE) {
@@ -143,3 +125,5 @@ if ($conexion->query($sql) === TRUE) {
 
 // Cerrar la conexión
 $conexion->close();
+
+?>
