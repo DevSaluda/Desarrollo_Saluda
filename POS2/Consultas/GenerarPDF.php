@@ -30,6 +30,7 @@ function HeaderTable($pdf) {
     $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
 }
 
+
 // Agregar una nueva página
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
@@ -61,6 +62,15 @@ $pdf->SetTextColor(0, 0, 0);
 // Iterar sobre los productos para agregarlos a la tabla
 $totalGeneral = 0;
 $pdf->SetFont('Arial', '', 10); // Reducir tamaño de la fuente para el contenido
+
+function getMultiCellHeight($pdf, $w, $h, $text) {
+    // Dividir el texto en líneas para contar cuántas líneas ocupará
+    $lines = $pdf->GetStringWidth($text) / $w;
+    $lines = ceil($lines); // Redondear hacia arriba para obtener líneas completas
+
+    // Retornar la altura total basada en el número de líneas y la altura por línea
+    return $lines * $h;
+}
 
 foreach ($cotizacion as $producto) {
     $nombreProd = utf8_decode($producto['Nombre_Prod']);
