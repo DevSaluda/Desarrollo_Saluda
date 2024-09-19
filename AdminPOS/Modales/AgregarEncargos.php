@@ -1,47 +1,40 @@
+
+
 <?php
+
 include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
-
-// Verificar si el formulario ha sido enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Sucursal'])) {
-    $sucursalSeleccionada = $_POST['Sucursal']; // Capturamos la sucursal seleccionada
-    $fechaActual = date('Y-m-d'); // Fecha actual
-    $user_id = null;
-
-    // Modificar la consulta SQL para incluir la sucursal seleccionada
-    $sql1 = "SELECT 
-            Encargos_POS.Id_Encargo,
-            Encargos_POS.IdentificadorEncargo,
-            Encargos_POS.Cod_Barra,
-            Encargos_POS.Nombre_Prod,
-            Encargos_POS.Fk_sucursal,
-            Encargos_POS.MetodoDePago,
-            Encargos_POS.MontoAbonado,
-            Encargos_POS.Precio_Venta,
-            Encargos_POS.Precio_C,
-            Encargos_POS.Cantidad,
-            Encargos_POS.Fecha_Ingreso,
-            Encargos_POS.FkPresentacion,
-            Encargos_POS.Fk_Caja,
-            Encargos_POS.Proveedor1,
-            Encargos_POS.Proveedor2,
-            Encargos_POS.AgregadoPor,
-            Encargos_POS.AgregadoEl,
-            Encargos_POS.ID_H_O_D,
-            Encargos_POS.Estado,
-            Encargos_POS.TipoEncargo,
-            SucursalesCorre.ID_SucursalC,
-            SucursalesCorre.Nombre_Sucursal
-        FROM 
-            Encargos_POS
-        INNER JOIN 
-            SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-        WHERE 
-            Encargos_POS.Fk_sucursal = '$sucursalSeleccionada'"; // Filtramos por la sucursal seleccionada
-
-    $query = $conn->query($sql1);
+$fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
+$user_id = null;
+$sql1 = "SELECT 
+        Encargos_POS.Id_Encargo,
+        Encargos_POS.IdentificadorEncargo,
+        Encargos_POS.Cod_Barra,
+        Encargos_POS.Nombre_Prod,
+        Encargos_POS.Fk_sucursal,
+        Encargos_POS.MetodoDePago,
+        Encargos_POS.MontoAbonado,
+        Encargos_POS.Precio_Venta,
+        Encargos_POS.Precio_C,
+        Encargos_POS.Cantidad,
+        Encargos_POS.Fecha_Ingreso,
+        Encargos_POS.FkPresentacion,
+        Encargos_POS.Fk_Caja,
+        Encargos_POS.Proveedor1,
+        Encargos_POS.Proveedor2,
+        Encargos_POS.AgregadoPor,
+        Encargos_POS.AgregadoEl,
+        Encargos_POS.ID_H_O_D,
+        Encargos_POS.Estado,
+        Encargos_POS.TipoEncargo,
+        SucursalesCorre.ID_SucursalC,
+        SucursalesCorre.Nombre_Sucursal
+    FROM 
+        Encargos_POS
+    INNER JOIN 
+        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC";
+$query = $conn->query($sql1);
 ?>
-
 
 <!-- Central Modal Medium Info -->
 <div class="modal fade" id="MuestraEncargos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: scroll;">
