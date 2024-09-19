@@ -168,6 +168,18 @@ include "Consultas/Consultas.php";
           100% { transform: rotate(360deg); }
         }
       </style>
+
+<form method="POST" id="formSucursal">
+    <input type="hidden" name="sucursal" value="<?php echo $sucursal?>" id="inputSucursalElegida" />
+</form>
+
+<script type="text/javascript">
+    document.getElementById('inputSucursalElegida').value = sucursal;
+    document.getElementById('formSucursal').submit(); // Envía el formulario automáticamente
+</script>
+
+
+
 <script type="text/javascript">
     var mes = "<?php echo $mes; ?>";
     var sucursal = "<?php echo $sucursal; ?>";

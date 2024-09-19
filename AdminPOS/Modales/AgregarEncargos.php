@@ -6,6 +6,8 @@ include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 $user_id = null;
+$$sucursal = isset($_POST['sucursal']) ? $_POST['sucursal'] : null; // Captura el valor de la sucursal
+
 $sql1 = "SELECT 
         Encargos_POS.Id_Encargo,
         Encargos_POS.IdentificadorEncargo,
@@ -32,8 +34,11 @@ $sql1 = "SELECT
     FROM 
         Encargos_POS
     INNER JOIN 
-        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC";
+        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+    WHERE 
+        Encargos_POS.Fk_sucursal = '$sucursal'"; // Filtra por la sucursal recibida
 $query = $conn->query($sql1);
+
 ?>
 
 <!-- Central Modal Medium Info -->
