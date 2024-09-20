@@ -35,7 +35,7 @@ function HeaderTable($pdf) {
 
 // Agregar una nueva página
 $pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 16);
+$pdf->SetFont('Arial', '', 10);
 
 // Agregar logo en la parte superior
 $logoPath = 'https://saludapos.com/ArchivoPDF/LogoSaluda.png';
