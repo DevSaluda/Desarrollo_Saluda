@@ -28,7 +28,7 @@ function HeaderTable($pdf) {
     $pdf->Cell(30, 10, utf8_decode('Precio'), 1, 0, 'C', true);
     $pdf->Cell(20, 10, utf8_decode('Cantidad'), 1, 0, 'C', true);
     $pdf->Cell(30, 10, utf8_decode('Total'), 1, 1, 'C', true);
-    
+    $pdf->SetFont('Arial', '', 10);
     // Restablecer color de texto a negro para el resto de la página
     $pdf->SetTextColor(0, 0, 0);
 }
