@@ -144,7 +144,7 @@ if (!$pdf->Output('F', $filePath)) {
 }
 
 // Definir la ruta relativa que se guardará en la base de datos
-$relativeFilePath = 'ArchivoPDF/' . $identificadorCotizacion . '.pdf';
+$relativeFilePath = 'ArchivoPDF/' . "COT-$identificadorCotizacion" . '.pdf';
 
 // Realizar el UPDATE en la tabla Cotizaciones_POS
 $sql = "UPDATE Cotizaciones_POS SET ArchivoPDF = '$relativeFilePath' WHERE Identificador = '$identificadorCotizacion'";
