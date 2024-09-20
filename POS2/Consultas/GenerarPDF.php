@@ -130,7 +130,7 @@ $pdf->MultiCell(0, 10, utf8_decode('Nota: Esta cotización tiene una validez de 
 
 // Definir ruta absoluta para guardar el archivo PDF
 $folderPath = '/home/u155356178/domains/saludapos.com/public_html/ArchivoPDF/';
-$filePath = $folderPath . $identificadorCotizacion . '.pdf';
+$filePath = $folderPath ."COT-$identificadorCotizacion". '.pdf';
 
 // Verificar si la carpeta existe, y si no, crearla
 if (!is_dir($folderPath)) {
