@@ -87,11 +87,6 @@ include "Consultas/ConsultaCaja.php";
                     <label for="TelefonoCliente">Teléfono</label>
                     <input type="text" class="form-control" id="TelefonoCliente" name="TelefonoCliente" required>
                 </div>
-                
-                <div class="form-group">
-                    <label for="MontoAbonado">Monto Abonado</label>
-                    <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
-                </div>
 
                 <div class="form-group">
                     <label for="MetodoDePago">Método de Pago</label>
@@ -136,6 +131,28 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
+
+     // Función para mostrar u ocultar el campo "Dinero Ingresado"
+     function toggleDineroIngresado() {
+        const metodoPago = $('#MetodoDePago').val();
+        if (metodoPago === 'Efectivo') {
+            $('#dineroIngresadoContainer').removeClass('hidden-field'); // Mostrar el campo
+            $('#DineroIngresado').attr('required', true); // Hacer que el campo sea obligatorio
+        } else {
+            $('#dineroIngresadoContainer').addClass('hidden-field'); // Ocultar el campo
+            $('#DineroIngresado').removeAttr('required'); // Eliminar la obligatoriedad
+            $('#DineroIngresado').val(''); // Limpiar el valor del campo
+        }
+    }
+
+    // Detectar cambios en el select de método de pago
+    $('#MetodoDePago').change(function() {
+        toggleDineroIngresado();
+    });
+
+    // Ejecutar la función al cargar la página para que se ajuste inicialmente
+    toggleDineroIngresado();
+});
 
     function calcularCambio() {
         let dineroIngresado = parseFloat($('#DineroIngresado').val()) || 0;
