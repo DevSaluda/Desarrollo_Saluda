@@ -96,10 +96,10 @@ include "Consultas/ConsultaCaja.php";
                     </select>
                 </div>
     <!-- Nuevo campo para el dinero ingresado -->
-    <div class="form-group">
-        <label for="DineroIngresado">Dinero Ingresado</label>
-        <input type="number" step="0.01" class="form-control" id="DineroIngresado" name="DineroIngresado" required>
-    </div>
+    <div class="form-group hidden-field" id="dineroIngresadoContainer">
+    <label for="DineroIngresado">Dinero Ingresado</label>
+    <input type="number" step="0.01" class="form-control" id="DineroIngresado" name="DineroIngresado">
+</div>
                 <!-- Campo para el monto abonado -->
     <div class="form-group">
         <label for="MontoAbonado">Monto Abonado</label>
