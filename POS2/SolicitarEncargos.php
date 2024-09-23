@@ -101,16 +101,23 @@ include "Consultas/ConsultaCaja.php";
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="RequiereCambio" name="RequiereCambio"> ¿Requiere cambio?
-                    </label>
-                </div>
+                <!-- Campo para el monto abonado -->
+    <div class="form-group">
+        <label for="MontoAbonado">Monto Abonado</label>
+        <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
+    </div>
 
-                <div class="form-group hidden-field" id="CambioContainer">
-                    <label for="Cambio">Cambio</label>
-                    <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
-                </div>
+    <!-- Nuevo campo para el dinero ingresado -->
+    <div class="form-group">
+        <label for="DineroIngresado">Dinero Ingresado</label>
+        <input type="number" step="0.01" class="form-control" id="DineroIngresado" name="DineroIngresado" required>
+    </div>
+
+    <!-- Campo para el cambio, que se calculará automáticamente -->
+    <div class="form-group">
+        <label for="Cambio">Cambio</label>
+        <input type="number" step="0.01" class="form-control" id="Cambio" name="Cambio" readonly>
+    </div>
                 
                 <button type="submit" class="btn btn-success">Guardar Encargo</button>
             </form>
@@ -131,53 +138,21 @@ $(document).ready(function() {
     let encargo = [];
 
     function calcularCambio() {
-    let totalEncargo = parseFloat($('#totalEncargo').text());
-    let minimoAbonar = totalEncargo * 0.5;
-    let montoAbonado = parseFloat($('#MontoAbonado').val());
-    let cambio = 0;
+        let dineroIngresado = parseFloat($('#DineroIngresado').val()) || 0;
+        let montoAbonado = parseFloat($('#MontoAbonado').val()) || 0;
+        let cambio = dineroIngresado - montoAbonado;
 
-    $('#errorMontoAbonado').hide();
-    $('#errorRequiereCambio').hide();
-
-    if ($('#RequiereCambio').is(':checked')) {
-        if (montoAbonado > totalEncargo) {
-            cambio = montoAbonado - totalEncargo;
-        } else if (montoAbonado > minimoAbonar && montoAbonado < totalEncargo) {
-            cambio = montoAbonado - minimoAbonar;
+        if (cambio >= 0) {
+            $('#Cambio').val(cambio.toFixed(2));
         } else {
-            $('#errorRequiereCambio').show();
-            $('#Cambio').val(''); // Limpiar el valor de cambio si hay un error
-            return; // Salir de la función si hay un error
+            $('#Cambio').val('0'); // No hay cambio si el dinero ingresado es menor al monto abonado
         }
-
-        $('#Cambio').val(cambio.toFixed(2));
-        montoAbonado = montoAbonado - cambio; // Restar el cambio al monto abonado
-        $('#MontoAbonado').val(montoAbonado.toFixed(2)); // Actualizar el monto abonado en el campo
-
-    } else {
-        $('#Cambio').val(''); // Limpiar el campo si no requiere cambio
-        $('#CambioContainer').addClass('hidden-field');
     }
 
-    if (montoAbonado < minimoAbonar) {
-        $('#errorMontoAbonado').show();
-    }
-}
-
-$('#MontoAbonado').on('input', function() {
-    calcularCambio();
-});
-
-$('#RequiereCambio').change(function() {
-    if ($(this).is(':checked')) {
-        $('#CambioContainer').removeClass('hidden-field');
-        calcularCambio(); // Recalcular cambio al marcar la casilla
-    } else {
-        $('#CambioContainer').addClass('hidden-field');
-        $('#Cambio').val('0');
-        calcularCambio(); // Recalcular sin el cambio
-    }
-});
+    // Calcular el cambio cuando se modifiquen los valores de Dinero Ingresado o Monto Abonado
+    $('#DineroIngresado, #MontoAbonado').on('input', function() {
+        calcularCambio();
+    });
 
 
 $(document).ready(function() {
@@ -394,6 +369,13 @@ else {
     // Validar el monto abonado antes de enviar el formulario
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
+
+        let dineroIngresado = parseFloat($('#DineroIngresado').val());
+
+        if (dineroIngresado < montoAbonado) {
+        alert("El dinero ingresado debe ser mayor o igual al monto abonado.");
+        return;
+        }
 
         let montoAbonado = parseFloat($('#MontoAbonado').val());
         let pagoMinimo = parseFloat($('#pagoMinimo').text());
