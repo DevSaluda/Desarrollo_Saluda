@@ -95,18 +95,18 @@ include "Consultas/ConsultaCaja.php";
                         <option value="Tarjeta">Tarjeta</option>
                     </select>
                 </div>
-
+    <!-- Nuevo campo para el dinero ingresado -->
+    <div class="form-group">
+        <label for="DineroIngresado">Dinero Ingresado</label>
+        <input type="number" step="0.01" class="form-control" id="DineroIngresado" name="DineroIngresado" required>
+    </div>
                 <!-- Campo para el monto abonado -->
     <div class="form-group">
         <label for="MontoAbonado">Monto Abonado</label>
         <input type="number" step="0.01" class="form-control" id="MontoAbonado" name="MontoAbonado" required>
     </div>
 
-    <!-- Nuevo campo para el dinero ingresado -->
-    <div class="form-group">
-        <label for="DineroIngresado">Dinero Ingresado</label>
-        <input type="number" step="0.01" class="form-control" id="DineroIngresado" name="DineroIngresado" required>
-    </div>
+
 
     <!-- Campo para el cambio, que se calculará automáticamente -->
     <div class="form-group">
@@ -133,7 +133,7 @@ $(document).ready(function() {
     let encargo = [];
 
      // Función para mostrar u ocultar el campo "Dinero Ingresado"
-     function toggleDineroIngresado() {
+    function toggleDineroIngresado() {
         const metodoPago = $('#MetodoDePago').val();
         if (metodoPago === 'Efectivo') {
             $('#dineroIngresadoContainer').removeClass('hidden-field'); // Mostrar el campo
@@ -150,9 +150,6 @@ $(document).ready(function() {
         toggleDineroIngresado();
     });
 
-    // Ejecutar la función al cargar la página para que se ajuste inicialmente
-    toggleDineroIngresado();
-});
 
     function calcularCambio() {
         let dineroIngresado = parseFloat($('#DineroIngresado').val()) || 0;
@@ -450,6 +447,10 @@ else {
                 location.reload();
             }
         });
+});
+
+
+
 });
 </script>
 </body>
