@@ -52,7 +52,7 @@ while($fila = $result->fetch_assoc()) {
     <td>
         <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
         <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
-          <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-Devolucion"><i class="far fa-calendar-times"></i></a>
+          <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-info btn-sm btn-Devolucion"><i class="far fa-calendar-times"></i></a>
     </td>';
     
     $c++;
