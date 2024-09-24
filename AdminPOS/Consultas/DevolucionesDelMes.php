@@ -108,6 +108,24 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .status-box {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.bg-yellow {
+    background-color: yellow;
+    color: black; /* Para mejorar la visibilidad del texto */
+}
+
+.bg-default {
+    background-color: gray;
+}
+
+
 </style>
 
 <script>

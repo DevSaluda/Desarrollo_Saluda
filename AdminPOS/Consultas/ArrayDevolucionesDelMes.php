@@ -15,6 +15,7 @@ Devolucion_POS.Fecha,
 Devolucion_POS.Agrego, 
 Devolucion_POS.HoraAgregado, 
 Devolucion_POS.NumOrde, 
+Devolucion_POS.Estatus, 
 SucursalesCorre.Nombre_Sucursal 
 FROM 
 Devolucion_POS 
@@ -35,25 +36,27 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Nombre_Produc"] = $fila["Nombre_Produc"];
     $data[$c]["Cantidad"] = $fila["Cantidad"];
     $data[$c]["Num_Factura"] = $fila["Num_Factura"];
-   
-  
-
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Motivo_Devolucion"] = $fila["Motivo_Devolucion"];
     $data[$c]["Fecha"] = date("d/m/Y", strtotime($fila["Fecha"]));
     $data[$c]["HoraAgregado"] = $fila["HoraAgregado"];
     $data[$c]["Agrego"] = $fila["Agrego"];
+
+    // Añadir el estatus con una clase dinámica basada en el valor
+    $estatus = $fila["Estatus"];
+    $colorClass = ($estatus == "Devolucion") ? "bg-yellow" : "bg-default"; // Clase CSS según el estatus
+
+    $data[$c]["Estatus"] = '<span class="status-box ' . $colorClass . '">' . $estatus . '</span>';
+
     $data[$c]["Acciones"] = '
     <td>
-    <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
-     <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
- 
-    
+        <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
+        <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
     </td>';
-        
-   
+    
     $c++;
 }
+
 
 $results = [
     "sEcho" => 1,
