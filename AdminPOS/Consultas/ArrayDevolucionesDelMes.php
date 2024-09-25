@@ -46,8 +46,11 @@ while($fila = $result->fetch_assoc()) {
     $estatus = $fila["Estatus"];
     $colorClass = ($estatus == "Devolucion") ? "bg-yellow" : "bg-default"; // Clase CSS según el estatus
 
+    // Imprimir el HTML en bruto para verificar el contenido generado
+    error_log("HTML generado: " . '<span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span>');
+
     // Utilizar htmlspecialchars para asegurarnos de que se rendericen bien los caracteres especiales en HTML
-    $data[$c]["Estatus"] = '<span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span>';
+    $data[$c]["Estatus"] = '<td><span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span></td>';
 
     // Añadir botones de acción
     $data[$c]["Acciones"] = '
