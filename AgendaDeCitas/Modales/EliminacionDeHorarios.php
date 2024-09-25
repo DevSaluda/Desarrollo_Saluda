@@ -41,7 +41,6 @@ if ($query->num_rows > 0) {
 ?>
 <?php if($Especialistas != null): ?>
 
-<!-- Estilos para hacer la ventana modal más grande y el formato de 12 horas -->
 <style>
     .modal-dialog {
         max-width: 80%;
@@ -49,12 +48,18 @@ if ($query->num_rows > 0) {
     }
 
     .form-control {
-        font-size: 1rem;  
-        height: 40px;     
+        font-size: 1rem;
+        height: 40px;
     }
 
     label {
         font-size: 1.2rem;
+    }
+
+    /* Añadimos un estilo para las horas checkbox */
+    .hora-checkbox {
+        display: block;
+        margin: 5px 0;
     }
 </style>
 
@@ -79,14 +84,11 @@ if ($query->num_rows > 0) {
             </div>
 
             <div class="col">
-                <label for="HoraSeleccionada">Hora a eliminar<span class="text-danger">*</span></label>
+                <label for="HoraSeleccionada">Horas a eliminar<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                    <div id="HoraCheckboxes" class="form-control">
+                        <!-- Aquí se cargarán las horas como checkboxes -->
                     </div>
-                    <select id="HoraSeleccionada" class="form-control" name="HoraSeleccionada" required>
-                        <option value="">Selecciona una hora</option>
-                    </select>
                 </div>
             </div>
         </div>
@@ -111,12 +113,11 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
         method: 'POST',
         data: { fecha_id: fecha_id },
         success: function(data) {
-            var horaSelect = document.getElementById('HoraSeleccionada');
-            horaSelect.innerHTML = '';
+            var horaCheckboxes = document.getElementById('HoraCheckboxes');
+            horaCheckboxes.innerHTML = '';  // Limpiar cualquier contenido previo
             var horas = JSON.parse(data);
 
             horas.forEach(function(horaObj) {
-                var option = document.createElement('option');
                 var [hour, minute] = horaObj.Horario_Disponibilidad.split(':').map(Number);
                 var date = new Date();
                 date.setHours(hour);
@@ -124,10 +125,21 @@ document.getElementById('FechaSeleccionada').addEventListener('change', function
                 date.setSeconds(0);
 
                 var time = date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true });
-                option.value = horaObj.ID_Horario;
-                option.text = time;
 
-                horaSelect.appendChild(option);
+                // Crear checkbox para cada hora
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'horasSeleccionadas[]';  // Importante para enviar un array con los valores seleccionados
+                checkbox.value = horaObj.ID_Horario;
+                checkbox.id = 'hora_' + horaObj.ID_Horario;
+
+                var label = document.createElement('label');
+                label.htmlFor = checkbox.id;
+                label.className = 'hora-checkbox';
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(' ' + time));
+
+                horaCheckboxes.appendChild(label);
             });
         }
     });
