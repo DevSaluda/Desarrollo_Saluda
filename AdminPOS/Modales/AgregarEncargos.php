@@ -75,7 +75,7 @@ $query = $conn->query($sql1);
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
                      <td><input type="text"  class="form-control" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
-                     <td><input type="text" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
+                     <td><input type="text" class="form-control" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
                      <td><input type="text"  name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
