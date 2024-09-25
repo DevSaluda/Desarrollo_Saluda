@@ -30,7 +30,19 @@ $result = mysqli_query($conn, $sql);
 $data = [];
 $c = 0;
 
-while($fila = $result->fetch_assoc()) {
+while ($fila = $result->fetch_assoc()) {
+    $estatus = $fila["Estatus"];
+    
+    // Definir estilos para el botón según el estatus
+    if ($estatus == "Devolucion") {
+        $estatus = '<button style="background-color: #ffc107 !important;" class="btn btn-default btn-sm">Devolución</button>';
+    } elseif (empty($estatus)) {
+        $estatus = '<button style="background-color: white; color: black;" class="btn btn-default btn-sm">Sin Estatus</button>';
+    } else {
+        $estatus = '<button style="background-color: #28a745 !important; color: white;" class="btn btn-default btn-sm">' . htmlspecialchars($estatus) . '</button>';
+    }
+
+    // Asignación de los datos al array
     $data[$c]["NumOrde"] = $fila["NumOrde"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Produc"] = $fila["Nombre_Produc"];
@@ -41,16 +53,7 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["Fecha"] = date("d/m/Y", strtotime($fila["Fecha"]));
     $data[$c]["HoraAgregado"] = $fila["HoraAgregado"];
     $data[$c]["Agrego"] = $fila["Agrego"];
-
-    // Añadir el estatus con una clase dinámica basada en el valor
-    $estatus = $fila["Estatus"];
-    $colorClass = ($estatus == "Devolucion") ? "bg-yellow" : "bg-default"; // Clase CSS según el estatus
-
-    // Imprimir el HTML en bruto para verificar el contenido generado
-    error_log("HTML generado: " . '<span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span>');
-
-    // Utilizar htmlspecialchars para asegurarnos de que se rendericen bien los caracteres especiales en HTML
-    $data[$c]["Estatus"] = '<td><span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span></td>';
+    $data[$c]["Estatus"] = $estatus; // Mostrar el botón según el estatus
 
     // Añadir botones de acción
     $data[$c]["Acciones"] = '
