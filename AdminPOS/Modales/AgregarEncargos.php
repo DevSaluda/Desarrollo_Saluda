@@ -69,7 +69,7 @@ $query = $conn->query($sql1);
                    <th>Piezas</th>
                 
                    <th>Solicitado por</th>
-                   <th>Numero de orden</th>
+                  
                  </thead>
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
@@ -79,7 +79,7 @@ $query = $conn->query($sql1);
                      <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
                      <td><input type="text"  name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
-                     <td><input type="text" name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
+                     <td><input type="text" hidden name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
                      <input type="text" hidden name="AgregadoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly />
                      <input type="text" hidden name="PrecioVenta[]" value="<?php echo $encargo['Precio_Venta']?>"readonly />
                      <input type="text" hidden name="PrecioCompra[]" value="<?php echo $encargo['Precio_C']?>"readonly />
