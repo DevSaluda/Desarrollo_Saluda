@@ -59,7 +59,7 @@ $query = $conn->query($sql1);
            <?php if($query->num_rows > 0): ?>
            <div class="text-center">
              <div class="table-responsive">
-             <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+             <form action="javascript:void(0)"  method="post" id="AgregaElEncargoAlPedido">
              <button type="submit" class="btn btn-primary">Agregar al pedido</button>
                <table id="StockSucursales" class="table table-hover">
                  <thead>
@@ -74,7 +74,7 @@ $query = $conn->query($sql1);
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                     <td><input type="text" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
+                     <td><input type="text"  class="form-control" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
                      <td><input type="text" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
                      <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
                      <td><input type="text"  name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
