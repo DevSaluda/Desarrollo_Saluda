@@ -46,18 +46,19 @@ while($fila = $result->fetch_assoc()) {
     $estatus = $fila["Estatus"];
     $colorClass = ($estatus == "Devolucion") ? "bg-yellow" : "bg-default"; // Clase CSS según el estatus
 
-    $data[$c]["Estatus"] = '<span class="status-box ' . $colorClass . '">' . $estatus . '</span>';
+    // Utilizar htmlspecialchars para asegurarnos de que se rendericen bien los caracteres especiales en HTML
+    $data[$c]["Estatus"] = '<span class="status-box ' . htmlspecialchars($colorClass, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($estatus, ENT_QUOTES, 'UTF-8') . '</span>';
 
+    // Añadir botones de acción
     $data[$c]["Acciones"] = '
     <td>
-        <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
-        <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
-          <a data-id="' . $fila["ID_Registro"] . '" class="btn btn-info btn-sm btn-Devolucion"><i class="fa-solid fa-rotate-left"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info btn-sm btn-Devolucion"><i class="fa-solid fa-rotate-left"></i></a>
     </td>';
     
     $c++;
 }
-
 
 $results = [
     "sEcho" => 1,
