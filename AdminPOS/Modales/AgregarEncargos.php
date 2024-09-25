@@ -77,7 +77,7 @@ $query = $conn->query($sql1);
                      <td><input type="text"  class="form-control" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
                      <td><input type="text" class="form-control" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
                      <td><input type="text" class="form-control" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
-                     <td><input type="text"  class="form-control" name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
+                     <td><input type="text"  class="form-control" name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>" /></td>
                      <td><input type="text" class="form-control" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
                      <td><input type="text" hidden name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
                      <input type="text" hidden name="AgregadoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly />
