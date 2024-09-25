@@ -52,8 +52,16 @@ while($fila=$result->fetch_assoc()){
   $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
   $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
 
-  // Agregar el link de Google Maps al mensaje de WhatsApp
-  $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita {$fila["Tipo_Consulta"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de {$fila["Nombre_Sucursal"]}. Puedes ver la ubicación de la sucursal aquí: {$fila["LinkMaps"]}. Esperamos tu confirmación ☺️";
+  // Generar el mensaje base de WhatsApp
+  $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita {$fila["Tipo_Consulta"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de {$fila["Nombre_Sucursal"]}.";
+  
+  // Verificar si hay un link de Google Maps y agregarlo al mensaje
+  if (!empty($fila["LinkMaps"])) {
+    $whatsappMessage .= " Puedes ver la ubicación de la sucursal aquí: {$fila["LinkMaps"]}.";
+  }
+
+  // Finalizar el mensaje de WhatsApp
+  $whatsappMessage .= " Esperamos tu confirmación ☺️";
 
   $data[$c]["ConWhatsapp"] = "<a class='btn btn-success' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
 
