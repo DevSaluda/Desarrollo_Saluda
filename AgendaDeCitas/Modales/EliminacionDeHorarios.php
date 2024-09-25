@@ -39,7 +39,7 @@ if ($query->num_rows > 0) {
     }
 }
 ?>
-<?php if($Especialistas != null): ?>
+    <?php if($Especialistas != null): ?>
 
 <style>
     .modal-dialog {
