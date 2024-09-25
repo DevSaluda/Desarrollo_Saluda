@@ -39,7 +39,7 @@ if ($query->num_rows > 0) {
     }
 }
 ?>
-    <?php if($Especialistas != null): ?>
+<?php if($Especialistas != null): ?>
 
 <style>
     .modal-dialog {
@@ -56,7 +56,16 @@ if ($query->num_rows > 0) {
         font-size: 1.2rem;
     }
 
-    /* Añadimos un estilo para las horas checkbox */
+    /* Estilo para el contenedor de las horas */
+    #HoraCheckboxes {
+        max-height: 200px; /* Limita la altura para que no se desborde */
+        overflow-y: auto;  /* Añade barra de desplazamiento vertical si hay muchas horas */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+    }
+
     .hora-checkbox {
         display: block;
         margin: 5px 0;
@@ -86,7 +95,7 @@ if ($query->num_rows > 0) {
             <div class="col">
                 <label for="HoraSeleccionada">Horas a eliminar<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
-                    <div id="HoraCheckboxes" class="form-control">
+                    <div id="HoraCheckboxes">
                         <!-- Aquí se cargarán las horas como checkboxes -->
                     </div>
                 </div>
