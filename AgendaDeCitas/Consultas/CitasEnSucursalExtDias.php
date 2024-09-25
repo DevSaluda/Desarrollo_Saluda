@@ -226,6 +226,7 @@ tabla = $('#CitasIndex').DataTable({
        { mData: 'Especialidad' },
        { mData: 'Doctor' },
        { mData: 'Sucursal' },
+       { mData: 'Tipo_Consulta' },
        { mData: 'Observaciones' },
       //  { mData: 'ConfirmarCita' },
        { mData: 'AgendadoPor' },
@@ -288,6 +289,7 @@ tabla = $('#CitasIndex').DataTable({
 <th>Especialidad</th>
 <th>Doctor </th>
 <th>Sucursal</th>
+<th>Motivo de Consulta</th>
 <th>Observaciones</th>
 <!-- <th>Recordartorio</th> -->
 
