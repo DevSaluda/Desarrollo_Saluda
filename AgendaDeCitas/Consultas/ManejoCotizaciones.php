@@ -74,12 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
         $IdentificadorCotizacion = $_POST['IdentificadorCotizacion'];
-        $fkSucursal = "AgendaDeCitas"
+        $fkSucursal = "AgendaDeCitas";
         $agregadoPor = $_POST['AgregadoPor'];
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoCotizacion = $_POST['TipoCotizacion'];
-        $fkCaja = "Agenda"
+        $fkCaja = "Agenda";
         $nombreCliente = $_POST['NombreCliente'];
         $telefonoCliente = $_POST['TelefonoCliente'];
     
