@@ -7,7 +7,7 @@ include 'Consultas/Consultas.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Cotizaciones | <?php echo $row['Nombre_Sucursal']?> </title>
+    <title>Cotizaciones AgendaDeCitas</title>
     <?php include "Header.php"?>
     <style>
         .error {
@@ -65,7 +65,6 @@ include 'Consultas/Consultas.php';
             <h4 class="highlight">Total de la cotización: <span id="totalCotizacion">0</span></h4>
             <form id="guardarCotizacionForm">
                 <div class="form-group hidden-field">
-                    <input type="hidden" class="form-control" id="FkSucursal" name="FkSucursal" value="<?php echo $row['Fk_Sucursal']?>">
                     <input type="hidden" class="form-control" id="AgregadoPor" name="AgregadoPor" value="<?php echo $row['Nombre_Apellidos']?>">
                     <input type="hidden" class="form-control" id="ID_H_O_D" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']?>">
                     <input type="hidden" class="form-control" id="Estado" name="Estado" value="Pendiente">

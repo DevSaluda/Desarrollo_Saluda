@@ -22,7 +22,7 @@ function buscarProducto($conn, $Cod_Barra) {
     }
 }
 
-function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $nombreCliente, $telefonoCliente) {
+function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion,$fkCaja, $nombreCliente, $telefonoCliente) {
     $response = [];
 
     foreach ($cotizacion as $producto) {
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
         $IdentificadorCotizacion = $_POST['IdentificadorCotizacion'];
-        $fkSucursal = $_POST['FkSucursal'];
+        $fkSucursal = "AgendaDeCitas"
         $agregadoPor = $_POST['AgregadoPor'];
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
