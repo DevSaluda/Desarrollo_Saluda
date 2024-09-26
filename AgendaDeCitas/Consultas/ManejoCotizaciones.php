@@ -22,7 +22,7 @@ function buscarProducto($conn, $Cod_Barra) {
     }
 }
 
-function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion,$fkCaja, $nombreCliente, $telefonoCliente) {
+function guardarCotizacion($conn, $cotizacion, $IdentificadorCotizacion, $fkSucursal, $agregadoPor, $idHOD, $estado, $tipoCotizacion, $fkCaja, $nombreCliente, $telefonoCliente) {
     $response = [];
 
     foreach ($cotizacion as $producto) {
