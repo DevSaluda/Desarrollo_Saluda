@@ -21,7 +21,7 @@
             
             <div class="row mb-4">
               <div class="col text-center">
-                <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
+                <p class="h4 animated fadeIn">¿Estas seguro de genrar la orden?</p>
               </div>
             </div>
             <input type="text" hidden class="form-control" name="Mes"value="<?php echo $row['Fk_Sucursal']?>">
