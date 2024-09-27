@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idHOD = $_POST['ID_H_O_D'];
         $estado = $_POST['Estado'];
         $tipoCotizacion = $_POST['TipoCotizacion'];
-        $fkCaja = "Agenda";
+        $fkCaja = "Agenda"; 
         $nombreCliente = $_POST['NombreCliente'];
         $telefonoCliente = $_POST['TelefonoCliente'];
     
