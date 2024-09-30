@@ -207,6 +207,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 var fechafin = '<?php echo $fechafin; ?>';
                 var dataToSend = {
                   "Mes": mes,
+                  "fechainicio": fechainicio,
+                  "fechafin": fechafin,
                 };
                 return dataToSend;
               },
