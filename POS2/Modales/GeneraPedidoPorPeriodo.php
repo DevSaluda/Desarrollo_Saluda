@@ -30,7 +30,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " readonly id="Fecha1" name="Fecha1">
+  <input type="date" class="form-control " readonly id="Fecha1" name="fechainicio">
   <input type="text" name="Sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
   <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -94,7 +94,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " readonly name="Fecha2"  id="Fecha2">
+  <input type="date" class="form-control " readonly name="fechafin"  id="Fecha2">
     </div>
     <script>
   document.addEventListener("DOMContentLoaded", function() {

@@ -41,6 +41,8 @@ include "Consultas/Consultas.php";
           if (isset($_POST['Mes']) ) {
               // Obtener los valores del formulario
               $mes = $_POST['Mes'];
+              $fechainicio = $_POST['fechainicio'];
+              $fechafin = $_POST['fechafin'];
               
           } else {
               // Si alguna de las variables no está seteada o es nula, mostrar un mensaje de error
@@ -197,6 +199,8 @@ include "Consultas/Consultas.php";
               "url": "https://saludapos.com/POS2/Consultas/ArrayDesglosePrePedido.php",
               "data": function (d) {
                 var mes = '<?php echo $mes; ?>';
+                var fechainicio = '<?php echo $fechainicio; ?>';
+                var fechafin = '<?php echo $fechafin; ?>';
                 var dataToSend = {
                   "Mes": mes,
                 };

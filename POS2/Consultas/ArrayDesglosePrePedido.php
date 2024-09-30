@@ -8,9 +8,11 @@ include "Consultas.php";
 // Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica si las variables están seteadas y no son nulas
-    if (isset($_POST['Mes'])) {
+    if (isset($_POST['Mes']) && isset($_POST['fechainicio']) && isset($_POST['fechafin'])) {
         // Obtén los valores del formulario
         $mes = $_POST['Mes'];
+        $fechainicio = $_POST['fechainicio'];
+        $fechafin = $_POST['fechafin'];
        
         // Concatena los valores en la consulta SQL
         $sql = "SELECT 
@@ -41,8 +43,8 @@ INNER JOIN
 INNER JOIN
     SucursalesCorre sc ON vp.Fk_sucursal = sc.ID_SucursalC
 WHERE 
-    vp.Fecha_venta = CURRENT_DATE
-    AND vp.Fk_sucursal = '$mes' -- Asegúrate de escapar esta variable
+    vp.Fecha_venta BETWEEN '$fechainicio' AND '$fechafin' -- Filtra por rango de fechas
+    AND vp.Fk_sucursal = '$mes' -- Filtra por sucursal
     AND sv.Servicio_ID = '00000000024'
 GROUP BY 
     vp.Cod_Barra, 
