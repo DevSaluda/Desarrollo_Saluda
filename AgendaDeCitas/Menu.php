@@ -330,22 +330,12 @@
                     </p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="https://saludapos.com/AgendaDeCitas/CitasEspecialistasExt" class="nav-link" style="color: white;">
-                    <i class="fas fa-calendar-check"></i>
-                    <p>
-                     Programar campaña
-
-                    </p>
-                  </a>
-                </li>
                
                 <li class="nav-item">
                   <a href="https://saludapos.com/AgendaDeCitas/DirectorioNuevaProgramacionSucursales" class="nav-link" style="color: white;">
                     <i class="fas fa-calendar-check"></i>
                     <p>
-                     Programa Campañas Nueva
+                     Programa Campaña
 
                     </p>
                   </a>
