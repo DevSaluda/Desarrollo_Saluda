@@ -38,20 +38,50 @@
     
     // Obtenemos la fecha actual
     const today = new Date();
+    const dayOfWeek = today.getDay(); // 0: domingo, 1: lunes, ..., 6: sábado
     
-    // Calculamos la fecha de hace 3 días
-    const threeDaysAgo = new Date();
-    threeDaysAgo.setDate(today.getDate() - 3);
+    // Definimos los días que restarás según el día de la semana
+    let daysToSubtract;
+    switch(dayOfWeek) {
+      case 1: // Lunes
+        daysToSubtract = 3;
+        break;
+      case 2: // Martes
+        daysToSubtract = 2;
+        break;
+      case 3: // Miércoles
+        daysToSubtract = 3;
+        break;
+      case 4: // Jueves
+        daysToSubtract = 1;
+        break;
+      case 5: // Viernes
+        daysToSubtract = 1;
+        break;
+      case 6: // Sábado
+        daysToSubtract = 1;
+        break;
+      case 0: // Domingo
+        daysToSubtract = 3; // Empieza con lunes, restamos 3
+        break;
+      default:
+        daysToSubtract = 3; // Por defecto restamos 3 días si algo falla
+    }
+
+    // Calculamos la fecha restando los días necesarios
+    const calculatedDate = new Date();
+    calculatedDate.setDate(today.getDate() - daysToSubtract);
     
-    // Convertimos la fecha a formato 'YYYY-MM-DD' para que sea válida para el input de tipo date
-    const formattedThreeDaysAgo = threeDaysAgo.toISOString().split('T')[0];
+    // Convertimos la fecha a formato 'YYYY-MM-DD' para el input de tipo date
+    const formattedCalculatedDate = calculatedDate.toISOString().split('T')[0];
     const formattedToday = today.toISOString().split('T')[0];
     
     // Establecemos los atributos min y max para limitar la selección de fechas
-    dateInput.setAttribute('min', formattedThreeDaysAgo);
+    dateInput.setAttribute('min', formattedCalculatedDate);
     dateInput.setAttribute('max', formattedToday);
   });
 </script>
+
     </div>
     </div>
     
