@@ -79,8 +79,12 @@
     // Establecemos los atributos min y max para limitar la selección de fechas
     dateInput.setAttribute('min', formattedCalculatedDate);
     dateInput.setAttribute('max', formattedToday);
+    
+    // Asignamos la fecha calculada al valor del input
+    dateInput.value = formattedCalculatedDate;
   });
 </script>
+
 
     </div>
     </div>
