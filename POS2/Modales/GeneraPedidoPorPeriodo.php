@@ -21,7 +21,7 @@
             
             <div class="row mb-4">
               <div class="col text-center">
-                <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
+                <p class="h4 animated fadeIn">¿Deseas generar tu orden de pedido?</p>
               </div>
             </div>
             <div class="row">
@@ -30,7 +30,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " id="Fecha1" name="Fecha1">
+  <input type="date" class="form-control " readonly id="Fecha1" name="Fecha1">
   <input type="text" name="Sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
   <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -94,7 +94,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " name="Fecha2"  id="Fecha2">
+  <input type="date" class="form-control " readonly name="Fecha2"  id="Fecha2">
     </div>
     <script>
   document.addEventListener("DOMContentLoaded", function() {
