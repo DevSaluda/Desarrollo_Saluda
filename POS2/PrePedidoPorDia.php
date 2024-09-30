@@ -37,10 +37,6 @@ include "Consultas/Consultas.php";
       <?php
      // Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Añadir var_dump para depurar las variables recibidas
-  var_dump($_POST); // Muestra todo lo que está en el array $_POST
-  // Detener la ejecución para inspeccionar la salida
-  exit;
 
   // Verifica si las variables están seteadas y no son nulas
   if (isset($_POST['Mes']) && isset($_POST['fechainicio']) && isset($_POST['fechafin'])) {
