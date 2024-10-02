@@ -23,8 +23,10 @@
         const canvas = document.getElementById('canvas');
         const captureButton = document.getElementById('capture');
 
-        // Solicitar acceso a la cámara del usuario
-        navigator.mediaDevices.getUserMedia({ video: true })
+        // Solicitar acceso a la cámara trasera del usuario
+        navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { exact: "environment" } }  // Indica el uso de la cámara trasera
+        })
         .then((stream) => {
             video.srcObject = stream;
         })
