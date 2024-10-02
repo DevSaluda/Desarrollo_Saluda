@@ -7,7 +7,7 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 // Función para extraer texto de una imagen usando Google Cloud Vision API
 function extraerTextoDeImagen($rutaImagen) {
     // Configurar la ruta a las credenciales JSON
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ruta correcta a las credenciales
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/app-saluda-966447541c3c.json'); // Ruta correcta a las credenciales
 
     // Crear un cliente para Google Cloud Vision
     $imageAnnotator = new ImageAnnotatorClient();
@@ -21,18 +21,42 @@ function extraerTextoDeImagen($rutaImagen) {
         $fullTextAnnotation = $response->getFullTextAnnotation();
 
         // Retornar el texto completo detectado
-        if ($fullTextAnnotation) {
-            return $fullTextAnnotation->getText();
-        } else {
-            return 'No se detectó texto en la imagen.';
-        }
+        return $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
 
     } finally {
         $imageAnnotator->close();
     }
 }
 
-// El resto del código permanece igual
+// Función para procesar el texto extraído y extraer datos relevantes
+function procesarTextoFactura($texto) {
+    $lineas = explode("\n", $texto);
+    $factura = [];
+    $proveedor = '';
+
+    foreach ($lineas as $linea) {
+        // Suponiendo que el nombre del proveedor está en la primera línea o en el logo
+        if (empty($proveedor)) {
+            $proveedor = trim($linea); // Captura la primera línea como proveedor
+            continue;
+        }
+
+        // Regex para capturar la información de productos
+        if (preg_match('/(.+)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+(\d+)\s+([\d\.]+)\s+([\d\.]+)/', trim($linea), $matches)) {
+            // Captura nombre de producto, cantidad, lote, precio e importe
+            $factura[] = [
+                'producto' => $matches[1],
+                'cantidad' => $matches[2],
+                'lote' => $matches[3],
+                'precio' => $matches[4],
+                'importe' => $matches[5],
+            ];
+        }
+    }
+
+    return [$proveedor, $factura];
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo; // Corrige la ruta aquí
@@ -41,13 +65,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
         // Procesar la imagen para extraer texto
         $textoExtraido = extraerTextoDeImagen($rutaArchivo);
-        echo "<h2>Texto extraído de la imagen:</h2>";
-        echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
+        list($proveedor, $productos) = procesarTextoFactura($textoExtraido);
+
+        echo "<h2>Factura de: " . htmlspecialchars($proveedor) . "</h2>";
+        echo "<table border='1'>";
+        echo "<tr><th>Nombre del Producto</th><th>Cantidad</th><th>Lote</th><th>Precio</th><th>Importe</th></tr>";
+
+        foreach ($productos as $producto) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($producto['producto']) . "</td>";
+            echo "<td>" . htmlspecialchars($producto['cantidad']) . "</td>";
+            echo "<td>" . htmlspecialchars($producto['lote']) . "</td>";
+            echo "<td>" . htmlspecialchars($producto['precio']) . "</td>";
+            echo "<td>" . htmlspecialchars($producto['importe']) . "</td>";
+            echo "</tr>";
+        }
+
+        echo "</table>";
     } else {
         echo "Hubo un error al subir la imagen.";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
