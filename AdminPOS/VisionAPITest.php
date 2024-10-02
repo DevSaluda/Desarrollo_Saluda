@@ -32,10 +32,9 @@ function extraerTextoDeImagen($rutaImagen) {
     }
 }
 
-// Verificar si se ha subido un archivo
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
-    $rutaArchivo = 'uploads/' . $nombreArchivo;
+    $rutaArchivo = __DIR__ . '/uploads/' . $nombreArchivo; // Asegura que se use la ruta correcta
 
     // Mover el archivo subido a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
@@ -47,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "Hubo un error al subir la imagen.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
