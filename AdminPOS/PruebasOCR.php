@@ -59,7 +59,9 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("Datos procesados:", data);
-                    alert("Datos procesados correctamente: " + data.message);
+
+                    // Redirigir a la nueva página con el texto reconocido como parámetro en la URL
+                    window.location.href = `resultado.php?texto=${encodeURIComponent(data.text)}`;
                 })
                 .catch(error => console.error("Error en el procesamiento:", error));
             });
