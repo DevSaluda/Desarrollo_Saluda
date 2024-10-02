@@ -7,7 +7,8 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 // Función para extraer texto de una imagen usando Google Cloud Vision API
 function extraerTextoDeImagen($rutaImagen) {
     // Configurar la ruta a las credenciales JSON
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=/https://saludapos.com/app-saluda-966447541c3c.json'); // Asegúrate de que esta ruta sea correcta
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/app-saluda-966447541c3c.json');
+
 
     // Crear un cliente para Google Cloud Vision
     $imageAnnotator = new ImageAnnotatorClient();
