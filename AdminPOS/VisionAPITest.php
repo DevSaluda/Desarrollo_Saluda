@@ -16,13 +16,13 @@ function extraerTextoDeImagen($rutaImagen) {
         // Leer el archivo de la imagen
         $image = file_get_contents($rutaImagen);
 
-        // Enviar la imagen a Google Cloud Vision para realizar OCR
-        $response = $imageAnnotator->textDetection($image);
-        $texts = $response->getTextAnnotations();
+        // Enviar la imagen a Google Cloud Vision para realizar detección de texto en documentos
+        $response = $imageAnnotator->documentTextDetection($image);
+        $fullTextAnnotation = $response->getFullTextAnnotation();
 
-        // Retornar el texto detectado
-        if ($texts) {
-            return $texts[0]->getDescription();
+        // Retornar el texto completo detectado
+        if ($fullTextAnnotation) {
+            return $fullTextAnnotation->getText();
         } else {
             return 'No se detectó texto en la imagen.';
         }
@@ -32,6 +32,7 @@ function extraerTextoDeImagen($rutaImagen) {
     }
 }
 
+// El resto del código permanece igual
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo; // Corrige la ruta aquí
@@ -47,21 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Imagen para OCR</title>
-</head>
-<body>
-    <h1>Subir una imagen para extraer texto (OCR)</h1>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        Selecciona una imagen:
-        <input type="file" name="archivo" accept="image/*" required>
-        <input type="submit" value="Subir Imagen">
-    </form>
-</body>
-</html>
