@@ -22,7 +22,6 @@ function extraerTextoDeImagen($rutaImagen) {
 
         // Retornar el texto completo detectado
         return $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
-
     } finally {
         $imageAnnotator->close();
     }
@@ -35,21 +34,21 @@ function procesarTextoFactura($texto) {
     $proveedor = '';
 
     foreach ($lineas as $linea) {
-        // Suponiendo que el nombre del proveedor está en la primera línea o en el logo
-        if (empty($proveedor)) {
-            $proveedor = trim($linea); // Captura la primera línea como proveedor
-            continue;
+        // Suponiendo que el nombre del proveedor está cerca del logo (línea que contiene "Marzam")
+        if (empty($proveedor) && stripos($linea, 'Marzam') !== false) {
+            $proveedor = trim($linea); // Captura el nombre del proveedor
         }
 
         // Regex para capturar la información de productos
-        if (preg_match('/(.+)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+(\d+)\s+([\d\.]+)\s+([\d\.]+)/', trim($linea), $matches)) {
+        // Este patrón debe ajustarse según el formato de la factura específica
+        if (preg_match('/(.+?)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+(\d+)\s+([\d\.]+)\s+([\d\.]+)/', trim($linea), $matches)) {
             // Captura nombre de producto, cantidad, lote, precio e importe
             $factura[] = [
-                'producto' => $matches[1],
+                'producto' => trim($matches[1]),
                 'cantidad' => $matches[2],
                 'lote' => $matches[3],
-                'precio' => $matches[4],
-                'importe' => $matches[5],
+                'precio' => $matches[5],
+                'importe' => $matches[6],
             ];
         }
     }
