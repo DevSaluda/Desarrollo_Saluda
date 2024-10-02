@@ -48,3 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Imagen para OCR</title>
+</head>
+<body>
+    <h1>Subir una imagen para extraer texto (OCR)</h1>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        Selecciona una imagen:
+        <input type="file" name="archivo" accept="image/*" required>
+        <input type="submit" value="Subir Imagen">
+    </form>
+</body>
+</html>
