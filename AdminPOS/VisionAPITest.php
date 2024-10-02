@@ -7,7 +7,7 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 // Función para extraer texto de una imagen usando Google Cloud Vision API
 function extraerTextoDeImagen($rutaImagen) {
     // Configurar la ruta a las credenciales JSON
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=/https://saludapos.com/app-saluda-966447541c3c.json');
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=/https://saludapos.com/app-saluda-966447541c3c.json'); // Asegúrate de que esta ruta sea correcta
 
     // Crear un cliente para Google Cloud Vision
     $imageAnnotator = new ImageAnnotatorClient();
@@ -34,7 +34,7 @@ function extraerTextoDeImagen($rutaImagen) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
-    $rutaArchivo = __DIR__ . '/home/u155356178/domains/saludapos.com/public_html/uploads/' . $nombreArchivo; // Asegura que se use la ruta correcta
+    $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo; // Corrige la ruta aquí
 
     // Mover el archivo subido a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "Hubo un error al subir la imagen.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
