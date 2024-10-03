@@ -4,114 +4,104 @@ require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
-// Función para limpiar el texto extraído del OCR
-function limpiarTextoOCR($texto) {
-    // Elimina espacios extra entre palabras
-    $texto = preg_replace('/\s+/', ' ', $texto);
-
-    // Normaliza saltos de línea
-    $texto = str_replace("\r", "\n", $texto); // Asegúrate de que los saltos de línea estén consistentes
-    $texto = trim($texto); // Elimina espacios al principio y al final
-
-    return $texto;
-}
-
-// Función para extraer texto de una imagen usando Google Cloud Vision API
-function extraerTextoDeImagen($rutaImagen) {
+// Función para extraer el texto de una imagen usando Google Cloud Vision API
+function obtenerTextoDeOCR($rutaImagen) {
     // Configurar la ruta a las credenciales JSON
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ruta correcta a las credenciales
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ajusta la ruta correcta
 
     // Crear un cliente para Google Cloud Vision
-    $imageAnnotator = new ImageAnnotatorClient();
+    $vision = new ImageAnnotatorClient();
 
     try {
         // Leer el archivo de la imagen
         $image = file_get_contents($rutaImagen);
 
         // Enviar la imagen a Google Cloud Vision para realizar detección de texto en documentos
-        $response = $imageAnnotator->documentTextDetection($image);
+        $response = $vision->documentTextDetection($image);
         $fullTextAnnotation = $response->getFullTextAnnotation();
 
-        // Retornar el texto completo detectado y limpiar el texto
-        $textoExtraido = $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
-        return limpiarTextoOCR($textoExtraido);
-
+        // Retornar el texto completo detectado
+        return $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
     } finally {
-        $imageAnnotator->close();
+        $vision->close();
     }
 }
 
-// Función para procesar el texto extraído y extraer datos relevantes (productos, cantidad, lote, precio e importe)
-function procesarTextoFactura($texto) {
-    $lineas = explode("\n", $texto);
-    $factura = [];
-    $proveedor = '';
-    $detallesTotales = [];
-    
-    foreach ($lineas as $linea) {
-        if (empty($proveedor) && strpos($linea, 'Marzam') !== false) {
-            // Busca la línea que contiene el nombre del proveedor
-            $proveedor = trim($linea); // Captura la primera línea como proveedor
-            continue;
-        }
+// Función para extraer datos usando expresiones regulares
+function extraer_datos($texto) {
+    // Array para almacenar los datos extraídos
+    $datos = [];
 
-        // Buscar líneas con productos usando regex
-        if (preg_match('/^\d{5}\s+(.+?)\s+(\d+)\s+([A-Z0-9]+)\s+([\d,\.]+)\s+([\d,\.]+)$/', trim($linea), $matches)) {
-            // Caso Producto, Cantidad, Lote, Precio unitario, Precio total
-            $factura[] = [
-                'producto' => $matches[1],
-                'cantidad' => $matches[2],
-                'lote' => $matches[3],
-                'precio_unitario' => $matches[4],
-                'importe' => $matches[5],
-            ];
-        }
+    // Extraer información del cliente
+    preg_match("/CLIENTE\s([A-Z0-9]+)\s(.+?)\s(.+)/", $texto, $cliente);
+    $datos['cliente_id'] = isset($cliente[1]) ? $cliente[1] : '';
+    $datos['cliente_nombre'] = isset($cliente[2]) ? $cliente[2] : '';
+    $datos['cliente_direccion'] = isset($cliente[3]) ? $cliente[3] : '';
 
-        // Buscar las líneas de totales
-        if (strpos($linea, 'TOTAL NETO') !== false || strpos($linea, 'I.V.A.') !== false) {
-            $detallesTotales[] = trim($linea);
-        }
+    // Extraer información de los productos
+    preg_match_all("/(\d{4})\s(.+?)\s(\d{2}.\d{2})\s(\d+)\s(\d{2,}.?\d{2})/", $texto, $productos);
+    $datos['productos'] = [];
+    for ($i = 0; $i < count($productos[0]); $i++) {
+        $datos['productos'][] = [
+            'codigo' => $productos[1][$i],
+            'nombre' => $productos[2][$i],
+            'precio_unitario' => $productos[3][$i],
+            'cantidad' => $productos[4][$i],
+            'importe' => $productos[5][$i],
+        ];
     }
 
-    return [$proveedor, $factura, $detallesTotales];
+    // Extraer resumen de la factura
+    preg_match("/SUBTOTAL\s([\d,]+.\d{2})\sIVA\s([\d,]+.\d{2})\sTOTAL\s([\d,]+.\d{2})/", $texto, $resumen);
+    $datos['subtotal'] = isset($resumen[1]) ? $resumen[1] : '';
+    $datos['iva'] = isset($resumen[2]) ? $resumen[2] : '';
+    $datos['total'] = isset($resumen[3]) ? $resumen[3] : '';
+
+    return $datos;
+}
+
+// Función para mostrar los datos en formato HTML
+function mostrar_datos_factura($datos) {
+    echo "<h2>Factura</h2>";
+    echo "<p><strong>Cliente:</strong> {$datos['cliente_id']} - {$datos['cliente_nombre']}</p>";
+    echo "<p><strong>Dirección del cliente:</strong> {$datos['cliente_direccion']}</p>";
+    echo "<table border='1'>
+            <tr>
+                <th>Código</th>
+                <th>Producto</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
+            </tr>";
+    foreach ($datos['productos'] as $producto) {
+        echo "<tr>
+                <td>{$producto['codigo']}</td>
+                <td>{$producto['nombre']}</td>
+                <td>{$producto['precio_unitario']}</td>
+                <td>{$producto['cantidad']}</td>
+                <td>{$producto['importe']}</td>
+              </tr>";
+    }
+    echo "</table>";
+    echo "<p><strong>Subtotal:</strong> {$datos['subtotal']}</p>";
+    echo "<p><strong>IVA:</strong> {$datos['iva']}</p>";
+    echo "<p><strong>Total:</strong> {$datos['total']}</p>";
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
-    $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo; // Corrige la ruta aquí
+    $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
 
     // Mover el archivo subido a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Procesar la imagen para extraer texto
-        $textoExtraido = extraerTextoDeImagen($rutaArchivo);
+        // Procesar la imagen para extraer texto mediante OCR
+        $textoFactura = obtenerTextoDeOCR($rutaArchivo);
 
-        // Mostrar el texto extraído antes de procesar
-        echo "<h2>Texto Extraído:</h2>";
-        echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
+        // Procesar el texto de la factura extraído por el OCR
+        $datosFactura = extraer_datos($textoFactura);
 
-        // Procesar el texto extraído para obtener proveedor, productos y totales
-        list($proveedor, $productos, $detallesTotales) = procesarTextoFactura($textoExtraido);
-
-        // Mostrar el proveedor y la tabla de productos
-        echo "<h2>Factura de: " . htmlspecialchars($proveedor) . "</h2>";
-        echo "<table border='1'>";
-        echo "<tr><th>Nombre del Producto</th><th>Cantidad</th><th>Lote</th><th>Precio Unitario</th><th>Importe</th></tr>";
-
-        foreach ($productos as $producto) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($producto['producto']) . "</td>";
-            echo "<td>" . htmlspecialchars($producto['cantidad']) . "</td>";
-            echo "<td>" . htmlspecialchars($producto['lote']) . "</td>";
-            echo "<td>" . htmlspecialchars($producto['precio_unitario']) . "</td>";
-            echo "<td>" . htmlspecialchars($producto['importe']) . "</td>";
-            echo "</tr>";
-        }
-
-        echo "</table>";
-
-        // Mostrar los detalles totales
-        echo "<h2>Detalles Totales:</h2>";
-        echo "<pre>" . htmlspecialchars(implode("\n", $detallesTotales)) . "</pre>";
+        // Mostrar los datos extraídos en formato HTML
+        mostrar_datos_factura($datosFactura);
     } else {
         echo "Hubo un error al subir la imagen.";
     }
