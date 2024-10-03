@@ -17,8 +17,18 @@ function analizarImagen($rutaImagen) {
     $client = new ImageAnnotatorClient();
 
     // Leer la imagen y convertirla a base64
-    $imageData = file_get_contents($rutaImagen);
-    $base64 = base64_encode($imageData);
+    // Leer la imagen y convertirla a base64
+$imageData = file_get_contents($rutaImagen);
+$base64 = base64_encode($imageData);
+
+// Comprobar si la conversión fue exitosa
+if ($base64 === false) {
+    echo "Error al convertir la imagen a base64.\n";
+    exit;
+} else {
+    echo "Datos de la imagen en base64 generados correctamente. Longitud: " . strlen($base64) . " caracteres.\n";
+}
+
 
     // Preparar la imagen
     $image = (new Image())->setContent($base64);
@@ -88,11 +98,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
 
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
+        // Verificar que el archivo se haya subido
+        echo "Archivo subido correctamente: " . $rutaArchivo . "\n";
+    
+        // Comprobar si el archivo se puede leer
+        if (file_exists($rutaArchivo)) {
+            $imageData = file_get_contents($rutaArchivo);
+            if ($imageData === false) {
+                echo "Error al leer el archivo de imagen.\n";
+                exit;
+            } else {
+                echo "El archivo se leyó correctamente. Tamaño: " . strlen($imageData) . " bytes.\n";
+            }
+        }
+    
         analizarImagen($rutaArchivo); // Llama a la función para analizar la imagen
     } else {
         echo "Hubo un error al subir la imagen.";
     }
-}
+}    
 ?>
 
 <!DOCTYPE html>
