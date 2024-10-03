@@ -5,6 +5,7 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\AnnotateImageRequest;
 use Google\Cloud\Vision\V1\Image;
+use Google\Cloud\Vision\V1\ImageContext;
 
 // Función para enviar una imagen a Google Cloud Vision API
 function analizarImagen($rutaImagen) {
@@ -34,15 +35,15 @@ function analizarImagen($rutaImagen) {
         (new Feature())->setType(Feature\Type::CROP_HINTS)->setMaxResults(50),
     ];
 
+    // Crear la instancia de ImageContext
+    $imageContext = (new ImageContext())
+        ->setCropHintsParams(['aspectRatios' => [0.8, 1, 1.2]]);
+
     // Crear la solicitud
     $request = (new AnnotateImageRequest())
         ->setImage($image)
         ->setFeatures($features)
-        ->setImageContext([
-            'cropHintsParams' => [
-                'aspectRatios' => [0.8, 1, 1.2],
-            ],
-        ]);
+        ->setImageContext($imageContext); // Usar la instancia de ImageContext
 
     // Realizar la solicitud de análisis
     $response = $client->batchAnnotateImages([$request]);
