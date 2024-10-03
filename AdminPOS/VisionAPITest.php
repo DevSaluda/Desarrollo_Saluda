@@ -2,6 +2,9 @@
 require 'vendor/autoload.php'; // Incluye el autoload de Composer para cargar las dependencias
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+use Google\Cloud\Vision\V1\Feature;
+use Google\Cloud\Vision\V1\AnnotateImageRequest;
+use Google\Cloud\Vision\V1\Image;
 
 // Función para enviar una imagen a Google Cloud Vision API
 function analizarImagen($rutaImagen) {
@@ -15,32 +18,35 @@ function analizarImagen($rutaImagen) {
     $imageData = file_get_contents($rutaImagen);
     $base64 = base64_encode($imageData);
 
-    // Preparar la solicitud
-    $response = $client->batchAnnotateImages([
-        'requests' => [
-            [
-                'image' => [
-                    'content' => $base64,
-                ],
-                'features' => [
-                    ['type' => 'LANDMARK_DETECTION', 'maxResults' => 50],
-                    ['type' => 'FACE_DETECTION', 'maxResults' => 50],
-                    ['type' => 'OBJECT_LOCALIZATION', 'maxResults' => 50, 'model' => 'builtin/latest'],
-                    ['type' => 'LOGO_DETECTION', 'maxResults' => 50],
-                    ['type' => 'LABEL_DETECTION', 'maxResults' => 50],
-                    ['type' => 'DOCUMENT_TEXT_DETECTION', 'maxResults' => 50, 'model' => 'builtin/latest'],
-                    ['type' => 'SAFE_SEARCH_DETECTION', 'maxResults' => 50],
-                    ['type' => 'IMAGE_PROPERTIES', 'maxResults' => 50],
-                    ['type' => 'CROP_HINTS', 'maxResults' => 50],
-                ],
-                'imageContext' => [
-                    'cropHintsParams' => [
-                        'aspectRatios' => [0.8, 1, 1.2],
-                    ],
-                ],
+    // Preparar la imagen
+    $image = (new Image())
+        ->setContent($base64);
+
+    // Preparar las características de la imagen
+    $features = [
+        (new Feature())->setType('LANDMARK_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('FACE_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('OBJECT_LOCALIZATION')->setMaxResults(50)->setModel('builtin/latest'),
+        (new Feature())->setType('LOGO_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('LABEL_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('DOCUMENT_TEXT_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('SAFE_SEARCH_DETECTION')->setMaxResults(50),
+        (new Feature())->setType('IMAGE_PROPERTIES')->setMaxResults(50),
+        (new Feature())->setType('CROP_HINTS')->setMaxResults(50),
+    ];
+
+    // Crear la solicitud
+    $request = (new AnnotateImageRequest())
+        ->setImage($image)
+        ->setFeatures($features)
+        ->setImageContext([
+            'cropHintsParams' => [
+                'aspectRatios' => [0.8, 1, 1.2],
             ],
-        ],
-    ]);
+        ]);
+
+    // Realizar la solicitud de análisis
+    $response = $client->batchAnnotateImages([$request]);
 
     // Procesar la respuesta
     foreach ($response->getResponses() as $res) {
