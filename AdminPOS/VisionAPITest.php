@@ -46,37 +46,34 @@ function procesarTextoFactura($texto) {
     $lineas = explode("\n", $texto);
     $factura = [];
     $proveedor = '';
-
+    $detallesTotales = [];
+    
     foreach ($lineas as $linea) {
-        if (empty($proveedor)) {
-            // Suponiendo que el nombre del proveedor está en la primera línea o en el logo
+        if (empty($proveedor) && strpos($linea, 'Marzam') !== false) {
+            // Busca la línea que contiene el nombre del proveedor
             $proveedor = trim($linea); // Captura la primera línea como proveedor
             continue;
         }
 
-        // Prueba con múltiples expresiones regulares para productos
-        if (preg_match('/(.+?)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+([\d,\.]+)\s+([\d,\.]+)/', trim($linea), $matches)) {
-            // Caso 1: Producto, Cantidad, Lote, Precio e Importe en una sola línea
+        // Buscar líneas con productos usando regex
+        if (preg_match('/^\d{5}\s+(.+?)\s+(\d+)\s+([A-Z0-9]+)\s+([\d,\.]+)\s+([\d,\.]+)$/', trim($linea), $matches)) {
+            // Caso Producto, Cantidad, Lote, Precio unitario, Precio total
             $factura[] = [
                 'producto' => $matches[1],
                 'cantidad' => $matches[2],
                 'lote' => $matches[3],
-                'precio' => $matches[4],
+                'precio_unitario' => $matches[4],
                 'importe' => $matches[5],
             ];
-        } elseif (preg_match('/(.+?)\s+(\d+)\s+([\d,\.]+)\s+([\d,\.]+)/', trim($linea), $matches)) {
-            // Caso 2: Producto, Cantidad, Precio e Importe en una sola línea (sin lote)
-            $factura[] = [
-                'producto' => $matches[1],
-                'cantidad' => $matches[2],
-                'lote' => 'No especificado', // No hay lote
-                'precio' => $matches[3],
-                'importe' => $matches[4],
-            ];
+        }
+
+        // Buscar las líneas de totales
+        if (strpos($linea, 'TOTAL NETO') !== false || strpos($linea, 'I.V.A.') !== false) {
+            $detallesTotales[] = trim($linea);
         }
     }
 
-    return [$proveedor, $factura];
+    return [$proveedor, $factura, $detallesTotales];
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
@@ -92,25 +89,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "<h2>Texto Extraído:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-        // Procesar el texto extraído para obtener proveedor y productos
-        list($proveedor, $productos) = procesarTextoFactura($textoExtraido);
+        // Procesar el texto extraído para obtener proveedor, productos y totales
+        list($proveedor, $productos, $detallesTotales) = procesarTextoFactura($textoExtraido);
 
         // Mostrar el proveedor y la tabla de productos
         echo "<h2>Factura de: " . htmlspecialchars($proveedor) . "</h2>";
         echo "<table border='1'>";
-        echo "<tr><th>Nombre del Producto</th><th>Cantidad</th><th>Lote</th><th>Precio</th><th>Importe</th></tr>";
+        echo "<tr><th>Nombre del Producto</th><th>Cantidad</th><th>Lote</th><th>Precio Unitario</th><th>Importe</th></tr>";
 
         foreach ($productos as $producto) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($producto['producto']) . "</td>";
             echo "<td>" . htmlspecialchars($producto['cantidad']) . "</td>";
             echo "<td>" . htmlspecialchars($producto['lote']) . "</td>";
-            echo "<td>" . htmlspecialchars($producto['precio']) . "</td>";
+            echo "<td>" . htmlspecialchars($producto['precio_unitario']) . "</td>";
             echo "<td>" . htmlspecialchars($producto['importe']) . "</td>";
             echo "</tr>";
         }
 
         echo "</table>";
+
+        // Mostrar los detalles totales
+        echo "<h2>Detalles Totales:</h2>";
+        echo "<pre>" . htmlspecialchars(implode("\n", $detallesTotales)) . "</pre>";
     } else {
         echo "Hubo un error al subir la imagen.";
     }
