@@ -23,22 +23,18 @@ function analizarImagen($rutaImagen) {
     // Preparar la imagen
     $image = (new Image())->setContent($base64);
 
-    // Preparar las características de la imagen usando constantes
+    // Preparar las características de la imagen
     $features = [
-        (new Feature())->setType(Feature\Type::LANDMARK_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::FACE_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::OBJECT_LOCALIZATION)->setMaxResults(50)->setModel('builtin/latest'),
+        (new Feature())->setType(Feature\Type::DOCUMENT_TEXT_DETECTION)->setMaxResults(50),
         (new Feature())->setType(Feature\Type::LOGO_DETECTION)->setMaxResults(50),
         (new Feature())->setType(Feature\Type::LABEL_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::DOCUMENT_TEXT_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::SAFE_SEARCH_DETECTION)->setMaxResults(50),
         (new Feature())->setType(Feature\Type::IMAGE_PROPERTIES)->setMaxResults(50),
         (new Feature())->setType(Feature\Type::CROP_HINTS)->setMaxResults(50),
     ];
 
     // Crear la instancia de CropHintsParams
     $cropHintsParams = (new CropHintsParams())
-        ->setAspectRatios([0.8, 1, 1.2]); // Configurar los ratios de aspecto
+        ->setAspectRatios([0.8, 1.0, 1.2]); // Configurar los ratios de aspecto
 
     // Crear la instancia de ImageContext y pasar CropHintsParams
     $imageContext = (new ImageContext())
@@ -67,23 +63,20 @@ function analizarImagen($rutaImagen) {
             echo "Texto extraído: " . htmlspecialchars($text) . "\n";
         }
 
-        // Detección de rostros
-        if ($res->getFaceAnnotations()) {
-            echo "Rostros detectados: " . count($res->getFaceAnnotations()) . "\n";
-        }
-
         // Detección de logotipos
         if ($res->getLogoAnnotations()) {
             echo "Logotipos detectados: " . count($res->getLogoAnnotations()) . "\n";
         }
 
-        // Detección de objetos
-        if ($res->getLocalizedObjectAnnotations()) {
-            echo "Objetos detectados: " . count($res->getLocalizedObjectAnnotations()) . "\n";
+        // Detección de propiedades de la imagen
+        if ($res->getImagePropertiesAnnotation()) {
+            echo "Propiedades de la imagen detectadas.\n";
         }
 
-        // Otros tipos de análisis pueden ser añadidos de manera similar
-        // ...
+        // Detección de CROP HINTS
+        if ($res->getCropHintsAnnotation()) {
+            echo "CROP HINTS detectados.\n";
+        }
     }
 
     $client->close(); // Cerrar el cliente
