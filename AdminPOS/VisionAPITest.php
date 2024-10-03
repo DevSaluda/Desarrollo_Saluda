@@ -4,6 +4,18 @@ require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
+// Función para limpiar el texto extraído del OCR
+function limpiarTextoOCR($texto) {
+    // Elimina espacios extra entre palabras
+    $texto = preg_replace('/\s+/', ' ', $texto);
+
+    // Normaliza saltos de línea
+    $texto = str_replace("\r", "\n", $texto); // Asegúrate de que los saltos de línea estén consistentes
+    $texto = trim($texto); // Elimina espacios al principio y al final
+
+    return $texto;
+}
+
 // Función para extraer texto de una imagen usando Google Cloud Vision API
 function extraerTextoDeImagen($rutaImagen) {
     // Configurar la ruta a las credenciales JSON
@@ -20,35 +32,46 @@ function extraerTextoDeImagen($rutaImagen) {
         $response = $imageAnnotator->documentTextDetection($image);
         $fullTextAnnotation = $response->getFullTextAnnotation();
 
-        // Retornar el texto completo detectado
-        return $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
+        // Retornar el texto completo detectado y limpiar el texto
+        $textoExtraido = $fullTextAnnotation ? $fullTextAnnotation->getText() : 'No se detectó texto en la imagen.';
+        return limpiarTextoOCR($textoExtraido);
+
     } finally {
         $imageAnnotator->close();
     }
 }
 
-// Función para procesar el texto extraído y extraer datos relevantes
+// Función para procesar el texto extraído y extraer datos relevantes (productos, cantidad, lote, precio e importe)
 function procesarTextoFactura($texto) {
     $lineas = explode("\n", $texto);
     $factura = [];
     $proveedor = '';
 
     foreach ($lineas as $linea) {
-        // Suponiendo que el nombre del proveedor está cerca del logo (línea que contiene "Marzam")
-        if (empty($proveedor) && stripos($linea, 'Marzam') !== false) {
-            $proveedor = trim($linea); // Captura el nombre del proveedor
+        if (empty($proveedor)) {
+            // Suponiendo que el nombre del proveedor está en la primera línea o en el logo
+            $proveedor = trim($linea); // Captura la primera línea como proveedor
+            continue;
         }
 
-        // Regex para capturar la información de productos
-        // Este patrón debe ajustarse según el formato de la factura específica
-        if (preg_match('/(.+?)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+(\d+)\s+([\d\.]+)\s+([\d\.]+)/', trim($linea), $matches)) {
-            // Captura nombre de producto, cantidad, lote, precio e importe
+        // Prueba con múltiples expresiones regulares para productos
+        if (preg_match('/(.+?)\s+(\d+)\s+([a-zA-Z0-9\-]+)\s+([\d,\.]+)\s+([\d,\.]+)/', trim($linea), $matches)) {
+            // Caso 1: Producto, Cantidad, Lote, Precio e Importe en una sola línea
             $factura[] = [
-                'producto' => trim($matches[1]),
+                'producto' => $matches[1],
                 'cantidad' => $matches[2],
                 'lote' => $matches[3],
-                'precio' => $matches[5],
-                'importe' => $matches[6],
+                'precio' => $matches[4],
+                'importe' => $matches[5],
+            ];
+        } elseif (preg_match('/(.+?)\s+(\d+)\s+([\d,\.]+)\s+([\d,\.]+)/', trim($linea), $matches)) {
+            // Caso 2: Producto, Cantidad, Precio e Importe en una sola línea (sin lote)
+            $factura[] = [
+                'producto' => $matches[1],
+                'cantidad' => $matches[2],
+                'lote' => 'No especificado', // No hay lote
+                'precio' => $matches[3],
+                'importe' => $matches[4],
             ];
         }
     }
@@ -64,8 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
         // Procesar la imagen para extraer texto
         $textoExtraido = extraerTextoDeImagen($rutaArchivo);
+
+        // Mostrar el texto extraído antes de procesar
+        echo "<h2>Texto Extraído:</h2>";
+        echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
+
+        // Procesar el texto extraído para obtener proveedor y productos
         list($proveedor, $productos) = procesarTextoFactura($textoExtraido);
 
+        // Mostrar el proveedor y la tabla de productos
         echo "<h2>Factura de: " . htmlspecialchars($proveedor) . "</h2>";
         echo "<table border='1'>";
         echo "<tr><th>Nombre del Producto</th><th>Cantidad</th><th>Lote</th><th>Precio</th><th>Importe</th></tr>";
