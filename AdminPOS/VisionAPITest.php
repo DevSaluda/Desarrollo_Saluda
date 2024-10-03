@@ -6,6 +6,7 @@ use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\AnnotateImageRequest;
 use Google\Cloud\Vision\V1\Image;
 use Google\Cloud\Vision\V1\ImageContext;
+use Google\Cloud\Vision\V1\CropHintsParams;
 
 // Función para enviar una imagen a Google Cloud Vision API
 function analizarImagen($rutaImagen) {
@@ -35,9 +36,13 @@ function analizarImagen($rutaImagen) {
         (new Feature())->setType(Feature\Type::CROP_HINTS)->setMaxResults(50),
     ];
 
-    // Crear la instancia de ImageContext
+    // Crear la instancia de CropHintsParams
+    $cropHintsParams = (new CropHintsParams())
+        ->setAspectRatios([0.8, 1, 1.2]); // Configurar los ratios de aspecto
+
+    // Crear la instancia de ImageContext y pasar CropHintsParams
     $imageContext = (new ImageContext())
-        ->setCropHintsParams(['aspectRatios' => [0.8, 1, 1.2]]);
+        ->setCropHintsParams($cropHintsParams);
 
     // Crear la solicitud
     $request = (new AnnotateImageRequest())
