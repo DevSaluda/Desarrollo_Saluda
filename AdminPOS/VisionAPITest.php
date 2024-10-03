@@ -19,20 +19,19 @@ function analizarImagen($rutaImagen) {
     $base64 = base64_encode($imageData);
 
     // Preparar la imagen
-    $image = (new Image())
-        ->setContent($base64);
+    $image = (new Image())->setContent($base64);
 
-    // Preparar las características de la imagen
+    // Preparar las características de la imagen usando constantes
     $features = [
-        (new Feature())->setType('LANDMARK_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('FACE_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('OBJECT_LOCALIZATION')->setMaxResults(50)->setModel('builtin/latest'),
-        (new Feature())->setType('LOGO_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('LABEL_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('DOCUMENT_TEXT_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('SAFE_SEARCH_DETECTION')->setMaxResults(50),
-        (new Feature())->setType('IMAGE_PROPERTIES')->setMaxResults(50),
-        (new Feature())->setType('CROP_HINTS')->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::LANDMARK_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::FACE_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::OBJECT_LOCALIZATION)->setMaxResults(50)->setModel('builtin/latest'),
+        (new Feature())->setType(Feature\Type::LOGO_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::LABEL_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::DOCUMENT_TEXT_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::SAFE_SEARCH_DETECTION)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::IMAGE_PROPERTIES)->setMaxResults(50),
+        (new Feature())->setType(Feature\Type::CROP_HINTS)->setMaxResults(50),
     ];
 
     // Crear la solicitud
