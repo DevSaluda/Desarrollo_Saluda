@@ -1,118 +1,78 @@
 <?php
-require 'vendor/autoload.php'; // Incluye el autoload de Composer para cargar las dependencias
+// Incluye el autoload de Composer para cargar las dependencias
+require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
-use Google\Cloud\Vision\V1\Feature;
-use Google\Cloud\Vision\V1\AnnotateImageRequest;
-use Google\Cloud\Vision\V1\Image;
-use Google\Cloud\Vision\V1\ImageContext;
-use Google\Cloud\Vision\V1\CropHintsParams;
 
-// Función para enviar una imagen a Google Cloud Vision API
-function analizarImagen($rutaImagen) {
-    // Configurar la ruta a las credenciales JSON
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json');
-
-    // Crear un cliente para Google Cloud Vision
-    $client = new ImageAnnotatorClient();
-
-    // Leer la imagen y convertirla a base64
-    $imageData = file_get_contents($rutaImagen);
-    $base64 = base64_encode($imageData);
-
-    // Comprobar si la conversión fue exitosa
-    if ($base64 === false) {
-        echo "Error al convertir la imagen a base64.\n";
-        exit;
-    } else {
-        echo "Datos de la imagen en base64 generados correctamente. Longitud: " . strlen($base64) . " caracteres.\n";
-    }
-
-    // Preparar la imagen
-    $image = (new Image())->setContent($base64);
-
-    // Preparar las características de la imagen
-    $features = [
-        (new Feature())->setType(Feature\Type::DOCUMENT_TEXT_DETECTION)->setMaxResults(50),
-    ];
-
-    // Crear la solicitud
-    $request = (new AnnotateImageRequest())
-        ->setImage($image)
-        ->setFeatures($features);
-
-    // Realizar la solicitud de análisis
-    $response = $client->batchAnnotateImages([$request]);
-
-    // Procesar la respuesta
-    foreach ($response->getResponses() as $res) {
-        if ($res->hasError()) {
-            echo 'Error: ' . $res->getError()->getMessage() . "\n";
-            continue;
-        }
-
-        // Obtener los bloques de texto y su posición
-        if ($res->hasFullTextAnnotation()) {
-            $annotation = $res->getFullTextAnnotation();
-            echo "Texto extraído completo:\n" . htmlspecialchars($annotation->getText()) . "\n\n";
-
-            // Recorrer las páginas
-            foreach ($annotation->getPages() as $page) {
-                // Recorrer los bloques
-                foreach ($page->getBlocks() as $block) {
-                    echo "Bloque de texto detectado:\n";
-
-                    // Obtener las coordenadas del bloque
-                    $vertices = $block->getBoundingBox()->getVertices();
-                    foreach ($vertices as $vertex) {
-                        echo "Posición del vértice: (" . $vertex->getX() . ", " . $vertex->getY() . ")\n";
-                    }
-
-                    // Imprimir el texto del bloque
-                    foreach ($block->getParagraphs() as $paragraph) {
-                        foreach ($paragraph->getWords() as $word) {
-                            $wordText = '';
-                            foreach ($word->getSymbols() as $symbol) {
-                                $wordText .= $symbol->getText();
-                            }
-                            echo $wordText . ' '; // Imprimir palabra
-                        }
-                        echo "\n"; // Salto de línea después de cada párrafo
-                    }
-                    echo "\n"; // Salto de línea después de cada bloque
-                }
-            }
-        }
-    }
-
-    $client->close(); // Cerrar el cliente
+// Función para limpiar el texto extraído del OCR
+function limpiarTextoOCR($texto) {
+    $texto = preg_replace('/\s+/', ' ', $texto); // Elimina espacios extra
+    $texto = str_replace("\r", "\n", $texto);    // Normaliza saltos de línea
+    return trim($texto);
 }
 
-// Probar la función con una imagen
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
-    $nombreArchivo = $_FILES['archivo']['name'];
-    $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
+// Función para extraer bloques de texto de una imagen usando Google Cloud Vision API
+function extraerBloquesDeImagen($rutaImagen) {
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ruta correcta a las credenciales
+    $imageAnnotator = new ImageAnnotatorClient();
 
-    if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Verificar que el archivo se haya subido
-        echo "Archivo subido correctamente: " . $rutaArchivo . "\n";
-    
-        // Comprobar si el archivo se puede leer
-        if (file_exists($rutaArchivo)) {
-            $imageData = file_get_contents($rutaArchivo);
-            if ($imageData === false) {
-                echo "Error al leer el archivo de imagen.\n";
-                exit;
-            } else {
-                echo "El archivo se leyó correctamente. Tamaño: " . strlen($imageData) . " bytes.\n";
+    try {
+        $image = file_get_contents($rutaImagen);
+        $response = $imageAnnotator->documentTextDetection($image);
+        $fullTextAnnotation = $response->getFullTextAnnotation();
+        if (!$fullTextAnnotation) {
+            return 'No se detectó texto en la imagen.';
+        }
+
+        // Extraer los bloques de texto
+        $pages = $fullTextAnnotation->getPages();
+        $bloques = [];
+
+        foreach ($pages as $page) {
+            foreach ($page->getBlocks() as $block) {
+                $textoBloque = '';
+                foreach ($block->getParagraphs() as $paragraph) {
+                    foreach ($paragraph->getWords() as $word) {
+                        foreach ($word->getSymbols() as $symbol) {
+                            $textoBloque .= $symbol->getText();
+                        }
+                        $textoBloque .= ' '; // Agrega un espacio entre palabras
+                    }
+                }
+                $bloques[] = limpiarTextoOCR($textoBloque); // Limpia y almacena cada bloque
             }
         }
-    
-        analizarImagen($rutaArchivo); // Llama a la función para analizar la imagen
+
+        return $bloques;
+    } finally {
+        $imageAnnotator->close();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
+    $nombreArchivo = $_FILES['archivo']['name'];
+    $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo; // Corrige la ruta aquí
+
+    // Mover el archivo subido a la carpeta 'uploads'
+    if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
+        // Procesar la imagen para extraer bloques de texto
+        $bloquesExtraidos = extraerBloquesDeImagen($rutaArchivo);
+
+        // Mostrar los bloques extraídos
+        echo "<h2>Bloques de Texto Detectados:</h2>";
+        echo "<div style='border: 1px solid #000; padding: 10px;'>";
+        if (is_array($bloquesExtraidos)) {
+            foreach ($bloquesExtraidos as $bloque) {
+                echo "<p style='margin-bottom: 10px;'>" . htmlspecialchars($bloque) . "</p>";
+            }
+        } else {
+            echo "<p>" . htmlspecialchars($bloquesExtraidos) . "</p>";
+        }
+        echo "</div>";
     } else {
         echo "Hubo un error al subir la imagen.";
     }
-}    
+}
 ?>
 
 <!DOCTYPE html>
@@ -120,10 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Imagen para Análisis</title>
+    <title>Subir Imagen para OCR</title>
 </head>
 <body>
-    <h1>Subir una imagen para análisis</h1>
+    <h1>Subir una imagen para extraer bloques de texto (OCR)</h1>
+
     <form action="" method="post" enctype="multipart/form-data">
         Selecciona una imagen:
         <input type="file" name="archivo" accept="image/*" required>
