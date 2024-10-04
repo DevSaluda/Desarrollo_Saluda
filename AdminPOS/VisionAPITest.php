@@ -17,18 +17,16 @@ function analizarImagen($rutaImagen) {
     $client = new ImageAnnotatorClient();
 
     // Leer la imagen y convertirla a base64
-    // Leer la imagen y convertirla a base64
-$imageData = file_get_contents($rutaImagen);
-$base64 = base64_encode($imageData);
+    $imageData = file_get_contents($rutaImagen);
+    $base64 = base64_encode($imageData);
 
-// Comprobar si la conversión fue exitosa
-if ($base64 === false) {
-    echo "Error al convertir la imagen a base64.\n";
-    exit;
-} else {
-    echo "Datos de la imagen en base64 generados correctamente. Longitud: " . strlen($base64) . " caracteres.\n";
-}
-
+    // Comprobar si la conversión fue exitosa
+    if ($base64 === false) {
+        echo "Error al convertir la imagen a base64.\n";
+        exit;
+    } else {
+        echo "Datos de la imagen en base64 generados correctamente. Longitud: " . strlen($base64) . " caracteres.\n";
+    }
 
     // Preparar la imagen
     $image = (new Image())->setContent($base64);
@@ -36,25 +34,12 @@ if ($base64 === false) {
     // Preparar las características de la imagen
     $features = [
         (new Feature())->setType(Feature\Type::DOCUMENT_TEXT_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::LOGO_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::LABEL_DETECTION)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::IMAGE_PROPERTIES)->setMaxResults(50),
-        (new Feature())->setType(Feature\Type::CROP_HINTS)->setMaxResults(50),
     ];
-
-    // Crear la instancia de CropHintsParams
-    $cropHintsParams = (new CropHintsParams())
-        ->setAspectRatios([0.8, 1.0, 1.2]); // Configurar los ratios de aspecto
-
-    // Crear la instancia de ImageContext y pasar CropHintsParams
-    $imageContext = (new ImageContext())
-        ->setCropHintsParams($cropHintsParams);
 
     // Crear la solicitud
     $request = (new AnnotateImageRequest())
         ->setImage($image)
-        ->setFeatures($features)
-        ->setImageContext($imageContext); // Usar la instancia de ImageContext
+        ->setFeatures($features);
 
     // Realizar la solicitud de análisis
     $response = $client->batchAnnotateImages([$request]);
@@ -66,26 +51,37 @@ if ($base64 === false) {
             continue;
         }
 
-        // Ejemplo de procesamiento de la respuesta
-        // Detección de texto
+        // Obtener los bloques de texto y su posición
         if ($res->hasFullTextAnnotation()) {
-            $text = $res->getFullTextAnnotation()->getText();
-            echo "Texto extraído: " . htmlspecialchars($text) . "\n";
-        }
+            $annotation = $res->getFullTextAnnotation();
+            echo "Texto extraído completo:\n" . htmlspecialchars($annotation->getText()) . "\n\n";
 
-        // Detección de logotipos
-        if ($res->getLogoAnnotations()) {
-            echo "Logotipos detectados: " . count($res->getLogoAnnotations()) . "\n";
-        }
+            // Recorrer las páginas
+            foreach ($annotation->getPages() as $page) {
+                // Recorrer los bloques
+                foreach ($page->getBlocks() as $block) {
+                    echo "Bloque de texto detectado:\n";
 
-        // Detección de propiedades de la imagen
-        if ($res->getImagePropertiesAnnotation()) {
-            echo "Propiedades de la imagen detectadas.\n";
-        }
+                    // Obtener las coordenadas del bloque
+                    $vertices = $block->getBoundingBox()->getVertices();
+                    foreach ($vertices as $vertex) {
+                        echo "Posición del vértice: (" . $vertex->getX() . ", " . $vertex->getY() . ")\n";
+                    }
 
-        // Detección de CROP HINTS
-        if ($res->getCropHintsAnnotation()) {
-            echo "CROP HINTS detectados.\n";
+                    // Imprimir el texto del bloque
+                    foreach ($block->getParagraphs() as $paragraph) {
+                        foreach ($paragraph->getWords() as $word) {
+                            $wordText = '';
+                            foreach ($word->getSymbols() as $symbol) {
+                                $wordText .= $symbol->getText();
+                            }
+                            echo $wordText . ' '; // Imprimir palabra
+                        }
+                        echo "\n"; // Salto de línea después de cada párrafo
+                    }
+                    echo "\n"; // Salto de línea después de cada bloque
+                }
+            }
         }
     }
 
