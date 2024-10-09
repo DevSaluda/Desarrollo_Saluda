@@ -3,17 +3,17 @@ require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
-function extraerBloquesDeImagen($rutaImagen) {
+function extraerBloquesDeImagen($rutaArchivo) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ajusta a la ruta de tus credenciales
     $imageAnnotator = new ImageAnnotatorClient();
 
     try {
-        $image = file_get_contents($rutaImagen);
+        $image = file_get_contents($rutaArchivo);
         $response = $imageAnnotator->documentTextDetection($image);
         $fullTextAnnotation = $response->getFullTextAnnotation();
 
         if (!$fullTextAnnotation) {
-            return 'No se detectó texto en la imagen.';
+            return 'No se detectó texto en la imagen o PDF.';
         }
 
         $bloques = [];
@@ -50,13 +50,46 @@ function extraerBloquesDeImagen($rutaImagen) {
     }
 }
 
+function pdfToImages($rutaPDF) {
+    $imagick = new Imagick();
+    $imagick->readImage($rutaPDF);
+    $pages = [];
+
+    foreach ($imagick as $page) {
+        $page->setImageFormat('png');
+        $pages[] = $page->getImageBlob();
+    }
+
+    return $pages;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
+    $extensionArchivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Extraer los bloques de texto
-        $bloquesDeTexto = extraerBloquesDeImagen($rutaArchivo);
+        // Si es un archivo PDF, convertir las páginas a imágenes
+        if ($extensionArchivo === 'pdf') {
+            $imagenes = pdfToImages($rutaArchivo);
+            $bloquesDeTexto = [];
+
+            foreach ($imagenes as $imagen) {
+                // Guardar la imagen en un archivo temporal
+                $rutaImagenTemporal = tempnam(sys_get_temp_dir(), 'img_') . '.png';
+                file_put_contents($rutaImagenTemporal, $imagen);
+
+                // Extraer texto de cada imagen generada del PDF
+                $bloquesDeTexto[] = extraerBloquesDeImagen($rutaImagenTemporal);
+
+                // Eliminar archivo temporal
+                unlink($rutaImagenTemporal);
+            }
+
+        } else {
+            // Procesar imagen directamente
+            $bloquesDeTexto = extraerBloquesDeImagen($rutaArchivo);
+        }
 
         // Mostrar los bloques de texto
         echo "<h2>Bloques de Texto Detectados:</h2>";
@@ -65,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
             echo "<pre>" . htmlspecialchars($bloque) . "</pre>";
         }
     } else {
-        echo "Hubo un error al subir la imagen.";
+        echo "Hubo un error al subir el archivo.";
     }
 }
 ?>
@@ -75,15 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Imagen para OCR</title>
+    <title>Subir Imagen o PDF para OCR</title>
 </head>
 <body>
-    <h1>Subir una imagen para extraer bloques de texto (OCR)</h1>
+    <h1>Subir una imagen o PDF para extraer bloques de texto (OCR)</h1>
 
     <form action="" method="post" enctype="multipart/form-data">
-        Selecciona una imagen:
-        <input type="file" name="archivo" accept="image/*" required>
-        <input type="submit" value="Subir Imagen">
+        Selecciona una imagen o PDF:
+        <input type="file" name="archivo" accept="image/*,application/pdf" required>
+        <input type="submit" value="Subir Archivo">
     </form>
 </body>
 </html>
