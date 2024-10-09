@@ -8,8 +8,6 @@ require 'vendor/autoload.php';
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
-use Google\Protobuf\Internal\ByteString;
-
 
 function extraerTextoDePDF($rutaArchivoPDF) {
     // Configurar la ruta a las credenciales JSON de Google Cloud
@@ -19,12 +17,13 @@ function extraerTextoDePDF($rutaArchivoPDF) {
     $imageAnnotator = new ImageAnnotatorClient();
 
     try {
-        // Leer el archivo PDF como un contenido binario
+        // Leer el archivo PDF como contenido binario
         $contenidoArchivo = file_get_contents($rutaArchivoPDF);
 
         // Crear una entrada de configuración para la API
         $inputConfig = new InputConfig();
-        $inputConfig->setContent(ByteString::copyFrom($contenidoArchivo)); // Ajuste aquí
+        // Aquí usamos directamente el contenido binario sin ByteString
+        $inputConfig->setContent($contenidoArchivo); // Ajuste aquí
         $inputConfig->setMimeType('application/pdf'); // Establecer el tipo de archivo como PDF
 
         // Crear una solicitud de anotación de archivo
@@ -78,20 +77,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir PDF para OCR</title>
-</head>
-<body>
-    <h1>Subir un archivo PDF para extraer texto (OCR)</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        Selecciona un archivo PDF:
-        <input type="file" name="archivo" accept="application/pdf" required>
-        <input type="submit" value="Subir PDF">
-    </form>
-</body>
-</html>
