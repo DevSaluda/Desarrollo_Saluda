@@ -18,28 +18,25 @@ function extraerBloquesDeImagen($rutaArchivo) {
 
         $bloques = [];
 
-        // Recorrer las páginas y luego los bloques de cada página
         foreach ($fullTextAnnotation->getPages() as $page) {
             foreach ($page->getBlocks() as $block) {
                 $bloqueTexto = '';
 
-                // Recorrer los párrafos dentro de cada bloque
                 foreach ($block->getParagraphs() as $paragraph) {
                     $paragraphText = '';
 
-                    // Recorrer las palabras dentro de cada párrafo
                     foreach ($paragraph->getWords() as $word) {
                         $symbols = $word->getSymbols();
                         foreach ($symbols as $symbol) {
                             $paragraphText .= $symbol->getText();
                         }
-                        $paragraphText .= ' ';  // Agregar espacio entre palabras
+                        $paragraphText .= ' ';
                     }
 
-                    $bloqueTexto .= trim($paragraphText) . "\n";  // Agregar un salto de línea entre párrafos
+                    $bloqueTexto .= trim($paragraphText) . "\n";
                 }
 
-                $bloques[] = trim($bloqueTexto);  // Guardar cada bloque de texto limpio
+                $bloques[] = trim($bloqueTexto);
             }
         }
 
@@ -69,33 +66,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $extensionArchivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Si es un archivo PDF, convertir las páginas a imágenes
         if ($extensionArchivo === 'pdf') {
             $imagenes = pdfToImages($rutaArchivo);
             $bloquesDeTexto = [];
 
             foreach ($imagenes as $imagen) {
-                // Guardar la imagen en un archivo temporal
                 $rutaImagenTemporal = tempnam(sys_get_temp_dir(), 'img_') . '.png';
                 file_put_contents($rutaImagenTemporal, $imagen);
 
-                // Extraer texto de cada imagen generada del PDF
                 $bloquesDeTexto[] = extraerBloquesDeImagen($rutaImagenTemporal);
 
-                // Eliminar archivo temporal
                 unlink($rutaImagenTemporal);
             }
-
         } else {
-            // Procesar imagen directamente
             $bloquesDeTexto = extraerBloquesDeImagen($rutaArchivo);
         }
 
         // Mostrar los bloques de texto
         echo "<h2>Bloques de Texto Detectados:</h2>";
+
         foreach ($bloquesDeTexto as $indice => $bloque) {
             echo "<h3>Bloque $indice:</h3>";
-            echo "<pre>" . htmlspecialchars($bloque) . "</pre>";
+
+            // Si el bloque es un array, iterar por cada bloque de texto
+            if (is_array($bloque)) {
+                foreach ($bloque as $subIndice => $subBloque) {
+                    echo "<pre>" . htmlspecialchars($subBloque) . "</pre>";
+                }
+            } else {
+                echo "<pre>" . htmlspecialchars($bloque) . "</pre>";
+            }
         }
     } else {
         echo "Hubo un error al subir el archivo.";
