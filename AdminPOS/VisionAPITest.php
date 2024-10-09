@@ -8,7 +8,8 @@ require 'vendor/autoload.php';
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
-use Google\Protobuf\ByteString;
+use Google\Protobuf\Internal\ByteString;
+
 
 function extraerTextoDePDF($rutaArchivoPDF) {
     // Configurar la ruta a las credenciales JSON de Google Cloud
