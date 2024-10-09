@@ -191,88 +191,57 @@
             </a>
           </li>
           </div>
+          <?php
+$displayStyle = 'display:none;'; // Valor predeterminado
 
-          <div  style=<?php switch($row){
-	case $row['Permisos']==10 ;				
-  echo "display:none;";
-
-	break;
-	case $row['Permisos']==0 ;		
-  echo "display:block;";
-		
-		} 	
-        
-      
-?>>
-            <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+if ($row['Permisos'] == 0) {
+    $displayStyle = 'display:block;'; // Si los permisos son 0, se muestra
+}
+?>
+<div style="<?php echo $displayStyle; ?>">
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
             <i class="fas fa-cash-register"></i>
-              <p>
-              Caja
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
+            <p>
+                Caja
+                <i class="fas fa-angle-left right"></i> <!-- La flecha que indica el submenu -->
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="AdministraCaja" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-              Administrar Caja
-              
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="CajasActivas" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-              Cajas Activas
-              
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="HistorialCaja" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-              Historial Caja
-               
-              </p>
-            </a>
-          </li>
+                <a href="AdministraCaja" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Administrar Caja</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="CajasActivas" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Cajas Activas</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="HistorialCaja" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Historial Caja</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="ReimpresionCortes" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Cortes de caja</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="ControlGastos" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Otros gastos</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+</div>
 
-          <li class="nav-item">
-            <a href="ReimpresionCortes" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-            Cortes de caja
-              
-              </p>
-            </a>
-          </li>
-          <!-- <li class="nav-item">
-            <a href="Totalesdeventas" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-             Totales
-               
-              </p>
-            </a>
-          </li> -->
-          <li class="nav-item">
-            <a href="ControlGastos" class="nav-link">
-            <i class="fas fa-dot-circle"></i>
-              <p>
-              Otros gastos
-               
-              </p>
-            </a>
-          </li>
-          
-            </ul>
-          </li>
-
-          </div>
 
 
           <div  style=<?php switch($row){
