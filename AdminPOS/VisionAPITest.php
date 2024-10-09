@@ -8,8 +8,7 @@ require 'vendor/autoload.php';
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
-use Google\Cloud\Vision\V1\ByteString;
-
+use Google\Protobuf\Internal\ByteString;
 
 
 function extraerTextoDePDF($rutaArchivoPDF) {
