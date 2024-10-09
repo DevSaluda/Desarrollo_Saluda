@@ -1,13 +1,14 @@
 <?php
 // Asegúrate de instalar el cliente de Google Cloud Vision mediante Composer
 // composer require google/cloud-vision
+// composer require google/protobuf
 
 require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
-use Google\Protobuf\Internal\ByteString;
+use Google\Protobuf\ByteString;
 
 function extraerTextoDePDF($rutaArchivoPDF) {
     // Configurar la ruta a las credenciales JSON de Google Cloud
@@ -22,7 +23,7 @@ function extraerTextoDePDF($rutaArchivoPDF) {
 
         // Crear una entrada de configuración para la API
         $inputConfig = new InputConfig();
-        $inputConfig->setContent(ByteString::fromString($contenidoArchivo));
+        $inputConfig->setContent(ByteString::copyFrom($contenidoArchivo)); // Ajuste aquí
         $inputConfig->setMimeType('application/pdf'); // Establecer el tipo de archivo como PDF
 
         // Crear una solicitud de anotación de archivo
