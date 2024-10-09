@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     // Mover el archivo subido a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
         // Llamar a la función para extraer texto del PDF
-        $textoExtraido = extraerTextoDePDF($rutaArchivo);z
+        $textoExtraido = extraerTextoDePDF($rutaArchivo);
 
         // Mostrar el texto extraído
         echo "<h2>Texto Extraído del PDF:</h2>";
