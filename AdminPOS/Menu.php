@@ -852,7 +852,7 @@ if ($row['Permisos'] == 0) {
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-exchange-alt"></i>
               <p>
@@ -861,7 +861,7 @@ if ($row['Permisos'] == 0) {
               </p>
             </a>
             <ul class="nav nav-treeview">
-         
+          -->
           <!-- <li class="nav-item">
             <a  href="ListadoDeTraspasos"  class="nav-link">
             <i class="fas fa-dot-circle"></i>
@@ -881,8 +881,8 @@ if ($row['Permisos'] == 0) {
                
               </p>
             </a>-->
-          </li> 
-           <li class="nav-item">
+          <!-- </li>  -->
+           <!-- <li class="nav-item">
             <a  href="RegistroTraspasos"  class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -890,8 +890,8 @@ if ($row['Permisos'] == 0) {
                
               </p>
             </a>
-          </li> 
-           <li class="nav-item">
+          </li>  -->
+           <!-- <li class="nav-item">
             <a  href="TraspasosExcel"  class="nav-link">
             <i class="fas fa-dot-circle"></i>
               <p>
@@ -899,9 +899,9 @@ if ($row['Permisos'] == 0) {
                
               </p>
             </a>
-          </li> 
+          </li>  -->
            
-            </ul>
+            <!-- </ul> -->
           </li>
           </div>
 
