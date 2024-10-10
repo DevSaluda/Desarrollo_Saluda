@@ -78,10 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
 
-        if (!$conexion) {
-            die("Error de conexión: " . mysqli_connect_error());
-        }
-
         // Buscar coincidencias de productos en la base de datos
         $productosEncontrados = buscarProductosEnBD($conexion, $textoExtraido);
 
