@@ -1,10 +1,6 @@
 <?php
-// Asegúrate de instalar el cliente de Google Cloud Vision mediante Composer
-// composer require google/cloud-vision
-// composer require google/protobuf
-
 require 'vendor/autoload.php';
-
+include 'Consultas/Consultas.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
@@ -48,46 +44,49 @@ function extraerTextoDePDF($rutaArchivoPDF) {
         $imageAnnotator->close();
     }
 }
-include ("Consultas/db_connection.php");
-function buscarProductosEnBD($conexion, $textoEscaneado) {
-    // Convertir el texto escaneado en palabras clave para la búsqueda
+
+function buscarProductosEnBD($conn, $textoEscaneado) {
+    // Convertir el texto escaneado en palabras clave
     $palabras = explode(' ', $textoEscaneado);
     
-    // Crear consulta dinámica
-    $sql = "SELECT * FROM Productos_POS WHERE ";
-    $sql .= implode(" OR ", array_map(function($palabra) {
-        return "Nombre_Prod LIKE '%$palabra%'";
-    }, $palabras));
+    // Limpiar las palabras clave (evitar inyecciones y palabras vacías)
+    $palabrasFiltradas = array_filter($palabras, function($palabra) {
+        return !empty($palabra);
+    });
 
-    $resultados = mysqli_query($conexion, $sql);
-    
+    if (count($palabrasFiltradas) === 0) {
+        return false; // Si no hay palabras, no hacer búsqueda
+    }
+
+    // Buscar productos que coincidan completamente con alguna de las palabras clave
+    $sql = "SELECT * FROM Productos_POS WHERE ";
+    $sql .= implode(" OR ", array_map(function($palabra) use ($conn) {
+        $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar posibles inyecciones SQL
+        return "Nombre_Prod LIKE '%$palabra%'"; // Coincidencia parcial con las palabras
+    }, $palabrasFiltradas));
+
+    $resultados = mysqli_query($conn, $sql);
+
     return $resultados;
 }
 
-// Subir un archivo PDF y extraer su texto
+// Subir archivo PDF y extraer el texto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
 
-    // Mover el archivo subido a la carpeta 'uploads'
+    // Mover el archivo a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Llamar a la función para extraer texto del PDF
+        // Extraer texto del PDF
         $textoExtraido = extraerTextoDePDF($rutaArchivo);
 
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-        // Conectar a la base de datos (asegúrate de que la conexión esté configurada)
-        $conexion = mysqli_connect('localhost', 'usuario', 'contraseña', 'base_de_datos');
+        // Buscar productos en la base de datos que coincidan con el texto extraído
+        $productosEncontrados = buscarProductosEnBD($conn, $textoExtraido);
 
-        if (!$conexion) {
-            die("Error de conexión: " . mysqli_connect_error());
-        }
-
-        // Buscar coincidencias de productos en la base de datos
-        $productosEncontrados = buscarProductosEnBD($conexion, $textoExtraido);
-
-        if (mysqli_num_rows($productosEncontrados) > 0) {
+        if ($productosEncontrados && mysqli_num_rows($productosEncontrados) > 0) {
             echo "<h2>Productos Coincidentes:</h2>";
             echo "<table border='1'>
                     <tr>
@@ -115,10 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
             echo "No se encontraron productos coincidentes.";
         }
 
-        // Cerrar la conexión a la base de datos
-        mysqli_close($conexion);
     } else {
-        echo "Hubo un error al subir el archivo.";
+        echo "Error al subir el archivo.";
     }
 }
 ?>
