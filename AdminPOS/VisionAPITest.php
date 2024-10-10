@@ -77,8 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-        // Conectar a la base de datos (asegúrate de que la conexión esté configurada)
-        $conexion = mysqli_connect('localhost', 'usuario', 'contraseña', 'base_de_datos');
 
         if (!$conexion) {
             die("Error de conexión: " . mysqli_connect_error());
