@@ -2,7 +2,7 @@
 // Asegúrate de instalar el cliente de Google Cloud Vision mediante Composer
 // composer require google/cloud-vision
 // composer require google/protobuf
-
+include 'Consultas/Consultas.php'; // Aquí debes tener tu conexión a la BD
 require 'vendor/autoload.php';
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
@@ -10,36 +10,27 @@ use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
 
 function extraerTextoDePDF($rutaArchivoPDF) {
-    // Configurar la ruta a las credenciales JSON de Google Cloud
-    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json'); // Ajusta la ruta
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../app-saluda-966447541c3c.json');
 
-    // Crear el cliente de Google Cloud Vision
     $imageAnnotator = new ImageAnnotatorClient();
 
     try {
-        // Leer el archivo PDF como contenido binario
         $contenidoArchivo = file_get_contents($rutaArchivoPDF);
 
-        // Crear una entrada de configuración para la API
         $inputConfig = new InputConfig();
-        // Aquí usamos directamente el contenido binario sin ByteString
-        $inputConfig->setContent($contenidoArchivo); // Ajuste aquí
-        $inputConfig->setMimeType('application/pdf'); // Establecer el tipo de archivo como PDF
+        $inputConfig->setContent($contenidoArchivo);
+        $inputConfig->setMimeType('application/pdf');
 
-        // Crear una solicitud de anotación de archivo
         $request = new \Google\Cloud\Vision\V1\AnnotateFileRequest();
         $request->setInputConfig($inputConfig);
 
-        // Definir la característica de detección de texto en documentos
         $feature = new Feature();
         $feature->setType(Feature\Type::DOCUMENT_TEXT_DETECTION);
         $request->setFeatures([$feature]);
 
-        // Enviar la solicitud de procesamiento del PDF
-        $requests = [$request]; // Lista de solicitudes (se puede procesar más de uno)
+        $requests = [$request];
         $response = $imageAnnotator->batchAnnotateFiles($requests);
 
-        // Procesar la respuesta y devolver el texto extraído
         $responses = $response->getResponses();
         foreach ($responses as $fileResponse) {
             foreach ($fileResponse->getResponses() as $imageResponse) {
@@ -48,15 +39,28 @@ function extraerTextoDePDF($rutaArchivoPDF) {
                 }
             }
         }
-
         return 'No se detectó texto en el archivo PDF.';
         
     } catch (Exception $e) {
         return 'Error durante la extracción de texto: ' . $e->getMessage();
     } finally {
-        // Cerrar el cliente
         $imageAnnotator->close();
     }
+}
+
+function buscarProductosEnBD($conexion, $textoEscaneado) {
+    // Convertir el texto escaneado en palabras clave para la búsqueda
+    $palabras = explode(' ', $textoEscaneado);
+    
+    // Crear consulta dinámica
+    $sql = "SELECT * FROM Productos_POS WHERE ";
+    $sql .= implode(" OR ", array_map(function($palabra) {
+        return "Nombre_Prod LIKE '%$palabra%'";
+    }, $palabras));
+
+    $resultados = mysqli_query($conexion, $sql);
+    
+    return $resultados;
 }
 
 // Subir un archivo PDF y extraer su texto
@@ -69,9 +73,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         // Llamar a la función para extraer texto del PDF
         $textoExtraido = extraerTextoDePDF($rutaArchivo);
 
-        // Mostrar el texto extraído
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
+
+        // Conectar a la base de datos (asegúrate de que la conexión esté configurada)
+        $conexion = mysqli_connect('localhost', 'usuario', 'contraseña', 'base_de_datos');
+
+        if (!$conexion) {
+            die("Error de conexión: " . mysqli_connect_error());
+        }
+
+        // Buscar coincidencias de productos en la base de datos
+        $productosEncontrados = buscarProductosEnBD($conexion, $textoExtraido);
+
+        if (mysqli_num_rows($productosEncontrados) > 0) {
+            echo "<h2>Productos Coincidentes:</h2>";
+            echo "<table border='1'>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Lote</th>
+                        <th>Fecha Caducidad</th>
+                        <th>Stock</th>
+                    </tr>";
+
+            while ($producto = mysqli_fetch_assoc($productosEncontrados)) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($producto['ID_Prod_POS']) . "</td>";
+                echo "<td>" . htmlspecialchars($producto['Nombre_Prod']) . "</td>";
+                echo "<td>" . htmlspecialchars($producto['Precio_Venta']) . "</td>";
+                echo "<td>" . htmlspecialchars($producto['Lote_Med']) . "</td>";
+                echo "<td>" . htmlspecialchars($producto['Fecha_Caducidad']) . "</td>";
+                echo "<td>" . htmlspecialchars($producto['Stock']) . "</td>";
+                echo "</tr>";
+            }
+
+            echo "</table>";
+        } else {
+            echo "No se encontraron productos coincidentes.";
+        }
+
+        // Cerrar la conexión a la base de datos
+        mysqli_close($conexion);
     } else {
         echo "Hubo un error al subir el archivo.";
     }
