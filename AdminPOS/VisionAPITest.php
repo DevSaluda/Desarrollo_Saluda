@@ -2,9 +2,9 @@
 // Asegúrate de instalar el cliente de Google Cloud Vision mediante Composer
 // composer require google/cloud-vision
 // composer require google/protobuf
-include 'Consultas/Consultas.php'; // Aquí debes tener tu conexión a la BD
-require 'vendor/autoload.php';
 
+require 'vendor/autoload.php';
+include 'Consultas/Consultas.php'; // Aquí debes tener tu conexión a la BD
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
