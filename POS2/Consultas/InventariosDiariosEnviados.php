@@ -5,10 +5,30 @@ include("db_connection.php");
 include "Consultas.php";
 
 
-$sql = "SELECT ConteosDiarios.Cod_Barra,ConteosDiarios.Nombre_Producto,ConteosDiarios.Fk_sucursal,ConteosDiarios.Existencias_R, 
-ConteosDiarios.ExistenciaFisica,ConteosDiarios.AgregadoPor,ConteosDiarios.AgregadoEl,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,
- Stock_POS.Cod_Barra,Stock_POS.Fk_sucursal,Stock_POS.Existencias_R as ExistenciaNube FROM ConteosDiarios,SucursalesCorre,Stock_POS WHERE 
- ConteosDiarios.Fk_sucursal = SucursalesCorre.ID_SucursalC and ConteosDiarios.Cod_Barra = Stock_POS.Cod_Barra and ConteosDiarios.Fk_sucursal = Stock_POS.Fk_sucursal AND ConteosDiarios.Fk_sucursal='".$row['Fk_Sucursal']."'";
+$sql = "SELECT 
+ConteosDiarios.Cod_Barra,
+ConteosDiarios.Nombre_Producto,
+ConteosDiarios.Fk_sucursal,
+ConteosDiarios.Existencias_R, 
+ConteosDiarios.ExistenciaFisica,
+ConteosDiarios.AgregadoPor,
+ConteosDiarios.AgregadoEl,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal,
+Stock_POS.Cod_Barra,
+Stock_POS.Fk_sucursal,
+Stock_POS.Existencias_R as ExistenciaNube 
+FROM 
+ConteosDiarios
+JOIN SucursalesCorre ON ConteosDiarios.Fk_sucursal = SucursalesCorre.ID_SucursalC
+JOIN Stock_POS ON ConteosDiarios.Cod_Barra = Stock_POS.Cod_Barra 
+    AND ConteosDiarios.Fk_sucursal = Stock_POS.Fk_sucursal 
+WHERE 
+ConteosDiarios.Fk_sucursal = '".$row['Fk_Sucursal']."' 
+AND YEAR(ConteosDiarios.AgregadoEl) = YEAR(CURDATE()) 
+ORDER BY 
+ConteosDiarios.AgregadoEl DESC";
+
  
 $result = mysqli_query($conn, $sql);
  
