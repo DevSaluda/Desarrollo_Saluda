@@ -49,7 +49,7 @@ function extraerTextoDePDF($rutaArchivoPDF) {
     }
 }
 
-function buscarProductosEnBD($conexion, $textoEscaneado) {
+function buscarProductosEnBD($conn, $textoEscaneado) {
     // Convertir el texto escaneado en palabras clave para la búsqueda
     $palabras = explode(' ', $textoEscaneado);
     
@@ -59,7 +59,7 @@ function buscarProductosEnBD($conexion, $textoEscaneado) {
         return "Nombre_Prod LIKE '%$palabra%'";
     }, $palabras));
 
-    $resultados = mysqli_query($conexion, $sql);
+    $resultados = mysqli_query($conn, $sql);
     
     return $resultados;
 }
@@ -77,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-
         // Buscar coincidencias de productos en la base de datos
-        $productosEncontrados = buscarProductosEnBD($conexion, $textoExtraido);
+        $productosEncontrados = buscarProductosEnBD($conn, $textoExtraido);
 
         if (mysqli_num_rows($productosEncontrados) > 0) {
             echo "<h2>Productos Coincidentes:</h2>";
@@ -109,14 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
             echo "No se encontraron productos coincidentes.";
         }
 
-        // Cerrar la conexión a la base de datos
-        mysqli_close($conexion);
     } else {
         echo "Hubo un error al subir el archivo.";
     }
 }
 ?>
-<?php include 'Consultas/Consultas.php';?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
