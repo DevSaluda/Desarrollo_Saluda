@@ -4,7 +4,8 @@
 // composer require google/protobuf
 
 require 'vendor/autoload.php';
-include 'Consultas/Consultas.php'; // Aquí debes tener tu conexión a la BD
+include("Consultas/Consultas.php");
+
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\InputConfig;
