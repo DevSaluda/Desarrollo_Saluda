@@ -46,23 +46,23 @@ function extraerTextoDePDF($rutaArchivoPDF) {
 }
 
 function buscarProductosEnBD($conn, $textoEscaneado) {
-    // Convertir el texto escaneado en palabras clave para la búsqueda
+    // Convertir el texto escaneado en palabras clave
     $palabras = explode(' ', $textoEscaneado);
-
-    // Limpiar las palabras clave para evitar inyecciones SQL
+    
+    // Limpiar las palabras clave (evitar inyecciones y palabras vacías)
     $palabrasFiltradas = array_filter($palabras, function($palabra) {
-        return !empty($palabra); // Evita términos vacíos
+        return !empty($palabra);
     });
 
     if (count($palabrasFiltradas) === 0) {
-        return false; // Si no hay palabras clave, no realizar la consulta
+        return false; // Si no hay palabras, no hacer búsqueda
     }
 
-    // Crear consulta dinámica para buscar coincidencias con las palabras clave
+    // Buscar productos que coincidan completamente con alguna de las palabras clave
     $sql = "SELECT * FROM Productos_POS WHERE ";
     $sql .= implode(" OR ", array_map(function($palabra) use ($conn) {
-        $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar caracteres peligrosos
-        return "Nombre_Prod LIKE '%$palabra%'";
+        $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar posibles inyecciones SQL
+        return "Nombre_Prod LIKE '%$palabra%'"; // Coincidencia parcial con las palabras
     }, $palabrasFiltradas));
 
     $resultados = mysqli_query($conn, $sql);
@@ -70,20 +70,20 @@ function buscarProductosEnBD($conn, $textoEscaneado) {
     return $resultados;
 }
 
-// Subir un archivo PDF y extraer su texto
+// Subir archivo PDF y extraer el texto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
 
-    // Mover el archivo subido a la carpeta 'uploads'
+    // Mover el archivo a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
-        // Llamar a la función para extraer texto del PDF
+        // Extraer texto del PDF
         $textoExtraido = extraerTextoDePDF($rutaArchivo);
 
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-        // Buscar coincidencias de productos en la base de datos
+        // Buscar productos en la base de datos que coincidan con el texto extraído
         $productosEncontrados = buscarProductosEnBD($conn, $textoExtraido);
 
         if ($productosEncontrados && mysqli_num_rows($productosEncontrados) > 0) {
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         }
 
     } else {
-        echo "Hubo un error al subir el archivo.";
+        echo "Error al subir el archivo.";
     }
 }
 ?>
