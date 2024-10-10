@@ -4,7 +4,7 @@
 // composer require google/protobuf
 
 require 'vendor/autoload.php';
-include("Consultas/Consultas.php");
+include ("Consultas/db_connection.php");
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
