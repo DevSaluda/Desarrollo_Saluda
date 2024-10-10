@@ -58,17 +58,21 @@ function buscarProductosEnBD($conn, $textoEscaneado) {
         return false; // Si no hay palabras, no hacer búsqueda
     }
 
-    // Buscar productos que coincidan completamente con alguna de las palabras clave
+    // Construir la consulta SQL
     $sql = "SELECT * FROM Productos_POS WHERE ";
     $sql .= implode(" OR ", array_map(function($palabra) use ($conn) {
         $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar posibles inyecciones SQL
         return "Nombre_Prod LIKE '%$palabra%'"; // Coincidencia parcial con las palabras
     }, $palabrasFiltradas));
 
+    // Imprimir la consulta para depuración
+    var_dump($sql); // Esto imprimirá la consulta SQL generada
+
     $resultados = mysqli_query($conn, $sql);
 
     return $resultados;
 }
+
 
 // Subir archivo PDF y extraer el texto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
@@ -118,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "Error al subir el archivo.";
     }
 }
-?>
+?>  
 
 <!DOCTYPE html>
 <html lang="es">
