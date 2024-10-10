@@ -4,7 +4,7 @@
 // composer require google/protobuf
 
 require 'vendor/autoload.php';
-include ("Consultas/db_connection.php");
+
 
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Google\Cloud\Vision\V1\Feature;
@@ -48,7 +48,7 @@ function extraerTextoDePDF($rutaArchivoPDF) {
         $imageAnnotator->close();
     }
 }
-
+include ("Consultas/db_connection.php");
 function buscarProductosEnBD($conexion, $textoEscaneado) {
     // Convertir el texto escaneado en palabras clave para la búsqueda
     $palabras = explode(' ', $textoEscaneado);
