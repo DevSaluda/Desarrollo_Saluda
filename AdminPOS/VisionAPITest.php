@@ -1,8 +1,4 @@
 <?php
-// Asegúrate de instalar el cliente de Google Cloud Vision mediante Composer
-// composer require google/cloud-vision
-// composer require google/protobuf
-
 require 'vendor/autoload.php';
 include 'Consultas/Consultas.php';
 
@@ -52,15 +48,25 @@ function extraerTextoDePDF($rutaArchivoPDF) {
 function buscarProductosEnBD($conn, $textoEscaneado) {
     // Convertir el texto escaneado en palabras clave para la búsqueda
     $palabras = explode(' ', $textoEscaneado);
-    
-    // Crear consulta dinámica
+
+    // Limpiar las palabras clave para evitar inyecciones SQL
+    $palabrasFiltradas = array_filter($palabras, function($palabra) {
+        return !empty($palabra); // Evita términos vacíos
+    });
+
+    if (count($palabrasFiltradas) === 0) {
+        return false; // Si no hay palabras clave, no realizar la consulta
+    }
+
+    // Crear consulta dinámica para buscar coincidencias con las palabras clave
     $sql = "SELECT * FROM Productos_POS WHERE ";
-    $sql .= implode(" OR ", array_map(function($palabra) {
+    $sql .= implode(" OR ", array_map(function($palabra) use ($conn) {
+        $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar caracteres peligrosos
         return "Nombre_Prod LIKE '%$palabra%'";
-    }, $palabras));
+    }, $palabrasFiltradas));
 
     $resultados = mysqli_query($conn, $sql);
-    
+
     return $resultados;
 }
 
@@ -80,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         // Buscar coincidencias de productos en la base de datos
         $productosEncontrados = buscarProductosEnBD($conn, $textoExtraido);
 
-        if (mysqli_num_rows($productosEncontrados) > 0) {
+        if ($productosEncontrados && mysqli_num_rows($productosEncontrados) > 0) {
             echo "<h2>Productos Coincidentes:</h2>";
             echo "<table border='1'>
                     <tr>
