@@ -49,33 +49,36 @@ function obtenerProductosDeBD($conn) {
     $sql = "SELECT * FROM Productos_POS";
     $resultados = mysqli_query($conn, $sql);
     $productos = [];
-
     while ($producto = mysqli_fetch_assoc($resultados)) {
         $productos[] = $producto;
     }
-
     return $productos;
 }
 
 function compararProductosConTexto($productos, $textoEscaneado) {
     $productosCoincidentes = [];
 
+    // Dividimos el texto escaneado en palabras clave
+    $palabrasClave = explode(' ', $textoEscaneado);
+
     foreach ($productos as $producto) {
-        // Buscar el nombre completo del producto dentro del texto extraído
-        if (stripos($textoEscaneado, $producto['Nombre_Prod']) !== false) {
-            $productosCoincidentes[] = $producto;
+        foreach ($palabrasClave as $palabra) {
+            // Eliminamos posibles espacios y comparamos ignorando mayúsculas/minúsculas
+            if (stripos($producto['Nombre_Prod'], trim($palabra)) !== false) {
+                // Si coincide, añadimos el producto a los resultados
+                $productosCoincidentes[] = $producto;
+                break; // Para evitar duplicados, saltamos a la siguiente palabra
+            }
         }
     }
 
     return $productosCoincidentes;
 }
 
-// Subir archivo PDF y extraer el texto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     $nombreArchivo = $_FILES['archivo']['name'];
     $rutaArchivo = __DIR__ . '/../uploads/' . $nombreArchivo;
 
-    // Mover el archivo a la carpeta 'uploads'
     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo)) {
         // Extraer texto del PDF
         $textoExtraido = extraerTextoDePDF($rutaArchivo);
@@ -86,9 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         // Obtener todos los productos de la base de datos
         $productos = obtenerProductosDeBD($conn);
 
-        // Comparar los nombres de productos con el texto extraído
+        // Comparar productos con el texto extraído
         $productosCoincidentes = compararProductosConTexto($productos, $textoExtraido);
 
+        // Mostrar los productos coincidentes
         if (!empty($productosCoincidentes)) {
             echo "<h2>Productos Coincidentes:</h2>";
             echo "<table border='1'>
@@ -122,20 +126,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir PDF para OCR</title>
-</head>
-<body>
-    <h1>Subir un archivo PDF para extraer texto (OCR)</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        Selecciona un archivo PDF:
-        <input type="file" name="archivo" accept="application/pdf" required>
-        <input type="submit" value="Subir PDF">
-    </form>
-</body>
-</html>
