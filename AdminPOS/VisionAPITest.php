@@ -45,34 +45,30 @@ function extraerTextoDePDF($rutaArchivoPDF) {
     }
 }
 
-function buscarProductosEnBD($conn, $textoEscaneado) {
-    // Convertir el texto escaneado en palabras clave
-    $palabras = explode(' ', $textoEscaneado);
-    
-    // Limpiar las palabras clave (evitar inyecciones y palabras vacías)
-    $palabrasFiltradas = array_filter($palabras, function($palabra) {
-        return !empty($palabra);
-    });
+function obtenerProductosDeBD($conn) {
+    $sql = "SELECT * FROM Productos_POS";
+    $resultados = mysqli_query($conn, $sql);
+    $productos = [];
 
-    if (count($palabrasFiltradas) === 0) {
-        return false; // Si no hay palabras, no hacer búsqueda
+    while ($producto = mysqli_fetch_assoc($resultados)) {
+        $productos[] = $producto;
     }
 
-    // Construir la consulta SQL
-    $sql = "SELECT * FROM Productos_POS WHERE ";
-    $sql .= implode(" OR ", array_map(function($palabra) use ($conn) {
-        $palabra = mysqli_real_escape_string($conn, $palabra); // Escapar posibles inyecciones SQL
-        return "Nombre_Prod LIKE '%$palabra%'"; // Coincidencia parcial con las palabras
-    }, $palabrasFiltradas));
-
-    // Imprimir la consulta para depuración
-    var_dump($sql); // Esto imprimirá la consulta SQL generada
-
-    $resultados = mysqli_query($conn, $sql);
-
-    return $resultados;
+    return $productos;
 }
 
+function compararProductosConTexto($productos, $textoEscaneado) {
+    $productosCoincidentes = [];
+
+    foreach ($productos as $producto) {
+        // Buscar el nombre completo del producto dentro del texto extraído
+        if (stripos($textoEscaneado, $producto['Nombre_Prod']) !== false) {
+            $productosCoincidentes[] = $producto;
+        }
+    }
+
+    return $productosCoincidentes;
+}
 
 // Subir archivo PDF y extraer el texto
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
@@ -87,10 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "<h2>Texto Extraído del PDF:</h2>";
         echo "<pre>" . htmlspecialchars($textoExtraido) . "</pre>";
 
-        // Buscar productos en la base de datos que coincidan con el texto extraído
-        $productosEncontrados = buscarProductosEnBD($conn, $textoExtraido);
+        // Obtener todos los productos de la base de datos
+        $productos = obtenerProductosDeBD($conn);
 
-        if ($productosEncontrados && mysqli_num_rows($productosEncontrados) > 0) {
+        // Comparar los nombres de productos con el texto extraído
+        $productosCoincidentes = compararProductosConTexto($productos, $textoExtraido);
+
+        if (!empty($productosCoincidentes)) {
             echo "<h2>Productos Coincidentes:</h2>";
             echo "<table border='1'>
                     <tr>
@@ -102,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
                         <th>Stock</th>
                     </tr>";
 
-            while ($producto = mysqli_fetch_assoc($productosEncontrados)) {
+            foreach ($productosCoincidentes as $producto) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($producto['ID_Prod_POS']) . "</td>";
                 echo "<td>" . htmlspecialchars($producto['Nombre_Prod']) . "</td>";
@@ -122,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
         echo "Error al subir el archivo.";
     }
 }
-?>  
+?>
 
 <!DOCTYPE html>
 <html lang="es">
