@@ -126,3 +126,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir PDF para OCR</title>
+</head>
+<body>
+    <h1>Subir un archivo PDF para extraer texto (OCR)</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        Selecciona un archivo PDF:
+        <input type="file" name="archivo" accept="application/pdf" required>
+        <input type="submit" value="Subir PDF">
+    </form>
+</body>
+</html>
