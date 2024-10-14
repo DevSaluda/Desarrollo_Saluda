@@ -82,6 +82,7 @@ if ($query->num_rows > 0) {
                         <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                     </div>
                     <select id="FechaSeleccionada" class="form-control" name="FechaSeleccionada" required>
+                        <option value="" disabled selected>Seleccione una fecha</option> <!-- Opción por defecto -->
                         <?php
                         $query = $conn->query("SELECT ID_Fecha_Esp, Fecha_Disponibilidad FROM Fechas_EspecialistasExt WHERE Fk_Programacion=$Especialistas->ID_Programacion");
                         while ($valores = mysqli_fetch_array($query)) {
@@ -111,6 +112,7 @@ if ($query->num_rows > 0) {
         </div>
     </form>
 </div>
+
 
 <script src="js/EliminaHorasProgramacion.js"></script>
 <script>
