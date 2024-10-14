@@ -244,4 +244,4 @@ $(document).ready(function() {
 
 </body>
 </html>
-<?php include 'ModalCancelacionEncargo.php'; ?>
+<?php include 'Modales/ModalCancelacionEncargo.php'; ?>
