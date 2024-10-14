@@ -59,15 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $identificadorEncargo = $_POST['idEncargo'];
         $productosSeleccionados = $_POST['productosSeleccionados'];
         $accion = $_POST['accion'];
-        $nuevoEstado = '';
 
-        if ($accion === 'entregar') {
-            $nuevoEstado = 'Entregado';
-        } elseif ($accion === 'saldar') {
-            $nuevoEstado = 'Saldado';
-        }
+        // Definir nuevo estado para "entregar" o "saldar"
+        if ($accion === 'entregar' || $accion === 'saldar') {
+            $nuevoEstado = ($accion === 'entregar') ? 'Entregado' : 'Saldado';
 
-        if ($nuevoEstado) {
             foreach ($productosSeleccionados as $idProducto) {
                 $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE ID_Encargo='$idProducto'";
                 if (!mysqli_query($conn, $query)) {
@@ -75,8 +71,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
                 }
             }
+
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
+            exit(); // Termina aquí si la acción es "entregar" o "saldar"
+        }
+
+        // Manejo de cancelación de productos
+        if ($accion === 'cancelar' && isset($_POST['motivoCancelacion'])) {
+            $motivo = $_POST['motivoCancelacion'];
+
+            foreach ($productosSeleccionados as $idProducto) {
+                // Obtener información del producto
+                $query = "SELECT * FROM Encargos_POS WHERE ID_Encargo = '$idProducto'";
+                $result = mysqli_query($conn, $query);
+                $producto = mysqli_fetch_assoc($result);
+
+                // Insertar en la tabla EncargosCancelados
+                $queryCancelacion = "INSERT INTO EncargosCancelados 
+                    (Id_Encargo, IdentificadorEncargo, Cod_Barra, Nombre_Prod, EstadoAnterior, EstadoNuevo, MotivoCancelacion, FechaCancelacion, Fk_sucursal, Cantidad, Precio_Venta, ID_H_O_D)
+                    VALUES ('{$producto['ID_Encargo']}', '{$producto['IdentificadorEncargo']}', '{$producto['Cod_Barra']}', '{$producto['Nombre_Prod']}', '{$producto['Estado']}', 'Cancelado', '$motivo', NOW(), '{$producto['Fk_sucursal']}', '{$producto['Cantidad']}', '{$producto['Precio_Venta']}', '{$producto['ID_H_O_D']}')";
+                mysqli_query($conn, $queryCancelacion);
+
+                // Actualizar el estado del producto en Encargos_POS
+                $queryActualizar = "UPDATE Encargos_POS SET Estado = 'Cancelado' WHERE ID_Encargo = '$idProducto'";
+                mysqli_query($conn, $queryActualizar);
+            }
+
+            echo json_encode(['success' => 'Productos cancelados exitosamente.']);
+            exit();
         }
     }
 }
+
 ?>

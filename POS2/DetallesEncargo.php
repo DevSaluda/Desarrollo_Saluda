@@ -110,7 +110,11 @@ include 'Consultas/Consultas.php';?>
         <div class="d-flex justify-content-between">
             <button type="button" name="accion" value="saldar" class="btn btn-success flex-grow-1 mr-2 estado-btn">Marcar como Saldado</button>
             <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>
+            <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button>
         </div>
+        <!-- DetallesEncargo.php -->
+<div id="modalContainer"></div>
+
     </form>
     <div class="row mt-4">
         <div class="col-md-6">
@@ -176,6 +180,54 @@ $(document).ready(function() {
         });
     });
 
+    $(document).ready(function() {
+    $('#cancelarBtn').on('click', function() {
+        const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
+
+        if (productosSeleccionados.length === 0) {
+            alert("Por favor, selecciona al menos un producto.");
+            return;
+        }
+
+        // Cargar el modal dinámicamente
+        $('#modalContainer').load('ModalCancelacionEncargo.php', function() {
+            // Mostrar el modal después de que se ha cargado
+            $('#cancelarModal').modal('show');
+        });
+    });
+
+      // Confirmar cancelación
+      $('#confirmarCancelacionBtn').on('click', function() {
+        const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
+        const motivo = $('#motivoCancelacion').val();
+
+        if (motivo.trim() === '') {
+            alert('Por favor, ingresa un motivo de cancelación.');
+            return;
+        }
+
+        $.ajax({
+            url: 'Consultas/ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: {
+                idEncargo: '<?php echo $identificador; ?>',
+                productosSeleccionados: productosSeleccionados,
+                motivoCancelacion: motivo,
+                accion: 'cancelar'
+            },
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+                $('#cancelarModal').modal('hide');
+            }
+        });
+    });
+});
+
     function mostrarMensaje(result) {
         $('#responseMessage').text(result.success || result.error).show();
         if (result.success) {
@@ -192,3 +244,4 @@ $(document).ready(function() {
 
 </body>
 </html>
+<?php include 'ModalCancelacionEncargo.php'; ?>
