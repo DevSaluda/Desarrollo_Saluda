@@ -51,7 +51,7 @@
               <option value="10">Tekit</option>
               <option value="11">Ticul</option>
             <option value="12">Tixkokob</option>
-          <option value="13">Uman</option>  
+          
         </select>
     </div>
     
