@@ -211,8 +211,8 @@ function showInstructions() {
                         <li>Coloca el <b>número de factura</b>.</li>
                         <li>Revisa que todos los datos sean correctos.</li>
                         <li>El campo escanear productos se desbloqueara automaticamente</li>
-                        <li>Escanea tu producto, si es un encargo recuerda generar la solicitud de encargo</li>
-                        <li>Recuerda llenar los campos fecha de caducidad,lote y precio maximo de venta</li>
+                       
+                       
                     </ol>
                     <div style="display: none;margin-top: 20px;">
                         <label >
