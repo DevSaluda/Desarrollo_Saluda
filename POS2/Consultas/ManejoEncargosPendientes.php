@@ -54,6 +54,7 @@ function abonarEncargo($conn, $identificadorEncargo, $montoAbonado) {
     return false;
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['idEncargo']) && isset($_POST['accion']) && isset($_POST['productosSeleccionados'])) {
         $identificadorEncargo = $_POST['idEncargo'];

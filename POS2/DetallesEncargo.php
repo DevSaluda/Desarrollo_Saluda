@@ -3,23 +3,32 @@ include 'Consultas/Consultas.php';
 include 'Consultas/ManejoEncargosPendientes.php';
 
 $identificador = $_GET['identificador'];
+
+// Obtener todos los productos, incluidos los cancelados
 $query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
 $result = mysqli_query($conn, $query);
 
-// Calcular el total del encargo y el total abonado
+// Inicializar las variables para el total de venta y monto abonado
 $totalVenta = 0;
 $montoAbonadoTotal = 0;
 $nombreCliente = '';
 $telefonoCliente = '';
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
+    // Incluir solo el precio de venta de los productos que no están cancelados
+    if ($row['Estado'] != 'Cancelado') {
+        $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
+    }
+    
+    // Siempre sumar el monto abonado, sin importar el estado del producto
     $montoAbonadoTotal += $row['MontoAbonado'];
+
+    // Almacenar la información del cliente (si aplica)
     $nombreCliente = $row['NombreCliente'];
     $telefonoCliente = $row['TelefonoCliente'];
 }
 
-// Volver a ejecutar la consulta para mostrar los datos en la tabla
+// Volver a ejecutar la consulta para mostrar todos los productos en la tabla
 $result = mysqli_query($conn, $query);
 ?>
 <?php
@@ -33,36 +42,7 @@ include 'Consultas/Consultas.php';?>
     <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
     <?php include "Header.php"?>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            height: 100%;
-        }
-        .table-responsive {
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .row.mt-4 {
-            margin-top: auto;
-        }
-        .d-flex.justify-content-between {
-            margin-top: 20px;
-        }
-        .form-group, h4 {
-            margin-bottom: 20px;
-        }
+        /* Estilos personalizados */
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -79,7 +59,7 @@ include 'Consultas/Consultas.php';?>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                    <th>Seleccionar</th>
+                        <th>Seleccionar</th>
                         <th>Código de Barra</th>
                         <th>Nombre del Producto</th>
                         <th>Sucursal</th>
@@ -112,10 +92,8 @@ include 'Consultas/Consultas.php';?>
             <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>
             <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button>
         </div>
-        <!-- DetallesEncargo.php -->
-<div id="modalContainer"></div>
-
     </form>
+    <div id="modalContainer"></div>
     <div class="row mt-4">
         <div class="col-md-6">
             <h4>Total Venta: <?php echo $totalVenta; ?></h4>
@@ -180,7 +158,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).ready(function() {
+    // Mostrar el modal de cancelación
     $('#cancelarBtn').on('click', function() {
         const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
             return $(this).val();
@@ -191,15 +169,13 @@ $(document).ready(function() {
             return;
         }
 
-        // Cargar el modal dinámicamente
         $('#modalContainer').load('ModalCancelacionEncargo.php', function() {
-            // Mostrar el modal después de que se ha cargado
             $('#cancelarModal').modal('show');
         });
     });
 
-      // Confirmar cancelación
-      $('#confirmarCancelacionBtn').on('click', function() {
+    // Confirmar cancelación
+    $('#confirmarCancelacionBtn').on('click', function() {
         const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
             return $(this).val();
         }).get();
@@ -226,7 +202,6 @@ $(document).ready(function() {
             }
         });
     });
-});
 
     function mostrarMensaje(result) {
         $('#responseMessage').text(result.success || result.error).show();
