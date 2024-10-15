@@ -87,6 +87,7 @@ include 'Consultas/Consultas.php';?>
             <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button>
         </div>
     </form>
+    <div id="modalContainer"></div>
     <div class="row mt-4">
         <div class="col-md-6">
             <h4>Total Venta: <?php echo $totalVenta; ?></h4>
