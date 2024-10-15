@@ -4,25 +4,27 @@ include 'Consultas/ManejoEncargosPendientes.php';
 
 $identificador = $_GET['identificador'];
 
-// Modificar la consulta SQL para excluir los productos cancelados
-$query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador' AND Estado != 'Cancelado'";
+// Obtener todos los productos, incluidos los cancelados
+$query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
 $result = mysqli_query($conn, $query);
 
-// Calcular el total del encargo y el total abonado
+// Calcular el total del encargo y el monto abonado, excluyendo los productos cancelados
 $totalVenta = 0;
 $montoAbonadoTotal = 0;
 $nombreCliente = '';
 $telefonoCliente = '';
 
 while ($row = mysqli_fetch_assoc($result)) {
-    // Solo sumar los productos que no están cancelados
-    $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
-    $montoAbonadoTotal += $row['MontoAbonado'];
+    // Sumar solo los productos que no están cancelados
+    if ($row['Estado'] != 'Cancelado') {
+        $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
+        $montoAbonadoTotal += $row['MontoAbonado'];
+    }
     $nombreCliente = $row['NombreCliente'];
     $telefonoCliente = $row['TelefonoCliente'];
 }
 
-// Volver a ejecutar la consulta para mostrar los datos en la tabla
+// Volver a ejecutar la consulta para mostrar todos los productos en la tabla
 $result = mysqli_query($conn, $query);
 ?>
 <?php
