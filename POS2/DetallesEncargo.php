@@ -8,18 +8,22 @@ $identificador = $_GET['identificador'];
 $query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
 $result = mysqli_query($conn, $query);
 
-// Calcular el total del encargo y el monto abonado, excluyendo los productos cancelados
+// Inicializar las variables para el total de venta y monto abonado
 $totalVenta = 0;
 $montoAbonadoTotal = 0;
 $nombreCliente = '';
 $telefonoCliente = '';
 
 while ($row = mysqli_fetch_assoc($result)) {
-    // Sumar solo los productos que no están cancelados
+    // Incluir solo el precio de venta de los productos que no están cancelados
     if ($row['Estado'] != 'Cancelado') {
         $totalVenta += $row['Precio_Venta'] * $row['Cantidad'];
-        $montoAbonadoTotal += $row['MontoAbonado'];
     }
+    
+    // Siempre sumar el monto abonado, sin importar el estado del producto
+    $montoAbonadoTotal += $row['MontoAbonado'];
+
+    // Almacenar la información del cliente (si aplica)
     $nombreCliente = $row['NombreCliente'];
     $telefonoCliente = $row['TelefonoCliente'];
 }
