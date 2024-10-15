@@ -5,7 +5,7 @@ include("db_connection.php");
 // Consulta para obtener los proveedores
 $sql = "SELECT DISTINCT Nombre_Proveedor 
 FROM Proveedores_POS 
-WHERE Nombre_Proveedor NOT IN ('CEDIS', 'COLGATE', 'CLINICAS SALUDA');
+WHERE Nombre_Proveedor NOT IN ( 'COLGATE', 'CLINICAS SALUDA');
 "; // Ajusta el nombre de la tabla y la columna según tu estructura
 
 // Ejecutar la consulta
