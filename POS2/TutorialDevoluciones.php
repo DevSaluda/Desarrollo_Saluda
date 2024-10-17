@@ -43,7 +43,7 @@ table td {
  
 </div>
 
-</div><div class="col-md-12">
+</div>
 <video id="video-fullscreen" controls autoplay loop>
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
