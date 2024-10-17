@@ -60,11 +60,11 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
             'location' => "$Fk_Sucursal",
             'description' => "$Observaciones",
             'start' => array(
-                'dateTime' => "$FechaT$Hora:00",
+                'dateTime' => "$Fecha$Hora:00",
                 'timeZone' => 'America/Mexico_City',
             ),
             'end' => array(
-                'dateTime' => "$FechaT$HoraFin:00",
+                'dateTime' => "$Fecha$HoraFin:00",
                 'timeZone' => 'America/Mexico_City',
             ),
             'attendees' => array(
