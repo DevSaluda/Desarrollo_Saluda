@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 include_once 'db_connection.php';
 
 // Configura la conexión a la base de datos para usar UTF-8
