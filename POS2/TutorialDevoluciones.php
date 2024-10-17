@@ -36,11 +36,7 @@ table td {
 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="card text-center">
  
-  <div >
-
-
-
-</div>
+<div class="col-md-12">
 <video id="video-fullscreen" controls autoplay loop>
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
