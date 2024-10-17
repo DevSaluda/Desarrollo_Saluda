@@ -44,7 +44,7 @@ table td {
 </div>
 
 </div><div class="col-md-12">
-<video width="900" height="600" controls autoplay loop>
+<video  height="600" controls autoplay loop>
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
 </video>
