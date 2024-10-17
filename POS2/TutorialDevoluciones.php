@@ -44,7 +44,7 @@ table td {
 </div>
 
 </div><div class="col-md-12">
-<video width="640" height="480" controls autoplay loop>
+<video id="video-fullscreen" controls autoplay loop>
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
 </video>
@@ -60,7 +60,19 @@ table td {
 
 
 
+<style>
+  
 
+#video-fullscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+</style>
      
   
   <!-- /.content-wrapper -->
