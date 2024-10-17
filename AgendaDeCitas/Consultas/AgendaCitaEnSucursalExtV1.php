@@ -51,10 +51,10 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
         // ID del calendario
         $calendarId = 'primary'; // Cambia esto si usas un calendario específico
 
-        // Calcula la hora de finalización de la cita, por ejemplo, una duración de 1 hora
-        $startDateTime = "$Fecha" . "T" . "$Hora:00"; // Formato ISO 8601
-        $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Suma 1 hora a la hora de inicio
-        $endDateTime = "$Fecha" . "T" . "$HoraFin:00"; // Formato ISO 8601
+        // Ajustar el formato de la hora y fecha para el formato ISO 8601
+        $startDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $Hora")); // Formato ISO 8601
+        $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Sumar 1 hora a la hora de inicio
+        $endDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $HoraFin")); // Formato ISO 8601
 
         // Verificaciones antes de crear el evento
         if (!DateTime::createFromFormat('Y-m-d\TH:i:s', $startDateTime) || !DateTime::createFromFormat('Y-m-d\TH:i:s', $endDateTime)) {
