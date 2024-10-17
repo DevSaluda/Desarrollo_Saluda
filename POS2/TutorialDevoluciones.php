@@ -38,10 +38,7 @@ table td {
  
   <div >
 
-</div>
-  <div >
- 
-</div>
+
 
 </div>
 <video id="video-fullscreen" controls autoplay loop>
