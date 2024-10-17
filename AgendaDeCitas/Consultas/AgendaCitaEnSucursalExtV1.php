@@ -56,6 +56,12 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
         $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Suma 1 hora a la hora de inicio
         $endDateTime = "$Fecha" . "T" . "$HoraFin:00"; // Formato ISO 8601
 
+        // Verificaciones antes de crear el evento
+        if (!DateTime::createFromFormat('Y-m-d\TH:i:s', $startDateTime) || !DateTime::createFromFormat('Y-m-d\TH:i:s', $endDateTime)) {
+            echo json_encode(array("statusCode" => 400, "error" => "Fecha y hora no válidas"));
+            exit();
+        }
+
         // Crea el evento
         $event = new Google_Service_Calendar_Event(array(
             'summary' => "Consulta de $Nombre_Paciente",
@@ -72,13 +78,16 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
             'attendees' => array(
                 array('email' => 'jesusemutul@gmail.com'), // Cambia esto por el correo del especialista
             ),
-            'colorId' => '2', // Color para el evento en el calendario
+            // 'colorId' => '2', // Puedes comentar esta línea si no estás seguro
         ));
 
         // Inserta el evento en el calendario
-        $event = $service->events->insert($calendarId, $event);
-
-        echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
+        try {
+            $event = $service->events->insert($calendarId, $event);
+            echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
+        } catch (Exception $e) {
+            echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
+        }
     } else {
         echo json_encode(array("statusCode" => 201));
     }
