@@ -1,4 +1,5 @@
 <?php
+require 'vendor/autoload.php';
 include_once 'db_connection.php';
 
 // Configura la conexión a la base de datos para usar UTF-8
@@ -41,7 +42,41 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
             '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario')";
 
     if (mysqli_query($conn, $sql)) {
-        echo json_encode(array("statusCode" => 200));
+        // Agregar el evento a Google Calendar
+        $client = new Google_Client();
+        $client->setAuthConfig('../../app-saluda-966447541c3c.json'); // Ruta al archivo JSON de credenciales
+        $client->setScopes(Google_Service_Calendar::CALENDAR);
+        $service = new Google_Service_Calendar($client);
+
+        // ID del calendario
+        $calendarId = 'primary'; // Cambia esto si usas un calendario específico
+
+        // Calcula la hora de finalización de la cita, por ejemplo, una duración de 1 hora
+        $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Suma 1 hora a la hora de inicio
+
+        // Crea el evento
+        $event = new Google_Service_Calendar_Event(array(
+            'summary' => "Consulta de $Nombre_Paciente",
+            'location' => "$Fk_Sucursal",
+            'description' => "$Observaciones",
+            'start' => array(
+                'dateTime' => "$FechaT$Hora:00",
+                'timeZone' => 'America/Mexico_City',
+            ),
+            'end' => array(
+                'dateTime' => "$FechaT$HoraFin:00",
+                'timeZone' => 'America/Mexico_City',
+            ),
+            'attendees' => array(
+                array('email' => 'jesusemutul@gmail.com'), // Cambia esto por el correo del especialista
+            ),
+            'colorId' => '2', // Color para el evento en el calendario
+        ));
+
+        // Inserta el evento en el calendario
+        $event = $service->events->insert($calendarId, $event);
+
+        echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
     } else {
         echo json_encode(array("statusCode" => 201));
     }
