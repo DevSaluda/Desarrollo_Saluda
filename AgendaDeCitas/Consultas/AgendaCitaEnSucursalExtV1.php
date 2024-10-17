@@ -52,7 +52,9 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
         $calendarId = 'primary'; // Cambia esto si usas un calendario específico
 
         // Calcula la hora de finalización de la cita, por ejemplo, una duración de 1 hora
+        $startDateTime = "$Fecha" . "T" . "$Hora:00"; // Formato ISO 8601
         $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Suma 1 hora a la hora de inicio
+        $endDateTime = "$Fecha" . "T" . "$HoraFin:00"; // Formato ISO 8601
 
         // Crea el evento
         $event = new Google_Service_Calendar_Event(array(
@@ -60,11 +62,11 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
             'location' => "$Fk_Sucursal",
             'description' => "$Observaciones",
             'start' => array(
-                'dateTime' => "$Fecha$Hora:00",
+                'dateTime' => $startDateTime,
                 'timeZone' => 'America/Mexico_City',
             ),
             'end' => array(
-                'dateTime' => "$Fecha$HoraFin:00",
+                'dateTime' => $endDateTime,
                 'timeZone' => 'America/Mexico_City',
             ),
             'attendees' => array(
