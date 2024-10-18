@@ -1,6 +1,6 @@
 <?php
 include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargosPendientes.php';
+include 'Consultas/ManejoEncargos.php';
 
 $identificador = $_GET['identificador'];
 
@@ -121,7 +121,7 @@ $(document).ready(function() {
     $('#abonarForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: 'Consultas/ManejoEncargosPendientes.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: $(this).serialize(),
             success: function(response) {
@@ -144,7 +144,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'Consultas/ManejoEncargosPendientes.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: {
                 idEncargo: '<?php echo $identificador; ?>',
@@ -187,7 +187,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'Consultas/ManejoEncargosPendientes.php',
+            url: 'Consultas/ManejoEncargos.php',
             type: 'POST',
             data: {
                 idEncargo: '<?php echo $identificador; ?>',
