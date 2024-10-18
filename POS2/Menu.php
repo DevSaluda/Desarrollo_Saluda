@@ -690,7 +690,7 @@ Surtir a enfermería
             </ul>
           </li>
           
-
+          <li class="nav-header">Tutoriales <i class="fa-solid fa-chalkboard-user"></i></li>
         
 <!--          
           <li class="nav-item has-treeview">
