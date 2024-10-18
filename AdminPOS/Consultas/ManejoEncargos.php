@@ -1,42 +1,69 @@
 <?php
 include 'Consultas.php';
 
-function obtenerEncargos($conn, $terminoBusqueda, $offset, $itemsPorPagina) {
-    $terminoBusqueda = mysqli_real_escape_string($conn, $terminoBusqueda);
-    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, Estado, TelefonoCliente
+function obtenerEncargos($conn, $search = '', $offset = 0, $perPage = 10) {
+    // Ajusta la consulta SQL para incluir NombreCliente y TelefonoCliente
+    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, SUM(Precio_Venta * Cantidad) AS TotalVenta, Estado, NombreCliente, TelefonoCliente 
               FROM Encargos_POS 
-              WHERE IdentificadorEncargo LIKE '%$terminoBusqueda%' 
-                 OR Fk_sucursal LIKE '%$terminoBusqueda%' 
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado, TelefonoCliente
-              LIMIT $offset, $itemsPorPagina";
+              WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'
+              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado, NombreCliente, TelefonoCliente
+              LIMIT $offset, $perPage";
     return mysqli_query($conn, $query);
 }
 
-function contarEncargos($conn, $terminoBusqueda) {
-    $terminoBusqueda = mysqli_real_escape_string($conn, $terminoBusqueda);
+function contarEncargos($conn, $search = '') {
     $query = "SELECT COUNT(DISTINCT IdentificadorEncargo) AS total 
               FROM Encargos_POS 
-              WHERE IdentificadorEncargo LIKE '%$terminoBusqueda%' 
-                 OR Fk_sucursal LIKE '%$terminoBusqueda%'";
+              WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['total'];
 }
 
-function actualizarEstadoEncargo($conn, $idEncargo, $nuevoEstado) {
-    $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE Id_Encargo='$idEncargo'";
+
+function actualizarEstadoEncargo($conn, $identificadorEncargo, $nuevoEstado) {
+    $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE IdentificadorEncargo='$identificadorEncargo'";
     return mysqli_query($conn, $query);
 }
 
+function abonarEncargo($conn, $identificadorEncargo, $montoAbonado) {
+    // Obtener la lista de productos relacionados con el IdentificadorEncargo
+    $query = "SELECT Id_Encargo FROM Encargos_POS WHERE IdentificadorEncargo='$identificadorEncargo'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $primero = true;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $idEncargo = $row['Id_Encargo'];
+
+            // Asignar el monto abonado solo al primer producto
+            if ($primero) {
+                $query = "UPDATE Encargos_POS SET MontoAbonado = MontoAbonado + '$montoAbonado' WHERE Id_Encargo='$idEncargo'";
+                $primero = false;
+            } else {
+                // No actualizar el monto abonado para los productos subsiguientes
+                $query = "UPDATE Encargos_POS SET MontoAbonado = MontoAbonado WHERE Id_Encargo='$idEncargo'";
+            }
+
+            if (!mysqli_query($conn, $query)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['idEncargo']) && isset($_POST['accion']) && isset($_POST['productosSeleccionados'])) {
-        $idEncargo = $_POST['idEncargo'];
-        $accion = $_POST['accion'];
+        $identificadorEncargo = $_POST['idEncargo'];
         $productosSeleccionados = $_POST['productosSeleccionados'];
+        $accion = $_POST['accion'];
 
-        // Definir nuevo estado para entregar o rechazar
-        if ($accion === 'entregar' || $accion === 'rechazar') {
-            $nuevoEstado = ($accion === 'entregar') ? 'Entregado' : 'Rechazado';
+        // Definir nuevo estado para "entregar" o "saldar"
+        if ($accion === 'entregar' || $accion === 'saldar') {
+            $nuevoEstado = ($accion === 'entregar') ? 'Entregado' : 'Saldado';
 
             foreach ($productosSeleccionados as $idProducto) {
                 $query = "UPDATE Encargos_POS SET Estado='$nuevoEstado' WHERE Id_Encargo='$idProducto'";
@@ -47,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
-            exit();
+            exit(); // Termina aquí si la acción es "entregar" o "saldar"
         }
 
         // Manejo de cancelación de productos
@@ -74,18 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => 'Productos cancelados exitosamente.']);
             exit();
         }
-
-        // Eliminar encargo
-        if ($accion === 'eliminar') {
-            $query = "DELETE FROM Encargos_POS WHERE Id_Encargo='$idEncargo'";
-            if (mysqli_query($conn, $query)) {
-                echo json_encode(['success' => 'Encargo eliminado exitosamente.']);
-                exit();
-            } else {
-                echo json_encode(['error' => 'Error al eliminar el encargo: ' . mysqli_error($conn)]);
-                exit();
-            }
-        }
     }
 }
+
 ?>
