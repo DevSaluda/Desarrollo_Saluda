@@ -71,7 +71,6 @@ include 'Consultas/Consultas.php';?>
         <th>Monto Abonado</th>
         <th>Estado</th>
         <th>Teléfono Cliente</th> <!-- Nueva columna -->
-        <th>Número Cliente</th> <!-- Nueva columna -->
         <th>Acciones</th>
     </tr>
 </thead>
