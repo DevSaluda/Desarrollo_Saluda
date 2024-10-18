@@ -85,7 +85,6 @@ include 'Consultas/Consultas.php';?>
         echo "<td>{$row['MontoAbonadoTotal']}</td>";
         echo "<td>{$row['Estado']}</td>";
         echo "<td>{$row['TelefonoCliente']}</td>"; // Mostrar TelefonoCliente
-        echo "<td>{$row['NumeroCliente']}</td>"; // Mostrar NumeroCliente
         echo "<td>
                 <a href='DetallesEncargo.php?identificador={$row['IdentificadorEncargo']}' class='btn btn-info'>Ver Detalles</a>
               </td>";
