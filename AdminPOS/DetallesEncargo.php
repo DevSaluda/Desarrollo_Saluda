@@ -1,11 +1,14 @@
 <?php
 include 'Consultas/Consultas.php';
-include 'Consultas/ManejoEncargos.php';
+include 'Consultas/ManejoEncargosPendientes.php';
 
 $identificador = $_GET['identificador'];
+
+// Obtener todos los productos, incluidos los cancelados
 $query = "SELECT * FROM Encargos_POS WHERE IdentificadorEncargo = '$identificador'";
 $result = mysqli_query($conn, $query);
 
+// Inicializar las variables para el total de venta y monto abonado
 $totalVenta = 0;
 $montoAbonadoTotal = 0;
 $nombreCliente = '';
@@ -39,20 +42,7 @@ include 'Consultas/Consultas.php';?>
     <title>Detalles Encargos | <?php echo $row['Nombre_Sucursal']?> </title>
     <?php include "Header.php"?>
     <style>
-        .error {
-            color: red;
-            margin-left: 5px; 
-        }  
-        .hidden-field {
-            display: none;
-        }
-        .highlight {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .alert {
-            margin-top: 10px;
-        }
+        /* Estilos personalizados */
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -61,7 +51,7 @@ include 'Consultas/Consultas.php';?>
 <body>
 <?php include_once("Menu.php")?>
 <div class="container">
-    <h3>Detalles del Encargo: <?php echo $identificador; ?></h3>
+    <h2>Detalles del Encargo: <?php echo $identificador; ?></h2>
     <h4>Nombre del Cliente: <?php echo $nombreCliente; ?></h4>
     <h4>Teléfono del Cliente: <?php echo $telefonoCliente; ?></h4>
     <form id="estadoForm">
@@ -98,14 +88,76 @@ include 'Consultas/Consultas.php';?>
             </table>
         </div>
         <div class="d-flex justify-content-between">
+            <button type="button" name="accion" value="saldar" class="btn btn-success flex-grow-1 mr-2 estado-btn">Marcar como Saldado</button>
+            <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>
             <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button>
         </div>
     </form>
     <div id="modalContainer"></div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Total Venta: <?php echo $totalVenta; ?></h4>
+            <h4>Monto Abonado: <?php echo $montoAbonadoTotal; ?></h4>
+            <h4>Faltante: <?php echo $totalVenta - $montoAbonadoTotal; ?></h4>
+        </div>
+        <div class="col-md-6">
+            <form id="abonarForm">
+                <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
+                <input type="hidden" name="accion" value="abonar">
+                <div class="form-group">
+                    <label for="montoAbonado">Abonar monto:</label>
+                    <input type="number" class="form-control" name="montoAbonado" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Abonar</button>
+            </form>
+        </div>
+    </div>
+    <div id="responseMessage" class="alert alert-info" style="display: none;"></div>
 </div>
 
 <script>
 $(document).ready(function() {
+    // Manejar el envío del formulario de abonar
+    $('#abonarForm').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'Consultas/ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
+    // Manejar los botones de estado (Saldar, Entregar)
+    $('.estado-btn').on('click', function() {
+        const accion = $(this).val();
+        const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
+            return $(this).val();
+        }).get();
+
+        if (productosSeleccionados.length === 0) {
+            alert("Por favor, selecciona al menos un producto.");
+            return;
+        }
+
+        $.ajax({
+            url: 'Consultas/ManejoEncargosPendientes.php',
+            type: 'POST',
+            data: {
+                idEncargo: '<?php echo $identificador; ?>',
+                productosSeleccionados: productosSeleccionados,
+                accion: accion
+            },
+            success: function(response) {
+                const result = JSON.parse(response);
+                mostrarMensaje(result);
+            }
+        });
+    });
+
     // Mostrar el modal de cancelación
     $('#cancelarBtn').on('click', function() {
         const productosSeleccionados = $('input[name="productosSeleccionados[]"]:checked').map(function() {
@@ -135,7 +187,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'Consultas/ManejoEncargos.php',
+            url: 'Consultas/ManejoEncargosPendientes.php',
             type: 'POST',
             data: {
                 idEncargo: '<?php echo $identificador; ?>',
@@ -152,11 +204,14 @@ $(document).ready(function() {
     });
 
     function mostrarMensaje(result) {
-        alert(result.success || result.error);
+        $('#responseMessage').text(result.success || result.error).show();
         if (result.success) {
+            $('#responseMessage').removeClass('alert-danger').addClass('alert-success');
             setTimeout(function() {
                 location.reload();
             }, 2000);
+        } else {
+            $('#responseMessage').removeClass('alert-success').addClass('alert-danger');
         }
     }
 });
@@ -164,5 +219,4 @@ $(document).ready(function() {
 
 </body>
 </html>
-
 <?php include 'Modales/ModalCancelacionEncargo.php'; ?>
