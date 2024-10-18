@@ -100,7 +100,7 @@ include 'Consultas/Consultas.php';?>
             <h4>Monto Abonado: <?php echo $montoAbonadoTotal; ?></h4>
             <h4>Faltante: <?php echo $totalVenta - $montoAbonadoTotal; ?></h4>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <form id="abonarForm">
                 <input type="hidden" name="idEncargo" value="<?php echo $identificador; ?>">
                 <input type="hidden" name="accion" value="abonar">
@@ -110,7 +110,7 @@ include 'Consultas/Consultas.php';?>
                 </div>
                 <button type="submit" class="btn btn-primary">Abonar</button>
             </form>
-        </div>
+        </div> -->
     </div>
     <div id="responseMessage" class="alert alert-info" style="display: none;"></div>
 </div>

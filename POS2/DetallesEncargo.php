@@ -90,7 +90,7 @@ include 'Consultas/Consultas.php';?>
         <div class="d-flex justify-content-between">
             <button type="button" name="accion" value="saldar" class="btn btn-success flex-grow-1 mr-2 estado-btn">Marcar como Saldado</button>
             <button type="button" name="accion" value="entregar" class="btn btn-success flex-grow-1 estado-btn">Marcar como Entregado</button>
-            <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button>
+            <!-- <button type="button" id="cancelarBtn" class="btn btn-danger flex-grow-1">Cancelar Producto(s)</button> -->
         </div>
     </form>
     <div id="modalContainer"></div>
