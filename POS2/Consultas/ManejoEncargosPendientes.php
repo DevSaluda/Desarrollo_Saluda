@@ -76,6 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => 'Estado del encargo actualizado exitosamente.']);
             exit(); // Termina aquí si la acción es "entregar" o "saldar"
         }
+        
+        if (isset($_POST['idEncargo']) && $_POST['accion'] === 'abonar' && isset($_POST['montoAbonado'])) {
+            $identificadorEncargo = $_POST['idEncargo'];
+            $montoAbonado = floatval($_POST['montoAbonado']); // Convertir a número
+            
+            // Log para ver si los datos llegan correctamente
+            error_log("Abonar Encargo ID: $identificadorEncargo, Monto: $montoAbonado");
+            
+            if (abonarEncargo($conn, $identificadorEncargo, $montoAbonado)) {
+                echo json_encode(['success' => 'Monto abonado exitosamente.']);
+            } else {
+                echo json_encode(['error' => 'Error al abonar el monto.']);
+            }
+            exit();
+        }
 
         // Manejo de cancelación de productos
         if ($accion === 'cancelar' && isset($_POST['motivoCancelacion'])) {
