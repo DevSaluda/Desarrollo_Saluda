@@ -39,17 +39,9 @@ include "Consultas/Consultas.php";
  
   <div >
   <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
+  Aperturar nuevo ticket <i class="fas fa-clinic-medical"></i>
 </button>
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-  Busqueda por mes <i class="fas fa-calendar-week"></i>
-</button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorFormasDePago" class="btn btn-default">
-  Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
-</button>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" class="btn btn-default">
-  Filtrar por rango de fechas <i class="fas fa-calendar"></i>
-</button>
+
 </div>
 </div>
     
