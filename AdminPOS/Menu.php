@@ -1335,7 +1335,7 @@ if ($row['Permisos'] == 0) {
                   </a>
              </li>
              <li class="nav-item">
-                  <a href="https://saludapos.com/AdminPOS/RegistroMantenimiento" class="nav-link" style="color: white;">
+                  <a href="https://saludapos.com/AdminPOS/TicketsDeSoporte" class="nav-link" style="color: white;">
                   <i class="fa-regular fa-tickets-perforated"></i>
                     <p>
                     Registro de Soporte
