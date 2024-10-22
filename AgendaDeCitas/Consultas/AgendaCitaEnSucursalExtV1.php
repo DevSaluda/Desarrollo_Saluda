@@ -96,7 +96,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
 
             // Guardar el ID del evento de Google Calendar en la base de datos
             $GoogleEventId = $event->id;
-            $sql = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha'";
+            $sql = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha' AND Hora='$Fk_Hora'";
             mysqli_query($conn, $sql);
             echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
         } catch (Exception $e) {
