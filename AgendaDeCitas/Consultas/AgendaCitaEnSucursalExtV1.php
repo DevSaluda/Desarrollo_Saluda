@@ -11,8 +11,8 @@ $ColorClaveCalendario = "#04B45F";
 $Fk_Especialidad = $conn->real_escape_string(trim($_POST['EspecialidadExt']));
 $Fk_Especialista = $conn->real_escape_string(trim($_POST['MedicoExt']));
 $Fk_Sucursal = $conn->real_escape_string(trim($_POST['SucursalExt']));
-$Fecha = $conn->real_escape_string(trim($_POST['FechaExt']));
-$Hora = $conn->real_escape_string(trim($_POST['HorasExt']));
+$Fk_Fecha = $conn->real_escape_string(trim($_POST['FechaExt'])); // ID de la fecha
+$Fk_Hora = $conn->real_escape_string(trim($_POST['HorasExt']));  // ID de la hora
 $Nombre_Paciente = $conn->real_escape_string(trim($_POST['NombresExt']));
 $Telefono = $conn->real_escape_string(trim($_POST['TelExt']));
 $Tipo_Consulta = $conn->real_escape_string(trim($_POST['TipoConsultaExt']));
@@ -23,22 +23,34 @@ $AgendadoPor = $conn->real_escape_string(trim($_POST['UsuarioExt']));
 $Sistema = $conn->real_escape_string(trim($_POST['SistemaExt']));
 $Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 
+// Obtener la fecha desde la tabla Fechas_EspecialistasExt
+$sql_fecha = "SELECT Fecha_Disponibilidad FROM Fechas_EspecialistasExt WHERE ID_Fecha_Esp = '$Fk_Fecha' AND FK_Especialista = '$Fk_Especialista'";
+$result_fecha = mysqli_query($conn, $sql_fecha);
+$row_fecha = mysqli_fetch_assoc($result_fecha);
+$Fecha = $row_fecha['Fecha_Disponibilidad'];
+
+// Obtener la hora desde la tabla Horarios_Citas_Ext
+$sql_hora = "SELECT Horario_Disponibilidad FROM Horarios_Citas_Ext WHERE ID_Horario = '$Fk_Hora' AND FK_Especialista = '$Fk_Especialista' AND FK_Fecha = '$Fk_Fecha'";
+$result_hora = mysqli_query($conn, $sql_hora);
+$row_hora = mysqli_fetch_assoc($result_hora);
+$Hora = $row_hora['Horario_Disponibilidad'];
+
 // Verificar si ya existe la cita
 $sql = "SELECT Fk_Especialidad, Fk_Especialista, Fk_Sucursal, Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, ID_H_O_D 
         FROM AgendaCitas_EspecialistasExt 
         WHERE Fk_Especialidad='$Fk_Especialidad' AND Fk_Especialista='$Fk_Especialista' AND Fk_Sucursal='$Fk_Sucursal'
-        AND Fecha='$Fecha' AND Hora='$Hora' AND Nombre_Paciente='$Nombre_Paciente' AND Telefono='$Telefono' 
+        AND Fecha='$Fk_Fecha' AND Hora='$Fk_Hora' AND Nombre_Paciente='$Nombre_Paciente' AND Telefono='$Telefono' 
         AND Tipo_Consulta='$Tipo_Consulta' AND ID_H_O_D='$ID_H_O_D'";
 $resultset = mysqli_query($conn, $sql) or die("database error: " . mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
-if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fecha && $row['Hora'] == $Hora && $row['Fk_Especialidad'] == $Fk_Especialidad) {
+if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_Fecha && $row['Hora'] == $Fk_Hora && $row['Fk_Especialidad'] == $Fk_Especialidad) {
     echo json_encode(array("statusCode" => 250));
 } else {
-    // Insertar la nueva cita en la base de datos
+    // Insertar la nueva cita en la base de datos con las FK de fecha y hora
     $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, 
             `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`, `Color_Calendario`) 
-            VALUES ('$Fk_Especialidad', '$Fk_Especialista', '$Fk_Sucursal', '$Fecha', '$Hora', '$Nombre_Paciente', '$Telefono', '$Tipo_Consulta', 
+            VALUES ('$Fk_Especialidad', '$Fk_Especialista', '$Fk_Sucursal', '$Fk_Fecha', '$Fk_Hora', '$Nombre_Paciente', '$Telefono', '$Tipo_Consulta', 
             '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario')";
 
     if (mysqli_query($conn, $sql)) {
@@ -49,7 +61,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
         $service = new Google_Service_Calendar($client);
 
         // ID del calendario
-        $calendarId = '3dc95b55f97f949efe5e01222ec074eeccd45eb10888e94b4a2fc39c91a60dc4@group.calendar.google.com'; // Cambia esto si usas un calendario específico
+        $calendarId = '3dc95b55f97f949efe5e01222ec074eeccd45eb10888e94b4a2fc39c91a60dc4@group.calendar.google.com';
 
         // Ajustar el formato de la hora y fecha para el formato ISO 8601
         $startDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $Hora")); // Formato ISO 8601
