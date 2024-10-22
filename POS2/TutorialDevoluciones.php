@@ -107,13 +107,48 @@ table td {
 
 <script>
 $(document).ready(function() {
+    // Obtener el nombre automáticamente de la variable PHP
+    var nombre = "<?php echo $row['Nombre_Apellidos']; ?>";
+    var tutorial = 'Devoluciones';  // Nombre del tutorial a validar
     var videoElement = document.getElementById('videoTutorial');
+
     if (videoElement) {
+        // Evento que se dispara cuando el video termina
         videoElement.addEventListener('ended', function() {
-            $('#registroTutorial').modal('show');
+            if (nombre) {
+                // Llamar a la función para validar si el usuario ya vio el tutorial
+                validarTutorial(nombre, tutorial);
+            } else {
+                alert('No se pudo obtener el nombre del usuario.');
+            }
         });
     }
 });
+
+// Función para validar si el usuario ya ha visto el tutorial
+function validarTutorial(nombre, tutorial) {
+    $.ajax({
+        url: 'Consultas/validar_registrotutorial.php',
+        type: 'POST',
+        data: {
+            nombre: nombre,
+            tutorial: tutorial
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.visto) {
+                // Si ya ha visto el tutorial, no mostrar el modal
+                alert('Ya has visto este tutorial.');
+            } else {
+                // Si no ha visto el tutorial, mostrar el modal
+                $('#registroTutorial').modal('show');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error en la solicitud: ' + textStatus + ' - ' + errorThrown);
+        }
+    });
+}
 
 
 
