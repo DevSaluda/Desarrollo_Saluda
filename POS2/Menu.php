@@ -691,7 +691,15 @@ Surtir a enfermería
           </li>
           
           <li class="nav-header">Tutoriales <i class="fa-solid fa-chalkboard-user"></i></li>
-        
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/TutorialDevoluciones" class="nav-link">
+            <i class="fa-solid fa-people-carry-box"></i>
+              <p>
+           Realizar devoluciones
+               
+              </p>
+            </a>
+          </li> 
 <!--          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
