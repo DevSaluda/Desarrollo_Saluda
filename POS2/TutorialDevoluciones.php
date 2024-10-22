@@ -85,12 +85,14 @@ table td {
         <form id="formRegistroTutorial">
           <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $row['Nombre_Apellidos']?>" required>
             <span class="error" id="nombreError"></span>
           </div>
           <div class="form-group">
             <label for="sucursal">Sucursal:</label>
-            <input type="text" class="form-control" id="sucursal" name="sucursal" required>
+            <input type="text" class="form-control" id="sucursalletras" name="sucursalletras" value="<?php echo $row['Nombre_Sucursal']?>" required>
+
+            <input type="text" class="form-control" id="sucursal" name="sucursal" value="<?php echo $row['Fk_Sucursal']?>" required>
             <span class="error" id="sucursalError"></span>
           </div>
           <input type="hidden" name="tutorial" value="Devoluciones">
