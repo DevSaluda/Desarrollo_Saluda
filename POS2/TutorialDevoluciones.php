@@ -76,7 +76,7 @@ table td {
   <div class="modal-dialog modal-lg modal-notify modal-success" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Registro de visualización del tutorial</h5>
+        <h5 class="modal-title" id="modalLabel" style="color:white;">Registro de visualización del tutorial</h5>
         <button type="button" class="close" disabled aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -85,14 +85,14 @@ table td {
         <form id="formRegistroTutorial">
           <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $row['Nombre_Apellidos']?>" required>
+            <input type="text" class="form-control" id="nombre" readonly name="nombre" value="<?php echo $row['Nombre_Apellidos']?>" required>
             <span class="error" id="nombreError"></span>
           </div>
           <div class="form-group">
             <label for="sucursal">Sucursal:</label>
-            <input type="text" class="form-control" id="sucursalletras" name="sucursalletras" value="<?php echo $row['Nombre_Sucursal']?>" required>
+            <input type="text" class="form-control" id="sucursalletras" readonly name="sucursalletras" value="<?php echo $row['Nombre_Sucursal']?>" required>
 
-            <input type="text" class="form-control" id="sucursal" name="sucursal" value="<?php echo $row['Fk_Sucursal']?>" required>
+            <input type="text" class="form-control" id="sucursal" hidden readonly name="sucursal" value="<?php echo $row['Fk_Sucursal']?>" required>
             <span class="error" id="sucursalError"></span>
           </div>
           <input type="hidden" name="tutorial" value="Devoluciones">
