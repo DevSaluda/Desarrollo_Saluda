@@ -1,5 +1,5 @@
 <?php
-include "Consultas/Consultas.php"; // Conexión a la base de datos
+include_once 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'];
