@@ -145,7 +145,7 @@ $(document).ready(function() {
     };
 
     $.ajax({
-        url: 'guardar_registro.php',
+        url: 'Consultas/guardar_registro.php',
         type: 'POST',
         data: datos,
         success: function(response) {
