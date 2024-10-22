@@ -49,7 +49,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
         $service = new Google_Service_Calendar($client);
 
         // ID del calendario
-        $calendarId = 'primary'; // Cambia esto si usas un calendario específico
+        $calendarId = '3dc95b55f97f949efe5e01222ec074eeccd45eb10888e94b4a2fc39c91a60dc4@group.calendar.google.com'; // Cambia esto si usas un calendario específico
 
         // Ajustar el formato de la hora y fecha para el formato ISO 8601
         $startDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $Hora")); // Formato ISO 8601
@@ -75,10 +75,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fec
                 'dateTime' => $endDateTime,
                 'timeZone' => 'America/Mexico_City',
             ),
-            'attendees' => array(
-                array('email' => 'jesusemutul@gmail.com'), // Cambia esto por el correo del especialista
-            ),
-            // 'colorId' => '2', // Puedes comentar esta línea si no estás seguro
+            'colorId' => '2', // Puedes comentar esta línea si no estás seguro
         ));
 
         // Inserta el evento en el calendario
