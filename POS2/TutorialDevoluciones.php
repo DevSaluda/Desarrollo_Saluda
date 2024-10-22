@@ -39,7 +39,8 @@ table td {
 
 
 
-<video  controls autoplay loop>
+<video  controls autoplay 
+>
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
 </video>
@@ -70,7 +71,93 @@ table td {
   include ("footer.php")?>
 
 
+<!-- Modal -->
+<div class="modal fade" id="registroTutorial" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Registro de visualización del tutorial</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formRegistroTutorial">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+            <span class="error" id="nombreError"></span>
+          </div>
+          <div class="form-group">
+            <label for="sucursal">Sucursal:</label>
+            <input type="text" class="form-control" id="sucursal" name="sucursal" required>
+            <span class="error" id="sucursalError"></span>
+          </div>
+          <input type="hidden" name="tutorial" value="Devoluciones">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="enviarRegistro()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+document.getElementById('videoTutorial').addEventListener('ended', function() {
+    // Mostrar modal cuando el video termine
+    $('#registroTutorial').modal('show');
+});
+
+
+
+  function enviarRegistro() {
+    // Obtener valores
+    var nombre = document.getElementById('nombre').value;
+    var sucursal = document.getElementById('sucursal').value;
+
+    // Validaciones simples
+    if (nombre === '') {
+        document.getElementById('nombreError').textContent = "El nombre es obligatorio";
+        return;
+    } else {
+        document.getElementById('nombreError').textContent = "";
+    }
+
+    if (sucursal === '') {
+        document.getElementById('sucursalError').textContent = "La sucursal es obligatoria";
+        return;
+    } else {
+        document.getElementById('sucursalError').textContent = "";
+    }
+
+    // Enviar datos por AJAX
+    var datos = {
+        nombre: nombre,
+        sucursal: sucursal,
+        tutorial: 'Devoluciones'
+    };
+
+    $.ajax({
+        url: 'guardar_registro.php',
+        type: 'POST',
+        data: datos,
+        success: function(response) {
+            if (response.success) {
+                alert('Registro guardado exitosamente');
+                $('#registroTutorial').modal('hide');
+            } else {
+                alert('Error al guardar el registro');
+            }
+        },
+        error: function() {
+            alert('Error en la solicitud');
+        }
+    });
+}
+
+</script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
