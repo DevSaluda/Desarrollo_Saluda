@@ -117,7 +117,7 @@ $(document).ready(function() {
 
 
 
-  function enviarRegistro() {
+function enviarRegistro() {
     // Obtener valores
     var nombre = document.getElementById('nombre').value;
     var sucursal = document.getElementById('sucursal').value;
@@ -148,16 +148,17 @@ $(document).ready(function() {
         url: 'Consultas/guardar_registro.php',
         type: 'POST',
         data: datos,
+        dataType: 'json',  // Asegúrate de interpretar la respuesta como JSON
         success: function(response) {
             if (response.success) {
                 alert('Registro guardado exitosamente');
-                $('#registroTutorial').modal('hide');
+                $('#registroTutorial').modal('hide'); // Cierra el modal solo cuando el registro se guarde exitosamente
             } else {
-                alert('Error al guardar el registro');
+                alert('Error al guardar el registro: ' + response.message);
             }
         },
-        error: function() {
-            alert('Error en la solicitud');
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error en la solicitud: ' + textStatus + ' - ' + errorThrown);
         }
     });
 }
