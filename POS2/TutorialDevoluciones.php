@@ -39,7 +39,7 @@ table td {
 
 
 
-<video  controls autoplay 
+<video id="videoTutorial" controls autoplay 
 >
     <source src="https://saludapos.com/Videotutoriales/Devoluciones.mp4" type="video/mp4">
     Tu navegador no soporta la reproducción de video.
@@ -105,9 +105,13 @@ table td {
 </div>
 
 <script>
-document.getElementById('videoTutorial').addEventListener('ended', function() {
-    // Mostrar modal cuando el video termine
-    $('#registroTutorial').modal('show');
+$(document).ready(function() {
+    var videoElement = document.getElementById('videoTutorial');
+    if (videoElement) {
+        videoElement.addEventListener('ended', function() {
+            $('#registroTutorial').modal('show');
+        });
+    }
 });
 
 
