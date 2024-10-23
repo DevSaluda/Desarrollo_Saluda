@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Asegúrate de tener el cliente de Google API cargado (puedes instalarlo con Composer)
+require '../vendor/autoload.php'; // Asegúrate de tener el cliente de Google API cargado (puedes instalarlo con Composer)
 
 $client = new Google_Client();
 $client->setAuthConfig('../../app-saluda-966447541c3c.json'); // Credenciales del cliente
