@@ -203,6 +203,7 @@ tabla = $('#Productos').DataTable({
     { "data": "Cod_Barra", "title": "Cod" },
             { "data": "Nombre_Produc", "title": "Nombre" },
             { "data": "Cantidad", "title": "Cantidad" },
+            { "data": "Proveedor", "title": "Proveedor" },
             { "data": "Num_Factura", "title": "N° Factura" },
             { "data": "Nombre_Sucursal", "title": "Sucursal" },
             { "data": "Motivo_Devolucion", "title": "Motivo Devolución" },

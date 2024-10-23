@@ -15,7 +15,8 @@ Devolucion_POS.Fecha,
 Devolucion_POS.Agrego, 
 Devolucion_POS.HoraAgregado, 
 Devolucion_POS.NumOrde, 
-Devolucion_POS.Estatus, 
+Devolucion_POS.Estatus,
+Devolucion_POS.Proveedor, 
 SucursalesCorre.Nombre_Sucursal 
 FROM 
 Devolucion_POS 
@@ -47,6 +48,7 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
     $data[$c]["Nombre_Produc"] = $fila["Nombre_Produc"];
     $data[$c]["Cantidad"] = $fila["Cantidad"];
+    $data[$c]["Proveedor"] = $fila["Proveedor"];
     $data[$c]["Num_Factura"] = $fila["Num_Factura"];
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Motivo_Devolucion"] = $fila["Motivo_Devolucion"];
