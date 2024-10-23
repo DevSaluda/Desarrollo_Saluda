@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Asegúrate de tener el cliente de Google API cargado (puedes instalarlo con Composer)
+require '../vendor/autoload.php'; // Asegúrate de tener el cliente de Google API cargado (puedes instalarlo con Composer)
 
 $client = new Google_Client();
 $client->setAuthConfig('../../app-saluda-966447541c3c.json'); // Credenciales del cliente
@@ -10,15 +10,17 @@ $calendarId = '3dc95b55f97f949efe5e01222ec074eeccd45eb10888e94b4a2fc39c91a60dc4@
 
 // Configurar el canal para recibir notificaciones
 $channel = new Google_Service_Calendar_Channel(array(
-    'id' => '0811', // Identificador único del canal, puedes generar uno
+    'id' => uniqid(), // Generar un ID único para cada canal
     'type' => 'web_hook',
     'address' => 'https://saludapos.com/AgendaDeCitas/Consultas/googleCalendarWebhook.php' // URL del webhook
 ));
 
 // Suscribirse a las notificaciones del calendario
-$watchRequest = $service->events->watch($calendarId, $channel);
-
-// Almacenar la respuesta para manejar futuras sincronizaciones
-$watchResponse = $watchRequest;
-
-echo "Suscripción creada con éxito";
+try {
+    $watchRequest = $service->events->watch($calendarId, $channel);
+    print_r($watchRequest); // Verificar la respuesta de la suscripción
+    echo "Suscripción creada con éxito";
+} catch (Exception $e) {
+    echo 'Error al crear la suscripción: ', $e->getMessage();
+    
+}
