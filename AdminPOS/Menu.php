@@ -1343,6 +1343,16 @@ if ($row['Permisos'] == 0) {
                     </p>
                   </a>
              </li>
+
+             <li class="nav-item">
+                  <a href="https://saludapos.com/AdminPOS/ListadoTutoriales" class="nav-link" style="color: white;">
+                  <i class="fa-solid fa-screen-users"></i>
+                    <p>
+                    Lista tutoriales
+
+                    </p>
+                  </a>
+             </li>
           <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
   echo "display:none;";
