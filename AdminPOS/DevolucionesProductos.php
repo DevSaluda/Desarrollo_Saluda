@@ -116,6 +116,31 @@ include ("footer.php")?>
         });
         $('#editModal').modal('show');
     });
+    $(document).on("click", ".btn-caducado", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaEstadoDeLaDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Productos Caducados");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
+
+    $(document).on("click", ".btn-caducado", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/IngresaloACedisDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Productos Caducados");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
 });
 
 </script>
