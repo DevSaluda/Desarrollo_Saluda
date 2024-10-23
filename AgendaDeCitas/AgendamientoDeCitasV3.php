@@ -75,6 +75,7 @@ include "Consultas/Consultas.php";
  include("Modales/BusquedaPorFechas.php");
  include("Modales/BusquedaPorSucursales.php");
  include("Modales/BusquedaPorSucursalesYEspecialistas.php");
+ include ("Consultas/googleCalendarWebhook.php");
   include ("footer.php")?>
 
 
