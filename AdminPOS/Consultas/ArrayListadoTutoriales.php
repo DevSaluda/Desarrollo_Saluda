@@ -19,7 +19,7 @@ while($fila=$result->fetch_assoc()){
  $data[$c]["Folio"] = $fila["id"];
  $data[$c]["Nombre_Paciente"] = $fila["nombre"];
 $data[$c]["Edad"] = $fila["Nombre_Sucursal"];
- $data[$c]["Sexo"] = $fila["Tutorial"];
+ $data[$c]["Sexo"] = $fila["tutorial"];
  $data[$c]["Fecha_Nacimiento"] = $fila["fecha_visto"];
    
 
