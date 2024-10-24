@@ -76,21 +76,23 @@ if($query->num_rows>0){
 <?php if($Devoluciones != null): ?>
     <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion" >
     <div class="row">
-        <div class="col">
-            <label for="exampleFormControlInput1">Número de Factura</label>
+      
+            <label for="exampleFormControlInput1">Nombre del producto</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
-                <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+                
+            
+            </div>
+
+            <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
                 <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
                 <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
                 <input type="text" class="form-control" hidden name="Movimiento"  readonly value="Agregado desde devoluciones">
                 <input type="text" class="form-control" hidden name="IdDevuelve"  readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
-            
-            </div>
         </div>
        
        
