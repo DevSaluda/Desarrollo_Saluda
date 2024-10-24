@@ -267,6 +267,7 @@ tabla = $('#Clientes').DataTable({
 <thead>
 <th>Id registro</th>
 <th>Nombre personal</th>
+<th>Sucursal</th>
 <th>Tutorial</th>
     <th>Fecha y hora de completado</th>
  
