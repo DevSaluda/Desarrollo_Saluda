@@ -31,6 +31,7 @@ $sql1 = "SELECT
     Devolucion_POS.HoraAgregado,
     Devolucion_POS.NumOrde,
     Devolucion_POS.Movimiento,
+    Devolucion_POS.Proveedor,
     SucursalesCorre.Nombre_Sucursal,
     SucursalesCorre.ID_SucursalC,
     MAX(Stock_POS.Cod_Barra) AS Stock_Cod_Barra,
@@ -87,7 +88,7 @@ if($query->num_rows>0){
             
             </div>
 
-            <label for="exampleFormControlInput1">Nombre del producto</label>
+            <label for="exampleFormControlInput1">Factura</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
