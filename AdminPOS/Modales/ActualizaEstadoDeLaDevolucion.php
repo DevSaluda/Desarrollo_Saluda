@@ -86,8 +86,8 @@ if($query->num_rows>0){
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
                 
             
-            </div>
-
+            </div> </div>
+            <div >
             <label for="exampleFormControlInput1">Factura</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
