@@ -137,7 +137,7 @@ include ("footer.php")?>
             $("#Titulo").html("Ingresando a la sucursal");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
             $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
-            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-primary");
         });
         $('#editModal').modal('show');
     });
