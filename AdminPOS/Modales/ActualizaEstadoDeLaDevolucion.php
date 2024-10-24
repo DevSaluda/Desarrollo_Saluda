@@ -87,32 +87,43 @@ if($query->num_rows>0){
                 
             
             </div> </div>
+
             <div >
-            <label for="exampleFormControlInput1">Factura</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-                </div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
-                <div >
-                <label for="exampleFormControlInput1">Proveedor</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-                </div>
-                </div>
-                <div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Proveedor; ?>">
-                <label for="exampleFormControlInput1">Cantidad</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-                </div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
-                </div>
+      
+      <label for="exampleFormControlInput1">Factura</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+          </div>
+          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
+          
+      
+      </div> </div>
+
+      <div >
+      
+      <label for="exampleFormControlInput1">Proveedor</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+          </div>
+          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Proveedor; ?>">
+          
+      
+      </div> </div>
+
+      <div >
+      
+      <label for="exampleFormControlInput1">Cantidad</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+          </div>
+          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
+          
+      
+      </div> </div>
             
-            
-            </div>
 
             <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
