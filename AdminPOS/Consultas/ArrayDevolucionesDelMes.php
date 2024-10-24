@@ -62,7 +62,8 @@ while ($fila = $result->fetch_assoc()) {
     <td>
         <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
         <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
-        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info btn-sm btn-Devolucion"><i class="fa-solid fa-rotate-left"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info btn-sm btn-DevolucionDefinitiva"><i class="fa-solid fa-rotate-left"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-primary btn-sm btn-Devolucion"><i class="fa-solid fa-rotate-left"></i></a>
     </td>';
     
     $c++;

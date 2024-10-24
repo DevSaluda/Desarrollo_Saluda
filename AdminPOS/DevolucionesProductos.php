@@ -116,7 +116,7 @@ include ("footer.php")?>
         });
         $('#editModal').modal('show');
     });
-    $(document).on("click", ".btn-caducado", function() {
+    $(document).on("click", ".btn-DevolucionDefinitiva", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/ActualizaEstadoDeLaDevolucion.php", { id: id }, function(data) {
