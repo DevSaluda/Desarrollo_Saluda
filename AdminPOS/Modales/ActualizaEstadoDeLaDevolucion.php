@@ -75,7 +75,7 @@ if($query->num_rows>0){
 
 <?php if($Devoluciones != null): ?>
     <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion" >
-    <div class="row">
+    <div >
       
             <label for="exampleFormControlInput1">Nombre del producto</label>
             <div class="input-group mb-3">
