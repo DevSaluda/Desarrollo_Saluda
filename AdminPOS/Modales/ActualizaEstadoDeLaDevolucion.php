@@ -82,7 +82,7 @@ if($query->num_rows>0){
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
                 </div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
+                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
                 
             
             </div>
@@ -94,6 +94,20 @@ if($query->num_rows>0){
                 </div>
                 <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
                 
+                <label for="exampleFormControlInput1">Proveedor</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+                </div>
+                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Proveedor; ?>">
+                <label for="exampleFormControlInput1">Cantidad</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+                </div>
+                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
+                
+            
             
             </div>
 
