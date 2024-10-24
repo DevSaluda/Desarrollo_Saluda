@@ -32,13 +32,11 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057b8 !important; color: white;">
-  Lista De Clientes    al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Lista De Tutoriales completador por el personal    al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroPorSucursalesIngresos" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
+
 </div>
 </div>
     
