@@ -135,7 +135,7 @@ include ("footer.php")?>
         $.post("https://saludapos.com/AdminPOS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Ingresando a la sucursal");
-            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
             $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
             $("#Di").addClass("modal-dialog modal-lg modal-notify modal-primary");
         });
