@@ -142,7 +142,7 @@ if($query->num_rows>0){
     
     </form>
 
-    <script src="js/RealizaTraspasoDesdeDevolucion.js"></script>
+    <script src="js/RealizaIngresoDevolucion.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
