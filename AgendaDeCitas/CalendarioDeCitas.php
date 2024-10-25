@@ -94,7 +94,7 @@ include "Consultas/Consultas.php";
         },
         events: function (fetchInfo, successCallback, failureCallback) {
             $.ajax({
-                url: 'fetch_events.php',
+                url: 'Consultas/fetch_events.php',
                 method: 'POST',
                 data: {
                     especialista: $('#especialista-select').val(),
