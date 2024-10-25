@@ -35,7 +35,7 @@ if (!empty($sucursal)) {
     $sql .= " AND SucursalesCorre.ID_SucursalC = '$sucursal'";
 }
 
-$result = $conexion->query($sql);
+$result = $conn->query($sql);
 $events = [];
 
 while ($row = $result->fetch_assoc()) {
