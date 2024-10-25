@@ -84,45 +84,66 @@ include "Consultas/Consultas.php";
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Configuración de FullCalendar
-        let calendarEl = document.getElementById('calendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            events: function(fetchInfo, successCallback, failureCallback) {
-                $.ajax({
-                    url: 'Consultas/fetch_events.php',
-                    method: 'POST',
-                    data: {
-                        especialista: $('#especialista-select').val(),
-                        sucursal: $('#sucursal-select').val()
-                    },
-                    success: function(data) {
-                        successCallback(data);
-                    },
-                    error: function() {
-                        failureCallback();
-                    }
-                });
-            },
-            eventClick: function(info) {
-                info.jsEvent.preventDefault();
-                $('#eventModal').modal('show');
-                document.getElementById('modal-body-content').innerHTML = `
-                    <p><strong>Especialidad:</strong> ${info.event.title}</p>
-                    <p><strong>Paciente:</strong> ${info.event.extendedProps.nombrePaciente}</p>
-                    <p><strong>Fecha y Hora:</strong> ${info.event.start.toLocaleString()}</p>
-                    <p><strong>Sucursal:</strong> ${info.event.extendedProps.nombreSucursal}</p>
-                    <p><strong>Observaciones:</strong> ${info.event.extendedProps.observaciones}</p>
-                `;
-            }
-        });
-        calendar.render();
-
-        // Acción de filtro
-        $('#filter-btn').on('click', function() {
-            calendar.refetchEvents();
-        });
+    let calendarEl = document.getElementById('calendar');
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Vista inicial en mes
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay' // Vistas de mes, semana y día
+        },
+        events: function (fetchInfo, successCallback, failureCallback) {
+            $.ajax({
+                url: 'fetch_events.php',
+                method: 'POST',
+                data: {
+                    especialista: $('#especialista-select').val(),
+                    sucursal: $('#sucursal-select').val()
+                },
+                success: function (data) {
+                    successCallback(data);
+                },
+                error: function () {
+                    failureCallback();
+                }
+            });
+        },
+        eventClick: function (info) {
+            info.jsEvent.preventDefault();
+            $('#eventModal').modal('show');
+            $('#modal-body-content').html(`
+                <p><strong>Especialidad:</strong> ${info.event.title}</p>
+                <p><strong>Paciente:</strong> ${info.event.extendedProps.nombrePaciente}</p>
+                <p><strong>Fecha y Hora:</strong> ${info.event.start.toLocaleString()}</p>
+                <p><strong>Sucursal:</strong> ${info.event.extendedProps.nombreSucursal}</p>
+                <p><strong>Observaciones:</strong> ${info.event.extendedProps.observaciones}</p>
+            `);
+        }
     });
+    calendar.render();
+
+    $('#filter-btn').on('click', function () {
+        calendar.refetchEvents();
+    });
+});
+
+
+
+    $(document).ready(function () {
+    $.ajax({
+        url: 'Consultas/load_filters.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('#especialista-select').html('<option value="">Selecciona Especialista</option>' + data.especialistas);
+            $('#sucursal-select').html('<option value="">Selecciona Sucursal</option>' + data.sucursales);
+        },
+        error: function () {
+            alert('Error al cargar especialistas y sucursales');
+        }
+    });
+});
+
 </script>
 </body>
 </html>

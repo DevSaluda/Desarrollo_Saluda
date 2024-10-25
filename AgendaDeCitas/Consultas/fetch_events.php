@@ -1,5 +1,7 @@
 <?php
-include 'conexion.php'; // Asegúrate de tener la conexión a la base de datos
+include 'db_connection.php'; // Asegúrate de tener la conexión a la base de datos
+
+
 
 $especialista = $_POST['especialista'] ?? '';
 $sucursal = $_POST['sucursal'] ?? '';
@@ -23,10 +25,9 @@ $sql = "SELECT
             LEFT JOIN Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp
             LEFT JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
         WHERE
-            AgendaCitas_EspecialistasExt.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-            AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
+            YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
 
-// Filtrado adicional
+// Agregar filtro de especialista y sucursal
 if (!empty($especialista)) {
     $sql .= " AND Personal_Medico_Express.Medico_ID = '$especialista'";
 }
