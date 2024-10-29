@@ -131,7 +131,7 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
-
+    let montoAbonado = 0; // Definir antes de cualquier uso
      // Función para mostrar u ocultar el campo "Dinero Ingresado"
     function toggleDineroIngresado() {
         const metodoPago = $('#MetodoDePago').val();
