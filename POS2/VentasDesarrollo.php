@@ -41,7 +41,8 @@ include ("Consultas/db_connection.php");
 <button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-arqui btn btn-warning btn-sm " type="submit"  >Arqueo de caja <i class="fa-solid fa-money-bill-transfer"></i> </button> 
 <button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-edit btn btn-warning btn-sm " type="submit"  >Corte de caja <i class="fas fa-cut"></i> <i class="fas fa-money-bill"></i></button> 
 
-     <button  data-toggle="modal" data-target="#ReimprimeVentas"   class="btn-reimpresion btn btn-info btn-sm  " type="submit"  >Reimpresión de tickets de venta <i class="fas fa-print"></i></button>
+     <button  data-toggle="modal" data-target="#ReimprimeVentasEnVentas"   class=" btn btn-info btn-sm  " type="submit"  >Reimpresión de tickets de venta <i class="fas fa-print"></i></button>
+     <button  id="aperturarcajon"  class=" btn btn-info btn-sm  "  >Aperturar cajon de dinero <i class="fa-regular fa-lock-keyhole-open"></i></button>
      <!-- <button data-toggle="modal" data-target="#CapturaFacturacion" class="btn btn-success btn-sm" style="
     background: #6610f2 !important;"type="submit" name="guardar" >Datos para facturación <i class="far fa-bell"></i></button> -->
       <div class="input-group mb-3">
@@ -189,10 +190,55 @@ $(".btn-aperturacaja").click(function() {
     $('#editModal').modal('show');
 });
   </script>
+<script>
+        $(document).ready(function(){
+            $('#aperturarcajon').click(function(){
+                // Datos que deseas enviar a la base de datos
+                const datosBD = {
+                    accion: "aperturar_cajon",
+                    timestamp: new Date().toISOString() // Marca de tiempo para registrar cada clic
+                };
+                
+                // Primera solicitud POST a tu backend para registrar el clic en la base de datos
+                $.ajax({
+                    url: 'Consultas/registrar_aperturacajon.php', // Cambia por la ruta de tu servidor para registrar en la BD
+                    type: 'POST',
+                    data: JSON.stringify(datosBD),
+                    contentType: 'application/json',
+                    success: function(respuestaBD) {
+                        console.log("Registro en la BD completado:", respuestaBD);
+                        
+                        // Datos que deseas enviar al localhost:8080 después de registrar en la BD
+                        const datosLocalhost = {
+                            mensaje: "Solicitud completada al localhost:8080",
+                            idRegistro: respuestaBD.idRegistro // Usa el id del registro si está disponible
+                        };
+
+                        // Segunda solicitud POST al localhost:8080
+                        $.ajax({
+                            url: 'http://localhost:8080/documento', // Cambia 'documento' por el endpoint específico
+                            type: 'POST',
+                            data: JSON.stringify(datosLocalhost),
+                            contentType: 'application/json',
+                            success: function(respuestaLocalhost) {
+                                console.log("Solicitud al localhost:8080 completada:", respuestaLocalhost);
+                            },
+                            error: function(errorLocalhost) {
+                                console.error("Error en la solicitud a localhost:8080:", errorLocalhost);
+                            }
+                        });
+                    },
+                    error: function(errorBD) {
+                        console.error("Error en el registro en la BD:", errorBD);
+                    }
+                });
+            });
+        });
+    </script>
 
    <!-- ./wrapper -->
    
-   <script src="js/ControladorFormVentasDesarrollo.js"></script>
+   <script src="js/ControladorFormVentas.js"></script>
 
      <!-- <script src="js/BusquedaVentasV.js"></script> -->
      <!-- <script src="js/BusquedaVentasV2.js"></script>
@@ -208,7 +254,7 @@ $(".btn-aperturacaja").click(function() {
   
       
    
-     <script src="js/RealizaVentasDesarrolloYPruebas.js"></script>
+     <script src="js/RealizaVentas.js"></script>
      <script src="js/CapturaDataFacturacion.js"></script>
      <script src="js/BuscaDataPacientes.js"></script>
 
