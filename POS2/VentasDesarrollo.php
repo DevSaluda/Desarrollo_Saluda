@@ -42,26 +42,15 @@ include ("Consultas/db_connection.php");
 <button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-edit btn btn-warning btn-sm " type="submit"  >Corte de caja <i class="fas fa-cut"></i> <i class="fas fa-money-bill"></i></button> 
 
      <button  data-toggle="modal" data-target="#ReimprimeVentasEnVentas"   class=" btn btn-info btn-sm  " type="submit"  >Reimpresión de tickets de venta <i class="fas fa-print"></i></button>
-     <button  id="aperturarcajon"  class=" btn btn-info btn-sm  "  >Aperturar cajon de dinero <i class="fa-regular fa-lock-keyhole-open"></i></button>
-     <!-- <button data-toggle="modal" data-target="#CapturaFacturacion" class="btn btn-success btn-sm" style="
-    background: #6610f2 !important;"type="submit" name="guardar" >Datos para facturación <i class="far fa-bell"></i></button> -->
+     <button  id="aperturarcajon"  class=" btn btn-dark btn-sm  "  >Aperturar cajon de dinero <i class="fa-regular fa-lock-keyhole-open"></i></button>
+   
       <div class="input-group mb-3">
         
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1"> Buscar<i class="fas fa-search"></i>  </span>
   </div>
   <input id="FiltrarContenido" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <!-- <input id="FiltrarContenido2" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido3" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido4" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido5" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-
   
-  <input id="FiltrarContenido6" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido7" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido8" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido9" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido10" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1"> -->
 </div></div>
 <div class="text-center">
   
@@ -73,27 +62,6 @@ include ("Consultas/db_connection.php");
     </div>
     </div>
 
- 
- <!-- <a class="btn btn-warning btn-sm" id="multi1" hidden onclick="multiplicar2()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi2" hidden onclick="multiplicar3()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi3" hidden onclick="multiplicar4()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi4" hidden onclick="multiplicar5()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi5" hidden onclick="multiplicar6()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi6" hidden onclick="multiplicar7()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi7" hidden onclick="multiplicar8()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi8" hidden onclick="multiplicar9()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi9" hidden onclick="multiplicar10()"><i class="fas fa-minus-circle"></i></a> -->
- <!-- <button hidden type="button" class="btn btn-primary btn-sm "id="add_fieldinicial" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field2" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field3" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field4" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field5" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field6" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field7" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field8" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field9" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field10" >Agregar mas productos</button> -->
   
      
   
