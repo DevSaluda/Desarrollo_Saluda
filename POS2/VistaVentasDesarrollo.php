@@ -388,8 +388,8 @@ function aplicarDescuentoSeleccionado() {
     // Aplica el descuento solo en la fila correspondiente
     aplicarDescuentoEnFila(cantidadDescuento);
 
-    // Actualiza el campo de tipo de descuento aplicado en la fila actual
-    filaActual.find('.Codigodescuento').val(tipoDescuento);
+    // Actualiza el campo de tipo de descuento aplicado
+    document.getElementById("tipodescuentoaplicado").value = tipoDescuento;
 
     // Actualiza el total
     actualizarTotal();
@@ -409,22 +409,23 @@ function aplicarDescuentoSeleccionado() {
     });
 }
 
-function actualizarFilaConDescuento(resultadoDescuento) {
-    // Actualiza el campo de costo de venta en la fila actual
-    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+function resetearModal() {
+    $('#cantidadadescontar').val('');
+    $('#montoDescuento').val('');
+    document.getElementById("tipodescuentoaplicado").value = "";  // Limpia el campo de tipo de descuento
+    document.getElementById("porcentaje").checked = true;
+    cambiarTipoDescuento();
+}
 
-    // Actualiza el campo de descuento en la fila actual
-    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
-    // Actualiza el campo de porcentaje o monto en la fila actual
-    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
-    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+function actualizarTotal() {
+    // Actualiza el total general (por completar según lógica de tu sistema)
+    console.log("Total actualizado");
 }
 
 function resetearModal() {
     $('#cantidadadescontar').val('');
     $('#montoDescuento').val('');
-    filaActual.find('.Codigodescuento').val("");  // Limpia el campo de tipo de descuento en la fila actual
     document.getElementById("porcentaje").checked = true;
     cambiarTipoDescuento();
 }
