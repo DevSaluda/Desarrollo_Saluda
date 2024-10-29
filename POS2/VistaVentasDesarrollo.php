@@ -301,15 +301,20 @@ $(document).ready(function () {
           </div>
 
           <!-- Input para monto de descuento (inicialmente oculto) -->
-          <div id="inputMonto" class="mt-3" style="display: none;">
-            <label for="montoDescuento">Monto a descontar <span class="text-danger">*</span></label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-              </div>
-              <input type="number" id="montoDescuento" class="form-control" placeholder="Especifica el monto" oninput="aplicarDescuentoSeleccionado()">
-            </div>
-          </div>
+        <!-- Input para monto de descuento (inicialmente oculto) -->
+<div id="inputMonto" class="mt-3" style="display: none;">
+    <label for="montoDescuento">Monto a descontar <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+        </div>
+        <input type="number" id="montoDescuento" class="form-control" placeholder="Especifica el monto">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="aplicarDescuentoSeleccionado()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
         </div>
       </div>
     </div>
@@ -367,16 +372,28 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
 }
 
 function aplicarDescuentoSeleccionado() {
-    var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
-    if (!document.getElementById("porcentaje").checked) {
+    var cantidadDescuento = 0;
+    
+    // Verifica si el descuento es porcentaje o monto
+    if (document.getElementById("porcentaje").checked) {
+        cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+    } else {
         cantidadDescuento = parseFloat(document.getElementById("montoDescuento").value) || 0;
     }
 
+    // Aplica el descuento solo en la fila correspondiente
     aplicarDescuentoEnFila(cantidadDescuento);
+
+    // Actualiza el total
     actualizarTotal();
+
+    // Cierra el modal
     $('#Descuento1detalles').modal('hide');
+
+    // Resetea el estado de la ventana modal
     resetearModal();
 
+    // Muestra SweetAlert
     Swal.fire({
         icon: 'success',
         title: 'Descuento aplicado',
@@ -396,6 +413,7 @@ function resetearModal() {
     document.getElementById("porcentaje").checked = true;
     cambiarTipoDescuento();
 }
+
 
 function actualizarTotal() {
     var contenedorFilas = $('#parte1');
