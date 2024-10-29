@@ -7,7 +7,7 @@ include "Consultas/SumadeFolioTickets.php";
 include ("Consultas/db_connection.php");
 $fcha = date("Y-m-d");
 
-// Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
+// 
 $primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
 
 
@@ -123,7 +123,7 @@ function multiplicar() {
     // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
         // Obtener los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
 
         // Calcular el importe para la fila actual
@@ -149,7 +149,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
@@ -158,15 +158,6 @@ function multiplicar() {
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
   } 
-
-  function actualizarMontos() {
-    // Seleccionar el último elemento .montoreal agregado
-    var montoReal = $('.montoreal').last().val();
-
-    // Actualizar el valor del último input .montocondescuentodeverdad con el valor del último input .montoreal
-    $('.montocondescuentodeverdad').last().val(montoReal);
-}
-
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
@@ -175,7 +166,7 @@ function multiplicar() {
 <script>
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
-        source: "Consultas/VentaDeProductosPruebas.php",
+        source: "Consultas/VentaDeProductos.php",
         minLength: 2,
         appendTo: "#productos",
         select: function (event, ui) {
@@ -217,15 +208,13 @@ $(document).ready(function () {
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
-                    <input class="montoreal form-control" readonly type="number"   </div>\
-                    <input class="montocondescuentodeverdad form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
+                    <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
                     <input class="form-control" readonly type="number" id="descuento1" value="0" name="DescuentoAplicado[]"> </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
-                    <input class="form-control" readonly type="text" value="<?php echo $row['EstadoSucursalInv']?>" name="EstadoVenta[]"> </div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm" onclick="setFilaActual(this)"><i class="fas fa-percent"></i></a>\
@@ -261,9 +250,7 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            actualizarMontos(); // Llamar a la función para actualizar los montos
             multiplicar();
-            
         }
     });
 });
@@ -294,6 +281,7 @@ $(document).ready(function () {
               <option value="">Seleccionar descuento</option>
               <option value="5">5%</option>
               <option value="10">10%</option>
+              <option value="12.5">12.5%</option>
               <option value="15">15%</option>
               <option value="20">20%</option>
               <option value="25">25%</option>
@@ -349,7 +337,7 @@ $(document).ready(function () {
 
 function actualizarFilaConDescuento(resultadoDescuento) {
     // Actualiza el campo de costo de venta
-    filaActual.find('.montocondescuentodeverdad').val(resultadoDescuento.valorConDescuento.toFixed(2));
+    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
     // Actualiza el campo de descuento en la fila
     filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
@@ -362,7 +350,7 @@ function actualizarFilaConDescuento(resultadoDescuento) {
 function aplicarDescuentoEnFila(cantidadDescuento) {
     if (filaActual) {
         // Obtén los valores de la fila actual
-        var precioProducto = parseFloat(filaActual.find('.montoreal').val()) || 0;
+        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
 
         // Aplica el descuento y obtén los resultados
         var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
@@ -371,9 +359,7 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
         actualizarFilaConDescuento(resultadoDescuento);
     }
 }
-function aplicarDescuentoEnFilaSinDescuento() {
-    aplicarDescuentoEnFila(0);
-}
+
 function resetearModal() {
     // Restablece el valor del select
     $('#cantidadadescontar').val('');
@@ -413,7 +399,7 @@ function actualizarTotal() {
     var sumaTotal = 0;
 
     contenedorFilas.find('.row').each(function () {
-        var importe = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
         sumaTotal += importe;
     });
 
@@ -454,4 +440,6 @@ $(document).ready(function()
 <script src="js/CalculaTotaldeproducto.js"></script>
 
 
-<script src="js/RealizaVentasDesarrolloYPruebas.js"></script>
+<script src="js/RealizaVentas.js"></script>
+<script src="js/RemueveProductos.js"></script>   
+<script src="js/Descuentos.js"></script>
