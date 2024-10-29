@@ -75,72 +75,71 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
-    <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion" >
-    <div >
-      
-            <label for="exampleFormControlInput1">Nombre del producto</label>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
+    <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
+    <div class="container">
+        <div class="row">
+            <!-- Columna 1 -->
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Nombre del producto</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
                 </div>
-                <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
-                
-            
-            </div> </div>
+            </div>
 
-            <div >
-      
-      <label for="exampleFormControlInput1">Factura</label>
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-          </div>
-          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
-          
-      
-      </div> </div>
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Factura</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
+                </div>
+            </div>
 
-      <div >
-      
-      <label for="exampleFormControlInput1">Proveedor</label>
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-          </div>
-          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Proveedor; ?>">
-          
-      
-      </div> </div>
-
-      <div >
-      
-      <label for="exampleFormControlInput1">Cantidad</label>
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="Factura"> <i class="fas fa-info-circle"></i></span>
-          </div>
-          <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
-          
-      
-      </div> </div>
-            
-
-            <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
-                <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
-                <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
-                <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
-                <input type="text" class="form-control" hidden name="Movimiento"  readonly value="Agregado desde devoluciones">
-                <input type="text" class="form-control" hidden name="IdDevuelve"  readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Proveedor</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Proveedor; ?>">
+                </div>
+            </div>
         </div>
-       
-       
 
-      
+        <div class="row">
+            <!-- Columna 2 -->
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Cantidad</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
+                </div>
+            </div>
 
-            <button type="submit"  id="submit"  class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
+            <!-- Campos ocultos (ocupando todo el ancho) -->
+            <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+            <input type="hidden" class="form-control" name="GeneradoPor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+            <input type="hidden" class="form-control" name="TipodeServicio" readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
+            <input type="hidden" class="form-control" name="ID_H_O_D" readonly value="Saluda">
+            <input type="hidden" class="form-control" name="Movimiento" readonly value="Agregado desde devoluciones">
+            <input type="hidden" class="form-control" name="IdDevuelve" readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
         </div>
-    
-    </form>
+
+        <!-- Botón de envío -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="submit" id="submit" class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+
 
     <script src="js/RealizaIngresoDevolucion.js"></script>
 <?php else: ?>
