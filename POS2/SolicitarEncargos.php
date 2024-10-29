@@ -131,7 +131,7 @@ endif;
 <script>
 $(document).ready(function() {
     let encargo = [];
-
+    
      // Función para mostrar u ocultar el campo "Dinero Ingresado"
     function toggleDineroIngresado() {
         const metodoPago = $('#MetodoDePago').val();
@@ -383,7 +383,7 @@ else {
     // Validar el monto abonado antes de enviar el formulario
     $('#guardarEncargoForm').submit(function(e) {
         e.preventDefault();
-
+        let montoAbonado = parseFloat($('#MontoAbonado').val());
         let dineroIngresado = parseFloat($('#DineroIngresado').val());
 
         if (dineroIngresado < montoAbonado) {
@@ -391,7 +391,7 @@ else {
         return;
         }
 
-        let montoAbonado = parseFloat($('#MontoAbonado').val());
+        
         let pagoMinimo = parseFloat($('#pagoMinimo').text());
 
         // Validar que el monto abonado no sea menor al mínimo requerido
