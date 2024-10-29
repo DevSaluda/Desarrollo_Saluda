@@ -24,3 +24,4 @@ try {
     echo 'Error al crear la suscripción: ', $e->getMessage();
     
 }
+ 
