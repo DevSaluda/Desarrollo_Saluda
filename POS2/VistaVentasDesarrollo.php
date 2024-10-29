@@ -198,6 +198,7 @@ $(document).ready(function () {
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
                     <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
                     <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  >\
+                    <input type="text" class="Codigodescuento form-control " readonly id="tipodescuentoaplicado" name="tipodescuentoaplicado[]"  >\
                 </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
@@ -373,16 +374,22 @@ function aplicarDescuentoEnFila(cantidadDescuento) {
 
 function aplicarDescuentoSeleccionado() {
     var cantidadDescuento = 0;
-    
+    var tipoDescuento = "";
+
     // Verifica si el descuento es porcentaje o monto
     if (document.getElementById("porcentaje").checked) {
         cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+        tipoDescuento = "Porcentaje";
     } else {
         cantidadDescuento = parseFloat(document.getElementById("montoDescuento").value) || 0;
+        tipoDescuento = "Monto";
     }
 
     // Aplica el descuento solo en la fila correspondiente
     aplicarDescuentoEnFila(cantidadDescuento);
+
+    // Actualiza el campo de tipo de descuento aplicado
+    document.getElementById("tipodescuentoaplicado").value = tipoDescuento;
 
     // Actualiza el total
     actualizarTotal();
@@ -401,6 +408,15 @@ function aplicarDescuentoSeleccionado() {
         timer: 1500
     });
 }
+
+function resetearModal() {
+    $('#cantidadadescontar').val('');
+    $('#montoDescuento').val('');
+    document.getElementById("tipodescuentoaplicado").value = "";  // Limpia el campo de tipo de descuento
+    document.getElementById("porcentaje").checked = true;
+    cambiarTipoDescuento();
+}
+
 
 function actualizarTotal() {
     // Actualiza el total general (por completar según lógica de tu sistema)
