@@ -1,4 +1,4 @@
-<?php
+<?php 
 require '../vendor/autoload.php';
 include_once 'db_connection.php';
 
@@ -54,53 +54,54 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
             '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario')";
 
     if (mysqli_query($conn, $sql)) {
-        // Agregar el evento a Google Calendar
-        $client = new Google_Client();
-        $client->setAuthConfig('../../app-saluda-966447541c3c.json'); // Ruta al archivo JSON de credenciales
-        $client->setScopes(Google_Service_Calendar::CALENDAR);
-        $service = new Google_Service_Calendar($client);
+        // Consultar el IDGoogleCalendar del especialista
+        $sql_calendar = "SELECT IDGoogleCalendar FROM Personal_Medico_Express WHERE Medico_ID = '$Fk_Especialista'";
+        $result_calendar = mysqli_query($conn, $sql_calendar);
+        $row_calendar = mysqli_fetch_assoc($result_calendar);
+        $calendarId = $row_calendar['IDGoogleCalendar'];
 
-        // ID del calendario
-        $calendarId = '3dc95b55f97f949efe5e01222ec074eeccd45eb10888e94b4a2fc39c91a60dc4@group.calendar.google.com';
+        // Verificar si el especialista tiene un IDGoogleCalendar asignado
+        if (!empty($calendarId)) {
+            // Agregar el evento a Google Calendar
+            $client = new Google_Client();
+            $client->setAuthConfig('../../app-saluda-966447541c3c.json'); // Ruta al archivo JSON de credenciales
+            $client->setScopes(Google_Service_Calendar::CALENDAR);
+            $service = new Google_Service_Calendar($client);
 
-        // Ajustar el formato de la hora y fecha para el formato ISO 8601
-        $startDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $Hora")); // Formato ISO 8601
-        $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Sumar 1 hora a la hora de inicio
-        $endDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $HoraFin")); // Formato ISO 8601
+            // Ajustar el formato de la hora y fecha para el formato ISO 8601
+            $startDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $Hora"));
+            $HoraFin = date('H:i', strtotime($Hora) + 60 * 60); // Sumar 1 hora a la hora de inicio
+            $endDateTime = date('Y-m-d\TH:i:s', strtotime("$Fecha $HoraFin"));
 
-        // Verificaciones antes de crear el evento
-        if (!DateTime::createFromFormat('Y-m-d\TH:i:s', $startDateTime) || !DateTime::createFromFormat('Y-m-d\TH:i:s', $endDateTime)) {
-            echo json_encode(array("statusCode" => 400, "error" => "Fecha y hora no válidas"));
-            exit();
-        }
+            try {
+                $event = new Google_Service_Calendar_Event(array(
+                    'summary' => "Consulta de $Nombre_Paciente",
+                    'location' => "$Fk_Sucursal",
+                    'description' => "$Observaciones",
+                    'start' => array(
+                        'dateTime' => $startDateTime,
+                        'timeZone' => 'America/Mexico_City',
+                    ),
+                    'end' => array(
+                        'dateTime' => $endDateTime,
+                        'timeZone' => 'America/Mexico_City',
+                    ),
+                    'colorId' => '2',
+                ));
 
-        // Crea el evento
-        $event = new Google_Service_Calendar_Event(array(
-            'summary' => "Consulta de $Nombre_Paciente",
-            'location' => "$Fk_Sucursal",
-            'description' => "$Observaciones",
-            'start' => array(
-                'dateTime' => $startDateTime,
-                'timeZone' => 'America/Mexico_City',
-            ),
-            'end' => array(
-                'dateTime' => $endDateTime,
-                'timeZone' => 'America/Mexico_City',
-            ),
-            'colorId' => '2', // Puedes comentar esta línea si no estás seguro
-        ));
+                $event = $service->events->insert($calendarId, $event);
 
-        // Inserta el evento en el calendario
-        try {
-            $event = $service->events->insert($calendarId, $event);
-
-            // Guardar el ID del evento de Google Calendar en la base de datos
-            $GoogleEventId = $event->id;
-            $sql = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha' AND Hora='$Fk_Hora'";
-            mysqli_query($conn, $sql);
-            echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
-        } catch (Exception $e) {
-            echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
+                // Guardar el ID del evento de Google Calendar en la base de datos
+                $GoogleEventId = $event->id;
+                $sql_update = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha' AND Hora='$Fk_Hora'";
+                mysqli_query($conn, $sql_update);
+                echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
+            } catch (Exception $e) {
+                echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
+            }
+        } else {
+            // Si no hay calendarId, omitir el paso de Google Calendar y finalizar
+            echo json_encode(array("statusCode" => 200, "message" => "Cita agendada sin Google Calendar"));
         }
     } else {
         echo json_encode(array("statusCode" => 201));
