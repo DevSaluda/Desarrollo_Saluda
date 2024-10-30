@@ -32,24 +32,26 @@ $('document').ready(function($) {
             ActPass: {
                 required: true,
             },
+            // Agrega otras reglas aquí para los otros campos según sea necesario
         },
         messages: {
             ActPass: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i>Dato Requerido",
             }
+            // Agrega otros mensajes aquí según sea necesario
         },
-        submitHandler: updateForm
+        submitHandler: submitForm
     });
   
-    function updateForm() {
+    function submitForm() {
         $.ajax({
-            type: 'POST',  // Cambiar a 'PUT' si el servidor lo permite
-            url: "Consultas/ActualizarDatosDevolucion.php",  // Cambiar al archivo PHP para actualizar
+            type: 'POST',
+            url: "Consultas/ActualizaEstadoDeLaDevolucion.php",
             data: $('#ActualizaEstadoDevolucion').serialize(),
             cache: false,
             beforeSend: function() {
                 $("#success").fadeOut();
-                $("#submit").html("Actualizando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+                $("#submit").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
             },
             success: function(dataResult) {
                 try {
@@ -57,13 +59,15 @@ $('document').ready(function($) {
                     if (dataResult.status === 'success') {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Actualización Exitosa',
+                            title: 'Éxito',
                             text: dataResult.message,
                             showConfirmButton: false,
                             timer: 2000
-                        }).then(() => {
-                            $("#submit").html("Actualizado <i class='fas fa-check'></i>");
                         });
+                        $("#submit").html("Enviado <i class='fas fa-check'></i>");
+                        $("#editModal").removeClass("in");
+                        $(".modal-backdrop").remove();
+                        $("#editModal").hide();
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -71,9 +75,8 @@ $('document').ready(function($) {
                             text: dataResult.message,
                             showConfirmButton: false,
                             timer: 2000
-                        }).then(() => {
-                            $("#submit").html("Actualizar <i class='fas fa-paper-plane'></i>");
                         });
+                        $("#submit").html("Enviar <i class='fas fa-paper-plane'></i>");
                     }
                 } catch (e) {
                     Swal.fire({
@@ -82,12 +85,12 @@ $('document').ready(function($) {
                         text: 'Ocurrió un error en el servidor.',
                         showConfirmButton: false,
                         timer: 2000
-                    }).then(() => {
-                        $("#submit").html("Actualizar <i class='fas fa-paper-plane'></i>");
                     });
+                    $("#submit").html("Enviar <i class='fas fa-paper-plane'></i>");
                 }
             }
         });
         return false;
     }
-});
+  });
+  
