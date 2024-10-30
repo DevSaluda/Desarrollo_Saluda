@@ -125,11 +125,10 @@ if($query->num_rows>0){
       </div> </div>
             
 
-            <input type="text" class="form-control" hidden name="IdBasedatos" hidden readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+            
                 <input type="text" class="form-control" hidden value="<?php echo $row['Nombre_Apellidos']?>" readonly name="GeneradoPor">
-                <input type="text" class="form-control" hidden name="TipodeServicio"  readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
-                <input type="text" class="form-control" hidden name="ID_H_O_D"  readonly value="Saluda">
-                <input type="text" class="form-control" hidden name="Movimiento"  readonly value="Agregado desde devoluciones">
+              
+                <input type="text" class="form-control" hidden name="Movimiento"  readonly value="Devolucion a proveedor">
                 <input type="text" class="form-control" hidden name="IdDevuelve"  readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
         </div>
        
@@ -142,7 +141,7 @@ if($query->num_rows>0){
     
     </form>
 
-    <script src="js/RealizaTraspasoDesdeDevolucion.js"></script>
+    <script src="js/MarcaloParaDevolucion.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
