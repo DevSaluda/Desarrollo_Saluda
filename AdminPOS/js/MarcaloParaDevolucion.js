@@ -27,7 +27,7 @@ $('document').ready(function($) {
         return this.optional(element) ||/^(\d{2})(\d{2})(\d{2})\d{5}$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Verifique el NSS");
   
-    $("#BajaEmpleados").validate({
+    $("#ActualizaEstadoDevolucion").validate({
         rules: {
             ActPass: {
                 required: true,
@@ -45,7 +45,7 @@ $('document').ready(function($) {
         $.ajax({
             type: 'POST',  // Cambiar a 'PUT' si el servidor lo permite
             url: "Consultas/ActualizarDatosDevolucion.php",  // Cambiar al archivo PHP para actualizar
-            data: $('#BajaEmpleados').serialize(),
+            data: $('#ActualizaEstadoDevolucion').serialize(),
             cache: false,
             beforeSend: function() {
                 $("#success").fadeOut();
