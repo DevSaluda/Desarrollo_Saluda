@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión
-include 'ruta_de_tu_archivo_de_conexion.php'; // Cambia 'ruta_de_tu_archivo_de_conexion.php' a la ubicación real del archivo
+include "db_connection.php"; // Cambia 'ruta_de_tu_archivo_de_conexion.php' a la ubicación real del archivo
 
 // Recibir los datos del POST (desde el AJAX)
 $data = json_decode(file_get_contents("php://input"), true);
