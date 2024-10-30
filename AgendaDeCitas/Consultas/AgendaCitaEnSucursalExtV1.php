@@ -35,6 +35,12 @@ $result_hora = mysqli_query($conn, $sql_hora);
 $row_hora = mysqli_fetch_assoc($result_hora);
 $Hora = $row_hora['Horario_Disponibilidad'];
 
+// Consultar el IDGoogleCalendar del especialista
+$sql_calendar = "SELECT IDGoogleCalendar FROM Personal_Medico_Express WHERE Medico_ID = '$Fk_Especialista'";
+$result_calendar = mysqli_query($conn, $sql_calendar);
+$row_calendar = mysqli_fetch_assoc($result_calendar);
+$calendarId = $row_calendar['IDGoogleCalendar'];
+
 // Verificar si ya existe la cita
 $sql = "SELECT Fk_Especialidad, Fk_Especialista, Fk_Sucursal, Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, ID_H_O_D 
         FROM AgendaCitas_EspecialistasExt 
@@ -49,18 +55,11 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
 } else {
     // Insertar la nueva cita en la base de datos con las FK de fecha y hora
     $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, 
-            `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`, `Color_Calendario`) 
+            `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`, `Color_Calendario`, `IDGoogleCalendar`) 
             VALUES ('$Fk_Especialidad', '$Fk_Especialista', '$Fk_Sucursal', '$Fk_Fecha', '$Fk_Hora', '$Nombre_Paciente', '$Telefono', '$Tipo_Consulta', 
-            '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario')";
+            '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario', '$calendarId')";
 
     if (mysqli_query($conn, $sql)) {
-        // Consultar el IDGoogleCalendar del especialista
-        $sql_calendar = "SELECT IDGoogleCalendar FROM Personal_Medico_Express WHERE Medico_ID = '$Fk_Especialista'";
-        $result_calendar = mysqli_query($conn, $sql_calendar);
-        $row_calendar = mysqli_fetch_assoc($result_calendar);
-        $calendarId = $row_calendar['IDGoogleCalendar'];
-
-        // Verificar si el especialista tiene un IDGoogleCalendar asignado
         if (!empty($calendarId)) {
             // Agregar el evento a Google Calendar
             $client = new Google_Client();
@@ -93,14 +92,13 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
 
                 // Guardar el ID del evento de Google Calendar en la base de datos
                 $GoogleEventId = $event->id;
-                $sql_update = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha' AND Hora='$Fk_Hora'";
+                $sql_update = "UPDATE AgendaCitas_EspecialistasExt SET GoogleEventId = '$GoogleEventId' WHERE Fecha = '$Fk_Fecha' AND Hora='$Fk_Hora' AND IDGoogleCalendar = '$calendarId'";
                 mysqli_query($conn, $sql_update);
                 echo json_encode(array("statusCode" => 200, "eventLink" => $event->htmlLink));
             } catch (Exception $e) {
                 echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
             }
         } else {
-            // Si no hay calendarId, omitir el paso de Google Calendar y finalizar
             echo json_encode(array("statusCode" => 200, "message" => "Cita agendada sin Google Calendar"));
         }
     } else {
