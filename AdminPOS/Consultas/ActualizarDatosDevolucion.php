@@ -3,9 +3,9 @@ include 'db_connection.php'; // Asegúrate de incluir la conexión a la base de 
 
 if (isset($_POST['GeneradoPor'], $_POST['Movimiento'], $_POST['IdDevuelve'])) {
     $actualizadoPor = $_POST['GeneradoPor'];
-    $movimiento = $_POST['Movimiento'];
+    $estatus= $_POST['Movimiento'];
     $idRegistro = $_POST['IdDevuelve'];
-    $estatus = "Actualizado"; // Define el nuevo estatus
+   
 
     // Consulta para actualizar la tabla Devolucion_POS
     $sql = "UPDATE Devolucion_POS 
