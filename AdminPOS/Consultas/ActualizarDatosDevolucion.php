@@ -12,7 +12,7 @@ if (isset($_POST['GeneradoPor'], $_POST['Movimiento'], $_POST['IdDevuelve'])) {
             SET ActualizadoPor = ?, Estatus = ?
             WHERE ID_Registro = ?";
 
-    if ($stmt = $conexion->prepare($sql)) {
+    if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("ssi", $actualizadoPor, $estatus, $idRegistro);
 
         if ($stmt->execute()) {
