@@ -160,48 +160,47 @@ $(".btn-aperturacaja").click(function() {
   </script>
 <script>
         $(document).ready(function(){
-            $('#aperturarcajon').click(function(){
-                // Datos que deseas enviar a la base de datos
-                const datosBD = {
-                    accion: "aperturar_cajon",
-                    timestamp: new Date().toISOString() // Marca de tiempo para registrar cada clic
-                };
+    $('#aperturarcajon').click(function(){
+        const datosBD = {
+            accion: "aperturar_cajon",
+            timestamp: new Date().toISOString() // Marca de tiempo para registrar cada clic
+        };
+        
+        // Primera solicitud POST a tu backend para registrar el clic en la base de datos
+        $.ajax({
+            url: 'Consultas/registrar_aperturacajon.php',
+            type: 'POST',
+            data: JSON.stringify(datosBD),
+            contentType: 'application/json',
+            success: function(respuestaBD) {
+                console.log("Registro en la BD completado:", respuestaBD);
                 
-                // Primera solicitud POST a tu backend para registrar el clic en la base de datos
-                $.ajax({
-                    url: 'Consultas/registrar_aperturacajon.php', // Cambia por la ruta de tu servidor para registrar en la BD
-                    type: 'POST',
-                    data: JSON.stringify(datosBD),
-                    contentType: 'application/json',
-                    success: function(respuestaBD) {
-                        console.log("Registro en la BD completado:", respuestaBD);
-                        
-                        // Datos que deseas enviar al localhost:8080 después de registrar en la BD
-                        const datosLocalhost = {
-                            mensaje: "Solicitud completada al localhost:8080",
-                            idRegistro: respuestaBD.idRegistro // Usa el id del registro si está disponible
-                        };
+                const datosLocalhost = {
+                    mensaje: "Solicitud completada al localhost:8080",
+                    idRegistro: respuestaBD.idRegistro // Usa el id del registro si está disponible
+                };
 
-                        // Segunda solicitud POST al localhost:8080
-                        $.ajax({
-                            url: 'localhost:8080/abrecajon.php', // Cambia 'documento' por el endpoint específico
-                            type: 'POST',
-                            data: JSON.stringify(datosLocalhost),
-                            contentType: 'application/json',
-                            success: function(respuestaLocalhost) {
-                                console.log("Solicitud al localhost:8080 completada:", respuestaLocalhost);
-                            },
-                            error: function(errorLocalhost) {
-                                console.error("Error en la solicitud a localhost:8080:", errorLocalhost);
-                            }
-                        });
+                // Segunda solicitud POST al localhost:8080
+                $.ajax({
+                    url: 'http://localhost:8080/abrecajon.php',
+                    type: 'POST',
+                    data: JSON.stringify(datosLocalhost),
+                    contentType: 'application/json',
+                    success: function(respuestaLocalhost) {
+                        console.log("Solicitud al localhost:8080 completada:", respuestaLocalhost);
                     },
-                    error: function(errorBD) {
-                        console.error("Error en el registro en la BD:", errorBD);
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud a localhost:8080:", status, error);
                     }
                 });
-            });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en el registro en la BD:", status, error);
+            }
         });
+    });
+});
+
     </script>
 
    <!-- ./wrapper -->
