@@ -35,7 +35,7 @@ if (isset($_POST['GeneradoPor'], $_POST['Movimiento'], $_POST['IdDevuelve'])) {
         ]);
     }
 
-    $conn->clonse();
+    $conn->close();
 } else {
     echo json_encode([
         "status" => "error",
