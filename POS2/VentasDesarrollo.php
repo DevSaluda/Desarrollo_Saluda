@@ -161,10 +161,12 @@ $(".btn-aperturacaja").click(function() {
 <script>
         $(document).ready(function(){
     $('#aperturarcajon').click(function(){
-        const datosBD = {
-            accion: "aperturar_cajon",
-            timestamp: new Date().toISOString() // Marca de tiempo para registrar cada clic
-        };
+      const datosBD = {
+              
+                ImpresoPor: "<?php echo $row['Nombre_Apellidos']; ?>", // Nombre del usuario que imprime
+                
+                fkSucursal: "<?php echo $row['Fk_Sucursal']; ?>" // ID de la sucursal
+            };
         
         // Primera solicitud POST a tu backend para registrar el clic en la base de datos
         $.ajax({
