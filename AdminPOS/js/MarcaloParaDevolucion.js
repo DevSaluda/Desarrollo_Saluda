@@ -46,7 +46,7 @@ $('document').ready(function($) {
     function submitForm() {
         $.ajax({
             type: 'POST',
-            url: "Consultas/ActualizaEstadoDeLaDevolucion.php",
+            url: "Consultas/ActualizarDatosDevolucion.php",
             data: $('#ActualizaEstadoDevolucion').serialize(),
             cache: false,
             beforeSend: function() {
