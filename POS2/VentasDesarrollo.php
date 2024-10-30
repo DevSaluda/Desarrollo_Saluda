@@ -184,7 +184,7 @@ $(".btn-aperturacaja").click(function() {
 
                         // Segunda solicitud POST al localhost:8080
                         $.ajax({
-                            url: 'http://localhost:8080/abrecajon.php', // Cambia 'documento' por el endpoint específico
+                            url: 'localhost:8080/abrecajon.php', // Cambia 'documento' por el endpoint específico
                             type: 'POST',
                             data: JSON.stringify(datosLocalhost),
                             contentType: 'application/json',
