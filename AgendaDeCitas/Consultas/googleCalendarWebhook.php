@@ -1,27 +1,21 @@
-<?php
+<?php 
 include "db_connection.php";
 
 // Capturar el cuerpo de la notificación
 $request_body = file_get_contents('php://input');
 file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Notificación recibida: " . $request_body . PHP_EOL, FILE_APPEND);
 
-// Decodificar la notificación
-$data = json_decode($request_body, true);
-
-// Obtener el calendario específico desde los datos de la notificación
-$calendarId = $data['calendarId'] ?? null; // Ajusta esto si el campo difiere
-if (!$calendarId) {
-    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error: No se encontró calendarId en la notificación." . PHP_EOL, FILE_APPEND);
-    exit;
+try {
+    // Sincronizar la base de datos con todos los calendarios registrados
+    syncAllCalendars($conn);
+} catch (Exception $e) {
+    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error en la sincronización: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
 }
-
-// Sincronizar la base de datos con el calendario correspondiente
-syncWithGoogleCalendar($conn, $calendarId);
 
 mysqli_close($conn);
 
-// Función para sincronizar los eventos de un calendario específico
-function syncWithGoogleCalendar($conn, $calendarId) {
+// Función para sincronizar todos los calendarios con la base de datos
+function syncAllCalendars($conn) {
     require '../vendor/autoload.php';
 
     $client = new Google_Client();
@@ -29,33 +23,55 @@ function syncWithGoogleCalendar($conn, $calendarId) {
     $client->setScopes(Google_Service_Calendar::CALENDAR);
     $service = new Google_Service_Calendar($client);
 
-    // Obtener todos los eventos del calendario de Google especificado
-    $events = $service->events->listEvents($calendarId);
+    // Obtener todos los IDGoogleCalendar de los médicos en la base de datos
+    $sql_calendars = "SELECT DISTINCT IDGoogleCalendar FROM Personal_Medico_Express WHERE IDGoogleCalendar IS NOT NULL";
+    $result_calendars = mysqli_query($conn, $sql_calendars);
 
-    // Obtener los registros de la base de datos que tienen un GoogleEventId y coinciden con este calendario
-    $sql = "SELECT GoogleEventId FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId IS NOT NULL AND IDGoogleCalendar = '$calendarId'";
-    $result = mysqli_query($conn, $sql);
-
-    $dbEventIds = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $dbEventIds[] = $row['GoogleEventId'];
+    if (!$result_calendars) {
+        throw new Exception("Error en la consulta de calendarios: " . mysqli_error($conn));
     }
 
-    // Crear una lista de los GoogleEventId actuales en Google Calendar
-    $googleEventIds = [];
-    foreach ($events->getItems() as $event) {
-        $googleEventIds[] = $event->getId();
-    }
+    $calendarEventIds = [];
+    
+    // Iterar sobre cada calendario registrado y obtener sus eventos actuales
+    while ($row_calendar = mysqli_fetch_assoc($result_calendars)) {
+        $calendarId = $row_calendar['IDGoogleCalendar'];
+        
+        try {
+            // Obtener eventos del calendario actual
+            $events = $service->events->listEvents($calendarId);
+        } catch (Exception $e) {
+            file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al obtener eventos de Google Calendar para $calendarId: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+            continue;
+        }
 
-    // Eliminar eventos de la base de datos que ya no existen en Google Calendar
-    foreach ($dbEventIds as $dbEventId) {
-        if (!in_array($dbEventId, $googleEventIds)) {
-            $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '$dbEventId'";
-            mysqli_query($conn, $deleteSql);
-            file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Evento eliminado de la base de datos: " . $dbEventId . " del calendario: $calendarId" . PHP_EOL, FILE_APPEND);
+        foreach ($events->getItems() as $event) {
+            $calendarEventIds[] = $event->getId(); // Almacenar todos los GoogleEventId de este calendario
         }
     }
 
-    echo "Sincronización completada para el calendario $calendarId";
+    // Obtener todos los GoogleEventId de la base de datos para verificar cuáles ya no existen
+    $sql_events = "SELECT GoogleEventId FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId IS NOT NULL";
+    $result_events = mysqli_query($conn, $sql_events);
+
+    if (!$result_events) {
+        throw new Exception("Error en la consulta de eventos de la base de datos: " . mysqli_error($conn));
+    }
+
+    while ($row_event = mysqli_fetch_assoc($result_events)) {
+        $dbEventId = $row_event['GoogleEventId'];
+
+        // Si el evento de la base de datos no existe en ninguno de los calendarios, eliminarlo
+        if (!in_array($dbEventId, $calendarEventIds)) {
+            $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '$dbEventId'";
+            if (!mysqli_query($conn, $deleteSql)) {
+                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al eliminar evento $dbEventId de la base de datos: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
+            } else {
+                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Evento eliminado de la base de datos: " . $dbEventId . PHP_EOL, FILE_APPEND);
+            }
+        }
+    }
+
+    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Sincronización completada para todos los calendarios registrados." . PHP_EOL, FILE_APPEND);
 }
 ?>
