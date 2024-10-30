@@ -141,11 +141,11 @@ if($query->num_rows>0){
     
     </form>
 
-    <script src="js/MarcaloParaDevolucion.js"></script>
+  
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
-
+<script src="js/MarcaloParaDevolucion.js"></script>
 <?php
 function fechaCastellano($fecha) {
     $fecha = substr($fecha, 0, 10);
