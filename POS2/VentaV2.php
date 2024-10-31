@@ -42,26 +42,15 @@ include ("Consultas/db_connection.php");
 <button data-id="<?php echo $ValorCaja["ID_Caja"];?>" class="btn-edit btn btn-warning btn-sm " type="submit"  >Corte de caja <i class="fas fa-cut"></i> <i class="fas fa-money-bill"></i></button> 
 
      <button  data-toggle="modal" data-target="#ReimprimeVentasEnVentas"   class=" btn btn-info btn-sm  " type="submit"  >Reimpresión de tickets de venta <i class="fas fa-print"></i></button>
-     <button  id="aperturarcajon"  class=" btn btn-info btn-sm  "  >Aperturar cajon de dinero <i class="fa-regular fa-lock-keyhole-open"></i></button>
-     <!-- <button data-toggle="modal" data-target="#CapturaFacturacion" class="btn btn-success btn-sm" style="
-    background: #6610f2 !important;"type="submit" name="guardar" >Datos para facturación <i class="far fa-bell"></i></button> -->
+     <button  id="aperturarcajon"  class=" btn btn-dark btn-sm  "  >Aperturar cajon de dinero <i class="fa-regular fa-lock-keyhole-open"></i></button>
+   
       <div class="input-group mb-3">
         
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1"> Buscar<i class="fas fa-search"></i>  </span>
   </div>
   <input id="FiltrarContenido" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <!-- <input id="FiltrarContenido2" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido3" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido4" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido5" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-
   
-  <input id="FiltrarContenido6" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido7" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido8" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido9" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
-  <input id="FiltrarContenido10" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1"> -->
 </div></div>
 <div class="text-center">
   
@@ -73,27 +62,6 @@ include ("Consultas/db_connection.php");
     </div>
     </div>
 
- 
- <!-- <a class="btn btn-warning btn-sm" id="multi1" hidden onclick="multiplicar2()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi2" hidden onclick="multiplicar3()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi3" hidden onclick="multiplicar4()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi4" hidden onclick="multiplicar5()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi5" hidden onclick="multiplicar6()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi6" hidden onclick="multiplicar7()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi7" hidden onclick="multiplicar8()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi8" hidden onclick="multiplicar9()"><i class="fas fa-minus-circle"></i></a>
- <a class="btn btn-warning btn-sm" id="multi9" hidden onclick="multiplicar10()"><i class="fas fa-minus-circle"></i></a> -->
- <!-- <button hidden type="button" class="btn btn-primary btn-sm "id="add_fieldinicial" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field2" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field3" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field4" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field5" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field6" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field7" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field8" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field9" >Agregar mas productos</button>
-  <button hidden type="button" class="btn btn-primary btn-sm "id="add_field10" >Agregar mas productos</button> -->
   
      
   
@@ -192,48 +160,49 @@ $(".btn-aperturacaja").click(function() {
   </script>
 <script>
         $(document).ready(function(){
-            $('#aperturarcajon').click(function(){
-                // Datos que deseas enviar a la base de datos
-                const datosBD = {
-                    accion: "aperturar_cajon",
-                    timestamp: new Date().toISOString() // Marca de tiempo para registrar cada clic
-                };
+    $('#aperturarcajon').click(function(){
+      const datosBD = {
+              
+                ImpresoPor: "<?php echo $row['Nombre_Apellidos']; ?>", // Nombre del usuario que imprime
                 
-                // Primera solicitud POST a tu backend para registrar el clic en la base de datos
-                $.ajax({
-                    url: 'Consultas/registrar_aperturacajon.php', // Cambia por la ruta de tu servidor para registrar en la BD
-                    type: 'POST',
-                    data: JSON.stringify(datosBD),
-                    contentType: 'application/json',
-                    success: function(respuestaBD) {
-                        console.log("Registro en la BD completado:", respuestaBD);
-                        
-                        // Datos que deseas enviar al localhost:8080 después de registrar en la BD
-                        const datosLocalhost = {
-                            mensaje: "Solicitud completada al localhost:8080",
-                            idRegistro: respuestaBD.idRegistro // Usa el id del registro si está disponible
-                        };
+                fkSucursal: "<?php echo $row['Fk_Sucursal']; ?>" // ID de la sucursal
+            };
+        
+        // Primera solicitud POST a tu backend para registrar el clic en la base de datos
+        $.ajax({
+            url: 'Consultas/registrar_aperturacajon.php',
+            type: 'POST',
+            data: JSON.stringify(datosBD),
+            contentType: 'application/json',
+            success: function(respuestaBD) {
+                console.log("Registro en la BD completado:", respuestaBD);
+                
+                const datosLocalhost = {
+                    mensaje: "Solicitud completada al localhost:8080",
+                    idRegistro: respuestaBD.idRegistro // Usa el id del registro si está disponible
+                };
 
-                        // Segunda solicitud POST al localhost:8080
-                        $.ajax({
-                            url: 'http://localhost:8080/documento', // Cambia 'documento' por el endpoint específico
-                            type: 'POST',
-                            data: JSON.stringify(datosLocalhost),
-                            contentType: 'application/json',
-                            success: function(respuestaLocalhost) {
-                                console.log("Solicitud al localhost:8080 completada:", respuestaLocalhost);
-                            },
-                            error: function(errorLocalhost) {
-                                console.error("Error en la solicitud a localhost:8080:", errorLocalhost);
-                            }
-                        });
+                // Segunda solicitud POST al localhost:8080
+                $.ajax({
+                    url: 'http://localhost:8080/ticket/AbreElCajon.php',
+                    type: 'POST',
+                    data: JSON.stringify(datosLocalhost),
+                    contentType: 'application/json',
+                    success: function(respuestaLocalhost) {
+                        console.log("Solicitud al localhost:8080 completada:", respuestaLocalhost);
                     },
-                    error: function(errorBD) {
-                        console.error("Error en el registro en la BD:", errorBD);
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud a localhost:8080:", status, error);
                     }
                 });
-            });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en el registro en la BD:", status, error);
+            }
         });
+    });
+});
+
     </script>
 
    <!-- ./wrapper -->

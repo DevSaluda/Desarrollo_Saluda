@@ -198,7 +198,7 @@ $(document).ready(function () {
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
                     <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
                     <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  >\
-                    <input type="text" class="Codigodescuento form-control " readonly id="tipodescuentoaplicado" name="tipodescuentoaplicado[]"  >\
+                    <input type="text" hidden class="Codigodescuento form-control " readonly id="tipodescuentoaplicado" name="tipodescuentoaplicado[]"  >\
                 </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
