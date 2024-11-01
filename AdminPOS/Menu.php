@@ -233,6 +233,12 @@ if ($row['Permisos'] == 0) {
                 </a>
             </li>
             <li class="nav-item">
+                <a href="AperturasDeCajon" class="nav-link">
+                    <i class="fas fa-dot-circle"></i>
+                    <p>Aperturas de cajon</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="ControlGastos" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
                     <p>Otros gastos</p>
