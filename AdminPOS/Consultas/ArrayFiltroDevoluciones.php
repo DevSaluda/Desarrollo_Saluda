@@ -3,90 +3,71 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Verifica si se han enviado datos por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica si las variables están seteadas y no son nulas
     if (isset($_POST['Mes']) && isset($_POST['anual'])) {
-        // Obtén los valores del formulario
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
 
-        // Concatena los valores en la consulta SQL
-        $sql = "SELECT DISTINCT
-            Ventas_POS.Venta_POS_ID,
-            Ventas_POS.Folio_Ticket,
-            Ventas_POS.FolioSucursal,
-            Ventas_POS.Fk_Caja,
-            Ventas_POS.Identificador_tipo,
-            Ventas_POS.Fecha_venta, 
-            Ventas_POS.Total_Venta,
-            Ventas_POS.Importe,
-            Ventas_POS.Total_VentaG,
-            Ventas_POS.FormaDePago,
-            Ventas_POS.Turno,
-            Ventas_POS.FolioSignoVital,
-            Ventas_POS.Cliente,
-            Cajas_POS.ID_Caja,
-            Cajas_POS.Sucursal,
-            Cajas_POS.MedicoEnturno,
-            Cajas_POS.EnfermeroEnturno,
-            Ventas_POS.Cod_Barra,
-            Ventas_POS.Clave_adicional,
-            Ventas_POS.Nombre_Prod,
-            Ventas_POS.Cantidad_Venta,
-            Ventas_POS.Fk_sucursal,
-            Ventas_POS.AgregadoPor,
-            Ventas_POS.AgregadoEl,
-            Ventas_POS.Lote,
-            Ventas_POS.ID_H_O_D,
-            SucursalesCorre.ID_SucursalC, 
-            SucursalesCorre.Nombre_Sucursal,
-            Servicios_POS.Servicio_ID,
-            Servicios_POS.Nom_Serv,
-            Ventas_POS.DescuentoAplicado, -- Agregamos la columna DescuentoAplicado
-            Stock_POS.ID_Prod_POS,
-            Stock_POS.Precio_Venta,
-            Stock_POS.Precio_C
+        $sql = "SELECT 
+            Devolucion_POS.ID_Registro, 
+            Devolucion_POS.Num_Factura, 
+            Devolucion_POS.Cod_Barra, 
+            Devolucion_POS.Nombre_Produc, 
+            Devolucion_POS.Cantidad, 
+            Devolucion_POS.Fk_Suc_Salida, 
+            Devolucion_POS.Motivo_Devolucion, 
+            Devolucion_POS.Fecha, 
+            Devolucion_POS.Agrego, 
+            Devolucion_POS.HoraAgregado, 
+            Devolucion_POS.NumOrde, 
+            Devolucion_POS.Estatus,
+            Devolucion_POS.Proveedor, 
+            SucursalesCorre.Nombre_Sucursal 
         FROM 
-            Ventas_POS
+            Devolucion_POS 
         INNER JOIN 
-            SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC 
-        INNER JOIN 
-            Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID 
-        INNER JOIN 
-            Cajas_POS ON Cajas_POS.ID_Caja = Ventas_POS.Fk_Caja
-        INNER JOIN 
-            Stock_POS ON Stock_POS.ID_Prod_POS = Ventas_POS.ID_Prod_POS
+            SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
         WHERE 
-        Ventas_POS.Fecha_venta BETWEEN '$mes' AND '$anual'";
+            YEAR(Devolucion_POS.Fecha) = '$anual'
+            AND MONTH(Devolucion_POS.Fecha) = '$mes'";
 
         $result = mysqli_query($conn, $sql);
 
-        $data = []; // Inicializar $data como un array vacío
-
+        $data = [];
         $c = 0;
 
         while ($fila = $result->fetch_assoc()) {
+            $estatus = $fila["Estatus"];
+            
+            if ($estatus == "Devolucion") {
+                $estatus = '<button style="background-color: #ffc107 !important;" class="btn btn-default btn-sm">Devolución</button>';
+            } elseif (empty($estatus)) {
+                $estatus = '<button style="background-color: white; color: black;" class="btn btn-default btn-sm">Sin Estatus</button>';
+            } else {
+                $estatus = '<button style="background-color: #28a745 !important; color: white;" class="btn btn-default btn-sm">' . htmlspecialchars($estatus) . '</button>';
+            }
+
+            $data[$c]["NumOrde"] = $fila["NumOrde"];
             $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
-            $data[$c]["PrecioCompra"] = $fila["Precio_C"];
-            $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
-            $data[$c]["FolioTicket"] = $fila["FolioSucursal"] . '' . $fila["Folio_Ticket"];
-            $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
-            $data[$c]["Turno"] = $fila["Turno"];
-            $data[$c]["Cantidad_Venta"] = $fila["Cantidad_Venta"];
-            $data[$c]["Importe"] = $fila["Importe"];
-            $data[$c]["Total_Venta"] = $fila["Total_Venta"];
-            $data[$c]["Descuento"] = $fila["DescuentoAplicado"];
-            $data[$c]["FormaPago"] = $fila["FormaDePago"];
-            $data[$c]["Cliente"] = $fila["Cliente"];
-            $data[$c]["FolioSignoVital"] = $fila["FolioSignoVital"];
-            $data[$c]["NomServ"] = $fila["Nom_Serv"];
-            $data[$c]["AgregadoEl"] = date("d/m/Y", strtotime($fila["Fecha_venta"]));
-            $data[$c]["AgregadoEnMomento"] = $fila["AgregadoEl"];
-            $data[$c]["AgregadoPor"] = $fila["AgregadoPor"];
-            $data[$c]["Enfermero"] = $fila["EnfermeroEnturno"];
-            $data[$c]["Doctor"] = $fila["MedicoEnturno"];
+            $data[$c]["Nombre_Produc"] = $fila["Nombre_Produc"];
+            $data[$c]["Cantidad"] = $fila["Cantidad"];
+            $data[$c]["Proveedor"] = $fila["Proveedor"];
+            $data[$c]["Num_Factura"] = $fila["Num_Factura"];
+            $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
+            $data[$c]["Motivo_Devolucion"] = $fila["Motivo_Devolucion"];
+            $data[$c]["Fecha"] = date("d/m/Y", strtotime($fila["Fecha"]));
+            $data[$c]["HoraAgregado"] = $fila["HoraAgregado"];
+            $data[$c]["Agrego"] = $fila["Agrego"];
+            $data[$c]["Estatus"] = $estatus;
+
+            $data[$c]["Acciones"] = '
+            <td>
+                <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-success btn-sm btn-Traspaso"><i class="fas fa-exchange-alt"></i></a>
+                <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
+                <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info btn-sm btn-DevolucionDefinitiva"><i class="fa-solid fa-rotate-left"></i></a>
+                <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-primary btn-sm btn-IngresoSucursales"><i class="fa-solid fa-pallet-boxes"></i></a>
+            </td>';
+            
             $c++;
         }
 
@@ -99,8 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo json_encode($results);
     } else {
-        // Si alguna de las variables no está seteada o es nula, muestra un mensaje de error
         echo json_encode(["error" => "No se recibieron todas las variables necesarias."]);
     }
 }
+
+mysqli_close($conn);
 ?>
