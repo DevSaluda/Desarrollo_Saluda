@@ -6,7 +6,7 @@
     
     <div class="text-center">
     <div class="modal-header">
-         <p class="heading lead">Busqueda por fechas devoluciones<i class="fas fa-credit-card">ec/i></p>
+         <p class="heading lead">Busqueda por fechas devoluciones</p>
 
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true" class="white-text">&times;</span>
