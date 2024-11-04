@@ -5,36 +5,31 @@ include "Consultas.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['Mes']) && isset($_POST['anual'])) {
-        // Asignar las variables del POST
         $mes = $_POST['Mes'];
         $anual = $_POST['anual'];
 
-        // Construir el rango de fechas usando Mes y anual
-        $fechaInicio = "$anual-$mes-01";
-        $fechaFin = date("Y-m-t", strtotime($fechaInicio)); // Último día del mes
-
-        // Consulta SQL con el rango de fechas en HoraAgregado
         $sql = "SELECT 
-                    Devolucion_POS.ID_Registro, 
-                    Devolucion_POS.Num_Factura, 
-                    Devolucion_POS.Cod_Barra, 
-                    Devolucion_POS.Nombre_Produc, 
-                    Devolucion_POS.Cantidad, 
-                    Devolucion_POS.Fk_Suc_Salida, 
-                    Devolucion_POS.Motivo_Devolucion, 
-                    Devolucion_POS.Fecha, 
-                    Devolucion_POS.Agrego, 
-                    Devolucion_POS.HoraAgregado, 
-                    Devolucion_POS.NumOrde, 
-                    Devolucion_POS.Estatus,
-                    Devolucion_POS.Proveedor, 
-                    SucursalesCorre.Nombre_Sucursal 
-                FROM 
-                    Devolucion_POS 
-                INNER JOIN 
-                    SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
-                WHERE 
-                    Devolucion_POS.HoraAgregado BETWEEN '$fechaInicio' AND '$fechaFin'";
+            Devolucion_POS.ID_Registro, 
+            Devolucion_POS.Num_Factura, 
+            Devolucion_POS.Cod_Barra, 
+            Devolucion_POS.Nombre_Produc, 
+            Devolucion_POS.Cantidad, 
+            Devolucion_POS.Fk_Suc_Salida, 
+            Devolucion_POS.Motivo_Devolucion, 
+            Devolucion_POS.Fecha, 
+            Devolucion_POS.Agrego, 
+            Devolucion_POS.HoraAgregado, 
+            Devolucion_POS.NumOrde, 
+            Devolucion_POS.Estatus,
+            Devolucion_POS.Proveedor, 
+            SucursalesCorre.Nombre_Sucursal 
+        FROM 
+            Devolucion_POS 
+        INNER JOIN 
+            SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
+        WHERE 
+            YEAR(Devolucion_POS.Fecha) = '$anual'
+            AND MONTH(Devolucion_POS.Fecha) = '$mes'";
 
         $result = mysqli_query($conn, $sql);
 
