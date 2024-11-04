@@ -246,27 +246,20 @@ include "Consultas/Consultas.php";
             console.log("Error en la solicitud AJAX:", error);
         }
     },
-            "columns": [
-              { "data": "Cod_Barra" },
-              { "data": "Nombre_Prod" },
-              { "data": "PrecioCompra" },
-              { "data": "PrecioVenta" },
-              { "data": "FolioTicket" },
-              { "data": "Sucursal" },
-              { "data": "Turno" },
-              { "data": "Cantidad_Venta" },
-              { "data": "Total_Venta" },
-              { "data": "Importe" },
-              { "data": "Descuento" },
-              { "data": "FormaPago" },
-              { "data": "Cliente" },
-              { "data": "FolioSignoVital" },
-              { "data": "NomServ" },
-              { "data": "AgregadoEl" },
-              { "data": "AgregadoEnMomento" },
-              { "data": "AgregadoPor" },
-              { "data": "Enfermero" },
-              { "data": "Doctor" }
+    "aoColumns": [
+    { "data": "NumOrde", "title": "N° Orden" },
+    { "data": "Cod_Barra", "title": "Cod" },
+            { "data": "Nombre_Produc", "title": "Nombre" },
+            { "data": "Cantidad", "title": "Cantidad" },
+            { "data": "Proveedor", "title": "Proveedor" },
+            { "data": "Num_Factura", "title": "N° Factura" },
+            { "data": "Nombre_Sucursal", "title": "Sucursal" },
+            { "data": "Motivo_Devolucion", "title": "Motivo Devolución" },
+            { "data": "Fecha", "title": "Fecha" },
+            { "data": "HoraAgregado", "title": "Hora" },
+            { "data": "Agrego", "title": "Agregado Por" },
+            { "data": "Acciones", "title": "Acciones" },
+            { "data": "Estatus", "title": "Estatus" },
             ],
             "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
             "language": {
@@ -331,26 +324,7 @@ action: function(e, dt, button, config) {
         <div class="table-responsive">
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-              <th>Cod</th>
-              <th>Nombre</th>
-              <th>PC</th>
-              <th>PV</th>
-              <th>N° Ticket</th>
-              <th>Sucursal</th>
-              <th>Turno</th>
-              <th>Cantidad</th>
-              <th>P.U</th>
-              <th>Importe</th> 
-              <th>Descuento</th>
-              <th>Forma de pago</th>
-              <th>Cliente</th>
-              <th>Folio Signo Vital</th>
-              <th>Servicio</th>
-              <th>Fecha</th>
-              <th>Hora</th>   
-              <th>Vendedor</th>
-              <th>Enfermero</th>
-              <th>Doctor</th>
+        
             </thead>
           </table>
         </div>
