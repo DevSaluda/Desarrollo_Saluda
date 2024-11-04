@@ -39,9 +39,6 @@ include "Consultas/Consultas.php";
  
   <div >
  
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-  Busqueda por mes <i class="fas fa-calendar-week"></i>
-</button>
 
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroFechasDevoluciones" class="btn btn-default">
   Filtrar por rango de fechas <i class="fas fa-calendar"></i>

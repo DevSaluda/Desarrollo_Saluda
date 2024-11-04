@@ -1,6 +1,6 @@
 
   
-      <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoFechaVentas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-xl" id="FiltroFechasDevoluciones" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
@@ -15,7 +15,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="FiltroPorFechasVentas">
+ <form  method="POST" action="FiltroPorFechasDevoluciones">
     
  
  <div class="row">
