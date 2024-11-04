@@ -38,14 +38,12 @@ include "Consultas/Consultas.php";
   </div>
  
   <div >
-  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
+ 
 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
   Busqueda por mes <i class="fas fa-calendar-week"></i>
 </button>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroFechasDevoluciones" class="btn btn-default">
   Filtrar por rango de fechas <i class="fas fa-calendar"></i>
 </button>
 </div>
@@ -77,9 +75,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
 
-  include ("Modales/FiltraPorMes.php");
-  include ("Modales/FiltroPorProducto.php");
-  include ("Modales/FiltroPorFechasBusqueda.php");
+  include ("Modales/FiltraPorFechaDevoluciones.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
