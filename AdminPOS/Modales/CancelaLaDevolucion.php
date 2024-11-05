@@ -73,25 +73,14 @@ if ($query->num_rows > 0) {
 <?php if ($Devoluciones != null): ?>
     <!-- Mensaje de Advertencia -->
     <div id="alertaBorrado" class="alert alert-warning">
-        <p>Advertencia: Los datos del producto <strong><?php echo $Devoluciones->Nombre_Produc; ?></strong> (Código de Barras: <strong><?php echo $Devoluciones->Cod_Barra; ?></strong>) serán eliminados permanentemente.</p>
+        <p>Advertencia: Esta por realizar la cancelacion del producto <strong><?php echo $Devoluciones->Nombre_Produc; ?></strong> (Código de Barras: <strong><?php echo $Devoluciones->Cod_Barra; ?></strong>) serán eliminados permanentemente.</p>
     </div>
 
     <!-- Formulario de actualización (Visible desde el inicio) -->
     <div id="formularioDevolucion">
         <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="nombreProducto">Nombre del producto</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
-                            </div>
-                            <input type="text" id="nombreProducto" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
-                        </div>
-                    </div>
-                    <!-- Más campos del formulario aquí... -->
-                </div>
+                
                 <!-- Botón de eliminación -->
                 <div class="row">
                     <div class="col-md-12 text-center">
