@@ -9,10 +9,7 @@ $monto1 = $Ticketss['Num_Orden'];
 $monto2 = 1;
 $totalmonto = $monto1 + $monto2;
 
-// Obtener la longitud original de $Ticketss['Num_Orden']
 $longitud_original = strlen($Ticketss['Num_Orden']);
-
-// Mostrar $totalmonto con los caracteres '0000000000' (ajustando la longitud)
 $totalmonto_con_ceros = str_pad($totalmonto, $longitud_original, '0', STR_PAD_LEFT);
 
 $fcha = date("Y-m-d");
@@ -73,13 +70,13 @@ if ($query->num_rows > 0) {
 ?>
 
 <?php if ($Devoluciones != null): ?>
-    <!-- Mensaje de Alerta -->
-    <div id="alertaBorrado" class="alert alert-warning" style="display: none;">
+    <!-- Mensaje de Alerta (Visible desde el inicio) -->
+    <div id="alertaBorrado" class="alert alert-warning">
         <p>Estos datos serán eliminados.</p>
     </div>
 
-    <!-- Formulario de actualización (oculto inicialmente) -->
-    <div id="formularioDevolucion">
+    <!-- Formulario de actualización (Oculto desde el inicio) -->
+    <div id="formularioDevolucion" style="display: none;">
         <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
             <div class="container">
                 <div class="row">
@@ -109,7 +106,7 @@ if ($query->num_rows > 0) {
 
 <script>
 function mostrarAlerta() {
-    // Oculta el formulario y muestra la alerta
+    // Muestra el mensaje de alerta y oculta el formulario al hacer clic en el botón
     document.getElementById("formularioDevolucion").style.display = "none";
     document.getElementById("alertaBorrado").style.display = "block";
 }
