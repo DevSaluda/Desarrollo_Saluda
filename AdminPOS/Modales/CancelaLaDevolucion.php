@@ -73,7 +73,7 @@ if ($query->num_rows > 0) {
 <?php if ($Devoluciones != null): ?>
     <!-- Mensaje de Advertencia -->
     <div id="alertaBorrado" class="alert alert-warning">
-        <p>Advertencia: Esta por realizar la cancelacion del producto <strong><?php echo $Devoluciones->Nombre_Produc; ?></strong> (Código de Barras: <strong><?php echo $Devoluciones->Cod_Barra; ?></strong>) serán eliminados permanentemente.</p>
+        <p>Advertencia: Esta por realizar la cancelacion del producto <strong><?php echo $Devoluciones->Nombre_Produc; ?></strong> (Código de Barras: <strong><?php echo $Devoluciones->Cod_Barra; ?></strong>) tome en cuenta que esta accion es permanente</p>
     </div>
 
     <!-- Formulario de actualización (Visible desde el inicio) -->
