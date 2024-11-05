@@ -140,7 +140,7 @@ include ("footer.php")?>
         var id = $(this).data("id");
         $.post("https://saludapos.com/AdminPOS/Modales/CancelaLaDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
-            $("#Titulo").html("Ingresando a la sucursal");
+            $("#Titulo").html("Cancelar solicitud");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
             $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
             $("#Di").addClass("modal-dialog modal-lg modal-danger");
