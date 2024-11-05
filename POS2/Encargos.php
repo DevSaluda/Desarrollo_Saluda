@@ -106,7 +106,7 @@ $totalPages = ceil($totalEncargos / $perPage);
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             echo "<td>{$row['IdentificadorEncargo']}</td>";
-                            echo "<td>{$row['Fk_sucursal']}</td>";
+                            echo "<td>{$row['Nombre_Sucursal']}</td>";
                             echo "<td>{$row['NombreCliente']}</td>";
                             echo "<td>{$row['TelefonoCliente']}</td>";
                             echo "<td>{$row['MontoAbonadoTotal']}</td>";

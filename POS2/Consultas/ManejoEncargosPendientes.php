@@ -2,14 +2,18 @@
 include 'Consultas.php';
 
 function obtenerEncargos($conn, $search = '', $offset = 0, $perPage = 10) {
-    // Ajusta la consulta SQL para incluir NombreCliente y TelefonoCliente
-    $query = "SELECT IdentificadorEncargo, Fk_sucursal, SUM(MontoAbonado) AS MontoAbonadoTotal, SUM(Precio_Venta * Cantidad) AS TotalVenta, Estado, NombreCliente, TelefonoCliente 
-              FROM Encargos_POS 
-              WHERE IdentificadorEncargo LIKE '%$search%' OR Fk_sucursal LIKE '%$search%' OR Estado LIKE '%$search%'
-              GROUP BY IdentificadorEncargo, Fk_sucursal, Estado, NombreCliente, TelefonoCliente
+    $query = "SELECT e.IdentificadorEncargo, s.Nombre_Sucursal, SUM(e.MontoAbonado) AS MontoAbonadoTotal, 
+                     SUM(e.Precio_Venta * e.Cantidad) AS TotalVenta, e.Estado, e.NombreCliente, e.TelefonoCliente 
+              FROM Encargos_POS e
+              JOIN SucursalesCorre s ON e.Fk_sucursal = s.ID_SucursalC
+              WHERE e.IdentificadorEncargo LIKE '%$search%' 
+                 OR s.Nombre_Sucursal LIKE '%$search%' 
+                 OR e.Estado LIKE '%$search%'
+              GROUP BY e.IdentificadorEncargo, s.Nombre_Sucursal, e.Estado, e.NombreCliente, e.TelefonoCliente
               LIMIT $offset, $perPage";
     return mysqli_query($conn, $query);
 }
+
 
 function contarEncargos($conn, $search = '') {
     $query = "SELECT COUNT(DISTINCT IdentificadorEncargo) AS total 
