@@ -52,10 +52,11 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Num_Factura"] = $fila["Num_Factura"];
     $data[$c]["Nombre_Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Motivo_Devolucion"] = $fila["Motivo_Devolucion"];
+    $data[$c]["Estatus"] = $estatus; // Mostrar el botón según el estatus
     $data[$c]["Fecha"] = date("d/m/Y", strtotime($fila["Fecha"]));
     $data[$c]["HoraAgregado"] = $fila["HoraAgregado"];
     $data[$c]["Agrego"] = $fila["Agrego"];
-    $data[$c]["Estatus"] = $estatus; // Mostrar el botón según el estatus
+  
 
     // Añadir botones de acción
     $data[$c]["Acciones"] = '
@@ -64,6 +65,7 @@ while ($fila = $result->fetch_assoc()) {
         <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-warning btn-sm btn-caducado"><i class="far fa-calendar-times"></i></a>
         <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info btn-sm btn-DevolucionDefinitiva"><i class="fa-solid fa-rotate-left"></i></a>
         <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-primary btn-sm btn-IngresoSucursales"><i class="fa-solid fa-pallet-boxes"></i></a>
+        <a data-id="' . htmlspecialchars($fila["ID_Registro"], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger btn-sm btn-CancelarSolicitud"><i class="fa-solid fa-pallet-boxes"></i></a>
     </td>';
     
     $c++;

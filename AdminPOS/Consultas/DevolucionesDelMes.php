@@ -207,11 +207,12 @@ tabla = $('#Productos').DataTable({
             { "data": "Num_Factura", "title": "N° Factura" },
             { "data": "Nombre_Sucursal", "title": "Sucursal" },
             { "data": "Motivo_Devolucion", "title": "Motivo Devolución" },
+            { "data": "Estatus", "title": "Estatus" },
             { "data": "Fecha", "title": "Fecha" },
             { "data": "HoraAgregado", "title": "Hora" },
             { "data": "Agrego", "title": "Agregado Por" },
             { "data": "Acciones", "title": "Acciones" },
-            { "data": "Estatus", "title": "Estatus" },
+           
       
   
       ],
