@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         INNER JOIN 
             SucursalesCorre ON Devolucion_POS.Fk_Suc_Salida = SucursalesCorre.ID_SucursalC
        WHERE 
-    Devolucion_POS.HoraAgregado BETWEEN '2024-10-01' AND '2024-11-05'";
+    Devolucion_POS.HoraAgregado BETWEEN '$mes' AND '$anual'";
 
         $result = mysqli_query($conn, $sql);
 
