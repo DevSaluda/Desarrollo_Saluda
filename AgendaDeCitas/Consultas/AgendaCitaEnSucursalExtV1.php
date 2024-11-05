@@ -23,6 +23,12 @@ $AgendadoPor = $conn->real_escape_string(trim($_POST['UsuarioExt']));
 $Sistema = $conn->real_escape_string(trim($_POST['SistemaExt']));
 $Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 
+// Obtener el nombre de la sucursal desde SucursalesCorre
+$sql_sucursal = "SELECT Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC = '$Fk_Sucursal'";
+$result_sucursal = mysqli_query($conn, $sql_sucursal);
+$row_sucursal = mysqli_fetch_assoc($result_sucursal);
+$Nombre_Sucursal = $row_sucursal['Nombre_Sucursal'];
+
 // Obtener la fecha desde la tabla Fechas_EspecialistasExt
 $sql_fecha = "SELECT Fecha_Disponibilidad FROM Fechas_EspecialistasExt WHERE ID_Fecha_Esp = '$Fk_Fecha' AND FK_Especialista = '$Fk_Especialista'";
 $result_fecha = mysqli_query($conn, $sql_fecha);
@@ -75,7 +81,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
             try {
                 $event = new Google_Service_Calendar_Event(array(
                     'summary' => "Consulta de $Nombre_Paciente",
-                    'location' => "$Fk_Sucursal",
+                    'location' => "$Nombre_Sucursal", // Usar el nombre de la sucursal en lugar del Fk_Sucursal
                     'description' => "$Observaciones",
                     'start' => array(
                         'dateTime' => $startDateTime,
