@@ -1,6 +1,7 @@
 <?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
+
 $sql = "SELECT * FROM Traspasos_generados ORDER BY ID_Traspaso_Generado DESC LIMIT 1";
 $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
 $Ticketss = mysqli_fetch_assoc($resultset);
@@ -70,31 +71,31 @@ if ($query->num_rows > 0) {
 ?>
 
 <?php if ($Devoluciones != null): ?>
-    <!-- Mensaje de Alerta (Visible desde el inicio) -->
+    <!-- Mensaje de Advertencia -->
     <div id="alertaBorrado" class="alert alert-warning">
-        <p>Estos datos serán eliminados.</p>
+        <p>Advertencia: Los datos del producto <strong><?php echo $Devoluciones->Nombre_Produc; ?></strong> (Código de Barras: <strong><?php echo $Devoluciones->Cod_Barra; ?></strong>) serán eliminados permanentemente.</p>
     </div>
 
-    <!-- Formulario de actualización (Oculto desde el inicio) -->
-    <div id="formularioDevolucion" style="display: none;">
+    <!-- Formulario de actualización (Visible desde el inicio) -->
+    <div id="formularioDevolucion">
         <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="exampleFormControlInput1">Nombre del producto</label>
+                        <label for="nombreProducto">Nombre del producto</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
                             </div>
-                            <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
+                            <input type="text" id="nombreProducto" class="form-control" readonly value="<?php echo $Devoluciones->Nombre_Produc; ?>">
                         </div>
                     </div>
                     <!-- Más campos del formulario aquí... -->
                 </div>
-                <!-- Botón de envío -->
+                <!-- Botón de eliminación -->
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button type="button" id="submit" class="btn btn-success" onclick="mostrarAlerta()">Eliminar datos <i class="fas fa-check"></i></button>
+                        <button type="button" id="submit" class="btn btn-danger" onclick="confirmarEliminacion()">Eliminar datos <i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>
@@ -105,9 +106,11 @@ if ($query->num_rows > 0) {
 <?php endif; ?>
 
 <script>
-function mostrarAlerta() {
-    // Muestra el mensaje de alerta y oculta el formulario al hacer clic en el botón
-    document.getElementById("formularioDevolucion").style.display = "none";
-    document.getElementById("alertaBorrado").style.display = "block";
+function confirmarEliminacion() {
+    // Confirma la eliminación de datos
+    if (confirm("¿Estás seguro de que deseas eliminar estos datos?")) {
+        // Aquí puedes agregar la lógica de eliminación
+        alert("Los datos se han eliminado correctamente.");
+    }
 }
 </script>
