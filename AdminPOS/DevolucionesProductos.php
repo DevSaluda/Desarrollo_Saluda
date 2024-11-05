@@ -134,7 +134,21 @@ include ("footer.php")?>
         });
         $('#editModal').modal('show');
     });
+
+    $(document).on("click", ".btn-IngresoSucursales", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Ingresando a la sucursal");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-primary");
+        });
+        $('#editModal').modal('show');
+    });
 });
+
 
 </script>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
