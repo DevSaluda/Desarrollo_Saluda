@@ -10,7 +10,7 @@ $service = new Google_Service_Calendar($client);
 include "db_connection.php";
 
 // Obtener todos los IDs de calendario de los especialistas
-$sql = "SELECT IDGoogleCalendar FROM Personal_Medico_Express WHERE IDGoogleCalendar IS NOT NULL";
+$sql = "SELECT DISTINCT IDGoogleCalendar FROM Personal_Medico_Express WHERE IDGoogleCalendar IS NOT NULL";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
