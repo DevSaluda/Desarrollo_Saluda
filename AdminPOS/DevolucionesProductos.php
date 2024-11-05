@@ -143,7 +143,7 @@ include ("footer.php")?>
             $("#Titulo").html("Cancelar solicitud");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
             $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
-            $("#Di").addClass("modal-dialog modal-lg modal-danger");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-danger");
         });
         $('#editModal').modal('show');
     });
