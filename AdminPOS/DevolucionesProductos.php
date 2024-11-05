@@ -135,10 +135,10 @@ include ("footer.php")?>
         $('#editModal').modal('show');
     });
 
-    $(document).on("click", ".btn-IngresoSucursales", function() {
+    $(document).on("click", ".btn-CancelarSolicitud", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/AdminPOS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/CancelaLaDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Ingresando a la sucursal");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
