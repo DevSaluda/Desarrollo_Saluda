@@ -51,7 +51,7 @@ function syncAllCalendars($conn) {
     }
 
     // Obtener todos los GoogleEventId de la base de datos para verificar cuáles ya no existen
-    $sql_events = "SELECT GoogleEventId FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId IS NOT NULL";
+    $sql_events = "SELECT * FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId IS NOT NULL";
     $result_events = mysqli_query($conn, $sql_events);
 
     if (!$result_events) {
@@ -61,13 +61,36 @@ function syncAllCalendars($conn) {
     while ($row_event = mysqli_fetch_assoc($result_events)) {
         $dbEventId = $row_event['GoogleEventId'];
 
-        // Si el evento de la base de datos no existe en ninguno de los calendarios, eliminarlo
+        // Si el evento de la base de datos no existe en ninguno de los calendarios, eliminarlo y registrar en MovimientosAgenda
         if (!in_array($dbEventId, $calendarEventIds)) {
             $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '$dbEventId'";
-            if (!mysqli_query($conn, $deleteSql)) {
-                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al eliminar evento $dbEventId de la base de datos: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
+            if (mysqli_query($conn, $deleteSql)) {
+                // Obtener el nombre del especialista
+                $medicoId = $row_event['Fk_Especialista'];
+                $sql_medico = "SELECT Nombre_Apellidos FROM Personal_Medico_Express WHERE Medico_ID = '$medicoId'";
+                $result_medico = mysqli_query($conn, $sql_medico);
+                $nombreEspecialista = ($row_medico = mysqli_fetch_assoc($result_medico)) ? $row_medico['Nombre_Apellidos'] : 'Desconocido';
+
+                // Registrar el movimiento en MovimientosAgenda
+                $insertMovSql = "INSERT INTO MovimientosAgenda (
+                    ID_Agenda_Especialista, Fk_Especialidad, Fk_Especialista, Fk_Sucursal,
+                    Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, Estatus_cita, Observaciones,
+                    ID_H_O_D, AgendadoPor, ActualizoEstado, Fecha_Hora, GoogleEventId, IDGoogleCalendar
+                ) VALUES (
+                    '{$row_event['ID_Agenda_Especialista']}', '{$row_event['Fk_Especialidad']}', '{$row_event['Fk_Especialista']}',
+                    '{$row_event['Fk_Sucursal']}', '{$row_event['Fecha']}', '{$row_event['Hora']}', '{$row_event['Nombre_Paciente']}',
+                    '{$row_event['Telefono']}', '{$row_event['Tipo_Consulta']}', '{$row_event['Estatus_cita']}', '{$row_event['Observaciones']}',
+                    '{$row_event['ID_H_O_D']}', '{$row_event['AgendadoPor']}', '$nombreEspecialista', NOW(),
+                    '{$row_event['GoogleEventId']}', '{$row_event['IDGoogleCalendar']}'
+                )";
+                
+                if (!mysqli_query($conn, $insertMovSql)) {
+                    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al registrar movimiento en MovimientosAgenda para el evento $dbEventId: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
+                } else {
+                    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Movimiento registrado en MovimientosAgenda para el evento $dbEventId" . PHP_EOL, FILE_APPEND);
+                }
             } else {
-                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Evento eliminado de la base de datos: " . $dbEventId . PHP_EOL, FILE_APPEND);
+                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al eliminar evento $dbEventId de la base de datos: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
             }
         }
     }
