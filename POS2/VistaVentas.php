@@ -290,13 +290,13 @@ $(document).ready(function () {
                 <span class="input-group-text" id="Tarjeta"><i class="fas fa-percent"></i></span>
               </div>
               <select id="cantidadadescontar" class="form-control" onchange="aplicarDescuentoSeleccionado()">
-                <option value="">Seleccionar descuento</option>
-                <option value="5">5%</option>
-                <option value="10">10%</option>
-                <option value="15">15%</option>
-                <option value="20">20%</option>
-                <!-- Agrega otros valores según sea necesario -->
-                <option value="100">100%</option>
+              <option value="">Seleccionar descuento</option>
+<?php
+for ($i = 1; $i <= 100; $i++) {
+    echo "<option value=\"$i\">$i%</option>";
+}
+?>
+
               </select>
             </div>
           </div>
