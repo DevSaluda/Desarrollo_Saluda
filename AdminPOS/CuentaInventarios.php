@@ -993,6 +993,10 @@ function calcularDiferencia(fila) {
         <td class="tipoajuste"><input class="form-control tipoajuste-input" readonly style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text" /></td>
           <td class="anaquel"><input class="form-control anaquel-input" readonly style="font-size: 0.75rem !important;" name="AnaquelSeleccionado[]" type="text" /></td>
           <td class="repisa"><input class="form-control repisa-input" readonly style="font-size: 0.75rem !important;" name="RepisaSeleccionada[]" type="text" /></td>
+         <td class="repisa">
+  <textarea class="form-control repisa-input" style="font-size: 0.75rem !important; resize: none;" name="Comentario[]" rows="3"></textarea>
+</td>
+
         <td style="display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
