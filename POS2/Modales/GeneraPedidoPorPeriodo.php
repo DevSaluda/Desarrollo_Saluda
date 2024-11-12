@@ -21,7 +21,7 @@
             
             <div class="row mb-4">
               <div class="col text-center">
-                <p class="h4 animated fadeIn">¿Deseas generar tu orden de prepedido?</p>
+                <p class="h4 animated fadeIn">¿Deseas generar tu orden de pedido?</p>
               </div>
             </div>
             <div class="row">
@@ -30,7 +30,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " id="Fecha1" name="Fecha1">
+  <input type="date" class="form-control " readonly id="Fecha1" name="fechainicio">
   <input type="text" name="Sucursal" hidden value="<?php echo $row['Fk_Sucursal']?>">
   <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -38,20 +38,54 @@
     
     // Obtenemos la fecha actual
     const today = new Date();
+    const dayOfWeek = today.getDay(); // 0: domingo, 1: lunes, ..., 6: sábado
     
-    // Calculamos la fecha de hace 3 días
-    const threeDaysAgo = new Date();
-    threeDaysAgo.setDate(today.getDate() - 3);
+    // Definimos los días que restarás según el día de la semana
+    let daysToSubtract;
+    switch(dayOfWeek) {
+      case 1: // Lunes
+        daysToSubtract = 3;
+        break;
+      case 2: // Martes
+        daysToSubtract = 2;
+        break;
+      case 3: // Miércoles
+        daysToSubtract = 3;
+        break;
+      case 4: // Jueves
+        daysToSubtract = 1;
+        break;
+      case 5: // Viernes
+        daysToSubtract = 1;
+        break;
+      case 6: // Sábado
+        daysToSubtract = 1;
+        break;
+      case 0: // Domingo
+        daysToSubtract = 3; // Empieza con lunes, restamos 3
+        break;
+      default:
+        daysToSubtract = 3; // Por defecto restamos 3 días si algo falla
+    }
+
+    // Calculamos la fecha restando los días necesarios
+    const calculatedDate = new Date();
+    calculatedDate.setDate(today.getDate() - daysToSubtract);
     
-    // Convertimos la fecha a formato 'YYYY-MM-DD' para que sea válida para el input de tipo date
-    const formattedThreeDaysAgo = threeDaysAgo.toISOString().split('T')[0];
+    // Convertimos la fecha a formato 'YYYY-MM-DD' para el input de tipo date
+    const formattedCalculatedDate = calculatedDate.toISOString().split('T')[0];
     const formattedToday = today.toISOString().split('T')[0];
     
     // Establecemos los atributos min y max para limitar la selección de fechas
-    dateInput.setAttribute('min', formattedThreeDaysAgo);
+    dateInput.setAttribute('min', formattedCalculatedDate);
     dateInput.setAttribute('max', formattedToday);
+    
+    // Asignamos la fecha calculada al valor del input
+    dateInput.value = formattedCalculatedDate;
   });
 </script>
+
+
     </div>
     </div>
     
@@ -60,7 +94,7 @@
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
   </div>
-  <input type="date" class="form-control " name="Fecha2"  id="Fecha2">
+  <input type="date" class="form-control " readonly name="fechafin"  id="Fecha2">
     </div>
     <script>
   document.addEventListener("DOMContentLoaded", function() {

@@ -6,6 +6,8 @@ include("Consultas/db_connection.php");
 include "Consultas/Consultas.php";
 $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Año-Mes-Día'
 $user_id = null;
+$$sucursal = isset($_POST['sucursal']) ? $_POST['sucursal'] : null; // Captura el valor de la sucursal
+
 $sql1 = "SELECT 
         Encargos_POS.Id_Encargo,
         Encargos_POS.IdentificadorEncargo,
@@ -32,8 +34,11 @@ $sql1 = "SELECT
     FROM 
         Encargos_POS
     INNER JOIN 
-        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC";
+        SucursalesCorre ON Encargos_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+    WHERE 
+        Encargos_POS.Fk_sucursal = '$sucursal'"; // Filtra por la sucursal recibida
 $query = $conn->query($sql1);
+
 ?>
 
 <!-- Central Modal Medium Info -->
@@ -54,7 +59,7 @@ $query = $conn->query($sql1);
            <?php if($query->num_rows > 0): ?>
            <div class="text-center">
              <div class="table-responsive">
-             <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+             <form action="javascript:void(0)"  method="post" id="AgregaElEncargoAlPedido">
              <button type="submit" class="btn btn-primary">Agregar al pedido</button>
                <table id="StockSucursales" class="table table-hover">
                  <thead>
@@ -64,17 +69,17 @@ $query = $conn->query($sql1);
                    <th>Piezas</th>
                 
                    <th>Solicitado por</th>
-                   <th>Numero de orden</th>
+                  
                  </thead>
                  <tbody>
                    <?php while ($encargo = $query->fetch_array()): ?>
                    <tr>
-                     <td><input type="text" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
-                     <td><input type="text" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
-                     <td><input type="text"  name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>"readonly /></td>
-                     <td><input type="text" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
-                     <td><input type="text" name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
+                     <td><input type="text"  class="form-control" name="CodBarra[]" value="<?php echo $encargo['Cod_Barra']; ?>"readonly /></td>
+                     <td><input type="text" class="form-control" name="NombreProd[]" value="<?php echo $encargo['Nombre_Prod']; ?>"readonly /></td>
+                     <td><input type="text" class="form-control" value="<?php echo $encargo['Nombre_Sucursal']; ?>"readonly /></td>
+                     <td><input type="text"  class="form-control" name="Cantidadd[]" value="<?php echo $encargo['Cantidad']; ?>" /></td>
+                     <td><input type="text" class="form-control" value="<?php echo $encargo['AgregadoPor']; ?>"readonly /></td>
+                     <td><input type="text" hidden name="CodigoPedido[]" value="<?php echo $mes ?>"readonly />
                      <input type="text" hidden name="AgregadoPor[]" value="<?php echo $row['Nombre_Apellidos']?>"readonly />
                      <input type="text" hidden name="PrecioVenta[]" value="<?php echo $encargo['Precio_Venta']?>"readonly />
                      <input type="text" hidden name="PrecioCompra[]" value="<?php echo $encargo['Precio_C']?>"readonly />

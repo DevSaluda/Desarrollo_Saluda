@@ -38,14 +38,9 @@ include "Consultas/Consultas.php";
   </div>
  
   <div >
-  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#FiltroEspecifico" class="btn btn-default">
-  Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
-</button>
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroEspecificoMesxd" class="btn btn-default">
-  Busqueda por mes <i class="fas fa-calendar-week"></i>
-</button>
+ 
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" class="btn btn-default">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroFechasDevoluciones" class="btn btn-default">
   Filtrar por rango de fechas <i class="fas fa-calendar"></i>
 </button>
 </div>
@@ -77,9 +72,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
 
-  include ("Modales/FiltraPorMes.php");
-  include ("Modales/FiltroPorProducto.php");
-  include ("Modales/FiltroPorFechasBusqueda.php");
+  include ("Modales/FiltraPorFechaDevoluciones.php");
 include ("footer.php")?>
 
 <!-- ./wrapper -->
@@ -116,7 +109,46 @@ include ("footer.php")?>
         });
         $('#editModal').modal('show');
     });
+    $(document).on("click", ".btn-DevolucionDefinitiva", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaEstadoDeLaDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Enviar para devolucion");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-warning");
+        });
+        $('#editModal').modal('show');
+    });
+
+    $(document).on("click", ".btn-IngresoSucursales", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Ingresando a la sucursal");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-primary");
+        });
+        $('#editModal').modal('show');
+    });
+
+    $(document).on("click", ".btn-CancelarSolicitud", function() {
+    console.log("Botón de edición clickeado");
+        var id = $(this).data("id");
+        $.post("https://saludapos.com/AdminPOS/Modales/CancelaLaDevolucion.php", { id: id }, function(data) {
+            $("#form-edit").html(data);
+            $("#Titulo").html("Cancelar solicitud");
+            $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
+            $("#Di").removeClass("modal-dialog .modal-xl modal-notify modal-success");
+            $("#Di").addClass("modal-dialog modal-lg modal-notify modal-danger");
+        });
+        $('#editModal').modal('show');
+    });
 });
+
 
 </script>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">

@@ -144,11 +144,11 @@ if($query->num_rows>0){
             <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
     <select id = "nombreproveedor" name="NombreProveedor" class = "form-control" required  >
     <option value="">Seleccione un opcion:</option>
-    <option value="Devolucion a cedis">Devolucion a cedis</option>
+    <!-- <option value="Devolucion a cedis">Devolucion a cedis</option> -->
     <!-- <option value="Traspaso entre sucursales">Traspaso entre sucursales</option>    -->
     <option value="Retiro por sobre stock">Retiro por sobre stock</option>  
-    <option value="Prontos a caducar">Prontos a caducar</option>    
-    <option value="Producto dañado">Producto dañado</option>    
+    <!-- <option value="Prontos a caducar">Prontos a caducar</option>    
+    <option value="Producto dañado">Producto dañado</option>     -->
 
          
           </select>   

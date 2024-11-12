@@ -23,8 +23,8 @@ include "Consultas/Consultas.php";
     <div class="card text-center">
       <div class="card-header" style="background-color: #2bbbad !important;color: white;">Sugerencias de pedidos</div>
       <div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PedidoPorDia" class="btn btn-default">Sugerencia por día<i class="fas fa-file-medical"></i></button>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PedidoPorPeriodo" class="btn btn-default">Sugerencia por periodo<i class="fas fa-file-medical"></i></button>
+        <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PedidoPorDia" class="btn btn-default">Sugerencia por día<i class="fas fa-file-medical"></i></button> -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PedidoPorPeriodo" class="btn btn-default">Generar nueva orden de pedido<i class="fas fa-file-medical"></i></button>
       </div>
     </div>
     

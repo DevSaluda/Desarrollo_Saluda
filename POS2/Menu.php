@@ -359,15 +359,15 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
               </p>
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="https://saludapos.com/POS2/ReportesMedicamentos" class="nav-link">
+           <li class="nav-item">
+            <a href="https://saludapos.com/POS2/DevolucionesPOS" class="nav-link">
             <i class="fa-solid fa-people-carry-box"></i>
               <p>
-           Generar devoluciones
+           Devoluciones
                
               </p>
             </a>
-          </li> -->
+          </li> 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="fas fa-dolly"></i>
@@ -690,8 +690,16 @@ Surtir a enfermería
             </ul>
           </li>
           
-
-        
+          <li class="nav-header">Tutoriales <i class="fa-solid fa-chalkboard-user"></i></li>
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/TutorialDevoluciones" class="nav-link">
+            <i class="fa-solid fa-circle-play"></i>
+              <p>
+              Tutorial Devoluciones 
+               
+              </p>
+            </a>
+          </li> 
 <!--          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

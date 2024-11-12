@@ -7,7 +7,7 @@ include "Consultas/SumadeFolioTickets.php";
 include ("Consultas/db_connection.php");
 $fcha = date("Y-m-d");
 
-// Suponiendo que $row['Nombre_Sucursal'] contiene un string con más de 3 caracteres
+// 
 $primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
 
 
@@ -123,7 +123,7 @@ function multiplicar() {
     // Iterar sobre todas las filas dentro del contenedor
     contenedorFilas.find('.row').each(function () {
         // Obtener los valores de la fila actual
-        var precioProducto = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var precioProducto = parseFloat($(this).find('.Precio').val()) || 0;
         var cantidadVenta = parseFloat($(this).find('.Cantidad').val()) || 0;
 
         // Calcular el importe para la fila actual
@@ -149,7 +149,7 @@ function multiplicar() {
     var $total2 = document.getElementById('totalventa');
     var $Importetotal = document.getElementById('subtotal');
     var subtotal = 0;
-    [ ...document.getElementsByClassName( "montocondescuentodeverdad" ) ].forEach( function ( element ) {
+    [ ...document.getElementsByClassName( "montoreal" ) ].forEach( function ( element ) {
       if(element.value !== '') {
         subtotal += parseFloat(element.value);
       }
@@ -158,15 +158,6 @@ function multiplicar() {
     $total2.value = subtotal;
     $Importetotal.value = subtotal;
   } 
-
-  function actualizarMontos() {
-    // Seleccionar el último elemento .montoreal agregado
-    var montoReal = $('.montoreal').last().val();
-
-    // Actualizar el valor del último input .montocondescuentodeverdad con el valor del último input .montoreal
-    $('.montocondescuentodeverdad').last().val(montoReal);
-}
-
 </script>
 <div id="parte1">
     <!-- Contenedor donde se agregarán los campos dinámicamente -->
@@ -175,7 +166,7 @@ function multiplicar() {
 <script>
 $(document).ready(function () {
     $("#FiltrarContenido").autocomplete({
-        source: "Consultas/VentaDeProductosPruebas.php",
+        source: "Consultas/VentaDeProductos.php",
         minLength: 2,
         appendTo: "#productos",
         select: function (event, ui) {
@@ -207,6 +198,7 @@ $(document).ready(function () {
                     <input class="Clavead form-control" hidden type="text" id="clavad" name="pro_clavad[]"/>\
                     <input class="Identificador form-control" hidden type="text" id="identificadortip" name="IdentificadorTip[]"/>\
                     <input type="text" class="Codigo form-control " readonly id="codbarras" name="CodBarras[]"  >\
+                    <input type="text" hidden class="Codigodescuento form-control " readonly id="tipodescuentoaplicado" name="tipodescuentoaplicado[]"  >\
                 </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
@@ -217,15 +209,13 @@ $(document).ready(function () {
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
-                    <input class="montoreal form-control" readonly type="number"   </div>\
-                    <input class="montocondescuentodeverdad form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
+                    <input class="montoreal form-control" readonly type="number" id="costoventa" name="ImporteT[]" >  </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Descuento<span class="text-danger">*</span></label>\
                     <input class="form-control" readonly type="number" id="descuento1" value="0" name="DescuentoAplicado[]"> </div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Cantidad<span class="text-danger">*</span></label>\
                     <input class="Cantidad form-control" onchange="multiplicar()"  id="cantidadventa" value="1" type="number" name="CantidadTotal[]"  ></div>\
-                    <input class="form-control" readonly type="text" value="<?php echo $row['EstadoSucursalInv']?>" name="EstadoVenta[]"> </div>\
                 <div class="col"> \
                     <label for="exampleFormControlInput1">Descuento</label>\
                     <a data-toggle="modal" data-target="#Descuento1detalles" class="btn btn-primary btn-sm" onclick="setFilaActual(this)"><i class="fas fa-percent"></i></a>\
@@ -261,61 +251,71 @@ $(document).ready(function () {
             
             // Limpiar el campo de búsqueda
             $('#FiltrarContenido').val("");
-            actualizarMontos(); // Llamar a la función para actualizar los montos
             multiplicar();
-            
         }
     });
 });
 </script>
 
 </div></div>
- <!-- Modal de descuentos -->
+<!-- Modal de descuentos -->
 <div class="modal fade bd-example-modal-sm" id="Descuento1detalles" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-notify modal-success">
     <div class="modal-content">
       <div class="text-center">
         <div class="modal-header">
-          <p class="heading lead">Aplicar descuentos<i class="fas fa-credit-card"></i></p>
+          <p class="heading lead">Aplicar descuentos <i class="fas fa-credit-card"></i></p>
           <button type="button" id="Cierra" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
-          <label for="exampleFormControlInput1">% a descontar <span class="text-danger">*</span></label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="Tarjeta"><i class="fas fa-dollar-sign"></i></span>
-            </div>
-
-            <!-- Añade el evento onchange para aplicar el descuento automáticamente -->
-            <select id="cantidadadescontar" class="form-control" onchange="aplicarDescuentoSeleccionado()">
-              <option value="">Seleccionar descuento</option>
-              <option value="5">5%</option>
-              <option value="10">10%</option>
-              <option value="15">15%</option>
-              <option value="20">20%</option>
-              <option value="25">25%</option>
-              <option value="30">30%</option>
-              <option value="35">35%</option>
-              <option value="40">40%</option>
-              <option value="45">45%</option>
-              <option value="50">50%</option>
-              <option value="55">55%</option>
-              <option value="60">60%</option>
-              <option value="65">65%</option>
-              <option value="70">70%</option>
-              <option value="75">75%</option>
-              <option value="80">80%</option>
-              <option value="85">85%</option>
-              <option value="90">90%</option>
-              <option value="95">95%</option>
-              <option value="100">100%</option>
-
-
-            </select>
+          <label for="exampleFormControlInput1">Tipo de descuento <span class="text-danger">*</span></label>
+          <!-- Toggle para seleccionar porcentaje o monto -->
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoDescuento" id="porcentaje" value="porcentaje" checked onchange="cambiarTipoDescuento()">
+            <label class="form-check-label" for="porcentaje">Porcentaje</label>
           </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoDescuento" id="monto" value="monto" onchange="cambiarTipoDescuento()">
+            <label class="form-check-label" for="monto">Monto</label>
+          </div>
+
+          <!-- Input para porcentaje de descuento -->
+          <div id="inputPorcentaje" class="mt-3">
+            <label for="cantidadadescontar">% a descontar <span class="text-danger">*</span></label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="Tarjeta"><i class="fas fa-percent"></i></span>
+              </div>
+              <select id="cantidadadescontar" class="form-control" onchange="aplicarDescuentoSeleccionado()">
+                <option value="">Seleccionar descuento</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+                <!-- Agrega otros valores según sea necesario -->
+                <option value="100">100%</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Input para monto de descuento (inicialmente oculto) -->
+        <!-- Input para monto de descuento (inicialmente oculto) -->
+<div id="inputMonto" class="mt-3" style="display: none;">
+    <label for="montoDescuento">Monto a descontar <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+        </div>
+        <input type="number" id="montoDescuento" class="form-control" placeholder="Especifica el monto">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="aplicarDescuentoSeleccionado()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
         </div>
       </div>
     </div>
@@ -324,88 +324,99 @@ $(document).ready(function () {
 
 
 
-
 <script>
-  var filaActual; // Variable global para almacenar la fila actual
+ var filaActual; // Variable global para almacenar la fila actual
 
-  function setFilaActual(boton) {
-    // Obtén la fila asociada al botón
-    filaActual = $(boton).closest('.row');
-  }
-
-  function aplicarDescuento(importe, cantidadDescuento) {
-    // Calcula el descuento
-    var descuento = (importe * cantidadDescuento) / 100;
-
-    // Calcula el valor con descuento
-    var valorConDescuento = importe - descuento;
-
-    // Devuelve un objeto con los resultados
-    return {
-        valorConDescuento: valorConDescuento,
-        descuento: descuento
-    };
+function setFilaActual(boton) {
+  // Obtén la fila asociada al botón
+  filaActual = $(boton).closest('.row');
 }
 
-function actualizarFilaConDescuento(resultadoDescuento) {
-    // Actualiza el campo de costo de venta
-    filaActual.find('.montocondescuentodeverdad').val(resultadoDescuento.valorConDescuento.toFixed(2));
+function cambiarTipoDescuento() {
+  // Mostrar u ocultar los campos según el tipo de descuento seleccionado
+  if (document.getElementById("porcentaje").checked) {
+    document.getElementById("inputPorcentaje").style.display = "block";
+    document.getElementById("inputMonto").style.display = "none";
+  } else {
+    document.getElementById("inputPorcentaje").style.display = "none";
+    document.getElementById("inputMonto").style.display = "block";
+  }
+}
 
-    // Actualiza el campo de descuento en la fila
-    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+function aplicarDescuento(importe, cantidadDescuento, esPorcentaje) {
+  var descuento = esPorcentaje ? (importe * cantidadDescuento) / 100 : cantidadDescuento;
+  var valorConDescuento = importe - descuento;
+  return {
+    valorConDescuento: valorConDescuento,
+    descuento: descuento
+  };
+}
 
-    // Muestra el descuento aplicado en el campo descuento1
-    var cantidadDescuentoSeleccionado = parseFloat($('#cantidadadescontar').val()) || 0;
-    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+function actualizarFilaConDescuento(resultadoDescuento, cantidadDescuentoSeleccionado) {
+  // Actualiza el campo de costo de venta
+  filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+
+  // Actualiza el campo de descuento en la fila
+  filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+
+  // Muestra el descuento aplicado en el campo descuento1
+  filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
-    if (filaActual) {
-        // Obtén los valores de la fila actual
-        var precioProducto = parseFloat(filaActual.find('.montoreal').val()) || 0;
+  if (filaActual) {
+    var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+    var esPorcentaje = document.getElementById("porcentaje").checked;
+    var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento, esPorcentaje);
+    actualizarFilaConDescuento(resultadoDescuento, cantidadDescuento);
 
-        // Aplica el descuento y obtén los resultados
-        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento);
-
-        // Actualiza la fila con los resultados del descuento
-        actualizarFilaConDescuento(resultadoDescuento);
-    }
-}
-function aplicarDescuentoEnFilaSinDescuento() {
-    aplicarDescuentoEnFila(0);
-}
-function resetearModal() {
-    // Restablece el valor del select
-    $('#cantidadadescontar').val('');
-
-    // Restablece otros campos si es necesario
-    // $('#otroCampo').val('');
-
-    // Otros ajustes necesarios para restablecer el estado de la ventana modal
+    // Actualiza el campo de tipo de descuento aplicado en la fila actual
+    var tipoDescuento = esPorcentaje ? "Porcentaje" : "Monto";
+    filaActual.find('.Codigodescuento').val(tipoDescuento);
+  }
 }
 
 function aplicarDescuentoSeleccionado() {
-    var cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+  var cantidadDescuento = 0;
+  
+  // Verifica si el descuento es porcentaje o monto
+  if (document.getElementById("porcentaje").checked) {
+    cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+  } else {
+    cantidadDescuento = parseFloat(document.getElementById("montoDescuento").value) || 0;
+  }
 
-    // Aplica descuento solo en la fila correspondiente
-    aplicarDescuentoEnFila(cantidadDescuento);
+  // Aplica el descuento solo en la fila correspondiente
+  aplicarDescuentoEnFila(cantidadDescuento);
 
-    // Actualiza el total
-    actualizarTotal();
+  // Actualiza el total
+  actualizarTotal();
 
-    // Cierra el modal
-    $('#Descuento1detalles').modal('hide');
+  // Cierra el modal
+  $('#Descuento1detalles').modal('hide');
 
-    // Resetea el estado de la ventana modal
-    resetearModal();
+  // Resetea el estado de la ventana modal
+  resetearModal();
 
-    // Muestra SweetAlert
-    Swal.fire({
-        icon: 'success',
-        title: 'Descuento aplicado',
-        showConfirmButton: false,
-        timer: 1500
-    });
+  // Muestra SweetAlert
+  Swal.fire({
+    icon: 'success',
+    title: 'Descuento aplicado',
+    showConfirmButton: false,
+    timer: 1500
+  });
+}
+
+function actualizarTotal() {
+  // Actualiza el total general (por completar según lógica de tu sistema)
+  console.log("Total actualizado");
+}
+
+function resetearModal() {
+  $('#cantidadadescontar').val('');
+  $('#montoDescuento').val('');
+  document.getElementById("porcentaje").checked = true;
+  cambiarTipoDescuento();
 }
 
 function actualizarTotal() {
@@ -413,7 +424,7 @@ function actualizarTotal() {
     var sumaTotal = 0;
 
     contenedorFilas.find('.row').each(function () {
-        var importe = parseFloat($(this).find('.montocondescuentodeverdad').val()) || 0;
+        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
         sumaTotal += importe;
     });
 
@@ -454,4 +465,6 @@ $(document).ready(function()
 <script src="js/CalculaTotaldeproducto.js"></script>
 
 
-<script src="js/RealizaVentasDesarrolloYPruebas.js"></script>
+<script src="js/RealizaVentasDesarrollo.js"></script>
+<script src="js/RemueveProductos.js"></script>   
+<script src="js/Descuentos.js"></script>

@@ -32,7 +32,7 @@
 
 <style>
   /* Estilos personalizados para la tabla */
-  #Productos th {
+  #Clientes th {
     font-size: 12px; /* Tamaño de letra para los encabezados */
     padding: 4px; /* Ajustar el espaciado entre los encabezados */
     white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
@@ -41,21 +41,21 @@
 
 <style>
   /* Estilos para la tabla */
-  #Productos {
+  #Clientes {
     font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
     border-collapse: collapse; /* Colapsar los bordes de las celdas */
     width: 100%;
     text-align: center; /* Centrar el contenido de las celdas */
   }
 
-  #Productos th {
+  #Clientes th {
     font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
     background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
     color: white; /* Cambiar el color del texto a blanco para contrastar */
     padding: 10px; /* Ajustar el espaciado de los encabezados */
   }
 
-  #Productos td {
+  #Clientes td {
     font-size: 14px; /* Tamaño de letra para el contenido de la tabla */
     padding: 8px; /* Ajustar el espaciado de las celdas */
     border-bottom: 1px solid #ccc; /* Agregar una línea de separación entre las filas */
@@ -108,26 +108,6 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  .status-box {
-    padding: 5px;
-    border-radius: 4px;
-    display: inline-block;
-    color: white;
-    font-weight: bold;
-}
-
-.bg-yellow {
-    background-color: yellow;
-    color: black;
-}
-
-.bg-default {
-    background-color: gray;
-    color: white;
-}
-
-
-
 </style>
 
 <script>
@@ -174,6 +154,36 @@
 "Cargando... Ten paciencia, incluso los programadores necesitan tiempo para pensar en nombres de variables.",
 
 "Estamos destilando líneas de código para obtener la solución perfecta. ¡Casi listo!",
+"Buscando el café perdido... ☕️",
+"Cargando unicornios pixelados...",
+"Generando excusas para la lentitud...",
+"Contando hasta el infinito... dos veces.",
+"Alineando los bits desobedientes...",
+"Convocando hamsters de velocidad...",
+"Reorganizando cajones virtuales...",
+"¿Estás ahí, mundo digital?",
+"Haciendo magia binaria...",
+"Consultando el manual del universo...",
+"Midiendo la velocidad de la luz en píxeles...",
+"Desenredando cables imaginarios...",
+"Haciendo una pausa para tomar un byte.",
+"Cargando una oveja contadora de sueños...",
+"¡Alerta! Bits desordenados, se necesita aspiradora digital.",
+"Comprando boletos para el hiperespacio...",
+"Dibujando una puerta en la pared de ladrillos...",
+"Esperando a que los electrones hagan ejercicio.",
+"Silencio, estamos calibrando los chistes.",
+"Revolviendo el caos en cámara lenta...",
+"🚀 Preparándose para despegar hacia el ciberespacio...",
+"🐢 Cargando a la velocidad de una tortuga con resaca...",
+"🌀 Girando los engranajes de la paciencia...",
+"⚡ Generando rayos de alta velocidad...",
+"🎮 Insertando monedas virtuales para acelerar...",
+"🌌 Navegando por el agujero de gusano del sistema...",
+"🤖 Despertando a los gnomos del procesador...",
+"🍕 Ordenando pizza digital mientras esperas...",
+"🕒 Viajando en el tiempo para cargar más rápido...",
+"🎩 Sacando conejos del sombrero de la programación...",
   ];
 
   // Función para mostrar el mensaje de carga con un texto aleatorio
@@ -188,89 +198,86 @@
   function ocultarCargando() {
     document.getElementById('loading-overlay').style.display = 'none';
   }
-  
 
-tabla = $('#Productos').DataTable({
+
+tabla = $('#Clientes').DataTable({
 
  "bProcessing": true,
  "ordering": true,
  "stateSave":true,
- "bAutoWidth": true,
+ "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDevolucionesDelMes.php",
+ "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayListadoTutoriales.php",
  "aoColumns": [
-    { "data": "NumOrde", "title": "N° Orden" },
-    { "data": "Cod_Barra", "title": "Cod" },
-            { "data": "Nombre_Produc", "title": "Nombre" },
-            { "data": "Cantidad", "title": "Cantidad" },
-            { "data": "Proveedor", "title": "Proveedor" },
-            { "data": "Num_Factura", "title": "N° Factura" },
-            { "data": "Nombre_Sucursal", "title": "Sucursal" },
-            { "data": "Motivo_Devolucion", "title": "Motivo Devolución" },
-            { "data": "Estatus", "title": "Estatus" },
-            { "data": "Fecha", "title": "Fecha" },
-            { "data": "HoraAgregado", "title": "Hora" },
-            { "data": "Agrego", "title": "Agregado Por" },
-            { "data": "Acciones", "title": "Acciones" },
-           
+  { mData: 'Folio' },  
+  { mData: 'Nombre_Paciente' },
+       { mData: 'Edad' },
+       { mData: 'Sexo' },
+       { mData: 'Fecha_Nacimiento' },
+       
       
   
       ],
      
-    
-      "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
+      "lengthMenu": [[20,150,250,500, -1], [20,50,250,500, "Todos"]],  
   
-      "language": {
-      "lengthMenu": "Mostrar _MENU_ registros",
-      "sPaginationType": "extStyle",
-      "zeroRecords": "No se encontraron resultados",
-      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sSearch": "Buscar:",
-      "paginate": {
-        "first": '<i class="fas fa-angle-double-left"></i>',
-        "last": '<i class="fas fa-angle-double-right"></i>',
-        "next": '<i class="fas fa-angle-right"></i>',
-        "previous": '<i class="fas fa-angle-left"></i>'
-      },
-      "processing": function () {
-        mostrarCargando();
-      }
-    },
-    "initComplete": function() {
-      // Al completar la inicialización de la tabla, ocultar el mensaje de carga
-      ocultarCargando();
-    },
-    // Para personalizar el estilo del botón de Excel
-    "buttons": [
-      {
-        extend: 'excelHtml5',
-        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-        titleAttr: 'Exportar a Excel',
-        title: 'Devoluciones de productos ',
-        className: 'btn btn-success',
-        exportOptions: {
-          columns: ':visible' // Exportar solo las columnas visibles
-        }
-      }
-    ],
-    // Personalizar la posición de los elementos del encabezado
-    "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
-    "responsive": true
-  });
-
+  "language": {
+  "lengthMenu": "Mostrar _MENU_ registros",
+  "sPaginationType": "extStyle",
+  "zeroRecords": "No se encontraron resultados",
+  "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+  "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+  "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+  "sSearch": "Buscar:",
+  "paginate": {
+    "first": '<i class="fas fa-angle-double-left"></i>',
+    "last": '<i class="fas fa-angle-double-right"></i>',
+    "next": '<i class="fas fa-angle-right"></i>',
+    "previous": '<i class="fas fa-angle-left"></i>'
+  },
+  "processing": function () {
+    mostrarCargando();
+  }
+},
+"initComplete": function() {
+  // Al completar la inicialización de la tabla, ocultar el mensaje de carga
+  ocultarCargando();
+},
+// Para personalizar el estilo del botón de Excel
+"buttons": [
+  {
+    extend: 'excelHtml5',
+    text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+    titleAttr: 'Exportar a Excel',
+    title: 'Base de Clientes',
+    className: 'btn btn-success',
+    exportOptions: {
+      columns: ':visible' // Exportar solo las columnas visibles
+    }
+  }
+],
+// Personalizar la posición de los elementos del encabezado
+"dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
+"responsive": true
+});
 </script>
 <div class="text-center">
-	<div class="table-responsive">
-	<table  id="Productos" class="hover" style="width:100%">
+  <div class="table-responsive">
+  <table  id="Clientes" class="table table-hover">
 <thead>
-
-
+<th>Id registro</th>
+<th>Nombre personal</th>
+<th>Sucursal</th>
+<th>Tutorial</th>
+    <th>Fecha y hora de completado</th>
+ 
 
 </thead>
 
 </div>
 </div>
+
+
+
 
 

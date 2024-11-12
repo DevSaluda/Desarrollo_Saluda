@@ -56,20 +56,17 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
     $data[$c]["Precio_Venta"] = $fila["Precio_Venta"];
     $data[$c]["Nom_Serv"] = $fila["Nom_Serv"];
-    $data[$c]["Tipo"] = $fila["Tipo"];
+
     $data[$c]["Proveedor1"] = $fila["Proveedor1"];
     $data[$c]["Proveedor2"] = $fila["Proveedor2"];
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["UltimoMovimiento"] = $fila["AgregadoEl"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
     
-    $data[$c]["Min_Existencia"] = $fila["Min_Existencia"];
-    $data[$c]["Max_Existencia"] = $fila["Max_Existencia"];
+
    
 
-    $data[$c]["Coincidencias"] = ["<a  href=https://saludapos.com/AdminPOS/CoincidenciaSucursales?Disid=".base64_encode($fila["ID_Prod_POS"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
-       $data[$c]["Ingreso"] = ["<a href=https://saludapos.com/AdminPOS/ActualizaOne?idProd=".base64_encode($fila["Folio_Prod_Stock"])." type='button' class='btn btn-info  btn-sm '><i class='fas fa-capsules'></i></a> "];
-       $data[$c]["Auditoria"] = ["<a href=https://saludapos.com/AdminPOS/HistorialProductoAudita?idProd=".base64_encode($fila["Cod_Barra"])." type='button' class='btn btn-primary  btn-sm '><i class='fas fa-history'></i></a> "];
+
     $c++; 
  
 }
