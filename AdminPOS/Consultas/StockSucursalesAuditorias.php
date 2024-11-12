@@ -16,7 +16,7 @@
        { mData: 'Nombre_Prod' },
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
-       { mData: 'Tipo' },
+      
        { mData: 'Proveedor1' },
        { mData: 'Proveedor2' },
        { mData: 'Sucursal' },
@@ -78,7 +78,7 @@
 <th style="background-color:#0057b8 !important;">Nombre</th>
 <th style="background-color:#0057b8 !important;">PV</th>
 <th style="background-color:#0057b8 !important;">Servicio</th>
-<th style="background-color:#0057b8 !important;">Tipo</th>
+
 <th style="background-color:#0057b8 !important;">Proveedor 1</th>
 <th style="background-color:#0057b8 !important;">Proveedor 2</th>
 <th style="background-color:#0057b8 !important;">Sucursal</th>
