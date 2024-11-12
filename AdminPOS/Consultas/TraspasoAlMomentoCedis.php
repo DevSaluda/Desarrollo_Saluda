@@ -36,7 +36,8 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
         Estatus, 
         AgregadoPor, 
         ID_H_O_D, 
-        TotaldePiezas,TipoMov
+        TotaldePiezas,
+        TipoMov
     ) VALUES ";
 
     $values = [];
@@ -71,7 +72,7 @@ if (isset($_POST["IdBasedatos"]) && !empty($_POST["IdBasedatos"])) {
                 '" . mysqli_real_escape_string($conn, $_POST["Estatus"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["AgregoElVendedor"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, $_POST["ID_H_O_D"][$i]) . "',
-                '" . mysqli_real_escape_string($conn, @$_POST["resultadepiezas"][$i]) . "'
+                '" . mysqli_real_escape_string($conn, @$_POST["resultadepiezas"][$i]) . "',
                 '" . mysqli_real_escape_string($conn, @$_POST["TipoMov"][$i]) . "'
             )";
         }
