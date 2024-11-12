@@ -23,7 +23,7 @@ $AgendadoPor = $conn->real_escape_string(trim($_POST['UsuarioExt']));
 $Sistema = $conn->real_escape_string(trim($_POST['SistemaExt']));
 $Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 
-// Obtener el nombre de la sucursal desde SucursalesCorre
+// Obtener el nombre de la sucursal desde SucursalesCorre2
 $sql_sucursal = "SELECT Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC = '$Fk_Sucursal'";
 $result_sucursal = mysqli_query($conn, $sql_sucursal);
 $row_sucursal = mysqli_fetch_assoc($result_sucursal);
@@ -91,7 +91,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
                         'dateTime' => $endDateTime,
                         'timeZone' => 'America/Mexico_City',
                     ),
-                    'colorId' => '2',
+                    'colorId' => '3',
                 ));
 
                 $event = $service->events->insert($calendarId, $event);

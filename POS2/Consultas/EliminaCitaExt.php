@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 
 $ID_Agenda_Especialista = $conn->real_escape_string(htmlentities(strip_tags(trim($_POST['idcancelaExt']))));
 
-// Obtener el GoogleEventId y el IDGoogleCalendar de la cita a eliminar
+// Obtener el GoogleEventId y el IDGoogleCalendar de la cita a eliminar2
 $sql_event = "SELECT GoogleEventId, IDGoogleCalendar FROM AgendaCitas_EspecialistasExt WHERE ID_Agenda_Especialista = '$ID_Agenda_Especialista'";
 $result = mysqli_query($conn, $sql_event);
 $row = mysqli_fetch_assoc($result);
