@@ -531,7 +531,8 @@ document.addEventListener("DOMContentLoaded", function() {
                           white-space: nowrap;
                           overflow: hidden;
                           text-overflow: visible;
-
+                          padding: 8px; /* Ajusta el padding para darle más espacio */
+                          font-size: 14px; /* Ajusta el tamaño de fuente para hacerla más legible */
 
                         }
 
