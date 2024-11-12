@@ -63,8 +63,7 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["UltimoMovimiento"] = $fila["AgregadoEl"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
     
-    $data[$c]["Min_Existencia"] = $fila["Min_Existencia"];
-    $data[$c]["Max_Existencia"] = $fila["Max_Existencia"];
+
    
 
 
