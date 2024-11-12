@@ -1,7 +1,7 @@
 <?php 
 include "db_connection.php";
 
-// Capturar el cuerpo de la notificación2
+// Capturar el cuerpo de la notificación
 $request_body = file_get_contents('php://input');
 file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Notificación recibida: " . $request_body . PHP_EOL, FILE_APPEND);
 
