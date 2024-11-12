@@ -22,8 +22,7 @@
        { mData: 'Sucursal' },
        { mData: 'UltimoMovimiento' },
        { mData: 'Existencias_R' },
-       { mData: 'Min_Existencia' },
-       { mData: 'Max_Existencia' },
+ 
    
  
 
