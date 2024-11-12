@@ -522,7 +522,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                       <style>
                         #tablaAgregarArticulos {
-                          width: 100%;
+                          width: 120%;
                           table-layout: fixed;
                         }
 
