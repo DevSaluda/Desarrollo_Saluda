@@ -522,7 +522,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                       <style>
                         #tablaAgregarArticulos {
-                          width: 120%;
+                          width: 100%;
                           table-layout: fixed;
                         }
 
@@ -561,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function() {
                               <th>Codigo</th>
                               <th class="no-click" style="width:20%">Producto</th>
                               <th class="no-click" style="width:5%">Contado</th>
-                              <th class="no-click" style="width:3%">Actual</th>
+                              <th class="no-click" style="width:5%">Actual</th>
                               <th class="no-click" style="width:5%">Diferencia</th>
                               <th class="no-click" style="width:5%">Precio</th>
                               <th class="no-click" >Tipo de ajuste</th>
