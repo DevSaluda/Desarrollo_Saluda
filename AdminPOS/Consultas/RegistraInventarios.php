@@ -10,7 +10,7 @@ if(isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`,`Tipo_Ajuste`,`Anaquel`,`Repisa`) VALUES ";
+$query = "INSERT INTO InventariosStocks_Conteos (`ID_Prod_POS`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `Precio_Venta`, `Precio_C`, `Contabilizado`, `StockEnMomento`, `Diferencia`, `Sistema`, `AgregadoPor`,  `ID_H_O_D`,`FechaInventario`,`Tipo_Ajuste`,`Anaquel`,`Repisa`,`Comentario`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -20,7 +20,7 @@ for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["NombreDelProducto"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
         $values[] = $_POST["IdBasedatos"][$i];
         $values[] = $_POST["CodBarras"][$i];
         $values[] = $_POST["NombreDelProducto"][$i];
@@ -38,7 +38,8 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = $_POST["Tipodeajusteaplicado"][$i];
         $values[] = $_POST["AnaquelSeleccionado"][$i];
         $values[] = $_POST["RepisaSeleccionada"][$i];
-        $valueTypes .= 'ssssssssssssssss'; // Ajustar tipos según corresponda
+        $values[] = $_POST["Comentario"][$i];
+        $valueTypes .= 'sssssssssssssssss'; // Ajustar tipos según corresponda
     }
 }
 
