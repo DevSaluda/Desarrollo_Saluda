@@ -721,6 +721,9 @@ document.getElementById('numberSelect').addEventListener('change', function() {
       {
         "data": "repisa"
       },
+      {
+        "data": "comentario"
+      },
       // {
       //     "data": "importesiniva"
       // },
