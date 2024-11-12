@@ -1,26 +1,29 @@
-<?php
-
+<?php 
+require '../vendor/autoload.php';
 include_once 'db_connection.php';
+
+// Configura la conexión a la base de datos para usar UTF-8
+$conn->set_charset("utf8mb4");
+
 $Cita = "Agendado";
 $ColorClaveCalendario = "#04B45F";
 
-// Obtener datos del formulario
-$Fk_Especialidad = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['EspecialidadExt']))));
-$Fk_Especialista = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['MedicoExt']))));
-$Fk_Sucursal = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['SucursalExt']))));
-$Fecha = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['FechaExt']))));
-$Hora = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['HorasExt']))));
-$Nombre_Paciente = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['NombresExt']))));
-$Telefono = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['TelExt']))));
-$Tipo_Consulta = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['TipoConsultaExt']))));
-$Estatus_cita = $conn->real_escape_string(htmlentities(strip_tags(Trim($Cita))));
-$Observaciones = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['ObservacionesExt']))));
-$ID_H_O_D = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['EmpresaExt']))));
-$AgendadoPor = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['UsuarioExt']))));
-$Sistema = $conn->real_escape_string(htmlentities(strip_tags(Trim($_POST['SistemaExt']))));
-$Color_Calendario = $conn->real_escape_string(htmlentities(strip_tags(Trim($ColorClaveCalendario))));
+$Fk_Especialidad = $conn->real_escape_string(trim($_POST['EspecialidadExt']));
+$Fk_Especialista = $conn->real_escape_string(trim($_POST['MedicoExt']));
+$Fk_Sucursal = $conn->real_escape_string(trim($_POST['SucursalExt']));
+$Fk_Fecha = $conn->real_escape_string(trim($_POST['FechaExt'])); // ID de la fecha
+$Fk_Hora = $conn->real_escape_string(trim($_POST['HorasExt']));  // ID de la hora
+$Nombre_Paciente = $conn->real_escape_string(trim($_POST['NombresExt']));
+$Telefono = $conn->real_escape_string(trim($_POST['TelExt']));
+$Tipo_Consulta = $conn->real_escape_string(trim($_POST['TipoConsultaExt']));
+$Estatus_cita = $conn->real_escape_string(trim($Cita));
+$Observaciones = $conn->real_escape_string(trim($_POST['ObservacionesExt']));
+$ID_H_O_D = $conn->real_escape_string(trim($_POST['EmpresaExt']));
+$AgendadoPor = $conn->real_escape_string(trim($_POST['UsuarioExt']));
+$Sistema = $conn->real_escape_string(trim($_POST['SistemaExt']));
+$Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 
-// Obtener el nombre de la sucursal desde SucursalesCorre2
+// Obtener el nombre de la sucursal desde SucursalesCorre
 $sql_sucursal = "SELECT Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC = '$Fk_Sucursal'";
 $result_sucursal = mysqli_query($conn, $sql_sucursal);
 $row_sucursal = mysqli_fetch_assoc($result_sucursal);
@@ -48,23 +51,19 @@ $calendarId = $row_calendar['IDGoogleCalendar'];
 $sql = "SELECT Fk_Especialidad, Fk_Especialista, Fk_Sucursal, Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, ID_H_O_D 
         FROM AgendaCitas_EspecialistasExt 
         WHERE Fk_Especialidad='$Fk_Especialidad' AND Fk_Especialista='$Fk_Especialista' AND Fk_Sucursal='$Fk_Sucursal'
-        AND Fecha='$Fecha' AND Hora='$Hora' AND Nombre_Paciente='$Nombre_Paciente' AND Telefono='$Telefono' 
+        AND Fecha='$Fk_Fecha' AND Hora='$Fk_Hora' AND Nombre_Paciente='$Nombre_Paciente' AND Telefono='$Telefono' 
         AND Tipo_Consulta='$Tipo_Consulta' AND ID_H_O_D='$ID_H_O_D'";
-
-$resultset = mysqli_query($conn, $sql) or die("Error en la base de datos:" . mysqli_error($conn));
+$resultset = mysqli_query($conn, $sql) or die("database error: " . mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 
-// Verificar si ya existe una cita con los mismos datos
-if ($row !== null) {
+if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_Fecha && $row['Hora'] == $Fk_Hora && $row['Fk_Especialidad'] == $Fk_Especialidad) {
     echo json_encode(array("statusCode" => 250));
 } else {
-    // Si no existe, realizar la inserción en la base de datos
-    $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`,
-            `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, 
-            `Sistema`,  `Color_Calendario`) 
-            VALUES ('$Fk_Especialidad','$Fk_Especialista', '$Fk_Sucursal','$Fecha','$Hora',
-            '$Nombre_Paciente','$Telefono','$Tipo_Consulta', '$Estatus_cita', '$Observaciones','$ID_H_O_D',
-            '$AgendadoPor','$Sistema','$Color_Calendario')";
+    // Insertar la nueva cita en la base de datos con las FK de fecha y hora
+    $sql = "INSERT INTO `AgendaCitas_EspecialistasExt`(`Fk_Especialidad`, `Fk_Especialista`, `Fk_Sucursal`, `Fecha`, `Hora`, 
+            `Nombre_Paciente`, `Telefono`, `Tipo_Consulta`, `Estatus_cita`, `Observaciones`, `ID_H_O_D`, `AgendadoPor`, `Sistema`, `Color_Calendario`, `IDGoogleCalendar`) 
+            VALUES ('$Fk_Especialidad', '$Fk_Especialista', '$Fk_Sucursal', '$Fk_Fecha', '$Fk_Hora', '$Nombre_Paciente', '$Telefono', '$Tipo_Consulta', 
+            '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario', '$calendarId')";
 
     if (mysqli_query($conn, $sql)) {
         if (!empty($calendarId)) {
@@ -92,7 +91,7 @@ if ($row !== null) {
                         'dateTime' => $endDateTime,
                         'timeZone' => 'America/Mexico_City',
                     ),
-                    'colorId' => '3',
+                    'colorId' => '2',
                 ));
 
                 $event = $service->events->insert($calendarId, $event);
@@ -111,7 +110,6 @@ if ($row !== null) {
     } else {
         echo json_encode(array("statusCode" => 201));
     }
-
     mysqli_close($conn);
 }
 ?>
