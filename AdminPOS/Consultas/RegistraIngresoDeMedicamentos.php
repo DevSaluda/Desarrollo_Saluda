@@ -10,7 +10,7 @@ if (isset($_POST["IdBasedatos"]) && is_array($_POST["IdBasedatos"])) {
 }
 
 $ProContador = 0;
-$query = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`, `Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES ";
+$query = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`, `Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`,`TipoMov`) VALUES ";
 
 $placeholders = [];
 $values = [];
@@ -20,7 +20,7 @@ for ($i = 0; $i < $contador; $i++) {
     // Verificar si los campos relevantes están definidos y no están vacíos antes de procesarlos
     if (!empty($_POST["IdBasedatos"][$i]) || !empty($_POST["CodBarras"][$i]) || !empty($_POST["Loteeee"][$i])) {
         $ProContador++;
-        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         
         $values[] = isset($_POST["IdBasedatos"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["IdBasedatos"][$i])))) : null;
         $values[] = isset($_POST["CodBarras"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CodBarras"][$i])))) : null;
@@ -35,8 +35,9 @@ for ($i = 0; $i < $contador; $i++) {
         $values[] = isset($_POST["FacturaNumber"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["FacturaNumber"][$i])))) : null;
         $values[] = isset($_POST["preciocompraAguardar"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["preciocompraAguardar"][$i])))) : null;
         $values[] = isset($_POST["CostototalFactura"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["CostototalFactura"][$i])))) : null;
+        $values[] = isset($_POST["CostototalFactura"][$i]) ? $conn->real_escape_string(htmlentities(strip_tags(trim($_POST["TipoMov"][$i])))) : null;
         
-        $valueTypes .= 'sssssssssssss'; // Ajustar tipos según corresponda
+        $valueTypes .= 'ssssssssssssss'; // Ajustar tipos según corresponda
     }
 }
 

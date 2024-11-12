@@ -719,6 +719,7 @@ function calcularDiferencia(input) {
         <td style="display:none;" class="ResponsableInventario"><input hidden id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']; ?>" /></td>
         <td style="display:none;" class="Sucursal"><input hidden type="text" class="form-control" name="Fk_sucursal[]" readonly value="<?php echo $row['Fk_Sucursal']; ?>" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Sistema[]" readonly value="POS" /></td>
+        <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="TipoMov[]" readonly value="Actualizacion por ingreso" /></td>
         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="ID_H_O_D[]" readonly value="Saluda" /></td>
                 <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="Loteeee[]" readonly  /></td>
                         <td style="display:none;" class="Empresa"><input hidden type="text" class="form-control" name="fechacadd[]" readonly value="Saluda" /></td>
