@@ -311,7 +311,7 @@ table td {
       <input type="text" class="form-control " hidden name="NumeroDelTraspaso[]" readonly  value="<?php echo $NumeroOrdenTraspaso?>"  > 
       <input type="text" class="form-control " hidden  name="ProveedorDelTraspaso[]" readonly  value="<?php echo $ProveedorFijo?>"  >
       <input type="text" class="form-control " hidden name="NumeroDeFacturaTraspaso[]" readonly  value="<?php echo $NumeroDeFacturaTrapaso?>"  > 
-      <input type="text" class="form-control "  name="TipoMov[]" readonly  value="Ingreso de proveedor <?php echo $ProveedorFijo?>"  > 
+      <input type="text" class="form-control " hidden name="TipoMov[]" readonly  value="Ingreso de proveedor <?php echo $ProveedorFijo?>"  > 
   </form>    
    <div class="col">   <label for="exampleFormControlInput1">Eliminar </label> <br> <a   id="deletee" class="btn btn-danger btn-sm remove"><i class="fas fa-minus-circle"></i></a></div></div>
               	</li>
