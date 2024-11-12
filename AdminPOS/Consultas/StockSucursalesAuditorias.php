@@ -46,10 +46,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
  
 
 
-       { mData: 'Coincidencias' }, 
-    //    { mData: 'Traspaso' }, 
-       { mData: 'Ingreso' }, 
-       { mData: 'Auditoria' }, 
+    
   
       ],
      
@@ -109,10 +106,7 @@ return '<button class="btn btn-default btn-sm" style="background-color:#fd7e14!i
 <th style="background-color:#0057b8 !important;">Min</th>
 <th style="background-color:#0057b8 !important;">Max</th>
 <th style="background-color:#0057b8 !important;">Estatus</th>
-<th style="background-color:#0057b8 !important;">Acciones</th>
-<!-- <th style="background-color:#0057b8 !important;">Traspaso</th> -->
-<th style="background-color:#0057b8 !important;">Ingreso</th>
-<th style="background-color:#0057b8 !important;">Historial</th>
+
 
 
 </thead>
