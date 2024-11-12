@@ -666,7 +666,7 @@ function calcularDiferencia(input) {
     var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
 
     // Calcular la diferencia
-    var diferencia = cantidadVendida - existenciasBd;
+    var diferencia = cantidadVendida + existenciasBd;
 
     // Actualizar el valor del input de diferencia en la fila actual
     fila.find('.cantidad-diferencia-input').val(diferencia);
