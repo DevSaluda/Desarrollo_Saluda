@@ -566,7 +566,7 @@ document.addEventListener("DOMContentLoaded", function() {
                               <th class="no-click" >Tipo de ajuste</th>
                               <th  class="no-click"style="width:3%">Anaquel</th>
                               <th  class="no-click" style="width:3%">Repisa</th>
-                              <th  class="no-click" style="width:3%">Comentario</th>
+                              <th  class="no-click" style="width:20%">Comentario</th>
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
                               <!-- <th>importe_Sin_Iva</th>
