@@ -113,7 +113,7 @@ table td {
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-clock"></i></span>
   </div>
-  <input type="date" class="form-control "   value="<?php echo date("Y-m-d")?>"  > 
+  <input type="date" class="form-control "  readonly value="<?php echo date("Y-m-d")?>"  > 
   
   
     </div>  </div>
@@ -230,7 +230,12 @@ table td {
                           margin-top: -10px !important;
                           margin-bottom: 5px !important;
                         }
+                        .no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
 
+                      
                         
                       </style>
                       
@@ -242,15 +247,15 @@ table td {
                         <table class="table table-striped" id="tablaAgregarArticulos" class="display">
                           <thead>
                             <tr>
-                              <th>Codigo</th>
-                              <th >Producto</th>
-                              <th>Precio compra</th>
-                              <th >Precio Venta</th>
-                              <th >Piezas</th>
+                              <th class="no-click">Codigo</th>
+                              <th class="no-click" >Producto</th>
+                              <th  class="no-click" >Precio compra</th>
+                              <th class="no-click">Precio Venta</th>
+                              <th class="no-click">Piezas</th>
                              
                             
                               
-                              <th>Eliminar</th>
+                              <th class="no-click">Eliminar</th>
                             
                             </tr>
                           </thead>

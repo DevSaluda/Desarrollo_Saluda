@@ -2,7 +2,7 @@
 
 <?php
 include "db_connection.php";
-
+$tipomovimiento="Ajuste manual de stock";
         $ID_Prod_POS=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACT_ID_Prod']))));
        
         $Lote=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Loteee']))));
@@ -20,6 +20,7 @@ include "db_connection.php";
         `AgregadoPor`='$AgregadoPor',
         `Existencias_R`='$Existencias_R',
         `Sistema`='$Sistema'
+        `TipoMov`=$tipomovimiento
 WHERE ID_Prod_POS=$ID_Prod_POS AND  Fk_sucursal=$Fk_sucursal";
        if (mysqli_query($conn, $sql)) {
 		echo json_encode(array("statusCode"=>200));

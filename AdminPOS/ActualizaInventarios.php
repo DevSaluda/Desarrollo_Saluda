@@ -58,7 +58,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Cod_Barra; ?>" >
+  <input type="text" class="form-control "  readonly  value="<?php echo $Especialistas->Cod_Barra; ?>" >
     </div>
     </div>
     
