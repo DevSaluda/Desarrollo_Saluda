@@ -165,16 +165,23 @@
             </a>
           </li>
              
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="StockCedis" class="nav-link">
             <i class="fas fa-file-invoice-dollar"></i>
               <p>
             Ingreso de medicamentos            
               </p>
             </a>
+          </li> -->
+          
+          <li class="nav-item">
+            <a href="GeneradorIngresoMedicamentos" class="nav-link">
+            <i class="fas fa-file-invoice-dollar"></i>
+              <p>
+            Ingreso de medicamentos            
+              </p>
+            </a>
           </li>
-          
-          
           
           
           <!-- <li class="nav-header">Ventas</li>
