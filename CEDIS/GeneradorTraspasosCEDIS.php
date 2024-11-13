@@ -805,6 +805,17 @@ function eliminarFila(element) {
                 },milisegundos);
             });
         </script>
+
+
+<script>
+  $(document).on('keydown', '.cantidad-vendida-input', function(event) {
+    // Si la tecla presionada es "Enter", bloquear la acción
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+});
+
+</script>
 <style>
 .toast {
   position: fixed;
