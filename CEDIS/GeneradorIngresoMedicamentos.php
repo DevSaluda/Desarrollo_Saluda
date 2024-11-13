@@ -264,7 +264,42 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
 
                        
+<script>
+// Función para obtener el valor de una cookie
+function getCookie(name) {
+    let value = "; " + document.cookie;
+    let parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+}
 
+// Función para establecer una cookie
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+// Verifica si la cookie "ocultarInfo" está establecida
+if (!getCookie("ocultarInfo")) {
+    Swal.fire({
+        title: "INFO",
+        text: "Es necesario que escribas la factura con la que se ingresan los productos",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonText: "No mostrar de nuevo en 7 días",
+        confirmButtonText: "OK"
+    }).then((result) => {
+        // Si se selecciona "No mostrar de nuevo en 7 días"
+        if (result.dismiss === Swal.DismissReason.cancel) {
+            setCookie("ocultarInfo", "true", 7);
+        }
+    });
+}
+</script>
 
                      <!-- Importa SweetAlert 2 -->
 
