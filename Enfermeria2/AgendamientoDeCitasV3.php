@@ -62,7 +62,7 @@ Lista de pacientes agendados
  include ("Modales/AltaEspecialista.php");
   include ("footer.php")?>
 
-<script src="js/CampanasSucursales.js"></script>
+
 <script src="js/CampanasExpress.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
 <script src="js/BuscaDataPacientesExt.js"></script>
