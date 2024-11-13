@@ -322,6 +322,10 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                           margin-top: -10px !important;
                           margin-bottom: 5px !important;
                         }
+                        .no-click {
+  pointer-events: none; /* Desactiva los eventos de puntero */
+  cursor: default; /* Opcional: cambia el cursor a la apariencia predeterminada para que parezca no interactivo */
+}
 
                         
                       </style>
@@ -335,13 +339,13 @@ document.getElementById('numerofactura').addEventListener('change', function() {
                           <thead>
                             <tr>
 
-                              <th>Codigo</th>
-                              <th style="width:20%">Producto</th>
-                              <th style="width:5%">Enviado</th>
-                              <th style="width:3%">Existencia actual</th>
-                              <th style="width:5%">Nueva existencias</th>
-                              <th style="width:5%">Precio</th>
-                              <th># de Factura</th>
+                              <th class="no-click">Codigo</th>
+                              <th style="width:20%" class="no-click">Producto</th>
+                              <th style="width:5%" class="no-click">Enviado</th>
+                              <th style="width:3%" class="no-click">Existencia actual</th>
+                              <th style="width:5%" class="no-click">Nueva existencias</th>
+                              <th style="width:5%" class="no-click">Precio</th>
+                              <th class="no-click" ># de Factura</th>
                      
                               <!-- <th>Precio compra</th>
                               <th>Importe</th> -->
