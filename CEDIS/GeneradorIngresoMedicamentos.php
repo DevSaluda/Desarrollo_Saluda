@@ -750,9 +750,9 @@ function calcularDiferencia(input) {
         <td class="descripcion"><textarea class="form-control descripcion-producto-input" readonly style="font-size: 0.75rem !important;" name="NombreDelProducto[]">${articulo.descripcion}</textarea></td>
         <td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="${articulo.cantidad}" onchange="calcularDiferencia(this)" /></td>
         <td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" /></td>
-        <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Diferencia[]" /></td>
+        <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" readonly type="number" name="Diferencia[]" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" name="preciocompraAguardar[]" value="${articulo.preciocompra}" /></td>
-        tr += '<td  class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
+        tr += '<td  class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" readonly type="text" name="FacturaNumber[]" /></td>';
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
         <td style="display:none;" class="idbd"><input class="form-control" style="font-size: 0.75rem !important;" type="text" value="${articulo.id}" name="IdBasedatos[]" /></td>
         <td style="display:none;" class="ResponsableInventario"><input hidden id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos']; ?>" /></td>
@@ -876,6 +876,17 @@ function eliminarFila(element) {
                 },milisegundos);
             });
         </script>
+
+
+<script>
+  $(document).on('keydown', '.cantidad-vendida-input', function(event) {
+    // Si la tecla presionada es "Enter", bloquear la acción
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+});
+
+</script>
 <style>
 .toast {
   position: fixed;
