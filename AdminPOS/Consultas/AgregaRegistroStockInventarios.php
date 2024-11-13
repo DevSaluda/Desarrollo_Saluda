@@ -1,5 +1,6 @@
 <?php
 include_once 'db_connection.php';
+$tipomovimiento="Ajuste manual de stock";
 $ID_Prod_POS=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ACT_ID_Prod']))));
        
 $Lote=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Loteeee']))));
@@ -13,8 +14,8 @@ $Fk_sucursal=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['St
 $ID_H_O_D=$conn -> real_escape_string(htmlentities(strip_tags(Trim("Saluda"))));
 $Factura=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['FacturasNumber']))));
 
-    $sql = "INSERT INTO `Stock_registrosNuevos`( `ID_Prod_POS`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`,`ID_H_O_D`,`Factura`) VALUES
-     ('$ID_Prod_POS', '$Fk_sucursal', '$Existencias_R', '$ExistenciaPrev', '$Recibido','$Lote','$Fecha_Caducidad', '$AgregadoPor','$ID_H_O_D','$Factura')";
+    $sql = "INSERT INTO `Stock_registrosNuevos`( `ID_Prod_POS`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`,`ID_H_O_D`,`Factura`,`TipoMov`) VALUES
+     ('$ID_Prod_POS', '$Fk_sucursal', '$Existencias_R', '$ExistenciaPrev', '$Recibido','$Lote','$Fecha_Caducidad', '$AgregadoPor','$ID_H_O_D','$Factura','$$tipomovimiento')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode" => 200));
