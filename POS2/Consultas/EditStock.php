@@ -20,7 +20,7 @@ $tipomovimiento="Ajuste manual de stock";
         `AgregadoPor`='$AgregadoPor',
         `Existencias_R`='$Existencias_R',
         `Sistema`='$Sistema'
-        `TipoMov`=$tipomovimiento
+        `TipoMov`='$tipomovimiento'
 WHERE ID_Prod_POS=$ID_Prod_POS AND  Fk_sucursal=$Fk_sucursal";
        if (mysqli_query($conn, $sql)) {
 		echo json_encode(array("statusCode"=>200));
