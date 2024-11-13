@@ -287,7 +287,7 @@ function setCookie(name, value, days) {
 if (!getCookie("ocultarInfo")) {
     Swal.fire({
         title: "Información Importante",
-        text: "Para garantizar que la información de los productos se guarde correctamente, es necesario ingresar el número de factura con la que se reciben. Si no tienes la factura a la mano, ingresa 'N/A'.",
+        text: "Para garantizar que la información de los productos se guarde correctamente, es necesario ingresar el número de factura con la que se reciben. Si los productos a ingresar no cuentan con factura usar 'N/A'.",
         icon: "info",
         showCancelButton: true,
         cancelButtonText: "No mostrar de nuevo en 7 días",
