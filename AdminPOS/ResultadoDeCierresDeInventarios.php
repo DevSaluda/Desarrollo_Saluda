@@ -298,7 +298,7 @@ include "Consultas/Consultas.php";
 
       <div class="text-center">
         <div class="table-responsive">
-        <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+        <form action="javascript:void(0)"  method="post" id="BajaInventarioCierre">
         <button type="submit" class="btn btn-primary">Realizar baja</button>
           <table id="Productos" class="hover" style="width:100%">
             <thead>
@@ -326,6 +326,7 @@ include "Consultas/Consultas.php";
 include("Modales/BusquedaTraspasosFechas.php");
   include ("footer.php");
   ?>
+    <script src="js/GuardaBajaDeProductos.js"></script>
 <?php include ("datatables.php")?>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
