@@ -50,7 +50,7 @@ include "Consultas/Consultas.php";
       class="btn btn-default">
       Busqueda por fechas <i class="fas fa-search"></i>
     </button>
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#FiltroPorFechasInventarios"
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#BajaDeInventarios"
       class="btn btn-default">
       Baja por cierre <i class="fa-sharp fa-solid fa-shop-lock"></i>
     </button>
@@ -94,7 +94,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
   include ("Modales/BusquedaInventariosFechas.php");
-
+  include ("Modales/BusquedaInventariosCierres.php");
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
