@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = [];
         $c = 0;
         while ($fila = $result->fetch_assoc()) {
-            $data[$c]["Idbddd"] = '<input type="text" hidden name="Folio_Prod_Stock[]" value="' . $fila["Folio_Prod_Stock"] . '" readonly>';
+            
             $data[$c]["IdbD"] = '<input type="text" name="Cod_Barra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Cod_Barra"] = '<input type="text" name="Nombre_Prod[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["NombreSucursal"] = '<input type="text" name="Nombre_Sucursal[]" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
@@ -42,7 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["PrecioCompra"] = '<input type="text" name="Precio_C[]" value="' . $fila["Precio_C"] . '" readonly>';
             $data[$c]["Nombre_Prod"] = '<input type="text" name="Contabilizado[]" value="' . $fila["Contabilizado"] . '" readonly>';
             $data[$c]["Cod_Enfermeria"] = '<input type="text" name="AgregadoPor[]" value="' . $fila["AgregadoPor"] . '" readonly>';
-            $data[$c]["FechaInventario"] = '<input type="text" name="FechaInventario[]" value="' . $fila["FechaInventario"] . '" readonly>';
+            $data[$c]["FechaInventario"] = '<input type="text" name="FechaInventario[]" value="' . $fila["FechaInventario"] . '" readonly
+            
+            
+            
+              <input type="text" hidden class="form-control" name="Folio_Prod_Stock[]" value="' . $fila["Folio_Prod_Stock"] . '"  readonly>>';
+
+            
             $c++;
         }
         

@@ -239,7 +239,7 @@ include "Consultas/Consultas.php";
         }
     },
             "columns": [
-                { mData: 'Idbddd' },
+              
               { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
@@ -297,7 +297,7 @@ include "Consultas/Consultas.php";
         <div class="table-responsive">
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-            <th style="display:none;" >Folio</ths>
+            
             
 <th>Cod Barra</th>
 <th>Nombre prod</th>
