@@ -45,7 +45,7 @@ include "Consultas/Consultas.php";
               // Obtener los valores del formulario
               $sucursal = $_POST['sucursal'];
               $fechainventario = $_POST['FechaInventario'];
-
+              $sucursalDestino = $_POST['FechaInventario'];
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
               echo "Fecha inicio: $sucursal<br>";
@@ -225,11 +225,12 @@ include "Consultas/Consultas.php";
         // Aquí puedes definir el código PHP directamente
         var sucursal = '<?php echo $sucursal; ?>'; // Obtén el valor de mes desde PHP
         var fechainventario = '<?php echo $fechainventario; ?>'; // Obtén el valor de anual desde PHP
-
+        var sucursalDestino= '<?php echo $sucursalDestino; ?>'
         // Construye el objeto de datos para enviar al servidor
         var dataToSend = {
             "Sucursal": sucursal,
-            "FechaInventario": fechainventario
+            "FechaInventario": fechainventario,
+            "destino":sucursalDestino
         };
 
         return dataToSend;
