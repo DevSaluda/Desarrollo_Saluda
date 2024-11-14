@@ -48,22 +48,23 @@ if ($ProContador != 0) {
     // Generar la consulta final
     $query .= implode(', ', $placeholders);
 
-    // Depuración: mostrar la consulta antes de ejecutarla
-    // echo $query;  // Puedes habilitar esto para verificar la consulta
+    // Depuración: mostrar la consulta y el número de valores
+    echo "Consulta SQL: " . $query . "<br>";
+    echo "Número de parámetros: " . count($values) . "<br>";
+    echo "Tipos de valores: " . $valueTypes . "<br>";
+    
+    // Verificar el número de parámetros a vincular
+    if (count($values) != strlen($valueTypes)) {
+        // Si no coinciden los números de parámetros con los tipos, mostrar un error
+        $response['status'] = 'error';
+        $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
+        echo json_encode($response);
+        exit();
+    }
 
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt) {
-        // Verificar el número de parámetros a vincular
-        $numParams = count($values);
-        if ($numParams != strlen($valueTypes)) {
-            // Si no coinciden los números de parámetros con los tipos, mostrar un error
-            $response['status'] = 'error';
-            $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
-            echo json_encode($response);
-            exit();
-        }
-
         // Enlace de parámetros
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
