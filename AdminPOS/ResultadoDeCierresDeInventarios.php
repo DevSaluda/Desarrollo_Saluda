@@ -45,7 +45,7 @@ include "Consultas/Consultas.php";
               // Obtener los valores del formulario
               $sucursal = $_POST['sucursal'];
               $fechainventario = $_POST['FechaInventario'];
-              $sucursalDestino = $_POST['FechaInventario'];
+              $sucursalDestino = $_POST['sucursalDestino'];
               // Realizar las operaciones que necesites con estas variables
               // Por ejemplo, imprimir su valor
               echo "Fecha inicio: $sucursal<br>";
