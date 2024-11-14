@@ -2,7 +2,7 @@
 // conexion.php debería contener la conexión a la base de datos
 include 'db_connection.php';
 
-$query = "SELECT SucursalesCorre.ID_SucursalC AS id, SucursalesCorre.Nombre_Sucursal AS nombre 
+$query = "SELECT DISTINCT SucursalesCorre.ID_SucursalC AS id, SucursalesCorre.Nombre_Sucursal AS nombre 
           FROM InventariosStocks_Conteos 
           INNER JOIN SucursalesCorre ON InventariosStocks_Conteos.Fk_sucursal = SucursalesCorre.ID_SucursalC 
           WHERE InventariosStocks_Conteos.Tipo_Ajuste = 'Ajuste por cierre de inventario'";
