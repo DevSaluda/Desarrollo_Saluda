@@ -243,8 +243,7 @@ include "Consultas/Consultas.php";
        { mData: 'NombreSucursal' },
        { mData: 'PrecioVenta' },
        { mData: 'PrecioCompra' },
-       { mData: 'TotalPrecioVenta' },
-       { mData: 'TotalPrecioCompra' },
+     
        { mData: 'Nombre_Prod' },
        { mData: 'Clave_interna' },
        { mData: 'Clave_Levic' },
@@ -301,8 +300,7 @@ include "Consultas/Consultas.php";
     <th>Sucursal</th>
     <th>PV</th>
     <th>PC</th>
-    <th>Total PV</th>
-    <th>Total PC</th>
+   
     <th>Contabilizado</th>
     <th>Stock Previo</th>
     <th>Diferencia</th>

@@ -52,8 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
             $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
             $data[$c]["PrecioCompra"] = $fila["Precio_C"];
-            $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];
-            $data[$c]["TotalPrecioCompra"] = $fila["Total_Precio_Compra"];
+         
             $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
             $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
             $data[$c]["Clave_Levic"] = $fila["Diferencia"];
