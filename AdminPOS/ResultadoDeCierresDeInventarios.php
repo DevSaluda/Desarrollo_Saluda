@@ -245,8 +245,7 @@ include "Consultas/Consultas.php";
        { mData: 'PrecioCompra' },
      
        { mData: 'Nombre_Prod' },
-       { mData: 'Clave_interna' },
-       { mData: 'Clave_Levic' },
+      
        { mData: 'Cod_Enfermeria' },
        { mData: 'FechaInventario' },
             ],
@@ -302,8 +301,7 @@ include "Consultas/Consultas.php";
     <th>PC</th>
    
     <th>Contabilizado</th>
-    <th>Stock Previo</th>
-    <th>Diferencia</th>
+   
     <th>Agregado por</th>
     <th>Fecha Inventario</th>
             </thead>
