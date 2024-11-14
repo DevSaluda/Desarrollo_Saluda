@@ -49,12 +49,21 @@ if ($ProContador != 0) {
     $query .= implode(', ', $placeholders);
 
     // Depuración: mostrar la consulta antes de ejecutarla
-    echo $query;
-    
+    // echo $query;  // Puedes habilitar esto para verificar la consulta
 
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt) {
+        // Verificar el número de parámetros a vincular
+        $numParams = count($values);
+        if ($numParams != strlen($valueTypes)) {
+            // Si no coinciden los números de parámetros con los tipos, mostrar un error
+            $response['status'] = 'error';
+            $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
+            echo json_encode($response);
+            exit();
+        }
+
         // Enlace de parámetros
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
