@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  <input type="text" hidden class="form-control" name="SucursalDestino[]"  value="' .$Destino . '"  readonly>
                  <input type="text" hidden class="form-control" name="Sucursal[]"  value="' .$sucursal . '"  readonly>
                  <input type="text" hidden class="form-control" name="ID_H_O_D[]"  value="Saluda"  readonly>
-                 <input type="text" hidden class="form-control" name="TipoMov[]"  value="Ingreso Por cierre de inventario de la sucursal' . $fila["Nombre_Sucursal"] . ' "  readonly>
+                 <input type="text" hidden class="form-control" name="TipoMov[]"  value="Ingreso Por cierre de inventario de la sucursal ' . $fila["Nombre_Sucursal"] . ' "  readonly>
                 <input type="text" hidden class="form-control"  name="PrecioCompra[]" value="' . $fila["Precio_C"] . '" readonly>';
 
             
