@@ -298,8 +298,9 @@ include "Consultas/Consultas.php";
           <table id="Productos" class="hover" style="width:100%">
             <thead>
             <th style="display:none;">Folio</th>
-            <th>ID_BD</th>
+            
 <th>Cod Barra</th>
+<th>Nombre prod</th>
     <th>Sucursal</th>
     <th>PV</th>
     <th>PC</th>
