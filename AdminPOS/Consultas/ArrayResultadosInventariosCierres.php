@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         JOIN 
             SucursalesCorre AS sc ON ic.Fk_sucursal = sc.ID_SucursalC
         WHERE 
-            ic.Fk_sucursal = ? AND ic.FechaInventario = ?";
+            ic.Fk_sucursal = ? AND ic.FechaInventario = ?
+        LIMIT 50";  // Limita la consulta a 50 resultados
         
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $sucursal, $fechaInventario);
