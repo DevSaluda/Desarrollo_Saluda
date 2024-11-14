@@ -190,7 +190,9 @@ tabla = $('#Productos').DataTable({
        { mData: 'Nombre_Prod' },
        { mData: 'Clave_interna' },
        { mData: 'Clave_Levic' },
+       { mData: 'Comentario' },
        { mData: 'Cod_Enfermeria' },
+       
        { mData: 'FechaInventario' },
        { mData: 'HoraInventario' },
       ],
@@ -252,6 +254,7 @@ tabla = $('#Productos').DataTable({
     <th>Contabilizado</th>
     <th>Stock Previo</th>
     <th>Diferencia</th>
+    <th>Comentario</th>
     <th>Agregado por</th>
     <th>Fecha Inventario</th>
     <th>Hora Inventario</th>

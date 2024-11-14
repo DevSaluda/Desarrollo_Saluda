@@ -23,7 +23,8 @@ $sql = "SELECT
     ic.AgregadoPor, 
     ic.AgregadoEl, 
     ic.ID_H_O_D, 
-    ic.FechaInventario
+    ic.FechaInventario,
+     ic.Comentario
 FROM 
     InventariosStocks_Conteos AS ic
 JOIN 
@@ -50,7 +51,9 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
     $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
     $data[$c]["Clave_Levic"] = $fila["Diferencia"];
+    $data[$c]["Comentario"] = $fila["Comentario"];
     $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
+    
     $data[$c]["FechaInventario"] = $fila["FechaInventario"];
     $horaInventario = date("g:i A", strtotime($fila["AgregadoEl"]));
     $data[$c]["HoraInventario"] = $horaInventario;
