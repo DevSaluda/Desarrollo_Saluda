@@ -40,7 +40,8 @@
         <option value="">Seleccione una sucursal</option>
     </select>
 </div>
-
+<input type="" id="nombreSucursaletras" name="nombreSucursalletras">
+<input type="" id="nombreSucursadestinoletras" name="nombreSucursadestinoletras">
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Cargar sucursales (esto ya lo tienes configurado en el script previo)
@@ -79,6 +80,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+$('#sucursalDestino').change(function() {
+        const nombreSucursal = $('#sucursalDestino option:selected').data('nombre');
+        $('#nombreSucursadestinoletras').val(nombreSucursal);  // Asigna el Nombre_Sucursal al campo oculto
+    });
+
 
 $(document).ready(function() {
     // Cargar sucursales en ambos selects
@@ -89,7 +95,6 @@ $(document).ready(function() {
         success: function(data) {
             data.forEach(function(sucursal) {
                 const option = `<option value="${sucursal.ID_SucursalC}">${sucursal.Nombre_Sucursal}</option>`;
-                $('#sucursalSelect').append(option);     // Sucursal origen
                 $('#sucursalDestino').append(option);    // Sucursal destino
             });
         },
