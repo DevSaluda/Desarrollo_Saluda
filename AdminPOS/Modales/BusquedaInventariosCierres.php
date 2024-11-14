@@ -1,11 +1,11 @@
 <div class="modal fade bd-example-modal-xl" id="BajaDeInventarios" tabindex="-1" role="dialog"
   aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-lg modal-notify modal-dark">
+  <div class="modal-dialog  modal-lg modal-notify modal-info">
     <div class="modal-content">
 
       <div class="text-center">
         <div class="modal-header">
-          <p class="heading lead">Busqueda de inventarios por fechas<i class="fas fa-credit-card"></i></p>
+          <p class="heading lead">Busqueda de inventarios de cierre<i class="fas fa-credit-card"></i></p>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">&times;</span>
