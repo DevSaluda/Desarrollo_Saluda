@@ -40,7 +40,7 @@
         <option value="">Seleccione una sucursal</option>
     </select>
 </div>
-<input type="" id="nombreSucursaletras" name="nombreSucursalletras">
+
 <input type="" id="nombreSucursadestinoletras" name="nombreSucursadestinoletras">
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -80,27 +80,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-$('#sucursalDestino').change(function() {
-        const nombreSucursal = $('#sucursalDestino option:selected').data('nombre');
-        $('#nombreSucursadestinoletras').val(nombreSucursal);  // Asigna el Nombre_Sucursal al campo oculto
-    });
 
 
 $(document).ready(function() {
-    // Cargar sucursales en ambos selects
     $.ajax({
         url: 'https://saludapos.com/AdminPOS/Consultas/cargarSucursales.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
             data.forEach(function(sucursal) {
-                const option = `<option value="${sucursal.ID_SucursalC}">${sucursal.Nombre_Sucursal}</option>`;
-                $('#sucursalDestino').append(option);    // Sucursal destino
+                const option = `<option value="${sucursal.ID_SucursalC}" data-nombre="${sucursal.Nombre_Sucursal}">${sucursal.Nombre_Sucursal}</option>`;
+                $('#sucursalDestino').append(option);
             });
         },
         error: function(xhr, status, error) {
             console.error("Error al cargar las sucursales:", error);
         }
+    });
+
+    // Actualizar el campo oculto con el Nombre_Sucursal cuando se seleccione una opción
+    $('#sucursalDestino').change(function() {
+        const nombreSucursal = $('#sucursalDestino option:selected').data('nombre');
+        $('#nombreSucursadestinoletras').val(nombreSucursal);  // Asigna el Nombre_Sucursal al campo oculto
     });
 });
 
