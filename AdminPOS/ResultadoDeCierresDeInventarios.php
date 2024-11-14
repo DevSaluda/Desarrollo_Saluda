@@ -213,6 +213,7 @@ include "Consultas/Consultas.php";
         $(document).ready(function() {
           tabla = $('#Productos').DataTable({
             "processing": true,
+            "paging": false,
             "ordering": true,
             "stateSave": true,
             "autoWidth": true,
