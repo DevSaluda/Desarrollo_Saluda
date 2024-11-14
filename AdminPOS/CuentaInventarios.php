@@ -244,6 +244,7 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
               <option value="Inventario inicial">Inventario inicial</option>
                  <option value="Ajuste por daño">Ajuste por daño</option>
               <option value="Ajuste por caducidad">Ajuste por caducidad</option>
+              <option value="Ajuste por caducidad">Ajuste por cierre de inventario</option>
 </select>
 
 
