@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['Sucursal']) && isset($_POST['FechaInventario'])) {
         $sucursal = $_POST['Sucursal'];
         $fechaInventario = $_POST['FechaInventario'];
-        
+        $Destino = $_POST['destino'];
         $sql = "SELECT 
             ic.Folio_Prod_Stock,
             ic.Cod_Barra, 
