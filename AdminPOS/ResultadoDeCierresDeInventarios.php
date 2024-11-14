@@ -298,6 +298,8 @@ include "Consultas/Consultas.php";
 
       <div class="text-center">
         <div class="table-responsive">
+        <form action="javascript:void(0)"  method="post" id="PrepedidoPorDiaGuarda">
+        <button type="submit" class="btn btn-primary">Realizar baja</button>
           <table id="Productos" class="hover" style="width:100%">
             <thead>
             
@@ -313,6 +315,7 @@ include "Consultas/Consultas.php";
     <th>Fecha Inventario</th>
             </thead>
           </table>
+          </form>
         </div>
       </div>
     </div>
