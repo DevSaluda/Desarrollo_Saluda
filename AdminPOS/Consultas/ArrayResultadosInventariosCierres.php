@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Consulta SQL con parámetros preparados
         $sql = "SELECT 
-        ic.Folio_Prod_Stock
+        ic.Folio_Prod_Stock,
             ic.Cod_Barra, 
             ic.Nombre_Prod, 
             sc.Nombre_Sucursal AS Nombre_Sucursal,
