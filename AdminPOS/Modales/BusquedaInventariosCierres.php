@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-xl" id="FiltroPorFechasInventarios" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-xl" id="BajaDeInventarios" tabindex="-1" role="dialog"
   aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-primary">
     <div class="modal-content">
