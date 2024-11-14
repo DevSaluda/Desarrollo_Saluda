@@ -284,7 +284,8 @@ include "Consultas/Consultas.php";
                 }
               }
             ],
-            "dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
+           "dom": '<"d-flex justify-content-between"f>rtip',
+
             "responsive": true
           });
         });
