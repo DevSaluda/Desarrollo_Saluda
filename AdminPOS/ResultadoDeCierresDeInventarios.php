@@ -297,7 +297,7 @@ include "Consultas/Consultas.php";
         <div class="table-responsive">
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-            <th>Folio</th>
+          
             <th>ID_BD</th>
 <th>Cod Barra</th>
     <th>Sucursal</th>
