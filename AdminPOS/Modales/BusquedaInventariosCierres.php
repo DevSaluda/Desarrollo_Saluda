@@ -24,38 +24,56 @@
     <label for="sucursalSelect">Sucursal</label>
     <select id="sucursalSelect" class="form-control" name="sucursal">
         <option value="">Seleccione una sucursal</option>
+        <!-- Opciones de sucursal serán cargadas aquí -->
+    </select>
+</div>
+
+<div class="col">
+    <label for="fechaInventario">Fecha de Inventario</label>
+    <select id="fechaInventario" class="form-control" name="FechaInventario">
+        <option value="">Seleccione una fecha</option>
     </select>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("https://saludapos.com/AdminPOS/Consultas/BuscaSucursalesDeCierre.php")
+    // Cargar sucursales (esto ya lo tienes configurado en el script previo)
+    fetch("https://saludapos.com/AdminPOS/Consultas/BuscaSucursalesDeCierre.php") // Ruta para obtener sucursales
         .then(response => response.json())
         .then(data => {
-            const select = document.getElementById("sucursalSelect");
+            const selectSucursal = document.getElementById("sucursalSelect");
             data.forEach(sucursal => {
                 const option = document.createElement("option");
                 option.value = sucursal.id;
                 option.text = sucursal.nombre;
-                select.add(option);
+                selectSucursal.add(option);
             });
         })
         .catch(error => console.error('Error:', error));
+
+    // Cargar fechas al seleccionar una sucursal
+    document.getElementById("sucursalSelect").addEventListener("change", function() {
+        const sucursalId = this.value;
+        const selectFecha = document.getElementById("fechaInventario");
+        selectFecha.innerHTML = '<option value="">Seleccione una fecha</option>';
+
+        if (sucursalId) {
+            fetch(`https://saludapos.com/AdminPOS/Consultas/BuscaFechasSucursalesBajaInventarios.php?sucursal_id=${sucursalId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(fecha => {
+                        const option = document.createElement("option");
+                        option.value = fecha;
+                        option.text = fecha;
+                        selectFecha.add(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
 });
 </script>
 
-              <div class="col">
-                <label for="exampleFormControlInput1">Fecha fin </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend"> <span class="input-group-text" id="Tarjeta"><i
-                        class="far fa-hospital"></i></span>
-                  </div>
-                  <input type="date" class="form-control " name="Fecha2">
-                </div>
-
-
-                <div> </div>
-              </div>
             </div>
             <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">Realizar busqueda <i
                 class="fas fa-exchange-alt"></i></button>
