@@ -1,15 +1,21 @@
 <?php
-ini_set('display_errors', 1);  // Habilita la visualización de errores
-error_reporting(E_ALL);        // Muestra todos los errores
+ini_set('display_errors', 1);  // Habilitar la visualización de errores
+error_reporting(E_ALL);        // Mostrar todos los errores
 
 include("db_connection.php");
 
 // Verifica que la conexión a la base de datos se haya realizado correctamente
 if (!$conn) {
-    die("Conexión fallida: " . mysqli_connect_error());  // Detiene la ejecución si la conexión falla
+    die("Conexión fallida: " . mysqli_connect_error());
 }
 
-$contador = count($_POST["CodBarra"]);
+// Verificar si $_POST["CodBarra"] existe y es un arreglo
+if (isset($_POST["CodBarra"]) && is_array($_POST["CodBarra"])) {
+    $contador = count($_POST["CodBarra"]);
+} else {
+    $contador = 0;  // Si no existe o no es un arreglo, establecer contador en 0
+}
+
 $ProContador = 0;
 $query = "INSERT INTO CierresDeInventarios (`Folio_Prod_Stock`, `Cod_Barra`, `Nombre_Prod`, `Fk_sucursal`, `SucursalDestino`, `Precio_Venta`, `Precio_C`, `Piezas`, `AgregadoPor`, `ID_H_O_D`, `FechaInventario`, `TipoMov`) VALUES ";
 
@@ -18,7 +24,6 @@ $values = [];
 $valueTypes = '';
 
 for ($i = 0; $i < $contador; $i++) {
-    // Verificar si los campos necesarios existen en $_POST antes de usarlos
     if (isset($_POST["CodBarra"][$i]) && isset($_POST["NombreProd"][$i])) {
         $ProContador++;
         $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -38,14 +43,14 @@ for ($i = 0; $i < $contador; $i++) {
     }
 }
 
-// Depurar si no se encuentran registros para agregar
 $response = array();
 if ($ProContador != 0) {
+    // Generar la consulta final
     $query .= implode(', ', $placeholders);
 
-    // Imprimir la consulta para depurar
+    // Depuración: mostrar la consulta antes de ejecutarla
     echo $query;
-    exit();  // Detiene la ejecución aquí para ver la consulta generada
+    
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -53,7 +58,7 @@ if ($ProContador != 0) {
         // Enlace de parámetros
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
 
-        // Ejecución de consulta
+        // Ejecutar la consulta
         $resultadocon = mysqli_stmt_execute($stmt);
 
         if ($resultadocon) {
