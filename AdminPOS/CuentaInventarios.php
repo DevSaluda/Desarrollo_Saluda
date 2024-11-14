@@ -1141,6 +1141,16 @@ function eliminarFila(element) {
 </script>
 
 <script>
+  $(document).on('keydown', '.comentario-input', function(event) {
+    // Si la tecla presionada es "Enter", bloquear la acción
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+  });
+</script>
+
+
+<script>
             document.addEventListener("DOMContentLoaded", function(){
                 // Invocamos cada 5 segundos ;)
                 const milisegundos = 600 *1000;
