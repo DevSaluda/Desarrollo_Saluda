@@ -48,11 +48,6 @@ if ($ProContador != 0) {
     // Generar la consulta final
     $query .= implode(', ', $placeholders);
 
-    // Depuración: mostrar la consulta y el número de valores
-    echo "Consulta SQL: " . $query . "<br>";
-    echo "Número de parámetros: " . count($values) . "<br>";
-    echo "Tipos de valores: " . $valueTypes . "<br>";
-
     // Verificar el número de parámetros a vincular
     if (count($values) != strlen($valueTypes)) {
         // Si no coinciden los números de parámetros con los tipos, mostrar un error
@@ -89,6 +84,8 @@ if ($ProContador != 0) {
     $response['message'] = 'No se encontraron registros para agregar.';
 }
 
+// Imprimir la respuesta en formato JSON
+header('Content-Type: application/json');
 echo json_encode($response);
 
 mysqli_close($conn);
