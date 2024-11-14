@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
 $(document).ready(function() {
     // Cargar sucursales en ambos selects
     $.ajax({
-        url: '`https://saludapos.com/AdminPOS/Consultas/cargarSucursales.php',
+        url: 'https://saludapos.com/AdminPOS/Consultas/cargarSucursales.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
