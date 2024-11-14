@@ -3,7 +3,7 @@ include 'db_connection.php';
 
 $sucursal_id = $_GET['sucursal_id'];
 
-$query = "SELECT FechaInventario FROM InventariosStocks_Conteos 
+$query = "SELECT DISTINCT FechaInventario FROM InventariosStocks_Conteos 
           WHERE Fk_sucursal = ? AND Tipo_Ajuste = 'Ajuste por cierre de inventario'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $sucursal_id);
