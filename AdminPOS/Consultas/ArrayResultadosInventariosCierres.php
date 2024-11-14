@@ -37,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $c = 0;
         while ($fila = $result->fetch_assoc()) {
             
-            $data[$c]["IdbD"] = '<input type="text" class="form-control form-control-sm" name="Cod_Barra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
-            $data[$c]["Cod_Barra"] = '<input type="text" class="form-control form-control-sm" name="Nombre_Prod[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
+            $data[$c]["IdbD"] = '<input type="text" class="form-control form-control-sm" name="CodBarra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
+            $data[$c]["Cod_Barra"] = '<input type="text" class="form-control form-control-sm" name="NombreProd[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["NombreSucursal"] = '<input type="text" class="form-control form-control-sm" name="Nombre_Sucursal[]" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
             $data[$c]["Destino"] = '<input type="text" class="form-control form-control-sm" name="Nombre_Sucursal[]" value="' .$DestinoLetras . '" readonly>';
           
