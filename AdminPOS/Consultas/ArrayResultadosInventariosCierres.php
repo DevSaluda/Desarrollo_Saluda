@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Consulta SQL con parámetros preparados
         $sql = "SELECT 
+        ic.Folio_Prod_Stock
             ic.Cod_Barra, 
             ic.Nombre_Prod, 
             sc.Nombre_Sucursal AS Nombre_Sucursal,
@@ -47,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = [];
         $c = 0;
         while ($fila = $result->fetch_assoc()) {
+         $data[$c]["Idbddd"] = $fila["Folio_Prod_Stock"];
             $data[$c]["IdbD"] = $fila["Cod_Barra"];
             $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
             $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];

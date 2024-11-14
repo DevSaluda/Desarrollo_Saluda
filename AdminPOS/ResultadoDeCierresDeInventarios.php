@@ -238,6 +238,7 @@ include "Consultas/Consultas.php";
         }
     },
             "columns": [
+                { mData: 'Idbddd' },
               { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
