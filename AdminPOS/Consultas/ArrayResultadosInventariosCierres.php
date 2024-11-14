@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = [];
         $c = 0;
         while ($fila = $result->fetch_assoc()) {
-            $data[$c]["Idbddd"] = '<input type="text"  name="Folio_Prod_Stock[]" value="' . $fila["Folio_Prod_Stock"] . '" readonly>';
+            $data[$c]["Idbddd"] = '<input type="text" hidden name="Folio_Prod_Stock[]" value="' . $fila["Folio_Prod_Stock"] . '" readonly>';
             $data[$c]["IdbD"] = '<input type="text" name="Cod_Barra[]" value="' . $fila["Cod_Barra"] . '" readonly>';
             $data[$c]["Cod_Barra"] = '<input type="text" name="Nombre_Prod[]" value="' . $fila["Nombre_Prod"] . '" readonly>';
             $data[$c]["NombreSucursal"] = '<input type="text" name="Nombre_Sucursal[]" value="' . $fila["Nombre_Sucursal"] . '" readonly>';
