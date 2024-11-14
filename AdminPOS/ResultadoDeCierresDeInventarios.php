@@ -243,11 +243,10 @@ include "Consultas/Consultas.php";
               { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
        { mData: 'NombreSucursal' },
-       { mData: 'PrecioVenta' },
-       { mData: 'PrecioCompra' },
+       
      
        { mData: 'Nombre_Prod' },
-      
+       { mData: 'Destino' },
        { mData: 'Cod_Enfermeria' },
        { mData: 'FechaInventario' },
             ],
@@ -301,12 +300,11 @@ include "Consultas/Consultas.php";
             
 <th>Cod Barra</th>
 <th>Nombre prod</th>
-    <th>Sucursal</th>
-    <th>PV</th>
-    <th>PC</th>
+    <th>Sucursal Origen</th>
+    
    
-    <th>Contabilizado</th>
-   
+    <th>Piezas</th>
+    <th>Sucursal destino</th>
     <th>Agregado por</th>
     <th>Fecha Inventario</th>
             </thead>

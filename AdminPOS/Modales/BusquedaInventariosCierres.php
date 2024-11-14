@@ -34,6 +34,12 @@
         <option value="">Seleccione una fecha</option>
     </select>
 </div>
+<div class="col">
+    <label for="sucursalDestino">Sucursal Destino</label>
+    <select id="sucursalDestino" class="form-control" name="sucursalDestino">
+        <option value="">Seleccione una sucursal</option>
+    </select>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -72,6 +78,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+$(document).ready(function() {
+    // Cargar sucursales en ambos selects
+    $.ajax({
+        url: '`https://saludapos.com/AdminPOS/Consultas/cargarSucursales.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            data.forEach(function(sucursal) {
+                const option = `<option value="${sucursal.ID_SucursalC}">${sucursal.Nombre_Sucursal}</option>`;
+                $('#sucursalSelect').append(option);     // Sucursal origen
+                $('#sucursalDestino').append(option);    // Sucursal destino
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al cargar las sucursales:", error);
+        }
+    });
+});
+
 </script>
 
             </div>
