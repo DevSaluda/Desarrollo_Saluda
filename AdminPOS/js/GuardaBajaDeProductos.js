@@ -48,9 +48,10 @@ $(document).ready(function () {
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
-                        console.log("Respuesta del servidor:", data); // Para ver la respuesta en la consola
+                        console.log("Respuesta del servidor:", data); // Ver la respuesta en la consola
+
                         try {
-                            var response = JSON.parse(data);
+                            var response = JSON.parse(data); // Intentar parsear la respuesta JSON
                             loadingSwal.close();
 
                             if (response.status === 'success') {
@@ -71,7 +72,7 @@ $(document).ready(function () {
                             }
                         } catch (e) {
                             loadingSwal.close();
-                            console.error("Error al parsear JSON:", data);
+                            console.error("Error al parsear JSON:", e, data); // Registrar el error en la consola
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Respuesta inesperada',
