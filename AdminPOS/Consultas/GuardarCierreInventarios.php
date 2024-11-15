@@ -6,7 +6,8 @@ include("db_connection.php");
 
 // Verifica que la conexión a la base de datos se haya realizado correctamente
 if (!$conn) {
-    die(json_encode(array("status" => "error", "message" => "Conexión fallida: " . mysqli_connect_error())));
+    echo json_encode(array("status" => "error", "message" => "Conexión fallida: " . mysqli_connect_error()));
+    exit(); // Finalizar script después de enviar respuesta
 }
 
 // Verificar si $_POST["CodBarra"] existe y es un arreglo
@@ -51,7 +52,7 @@ if ($ProContador != 0) {
         $response['status'] = 'error';
         $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
         echo json_encode($response);
-        exit();
+        exit(); // Finalizar script después de enviar respuesta
     }
 
     $stmt = mysqli_prepare($conn, $query);
@@ -77,9 +78,10 @@ if ($ProContador != 0) {
     $response['message'] = 'No se encontraron registros para agregar.';
 }
 
-// Establecer el encabezado de respuesta JSON y enviar la respuesta
+// Enviar la respuesta JSON y finalizar
 header('Content-Type: application/json');
 echo json_encode($response);
+exit(); // Terminar el script para evitar cualquier salida adicional
 
-mysqli_close($conn);
+
 ?>
