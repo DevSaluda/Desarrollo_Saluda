@@ -1,7 +1,7 @@
 <?php
 include_once "db_connection.php";
 include_once "Consultas.php";
-require __DIR__ . '/vendor/autoload.php'; // Asegúrate de que la librería de Pusher esté incluida
+require __DIR__ . '/../vendor/autoload.php'; // Asegúrate de que la librería de Pusher esté incluida
 
 // Obtener el código de barras y la sucursal buscada enviado por AJAX
 $codigo = $_POST['codigoEscaneado'];
