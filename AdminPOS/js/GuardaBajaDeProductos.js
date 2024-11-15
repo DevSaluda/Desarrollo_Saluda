@@ -70,7 +70,7 @@ $(document).ready(function () {
                                 // Si la respuesta no fue exitosa
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Algo salió mal',
+                                    title: 'Algo salió mal...',
                                     text: response.message,
                                 });
                             }
