@@ -45,21 +45,18 @@ $(document).ready(function () {
                     }
                 });
 
-                // Enviar la solicitud AJAX
                 $.ajax({
                     type: 'POST',
                     url: "Consultas/GuardarCierreInventarios.php",
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
-                        console.log(data); // Verifica qué estás recibiendo
+                        console.log("Respuesta del servidor:", data); // Ver qué datos estamos recibiendo
+                
                         try {
-                            var response = JSON.parse(data); // Intenta parsear la respuesta
-
-                            // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
-                            loadingSwal.close();
-
-                            // Si la respuesta es exitosa, mostrar el mensaje de éxito
+                            var response = JSON.parse(data); // Intentar parsear la respuesta
+                
+                            // Si el parseo fue exitoso
                             if (response.status === 'success') {
                                 Swal.fire({
                                     icon: 'success',
@@ -70,7 +67,7 @@ $(document).ready(function () {
                                     window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
                                 });
                             } else {
-                                // Si hay un error, mostrar el mensaje de error
+                                // Si la respuesta no fue exitosa
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Algo salió mal',
@@ -87,10 +84,7 @@ $(document).ready(function () {
                         }
                     },
                     error: function () {
-                        // Cerrar el SweetAlert de carga si ocurre un error
-                        loadingSwal.close();
-
-                        // Mostrar un mensaje de error en caso de fallo en la solicitud
+                        // Mostrar mensaje en caso de error en la solicitud AJAX
                         Swal.fire({
                             icon: 'error',
                             title: 'Error en la petición',
@@ -98,6 +92,7 @@ $(document).ready(function () {
                         });
                     }
                 });
+                
             }
         },
     });
