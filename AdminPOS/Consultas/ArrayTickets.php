@@ -43,13 +43,11 @@ FROM
 Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-WHERE
- Ventas_POS.ID_H_O_D = '".$row['ID_H_O_D']."'
 GROUP BY
 Ventas_POS.Folio_Ticket,
 Ventas_POS.FolioSucursal
 ORDER BY
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
+Ventas_POS.AgregadoEl DESC;";
 ;
  
 $result = mysqli_query($conn, $sql);
