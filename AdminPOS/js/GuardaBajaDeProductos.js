@@ -52,27 +52,38 @@ $(document).ready(function () {
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
-                        var response = JSON.parse(data);
+                        try {
+                            var response = JSON.parse(data); // Intentar parsear el JSON
+                            
+                            // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
+                            loadingSwal.close();
 
-                        // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
-                        loadingSwal.close();
-
-                        // Si la respuesta es exitosa, mostrar el mensaje de éxito
-                        if (response.status === 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Datos guardados con éxito!',
-                                showConfirmButton: false,
-                                timer: 2000,
-                            }).then(() => {
-                                window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
-                            });
-                        } else {
-                            // Si hay un error, mostrar el mensaje de error
+                            // Si la respuesta es exitosa, mostrar el mensaje de éxito
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Datos guardados con éxito!',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                }).then(() => {
+                                    window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
+                                });
+                            } else {
+                                // Si hay un error, mostrar el mensaje de error
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Algo salió mal',
+                                    text: response.message,
+                                });
+                            }
+                        } catch (e) {
+                            // Si ocurre un error al parsear, muestra el contenido de `data` para depurar
+                            loadingSwal.close();
+                            console.error("Error en la respuesta del servidor:", data);
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Algo salió mal',
-                                text: response.message,
+                                title: 'Respuesta inesperada',
+                                text: 'No se pudo procesar la respuesta del servidor.',
                             });
                         }
                     },
