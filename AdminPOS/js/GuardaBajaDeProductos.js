@@ -51,40 +51,42 @@ $(document).ready(function () {
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
-                        console.log("Respuesta del servidor:", data); // Ver qué datos estamos recibiendo
+                        console.log("Respuesta recibida del servidor:", data);
                 
-                        try {
-                            // Comprobar si la respuesta es un JSON válido antes de intentar parsear
-                            if (isValidJson(data)) {
-                                var response = JSON.parse(data); // Intentar parsear la respuesta
-                
-                                // Si el parseo fue exitoso
-                                if (response.status === 'success') {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Datos guardados con éxito!',
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                    }).then(() => {
-                                        window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
-                                    });
-                                } else {
-                                    // Si la respuesta no fue exitosa
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Algo salió mal',
-                                        text: response.message,
-                                    });
-                                }
-                            } else {
-                                throw new Error("La respuesta no es un JSON válido");
+                        // Verificar si la respuesta es un objeto y convertirlo en JSON si es necesario
+                        if (typeof data === 'object') {
+                            console.log("La respuesta ya es un objeto, no es necesario parsearla.");
+                        } else if (typeof data === 'string') {
+                            // Si la respuesta es una cadena, entonces intentamos parsearla
+                            try {
+                                data = JSON.parse(data);
+                                console.log("JSON parseado correctamente:", data);
+                            } catch (e) {
+                                console.error("Error al parsear JSON:", e);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error al procesar los datos',
+                                    text: 'Hubo un problema al recibir los datos. Por favor, inténtalo de nuevo.',
+                                });
+                                return;
                             }
-                        } catch (e) {
-                            console.error('Error al procesar la respuesta:', e);
+                        }
+                
+                        // Ahora que sabemos que 'data' es un objeto, podemos trabajar con él
+                        if (data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Datos guardados con éxito!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            }).then(() => {
+                                window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
+                            });
+                        } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Error al procesar los datos',
-                                text: 'Hubo un problema al recibir los datos. Por favor, inténtalo de nuevo.',
+                                title: 'Algo salió mal',
+                                text: data.message,
                             });
                         }
                     },
@@ -96,16 +98,6 @@ $(document).ready(function () {
                         });
                     }
                 });
-                
-                // Función para validar si la respuesta es un JSON válido
-                function isValidJson(str) {
-                    try {
-                        JSON.parse(str);
-                        return true;
-                    } catch (e) {
-                        return false;
-                    }
-                }
                 
             }
         },
