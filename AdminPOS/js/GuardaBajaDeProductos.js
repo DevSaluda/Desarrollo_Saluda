@@ -47,41 +47,30 @@ $(document).ready(function () {
                     url: "Consultas/GuardarCierreInventarios.php",
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
-                    success: function (data) {
-                        console.log("Respuesta del servidor:", data); // Ver la respuesta en la consola
+                    dataType: 'json',  // Fuerza que la respuesta sea tratada como JSON
+                    success: function (response) {
+                        loadingSwal.close();
 
-                        try {
-                            var response = JSON.parse(data); // Intentar parsear la respuesta JSON
-                            loadingSwal.close();
-
-                            if (response.status === 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Datos guardados con éxito!',
-                                    showConfirmButton: false,
-                                    timer: 2000,
-                                }).then(() => {
-                                    window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Algo salió mal',
-                                    text: response.message,
-                                });
-                            }
-                        } catch (e) {
-                            loadingSwal.close();
-                            console.error("Error al parsear JSON:", e, data); // Registrar el error en la consola
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Datos guardados con éxito!',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            }).then(() => {
+                                window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
+                            });
+                        } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Respuesta inesperada',
-                                text: 'No se pudo procesar la respuesta del servidor.',
+                                title: 'Algo salió mal',
+                                text: response.message,
                             });
                         }
                     },
-                    error: function () {
+                    error: function (xhr, status, error) {
                         loadingSwal.close();
+                        console.error("Error en la petición:", status, error, xhr.responseText);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error en la petición',
