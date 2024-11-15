@@ -18,9 +18,11 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
   <title>Conteo de productos <?php echo $row['ID_H_O_D'] ?> </title>
 
   <?php include "Header.php" ?>
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+ 
 
   <style>
     .error {
@@ -967,11 +969,12 @@ function calcularDiferencia(fila) {
   // Variable para almacenar el total del IVA
   var totalIVA = 0;
 
- // Configuración de Pusher
+
+// Configuración de Pusher
 Pusher.logToConsole = true;
 var pusher = new Pusher('b68a53e34e22c0108e9e', {
-      cluster: 'us2'
-    });
+  cluster: 'us2'
+});
 
 var channel = pusher.subscribe('my-channel');  // Nombre del canal
 
@@ -1041,12 +1044,7 @@ function agregarArticulo(articulo) {
     actualizarSuma();
     mostrarTotalVenta();
 
-    // Emitir un evento Pusher para notificar a otros clientes
-    pusher.trigger('my-channel', 'producto-agregado por otra persona de igual forma', {
-      id: articulo.id,
-      descripcion: articulo.descripcion,
-      cantidad: articulo.cantidad
-    });
+   
   }
 
   limpiarCampo();
