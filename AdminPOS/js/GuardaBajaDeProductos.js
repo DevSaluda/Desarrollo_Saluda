@@ -54,28 +54,33 @@ $(document).ready(function () {
                         console.log("Respuesta del servidor:", data); // Ver qué datos estamos recibiendo
                 
                         try {
-                            var response = JSON.parse(data); // Intentar parsear la respuesta
+                            // Comprobar si la respuesta es un JSON válido antes de intentar parsear
+                            if (isValidJson(data)) {
+                                var response = JSON.parse(data); // Intentar parsear la respuesta
                 
-                            // Si el parseo fue exitoso
-                            if (response.status === 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Datos guardados con éxito!',
-                                    showConfirmButton: false,
-                                    timer: 2000,
-                                }).then(() => {
-                                    window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
-                                });
+                                // Si el parseo fue exitoso
+                                if (response.status === 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Datos guardados con éxito!',
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                    }).then(() => {
+                                        window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
+                                    });
+                                } else {
+                                    // Si la respuesta no fue exitosa
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Algo salió mal',
+                                        text: response.message,
+                                    });
+                                }
                             } else {
-                                // Si la respuesta no fue exitosa
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Algo salió mal...',
-                                    text: response.message,
-                                });
+                                throw new Error("La respuesta no es un JSON válido");
                             }
                         } catch (e) {
-                            console.error('Error al parsear JSON:', e);
+                            console.error('Error al procesar la respuesta:', e);
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error al procesar los datos',
@@ -84,7 +89,6 @@ $(document).ready(function () {
                         }
                     },
                     error: function () {
-                        // Mostrar mensaje en caso de error en la solicitud AJAX
                         Swal.fire({
                             icon: 'error',
                             title: 'Error en la petición',
@@ -92,6 +96,16 @@ $(document).ready(function () {
                         });
                     }
                 });
+                
+                // Función para validar si la respuesta es un JSON válido
+                function isValidJson(str) {
+                    try {
+                        JSON.parse(str);
+                        return true;
+                    } catch (e) {
+                        return false;
+                    }
+                }
                 
             }
         },
