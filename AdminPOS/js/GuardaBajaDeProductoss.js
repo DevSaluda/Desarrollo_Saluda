@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Captura el evento de envío del formulario o el evento que maneje la acción
-    $('#formularioBaja').submit(function (e) {
+    $('#BajaInventarioCierre').submit(function (e) {
         e.preventDefault(); // Evita el envío normal del formulario
 
         // Recolecta los datos del formulario
