@@ -326,7 +326,7 @@ include "Consultas/Consultas.php";
 include("Modales/BusquedaTraspasosFechas.php");
   include ("footer.php");
   ?>
-    <script src="js/GuardaBajaDeProductosInventarios.js"></script>
+    <script src="js/GuardaBajaDeProductos.js"></script>
 <?php include ("datatables.php")?>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
