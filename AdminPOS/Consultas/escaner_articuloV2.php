@@ -45,25 +45,19 @@ if ($result->num_rows > 0) {
         "eliminar" => ""
     );
     
-    // Disparar el evento de Pusher
     $options = array(
         'cluster' => 'us2',
         'useTLS' => true
-    );
-
-    $pusher = new Pusher\Pusher(
-        'b68a53e34e22c0108e9e',   // Tu app key
-        '46ab90a0be9cd53ada97',   // Tu app secret
-        '1896711',                 // Tu app ID
+      );
+      $pusher = new Pusher\Pusher(
+        'effad4fdf8949f07766a',
+        '9a9bc81f5d2fbc13618c',
+        '1896713',
         $options
-    );
-
-    // Datos del producto escaneado (puedes agregar más detalles si lo deseas)
-    $data['message'] = 'Producto escaneado: ' . $row["Cod_Barra"];
-
-    // Disparar el evento de Pusher
-    $pusher->trigger('my-channel', 'my-event', $data);
-
+      );
+    
+      $data['message'] = 'hello world';
+      $pusher->trigger('my-channel', 'my-event', $data);
     // Devolver la respuesta como JSON
     header('Content-Type: application/json');
     echo json_encode($data);

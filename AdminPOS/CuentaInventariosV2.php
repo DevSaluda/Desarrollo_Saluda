@@ -972,18 +972,15 @@ function calcularDiferencia(fila) {
 
 // Configuración de Pusher
 Pusher.logToConsole = true;
-var pusher = new Pusher('b68a53e34e22c0108e9e', {
-  cluster: 'us2'
-});
+var pusher = new Pusher('effad4fdf8949f07766a', {
+      cluster: 'us2'
+    });
 
-var channel = pusher.subscribe('my-channel');  // Nombre del canal
 
-channel.bind('producto-agregado', function(data) {
-  // Acción al recibir el evento de Pusher
-  console.log('Producto agregado:', data);
-  // Puedes actualizar la interfaz aquí si es necesario
-  mostrarToast('Nuevo producto agregado: ' + data.descripcion);
-});
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
 
 function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
