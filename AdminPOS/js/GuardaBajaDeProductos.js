@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Agregar los métodos de validación personalizados
     function validarFormulario() {
         var clienteInput = $("#clienteInput");
 
@@ -14,7 +13,6 @@ $(document).ready(function () {
         return true;
     }
 
-    // Validar el formulario
     $("#BajaInventarioCierre").validate({
         rules: {
             clienteInput: {
@@ -34,31 +32,27 @@ $(document).ready(function () {
         },
         submitHandler: function () {
             if (validarFormulario()) {
-                // Mostrar el SweetAlert de carga real
                 const loadingSwal = Swal.fire({
                     title: 'Guardando...',
                     text: 'Por favor espera mientras se guardan los datos.',
                     icon: 'info',
                     allowOutsideClick: false,
                     didOpen: () => {
-                        Swal.showLoading(); // Mostrar indicador de carga
+                        Swal.showLoading();
                     }
                 });
 
-                // Enviar la solicitud AJAX
                 $.ajax({
                     type: 'POST',
                     url: "Consultas/GuardarCierreInventarios.php",
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
+                        console.log("Respuesta del servidor:", data); // Para ver la respuesta en la consola
                         try {
-                            var response = JSON.parse(data); // Intentar parsear el JSON
-                            
-                            // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
+                            var response = JSON.parse(data);
                             loadingSwal.close();
 
-                            // Si la respuesta es exitosa, mostrar el mensaje de éxito
                             if (response.status === 'success') {
                                 Swal.fire({
                                     icon: 'success',
@@ -69,7 +63,6 @@ $(document).ready(function () {
                                     window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
                                 });
                             } else {
-                                // Si hay un error, mostrar el mensaje de error
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Algo salió mal',
@@ -77,9 +70,8 @@ $(document).ready(function () {
                                 });
                             }
                         } catch (e) {
-                            // Si ocurre un error al parsear, muestra el contenido de `data` para depurar
                             loadingSwal.close();
-                            console.error("Error en la respuesta del servidor:", data);
+                            console.error("Error al parsear JSON:", data);
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Respuesta inesperada',
@@ -88,10 +80,7 @@ $(document).ready(function () {
                         }
                     },
                     error: function () {
-                        // Cerrar el SweetAlert de carga si ocurre un error
                         loadingSwal.close();
-
-                        // Mostrar un mensaje de error en caso de fallo en la solicitud
                         Swal.fire({
                             icon: 'error',
                             title: 'Error en la petición',

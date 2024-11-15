@@ -1,19 +1,18 @@
 <?php
-ini_set('display_errors', 1);  // Habilitar la visualización de errores
-error_reporting(E_ALL);        // Mostrar todos los errores
+// Desactivar temporalmente la visualización de errores en producción
+ini_set('display_errors', 0); 
+error_reporting(E_ALL);
 
 include("db_connection.php");
 
-// Verifica que la conexión a la base de datos se haya realizado correctamente
 if (!$conn) {
     die("Conexión fallida: " . mysqli_connect_error());
 }
 
-// Verificar si $_POST["CodBarra"] existe y es un arreglo
 if (isset($_POST["CodBarra"]) && is_array($_POST["CodBarra"])) {
     $contador = count($_POST["CodBarra"]);
 } else {
-    $contador = 0;  // Si no existe o no es un arreglo, establecer contador en 0
+    $contador = 0;
 }
 
 $ProContador = 0;
@@ -28,31 +27,29 @@ for ($i = 0; $i < $contador; $i++) {
         $ProContador++;
         $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $values[] = $_POST["Folio_Prod_Stock"][$i];
-        $values[] = $_POST["CodBarra"][$i];        // Cod_Barra
-        $values[] = $_POST["NombreProd"][$i];     // Nombre_Prod
-        $values[] = $_POST["Sucursal"][$i];       // Fk_sucursal
-        $values[] = $_POST["SucursalDestino"][$i];// SucursalDestino
-        $values[] = $_POST["PrecioVenta"][$i];    // Precio_Venta
-        $values[] = $_POST["PrecioCompra"][$i];   // Precio_C
-        $values[] = $_POST["Cantidadd"][$i];      // Piezas
-        $values[] = $_POST["AgregadoPor"][$i];    // AgregadoPor
-        $values[] = $_POST["ID_H_O_D"][$i];       // ID_H_O_D
-        $values[] = $_POST["FechaInventario"][$i];// FechaInventario
-        $values[] = $_POST["TipoMov"][$i];        // TipoMov
-        $valueTypes .= 'ssssssssssss'; // Asegurarse de que haya 12 tipos por cada conjunto de valores
+        $values[] = $_POST["CodBarra"][$i];
+        $values[] = $_POST["NombreProd"][$i];
+        $values[] = $_POST["Sucursal"][$i];
+        $values[] = $_POST["SucursalDestino"][$i];
+        $values[] = $_POST["PrecioVenta"][$i];
+        $values[] = $_POST["PrecioCompra"][$i];
+        $values[] = $_POST["Cantidadd"][$i];
+        $values[] = $_POST["AgregadoPor"][$i];
+        $values[] = $_POST["ID_H_O_D"][$i];
+        $values[] = $_POST["FechaInventario"][$i];
+        $values[] = $_POST["TipoMov"][$i];
+        $valueTypes .= 'ssssssssssss';
     }
 }
 
 $response = array();
 if ($ProContador != 0) {
-    // Generar la consulta final
     $query .= implode(', ', $placeholders);
 
-    // Verificar el número de parámetros a vincular
     if (count($values) != strlen($valueTypes)) {
-        // Si no coinciden los números de parámetros con los tipos, mostrar un error
         $response['status'] = 'error';
         $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
+        header('Content-Type: application/json');
         echo json_encode($response);
         exit();
     }
@@ -60,10 +57,7 @@ if ($ProContador != 0) {
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt) {
-        // Enlace de parámetros
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
-
-        // Ejecutar la consulta
         $resultadocon = mysqli_stmt_execute($stmt);
 
         if ($resultadocon) {
@@ -84,7 +78,7 @@ if ($ProContador != 0) {
     $response['message'] = 'No se encontraron registros para agregar.';
 }
 
-// Imprimir la respuesta en formato JSON
+// Enviar la respuesta JSON sin espacios en blanco adicionales
 header('Content-Type: application/json');
 echo json_encode($response);
 
