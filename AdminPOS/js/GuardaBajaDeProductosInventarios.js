@@ -20,7 +20,6 @@ $(document).ready(function () {
         };
 
         // Recoge los datos de cada input dentro del formulario (o tabla si los tienes allí)
-        // Ejemplo de cómo podría estar estructurada la recolección de datos:
         $('.producto').each(function (index) {
             formData.CodBarra.push($(this).find('.codBarra').val());
             formData.NombreProd.push($(this).find('.nombreProd').val());
@@ -46,21 +45,31 @@ $(document).ready(function () {
             data: formData,  // Datos a enviar al servidor
             success: function (data) {
                 console.log("Datos recibidos del servidor:", data); // Muestra los datos crudos para depuración
-                try {
-                    // Intentamos parsear la respuesta JSON
-                    var response = JSON.parse(data);
-                    if (response.status === "success") {
+
+                // Si la respuesta es un objeto JSON (ya no necesitamos hacer JSON.parse)
+                if (data && typeof data === 'object') {
+                    if (data.status === "success") {
                         // Si el servidor devuelve éxito
-                        alert(response.message); // Muestra el mensaje de éxito
+                        alert(data.message); // Muestra el mensaje de éxito
                     } else {
                         // Si hay un error en el servidor
-                        alert("Error: " + response.message); // Muestra el mensaje de error
+                        alert("Error: " + data.message); // Muestra el mensaje de error
                     }
-                } catch (e) {
-                    // Si hay un error al intentar parsear el JSON
-                    console.error("Error al parsear JSON:", e);
-                    console.log("Respuesta del servidor no válida:", data); // Muestra la respuesta cruda
-                    alert("Hubo un problema al procesar la respuesta del servidor.");
+                } else {
+                    // Si la respuesta no es un objeto JSON válido
+                    try {
+                        // Intentamos parsear la respuesta JSON
+                        var response = JSON.parse(data);
+                        if (response.status === "success") {
+                            alert(response.message); // Muestra el mensaje de éxito
+                        } else {
+                            alert("Error: " + response.message); // Muestra el mensaje de error
+                        }
+                    } catch (e) {
+                        console.error("Error al parsear JSON:", e);
+                        console.log("Respuesta del servidor no válida:", data); // Muestra la respuesta cruda
+                        alert("Hubo un problema al procesar la respuesta del servidor.");
+                    }
                 }
             },
             error: function (xhr, status, error) {
