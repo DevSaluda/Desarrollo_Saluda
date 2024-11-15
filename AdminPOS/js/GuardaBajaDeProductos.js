@@ -47,7 +47,7 @@ $(document).ready(function () {
                     url: "Consultas/GuardarCierreInventarios.php",
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
-                    dataType: 'json',  // Fuerza que la respuesta sea tratada como JSON
+                    dataType: 'json',  // Forzar JSON
                     success: function (response) {
                         loadingSwal.close();
 
@@ -70,7 +70,7 @@ $(document).ready(function () {
                     },
                     error: function (xhr, status, error) {
                         loadingSwal.close();
-                        console.error("Error en la petición:", status, error, xhr.responseText);
+                        console.error("Error en la petición:", status, error);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error en la petición',

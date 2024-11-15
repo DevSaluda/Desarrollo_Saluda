@@ -1,18 +1,19 @@
 <?php
-// Desactivar temporalmente la visualización de errores en producción
-ini_set('display_errors', 0); 
-error_reporting(E_ALL);
+ini_set('display_errors', 1);  // Habilitar la visualización de errores
+error_reporting(E_ALL);        // Mostrar todos los errores
 
 include("db_connection.php");
 
+// Verifica que la conexión a la base de datos se haya realizado correctamente
 if (!$conn) {
-    die("Conexión fallida: " . mysqli_connect_error());
+    die(json_encode(array("status" => "error", "message" => "Conexión fallida: " . mysqli_connect_error())));
 }
 
+// Verificar si $_POST["CodBarra"] existe y es un arreglo
 if (isset($_POST["CodBarra"]) && is_array($_POST["CodBarra"])) {
     $contador = count($_POST["CodBarra"]);
 } else {
-    $contador = 0;
+    $contador = 0;  // Si no existe o no es un arreglo, establecer contador en 0
 }
 
 $ProContador = 0;
@@ -49,7 +50,6 @@ if ($ProContador != 0) {
     if (count($values) != strlen($valueTypes)) {
         $response['status'] = 'error';
         $response['message'] = 'El número de parámetros no coincide con los tipos de datos.';
-        header('Content-Type: application/json');
         echo json_encode($response);
         exit();
     }
@@ -58,9 +58,8 @@ if ($ProContador != 0) {
 
     if ($stmt) {
         mysqli_stmt_bind_param($stmt, $valueTypes, ...$values);
-        $resultadocon = mysqli_stmt_execute($stmt);
 
-        if ($resultadocon) {
+        if (mysqli_stmt_execute($stmt)) {
             $response['status'] = 'success';
             $response['message'] = 'Registro(s) agregado(s) correctamente.';
         } else {
@@ -78,7 +77,7 @@ if ($ProContador != 0) {
     $response['message'] = 'No se encontraron registros para agregar.';
 }
 
-// Enviar la respuesta JSON sin espacios en blanco adicionales
+// Establecer el encabezado de respuesta JSON y enviar la respuesta
 header('Content-Type: application/json');
 echo json_encode($response);
 
