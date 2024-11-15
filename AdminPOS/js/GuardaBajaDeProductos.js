@@ -52,27 +52,37 @@ $(document).ready(function () {
                     data: $('#BajaInventarioCierre').serialize(),
                     cache: false,
                     success: function (data) {
-                        var response = JSON.parse(data);
+                        console.log(data); // Verifica qué estás recibiendo
+                        try {
+                            var response = JSON.parse(data); // Intenta parsear la respuesta
 
-                        // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
-                        loadingSwal.close();
+                            // Cerrar el SweetAlert de carga solo cuando la respuesta sea recibida
+                            loadingSwal.close();
 
-                        // Si la respuesta es exitosa, mostrar el mensaje de éxito
-                        if (response.status === 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Datos guardados con éxito!',
-                                showConfirmButton: false,
-                                timer: 2000,
-                            }).then(() => {
-                                window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
-                            });
-                        } else {
-                            // Si hay un error, mostrar el mensaje de error
+                            // Si la respuesta es exitosa, mostrar el mensaje de éxito
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Datos guardados con éxito!',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                }).then(() => {
+                                    window.location.href = "https://saludapos.com/AdminPOS/HistorialInventarios";
+                                });
+                            } else {
+                                // Si hay un error, mostrar el mensaje de error
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Algo salió mal',
+                                    text: response.message,
+                                });
+                            }
+                        } catch (e) {
+                            console.error('Error al parsear JSON:', e);
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Algo salió mal',
-                                text: response.message,
+                                title: 'Error al procesar los datos',
+                                text: 'Hubo un problema al recibir los datos. Por favor, inténtalo de nuevo.',
                             });
                         }
                     },

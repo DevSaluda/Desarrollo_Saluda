@@ -82,6 +82,4 @@ if ($ProContador != 0) {
 header('Content-Type: application/json');
 echo json_encode($response);
 exit(); // Terminar el script para evitar cualquier salida adicional
-
-
 ?>
