@@ -1042,7 +1042,7 @@ function agregarArticulo(articulo) {
     mostrarTotalVenta();
 
     // Emitir un evento Pusher para notificar a otros clientes
-    pusher.trigger('inventario-channel', 'producto-agregado', {
+    pusher.trigger('my-channel', 'producto-agregado por otra persona de igual forma', {
       id: articulo.id,
       descripcion: articulo.descripcion,
       cantidad: articulo.cantidad
