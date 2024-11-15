@@ -24,8 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             InventariosStocks_Conteos AS ic
         JOIN 
             SucursalesCorre AS sc ON ic.Fk_sucursal = sc.ID_SucursalC
+        LEFT JOIN 
+            InventariosStocks_Conteos AS isc ON ic.Folio_Prod_Stock = isc.Folio_Prod_Stock
         WHERE 
-            ic.Fk_sucursal = ? AND ic.FechaInventario = ?
+            ic.Fk_sucursal = ? 
+            AND ic.FechaInventario = ? 
+            AND (isc.Comentario != 'Ingreso Por cierre de inventario de la sucursal Tekax' OR isc.Comentario IS NULL)
         LIMIT 50";  // Limita la consulta a 50 resultados
         
         $stmt = $conn->prepare($sql);
@@ -52,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  <input type="text" hidden class="form-control" name="ID_H_O_D[]"  value="Saluda"  readonly>
                  <input type="text" hidden class="form-control" name="TipoMov[]"  value="Ingreso Por cierre de inventario de la sucursal ' . $fila["Nombre_Sucursal"] . ' "  readonly>
                 <input type="text" hidden class="form-control"  name="PrecioCompra[]" value="' . $fila["Precio_C"] . '" readonly>';
-
             
             $c++;
         }
