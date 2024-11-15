@@ -41,7 +41,7 @@ $(document).ready(function () {
 
         // Realiza la solicitud AJAX para guardar los datos
         $.ajax({
-            url: 'GuardaBajaDeProductos.php',  // La URL de tu archivo PHP
+            url: 'Consultas/GuardarCierreInventarios.php',  // La URL de tu archivo PHP
             type: 'POST',
             data: formData,  // Datos a enviar al servidor
             success: function (data) {
