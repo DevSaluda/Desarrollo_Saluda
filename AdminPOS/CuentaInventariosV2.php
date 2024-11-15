@@ -20,7 +20,8 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
   <?php include "Header.php" ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
- 
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
   <style>
     .error {
       color: red;
@@ -810,7 +811,7 @@ function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
   $.ajax({
-    url: "Consultas/escaner_articulo.php",
+    url: "Consultas/escaner_articuloV2.php",
     type: 'POST',
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
@@ -906,7 +907,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado.php',
+      url: 'Consultas/autocompletadoV2.php',
       type: 'GET',
       dataType: 'json',
       data: {
@@ -966,7 +967,22 @@ function calcularDiferencia(fila) {
   // Variable para almacenar el total del IVA
   var totalIVA = 0;
 
-  function agregarArticulo(articulo) {
+ // Configuración de Pusher
+Pusher.logToConsole = true;
+var pusher = new Pusher('b68a53e34e22c0108e9e', {
+      cluster: 'us2'
+    });
+
+var channel = pusher.subscribe('my-channel');  // Nombre del canal
+
+channel.bind('producto-agregado', function(data) {
+  // Acción al recibir el evento de Pusher
+  console.log('Producto agregado:', data);
+  // Puedes actualizar la interfaz aquí si es necesario
+  mostrarToast('Nuevo producto agregado: ' + data.descripcion);
+});
+
+function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
     mostrarMensaje('El artículo no es válido');
     return;
@@ -997,12 +1013,11 @@ function calcularDiferencia(fila) {
         <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem  !important;" type="number" readonly name="Diferencia[]" /></td>
         <td class="preciofijo"><input class="form-control preciou-input" readonly style="font-size: 0.75rem !important;" type="number" value="${articulo.precio}" /></td>
         <td class="tipoajuste"><input class="form-control tipoajuste-input" readonly style="font-size: 0.75rem !important;" name="Tipodeajusteaplicado[]" type="text" /></td>
-          <td class="anaquel"><input class="form-control anaquel-input" readonly style="font-size: 0.75rem !important;" name="AnaquelSeleccionado[]" type="text" /></td>
-          <td class="repisa"><input class="form-control repisa-input" readonly style="font-size: 0.75rem !important;" name="RepisaSeleccionada[]" type="text" /></td>
-         <td class="comentario">
-  <textarea class="form-control comentario-input" style="font-size: 0.75rem !important; resize: none;" name="Comentario[]" rows="3"></textarea>
-</td>
-
+        <td class="anaquel"><input class="form-control anaquel-input" readonly style="font-size: 0.75rem !important;" name="AnaquelSeleccionado[]" type="text" /></td>
+        <td class="repisa"><input class="form-control repisa-input" readonly style="font-size: 0.75rem !important;" name="RepisaSeleccionada[]" type="text" /></td>
+        <td class="comentario">
+          <textarea class="form-control comentario-input" style="font-size: 0.75rem !important; resize: none;" name="Comentario[]" rows="3"></textarea>
+        </td>
         <td style="display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" name="PrecioCompra[]" value="${articulo.preciocompra}" /></td>
         <td style="display:none;" class="precio"><input hidden id="precio_${articulo.id}" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="${articulo.precio}" onchange="actualizarImporte($(this).parent().parent());" /></td>
         <td style="display:none;"><input id="importe_${articulo.id}" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>
@@ -1025,6 +1040,13 @@ function calcularDiferencia(fila) {
     calcularIVA();
     actualizarSuma();
     mostrarTotalVenta();
+
+    // Emitir un evento Pusher para notificar a otros clientes
+    pusher.trigger('inventario-channel', 'producto-agregado', {
+      id: articulo.id,
+      descripcion: articulo.descripcion,
+      cantidad: articulo.cantidad
+    });
   }
 
   limpiarCampo();
