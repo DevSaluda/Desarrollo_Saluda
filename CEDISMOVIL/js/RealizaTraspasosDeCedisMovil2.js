@@ -51,7 +51,7 @@ $(document).ready(function($) {
                         timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = "https://saludapos.com/CEDISMOVIL/ListadoDeTraspasosV2";
+                        window.location.href = "https://saludapos.com/CEDISMOVIL/ListadoDeTraspasos";
                     });
                 } else {
                     Swal.fire({

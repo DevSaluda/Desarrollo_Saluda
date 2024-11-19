@@ -1,27 +1,24 @@
 <?php
 include "Consultas/Consultas.php";
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Traspasos generados <?php echo $row['ID_H_O_D']?> </title>
+  <title>Traspasos generados <?php echo $row['ID_H_O_D'] ?> </title>
 
-<?php include "Header.php"?>
- <style>
-        .error {
-  color: red;
-  margin-left: 5px; 
-  
-}
+  <?php include "Header.php"?>
+  <style>
+    .error {
+      color: red;
+      margin-left: 5px;
 
-    </style>
+    }
+  </style>
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
@@ -30,21 +27,25 @@ include "Consultas/Consultas.php";
 <?php include_once ("Menu.php")?>
 
 <div class="card text-center">
-  <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-    Traspasos realizados  <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  <div class="card-header" style="background-color:#0057b8 !important;color: white;">
+    Traspasos realizados
+    <?php echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>
   </div>
-  
-  <div >
- 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
-  Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
-</button>
 
-<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltroParaSucursalesVarias" class="btn btn-default">
-  Traspaso entre sucursales <i class="fas fa-clinic-medical"></i> <i class="fas fa-exchange-alt"></i> <i class="fas fa-clinic-medical"></i>
-</div> -->
+  <div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroTraspasos"
+      class="btn btn-default">
+      Busqueda por fechas <i class="fas fa-search"></i>
+    </button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroLabs" class="btn btn-default">
+      Nueva orden de traspaso <i class="fas fa-exchange-alt"></i>
+    </button>
+    <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#FiltroDeFacturas" class="btn btn-default">
+      Generar impresion <i class="fas fa-print"></i>
+    </button>
+  </div>
 </div>
-    
+
 <div id="tablaProductos"></div>
 
 </div>
@@ -53,21 +54,23 @@ include "Consultas/Consultas.php";
 </div>
 
 <!-- POR CADUCAR -->
- 
 
 
-     
-  
-  <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
- 
-  <!-- Main Footer -->
+
+
+<!-- /.content-wrapper -->
+
+<!-- Control Sidebar -->
+
+<!-- Main Footer -->
+
 <?php
-  include("Modales/BusquedaTraspasosFechas.php");
-  include("Modales/RealizaNuevaOrdenTraspaso.php");
-  include("Modales/RealizaNuevaOrdenTraspasoPorSucursales.php");
-  include ("footer.php")?>
+include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaDeFoliosFacturas.php");
+include("Modales/RealizaNuevaOrdenTraspasoCEDIS.php");
+
+include("footer.php") ?>
 
 <!-- ./wrapper -->
 
@@ -75,12 +78,7 @@ include "Consultas/Consultas.php";
 <script src="js/ListaDeTraspasos.js"></script>
 
 
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<?php include "datatables.php"?>
 
 
 <!-- Bootstrap -->
@@ -96,8 +94,9 @@ include "Consultas/Consultas.php";
 <!-- PAGE PLUGINS -->
 
 </body>
+
 </html>
-<?php 
+<?php
 
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
