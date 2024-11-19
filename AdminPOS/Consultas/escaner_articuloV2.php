@@ -17,7 +17,7 @@ $stmtVerifica->execute();
 $resultVerifica = $stmtVerifica->get_result();
 
 if ($resultVerifica->num_rows > 0) {
-    // Si el producto ya está inventariado, actualizar la cantidad
+    // Si el producto ya está inventariado, mostrar mensaje pero NO agregar filas
     $rowVerifica = $resultVerifica->fetch_assoc();
     $nuevaCantidad = $rowVerifica['Cantidad'] + 1;
 
@@ -28,11 +28,10 @@ if ($resultVerifica->num_rows > 0) {
     $stmtUpdate->bind_param("isss", $nuevaCantidad, $usuario, $codigo, $sucursalbusqueda);
     $stmtUpdate->execute();
 
-    // Responder con los datos actualizados para que se reflejen en la tabla
+    // Enviar un mensaje de alerta sin agregar filas
     $data = array(
-        "id" => $rowVerifica['ID_Registro'],
-        "codigo" => $rowVerifica['Cod_Barra'],
-        "cantidad" => $nuevaCantidad // Solo actualizamos la cantidad
+        "status" => "alert", // Indica que es una alerta, no error
+        "message" => "El producto ya estaba inventariado. Cantidad actualizada: $nuevaCantidad"
     );
 
     header('Content-Type: application/json');
@@ -120,5 +119,6 @@ if ($result->num_rows > 0) {
 $stmtVerifica->close();
 $stmt->close();
 $conn->close();
+
 
 ?>

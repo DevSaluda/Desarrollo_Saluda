@@ -822,30 +822,43 @@ function buscarArticulo(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (data) {
-      if (!data || !data.codigo) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'No encontramos coincidencias',
-          text: 'Al parecer el código no está asignado en la sucursal ¿deseas asignarlo?',
-          showCancelButton: true,
-          confirmButtonText: 'Agregar producto a la sucursal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-          }
-        });
-      } else {
-        agregarArticulo(data);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
-      }
+        if (data.status === "error") {
+            // Producto no encontrado en Stock_POS
+            Swal.fire({
+                icon: 'warning',
+                title: 'No encontramos coincidencias',
+                text: 'Al parecer el código no está asignado en la sucursal ¿deseas asignarlo?',
+                showCancelButton: true,
+                confirmButtonText: 'Agregar producto a la sucursal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
+                }
+            });
+        } else if (data.status === "alert") {
+            // Producto ya inventariado, mostrar mensaje de alerta
+            Swal.fire({
+                icon: 'info',
+                title: 'Producto ya inventariado',
+                text: data.message // Mensaje enviado desde PHP
+            });
+        } else {
+            // Producto nuevo, agregarlo a la tabla
+            agregarArticulo(data);
+            calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        }
 
-      limpiarCampo();
+        limpiarCampo(); // Limpia el input del código escaneado
     },
     error: function (data) {
-      console.error('Error en la solicitud AJAX', data);
+        console.error('Error en la solicitud AJAX', data);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error en la solicitud',
+            text: 'No se pudo procesar la solicitud. Por favor, inténtalo nuevamente.'
+        });
     }
-  });
-}
+});
 
 
   function agregarCodigoInexistente(codigo, sucursal) {
