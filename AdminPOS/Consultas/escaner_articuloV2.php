@@ -28,19 +28,11 @@ if ($resultVerifica->num_rows > 0) {
     $stmtUpdate->bind_param("isss", $nuevaCantidad, $usuario, $codigo, $sucursalbusqueda);
     $stmtUpdate->execute();
 
-    // Recuperar datos para la tabla
+    // Responder con los datos actualizados para que se reflejen en la tabla
     $data = array(
         "id" => $rowVerifica['ID_Registro'],
         "codigo" => $rowVerifica['Cod_Barra'],
-        "descripcion" => "Producto ya inventariado", // Puede ajustarse según tus datos
-        "cantidad" => $nuevaCantidad,
-        "existencia" => "-",
-        "precio" => "-",
-        "preciocompra" => "-",
-        "lote" => "-",
-        "clave" => "-",
-        "tipo" => "-",
-        "eliminar" => ""
+        "cantidad" => $nuevaCantidad // Solo actualizamos la cantidad
     );
 
     header('Content-Type: application/json');
