@@ -3,9 +3,10 @@ include_once "db_connection.php";
 include_once "Consultas.php";
 require __DIR__ . '/../vendor/autoload.php'; // Incluye la librería de Pusher
 
-// Obtener el código de barras y la sucursal enviados por AJAX
+// Obtener datos enviados por AJAX
 $codigo = $_POST['codigoEscaneado'];
 $sucursalbusqueda = $row['Fk_Sucursal'];
+$usuario = $row['Nombre_Apellidos']; // Usuario dinámico desde la variable
 
 // Verificar si el producto ya fue inventariado
 $sqlVerifica = "SELECT * FROM Inventarios_Procesados 
@@ -16,11 +17,22 @@ $stmtVerifica->execute();
 $resultVerifica = $stmtVerifica->get_result();
 
 if ($resultVerifica->num_rows > 0) {
-    // Si el producto ya está inventariado, se detiene el proceso
-    $data = array("status" => "error", "message" => "El producto ya está inventariado.");
+    // Si el producto ya está inventariado, actualizar la cantidad
+    $rowVerifica = $resultVerifica->fetch_assoc();
+    $nuevaCantidad = $rowVerifica['Cantidad'] + 1;
+
+    $sqlUpdate = "UPDATE Inventarios_Procesados 
+                  SET Cantidad = ?, Fecha_Inventario = NOW(), ProcesadoPor = ? 
+                  WHERE Cod_Barra = ? AND Fk_Sucursal = ?";
+    $stmtUpdate = $conn->prepare($sqlUpdate);
+    $stmtUpdate->bind_param("isss", $nuevaCantidad, $usuario, $codigo, $sucursalbusqueda);
+    $stmtUpdate->execute();
+
+    // Responder con mensaje de éxito
+    $data = array("status" => "success", "message" => "Cantidad actualizada: $nuevaCantidad.");
     header('Content-Type: application/json');
     echo json_encode($data);
-    exit; // Salir del script para evitar procesamiento adicional
+    exit;
 }
 
 // Si no existe, proceder con el registro en el inventario
@@ -84,8 +96,7 @@ if ($result->num_rows > 0) {
     $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
                    VALUES (?, ?, ?, NOW(), ?)";
     $stmtInserta = $conn->prepare($sqlInserta);
-    $cantidad = 1;
-    $usuario = 'Admin'; // Cambiar según el sistema de autenticación
+    $cantidad = 1; // Cantidad inicial
     $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
     $stmtInserta->execute();
 
