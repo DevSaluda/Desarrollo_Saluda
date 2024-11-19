@@ -50,7 +50,7 @@
 
   #Traspasos th {
     font-size: 16px; /* Tamaño de letra para los encabezados de la tabla */
-    background-color: #C80096 !important; /* Nuevo color de fondo para los encabezados */
+    background-color: #0057b8 !important; /* Nuevo color de fondo para los encabezados */
     color: white; /* Cambiar el color del texto a blanco para contrastar */
     padding: 10px; /* Ajustar el espaciado de los encabezados */
   }
@@ -167,6 +167,7 @@ var mensajesCarga = [
   function ocultarCargando() {
     document.getElementById('loading-overlay').style.display = 'none';
   }
+  
 tabla = $('#Traspasos').DataTable({
 
  "bProcessing": true,
@@ -186,11 +187,11 @@ tabla = $('#Traspasos').DataTable({
        { mData: 'Fk_sucursal' },
        { mData: 'Destino' },
        { mData: 'Cantidad' },
-    //    { mData: 'PrecioCompra' },
-    //    { mData: 'PrecioVenta' },
+      //  { mData: 'PrecioCompra' },
+      //  { mData: 'PrecioVenta' },
     //    { mData: 'Total_traspaso' },
     //    { mData: 'TotalVenta' },
-    //    { mData: 'TotaldePiezas' },
+       { mData: 'TotaldePiezas' },
         { mData: 'FechaEntrega' },
         {mData: "Estatus",
        "searchable": true,
@@ -214,13 +215,12 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
     },
     { mData: 'Envio' },
     { mData: 'Recibio' },
-    // { mData: "Traspasocorrecto" }, 
+    { mData: "Traspasocorrecto" }, 
        
        
       ],
      
-    
-      "lengthMenu": [[20,150,250,500, -1], [20,50,250,500, "Todos"]],  
+      "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
   
   "language": {
   "lengthMenu": "Mostrar _MENU_ registros",
@@ -244,12 +244,20 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
   // Al completar la inicialización de la tabla, ocultar el mensaje de carga
   ocultarCargando();
 },
-       
-       
-   
-	   
-        	        
-    });     
+// Para personalizar el estilo del botón de Excel
+dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>'",
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      'Descargar excel  <i Descargar excel class="fas fa-file-excel"></i> ',
+				titleAttr: 'Descargar excel',
+                autoFilter: true,
+        title: 'Crédito enfermería ',
+				className: 'btn btn-success'
+			},
+        ],
+});
+
 
 </script>
 <div class="text-center">
@@ -272,12 +280,12 @@ return '<button class="btn btn-default btn-sm" style="background-color:#ffc107!i
 <th>Precio compra</th> -->
 <!-- <th>Total global de venta</th>
 <th>Total global de compra</th> -->
-<!-- <th>Total de piezas</th> -->
+<th>Total de piezas</th>
 <th>Fecha estimada de entrega</th>
 <th>Estatus</th>
 <th>Entrega</th>
 <th>Recepciono</th>
-<!-- <th>Aceptar Traspaso</th> -->
+ <th>Aceptar Traspaso</th> 
 </thead>
 
 </div>

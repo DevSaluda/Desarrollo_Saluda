@@ -65,7 +65,7 @@ table td {
 
   <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
- Traspasos de cedis de <?php echo $SucursalDestino ?>  
+ Traspasos de cedis de <?php echo $row['ID_H_O_D'] ?>  
   </div>
  
   <div >
@@ -460,76 +460,24 @@ function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
   $.ajax({
-    url: "Consultas/escaner_articulosCEDISMOVIL.php",
+    url: "Consultas/escaner_articuloCedis.php",
     type: 'POST',
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (data) {
-      if (!data || !data.codigo) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'No encontramos coincidencias',
-          text: 'Al parecer el código no está asignado en la sucursal ¿deseas asignarlo?',
-          showCancelButton: true,
-          confirmButtonText: 'Agregar producto a la sucursal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-          }
-        });
-      } else {
+      if (data && data.codigo) {
         agregarArticulo(data);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       }
-
       limpiarCampo();
     },
     error: function (data) {
       console.error('Error en la solicitud AJAX', data);
     }
-  });
+});
 }
 
-
-  function agregarCodigoInexistente(codigo, sucursal) {
-    if (codigo.trim() === "" || sucursal.trim() === "") {
-        return; // No hacer nada si el código o la sucursal están vacíos
-    }
-    // Enviar el código y la sucursal al backend para insertarlo en la tabla de la base de datos
-    $.ajax({
-        url: "https://saludapos.com/CEDISMOVIL/Consultas/codigosinexistir.php",
-        type: 'POST',
-        data: { codigo: codigo, sucursal: sucursal },
-        dataType: 'json',
-        success: function (response) {
-            if (response.success) {
-                // Mostrar mensaje de éxito con SweetAlert2, incluyendo el nombre del producto
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Producto agregado',
-                    text: 'Producto "' + response.nombreProducto + '" agregado con éxito'
-                }).then(() => {
-                    // Ejecutar la función buscarArticulo con el código escaneado después de cerrar la alerta
-                    buscarArticulo(codigo);
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error al agregar el producto: ' + response.message
-                });
-            }
-        },
-        error: function (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Error al agregar el producto'
-            });
-        }
-    });
-}
-
+ 
 
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
@@ -556,7 +504,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado_CEDISMOVIL.php',
+      url: 'Consultas/autocompletado_Cedis.php',
       type: 'GET',
       dataType: 'json',
       data: {
@@ -655,7 +603,7 @@ function calcularDiferencia(fila) {
     <td style="display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaAprox[]" readonly value="<?php echo $fechaActual; ?>" /></td>
     <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
     <td style="display:none;"><input type="text" name="SucursalTraspasa[]" hidden value="<?php echo $SucursalDestinoLetras; ?>" class="form-control" ></td>
-<td style="display:none;"><input type="text" name="    SucursalDestinoFK[]" hidden value="<?php echo $SucursalDestinoLetras; ?>" class="form-control" ></td>
+<td style="display:none;"><input type="text" name="SucursalDestinoFK[]" hidden value="<?php echo  $SucursalDestino; ?>" class="form-control" ></td>
     <td style="display:none;"><input type="text" class="form-control " hidden name="GeneradoPor[]" value="<?php echo $row['Nombre_Apellidos']?>" readonly ></td>
     <td style="display:none;"><input type="text" class="form-control " hidden name="Empresa[]" value="<?php echo $row['ID_H_O_D']?>" readonly ></td>
     <td style="display:none;"><input type="text" hidden name="Proveedor1[]" id="proveedor1" class="form-control" ></td>

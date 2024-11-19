@@ -1,15 +1,49 @@
+
+
+
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-$sql = "SELECT Traspasos_generados.ID_Traspaso_Generado,Traspasos_generados.Folio_Prod_Stock,Traspasos_generados.TraspasoRecibidoPor,	Traspasos_generados.TraspasoGeneradoPor,Traspasos_generados.Num_Orden,
-Traspasos_generados.Num_Factura,Traspasos_generados.TotaldePiezas,
-Traspasos_generados.Cod_Barra, Traspasos_generados.Nombre_Prod,Traspasos_generados.Fk_sucursal,Traspasos_generados.Fk_Sucursal_Destino, Traspasos_generados.Proveedor1,	Traspasos_generados.Proveedor2,
-Traspasos_generados.Precio_Venta,Traspasos_generados.Precio_Compra, Traspasos_generados.Total_traspaso,Traspasos_generados.TotalVenta,Traspasos_generados.Existencias_R,Traspasos_generados.ProveedorFijo,
- Traspasos_generados.Cantidad_Enviada,Traspasos_generados.Existencias_D_envio,Traspasos_generados.FechaEntrega,Traspasos_generados.Estatus,Traspasos_generados.ID_H_O_D,
- SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM Traspasos_generados,SucursalesCorre WHERE Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC AND 
- MONTH(Traspasos_generados.FechaEntrega) = MONTH(CURDATE()) AND YEAR(Traspasos_generados.FechaEntrega) = YEAR(CURDATE())"; 
+
+$sql = "SELECT 
+Traspasos_generados.ID_Traspaso_Generado,
+Traspasos_generados.Folio_Prod_Stock,
+Traspasos_generados.TraspasoRecibidoPor,
+Traspasos_generados.TraspasoGeneradoPor,
+Traspasos_generados.Num_Orden,
+Traspasos_generados.Num_Factura,
+Traspasos_generados.TotaldePiezas,
+Traspasos_generados.Cod_Barra,
+Traspasos_generados.Nombre_Prod,
+Traspasos_generados.Fk_sucursal,
+Traspasos_generados.Fk_Sucursal_Destino,
+Traspasos_generados.Proveedor1,
+Traspasos_generados.Proveedor2,
+Traspasos_generados.Precio_Venta,
+Traspasos_generados.Precio_Compra,
+Traspasos_generados.Total_traspaso,
+Traspasos_generados.TotalVenta,
+Traspasos_generados.Existencias_R,
+Traspasos_generados.ProveedorFijo,
+Traspasos_generados.Cantidad_Enviada,
+Traspasos_generados.Existencias_D_envio,
+Traspasos_generados.FechaEntrega,
+Traspasos_generados.Estatus,
+Traspasos_generados.ID_H_O_D,
+SucursalesCorre.ID_SucursalC,
+SucursalesCorre.Nombre_Sucursal 
+FROM 
+Traspasos_generados,
+SucursalesCorre 
+WHERE 
+Traspasos_generados.Fk_sucursal = SucursalesCorre.ID_SucursalC 
+AND (
+    (MONTH(Traspasos_generados.FechaEntrega) = MONTH(CURDATE()) AND YEAR(Traspasos_generados.FechaEntrega) = YEAR(CURDATE()))
+    OR
+    (MONTH(Traspasos_generados.FechaEntrega) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(Traspasos_generados.FechaEntrega) = YEAR(CURDATE() - INTERVAL 1 MONTH))
+);";  
 $result = mysqli_query($conn, $sql);
  
 $c=0;
@@ -22,7 +56,7 @@ while($fila=$result->fetch_assoc()){
    if (empty($fila["Num_Factura"])) {
     // Tomar solo las primeras 4 letras de "Fk_Sucursal_Destino" y concatenar con "Num_Orden"
     $sucursalDestino = substr($fila["Fk_Sucursal_Destino"], 0, 4);
-    $data[$c]["NumberFactura"] = $sucursalDestino  . "0".$fila["Num_Orden"];
+    $data[$c]["NumberFactura"] = $sucursalDestino  . $fila["Num_Orden"];
 } else {
     // Si no está vacía, se toma el valor directamente de "Num_Factura"
     $data[$c]["NumberFactura"] = $fila["Num_Factura"];
@@ -33,19 +67,27 @@ while($fila=$result->fetch_assoc()){
    
     
     $data[$c]["ProveedorFijo"] = $fila["ProveedorFijo"];
-    $data[$c]["Fk_sucursal"] = $fila["Nombre_Sucursal"];
+    if ($fila["Nombre_Sucursal"] === "CEDIS") {
+      $data[$c]["Fk_sucursal"] = "";
+  } else {
+      $data[$c]["Fk_sucursal"] = $fila["Nombre_Sucursal"];
+  }
+  
     $data[$c]["Destino"] = $fila["Fk_Sucursal_Destino"];
     $data[$c]["Cantidad"] = $fila["Cantidad_Enviada"];
     // $data[$c]["PrecioCompra"] = $fila["Precio_Venta"];
     // $data[$c]["PrecioVenta"] = $fila["Precio_Compra"];
     
-    // $data[$c]["TotaldePiezas"] = $fila["TotaldePiezas"];
-    $data[$c]["FechaEntrega"] = fechaCastellano($fila["FechaEntrega"]);
+    $data[$c]["TotaldePiezas"] = $fila["TotaldePiezas"];
+    $data[$c]["FechaEntrega"] =$fila["FechaEntrega"];
     $data[$c]["Estatus"] =$fila["Estatus"];
     $data[$c]["Envio"] =$fila["TraspasoGeneradoPor"];
     $data[$c]["Recibio"] =$fila["TraspasoRecibidoPor"];
-    // $data[$c]["Traspasocorrecto"] = ["<a href=https://controlfarmacia.com/AdminPOS/TraspasoOKV2?traspasoid=".base64_encode($fila["ID_Traspaso_Generado"])." type='button' class='btn btn-success  btn-sm '><i class='fas fa-check'></i></a> "];
-    
+    if (in_array($data[$c]["ProveedorFijo"], ["Devolucion a cedis", "Retiro por sobre stock", "Prontos a caducar", "Producto dañado"]) && $fila["Estatus"] != "Entregado") {
+      $data[$c]["Traspasocorrecto"] = ["<a href='https://saludapos.com/CEDIS/TraspasoOKV2?traspasoid=" . base64_encode($fila["ID_Traspaso_Generado"]) . "' type='button' class='btn btn-success btn-sm'><i class='fas fa-check'></i></a>"];
+  } else {
+      $data[$c]["Traspasocorrecto"] = [];
+  }  
     $c++; 
  
 }
