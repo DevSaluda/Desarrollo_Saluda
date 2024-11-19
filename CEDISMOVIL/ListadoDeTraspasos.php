@@ -68,7 +68,7 @@ include "Consultas/Consultas.php";
 <?php
 include("Modales/BusquedaTraspasosFechas.php");
 include("Modales/BusquedaDeFoliosFacturas.php");
-include("Modales/RealizaNuevaOrdenTraspasoCEDIS.php");
+include("Modales/RealizaNuevaOrdenTraspasoCEDISMOVIL.php");
 
 include("footer.php") ?>
 
