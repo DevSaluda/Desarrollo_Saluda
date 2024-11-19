@@ -3,10 +3,9 @@ include_once "db_connection.php";
 include_once "Consultas.php";
 require __DIR__ . '/../vendor/autoload.php'; // Incluye la librería de Pusher
 
-// Obtener datos enviados por AJAX
 $codigo = $_POST['codigoEscaneado'];
-$usuario = $row['Nombre_Apellidos']; // Usuario procesando
-$sucursalbusqueda = $row['Fk_Sucursal']; // Sucursal actual
+$usuario = $row['Nombre_Apellidos']; 
+$sucursalbusqueda = $row['Fk_Sucursal'];
 
 // Verificar si el producto ya fue inventariado con los 3 criterios
 $sqlVerifica = "SELECT * FROM Inventarios_Procesados 
@@ -17,14 +16,14 @@ $stmtVerifica->execute();
 $resultVerifica = $stmtVerifica->get_result();
 
 if ($resultVerifica->num_rows > 0) {
-    // Si los tres campos coinciden, responder con estado "continue"
+    // Responder estado "continue" si ya existe con todos los criterios
     $data = array("status" => "continue");
     header('Content-Type: application/json');
     echo json_encode($data);
     exit;
 }
 
-// Si no existe en Inventarios_Procesados, buscar en Stock_POS
+// Buscar el producto en Stock_POS
 $sql = "SELECT Cod_Barra, Fk_sucursal, GROUP_CONCAT(ID_Prod_POS) AS IDs, 
                GROUP_CONCAT(Nombre_Prod) AS descripciones, 
                GROUP_CONCAT(Precio_Venta) AS precios, 
@@ -42,67 +41,42 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    // Producto encontrado en Stock_POS
+    // Producto encontrado
     $row = $result->fetch_assoc();
-    $ids = explode(',', $row['IDs']);
-    $descripciones = explode(',', $row['descripciones']);
-    $precios = explode(',', $row['precios']);
-    $precioscompra = explode(',', $row['precioscompra']);
-    $stockactual = explode(',', $row['stockactual']);
-    $lotes = explode(',', $row['lotes']);
-    $claves = explode(',', $row['claves']);
-    $tipos = explode(',', $row['tipos']);
-
     $data = array(
-        "id" => $ids[0],
-        "codigo" => $row["Cod_Barra"],
-        "descripcion" => $descripciones[0],
-        "cantidad" => [1],
-        "existencia" => $stockactual[0],
-        "precio" => $precios[0],
-        "preciocompra" => $precioscompra[0],
-        "lote" => $lotes[0],
-        "clave" => $claves[0],
-        "tipo" => $tipos[0],
-        "eliminar" => ""
+        "status" => "success",
+        "producto" => array(
+            "id" => explode(',', $row['IDs'])[0],
+            "codigo" => $row["Cod_Barra"],
+            "descripcion" => explode(',', $row['descripciones'])[0],
+            "cantidad" => 1,
+            "existencia" => explode(',', $row['stockactual'])[0],
+            "precio" => explode(',', $row['precios'])[0],
+            "preciocompra" => explode(',', $row['precioscompra'])[0],
+            "lote" => explode(',', $row['lotes'])[0],
+            "clave" => explode(',', $row['claves'])[0],
+            "tipo" => explode(',', $row['tipos'])[0]
+        )
     );
 
-    // Enviar notificación con Pusher
-    $options = array(
-        'cluster' => 'us2',
-        'useTLS' => true
-    );
-    $pusher = new Pusher\Pusher(
-        'effad4fdf8949f07766a',
-        '9a9bc81f5d2fbc13618c',
-        '1896713',
-        $options
-    );
-
-    $data['message'] = "Producto escaneado: $codigo";
-    $pusher->trigger('my-channel', 'my-event', $data);
-
-    // Registrar producto en Inventarios_Procesados
+    // Insertar en Inventarios_Procesados
     $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
                    VALUES (?, ?, ?, NOW(), ?)";
     $stmtInserta = $conn->prepare($sqlInserta);
-    $cantidad = 1;
-    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
+    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $data['producto']['cantidad'], $usuario);
     $stmtInserta->execute();
 
-    // Respuesta exitosa
     header('Content-Type: application/json');
     echo json_encode($data);
 } else {
-    // Producto no encontrado en Stock_POS
+    // Producto no encontrado
     $data = array("status" => "alert", "message" => "El producto no está asignado en esta sucursal.");
     header('Content-Type: application/json');
     echo json_encode($data);
 }
 
-// Cerrar conexiones
 $stmtVerifica->close();
 $stmt->close();
-$stmtInserta->close();
+if (isset($stmtInserta)) $stmtInserta->close();
 $conn->close();
 ?>
