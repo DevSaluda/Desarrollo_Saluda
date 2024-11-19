@@ -556,6 +556,10 @@ document.addEventListener("DOMContentLoaded", function() {
                       
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
+                      <ul id="productosInventariados">
+    <!-- Aquí se agregarán los productos escaneados -->
+</ul>
+
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
                
@@ -668,6 +672,16 @@ document.getElementById('numberSelect').addEventListener('change', function() {
 
 
 <script>
+
+channel.bind('my-event', function(data) {
+    if (data.status === "success") {
+        let listado = document.getElementById('productosInventariados');
+        let item = document.createElement('li');
+        item.textContent = data.descripcion + " - " + data.codigo;
+        listado.appendChild(item);
+    }
+});
+
   $("#btnVaciarListado").click(function() {
     console.log("Click en el botón");
     $("#tablaAgregarArticulos tbody").empty();
@@ -970,17 +984,16 @@ function calcularDiferencia(fila) {
   var totalIVA = 0;
 
 
-// Configuración de Pusher
-Pusher.logToConsole = true;
-var pusher = new Pusher('effad4fdf8949f07766a', {
-      cluster: 'us2'
-    });
+  channel.bind('my-event', function(data) {
+    if (data.status === "success") {
+        alert("Producto agregado: " + data.descripcion);
+        // Aquí puedes actualizar la lista de productos en la UI
+    } else if (data.status === "error") {
+        alert("Error: " + data.message);
+        // Aquí puedes mostrar un mensaje indicando que el producto ya estaba procesado
+    }
+});
 
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(JSON.stringify(data));
-    });
 
 function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
