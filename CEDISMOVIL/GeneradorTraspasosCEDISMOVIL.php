@@ -504,7 +504,7 @@ $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
     // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
-      url: 'Consultas/autocompletado_Cedis.php',
+      url: 'Consultas/autocompletado_CEDISMOVIL.php',
       type: 'GET',
       dataType: 'json',
       data: {
