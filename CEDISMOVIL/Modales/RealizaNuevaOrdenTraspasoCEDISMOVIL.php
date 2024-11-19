@@ -22,7 +22,7 @@
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
-    <div class="text-center">
+   <div class="text-center">
     <div class="modal-header">
          <p class="heading lead">Seleccion de sucursal para traspaso <i class="fas fa-credit-card"></i></p>
 
@@ -33,7 +33,7 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="https://saludapos.com/CEDISMOVIL/GeneradorTraspasosCEDISMOVIL">
+ <form  method="POST" action="https://saludapos.com/CEDISMOVIL/GeneradorTraspasosCEDIS">
     <div class="form-group">
   <label for="exampleInputEmail1">Elija proveedor</label>
     <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-dolly"></i></span>
@@ -68,11 +68,9 @@
    
 </div>
 
-  <div class="form-group" >
-  <label for="exampleInputEmail1">Sucursal</label>
-    <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-    <input type="text" name="sucursalLetras" id="sucursalLetras" class="form-control">
-    </div>  </div>
+  
+    <input hidden type="text" name="sucursalLetras" id="sucursalLetras" class="form-control">
+    
     <button type="submit"  id="registrotraspaso" value="Guardar" class="btn btn-success">Generar orden de traspaso <i class="fas fa-exchange-alt"></i></button>
 </div>
     
@@ -117,7 +115,7 @@ $(document).on('change', '#sucursalconorden', function(event) {
 function comprobarFactura() {
 	$("#loaderIcon").show();
 	jQuery.ajax({
-	url: "https://saludapos.com/CEDISMOVIL/Consultas/ComprobarFactura.php",
+	url: "https://saludapos.com/AdminPOS/Consultas/ComprobarFactura.php",
 	data:'NumFactura='+$("#NumFactura").val(),
 	type: "POST",
 	success:function(data){
