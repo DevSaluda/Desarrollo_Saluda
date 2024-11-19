@@ -28,8 +28,21 @@ if ($resultVerifica->num_rows > 0) {
     $stmtUpdate->bind_param("isss", $nuevaCantidad, $usuario, $codigo, $sucursalbusqueda);
     $stmtUpdate->execute();
 
-    // Responder con mensaje de éxito
-    $data = array("status" => "success", "message" => "Cantidad actualizada: $nuevaCantidad.");
+    // Recuperar datos para la tabla
+    $data = array(
+        "id" => $rowVerifica['ID_Registro'],
+        "codigo" => $rowVerifica['Cod_Barra'],
+        "descripcion" => "Producto ya inventariado", // Puede ajustarse según tus datos
+        "cantidad" => $nuevaCantidad,
+        "existencia" => "-",
+        "precio" => "-",
+        "preciocompra" => "-",
+        "lote" => "-",
+        "clave" => "-",
+        "tipo" => "-",
+        "eliminar" => ""
+    );
+
     header('Content-Type: application/json');
     echo json_encode($data);
     exit;
@@ -64,11 +77,20 @@ if ($result->num_rows > 0) {
     $claves = explode(',', $row['claves']);
     $tipos = explode(',', $row['tipos']);
 
+    // Guardar el producto en Inventarios_Procesados
+    $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
+                   VALUES (?, ?, ?, NOW(), ?)";
+    $stmtInserta = $conn->prepare($sqlInserta);
+    $cantidad = 1; // Cantidad inicial
+    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
+    $stmtInserta->execute();
+
+    // Preparar datos para la tabla
     $data = array(
         "id" => $ids[0],
         "codigo" => $row["Cod_Barra"],
         "descripcion" => $descripciones[0],
-        "cantidad" => [1],
+        "cantidad" => $cantidad,
         "existencia" => $stockactual[0],
         "precio" => $precios[0],
         "preciocompra" => $precioscompra[0],
@@ -91,14 +113,6 @@ if ($result->num_rows > 0) {
 
     $data['message'] = "Producto escaneado: $codigo";
     $pusher->trigger('my-channel', 'my-event', $data);
-
-    // Guardar el producto en Inventarios_Procesados
-    $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
-                   VALUES (?, ?, ?, NOW(), ?)";
-    $stmtInserta = $conn->prepare($sqlInserta);
-    $cantidad = 1; // Cantidad inicial
-    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
-    $stmtInserta->execute();
 
     // Respuesta exitosa
     header('Content-Type: application/json');
