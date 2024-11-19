@@ -556,9 +556,7 @@ document.addEventListener("DOMContentLoaded", function() {
                       
                       <form action="javascript:void(0)"  method="post" id="VentasAlmomento">
                       <div class="text-center">
-                      <ul id="productosInventariados">
-    <!-- Aquí se agregarán los productos escaneados -->
-</ul>
+                 
 
         <button type="submit" class="btn btn-primary">Guardar datos</button>
     </div>
@@ -673,14 +671,6 @@ document.getElementById('numberSelect').addEventListener('change', function() {
 
 <script>
 
-channel.bind('my-event', function(data) {
-    if (data.status === "success") {
-        let listado = document.getElementById('productosInventariados');
-        let item = document.createElement('li');
-        item.textContent = data.descripcion + " - " + data.codigo;
-        listado.appendChild(item);
-    }
-});
 
   $("#btnVaciarListado").click(function() {
     console.log("Click en el botón");
