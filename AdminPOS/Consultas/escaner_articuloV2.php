@@ -5,41 +5,26 @@ require __DIR__ . '/../vendor/autoload.php'; // Incluye la librería de Pusher
 
 // Obtener datos enviados por AJAX
 $codigo = $_POST['codigoEscaneado'];
-$sucursalbusqueda = $row['Fk_Sucursal'];
-$usuario = $row['Nombre_Apellidos']; // Usuario dinámico desde la variable
+$usuario = $row['Nombre_Apellidos']; // Usuario procesando
+$sucursalbusqueda = $row['Fk_Sucursal']; // Sucursal actual
 
-// Verificar si el producto ya fue inventariado
+// Verificar si el producto ya fue inventariado con los 3 criterios
 $sqlVerifica = "SELECT * FROM Inventarios_Procesados 
-                WHERE Cod_Barra = ? AND Fk_Sucursal = ?";
+                WHERE Cod_Barra = ? AND Fk_Sucursal = ? AND ProcesadoPor = ?";
 $stmtVerifica = $conn->prepare($sqlVerifica);
-$stmtVerifica->bind_param("ss", $codigo, $sucursalbusqueda);
+$stmtVerifica->bind_param("sss", $codigo, $sucursalbusqueda, $usuario);
 $stmtVerifica->execute();
 $resultVerifica = $stmtVerifica->get_result();
 
 if ($resultVerifica->num_rows > 0) {
-    // Si el producto ya está inventariado, mostrar mensaje pero NO agregar filas
-    $rowVerifica = $resultVerifica->fetch_assoc();
-    $nuevaCantidad = $rowVerifica['Cantidad'] + 1;
-
-    $sqlUpdate = "UPDATE Inventarios_Procesados 
-                  SET Cantidad = ?, Fecha_Inventario = NOW(), ProcesadoPor = ? 
-                  WHERE Cod_Barra = ? AND Fk_Sucursal = ?";
-    $stmtUpdate = $conn->prepare($sqlUpdate);
-    $stmtUpdate->bind_param("isss", $nuevaCantidad, $usuario, $codigo, $sucursalbusqueda);
-    $stmtUpdate->execute();
-
-    // Enviar un mensaje de alerta sin agregar filas
-    $data = array(
-        "status" => "alert", // Indica que es una alerta, no error
-        "message" => "El producto ya estaba inventariado. Cantidad actualizada: $nuevaCantidad"
-    );
-
+    // Si los tres campos coinciden, responder con estado "continue"
+    $data = array("status" => "continue");
     header('Content-Type: application/json');
     echo json_encode($data);
     exit;
 }
 
-// Si no existe, proceder con el registro en el inventario
+// Si no existe en Inventarios_Procesados, buscar en Stock_POS
 $sql = "SELECT Cod_Barra, Fk_sucursal, GROUP_CONCAT(ID_Prod_POS) AS IDs, 
                GROUP_CONCAT(Nombre_Prod) AS descripciones, 
                GROUP_CONCAT(Precio_Venta) AS precios, 
@@ -57,7 +42,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    // Si se encuentra el producto, se obtiene y se procesa
+    // Producto encontrado en Stock_POS
     $row = $result->fetch_assoc();
     $ids = explode(',', $row['IDs']);
     $descripciones = explode(',', $row['descripciones']);
@@ -68,20 +53,11 @@ if ($result->num_rows > 0) {
     $claves = explode(',', $row['claves']);
     $tipos = explode(',', $row['tipos']);
 
-    // Guardar el producto en Inventarios_Procesados
-    $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
-                   VALUES (?, ?, ?, NOW(), ?)";
-    $stmtInserta = $conn->prepare($sqlInserta);
-    $cantidad = 1; // Cantidad inicial
-    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
-    $stmtInserta->execute();
-
-    // Preparar datos para la tabla
     $data = array(
         "id" => $ids[0],
         "codigo" => $row["Cod_Barra"],
         "descripcion" => $descripciones[0],
-        "cantidad" => $cantidad,
+        "cantidad" => [1],
         "existencia" => $stockactual[0],
         "precio" => $precios[0],
         "preciocompra" => $precioscompra[0],
@@ -91,6 +67,7 @@ if ($result->num_rows > 0) {
         "eliminar" => ""
     );
 
+    // Enviar notificación con Pusher
     $options = array(
         'cluster' => 'us2',
         'useTLS' => true
@@ -105,20 +82,27 @@ if ($result->num_rows > 0) {
     $data['message'] = "Producto escaneado: $codigo";
     $pusher->trigger('my-channel', 'my-event', $data);
 
+    // Registrar producto en Inventarios_Procesados
+    $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
+                   VALUES (?, ?, ?, NOW(), ?)";
+    $stmtInserta = $conn->prepare($sqlInserta);
+    $cantidad = 1;
+    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidad, $usuario);
+    $stmtInserta->execute();
+
     // Respuesta exitosa
     header('Content-Type: application/json');
     echo json_encode($data);
 } else {
-    // Si no se encuentra el producto en Stock_POS
-    $data = array("status" => "error", "message" => "Producto no encontrado.");
+    // Producto no encontrado en Stock_POS
+    $data = array("status" => "alert", "message" => "El producto no está asignado en esta sucursal.");
     header('Content-Type: application/json');
     echo json_encode($data);
 }
 
-// Cerrar las conexiones
+// Cerrar conexiones
 $stmtVerifica->close();
 $stmt->close();
+$stmtInserta->close();
 $conn->close();
-
-
 ?>

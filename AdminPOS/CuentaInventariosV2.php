@@ -822,7 +822,18 @@ function buscarArticulo(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (data) {
-        if (data.status === "error") {
+        if (data.status === "alert") {
+            // Mostrar mensaje si los datos no coinciden
+            Swal.fire({
+                icon: 'info',
+                title: 'Producto ya inventariado',
+                text: data.message // Mensaje enviado desde PHP
+            });
+        } else if (data.status === "continue") {
+            // Continuar con el proceso sin mostrar alertas
+            agregarArticulo(data);
+            calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+        } else if (!data || !data.codigo) {
             // Producto no encontrado en Stock_POS
             Swal.fire({
                 icon: 'warning',
@@ -835,17 +846,6 @@ function buscarArticulo(codigoEscaneado) {
                     agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
                 }
             });
-        } else if (data.status === "alert") {
-            // Producto ya inventariado, mostrar mensaje de alerta
-            Swal.fire({
-                icon: 'info',
-                title: 'Producto ya inventariado',
-                text: data.message // Mensaje enviado desde PHP
-            });
-        } else {
-            // Producto nuevo, agregarlo a la tabla
-            agregarArticulo(data);
-            calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
         }
 
         limpiarCampo(); // Limpia el input del código escaneado
