@@ -1,5 +1,5 @@
 $('document').ready(function($) {
-    $("#RegistroMantenimientoForm").validate({
+    $("#RegistroTicketSoporteModal").validate({
         rules: {
             tipoProblema: {
                 required: true,
@@ -20,7 +20,7 @@ $('document').ready(function($) {
     });
 
     function submitForm() {
-        $("#RegistroMantenimientoForm").on('submit', function(e) {
+        $("#RegistroTicketSoporteModal").on('submit', function(e) {
             e.preventDefault();
             $.ajax({
                 type: 'POST',
@@ -37,7 +37,7 @@ $('document').ready(function($) {
 
                     if (result.statusCode === 200) {
                         $("#submit_Mantenimiento").html("Enviado <i class='fas fa-check'></i>");
-                        $("#RegistroMantenimientoForm")[0].reset();
+                        $("#RegistroTicketSoporteModal")[0].reset();
                         $("#RegistroMantenimientoVentanaModal").modal('hide');
                         $('#Exito').modal('toggle');
                         setTimeout(function() {
