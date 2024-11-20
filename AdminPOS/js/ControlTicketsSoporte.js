@@ -1,7 +1,7 @@
 function RegistroEnergias() {
 
 
-    $.post("https://saludapos.com/AdminPOS/Consultas/RegistroTicketSoporteModal.php", "", function(data) {
+    $.post("https://saludapos.com/AdminPOS/Consultas/RegistroTicketSoporte.php", "", function(data) {
         $("#RegistrosTicketSoporteTabla").html(data);
     })
 

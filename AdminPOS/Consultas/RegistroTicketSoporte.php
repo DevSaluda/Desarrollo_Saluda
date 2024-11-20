@@ -1,24 +1,25 @@
 <script>
 $(document).ready(function() {
-    var tabla = $('#Productos').DataTable({
+    var tabla = $('#Tickets').DataTable({
         "bProcessing": true,
         "ordering": true,
         "stateSave": true,
         "bAutoWidth": false,
         "order": [[0, "desc"]],
         "ajax": {
-            "url": "https://saludapos.com/AdminPOS/Consultas/RegistroTicketSoporteArray.php",
+            "url": "https://saludapos.com/AdminPOS/Consultas/TicketsSoporteArray.php",
             "dataSrc": "aaData"
         },
         "columns": [
-            { "data": "Id_Registro" },
-            { "data": "Registro_mantenimiento" },
-            { "data": "Fecha_registro" },
+            { "data": "Id_Ticket" },
+            { "data": "No_Ticket" },
             { "data": "Sucursal" },
-            { "data": "Comentario" },
-            { "data": "Foto", "render": function(data, type, row) {
-                return data; // No es necesario modificar 'data' ya que es HTML generado por PHP
-            }}
+            { "data": "Reportado_Por" },
+            { "data": "Fecha_Registro" },
+            { "data": "Problematica" },
+            { "data": "DescripcionProblematica" },
+            { "data": "Solucion" },
+            { "data": "Estatus" }
         ],
         "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
         "language": {
@@ -43,15 +44,18 @@ $(document).ready(function() {
 
 <div class="text-center">
     <div class="table-responsive">
-        <table id="Productos" class="table table-hover">
+        <table id="Tickets" class="table table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Registro de Mantenimiento</th>
-                    <th>Fecha</th>
+                    <th>No. Ticket</th>
                     <th>Sucursal</th>
-                    <th>Comentario</th>
-                    <th>Foto</th>
+                    <th>Reportado Por</th>
+                    <th>Fecha de Registro</th>
+                    <th>Problemática</th>
+                    <th>Descripción</th>
+                    <th>Solución</th>
+                    <th>Estatus</th>
                 </tr>
             </thead>
         </table>
