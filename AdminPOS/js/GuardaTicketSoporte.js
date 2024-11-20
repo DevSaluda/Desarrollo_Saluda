@@ -1,7 +1,8 @@
 $('document').ready(function($) {
-    $("#RegistroMantenimientoForm").validate({
+    // Validación del formulario
+    $("#RegistroTicketSoporteForm").validate({
         rules: {
-            tipoProblema: {
+            Problematica: {
                 required: true,
             },
             DescripcionProblematica: {
@@ -9,7 +10,7 @@ $('document').ready(function($) {
             }
         },
         messages: {
-            tipoProblema: {
+            Problematica: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Seleccione un tipo de problema",
             },
             DescripcionProblematica: {
@@ -19,9 +20,11 @@ $('document').ready(function($) {
         submitHandler: submitForm
     });
 
+    // Manejo del envío del formulario
     function submitForm() {
-        $("#RegistroMantenimientoForm").on('submit', function(e) {
-            e.preventDefault();
+        $("#RegistroTicketSoporteForm").on('submit', function(e) {
+            e.preventDefault(); // Evita el comportamiento predeterminado del formulario
+
             $.ajax({
                 type: 'POST',
                 url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php',
@@ -30,29 +33,32 @@ $('document').ready(function($) {
                 cache: false,
                 processData: false,
                 beforeSend: function() {
-                    $("#submit_Mantenimiento").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+                    $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
                 },
                 success: function(dataResult) {
                     const result = JSON.parse(dataResult);
 
                     if (result.statusCode === 200) {
-                        $("#submit_Mantenimiento").html("Enviado <i class='fas fa-check'></i>");
-                        $("#RegistroMantenimientoForm")[0].reset();
-                        $("#RegistroMantenimientoVentanaModal").modal('hide');
-                        $('#Exito').modal('toggle');
+                        $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
+                        $("#RegistroTicketSoporteForm")[0].reset();
+                        $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
+                        $('#Exito').modal('toggle'); // Muestra modal de éxito
                         setTimeout(function() {
                             $('#Exito').modal('hide');
                         }, 2000);
                     } else {
-                        $("#submit_Mantenimiento").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
-                        $('#ErrorData').modal('toggle');
+                        $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                        $('#ErrorData').modal('toggle'); // Muestra modal de error
                         setTimeout(function() {
-                            $("#submit_Mantenimiento").html("Guardar <i class='fas fa-save'></i>");
+                            $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
                         }, 3000);
                     }
+                },
+                error: function() {
+                    $("#submitTicketSoporte").html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
                 }
             });
         });
-        return false;
+        return false; // Detiene el envío predeterminado
     }
 });
