@@ -1,4 +1,4 @@
-<form id="RegistroTicketSoporteForm">
+<form id="RegistroTicketSoporteModal">
     <!-- Tipo de problema -->
     <div class="form-group">
         <label for="tipoProblema">Seleccione el tipo de problema</label>
