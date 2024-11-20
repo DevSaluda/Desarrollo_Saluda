@@ -45,7 +45,7 @@ table td {
 </div>
 
 </div><div class="col-md-12">
-<div id="RegistrosTicketSoporteTabla"></div>
+<div id="RegistrosTicketSoporteTabla "></div>
   </div></div>
 
   <!-- /.content-wrapper -->
@@ -54,7 +54,7 @@ table td {
  
   <!-- Main Footer -->
 <?php
-  include ("Modales/RegistroTicketSoportemModal.php");
+  include ("Modales/RegistroTicketSoporteModal.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("footer.php")?>
