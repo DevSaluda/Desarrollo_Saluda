@@ -44,6 +44,8 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     // Respuesta en caso de campos faltantes
     $response = array("statusCode" => 400, "message" => "Todos los campos son obligatorios.");
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Enviar la respuesta en formato JSON
 echo json_encode($response);
