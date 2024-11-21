@@ -8,7 +8,7 @@ $('#SolucionForm').on('submit', function(e) {
 
     $.ajax({
         type: 'POST',
-        url: 'https://saludapos.com/AdminPOS/Consultas/ActualizarSolucion.php',
+        url: 'https://saludapos.com/POS2/Consultas/ActualizarSolucion.php',
         data: $(this).serialize(),
         success: function(response) {
             const result = JSON.parse(response);
