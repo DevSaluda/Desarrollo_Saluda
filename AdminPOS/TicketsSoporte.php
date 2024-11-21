@@ -55,7 +55,7 @@ table td {
   <!-- Main Footer -->
 <?php
   include ("Modales/RegistroTicketSoporteModal.php");
-  include ("Modales/SolucionTicketModal.php");
+  include ("Modales/SolucionModal.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("footer.php")?>
