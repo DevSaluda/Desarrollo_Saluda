@@ -23,7 +23,7 @@ $(document).ready(function() {
     {
         "data": null,
         "render": function(data, type, row) {
-            return `<button class="btn btn-primary btn-sm solucion-btn" data-id="${row.Id_Ticket}" data-toggle="modal" data-target="#SolucionTicketModal">Solucionar</button>`;
+            return `<button class="btn btn-primary btn-sm solucion-btn" data-id="${row.Id_Ticket}" data-toggle="modal" data-target="#SolucionModal">Solucionar</button>`;
         }
     }
 ],
