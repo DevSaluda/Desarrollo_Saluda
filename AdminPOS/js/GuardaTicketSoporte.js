@@ -19,6 +19,7 @@ $('document').ready(function($) {
         },
         submitHandler: submitForm
     });
+    
 
     // Manejo del envío del formulario
     function submitForm() {
@@ -61,4 +62,6 @@ $('document').ready(function($) {
         });
         return false; // Detiene el envío predeterminado
     }
+
+    
 });

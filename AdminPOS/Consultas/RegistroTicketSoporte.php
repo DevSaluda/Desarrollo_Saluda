@@ -11,16 +11,23 @@ $(document).ready(function() {
             "dataSrc": "aaData"
         },
         "columns": [
-            { "data": "Id_Ticket" },
-            { "data": "No_Ticket" },
-            { "data": "Sucursal" },
-            { "data": "Reportado_Por" },
-            { "data": "Fecha_Registro" },
-            { "data": "Problematica" },
-            { "data": "DescripcionProblematica" },
-            { "data": "Solucion" },
-            { "data": "Estatus" }
-        ],
+    { "data": "Id_Ticket" },
+    { "data": "No_Ticket" },
+    { "data": "Sucursal" },
+    { "data": "Reportado_Por" },
+    { "data": "Fecha_Registro" },
+    { "data": "Problematica" },
+    { "data": "DescripcionProblematica" },
+    { "data": "Solucion" },
+    { "data": "Estatus" },
+    {
+        "data": null,
+        "render": function(data, type, row) {
+            return `<button class="btn btn-primary btn-sm solucion-btn" data-id="${row.Id_Ticket}" data-toggle="modal" data-target="#SolucionTicketModal">Solucionar</button>`;
+        }
+    }
+],
+
         "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros",
