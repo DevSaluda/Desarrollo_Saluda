@@ -32,7 +32,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
             // Manejar la subida de imágenes
             if (!empty($_FILES['imagenes']['name'][0])) {
                 $uploadedFiles = [];
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/RegistroMantenimiento/"; // Ruta de la carpeta para las imágenes
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/ImagenesTickets/"; // Ruta de la carpeta para las imágenes
 
                 foreach ($_FILES['imagenes']['name'] as $key => $fileName) {
                     $fileTmpPath = $_FILES['imagenes']['tmp_name'][$key];
