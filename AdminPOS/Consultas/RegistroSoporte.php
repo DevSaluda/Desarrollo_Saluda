@@ -32,7 +32,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
             // Manejar la subida de imágenes
             if (!empty($_FILES['imagenes']['name'][0])) {
                 $uploadedFiles = [];
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/tickets/"; // Ruta para guardar imágenes
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/ImagenesTickets/"; // Ruta para guardar imágenes
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
