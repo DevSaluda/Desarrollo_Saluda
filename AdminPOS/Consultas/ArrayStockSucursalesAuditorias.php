@@ -33,6 +33,7 @@ $sql = "SELECT
     a.AgregadoPor,
     a.AgregadoEl,
     a.ID_H_O_D,
+    a.TipoMov,
     b.ID_SucursalC,
     b.Nombre_Sucursal,
     c.Servicio_ID,
@@ -68,7 +69,9 @@ while($fila=$result->fetch_assoc()){
  
     $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["UltimoMovimiento"] = $fila["AgregadoEl"];
+    $data[$c]["TipoMov"] = $fila["TipoMov"];
     $data[$c]["Existencias_R"] = $fila["Existencias_R"];
+    
     
 
    

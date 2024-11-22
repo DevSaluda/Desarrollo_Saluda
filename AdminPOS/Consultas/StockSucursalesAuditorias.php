@@ -20,6 +20,8 @@
        
        { mData: 'Sucursal' },
        { mData: 'UltimoMovimiento' },
+       { mData: 'TipoMov' },
+       
        { mData: 'Existencias_R' },
  
    
@@ -80,6 +82,8 @@
 
 <th style="background-color:#0057b8 !important;">Sucursal</th>
 <th style="background-color:#0057b8 !important;">Ultimo movimiento registrado</th>
+
+<th style="background-color:#0057b8 !important;">Tipo movimiento</th>
 <th style="background-color:#0057b8 !important;">Stock</th>
 
 
