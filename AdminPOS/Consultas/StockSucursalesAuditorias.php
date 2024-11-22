@@ -17,8 +17,7 @@
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
       
-       { mData: 'Proveedor1' },
-       { mData: 'Proveedor2' },
+       
        { mData: 'Sucursal' },
        { mData: 'UltimoMovimiento' },
        { mData: 'Existencias_R' },
@@ -79,8 +78,6 @@
 <th style="background-color:#0057b8 !important;">PV</th>
 <th style="background-color:#0057b8 !important;">Servicio</th>
 
-<th style="background-color:#0057b8 !important;">Proveedor 1</th>
-<th style="background-color:#0057b8 !important;">Proveedor 2</th>
 <th style="background-color:#0057b8 !important;">Sucursal</th>
 <th style="background-color:#0057b8 !important;">Ultimo movimiento registrado</th>
 <th style="background-color:#0057b8 !important;">Stock</th>
