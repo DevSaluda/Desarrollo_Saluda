@@ -32,10 +32,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
             // Manejar la subida de imágenes
             if (!empty($_FILES['imagenes']['name'][0])) {
                 $uploadedFiles = [];
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/ImagenesTickets/"; // Ruta para guardar imágenes
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/RegistroMantenimiento/"; // Ruta de la carpeta para las imágenes
 
                 foreach ($_FILES['imagenes']['name'] as $key => $fileName) {
                     $fileTmpPath = $_FILES['imagenes']['tmp_name'][$key];
@@ -48,7 +45,8 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
                         in_array($_FILES['imagenes']['type'][$key], ['image/jpeg', 'image/jpg', 'image/png'])) {
 
                         // Subir el archivo
-                        if (move_uploaded_file($fileTmpPath, $uploadDir . $newFileName)) {
+                        $targetPath = $uploadDir . $newFileName;
+                        if (move_uploaded_file($fileTmpPath, $targetPath)) {
                             $uploadedFiles[] = $newFileName;
 
                             // Guardar el nombre de la imagen en la base de datos
