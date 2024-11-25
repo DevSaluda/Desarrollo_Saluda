@@ -62,7 +62,7 @@
           <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
           <input type="hidden" name="Agregado_Por" value="<?php echo $row['Nombre_Apellidos']; ?>" readonly>
           <input type="hidden" name="Sucursal" value="<?php echo $row['Nombre_Sucursal']; ?>" readonly>
-          <input type="hidden" name="ID_H_O_D" value="<?php echo $row['ID_H_O_D']; ?>" readonly>
+          <input type="hidden" name="Empresa" value="<?php echo $row['ID_H_O_D']; ?>" readonly>
 
           <!-- Botón de envío -->
           <div class="text-center">

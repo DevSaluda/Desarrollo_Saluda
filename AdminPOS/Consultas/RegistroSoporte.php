@@ -1,83 +1,62 @@
 <?php
 include_once 'db_connection.php';
 
-if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica'])) {
-    $tipoProblema = mysqli_real_escape_string($conn, $_POST['Problematica']);
-    $descripcion = mysqli_real_escape_string($conn, $_POST['DescripcionProblematica']);
-    $fecha = mysqli_real_escape_string($conn, $_POST['Fecha']);
-    $reportadoPor = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
-    $sucursal = mysqli_real_escape_string($conn, $_POST['Sucursal']);
-    $id_h_o_d = mysqli_real_escape_string($conn, $_POST['ID_H_O_D']);
+if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
+    $uploadedFiles = [];
 
-    $estatus = "Pendiente";
-    $noTicket = "TS-" . strtoupper(uniqid());
+    foreach ($_FILES['file']['name'] as $key => $val) {
+        $fileName = time() . '_' . $_FILES['file']['name'][$key];
+        $valid_extensions = array("jpeg", "jpg", "png");
+        $temporary = explode(".", $_FILES["file"]["name"][$key]);
+        $file_extension = end($temporary);
 
-    // Preparar consulta principal
-    $query = "INSERT INTO Tickets_Soporte 
-        (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D) 
-        VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "sssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $id_h_o_d);
+        if (
+            (
+                ($_FILES["file"]["type"][$key] == "image/png") ||
+                ($_FILES["file"]["type"][$key] == "image/jpg") ||
+                ($_FILES["file"]["type"][$key] == "image/jpeg")
+            ) && in_array($file_extension, $valid_extensions)
+        ) {
+            $sourcePath = $_FILES['file']['tmp_name'][$key];
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/TicketsSoporte/" . $fileName;
 
-        if (mysqli_stmt_execute($stmt)) {
-            $ticketId = mysqli_insert_id($conn);
-
-            if (!empty($_FILES['imagenes']['name'][0])) {
-                $uploadedFiles = [];
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/ImagenesTickets/";
-
-                foreach ($_FILES['imagenes']['name'] as $key => $fileName) {
-                    $fileTmpPath = $_FILES['imagenes']['tmp_name'][$key];
-                    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-                    $newFileName = time() . '-' . uniqid() . '.' . $fileExtension;
-
-                    $validExtensions = ['jpeg', 'jpg', 'png'];
-
-                    if (in_array($fileExtension, $validExtensions)) {
-                        $targetPath = $uploadDir . $newFileName;
-
-                        if (move_uploaded_file($fileTmpPath, $targetPath)) {
-                            $uploadedFiles[] = $newFileName;
-
-                            $queryImg = "INSERT INTO Tickets_Imagenes (Ticket_Id, Imagen) VALUES (?, ?)";
-                            if ($stmtImg = mysqli_prepare($conn, $queryImg)) {
-                                mysqli_stmt_bind_param($stmtImg, "is", $ticketId, $newFileName);
-                                mysqli_stmt_execute($stmtImg);
-                                mysqli_stmt_close($stmtImg);
-                            }
-                        } else {
-                            error_log("Error al mover el archivo $fileTmpPath a $targetPath");
-                        }
-                    } else {
-                        error_log("Extensión no permitida para $fileName");
-                    }
-                }
-
-                if (empty($uploadedFiles)) {
-                    $response = array("statusCode" => 202, "message" => "No se pudo subir ninguna imagen.");
-                    echo json_encode($response);
-                    exit;
-                }
+            if (move_uploaded_file($sourcePath, $targetPath)) {
+                $uploadedFiles[] = $fileName;
+            } else {
+                $response = array("statusCode" => 202, "message" => "Error al mover el archivo: $targetPath");
+                echo json_encode($response);
+                exit;
             }
-
-            $response = array("statusCode" => 200, "message" => "Ticket creado exitosamente.");
-        } else {
-            $response = array("statusCode" => 201, "message" => "Error al crear el ticket: " . mysqli_stmt_error($stmt));
         }
-
-        mysqli_stmt_close($stmt);
-    } else {
-        $response = array("statusCode" => 201, "message" => "Error al preparar la consulta: " . mysqli_error($conn));
     }
-} else {
-    $response = array("statusCode" => 400, "message" => "Todos los campos son obligatorios.");
+
+    if (!empty($uploadedFiles)) {
+        $fileNames = implode('|', $uploadedFiles);
+
+        // Inserta la información en la base de datos
+        $tipoProblema = $_POST['tipoProblema'];
+        $descripcion = $_POST['DescripcionProblematica'];
+        $fecha = $_POST['Fecha'];
+        $registro = $_POST['Registro'];
+        $sucursal = $_POST['Sucursal'];
+        $empresa = $_POST['Empresa'];
+
+        $query =  "INSERT INTO TicketsSoporte 
+        (Tipo_Problema, Descripcion, Fecha_Registro, Sucursal, Registro, AgregadoEl, ID_H_O_D) 
+        VALUES ('$tipoProblema', '$descripcion', '$fecha', '$sucursal', '$registro', NOW(), '$empresa')";
+        
+        if (mysqli_query($conn, $query)) {
+            $response = array("statusCode" => 200);
+        } else {
+            $response = array("statusCode" => 201);
+        }
+    } else {
+        $response = array("statusCode" => 201);
+    }
+    echo json_encode($response);
 }
+// Al final del archivo PHP
+header('Content-Type: application/json'); // Asegúrate de que el contenido sea JSON
+echo json_encode($response); // Asegúrate de que $response exista y sea un array asociativo o similar
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-echo json_encode($response);
-mysqli_close($conn);
 ?>
