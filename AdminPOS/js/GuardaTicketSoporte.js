@@ -44,7 +44,7 @@ $('document').ready(function ($) {
             e.preventDefault(); // Evita el comportamiento predeterminado del formulario
 
             // Validación de imágenes antes de enviar
-            const imagenes = document.getElementById("file").files; // Asegúrate de usar el id correcto
+            const imagenes = document.getElementById("ImagenesSoporte").files;
             for (let i = 0; i < imagenes.length; i++) {
                 if (imagenes[i].size > 5 * 1024 * 1024) { // 5 MB
                     alert(`El archivo ${imagenes[i].name} excede el tamaño permitido de 5 MB.`);
@@ -59,7 +59,7 @@ $('document').ready(function ($) {
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
-                url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php', // Verifica la ruta
+                url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
