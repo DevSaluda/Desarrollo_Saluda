@@ -33,24 +33,30 @@ $('document').ready(function($) {
                     $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
                 },
                 success: function(dataResult) {
-                    const result = JSON.parse(dataResult);
-
-                    if (result.statusCode === 200) {
-                        $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
-                        $("#RegistroTicketSoporteForm")[0].reset();
-                        $("#RegistroTicketSoporteModal").modal('hide');
-                        $('#Exito').modal('toggle');
-                        setTimeout(function() {
-                            $('#Exito').modal('hide');
-                        }, 2000);
-                    } else {
-                        $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
-                        $('#ErrorData').modal('toggle');
-                        setTimeout(function() {
-                            $("#submitTicketSoporte").html("Guardar <i class='fas fa-save'></i>");
-                        }, 3000);
+                    try {
+                        const result = JSON.parse(dataResult);
+                
+                        if (result.statusCode === 200) {
+                            $("#submit_Tickets").html("Enviado <i class='fas fa-check'></i>");
+                            $("#RegistroTicketsForm")[0].reset();
+                            $("#RegistroTicketsVentanaModal").modal('hide');
+                            $('#Exito').modal('toggle');
+                            setTimeout(function() {
+                                $('#Exito').modal('hide');
+                            }, 2000);
+                        } else {
+                            $("#submit_Tickets").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                            $('#ErrorData').modal('toggle');
+                            setTimeout(function() {
+                                $("#submit_Tickets").html("Guardar <i class='fas fa-save'></i>");
+                            }, 3000);
+                        }
+                    } catch (e) {
+                        console.error("Error al parsear JSON:", dataResult);
+                        $("#submit_Tickets").html("Error inesperado <i class='fas fa-exclamation-triangle'></i>");
                     }
                 }
+                
             });
         });
         return false;
