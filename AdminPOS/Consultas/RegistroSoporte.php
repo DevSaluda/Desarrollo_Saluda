@@ -15,7 +15,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     // Subir imágenes primero
     $uploadedFiles = [];
     if (!empty($_FILES['imagenes']['name'][0])) {
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/ImagenesTickets/";
+        $uploadDir = "../../ImagenesTickets/";
 
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0777, true)) {
             $response = array("statusCode" => 500, "message" => "Error al crear el directorio de imágenes.");
@@ -31,7 +31,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
             $validExtensions = ['jpeg', 'jpg', 'png'];
 
             if (in_array($fileExtension, $validExtensions)) {
-                $targetPath = $uploadDir . $newFileName;
+                $targetPath ="../../ImagenesTickets/$newFileName";
 
                 if (move_uploaded_file($fileTmpPath, $targetPath)) {
                     $uploadedFiles[] = $newFileName;
