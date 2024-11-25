@@ -55,4 +55,8 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
     }
     echo json_encode($response);
 }
+// Al final del archivo PHP
+header('Content-Type: application/json'); // Asegúrate de que el contenido sea JSON
+echo json_encode($response); // Asegúrate de que $response exista y sea un array asociativo o similar
+
 ?>
