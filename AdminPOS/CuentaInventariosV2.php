@@ -822,8 +822,8 @@ function buscarArticulo(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (response) {
-      if (response.status === "continue") {
-        // Producto ya procesado por el mismo usuario
+      if (response.status === "continue" || response.status === "success") {
+        // Continuar flujo normal y agregar producto a la tabla
         agregarArticulo(response.producto);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       } else if (response.status === "alert") {
@@ -839,10 +839,6 @@ function buscarArticulo(codigoEscaneado) {
             agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
           }
         });
-      } else if (response.status === "success") {
-        // Producto encontrado y procesado correctamente
-        agregarArticulo(response.producto);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       }
 
       limpiarCampo();
