@@ -7,20 +7,32 @@ $codigo = $_POST['codigoEscaneado'];
 $usuario = $row['Nombre_Apellidos']; 
 $sucursalbusqueda = $row['Fk_Sucursal'];
 
-// Verificar si el producto ya fue inventariado con los 3 criterios
-$sqlVerifica = "SELECT * FROM Inventarios_Procesados 
-                WHERE Cod_Barra = ? AND Fk_Sucursal = ? AND ProcesadoPor = ?";
+// Verificar si el producto ya fue inventariado por otro usuario
+$sqlVerifica = "SELECT ProcesadoPor FROM Inventarios_Procesados 
+                WHERE Cod_Barra = ? AND Fk_Sucursal = ?";
 $stmtVerifica = $conn->prepare($sqlVerifica);
-$stmtVerifica->bind_param("sss", $codigo, $sucursalbusqueda, $usuario);
+$stmtVerifica->bind_param("ss", $codigo, $sucursalbusqueda);
 $stmtVerifica->execute();
 $resultVerifica = $stmtVerifica->get_result();
 
 if ($resultVerifica->num_rows > 0) {
-    // Responder estado "continue" si ya existe con todos los criterios
-    $data = array("status" => "continue");
-    header('Content-Type: application/json');
-    echo json_encode($data);
-    exit;
+    $rowVerifica = $resultVerifica->fetch_assoc();
+    if ($rowVerifica['ProcesadoPor'] !== $usuario) {
+        // Si ya fue procesado por otro usuario
+        $data = array(
+            "status" => "alert",
+            "message" => "El producto ya fue inventariado por otro usuario: " . $rowVerifica['ProcesadoPor']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    } else {
+        // Si ya fue procesado por el mismo usuario
+        $data = array("status" => "continue");
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    }
 }
 
 // Buscar el producto en Stock_POS
