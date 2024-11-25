@@ -42,8 +42,8 @@ if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
         $empresa = $_POST['Empresa'];
 
         $query =  "INSERT INTO TicketsSoporte 
-        (Tipo_Problema, Descripcion, Fecha_Registro, Sucursal, Registro, AgregadoEl, ID_H_O_D, file_name) 
-        VALUES ('$tipoProblema', '$descripcion', '$fecha', '$sucursal', '$registro', NOW(), '$empresa', '$fileNames')";
+        (Tipo_Problema, Descripcion, Fecha_Registro, Sucursal, Registro, AgregadoEl, ID_H_O_D) 
+        VALUES ('$tipoProblema', '$descripcion', '$fecha', '$sucursal', '$registro', NOW(), '$empresa')";
         
         if (mysqli_query($conn, $query)) {
             $response = array("statusCode" => 200);
