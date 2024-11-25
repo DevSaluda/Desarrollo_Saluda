@@ -824,11 +824,8 @@ function buscarArticulo(codigoEscaneado) {
     success: function (response) {
       if (response.status === "continue") {
         // Producto ya procesado por el mismo usuario
-        Swal.fire({
-          icon: 'info',
-          title: 'Producto ya procesado',
-          text: 'Este producto ya fue inventariado por ti.'
-        });
+        agregarArticulo(response.producto);
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       } else if (response.status === "alert") {
         // Producto procesado por otro usuario o no encontrado
         Swal.fire({
