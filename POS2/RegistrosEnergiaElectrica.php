@@ -83,7 +83,7 @@ table td {
 
 <!-- Agrega este script al final de tu página justo antes de cerrar el cuerpo (</body>) -->
 <!-- Script para mostrar y ocultar el modal -->
-<script>
+<!-- <script>
     // Espera a que el documento esté completamente cargado
     $(document).ready(function() {
         // Muestra el modal al cargar la página
@@ -96,7 +96,7 @@ table td {
         window.location.href = 'https://saludapos.com/POS2/RegistrosEnergiaElectrica';
     }
 </script>
-
+ -->
 
   
   <!-- /.content-wrapper -->
