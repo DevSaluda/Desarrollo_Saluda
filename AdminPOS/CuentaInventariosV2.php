@@ -831,21 +831,28 @@ function buscarArticulo(codigoEscaneado) {
         agregarArticulo(response.producto); // Sumar cantidad al existente
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child')); // Actualizar diferencias
       } else if (response.status === "alert") {
-        // Producto no encontrado en el inventario de la sucursal
-        Swal.fire({
-          icon: 'warning',
-          title: 'Producto no encontrado',
-          text: response.message,
-          showCancelButton: true,
-          confirmButtonText: 'Agregar producto a la sucursal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
-          }
-        });
+    Swal.fire({
+      icon: 'warning',
+      title: 'Producto no encontrado',
+      text: response.message,
+      showCancelButton: true,
+      confirmButtonText: 'Agregar producto a la sucursal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
       }
-      limpiarCampo(); // Limpiar el campo de entrada siempre
-    },
+    });
+  } else if (response.status === "alert_escaneado") {
+    // Producto ya escaneado por otro usuario
+    Swal.fire({
+      icon: 'info',
+      title: 'Producto ya inventariado',
+      text: response.message,
+      confirmButtonText: 'Entendido'
+    });
+  }
+  limpiarCampo(); // Limpiar el campo de entrada siempre
+},
     error: function (error) {
       console.error('Error en la solicitud AJAX', error);
     }
