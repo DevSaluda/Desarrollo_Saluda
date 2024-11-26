@@ -1,62 +1,75 @@
-<div class="modal fade" id="RegistroMantenimientoModal" tabindex="-1" role="dialog" style="overflow-y: auto;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="Di" class="modal-dialog modal-lg modal-notify modal-success">
+<div class="modal fade" id="RegistroTicketSoporteModal" tabindex="-1" role="dialog" aria-labelledby="Titulo" aria-hidden="true" style="overflow-y: auto;">
+  <div class="modal-dialog modal-lg modal-notify modal-success">
     <div class="modal-content">
+      <!-- Encabezado -->
       <div class="modal-header">
-        <p class="heading lead" id="Titulo">Registro de Mantenimiento</p>
+        <h5 class="modal-title" id="Titulo">Registro de Ticket de Soporte</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
+      <!-- Mensaje informativo -->
       <div id="Mensaje" class="alert alert-info alert-styled-left text-blue-800 content-group">
         <span id="Aviso" class="text-semibold">Estimado usuario, verifique los campos antes de realizar alguna acción</span>
         <button type="button" class="close" data-dismiss="alert">×</button>
       </div>
+      
+      <!-- Cuerpo del modal -->
       <div class="modal-body">
-        <div class="text-center">
-          <form enctype="multipart/form-data" id="RegistroMantenimientoForm">
-            <div class="form-group">
-              <label for="tipoEquipo">Seleccione el tipo de equipo</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                </div>
-                <select class="form-control" name="tipoEquipo" id="tipoEquipo" required>
-                  <option value="">Seleccione...</option>
-                  <option value="Computadora">Computadora</option>
-                  <option value="Laptop">Laptop</option>
-                  <option value="Impresora">Impresora</option>
-                  <option value="Tablet">Tablet</option>
-                  <option value="Celular">Celular</option>
-                </select>
+        <form id="RegistroTicketSoporteForm" enctype="multipart/form-data">
+          <!-- Tipo de problema -->
+          <div class="form-group">
+            <label for="tipoProblema">Seleccione el tipo de problema</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-exclamation-triangle"></i></span>
               </div>
+              <select class="form-control" name="tipoProblema" id="tipoProblema" required>
+                <option value="">Seleccione...</option>
+                <option value="Conexión a internet">Conexión a internet</option>
+                <option value="Problema con impresora">Problema con impresora</option>
+                <option value="Actualización de software">Actualización de software</option>
+                <option value="Otro">Otro</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="Comentario">Comentario</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-comment"></i></span>
-                </div>
-                <textarea class="form-control" id="Comentario" name="Comentario" rows="5" style="resize: vertical;"></textarea>
+          </div>
+
+          <!-- Descripción de la problemática -->
+          <div class="form-group">
+            <label for="DescripcionProblematica">Descripción de la problemática</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-comment"></i></span>
               </div>
+              <textarea class="form-control" id="DescripcionProblematica" name="DescripcionProblematica" rows="5" style="resize: vertical;" placeholder="Describa la problemática con detalles relevantes" required></textarea>
             </div>
-            <div class="form-group">
-              <label for="file">Agregar imágenes</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-camera"></i></span>
-                </div>
-                <input type="file" class="form-control" name="file[]" id="file" multiple aria-describedby="basic-addon1">
+          </div>
+
+          <!-- Agregar imágenes -->
+          <div class="form-group">
+            <label for="file">Agregar imágenes</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-camera"></i></span>
               </div>
+              <input type="file" class="form-control" name="file[]" id="file" multiple aria-describedby="basic-addon1">
             </div>
-            <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
-            <input type="hidden" class="form-control" name="Registro" id="registro" value="<?php echo $row['Nombre_Apellidos']?>" readonly>
-            <input type="hidden" class="form-control" name="Sucursal" id="sucursal" value="<?php echo $row['Nombre_Sucursal']?>" readonly>
-            <input type="hidden" class="form-control" name="Empresa" id="Empresa" value="<?php echo $row['ID_H_O_D']?>" readonly>
-            <div class="text-center">
-              <button type="submit" name="submit_Mantenimiento" id="submit_Mantenimiento" class="btn btn-success">Confirmar datos <i class="fas fa-check"></i></button>
-            </div>
-          </form>
-        </div>
+          </div>
+
+          <!-- Campos ocultos -->
+          <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
+          <input type="hidden" name="Agregado_Por" value="<?php echo $row['Nombre_Apellidos']; ?>" readonly>
+          <input type="hidden" name="Sucursal" value="<?php echo $row['Nombre_Sucursal']; ?>" readonly>
+          <input type="hidden" name="Empresa" value="<?php echo $row['ID_H_O_D']; ?>" readonly>
+
+          <!-- Botón de envío -->
+          <div class="text-center">
+            <button type="submit" name="submitTicketSoporte" id="submitTicketSoporte" class="btn btn-success">
+              Guardar Ticket <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
