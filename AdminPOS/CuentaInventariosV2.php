@@ -824,7 +824,7 @@ function buscarArticulo(codigoEscaneado) {
     success: function (response) {
       if (response.status === "continue" || response.status === "success") {
         // Continuar flujo normal y agregar producto a la tabla
-        agregarArticulo(response.producto);
+        agregarArticulo(data);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       } else if (response.status === "alert") {
         // Producto procesado por otro usuario o no encontrado
