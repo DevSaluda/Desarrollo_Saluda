@@ -32,7 +32,7 @@ if ($resultVerifica->num_rows > 0) {
             "id" => $row['ID_Registro'],
             "codigo" => $row["Cod_Barra"],
             "descripcion" => $row["Nombre_Prod"],
-            "cantidad" => $nuevaCantidad,
+            "cantidad" => [1],
             "existencia" => $row["Cantidad"],
             "precio" => $row["Precio_Venta"]
         )
