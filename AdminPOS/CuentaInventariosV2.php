@@ -823,14 +823,14 @@ function buscarArticulo(codigoEscaneado) {
     dataType: 'json',
     success: function (response) {
       if (response.status === "continue" || response.status === "success") {
-        // Continuar flujo normal y agregar producto a la tabla
+        // Agregar producto a la tabla y continuar flujo normal
         agregarArticulo(response.producto);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       } else if (response.status === "alert") {
-        // Producto procesado por otro usuario o no encontrado
+        // Mostrar mensaje de alerta si no se encuentra el producto
         Swal.fire({
           icon: 'warning',
-          title: 'Atención',
+          title: 'No encontramos coincidencias',
           text: response.message,
           showCancelButton: true,
           confirmButtonText: 'Agregar producto a la sucursal'
@@ -841,13 +841,14 @@ function buscarArticulo(codigoEscaneado) {
         });
       }
 
-      limpiarCampo();
+      limpiarCampo(); // Limpiar el campo de entrada
     },
     error: function (error) {
       console.error('Error en la solicitud AJAX', error);
     }
   });
 }
+
 
 
 
