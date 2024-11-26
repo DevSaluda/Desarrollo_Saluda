@@ -825,7 +825,7 @@ function esCodigoBarrasValido(codigoEscaneado) {
     success: function (response) {
       if (response.status === "continue" || response.status === "success") {
         // Agregar producto a la tabla y continuar flujo normal
-        agregarArticulo(response.codigo);
+        agregarArticulo(response.articulo);
         calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       } else if (response.status === "alert") {
         // Mostrar mensaje de alerta si no se encuentra el producto
