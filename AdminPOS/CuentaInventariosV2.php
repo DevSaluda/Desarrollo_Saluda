@@ -814,7 +814,7 @@ function esCodigoBarrasValido(codigoEscaneado) {
 }
 
 
-  function buscarArticulo(codigoEscaneado) {
+function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
   $.ajax({
@@ -823,15 +823,19 @@ function esCodigoBarrasValido(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (response) {
-      if (response.status === "continue" || response.status === "success") {
-        // Agregar producto a la tabla y continuar flujo normal
-        agregarArticulo(response.articulo);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+      if (response.status === "success") {
+        // Producto encontrado y procesado correctamente
+        agregarArticulo(response.producto); // Agregar a la tabla
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child')); // Calcular diferencias
+      } else if (response.status === "continue") {
+        // Producto ya procesado por el mismo usuario
+        agregarArticulo(response.producto); // Sumar cantidad al existente
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child')); // Actualizar diferencias
       } else if (response.status === "alert") {
-        // Mostrar mensaje de alerta si no se encuentra el producto
+        // Producto no encontrado en el inventario de la sucursal
         Swal.fire({
           icon: 'warning',
-          title: 'No encontramos coincidencias',
+          title: 'Producto no encontrado',
           text: response.message,
           showCancelButton: true,
           confirmButtonText: 'Agregar producto a la sucursal'
@@ -841,15 +845,13 @@ function esCodigoBarrasValido(codigoEscaneado) {
           }
         });
       }
-
-      limpiarCampo(); // Limpiar el campo de entrada
+      limpiarCampo(); // Limpiar el campo de entrada siempre
     },
     error: function (error) {
       console.error('Error en la solicitud AJAX', error);
     }
   });
 }
-
 
 
 
