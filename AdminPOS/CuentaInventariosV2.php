@@ -1000,10 +1000,12 @@ function agregarArticulo(articulo) {
     return;
   }
 
+  // Verificar si el producto ya existe en la tabla
   let row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
   if (row.length) {
+    // Si ya existe, actualizar la cantidad
     let cantidadActual = parseInt(row.find('.cantidad input').val());
-    let nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+    let nuevaCantidad = cantidadActual + parseInt(articulo.cantidad); // Incrementar según lo devuelto por el servidor
     if (nuevaCantidad < 0) {
       mostrarMensaje('La cantidad no puede ser negativa');
       return;
