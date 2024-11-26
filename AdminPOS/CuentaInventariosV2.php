@@ -813,7 +813,6 @@ function esCodigoBarrasValido(codigoEscaneado) {
   return longitud >= 2 && longitud <= 13; // Ajusta el rango según sea necesario
 }
 
-
 function buscarArticulo(codigoEscaneado) {
   if (!codigoEscaneado.trim()) return; // No hacer nada si el código está vacío
 
@@ -852,6 +851,8 @@ function buscarArticulo(codigoEscaneado) {
     }
   });
 }
+
+
 
 
 
