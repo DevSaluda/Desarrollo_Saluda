@@ -46,18 +46,15 @@
             </div>
           </div>
 
-          <!-- Campo para cargar imágenes -->
           <div class="form-group">
-            <label for="file">Subir imágenes (opcional)</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-upload"></i></span>
+              <label for="file">Agregar imágenes</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-camera"></i></span>
+                </div>
+                <input type="file" class="form-control" name="file[]" id="file" multiple aria-describedby="basic-addon1">
               </div>
-              <input type="file" class="form-control" id="file" name="file[]" multiple aria-describedby="basic-addon1">
             </div>
-            <small class="form-text text-muted">Puede seleccionar varias imágenes (máximo 5MB por archivo).</small>
-          </div>
-
           <!-- Campos ocultos -->
           <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
           <input type="hidden" name="Agregado_Por" value="<?php echo $row['Nombre_Apellidos']; ?>" readonly>
