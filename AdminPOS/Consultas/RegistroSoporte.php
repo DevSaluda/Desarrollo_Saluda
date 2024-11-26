@@ -8,17 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['tipoProblema']) && !empty($_POST['DescripcionProblematica'])) {
         $uploadedFiles = [];
 
-        if (!empty($_FILES['ImagenesSoporte']['name'][0])) {
-            foreach ($_FILES['ImagenesSoporte']['name'] as $key => $val) {
-                $fileName = time() . '_' . $_FILES['ImagenesSoporte']['name'][$key];
+        if (!empty($_FILES['file']['name'][0])) {
+            foreach ($_FILES['file']['name'] as $key => $val) {
+                $fileName = time() . '_' . $_FILES['file']['name'][$key];
                 $valid_extensions = ["jpeg", "jpg", "png"];
                 $file_extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
                 if (
                     in_array($file_extension, $valid_extensions) &&
-                    ($_FILES['ImagenesSoporte']['size'][$key] <= 5 * 1024 * 1024) // Máximo 5 MB
+                    ($_FILES['file']['size'][$key] <= 5 * 1024 * 1024) // Máximo 5 MB
                 ) {
-                    $sourcePath = $_FILES['ImagenesSoporte']['tmp_name'][$key];
+                    $sourcePath = $_FILES['file']['tmp_name'][$key];
                     $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/TicketsSoporte/" . $fileName;
 
                     if (move_uploaded_file($sourcePath, $targetPath)) {
