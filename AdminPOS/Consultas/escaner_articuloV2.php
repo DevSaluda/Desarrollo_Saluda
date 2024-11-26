@@ -3,7 +3,7 @@ include_once "db_connection.php";
 include_once "Consultas.php";
 
 $codigo = $_POST['codigoEscaneado'];
-$usuario = $row['Nombre_Apellidos']; 
+$usuario = $row['Nombre_Apellidos'];
 $sucursalbusqueda = $row['Fk_Sucursal'];
 
 // Verificar si el producto ya fue inventariado por este usuario en esta sucursal
@@ -17,7 +17,8 @@ $resultVerifica = $stmtVerifica->get_result();
 if ($resultVerifica->num_rows > 0) {
     // Producto ya procesado por este usuario, actualizar la cantidad
     $row = $resultVerifica->fetch_assoc();
-    $nuevaCantidad = $row['Cantidad'] + 1;
+    $cantidadActual = $row['Cantidad'];
+    $nuevaCantidad = $cantidadActual + 1; // Incrementar en 1
 
     $sqlUpdate = "UPDATE Inventarios_Procesados 
                   SET Cantidad = ?, Fecha_Inventario = NOW()
@@ -26,14 +27,15 @@ if ($resultVerifica->num_rows > 0) {
     $stmtUpdate->bind_param("ii", $nuevaCantidad, $row['ID_Registro']);
     $stmtUpdate->execute();
 
+    // Responder con los datos actualizados
     $data = array(
         "status" => "continue",
         "producto" => array(
             "id" => $row['ID_Registro'],
             "codigo" => $row["Cod_Barra"],
             "descripcion" => $row["Nombre_Prod"],
-            "cantidad" => $nuevaCantidad,
-            "existencia" => $row["Cantidad"],
+            "cantidad" => $nuevaCantidad, // Enviar la nueva cantidad
+            "existencia" => $row["Cantidad"], // Existencia previa, si aplica
             "precio" => $row["Precio_Venta"]
         )
     );
