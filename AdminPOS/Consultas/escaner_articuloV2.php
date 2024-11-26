@@ -42,6 +42,24 @@ if ($resultVerifica->num_rows > 0) {
     exit;
 }
 
+// Verificar si el producto ya fue inventariado por otro usuario en esta sucursal
+$sqlVerificaOtroUsuario = "SELECT * FROM Inventarios_Procesados 
+                           WHERE Cod_Barra = ? AND Fk_Sucursal = ? AND ProcesadoPor != ?";
+$stmtVerificaOtroUsuario = $conn->prepare($sqlVerificaOtroUsuario);
+$stmtVerificaOtroUsuario->bind_param("sss", $codigo, $sucursalbusqueda, $usuario);
+$stmtVerificaOtroUsuario->execute();
+$resultVerificaOtroUsuario = $stmtVerificaOtroUsuario->get_result();
+
+if ($resultVerificaOtroUsuario->num_rows > 0) {
+    // Producto ya procesado por otro usuario
+    $data = array(
+        "status" => "alert_escaneado",
+        "message" => "Este producto ya fue inventariado por otro usuario."
+    );
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
 // Buscar el producto en Stock_POS si no fue procesado previamente
 $sql = "SELECT Cod_Barra, Fk_sucursal, ID_Prod_POS, Nombre_Prod, Precio_Venta, Lote, Existencias_R
         FROM Stock_POS
