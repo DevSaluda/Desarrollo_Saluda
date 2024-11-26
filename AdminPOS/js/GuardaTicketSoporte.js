@@ -35,28 +35,32 @@ $('document').ready(function($) {
                 success: function(dataResult) {
                     try {
                         const result = JSON.parse(dataResult);
-                
+
                         if (result.statusCode === 200) {
-                            $("#submit_Tickets").html("Enviado <i class='fas fa-check'></i>");
+                            $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
                             $("#RegistroTicketsForm")[0].reset();
-                            $("#RegistroTicketsVentanaModal").modal('hide');
+                            $("#RegistroTicketSoporteModal").modal('hide');
                             $('#Exito').modal('toggle');
                             setTimeout(function() {
                                 $('#Exito').modal('hide');
                             }, 2000);
                         } else {
-                            $("#submit_Tickets").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                            const errorMessage = result.message || "Algo no salió bien...";
+                            $("#submitTicketSoporte").html(`${errorMessage} <i class='fas fa-exclamation-triangle'></i>`);
                             $('#ErrorData').modal('toggle');
                             setTimeout(function() {
-                                $("#submit_Tickets").html("Guardar <i class='fas fa-save'></i>");
+                                $("#submitTicketSoporte").html("Guardar <i class='fas fa-save'></i>");
                             }, 3000);
                         }
                     } catch (e) {
-                        console.error("Error al parsear JSON:", dataResult);
-                        $("#submit_Tickets").html("Error inesperado <i class='fas fa-exclamation-triangle'></i>");
+                        console.error("Error al parsear JSON:", dataResult, e);
+                        $("#submitTicketSoporte").html("Error inesperado <i class='fas fa-exclamation-triangle'></i>");
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", status, error);
+                    $("#submitTicketSoporte").html("Error en la conexión <i class='fas fa-exclamation-triangle'></i>");
                 }
-                
             });
         });
         return false;
