@@ -60,6 +60,7 @@ if ($resultVerificaOtroUsuario->num_rows > 0) {
     echo json_encode($data);
     exit;
 }
+
 // Buscar el producto en Stock_POS si no fue procesado previamente
 $sql = "SELECT Cod_Barra, Fk_sucursal, ID_Prod_POS, Nombre_Prod, Precio_Venta, Lote, Existencias_R
         FROM Stock_POS
@@ -102,7 +103,9 @@ if ($result->num_rows > 0) {
     echo json_encode($data);
 }
 
+// Cerrar conexiones
 $stmtVerifica->close();
+$stmtVerificaOtroUsuario->close();
 $stmt->close();
 if (isset($stmtInserta)) $stmtInserta->close();
 if (isset($stmtUpdate)) $stmtUpdate->close();
