@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ($_FILES['file']['size'][$key] <= 5 * 1024 * 1024) // Máximo 5 MB
                 ) {
                     $sourcePath = $_FILES['file']['tmp_name'][$key];
-                    $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/TicketsSoporte/" . $fileName;
+                    $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/RegistroMantenimiento/" . $fileName;
 
                     if (move_uploaded_file($sourcePath, $targetPath)) {
                         $uploadedFiles[] = $fileName;
