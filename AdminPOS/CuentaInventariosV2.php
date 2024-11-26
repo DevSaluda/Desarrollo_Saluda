@@ -822,10 +822,13 @@ function buscarArticulo(codigoEscaneado) {
     data: { codigoEscaneado: codigoEscaneado },
     dataType: 'json',
     success: function (response) {
-      if (response.status === "continue" || response.status === "success") {
-        // Continuar flujo normal y agregar producto a la tabla
-        agregarArticulo(data);
-        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
+      if (response.status === "continue") {
+        // Producto ya procesado por el mismo usuario
+        Swal.fire({
+          icon: 'info',
+          title: 'Producto ya procesado',
+          text: 'Este producto ya fue inventariado por ti.'
+        });
       } else if (response.status === "alert") {
         // Producto procesado por otro usuario o no encontrado
         Swal.fire({
@@ -839,6 +842,10 @@ function buscarArticulo(codigoEscaneado) {
             agregarCodigoInexistente(codigoEscaneado, Fk_sucursal);
           }
         });
+      } else if (response.status === "success") {
+        // Producto encontrado y procesado correctamente
+        agregarArticulo(response.producto);
+        calcularDiferencia($('#tablaAgregarArticulos tbody tr:last-child'));
       }
 
       limpiarCampo();
