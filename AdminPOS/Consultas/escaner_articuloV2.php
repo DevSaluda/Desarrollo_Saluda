@@ -2,87 +2,91 @@
 include_once "db_connection.php";
 include_once "Consultas.php";
 
+$codigo = $_POST['codigoEscaneado'];
+$usuario = $row['Nombre_Apellidos']; 
+$sucursalbusqueda = $row['Fk_Sucursal'];
 
+// Verificar si el producto ya fue inventariado por este usuario en esta sucursal
+$sqlVerifica = "SELECT * FROM Inventarios_Procesados 
+                WHERE Cod_Barra = ? AND Fk_Sucursal = ? AND ProcesadoPor = ?";
+$stmtVerifica = $conn->prepare($sqlVerifica);
+$stmtVerifica->bind_param("sss", $codigo, $sucursalbusqueda, $usuario);
+$stmtVerifica->execute();
+$resultVerifica = $stmtVerifica->get_result();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $codigo = $_POST['codigo'] ?? '';
+if ($resultVerifica->num_rows > 0) {
+    // Producto ya procesado por este usuario, actualizar la cantidad
+    $row = $resultVerifica->fetch_assoc();
+    $nuevaCantidad = $row['Cantidad'] + 1;
 
-    if (empty($codigo)) {
-        echo json_encode(['status' => 'error', 'message' => 'El código es obligatorio.']);
-        exit;
-    }
+    $sqlUpdate = "UPDATE Inventarios_Procesados 
+                  SET Cantidad = ?, Fecha_Inventario = NOW()
+                  WHERE ID_Registro = ?";
+    $stmtUpdate = $conn->prepare($sqlUpdate);
+    $stmtUpdate->bind_param("ii", $nuevaCantidad, $row['ID_Registro']);
+    $stmtUpdate->execute();
 
-    // Verificar si el producto ya existe en la tabla de inventarios procesados
-    $sqlVerifica = "SELECT * FROM Inventarios_Procesados WHERE Cod_Barra = ?";
-    $stmtVerifica = $conn->prepare($sqlVerifica);
-    $stmtVerifica->bind_param("s", $codigo);
-    $stmtVerifica->execute();
-    $resultVerifica = $stmtVerifica->get_result();
-
-    if ($resultVerifica->num_rows > 0) {
-        // Si existe, actualizar la cantidad
-        $row = $resultVerifica->fetch_assoc();
-        $cantidadActual = $row['Cantidad'];
-        $nuevaCantidad = $cantidadActual + 1;
-
-        $sqlUpdate = "UPDATE Inventarios_Procesados 
-                      SET Cantidad = ?, Fecha_Inventario = NOW()
-                      WHERE ID_Registro = ?";
-        $stmtUpdate = $conn->prepare($sqlUpdate);
-        $stmtUpdate->bind_param("ii", $nuevaCantidad, $row['ID_Registro']);
-        $stmtUpdate->execute();
-
-        // Enviar respuesta con los datos actualizados
-        echo json_encode([
-            'status' => 'continue',
-            'producto' => [
-                'id' => $row['ID_Registro'],
-                'codigo' => $row['Cod_Barra'],
-                'descripcion' => $row['Nombre_Prod'],
-                'cantidad' => $nuevaCantidad,
-                'existencia' => $row['Stock'],
-                'precio' => $row['Precio_Venta']
-            ]
-        ]);
-    } else {
-        // Si no existe, agregar un nuevo registro
-        $sqlProducto = "SELECT * FROM Productos WHERE Cod_Barra = ?";
-        $stmtProducto = $conn->prepare($sqlProducto);
-        $stmtProducto->bind_param("s", $codigo);
-        $stmtProducto->execute();
-        $resultProducto = $stmtProducto->get_result();
-
-        if ($resultProducto->num_rows > 0) {
-            $producto = $resultProducto->fetch_assoc();
-
-            $sqlInsert = "INSERT INTO Inventarios_Procesados (Cod_Barra, Nombre_Prod, Cantidad, Stock, Precio_Venta, Fecha_Inventario) 
-                          VALUES (?, ?, ?, ?, ?, NOW())";
-            $stmtInsert = $conn->prepare($sqlInsert);
-            $cantidadInicial = 1;
-            $stmtInsert->bind_param(
-                "ssiid",
-                $producto['Cod_Barra'],
-                $producto['Nombre_Prod'],
-                $cantidadInicial,
-                $producto['Stock'],
-                $producto['Precio_Venta']
-            );
-            $stmtInsert->execute();
-
-            echo json_encode([
-                'status' => 'success',
-                'producto' => [
-                    'id' => $conn->insert_id,
-                    'codigo' => $producto['Cod_Barra'],
-                    'descripcion' => $producto['Nombre_Prod'],
-                    'cantidad' => $cantidadInicial,
-                    'existencia' => $producto['Stock'],
-                    'precio' => $producto['Precio_Venta']
-                ]
-            ]);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Producto no encontrado.']);
-        }
-    }
+    $data = array(
+        "status" => "continue",
+        "producto" => array(
+            "id" => $row['ID_Registro'],
+            "codigo" => $row["Cod_Barra"],
+            "descripcion" => $row["Nombre_Prod"],
+            "cantidad" => $nuevaCantidad,
+            "existencia" => $row["Cantidad"],
+            "precio" => $row["Precio_Venta"]
+        )
+    );
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
 }
+
+// Buscar el producto en Stock_POS si no fue procesado previamente
+$sql = "SELECT Cod_Barra, Fk_sucursal, ID_Prod_POS, Nombre_Prod, Precio_Venta, Lote, Existencias_R
+        FROM Stock_POS
+        WHERE Cod_Barra = ? AND Fk_sucursal = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $codigo, $sucursalbusqueda);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // Producto encontrado, insertar como nuevo en Inventarios_Procesados
+    $row = $result->fetch_assoc();
+
+    $sqlInserta = "INSERT INTO Inventarios_Procesados (Cod_Barra, Fk_Sucursal, Cantidad, Fecha_Inventario, ProcesadoPor)
+                   VALUES (?, ?, ?, NOW(), ?)";
+    $stmtInserta = $conn->prepare($sqlInserta);
+    $cantidadInicial = 1;
+    $stmtInserta->bind_param("ssis", $codigo, $sucursalbusqueda, $cantidadInicial, $usuario);
+    $stmtInserta->execute();
+
+    $data = array(
+        "status" => "success",
+        "producto" => array(
+            "id" => $stmtInserta->insert_id,
+            "codigo" => $row["Cod_Barra"],
+            "descripcion" => $row["Nombre_Prod"],
+            "cantidad" => $cantidadInicial,
+            "existencia" => $row["Existencias_R"],
+            "precio" => $row["Precio_Venta"],
+            "lote" => $row["Lote"]
+        )
+    );
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+} else {
+    // Producto no encontrado en Stock_POS
+    $data = array("status" => "alert", "message" => "El producto no está asignado en esta sucursal.");
+    header('Content-Type: application/json');
+    echo json_encode($data);
+}
+
+$stmtVerifica->close();
+$stmt->close();
+if (isset($stmtInserta)) $stmtInserta->close();
+if (isset($stmtUpdate)) $stmtUpdate->close();
+$conn->close();
 ?>
