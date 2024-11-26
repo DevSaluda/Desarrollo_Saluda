@@ -1,62 +1,60 @@
 <?php
 include_once 'db_connection.php';
+header('Content-Type: application/json');
 
-if (!empty($_POST['name']) || !empty($_FILES['file']['name'])) {
-    $uploadedFiles = [];
+$response = ["statusCode" => 500, "message" => "Error desconocido"]; // Valor predeterminado
 
-    foreach ($_FILES['file']['name'] as $key => $val) {
-        $fileName = time() . '_' . $_FILES['file']['name'][$key];
-        $valid_extensions = array("jpeg", "jpg", "png");
-        $temporary = explode(".", $_FILES["file"]["name"][$key]);
-        $file_extension = end($temporary);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['tipoProblema']) && !empty($_POST['DescripcionProblematica'])) {
+        $uploadedFiles = [];
 
-        if (
-            (
-                ($_FILES["file"]["type"][$key] == "image/png") ||
-                ($_FILES["file"]["type"][$key] == "image/jpg") ||
-                ($_FILES["file"]["type"][$key] == "image/jpeg")
-            ) && in_array($file_extension, $valid_extensions)
-        ) {
-            $sourcePath = $_FILES['file']['tmp_name'][$key];
-            $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/TicketsSoporte/" . $fileName;
+        if (!empty($_FILES['file']['name'][0])) {
+            foreach ($_FILES['file']['name'] as $key => $val) {
+                $fileName = time() . '_' . $_FILES['file']['name'][$key];
+                $valid_extensions = ["jpeg", "jpg", "png"];
+                $file_extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-            if (move_uploaded_file($sourcePath, $targetPath)) {
-                $uploadedFiles[] = $fileName;
-            } else {
-                $response = array("statusCode" => 202, "message" => "Error al mover el archivo: $targetPath");
-                echo json_encode($response);
-                exit;
+                if (
+                    in_array($file_extension, $valid_extensions) &&
+                    ($_FILES['file']['size'][$key] <= 5 * 1024 * 1024) // Máximo 5 MB
+                ) {
+                    $sourcePath = $_FILES['file']['tmp_name'][$key];
+                    $targetPath = $_SERVER['DOCUMENT_ROOT'] . "/RegistroMantenimiento/" . $fileName;
+
+                    if (move_uploaded_file($sourcePath, $targetPath)) {
+                        $uploadedFiles[] = $fileName;
+                    } else {
+                        $response = ["statusCode" => 202, "message" => "Error al mover el archivo: $fileName"];
+                        echo json_encode($response);
+                        exit;
+                    }
+                }
             }
         }
-    }
 
-    if (!empty($uploadedFiles)) {
-        $fileNames = implode('|', $uploadedFiles);
+        // Inserción en la base de datos
+        $tipoProblema = mysqli_real_escape_string($conn, $_POST['tipoProblema']);
+        $descripcion = mysqli_real_escape_string($conn, $_POST['DescripcionProblematica']);
+        $fecha = mysqli_real_escape_string($conn, $_POST['Fecha']);
+        $registro = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
+        $sucursal = mysqli_real_escape_string($conn, $_POST['Sucursal']);
+        $empresa = mysqli_real_escape_string($conn, $_POST['Empresa']);
 
-        // Inserta la información en la base de datos
-        $tipoProblema = $_POST['tipoProblema'];
-        $descripcion = $_POST['DescripcionProblematica'];
-        $fecha = $_POST['Fecha'];
-        $registro = $_POST['Registro'];
-        $sucursal = $_POST['Sucursal'];
-        $empresa = $_POST['Empresa'];
+        $query = "INSERT INTO TicketsSoporte 
+            (Tipo_Problema, Descripcion, Fecha_Registro, Sucursal, Registro, AgregadoEl, ID_H_O_D) 
+            VALUES ('$tipoProblema', '$descripcion', '$fecha', '$sucursal', '$registro', NOW(), '$empresa')";
 
-        $query =  "INSERT INTO TicketsSoporte 
-        (Tipo_Problema, Descripcion, Fecha_Registro, Sucursal, Registro, AgregadoEl, ID_H_O_D) 
-        VALUES ('$tipoProblema', '$descripcion', '$fecha', '$sucursal', '$registro', NOW(), '$empresa')";
-        
         if (mysqli_query($conn, $query)) {
-            $response = array("statusCode" => 200);
+            $response = ["statusCode" => 200, "message" => "Ticket registrado correctamente"];
         } else {
-            $response = array("statusCode" => 201);
+            $response = ["statusCode" => 201, "message" => "Error al guardar en la base de datos"];
         }
     } else {
-        $response = array("statusCode" => 201);
+        $response = ["statusCode" => 400, "message" => "Campos requeridos incompletos"];
     }
-    echo json_encode($response);
+} else {
+    $response = ["statusCode" => 405, "message" => "Método no permitido"];
 }
-// Al final del archivo PHP
-header('Content-Type: application/json'); // Asegúrate de que el contenido sea JSON
-echo json_encode($response); // Asegúrate de que $response exista y sea un array asociativo o similar
 
+echo json_encode($response);
 ?>

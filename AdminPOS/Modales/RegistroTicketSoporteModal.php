@@ -25,7 +25,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-exclamation-triangle"></i></span>
               </div>
-              <select class="form-control" name="Problematica" id="tipoProblema" required>
+              <select class="form-control" name="tipoProblema" id="tipoProblema" required>
                 <option value="">Seleccione...</option>
                 <option value="Conexión a internet">Conexión a internet</option>
                 <option value="Problema con impresora">Problema con impresora</option>
@@ -48,12 +48,12 @@
 
           <!-- Campo para cargar imágenes -->
           <div class="form-group">
-            <label for="ImagenesSoporte">Subir imágenes (opcional)</label>
+            <label for="file">Subir imágenes (opcional)</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-upload"></i></span>
               </div>
-              <input type="file" class="form-control" id="ImagenesSoporte" name="ImagenesSoporte[]" accept="image/*" multiple>
+              <input type="file" class="form-control" id="file" name="file[]" multiple aria-describedby="basic-addon1">
             </div>
             <small class="form-text text-muted">Puede seleccionar varias imágenes (máximo 5MB por archivo).</small>
           </div>
@@ -66,7 +66,7 @@
 
           <!-- Botón de envío -->
           <div class="text-center">
-            <button type="submit" id="submitTicketSoporte" class="btn btn-success">
+            <button type="submit" name= 'submitTicketSoporte' id="submitTicketSoporte" class="btn btn-success">
               Guardar Ticket <i class="fas fa-check"></i>
             </button>
           </div>
