@@ -46,15 +46,7 @@
             </div>
           </div>
 
-          <div class="form-group">
-              <label for="file">Agregar imágenes</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-camera"></i></span>
-                </div>
-                <input type="file" class="form-control" name="file[]" id="file" multiple aria-describedby="basic-addon1">
-              </div>
-            </div>
+          
           <!-- Campos ocultos -->
           <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
           <input type="hidden" name="Agregado_Por" value="<?php echo $row['Nombre_Apellidos']; ?>" readonly>
