@@ -1,7 +1,8 @@
 $('document').ready(function($) {
-    $("#RegistroTicketsForm").validate({
+    // Validación del formulario
+    $("#RegistroTicketSoporteForm").validate({
         rules: {
-            tipoProblema: {
+            Problematica: {
                 required: true,
             },
             DescripcionProblematica: {
@@ -9,7 +10,7 @@ $('document').ready(function($) {
             }
         },
         messages: {
-            tipoProblema: {
+            Problematica: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Seleccione un tipo de problema",
             },
             DescripcionProblematica: {
@@ -18,10 +19,13 @@ $('document').ready(function($) {
         },
         submitHandler: submitForm
     });
+    
 
+    // Manejo del envío del formulario
     function submitForm() {
-        $("#RegistroTicketsForm").on('submit', function(e) {
-            e.preventDefault();
+        $("#RegistroTicketSoporteForm").on('submit', function(e) {
+            e.preventDefault(); // Evita el comportamiento predeterminado del formulario
+
             $.ajax({
                 type: 'POST',
                 url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php',
@@ -33,36 +37,31 @@ $('document').ready(function($) {
                     $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
                 },
                 success: function(dataResult) {
-                    try {
-                        const result = JSON.parse(dataResult);
+                    const result = JSON.parse(dataResult);
 
-                        if (result.statusCode === 200) {
-                            $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
-                            $("#RegistroTicketsForm")[0].reset();
-                            $("#RegistroTicketSoporteModal").modal('hide');
-                            $('#Exito').modal('toggle');
-                            setTimeout(function() {
-                                $('#Exito').modal('hide');
-                            }, 2000);
-                        } else {
-                            const errorMessage = result.message || "Algo no salió bien...";
-                            $("#submitTicketSoporte").html(`${errorMessage} <i class='fas fa-exclamation-triangle'></i>`);
-                            $('#ErrorData').modal('toggle');
-                            setTimeout(function() {
-                                $("#submitTicketSoporte").html("Guardar <i class='fas fa-save'></i>");
-                            }, 3000);
-                        }
-                    } catch (e) {
-                        console.error("Error al parsear JSON:", dataResult, e);
-                        $("#submitTicketSoporte").html("Error inesperado <i class='fas fa-exclamation-triangle'></i>");
+                    if (result.statusCode === 200) {
+                        $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
+                        $("#RegistroTicketSoporteForm")[0].reset();
+                        $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
+                        $('#Exito').modal('toggle'); // Muestra modal de éxito
+                        setTimeout(function() {
+                            $('#Exito').modal('hide');
+                        }, 2000);
+                    } else {
+                        $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                        $('#ErrorData').modal('toggle'); // Muestra modal de error
+                        setTimeout(function() {
+                            $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
+                        }, 3000);
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    $("#submitTicketSoporte").html("Error en la conexión <i class='fas fa-exclamation-triangle'></i>");
+                error: function() {
+                    $("#submitTicketSoporte").html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
                 }
             });
         });
-        return false;
+        return false; // Detiene el envío predeterminado
     }
+
+    
 });
