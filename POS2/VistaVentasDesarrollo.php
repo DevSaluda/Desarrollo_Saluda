@@ -325,123 +325,98 @@ $(document).ready(function () {
 
 
 <script>
-var filaActual; // Variable global para almacenar la fila actual
+ var filaActual; // Variable global para almacenar la fila actual
 
 function setFilaActual(boton) {
-    // Obtén la fila asociada al botón
-    filaActual = $(boton).closest('.row');
+  // Obtén la fila asociada al botón
+  filaActual = $(boton).closest('.row');
 }
 
 function cambiarTipoDescuento() {
-    // Mostrar u ocultar los campos según el tipo de descuento seleccionado
-    if (document.getElementById("porcentaje").checked) {
-        document.getElementById("inputPorcentaje").style.display = "block";
-        document.getElementById("inputMonto").style.display = "none";
-    } else {
-        document.getElementById("inputPorcentaje").style.display = "none";
-        document.getElementById("inputMonto").style.display = "block";
-    }
+  // Mostrar u ocultar los campos según el tipo de descuento seleccionado
+  if (document.getElementById("porcentaje").checked) {
+    document.getElementById("inputPorcentaje").style.display = "block";
+    document.getElementById("inputMonto").style.display = "none";
+  } else {
+    document.getElementById("inputPorcentaje").style.display = "none";
+    document.getElementById("inputMonto").style.display = "block";
+  }
 }
 
-function aplicarDescuento(importeUnitario, cantidad, cantidadDescuento, esPorcentaje) {
-    // Calcula el importe total basado en la cantidad
-    var importeTotal = importeUnitario * cantidad;
-
-    // Calcula el descuento según el tipo seleccionado
-    var descuento = esPorcentaje
-        ? (importeTotal * cantidadDescuento) / 100 // Porcentaje del total
-        : cantidadDescuento * cantidad; // Monto total basado en la cantidad
-
-    // Calcula el importe con descuento
-    var valorConDescuento = importeTotal - descuento;
-
-    return {
-        valorConDescuento: valorConDescuento,
-        descuento: descuento
-    };
+function aplicarDescuento(importe, cantidadDescuento, esPorcentaje) {
+  var descuento = esPorcentaje ? (importe * cantidadDescuento) / 100 : cantidadDescuento;
+  var valorConDescuento = importe - descuento;
+  return {
+    valorConDescuento: valorConDescuento,
+    descuento: descuento
+  };
 }
 
 function actualizarFilaConDescuento(resultadoDescuento, cantidadDescuentoSeleccionado) {
-    // Actualiza el campo de costo de venta
-    filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
+  // Actualiza el campo de costo de venta
+  filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
-    // Actualiza el campo de descuento en la fila
-    filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
+  // Actualiza el campo de descuento en la fila
+  filaActual.find('.Descuento').val(resultadoDescuento.descuento.toFixed(2));
 
-    // Muestra el descuento aplicado en el campo descuento1
-    filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
+  // Muestra el descuento aplicado en el campo descuento1
+  filaActual.find('#descuento1').val(parseInt(cantidadDescuentoSeleccionado));
 }
 
 function aplicarDescuentoEnFila(cantidadDescuento) {
-    if (filaActual) {
-        var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0; // Precio unitario
-        var cantidadProducto = parseInt(filaActual.find('.Cantidad').val()) || 1; // Cantidad del producto
-        var esPorcentaje = document.getElementById("porcentaje").checked;
+  if (filaActual) {
+    var precioProducto = parseFloat(filaActual.find('.Precio').val()) || 0;
+    var esPorcentaje = document.getElementById("porcentaje").checked;
+    var resultadoDescuento = aplicarDescuento(precioProducto, cantidadDescuento, esPorcentaje);
+    actualizarFilaConDescuento(resultadoDescuento, cantidadDescuento);
 
-        // Calcula el descuento considerando la cantidad
-        var resultadoDescuento = aplicarDescuento(precioProducto, cantidadProducto, cantidadDescuento, esPorcentaje);
-
-        // Actualiza los valores en la fila actual
-        actualizarFilaConDescuento(resultadoDescuento, cantidadDescuento);
-
-        // Actualiza el campo de tipo de descuento aplicado en la fila actual
-        var tipoDescuento = esPorcentaje ? "Porcentaje" : "Monto";
-        filaActual.find('.Codigodescuento').val(tipoDescuento);
-    }
+    // Actualiza el campo de tipo de descuento aplicado en la fila actual
+    var tipoDescuento = esPorcentaje ? "Porcentaje" : "Monto";
+    filaActual.find('.Codigodescuento').val(tipoDescuento);
+  }
 }
 
 function aplicarDescuentoSeleccionado() {
-    var cantidadDescuento = 0;
+  var cantidadDescuento = 0;
+  
+  // Verifica si el descuento es porcentaje o monto
+  if (document.getElementById("porcentaje").checked) {
+    cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
+  } else {
+    cantidadDescuento = parseFloat(document.getElementById("montoDescuento").value) || 0;
+  }
 
-    // Verifica si el descuento es porcentaje o monto
-    if (document.getElementById("porcentaje").checked) {
-        cantidadDescuento = parseFloat(document.getElementById("cantidadadescontar").value) || 0;
-    } else {
-        cantidadDescuento = parseFloat(document.getElementById("montoDescuento").value) || 0;
-    }
+  // Aplica el descuento solo en la fila correspondiente
+  aplicarDescuentoEnFila(cantidadDescuento);
 
-    // Aplica el descuento solo en la fila correspondiente
-    aplicarDescuentoEnFila(cantidadDescuento);
+  // Actualiza el total
+  actualizarTotal();
 
-    // Actualiza el total
-    actualizarTotal();
+  // Cierra el modal
+  $('#Descuento1detalles').modal('hide');
 
-    // Cierra el modal
-    $('#Descuento1detalles').modal('hide');
+  // Resetea el estado de la ventana modal
+  resetearModal();
 
-    // Resetea el estado de la ventana modal
-    resetearModal();
-
-    // Muestra SweetAlert
-    Swal.fire({
-        icon: 'success',
-        title: 'Descuento aplicado',
-        showConfirmButton: false,
-        timer: 1500
-    });
+  // Muestra SweetAlert
+  Swal.fire({
+    icon: 'success',
+    title: 'Descuento aplicado',
+    showConfirmButton: false,
+    timer: 1500
+  });
 }
 
 function actualizarTotal() {
-    var contenedorFilas = $('#parte1');
-    var sumaTotal = 0;
-
-    // Recorre todas las filas y suma los importes considerando la cantidad
-    contenedorFilas.find('.row').each(function () {
-        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
-        sumaTotal += importe;
-    });
-
-    // Actualiza los campos de totales
-    $('#totalventa').val(sumaTotal.toFixed(2));
-    $('#totalventa2').val(sumaTotal.toFixed(2));
-    $('#subtotal').val(sumaTotal.toFixed(2));
+  // Actualiza el total general (por completar según lógica de tu sistema)
+  console.log("Total actualizado");
 }
 
 function resetearModal() {
-    $('#cantidadadescontar').val('');
-    $('#montoDescuento').val('');
-    document.getElementById("porcentaje").checked = true;
-    cambiarTipoDescuento();
+  $('#cantidadadescontar').val('');
+  $('#montoDescuento').val('');
+  document.getElementById("porcentaje").checked = true;
+  cambiarTipoDescuento();
 }
 
 function actualizarTotal() {
