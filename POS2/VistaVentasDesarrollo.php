@@ -325,7 +325,7 @@ $(document).ready(function () {
 
 
 <script>
- var filaActual; // Variable global para almacenar la fila actual
+var filaActual; // Variable global para almacenar la fila actual
 
 function setFilaActual(boton) {
     // Obtén la fila asociada al botón
