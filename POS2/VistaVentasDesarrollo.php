@@ -347,8 +347,10 @@ function aplicarDescuento(importeUnitario, cantidad, cantidadDescuento, esPorcen
     // Calcula el importe total basado en la cantidad
     var importeTotal = importeUnitario * cantidad;
 
-    // Calcula el descuento (porcentaje o monto fijo)
-    var descuento = esPorcentaje ? (importeTotal * cantidadDescuento) / 100 : cantidadDescuento * cantidad;
+    // Calcula el descuento según el tipo seleccionado
+    var descuento = esPorcentaje
+        ? (importeTotal * cantidadDescuento) / 100 // Porcentaje del total
+        : cantidadDescuento * cantidad; // Monto total basado en la cantidad
 
     // Calcula el importe con descuento
     var valorConDescuento = importeTotal - descuento;
@@ -360,7 +362,7 @@ function aplicarDescuento(importeUnitario, cantidad, cantidadDescuento, esPorcen
 }
 
 function actualizarFilaConDescuento(resultadoDescuento, cantidadDescuentoSeleccionado) {
-    // Actualiza el campo de monto real (precio total con descuento)
+    // Actualiza el campo de costo de venta
     filaActual.find('.montoreal').val(resultadoDescuento.valorConDescuento.toFixed(2));
 
     // Actualiza el campo de descuento en la fila
@@ -441,7 +443,6 @@ function resetearModal() {
     document.getElementById("porcentaje").checked = true;
     cambiarTipoDescuento();
 }
-
 
 function actualizarTotal() {
     var contenedorFilas = $('#parte1');
