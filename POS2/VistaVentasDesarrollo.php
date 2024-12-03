@@ -425,9 +425,8 @@ function actualizarTotal() {
 
     // Recorre todas las filas y suma los importes considerando la cantidad
     contenedorFilas.find('.row').each(function () {
-        var cantidad = parseInt($(this).find('.Cantidad').val()) || 1;
-        var importeUnitario = parseFloat($(this).find('.montoreal').val()) || 0;
-        sumaTotal += importeUnitario * cantidad;
+        var importe = parseFloat($(this).find('.montoreal').val()) || 0;
+        sumaTotal += importe;
     });
 
     // Actualiza los campos de totales
