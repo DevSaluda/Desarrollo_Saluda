@@ -34,6 +34,7 @@
      <option value="">Elija forma de pago</option>
      <option >Efectivo</option>
      <option >Tarjeta</option>
+     <option >Efectivo Y Tarjeta</option>
      <option >Credito</option>
      <option >Vale</option>
      <option >Transferencia</option>
