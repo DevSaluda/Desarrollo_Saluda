@@ -94,7 +94,7 @@ endif;
     include ("Modales/ModalConsultaProductos.php");
      include ("Modales/Error.php");
      include ("Modales/Exito.php");
-     include ("Modales/Cambio.php");
+     include ("Modales/CambioDesarrollo.php");
      include ("Modales/Descuentos.php");
      include ("Modales/AdvierteDeCaja.php");
      include ("Modales/DataFacturacion.php");

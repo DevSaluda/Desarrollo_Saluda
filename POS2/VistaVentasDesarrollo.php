@@ -22,7 +22,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 
 
 <div class="text-center">
-<button data-toggle="modal" data-target="#CambioAdar" class="btn btn-success btn-sm">Realizar venta <i class="fas fa-cash-register"></i></button>
+<button data-toggle="modal" data-target="#CambioAdarDesarrollo" class="btn btn-success btn-sm">Realizar venta <i class="fas fa-cash-register"></i></button>
 <button  class="btn btn-danger btn-sm" onclick="CargaGestionventas();">Cancelar venta <i class="far fa-window-close"></i></button>
 <div class="row">
 <input hidden type="text" class="form-control "  readonly value="<?php echo $row['Nombre_Apellidos']?>" >
