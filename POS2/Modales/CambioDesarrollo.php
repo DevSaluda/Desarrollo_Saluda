@@ -201,7 +201,7 @@
   
   <input type="number" step="any" class="form-control " oninput="CapturaValorPago()"id="pago" >            
 </div>
-<div id="PagareTarjetas" >
+<div id="PagareTarjetas" style="display:none;">
 <label for="exampleFormControlInput1">Pago en tarjeta<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -209,7 +209,7 @@
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-money-bill-wave"></i></span>
   </div>
   </div>
-  <input type="number" step="any" class="form-control " id="pago" >            
+  <input type="number" step="any" class="form-control " id="pagotarjeta >            
 </div>
 <label for="exampleFormControlInput1">Cambio<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
