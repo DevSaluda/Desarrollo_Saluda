@@ -286,6 +286,11 @@ function CapturaFormadePago() {
             $("#SignoVitalpaciente").show();
             $("#Pagare").show();
             break;
+            case "Tarjeta":
+            $("#PublicoGenerall").show();
+            $("#SignoVitalpaciente").show();
+            $("#Pagare").show();
+            break;
 
         case "Crédito Farmacéutico":
             $("#PersonalFarmacia").show();
