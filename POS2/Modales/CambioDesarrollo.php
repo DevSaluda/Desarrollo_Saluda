@@ -201,8 +201,16 @@
   
   <input type="number" step="any" class="form-control " oninput="CapturaValorPago()"id="pago" >            
 </div>
-
-
+<div id="PagareTarjetas" >
+<label for="exampleFormControlInput1">Pago en tarjeta<span class="text-danger">*</span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  
+    <span class="input-group-text" id="Tarjeta"><i class="fas fa-money-bill-wave"></i></span>
+  </div>
+  </div>
+  <input type="number" step="any" class="form-control " id="pago" >            
+</div>
 <label for="exampleFormControlInput1">Cambio<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -259,7 +267,7 @@ function CapturaValorCambio() {
 }
 
 function CapturaFormadePago() {
-  if (document.getElementById("formapago").value == "Crédito Enfermería") {
+    if (document.getElementById("formapago").value == "Crédito Enfermería") {
         $("#PersonalEnfermeria").show();
         $("#PublicoGenerall").hide();
         $("#PersonalFarmacia").hide();
@@ -268,21 +276,21 @@ function CapturaFormadePago() {
         $("#SignoVitalpaciente").hide();
         $("#PersonalGestores").hide();
         $("#Pagare").hide();
-        
+        $("#PagareTarjetas").hide(); // Ocultar si aplica
     }
     if (document.getElementById("formapago").value == "Efectivo") {
-      $("#PublicoGenerall").show();
-      $("#SignoVitalpaciente").show();
-        $("#Pagare").show();  
-      $("#PersonalEnfermeria").hide();
-      $("#PersonalMedico").hide();
-      $("#PersonalLimpieza").hide();
-      $("#PersonalGestores").hide();
-      $("#PersonalFarmacia").hide();
+        $("#PublicoGenerall").show();
+        $("#SignoVitalpaciente").show();
+        $("#Pagare").show();
+        $("#PagareTarjetas").hide(); // Ocultar si no es "Efectivo Y Tarjeta"
+        $("#PersonalEnfermeria").hide();
+        $("#PersonalMedico").hide();
+        $("#PersonalLimpieza").hide();
+        $("#PersonalGestores").hide();
+        $("#PersonalFarmacia").hide();
     }
-
     if (document.getElementById("formapago").value == "Crédito Farmacéutico") {
-      $("#PersonalFarmacia").show();
+        $("#PersonalFarmacia").show();
         $("#PublicoGenerall").hide();
         $("#PersonalEnfermeria").hide();
         $("#PersonalMedico").hide();
@@ -290,11 +298,10 @@ function CapturaFormadePago() {
         $("#SignoVitalpaciente").hide();
         $("#PersonalGestores").hide();
         $("#Pagare").hide();
-       
-        
+        $("#PagareTarjetas").hide(); // Ocultar si aplica
     }
     if (document.getElementById("formapago").value == "Crédito Médico") {
-      $("#PersonalMedico").show();
+        $("#PersonalMedico").show();
         $("#PublicoGenerall").hide();
         $("#PersonalEnfermeria").hide();
         $("#PersonalFarmacia").hide();
@@ -302,31 +309,39 @@ function CapturaFormadePago() {
         $("#SignoVitalpaciente").hide();
         $("#PersonalGestores").hide();
         $("#Pagare").hide();
-       
-        
+        $("#PagareTarjetas").hide(); // Ocultar si aplica
     }
-
     if (document.getElementById("formapago").value == "Crédito Limpieza") {
-      $("#PersonalLimpieza").show();
-      $("#PersonalMedico").hide();
+        $("#PersonalLimpieza").show();
+        $("#PersonalMedico").hide();
         $("#PublicoGenerall").hide();
         $("#PersonalEnfermeria").hide();
         $("#PersonalFarmacia").hide();
         $("#SignoVitalpaciente").hide();
         $("#PersonalGestores").hide();
         $("#Pagare").hide();
-       
-        
+        $("#PagareTarjetas").hide(); // Ocultar si aplica
     }
-   
-    var formadepagoreal = document.getElementById("formapago").value;
 
-// Seleccionar todos los elementos con la clase "formapago-dinamico"
-var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
-for (var i = 0; i < elementosDinamicos.length; i++) {
-    elementosDinamicos[i].value = formadepagoreal;
-}
-   
+    // Agregar comportamiento para "Efectivo Y Tarjeta"
+    if (document.getElementById("formapago").value == "Efectivo Y Tarjeta") {
+        $("#Pagare").show();
+        $("#PagareTarjetas").show(); // Mostrar campo adicional de tarjetas
+        $("#PublicoGenerall").show();
+        $("#SignoVitalpaciente").show();
+        $("#PersonalEnfermeria").hide();
+        $("#PersonalMedico").hide();
+        $("#PersonalLimpieza").hide();
+        $("#PersonalGestores").hide();
+        $("#PersonalFarmacia").hide();
+    }
+
+    // Aplicar el valor seleccionado a elementos dinámicos
+    var formadepagoreal = document.getElementById("formapago").value;
+    var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
+    for (var i = 0; i < elementosDinamicos.length; i++) {
+        elementosDinamicos[i].value = formadepagoreal;
+    }
 }
 
 
