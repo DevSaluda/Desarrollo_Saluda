@@ -193,12 +193,7 @@
         </div> -->
         <div id="PagareTarjetas" style="display:none;">
 <label for="exampleFormControlInput1">Tarjeta<span class="text-danger">*</span></label>
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  
-    <span class="input-group-text" id="Tarjeta"><i class="fas fa-money-bill-wave"></i></span>
-  </div>
-  </div>
+     
   <input type="number" step="any" class="form-control " id="pagotarjeta" >            
 </div>
         <div id="Pagare" >
