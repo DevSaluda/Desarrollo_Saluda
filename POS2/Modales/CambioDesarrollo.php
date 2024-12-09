@@ -241,89 +241,101 @@
   </div>
   </div>
   <script>
-       var pagare = document.getElementById("subtotal")
-       var conesopago = document.getElementById("pago")
-       var elcambio = document.getElementById("cambio")
     
-       conesopago.addEventListener("change", () => {
-            elcambio.value = parseFloat(conesopago.value) - parseFloat(pagare.value)
-            $("#cambio").focus();
-        })
-       
-       
-        function CapturaValorPago() {
-    var realpago = document.getElementById("pago").value;
+    // Elementos
+    var subtotal = document.getElementById("subtotal"); // Total a pagar
+    var pagoEfectivo = document.getElementById("pago"); // Pago en efectivo
+    var pagoTarjeta = document.getElementById("pagotarjeta"); // Pago en tarjeta
+    var cambio = document.getElementById("cambio"); // Cambio a mostrar
 
-    // Seleccionar todos los elementos con la clase "pago-dinamico"
-    var elementosDinamicos = document.getElementsByClassName("pago-dinamico");
-    for (var i = 0; i < elementosDinamicos.length; i++) {
-        elementosDinamicos[i].value = realpago;
+    // Función para recalcular el cambio
+    function recalcularCambio() {
+        // Convertir valores a números (o 0 si están vacíos)
+        var efectivo = parseFloat(pagoEfectivo.value) || 0;
+        var tarjeta = parseFloat(pagoTarjeta.value) || 0;
+        var total = parseFloat(subtotal.value) || 0;
+
+        // Calcular cambio: total pagado - subtotal
+        var totalPagado = efectivo + tarjeta;
+        var cambioCalculado = totalPagado - total;
+
+        // Mostrar el cambio en su campo correspondiente
+        cambio.value = cambioCalculado.toFixed(2); // Redondear a 2 decimales
     }
-}
 
-function CapturaValorCambio() {
-    var realcambio = document.getElementById("cambio").value;
-    //Se actualiza en municipio inm
-    document.getElementById("cambioreal").value = realcambio;
-   
-}
+    // Precargar el valor del subtotal al campo de pago en efectivo
+    window.onload = function () {
+        pagoEfectivo.value = subtotal.value;
+        recalcularCambio(); // Calcular cambio al inicio
+    };
 
-function CapturaFormadePago() {
-    // Obtener el valor de la forma de pago seleccionada
-    var formaDePago = document.getElementById("formapago").value;
+    // Listeners para actualizar el cambio cuando los valores cambian
+    pagoEfectivo.addEventListener("input", recalcularCambio);
+    pagoTarjeta.addEventListener("input", recalcularCambio);
 
-    // Ocultar todos los elementos inicialmente
-    $(".section").hide(); // Asegúrate de que todos los elementos tienen esta clase común
-    $("#Pagare").hide();
-    $("#PagareTarjetas").hide();
+    // Adaptar CapturaValorPago
+    function CapturaValorPago() {
+        var realpago = parseFloat(pagoEfectivo.value) || 0;
+        var elementosDinamicos = document.getElementsByClassName("pago-dinamico");
+        for (var i = 0; i < elementosDinamicos.length; i++) {
+            elementosDinamicos[i].value = realpago;
+        }
+    }
 
-    // Mostrar los elementos según la forma de pago seleccionada
-    switch (formaDePago) {
-        case "Crédito Enfermería":
-            $("#PersonalEnfermeria").show();
-            break;
+    // CapturaValorCambio
+    function CapturaValorCambio() {
+        var realcambio = cambio.value;
+        document.getElementById("cambioreal").value = realcambio;
+    }
 
-        case "Efectivo":
-            $("#PublicoGenerall").show();
-            $("#SignoVitalpaciente").show();
-            $("#Pagare").show();
-            break;
+    // CapturaFormadePago
+    function CapturaFormadePago() {
+        var formaDePago = document.getElementById("formapago").value;
+
+        $(".section").hide(); // Ocultar todo
+        $("#Pagare").hide();
+        $("#PagareTarjetas").hide();
+
+        switch (formaDePago) {
+            case "Crédito Enfermería":
+                $("#PersonalEnfermeria").show();
+                break;
+            case "Efectivo":
+                $("#PublicoGenerall").show();
+                $("#SignoVitalpaciente").show();
+                $("#Pagare").show();
+                break;
             case "Tarjeta":
-            $("#PublicoGenerall").show();
-            $("#SignoVitalpaciente").show();
-            $("#Pagare").show();
-            break;
+                $("#PublicoGenerall").show();
+                $("#SignoVitalpaciente").show();
+                $("#Pagare").show();
+                break;
+            case "Crédito Farmacéutico":
+                $("#PersonalFarmacia").show();
+                break;
+            case "Crédito Médico":
+                $("#PersonalMedico").show();
+                break;
+            case "Crédito Limpieza":
+                $("#PersonalLimpieza").show();
+                break;
+            case "Efectivo Y Tarjeta":
+                $("#Pagare").show();
+                $("#PagareTarjetas").show();
+                $("#PublicoGenerall").show();
+                $("#SignoVitalpaciente").show();
+                break;
+            default:
+                console.log("Forma de pago no reconocida:", formaDePago);
+                break;
+        }
 
-        case "Crédito Farmacéutico":
-            $("#PersonalFarmacia").show();
-            break;
-
-        case "Crédito Médico":
-            $("#PersonalMedico").show();
-            break;
-
-        case "Crédito Limpieza":
-            $("#PersonalLimpieza").show();
-            break;
-
-        case "Efectivo Y Tarjeta":
-            $("#Pagare").show();
-            $("#PagareTarjetas").show();
-            $("#PublicoGenerall").show();
-            $("#SignoVitalpaciente").show();
-            break;
-
-        default:
-            console.log("Forma de pago no reconocida:", formaDePago);
-            break;
+        var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
+        for (var i = 0; i < elementosDinamicos.length; i++) {
+            elementosDinamicos[i].value = formaDePago;
+        }
     }
 
-    // Aplicar el valor de forma de pago a los elementos dinámicos
-    var elementosDinamicos = document.getElementsByClassName("formapago-dinamico");
-    for (var i = 0; i < elementosDinamicos.length; i++) {
-        elementosDinamicos[i].value = formaDePago;
-    }
-}
 
 
 
