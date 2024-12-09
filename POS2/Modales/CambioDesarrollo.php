@@ -202,7 +202,7 @@
   <input type="number" step="any" class="form-control " oninput="CapturaValorPago()"id="pago" >            
 </div>
 <div id="PagareTarjetas" style="display:none;">
-<label for="exampleFormControlInput1">Pago en tarjeta<span class="text-danger">*</span></label>
+<label for="exampleFormControlInput1">Tarjeta<span class="text-danger">*</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
   
