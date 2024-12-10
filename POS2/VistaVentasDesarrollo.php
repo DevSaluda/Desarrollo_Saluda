@@ -207,7 +207,7 @@ $(document).ready(function () {
                 </div>\
                  <div class="col">\
                     <label for="exampleFormControlInput1">Precio Real<span class="text-danger">*</span></label>\
-                    <input class="Precio form-control" readonly type="number" id=""  name="" ></div>\
+                    <input class="form-control" readonly type="number" id=""  name="" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Precio<span class="text-danger">*</span></label>\
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
