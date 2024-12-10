@@ -206,10 +206,10 @@ $(document).ready(function () {
                     <textarea class="Nombre form-control" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>\
                 </div>\
                  <div class="col">\
-                    <label for="exampleFormControlInput1">Precio Real<span class="text-danger">*</span></label>\
+                    <label for="exampleFormControlInput1">P.U.<span class="text-danger">*</span></label>\
                     <input class="PrecioReal form-control" readonly type="number" id=""  name="" ></div>\
                 <div class="col">\
-                    <label for="exampleFormControlInput1">Precio<span class="text-danger">*</span></label>\
+                    <label for="exampleFormControlInput1">P. Desc.<span class="text-danger">*</span></label>\
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
