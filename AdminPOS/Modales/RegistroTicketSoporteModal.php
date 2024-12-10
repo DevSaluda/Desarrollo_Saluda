@@ -18,18 +18,25 @@
             <div class="form-group">
               <label for="tipoProblema">Seleccione el tipo de problema</label>
               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-exclamation-triangle"></i></span>
-                </div>
-                <select class="form-control" name="Problematica" id="tipoProblema" required>
-                  <option value="">Seleccione...</option>
-                  <option value="Conexión a internet">Conexión a internet</option>
-                  <option value="Problema con impresora">Problema con impresora</option>
-                  <option value="Actualización de software">Actualización de software</option>
-                  <option value="Otro">Otro</option>
-                </select>
-              </div>
-            </div>
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fas fa-exclamation-triangle"></i></span>
+  </div>
+  <select class="form-control" name="Problematica" id="tipoProblema" required>
+    <option value="">Seleccione...</option>
+    <option value="Teléfono">Teléfono</option>
+    <option value="Computadora">Computadora</option>
+    <option value="Wifi/Internet">Wifi/Internet</option>
+    <option value="Impresora">Impresora</option>
+    <option value="Huellas">Huellas</option>
+    <option value="Terminal Bancaria">Terminal Bancaria</option>
+    <option value="Teléfono Fijo">Teléfono Fijo</option>
+    <option value="Tableta">Tableta</option>
+    <option value="Accesorios">Accesorios</option>
+    <option value="Programas/Software">Programas/Software</option>
+    <option value="Otros">Otros</option>
+  </select>
+</div>
+
 
             <!-- Descripción de la problemática -->
             <div class="form-group">
