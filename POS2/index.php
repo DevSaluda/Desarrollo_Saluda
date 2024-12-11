@@ -200,12 +200,12 @@ document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
         title: `¡Hola <?php echo $row['Nombre_Apellidos']; ?>!`,
         html: `
-            <p>Se ha realizado una actualización a la interfaz de ventas. Como podrás observar en la imagen de abajo, si tienes dudas o tienes algún problema al realizar tus ventas, te recomendamos que contactes al área de soporte.</p>
+            <p>Se ha realizado una actualización a la interfaz de ventas. Como podrás observar en la imagen de arriba, si tienes dudas o tienes algún problema al realizar tus ventas, te recomendamos que contactes al área de soporte.</p>
             <p><strong>PD:</strong> Recuerda que soporte está disponible a partir de las 8:00 AM.</p>
         `,
         imageUrl: 'https://saludapos.com/POS2/image.png', // Reemplaza con la URL o ruta de tu imagen
         imageWidth: 400,
-        imageHeight: 200,
+        imageHeight: 300,
         imageAlt: 'Actualización de interfaz',
         confirmButtonText: 'Entendido',
         allowOutsideClick: false, // Evita cerrar el modal al hacer clic fuera
