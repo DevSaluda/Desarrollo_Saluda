@@ -23,6 +23,7 @@
   </div>
   <select class="form-control" name="Problematica" id="tipoProblema" required>
     <option value="">Seleccione...</option>
+    <option value="POS">Punto de Venta</option>
     <option value="Teléfono">Teléfono</option>
     <option value="Computadora">Computadora</option>
     <option value="Wifi/Internet">Wifi/Internet</option>
