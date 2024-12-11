@@ -204,8 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <p><strong>PD:</strong> Recuerda que soporte está disponible a partir de las 8:00 AM.</p>
         `,
         imageUrl: 'https://saludapos.com/POS2/image.png', // Reemplaza con la URL o ruta de tu imagen
-        imageWidth: 500,
-        imageHeight: 300,
+        imageWidth: 400,
+        imageHeight: 200,
         imageAlt: 'Actualización de interfaz',
         confirmButtonText: 'Entendido',
         allowOutsideClick: false, // Evita cerrar el modal al hacer clic fuera
