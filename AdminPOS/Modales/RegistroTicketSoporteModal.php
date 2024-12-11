@@ -18,6 +18,9 @@
             <div class="form-group">
               <label for="tipoProblema">Seleccione el tipo de problema</label>
               <div class="input-group mb-3">
+
+
+  
   <div class="input-group-prepend">
     <span class="input-group-text"><i class="fas fa-exclamation-triangle"></i></span>
   </div>
@@ -37,6 +40,8 @@
     <option value="Otros">Otros</option>
   </select>
 </div>
+
+
 
 
             <!-- Descripción de la problemática -->
