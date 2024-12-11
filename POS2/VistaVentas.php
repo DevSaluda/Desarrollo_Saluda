@@ -204,8 +204,11 @@ $(document).ready(function () {
                     <label for="exampleFormControlInput1">Producto<span class="text-danger">*</span></label>\
                     <textarea class="Nombre form-control" readonly id="nombreprod" name="NombreProd[]" rows="3"></textarea>\
                 </div>\
+               <div class="col">\
+                    <label for="exampleFormControlInput1">P.U.<span class="text-danger">*</span></label>\
+                    <input class="PrecioReal form-control" readonly type="number" id=""  name="" ></div>\
                 <div class="col">\
-                    <label for="exampleFormControlInput1">Precio<span class="text-danger">*</span></label>\
+                    <label for="exampleFormControlInput1">P. Desc.<span class="text-danger">*</span></label>\
                     <input class="Precio form-control" readonly type="number" id="precioprod"  name="pro_cantidad[]" ></div>\
                 <div class="col">\
                     <label for="exampleFormControlInput1">Importe<span class="text-danger">*</span></label>\
@@ -233,6 +236,7 @@ $(document).ready(function () {
           // Actualizar los valores del nuevo campo
           $(nuevoCampo).find('.Codigo').val(ui.item.pro_nombre);
             $(nuevoCampo).find('.Nombre').val(ui.item.NombreProd);
+            $(nuevoCampo).find('.PrecioReal').val(ui.item.pro_cantidad);
             $(nuevoCampo).find('.Precio').val(ui.item.pro_cantidad);
             $(nuevoCampo).find('.montoreal').val(ui.item.pro_cantidad); // Puedes ajustar esto según tus necesidades
             $(nuevoCampo).find('.FKID').val(ui.item.pro_FKID);
