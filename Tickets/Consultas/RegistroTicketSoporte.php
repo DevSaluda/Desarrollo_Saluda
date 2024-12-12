@@ -23,7 +23,7 @@ $(document).ready(function() {
 
         // Realiza una petición AJAX para obtener los datos del ticket
         $.ajax({
-            url: "https://saludapos.com/Tickets/Consultas/RegistroTicketSoporte.php",
+            url: "https://saludapos.com/Tickets/Consultas/RegistroTicketSoporteArray.php",
             type: "GET",
             data: { No_Ticket: numeroTicket },
             dataType: "json",
