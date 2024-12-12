@@ -1,4 +1,4 @@
-function RegistroEnergias() {
+function RegistroSoporte() {
 
 
     $.post("https://saludapos.com/Tickets/Consultas/RegistroTicketSoporte.php", "", function(data) {
@@ -9,4 +9,4 @@ function RegistroEnergias() {
 
 
 
-RegistroEnergias();
+RegistroSoporte();
