@@ -13,7 +13,7 @@ include "Consultas/db_connection.php";
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
-
+<?php include "Header.php"?>
  <style>
         .error {
   color: red;
