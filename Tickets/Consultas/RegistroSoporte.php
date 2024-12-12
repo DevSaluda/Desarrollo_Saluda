@@ -36,7 +36,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "sssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor);
+        mysqli_stmt_bind_param($stmt, "ssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor);
 
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito
