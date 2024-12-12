@@ -30,13 +30,15 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
 
     // Preparar la consulta
     $query = "INSERT INTO Tickets_Soporte 
-        (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por) 
-        VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?, ?, ?)"; // 8 placeholders
+
 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "ssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor);
+
 
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito
