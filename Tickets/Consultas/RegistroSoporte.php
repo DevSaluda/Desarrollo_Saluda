@@ -7,12 +7,11 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     $fecha = mysqli_real_escape_string($conn, $_POST['Fecha']);
     $reportadoPor = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
     $sucursal = mysqli_real_escape_string($conn, $_POST['SucursalExt']);
-    $id_h_o_d = "SALUDA";
     $estatus = "Pendiente";
     $noTicket = "TS-" . strtoupper(uniqid());
 
-    $query = "INSERT INTO Tickets_Soporte (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Tickets_Soporte (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, )";
 
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "sssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $id_h_o_d);
