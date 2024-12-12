@@ -28,7 +28,7 @@
                     <?php
                       $query = $conn->query("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE Nombre_Sucursal !='Matriz'");
                       while ($valores = mysqli_fetch_array($query)) {
-                        echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+                        echo '<option value="'.$valores["Nombre_Sucursal"].'">'.$valores["Nombre_Sucursal"].'</option>';
                       }
                     ?>
                   </select>

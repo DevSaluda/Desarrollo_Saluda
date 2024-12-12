@@ -7,8 +7,8 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     $descripcion = mysqli_real_escape_string($conn, $_POST['DescripcionProblematica']);
     $fecha = mysqli_real_escape_string($conn, $_POST['Fecha']);
     $reportadoPor = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
-    $sucursal = mysqli_real_escape_string($conn, $_POST['Sucursal']);
-    $id_h_o_d = mysqli_real_escape_string($conn, $_POST['ID_H_O_D']);
+    $sucursal = mysqli_real_escape_string($conn, $_POST['SucursalExt']);
+    $id_h_o_d = "SALUDA";
     
     // Definir estatus inicial
     $estatus = "Pendiente";
@@ -20,7 +20,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     $query = "INSERT INTO Tickets_Soporte 
         (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D) 
         VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, SALUDA)";
+        (?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
