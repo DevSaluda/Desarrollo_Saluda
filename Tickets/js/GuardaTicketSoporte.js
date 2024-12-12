@@ -17,71 +17,52 @@ $('document').ready(function($) {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i> Proporcione una descripción de la problemática",
             }
         },
-        submitHandler: submitForm // Llama a la función submitForm cuando el formulario es válido
+        submitHandler: function() {
+            submitForm(); // Llama a la función de envío
+        }
     });
 
     // Manejo del envío del formulario
     function submitForm() {
-        // Obtener los datos del formulario
-        var formData = $('#RegistroTicketSoporteForm').serializeArray();
-        var formValues = {};
-        $(formData).each(function(index, obj) {
-            formValues[obj.name] = obj.value;
-        });
+        const form = $("#RegistroTicketSoporteForm")[0];
+        const formData = new FormData(form);
 
-        // Construir el mensaje de confirmación con los datos del formulario
-        var alertMessage = "<p>Confirmar los siguientes datos:</p><br>";
-        alertMessage += "<p>Problema: " + formValues['Problematica'] + "</p><br>";
-        alertMessage += "<p>Descripción: " + formValues['DescripcionProblematica'] + "</p><br>";
+        $.ajax({
+            type: 'POST',
+            url: 'https://saludapos.com/Tickets/Consultas/RegistroSoporte.php',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+                $("#submitTicketSoporte").prop("disabled", true); // Deshabilitar el botón mientras se envía
+            },
+            success: function(dataResult) {
+                const result = JSON.parse(dataResult);
 
-        // Mostrar la alerta de Sweet Alert
-        Swal.fire({
-            title: "Confirmar datos",
-            html: alertMessage,
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonText: "Confirmar",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, enviar los datos al servidor
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://saludapos.com/Tickets/Consultas/RegistroSoporte.php',
-                    data: new FormData($('#RegistroTicketSoporteForm')[0]),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
-                    },
-                    success: function(dataResult) {
-                        const result = JSON.parse(dataResult);
-
-                        if (result.statusCode === 200) {
-                            $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
-                            $("#RegistroTicketSoporteForm")[0].reset();
-                            $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
-                            $('#Exito').modal('toggle'); // Muestra modal de éxito
-                            setTimeout(function() {
-                                $('#Exito').modal('hide');
-                            }, 2000);
-                        } else {
-                            $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
-                            $('#ErrorData').modal('toggle'); // Muestra modal de error
-                            setTimeout(function() {
-                                $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
-                            }, 3000);
-                        }
-                    },
-                    error: function() {
-                        $("#submitTicketSoporte").html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
-                    }
-                });
+                if (result.statusCode === 200) {
+                    $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
+                    $("#RegistroTicketSoporteForm")[0].reset();
+                    $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
+                    $('#Exito').modal('toggle'); // Muestra modal de éxito
+                    setTimeout(function() {
+                        $('#Exito').modal('hide');
+                    }, 2000);
+                } else {
+                    $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                    $('#ErrorData').modal('toggle'); // Muestra modal de error
+                    setTimeout(function() {
+                        $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
+                    }, 3000);
+                }
+            },
+            error: function() {
+                $("#submitTicketSoporte").html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
+            },
+            complete: function() {
+                $("#submitTicketSoporte").prop("disabled", false); // Rehabilitar el botón
             }
         });
-
-        // Retornar false para evitar el envío del formulario tradicional
-        return false;
     }
 });
