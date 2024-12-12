@@ -9,9 +9,6 @@ include "Consultas/db_connection.php";
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Registro de Tickets Realizados</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
 <?php include "Header.php"?>
  <style>
@@ -28,7 +25,7 @@ table td {
 
     </style>
 </head>
-<?php include_once ("Menu.php")?>
+
 
 
 
@@ -49,7 +46,7 @@ table td {
 
 
 </div><div class="col-md-12">
-<div id="RegistrosTicketSoporteTabla"></div>
+<div id=""></div>
   </div></div>
   <!-- /.content-wrapper -->
 
