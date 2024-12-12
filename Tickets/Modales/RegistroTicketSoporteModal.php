@@ -13,7 +13,8 @@
       </div>
       <div class="modal-body">
         <div class="text-center">
-          <form id="RegistroTicketSoporteForm">
+        <form id="RegistroTicketSoporteForm" method="POST">
+
 
             <div class="row">
               <div class="col">
