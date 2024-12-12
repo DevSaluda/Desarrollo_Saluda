@@ -85,7 +85,6 @@
 
             <!-- Campos ocultos -->
             <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
-            <input type="hidden" class="form-control" name="ID_H_O_D" id="Empresa" value="<?php echo $row['ID_H_O_D']?>" readonly>
 
             <!-- Botón de envío -->
             <div class="text-center">
