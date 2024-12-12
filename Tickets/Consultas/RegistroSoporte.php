@@ -1,6 +1,6 @@
 <?php
 include_once 'db_connection.php';
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) && !empty($_POST['SucursalExt']) && !empty($_POST['Agregado_Por'])) {
     $tipoProblema = mysqli_real_escape_string($conn, $_POST['Problematica']);
     $descripcion = mysqli_real_escape_string($conn, $_POST['DescripcionProblematica']);
@@ -27,5 +27,6 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     }
 } else {
     echo json_encode(["statusCode" => 400, "message" => "Datos incompletos"]);
+}
 }
 ?>
