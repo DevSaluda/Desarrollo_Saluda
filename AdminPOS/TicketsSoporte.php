@@ -46,7 +46,7 @@ table td {
 
 
 </div><div class="col-md-12">
-<div id="resultadoTicket"></div>
+<div id=""></div>
   </div></div>
   <!-- /.content-wrapper -->
 
