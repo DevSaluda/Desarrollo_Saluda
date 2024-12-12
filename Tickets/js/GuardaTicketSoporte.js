@@ -28,7 +28,7 @@ $('document').ready(function($) {
 
             $.ajax({
                 type: 'POST',
-                url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php',
+                url: 'https://saludapos.com/Tickets/Consultas/RegistroSoporte.php',
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
