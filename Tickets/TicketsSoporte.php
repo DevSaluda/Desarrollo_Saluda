@@ -1,5 +1,5 @@
 <?php
-include "Consultas/Consultas.php";
+include "Consultas/db_connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
