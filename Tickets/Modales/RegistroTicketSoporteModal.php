@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <div class="text-center">
-        <form id="RegistroTicketSoporteForm" method="POST">
+        <form action="javascript:void(0)" method="post" id="RegistroTicketSoporteForm" >
 
 
             <div class="row">
