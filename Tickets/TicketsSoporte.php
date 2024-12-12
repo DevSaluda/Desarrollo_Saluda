@@ -46,8 +46,7 @@ table td {
 
 
 </div><div class="col-md-12">
-<div id=""></div>
-  </div></div>
+<div id="RegistrosTicketSoporteTabla"></div>
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
