@@ -7,7 +7,7 @@ $(document).ready(function() {
         "bAutoWidth": false,
         "order": [[0, "desc"]],
         "ajax": {
-            "url": "https://saludapos.com/POS2/Consultas/RegistroTicketSoporteArray.php",
+            "url": "https://saludapos.com/Tickets/Consultas/RegistroTicketSoporteArray.php",
             "dataSrc": "aaData"
         },
         "columns": [
