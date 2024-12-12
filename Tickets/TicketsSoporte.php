@@ -1,5 +1,5 @@
 <?php
-include_once 'db_connection.php';
+include "Consultas/db_connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,53 +9,101 @@ include_once 'db_connection.php';
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Registro de Tickets Realizados</title>
-
-  <!-- Estilos CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
-  <style>
-    .error {
-      color: red;
-      margin-left: 5px;
-    }
-    table td {
-      word-wrap: break-word;
-      max-width: 400px;
-    }
-  </style>
+<?php include "Header.php"?>
+ <style>
+        .error {
+  color: red;
+  margin-left: 5px; 
+  
+  
+}
+table td {
+  word-wrap: break-word;
+  max-width: 400px;
+}
+
+    </style>
 </head>
-<body>
-  <div class="wrapper">
-    <div class="card text-center">
-      <div class="card-header" style="background-color:#2bbbad !important;color: white;">
-        Registro de Tickets al día <?php echo fechaCastellano(date('d-m-Y H:i:s')); ?>
-      </div>
-      <div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#RegistroTicketSoporteModal">
-          Registrar Tickets de Soporte <i class="fas fa-lightbulb"></i>
-        </button>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div id="RegistrosTicketSoporteTabla"></div>
-    </div>
+<?php include_once ("Menu.php")?>
+
+
+
+  <div class="card text-center">
+  <div class="card-header" style="background-color:#2bbbad !important;color: white;">
+  Registro de Tickets al dia  <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
+ 
+  <div >
+  <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#RegistroTicketSoporteModal" class="btn btn-default">
+ Registrar Tickets de Soporte <i class="fas fa-lightbulb"></i>
+</button>
 
-  <?php
-    include("Modales/RegistroTicketSoporteModal.php");
-    include("Modales/Error.php");
-    include("Modales/Exito.php");
-  ?>
+</div>
+  <div>
+ 
+</div>
 
-  <!-- Scripts JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="dist/js/adminlte.js"></script>
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-  <script src="js/ControlTicketsSoporte.js"></script>
-  <script src="js/GuardaTicketSoporte.js"></script>
+</div><div class="col-md-12">
+<div id="RegistrosTicketSoporteTabla"></div>
+  </div></div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+ 
+  <!-- Main Footer -->
+<?php
+  include ("Modales/RegistroTicketSoporteModal.php");
+  include ("Modales/Error.php");
+  include ("Modales/Exito.php");
+  include ("footer.php")?>
+
+<!-- ./wrapper -->
+
+
+<script src="js/ControlTicketsSoporte.js"></script>
+<script src="js/GuardaTicketSoporte.js"></script>
+<script src='js/GuardaSolucionTicket.js'></script>
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+
+<!-- PAGE PLUGINS -->
+
 </body>
 </html>
+<?php
+
+function fechaCastellano ($fecha) {
+  $fecha = substr($fecha, 0, 10);
+  $numeroDia = date('d', strtotime($fecha));
+  $dia = date('l', strtotime($fecha));
+  $mes = date('F', strtotime($fecha));
+  $anio = date('Y', strtotime($fecha));
+  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+}
+?>
