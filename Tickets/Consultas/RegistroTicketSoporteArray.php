@@ -3,40 +3,37 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Obtiene la fecha actual en el formato 'YYYY-MM-DD'
-$fechaActual = date("Y-m-d");
+// Obtén el número de ticket de la solicitud GET
+$numeroTicket = isset($_GET['No_Ticket']) ? mysqli_real_escape_string($conn, $_GET['No_Ticket']) : null;
 
-// Consulta SQL para obtener los datos de la tabla `Tickets_soporte`
-$sql = "SELECT * FROM `Tickets_Soporte`";
+if (!$numeroTicket) {
+    echo json_encode(["error" => "No se proporcionó un número de ticket válido."]);
+    exit;
+}
+
+// Consulta SQL para obtener los datos del ticket
+$sql = "SELECT * FROM `Tickets_Soporte` WHERE `No_Ticket` = '$numeroTicket'";
 
 $result = mysqli_query($conn, $sql);
 
-$data = [];
-
 if ($result && $result->num_rows > 0) {
-    $c = 0;
-
-    while ($fila = $result->fetch_assoc()) {
-        $data[$c]["Id_Ticket"] = $fila["Id_Ticket"];
-        $data[$c]["No_Ticket"] = $fila["No_Ticket"];
-        $data[$c]["Sucursal"] = $fila["Sucursal"];
-        $data[$c]["Reportado_Por"] = $fila["Reportado_Por"];
-        $data[$c]["Fecha_Registro"] = $fila["Fecha_Registro"];
-        $data[$c]["Problematica"] = $fila["Problematica"];
-        $data[$c]["DescripcionProblematica"] = $fila["DescripcionProblematica"];
-        $data[$c]["Solucion"] = $fila["Solucion"];
-        $data[$c]["Estatus"] = $fila["Estatus"];
-
-        $c++;
-    }
+    // Si se encuentra el ticket, devuelve el primer resultado
+    $fila = $result->fetch_assoc();
+    $data = [
+        "Id_Ticket" => $fila["Id_Ticket"],
+        "No_Ticket" => $fila["No_Ticket"],
+        "Sucursal" => $fila["Sucursal"],
+        "Reportado_Por" => $fila["Reportado_Por"],
+        "Fecha_Registro" => $fila["Fecha_Registro"],
+        "Problematica" => $fila["Problematica"],
+        "DescripcionProblematica" => $fila["DescripcionProblematica"],
+        "Solucion" => $fila["Solucion"],
+        "Estatus" => $fila["Estatus"]
+    ];
+} else {
+    // Si no se encuentra el ticket, devuelve un mensaje de error
+    $data = ["error" => "No se encontró un ticket con el número proporcionado."];
 }
 
-$results = [
-    "sEcho" => 1,
-    "iTotalRecords" => count($data),
-    "iTotalDisplayRecords" => count($data),
-    "aaData" => $data
-];
-
-echo json_encode($results);
+echo json_encode($data);
 ?>
