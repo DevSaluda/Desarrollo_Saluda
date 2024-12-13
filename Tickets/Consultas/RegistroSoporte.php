@@ -42,7 +42,8 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
 
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito
-            $response = array("statusCode" => 200);
+            $response = array("statusCode" => 200,
+            'ticketNumber' => $noTicket,);
         } else {
             // Respuesta de error al ejecutar la consulta
             $response = array("statusCode" => 201, "message" => "Error al guardar el ticket: " . mysqli_stmt_error($stmt));
