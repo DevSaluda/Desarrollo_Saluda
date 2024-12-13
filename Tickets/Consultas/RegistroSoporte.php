@@ -20,13 +20,20 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
         echo json_encode($response);
         exit;
     }
-    
 
     // Definir estatus inicial
     $estatus = "Pendiente";
 
-    // Generar un número de ticket único
-    $noTicket = "TS-" . strtoupper(uniqid());
+    // Consultar el último número de ticket
+    $result = mysqli_query($conn, "SELECT MAX(Id_Ticket) as last_id FROM Tickets_Soporte");
+    $row = mysqli_fetch_assoc($result);
+    $lastId = isset($row['last_id']) ? intval($row['last_id']) : 0;
+
+    // Incrementar el identificador
+    $nextId = $lastId + 1;
+
+    // Generar el número de ticket
+    $noTicket = "TS-" . str_pad($nextId, 4, "0", STR_PAD_LEFT); // Ejemplo: TS-0001
 
     // Preparar la consulta
     $query = "INSERT INTO Tickets_Soporte 
@@ -34,16 +41,16 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     VALUES 
     (?, ?, ?, ?, ?, ?, ?, ?)"; // 8 placeholders
 
-
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "ssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor);
 
-
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito
-            $response = array("statusCode" => 200,
-            'ticketNumber' => $noTicket,);
+            $response = array(
+                "statusCode" => 200,
+                'ticketNumber' => $noTicket
+            );
         } else {
             // Respuesta de error al ejecutar la consulta
             $response = array("statusCode" => 201, "message" => "Error al guardar el ticket: " . mysqli_stmt_error($stmt));
