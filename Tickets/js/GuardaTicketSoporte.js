@@ -49,7 +49,7 @@ $('document').ready(function($) {
                         <p>Este es tu número de ticket: <strong>${ticketNumber}</strong></p>
                         <p>Con este número puedes consultar el estado de tu ticket en cualquier momento.</p>
                     `;
-                    $("#modalExito .mensaje").html(successMessage);
+                    $("#modalExito .modal-body").html(successMessage);
                     $("#modalExito").modal("show"); // Mostrar el modal de éxito
 
                     // Reiniciar el formulario y el botón
