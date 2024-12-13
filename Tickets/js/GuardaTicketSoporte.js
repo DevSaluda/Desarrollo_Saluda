@@ -42,13 +42,19 @@ $('document').ready(function($) {
                 const result = JSON.parse(dataResult);
 
                 if (result.statusCode === 200) {
-                    $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
+                    // Mostrar el número de ticket en un modal
+                    const ticketNumber = result.ticketNumber;
+                    const successMessage = `
+                        <p>¡Registro exitoso!</p>
+                        <p>Este es tu número de ticket: <strong>${ticketNumber}</strong></p>
+                        <p>Con este número puedes consultar el estado de tu ticket en cualquier momento.</p>
+                    `;
+                    $("#modalExito .modal-body").html(successMessage);
+                    $("#modalExito").modal("show"); // Mostrar el modal de éxito
+
+                    // Reiniciar el formulario y el botón
                     $("#RegistroTicketSoporteForm")[0].reset();
-                    $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
-                    $('#Exito').modal('toggle'); // Muestra modal de éxito
-                    setTimeout(function() {
-                        $('#Exito').modal('hide');
-                    }, 2000);
+                    $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
                 } else {
                     $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
                     $('#ErrorData').modal('toggle'); // Muestra modal de error
