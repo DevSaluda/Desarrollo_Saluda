@@ -46,7 +46,7 @@ table td {
 
 
 </div><div class="col-md-12">
-<div id=""></div>
+<div id="RegistrosTicketSoporteTabla"></div>
   </div></div>
   <!-- /.content-wrapper -->
 
