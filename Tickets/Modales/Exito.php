@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body">
+            <div class="modal-body">
                 <!-- Aquí se mostrará el mensaje dinámico -->
             </div>
             <div class="modal-footer">
