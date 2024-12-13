@@ -42,26 +42,13 @@ $('document').ready(function($) {
                 const result = JSON.parse(dataResult);
 
                 if (result.statusCode === 200) {
-                    const ticketNumber = result.ticketNumber;
-
                     $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
                     $("#RegistroTicketSoporteForm")[0].reset();
-
-                    // Mostrar mensaje personalizado con el número de ticket
-                    const successMessage = `
-                        <div class="alert alert-success">
-                            <strong>¡Éxito!</strong> Este es tu número de ticket: <strong>${ticketNumber}</strong>.
-                            <br>Puedes usar este número para consultar el estado de tu ticket.
-                            <br>Haz clic en "Continuar" para recargar la página.
-                        </div>
-                        <button id="continueBtn" class="btn btn-primary">Continuar</button>
-                    `;
-                    $('#customMessageContainer').html(successMessage); // Mostrar mensaje en un contenedor específico
-
-                    // Agregar evento para recargar la página al hacer clic en "Continuar"
-                    $('#continueBtn').on('click', function() {
-                        location.reload();
-                    });
+                    $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
+                    $('#Exito').modal('toggle'); // Muestra modal de éxito
+                    setTimeout(function() {
+                        $('#Exito').modal('hide');
+                    }, 2000);
                 } else {
                     $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
                     $('#ErrorData').modal('toggle'); // Muestra modal de error
