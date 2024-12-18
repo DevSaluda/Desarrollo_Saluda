@@ -66,7 +66,7 @@ function syncAllCalendars($conn) {
             $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '$dbEventId'";
             if (mysqli_query($conn, $deleteSql)) {
                 // Obtener el nombre del especialista
-                $medicoId = $row_event['Fk_Especialista'];
+                $medicoId = mysqli_real_escape_string($conn, $row_event['Fk_Especialista']);
                 $sql_medico = "SELECT Nombre_Apellidos FROM Personal_Medico_Express WHERE Medico_ID = '$medicoId'";
                 $result_medico = mysqli_query($conn, $sql_medico);
                 $nombreEspecialista = ($row_medico = mysqli_fetch_assoc($result_medico)) ? $row_medico['Nombre_Apellidos'] : 'Desconocido';
@@ -82,7 +82,7 @@ function syncAllCalendars($conn) {
                     '{$row_event['Telefono']}', '{$row_event['Tipo_Consulta']}', '{$row_event['Estatus_cita']}', '{$row_event['Observaciones']}',
                     '{$row_event['ID_H_O_D']}', '{$row_event['AgendadoPor']}', '$nombreEspecialista', NOW(),
                     '{$row_event['GoogleEventId']}', '{$row_event['IDGoogleCalendar']}'
-                )";
+                ) ON DUPLICATE KEY UPDATE Fecha_Hora = NOW()";
                 
                 if (!mysqli_query($conn, $insertMovSql)) {
                     file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al registrar movimiento en MovimientosAgenda para el evento $dbEventId: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
