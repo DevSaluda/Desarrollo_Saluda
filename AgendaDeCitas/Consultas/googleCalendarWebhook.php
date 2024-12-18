@@ -32,13 +32,13 @@ function syncAllCalendars($conn) {
     }
 
     $calendarEventIds = [];
-    
+    $googleEvents = [];
+
     // Iterar sobre cada calendario registrado y obtener sus eventos actuales
     while ($row_calendar = mysqli_fetch_assoc($result_calendars)) {
         $calendarId = $row_calendar['IDGoogleCalendar'];
         
         try {
-            // Obtener eventos del calendario actual
             $events = $service->events->listEvents($calendarId);
         } catch (Exception $e) {
             file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al obtener eventos de Google Calendar para $calendarId: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
@@ -46,11 +46,18 @@ function syncAllCalendars($conn) {
         }
 
         foreach ($events->getItems() as $event) {
-            $calendarEventIds[] = $event->getId(); // Almacenar todos los GoogleEventId de este calendario
+            $eventId = $event->getId();
+            $googleEvents[$eventId] = [
+                'summary' => $event->getSummary(),
+                'start' => $event->getStart()->getDateTime(),
+                'end' => $event->getEnd()->getDateTime(),
+                'calendarId' => $calendarId,
+            ];
+            $calendarEventIds[] = $eventId;
         }
     }
 
-    // Obtener todos los GoogleEventId de la base de datos para verificar cuáles ya no existen
+    // Obtener todos los GoogleEventId de la base de datos
     $sql_events = "SELECT * FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId IS NOT NULL";
     $result_events = mysqli_query($conn, $sql_events);
 
@@ -58,43 +65,64 @@ function syncAllCalendars($conn) {
         throw new Exception("Error en la consulta de eventos de la base de datos: " . mysqli_error($conn));
     }
 
+    $dbEvents = [];
     while ($row_event = mysqli_fetch_assoc($result_events)) {
-        $dbEventId = $row_event['GoogleEventId'];
+        $dbEvents[$row_event['GoogleEventId']] = $row_event;
+    }
 
-        // Si el evento de la base de datos no existe en ninguno de los calendarios, eliminarlo y registrar en MovimientosAgenda
-        if (!in_array($dbEventId, $calendarEventIds)) {
-            $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '$dbEventId'";
-            if (mysqli_query($conn, $deleteSql)) {
-                // Obtener el nombre del especialista
-                $medicoId = mysqli_real_escape_string($conn, $row_event['Fk_Especialista']);
-                $sql_medico = "SELECT Nombre_Apellidos FROM Personal_Medico_Express WHERE Medico_ID = '$medicoId'";
-                $result_medico = mysqli_query($conn, $sql_medico);
-                $nombreEspecialista = ($row_medico = mysqli_fetch_assoc($result_medico)) ? $row_medico['Nombre_Apellidos'] : 'Desconocido';
-
-                // Registrar el movimiento en MovimientosAgenda
-                $insertMovSql = "INSERT INTO MovimientosAgenda (
-                    ID_Agenda_Especialista, Fk_Especialidad, Fk_Especialista, Fk_Sucursal,
-                    Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, Estatus_cita, Observaciones,
-                    ID_H_O_D, AgendadoPor, ActualizoEstado, Fecha_Hora, GoogleEventId, IDGoogleCalendar
-                ) VALUES (
-                    '{$row_event['ID_Agenda_Especialista']}', '{$row_event['Fk_Especialidad']}', '{$row_event['Fk_Especialista']}',
-                    '{$row_event['Fk_Sucursal']}', '{$row_event['Fecha']}', '{$row_event['Hora']}', '{$row_event['Nombre_Paciente']}',
-                    '{$row_event['Telefono']}', '{$row_event['Tipo_Consulta']}', '{$row_event['Estatus_cita']}', '{$row_event['Observaciones']}',
-                    '{$row_event['ID_H_O_D']}', '{$row_event['AgendadoPor']}', '$nombreEspecialista', NOW(),
-                    '{$row_event['GoogleEventId']}', '{$row_event['IDGoogleCalendar']}'
-                ) ON DUPLICATE KEY UPDATE Fecha_Hora = NOW()";
-                
-                if (!mysqli_query($conn, $insertMovSql)) {
-                    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al registrar movimiento en MovimientosAgenda para el evento $dbEventId: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
-                } else {
-                    file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Movimiento registrado en MovimientosAgenda para el evento $dbEventId" . PHP_EOL, FILE_APPEND);
-                }
-            } else {
-                file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al eliminar evento $dbEventId de la base de datos: " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
+    // Comparar eventos de Google Calendar con los de la base de datos
+    foreach ($googleEvents as $googleEventId => $googleEventData) {
+        if (isset($dbEvents[$googleEventId])) {
+            // Evento existe en ambas partes: Verificar si hubo cambios (edición)
+            $dbEvent = $dbEvents[$googleEventId];
+            if ($googleEventData['summary'] != $dbEvent['Nombre_Paciente'] || $googleEventData['start'] != $dbEvent['Fecha'] . 'T' . $dbEvent['Hora']) {
+                // Registrar edición
+                registrarMovimiento($conn, $dbEvent, 'Editado');
             }
+            unset($dbEvents[$googleEventId]); // Marcar como procesado
+        } else {
+            // Evento existe en Google pero no en la base de datos: Registrar creación
+            registrarMovimiento($conn, $googleEventData, 'Creado', true);
         }
+    }
+
+    // Los eventos restantes en $dbEvents no existen en Google Calendar (eliminados)
+    foreach ($dbEvents as $dbEvent) {
+        registrarMovimiento($conn, $dbEvent, 'Eliminado');
+        $deleteSql = "DELETE FROM AgendaCitas_EspecialistasExt WHERE GoogleEventId = '{$dbEvent['GoogleEventId']}'";
+        mysqli_query($conn, $deleteSql);
     }
 
     file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Sincronización completada para todos los calendarios registrados." . PHP_EOL, FILE_APPEND);
 }
+
+function registrarMovimiento($conn, $evento, $accion, $esNuevo = false) {
+    if ($esNuevo) {
+        // Si es un evento nuevo, extraer datos del array proporcionado por Google
+        $especialista = 'Desconocido'; // Puedes modificar para obtener datos relevantes
+        $nombrePaciente = $evento['summary'];
+        $fechaHora = $evento['start'];
+        $calendarId = $evento['calendarId'];
+    } else {
+        // Datos existentes en la base de datos
+        $especialista = $evento['Fk_Especialista'];
+        $nombrePaciente = $evento['Nombre_Paciente'];
+        $fechaHora = $evento['Fecha'] . ' ' . $evento['Hora'];
+        $calendarId = $evento['IDGoogleCalendar'];
+    }
+
+    // Insertar en MovimientosAgenda
+    $sql = "INSERT INTO MovimientosAgenda (
+                Fk_Especialista, Nombre_Paciente, Fecha_Hora, Accion, IDGoogleCalendar
+            ) VALUES (
+                '$especialista', '$nombrePaciente', '$fechaHora', '$accion', '$calendarId'
+            )";
+
+    if (!mysqli_query($conn, $sql)) {
+        file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Error al registrar movimiento ($accion): " . mysqli_error($conn) . PHP_EOL, FILE_APPEND);
+    } else {
+        file_put_contents('webhook.log', date('Y-m-d H:i:s') . " - Movimiento registrado ($accion) para $nombrePaciente" . PHP_EOL, FILE_APPEND);
+    }
+}
+
 ?>
