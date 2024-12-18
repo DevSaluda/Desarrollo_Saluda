@@ -18,6 +18,7 @@
                         <label for="Estatus">Estatus</label>
                         <select class="form-control" id="Estatus" name="Estatus" required>
                             <option value="Pendiente">Pendiente</option>
+                            <option value="En Proceso">En Proceso</option>
                             <option value="Resuelto">Resuelto</option>
                             <option value="Cancelado">Cancelado</option>
                         </select>
