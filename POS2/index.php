@@ -195,7 +195,7 @@ $(document).ready(function(){
     $(".toast").toast("hide");
   }
 </script>
-<script>
+<!-- <script>
 document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
         title: `¡Hola <?php echo $row['Nombre_Apellidos']; ?>!`,
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
+</script> -->
 </div></div>
   <?php include ("Modales/Ingreso.php");
       include ("Modales/ModalConsultaProductos.php");
