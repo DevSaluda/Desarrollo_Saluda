@@ -197,7 +197,7 @@ tabla = $('#Productos').DataTable({
  "stateSave":true,
  "bAutoWidth": true,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayDevolucionesDelMes.php",
+ "sAjaxSource": "https://saludapos.com/CEDIS/Consultas/ArrayDevolucionesDelMes.php",
  "aoColumns": [
     { "data": "NumOrde", "title": "N° Orden" },
     { "data": "Cod_Barra", "title": "Cod" },
