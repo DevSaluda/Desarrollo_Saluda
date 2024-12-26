@@ -183,7 +183,16 @@
             </a>
           </li>
           
+          <li class="nav-item has-treeview">
+            <a href="DevolucionesProductos" class="nav-link">
+            <i class="fas fa-undo"></i>
+              <p>
+        Devoluciones
+               
+              </p>
+            </a>
           
+          </li>
           <!-- <li class="nav-header">Ventas</li>
             
           <li class="nav-item">
