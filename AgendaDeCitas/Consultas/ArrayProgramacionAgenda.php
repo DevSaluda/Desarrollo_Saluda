@@ -47,7 +47,7 @@ Programacion_MedicosExt.FK_Medico = Personal_Medico_Express.Medico_ID
 AND Programacion_MedicosExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
 AND Personal_Medico_Express.Especialidad_Express = Especialidades_Express.ID_Especialidad 
 AND Programacion_MedicosExt.Estatus <> 'Autorizado' 
-AND YEAR(Programacion_MedicosExt.ProgramadoEn) = YEAR(CURRENT_DATE())
+AND YEAR(Programacion_MedicosExt.Fecha_Fin,) = YEAR(CURRENT_DATE())
 ORDER BY 
 Programacion_MedicosExt.ProgramadoEn DESC;
 ";
