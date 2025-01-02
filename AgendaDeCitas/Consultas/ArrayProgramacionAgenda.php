@@ -18,38 +18,39 @@ function fechaCastellano ($fecha) {
     return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
   }
 $sql = "SELECT 
-Programacion_MedicosExt.ID_Programacion,
-Programacion_MedicosExt.FK_Medico,
-Programacion_MedicosExt.Fk_Sucursal,
-Programacion_MedicosExt.Tipo_Programacion,
-Programacion_MedicosExt.Fecha_Inicio,
-Programacion_MedicosExt.ID_H_O_D,
-Programacion_MedicosExt.ProgramadoEn,
-Programacion_MedicosExt.Fecha_Fin,
-Programacion_MedicosExt.Hora_inicio,
-Programacion_MedicosExt.Hora_Fin,
-Programacion_MedicosExt.Intervalo,
-Programacion_MedicosExt.Estatus,
-Especialidades_Express.ID_Especialidad,
-Especialidades_Express.Nombre_Especialidad,
-Personal_Medico_Express.Medico_ID,
-Personal_Medico_Express.Especialidad_Express,
-Personal_Medico_Express.Nombre_Apellidos,
-SucursalesCorre.ID_SucursalC,
-SucursalesCorre.Nombre_Sucursal 
+    Programacion_MedicosExt.ID_Programacion,
+    Programacion_MedicosExt.FK_Medico,
+    Programacion_MedicosExt.Fk_Sucursal,
+    Programacion_MedicosExt.Tipo_Programacion,
+    Programacion_MedicosExt.Fecha_Inicio,
+    Programacion_MedicosExt.ID_H_O_D,
+    Programacion_MedicosExt.ProgramadoEn,
+    Programacion_MedicosExt.Fecha_Fin,
+    Programacion_MedicosExt.Hora_inicio,
+    Programacion_MedicosExt.Hora_Fin,
+    Programacion_MedicosExt.Intervalo,
+    Programacion_MedicosExt.Estatus,
+    Especialidades_Express.ID_Especialidad,
+    Especialidades_Express.Nombre_Especialidad,
+    Personal_Medico_Express.Medico_ID,
+    Personal_Medico_Express.Especialidad_Express,
+    Personal_Medico_Express.Nombre_Apellidos,
+    SucursalesCorre.ID_SucursalC,
+    SucursalesCorre.Nombre_Sucursal 
 FROM 
-Programacion_MedicosExt,
-Especialidades_Express,
-Personal_Medico_Express,
-SucursalesCorre 
+    Programacion_MedicosExt
+    INNER JOIN Especialidades_Express ON Personal_Medico_Express.Especialidad_Express = Especialidades_Express.ID_Especialidad
+    INNER JOIN Personal_Medico_Express ON Programacion_MedicosExt.FK_Medico = Personal_Medico_Express.Medico_ID
+    INNER JOIN SucursalesCorre ON Programacion_MedicosExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
 WHERE 
-Programacion_MedicosExt.FK_Medico = Personal_Medico_Express.Medico_ID 
-AND Programacion_MedicosExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-AND Personal_Medico_Express.Especialidad_Express = Especialidades_Express.ID_Especialidad 
-AND Programacion_MedicosExt.Estatus <> 'Autorizado' 
-AND YEAR(Programacion_MedicosExt.ProgramadoEn) = YEAR(CURRENT_DATE())
+    Programacion_MedicosExt.Estatus <> 'Autorizado' 
+    AND Programacion_MedicosExt.ProgramadoEn BETWEEN 
+        DATE(CONCAT(YEAR(CURRENT_DATE()) - 1, '-11-01')) AND LAST_DAY(DATE(CONCAT(YEAR(CURRENT_DATE()) - 1, '-12-01'))) 
+        OR Programacion_MedicosExt.ProgramadoEn BETWEEN 
+        DATE(CONCAT(YEAR(CURRENT_DATE()), '-01-01')) AND CURRENT_DATE()
 ORDER BY 
-Programacion_MedicosExt.ProgramadoEn DESC;
+    Programacion_MedicosExt.ProgramadoEn DESC;
+
 ";
 
 
