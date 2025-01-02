@@ -45,7 +45,8 @@ $sql = "SELECT
             LEFT JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
         WHERE
             AgendaCitas_EspecialistasExt.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-            AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
+            AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) = YEAR(CURDATE())";
+
 
 $result = mysqli_query($conn, $sql);
 
