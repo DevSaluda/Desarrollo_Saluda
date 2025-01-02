@@ -39,17 +39,20 @@ $sql = "SELECT
     SucursalesCorre.Nombre_Sucursal 
 FROM 
     Programacion_MedicosExt
-    INNER JOIN Especialidades_Express ON Personal_Medico_Express.Especialidad_Express = Especialidades_Express.ID_Especialidad
-    INNER JOIN Personal_Medico_Express ON Programacion_MedicosExt.FK_Medico = Personal_Medico_Express.Medico_ID
-    INNER JOIN SucursalesCorre ON Programacion_MedicosExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
+    INNER JOIN Personal_Medico_Express 
+        ON Programacion_MedicosExt.FK_Medico = Personal_Medico_Express.Medico_ID
+    INNER JOIN Especialidades_Express 
+        ON Personal_Medico_Express.Especialidad_Express = Especialidades_Express.ID_Especialidad
+    INNER JOIN SucursalesCorre 
+        ON Programacion_MedicosExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
 WHERE 
     Programacion_MedicosExt.Estatus <> 'Autorizado' 
     AND Programacion_MedicosExt.ProgramadoEn BETWEEN 
-        DATE(CONCAT(YEAR(CURRENT_DATE()) - 1, '-11-01')) AND LAST_DAY(DATE(CONCAT(YEAR(CURRENT_DATE()) - 1, '-12-01'))) 
-        OR Programacion_MedicosExt.ProgramadoEn BETWEEN 
-        DATE(CONCAT(YEAR(CURRENT_DATE()), '-01-01')) AND CURRENT_DATE()
+        DATE(CONCAT(YEAR(CURRENT_DATE()) - 1, '-11-01')) 
+        AND CURRENT_DATE()
 ORDER BY 
-    Programacion_MedicosExt.ProgramadoEn DESC;";
+    Programacion_MedicosExt.ProgramadoEn DESC;
+";
 
 
 $result = mysqli_query($conn, $sql);
