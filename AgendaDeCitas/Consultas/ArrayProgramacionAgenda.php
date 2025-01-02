@@ -49,9 +49,7 @@ WHERE
         OR Programacion_MedicosExt.ProgramadoEn BETWEEN 
         DATE(CONCAT(YEAR(CURRENT_DATE()), '-01-01')) AND CURRENT_DATE()
 ORDER BY 
-    Programacion_MedicosExt.ProgramadoEn DESC;
-
-";
+    Programacion_MedicosExt.ProgramadoEn DESC;";
 
 
 $result = mysqli_query($conn, $sql);
