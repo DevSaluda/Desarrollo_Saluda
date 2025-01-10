@@ -41,7 +41,7 @@ include "../Consultas/Consultas.php";
 
 $user_id=null;
 $sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Clave_adicional,
-Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl,
+Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl,Ventas_POS.PuSindescuento,
 Ventas_POS.Total_Venta,Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM 
 Ventas_POS,SucursalesCorre WHERE   
 Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC  AND Ventas_POS.Fk_sucursal='".$row['Fk_Sucursal']."' 

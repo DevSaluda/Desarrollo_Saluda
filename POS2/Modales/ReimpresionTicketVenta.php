@@ -6,7 +6,7 @@ include "../Consultas/Consultas.php";
 $fcha = date("Y-m-d");
 $user_id=null;
 $sql1= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.FormaDePago,Ventas_POS.Fecha_venta,
-Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,
+Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,Ventas_POS.PuSindescuento,
 Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
 Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
  FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC   AND Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
@@ -24,7 +24,7 @@ while ($r=$query->fetch_object()){
   }
   $user_id=null;
   $sql2= "SELECT Ventas_POS.Folio_Ticket,Ventas_POS.Fk_Caja,Ventas_POS.Venta_POS_ID,Ventas_POS.Identificador_tipo,Ventas_POS.Cod_Barra,Ventas_POS.Turno,Ventas_POS.DescuentoAplicado,
-  Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,Ventas_POS.Fecha_venta,
+  Ventas_POS.Clave_adicional,Ventas_POS.Total_Venta,Ventas_POS.Importe,Ventas_POS.Total_VentaG,Ventas_POS.CantidadPago,Ventas_POS.Fecha_venta,Ventas_POS.PuSindescuento,
   Ventas_POS.Cambio,Servicios_POS.Servicio_ID,Servicios_POS.Nom_Serv, Ventas_POS.Nombre_Prod,Ventas_POS.Cantidad_Venta,Ventas_POS.
   Fk_sucursal,Ventas_POS.AgregadoPor,Ventas_POS.AgregadoEl, Ventas_POS.Lote,Ventas_POS.ID_H_O_D,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal
    FROM Ventas_POS,SucursalesCorre,Servicios_POS WHERE Ventas_POS.Fk_sucursal= SucursalesCorre.ID_SucursalC   AND Ventas_POS.Folio_Ticket= '".$_POST["id"]."' AND
@@ -97,6 +97,7 @@ while ($r=$query->fetch_object()){
 <td><input type="text" class="form-control" readonly value=<?php echo $Tickets["Lote"]; ?>></td>
 <td><input type="text" class="form-control" name="CantidadTotal[]"readonly value=<?php echo $Tickets["Cantidad_Venta"]; ?>></td>
 <td><input type="text" class="form-control" readonly name="pro_cantidad[]"value=<?php echo $Tickets["Total_Venta"]; ?>></td>
+<td><input type="text" class="form-control" readonly name="PuSindescuento[]"value=<?php echo $Tickets["PuSindescuento"]; ?>></td>
 <td><input type="text" class="form-control"  readonly name="Descuento[]"value="<?php echo $Tickets["DescuentoAplicado"]; ?> %"></td>
 <td><input type="text" class="form-control" name="ImporteT[]" readonly value=<?php echo $Tickets["Importe"]; ?>>
 <input type="text" class="form-control" hidden readonly name="Vendedor[]"value=<?php echo $Tickets["AgregadoPor"]; ?>>
