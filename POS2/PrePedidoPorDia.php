@@ -197,6 +197,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "ordering": true,
             "stateSave": true,
             "autoWidth": true,
+            "lengthChange": false, // Oculta el menú para seleccionar cantidad de registros
+        "paging": false,       // Desactiva la paginación
+        "pageLength": -1,      // Muestra todos los registros por defecto
             "order": [[ 0, "desc" ]],
             "ajax": {
               "type": "POST",
@@ -226,7 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               { "data": "Total_Venta" },
               { "data": "Descuento" },
             ],
-           
+            "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
             "language": {
               "lengthMenu": "Mostrar _MENU_ registros",
               "sPaginationType": "extStyle",
