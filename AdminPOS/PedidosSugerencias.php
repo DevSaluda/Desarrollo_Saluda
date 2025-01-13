@@ -102,9 +102,9 @@ include ("footer.php")?>
             { id: id, sucursal: sucursal }, // Envía ambos datos
             function(data) {
                 $("#form-edit").html(data);
-                $("#Titulo").html("Registrando como caducados");
+                $("#Titulo").html("Generando pedido....");
                 $("#Di").removeClass("modal-dialog modal-notify modal-info");
-                $("#Di").addClass("modal-dialog  modal-notify modal-warning");
+                $("#Di").addClass("modal-dialog  modal-notify modal-info");
             }
         );
 
