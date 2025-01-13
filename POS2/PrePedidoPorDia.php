@@ -226,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               { "data": "Total_Venta" },
               { "data": "Descuento" },
             ],
-            "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
+           
             "language": {
               "lengthMenu": "Mostrar _MENU_ registros",
               "sPaginationType": "extStyle",
