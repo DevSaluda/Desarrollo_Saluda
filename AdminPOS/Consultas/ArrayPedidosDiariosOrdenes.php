@@ -35,7 +35,7 @@ while($fila = $result->fetch_assoc()) {
    
     $data[$c]["Acciones"] = '
     <td>
-        <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-warning btn-sm btn-CreaPedido"><i class="fas fa-people-carry"></i></a>
+        <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-warning btn-sm btn-CreaPedido"><i class="fa-solid fa-cart-shopping-fast"></i></a>
         <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-primary btn-sm btn-GeneraImpresionPedido"><i class="fas fa-pills"></i></a>
     <a data-id="' . $fila["NumOrdPedido"] . '" data-sucursal="' . $fila["Fk_sucursal"] . '" class="btn btn-primary btn-sm btn-MarcarComoCancelado"><i class="fas fa-pills"></i></a>
         </td>';
