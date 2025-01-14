@@ -176,6 +176,7 @@ tabla = $('#Productos').DataTable({
  "ordering": true,
  "stateSave":true,
  "bAutoWidth": true,
+ "paging": false,   
  "order": [[ 0, "desc" ]],
  "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiariosOrdenes.php",
  "aoColumns": [
