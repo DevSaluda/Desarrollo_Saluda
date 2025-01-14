@@ -234,6 +234,9 @@ $(document).ready(function() {
         "ordering": true,
         "stateSave": true,
         "autoWidth": true,
+        "lengthChange": false, // Oculta el menú para seleccionar cantidad de registros
+        "paging": false,       // Desactiva la paginación
+        "pageLength": -1,      // Muestra todos los registros por defecto
         "order": [[ 0, "desc" ]],
         "ajax": {
             "type": "POST",
