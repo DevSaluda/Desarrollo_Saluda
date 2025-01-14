@@ -175,9 +175,10 @@ tabla = $('#Productos').DataTable({
  "bProcessing": true,
  "ordering": true,
  "stateSave":true,
- "bAutoWidth": true,
- "paging": false,   
-"pageLength": -1, 
+ "bAutoWidth": true,   
+ "lengthChange": false, // Oculta el menú para seleccionar cantidad de registros
+        "paging": false,       // Desactiva la paginación
+        "pageLength": -1,      // Muestra todos los registros por defecto
  "order": [[ 0, "desc" ]],
  "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayPedidosDiariosOrdenes.php",
  "aoColumns": [
