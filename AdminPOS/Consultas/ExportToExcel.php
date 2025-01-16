@@ -17,6 +17,7 @@ if (isset($_POST['Mes']) && isset($_POST['anual'])) {
 }
 
 $query = "SELECT DISTINCT
+Ventas_POS.Venta_POS_ID,
 Ventas_POS.Cod_Barra,
 Ventas_POS.Nombre_Prod,
 Stock_POS.Precio_C AS PrecioCompra,
@@ -32,6 +33,8 @@ Ventas_POS.DescuentoAplicado AS Descuento,
 CONVERT(Ventas_POS.FormaDePago USING utf8) AS FormaPago,
 CONVERT(Ventas_POS.Cliente USING utf8) AS Cliente,
 Ventas_POS.FolioSignoVital,
+Ventas_POS.Lote,
+Ventas_POS.ID_H_O_D,
 Servicios_POS.Nom_Serv AS NomServ,
 Ventas_POS.Fecha_venta AS AgregadoEl,
 Ventas_POS.AgregadoEl AS AgregadoEnMomento,
