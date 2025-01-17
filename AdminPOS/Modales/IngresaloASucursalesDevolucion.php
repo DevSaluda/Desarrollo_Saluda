@@ -122,7 +122,7 @@ if($query->num_rows>0){
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="exampleFormControlInput1">Cantidad</label>
+                <label for="exampleFormControlInput1">Cantidad|</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
