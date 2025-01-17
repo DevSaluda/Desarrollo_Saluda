@@ -121,7 +121,15 @@ if($query->num_rows>0){
                     <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Cantidad</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
+                </div>
+            </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
             <input type="hidden" class="form-control" name="GeneradoPor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
