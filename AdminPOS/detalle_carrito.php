@@ -12,7 +12,7 @@ if ($id_carrito <= 0) {
 // Obtener los detalles del carrito (opcional para el título)
 $sql_carrito = "
     SELECT ID_CARRITO 
-    FROM CarritosEnfermeria
+    FROM CARRITOS
     WHERE ID_CARRITO = $id_carrito
 ";
 $result_carrito = $conn->query($sql_carrito);
