@@ -146,13 +146,14 @@ if($query->num_rows>0){
             </div> </div> </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+            <input type="hidden" class="form-control" name="CodBarras" readonly value="<?php echo $Devoluciones->Cod_Barra; ?>">
             <input type="hidden" class="form-control" name="AgregoElVendedor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
             <input type="hidden" class="form-control" name="TipodeServicio" readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
             <input type="hidden" class="form-control" name="ID_H_O_D" readonly value="Saluda">
             <input type="hidden" class="form-control" name="Movimiento" readonly value="Ingresado desde devoluciones">
             <input type="hidden" class="form-control" name="IdDevuelve" readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
 
-            Cod_Barra
+            
         </div>
 
         <!-- Botón de envío -->
