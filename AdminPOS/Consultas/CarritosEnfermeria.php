@@ -1,8 +1,36 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#TiposConsultasDoc').DataTable({
+            "order": [[0, "desc"]],
+            "lengthMenu": [[25, 50, 150, 200, -1], [25, 50, 150, 200, "Todos"]],
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "sProcessing": "Procesando...",
+            },
+            responsive: "true",
+            dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>",
+        });
+    });
+</script>
+
 <?php
 include("db_connection.php");
 include "Consultas.php";
 
-$user_id = null;
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 
 $sql1 = "
     SELECT 
@@ -10,7 +38,7 @@ $sql1 = "
         c.ID_SUCURSAL,
         s.Nombre_Sucursal
     FROM 
-        CarritosEnfermeria AS c
+        CARRITOS AS c
     INNER JOIN 
         SucursalesCorre AS s
     ON 
@@ -26,11 +54,14 @@ if (!$query) {
 <?php if ($query->num_rows > 0) : ?>
     <div class="text-center">
         <div class="table-responsive">
-            <table id="TiposConsultasDoc" class="table table-hover">
+            <table id="CarritosEnfermeria" class="table table-hover">
+                <caption>Listado de Carritos y Sucursales</caption>
                 <thead>
-                    <th style="background-color:#0057b8 !important;">N° Carrito</th>
-                    <th style="background-color:#0057b8 !important;">Sucursal</th>
-                    <th style="background-color:#0057b8 !important;">Acciones</th>
+                    <tr>
+                        <th style="background-color:#0057b8 !important;">N° Carrito</th>
+                        <th style="background-color:#0057b8 !important;">Sucursal</th>
+                        <th style="background-color:#0057b8 !important;">Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $query->fetch_array()) : ?>
@@ -39,7 +70,7 @@ if (!$query) {
                             <td><?php echo $row["Nombre_Sucursal"]; ?></td>
                             <td>
                                 <a href="detalle_carrito.php?id_carrito=<?php echo $row['ID_CARRITO']; ?>" class="btn btn-primary">
-                                    Ver detalles
+                                    <i class="fas fa-eye"></i> Ver detalles
                                 </a>
                             </td>
                         </tr>
