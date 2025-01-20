@@ -134,7 +134,7 @@ if($query->num_rows>0){
           }
                         ?>
         </select>   
-            </div>
+            </div> </div> </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
             <input type="hidden" class="form-control" name="GeneradoPor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
