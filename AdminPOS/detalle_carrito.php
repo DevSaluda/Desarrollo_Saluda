@@ -95,7 +95,6 @@ $result_productos = $conn->query($sql_productos);
 
 <?php
     
-¿
   include ("footer.php")?>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
