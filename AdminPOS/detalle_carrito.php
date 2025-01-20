@@ -3,7 +3,7 @@ include("db_connection.php");
 include "Consultas/Consultas.php";
 
 // Obtener el ID del carrito de la URL
-$id_carrito = isset($_GET['ID_CARRITO']) ? intval($_GET['ID_CARRITO']) : 0;
+$id_carrito = isset($_GET['id_carrito']) ? intval($_GET['id_carrito']) : 0;
 
 
 // Verificar si se ha proporcionado un ID de carrito válido
