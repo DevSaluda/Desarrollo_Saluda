@@ -1,34 +1,28 @@
 <?php
 include("db_connection.php");
+include "Consultas/Consultas.php";
 
 // Obtener el ID del carrito de la URL
 $id_carrito = isset($_GET['id_carrito']) ? intval($_GET['id_carrito']) : 0;
 
-// Validar que el ID del carrito exista
-$sql_carrito = "
-    SELECT 
-        c.ID_CARRITO,
-        s.Nombre_Sucursal,
-        c.Estado,
-        c.Agregadoel
-    FROM 
-        CARRITOS AS c
-    INNER JOIN 
-        SucursalesCorre AS s
-    ON 
-        c.ID_SUCURSAL = s.ID_SucursalC
-    WHERE 
-        c.ID_CARRITO = $id_carrito
-";
-$result_carrito = $conn->query($sql_carrito);
 
-if ($result_carrito->num_rows == 0) {
-    echo "<p class='alert alert-danger'>Carrito no encontrado</p>";
-    exit;
+// Verificar si se ha proporcionado un ID de carrito válido
+if ($id_carrito <= 0) {
+    die("ID de carrito no válido.");
 }
 
-// Datos del carrito
-$carrito = $result_carrito->fetch_assoc();
+// Obtener los detalles del carrito (opcional para el título)
+$sql_carrito = "
+    SELECT ID_CARRITO 
+    FROM CARRITOS
+    WHERE ID_CARRITO = $id_carrito
+";
+$result_carrito = $conn->query($sql_carrito);
+if ($result_carrito && $result_carrito->num_rows > 0) {
+    $carrito = $result_carrito->fetch_assoc();
+} else {
+    die("No se encontró el carrito.");
+}
 
 // Obtener productos en el carrito
 $sql_productos = "
@@ -51,17 +45,26 @@ $result_productos = $conn->query($sql_productos);
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Carrito</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title><?php echo $row['ID_H_O_D']?> | Carritos Enfermeria </title>
+
+<?php include "Header.php"?>
+ <style>
+        .error {
+  color: red;
+  margin-left: 5px; 
+  
+}
+
+    </style>
 </head>
+<?php include_once ("Menu.php")?>
 <body>
     <div class="container mt-4">
         <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
-        <p><strong>Sucursal:</strong> <?php echo $carrito['Nombre_Sucursal']; ?></p>
-        <p><strong>Estado:</strong> <?php echo $carrito['Estado']; ?></p>
-        <p><strong>Agregado el:</strong> <?php echo fechaCastellano($carrito['Agregadoel']); ?></p>
 
         <h3>Productos en el carrito</h3>
         <?php if ($result_productos->num_rows > 0): ?>
@@ -89,3 +92,45 @@ $result_productos = $conn->query($sql_productos);
     </div>
 </body>
 </html>
+
+<?php
+    
+  include ("footer.php")?>
+
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="dist/js/demo.js"></script>
+
+<!-- PAGE PLUGINS -->
+
+</body>
+</html>
+<?php
+
+function fechaCastellano ($fecha) {
+  $fecha = substr($fecha, 0, 10);
+  $numeroDia = date('d', strtotime($fecha));
+  $dia = date('l', strtotime($fecha));
+  $mes = date('F', strtotime($fecha));
+  $anio = date('Y', strtotime($fecha));
+  $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
+  $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+  $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+  $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+  $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+  return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+}
+?>
