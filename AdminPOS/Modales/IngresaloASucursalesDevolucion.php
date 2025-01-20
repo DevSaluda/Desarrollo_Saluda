@@ -95,7 +95,7 @@ if($query->num_rows>0){
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
                     </div>
-                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
+                    <input type="text" class="form-control" name="FacturaNumber" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
                 </div>
             </div>
 
@@ -127,13 +127,13 @@ if($query->num_rows>0){
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
                     </div>
-                    <input type="number" class="form-control" >
+                    <input type="number"  name="Contabilizado" class="form-control" >
                 </div>
             </div>
             <div class="col-md-4">
             <label for="exampleFormControlInput1">Sucursal destino</label>
             <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
-            <select id = "sucursalconordenDestino" name="SucursalConOrdenDestino" class = "form-control" required  >
+            <select id = "sucursalconordenDestinos" name="Fk_sucursal" class = "form-control" required  >
   <option value="">Seleccione una Sucursal:</option>
                                                <?php
           $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
@@ -146,11 +146,13 @@ if($query->num_rows>0){
             </div> </div> </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
-            <input type="hidden" class="form-control" name="GeneradoPor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+            <input type="hidden" class="form-control" name="AgregoElVendedor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
             <input type="hidden" class="form-control" name="TipodeServicio" readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
             <input type="hidden" class="form-control" name="ID_H_O_D" readonly value="Saluda">
-            <input type="hidden" class="form-control" name="Movimiento" readonly value="Agregado desde devoluciones">
+            <input type="hidden" class="form-control" name="Movimiento" readonly value="Ingresado desde devoluciones">
             <input type="hidden" class="form-control" name="IdDevuelve" readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
+
+            Cod_Barra
         </div>
 
         <!-- Botón de envío -->
