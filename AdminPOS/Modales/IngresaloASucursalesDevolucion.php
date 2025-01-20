@@ -127,7 +127,7 @@ if($query->num_rows>0){
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
                     </div>
-                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
+                    <input type="number" class="form-control" >
                 </div>
             </div>
             <div class="col-md-4">
@@ -156,7 +156,7 @@ if($query->num_rows>0){
         <!-- Botón de envío -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" id="submit" class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
+                <button type="submit" id="submit" class="btn btn-success">Realizar ingreso <i class="fas fa-check"></i></button>
             </div>
         </div>
     </div>
