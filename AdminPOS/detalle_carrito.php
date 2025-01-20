@@ -12,7 +12,7 @@ $sql_carrito = "
         c.Estado,
         c.Agregadoel
     FROM 
-        ID_CARRITO AS c
+        CARRITOS AS c
     INNER JOIN 
         SucursalesCorre AS s
     ON 
