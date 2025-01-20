@@ -8,7 +8,7 @@ include "Consultas/Consultas.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?php echo $row['ID_H_O_D']?> | Tipos de consultas </title>
+  <title><?php echo $row['ID_H_O_D']?> | Carritos Enfermeria </title>
 
 <?php include "Header.php"?>
  <style>
@@ -23,13 +23,11 @@ include "Consultas/Consultas.php";
 <?php include_once ("Menu.php")?>
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Tipos de Consulta de <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  Carritos de Enfermeria <?echo $row['ID_H_O_D']?> al <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
   <div >
- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AltadeTiposConsultas"class="btn btn-default">
-  Añadir nuevo tipo <i class="far fa-plus-square"></i>
-</button>
+
 
 </div>
 
@@ -61,7 +59,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
     
-  include ("Modales/AltaTipoConsultas.php");
+
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
@@ -71,7 +69,7 @@ include "Consultas/Consultas.php";
 
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlCarritosEnfermeria.js"></script>
-<script src="js/AgregaTipoConsultas.js"></script>
+
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
