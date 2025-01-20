@@ -122,13 +122,16 @@ if($query->num_rows>0){
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="exampleFormControlInput1">Cantidad|</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
-                    </div>
-                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
-                </div>
+            <select id = "sucursalconordenDestino" name="SucursalConOrdenDestino" class = "form-control" required  >
+  <option value="">Seleccione una Sucursal:</option>
+                                               <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
+        </select>   
             </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
