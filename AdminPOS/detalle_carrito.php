@@ -1,5 +1,6 @@
 <?php
 include("db_connection.php");
+include "Consultas/Consultas.php";
 
 // Obtener el ID del carrito de la URL
 $id_carrito = isset($_GET['ID_CARRITO']) ? intval($_GET['ID_CARRITO']) : 0;
@@ -40,9 +41,7 @@ $sql_productos = "
 ";
 $result_productos = $conn->query($sql_productos);
 ?>
-<?php
-include "Consultas/Consultas.php";
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
