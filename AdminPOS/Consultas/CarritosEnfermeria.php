@@ -36,8 +36,6 @@ $sql1 = "
         c.ID_CARRITO,
         c.ID_SUCURSAL,
         s.Nombre_Sucursal,
-        c.Estado,
-        c.Agregadoel
     FROM 
         CarritosEnfermeria AS c
     INNER JOIN 
@@ -57,8 +55,6 @@ $query = $conn->query($sql1);
                 <thead>
                     <th style="background-color:#0057b8 !important;">N° Carrito</th>
                     <th style="background-color:#0057b8 !important;">Sucursal</th>
-                    <th style="background-color:#0057b8 !important;">Estado</th>
-                    <th style="background-color:#0057b8 !important;">Agregado el</th>
                     <th style="background-color:#0057b8 !important;">Acciones</th>
                 </thead>
                 <?php while ($row = $query->fetch_array()) : ?>
