@@ -2,7 +2,9 @@
 include("db_connection.php");
 include "Consultas.php";
 
-$user_id = null;
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 
 $sql1 = "
     SELECT 
@@ -26,11 +28,14 @@ if (!$query) {
 <?php if ($query->num_rows > 0) : ?>
     <div class="text-center">
         <div class="table-responsive">
-            <table id="TiposConsultasDoc" class="table table-hover">
+            <table id="CarritosEnfermeria" class="table table-hover">
+                <caption>Listado de Carritos y Sucursales</caption>
                 <thead>
-                    <th style="background-color:#0057b8 !important;">N° Carrito</th>
-                    <th style="background-color:#0057b8 !important;">Sucursal</th>
-                    <th style="background-color:#0057b8 !important;">Acciones</th>
+                    <tr>
+                        <th style="background-color:#0057b8 !important;">N° Carrito</th>
+                        <th style="background-color:#0057b8 !important;">Sucursal</th>
+                        <th style="background-color:#0057b8 !important;">Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $query->fetch_array()) : ?>
@@ -39,7 +44,7 @@ if (!$query) {
                             <td><?php echo $row["Nombre_Sucursal"]; ?></td>
                             <td>
                                 <a href="detalle_carrito.php?id_carrito=<?php echo $row['ID_CARRITO']; ?>" class="btn btn-primary">
-                                    Ver detalles
+                                    <i class="fas fa-eye"></i> Ver detalles
                                 </a>
                             </td>
                         </tr>
