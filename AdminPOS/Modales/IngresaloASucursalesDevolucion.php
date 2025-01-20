@@ -75,7 +75,7 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
-    <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
+    <form action="javascript:void(0)" method="post" id="IngresaAsucursalesDesdeDevoluciones">
     <div class="container">
         <div class="row">
             <!-- Columna 1 -->

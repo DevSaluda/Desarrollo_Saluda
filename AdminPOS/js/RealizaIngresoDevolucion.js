@@ -27,7 +27,7 @@ $('document').ready(function($) {
         return this.optional(element) ||/^(\d{2})(\d{2})(\d{2})\d{5}$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Verifique el NSS");
   
-    $("#BajaEmpleados").validate({
+    $("#IngresaAsucursalesDesdeDevoluciones").validate({
         rules: {
             ActPass: {
                 required: true,
@@ -47,7 +47,7 @@ $('document').ready(function($) {
         $.ajax({
             type: 'POST',
             url: "Consultas/IngresoDesdeDevoluciones.php",
-            data: $('#BajaEmpleados').serialize(),
+            data: $('#IngresaAsucursalesDesdeDevoluciones').serialize(),
             cache: false,
             beforeSend: function() {
                 $("#success").fadeOut();
