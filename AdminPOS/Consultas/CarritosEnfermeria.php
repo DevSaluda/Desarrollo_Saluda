@@ -39,12 +39,13 @@ $sql1 = "
         c.Estado,
         c.Agregadoel
     FROM 
-        ID_CARRITO AS c
+        CarritosEnfermeria AS c
     INNER JOIN 
         SucursalesCorre AS s
     ON 
         c.ID_SUCURSAL = s.ID_SucursalC
 ";
+
 
 $query = $conn->query($sql1);
 ?>

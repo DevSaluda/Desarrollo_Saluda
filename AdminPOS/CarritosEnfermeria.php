@@ -39,8 +39,8 @@ include "Consultas/Consultas.php";
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-    
-<div id="TableConsultas"></div>
+<div id="TableCarritos"></div>
+
 
 
 </div>
