@@ -69,7 +69,7 @@ include "Consultas/Consultas.php";
 
 <!-- REQUIRED SCRIPTS -->
 <script src="js/ControlCarritosEnfermeria.js"></script>
-<script src="js/AgregaproductoCarrito.js"></script>
+<script src="js/AgregaProductoCarrito.js"></script>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
