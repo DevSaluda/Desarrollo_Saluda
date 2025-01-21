@@ -77,6 +77,12 @@ $result_productos = $conn->query($sql_productos);
                     </tr>
                 </thead>
                 <tbody>
+                <td>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
+        Agregar Producto
+    </button>
+</td>
+
                     <?php while ($producto = $result_productos->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo $producto['ID_PRODUCTO']; ?></td>
@@ -94,8 +100,8 @@ $result_productos = $conn->query($sql_productos);
 </html>
 
 <?php
-    
-  include ("footer.php")?>
+    include('Modales/ModalAgregarProductoCarrito.php');
+    include ("footer.php")?>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
