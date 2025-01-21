@@ -2,13 +2,22 @@ $(document).ready(function() {
     // Función para cargar productos en el modal
     function cargarProductos(idCarrito) {
         $.ajax({
-            url: 'Consultas/ObtenerProductos.php', // Archivo PHP que obtiene los productos
+            url: 'Consultas/ObtenerProductos.php',
             method: 'GET',
             data: { id_carrito: idCarrito },
             success: function(response) {
-                console.log('Respuesta recibida:', response); // Para depuración
+                console.log('Respuesta recibida:', response); // Ver la respuesta cruda
                 try {
-                    let productos = JSON.parse(response); // Parsear el JSON
+                    let productos = JSON.parse(response); // Intenta parsear el JSON
+                    console.log('Productos parseados:', productos); // Ver los productos parseados
+    
+                    // Verifica si hay productos en la lista
+                    if (productos.length === 0) {
+                        $('#productoList').html('<tr><td colspan="4">No se encontraron productos.</td></tr>');
+                        return;
+                    }
+    
+                    // Renderizar los productos
                     let html = '';
                     productos.forEach(function(producto) {
                         html += `
@@ -35,14 +44,17 @@ $(document).ready(function() {
             }
         });
     }
+    
 
     // Evento cuando se muestra el modal
     $('#modalAgregarProducto').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var idCarrito = button.data('carrito-id'); // Obtener el id_carrito desde el atributo data-carrito-id
-        $('#modalAgregarProducto').data('carrito-id', idCarrito); // Guardar el id_carrito en el modal
-        cargarProductos(idCarrito); // Cargar productos en el modal
+        var button = $(event.relatedTarget); // Botón que abrió el modal
+        var idCarrito = button.data('carrito-id'); // ID del carrito desde el atributo data-carrito-id
+        console.log('ID del carrito:', idCarrito); // Para depuración
+        $('#modalAgregarProducto').data('carrito-id', idCarrito); // Guarda el ID del carrito
+        cargarProductos(idCarrito); // Llama a la función
     });
+    
 
     // Evento de búsqueda de productos
     $('#buscadorProducto').on('input', function() {
