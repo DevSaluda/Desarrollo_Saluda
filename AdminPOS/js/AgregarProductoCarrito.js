@@ -2,23 +2,32 @@ $(document).ready(function() {
     // Función para cargar productos en el modal
     function cargarProductos(idCarrito) {
         $.ajax({
-            url: 'Consultas/ObtenerProductos.php', // Archivo PHP que obtiene los productos según el id_carrito
+            url: 'Consultas/ObtenerProductos.php', // Archivo PHP que obtiene los productos
             method: 'GET',
-            data: { id_carrito: idCarrito }, // Pasar el id_carrito como parámetro
+            data: { id_carrito: idCarrito },
             success: function(response) {
-                let productos = JSON.parse(response); // Parsear el JSON
-                let html = '';
-                productos.forEach(function(producto) {
-                    html += `
-                        <tr>
-                            <td>${producto.ID_Prod_POS}</td>
-                            <td>${producto.Nombre_Prod}</td>
-                            <td><input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}"></td>
-                            <td><button class="btn btn-primary agregarProductoBtn" data-id="${producto.ID_Prod_POS}" data-nombre="${producto.Nombre_Prod}">Agregar</button></td>
-                        </tr>
-                    `;
-                });
-                $('#productoList').html(html);
+                try {
+                    let productos = JSON.parse(response); // Parsear el JSON
+                    let html = '';
+                    productos.forEach(function(producto) {
+                        html += `
+                            <tr>
+                                <td>${producto.ID_Prod_POS}</td>
+                                <td>${producto.Nombre_Prod}</td>
+                                <td>
+                                    <input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary agregarProductoBtn" data-id="${producto.ID_Prod_POS}" data-nombre="${producto.Nombre_Prod}">Agregar</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    $('#productoList').html(html);
+                } catch (e) {
+                    console.error('Error procesando la respuesta JSON:', e);
+                    alert('Error al procesar los productos. Intenta nuevamente.');
+                }
             },
             error: function() {
                 alert('Error al cargar los productos del carrito');
@@ -27,7 +36,7 @@ $(document).ready(function() {
     }
 
     // Evento cuando se muestra el modal
-    $('#modalAgregarProducto').on('show.bs.modal', function (event) {
+    $('#modalAgregarProducto').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var idCarrito = button.data('carrito-id'); // Obtener el id_carrito desde el atributo data-carrito-id
         $('#modalAgregarProducto').data('carrito-id', idCarrito); // Guardar el id_carrito en el modal
