@@ -6,6 +6,7 @@ $(document).ready(function() {
             method: 'GET',
             data: { id_carrito: idCarrito },
             success: function(response) {
+                console.log('Respuesta recibida:', response); // Para depuración
                 try {
                     let productos = JSON.parse(response); // Parsear el JSON
                     let html = '';
@@ -25,7 +26,7 @@ $(document).ready(function() {
                     });
                     $('#productoList').html(html);
                 } catch (e) {
-                    console.error('Error procesando la respuesta JSON:', e);
+                    console.error('Error procesando la respuesta JSON:', e, response);
                     alert('Error al procesar los productos. Intenta nuevamente.');
                 }
             },
