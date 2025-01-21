@@ -6,8 +6,19 @@ $(document).ready(function() {
             method: 'GET',
             data: { id_carrito: idCarrito }, // Pasar el id_carrito como parámetro
             success: function(response) {
-                // Procesar la respuesta y actualizar la vista del modal
-                $('#productoList').html(response);
+                let productos = JSON.parse(response); // Parsear el JSON
+                let html = '';
+                productos.forEach(function(producto) {
+                    html += `
+                        <tr>
+                            <td>${producto.ID_Prod_POS}</td>
+                            <td>${producto.Nombre_Prod}</td>
+                            <td><input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}"></td>
+                            <td><button class="btn btn-primary agregarProductoBtn" data-id="${producto.ID_Prod_POS}" data-nombre="${producto.Nombre_Prod}">Agregar</button></td>
+                        </tr>
+                    `;
+                });
+                $('#productoList').html(html);
             },
             error: function() {
                 alert('Error al cargar los productos del carrito');
@@ -19,10 +30,8 @@ $(document).ready(function() {
     $('#modalAgregarProducto').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var idCarrito = button.data('carrito-id'); // Obtener el id_carrito desde el atributo data-carrito-id
-        
-        // Cargar productos en el modal
-        console.log("ID del Carrito: " + idCarrito);
-        cargarProductos(idCarrito);
+        $('#modalAgregarProducto').data('carrito-id', idCarrito); // Guardar el id_carrito en el modal
+        cargarProductos(idCarrito); // Cargar productos en el modal
     });
 
     // Evento de búsqueda de productos
@@ -42,18 +51,16 @@ $(document).ready(function() {
     $(document).on('click', '.agregarProductoBtn', function() {
         var idProducto = $(this).data('id'); // Obtener el ID del producto
         var nombreProducto = $(this).data('nombre'); // Obtener el nombre del producto
-        var cantidad = 1; // Se puede cambiar para que el usuario ingrese una cantidad
+        var cantidad = $(this).closest('tr').find('.cantidadProducto').val(); // Obtener la cantidad ingresada
         var idCarrito = $('#modalAgregarProducto').data('carrito-id'); // Obtener el ID del carrito desde el modal
-        
-        // Verificar si idCarrito está disponible
+
         if (!idCarrito) {
             alert('ID de carrito no disponible');
             return;
         }
 
-        // Enviar la solicitud AJAX para agregar el producto al carrito
         $.ajax({
-            url: 'Consultas/AgregarProductoACarrito.php', // El archivo que manejará la inserción
+            url: 'Consultas/AgregarProductoACarrito.php',
             method: 'POST',
             data: {
                 id_carrito: idCarrito,
@@ -61,7 +68,6 @@ $(document).ready(function() {
                 cantidad: cantidad
             },
             success: function(response) {
-                // Actualizar la lista de productos en el carrito
                 alert('Producto agregado al carrito');
                 location.reload(); // Recargar la página para ver el producto agregado
             },
