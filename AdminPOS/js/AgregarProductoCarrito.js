@@ -8,7 +8,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log('Respuesta recibida:', response); // Ver la respuesta cruda
                 try {
-                    let productos = JSON.parse(response); // Intenta parsear el JSON
+                   
                     console.log('Productos parseados:', productos); // Ver los productos parseados
     
                     // Verifica si hay productos en la lista
@@ -18,6 +18,11 @@ $(document).ready(function() {
                     }
     
                     // Renderizar los productos
+                    let productos = [
+                        { ID_Prod_POS: '101', Nombre_Prod: 'Producto A' },
+                        { ID_Prod_POS: '102', Nombre_Prod: 'Producto B' },
+                    ];
+                    
                     let html = '';
                     productos.forEach(function(producto) {
                         html += `
@@ -34,6 +39,7 @@ $(document).ready(function() {
                         `;
                     });
                     $('#productoList').html(html);
+                    
                 } catch (e) {
                     console.error('Error procesando la respuesta JSON:', e, response);
                     alert('Error al procesar los productos. Intenta nuevamente.');
@@ -48,12 +54,16 @@ $(document).ready(function() {
 
     // Evento cuando se muestra el modal
     $('#modalAgregarProducto').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Botón que abrió el modal
-        var idCarrito = button.data('carrito-id'); // ID del carrito desde el atributo data-carrito-id
-        console.log('ID del carrito:', idCarrito); // Para depuración
-        $('#modalAgregarProducto').data('carrito-id', idCarrito); // Guarda el ID del carrito
-        cargarProductos(idCarrito); // Llama a la función
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var idCarrito = button.data('carrito-id'); // Obtener el ID del carrito
+        console.log('ID del carrito:', idCarrito); // Verifica el ID en la consola
+        if (!idCarrito) {
+            alert('ID del carrito no disponible.');
+            return;
+        }
+        cargarProductos(idCarrito); // Cargar productos con el ID del carrito
     });
+    
     
 
     // Evento de búsqueda de productos
