@@ -67,6 +67,9 @@ $result_productos = $conn->query($sql_productos);
         <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
 
         <h3>Productos en el carrito</h3>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
+        Agregar Producto
+    </button>
         <?php if ($result_productos->num_rows > 0): ?>
             <table class="table table-bordered">
                 <thead>
@@ -78,9 +81,7 @@ $result_productos = $conn->query($sql_productos);
                 </thead>
                 <tbody>
                 <td>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
-        Agregar Producto
-    </button>
+ 
 </td>
 
                     <?php while ($producto = $result_productos->fetch_assoc()): ?>
@@ -102,7 +103,7 @@ $result_productos = $conn->query($sql_productos);
 <?php
     include('Modales/ModalAgregarProductoCarrito.php');
     include ("footer.php")?>
-
+<script src="js/AgregaProductoCarrito.js"></script>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
