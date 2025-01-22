@@ -1,83 +1,3 @@
-$(document).ready(function() {
-    // Función para cargar productos en el modal
-    function cargarProductos(idCarrito) {
-        $.ajax({
-            url: 'Consultas/ObtenerProductos.php',
-            method: 'GET',
-            data: { id_carrito: idCarrito },
-            success: function(response) {
-                console.log('Respuesta recibida:', response); // Ver la respuesta cruda
-                try {
-                   
-                    console.log('Productos parseados:', productos); // Ver los productos parseados
-    
-                    // Verifica si hay productos en la lista
-                    if (productos.length === 0) {
-                        $('#productoList').html('<tr><td colspan="4">No se encontraron productos.</td></tr>');
-                        return;
-                    }
-    
-                    // Renderizar los productos
-                    let productos = [
-                        { ID_Prod_POS: '101', Nombre_Prod: 'Producto A' },
-                        { ID_Prod_POS: '102', Nombre_Prod: 'Producto B' },
-                    ];
-                    
-                    let html = '';
-                    productos.forEach(function(producto) {
-                        html += `
-                            <tr>
-                                <td>${producto.ID_Prod_POS}</td>
-                                <td>${producto.Nombre_Prod}</td>
-                                <td>
-                                    <input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}">
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary agregarProductoBtn" data-id="${producto.ID_Prod_POS}" data-nombre="${producto.Nombre_Prod}">Agregar</button>
-                                </td>
-                            </tr>
-                        `;
-                    });
-                    $('#productoList').html(html);
-                    
-                } catch (e) {
-                    console.error('Error procesando la respuesta JSON:', e, response);
-                    alert('Error al procesar los productos. Intenta nuevamente.');
-                }
-            },
-            error: function() {
-                alert('Error al cargar los productos del carrito');
-            }
-        });
-    }
-    
-
-    // Evento cuando se muestra el modal
-    $('#modalAgregarProducto').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var idCarrito = button.data('carrito-id'); // Obtener el ID del carrito
-        console.log('ID del carrito:', idCarrito); // Verifica el ID en la consola
-        if (!idCarrito) {
-            alert('ID del carrito no disponible.');
-            return;
-        }
-        cargarProductos(idCarrito); // Cargar productos con el ID del carrito
-    });
-    
-    
-
-    // Evento de búsqueda de productos
-    $('#buscadorProducto').on('input', function() {
-        var query = $(this).val().toLowerCase(); // Obtener el valor del buscador
-        $('#productoList tr').each(function() {
-            var nombreProducto = $(this).find('td').eq(1).text().toLowerCase(); // Obtener nombre del producto
-            if (nombreProducto.includes(query)) {
-                $(this).show(); // Mostrar el producto si coincide con la búsqueda
-            } else {
-                $(this).hide(); // Ocultar el producto si no coincide
-            }
-        });
-    });
 
     // Evento para agregar producto al carrito
     $(document).on('click', '.agregarProductoBtn', function() {
@@ -108,4 +28,4 @@ $(document).ready(function() {
             }
         });
     });
-});
+
