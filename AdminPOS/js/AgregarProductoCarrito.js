@@ -1,31 +1,23 @@
+$(document).ready(function() {
+    $('#modalAgregarProducto').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var idCarrito = button.data('carrito-id'); // Extraer información de data-*
+        $('#id_carrito').val(idCarrito); // Asignar al campo oculto
+    });
 
-    // Evento para agregar producto al carrito
-    $(document).on('click', '.agregarProductoBtn', function() {
-        var idProducto = $(this).data('id'); // Obtener el ID del producto
-        var nombreProducto = $(this).data('nombre'); // Obtener el nombre del producto
-        var cantidad = $(this).closest('tr').find('.cantidadProducto').val(); // Obtener la cantidad ingresada
-        var idCarrito = $('#modalAgregarProducto').data('carrito-id'); // Obtener el ID del carrito desde el modal
-
-        if (!idCarrito) {
-            alert('ID de carrito no disponible');
-            return;
-        }
-
+    $('#guardarProducto').on('click', function() {
+        var formData = $('#formAgregarProducto').serialize(); // Serializar datos del formulario
         $.ajax({
             url: 'Consultas/AgregarProductoACarrito.php',
             method: 'POST',
-            data: {
-                id_carrito: idCarrito,
-                id_producto: idProducto,
-                cantidad: cantidad
-            },
+            data: formData,
             success: function(response) {
-                alert('Producto agregado al carrito');
-                location.reload(); // Recargar la página para ver el producto agregado
+                alert('Producto agregado con éxito');
+                location.reload(); // Recargar la página o actualizar tabla
             },
             error: function() {
-                alert('Hubo un error al agregar el producto al carrito');
+                alert('Error al agregar producto.');
             }
         });
     });
-
+});
