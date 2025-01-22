@@ -68,8 +68,9 @@ $result_productos = $conn->query($sql_productos);
 
         <h3>Productos en el carrito</h3>
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
-        Agregar Producto
-    </button>
+    Agregar Producto
+</button>
+
         <?php if ($result_productos->num_rows > 0): ?>
             <table class="table table-bordered">
                 <thead>
