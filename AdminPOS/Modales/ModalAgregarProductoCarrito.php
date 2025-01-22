@@ -2,12 +2,11 @@
     // Función para cargar productos
     function cargarProductos() {
         $.ajax({
-            url: 'Consultas/ObtenerProductos.php', // Ruta al archivo PHP
-            method: 'GET', // Método de la solicitud
-            dataType: 'json', // Tipo de datos esperados
-            success: function(response) {
-                console.log('Productos cargados:', response); // Verifica que los datos llegan correctamente
-
+    url: 'Consultas/ObtenerProductos.php', // Sin id_carrito
+    method: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        console.log('Productos cargados:', response);
                 let html = '';
                 if (response && Array.isArray(response) && response.length > 0) {
                     response.forEach(function(producto) {
@@ -36,10 +35,10 @@
                 $('#productoList').html(html); // Inserta el contenido en la tabla
             },
             error: function(xhr, status, error) {
-                console.error('Error al cargar los productos:', error);
-                $('#productoList').html('<tr><td colspan="4">Error al cargar los productos.</td></tr>');
-            }
-        });
+        console.error('Error al cargar los productos:', error);
+        $('#productoList').html('<tr><td colspan="4">Error al cargar los productos.</td></tr>');
+    }
+});
     }
 
     // Evento al abrir el modal para cargar los productos
