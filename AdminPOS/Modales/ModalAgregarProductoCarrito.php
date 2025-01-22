@@ -86,6 +86,20 @@
                         <input type="number" id="cantidad" name="cantidad" class="form-control" required>
                     </div>
                 </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID Producto</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productoList">
+                        <!-- Aquí se insertan las filas dinámicamente -->
+                    </tbody>
+                </table>
+                <input type="text" id="buscadorProducto" class="form-control" placeholder="Buscar producto...">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
