@@ -38,10 +38,10 @@
         });
     }
 
-    // Asocia la función al evento del modal
     $('#modalAgregarProducto').on('show.bs.modal', function() {
-        cargarProductos(); // Carga los productos cuando se abre el modal
-    });
+    console.log('Modal abierto, cargando productos...');
+    cargarProductos();
+});
 
     // Evento de búsqueda de productos
     $('#buscadorProducto').on('input', function() {
