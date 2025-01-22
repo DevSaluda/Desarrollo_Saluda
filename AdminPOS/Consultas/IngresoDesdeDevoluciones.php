@@ -4,10 +4,10 @@ include_once 'db_connection.php';
 $response = array();
 
 // Verificar si $_POST contiene todos los datos requeridos
-if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["Fk_sucursal"]) && isset($_POST["Diferencia"])) {
+if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["Fk_sucursal"]) && isset($_POST["Contabilizado"]) && isset($_POST["AgregoElVendedor"]) && isset($_POST["FacturaNumber"]) && isset($_POST["preciocompraAguardar"]) && isset($_POST["CostototalFactura"])) {
     
     // Preparar la consulta de inserción
-    $query = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`, `Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Stock_registrosNuevos (ID_Prod_POS, Cod_Barras, Fk_sucursal, Recibido, AgregadoPor, ID_H_O_D, Factura, Precio_compra, Total_Factura,TipoMov) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($conn, $query);
     
@@ -16,11 +16,7 @@ if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["
         $ID_Prod_POS = htmlentities(strip_tags(trim($_POST["IdBasedatos"])));
         $Cod_Barras = htmlentities(strip_tags(trim($_POST["CodBarras"])));
         $Fk_sucursal = htmlentities(strip_tags(trim($_POST["Fk_sucursal"])));
-        $Existencias_R = htmlentities(strip_tags(trim($_POST["Diferencia"])));
-        $ExistenciaPrev = htmlentities(strip_tags(trim($_POST["StockActual"])));
         $Recibido = htmlentities(strip_tags(trim($_POST["Contabilizado"])));
-        $Lote = htmlentities(strip_tags(trim($_POST["Loteeee"])));
-        $Fecha_Caducidad = htmlentities(strip_tags(trim($_POST["fechacadd"])));
         $AgregadoPor = htmlentities(strip_tags(trim($_POST["AgregoElVendedor"])));
         $ID_H_O_D = "Saluda"; // Valor constante
         $Factura = htmlentities(strip_tags(trim($_POST["FacturaNumber"])));
@@ -28,15 +24,11 @@ if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["
         $Total_Factura = htmlentities(strip_tags(trim($_POST["CostototalFactura"])));
 
         // Enlazar los parámetros de manera individual
-        mysqli_stmt_bind_param($stmt, 'sssssssssssss', 
+        mysqli_stmt_bind_param($stmt, 'sssssssss', 
             $ID_Prod_POS, 
             $Cod_Barras, 
             $Fk_sucursal, 
-            $Existencias_R, 
-            $ExistenciaPrev, 
             $Recibido, 
-            $Lote, 
-            $Fecha_Caducidad, 
             $AgregadoPor, 
             $ID_H_O_D, 
             $Factura, 
