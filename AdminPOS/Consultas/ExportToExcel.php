@@ -29,6 +29,7 @@ Ventas_POS.Cantidad_Venta,
 Ventas_POS.Importe,
 Ventas_POS.Total_Venta,
 Ventas_POS.PuSindescuento,
+Ventas_POS.TipoDescuento,
 Ventas_POS.DescuentoAplicado AS Descuento,
 CONVERT(Ventas_POS.FormaDePago USING utf8) AS FormaPago,
 CONVERT(Ventas_POS.Cliente USING utf8) AS Cliente,
@@ -70,7 +71,7 @@ header('Cache-Control: max-age=0');
 $output = fopen('php://output', 'w');
 
 // Escribir los encabezados en el archivo CSV
-$encabezados = ["Codigo de Barras", "Nombre del Producto", "# de Ticket", "Sucursal", "Turno", "Cantidad", "P.U","P. Desc", "Importe", "Descuento", "Forma de Pago", "Cliente", "FolioSignoVital", "Servicio", "Fecha de venta", "Fecha y hora", "Vendedor", "Enfermero", "Doctor","PrecioCompra", "PrecioVenta" ];
+$encabezados = ["Codigo de Barras", "Nombre del Producto", "# de Ticket", "Sucursal", "Turno", "Cantidad", "P.U","P. Desc", "Importe", "Descuento","tipo de Descuento", "Forma de Pago", "Cliente", "FolioSignoVital", "Servicio", "Fecha de venta", "Fecha y hora", "Vendedor", "Enfermero", "Doctor","PrecioCompra", "PrecioVenta" ];
 fputcsv($output, $encabezados);
 
 // Escribir los datos del archivo CSV
@@ -98,6 +99,7 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["PuSindescuento"],
         $fila["Importe"],
         $fila["Descuento"],
+        $fila["TipoDescuento"],
         $fila["FormaPago"],
         $fila["Cliente"],
         $fila["FolioSignoVital"],
