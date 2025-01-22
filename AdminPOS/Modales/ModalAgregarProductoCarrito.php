@@ -2,7 +2,7 @@
  // Función para cargar productos
 function cargarProductos() {
     $.ajax({
-        url: 'Consultas/ObtenerProductos.php?id_carrito=1', // Ruta al archivo PHP
+        url: 'Consultas/ObtenerProductos.php', // Ruta al archivo PHP
         method: 'GET', // Método de la solicitud
         dataType: 'json', // Tipo de datos esperados
         success: function(response) {
