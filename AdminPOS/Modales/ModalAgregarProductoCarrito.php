@@ -41,12 +41,7 @@ function cargarProductos() {
         }
     });
 }
-$('#modalAgregarProducto').on('show.bs.modal', function() {
-    console.log('Modal abierto, cargando productos...');
-    setTimeout(function() {
-        cargarProductos(); // Retrasar la carga de productos
-    }, 100); // Retrasa la carga 100ms para asegurar que el modal se abra completamente
-});
+
 </script>
 
 <!-- Modal HTML -->
