@@ -204,6 +204,16 @@
             </a>
           
           </li>
+          <li class="nav-item has-treeview">
+            <a href="HistorialInventarios" class="nav-link">
+            <i class="fas fa-boxes"></i>
+              <p>
+        Reporte de inventarios
+               
+              </p>
+            </a>
+          
+          </li>
           <!-- <li class="nav-header">Ventas</li>
             
           <li class="nav-item">
