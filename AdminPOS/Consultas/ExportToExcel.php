@@ -93,9 +93,9 @@ while ($fila = $resultado->fetch_assoc()) {
         $fila["Sucursal"],
         $fila["Turno"],
         $fila["Cantidad_Venta"],
-       
-        $fila["PuSindescuento"],
          $fila["Total_Venta"],
+           
+        $fila["PuSindescuento"],
         $fila["Importe"],
         $fila["Descuento"],
         $fila["FormaPago"],
