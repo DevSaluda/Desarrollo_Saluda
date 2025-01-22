@@ -1,15 +1,15 @@
 <script>
     // Función para cargar productos
     function cargarProductos() {
-        // Aquí harías la llamada AJAX para obtener los datos del backend
         $.ajax({
             url: 'Consultas/ObtenerProductos.php', // Ruta al archivo PHP
             method: 'GET', // Método de la solicitud
             dataType: 'json', // Tipo de datos esperados
             success: function(response) {
-                console.log('Productos cargados:', response); // Depuración
+                console.log('Productos cargados:', response); // Verifica que los datos llegan correctamente
+
                 let html = '';
-                if (response && response.length > 0) {
+                if (response && Array.isArray(response) && response.length > 0) {
                     response.forEach(function(producto) {
                         html += `
                             <tr>
@@ -19,7 +19,9 @@
                                     <input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}">
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary agregarProductoBtn" data-id="${producto.ID_Prod_POS}" data-nombre="${producto.Nombre_Prod}">
+                                    <button class="btn btn-primary agregarProductoBtn" 
+                                            data-id="${producto.ID_Prod_POS}" 
+                                            data-nombre="${producto.Nombre_Prod}">
                                         Agregar
                                     </button>
                                 </td>
@@ -29,6 +31,8 @@
                 } else {
                     html = '<tr><td colspan="4">No se encontraron productos.</td></tr>';
                 }
+
+                console.log('HTML generado:', html); // Verifica el HTML generado
                 $('#productoList').html(html); // Inserta el contenido en la tabla
             },
             error: function(xhr, status, error) {
@@ -38,10 +42,11 @@
         });
     }
 
+    // Evento al abrir el modal para cargar los productos
     $('#modalAgregarProducto').on('show.bs.modal', function() {
-    console.log('Modal abierto, cargando productos...');
-    cargarProductos();
-});
+        console.log('Modal abierto, cargando productos...');
+        cargarProductos();
+    });
 
     // Evento de búsqueda de productos
     $('#buscadorProducto').on('input', function() {
@@ -57,6 +62,7 @@
     });
 </script>
 
+<!-- Modal HTML -->
 <div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -80,7 +86,7 @@
                             </tr>
                         </thead>
                         <tbody id="productoList">
-                            <!-- Los productos se cargarán aquí -->
+                            <!-- Aquí se insertarán los productos -->
                         </tbody>
                     </table>
                 </div>
