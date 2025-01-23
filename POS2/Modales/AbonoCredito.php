@@ -204,7 +204,7 @@ while ($r=$query->fetch_object()){
    
   <input type="number" class="form-control "  name="ID_PROD" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">            
  
-  <input type="Text" class="form-control "  name="IDentificador" value="Créditos" readonly   aria-describedby="basic-addon1" maxlength="60">  
+  <input type="Text" class="form-control "  name="IDentificador" value="00000000040" readonly   aria-describedby="basic-addon1" maxlength="60">  
 
   <input type="number" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $totalmonto;?>"readonly  > 
   <input type="number" class="form-control "  name="ClavAd" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
