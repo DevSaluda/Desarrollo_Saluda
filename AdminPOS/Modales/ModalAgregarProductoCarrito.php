@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- Modal HTML -->
+    <!-- Modal -->
     <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -21,18 +21,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formAgregarProducto">
-                        <div class="form-group">
-                            <label for="producto">Producto</label>
-                            <select id="producto" name="producto" class="form-control" required>
-                                <!-- Opciones generadas desde el backend -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="number" id="cantidad" name="cantidad" class="form-control" required>
-                        </div>
-                    </form>
+                    <input type="hidden" id="id_carrito" name="id_carrito">
                     <table class="table">
                         <thead>
                             <tr>
@@ -43,14 +32,12 @@
                             </tr>
                         </thead>
                         <tbody id="productoList">
-                            <!-- Aquí se insertan las filas dinámicamente -->
+                            <!-- Productos generados dinámicamente -->
                         </tbody>
                     </table>
-                    <input type="text" id="buscadorProducto" class="form-control" placeholder="Buscar producto...">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" id="guardarProducto">Guardar</button>
                 </div>
             </div>
         </div>
@@ -58,21 +45,22 @@
 
     <script>
         $(document).ready(function() {
-            // Registro del evento para cargar productos al abrir el modal
-            $('#modalAgregarProducto').on('show.bs.modal', function() {
-                console.log('Modal abierto, intentando cargar productos...');
-                cargarProductos(); // Llama a la función para cargar productos
+            // Evento para cargar productos cuando se abre el modal
+            $('#modalAgregarProducto').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Botón que activó el modal
+                var idCarrito = button.data('carrito-id'); // Extraer data-carrito-id
+                $('#id_carrito').val(idCarrito); // Asignar al campo oculto
+
+                cargarProductos(); // Llamar función para cargar productos
             });
 
-            // Función para cargar productos
+            // Función para cargar productos en la tabla
             function cargarProductos() {
                 $.ajax({
-                    url: 'Consultas/ObtenerProductos.php', // Ruta al archivo PHP
-                    method: 'GET', // Método de la solicitud
-                    dataType: 'json', // Tipo de datos esperados
+                    url: 'Consultas/ObtenerProductos.php',
+                    method: 'GET',
+                    dataType: 'json',
                     success: function(response) {
-                        console.log('Productos cargados:', response); // Verifica que los datos llegan correctamente
-
                         let html = '';
                         if (response && Array.isArray(response) && response.length > 0) {
                             response.forEach(function(producto) {
@@ -96,17 +84,46 @@
                         } else {
                             html = '<tr><td colspan="4">No se encontraron productos.</td></tr>';
                         }
-
-                        console.log('HTML generado:', html); // Verifica el HTML generado
-                        $('#productoList').html(html); // Inserta el contenido en la tabla
+                        $('#productoList').html(html); // Insertar filas en la tabla
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al cargar los productos:', error);
-                        console.error('Respuesta del servidor:', xhr.responseText);
                         $('#productoList').html('<tr><td colspan="4">Error al cargar los productos.</td></tr>');
                     }
                 });
             }
+
+            // Evento para agregar producto al carrito
+            $(document).on('click', '.agregarProductoBtn', function() {
+                var idProducto = $(this).data('id');
+                var nombreProducto = $(this).data('nombre');
+                var cantidad = $(this).closest('tr').find('.cantidadProducto').val();
+                var idCarrito = $('#id_carrito').val();
+
+                // Validar que la cantidad sea mayor a 0
+                if (cantidad <= 0) {
+                    alert('La cantidad debe ser mayor a 0.');
+                    return;
+                }
+
+                // Enviar datos al servidor
+                $.ajax({
+                    url: 'Consultas/AgregarProductoACarrito.php',
+                    method: 'POST',
+                    data: {
+                        id_producto: idProducto,
+                        cantidad: cantidad,
+                        id_carrito: idCarrito
+                    },
+                    success: function(response) {
+                        alert('Producto agregado con éxito: ' + nombreProducto);
+                        // Opcional: Actualizar la tabla o realizar otra acción
+                    },
+                    error: function() {
+                        alert('Error al agregar producto.');
+                    }
+                });
+            });
         });
     </script>
 </body>
