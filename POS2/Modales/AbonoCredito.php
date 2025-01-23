@@ -202,14 +202,14 @@ while ($r=$query->fetch_object()){
 
   
    
-  <input type="number" class="form-control "  name="ID_PROD" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">            
+  <input type="number" class="form-control "  name="ID_PROD" value="000000008377" readonly   aria-describedby="basic-addon1" maxlength="60">            
  
   <input type="Text" class="form-control "  name="IDentificador" value="00000000040" readonly   aria-describedby="basic-addon1" maxlength="60">  
 
   <input type="number" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $totalmonto;?>"readonly  > 
   <input type="number" class="form-control "  name="ClavAd" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
-  <input type="number" class="form-control "  name="CodBarra" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
-  <input type="text" class="form-control "  name="NombreProducto" value="Abono de crédito" readonly   aria-describedby="basic-addon1" maxlength="60">
+  <input type="number" class="form-control "  name="CodBarra" value="ADental001" readonly   aria-describedby="basic-addon1" maxlength="60">
+  <input type="text" class="form-control "  name="NombreProducto" value="Abono de crédito dental" readonly   aria-describedby="basic-addon1" maxlength="60">
   <input type="number" class="form-control "  name="CantidadVenta" value="1" readonly   aria-describedby="basic-addon1" maxlength="60">  
   <input type="text" class="form-control "  name="SucursalesS" value="<?php echo $row['Fk_Sucursal']?>" readonly   aria-describedby="basic-addon1" maxlength="60">      
   <input type="number" class="form-control "  name="TotalVenta" id="totalventa" readonly   aria-describedby="basic-addon1" maxlength="60">  
