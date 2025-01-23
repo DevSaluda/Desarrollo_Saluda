@@ -59,101 +59,98 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            // Obtener el id del carrito desde el campo oculto
-            var idCarrito = $('#id_carrito_hidden').val();
-            
-            // Mostrar el id del carrito en el título del modal
-            $('#carritoId').text(idCarrito);
+    $(document).ready(function() {
+        var debounceTimer;
 
-            let debounceTimer;
+        // Buscar productos al escribir
+        $('#buscarProducto').on('input', function() {
+            clearTimeout(debounceTimer);
+            var query = $(this).val().trim();
 
-            // Buscar productos al escribir
-            $('#buscarProducto').on('input', function() {
-                clearTimeout(debounceTimer);
-                var query = $(this).val().trim();
+            debounceTimer = setTimeout(function() {
+                if (query.length >= 3) {
+                    buscarProductos(query);
+                } else {
+                    $('#productoList').html('<tr><td colspan="4">Escribe al menos 3 caracteres para buscar productos.</td></tr>');
+                }
+            }, 300);
+        });
 
-                debounceTimer = setTimeout(function() {
-                    if (query.length >= 3) {
-                        buscarProductos(query);
+        // Función para buscar productos
+        function buscarProductos(query) {
+            $.ajax({
+                url: 'Consultas/ObtenerProductos.php',
+                method: 'GET',
+                data: {
+                    nombre: query // Aquí puedes modificar para incluir otros parámetros como 'cod_barra' o 'id_prod_pos'
+                },
+                dataType: 'json',
+                success: function(response) {
+                    let html = '';
+                    if (response && Array.isArray(response) && response.length > 0) {
+                        response.forEach(function(producto) {
+                            html += `
+                                <tr>
+                                    <td>${producto.ID_Prod_POS}</td>
+                                    <td>${producto.Nombre_Prod}</td>
+                                    <td>
+                                        <input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary agregarProductoBtn" 
+                                                data-id="${producto.ID_Prod_POS}" 
+                                                data-nombre="${producto.Nombre_Prod}">
+                                            Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
                     } else {
-                        $('#productoList').html('<tr><td colspan="4">Escribe al menos 3 caracteres para buscar productos.</td></tr>');
+                        html = '<tr><td colspan="4">No se encontraron productos con ese nombre.</td></tr>';
                     }
-                }, 300);
+                    $('#productoList').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al buscar los productos:', error);
+                    $('#productoList').html('<tr><td colspan="4">Error al buscar productos.</td></tr>');
+                }
             });
+        }
 
-            // Función para buscar productos
-            function buscarProductos(query) {
-                $.ajax({
-                    url: 'Consultas/ObtenerProductos.php',
-                    method: 'GET',
-                    data: { nombre: query },
-                    dataType: 'json',
-                    success: function(response) {
-                        let html = '';
-                        if (response && Array.isArray(response) && response.length > 0) {
-                            response.forEach(function(producto) {
-                                html += `
-                                    <tr>
-                                        <td>${producto.ID_Prod_POS}</td>
-                                        <td>${producto.Nombre_Prod}</td>
-                                        <td>
-                                            <input type="number" min="1" value="1" class="form-control cantidadProducto" data-id="${producto.ID_Prod_POS}">
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary agregarProductoBtn" 
-                                                    data-id="${producto.ID_Prod_POS}" 
-                                                    data-nombre="${producto.Nombre_Prod}">
-                                                Agregar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                `;
-                            });
-                        } else {
-                            html = '<tr><td colspan="4">No se encontraron productos con ese nombre.</td></tr>';
-                        }
-                        $('#productoList').html(html);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error al buscar los productos:', error);
-                        $('#productoList').html('<tr><td colspan="4">Error al buscar productos.</td></tr>');
-                    }
-                });
+        // Agregar producto al carrito
+        $(document).on('click', '.agregarProductoBtn', function() {
+            var idProducto = $(this).data('id');
+            var nombreProducto = $(this).data('nombre');
+            var cantidad = $(this).closest('tr').find('.cantidadProducto').val();
+            var idCarrito = $('#id_carrito_hidden').val(); // Obtener id_carrito del campo oculto
+
+            // Validar cantidad
+            if (cantidad <= 0) {
+                alert('La cantidad debe ser mayor a 0.');
+                return;
             }
 
-            // Agregar producto al carrito
-            $(document).on('click', '.agregarProductoBtn', function() {
-                var idProducto = $(this).data('id');
-                var nombreProducto = $(this).data('nombre');
-                var cantidad = $(this).closest('tr').find('.cantidadProducto').val();
-                var idCarrito = $('#id_carrito_hidden').val(); // Obtener id_carrito del campo oculto
-
-                // Validar cantidad
-                if (cantidad <= 0) {
-                    alert('La cantidad debe ser mayor a 0.');
-                    return;
+            // Enviar datos al servidor
+            $.ajax({
+                url: 'Consultas/AgregarProductoACarrito.php',
+                method: 'POST',
+                data: {
+                    id_producto: idProducto,
+                    cantidad: cantidad,
+                    id_carrito: idCarrito // Enviar el id_carrito
+                },
+                success: function(response) {
+                    alert('Producto agregado con éxito: ' + nombreProducto);
+                    // Opcional: Actualizar la tabla o realizar otra acción
+                },
+                error: function() {
+                    alert('Error al agregar producto.');
                 }
-
-                // Enviar datos al servidor
-                $.ajax({
-                    url: 'Consultas/AgregarProductoACarrito.php',
-                    method: 'POST',
-                    data: {
-                        id_producto: idProducto,
-                        cantidad: cantidad,
-                        id_carrito: idCarrito // Enviar el id_carrito
-                    },
-                    success: function(response) {
-                        alert('Producto agregado con éxito: ' + nombreProducto);
-                        // Opcional: Actualizar la tabla o realizar otra acción
-                    },
-                    error: function() {
-                        alert('Error al agregar producto.');
-                    }
-                });
             });
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
