@@ -8,11 +8,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* Ajuste para que el modal sea más grande */
+        .modal-lg {
+            max-width: 80%; /* Ajusta este valor según tus necesidades */
+        }
+    </style>
 </head>
 <body>
     <!-- Modal -->
     <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document"> <!-- Clase modal-lg para agrandar -->
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Agregar Producto</h5>
@@ -21,8 +27,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="id_carrito" name="id_carrito">
-                    <table class="table">
+                    <!-- Barra de búsqueda -->
+                    <div class="form-group">
+                        <label for="buscarProducto">Buscar producto:</label>
+                        <input type="text" id="buscarProducto" class="form-control" placeholder="Escribe el nombre del producto">
+                    </div>
+                    <!-- Tabla de productos -->
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>ID Producto</th>
@@ -32,7 +43,9 @@
                             </tr>
                         </thead>
                         <tbody id="productoList">
-                            <!-- Productos generados dinámicamente -->
+                            <tr>
+                                <td colspan="4">Escribe el nombre de un producto para buscar.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -45,20 +58,23 @@
 
     <script>
         $(document).ready(function() {
-            // Evento para cargar productos cuando se abre el modal
-            $('#modalAgregarProducto').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Botón que activó el modal
-                var idCarrito = button.data('carrito-id'); // Extraer data-carrito-id
-                $('#id_carrito').val(idCarrito); // Asignar al campo oculto
+            // Evento para buscar productos al escribir en la barra de búsqueda
+            $('#buscarProducto').on('input', function() {
+                var query = $(this).val().trim(); // Obtener el texto ingresado
 
-                cargarProductos(); // Llamar función para cargar productos
+                if (query.length >= 3) { // Buscar solo si hay al menos 3 caracteres
+                    buscarProductos(query);
+                } else {
+                    $('#productoList').html('<tr><td colspan="4">Escribe al menos 3 caracteres para buscar productos.</td></tr>');
+                }
             });
 
-            // Función para cargar productos en la tabla
-            function cargarProductos() {
+            // Función para buscar productos en el servidor
+            function buscarProductos(query) {
                 $.ajax({
                     url: 'Consultas/ObtenerProductos.php',
                     method: 'GET',
+                    data: { nombre: query },
                     dataType: 'json',
                     success: function(response) {
                         let html = '';
@@ -82,13 +98,13 @@
                                 `;
                             });
                         } else {
-                            html = '<tr><td colspan="4">No se encontraron productos.</td></tr>';
+                            html = '<tr><td colspan="4">No se encontraron productos con ese nombre.</td></tr>';
                         }
                         $('#productoList').html(html); // Insertar filas en la tabla
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error al cargar los productos:', error);
-                        $('#productoList').html('<tr><td colspan="4">Error al cargar los productos.</td></tr>');
+                        console.error('Error al buscar los productos:', error);
+                        $('#productoList').html('<tr><td colspan="4">Error al buscar productos.</td></tr>');
                     }
                 });
             }
