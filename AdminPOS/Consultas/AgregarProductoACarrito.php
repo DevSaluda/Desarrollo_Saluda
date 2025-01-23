@@ -13,6 +13,9 @@ if ($id_carrito <= 0 || $id_producto <= 0 || $cantidad <= 0) {
 // Verificar si el producto ya está en el carrito
 $sql_verificar = "SELECT CANTIDAD FROM PRODUCTOS_EN_CARRITO WHERE FK_Producto = ? AND ID_CARRITO = ?";
 $stmt = $conn->prepare($sql_verificar);
+if ($stmt === false) {
+    die("Error en la preparación de la consulta: " . $conn->error);
+}
 $stmt->bind_param("ii", $id_producto, $id_carrito);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,6 +24,9 @@ if ($result->num_rows > 0) {
     // Producto ya existe en el carrito, actualizar la cantidad
     $sql_actualizar = "UPDATE PRODUCTOS_EN_CARRITO SET CANTIDAD = CANTIDAD + ? WHERE FK_Producto = ? AND ID_CARRITO = ?";
     $stmt = $conn->prepare($sql_actualizar);
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
     $stmt->bind_param("iii", $cantidad, $id_producto, $id_carrito);
 
     if ($stmt->execute()) {
@@ -32,6 +38,9 @@ if ($result->num_rows > 0) {
     // Insertar el producto como nuevo en el carrito
     $sql_insertar = "INSERT INTO PRODUCTOS_EN_CARRITO (FK_Producto, ID_CARRITO, CANTIDAD) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql_insertar);
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
     $stmt->bind_param("iii", $id_producto, $id_carrito, $cantidad);
 
     if ($stmt->execute()) {
