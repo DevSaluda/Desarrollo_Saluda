@@ -1,18 +1,21 @@
 <?php
 include("db_connection.php");
 
-// Verificar si se ha enviado el parámetro "nombre", "cod_barra" o "id_prod_pos"
-if (isset($_GET['nombre']) && !empty($_GET['nombre'])) {
-    $nombre = $conn->real_escape_string($_GET['nombre']);
-    $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS WHERE Nombre_Prod LIKE '%$nombre%'";
-} elseif (isset($_GET['cod_barra']) && !empty($_GET['cod_barra'])) {
-    $cod_barra = $conn->real_escape_string($_GET['cod_barra']);
-    $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS WHERE Cod_Barra LIKE '%$cod_barra%'";
-} elseif (isset($_GET['id_prod_pos']) && !empty($_GET['id_prod_pos'])) {
-    $id_prod_pos = intval($_GET['id_prod_pos']);
-    $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS WHERE ID_Prod_POS = $id_prod_pos";
+// Verificar si se ha enviado el parámetro "busqueda"
+if (isset($_GET['busqueda']) && !empty($_GET['busqueda'])) {
+    $busqueda = $conn->real_escape_string($_GET['busqueda']);
+
+    // Verificar si es un número para buscar en ID o código de barra
+    if (is_numeric($busqueda)) {
+        $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS 
+                WHERE ID_Prod_POS = '$busqueda' OR Cod_Barra LIKE '%$busqueda%'";
+    } else {
+        // Buscar por nombre de producto
+        $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS 
+                WHERE Nombre_Prod LIKE '%$busqueda%'";
+    }
 } else {
-    // Si no se envía ninguno de los parámetros, devolver todos los productos
+    // Si no se envía ningún parámetro de búsqueda, devolver todos los productos
     $sql = "SELECT ID_Prod_POS, Nombre_Prod FROM Productos_POS";
 }
 
