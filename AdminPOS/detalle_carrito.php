@@ -41,96 +41,100 @@ $sql_productos = "
 ";
 $result_productos = $conn->query($sql_productos);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title><?php echo $row['ID_H_O_D']?> | Carritos Enfermería</title>
+  <?php include "Header.php" ?>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
 
-  <title><?php echo $row['ID_H_O_D']?> | Carritos Enfermeria </title>
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-<?php include "Header.php"?>
- <style>
-        .error {
-  color: red;
-  margin-left: 5px; 
-  
-}
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
 
-    </style>
+    footer {
+      background-color: #f8f9fa;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
-<?php include_once ("Menu.php")?>
 <body>
-    <div class="container mt-4">
-        <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
+  <div class="wrapper">
+    <?php include_once("Menu.php") ?>
 
-        <h3>Productos en el carrito</h3>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
-    Agregar Producto
-</button>
+    <div class="content container mt-4">
+      <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
 
+      <h3>Productos en el carrito</h3>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
+        Agregar Producto
+      </button>
 
-        <?php if ($result_productos->num_rows > 0): ?>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID Producto</th>
-                        <th>Nombre del Producto</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-    <?php while ($producto = $result_productos->fetch_assoc()): ?>
-        <tr>
-            <td><?php echo $producto['ID_PRODUCTO']; ?></td>
-            <td><?php echo $producto['Nombre_Prod']; ?></td>
-            <td>
-                <input 
+      <?php if ($result_productos->num_rows > 0): ?>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID Producto</th>
+              <th>Nombre del Producto</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php while ($producto = $result_productos->fetch_assoc()): ?>
+              <tr>
+                <td><?php echo $producto['ID_PRODUCTO']; ?></td>
+                <td><?php echo $producto['Nombre_Prod']; ?></td>
+                <td>
+                  <input 
                     type="number" 
                     class="form-control input-cantidad" 
                     data-id-producto="<?php echo $producto['ID_PRODUCTO']; ?>" 
                     data-id-carrito="<?php echo $id_carrito; ?>" 
                     value="<?php echo $producto['CANTIDAD']; ?>" 
                     min="1"
-                >
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</tbody>
-    </table>
-        <?php else: ?>
-            <p class="alert alert-warning">No hay productos en este carrito.</p>
-        <?php endif; ?>
+                  >
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      <?php else: ?>
+        <p class="alert alert-warning">No hay productos en este carrito.</p>
+      <?php endif; ?>
     </div>
+
+    <?php include("footer.php") ?>
+  </div>
+
+  <!-- JS -->
+  <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script> 
+  <script src="js/ControlDetallesCarrito.js"></script> 
+  <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+  <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="dist/js/adminlte.js"></script>
+  <script src="dist/js/demo.js"></script>
 </body>
 </html>
 
-<?php
-    include('Modales/ModalAgregarProductoCarrito.php');
-    include ("footer.php")?>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script> 
-<script src='js/ControlDetallesCarrito.js'></script> 
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
-
-<!-- PAGE PLUGINS -->
-
-</body>
-</html>
 <?php
 
 function fechaCastellano ($fecha) {
