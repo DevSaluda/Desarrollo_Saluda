@@ -71,6 +71,7 @@ $result_productos = $conn->query($sql_productos);
     Agregar Producto
 </button>
 
+
         <?php if ($result_productos->num_rows > 0): ?>
             <table class="table table-bordered">
                 <thead>
