@@ -99,7 +99,7 @@ $result_productos = $conn->query($sql_productos);
         </tr>
     <?php endwhile; ?>
 </tbody>
-
+    </table>
         <?php else: ?>
             <p class="alert alert-warning">No hay productos en este carrito.</p>
         <?php endif; ?>
