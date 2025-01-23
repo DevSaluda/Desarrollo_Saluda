@@ -82,19 +82,24 @@ $result_productos = $conn->query($sql_productos);
                     </tr>
                 </thead>
                 <tbody>
-                <td>
- 
-</td>
+    <?php while ($producto = $result_productos->fetch_assoc()): ?>
+        <tr>
+            <td><?php echo $producto['ID_PRODUCTO']; ?></td>
+            <td><?php echo $producto['Nombre_Prod']; ?></td>
+            <td>
+                <input 
+                    type="number" 
+                    class="form-control input-cantidad" 
+                    data-id-producto="<?php echo $producto['ID_PRODUCTO']; ?>" 
+                    data-id-carrito="<?php echo $id_carrito; ?>" 
+                    value="<?php echo $producto['CANTIDAD']; ?>" 
+                    min="1"
+                >
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
 
-                    <?php while ($producto = $result_productos->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $producto['ID_PRODUCTO']; ?></td>
-                            <td><?php echo $producto['Nombre_Prod']; ?></td>
-                            <td><?php echo $producto['CANTIDAD']; ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
         <?php else: ?>
             <p class="alert alert-warning">No hay productos en este carrito.</p>
         <?php endif; ?>
@@ -105,7 +110,8 @@ $result_productos = $conn->query($sql_productos);
 <?php
     include('Modales/ModalAgregarProductoCarrito.php');
     include ("footer.php")?>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script> 
+<script src='js/ControlDetallesCarrito.js'></script> 
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
