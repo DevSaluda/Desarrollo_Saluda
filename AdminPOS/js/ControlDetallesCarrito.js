@@ -33,35 +33,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Eliminación de producto
+    document.querySelectorAll('.btn-eliminar-producto').forEach((btn) => {
+        btn.addEventListener('click', function () {
+            const idProducto = this.getAttribute('data-id-producto');
+            const idCarrito = this.getAttribute('data-id-carrito');
     
-        document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('btn-eliminar-producto')) {
-                const idProducto = e.target.getAttribute('data-id-producto');
-                const idCarrito = e.target.getAttribute('data-id-carrito');
-        
-                if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                    fetch('Consultas/EliminarProductoCarrito.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: `id_carrito=${idCarrito}&id_producto=${idProducto}`
+            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                fetch('Consultas/EliminarProductoCarrito.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idProducto, idCarrito })
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            alert('Producto eliminado exitosamente.');
+                            location.reload(); // Reflejar los cambios en la interfaz
+                        } else {
+                            alert(data.message);
+                        }
                     })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.success) {
-                                alert(data.message);
-                                location.reload();
-                            } else {
-                                alert(data.message);
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                            alert('Ocurrió un error al eliminar el producto.');
-                        });
-                }
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Ocurrió un error al eliminar el producto.');
+                    });
             }
         });
-    
-    
+    });
     
 });
