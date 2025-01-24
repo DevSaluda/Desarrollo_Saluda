@@ -63,13 +63,14 @@ $result_productos = $conn->query($sql_productos);
 </head>
 <?php include_once ("Menu.php")?>
 <body>
-    <div class="container mt-4">
-        <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
+<div class="container mt-4">
+    <h2>Detalle del Carrito N° <?php echo $carrito['ID_CARRITO']; ?></h2>
+    <a href="CarritosEnfermeria.php" class="btn btn-secondary mb-3">Regresar</a>
+    <h3>Productos en el carrito</h3>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
+        Agregar Producto
+    </button>
 
-        <h3>Productos en el carrito</h3>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-carrito-id="<?php echo $carrito['ID_CARRITO']; ?>">
-    Agregar Producto
-</button>
 
 
         <?php if ($result_productos->num_rows > 0): ?>
