@@ -37,18 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function () {
             const idProducto = this.getAttribute('data-id-producto');
             const idCarrito = this.getAttribute('data-id-carrito');
-
+    
             if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
                 fetch('Consultas/EliminarProductoCarrito.php', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `id_carrito=${idCarrito}&id_producto=${idProducto}`
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idProducto, idCarrito })
                 })
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.success) {
-                            alert(data.message);
-                            location.reload(); // Recargar la página para reflejar cambios
+                            alert('Producto eliminado exitosamente.');
+                            location.reload(); // Reflejar los cambios en la interfaz
                         } else {
                             alert(data.message);
                         }
@@ -60,4 +60,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    
 });
