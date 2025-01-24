@@ -14,7 +14,7 @@ $idProducto = intval($data['idProducto']);
 $idCarrito = intval($data['idCarrito']);
 
 // Consulta para eliminar el producto del carrito
-$sql = "DELETE FROM PRODUCTOS_EN_CARRITO WHERE ID_CARRITO = ? AND FK_Producto = ?";
+$sql = "DELETE FROM PRODUCTOS_EN_CARRITO WHERE ID_CARRITO = ? AND ID_PRODUCTO = ?";
 $stmt = $conn->prepare($sql);
 
 // Vincular los parámetros en el orden correcto
