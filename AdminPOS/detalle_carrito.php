@@ -74,32 +74,42 @@ $result_productos = $conn->query($sql_productos);
 
         <?php if ($result_productos->num_rows > 0): ?>
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID Producto</th>
-                        <th>Nombre del Producto</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-    <?php while ($producto = $result_productos->fetch_assoc()): ?>
+    <thead>
         <tr>
-            <td><?php echo $producto['ID_PRODUCTO']; ?></td>
-            <td><?php echo $producto['Nombre_Prod']; ?></td>
-            <td>
-                <input 
-                    type="number" 
-                    class="form-control input-cantidad" 
-                    data-id-producto="<?php echo $producto['ID_PRODUCTO']; ?>" 
-                    data-id-carrito="<?php echo $id_carrito; ?>" 
-                    value="<?php echo $producto['CANTIDAD']; ?>" 
-                    min="1"
-                >
-            </td>
+            <th>ID Producto</th>
+            <th>Nombre del Producto</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
         </tr>
-    <?php endwhile; ?>
-</tbody>
-    </table>
+    </thead>
+    <tbody>
+        <?php while ($producto = $result_productos->fetch_assoc()): ?>
+            <tr>
+                <td><?php echo $producto['ID_PRODUCTO']; ?></td>
+                <td><?php echo $producto['Nombre_Prod']; ?></td>
+                <td>
+                    <input 
+                        type="number" 
+                        class="form-control input-cantidad" 
+                        data-id-producto="<?php echo $producto['ID_PRODUCTO']; ?>" 
+                        data-id-carrito="<?php echo $id_carrito; ?>" 
+                        value="<?php echo $producto['CANTIDAD']; ?>" 
+                        min="1"
+                    >
+                </td>
+                <td>
+                    <button 
+                        class="btn btn-danger btn-eliminar-producto" 
+                        data-id-producto="<?php echo $producto['ID_PRODUCTO']; ?>" 
+                        data-id-carrito="<?php echo $id_carrito; ?>">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+    </tbody>
+</table>
+
         <?php else: ?>
             <p class="alert alert-warning">No hay productos en este carrito.</p>
         <?php endif; ?>
