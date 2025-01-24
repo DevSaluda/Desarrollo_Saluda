@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            fetch('ActualizarCantidadProducto.php', {
+            fetch('Consultas/actualizar_cantidad.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `id_carrito=${idCarrito}&id_producto=${idProducto}&cantidad=${nuevaCantidad}`
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const idCarrito = this.getAttribute('data-id-carrito');
 
             if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                fetch('EliminarProductoCarrito.php', {
+                fetch('Consultas/EliminarProductoCarrito.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `id_carrito=${idCarrito}&id_producto=${idProducto}`
