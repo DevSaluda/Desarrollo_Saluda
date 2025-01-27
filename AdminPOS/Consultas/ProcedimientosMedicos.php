@@ -1,146 +1,82 @@
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#StockSucursales').DataTable({
-      "order": [[ 0, "desc" ]],
-      "lengthMenu": [[50,100,500, -1], [50,100,500, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
- 
-		
-	  } 
-	  
-	  );
-} );
+    $(document).ready(function () {
+        $('#TiposConsultasDoc').DataTable({
+            "order": [[0, "desc"]],
+            "lengthMenu": [[25, 50, 150, 200, -1], [25, 50, 150, 200, "Todos"]],
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "sProcessing": "Procesando...",
+            },
+            responsive: "true",
+            dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>",
+        });
+    });
 </script>
-<?php
 
+<?php
 include("db_connection.php");
 include "Consultas.php";
 
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 
-$user_id=null;
-$sql1="SELECT * FROM Procedimientos_Medicos WHERE ID_H_O_D ='".$row['ID_H_O_D']."'";
+$sql1 = "
+    SELECT 
+        IDProcedimiento,
+        Nombre_Procedimiento,
+        Estatus
+    FROM 
+        Procedimientos_POS
+";
+
 $query = $conn->query($sql1);
+if (!$query) {
+    die("Error en la consulta SQL: " . $conn->error);
+}
 ?>
 
-<?php if($query->num_rows>0):?>
-  <div class="text-center">
-	<div class="table-responsive">
-	<table  id="StockSucursales" class="table table-hover">
-<thead>
-
-<th>Folio</th>
-    <th>Codigo procedimiento</th>
-    <th>Nombre del procedimiento </th>
-    <th>Costo del procedimiento </th>
-    <th>Acciones </th>
-    
-	
-
-
-</thead>
-<?php while ($Usuarios=$query->fetch_array()):?>
-<tr>
-
-
-
-<td > <?php echo $Usuarios['ID_Proce']; ?></td>
-  <td > <?php echo $Usuarios['Codigo_Procedimiento']; ?></td>
-  <td > <?php echo $Usuarios['Nombre_Procedimiento']; ?></td>
-  <td > $ <?php echo $Usuarios['Costo_Procedimiento']; ?></td>
- 
-    <td>
-		 <!-- Basic dropdown -->
-<button class="btn btn-primary btn-sm dropdown-toggle " type="button" data-toggle="dropdown"
-  aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
-
-<div class="dropdown-menu">
-
-<a data-id="<?php echo $Usuarios["ID_Proce"];?>" class="btn-editStock dropdown-item" >Actualizar <i class="fas fa-edit"></i></a>
-<a data-id="<?php echo $Usuarios["ID_Proce"];?>" class="btn-EliminaProcedimiento dropdown-item" >Eliminar <i class="fas fa-trash"></i></a>
-<a data-id="<?php echo $Usuarios["ID_Proce"];?>" class="btn-HistorialStocksucursaless dropdown-item" >Movimientos <i class="fas fa-history"></i></a>
- 
-</div>
-<!-- Basic dropdown -->
-	 </td>
-	
-		
-</tr>
-<?php endwhile;?>
-</table>
-</div>
-</div>
-<?php else:?>
-	<p class="alert alert-warning">Aún no hay Stock Sucursales registrados para <?echo $row['ID_H_O_D']?></p>
-<?php endif;?>
-  <!-- Modal -->
-  <script>
-
-
-  	$(".btn-editStock").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/ActualizaProcedimiento.php","id="+id,function(data){
-  			$("#form-editStockSucursalesA").html(data);
-          $("#TituloStockSucursalesA").html("Actualizar datos de procedimiento");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog  modal-primary modal-success");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-xl modal-notify modal-success");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-sm modal-notify modal-warning");
-              $("#DiStockSucursalesSA").addClass("modal-dialog  modal-notify modal-success");
-  		});
-  		$('#editModalStockSucursalesA').modal('show');
-  	});
-
-    $(".btn-HistorialStocksucursaless").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://saludapos.com/AdminPOS/Modales/HistorialProcedimiento.php","id="+id,function(data){
-  			$("#form-editStockSucursalesA").html(data);
-          $("#TituloStockSucursalesA").html("Movimientos de productos");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog  modal-notify modal-success");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog  modal-primary modal-success");
-              $("#DiStockSucursalesSA").addClass("modal-dialog modal-xl modal-notify modal-success");
-  		});
-  		$('#editModalStockSucursalesA').modal('show');
-  	});
-
-      $(".btn-EliminaProcedimiento").click(function(){
-  		id = $(this).data("id");
-  		$.post("https://sludapos.com/AdminPOS/Modales/EliminaProcedimiento.php","id="+id,function(data){
-  			$("#form-editStockSucursalesA").html(data);
-          $("#TituloStockSucursalesA").html("Eliminar procedimiento");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog modal-lg modal-notify modal-info");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog  modal-notify modal-success");
-              $("#DiStockSucursalesSA").removeClass("modal-dialog  modal-primary modal-success");
-              $("#DiStockSucursalesSA").addClass("modal-dialog modal-sm modal-notify modal-warning");
-  		});
-  		$('#editModalStockSucursalesA').modal('show');
-  	});
-
-  </script>
-  <div class="modal fade" id="editModalStockSucursalesA" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div id="DiStockSucursalesSA"class="modal-dialog modal-lg modal-notify modal-info">
-      <div class="modal-content">
-      <div class="modal-header">
-         <p class="heading lead" id="TituloStockSucursalesA"></p>
-
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true" class="white-text">&times;</span>
-         </button>
-       </div>
-        <div id="MensajeStockSucursalesG"class="alert alert-info alert-styled-left text-blue-800 content-group">
-						                <span id="Aviso" class="text-semibold">Estimado usuario, 
-                            Verifique los campos antes de realizar alguna accion</span>
-						                <button type="button" class="close" data-dismiss="alert">×</button>
-                            </div>
-	        <div class="modal-body">
-          <div class="text-center">
-        <div id="form-editStockSucursalesA"></div>
-        
+<?php if ($query->num_rows > 0) : ?>
+    <div class="text-center">
+        <div class="table-responsive">
+            <table id="CarritosEnfermeria" class="table table-hover">
+                <caption>Listado de Procedimientos  </caption>
+                <thead>
+                    <tr>
+                        <th style="background-color:#0057b8 !important;">N° Carrito</th>
+                        <th style="background-color:#0057b8 !important;">Sucursal</th>
+                        <th style="background-color:#0057b8 !important;">Estado</th>
+                        <th style="background-color:#0057b8 !important;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $query->fetch_array()) : ?>
+                        <tr>
+                            <td><?php echo $row["IDProcedimiento"]; ?></td>
+                            <td><?php echo $row["Nombre_Procedimiento"]; ?></td>
+                            <td><?php echo $row["Estatus"]; ?></td>
+                            <td>
+                                <a href="DetallesProcedimientos.php?idprocedimiento=<?php echo $row['IDProcedimiento']; ?>" class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> Ver detalles
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
         </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+    </div>
+<?php else : ?>
+    <p class="alert alert-warning">No hay resultados</p>
+<?php endif; ?>
