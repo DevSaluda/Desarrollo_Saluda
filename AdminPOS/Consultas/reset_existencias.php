@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 include("db_connection.php");
-include "Consultas.php";
+
 
 // Consulta SQL para actualizar existencias
 $sql = "UPDATE Stock_POS SET Existencias_R = 0 WHERE Cod_Barra = 'PAPE-0069' AND Fk_sucursal = 24";
