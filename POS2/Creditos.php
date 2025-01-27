@@ -1,6 +1,7 @@
 <?php
 include "Consultas/Consultas.php";
 include "Consultas/ConsultaCaja.php";
+include "Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
 ?>
 
@@ -100,7 +101,7 @@ $fcha = date("Y-m-d");
   include ("Modales/ExitoActualiza.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
-
+ 
 <!-- REQUIRED SCRIPTS -->
 
 <script src="js/Creditos.js"></script>
