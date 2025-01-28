@@ -129,7 +129,7 @@ while ($r=$query->fetch_object()){
 
 
 <!-- FORMUARIO DE IMPRESION DEL CODIGO DE ABONO -->
-  <div style="display: none;">
+  <!-- <div style="display: none;"> -->
 <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/"
