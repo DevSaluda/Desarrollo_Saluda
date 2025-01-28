@@ -36,7 +36,7 @@ $sql_productos = "
     ON 
         ProdProc.Fk_Prod_Stock = ProdPos.ID_Prod_POS
     WHERE 
-        ProdProc.IDProcedimiento = $idprocedimiento
+        ProdProc.Fk_Proced = $idprocedimiento
 ";
 $result_productos = $conn->query($sql_productos);
 ?>
