@@ -1,6 +1,6 @@
 $('document').ready(function ($) {
     $("#ActualizaSaldo").hide();
-    $("#AgregaEnCaja").hide();
+    // $("#AgregaEnCaja").hide();
     $("#GeneraTicket").hide();
     $("#GuardaReimpresionTicket").hide();
    
