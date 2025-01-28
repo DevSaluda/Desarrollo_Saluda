@@ -18,7 +18,44 @@ $fcha = date("Y-m-d");
 </head>
 <?php include_once ("Menu.php")?>
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const passwordCorrecta = "DevZero"; // Cambia esto por tu contraseña
 
+      Swal.fire({
+        title: 'Acceso Restringido',
+        html: `
+          <p>El área de abonos dentales se encuentra en mantenimiento.</p>
+          <label for="password" style="display:block; margin-top: 10px;">Por favor, ingrese su contraseña:</label>
+          <input id="password" type="password" class="swal2-input" placeholder="Contraseña">
+        `,
+        icon: 'warning',
+        allowOutsideClick: false, // Evita cerrar el SweetAlert al hacer clic fuera
+        allowEscapeKey: false, // Evita cerrarlo con la tecla Escape
+        showCancelButton: false, // Quita el botón "Cancelar"
+        confirmButtonText: 'Acceder',
+        preConfirm: () => {
+          const password = Swal.getPopup().querySelector('#password').value;
+          if (!password) {
+            Swal.showValidationMessage('Debe ingresar una contraseña');
+          } else if (password !== passwordCorrecta) {
+            Swal.showValidationMessage('Contraseña incorrecta');
+          }
+          return password;
+        }
+      }).then((result) => {
+        if (result.value === passwordCorrecta) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Acceso permitido',
+            text: '¡Bienvenido!',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
+    });
+  </script>
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
