@@ -195,7 +195,7 @@ while ($r=$query->fetch_object()){
 <button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
-
+</div>
 
 <form action="javascript:void(0)" method="post" id="AgregaEnCaja" >
 
