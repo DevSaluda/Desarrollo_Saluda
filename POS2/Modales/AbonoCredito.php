@@ -219,7 +219,8 @@ while ($r=$query->fetch_object()){
  
   <input type="Text" class="form-control "  name="IDentificador" value="00000000040" readonly   aria-describedby="basic-addon1" maxlength="60">  
 
-  <input type="Text" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $resultado_en_mayusculas; ?><?php echo $totalmonto_con_ceros; ?>" readonly  > 
+  <input type="Text" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $totalmonto_con_ceros; ?>" readonly  > 
+  <input type="Text" class="form-control " id="ticketval" name="TicketVal2" value="<?php echo $resultado_en_mayusculas; ?>" readonly  > 
   <input type="number" class="form-control "  name="ClavAd" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
   <input type="text" class="form-control "  name="CodBarra" value="ADental001" readonly   aria-describedby="basic-addon1" maxlength="60">
   <input type="text" class="form-control "  name="NombreProducto" value="Abono de crédito dental" readonly   aria-describedby="basic-addon1" maxlength="60">
