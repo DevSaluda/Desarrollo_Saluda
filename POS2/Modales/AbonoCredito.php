@@ -251,4 +251,3 @@ precio2.addEventListener("change", () => {
 
 
 <script src="js/Abona.js"></script>
-<script src="js/UpdateSaldo.js"></script>
