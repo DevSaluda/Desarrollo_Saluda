@@ -33,7 +33,7 @@ $fcha = date("Y-m-d");
     <p style="margin-bottom: 15px; line-height: 1.5;">
       Si necesita más información, por favor, póngase en contacto con nuestro equipo de soporte.
     </p>
-    <label for="password" style="display:block; margin-top: 10px; font-weight: bold;">Ingrese su contraseña:</label>
+    <label for="password" style="display:block; margin-top: 10px; font-weight: bold;">Ingrese la contraseña administrativa para desbloquear:</label>
     <input 
       id="password" 
       type="password" 
