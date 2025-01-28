@@ -155,7 +155,7 @@ $fcha = date("Y-m-d");
 <!-- REQUIRED SCRIPTS -->
 
 <script src="js/Creditos.js"></script>
-<script src="js/AbonoCreditosDentales.js"></script>
+<script src="js/AbonaCreditosDentales.js"></script>
 
 <script src="js/AperturaCredito.js"></script>
 
