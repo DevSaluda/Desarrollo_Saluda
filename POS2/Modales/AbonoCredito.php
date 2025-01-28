@@ -129,7 +129,7 @@ while ($r=$query->fetch_object()){
 
 
 <!-- FORMUARIO DE IMPRESION DEL CODIGO DE ABONO -->
-  <!-- <div style="display: none;"> -->
+  <div style="display: none;">
 <form method="post" 
       target="print_popup" 
       action="http://localhost:8080/ticket/"
@@ -156,7 +156,7 @@ while ($r=$query->fetch_object()){
 
 
 <!-- FORMULARIO DE REIMPRESION DE TICKETS -->
-<!-- <div style="display: none;"> -->
+<div style="display: none;">
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
@@ -177,7 +177,7 @@ while ($r=$query->fetch_object()){
 </div>
 <!-- FORMULARIO DE REIMPRESION DE TICKETS -->
 <!-- FORMULARIO DE ACTUALIZACION DE SALDO-->
-<!-- <div style="display: none;"> -->
+<div style="display: none;">
 <form action="javascript:void(0)" method="post" id="ActualizaSaldo" >
 
     <div class="form-group">
@@ -195,7 +195,7 @@ while ($r=$query->fetch_object()){
 <button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
-<div></div>
+
 
 <form action="javascript:void(0)" method="post" id="AgregaEnCaja" >
 
@@ -250,4 +250,4 @@ precio2.addEventListener("change", () => {
 </script>
 
 
-<script src="js/Abona.js"></script>
+<script src="js/AbonoCreditosDentales.js"></script>
