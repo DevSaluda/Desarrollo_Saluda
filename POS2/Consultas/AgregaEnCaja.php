@@ -4,6 +4,7 @@
     
     $ID_Prod_POS=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ID_PROD'])))); 
     $Identificador_tipo =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['IDentificador'])))); 
+    $Turno =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Turno'])))); 
     $Folio_Sucursal =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TicketVal2'])))); 
     $Folio_Ticket =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TicketVal'])))); 
     $Clave_adicional =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['ClavAd'])))); 
