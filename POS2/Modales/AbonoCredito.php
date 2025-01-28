@@ -190,7 +190,7 @@ while ($r=$query->fetch_object()){
 </div>
 <!-- FORMULARIO DE REIMPRESION DE TICKETS -->
 <!-- FORMULARIO DE ACTUALIZACION DE SALDO-->
-
+<div style="display: none;"></div>
 <form action="javascript:void(0)" method="post" id="ActualizaSaldo" >
 
     <div class="form-group">
@@ -208,7 +208,7 @@ while ($r=$query->fetch_object()){
 <button type="submit"  id="submit_saldo"  class="btn btn-info">Ajustar credito <i class="fas fa-money-check-alt"></i></button>
                           
 </form>
-
+</div>
 
 <form action="javascript:void(0)" method="post" id="AgregaEnCaja" >
 
