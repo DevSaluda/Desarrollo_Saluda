@@ -4,6 +4,19 @@ include "../Consultas/Consultas.php";
 include "../Consultas/ConsultaCaja.php";
 include "../Consultas/SumadeFolioTickets.php";
 $fcha = date("Y-m-d");
+
+// 
+$primeras_tres_letras = substr($row['Nombre_Sucursal'], 0, 4);
+
+
+// Concatenar las primeras 3 letras con el valor de $totalmonto
+$resultado_concatenado = $primeras_tres_letras ;
+
+// Convertir el resultado a mayúsculas
+$resultado_en_mayusculas = strtoupper($resultado_concatenado);
+
+// Imprimir el resultado en mayúsculas
+
 $user_id=null;
 $sql1= "SELECT Creditos_POS.Folio_Credito,Creditos_POS.Fk_tipo_Credi,Creditos_POS.Nombre_Cred,Creditos_POS.Cant_Apertura,Creditos_POS.Fk_Sucursal,Creditos_POS.Validez,Creditos_POS.Saldo,
 Creditos_POS.Estatus,Creditos_POS.CodigoEstatus,Creditos_POS.ID_H_O_D,Tipos_Credit_POS.ID_Tip_Cred,
@@ -206,7 +219,7 @@ while ($r=$query->fetch_object()){
  
   <input type="Text" class="form-control "  name="IDentificador" value="00000000040" readonly   aria-describedby="basic-addon1" maxlength="60">  
 
-  <input type="number" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $resultado_en_mayusculas; ?><?php echo $totalmonto_con_ceros; ?>" readonly  > 
+  <input type="Text" class="form-control " id="ticketval" name="TicketVal" value="<?php echo $resultado_en_mayusculas; ?><?php echo $totalmonto_con_ceros; ?>" readonly  > 
   <input type="number" class="form-control "  name="ClavAd" value="0000000000" readonly   aria-describedby="basic-addon1" maxlength="60">
   <input type="number" class="form-control "  name="CodBarra" value="ADental001" readonly   aria-describedby="basic-addon1" maxlength="60">
   <input type="text" class="form-control "  name="NombreProducto" value="Abono de crédito dental" readonly   aria-describedby="basic-addon1" maxlength="60">
