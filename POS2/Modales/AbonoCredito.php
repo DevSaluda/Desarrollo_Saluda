@@ -156,7 +156,7 @@ while ($r=$query->fetch_object()){
 
 
 <!-- FORMULARIO DE REIMPRESION DE TICKETS -->
-<div style="display: none;">
+<!-- <div style="display: none;"> -->
 <form action="javascript:void(0)" method="post" id="GuardaReimpresionTicket" >
       <input type="number" class="form-control " name="NumeroTicketR" value="<?php echo $totalmonto;?>"readonly  >
       <input type="text" class="form-control "  name="FolioCreditoR"  readonly value="<?php echo $Especialistas->Folio_Credito; ?>">
