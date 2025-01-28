@@ -25,10 +25,23 @@ $fcha = date("Y-m-d");
       Swal.fire({
         title: 'Acceso Restringido',
         html: `
-          <p>El área de abonos dentales se encuentra en mantenimiento.</p>
-          <label for="password" style="display:block; margin-top: 10px;">Por favor, ingrese su contraseña:</label>
-          <input id="password" type="password" class="swal2-input" placeholder="Contraseña">
-        `,
+  <div style="text-align: left; font-size: 16px; color: #333;">
+    <p style="margin-bottom: 15px; line-height: 1.5;">
+      <strong>Disculpe las molestias:</strong> El área de <strong>abonos dentales</strong> se encuentra actualmente en mantenimiento. 
+      Estamos trabajando para resolverlo lo antes posible.
+    </p>
+    <p style="margin-bottom: 15px; line-height: 1.5;">
+      Si necesita más información, por favor, póngase en contacto con nuestro equipo de soporte.
+    </p>
+    <label for="password" style="display:block; margin-top: 10px; font-weight: bold;">Ingrese su contraseña:</label>
+    <input 
+      id="password" 
+      type="password" 
+      class="swal2-input" 
+      placeholder="Contraseña" 
+      style="margin-top: 8px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%;">
+  </div>
+`,
         icon: 'warning',
         allowOutsideClick: false, // Evita cerrar el SweetAlert al hacer clic fuera
         allowEscapeKey: false, // Evita cerrarlo con la tecla Escape
