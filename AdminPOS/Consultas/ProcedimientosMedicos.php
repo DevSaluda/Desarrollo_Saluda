@@ -55,7 +55,7 @@ if (!$query) {
                 <thead>
                     <tr>
                         <th style="background-color:#0057b8 !important;">N° Carrito</th>
-                        <th style="background-color:#0057b8 !important;">Sucursal</th>
+                        <th style="background-color:#0057b8 !important;">Nombre Procedimiento</th>
                         <th style="background-color:#0057b8 !important;">Estado</th>
                         <th style="background-color:#0057b8 !important;">Acciones</th>
                     </tr>

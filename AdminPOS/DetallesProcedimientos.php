@@ -12,7 +12,7 @@ if ($idprocedimiento <= 0) {
 
 // Obtener los detalles del procedimiento (opcional para el título)
 $sql_procedimiento = "
-    SELECT IDProcedimiento, NombreProcedimiento
+    SELECT IDProcedimiento, Nombre_Procedimiento
     FROM Procedimientos_POS
     WHERE IDProcedimiento = $idprocedimiento
 ";
@@ -48,7 +48,7 @@ $result_productos = $conn->query($sql_productos);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title><?php echo $procedimiento['NombreProcedimiento']; ?> | Procedimientos Médicos</title>
+  <title><?php echo $procedimiento['Nombre_Procedimiento']; ?> | Procedimientos Médicos</title>
 
 <?php include "Header.php"; ?>
 <style>
@@ -61,7 +61,7 @@ $result_productos = $conn->query($sql_productos);
 <?php include_once("Menu.php"); ?>
 <body>
 <div class="container mt-4">
-    <h2>Detalles del procedimiento: <?php echo $procedimiento['NombreProcedimiento']; ?></h2>
+    <h2>Detalles del procedimiento: <?php echo $procedimiento['Nombre_Procedimiento']; ?></h2>
     <a href="ProcedimientosEnfermeria.php" class="btn btn-secondary mb-3">Regresar</a>
     <h3>Productos asociados al procedimiento</h3>
     <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-procedimiento-id="<?php echo $procedimiento['IDProcedimiento']; ?>">
