@@ -25,18 +25,19 @@ if ($result_procedimiento && $result_procedimiento->num_rows > 0) {
 
 // Obtener los productos asociados al procedimiento
 $sql_productos = "
-    SELECT 
-        ProdProc.IDProductoProc,
-        ProdPos.Nombre_Prod,
-        ProdProc.Cantidad
-    FROM 
-        Productos_En_Procedimientos AS ProdProc
-    INNER JOIN 
-        Productos_POS AS ProdPos
-    ON 
-        ProdProc.Fk_Prod_Stock = ProdPos.ID_Prod_POS
-    WHERE 
-        ProdProc.Fk_Proced = $idprocedimiento
+   SELECT 
+    Ins.ID_Insumo,
+    ProdStock.Nombre_Prod,
+    Ins.Cantidad
+FROM 
+    Insumos AS Ins
+INNER JOIN 
+    Stock_POS AS ProdStock
+ON 
+    Ins.FK_Producto = ProdStock.Folio_Prod_Stock
+WHERE 
+    Ins.FK_Procedimiento = $idprocedimiento
+
 ";
 $result_productos = $conn->query($sql_productos);
 ?>
