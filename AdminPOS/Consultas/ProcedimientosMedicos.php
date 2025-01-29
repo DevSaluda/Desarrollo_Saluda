@@ -1,29 +1,3 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#TiposConsultasDoc').DataTable({
-            "order": [[0, "desc"]],
-            "lengthMenu": [[25, 50, 150, 200, -1], [25, 50, 150, 200, "Todos"]],
-            language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "sProcessing": "Procesando...",
-            },
-            responsive: "true",
-            dom: "<'#colvis row'><'row'><'row'<'col-md-6'l><'col-md-6'f>r>t<'bottom'ip><'clear'>",
-        });
-    });
-</script>
-
 <?php
 include("db_connection.php");
 include "Consultas.php";
@@ -51,7 +25,7 @@ if (!$query) {
     <div class="text-center">
         <div class="table-responsive">
             <table id="CarritosEnfermeria" class="table table-hover">
-                <caption>Listado de Procedimientos  </caption>
+                <caption>Listado de Procedimientos</caption>
                 <thead>
                     <tr>
                         <th style="background-color:#0057b8 !important;">N° Carrito</th>
@@ -80,3 +54,32 @@ if (!$query) {
 <?php else : ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CarritosEnfermeria').DataTable({
+            "pageLength": 10, // Muestra 10 registros por página
+            "order": [[0, "desc"]],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                "infoFiltered": "(filtrado de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "sProcessing": "Procesando...",
+            },
+            "responsive": true,
+            "dom": "<'row'<'col-md-6'l><'col-md-6'f>>" +
+                   "<'row'<'col-sm-12'tr>>" +
+                   "<'row'<'col-md-6'i><'col-md-6'p>>"
+        });
+    });
+</script>
