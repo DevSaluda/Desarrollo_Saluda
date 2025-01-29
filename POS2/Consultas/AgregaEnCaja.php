@@ -21,13 +21,13 @@
 
     $Fecha=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Fecha'])))); 
 
-    $Cliente=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Fecha'])))); 
-    
-  
-            $sql = "INSERT INTO `Ventas_POS`(`ID_Prod_POS`,`Identificador_tipo`,`Turno`,`FolioSucursal`,`Folio_Ticket`,`Clave_adicional`,`Cod_Barra`,`Nombre_Prod`,`Cantidad_Venta`,`Fk_sucursal`,`Importe`,`Cliente`,`Fecha_venta`,`Fk_Caja`,`Lote`,
+    $Cliente=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Cliente'])))); 
+    $Total_Venta =$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TotalVenta'])))); 
+    $Total_VentaG=$conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['TotalVenta'])))); 
+            $sql = "INSERT INTO `Ventas_POS`(`ID_Prod_POS`,`Identificador_tipo`,`Turno`,`FolioSucursal`,`Folio_Ticket`,`Clave_adicional`,`Cod_Barra`,`Nombre_Prod`,`Cantidad_Venta`,`Fk_sucursal`,`Total_Venta`,`Importe`,`Total_VentaG`,`Cliente`,`Fecha_venta`,`Fk_Caja`,`Lote`,
             `Motivo_Cancelacion`,`Estatus`,`Sistema`,`AgregadoPor`,`ID_H_O_D`) 
             VALUES ('$ID_Prod_POS','$Identificador_tipo','$Turno','$Folio_Sucursal','$Folio_Ticket','$Clave_adicional','$Cod_Barra','$Nombre_Prod','$Cantidad_Venta',
-             '$Fk_sucursal','$Importe','$Cliente','$Fecha','$Fk_Caja', '$Lote','$Motivo_Cancelacion','$Estatus','$Sistema','$AgregadoPor','$ID_H_O_D')";
+             '$Fk_sucursal','$Total_Venta','$Importe','$Total_VentaG','$Cliente','$Fecha','$Fk_Caja', '$Lote','$Motivo_Cancelacion','$Estatus','$Sistema','$AgregadoPor','$ID_H_O_D')";
         
             if (mysqli_query($conn, $sql)) {
                
