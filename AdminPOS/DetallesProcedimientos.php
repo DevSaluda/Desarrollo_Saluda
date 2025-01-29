@@ -63,7 +63,7 @@ $result_productos = $conn->query($sql_productos);
 <body>
 <div class="container mt-4">
     <h2>Detalles del procedimiento: <?php echo $procedimiento['Nombre_Procedimiento']; ?></h2>
-    <a href="ProcedimientosEnfermeria.php" class="btn btn-secondary mb-3">Regresar</a>
+    <a href="ProcedimientosMedicos1.php" class="btn btn-secondary mb-3">Regresar</a>
     <h3>Productos asociados al procedimiento</h3>
     <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto" data-procedimiento-id="<?php echo $procedimiento['IDProcedimiento']; ?>">
         Agregar Producto
