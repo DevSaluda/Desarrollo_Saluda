@@ -121,7 +121,7 @@ $query = $conn->query($sql1);
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
               $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-danger");
               $("#Di").removeClass("modal-dialog modal-xl modal-notify modal-primary");
-              $("#Di").addClass("modal-dialog .modal-lg modal-notify modal-info");
+              $("#Di").addClass("modal-dialog modal-lg modal-notify modal-info");
   		});
   		$('#editModal').modal('show');
   	});
