@@ -223,7 +223,7 @@ while ($r=$query->fetch_object()){
                           
 </form>
 </div>
-
+<div style="display: none;">
 <form action="javascript:void(0)" method="post" id="AgregaEnCaja" >
 
 
