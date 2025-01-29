@@ -116,6 +116,20 @@ while ($r=$query->fetch_object()){
     </div>
     </div>
     <div class="col">
+    <label for="exampleFormControlInput1">Forma de pago <span class="text-danger">*</span></label>
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
+  </div>
+  <select  id="formapago" required class="form-control" onchange="CapturaFormadePago();">
+     <option value="">Elija forma de pago</option>
+     <option >Efectivo</option>
+     <option >Tarjeta</option>
+     <option >Transferencia</option>
+ 
+     </select>
+    </div>
+    </div>
+    <div class="col">
     <label for="exampleFormControlInput1">Saldo despues de abono<span class="text-danger">*</span></label>
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
@@ -232,6 +246,7 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control "  name="Fecha" id="fecha" value="<?php echo $fcha?>">  
   <input type="text" class="form-control "  name="Cliente" id="cliente" value="<?php echo $Especialistas->Nombre_Cred; ?>">  
   <input type="text" class="form-control "  name="Lote"  value="N/A">  
+  <input type="text" class="form-control "  name="FormaPago"  id="formdepago">  
   <input type="text" class="form-control "  readonly id="sistemacaja" name="SistemaCaja" readonly value="POS <?php echo $row['Nombre_rol']?>">
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
 <input type="text" class="form-control "   readonly name="UsuarioCaja" id="usuariocaja"  readonly value="<?php echo $row['Nombre_Apellidos']?>">
@@ -265,5 +280,12 @@ precio2.addEventListener("change", () => {
 });
 </script>
 
+
+<script>
+  function CapturaFormadePago(){
+    let formapago = document.getElementById("formapago").value;
+    document.getElementById("formdepago").value = formapago;
+  }
+</script>
 
 <script src="js/AbonaCreditosDentales.js"></script>
