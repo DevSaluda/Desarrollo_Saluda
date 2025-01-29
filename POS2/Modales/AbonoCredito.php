@@ -230,6 +230,7 @@ while ($r=$query->fetch_object()){
   <input type="text" class="form-control "  name="CajaAsignada" id="cajaasignada" value="<?php echo $ValorCaja["ID_Caja"];?>">  
   <input type="text" class="form-control "  name="Turno" id="turno" value="<?php echo $ValorCaja["Turno"];?>">  
   <input type="text" class="form-control "  name="Fecha" id="fecha" value="<?php echo $fcha?>">  
+  <input type="text" class="form-control "  name="Cliente" id="cliente" value="<?php echo $Especialistas->Nombre_Cred; ?>">  
   <input type="text" class="form-control "  name="Lote"  value="N/A">  
   <input type="text" class="form-control "  readonly id="sistemacaja" name="SistemaCaja" readonly value="POS <?php echo $row['Nombre_rol']?>">
 <input type="text" class="form-control "    readonly id="empresacaja" name="EmpresaCaja" readonly value="<?php echo $row['ID_H_O_D']?>">
