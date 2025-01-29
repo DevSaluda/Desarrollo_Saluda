@@ -166,7 +166,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 <!-- REQUIRED SCRIPTS -->
 
 <script src="js/Creditos.js"></script>
-<script src="js/AbonaCreditosDentales.js"></script>
+<script src="js/AbonaCreditosDentaless.js"></script>
 
 <script src="js/AperturaCredito.js"></script>
 

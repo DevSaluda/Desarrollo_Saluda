@@ -288,4 +288,4 @@ precio2.addEventListener("change", () => {
   }
 </script>
 
-<script src="js/AbonaCreditosDentales.js"></script>
+<script src="js/AbonaCreditosDentaless.js"></script>
