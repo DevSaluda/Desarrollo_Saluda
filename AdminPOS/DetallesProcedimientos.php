@@ -82,7 +82,7 @@ $result_productos = $conn->query($sql_productos);
             <tbody>
                 <?php while ($producto = $result_productos->fetch_assoc()): ?>
                     <tr>
-                        <td><?php echo $producto['IDProcedimiento']; ?></td>
+                        <td><?php echo $producto['ID_Insumo']; ?></td>
                         <td><?php echo $producto['Nombre_Prod']; ?></td>
                         <td>
                             <input 
