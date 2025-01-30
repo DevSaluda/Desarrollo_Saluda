@@ -22,9 +22,11 @@ if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["
         $Factura = htmlentities(strip_tags(trim($_POST["FacturaNumber"])));
         $Precio_compra = htmlentities(strip_tags(trim($_POST["preciocompraAguardar"])));
         $Total_Factura = htmlentities(strip_tags(trim($_POST["CostototalFactura"])));
+        $TipoMov = htmlentities(strip_tags(trim($_POST["Movimiento"])));
 
         // Enlazar los parámetros de manera individual
-        mysqli_stmt_bind_param($stmt, 'sssssssss', 
+        mysqli_stmt_bind_param($stmt, 'ssssssssss', 
+
             $ID_Prod_POS, 
             $Cod_Barras, 
             $Fk_sucursal, 
@@ -33,7 +35,8 @@ if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["
             $ID_H_O_D, 
             $Factura, 
             $Precio_compra, 
-            $Total_Factura
+            $Total_Factura,
+            $TipoMov
         );
 
         // Ejecutar la consulta

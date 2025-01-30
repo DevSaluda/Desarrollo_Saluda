@@ -152,6 +152,8 @@ if($query->num_rows>0){
             <input type="hidden" class="form-control" name="ID_H_O_D" readonly value="Saluda">
             <input type="hidden" class="form-control" name="Movimiento" readonly value="Ingresado desde devoluciones">
             <input type="hidden" class="form-control" name="IdDevuelve" readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
+            <input type="hidden" name="preciocompraAguardar" value="N/A">
+
 
             
         </div>
