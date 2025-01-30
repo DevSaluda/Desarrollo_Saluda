@@ -118,7 +118,7 @@ include('Modales/ModalAgregarProductoProcedimiento.php');
 include("footer.php");
 ?>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script> 
-<script src='js/ControlDetallesProcedimiento.js'></script> 
+<script src='js/ControlDetallesProcedimientos.js'></script> 
 <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
 <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
 <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
