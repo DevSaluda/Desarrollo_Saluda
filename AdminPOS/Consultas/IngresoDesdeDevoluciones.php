@@ -3,16 +3,18 @@ include_once 'db_connection.php';
 
 $response = array();
 
-// Verificar si $_POST contiene todos los datos requeridos y que no sean "N/A" o vacíos
+// Convertir a números los valores que deben serlo, evitando errores con "N/A"
+$Precio_compra = (isset($_POST["preciocompraAguardar"]) && is_numeric($_POST["preciocompraAguardar"])) ? floatval($_POST["preciocompraAguardar"]) : 0;
+$Total_Factura = (isset($_POST["CostototalFactura"]) && is_numeric($_POST["CostototalFactura"])) ? floatval($_POST["CostototalFactura"]) : 0;
+
+// Verificar si $_POST contiene todos los datos requeridos (excepto Precio_compra y Total_Factura, que ya aseguramos)
 if (
     !empty($_POST["IdBasedatos"]) && 
     !empty($_POST["CodBarras"]) && 
     !empty($_POST["Fk_sucursal"]) && 
     !empty($_POST["Contabilizado"]) && 
     !empty($_POST["AgregoElVendedor"]) && 
-    !empty($_POST["FacturaNumber"]) && $_POST["FacturaNumber"] !== "N/A" && 
-    !empty($_POST["preciocompraAguardar"]) && $_POST["preciocompraAguardar"] !== "N/A" && 
-    !empty($_POST["CostototalFactura"]) && 
+    !empty($_POST["FacturaNumber"]) && 
     !empty($_POST["Movimiento"])
 ) {
     // Preparar la consulta de inserción
@@ -31,11 +33,6 @@ if (
         $AgregadoPor = htmlentities(strip_tags(trim($_POST["AgregoElVendedor"])));
         $ID_H_O_D = "Saluda"; // Valor constante
         $Factura = htmlentities(strip_tags(trim($_POST["FacturaNumber"])));
-
-        // Convertir a números los valores que deben serlo
-        $Precio_compra = is_numeric($_POST["preciocompraAguardar"]) ? floatval($_POST["preciocompraAguardar"]) : 0;
-        $Total_Factura = is_numeric($_POST["CostototalFactura"]) ? floatval($_POST["CostototalFactura"]) : 0;
-        
         $TipoMov = htmlentities(strip_tags(trim($_POST["Movimiento"])));
 
         // Enlazar los parámetros con los tipos correctos (s = string, d = double/decimal)
