@@ -14,7 +14,7 @@ $idProducto = intval($data['idProducto']);
 $idProcedimiento = intval($data['idProcedimiento']);
 
 // Consulta para eliminar el producto del procedimiento
-$sql = "DELETE FROM Insumos WHERE FK_Procedimiento = ? AND FK_Producto = ?";
+$sql = "DELETE FROM Insumos WHERE FK_Procedimiento = ? AND ID_Insumo = ?";
 $stmt = $conn->prepare($sql);
 
 // Vincular los parámetros en el orden correcto
