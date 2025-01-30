@@ -29,7 +29,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
 </head>
 <?php include_once ("Menu.php")?>
 
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", () => {
       const passwordCorrecta = "DevZero"; // Cambia esto por tu contraseña
 
@@ -79,7 +79,7 @@ $resultado_en_mayusculas = strtoupper($resultado_concatenado);
         }
       });
     });
-  </script>
+  </script> -->
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
