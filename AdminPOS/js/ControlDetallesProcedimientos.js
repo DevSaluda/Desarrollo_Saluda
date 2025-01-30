@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('Consultas/ActualizarCantidadProcedimiento.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `id_procedimiento=${idProcedimiento}&id_producto=${idProducto}&cantidad=${nuevaCantidad}`
+                body: `idProcedimiento=${idProcedimiento}&idProducto=${idProducto}&nuevaCantidad=${nuevaCantidad}`
             })
                 .then((response) => response.json())
                 .then((data) => {
