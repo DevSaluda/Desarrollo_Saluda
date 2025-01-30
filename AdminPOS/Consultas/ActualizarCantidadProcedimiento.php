@@ -19,7 +19,7 @@ if ($nuevaCantidad <= 0) {
 }
 
 // Actualizar la cantidad en la base de datos
-$sql = "UPDATE Insumos SET Cantidad = ? WHERE FK_Producto = ? AND ID_Insumo = ?";
+$sql = "UPDATE Insumos SET Cantidad = ? WHERE ID_Insumo = ? AND FK_Procedimiento = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $nuevaCantidad, $idProducto, $idProcedimiento);
 
