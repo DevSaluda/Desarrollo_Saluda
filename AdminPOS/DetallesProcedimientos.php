@@ -27,14 +27,14 @@ if ($result_procedimiento && $result_procedimiento->num_rows > 0) {
 $sql_productos = "
    SELECT 
     Ins.ID_Insumo,
-    ProdStock.Nombre_Prod,
+    ProdPOS.Nombre_Prod,
     Ins.Cantidad
 FROM 
     Insumos AS Ins
 INNER JOIN 
-    Stock_POS AS ProdStock
+    Productos_POS AS ProdPOS
 ON 
-    Ins.FK_Producto = ProdStock.Folio_Prod_Stock
+    Ins.FK_Producto = ProdPOS.ID_Prod_POS
 WHERE 
     Ins.FK_Procedimiento = $idprocedimiento
 
@@ -88,7 +88,7 @@ $result_productos = $conn->query($sql_productos);
                             <input 
                                 type="number" 
                                 class="form-control input-cantidad" 
-                                data-id-producto="<?php echo $producto['IDProductoProc']; ?>" 
+                                data-id-producto="<?php echo $producto['ID_Insumo']; ?>" 
                                 data-id-procedimiento="<?php echo $idprocedimiento; ?>" 
                                 value="<?php echo $producto['Cantidad']; ?>" 
                                 min="1"
@@ -97,7 +97,7 @@ $result_productos = $conn->query($sql_productos);
                         <td>
                             <button 
                                 class="btn btn-danger btn-eliminar-producto" 
-                                data-id-producto="<?php echo $producto['IDProductoProc']; ?>" 
+                                data-id-producto="<?php echo $producto['ID_Insumo']; ?>" 
                                 data-id-procedimiento="<?php echo $idprocedimiento; ?>">
                                 Eliminar
                             </button>

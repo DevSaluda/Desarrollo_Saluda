@@ -59,7 +59,7 @@ include "Consultas/Consultas.php";
   <!-- Main Footer -->
 <?php
     
-
+  include ("Modales/AgregarProcedimientoModal.php");
   include ("Modales/Vacios.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
