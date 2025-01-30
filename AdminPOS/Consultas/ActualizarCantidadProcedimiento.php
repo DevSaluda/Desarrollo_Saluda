@@ -3,17 +3,17 @@ include("db_connection.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($data['idProducto'], $data['idProcedimiento'], $data['nuevaCantidad'])) {
+if (!isset($data['id_producto'], $data['id_procedimiento'], $data['cantidad'])) {
     echo json_encode(['success' => false, 'message' => 'Datos incompletos.']);
     exit;
 }
 
-$idProducto = intval($data['idProducto']);
-$idProcedimiento = intval($data['idProcedimiento']);
-$nuevaCantidad = intval($data['nuevaCantidad']);
+$id_producto = intval($data['id_producto']);
+$id_procedimiento = intval($data['id_procedimiento']);
+$cantidad = intval($data['cantidad']);
 
 // Validar que la cantidad sea válida
-if ($nuevaCantidad <= 0) {
+if ($cantidad <= 0) {
     echo json_encode(['success' => false, 'message' => 'La cantidad debe ser mayor a 0.']);
     exit;
 }
@@ -21,7 +21,7 @@ if ($nuevaCantidad <= 0) {
 // Actualizar la cantidad en la base de datos
 $sql = "UPDATE Insumos SET Cantidad = ? WHERE FK_Producto = ? AND FK_Procedimiento = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("iii", $nuevaCantidad, $idProducto, $idProcedimiento);
+$stmt->bind_param("iii", $cantidad, $id_producto, $id_procedimiento);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Cantidad actualizada correctamente.']);
