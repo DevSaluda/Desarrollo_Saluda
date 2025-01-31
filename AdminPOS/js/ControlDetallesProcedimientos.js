@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Actualización de cantidad de producto en un procedimiento
     document.querySelectorAll('.input-cantidad').forEach((input) => {
         input.addEventListener('change', function () {
             const idProducto = this.getAttribute('data-id-producto');
@@ -13,8 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             fetch('Consultas/ActualizarCantidadProcedimiento.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `id_procedimiento=${idProcedimiento}&id_producto=${idProducto}&cantidad=${nuevaCantidad}`
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    idProducto: idProducto,
+                    idProcedimiento: idProcedimiento,
+                    nuevaCantidad: nuevaCantidad
+                })
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -22,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         alert('Cantidad actualizada correctamente.');
                     } else {
                         alert('Error: ' + data.message);
-                        location.reload();
                     }
                 })
                 .catch((error) => {
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     });
+
+
 
     // Eliminación de producto de un procedimiento
     document.querySelectorAll('.btn-eliminar-producto').forEach((btn) => {
