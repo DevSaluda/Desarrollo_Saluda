@@ -1,30 +1,10 @@
 <?php
 include("db_connection.php");
 
-// Leer la entrada JSON correctamente
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (!$data) {
-    echo json_encode(['success' => false, 'message' => 'No se recibió ninguna carga útil válida.']);
-    exit;
-}
-
-// Validar que los datos existen
-$requiredFields = ['idProducto', 'idProcedimiento', 'nuevaCantidad'];
-$missingFields = [];
-
-foreach ($requiredFields as $field) {
-    if (!isset($data[$field])) {
-        $missingFields[] = $field;
-    }
-}
-
-if (!empty($missingFields)) {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Datos incompletos.',
-        'missing_fields' => $missingFields
-    ]);
+if (!isset($data['idProducto'], $data['idProcedimiento'], $data['nuevaCantidad'])) {
+    echo json_encode(['success' => false, 'message' => 'Datos incompletos.']);
     exit;
 }
 
