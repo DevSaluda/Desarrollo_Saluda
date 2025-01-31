@@ -21,7 +21,7 @@ $precios_festivos = [
     "7001-7" => 150.00,
    
 ];
-
+date_default_timezone_set("America/Mexico_City");
 $hoy = date("Y-m-d");
 
 if (in_array($hoy, $festivos)) {
