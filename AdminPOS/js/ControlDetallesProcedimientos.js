@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
+
     // Eliminación de producto de un procedimiento
     document.querySelectorAll('.btn-eliminar-producto').forEach((btn) => {
         btn.addEventListener('click', function () {
