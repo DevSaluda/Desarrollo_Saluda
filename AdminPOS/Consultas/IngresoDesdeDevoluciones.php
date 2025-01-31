@@ -19,8 +19,8 @@ if (
 ) {
     // Preparar la consulta de inserción
     $query = "INSERT INTO Stock_registrosNuevos 
-        (ID_Prod_POS, Cod_Barras, Fk_sucursal, Recibido, AgregadoPor, ID_H_O_D, Factura, Precio_compra, Total_Factura, TipoMov) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        (ID_Prod_POS, Cod_Barras, Fk_sucursal, Recibido, AgregadoPor, ID_H_O_D, Factura, Precio_compra, Total_Factura, TipoMov,FolioUnico) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -34,9 +34,10 @@ if (
         $ID_H_O_D = "Saluda"; // Valor constante
         $Factura = htmlentities(strip_tags(trim($_POST["FacturaNumber"])));
         $TipoMov = htmlentities(strip_tags(trim($_POST["Movimiento"])));
+        $FolioUnico = htmlentities(strip_tags(trim($_POST["FolioUnico"])));
 
         // Enlazar los parámetros con los tipos correctos (s = string, d = double/decimal)
-        mysqli_stmt_bind_param($stmt, 'ssssssssds', 
+        mysqli_stmt_bind_param($stmt, 'ssssssssdss', 
             $ID_Prod_POS, 
             $Cod_Barras, 
             $Fk_sucursal, 
@@ -46,7 +47,8 @@ if (
             $Factura, 
             $Precio_compra, // Número decimal
             $Total_Factura, // Número decimal
-            $TipoMov
+            $TipoMov,
+            $FolioUnico
         );
 
         // Ejecutar la consulta
