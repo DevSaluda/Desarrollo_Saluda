@@ -3,10 +3,24 @@ include("db_connection.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($data['idProducto'], $data['idProcedimiento'], $data['nuevaCantidad'])) {
-    echo json_encode(['success' => false, 'message' => 'Datos incompletos.']);
+$requiredFields = ['idProducto', 'idProcedimiento', 'nuevaCantidad'];
+$missingFields = [];
+
+foreach ($requiredFields as $field) {
+    if (!isset($data[$field])) {
+        $missingFields[] = $field;
+    }
+}
+
+if (!empty($missingFields)) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Datos incompletos.',
+        'missing_fields' => $missingFields
+    ]);
     exit;
 }
+
 
 $idProducto = intval($data['idProducto']);
 $idProcedimiento = intval($data['idProcedimiento']);
