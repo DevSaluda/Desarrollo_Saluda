@@ -38,6 +38,7 @@ $sql1 = "SELECT
     MAX(Stock_POS.Precio_Venta) AS Precio_Venta,
     MAX(Stock_POS.Precio_C) AS Precio_C,
     MAX(Stock_POS.ID_Prod_POS) AS ID_Prod_POS,
+    MAX(Stock_POS.Folio_Prod_Stock) AS FolioUnico,
     MAX(Stock_POS.Tipo_Servicio) AS Tipo_Servicio
 FROM 
     Devolucion_POS
@@ -146,6 +147,7 @@ if($query->num_rows>0){
             </div> </div> </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
+            <input type="hidden" class="form-control" name="FolioUnico" readonly value="<?php echo $Devoluciones->FolioUnico; ?>">
             <input type="hidden" class="form-control" name="CodBarras" readonly value="<?php echo $Devoluciones->Cod_Barra; ?>">
             <input type="hidden" class="form-control" name="AgregoElVendedor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
             <input type="hidden" class="form-control" name="TipodeServicio" readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
