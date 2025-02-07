@@ -760,11 +760,8 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
   });
 
- 
-
-  
-
-  function buscarArticulo(codigoEscaneado) {
+ // Función que realiza la búsqueda vía AJAX
+function buscarArticulo(codigoEscaneado) {
   var formData = new FormData();
   formData.append('codigoEscaneado', codigoEscaneado);
 
@@ -781,15 +778,15 @@ document.getElementById('numerofactura').addEventListener('change', function() {
       } else if (data.codigo) {
         agregarArticulo(data);
       }
-
       limpiarCampo();
     },
     error: function (data) {
-      
+      // Manejo de error (opcional)
     }
   });
 }
 
+// Función para limpiar y enfocar el campo de búsqueda
 function limpiarCampo() {
   $('#codigoEscaneado').val('');
   $('#codigoEscaneado').focus();
@@ -797,152 +794,201 @@ function limpiarCampo() {
 
 var isScannerInput = false;
 
-// Escucha el evento keyup en el campo de búsqueda
+// Evento keyup para detectar "Enter" en el input
 $('#codigoEscaneado').keyup(function (event) {
-  if (event.which === 13) { // Verifica si la tecla presionada es "Enter"
-    if (!isScannerInput) { // Verifica si el evento no viene del escáner
+  if (event.which === 13) { // Si se presiona Enter
+    if (!isScannerInput) { // Si no proviene del autocompletado
       var codigoEscaneado = $('#codigoEscaneado').val();
       buscarArticulo(codigoEscaneado);
-      event.preventDefault(); // Evita que el formulario se envíe al presionar "Enter"
+      event.preventDefault(); // Evita el envío del formulario
     }
-    isScannerInput = false; // Restablece la bandera del escáner
+    isScannerInput = false; // Reinicia la bandera
   }
 });
 
-// Agrega el autocompletado al campo de búsqueda
+// Configuración del autocompletado para el campo de búsqueda
 $('#codigoEscaneado').autocomplete({
   source: function (request, response) {
-    // Realiza una solicitud AJAX para obtener los resultados de autocompletado
     $.ajax({
       url: 'Consultas/DespliegaAutoCompleteTraspasos.php',
       type: 'GET',
       dataType: 'json',
-      data: {
-        term: request.term
-      },
+      data: { term: request.term },
       success: function (data) {
         response(data);
       }
     });
   },
-  minLength: 3, // Especifica la cantidad mínima de caracteres para activar el autocompletado
+  minLength: 3,
   select: function (event, ui) {
-    // Cuando se selecciona un resultado del autocompletado, llamar a la función buscarArticulo() con el código seleccionado
     var codigoEscaneado = ui.item.value;
-    isScannerInput = true; // Establece la bandera del escáner
+    isScannerInput = true;
     $('#codigoEscaneado').val(codigoEscaneado);
     buscarArticulo(codigoEscaneado);
   }
 });
-  
 
-// Agregar evento change al input de cantidad vendida
+// Evento para recalcular la diferencia entre cantidad vendida y existencias
 $(document).on('change', '.cantidad-vendida-input', function() {
-    // Obtener la fila actual
-    var fila = $(this).closest('tr');
-    
-    // Obtener el valor del input de cantidad vendida
-    var cantidadVendida = parseInt($(this).val());
-    
-    // Obtener el valor del input de existencias en la base de datos
-    var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
-    
-    // Calcular la diferencia
-    var diferencia = cantidadVendida - existenciasBd;
-    
-    // Actualizar el valor del input de diferencia
-    fila.find('.cantidad-diferencia-input').val(diferencia);
+  var fila = $(this).closest('tr');
+  var cantidadVendida = parseInt($(this).val());
+  var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+  var diferencia = cantidadVendida - existenciasBd;
+  fila.find('.cantidad-diferencia-input').val(diferencia);
 });
-// Función para calcular la diferencia entre la cantidad vendida y las existencias en la base de datos
 
+// Variables globales (puedes utilizarlas según tu lógica)
+var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
+var totalIVA = 0;        // Variable para almacenar el total del IVA
 
-
-  var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
-
-
-
-  // Variable para almacenar el total del IVA
-  var totalIVA = 0;
-
-  function agregarArticulo(articulo) {
+// Función que agrega o actualiza el artículo en la tabla.
+// Se adapta para manejar la selección de lote cuando existan varios.
+function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
     mostrarMensaje('El artículo no es válido');
-  } else if ($('#detIdModal' + articulo.id).length) {
-    mostrarMensaje('El artículo ya se encuentra incluido');
-  } else {
-    var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
-    if (row.length) {
-      var loteIgual = row.find('.ExistenciasEnBd input').val() === articulo.fechacaducidad;
-      var fechaIgual = row.find('.Diferenciaresultante input').val() === articulo.lote;
+    return;
+  }
 
-      if (loteIgual && fechaIgual) {
-        var cantidadActual = parseInt(row.find('.cantidad input').val());
-        var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
-        if (nuevaCantidad < 0) {
-          mostrarMensaje('La cantidad no puede ser negativa');
-          return;
-        }
-        row.find('.cantidad input').val(nuevaCantidad);
-      } else {
-        Swal.fire({
-          title: 'El lote o la fecha de caducidad es diferente',
-          text: '¿Desea agregar el artículo como una nueva entrada?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, agregar como nueva',
-          cancelButtonText: 'No, actualizar cantidad'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            agregarFilaArticulo(articulo);
-          } else {
-            // Actualizar la fila que no coincide ni lote ni fecha
-            row.each(function() {
-              var loteFila = $(this).find('.ExistenciasEnBd input').val();
-              var fechaFila = $(this).find('.Diferenciaresultante input').val();
-
-              if (loteFila === articulo.fechacaducidad && fechaFila === articulo.lote) {
-                var cantidadActual = parseInt($(this).find('.cantidad input').val());
-                var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
-                if (nuevaCantidad < 0) {
-                  mostrarMensaje('La cantidad no puede ser negativa');
-                  return;
-                }
-                $(this).find('.cantidad input').val(nuevaCantidad);
-                return false; // Detener la iteración después de actualizar la fila correcta
-              }
-            });
-          }
-        });
-      }
-    } else {
-      agregarFilaArticulo(articulo);
+  // Si el objeto artículo trae un arreglo "lotes", se procede a la selección.
+  if (articulo.lotes && articulo.lotes.length > 0) {
+    if (articulo.lotes.length > 1) {
+      mostrarModalLotes(articulo);
+      return; // Se detiene hasta que el usuario seleccione un lote
+    } else if (articulo.lotes.length === 1) {
+      // Si solo hay un lote, se asigna automáticamente.
+      articulo.lote = articulo.lotes[0].lote;
+      articulo.fechacaducidad = articulo.lotes[0].fecha_caducidad;
+      articulo.stockDisponible = articulo.lotes[0].cantidad;
+      delete articulo.lotes; // Se elimina para evitar reprocesos
     }
   }
 
-  $('#codigoEscaneado').val('');
-  $('#codigoEscaneado').focus();
+  // Verifica si el artículo ya está incluido (usando un identificador único)
+  if ($('#detIdModal' + articulo.id).length) {
+    mostrarMensaje('El artículo ya se encuentra incluido');
+    return;
+  }
+
+  var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
+
+  if (row.length) {
+    // Si la fila ya existe, se verifica si el lote y la fecha son iguales.
+    var loteIgual = row.find('.ExistenciasEnBd input').val() === articulo.fechacaducidad;
+    var fechaIgual = row.find('.Diferenciaresultante input').val() === articulo.lote;
+
+    if (loteIgual && fechaIgual) {
+      var cantidadActual = parseInt(row.find('.cantidad input').val());
+      var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+      if (nuevaCantidad < 0) {
+        mostrarMensaje('La cantidad no puede ser negativa');
+        return;
+      }
+      row.find('.cantidad input').val(nuevaCantidad);
+    } else {
+      Swal.fire({
+        title: 'El lote o la fecha de caducidad es diferente',
+        text: '¿Desea agregar el artículo como una nueva entrada?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, agregar como nueva',
+        cancelButtonText: 'No, actualizar cantidad'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          agregarFilaArticulo(articulo);
+        } else {
+          // Actualiza la fila que coincida en lote y fecha
+          row.each(function() {
+            var loteFila = $(this).find('.ExistenciasEnBd input').val();
+            var fechaFila = $(this).find('.Diferenciaresultante input').val();
+            if (loteFila === articulo.fechacaducidad && fechaFila === articulo.lote) {
+              var cantidadActual = parseInt($(this).find('.cantidad input').val());
+              var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+              if (nuevaCantidad < 0) {
+                mostrarMensaje('La cantidad no puede ser negativa');
+                return;
+              }
+              $(this).find('.cantidad input').val(nuevaCantidad);
+              return false; // Detiene la iteración después de actualizar
+            }
+          });
+        }
+      });
+    }
+  } else {
+    agregarFilaArticulo(articulo);
+  }
+
+  limpiarCampo();
 }
 
+// Función que muestra un modal para que el usuario seleccione el lote
+function mostrarModalLotes(articulo) {
+  let html = '<select id="seleccionLote" class="form-control">';
+  articulo.lotes.forEach(function(lote) {
+    html += `<option value="${lote.lote}" data-fcad="${lote.fecha_caducidad}" data-cant="${lote.cantidad}">
+               Lote: ${lote.lote} - Cad: ${lote.fecha_caducidad} - Disponible: ${lote.cantidad}
+             </option>`;
+  });
+  html += '</select>';
+
+  Swal.fire({
+    title: 'Seleccione un lote',
+    html: html,
+    showCancelButton: true,
+    confirmButtonText: 'Seleccionar',
+    cancelButtonText: 'Cancelar',
+    preConfirm: () => {
+      const select = Swal.getPopup().querySelector('#seleccionLote');
+      if (!select) {
+        Swal.showValidationMessage('No se encontró el selector de lotes');
+        return;
+      }
+      const selectedOption = select.options[select.selectedIndex];
+      return {
+        lote: selectedOption.value,
+        fechacaducidad: selectedOption.getAttribute('data-fcad'),
+        stockDisponible: selectedOption.getAttribute('data-cant')
+      };
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Actualiza las propiedades del artículo con el lote seleccionado
+      articulo.lote = result.value.lote;
+      articulo.fechacaducidad = result.value.fechacaducidad;
+      articulo.stockDisponible = result.value.stockDisponible;
+      delete articulo.lotes; // Elimina la propiedad para evitar reprocesos
+      // Se vuelve a llamar a agregarArticulo para continuar el flujo
+      agregarArticulo(articulo);
+    }
+  });
+}
+
+// Función que agrega la fila en la tabla utilizando la información actualizada
 function agregarFilaArticulo(articulo) {
   var tr = '';
-  var btnEliminar = '<button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button>';
-
-  var inputId = '<input type="hidden" name="detIdModal[' + articulo.id + ']" value="' + articulo.id + '" />';
-  var inputCantidad = '<input class="form-control" type="hidden" name="detCantidadModal[' + articulo.id + ']" value="' + articulo.cantidad + '" />';
+  var btnEliminar = '<button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);">' +
+                    '<i class="fas fa-minus-circle fa-xs"></i></button>';
 
   tr += '<tr data-id="' + articulo.id + '">';
 
+  // Columna: Código de barras
   tr += '<td class="codigo"><input class="form-control codigo-barras-input" id="codBarrasInput" style="font-size: 0.75rem !important;" type="text" value="' + articulo.codigo + '" name="CodBarras[]" /></td>';
+  // Columna: Descripción
   tr += '<td class="descripcion"><textarea class="form-control descripcion-producto-input" id="descripcionproducto" name="NombreDelProducto[]" style="font-size: 0.75rem !important;">' + articulo.descripcion + '</textarea></td>';
+  // Columna: Cantidad
   tr += '<td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" /></td>';
+  // Columna: Fecha de Caducidad (usando la propiedad asignada)
   tr += '<td class="ExistenciasEnBd"><input class="form-control cantidad-existencias-input" style="font-size: 0.75rem !important;" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
-  tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="number" name="Lote[]" value="' + articulo.lote + '" /></td>';
-  tr += '<td class="Preciototal"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" /></td>';
+  // Columna: Lote (usando la propiedad asignada)
+  tr += '<td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem !important;" type="text" name="Lote[]" value="' + articulo.lote + '" /></td>';
+  // Columna: Precio Máximo
+  tr += '<td class="Preciototal"><input class="form-control" style="font-size: 0.75rem !important;" type="text" name="PrecioMaximo[]" value="' + articulo.precio + '" /></td>';
+  // Campos ocultos adicionales (ajusta según tus necesidades)
   tr += '<td style="visibility:collapse; display:none;" class="Proveedor"><input class="form-control proveedor-input" style="font-size: 0.75rem !important;" id="proveedor" type="text" name="Proveedor[]" /></td>';
   tr += '<td style="visibility:collapse; display:none;" class="factura"><input class="form-control factura-input" style="font-size: 0.75rem !important;" id="facturanumber" type="text" name="FacturaNumber[]" /></td>';
   tr += '<td style="visibility:collapse; display:none;" class="numerorden"><input class="form-control" style="font-size: 0.75rem !important;" value="<?php echo  $totalmonto?>" type="text" name="NumberOrden[]" /></td>';
-  tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '"  /></td>';
-  tr += '<td style="visibility:collapse; display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" type="number"  name="PrecioCompra[]" value="' + articulo.preciocompra + '"  /></td>';
+  tr += '<td style="visibility:collapse; display:none;" class="preciofijo"><input class="form-control preciou-input" style="font-size: 0.75rem !important;" type="number" name="PrecioVenta[]" value="' + articulo.precio + '" /></td>';
+  tr += '<td style="visibility:collapse; display:none;" class="preciodecompra"><input class="form-control preciocompra-input" style="font-size: 0.75rem !important;" type="number" name="PrecioCompra[]" value="' + articulo.preciocompra + '" /></td>';
   tr += '<td style="visibility:collapse; display:none;" class="precio"><input hidden id="precio_' + articulo.id + '" class="form-control precio" style="font-size: 0.75rem !important;" type="number" name="PrecioVentaProd[]" value="' + articulo.precio + '" onchange="actualizarImporte($(this).parent().parent());" /></td>';
   tr += '<td style="visibility:collapse; display:none;"><input id="importe_' + articulo.id + '" class="form-control importe" name="ImporteGenerado[]" style="font-size: 0.75rem !important;" type="number" readonly /></td>';
   tr += '<td style="visibility:collapse; display:none;"><input id="importe_siniva_' + articulo.id + '" class="form-control importe_siniva" type="number" readonly /></td>';
@@ -953,15 +999,14 @@ function agregarFilaArticulo(articulo) {
   tr += '<td style="visibility:collapse; display:none;" class="NumberSucursal"><input hidden id="sucursal" type="text" class="form-control" name="FkSucursal[]" readonly value="<?php echo $row['Fk_Sucursal'] ?>" /></td>';
   tr += '<td style="visibility:collapse; display:none;" class="ResponsableInventario"><input hidden id="VendedorFarma" type="text" class="form-control" name="AgregoElVendedor[]" readonly value="<?php echo $row['Nombre_Apellidos'] ?>" /></td>';
   tr += '<td style="visibility:collapse; display:none;" class="Fecha"><input hidden type="text" class="form-control" name="FechaDeInventario[]" readonly value="<?php echo $fechaActual;?>" /></td>';
-  tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></td>';
-
+  tr += '<td><div class="btn-container">' + btnEliminar + '</div><div class="input-container"></div></td>';
   tr += '</tr>';
 
   $('#tablaAgregarArticulos tbody').append(tr);
   $('#tablaAgregarArticulos tbody tr:last-child').find('.proveedor-input').val(selectedAdjustment);
   $('#tablaAgregarArticulos tbody tr:last-child').find('.factura-input').val(selectedfactura);
 }
-
+// Función para mostrar un mensaje de error usando SweetAlert2
 function mostrarMensaje(mensaje) {
   Swal.fire({
     icon: 'error',
@@ -969,16 +1014,14 @@ function mostrarMensaje(mensaje) {
     text: mensaje
   });
 }
-  
- 
- 
-// Modificar la función eliminarFila() para llamar a las funciones necesarias después de eliminar la fila
-function eliminarFila(element) {
-  var fila = $(element).closest('tr'); // Obtener la fila más cercana al elemento
-  fila.remove(); // Eliminar la fila
 
- 
+// Función para eliminar una fila de la tabla
+function eliminarFila(element) {
+  var fila = $(element).closest('tr');
+  fila.remove();
 }
+
+  
 
 
 </script>
