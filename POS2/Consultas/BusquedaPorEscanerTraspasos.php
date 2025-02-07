@@ -1,61 +1,79 @@
 <?php
-// get_product.php
-include_once "db_connection.php";  // Asegúrate de tener la conexión correcta
+include_once "db_connection.php";
 include_once "Consultas.php";
 
-// Recibir el código de barras enviado por AJAX
+// Obtener el código de barras enviado por AJAX
 $codigo = $_POST['codigoEscaneado'];
 
-// Primero, obtenemos los datos generales del producto desde Stock_POS
-$sqlProducto = "SELECT Folio_Prod_Stock,ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C 
-                FROM Stock_POS 
-                WHERE Cod_Barra = ? 
-                LIMIT 1;";
-$stmtProd = $conn->prepare($sqlProducto);
-$stmtProd->bind_param("s", $codigo);
-$stmtProd->execute();
-$resultProd = $stmtProd->get_result();
+// Consultar la base de datos para obtener el artículo correspondiente al código de barras
+$sql = "SELECT Cod_Barra, Fecha_Caducidad, 
+               GROUP_CONCAT(ID_Prod_POS) AS IDs, 
+               GROUP_CONCAT(Nombre_Prod) AS descripciones, 
+               GROUP_CONCAT(Precio_Venta) AS precios, 
+               GROUP_CONCAT(Lote SEPARATOR ', ') AS lotes,
+               GROUP_CONCAT(Clave_adicional) AS claves, 
+               GROUP_CONCAT(Tipo_Servicio) AS tipos, 
+               GROUP_CONCAT(Existencias_R) AS stockactual,
+               GROUP_CONCAT(Precio_C) AS precioscompra
+        FROM Stock_POS
+        WHERE Cod_Barra = ? 
+        AND Lote IS NOT NULL 
+        AND Lote <> ''
+        GROUP BY Cod_Barra;";
 
-if ($resultProd->num_rows > 0) {
-    $rowProd = $resultProd->fetch_assoc();
-    $producto_id = $rowProd['Folio_Prod_Stock'];
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $codigo);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // Si se encontró el artículo, obtener los valores concatenados
+    $row = $result->fetch_assoc();
+    $ids = explode(',', $row['IDs']);
+    $descripciones = explode(',', $row['descripciones']);
+    $precios = explode(',', $row['precios']);
+    $precioscompra = explode(',', $row['precioscompra']);
+    $fechacaducidad = explode(',', $row['Fecha_Caducidad']);
+    $lotesArray = explode(',', $row['lotes']);
+    $claves = explode(',', $row['claves']);
+    $tipos = explode(',', $row['tipos']);
     
-    // Obtener los lotes disponibles desde Lotes_Productos para este producto
-    // Puedes modificar la variable $sucursal_id o incluir otros filtros (como el estatus)
-    $sucursal_id = 1; // Ejemplo: valor fijo, pero lo puedes obtener dinámicamente
-    $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
-                 FROM Lotes_Productos 
-                 WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
-    $stmtLotes = $conn->prepare($sqlLotes);
-    $stmtLotes->bind_param("ii", $producto_id, $sucursal_id);
-    $stmtLotes->execute();
-    $resultLotes = $stmtLotes->get_result();
-    
-    $lotes = array();
-    while ($lote = $resultLotes->fetch_assoc()) {
-        $lotes[] = $lote;
+    // Tomar el primer lote válido
+    $lote = '';
+    foreach ($lotesArray as $l) {
+        if (!empty(trim($l))) {
+            $lote = trim($l);
+            break; // Tomar el primer lote válido
+        }
     }
     
-    // Armar el array de respuesta
+    // Armar la respuesta
     $data = array(
-        "id"           => $producto_id,
-        "codigo"       => $rowProd["Cod_Barra"],
-        "descripcion"  => $rowProd["Nombre_Prod"],
-        "cantidad"     => 1,  // Cantidad inicial sugerida
-        "precio"       => $rowProd["Precio_Venta"],
-        "preciocompra" => $rowProd["Precio_C"],
-        "lotes"        => $lotes
+        "id" => $ids[0],
+        "codigo" => $row["Cod_Barra"],
+        "descripcion" => $descripciones[0],
+        "cantidad" => 1,
+        "existencia" => $fechacaducidad[0],
+        "precio" => $precios[0],
+        "preciocompra" => $precioscompra[0],
+        "lote" => $lote,
+        "lotes" => $lotesArray, // Enviar todos los lotes en la respuesta
+        "fechacaducidades" => $fechacaducidad,
+        "clave" => $claves[0],
+        "tipo" => $tipos[0],
+        "eliminar" => ""
     );
-    
+
     header('Content-Type: application/json');
     echo json_encode($data);
 } else {
-    // Producto no encontrado
+    // Si no se encontró el artículo, devolver un array vacío en formato JSON
+    $data = array();
     header('Content-Type: application/json');
-    echo json_encode(array());
+    echo json_encode($data);
 }
 
-$stmtProd->close();
-if (isset($stmtLotes)) { $stmtLotes->close(); }
+// Cerrar la conexión a la base de datos
+$stmt->close();
 $conn->close();
 ?>
