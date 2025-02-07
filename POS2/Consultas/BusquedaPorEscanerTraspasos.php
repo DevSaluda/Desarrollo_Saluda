@@ -7,7 +7,7 @@ include_once "Consultas.php";
 $codigo = $_POST['codigoEscaneado'];
 
 // Primero, obtenemos los datos generales del producto desde Stock_POS
-$sqlProducto = "SELECT Folio_Prod_Stock,ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C 
+$sqlProducto = "SELECT Folio_Prod_Stock,ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C,Lote
                 FROM Stock_POS 
                 WHERE Cod_Barra = ? 
                 LIMIT 1;";
