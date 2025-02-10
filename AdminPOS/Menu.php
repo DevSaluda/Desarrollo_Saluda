@@ -1028,7 +1028,7 @@ if ($row['Permisos'] == 0) {
           
           </li>
           <li class="nav-item has-treeview">
-            <a href="HistorialInventarios" class="nav-link">
+            <a href="LotesYFechasCaducidades" class="nav-link">
             <i class="fas fa-calendar-day"></i>
               <p>
         Lotes y fechas 
