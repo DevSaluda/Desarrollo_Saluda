@@ -1029,7 +1029,7 @@ if ($row['Permisos'] == 0) {
           </li>
           <li class="nav-item has-treeview">
             <a href="LotesYFechasCaducidades" class="nav-link">
-            <i class="fas fa-calendar-day"></i>
+            <i class="fa-regular fa-ballot-check"></i>
               <p>
         Lotes y fechas 
                
