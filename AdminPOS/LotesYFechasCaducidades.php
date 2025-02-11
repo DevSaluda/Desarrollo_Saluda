@@ -105,7 +105,7 @@ include "Consultas/Consultas.php";
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script src="js/LotesYFechas.js"></script>
+<script src="js/LotesYFechasSP.js"></script>
 
 
 
