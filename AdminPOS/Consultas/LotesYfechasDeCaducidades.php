@@ -256,7 +256,7 @@ tabla = $('#Productos').DataTable({
     <th>Total PC</th>
     <th>Piezas</th>
     <th>Fecha de ingreso</th>
-    <th>Stock Previo</th>
+   
   
 
 
