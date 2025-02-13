@@ -187,7 +187,7 @@ tabla = $('#Productos').DataTable({
        { mData: 'Comentario' },  
        { mData: 'FechaInventario' },
        { mData: 'Piezas' },
-       { mData: 'Tipo_Ajuste' },
+     
        { mData: 'PrecioVenta' },
        { mData: 'PrecioCompra' },
        { mData: 'TotalPrecioVenta' },
@@ -198,6 +198,7 @@ tabla = $('#Productos').DataTable({
        
  
        { mData: 'HoraInventario' },
+       { mData: 'Tipo_Ajuste' },
       ],
      
       "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],  
