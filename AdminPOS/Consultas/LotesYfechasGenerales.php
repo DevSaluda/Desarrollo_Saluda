@@ -186,6 +186,7 @@ tabla = $('#Productos').DataTable({
       
        { mData: 'Comentario' },  
        { mData: 'FechaInventario' },
+       { mData: 'Piezas' },
        { mData: 'Tipo_Ajuste' },
        { mData: 'PrecioVenta' },
        { mData: 'PrecioCompra' },
