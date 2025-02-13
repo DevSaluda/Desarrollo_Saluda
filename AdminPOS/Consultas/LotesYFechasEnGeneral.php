@@ -32,8 +32,9 @@ $c = 0;
 while ($fila = $result->fetch_assoc()) {
     $data[$c]["IdbD"] = $fila["id"];
     $data[$c]["Cod_Barra"] = $fila["Cod_Barra"];
-    $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
     $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
+    $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
+    
     $data[$c]["Comentario"] =  $fila["lote"];
     $data[$c]["FechaInventario"] = $fila["fecha_caducidad"];
     $data[$c]["Tipo_Ajuste"] = $fila["estatus"];
