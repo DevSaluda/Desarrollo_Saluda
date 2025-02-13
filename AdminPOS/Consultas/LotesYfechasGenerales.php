@@ -181,8 +181,9 @@ tabla = $('#Productos').DataTable({
  "aoColumns": [
     { mData: 'IdbD' },
        { mData: 'Cod_Barra' },
-       { mData: 'NombreSucursal' },
        { mData: 'Nombre_Prod' },
+       { mData: 'NombreSucursal' },
+      
        { mData: 'Comentario' },  
        { mData: 'FechaInventario' },
        { mData: 'Tipo_Ajuste' },
