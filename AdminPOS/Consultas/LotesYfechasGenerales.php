@@ -252,6 +252,7 @@ tabla = $('#Productos').DataTable({
     <th>Sucursal</th>
     <th>Lote</th>
     <th>Fecha de caducidad</th>
+    <th>Piezas</th>
     <th>Precio venta</th>
     <th>Precio compra</th>
     <th>Total PV</th>
