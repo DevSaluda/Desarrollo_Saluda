@@ -38,12 +38,13 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Comentario"] =  $fila["lote"];
     $data[$c]["FechaInventario"] = $fila["fecha_caducidad"];
     $data[$c]["Piezas"] = $fila["cantidad"];
-    $data[$c]["Tipo_Ajuste"] = $fila["estatus"];
+  
     $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
     $data[$c]["PrecioCompra"] = $fila["Precio_C"];
     $data[$c]["TotalPrecioVenta"] = floatval($fila["Precio_Venta"]) * floatval($fila["cantidad"]);
     $data[$c]["TotalPrecioCompra"] = floatval($fila["Precio_C"]) * floatval($fila["cantidad"]);
     $data[$c]["HoraInventario"] = date("g:i A", strtotime($fila["fecha_registro"]));
+    $data[$c]["Tipo_Ajuste"] = $fila["estatus"];
     $c++;
 }
 
