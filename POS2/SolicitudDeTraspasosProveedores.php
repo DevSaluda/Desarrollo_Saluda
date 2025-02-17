@@ -989,6 +989,18 @@ $(document).ready(function() {
 function mostrarMensaje(titulo, texto, icono = 'success') {
   Swal.fire({ title: titulo, text: texto, icon: icono });
 }
+
+function actualizarTotales() {
+    let total = 0;
+    
+    $('#tablaAgregarArticulos tbody tr').each(function() {
+        const precio = parseFloat($(this).find('.preciou-input').val()) || 0;
+        const cantidad = parseInt($(this).find('.cantidad-vendida-input').val()) || 0;
+        total += precio * cantidad;
+    });
+    
+    $('#totalGeneral').text(total.toFixed(2));
+}
 </script>
 
 <script src="js/CompletaSolicitudTraspaso.js"></script>
