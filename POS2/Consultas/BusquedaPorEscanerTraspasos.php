@@ -21,7 +21,7 @@ if ($resultProd->num_rows > 0) {
     $producto_id = $rowProd['Folio_Prod_Stock'];
     
     // Obtener los lotes disponibles desde Lotes_Productos
-    $sucursal_id = 1; // Puedes obtenerlo dinámicamente
+    $sucursal_id = $_POST['Fk_Sucursal'] ?? 1; // Obtener dinámicamente desde el frontend o sesión
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
                  WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
@@ -32,19 +32,30 @@ if ($resultProd->num_rows > 0) {
     
     $lotes = [];
     while ($lote = $resultLotes->fetch_assoc()) {
-        if (!empty($lote['lote'])) { // Filtrar lotes vacíos
+        // Filtrar lotes vacíos y fechas de caducidad inválidas
+        if (!empty($lote['lote'])) {
+            // Validar la fecha de caducidad
+            if (!empty($lote['fecha_caducidad']) && $lote['fecha_caducidad'] != '0000-00-00') {
+                $lote['fecha_caducidad'] = $lote['fecha_caducidad']; // Mantener la fecha válida
+            } else {
+                unset($lote['fecha_caducidad']); // Eliminar la fecha si no es válida
+            }
             $lotes[] = $lote;
         }
     }
     
     // Si no hay lotes en Lotes_Productos, usar el lote de Stock_POS
     if (empty($lotes) && !empty($rowProd['Lote'])) {
-        $lotes[] = [
+        $lote = [
             'id' => null,
             'lote' => $rowProd['Lote'],
-            'fecha_caducidad' => '0000-00-00',
             'cantidad' => 1
         ];
+        // Solo agregar fecha de caducidad si está presente y es válida
+        if (!empty($rowProd['fecha_caducidad']) && $rowProd['fecha_caducidad'] != '0000-00-00') {
+            $lote['fecha_caducidad'] = $rowProd['fecha_caducidad'];
+        }
+        $lotes[] = $lote;
     }
     
     // Armar el array de respuesta
