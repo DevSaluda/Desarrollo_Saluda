@@ -760,247 +760,127 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
   });
 
- // Función que realiza la búsqueda vía AJAX (original modificada)
-function buscarArticulo(codigoEscaneado) {
-  var formData = new FormData();
-  formData.append('codigoEscaneado', codigoEscaneado);
+ // Código JavaScript optimizado para manejo de lotes y traspasos
+$(document).ready(function () {
 
+// Función para buscar artículo por código escaneado
+function buscarArticulo(codigoEscaneado) {
   $.ajax({
     url: "Consultas/BusquedaPorEscanerTraspasos.php",
     type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
+    data: { codigoEscaneado },
     dataType: 'json',
     success: function (data) {
-      if (data.length === 0) {
-        msjError('No Encontrado');
-      } else if (data.codigo) {
-        // Verificar si la respuesta incluye múltiples lotes
-        if (data.lotes && data.lotes.length > 0) {
-          data.lotes = data.lotes.filter(lote => lote.cantidad > 0); // Filtrar lotes con existencia
-          if (data.lotes.length === 0) {
-            msjError('No hay existencias disponibles');
-            return;
-          }
-        }
+      if (data && data.codigo) {
         agregarArticulo(data);
+      } else {
+        Swal.fire('Error', 'Artículo no encontrado', 'error');
       }
       limpiarCampo();
     },
-    error: function (data) {
-      msjError('Error en la búsqueda');
+    error: function () {
+      Swal.fire('Error', 'Error en la búsqueda', 'error');
     }
   });
 }
 
-// Función mejorada para agregar/actualizar artículos
+// Limpiar y enfocar campo
+function limpiarCampo() {
+  $('#codigoEscaneado').val('').focus();
+}
+
+// Detectar Enter en input
+$('#codigoEscaneado').on('keyup', function (event) {
+  if (event.which === 13) {
+    const codigo = $(this).val();
+    if (codigo) buscarArticulo(codigo);
+  }
+});
+
+// Agregar artículo a la tabla
 function agregarArticulo(articulo) {
-  if (!articulo?.id) {
-    mostrarMensaje('Artículo inválido');
+  if (!articulo.id) {
+    Swal.fire('Error', 'Artículo inválido', 'error');
     return;
   }
 
-  // Manejo de múltiples lotes
   if (articulo.lotes?.length > 1) {
     mostrarModalLotes(articulo);
     return;
   }
 
-  // Asignación directa si hay un solo lote
-  if (articulo.lotes?.length === 1) {
-    Object.assign(articulo, {
-      lote: articulo.lotes[0].lote,
-      fechacaducidad: articulo.lotes[0].fecha_caducidad,
-      stockDisponible: articulo.lotes[0].cantidad
-    });
-    delete articulo.lotes;
-  }
+  // Si tiene un solo lote
+  const lote = articulo.lotes?.[0] ?? {};
+  const nuevoArticulo = {
+    ...articulo,
+    lote: lote.lote,
+    fechacaducidad: lote.fecha_caducidad,
+    stockDisponible: lote.cantidad
+  };
 
-  // Buscar existencia del mismo artículo + lote + fecha
-  const existe = $(`#tablaAgregarArticulos tr[data-id="${articulo.id}"][data-lote="${articulo.lote}"][data-fecha="${articulo.fechacaducidad}"]`);
-
-  if (existe.length) {
-    const inputCantidad = existe.find('.cantidad-vendida-input');
-    const nuevaCantidad = parseInt(inputCantidad.val()) + 1;
-    inputCantidad.val(nuevaCantidad);
-    inputCantidad.trigger('change');
-    mostrarMensaje('Cantidad actualizada', 'success');
-  } else {
-    agregarFilaArticulo(articulo);
-  }
+  agregarFilaArticulo(nuevoArticulo);
   limpiarCampo();
 }
 
-// Modal de selección de lotes (nueva implementación)
+// Modal para selección de lote
 function mostrarModalLotes(articulo) {
-  let html = `<div class="table-responsive">
-                <table class="table table-hover table-sm">
-                  <thead class="bg-light">
-                    <tr>
-                      <th></th>
-                      <th>Lote</th>
-                      <th>Caducidad</th>
-                      <th>Disponible</th>
-                    </tr>
-                  </thead>
-                  <tbody>`;
-
-  articulo.lotes.forEach(lote => {
-    html += `<tr class="lote-row cursor-pointer" 
-                 data-lote="${lote.lote}"
-                 data-fcad="${lote.fecha_caducidad}"
-                 data-cant="${lote.cantidad}">
-               <td><input type="radio" name="selectedLote" class="form-check-input"></td>
-               <td>${lote.lote}</td>
-               <td>${lote.fecha_caducidad}</td>
-               <td>${lote.cantidad}</td>
-             </tr>`;
-  });
-
-  html += `</tbody></table></div>`;
+  let opciones = articulo.lotes.map(l =>
+    `<option value="${l.lote}" data-fcad="${l.fecha_caducidad}" data-cant="${l.cantidad}">
+      Lote: ${l.lote} - Cad: ${l.fecha_caducidad} - Disp: ${l.cantidad}
+    </option>`
+  ).join('');
 
   Swal.fire({
-    title: 'Seleccione un Lote',
-    html: html,
-    width: '60%',
+    title: 'Seleccione un lote',
+    html: `<select id="seleccionLote" class="form-control">${opciones}</select>`,
     showCancelButton: true,
     confirmButtonText: 'Seleccionar',
-    customClass: {
-      confirmButton: 'btn btn-primary',
-      cancelButton: 'btn btn-secondary'
-    },
-    didOpen: () => {
-      $('.lote-row').click(function() {
-        $(this).find('input[type="radio"]').prop('checked', true);
-        $('.lote-row').removeClass('table-primary');
-        $(this).addClass('table-primary');
-      });
-    },
     preConfirm: () => {
-      const selected = $('input[name="selectedLote"]:checked').closest('.lote-row');
-      if (!selected.length) {
-        Swal.showValidationMessage('Seleccione un lote');
-        return;
-      }
+      const select = Swal.getPopup().querySelector('#seleccionLote');
+      const opt = select.options[select.selectedIndex];
       return {
-        lote: selected.data('lote'),
-        fechacaducidad: selected.data('fcad'),
-        stockDisponible: selected.data('cant')
+        lote: opt.value,
+        fechacaducidad: opt.dataset.fcad,
+        stockDisponible: opt.dataset.cant
       };
     }
   }).then((result) => {
     if (result.isConfirmed) {
-      articulo.lote = result.value.lote;
-      articulo.fechacaducidad = result.value.fechacaducidad;
-      articulo.stockDisponible = result.value.stockDisponible;
-      agregarArticulo(articulo);
+      agregarFilaArticulo({
+        ...articulo,
+        lote: result.value.lote,
+        fechacaducidad: result.value.fechacaducidad,
+        stockDisponible: result.value.stockDisponible
+      });
     }
   });
 }
 
-// Función para agregar filas (modificada)
+// Agregar fila de artículo
 function agregarFilaArticulo(articulo) {
-  const tr = $(`
-    <tr data-id="${articulo.id}" data-lote="${articulo.lote}" data-fecha="${articulo.fechacaducidad}">
-      <td class="codigo">
-        <input class="form-control form-control-sm codigo-barras-input" 
-               value="${articulo.codigo}" 
-               name="CodBarras[]" readonly>
-      </td>
-      <td class="descripcion">
-        <textarea class="form-control form-control-sm" 
-                  name="NombreDelProducto[]" 
-                  readonly>${articulo.descripcion}</textarea>
-      </td>
-      <td class="cantidad">
-        <input class="form-control form-control-sm cantidad-vendida-input" 
-               type="number" 
-               value="1" 
-               min="1" 
-               max="${articulo.stockDisponible}"
-               name="Contabilizado[]">
-      </td>
-      <td class="ExistenciasEnBd">
-        <input class="form-control form-control-sm" 
-               type="date" 
-               value="${articulo.fechacaducidad}" 
-               name="FechaCaducidad[]" 
-               readonly>
-      </td>
-      <td class="Diferenciaresultante">
-        <input class="form-control form-control-sm" 
-               type="text" 
-               value="${articulo.lote}" 
-               name="Lote[]" 
-               readonly>
-      </td>
-      <td>
-        <button class="btn btn-danger btn-sm" 
-                onclick="eliminarFila(this)">
-          <i class="fas fa-minus-circle"></i>
-        </button>
-      </td>
-      <!-- Campos ocultos adicionales -->
-      ${generarCamposOcultos(articulo)}
-    </tr>
-  `);
+  const tr = `
+    <tr data-id="${articulo.id}">
+      <td><input class="form-control" value="${articulo.codigo}" name="CodBarras[]" readonly></td>
+      <td><input class="form-control" value="${articulo.descripcion}" name="NombreDelProducto[]" readonly></td>
+      <td><input class="form-control cantidad-vendida-input" type="number" name="Contabilizado[]" value="${articulo.cantidad || 1}"></td>
+      <td><input class="form-control" type="date" name="FechaCaducidad[]" value="${articulo.fechacaducidad}" readonly></td>
+      <td><input class="form-control" name="Lote[]" value="${articulo.lote}" readonly></td>
+      <td><input class="form-control" type="number" name="PrecioMaximo[]" value="${articulo.precio}" readonly></td>
+      <td><button class="btn btn-danger btn-sm" onclick="$(this).closest('tr').remove();">Eliminar</button></td>
+    </tr>`;
 
   $('#tablaAgregarArticulos tbody').append(tr);
-  actualizarTotales();
 }
 
-// Función auxiliar para campos ocultos
-function generarCamposOcultos(articulo) {
-  return `
-    <td style="display:none;">
-      <input type="hidden" name="IdBasedatos[]" value="${articulo.id}">
-      <input type="hidden" class="preciocompra-input" name="PrecioCompra[]" value="${articulo.preciocompra}">
-      <input type="hidden" class="preciou-input" name="PrecioVenta[]" value="${articulo.precio}">
-    </td>`;
-}
-
-// Función para limpiar y enfocar el campo de búsqueda (original)
-function limpiarCampo() {
-  $('#codigoEscaneado').val('').focus();
-}
-
-// Eventos y configuraciones iniciales (originales modificadas)
-$(document).ready(function() {
-  // Autocompletado
-  $('#codigoEscaneado').autocomplete({
-    source: 'Consultas/DespliegaAutoCompleteTraspasos.php',
-    minLength: 2,
-    select: function(event, ui) {
-      buscarArticulo(ui.item.value);
-    }
-  });
-
-  // Detección de Enter
-  $('#codigoEscaneado').keypress(function(e) {
-    if (e.which === 13) {
-      buscarArticulo($(this).val());
-      return false;
-    }
-  });
+// Calcular diferencia
+$(document).on('change', '.cantidad-vendida-input', function () {
+  const tr = $(this).closest('tr');
+  const cantidad = parseInt($(this).val()) || 0;
+  const existencias = parseInt(tr.find('.cantidad-existencias-input').val()) || 0;
+  tr.find('.cantidad-diferencia-input').val(cantidad - existencias);
+});
 });
 
-// Función de utilidad para mensajes
-function mostrarMensaje(titulo, texto, icono = 'success') {
-  Swal.fire({ title: titulo, text: texto, icon: icono });
-}
-
-function actualizarTotales() {
-    let total = 0;
-    
-    $('#tablaAgregarArticulos tbody tr').each(function() {
-        const precio = parseFloat($(this).find('.preciou-input').val()) || 0;
-        const cantidad = parseInt($(this).find('.cantidad-vendida-input').val()) || 0;
-        total += precio * cantidad;
-    });
-    
-    $('#totalGeneral').text(total.toFixed(2));
-}
 </script>
 
 <script src="js/CompletaSolicitudTraspaso.js"></script>

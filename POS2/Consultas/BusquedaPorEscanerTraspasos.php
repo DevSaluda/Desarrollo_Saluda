@@ -3,96 +3,70 @@
 include_once "db_connection.php";
 include_once "Consultas.php";
 
-header('Content-Type: application/json'); // Mover headers al inicio
+// Recibir el código de barras enviado por AJAX
+$codigo = $_POST['codigoEscaneado'];
 
-try {
-    // Validar entrada
-    if (!isset($_POST['codigoEscaneado'])) {
-        throw new Exception('Código no recibido');
-    }
-    
-    $codigo = trim($_POST['codigoEscaneado']);
-    if (empty($codigo)) {
-        throw new Exception('Código vacío');
-    }
+// Obtener los datos generales del producto desde Stock_POS
+$sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad
+                FROM Stock_POS 
+                WHERE Cod_Barra = ? 
+                LIMIT 1;";
+$stmtProd = $conn->prepare($sqlProducto);
+$stmtProd->bind_param("s", $codigo);
+$stmtProd->execute();
+$resultProd = $stmtProd->get_result();
 
-    // Obtener datos básicos del producto
-    $sqlProducto = "SELECT Folio_Prod_Stock AS id, 
-                    Cod_Barra AS codigo, 
-                    Nombre_Prod AS descripcion,
-                    Precio_Venta AS precio,
-                    Precio_C AS preciocompra,
-                    Lote,
-                    Existencias_R
-                    FROM Stock_POS 
-                    WHERE Cod_Barra = ? 
-                    LIMIT 1";
-    
-    $stmtProd = $conn->prepare($sqlProducto);
-    $stmtProd->bind_param("s", $codigo);
-    $stmtProd->execute();
-    $resultProd = $stmtProd->get_result();
-
-    if ($resultProd->num_rows === 0) {
-        echo json_encode(['error' => 'Producto no encontrado']);
-        exit;
-    }
-
+if ($resultProd->num_rows > 0) {
     $rowProd = $resultProd->fetch_assoc();
-    $response = [
-        "id" => $rowProd['id'],
-        "codigo" => $rowProd['codigo'],
-        "descripcion" => $rowProd['descripcion'],
-        "precio" => $rowProd['precio'],
-        "preciocompra" => $rowProd['preciocompra'],
-        "lotes" => []
-    ];
-
-    // Obtener lotes
-    $sqlLotes = "SELECT lote, 
-                DATE_FORMAT(fecha_caducidad, '%Y-%m-%d') AS fecha_caducidad, 
-                cantidad 
-                FROM Lotes_Productos 
-                WHERE producto_id = ? 
-                AND sucursal_id = ? 
-                AND cantidad > 0 
-                AND estatus = 'Disponible'";
+    $producto_id = $rowProd['Folio_Prod_Stock'];
     
+    // Obtener los lotes disponibles desde Lotes_Productos
+    $sucursal_id = 1; // Puedes obtenerlo dinámicamente
+    $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
+                 FROM Lotes_Productos 
+                 WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
     $stmtLotes = $conn->prepare($sqlLotes);
-    $sucursal_id = 1; // Obtener dinámicamente según sesión
-    $stmtLotes->bind_param("ii", $rowProd['id'], $sucursal_id);
+    $stmtLotes->bind_param("ii", $producto_id, $sucursal_id);
     $stmtLotes->execute();
     $resultLotes = $stmtLotes->get_result();
-
-    // Si hay lotes registrados
-    if ($resultLotes->num_rows > 0) {
-        while ($lote = $resultLotes->fetch_assoc()) {
-            $response['lotes'][] = [
-                "lote" => $lote['lote'],
-                "fecha_caducidad" => $lote['fecha_caducidad'],
-                "cantidad" => (int)$lote['cantidad']
-            ];
-        }
-    } else {
-        // Si no hay lotes, usar datos generales del producto
-        if (!empty($rowProd['Lote'])) {
-            $response['lotes'][] = [
-                "lote" => $rowProd['Lote'],
-                "fecha_caducidad" => 'N/A',
-                "cantidad" => (int)$rowProd['Existencias_R']
-            ];
+    
+    $lotes = [];
+    while ($lote = $resultLotes->fetch_assoc()) {
+        if (!empty($lote['lote'])) { // Filtrar lotes vacíos
+            $lotes[] = $lote;
         }
     }
 
-    echo json_encode($response);
+    // Si no hay lotes en Lotes_Productos, usar el lote y fecha de caducidad de Stock_POS
+    if (empty($lotes) && !empty($rowProd['Lote'])) {
+        $lotes[] = [
+            'id' => null,
+            'lote' => $rowProd['Lote'],
+            'fecha_caducidad' => $rowProd['Fecha_Caducidad'] ?: '0000-00-00',
+            'cantidad' => 1
+        ];
+    }
 
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(['error' => $e->getMessage()]);
-} finally {
-    // Cerrar conexiones
-    if (isset($stmtProd)) $stmtProd->close();
-    if (isset($stmtLotes)) $stmtLotes->close();
-    $conn->close();
+    // Armar el array de respuesta
+    $data = [
+        "id"           => $producto_id,
+        "codigo"       => $rowProd["Cod_Barra"],
+        "descripcion"  => $rowProd["Nombre_Prod"],
+        "cantidad"     => 1,
+        "precio"       => $rowProd["Precio_Venta"],
+        "preciocompra" => $rowProd["Precio_C"],
+        "lotes"        => $lotes
+    ];
+    
+    header('Content-Type: application/json');
+    echo json_encode($data);
+} else {
+    // Producto no encontrado
+    header('Content-Type: application/json');
+    echo json_encode([]);
 }
+
+$stmtProd->close();
+if (isset($stmtLotes)) { $stmtLotes->close(); }
+$conn->close();
 ?>
