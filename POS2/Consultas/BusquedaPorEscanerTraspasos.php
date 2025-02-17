@@ -36,7 +36,7 @@ if ($resultProd->num_rows > 0) {
         if (!empty($lote['lote'])) {
             // Validar la fecha de caducidad
             if (!empty($lote['fecha_caducidad']) && $lote['fecha_caducidad'] != '0000-00-00') {
-                $lote['fecha_caducidad'] = $lote['fecha_caducidad']; // Mantener la fecha válida
+              
             } else {
                 unset($lote['fecha_caducidad']); // Eliminar la fecha si no es válida
             }
