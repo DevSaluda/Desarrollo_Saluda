@@ -760,127 +760,234 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
   });
 
- // Código JavaScript optimizado para manejo de lotes y traspasos
-$(document).ready(function () {
-
-// Función para buscar artículo por código escaneado
+ // Función que realiza la búsqueda vía AJAX
 function buscarArticulo(codigoEscaneado) {
+  var formData = new FormData();
+  formData.append('codigoEscaneado', codigoEscaneado);
+
   $.ajax({
     url: "Consultas/BusquedaPorEscanerTraspasos.php",
     type: 'POST',
-    data: { codigoEscaneado },
+    data: formData,
+    processData: false,
+    contentType: false,
     dataType: 'json',
     success: function (data) {
-      if (data && data.codigo) {
+      if (data.length === 0) {
+        // msjError('No Encontrado');
+      } else if (data.codigo) {
         agregarArticulo(data);
-      } else {
-        Swal.fire('Error', 'Artículo no encontrado', 'error');
       }
       limpiarCampo();
     },
-    error: function () {
-      Swal.fire('Error', 'Error en la búsqueda', 'error');
+    error: function (data) {
+      // Manejo de error (opcional)
     }
   });
 }
 
-// Limpiar y enfocar campo
+// Función para limpiar y enfocar el campo de búsqueda
 function limpiarCampo() {
-  $('#codigoEscaneado').val('').focus();
+  $('#codigoEscaneado').val('');
+  $('#codigoEscaneado').focus();
 }
 
-// Detectar Enter en input
-$('#codigoEscaneado').on('keyup', function (event) {
-  if (event.which === 13) {
-    const codigo = $(this).val();
-    if (codigo) buscarArticulo(codigo);
+var isScannerInput = false;
+
+// Evento keyup para detectar "Enter" en el input
+$('#codigoEscaneado').keyup(function (event) {
+  if (event.which === 13) { // Si se presiona Enter
+    if (!isScannerInput) { // Si no proviene del autocompletado
+      var codigoEscaneado = $('#codigoEscaneado').val();
+      buscarArticulo(codigoEscaneado);
+      event.preventDefault(); // Evita el envío del formulario
+    }
+    isScannerInput = false; // Reinicia la bandera
   }
 });
 
-// Agregar artículo a la tabla
+// Configuración del autocompletado para el campo de búsqueda
+$('#codigoEscaneado').autocomplete({
+  source: function (request, response) {
+    $.ajax({
+      url: 'Consultas/DespliegaAutoCompleteTraspasos.php',
+      type: 'GET',
+      dataType: 'json',
+      data: { term: request.term },
+      success: function (data) {
+        response(data);
+      }
+    });
+  },
+  minLength: 2,
+  select: function (event, ui) {
+    var codigoEscaneado = ui.item.value;
+    isScannerInput = true;
+    $('#codigoEscaneado').val(codigoEscaneado);
+    buscarArticulo(codigoEscaneado);
+  }
+});
+
+// Evento para recalcular la diferencia entre cantidad vendida y existencias
+$(document).on('change', '.cantidad-vendida-input', function() {
+  var fila = $(this).closest('tr');
+  var cantidadVendida = parseInt($(this).val());
+  var existenciasBd = parseInt(fila.find('.cantidad-existencias-input').val());
+  var diferencia = cantidadVendida - existenciasBd;
+  fila.find('.cantidad-diferencia-input').val(diferencia);
+});
+
+// Variables globales (puedes utilizarlas según tu lógica)
+var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
+var totalIVA = 0;        // Variable para almacenar el total del IVA
+
+// Función que agrega o actualiza el artículo en la tabla.
 function agregarArticulo(articulo) {
-  if (!articulo.id) {
-    Swal.fire('Error', 'Artículo inválido', 'error');
+  if (!articulo || !articulo.id) {
+    mostrarMensaje('El artículo no es válido');
     return;
   }
 
-  if (articulo.lotes?.length > 1) {
-    mostrarModalLotes(articulo);
+  // Si el objeto artículo trae un arreglo "lotes", se procede a la selección.
+  if (articulo.lotes && articulo.lotes.length > 0) {
+    if (articulo.lotes.length > 1) {
+      mostrarModalLotes(articulo);
+      return;
+    } else if (articulo.lotes.length === 1) {
+      articulo.lote = articulo.lotes[0].lote;
+      articulo.fechacaducidad = articulo.lotes[0].fecha_caducidad;
+      articulo.stockDisponible = articulo.lotes[0].cantidad;
+      delete articulo.lotes;
+    }
+  }
+
+  if ($('#detIdModal' + articulo.id).length) {
+    mostrarMensaje('El artículo ya se encuentra incluido');
     return;
   }
 
-  // Si tiene un solo lote
-  const lote = articulo.lotes?.[0] ?? {};
-  const nuevoArticulo = {
-    ...articulo,
-    lote: lote.lote,
-    fechacaducidad: lote.fecha_caducidad,
-    stockDisponible: lote.cantidad
-  };
+  var row = $('#tablaAgregarArticulos tbody').find('tr[data-id="' + articulo.id + '"]');
 
-  agregarFilaArticulo(nuevoArticulo);
+  if (row.length) {
+    var loteIgual = row.find('.ExistenciasEnBd input').val() === articulo.fechacaducidad;
+    var fechaIgual = row.find('.Diferenciaresultante input').val() === articulo.lote;
+
+    if (loteIgual && fechaIgual) {
+      var cantidadActual = parseInt(row.find('.cantidad input').val());
+      var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+      if (nuevaCantidad < 0) {
+        mostrarMensaje('La cantidad no puede ser negativa');
+        return;
+      }
+      row.find('.cantidad input').val(nuevaCantidad);
+    } else {
+      Swal.fire({
+        title: 'Lote o fecha diferente',
+        text: '¿Agregar el artículo como nueva entrada?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, agregar',
+        cancelButtonText: 'No, actualizar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          agregarFilaArticulo(articulo);
+        } else {
+          row.each(function() {
+            var loteFila = $(this).find('.ExistenciasEnBd input').val();
+            var fechaFila = $(this).find('.Diferenciaresultante input').val();
+            if (loteFila === articulo.fechacaducidad && fechaFila === articulo.lote) {
+              var cantidadActual = parseInt($(this).find('.cantidad input').val());
+              var nuevaCantidad = cantidadActual + parseInt(articulo.cantidad);
+              if (nuevaCantidad < 0) {
+                mostrarMensaje('La cantidad no puede ser negativa');
+                return;
+              }
+              $(this).find('.cantidad input').val(nuevaCantidad);
+              return false;
+            }
+          });
+        }
+      });
+    }
+  } else {
+    agregarFilaArticulo(articulo);
+  }
+
   limpiarCampo();
 }
 
-// Modal para selección de lote
+// Función que muestra un modal para seleccionar lote
 function mostrarModalLotes(articulo) {
-  let opciones = articulo.lotes.map(l =>
-    `<option value="${l.lote}" data-fcad="${l.fecha_caducidad}" data-cant="${l.cantidad}">
-      Lote: ${l.lote} - Cad: ${l.fecha_caducidad} - Disp: ${l.cantidad}
-    </option>`
-  ).join('');
+  let html = '<select id="seleccionLote" class="form-control">';
+  articulo.lotes.forEach(function(lote) {
+    html += `<option value="${lote.lote}" data-fcad="${lote.fecha_caducidad}" data-cant="${lote.cantidad}">
+               Lote: ${lote.lote} - Cad: ${lote.fecha_caducidad} - Disp: ${lote.cantidad}
+             </option>`;
+  });
+  html += '</select>';
 
   Swal.fire({
     title: 'Seleccione un lote',
-    html: `<select id="seleccionLote" class="form-control">${opciones}</select>`,
+    html: html,
     showCancelButton: true,
     confirmButtonText: 'Seleccionar',
+    cancelButtonText: 'Cancelar',
     preConfirm: () => {
       const select = Swal.getPopup().querySelector('#seleccionLote');
-      const opt = select.options[select.selectedIndex];
+      if (!select) {
+        Swal.showValidationMessage('No se encontró el selector de lotes');
+        return;
+      }
+      const selectedOption = select.options[select.selectedIndex];
       return {
-        lote: opt.value,
-        fechacaducidad: opt.dataset.fcad,
-        stockDisponible: opt.dataset.cant
+        lote: selectedOption.value,
+        fechacaducidad: selectedOption.getAttribute('data-fcad'),
+        stockDisponible: selectedOption.getAttribute('data-cant')
       };
     }
   }).then((result) => {
     if (result.isConfirmed) {
-      agregarFilaArticulo({
-        ...articulo,
-        lote: result.value.lote,
-        fechacaducidad: result.value.fechacaducidad,
-        stockDisponible: result.value.stockDisponible
-      });
+      articulo.lote = result.value.lote;
+      articulo.fechacaducidad = result.value.fechacaducidad;
+      articulo.stockDisponible = result.value.stockDisponible;
+      delete articulo.lotes;
+      agregarArticulo(articulo);
     }
   });
 }
 
-// Agregar fila de artículo
+// Función que agrega una fila con la información del artículo
 function agregarFilaArticulo(articulo) {
-  const tr = `
-    <tr data-id="${articulo.id}">
-      <td><input class="form-control" value="${articulo.codigo}" name="CodBarras[]" readonly></td>
-      <td><input class="form-control" value="${articulo.descripcion}" name="NombreDelProducto[]" readonly></td>
-      <td><input class="form-control cantidad-vendida-input" type="number" name="Contabilizado[]" value="${articulo.cantidad || 1}"></td>
-      <td><input class="form-control" type="date" name="FechaCaducidad[]" value="${articulo.fechacaducidad}" readonly></td>
-      <td><input class="form-control" name="Lote[]" value="${articulo.lote}" readonly></td>
-      <td><input class="form-control" type="number" name="PrecioMaximo[]" value="${articulo.precio}" readonly></td>
-      <td><button class="btn btn-danger btn-sm" onclick="$(this).closest('tr').remove();">Eliminar</button></td>
-    </tr>`;
+  var tr = '';
+  var btnEliminar = '<button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);">' +
+                    '<i class="fas fa-minus-circle fa-xs"></i></button>';
+
+  tr += '<tr data-id="' + articulo.id + '">';
+  tr += '<td class="codigo"><input class="form-control" type="text" name="CodBarras[]" value="' + articulo.codigo + '" /></td>';
+  tr += '<td class="descripcion"><textarea class="form-control" name="NombreDelProducto[]">' + articulo.descripcion + '</textarea></td>';
+  tr += '<td class="cantidad"><input class="form-control" type="number" name="Contabilizado[]" value="' + articulo.cantidad + '" /></td>';
+  tr += '<td class="ExistenciasEnBd"><input class="form-control" type="date" name="FechaCaducidad[]" value="' + articulo.fechacaducidad + '" /></td>';
+  tr += '<td class="Diferenciaresultante"><input class="form-control" type="text" name="Lote[]" value="' + articulo.lote + '" /></td>';
+  tr += '<td class="Preciototal"><input class="form-control" type="text" name="PrecioMaximo[]" value="' + articulo.precio + '" /></td>';
+  tr += '<td><div class="btn-container">' + btnEliminar + '</div></td>';
+  tr += '</tr>';
 
   $('#tablaAgregarArticulos tbody').append(tr);
 }
 
-// Calcular diferencia
-$(document).on('change', '.cantidad-vendida-input', function () {
-  const tr = $(this).closest('tr');
-  const cantidad = parseInt($(this).val()) || 0;
-  const existencias = parseInt(tr.find('.cantidad-existencias-input').val()) || 0;
-  tr.find('.cantidad-diferencia-input').val(cantidad - existencias);
-});
-});
+// Función para mostrar un mensaje con SweetAlert2
+function mostrarMensaje(mensaje) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: mensaje
+  });
+}
 
+// Función para eliminar una fila de la tabla
+function eliminarFila(element) {
+  $(element).closest('tr').remove();
+}
 </script>
 
 <script src="js/CompletaSolicitudTraspaso.js"></script>
