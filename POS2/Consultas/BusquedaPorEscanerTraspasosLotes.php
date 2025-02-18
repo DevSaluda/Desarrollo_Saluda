@@ -41,7 +41,7 @@ if ($resultProd->num_rows > 0) {
 
     // Obtener el sucursal_id correctamente desde el resultado
     $sucursal_id = $rowProd['Fk_Sucursal'];  // Usar Fk_Sucursal de la fila actual
-
+echo $sucursal_id;
     // Obtener los lotes disponibles desde Lotes_Productos
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
