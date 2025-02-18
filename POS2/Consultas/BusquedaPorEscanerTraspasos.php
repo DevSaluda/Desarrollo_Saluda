@@ -35,6 +35,10 @@ if ($resultProd->num_rows > 0) {
     $rowProd = $resultProd->fetch_assoc();
     $producto_id = $rowProd['Folio_Prod_Stock'];
     
+    // Verificar el valor de $producto_id
+    var_dump("Producto ID:", $producto_id);
+    error_log("Producto ID: $producto_id");
+
     // Obtener los lotes disponibles desde Lotes_Productos
     $sucursal_id = 1; // Puedes obtenerlo dinámicamente
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
@@ -49,6 +53,14 @@ if ($resultProd->num_rows > 0) {
     $stmtLotes->bind_param("ii", $producto_id, $sucursal_id);
     $stmtLotes->execute();
     $resultLotes = $stmtLotes->get_result();
+
+    // Verificar si la consulta de lotes devuelve resultados
+    if ($resultLotes) {
+        var_dump("Resultado de lotes:", $resultLotes);
+        error_log("Resultado de lotes: " . json_encode($resultLotes->fetch_all(MYSQLI_ASSOC)));
+    } else {
+        error_log("Error al ejecutar la consulta de lotes: " . $stmtLotes->error);
+    }
     
     $lotes = [];
     while ($lote = $resultLotes->fetch_assoc()) {
