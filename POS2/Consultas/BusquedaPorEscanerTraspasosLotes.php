@@ -5,20 +5,23 @@ include_once "Consultas.php";
 
 // Recibir el código de barras enviado por AJAX
 $codigo = $_POST['codigoEscaneado'] ?? '';
+$sucursal_id = $row['Fk_Sucursal'] ?? '';  // Asumiendo que el id de la sucursal se envía por POST también
 
-if (empty($codigo)) {
-    echo json_encode(["error" => "Código de barras vacío"]);
+if (empty($codigo) || empty($sucursal_id)) {
+    echo json_encode(["error" => "Código de barras o ID de sucursal vacío"]);
     exit;
 }
 
 // Mostrar el código recibido
 var_dump("Código recibido:", $codigo);
+var_dump("Sucursal ID recibido:", $sucursal_id);
 error_log("Código recibido: $codigo");
+error_log("Sucursal ID recibido: $sucursal_id");
 
 // Obtener los datos generales del producto desde Stock_POS
 $sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad, Fk_Sucursal
                 FROM Stock_POS 
-                WHERE Cod_Barra = ? 
+                WHERE Cod_Barra = ? AND Fk_Sucursal = ? 
                 LIMIT 1;";
 
 // Mostrar la consulta generada
@@ -27,7 +30,7 @@ error_log("Consulta producto: $sqlProducto");
 
 // Preparar y ejecutar la consulta
 $stmtProd = $conn->prepare($sqlProducto);
-$stmtProd->bind_param("s", $codigo);
+$stmtProd->bind_param("si", $codigo, $sucursal_id);  // "s" para el código y "i" para la sucursal (entero)
 $stmtProd->execute();
 $resultProd = $stmtProd->get_result();
 
@@ -40,8 +43,8 @@ if ($resultProd->num_rows > 0) {
     error_log("Producto ID: $producto_id");
 
     // Obtener el sucursal_id correctamente desde el resultado
-    $sucursal_id = $rowProd['Fk_Sucursal'];  // Usar Fk_Sucursal de la fila actual
-echo $sucursal_id;
+    $sucursal_id = $rowProd['Fk_Sucursal'];  // Ahora puedes obtenerlo después de la consulta
+
     // Obtener los lotes disponibles desde Lotes_Productos
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
