@@ -4,13 +4,28 @@ include_once "db_connection.php";
 include_once "Consultas.php";
 
 // Recibir el código de barras enviado por AJAX
-$codigo = $_POST['codigoEscaneado'];
+$codigo = $_POST['codigoEscaneado'] ?? '';
+
+if (empty($codigo)) {
+    echo json_encode(["error" => "Código de barras vacío"]);
+    exit;
+}
+
+// Mostrar el código recibido
+var_dump("Código recibido:", $codigo);
+error_log("Código recibido: $codigo");
 
 // Obtener los datos generales del producto desde Stock_POS
 $sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad
                 FROM Stock_POS 
                 WHERE Cod_Barra = ? 
                 LIMIT 1;";
+
+// Mostrar la consulta generada
+var_dump("Consulta producto:", $sqlProducto);
+error_log("Consulta producto: $sqlProducto");
+
+// Preparar y ejecutar la consulta
 $stmtProd = $conn->prepare($sqlProducto);
 $stmtProd->bind_param("s", $codigo);
 $stmtProd->execute();
@@ -25,6 +40,11 @@ if ($resultProd->num_rows > 0) {
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
                  WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
+
+    // Mostrar la consulta de lotes
+    var_dump("Consulta lotes:", $sqlLotes);
+    error_log("Consulta lotes: $sqlLotes");
+
     $stmtLotes = $conn->prepare($sqlLotes);
     $stmtLotes->bind_param("ii", $producto_id, $sucursal_id);
     $stmtLotes->execute();
@@ -36,6 +56,10 @@ if ($resultProd->num_rows > 0) {
             $lotes[] = $lote;
         }
     }
+
+    // Mostrar los lotes obtenidos
+    var_dump("Lotes obtenidos:", $lotes);
+    error_log("Lotes obtenidos: " . json_encode($lotes));
 
     // Si no hay lotes en Lotes_Productos, usar el lote y fecha de caducidad de Stock_POS
     if (empty($lotes) && !empty($rowProd['Lote'])) {
@@ -62,6 +86,8 @@ if ($resultProd->num_rows > 0) {
     echo json_encode($data);
 } else {
     // Producto no encontrado
+    var_dump("Producto no encontrado para el código:", $codigo);
+    error_log("Producto no encontrado para el código: $codigo");
     header('Content-Type: application/json');
     echo json_encode([]);
 }
