@@ -40,7 +40,7 @@ if ($resultProd->num_rows > 0) {
     error_log("Producto ID: $producto_id");
 
     // Obtener los lotes disponibles desde Lotes_Productos
-    $sucursal_id = 1; // Puedes obtenerlo dinámicamente
+    $sucursal_id = $row['Fk_Sucursal']; // Puedes obtenerlo dinámicamente
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
                  WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
