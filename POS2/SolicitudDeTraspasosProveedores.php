@@ -812,7 +812,7 @@ function buscarArticulo(codigoEscaneado) {
   formData.append('codigoEscaneado', codigoEscaneado);
 
   $.ajax({
-    url: "Consultas/BusquedaPorEscanerTraspasos.php",
+    url: "Consultas/BusquedaPorEscanerTraspasosLotes.php",
     type: 'POST',
     data: formData,
     processData: false,
