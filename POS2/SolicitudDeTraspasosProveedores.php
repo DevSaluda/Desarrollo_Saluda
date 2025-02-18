@@ -760,52 +760,6 @@ document.getElementById('numerofactura').addEventListener('change', function() {
 
   });
 
- // Función que realiza la búsqueda vía AJAX
-function buscarArticulo(codigoEscaneado) {
-  var formData = new FormData();
-  formData.append('codigoEscaneado', codigoEscaneado);
-
-  $.ajax({
-    url: "Consultas/BusquedaPorEscanerTraspasos.php",
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    dataType: 'json',
-    success: function (data) {
-      if (data.length === 0) {
-        // msjError('No Encontrado');
-      } else if (data.codigo) {
-        agregarArticulo(data);
-      }
-      limpiarCampo();
-    },
-    error: function (data) {
-      // Manejo de error (opcional)
-    }
-  });
-}
-
-// Función para limpiar y enfocar el campo de búsqueda
-function limpiarCampo() {
-  $('#codigoEscaneado').val('');
-  $('#codigoEscaneado').focus();
-}
-
-var isScannerInput = false;
-
-// Evento keyup para detectar "Enter" en el input
-$('#codigoEscaneado').keyup(function (event) {
-  if (event.which === 13) { // Si se presiona Enter
-    if (!isScannerInput) { // Si no proviene del autocompletado
-      var codigoEscaneado = $('#codigoEscaneado').val();
-      buscarArticulo(codigoEscaneado);
-      event.preventDefault(); // Evita el envío del formulario
-    }
-    isScannerInput = false; // Reinicia la bandera
-  }
-});
-
 // Función que realiza la búsqueda vía AJAX
 function buscarArticulo(codigoEscaneado) {
   var formData = new FormData();
@@ -888,7 +842,7 @@ $(document).on('change', '.cantidad-vendida-input', function() {
 var tablaArticulos = ''; // Variable para almacenar el contenido de la tabla
 var totalIVA = 0;        // Variable para almacenar el total del IVA
 
-// Función que agrega o actualiza el artículo en la tabla.
+// Función que agrega o actualiza el artículo en la tabla
 function agregarArticulo(articulo) {
   if (!articulo || !articulo.id) {
     mostrarMensaje('El artículo no es válido');
@@ -954,15 +908,21 @@ function mostrarModalLotes(articulo) {
     }
   }).then((result) => {
     if (result.isConfirmed) {
+      // Asignar los valores seleccionados al artículo
       articulo.lote = result.value.lote;
       articulo.fechacaducidad = result.value.fechacaducidad;
       articulo.stockDisponible = result.value.stockDisponible;
+      
+      // Cerrar el modal
+      Swal.close();
+      
+      // Agregar el artículo con el lote seleccionado
       agregarArticulo(articulo);
     }
   });
 }
 
-// Función para agregar una fila en la tabla
+// Función que agrega una fila en la tabla
 function agregarFilaArticulo(articulo) {
   var tr = `<tr data-id="${articulo.id}">
     <td class="codigo"><input class="form-control" type="text" value="${articulo.codigo}" name="CodBarras[]" /></td>
