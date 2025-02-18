@@ -12,21 +12,11 @@ if (empty($codigo) || empty($sucursal_id)) {
     exit;
 }
 
-// Mostrar el código recibido
-var_dump("Código recibido:", $codigo);
-var_dump("Sucursal ID recibido:", $sucursal_id);
-error_log("Código recibido: $codigo");
-error_log("Sucursal ID recibido: $sucursal_id");
-
 // Obtener los datos generales del producto desde Stock_POS
 $sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad, Fk_Sucursal
                 FROM Stock_POS 
                 WHERE Cod_Barra = ? AND Fk_Sucursal = ? 
                 LIMIT 1;";
-
-// Mostrar la consulta generada
-var_dump("Consulta producto:", $sqlProducto);
-error_log("Consulta producto: $sqlProducto");
 
 // Preparar y ejecutar la consulta
 $stmtProd = $conn->prepare($sqlProducto);
@@ -37,10 +27,6 @@ $resultProd = $stmtProd->get_result();
 if ($resultProd->num_rows > 0) {
     $rowProd = $resultProd->fetch_assoc();
     $producto_id = $rowProd['Folio_Prod_Stock'];
-    
-    // Verificar el valor de $producto_id
-    var_dump("Producto ID:", $producto_id);
-    error_log("Producto ID: $producto_id");
 
     // Obtener el sucursal_id correctamente desde el resultado
     $sucursal_id = $rowProd['Fk_Sucursal'];  // Ahora puedes obtenerlo después de la consulta
@@ -50,22 +36,10 @@ if ($resultProd->num_rows > 0) {
                  FROM Lotes_Productos 
                  WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
 
-    // Mostrar la consulta de lotes
-    var_dump("Consulta lotes:", $sqlLotes);
-    error_log("Consulta lotes: $sqlLotes");
-
     $stmtLotes = $conn->prepare($sqlLotes);
     $stmtLotes->bind_param("ii", $producto_id, $sucursal_id);
     $stmtLotes->execute();
     $resultLotes = $stmtLotes->get_result();
-
-    // Verificar si la consulta de lotes devuelve resultados
-    if ($resultLotes) {
-        var_dump("Resultado de lotes:", $resultLotes);
-        error_log("Resultado de lotes: " . json_encode($resultLotes->fetch_all(MYSQLI_ASSOC)));
-    } else {
-        error_log("Error al ejecutar la consulta de lotes: " . $stmtLotes->error);
-    }
     
     $lotes = [];
     while ($lote = $resultLotes->fetch_assoc()) {
@@ -73,10 +47,6 @@ if ($resultProd->num_rows > 0) {
             $lotes[] = $lote;
         }
     }
-
-    // Mostrar los lotes obtenidos
-    var_dump("Lotes obtenidos:", $lotes);
-    error_log("Lotes obtenidos: " . json_encode($lotes));
 
     // Si no hay lotes en Lotes_Productos, usar el lote y fecha de caducidad de Stock_POS
     if (empty($lotes) && !empty($rowProd['Lote'])) {
@@ -103,8 +73,6 @@ if ($resultProd->num_rows > 0) {
     echo json_encode($data);
 } else {
     // Producto no encontrado
-    var_dump("Producto no encontrado para el código:", $codigo);
-    error_log("Producto no encontrado para el código: $codigo");
     header('Content-Type: application/json');
     echo json_encode([]);
 }
