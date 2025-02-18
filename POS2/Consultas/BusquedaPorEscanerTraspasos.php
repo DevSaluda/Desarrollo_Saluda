@@ -16,7 +16,7 @@ var_dump("Código recibido:", $codigo);
 error_log("Código recibido: $codigo");
 
 // Obtener los datos generales del producto desde Stock_POS
-$sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad
+$sqlProducto = "SELECT Folio_Prod_Stock, ID_Prod_POS, Cod_Barra, Nombre_Prod, Precio_Venta, Precio_C, Lote, Fecha_Caducidad, Fk_Sucursal
                 FROM Stock_POS 
                 WHERE Cod_Barra = ? 
                 LIMIT 1;";
@@ -39,8 +39,10 @@ if ($resultProd->num_rows > 0) {
     var_dump("Producto ID:", $producto_id);
     error_log("Producto ID: $producto_id");
 
+    // Obtener el sucursal_id correctamente desde el resultado
+    $sucursal_id = $rowProd['Fk_Sucursal'];  // Usar Fk_Sucursal de la fila actual
+
     // Obtener los lotes disponibles desde Lotes_Productos
-    $sucursal_id = $row['Fk_Sucursal']; // Puedes obtenerlo dinámicamente
     $sqlLotes = "SELECT id, lote, fecha_caducidad, cantidad 
                  FROM Lotes_Productos 
                  WHERE producto_id = ? AND sucursal_id = ? AND estatus = 'Disponible'";
