@@ -1,6 +1,6 @@
 <?php
   // Obteniendo la fecha actual del sistema con PHP
-  $fechaActual = date("Y-m-d",strtotime("+ 1 days"));
+  $fechaActual = date("Y-m-d",strtotime("+ 0 days"));
  
  $fechafinalcargasemama = date("Y-m-d",strtotime($fechaActual."+ 7 days"));
  $fechafinalcargames = date("Y-m-d",strtotime($fechaActual."+ 30 days"))
