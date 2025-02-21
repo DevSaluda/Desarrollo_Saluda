@@ -825,7 +825,7 @@ document.getElementById('devolucionesselect').addEventListener('change', functio
   formData.append('codigoEscaneado', codigoEscaneado);
 
   $.ajax({
-    url: "Consultas/BusquedaPorEscanerTraspasos.php",
+    url: "Consultas/BusquedaPorEscanerTraspasos2.php",
     type: 'POST',
     data: formData,
     processData: false,
