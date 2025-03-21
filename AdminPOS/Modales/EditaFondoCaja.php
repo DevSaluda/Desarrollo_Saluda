@@ -17,7 +17,7 @@ while ($r=$query->fetch_object()){
 }
 ?>
 
-<? if($Especialistas!=null):?>
+<?php if($Especialistas!=null):?>
 
 <form action="javascript:void(0)" method="post" id="ActualizaFondos" >
 <div class="form-group">
@@ -25,7 +25,7 @@ while ($r=$query->fetch_object()){
     <div class="input-group mb-3">
   <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="fas fa-receipt"></i></span>
   </div>
-  <input type="text" class="form-control " disabled readonly value="<? echo $Especialistas->ID_Fon_Caja; ?>">
+  <input type="text" class="form-control " disabled readonly value="<?php echo $Especialistas->ID_Fon_Caja; ?>">
     </div>
     </div>
     
@@ -37,7 +37,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="text" class="form-control " readonly  value="<? echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">            
+  <input type="text" class="form-control " readonly  value="<?php echo $Especialistas->Nombre_Sucursal; ?>" aria-describedby="basic-addon1" maxlength="60">            
 </div></div></div>
 
     
@@ -49,7 +49,7 @@ while ($r=$query->fetch_object()){
   
     <span class="input-group-text" id="Tarjeta"><i class="fas fa-file-signature"></i></span>
   </div>
-  <input type="number" class="form-control " name="ActCantidad" id="actcantidad" value="<? echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >            
+  <input type="number" class="form-control " name="ActCantidad" id="actcantidad" value="<?php echo $Especialistas->Fondo_Caja; ?>" aria-describedby="basic-addon1" >            
 </div></div></div>
 <div class="row">
     <div class="col">
@@ -60,7 +60,7 @@ while ($r=$query->fetch_object()){
   <select name="Vigencia" class="form-control" id="vigencia" onchange="TipoVigencia();">
                  
                     
-                   <option  value="<? echo $Especialistas->CodigoEstatus; ?>"><? echo $Especialistas->Estatus; ?></option>		
+                   <option  value="<?php echo $Especialistas->CodigoEstatus; ?>"><?php echo $Especialistas->Estatus; ?></option>		
               <option  value="background-color: #2BBB1D !important;">Asignado</option>		
               <option  value="background-color: #FE0000 !important;">Baja</option>						  	
               <option  value="background-color: #ECB442 !important;">Pendiente</option>						  				  
@@ -80,7 +80,7 @@ while ($r=$query->fetch_object()){
   <tbody>
     <tr>
 <td>
-<button id="VigenciaBD" class="btn btn-default btn-sm" style=<? echo $Especialistas->CodigoEstatus; ?>><? echo $Especialistas->Estatus; ?></button> 
+<button id="VigenciaBD" class="btn btn-default btn-sm" style=<?php echo $Especialistas->CodigoEstatus; ?>><?php echo $Especialistas->Estatus; ?></button> 
      <button id="SiVigente" class="divOculto btn btn-default btn-sm" style="background-color: #2BBB1D !important;">Asignado</button> 
       <button id="NoVigente" class="divOculto btn btn-default btn-sm" style="background-color: #FE0000 !important;">Baja</button>
       <button id="Quizasproximo" class="divOculto btn btn-default btn-sm" style="background-color: #ECB442 !important;">Pendiente</button></td>
@@ -99,9 +99,9 @@ while ($r=$query->fetch_object()){
 </form>
 <script src="js/ActualizaFondos.js"></script>
 
-<? else:?>
+<?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>
-<? endif;?>
+<?php endif;?>
 <script type="text/javascript">
   
 
@@ -157,7 +157,7 @@ $("#vigencia").on('change', function() {
      
       
       break;
-      case "<? echo $Especialistas->CodigoEstatus; ?>":
+      case "<?php echo $Especialistas->CodigoEstatus; ?>":
   
         $("#VigenciaBD").show();
         $("#NoVigente").hide();
