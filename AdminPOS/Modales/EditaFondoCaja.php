@@ -1,4 +1,4 @@
-<?
+<?php
 include "../Consultas/db_connection.php";
 include "../Consultas/Consultas.php";
 include "../Consultas/Sesion.php";
@@ -14,8 +14,7 @@ while ($r=$query->fetch_object()){
   $Especialistas=$r;
   break;
 }
-
-  }
+}
 ?>
 
 <? if($Especialistas!=null):?>
