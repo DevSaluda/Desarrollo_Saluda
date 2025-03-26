@@ -55,7 +55,16 @@
     </div>
    
     
- 
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Sucursal desde donde se sube</label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+  <span class="input-group-text" id="Tarjeta"><i class="fas fa-lightbulb"></i></span>
+  </div>
+  <input type="text" class="form-control" name="Sucursal" id="sucursal"  value="<?php echo $row['Nombre_Sucursal']?>"   readonly >
+</div>
+<div>
+</div>
   
 <!-- INICIA DATA DE AGENDA -->
 
@@ -66,8 +75,8 @@
      
     <input type="text" class="form-control" name="Registro" id="registro" hidden value="<?php echo $row['Nombre_Apellidos']?>"  readonly >
   
-    <input type="text" class="form-control" name="Sucursal" id="sucursal"  hidden value="<?php echo $row['Nombre_Sucursal']?>"   readonly >
-    <input type="text" class="form-control" name="Empresa" id="Empresa" hidden value="Doctor Consulta"   readonly >
+    
+    <input type="text" class="form-control" name="Empresa" id="Empresa" hidden value="Saluda"   readonly >
     <div class="text-center">
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div></div>
