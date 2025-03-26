@@ -11,9 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mes = $conn->real_escape_string($_POST['Mes']);
         $anual = $conn->real_escape_string($_POST['anual']);
 
-        // Construye las fechas de inicio y fin basadas en el mes y el año
-        $fechaInicio = "$anual-$mes-01"; // Primer día del mes
-        $fechaFin = date("Y-m-t", strtotime($fechaInicio)); // Último día del mes
+    
 
         // Consulta SQL para filtrar registros por rango de fechas
         $sql = "SELECT 
@@ -27,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 FROM 
                     Registros_Energia
                 WHERE 
-                    Fecha_registro BETWEEN '$fechaInicio' AND '$fechaFin'";
+                    Fecha_registro BETWEEN '$mes' AND '$anual'";
 
         $result = mysqli_query($conn, $sql);
 
