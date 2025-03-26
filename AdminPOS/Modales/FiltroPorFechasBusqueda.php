@@ -1,6 +1,4 @@
-
-  
-      <div class="modal fade bd-example-modal-xl" id="FiltroEspecificoFechaVentas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl" id="FiltroEspecificoFechaVentas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-notify modal-success">
     <div class="modal-content">
     
@@ -15,39 +13,31 @@
      
       <div class="modal-body">
      
- <form  method="POST" action="FiltroPorFechasVentas">
-    
- 
- <div class="row">
-  
-    
-     </div>
-
+ <form id="FiltroPorFechasForm" method="POST" action="">
   <div class="row">
     <div class="col">
-    <label for="exampleFormControlInput1">Fecha inicio </label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-  </div>
-  <input type="date" class="form-control " name="Mes">
-
-  
+      <label for="exampleFormControlInput1">Fecha inicio</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+        </div>
+        <input type="date" class="form-control" name="Mes" required>
+      </div>
     </div>
-    </div>
-    
     <div class="col">
-    <label for="exampleFormControlInput1">Fecha fin</label>
-    <div class="input-group mb-3">
-  <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
-  </div>
-  <input type="date" class="form-control " name="anual">
+      <label for="exampleFormControlInput1">Fecha fin</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="Tarjeta"><i class="far fa-hospital"></i></span>
+        </div>
+        <input type="date" class="form-control" name="anual" required>
+      </div>
     </div>
-    
-
-  <div>     </div>
-  </div>  </div>
-      <button type="submit"  id="submit_registroarea" value="Guardar" class="btn btn-success">Consultar <i class="fas fa-exchange-alt"></i></button>
-                                        </form>
+  </div>
+  <button type="submit" id="submit_registroarea" value="Guardar" class="btn btn-success">
+    Consultar <i class="fas fa-exchange-alt"></i>
+  </button>
+</form>
                                         </div>
                                         </div>
      
@@ -55,4 +45,3 @@
   </div>
   </div>
   </div>
-  

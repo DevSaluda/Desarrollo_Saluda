@@ -47,8 +47,10 @@ table td {
 <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#GeneradorReporteEnergia" class="btn btn-default">
  Generar reporte <i class="fas fa-file-excel"></i>
 </button>
-<button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#RegistroEnergiaVentanaModal" class="btn btn-default">
-Consulta por fechas <i class="fas fa-lightbulb"></i>
+
+<!-- Botón 2: Consulta por registro de energía eléctrica -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" data-action="FiltroPorRegistroEnergiaElectricaFechas">
+  Consulta por registro de energía eléctrica <i class="fas fa-lightbulb"></i>
 </button>
 </div>
   <div >

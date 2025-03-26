@@ -9,4 +9,5 @@
 
 ?>
 <script src="js/LogSalida.js"></script>
+<script src="js/ModalFiltraadoDinamico"></script>
 <script src="https://saludapos.com/AdminPOS/js/Refresca.js"></script>
