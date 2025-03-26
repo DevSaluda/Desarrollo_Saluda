@@ -48,10 +48,9 @@ include "Consultas/Consultas.php";
   Filtrar por forma de pago <i class="fas fa-prescription-bottle"></i>
 </button>
 <!-- Botón 1: Filtrar por rango de fechas -->
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" data-action="FiltroPorFechasRango.php">
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltroEspecificoFechaVentas" data-action="FiltroPorFechasVentas">
   Filtrar por rango de fechas <i class="fas fa-calendar"></i>
 </button>
-
 </div>
 </div>
     
