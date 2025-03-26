@@ -74,8 +74,7 @@ table td {
   <!-- Main Footer -->
 <?php
   include ("Modales/RegistroEnergiaModal.php");
-  include ("Modales/ReporteExcelEnergia.php");
-  include ("Modales/ConsultaPorFechasEnergia.php");
+  include ("Modales/FiltroPorFechasBusqueda.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("footer.php")?>
