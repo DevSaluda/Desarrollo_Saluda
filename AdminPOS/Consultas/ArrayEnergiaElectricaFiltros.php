@@ -3,21 +3,25 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Verifica si se enviaron las fechas de inicio y fin
-if (isset($_POST['fechaInicio']) && isset($_POST['fechaFin'])) {
-    $fechaInicio = $conn->real_escape_string($_POST['fechaInicio']);
-    $fechaFin = $conn->real_escape_string($_POST['fechaFin']);
+// Verifica si se enviaron las variables 'mes' y 'anual'
+if (isset($_POST['Mes']) && isset($_POST['anual'])) {
+    $mes = $conn->real_escape_string($_POST['Mes']);
+    $anual = $conn->real_escape_string($_POST['anual']);
+
+    // Construye las fechas de inicio y fin basadas en el mes y el año
+    $fechaInicio = "$anual-$mes-01"; // Primer día del mes
+    $fechaFin = date("Y-m-t", strtotime($fechaInicio)); // Último día del mes
 
     // Consulta para filtrar registros por rango de fechas
     $sql = "SELECT * FROM `Registros_Energia` WHERE Fecha_registro BETWEEN '$fechaInicio' AND '$fechaFin'";
 } else {
-    // Si no se envían fechas, devuelve un error
+    // Si no se envían las variables, devuelve un error
     echo json_encode([
         "sEcho" => 1,
         "iTotalRecords" => 0,
         "iTotalDisplayRecords" => 0,
         "aaData" => [],
-        "error" => "Por favor, proporciona un rango de fechas válido."
+        "error" => "Por favor, proporciona un mes y un año válidos."
     ]);
     exit;
 }
