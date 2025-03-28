@@ -44,7 +44,7 @@ table td {
   <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#RegistroEnergiaVentanaModal" class="btn btn-default">
  Registrar informacion de energia electrica <i class="fas fa-lightbulb"></i>
 </button>
-<button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#GeneradorReporteEnergia" class="btn btn-default">
+<button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#FiltroEspecificoSucursales" class="btn btn-default">
  Generar reporte <i class="fas fa-file-excel"></i>
 </button>
 
@@ -75,6 +75,7 @@ table td {
 <?php
   include ("Modales/RegistroEnergiaModal.php");
   include ("Modales/FiltroPorFechasBusqueda.php");
+  include ("Modales/FiltroPorSucursal.php");
   include ("Modales/Error.php");
   include ("Modales/Exito.php");
   include ("footer.php")?>
