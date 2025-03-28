@@ -1,0 +1,36 @@
+# Ignorar archivos y carpetas de control de versiones
+.git
+.gitignore
+
+# Archivos de configuración del entorno local
+.env
+.env.*
+
+# Archivos de logs
+*.log
+logs/
+error_log
+
+# Archivos temporales y de caché
+*.tmp
+*.cache
+*.bak
+*.swp
+*.swo
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Dependencias locales (si usas Composer o Node.js)
+vendor/
+node_modules/
+
+# Archivos específicos de IDEs o editores
+.vscode/
+.idea/
+
+# Otros archivos innecesarios
+docker-compose.yml
+Dockerfile
+LICENSE
