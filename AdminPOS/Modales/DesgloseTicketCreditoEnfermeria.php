@@ -6,14 +6,10 @@ include "../Consultas/Sesion.php";
 $fcha = date("Y-m-d");
 $user_id = null;
 
-// Separar el Folio_Ticket del FolioSucursal
-$ticket_completo = $_POST["id"];
-$partes = explode("-", $ticket_completo);
-$folio_ticket = $partes[0];
-
 // Primera consulta para obtener información del ticket
 $sql1 = "SELECT 
     Ventas_POS.Folio_Ticket,
+    Ventas_POS.FolioSucursal,
     Ventas_POS.Fk_Caja,
     Ventas_POS.Venta_POS_ID,
     Ventas_POS.Identificador_tipo,
@@ -38,25 +34,26 @@ $sql1 = "SELECT
     SucursalesCorre.ID_SucursalC,
     SucursalesCorre.Nombre_Sucursal
 FROM Ventas_POS
-LEFT JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-LEFT JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
-WHERE Ventas_POS.Folio_Ticket = ? 
-AND Ventas_POS.Fk_sucursal = ?
+JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
+WHERE Ventas_POS.Folio_Ticket = '".$_POST["folioTicket"]."'
+AND Ventas_POS.FolioSucursal = '".$_POST["foliosucursal"]."'
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
-$stmt = $conn->prepare($sql1);
-$stmt->bind_param("ss", $folio_ticket, $_SESSION['Fk_Sucursal']);
-$stmt->execute();
-$result = $stmt->get_result();
+$query = $conn->query($sql1);
 $Especialistas = null;
 
-if($result->num_rows > 0) {
-    $Especialistas = $result->fetch_object();
+if($query->num_rows > 0) {
+    while ($r = $query->fetch_object()) {
+        $Especialistas = $r;
+        break;
+    }
 }
 
 // Segunda consulta para obtener detalles del ticket
 $sql2 = "SELECT 
     Ventas_POS.Folio_Ticket,
+    Ventas_POS.FolioSucursal,
     Ventas_POS.Fk_Caja,
     Ventas_POS.Venta_POS_ID,
     Ventas_POS.Identificador_tipo,
@@ -83,16 +80,13 @@ $sql2 = "SELECT
     SucursalesCorre.ID_SucursalC,
     SucursalesCorre.Nombre_Sucursal
 FROM Ventas_POS
-LEFT JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-LEFT JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
-WHERE Ventas_POS.Folio_Ticket = ? 
-AND Ventas_POS.Fk_sucursal = ?
+JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
+WHERE Ventas_POS.Folio_Ticket = '".$_POST["folioTicket"]."'
+AND Ventas_POS.FolioSucursal = '".$_POST["foliosucursal"]."'
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
-$stmt = $conn->prepare($sql2);
-$stmt->bind_param("ss", $folio_ticket, $_SESSION['Fk_Sucursal']);
-$stmt->execute();
-$query = $stmt->get_result();
+$query = $conn->query($sql2);
 ?>
 
 <?php if($Especialistas != null): ?>
