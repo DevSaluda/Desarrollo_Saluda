@@ -47,15 +47,29 @@ try {
     // Consulta SQL optimizada
     $sql = "SELECT
         v.Folio_Ticket,
+        v.FolioSucursal,
+        v.Fk_Caja,
+        v.Venta_POS_ID,
+        v.Identificador_tipo,
+        v.Cod_Barra,
+        v.Clave_adicional,
+        v.Nombre_Prod,
+        v.Cantidad_Venta,
+        v.Fk_sucursal,
         v.AgregadoPor,
         v.AgregadoEl,
         v.Total_Venta,
+        v.Lote,
+        v.ID_H_O_D,
+        s.ID_SucursalC,
         s.Nombre_Sucursal
     FROM Ventas_POS v
     JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
     WHERE v.ID_H_O_D = ?
     AND v.FormaDePago = 'Crédito Enfermería'
-    GROUP BY v.Folio_Ticket
+    AND MONTH(v.AgregadoEl) = MONTH(CURRENT_DATE())
+    AND YEAR(v.AgregadoEl) = YEAR(CURRENT_DATE())
+    GROUP BY v.Folio_Ticket, v.FolioSucursal
     ORDER BY v.AgregadoEl DESC";
 
     // Preparar la consulta
@@ -89,13 +103,15 @@ try {
         $totalVentas += floatval($fila['Total_Venta']);
         $data[] = [
             "NumberTicket" => $fila["Folio_Ticket"],
+            "FolioSucursal" => $fila["FolioSucursal"],
             "Fecha" => fechaCastellano($fila["AgregadoEl"]),
             "Hora" => date("g:i:s a", strtotime($fila["AgregadoEl"])),
             "Vendedor" => $fila["AgregadoPor"],
             "Total" => number_format($fila["Total_Venta"], 2),
             "Sucursal" => $fila["Nombre_Sucursal"],
-            "Desglose" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-success btn-sm btn-desglose dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-receipt"></i> Desglosar ticket</a></td>',
-            "Reimpresion" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a></td>',
+            "Desglose" => '<td><a data-id="' . $fila["Folio_Ticket"] . '-' . $fila["FolioSucursal"] . '" class="btn btn-success btn-sm btn-desglose dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-receipt"></i> Desglosar ticket</a></td>',
+            "Reimpresion" => '<td><a data-id="' . $fila["Folio_Ticket"] . '-' . $fila["FolioSucursal"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a></td>',
+            "EditarData" => '<td><a data-id="' . $fila["Folio_Ticket"] . '-' . $fila["FolioSucursal"] . '" class="btn btn-primary btn-sm btn-EditarData dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-edit"></i> Editar ticket</a></td>',
         ];
     }
 

@@ -183,7 +183,7 @@
 "🤖 Despertando a los gnomos del procesador...",
 "🍕 Ordenando pizza digital mientras esperas...",
 "🕒 Viajando en el tiempo para cargar más rápido...",
-"🎩 Sacando conejos del sombrero de la programación...",
+"🎩 Sacando conejos del sombrero de la programación..."
   ];
 
   // Función para mostrar el mensaje de carga con un texto aleatorio
@@ -199,85 +199,77 @@
     document.getElementById('loading-overlay').style.display = 'none';
   }
 
-
-tabla = $('#Productos').DataTable({
-
- "bProcessing": true,
- "ordering": true,
- "stateSave":true,
- "bAutoWidth": false,
- "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayTicketsCredito.php",
- "aoColumns": [
-  { mData: 'NumberTicket' },  
-  { mData: 'Fecha' },
-  { mData: 'Hora' },
-  { mData: 'Vendedor' },
-  { mData: 'Acciones' },
-  { mData: 'Desglose' },
-  { mData: 'Reimpresion' },
-      
-      
-      ],
-     
-      "lengthMenu": [[20,150,250,500, -1], [20,50,250,500, "Todos"]],  
-  
-  "language": {
-  "lengthMenu": "Mostrar _MENU_ registros",
-  "sPaginationType": "extStyle",
-  "zeroRecords": "No se encontraron resultados",
-  "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-  "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-  "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-  "sSearch": "Buscar:",
-  "paginate": {
-    "first": '<i class="fas fa-angle-double-left"></i>',
-    "last": '<i class="fas fa-angle-double-right"></i>',
-    "next": '<i class="fas fa-angle-right"></i>',
-    "previous": '<i class="fas fa-angle-left"></i>'
-  },
-  "processing": function () {
-    mostrarCargando();
-  }
-},
-"initComplete": function() {
-  // Al completar la inicialización de la tabla, ocultar el mensaje de carga
-  ocultarCargando();
-},
-// Para personalizar el estilo del botón de Excel
-"buttons": [
-  {
-    extend: 'excelHtml5',
-    text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
-    titleAttr: 'Exportar a Excel',
-    title: 'Base de productos',
-    className: 'btn btn-success',
-    exportOptions: {
-      columns: ':visible' // Exportar solo las columnas visibles
-    }
-  }
-],
-// Personalizar la posición de los elementos del encabezado
-"dom": '<"d-flex justify-content-between"lBf>rtip', // Modificar la disposición aquí
-"responsive": true
-});
+  tabla = $('#Productos').DataTable({
+    "bProcessing": true,
+    "ordering": true,
+    "stateSave": true,
+    "bAutoWidth": false,
+    "order": [[0, "desc"]],
+    "sAjaxSource": "https://saludapos.com/AdminPOS/Consultas/ArrayTicketsCredito.php",
+    "aoColumns": [
+      { mData: 'NumberTicket' },
+      { mData: 'FolioSucursal' },
+      { mData: 'Fecha' },
+      { mData: 'Hora' },
+      { mData: 'Vendedor' },
+      { mData: 'Desglose' },
+      { mData: 'Reimpresion' },
+      { mData: 'EditarData' }
+    ],
+    "lengthMenu": [[20,150,250,500, -1], [20,50,250,500, "Todos"]],
+    "language": {
+      "lengthMenu": "Mostrar _MENU_ registros",
+      "sPaginationType": "extStyle",
+      "zeroRecords": "No se encontraron resultados",
+      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sSearch": "Buscar:",
+      "paginate": {
+        "first": '<i class="fas fa-angle-double-left"></i>',
+        "last": '<i class="fas fa-angle-double-right"></i>',
+        "next": '<i class="fas fa-angle-right"></i>',
+        "previous": '<i class="fas fa-angle-left"></i>'
+      },
+      "processing": function () {
+        mostrarCargando();
+      }
+    },
+    "initComplete": function() {
+      ocultarCargando();
+    },
+    "buttons": [
+      {
+        extend: 'excelHtml5',
+        text: 'Exportar a Excel  <i Exportar a Excel class="fas fa-file-excel"></i> ',
+        titleAttr: 'Exportar a Excel',
+        title: 'Base de productos',
+        className: 'btn btn-success',
+        exportOptions: {
+          columns: ':visible'
+        }
+      }
+    ],
+    "dom": '<"d-flex justify-content-between"lBf>rtip',
+    "responsive": true
+  });
 </script>
+
 <div class="text-center">
-    <div class="table-responsive">
-    <table  id="Productos" class="table table-hover">
-<thead>
-<th>N° Ticket</th>
-<th>Fecha</th>
-<th>Hora</th>
-    <th>Vendedor</th>
-    <th></th>
-    <th>Desglose</th>
-    <th>Reimpresion</th>
-    
-
-</thead>
-
-</div>
+  <div class="table-responsive">
+    <table id="Productos" class="table table-hover">
+      <thead>
+        <th>N° Ticket</th>
+        <th>Folio Sucursal</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Vendedor</th>
+        <th>Desglose</th>
+        <th>Reimpresion</th>
+        <th>Editar datos</th>
+      </thead>
+    </table>
+  </div>
 </div>
 
 
