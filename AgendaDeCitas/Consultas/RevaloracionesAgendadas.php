@@ -1,12 +1,33 @@
 <script type="text/javascript">
 $(document).ready(function () {
     $('#CitasExteriores').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "https://saludapos.com/AgendaDeCitas/Consultas/RevaloracionesAgendadas.php",
+            "type": "POST"
+        },
         "order": [[0, "desc"]],
-        "info": false,
-        "lengthMenu": [[10, 50, 200, -1], [10, 50, 200, "Todos"]],
+        "pageLength": 10,
+        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
         "language": {
             "url": "Componentes/Spanish.json"
         },
+        "drawCallback": function() {
+            // Reasignar eventos después de cada redibujado de la tabla
+            $(".btn-Asiste").click(function(){
+                var id = $(this).data("id");
+                $.post("https://saludapos.com/AgendaDeCitas/Modales/AsistenciaPacienteRevaloracion.php", 
+                    "id=" + id, 
+                    function(data){
+                        $("#form-editExt").html(data);
+                        $("#TituloExt").html("¿El paciente asistió?");
+                        $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
+                        $("#DiExt").addClass("modal-dialog modal-sm modal-notify modal-success");
+                    });
+                $('#editModalExt').modal('show');
+            });
+        }
     });
 });
 </script>
@@ -30,13 +51,40 @@ function fechaCastellano($fecha) {
 include("db_connection.php");
 include "Consultas.php";
 
-$user_id = null;
-$sql1 = "SELECT Agenda_revaloraciones.Id_genda, Agenda_revaloraciones.Nombres_Apellidos, Agenda_revaloraciones.Telefono, Agenda_revaloraciones.Fk_sucursal,
-         Agenda_revaloraciones.Medico, Agenda_revaloraciones.Fecha, Agenda_revaloraciones.Asistio, Agenda_revaloraciones.Turno, Agenda_revaloraciones.Motivo_Consulta,
-         Agenda_revaloraciones.Agrego, Agenda_revaloraciones.AgregadoEl, SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal 
-         FROM Agenda_revaloraciones, SucursalesCorre 
-         WHERE SucursalesCorre.ID_SucursalC = Agenda_revaloraciones.Fk_sucursal";
-$query = $conn->query($sql1);
+// Obtener parámetros de paginación
+$start = isset($_POST['start']) ? intval($_POST['start']) : 0;
+$length = isset($_POST['length']) ? intval($_POST['length']) : 10;
+$search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
+
+// Consulta optimizada con JOIN explícito y paginación
+$sql1 = "SELECT SQL_CALC_FOUND_ROWS 
+         a.Id_genda, a.Nombres_Apellidos, a.Telefono, a.Fk_sucursal,
+         a.Medico, a.Fecha, a.Asistio, a.Turno, a.Motivo_Consulta,
+         a.Agrego, a.AgregadoEl, s.ID_SucursalC, s.Nombre_Sucursal 
+         FROM Agenda_revaloraciones a
+         INNER JOIN SucursalesCorre s ON s.ID_SucursalC = a.Fk_sucursal";
+
+// Agregar búsqueda si existe
+if (!empty($search)) {
+    $sql1 .= " WHERE a.Nombres_Apellidos LIKE ? OR a.Telefono LIKE ? OR s.Nombre_Sucursal LIKE ?";
+    $searchParam = "%$search%";
+}
+
+// Agregar ordenamiento
+$sql1 .= " ORDER BY a.Fecha DESC LIMIT ?, ?";
+
+// Preparar y ejecutar la consulta
+$stmt = $conn->prepare($sql1);
+if (!empty($search)) {
+    $stmt->bind_param("sssii", $searchParam, $searchParam, $searchParam, $start, $length);
+} else {
+    $stmt->bind_param("ii", $start, $length);
+}
+$stmt->execute();
+$query = $stmt->get_result();
+
+// Obtener el total de registros
+$totalRecords = $conn->query("SELECT FOUND_ROWS()")->fetch_row()[0];
 ?>
 
 <?php if ($query->num_rows > 0): ?>
@@ -57,6 +105,7 @@ $query = $conn->query($sql1);
                 <th>Agregado el</th>
                 <th>Acciones</th>
             </thead>
+            <tbody>
             <?php while ($Usuarios = $query->fetch_array()): ?>
             <tr>
                 <td><?php echo $Usuarios["Id_genda"]; ?></td>
@@ -80,25 +129,13 @@ $query = $conn->query($sql1);
                 </td>
             </tr>
             <?php endwhile; ?>
+            </tbody>
         </table>
     </div>
 </div>
 <?php else: ?>
 <p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif; ?>
-
-<script>
-$(".btn-Asiste").click(function(){
-    id = $(this).data("id");
-    $.post("https://saludapos.com/AgendaDeCitas/Modales/AsistenciaPacienteRevaloracion.php", "id=" + id, function(data){
-        $("#form-editExt").html(data);
-        $("#TituloExt").html("¿El paciente asistió?");
-        $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
-        $("#DiExt").addClass("modal-dialog modal-sm modal-notify modal-success");
-    });
-    $('#editModalExt').modal('show');
-});
-</script>
 
 <div class="modal fade" id="editModalExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalExtLabel" aria-hidden="true">
     <div id="DiExt" class="modal-dialog modal-notify modal-success">
