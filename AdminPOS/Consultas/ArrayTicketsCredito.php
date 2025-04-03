@@ -4,8 +4,8 @@ include("db_connection.php");
 include "Consultas.php";
 session_start();
 
-// Verificar si existe la sesión
-if (!isset($_SESSION['ID_H_O_D']) || !isset($_SESSION['Fk_Sucursal']) || !isset($_SESSION['Nombre_Apellidos'])) {
+// Verificar si existe la sesión de manera más flexible
+if (!isset($_SESSION['ID_H_O_D'])) {
     die(json_encode([
         "error" => true,
         "message" => "No se ha iniciado sesión correctamente",
@@ -53,8 +53,7 @@ try {
         s.Nombre_Sucursal
     FROM Ventas_POS v
     JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-    WHERE v.Fk_sucursal = ? 
-    AND v.ID_H_O_D = ?
+    WHERE v.ID_H_O_D = ?
     AND v.FormaDePago = 'Crédito Enfermería'
     GROUP BY v.Folio_Ticket
     ORDER BY v.AgregadoEl DESC";
@@ -67,7 +66,7 @@ try {
     }
 
     // Enlazar parámetros
-    if (!mysqli_stmt_bind_param($stmt, "ii", $_SESSION['Fk_Sucursal'], $_SESSION['ID_H_O_D'])) {
+    if (!mysqli_stmt_bind_param($stmt, "i", $_SESSION['ID_H_O_D'])) {
         throw new Exception("Error al enlazar parámetros");
     }
 
