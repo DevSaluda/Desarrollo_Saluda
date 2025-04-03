@@ -6,6 +6,11 @@ include "../Consultas/Sesion.php";
 $fcha = date("Y-m-d");
 $user_id = null;
 
+// Separar el Folio_Ticket del FolioSucursal
+$ticket_completo = $_POST["id"];
+$partes = explode("-", $ticket_completo);
+$folio_ticket = $partes[0];
+
 // Primera consulta para obtener información del ticket
 $sql1 = "SELECT 
     Ventas_POS.Folio_Ticket,
@@ -40,7 +45,7 @@ AND Ventas_POS.Fk_sucursal = ?
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $stmt = $conn->prepare($sql1);
-$stmt->bind_param("ss", $_POST["id"], $_SESSION['Fk_Sucursal']);
+$stmt->bind_param("ss", $folio_ticket, $_SESSION['Fk_Sucursal']);
 $stmt->execute();
 $result = $stmt->get_result();
 $Especialistas = null;
@@ -85,7 +90,7 @@ AND Ventas_POS.Fk_sucursal = ?
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $stmt = $conn->prepare($sql2);
-$stmt->bind_param("ss", $_POST["id"], $_SESSION['Fk_Sucursal']);
+$stmt->bind_param("ss", $folio_ticket, $_SESSION['Fk_Sucursal']);
 $stmt->execute();
 $query = $stmt->get_result();
 ?>
