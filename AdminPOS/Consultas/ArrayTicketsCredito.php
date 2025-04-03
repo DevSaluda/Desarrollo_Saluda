@@ -4,8 +4,8 @@ include("db_connection.php");
 include "Consultas.php";
 session_start();
 
-// Verificar si existe la sesión
-if (!isset($_SESSION['ID_H_O_D']) || !isset($_SESSION['Fk_Sucursal']) || !isset($_SESSION['Nombre_Apellidos'])) {
+// Verificar si existe la sesión de manera más flexible
+if (!isset($_SESSION['ID_H_O_D'])) {
     die(json_encode([
         "error" => true,
         "message" => "No se ha iniciado sesión correctamente",
@@ -47,16 +47,29 @@ try {
     // Consulta SQL optimizada
     $sql = "SELECT
         v.Folio_Ticket,
+        v.FolioSucursal,
+        v.Fk_Caja,
+        v.Venta_POS_ID,
+        v.Identificador_tipo,
+        v.Cod_Barra,
+        v.Clave_adicional,
+        v.Nombre_Prod,
+        v.Cantidad_Venta,
+        v.Fk_sucursal,
         v.AgregadoPor,
         v.AgregadoEl,
         v.Total_Venta,
+        v.Lote,
+        v.ID_H_O_D,
+        s.ID_SucursalC,
         s.Nombre_Sucursal
     FROM Ventas_POS v
     JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-    WHERE v.Fk_sucursal = ? 
-    AND v.ID_H_O_D = ?
+    WHERE v.ID_H_O_D = ?
     AND v.FormaDePago = 'Crédito Enfermería'
-    GROUP BY v.Folio_Ticket
+    AND MONTH(v.AgregadoEl) = MONTH(CURRENT_DATE())
+    AND YEAR(v.AgregadoEl) = YEAR(CURRENT_DATE())
+    GROUP BY v.Folio_Ticket, v.FolioSucursal
     ORDER BY v.AgregadoEl DESC";
 
     // Preparar la consulta
@@ -67,7 +80,7 @@ try {
     }
 
     // Enlazar parámetros
-    if (!mysqli_stmt_bind_param($stmt, "ii", $_SESSION['Fk_Sucursal'], $_SESSION['ID_H_O_D'])) {
+    if (!mysqli_stmt_bind_param($stmt, "i", $_SESSION['ID_H_O_D'])) {
         throw new Exception("Error al enlazar parámetros");
     }
 
@@ -90,13 +103,15 @@ try {
         $totalVentas += floatval($fila['Total_Venta']);
         $data[] = [
             "NumberTicket" => $fila["Folio_Ticket"],
+            "FolioSucursal" => $fila["FolioSucursal"],
             "Fecha" => fechaCastellano($fila["AgregadoEl"]),
             "Hora" => date("g:i:s a", strtotime($fila["AgregadoEl"])),
             "Vendedor" => $fila["AgregadoPor"],
             "Total" => number_format($fila["Total_Venta"], 2),
             "Sucursal" => $fila["Nombre_Sucursal"],
+
             "Desglose" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-success btn-xs btn-desglose dropdown-item" style="background-color: #C80096 !important; padding: 2px 5px; font-size: 12px;" ><i class="fas fa-receipt"></i> Desglosar</a></td>',
-            "Reimpresion" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-xs btn-Reimpresion dropdown-item" style="background-color: #C80096 !important; padding: 2px 5px; font-size: 12px;"><i class="fas fa-print"></i> Reimprimir</a></td>',
+
         ];
     }
 
