@@ -2,7 +2,12 @@
 header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
+session_start();
 
+// Verificar si existe la sesión
+if (!isset($_SESSION['ID_H_O_D']) || !isset($_SESSION['Fk_Sucursal']) || !isset($_SESSION['Nombre_Apellidos'])) {
+    die(json_encode(["error" => "No se ha iniciado sesión correctamente"]));
+}
 
 function fechaCastellano($fecha) {
     $fecha = substr($fecha, 0, 10);
@@ -51,10 +56,14 @@ FROM
 Ventas_POS
 JOIN
 SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+WHERE
+Ventas_POS.Fk_sucursal = ? 
+AND Ventas_POS.ID_H_O_D = ?
+AND Ventas_POS.FormaDePago = 'Crédito Enfermería'
 GROUP BY
 Ventas_POS.Folio_Ticket
 ORDER BY
-Ventas_POS.AgregadoEl DESC; -- Ordena por fecha y hora más reciente dentro del mes";
+Ventas_POS.AgregadoEl DESC";
 
 // Preparar la consulta
 $stmt = mysqli_prepare($conn, $sql);
@@ -62,7 +71,7 @@ $stmt = mysqli_prepare($conn, $sql);
 // Verificar si la preparación fue exitosa
 if ($stmt) {
     // Enlazar parámetros
-    mysqli_stmt_bind_param($stmt, "iss", $fk_sucursal, $fila['AgregadoPor'], $id_h_o_d);
+    mysqli_stmt_bind_param($stmt, "ii", $_SESSION['Fk_Sucursal'], $_SESSION['ID_H_O_D']);
 
     // Ejecutar la consulta
     mysqli_stmt_execute($stmt);
