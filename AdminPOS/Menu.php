@@ -217,27 +217,27 @@ if ($row['Permisos'] == 0) {
             <li class="nav-item">
                 <a href="CajasActivas" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
-                    <p>Cajas Activas</p>
+                    <p>Cajas Hoy</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="HistorialCaja" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
-                    <p>Historial Caja</p>
+                    <p>Historial</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="ReimpresionCortes" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
-                    <p>Cortes de caja</p>
+                    <p>Historial de cortes</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="AperturasDeCajon" class="nav-link">
                     <i class="fas fa-dot-circle"></i>
                     <p>Aperturas de cajon</p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="ControlGastos" class="nav-link">
                     <i class="fas fa-dot-circle"></i>

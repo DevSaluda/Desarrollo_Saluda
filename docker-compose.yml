@@ -6,12 +6,16 @@ services:
     ports:
       - "80:80"
     volumes:
+
       - .:/var/www/html # Monta todo el proyecto en el contenedor
+
     environment:
       - DB_HOST=db
       - DB_NAME=u155356178_saludapos
       - DB_USER=u155356178_SaludDevCenter
+
       - DB_PASSWORD=150518Wen
+
     depends_on:
       - db
 
