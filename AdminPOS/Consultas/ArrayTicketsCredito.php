@@ -95,8 +95,8 @@ try {
             "Vendedor" => $fila["AgregadoPor"],
             "Total" => number_format($fila["Total_Venta"], 2),
             "Sucursal" => $fila["Nombre_Sucursal"],
-            "Desglose" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-success btn-sm btn-desglose dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-receipt"></i> Desglosar ticket</a></td>',
-            "Reimpresion" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-sm btn-Reimpresion dropdown-item" style="background-color: #C80096 !important;"><i class="fas fa-print"></i> Reimpresión ticket</a></td>',
+            "Desglose" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-success btn-xs btn-desglose dropdown-item" style="background-color: #C80096 !important; padding: 2px 5px; font-size: 12px;" ><i class="fas fa-receipt"></i> Desglosar</a></td>',
+            "Reimpresion" => '<td><a data-id="' . $fila["Folio_Ticket"] . '" class="btn btn-primary btn-xs btn-Reimpresion dropdown-item" style="background-color: #C80096 !important; padding: 2px 5px; font-size: 12px;"><i class="fas fa-print"></i> Reimprimir</a></td>',
         ];
     }
 
