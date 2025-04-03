@@ -212,6 +212,8 @@
       { mData: 'Fecha' },
       { mData: 'Hora' },
       { mData: 'Vendedor' },
+      { mData: 'Total' },
+      { mData: 'Sucursal' },
       { mData: 'Desglose' },
       { mData: 'Reimpresion' },
       { mData: 'EditarData' }
@@ -259,15 +261,21 @@
   <div class="table-responsive">
     <table id="Productos" class="table table-hover">
       <thead>
-        <th>N° Ticket</th>
-        <th>Folio Sucursal</th>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Vendedor</th>
-        <th>Desglose</th>
-        <th>Reimpresion</th>
-        <th>Editar datos</th>
+        <tr>
+          <th>N° Ticket</th>
+          <th>Folio Sucursal</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Vendedor</th>
+          <th>Total</th>
+          <th>Sucursal</th>
+          <th>Desglose</th>
+          <th>Reimpresion</th>
+          <th>Editar</th>
+        </tr>
       </thead>
+      <tbody>
+      </tbody>
     </table>
   </div>
 </div>
