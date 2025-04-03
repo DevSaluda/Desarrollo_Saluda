@@ -60,43 +60,45 @@ include "Consultas/Consultas.php";
 
   <?php 
    include ("Modales/Error.php");
-  
    include ("Modales/Exito.php");
-
    include ("Modales/Precarga.php");
    include ("Modales/ExitoActualiza.php");
    include ("Modales/EstatusAgendaGuardado.php");
-  include ("Modales/AgendarCitasDeSucursales.php");
-  include ("Modales/AgendarCitasExt.php");
- include ("Modales/AltaEspecialista.php");
- include("Modales/BusquedaCitasMes.php");
-  include ("footer.php")?>
+   include ("Modales/AgendarCitasDeSucursales.php");
+   include ("Modales/AgendarCitasExt.php");
+   include ("Modales/AltaEspecialista.php");
+   include("Modales/BusquedaCitasMes.php");
+   include ("footer.php")
+  ?>
 
+<!-- Cargar jQuery primero -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<!-- Cargar Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Cargar DataTables y sus dependencias -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Cargar overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<!-- Cargar AdminLTE -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- Cargar scripts específicos de la aplicación -->
 <script src="js/Revaloraciones.js"></script>
-  <script src="js/AgendaEnSucursales.js"></script>
-
+<script src="js/AgendaEnSucursales.js"></script>
 <script src="js/AgregaEspecialidad.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>
-
 <script src="js/AgregaEspecialista.js"></script>
 <script src="js/ObtieneEspecialidadMedicoSucursal.js"></script>
 <script src="js/ObtieneMedicoDeSucursal.js"></script>
-
 <script src="js/AgendaEnSucursalesExt.js"></script>
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
+<!-- Cargar demo.js al final -->
 <script src="dist/js/demo.js"></script>
-
 
 </body>
 </html>
