@@ -6,6 +6,12 @@ include "../Consultas/Sesion.php";
 $fcha = date("Y-m-d");
 $user_id = null;
 
+// Separar el Folio_Ticket del FolioSucursal
+$ticket_completo = $_POST["id"];
+$partes = explode("-", $ticket_completo);
+$folio_ticket = $partes[0];
+$folio_sucursal = $partes[1];
+
 // Primera consulta para obtener información del ticket
 $sql1 = "SELECT 
     Ventas_POS.Folio_Ticket,
@@ -36,8 +42,8 @@ $sql1 = "SELECT
 FROM Ventas_POS
 JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
-WHERE Ventas_POS.Folio_Ticket = '".$_POST["folioTicket"]."'
-AND Ventas_POS.FolioSucursal = '".$_POST["foliosucursal"]."'
+WHERE Ventas_POS.Folio_Ticket = '".$folio_ticket."'
+AND Ventas_POS.FolioSucursal = '".$folio_sucursal."'
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $query = $conn->query($sql1);
@@ -82,8 +88,8 @@ $sql2 = "SELECT
 FROM Ventas_POS
 JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
 JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
-WHERE Ventas_POS.Folio_Ticket = '".$_POST["folioTicket"]."'
-AND Ventas_POS.FolioSucursal = '".$_POST["foliosucursal"]."'
+WHERE Ventas_POS.Folio_Ticket = '".$folio_ticket."'
+AND Ventas_POS.FolioSucursal = '".$folio_sucursal."'
 AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $query = $conn->query($sql2);
