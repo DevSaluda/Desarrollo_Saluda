@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html # Monta todo el proyecto en el contenedor
+    environment:
+      - DB_HOST=db
+      - DB_NAME=u155356178_saludapos
+      - DB_USER=u155356178_SaludDevCenter
+      - DB_PASSWORD=150518Wen
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_DATABASE: u155356178_saludapos
+      MYSQL_USER: u155356178_SaludDevCenter
+      MYSQL_PASSWORD: "uE;bAISz;*6c|I4PvEnfSys324\\Zavp2zJ:9TLx{]L&QMcmhAdmSCDBSN3iH4UV3D24WMF@2024myV>"
+      TZ: America/Chicago
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    command: [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--default-authentication-plugin=mysql_native_password"
+    ]
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
