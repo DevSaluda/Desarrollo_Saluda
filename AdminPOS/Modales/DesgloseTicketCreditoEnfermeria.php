@@ -33,10 +33,11 @@ $sql1 = "SELECT
     SucursalesCorre.ID_SucursalC,
     SucursalesCorre.Nombre_Sucursal
 FROM Ventas_POS
-JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
+LEFT JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+LEFT JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 WHERE Ventas_POS.Folio_Ticket = ? 
-AND Ventas_POS.Fk_sucursal = ?";
+AND Ventas_POS.Fk_sucursal = ?
+AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $stmt = $conn->prepare($sql1);
 $stmt->bind_param("ss", $_POST["id"], $_SESSION['Fk_Sucursal']);
@@ -77,10 +78,11 @@ $sql2 = "SELECT
     SucursalesCorre.ID_SucursalC,
     SucursalesCorre.Nombre_Sucursal
 FROM Ventas_POS
-JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
-JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
+LEFT JOIN SucursalesCorre ON Ventas_POS.Fk_sucursal = SucursalesCorre.ID_SucursalC
+LEFT JOIN Servicios_POS ON Ventas_POS.Identificador_tipo = Servicios_POS.Servicio_ID
 WHERE Ventas_POS.Folio_Ticket = ? 
-AND Ventas_POS.Fk_sucursal = ?";
+AND Ventas_POS.Fk_sucursal = ?
+AND Ventas_POS.FormaDePago = 'Crédito Enfermería'";
 
 $stmt = $conn->prepare($sql2);
 $stmt->bind_param("ss", $_POST["id"], $_SESSION['Fk_Sucursal']);
