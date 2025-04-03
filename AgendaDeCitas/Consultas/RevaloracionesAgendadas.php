@@ -51,7 +51,8 @@ function fechaCastellano($fecha) {
 include("db_connection.php");
 include "Consultas.php";
 
-// Obtener parámetros de paginación
+// Obtener parámetros de DataTables
+$draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
 $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
 $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
 $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
@@ -85,57 +86,41 @@ $query = $stmt->get_result();
 
 // Obtener el total de registros
 $totalRecords = $conn->query("SELECT FOUND_ROWS()")->fetch_row()[0];
-?>
 
-<?php if ($query->num_rows > 0): ?>
-<div class="text-center">
-    <div class="table-responsive">
-        <table id="CitasExteriores" class="table table-hover">
-            <thead>
-                <th>Folio</th>
-                <th>Paciente</th>
-                <th>Teléfono</th>
-                <th>Fecha</th>
-                <th>Sucursal</th>
-                <th>Médico</th>
-                <th>Turno</th>
-                <th>Motivo Consulta</th>
-                <th>Contacto por WhatsApp</th>
-                <th>Agendado por</th>
-                <th>Agregado el</th>
-                <th>Acciones</th>
-            </thead>
-            <tbody>
-            <?php while ($Usuarios = $query->fetch_array()): ?>
-            <tr>
-                <td><?php echo $Usuarios["Id_genda"]; ?></td>
-                <td><?php echo $Usuarios["Nombres_Apellidos"]; ?></td>
-                <td><?php echo $Usuarios["Telefono"]; ?></td>
-                <td><?php echo fechaCastellano($Usuarios["Fecha"]); ?></td>
-                <td><?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
-                <td><?php echo $Usuarios["Medico"]; ?></td>
-                <td><?php echo $Usuarios["Turno"]; ?></td>
-                <td><?php echo $Usuarios["Motivo_Consulta"]; ?></td>
-                <td>
-                    <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola <?php echo $Usuarios["Nombres_Apellidos"]; ?>! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕ Te invitamos a tu próxima revaloración, programada para el día *<?php echo fechaCastellano($Usuarios["Fecha"]); ?>* en *Saluda Centro Médico Familiar <?php echo $Usuarios["Nombre_Sucursal"]; ?>*. ¿Confirmamos tu asistencia? Tu bienestar es nuestra prioridad. ¡Gracias por confiar tu salud con nosotros! 🩷" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
-                </td>
-                <td><?php echo $Usuarios["Agrego"]; ?></td>
-                <td><?php echo fechaCastellano($Usuarios["AgregadoEl"]); ?></td>
-                <td>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
-                    <div class="dropdown-menu">
-                        <a data-id="<?php echo $Usuarios["Id_genda"]; ?>" class="btn-Asiste dropdown-item">¿El paciente asistió? <i class="far fa-calendar-check"></i></a>
-                    </div>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-<?php else: ?>
-<p class="alert alert-warning">Por el momento no hay citas</p>
-<?php endif; ?>
+// Preparar los datos para la respuesta
+$data = array();
+while ($row = $query->fetch_assoc()) {
+    $data[] = array(
+        $row['Id_genda'],
+        $row['Nombres_Apellidos'],
+        $row['Telefono'],
+        fechaCastellano($row['Fecha']),
+        $row['Nombre_Sucursal'],
+        $row['Medico'],
+        $row['Turno'],
+        $row['Motivo_Consulta'],
+        '<a class="btn btn-success" href="https://api.whatsapp.com/send?phone=+52' . $row['Telefono'] . '&text=¡Hola ' . $row['Nombres_Apellidos'] . '! Queremos recordarte lo importante que es darle seguimiento a tu salud. 👩🏻‍⚕🧑🏻‍⚕ Te invitamos a tu próxima revaloración, programada para el día *' . fechaCastellano($row['Fecha']) . '* en *Saluda Centro Médico Familiar ' . $row['Nombre_Sucursal'] . '*. ¿Confirmamos tu asistencia? Tu bienestar es nuestra prioridad. ¡Gracias por confiar tu salud con nosotros! 🩷" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>',
+        $row['Agrego'],
+        fechaCastellano($row['AgregadoEl']),
+        '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th-list fa-1x"></i></button>
+         <div class="dropdown-menu">
+             <a data-id="' . $row['Id_genda'] . '" class="btn-Asiste dropdown-item">¿El paciente asistió? <i class="far fa-calendar-check"></i></a>
+         </div>'
+    );
+}
+
+// Preparar la respuesta JSON
+$response = array(
+    "draw" => $draw,
+    "recordsTotal" => $totalRecords,
+    "recordsFiltered" => $totalRecords,
+    "data" => $data
+);
+
+// Enviar la respuesta como JSON
+header('Content-Type: application/json');
+echo json_encode($response);
+?>
 
 <div class="modal fade" id="editModalExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalExtLabel" aria-hidden="true">
     <div id="DiExt" class="modal-dialog modal-notify modal-success">
