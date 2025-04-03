@@ -60,10 +60,10 @@ while($fila=$result->fetch_assoc()){
     $data[$c]["NumberTicket"] = $fila["Folio_Ticket"];
     $data[$c]["FolioSucursal"] = $fila["FolioSucursal"];
     $data[$c]["Fecha"] = fechaCastellano($fila["AgregadoEl"]);
-    
     $data[$c]["Hora"] = date("g:i:s a", strtotime($fila["AgregadoEl"]));
-   
     $data[$c]["Vendedor"] = $fila["AgregadoPor"];
+    $data[$c]["Total"] = number_format($fila["Total_Venta"], 2);
+    $data[$c]["Sucursal"] = $fila["Nombre_Sucursal"];
     $data[$c]["Desglose"] = '
 <td>
 <a data-id="' . $fila["Folio_Ticket"] . '-' . $fila["FolioSucursal"] . '" class="btn btn-success btn-xs btn-desglose dropdown-item" style="background-color: #C80096 !important; padding: 2px 5px; font-size: 12px;" ><i class="fas fa-receipt"></i> Desglosar</a>
