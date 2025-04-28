@@ -44,7 +44,7 @@ while ($r=$query->fetch_object()){
                                                <option value="<?php echo $person->ID_Sucursal; ?>"><?php echo $person->ID_Sucursal; ?></option>
                                                <?php
           $query = $conn -> query ("SELECT Nombre_Sucursal  FROM SucursalesCorre
-          WHERE Nombre_Sucursal NOT IN ('Hunucm&aacute;', 'Mama', 'Mani', 'Akil', 'CEDIS', 'CEDIS(Partner)', 'Capacitación');");
+          WHERE Nombre_Sucursal NOT IN ('Hunucm&aacute;', 'Mama', 'Mani', 'Akil', 'CEDIS', 'CEDIS(Partner)', 'Capacitación','Oficinas','Tekax','Teabo');");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["Nombre_Sucursal"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
@@ -59,7 +59,7 @@ while ($r=$query->fetch_object()){
   <select name="ActualizaColor" class="form-control" id="color" onchange="ShowSelected();">
 									  <option value="<?php echo $person->Codigo_color; ?>"><?php echo $person->Estatus; ?></option>
 				
-              <option  value="btn btn-success">Entregado</option>		
+              <option  value="btn btn-success">Entregado Digital</option>		
               <option  value="btn btn-danger">Pendiente</option>						  
 						 </select>
 </div>

@@ -2,13 +2,19 @@
 	include('conn.php');
 	
 	foreach ($_FILES['upload']['name'] as $key => $name){
-		
 		$newFilename = time() . "_" . $name;
 		move_uploaded_file($_FILES['upload']['tmp_name'][$key], 'upload/' . $newFilename);
 		$location = 'upload/' . $newFilename;
 		$Fk_Nombre_paciente = $_POST['Nombre']; 
 		mysqli_query($conn,"insert into Fotografias (Fk_Nombre_paciente, location) values ('$Fk_Nombre_paciente','$location')");
 	}
+
+	// Actualizar el estatus en Resultados_Ultrasonidos para el paciente
+	$estatus = isset($_POST['Estatus']) ? $_POST['Estatus'] : '';
+	if (!empty($estatus) && !empty($_POST['Nombre'])) {
+	    mysqli_query($conn, "UPDATE Resultados_Ultrasonidos SET Estatus='$estatus' WHERE Nombre_paciente='" . $_POST['Nombre'] . "'");
+	}
+
 	header('location:https://controlfarmacia.com/Servicios_Especializados/index');
 ?>
 

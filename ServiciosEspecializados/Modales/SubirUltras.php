@@ -35,6 +35,17 @@ while ($r=$query->fetch_object()){
   <input type="file" class="form-control" name="upload[]" multiple>
 </div>
 
+<label for="estatus">Estatus</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="Estatus"><i class="fas fa-flag"></i></span>
+  </div>
+  <select class="form-control" name="Estatus" id="estatus" required>
+    <option value="Entregado Fisico">Entregado</option>
+    <option value="Pendiente">Pendiente</option>
+  </select>
+</div>
+
 <button type="submit"  name="submit" id="submit"  class="btn btn-primary">Aplicar cambios <i class="fas fa-save"></i></button>
                           
 </form>
