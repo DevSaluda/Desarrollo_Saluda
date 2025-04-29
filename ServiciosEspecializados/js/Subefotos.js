@@ -6,7 +6,7 @@ $(document).ready(function(e){
         console.log('Estatus enviado:', formData.get('Estatus'));
         $.ajax({
             type: 'POST',
-            url: 'Consultas/SubeFotos.php',
+            url: 'Consultas/GuardaUltra.php',
             data: formData,
             contentType: false,
             cache: false,
