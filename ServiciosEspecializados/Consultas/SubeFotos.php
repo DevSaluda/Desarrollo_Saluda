@@ -16,5 +16,6 @@ if (!empty($estatus) && !empty($_POST['Nombre'])) {
     mysqli_query($conn, "UPDATE Resultados_Ultrasonidos SET Estatus='$estatus' WHERE Nombre_paciente='" . $_POST['Nombre'] . "'");
 }
 
-	header('location:https://controlfarmacia.com/Servicios_Especializados/index');
+	echo json_encode(['success' => true, 'estatus' => $estatus]);
+exit;
 ?>
