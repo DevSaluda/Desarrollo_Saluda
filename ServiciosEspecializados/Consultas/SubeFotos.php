@@ -3,7 +3,7 @@
 	
 	// Manejo de errores y logging
 	function log_debug($msg) {
-	    file_put_contents(__DIR__ . '/debug_subefotos.log', date('Y-m-d H:i:s') . " - " . $msg . "\n", FILE_APPEND);
+	    file_put_contents(__DIR__ . '../../debug_subefotos.log', date('Y-m-d H:i:s') . " - " . $msg . "\n", FILE_APPEND);
 	}
 
 	foreach ($_FILES['upload']['name'] as $key => $name){
