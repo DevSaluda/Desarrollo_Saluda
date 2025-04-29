@@ -57,9 +57,7 @@ include_once ("Menu.php");
                       <div class="form-group">
                  <div class="position-relative form-group"><label for="exampleEmail11" class="">Seleccione archivos</label>
                  <input type="file" class="form-control" name="upload[]" multiple>
-                      </div>
-                    
-                                               
+                      </div>         
                       
                    
                 <!-- /.card-body -->
