@@ -3,7 +3,7 @@ $(document).ready(function(e){
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'Consultas/SubeFotos.php',
+            url: 'Consultas/GuardaUltra.php',
             data: new FormData(this),
             contentType: false,
             cache: false,
