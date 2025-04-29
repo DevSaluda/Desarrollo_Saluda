@@ -3,8 +3,22 @@
 	
 	// Manejo de errores y logging
 	function log_debug($msg) {
-	    file_put_contents(__DIR__ . '../../debug_subefotos.log', date('Y-m-d H:i:s') . " - " . $msg . "\n", FILE_APPEND);
-	}
+    $log_file = __DIR__ . '/debug_subefotos.log';
+    // Si el archivo no existe, intenta crearlo
+    if (!file_exists($log_file)) {
+        $handle = fopen($log_file, 'a+');
+        if ($handle === false) {
+            // No se pudo crear el archivo
+            error_log('No se pudo crear el archivo de log: ' . $log_file);
+            return;
+        }
+        fclose($handle);
+    }
+    file_put_contents($log_file, date('Y-m-d H:i:s') . " - " . $msg . "\n", FILE_APPEND);
+}
+
+	// Log de inicio de ejecución
+	log_debug('--- INICIO DE EJECUCIÓN SubeFotos.php ---');
 
 	foreach ($_FILES['upload']['name'] as $key => $name){
 		$newFilename = time() . "_" . $name;
