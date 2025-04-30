@@ -50,7 +50,7 @@ while ($r=$query->fetch_object()){
                           
 </form>
 
-<script src="js/Subefotos.js"></script>
+<script src="js/Subefotos2.js"></script>
 
 <?php else:?>
   <p class="alert alert-danger">404 No se encuentra</p>

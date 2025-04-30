@@ -70,7 +70,7 @@ include "Consultas/db_connection.php";
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script type="text/javascript" src="js/Gultrasonidos.js"></script>
+<script type="text/javascript" src="js/Gultrasonidos2.js"></script>
 <script src="js/ControlPacientes.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
