@@ -56,7 +56,7 @@ if (isset($_POST['login_button'])) {
 <link rel="stylesheet" type="text/css" href="Componentes/Preloader.css">
 <!--===============================================================================================-->
 <script type="text/javascript" src="Consultas/validation.min.js"></script>
-<script type="text/javascript" src="Consultas/Medicos.js"></script>
+<script src="Scripts/loginagendaespecialistas.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
