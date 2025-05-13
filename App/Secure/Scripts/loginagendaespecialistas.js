@@ -23,7 +23,7 @@ $('document').ready(function() {
 		var data = $("#login-form").serialize();
 		$.ajax({
 			type : 'POST',
-			url  : 'IngresoAgendaEspecialista.php', // Puede ajustarse si usas otro endpoint
+			url  : 'Scripts/AgendaEspecialistas.php',
 			data : data,
 			beforeSend: function(){	
 				$("#error").fadeOut();
