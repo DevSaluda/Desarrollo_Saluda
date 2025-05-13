@@ -1,28 +1,7 @@
 <?php
 session_start();
 $mensaje = "";
-if (isset($_POST['login_button'])) {
-    include_once("../../Conexiones/conexion.php");
-    $user_email = trim($_POST['user_email']);
-    $password = trim($_POST['password']);
-    // Consulta a la tabla de especialistas
-    $stmt = $conexion->prepare("SELECT PersonalAgendaEspecialista_ID, Nombre_Apellidos, file_name FROM IngresoAgendaEspecialistas WHERE Correo_Electronico = ? AND Password = ? AND Estatus = 1 LIMIT 1");
-    $stmt->bind_param("ss", $user_email, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result && $result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        $_SESSION['Especialista_ID'] = $row['PersonalAgendaEspecialista_ID'];
-        $_SESSION['Nombre_Apellidos'] = $row['Nombre_Apellidos'];
-        $_SESSION['file_name'] = $row['file_name'];
-        header("Location: PanelAgendaEspecialista.php");
-        exit();
-    } else {
-        $mensaje = '<span class="error">Correo o contraseña incorrectos.</span>';
-    }
-    $stmt->close();
-    $conexion->close();
-}
+// La validación y consulta se realiza ahora vía AJAX en Scripts/AgendaEspecialistas.php
 ?>
 <!DOCTYPE html>
 <html lang="es">
