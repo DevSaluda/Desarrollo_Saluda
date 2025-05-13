@@ -1,11 +1,11 @@
 <?php
 session_start();
-include_once("../../Conexiones/conexion.php");
+include_once("../db_connect.php");
 if(isset($_POST['login_button'])) {
     $Correo_Electronico = trim($_POST['user_email']);
     $Password = trim($_POST['password']);
     $sql = "SELECT PersonalAgendaEspecialista_ID, Nombre_Apellidos, Password, Correo_Electronico, ID_H_O_D, Fk_Usuario, file_name FROM IngresoAgendaEspecialistas WHERE Correo_Electronico='$Correo_Electronico' AND Estatus = 1 LIMIT 1";
-    $resultset = mysqli_query($conexion, $sql) or die("database error:". mysqli_error($conexion));
+    $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
     $row = mysqli_fetch_assoc($resultset);
     if($row && $row['Password'] == $Password){
         echo "ok";
