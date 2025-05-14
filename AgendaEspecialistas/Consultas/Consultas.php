@@ -2,40 +2,36 @@
 date_default_timezone_set("America/Monterrey");
 if (session_status() == PHP_SESSION_NONE) {
    session_start();
-}
-
-// Cambia la validación de sesión al identificador de especialistas
-if(!isset($_SESSION['Especialista_ID'])){
-    header("Location: Expiro");
-    exit();
+ }
+ 
+if(!isset($_SESSION['AdminAgenda'])){
+	header("Location: Expiro");
 }
 
 include_once("db_connection.php");
 
-// Ajusta la consulta para la tabla de especialistas
-$sql = "SELECT 
-    IngresoAgendaEspecialistas.PersonalAgendaEspecialista_ID,
-    IngresoAgendaEspecialistas.Nombre_Apellidos,
-    IngresoAgendaEspecialistas.file_name,
-    IngresoAgendaEspecialistas.Estatus,
-    IngresoAgendaEspecialistas.ID_H_O_D,
-    IngresoAgendaEspecialistas.Fk_Usuario,
-    IngresoAgendaEspecialistas.Correo_Electronico,
-    IngresoAgendaEspecialistas.ColorEstatus
-FROM 
-    IngresoAgendaEspecialistas
-WHERE 
-    PersonalAgendaEspecialista_ID = '".$_SESSION['Especialista_ID']."'";
-
+$sql = "SELECT Personal_Agenda.PersonalAgenda_ID,Personal_Agenda.Nombre_Apellidos,Personal_Agenda.file_name,Personal_Agenda.Estatus,
+Personal_Agenda.ID_H_O_D,Personal_Agenda.Fk_Usuario,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol FROM
+Personal_Agenda,Roles_Puestos wHERE Personal_Agenda.Fk_Usuario = Roles_Puestos.ID_rol AND PersonalAgenda_ID='".$_SESSION['AdminAgenda']."'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
+if($row['Estatus']=="Vigente" ){				
 
-// Ajusta el valor de estatus según tu lógica de especialistas
-if(strtolower($row['Estatus'])=="vigente" ){				
+} 
+else
+{header("Location:Stop");
+}
 
+   ?>
+or die("database error:". mysqli_error($conn));
+$row = mysqli_fetch_assoc($resultset);
+
+if($row && ($row['Estatus']=="1" || strtolower($row['Estatus'])=="vigente")){				
+    // Acceso permitido
 } 
 else {
     header("Location:Stop");
     exit();
 }
 ?>
+
