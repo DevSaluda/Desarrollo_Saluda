@@ -72,10 +72,10 @@ include "Header.php";
 
 <div class="prog-container degree">
   <span class="icon">
-  <i onclick="Medicos()" class="fas fa-hand-holding-medical"></i>
+  <i onclick="AgendaEspecialistas()" class="fas fa-hand-holding-medical"></i>
   </span>
   <div class="details">
-  <h1>MEDICOS</h1>
+  <h1>Especialistas</h1>
    
   </div>
 </div>

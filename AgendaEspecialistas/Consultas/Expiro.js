@@ -13,5 +13,5 @@ function Expiro(){
  
 }
 function Login(){
-    location.href="https://controlfarmacia.com/App/Secure/IngresoAgenda"
+    location.href="https://controlfarmacia.com/App/Secure/IngresoAgendaEspecialista"
  }
