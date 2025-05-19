@@ -23,7 +23,7 @@ $('document').ready(function() {
 	});
 	/* Handling login functionality */
 	function submitForm() {
-		var data = $("#login-form").serialize();
+		var data = $("#login-form").serialize() + '&login_button=1';
 		$.ajax({
 			type : 'POST',
 			url  : 'Scripts/AgendaEspecialistas.php',

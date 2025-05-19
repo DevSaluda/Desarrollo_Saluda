@@ -19,6 +19,10 @@ function Medicos(){
   location.href="https://saludapos.com/App/Secure/IngresoMedicos" 
 }
 
+function AgendaEspecialistas(){
+  location.href="https://saludapos.com/App/Secure/IngresoAgendaEspecialista" 
+}
+
 
 /*Redirecciones para volver a identificacion de perfiles, y soporte tecnico */
 
