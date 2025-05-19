@@ -40,7 +40,7 @@ $('document').ready(function() {
 				if(response=="ok"){
                     $("#login_button").html("Iniciando...")
 					$('#Ingreso').modal('toggle');
-					setTimeout(' window.location.href = "https://saludapos.com/AgendaEspecialistas"; ',2000);
+					setTimeout(' window.location.href = "https://saludapos.com/AgendaEspecialistas/"; ',2000);
 				} else {
 					$("#error").fadeIn(1000, function(){
                         $("#error").html();

@@ -9,7 +9,6 @@ if(isset($_POST['login_button'])) {
     $row = mysqli_fetch_assoc($resultset);
     if($row && $row['Password'] == $Password){
         echo "ok";
-        $_SESSION['Especialista_ID'] = $row['PersonalAgendaEspecialista_ID'];
         $_SESSION['Nombre_Apellidos'] = $row['Nombre_Apellidos'];
         $_SESSION['AgendaEspecialista'] = $row['PersonalAgendaEspecialista_ID'];
     }
