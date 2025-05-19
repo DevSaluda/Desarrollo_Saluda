@@ -11,7 +11,7 @@ if(isset($_POST['login_button'])) {
         echo "ok";
         $_SESSION['Especialista_ID'] = $row['PersonalAgendaEspecialista_ID'];
         $_SESSION['Nombre_Apellidos'] = $row['Nombre_Apellidos'];
-        $_SESSION['file_name'] = $row['file_name'];
+        $_SESSION['AgendaEspecialista'] = $row['PersonalAgendaEspecialista_ID'];
     }
     // Si no coincide, no imprime nada (puedes poner un mensaje si lo deseas)
 }
