@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function () {
-    $('#CitasExteriores').DataTable({
+    $('#RevaloracionesAgendadas').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
