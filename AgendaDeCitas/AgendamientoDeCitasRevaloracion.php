@@ -46,7 +46,7 @@ include "Consultas/Consultas.php";
 
 
   
-<div id="CitasExteriores"></div>
+<div id="CitasDeRevaloracion"></div>
 </div>
 
 </div>
