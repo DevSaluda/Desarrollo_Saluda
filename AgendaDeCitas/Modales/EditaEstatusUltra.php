@@ -59,7 +59,8 @@ while ($r=$query->fetch_object()){
   <select name="ActualizaColor" class="form-control" id="color" onchange="ShowSelected();">
 									  <option value="<?php echo $person->Codigo_color; ?>"><?php echo $person->Estatus; ?></option>
 				
-              <option  value="btn btn-success">Entregado Digital</option>		
+              <option  value="btn btn-success">Entregado Digital</option>	
+              <option  value="btn btn-success">Entregado Fisico</option>			
               <option  value="btn btn-danger">Pendiente</option>						  
 						 </select>
 </div>
