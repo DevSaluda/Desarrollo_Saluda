@@ -1,5 +1,21 @@
 
 <?php
+session_start();
+if (!isset($_SESSION['AgendaEspecialista'])) {
+    header('Location: ../login.php');
+    exit();
+}
+$especialista_id = $_SESSION['AgendaEspecialista'];
+include_once '../App/Secure/db_connect.php';
+// Obtener datos del especialista
+$sql_user = "SELECT Nombre_Apellidos FROM Personal_Agenda WHERE PersonalAgenda_ID = '$especialista_id'";
+$result_user = mysqli_query($conn, $sql_user);
+$row_user = mysqli_fetch_assoc($result_user);
+$nombre_especialista = $row_user ? $row_user['Nombre_Apellidos'] : '';
+// Obtener citas del especialista
+$sql_citas = "SELECT * FROM AgendaCitas_Especialistas WHERE Fk_Especialista = '$especialista_id' ORDER BY Fk_Fecha DESC, Fk_Hora DESC";
+$result_citas = mysqli_query($conn, $sql_citas);
+
  include "Consultas/Consultas.php";
 include "Consultas/ConsultaEstadoConexion.php";
 include "Consultas/Mensaje.php";
@@ -26,28 +42,56 @@ include "Consultas/Mensaje.php";
 
 
 
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2E64FE !important;color: white;">
-  Citas de especialistas del <?php echo FechaCastellano(date('d-m-Y H:i:s'));  ?>  al <?php echo FechaCastellano(date('d-m-Y H:i:s', strtotime("+4 day")));  ?> 
-  </div>
-  </div>
- 
-  <div >
-  
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Bienvenido, <?php echo htmlspecialchars($nombre_especialista); ?>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Tus citas</h5>
+            <div class="table-responsive">
+                <table class="table table-striped" id="tabla-citas">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Tipo Consulta</th>
+                            <th>Estatus</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php while($cita = mysqli_fetch_assoc($result_citas)): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cita['Nombre_Paciente']); ?></td>
+                            <td><?php echo htmlspecialchars($cita['Fk_Fecha']); ?></td>
+                            <td><?php echo htmlspecialchars($cita['Fk_Hora']); ?></td>
+                            <td><?php echo htmlspecialchars($cita['Tipo_Consulta']); ?></td>
+                            <td><?php echo htmlspecialchars($cita['Estatus_cita']); ?></td>
+                            <td><?php echo htmlspecialchars($cita['Observaciones']); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-<div id="CitasEnLaSucursalExt"></div>
-</div>
-</div>
-</div>
+<script src="Componentes/jquery-3.5.1.slim.min.js"></script>
+<script src="Componentes/bootstrap.min.js"></script>
+<script src="Componentes/datatables.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#tabla-citas').DataTable({
+            "language": {
+                "url": "Componentes/Spanish.json"
+            }
+        });
+    });
+</script>
 
-
-
-
-
-
-     
-  
-  <!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
