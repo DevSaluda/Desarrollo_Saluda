@@ -43,23 +43,26 @@ $('document').ready(function() {
                   
 			},
 				
-			success : function(response){						
-				if(response=="ok"){									
+			success : function(response){
+                if(response=="ok"){                   
                     $("#login_button").html("Iniciando...")
-					$('#Ingreso').modal('toggle');
-					setTimeout(' window.location.href = "https://saludapos.com/App/Secure/ControladorAgenda"; ',2000);
-				} else {									
-					$("#error").fadeIn(1000, function(){						
+                    $('#Ingreso').modal('toggle');
+                    setTimeout(' window.location.href = "https://saludapos.com/App/Secure/ControladorAgenda"; ',2000);
+                } else if(response=="especialista"){
+                    $("#login_button").html("Iniciando...")
+                    $('#Ingreso').modal('toggle');
+                    setTimeout(' window.location.href = "https://saludapos.com/AgendaEspecialistas/"; ',2000);
+                } else {                   
+                    $("#error").fadeIn(1000, function(){                   
                         $("#error").html();
                         setTimeout(function(){ 
                             $('#Fallo').modal('toggle');
                         }, 2000); 
-						
                         $("#login_button").html('<span ></span> &nbsp;   Ingresar   ');
-					});
-						 
-				}
-			}
+                    });
+                     
+                }
+            }
 		});
 		return false;
 	}   
