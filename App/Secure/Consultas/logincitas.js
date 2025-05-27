@@ -38,7 +38,7 @@ $('document').ready(function() {
 				  }));
 			},
 			success : function(response){						
-				if(response=="ok"){									
+				if(response=="ok"){
 					$("#login_button").html("Iniciando ",Swal.fire({
 						icon: 'success',
 						title: 'Datos Correctos.',
@@ -46,6 +46,14 @@ $('document').ready(function() {
 						showConfirmButton: false,
 					  }))
 					setTimeout(' window.location.href = "https://controlfarmacia.com/Controldecitas/"; ',2000);
+				} else if(response=="especialista"){
+					$("#login_button").html("Iniciando ",Swal.fire({
+						icon: 'success',
+						title: 'Datos Correctos.',
+						text: 'Bienvenido especialista, espere un momento!',
+						showConfirmButton: false,
+					}))
+					setTimeout(' window.location.href = "https://controlfarmacia.com/ControlEspecialista/"; ',2000);
 				} else {									
 					$("#error").fadeIn(1000, function(){									
 						$("#error").html(Swal.fire({
