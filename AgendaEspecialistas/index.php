@@ -1,20 +1,28 @@
 
 <?php
+// DEBUG: Mostrar errores en pantalla (quitar en producción)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 if (!isset($_SESSION['AgendaEspecialista'])) {
     header('Location: ../login.php');
     exit();
 }
 $especialista_id = $_SESSION['AgendaEspecialista'];
-include_once '../App/Secure/db_connect.php';
+// Ruta robusta para conexión
+include_once __DIR__ . '/../App/Secure/db_connect.php';
 // Obtener datos del especialista
 $sql_user = "SELECT Nombre_Apellidos FROM Personal_Agenda WHERE PersonalAgenda_ID = '$especialista_id'";
 $result_user = mysqli_query($conn, $sql_user);
+if (!$result_user) { die('Error SQL usuario: ' . mysqli_error($conn)); }
 $row_user = mysqli_fetch_assoc($result_user);
 $nombre_especialista = $row_user ? $row_user['Nombre_Apellidos'] : '';
 // Obtener citas del especialista
 $sql_citas = "SELECT * FROM AgendaCitas_Especialistas WHERE Fk_Especialista = '$especialista_id' ORDER BY Fk_Fecha DESC, Fk_Hora DESC";
 $result_citas = mysqli_query($conn, $sql_citas);
+if (!$result_citas) { die('Error SQL citas: ' . mysqli_error($conn)); }
 
  include "Consultas/Consultas.php";
 include "Consultas/ConsultaEstadoConexion.php";
