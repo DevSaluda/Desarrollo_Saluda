@@ -6,6 +6,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+// DEBUG SOLO TEMPORAL
+if (!isset($_SESSION['AgendaEspecialista'])) {
+    echo "<pre>DEBUG SESSION:\n";
+    print_r($_SESSION);
+    echo "</pre>";
+}
 if (!isset($_SESSION['AgendaEspecialista'])) {
     header('Location: ../login.php');
     exit();
