@@ -48,11 +48,8 @@ $('document').ready(function() {
                     $("#login_button").html("Iniciando...")
                     $('#Ingreso').modal('toggle');
                     setTimeout(' window.location.href = "https://saludapos.com/App/Secure/ControladorAgenda"; ',2000);
-                } else if(response=="especialista"){
-                    $("#login_button").html("Iniciando...")
-                    $('#Ingreso').modal('toggle');
-                    setTimeout(' window.location.href = "https://saludapos.com/AgendaEspecialistas/"; ',2000);
-                } else {                   
+                } 
+                 else {                   
                     $("#error").fadeIn(1000, function(){                   
                         $("#error").html();
                         setTimeout(function(){ 
