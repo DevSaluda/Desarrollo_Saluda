@@ -32,7 +32,7 @@ if(isset($_POST['login_button'])) {
 	
     // Nuevo rol AgendaEspecialista
     if($row['Password']==$Password and $row['Nombre_rol']=="AgendaEspecialista" and $row['Estatus']=="Vigente" ){
-        echo "especialista";
+        echo "ok";
         $_SESSION['AgendaEspecialista'] = $row['PersonalAgenda_ID'];
     }
 
