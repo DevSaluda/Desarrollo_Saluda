@@ -21,27 +21,56 @@ function fechaCastellano ($fecha) {
     return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
 
-$sql = "SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista, AgendaCitas_EspecialistasExt.Fk_Especialidad, 
-AgendaCitas_EspecialistasExt.Fk_Especialista, AgendaCitas_EspecialistasExt.Fk_Sucursal, 
-AgendaCitas_EspecialistasExt.Fecha, AgendaCitas_EspecialistasExt.Hora, AgendaCitas_EspecialistasExt.AgendadoPor, 
-AgendaCitas_EspecialistasExt.Fecha_Hora, AgendaCitas_EspecialistasExt.Nombre_Paciente, 
-AgendaCitas_EspecialistasExt.Telefono, AgendaCitas_EspecialistasExt.Tipo_Consulta, 
-AgendaCitas_EspecialistasExt.Observaciones, AgendaCitas_EspecialistasExt.ID_H_O_D, 
-Especialidades_Express.ID_Especialidad, Especialidades_Express.Nombre_Especialidad, 
-Personal_Medico_Express.Medico_ID, Personal_Medico_Express.Nombre_Apellidos, 
-Fechas_EspecialistasExt.ID_Fecha_Esp, Fechas_EspecialistasExt.Fecha_Disponibilidad, 
-Horarios_Citas_Ext.ID_Horario, Horarios_Citas_Ext.Horario_Disponibilidad, 
-SucursalesCorre.ID_SucursalC, SucursalesCorre.Nombre_Sucursal, SucursalesCorre.LinkMaps 
-FROM AgendaCitas_EspecialistasExt
-INNER JOIN Especialidades_Express ON AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad
-INNER JOIN Personal_Medico_Express ON AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID
-INNER JOIN SucursalesCorre ON AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
-INNER JOIN Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp
-INNER JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
-WHERE Personal_Medico_Express.Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
+// Primero obtenemos todos los Medico_ID que coincidan con el nombre
+$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express 
+            WHERE Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
+$result_ids = mysqli_query($conn, $sql_ids);
+
+$ids_medicos = array();
+while($row = mysqli_fetch_assoc($result_ids)) {
+    $ids_medicos[] = $row['Medico_ID'];
+}
+
+// Si no encontramos médicos, devolvemos array vacío
+if(empty($ids_medicos)) {
+    echo json_encode([
+        "sEcho" => 1,
+        "iTotalRecords" => 0,
+        "iTotalDisplayRecords" => 0,
+        "aaData" => array()
+    ]);
+    exit;
+}
+
+// Construimos la condición IN para los IDs
+$ids_string = implode(",", array_map('intval', $ids_medicos));
+
+// Ahora la consulta principal con los IDs obtenidos
+$sql = "SELECT 
+        ace.ID_Agenda_Especialista,
+        ace.Nombre_Paciente,
+        ace.Telefono,
+        ace.Tipo_Consulta,
+        ace.Observaciones,
+        ace.AgendadoPor,
+        ace.Fecha_Hora,
+        ee.Nombre_Especialidad,
+        pme.Nombre_Apellidos,
+        fe.Fecha_Disponibilidad,
+        hce.Horario_Disponibilidad,
+        sc.Nombre_Sucursal,
+        sc.LinkMaps
+        FROM AgendaCitas_EspecialistasExt ace
+        INNER JOIN Especialidades_Express ee ON ace.Fk_Especialidad = ee.ID_Especialidad
+        INNER JOIN Personal_Medico_Express pme ON ace.Fk_Especialista = pme.Medico_ID
+        INNER JOIN SucursalesCorre sc ON ace.Fk_Sucursal = sc.ID_SucursalC
+        INNER JOIN Fechas_EspecialistasExt fe ON ace.Fecha = fe.ID_Fecha_Esp
+        INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario
+        WHERE ace.Fk_Especialista IN ($ids_string)
+        AND fe.Fecha_Disponibilidad BETWEEN CURDATE() AND CURDATE() + INTERVAL 4 DAY";
+
 $result = mysqli_query($conn, $sql);
 
-// Inicializar el array $data para evitar errores si no hay resultados
 $data = array();
 $c = 0;
 
@@ -63,7 +92,6 @@ if ($result) {
         $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
         $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
 
-        // Generar el mensaje base de WhatsApp
         $whatsappMessage = "Hola, {$fila["Nombre_Paciente"]}! Te contactamos de *Saluda Centro Médico Familiar* para confirmar tu cita {$fila["Tipo_Consulta"]} agendada para el día *$fechaFormateada* en horario de *$horaFormateada* en nuestro centro médico de {$fila["Nombre_Sucursal"]}.";
         if (!empty($fila["LinkMaps"])) {
             $whatsappMessage .= " Puedes ver la ubicación de la sucursal aquí: {$fila["LinkMaps"]}.";
@@ -72,9 +100,6 @@ if ($result) {
         $data[$c]["ConWhatsapp"] = "<a class='btn btn-success' href='https://api.whatsapp.com/send?phone=+52{$fila["Telefono"]}&text=" . urlencode($whatsappMessage) . "' target='_blank'><span class='fab fa-whatsapp'></span><span class='hidden-xs'></span></a>";
         $c++;
     }
-} else {
-    // Si hay error en la consulta, devuelve un JSON vacío
-    $data = array();
 }
 
 $results = [
