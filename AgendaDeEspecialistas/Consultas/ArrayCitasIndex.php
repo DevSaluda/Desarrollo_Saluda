@@ -30,14 +30,12 @@ Personal_Medico_Express.Nombre_Apellidos, Fechas_EspecialistasExt.ID_Fecha_Esp,F
 AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fechas_EspecialistasExt,Horarios_Citas_Ext,SucursalesCorre WHERE 
 AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad 
 AND AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID 
-AND AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC 
-AND AgendaCitas_EspecialistasExt.Fk_Especialidad=74 
 AND AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp  
 AND Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 4 DAY 
 AND AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 AND Personal_Medico_Express.Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
 
-
+var_dump($sql);
 
 $result = mysqli_query($conn, $sql);
  
