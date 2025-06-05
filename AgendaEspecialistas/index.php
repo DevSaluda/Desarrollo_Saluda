@@ -7,15 +7,7 @@ error_reporting(E_ALL);
 
 session_start();
 // DEBUG SOLO TEMPORAL
-if (!isset($_SESSION['AgendaEspecialista'])) {
-    echo "<pre>DEBUG SESSION:\n";
-    print_r($_SESSION);
-    echo "</pre>";
-}
-if (!isset($_SESSION['AgendaEspecialista'])) {
-    header('Location: ../login.php');
-    exit();
-}
+
 $especialista_id = $_SESSION['AgendaEspecialista'];
 // Ruta robusta para conexión
 include_once __DIR__ . '/../App/Secure/db_connect.php';
