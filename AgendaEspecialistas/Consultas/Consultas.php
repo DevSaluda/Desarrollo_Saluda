@@ -4,30 +4,26 @@ if (session_status() == PHP_SESSION_NONE) {
    session_start();
  }
  
-if(!isset($_SESSION['AdminAgenda'])){
-	header("Location: Expiro");
+if(!isset($_SESSION['AgendaEspecialista'])){
+    header("Location: Expiro");
+    exit();
 }
 
 include_once("db_connection.php");
 
-$sql = "SELECT Personal_Agenda.PersonalAgenda_ID,Personal_Agenda.Nombre_Apellidos,Personal_Agenda.file_name,Personal_Agenda.Estatus,
-Personal_Agenda.ID_H_O_D,Personal_Agenda.Fk_Usuario,Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol FROM
-Personal_Agenda,Roles_Puestos wHERE Personal_Agenda.Fk_Usuario = Roles_Puestos.ID_rol AND PersonalAgenda_ID='".$_SESSION['AdminAgenda']."'";
+$id_medico = $_SESSION['AgendaEspecialista'];
+
+$sql = "SELECT Personal_Medico_Express.Medico_ID, Personal_Medico_Express.Nombre_Apellidos, Personal_Medico_Express.file_name, 
+               Personal_Medico_Express.Estatus, Personal_Medico_Express.Fk_Usuario, Roles_Puestos.ID_rol, Roles_Puestos.Nombre_rol 
+        FROM Personal_Medico_Express
+        LEFT JOIN Roles_Puestos ON Personal_Medico_Express.Fk_Usuario = Roles_Puestos.ID_rol
+        WHERE Medico_ID='$id_medico'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
-if($row['Estatus']=="Vigente" ){				
 
-} 
-else
-{header("Location:Stop");
-}
-
-   ?>
-or die("database error:". mysqli_error($conn));
-$row = mysqli_fetch_assoc($resultset);
-
-if($row && ($row['Estatus']=="1" || strtolower($row['Estatus'])=="vigente")){				
+if($row && ($row['Estatus']=="1" || strtolower($row['Estatus'])=="vigente")){
     // Acceso permitido
+    $_SESSION['Nombre_Medico'] = $row['Nombre_Apellidos']; // Para el filtro de citas y sidebar
 } 
 else {
     header("Location:Stop");
