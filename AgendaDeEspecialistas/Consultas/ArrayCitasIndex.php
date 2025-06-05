@@ -25,10 +25,7 @@ $sql = "SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,AgendaCitas_E
 AgendaCitas_EspecialistasExt.Fk_Sucursal,AgendaCitas_EspecialistasExt.Fecha,AgendaCitas_EspecialistasExt.Hora,AgendaCitas_EspecialistasExt.AgendadoPor,AgendaCitas_EspecialistasExt.Fecha_Hora,
 AgendaCitas_EspecialistasExt.Nombre_Paciente,AgendaCitas_EspecialistasExt.Telefono,AgendaCitas_EspecialistasExt.Tipo_Consulta,AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ID_H_O_D, Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,Personal_Medico_Express.Medico_ID,
 Personal_Medico_Express.Nombre_Apellidos, Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad, Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,SucursalesCorre.LinkMaps FROM 
-AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fechas_EspecialistasExt,Horarios_Citas_Ext,SucursalesCorre WHERE 
-AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID 
-AND AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp AND Fechas_EspecialistasExt.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 4 DAY AND
-AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario AND Personal_Medico_Express.Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
+AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fechas_EspecialistasExt,Horarios_Citas_Ext,SucursalesCorre WHERE Personal_Medico_Express.Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
 
 $result = mysqli_query($conn, $sql);
 
