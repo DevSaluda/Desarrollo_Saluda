@@ -16,7 +16,7 @@ Personal_Agenda,Roles_Puestos wHERE Personal_Agenda.Fk_Usuario = Roles_Puestos.I
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 $row = mysqli_fetch_assoc($resultset);
 if($row['Estatus']=="Vigente" ){				
-
+   $_SESSION['Nombre_Medico'] = $row['Nombre_Apellidos']; // Ahora el filtro y el sidebar usan el mismo valor
 } 
 else
 {header("Location:Stop");
