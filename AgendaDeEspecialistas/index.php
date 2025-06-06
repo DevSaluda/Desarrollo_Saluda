@@ -67,7 +67,7 @@ include "Consultas/Mensaje.php";
  include ("footer.php");?>
 <!-- ./wrapper -->
 
-<script src="js/ControlCampanasDiasExtV2.js"></script>
+<script src="js/ControlCampanasDiasCalendario.js"></script>
 <script src="js/Logs.js"></script>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
