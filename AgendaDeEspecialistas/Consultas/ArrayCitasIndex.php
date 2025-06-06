@@ -102,12 +102,6 @@ if ($result) {
     }
 }
 
-$results = [
-    "sEcho" => 1,
-    "iTotalRecords" => count($data),
-    "iTotalDisplayRecords" => count($data),
-    "aaData" => $data
-];
-
-echo json_encode($results);
+header('Content-Type: application/json');
+echo json_encode($data);
 ?>

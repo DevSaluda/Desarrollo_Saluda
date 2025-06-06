@@ -1,4 +1,30 @@
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    $eventos[] = array(
+        "id" => $cita["ID_Agenda_Especialista"],
+        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
+        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "extendedProps" => array(
+            "telefono" => $cita["Telefono"],
+            "especialidad" => $cita["Especialidad"],
+            "doctor" => $cita["Doctor"],
+            "sucursal" => $cita["Sucursal"],
+            "observaciones" => $cita["Observaciones"]
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Personalizar el diseño de la paginación con CSS */
   .dataTables_wrapper .dataTables_paginate {
     text-align: center !important; /* Centrar los botones de paginación */
@@ -30,7 +56,33 @@
   }
 </style>
 
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    $eventos[] = array(
+        "id" => $cita["ID_Agenda_Especialista"],
+        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
+        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "extendedProps" => array(
+            "telefono" => $cita["Telefono"],
+            "especialidad" => $cita["Especialidad"],
+            "doctor" => $cita["Doctor"],
+            "sucursal" => $cita["Sucursal"],
+            "observaciones" => $cita["Observaciones"]
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos personalizados para la tabla */
   #Productos th {
     font-size: 12px; /* Tamaño de letra para los encabezados */
@@ -39,7 +91,33 @@
   }
 </style>
 
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    $eventos[] = array(
+        "id" => $cita["ID_Agenda_Especialista"],
+        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
+        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "extendedProps" => array(
+            "telefono" => $cita["Telefono"],
+            "especialidad" => $cita["Especialidad"],
+            "doctor" => $cita["Doctor"],
+            "sucursal" => $cita["Sucursal"],
+            "observaciones" => $cita["Observaciones"]
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos para la tabla */
   #Productos {
     font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
@@ -78,7 +156,33 @@
  
 </style>
 
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    $eventos[] = array(
+        "id" => $cita["ID_Agenda_Especialista"],
+        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
+        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "extendedProps" => array(
+            "telefono" => $cita["Telefono"],
+            "especialidad" => $cita["Especialidad"],
+            "doctor" => $cita["Doctor"],
+            "sucursal" => $cita["Sucursal"],
+            "observaciones" => $cita["Observaciones"]
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos para la capa de carga */
   #loading-overlay {
     position: fixed;
