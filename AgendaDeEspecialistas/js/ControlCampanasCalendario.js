@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     events: '../AgendaDeCitas/Consultas/CitasEnSucursalExtDias.php',
+    
     eventClick: function(info) {
+
+      console.log('Eventos cargados:', info);
+
       var e = info.event;
       var details =
         '<b>Paciente:</b> ' + e.title + '<br>' +
