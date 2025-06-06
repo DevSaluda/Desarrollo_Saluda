@@ -1,36 +1,85 @@
-<style>
-  /* Personalizar el diseño de la paginación con CSS */
-  .dataTables_wrapper .dataTables_paginate {
-    text-align: center !important; /* Centrar los botones de paginación */
-    margin-top: 10px !important;
-  }
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
 
-  .dataTables_paginate .paginate_button {
-    padding: 5px 10px !important;
-    border: 1px solid #007bff !important;
-    margin: 2px !important;
-    cursor: pointer !important;
-    font-size: 16px !important;
-    color: #007bff !important;
-    background-color: #fff !important;
-  }
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
 
-  /* Cambiar el color del paginado seleccionado */
-  .dataTables_paginate .paginate_button.current {
-    background-color: #007bff !important;
-    color: #fff !important;
-    border-color: #007bff !important;
-  }
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
 
-  /* Cambiar el color del hover */
-  .dataTables_paginate .paginate_button:hover {
-    background-color: #C80096 !important;
-    color: #fff !important;
-    border-color: #C80096 !important;
-  }
-</style>
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
 
-<style>
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos personalizados para la tabla */
   #Productos th {
     font-size: 12px; /* Tamaño de letra para los encabezados */
@@ -39,7 +88,50 @@
   }
 </style>
 
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos para la tabla */
   #Productos {
     font-size: 12px; /* Tamaño de letra para el contenido de la tabla */
@@ -78,7 +170,50 @@
  
 </style>
 
-<style>
+<?php
+header('Content-Type: application/json');
+include("db_connection.php");
+include "Consultas.php";
+
+// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
+// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+
+// Ejemplo de transformación para FullCalendar:
+$eventos = array();
+foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+?>
   /* Estilos para la capa de carga */
   #loading-overlay {
     position: fixed;
@@ -216,7 +351,7 @@ tabla = $('#CitasIndex').DataTable({
  "stateSave":true,
  "bAutoWidth": false,
  "order": [[ 0, "desc" ]],
- "sAjaxSource": "https://saludapos.com/AgendaDeEspecialistas/Consultas/ArrayCitasIndex.php",
+ "sAjaxSource": "https://saludapos.com/AgendaDeCitas/Consultas/ArrayCitasIndex.php",
  "aoColumns": [
     { mData: 'Folio' },
        { mData: 'Paciente' },
@@ -226,6 +361,7 @@ tabla = $('#CitasIndex').DataTable({
        { mData: 'Especialidad' },
        { mData: 'Doctor' },
        { mData: 'Sucursal' },
+       { mData: 'Tipo_Consulta' },
        { mData: 'Observaciones' },
       //  { mData: 'ConfirmarCita' },
        { mData: 'AgendadoPor' },
@@ -288,18 +424,18 @@ tabla = $('#CitasIndex').DataTable({
 <th>Especialidad</th>
 <th>Doctor </th>
 <th>Sucursal</th>
+<th>Motivo de Consulta</th>
 <th>Observaciones</th>
 <!-- <th>Recordartorio</th> -->
 
-<!-- <th>Agendado por </th>
+<th>Agendado por </th>
 <th>Registrado el </th>
 <th>Enviar Mensaje </th>
-	 -->
+	
 
 
 </thead>
 
 </div>
 </div>
-
 
