@@ -17,6 +17,10 @@ include "Consultas/Mensaje.php";
   <!-- Font Awesome Icons -->
   <?php include "Header.php"?>
 
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet" />
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 </head>
 <div id="loading-overlay">
   <div class="loader"></div>
@@ -35,7 +39,7 @@ include "Consultas/Mensaje.php";
   <div >
   
 </div>
-<div id="CitasEnLaSucursalExt"></div>
+<div id="calendar"></div>
 </div>
 </div>
 </div>
@@ -79,6 +83,62 @@ include "Consultas/Mensaje.php";
 <script src="dist/js/demo.js"></script>
 
 <!-- PAGE PLUGINS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'es',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    events: {
+      url: 'Consultas/ArrayCitasIndex.php',
+      method: 'GET',
+      failure: function() {
+        alert('Error al cargar las citas');
+      },
+      extraParams: {
+        // Puedes agregar parámetros extra si necesitas
+      }
+    },
+    eventDataTransform: function(eventData) {
+      // Transforma los datos de la API PHP al formato FullCalendar
+      return {
+        id: eventData.Folio,
+        title: eventData.Paciente + ' (' + eventData.Tipo_Consulta + ')',
+        start: eventData.Fecha.split(' de ').reverse().join('-') + 'T' + (eventData.Hora ? eventData.Hora : '09:00'),
+        extendedProps: {
+          telefono: eventData.Telefono,
+          especialidad: eventData.Especialidad,
+          doctor: eventData.Doctor,
+          sucursal: eventData.Sucursal,
+          observaciones: eventData.Observaciones,
+          agendadoPor: eventData.AgendadoPor,
+          agendamientoRealizado: eventData.AgendamientoRealizado
+        }
+      };
+    },
+    eventClick: function(info) {
+      var e = info.event;
+      var details =
+        '<b>Paciente:</b> ' + e.title + '<br>' +
+        '<b>Teléfono:</b> ' + (e.extendedProps.telefono || '-') + '<br>' +
+        '<b>Especialidad:</b> ' + (e.extendedProps.especialidad || '-') + '<br>' +
+        '<b>Doctor:</b> ' + (e.extendedProps.doctor || '-') + '<br>' +
+        '<b>Sucursal:</b> ' + (e.extendedProps.sucursal || '-') + '<br>' +
+        '<b>Observaciones:</b> ' + (e.extendedProps.observaciones || '-') + '<br>' +
+        '<b>Agendado por:</b> ' + (e.extendedProps.agendadoPor || '-') + '<br>' +
+        '<b>Agendamiento Realizado:</b> ' + (e.extendedProps.agendamientoRealizado || '-');
+      // Puedes mostrar detalles en un modal o alert
+      alert(details);
+    }
+  });
+  calendar.render();
+});
+</script>
 <!-- jQuery Mapael -->
 <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="plugins/raphael/raphael.min.js"></script>
