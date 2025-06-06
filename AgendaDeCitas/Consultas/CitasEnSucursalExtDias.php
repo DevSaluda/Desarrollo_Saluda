@@ -41,44 +41,7 @@ foreach($data as $cita) {
 }
 echo json_encode($eventos);
 exit;
-?>
-  /* Personalizar el diseño de la paginación con CSS */
-  .dataTables_wrapper .dataTables_paginate {
-    text-align: center !important; /* Centrar los botones de paginación */
-    margin-top: 10px !important;
-  }
 
-  .dataTables_paginate .paginate_button {
-    padding: 5px 10px !important;
-    border: 1px solid #007bff !important;
-    margin: 2px !important;
-    cursor: pointer !important;
-    font-size: 16px !important;
-    color: #007bff !important;
-    background-color: #fff !important;
-  }
-
-  /* Cambiar el color del paginado seleccionado */
-  .dataTables_paginate .paginate_button.current {
-    background-color: #007bff !important;
-    color: #fff !important;
-    border-color: #007bff !important;
-  }
-
-  /* Cambiar el color del hover */
-  .dataTables_paginate .paginate_button:hover {
-    background-color: #C80096 !important;
-    color: #fff !important;
-    border-color: #C80096 !important;
-  }
-</style>
-
-<?php
-header('Content-Type: application/json');
-include("db_connection.php");
-include "Consultas.php";
-
-// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
 // Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
 
 // Ejemplo de transformación para FullCalendar:
