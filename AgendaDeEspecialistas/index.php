@@ -103,24 +103,24 @@ document.addEventListener('DOMContentLoaded', function() {
       extraParams: {
         // Puedes agregar parámetros extra si necesitas
       }
-    },
-    eventDataTransform: function(eventData) {
-      // Transforma los datos de la API PHP al formato FullCalendar
-      return {
-        id: eventData.Folio,
-        title: eventData.Paciente + ' (' + eventData.Tipo_Consulta + ')',
-        start: eventData.Fecha.split(' de ').reverse().join('-') + 'T' + (eventData.Hora ? eventData.Hora : '09:00'),
-        extendedProps: {
-          telefono: eventData.Telefono,
-          especialidad: eventData.Especialidad,
-          doctor: eventData.Doctor,
-          sucursal: eventData.Sucursal,
-          observaciones: eventData.Observaciones,
-          agendadoPor: eventData.AgendadoPor,
-          agendamientoRealizado: eventData.AgendamientoRealizado
-        }
-      };
-    },
+    },eventDataTransform: function(eventData) {
+  // Asume que eventData.Fecha está en formato 'YYYY-MM-DD' o similar
+  return {
+    id: eventData.id || eventData.Folio || eventData.ID_Agenda_Especialista,
+    title: (eventData.Paciente || eventData.Nombre_Paciente || 'Sin nombre') + 
+           (eventData.Tipo_Consulta ? ' (' + eventData.Tipo_Consulta + ')' : ''),
+    start: eventData.Fecha + 'T' + (eventData.Hora || '09:00:00'),
+    extendedProps: {
+      telefono: eventData.Telefono || '',
+      especialidad: eventData.Especialidad || '',
+      doctor: eventData.Doctor || '',
+      sucursal: eventData.Sucursal || '',
+      observaciones: eventData.Observaciones || '',
+      agendadoPor: eventData.AgendadoPor || '',
+      agendamientoRealizado: eventData.AgendamientoRealizado || ''
+    }
+  };
+}
     eventClick: function(info) {
       var e = info.event;
       var details =
