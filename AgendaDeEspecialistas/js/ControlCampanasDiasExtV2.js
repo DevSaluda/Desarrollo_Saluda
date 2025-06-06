@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: 'https://saludapos.com/AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php',
+    events: '../AgendaDeCitas/Consultas/CitasEnSucursalExtDias.php',
     eventClick: function(info) {
       var e = info.event;
       var details =
