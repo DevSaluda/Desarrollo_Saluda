@@ -83,62 +83,6 @@ include "Consultas/Mensaje.php";
 <script src="dist/js/demo.js"></script>
 
 <!-- PAGE PLUGINS -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'es',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-    },
-    events: {
-      url: 'Consultas/ArrayCitasIndex.php',
-      method: 'GET',
-      failure: function() {
-        alert('Error al cargar las citas');
-      },
-      extraParams: {
-        // Puedes agregar parámetros extra si necesitas
-      }
-    },eventDataTransform: function(eventData) {
-  // Asume que eventData.Fecha está en formato 'YYYY-MM-DD' o similar
-  return {
-    id: eventData.id || eventData.Folio || eventData.ID_Agenda_Especialista,
-    title: (eventData.Paciente || eventData.Nombre_Paciente || 'Sin nombre') + 
-           (eventData.Tipo_Consulta ? ' (' + eventData.Tipo_Consulta + ')' : ''),
-    start: eventData.Fecha + 'T' + (eventData.Hora || '09:00:00'),
-    extendedProps: {
-      telefono: eventData.Telefono || '',
-      especialidad: eventData.Especialidad || '',
-      doctor: eventData.Doctor || '',
-      sucursal: eventData.Sucursal || '',
-      observaciones: eventData.Observaciones || '',
-      agendadoPor: eventData.AgendadoPor || '',
-      agendamientoRealizado: eventData.AgendamientoRealizado || ''
-    }
-  };
-}
-    eventClick: function(info) {
-      var e = info.event;
-      var details =
-        '<b>Paciente:</b> ' + e.title + '<br>' +
-        '<b>Teléfono:</b> ' + (e.extendedProps.telefono || '-') + '<br>' +
-        '<b>Especialidad:</b> ' + (e.extendedProps.especialidad || '-') + '<br>' +
-        '<b>Doctor:</b> ' + (e.extendedProps.doctor || '-') + '<br>' +
-        '<b>Sucursal:</b> ' + (e.extendedProps.sucursal || '-') + '<br>' +
-        '<b>Observaciones:</b> ' + (e.extendedProps.observaciones || '-') + '<br>' +
-        '<b>Agendado por:</b> ' + (e.extendedProps.agendadoPor || '-') + '<br>' +
-        '<b>Agendamiento Realizado:</b> ' + (e.extendedProps.agendamientoRealizado || '-');
-      // Puedes mostrar detalles en un modal o alert
-      alert(details);
-    }
-  });
-  calendar.render();
-});
-</script>
 <!-- jQuery Mapael -->
 <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="plugins/raphael/raphael.min.js"></script>
