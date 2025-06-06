@@ -9,16 +9,33 @@ include "Consultas.php";
 // Ejemplo de transformación para FullCalendar:
 $eventos = array();
 foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
     $eventos[] = array(
-        "id" => $cita["ID_Agenda_Especialista"],
-        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
-        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
         "extendedProps" => array(
-            "telefono" => $cita["Telefono"],
-            "especialidad" => $cita["Especialidad"],
-            "doctor" => $cita["Doctor"],
-            "sucursal" => $cita["Sucursal"],
-            "observaciones" => $cita["Observaciones"]
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
         )
     );
 }
@@ -67,16 +84,33 @@ include "Consultas.php";
 // Ejemplo de transformación para FullCalendar:
 $eventos = array();
 foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
     $eventos[] = array(
-        "id" => $cita["ID_Agenda_Especialista"],
-        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
-        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
         "extendedProps" => array(
-            "telefono" => $cita["Telefono"],
-            "especialidad" => $cita["Especialidad"],
-            "doctor" => $cita["Doctor"],
-            "sucursal" => $cita["Sucursal"],
-            "observaciones" => $cita["Observaciones"]
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
         )
     );
 }
@@ -102,16 +136,33 @@ include "Consultas.php";
 // Ejemplo de transformación para FullCalendar:
 $eventos = array();
 foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
     $eventos[] = array(
-        "id" => $cita["ID_Agenda_Especialista"],
-        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
-        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
         "extendedProps" => array(
-            "telefono" => $cita["Telefono"],
-            "especialidad" => $cita["Especialidad"],
-            "doctor" => $cita["Doctor"],
-            "sucursal" => $cita["Sucursal"],
-            "observaciones" => $cita["Observaciones"]
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
         )
     );
 }
@@ -167,16 +218,33 @@ include "Consultas.php";
 // Ejemplo de transformación para FullCalendar:
 $eventos = array();
 foreach($data as $cita) {
+    // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
+    $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
+    $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
+    $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
+    // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Valida fecha en formato YYYY-MM-DD
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        // Si no está en formato correcto, intenta convertirla
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
     $eventos[] = array(
-        "id" => $cita["ID_Agenda_Especialista"],
-        "title" => $cita["Nombre_Paciente"] . ' (' . $cita["Tipo_Consulta"] . ')',
-        "start" => $cita["Fecha"] . 'T' . $cita["Hora"] , // Ajusta formato si es necesario
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
         "extendedProps" => array(
-            "telefono" => $cita["Telefono"],
-            "especialidad" => $cita["Especialidad"],
-            "doctor" => $cita["Doctor"],
-            "sucursal" => $cita["Sucursal"],
-            "observaciones" => $cita["Observaciones"]
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
+            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
+            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
         )
     );
 }
