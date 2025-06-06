@@ -439,4 +439,3 @@ tabla = $('#CitasIndex').DataTable({
 </div>
 </div>
 
-
