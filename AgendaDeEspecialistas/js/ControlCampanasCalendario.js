@@ -22,9 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
         '<b>Doctor:</b> ' + (e.extendedProps.doctor || '-') + '<br>' +
         '<b>Sucursal:</b> ' + (e.extendedProps.sucursal || '-') + '<br>' +
         '<b>Observaciones:</b> ' + (e.extendedProps.observaciones || '-');
-      alert(details);
+
+      // Mostrar detalles en el modal Bootstrap
+      var modal = document.getElementById('modalDetalles');
+      var modalBody = modal.querySelector('.modal-body');
+      modalBody.innerHTML = details;
+      modal.style.display = 'block';
     }
   });
   calendar.render();
 });
-
