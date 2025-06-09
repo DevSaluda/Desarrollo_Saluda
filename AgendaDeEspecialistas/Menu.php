@@ -127,7 +127,7 @@
               <?php echo $row['Nombre_Apellidos']?>
             </a>
             <a id="DatosGenerales" class="d-block"><small>
-                <?php echo $row['Nombre_rol']?>
+               
               </small></a>
           </div>
         </div>
