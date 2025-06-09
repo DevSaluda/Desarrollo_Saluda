@@ -1,5 +1,18 @@
 <?php
+
 header('Content-Type: application/json');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
+
+// Chequeo robusto de sesión
+if (!isset($_SESSION['Nombre_Medico'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'No hay sesión de médico activa']);
+    exit;
+}
+
+
 include("db_connection.php");
 include "Consultas.php";
 
