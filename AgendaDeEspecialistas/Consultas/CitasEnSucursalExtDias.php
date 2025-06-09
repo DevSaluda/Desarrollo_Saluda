@@ -1,5 +1,4 @@
 <?php
-
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -12,16 +11,95 @@ if (!isset($_SESSION['Nombre_Medico'])) {
     exit;
 }
 
-
 include("db_connection.php");
 include "Consultas.php";
 
-// Aquí debes obtener los datos igual que antes (consulta SQL, etc.)
-// Supón que tienes un array $data con los resultados de las citas, cada elemento con los campos necesarios.
+// 1. Obtener nombre del médico de la sesión
+$nombre_medico = $_SESSION['Nombre_Medico'];
 
-// Ejemplo de transformación para FullCalendar:
+// 2. Buscar los IDs de médico correspondientes
+$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express WHERE Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
+$result_ids = mysqli_query($conn, $sql_ids);
+$ids_medicos = array();
+while($row = mysqli_fetch_assoc($result_ids)) {
+    $ids_medicos[] = $row['Medico_ID'];
+}
+
+// 3. Si no hay IDs, retornar array vacío
+if (empty($ids_medicos)) {
+    echo json_encode([]);
+    exit;
+}
+$ids_string = implode(",", array_map('intval', $ids_medicos));
+
+// 4. Obtener y limpiar fechas de GET
+$fecha_inicio = isset($_GET['start']) ? date('Y-m-d', strtotime($_GET['start'])) : date('Y-m-d');
+$fecha_fin = isset($_GET['end']) ? date('Y-m-d', strtotime($_GET['end'])) : date('Y-m-d', strtotime('+4 day'));
+
+// 5. Consulta SQL principal
+$sql = "SELECT 
+    ace.ID_Agenda_Especialista,
+    ace.Nombre_Paciente,
+    ace.Telefono,
+    ace.Tipo_Consulta,
+    ace.Observaciones,
+    ace.AgendadoPor,
+    ace.Fecha_Hora,
+    ee.Nombre_Especialidad,
+    pme.Nombre_Apellidos,
+    fe.Fecha_Disponibilidad,
+    hce.Horario_Disponibilidad,
+    sc.Nombre_Sucursal,
+    sc.LinkMaps
+FROM AgendaCitas_EspecialistasExt ace
+INNER JOIN Especialidades_Express ee ON ace.Fk_Especialidad = ee.ID_Especialidad
+INNER JOIN Personal_Medico_Express pme ON ace.Fk_Especialista = pme.Medico_ID
+INNER JOIN SucursalesCorre sc ON ace.Fk_Sucursal = sc.ID_SucursalC
+INNER JOIN Fechas_EspecialistasExt fe ON ace.Fecha = fe.ID_Fecha_Esp
+INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario
+WHERE ace.Fk_Especialista IN ($ids_string)
+AND fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+    echo json_encode(['error' => mysqli_error($conn)]);
+    exit;
+}
+
+// 6. Armar array de eventos para FullCalendar
 $eventos = array();
-foreach($data as $cita) {
+while($cita = mysqli_fetch_assoc($result)) {
+    $id = isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null;
+    $paciente = isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '';
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha_Disponibilidad"]) ? $cita["Fecha_Disponibilidad"] : '';
+    $hora = isset($cita["Horario_Disponibilidad"]) ? $cita["Horario_Disponibilidad"] : '';
+    // Normaliza hora a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Normaliza fecha
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Nombre_Especialidad"]) ? $cita["Nombre_Especialidad"] : '',
+            "doctor" => isset($cita["Nombre_Apellidos"]) ? $cita["Nombre_Apellidos"] : '',
+            "sucursal" => isset($cita["Nombre_Sucursal"]) ? $cita["Nombre_Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+        )
+    );
+}
+echo json_encode($eventos);
+exit;
+
     // Detecta el campo correcto de ID (Folio o ID_Agenda_Especialista)
     $id = isset($cita["Folio"]) ? $cita["Folio"] : (isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null);
     $paciente = isset($cita["Paciente"]) ? $cita["Paciente"] : (isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '');
