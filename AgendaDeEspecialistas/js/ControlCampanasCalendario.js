@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '<b>Observaciones:</b> ' + (e.extendedProps.observaciones || '-');
 
       // Mostrar detalles en el modal Bootstrap
-      var modal = document.getElementById('modalDetalles');
+      var modal = document.getElementById('modalDetalleCita');
       var modalBody = modal.querySelector('.modal-body');
       modalBody.innerHTML = details;
       modal.style.display = 'block';
