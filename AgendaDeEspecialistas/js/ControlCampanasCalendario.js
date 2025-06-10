@@ -22,12 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
       tabla += '<tr><th>Observaciones</th><td>' + (e.extendedProps.observaciones || '-') + '</td></tr>';
       tabla += '</table>';
       document.getElementById('modalDetalleCitaBody').innerHTML = tabla;
-      // Agrega el botón al footer del modal
+      // Agrega el botón al footer del modal sin sobrescribir el de cerrar
       var modalFooter = document.querySelector('#modalDetalleCita .modal-footer');
       if (modalFooter) {
-        // Limpia el footer y agrega el botón de cerrar y eliminar
-        modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>' +
-          '<button id="btn-eliminar-cita" class="btn btn-danger ms-2">Eliminar cita</button>';
+        // Si ya existe el botón, no lo agregues de nuevo
+        if (!document.getElementById('btn-eliminar-cita')) {
+          var btnEliminar = document.createElement('button');
+          btnEliminar.id = 'btn-eliminar-cita';
+          btnEliminar.className = 'btn btn-danger ms-2';
+          btnEliminar.innerText = 'Eliminar cita';
+          modalFooter.appendChild(btnEliminar);
+        }
       }
       var modalEl = document.getElementById('modalDetalleCita');
       var modal = new bootstrap.Modal(modalEl);
