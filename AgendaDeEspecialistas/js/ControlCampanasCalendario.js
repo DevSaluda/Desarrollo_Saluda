@@ -21,9 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
       tabla += '<tr><th>Sucursal</th><td>' + (e.extendedProps.sucursal || '-') + '</td></tr>';
       tabla += '<tr><th>Observaciones</th><td>' + (e.extendedProps.observaciones || '-') + '</td></tr>';
       tabla += '</table>';
-      // Botón de eliminar cita
-      tabla += '<button id="btn-eliminar-cita" class="btn btn-danger w-100 mt-3">Eliminar cita</button>';
       document.getElementById('modalDetalleCitaBody').innerHTML = tabla;
+      // Agrega el botón al footer del modal
+      var modalFooter = document.querySelector('#modalDetalleCita .modal-footer');
+      if (modalFooter) {
+        // Limpia el footer y agrega el botón de cerrar y eliminar
+        modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>' +
+          '<button id="btn-eliminar-cita" class="btn btn-danger ms-2">Eliminar cita</button>';
+      }
       var modalEl = document.getElementById('modalDetalleCita');
       var modal = new bootstrap.Modal(modalEl);
       modal.show();
