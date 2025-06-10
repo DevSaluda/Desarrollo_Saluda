@@ -28,7 +28,7 @@ include "Consultas/Consultas.php";
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
 <div class="card text-center">
   <div class="card-header" style="background-color: #0057B8 !important;color: white;">
-  <i class="fas fa-user-md"></i>Consultas con especialistas agendadas <i class="fas fa-user-md"></i>
+  Citas con especialistas disponibles para el dia de hoy
   </div>
 
   <!-- Container de botones-->
@@ -38,10 +38,15 @@ include "Consultas/Consultas.php";
   Agendar nueva cita <i class="fas fa-file-medical"></i>
 </button>
 <!-- Boton para filtrar por fecha-->
-<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#CitaExt" style="background-color: #C80096 !important;" class="btn btn-default">
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroEspecificoMesxd" style="background-color: #C80096 !important;" class="btn btn-default">
  Citas por fechas <i class="fas fa-calendar"></i>
 </button>
-
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltraPorSucursales" style="background-color: #C80096 !important;" class="btn btn-default">
+ Citas por sucursal <i class="fas fa-calendar"></i>
+</button>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltraPorSucursalesYEspecialistas" style="background-color: #C80096 !important;" class="btn btn-default">
+ Citas por especialista <i class="fas fa-calendar"></i>
+</button>
 </div> <!-- Fin del container -->
 
 </div>
@@ -67,7 +72,9 @@ include "Consultas/Consultas.php";
   include ("Modales/AgendarCitasDeSucursales.php");
   include ("Modales/AgendarCitasExt.php");
  include ("Modales/AltaEspecialista.php");
- include("Modales/BusquedaCitasMes.php");
+ include("Modales/BusquedaPorFechas.php");
+ include("Modales/BusquedaPorSucursales.php");
+ include("Modales/BusquedaPorSucursalesYEspecialistas.php");
   include ("footer.php")?>
 
 
@@ -83,9 +90,10 @@ include "Consultas/Consultas.php";
 <script src="js/ObtieneHoras.js"></script> -->
 <script src="js/ObtieneEspecialidadMedicoExt.js"></script>
 <script src="js/ObtieneMedicoDeSucursalExt.js"></script>
+<script src="js/ObtieneTipoDeConsulta.js"></script>
 <script src="js/ObtieneFechasExt.js"></script>
 <script src="js/ObtieneHorasExt.js"></script>
-<script src="js/AgendaEnSucursalesExt.js"></script>
+<script src="js/AgendaEnSucursalesValidacion.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
