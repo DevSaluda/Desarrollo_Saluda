@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     events: '../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php',
     
     eventClick: function(info) {
-
-      console.log('Eventos cargados:', info);
-
       var e = info.event;
       var details =
         '<b>Paciente:</b> ' + e.title + '<br>' +
@@ -23,11 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
         '<b>Sucursal:</b> ' + (e.extendedProps.sucursal || '-') + '<br>' +
         '<b>Observaciones:</b> ' + (e.extendedProps.observaciones || '-');
 
-      // Mostrar detalles en el modal Bootstrap
-      var modal = document.getElementById('modalDetalleCita');
-      var modalBody = modal.querySelector('.modal-body');
-      modalBody.innerHTML = details;
-      modal.style.display = 'block';
+      // Usar el id correcto y la API Bootstrap 5
+      document.getElementById('modalDetalleCitaBody').innerHTML = details;
+      var modal = new bootstrap.Modal(document.getElementById('modalDetalleCita'));
+      modal.show();
     }
   });
   calendar.render();
