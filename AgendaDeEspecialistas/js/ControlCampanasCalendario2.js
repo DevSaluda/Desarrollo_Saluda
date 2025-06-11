@@ -81,24 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function filtrarPorNombre() {
-    var texto = document.getElementById('busquedaNombreCita').value.toLowerCase();
+    var texto = document.getElementById('busquedaNombreCita').value;
+    var usuario = (typeof nombreUsuario !== 'undefined' ? nombreUsuario : '');
     calendar.removeAllEventSources();
-    calendar.addEventSource(function(fetchInfo, successCallback, failureCallback) {
-      fetch('../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php')
-        .then(response => response.json())
-        .then(events => {
-          if (!texto) {
+    if (texto.trim() === '') {
+      // Si está vacío, consulta el archivo original
+      calendar.addEventSource('Consultas/CitasEnSucursalExtDias.php');
+    } else {
+      // Si hay texto, filtra usando el nuevo archivo PHP
+      calendar.addEventSource(function(fetchInfo, successCallback, failureCallback) {
+        var params = new URLSearchParams({ usuario: usuario, busqueda: texto });
+        fetch('Consultas/FiltraCitasPorNombre.php?' + params.toString())
+          .then(response => response.json())
+          .then(events => {
             successCallback(events);
-          } else {
-            var lista = Array.isArray(events) ? events : (events.events || []);
-            var filtrados = lista.filter(ev =>
-              (ev.title && ev.title.toLowerCase().includes(texto)) ||
-              (ev.Nombre_Paciente && ev.Nombre_Paciente.toLowerCase().includes(texto))
-            );
-            successCallback(filtrados);
-          }
-        })
-        .catch(failureCallback);
-    });
+          })
+          .catch(failureCallback);
+      });
+    }
   }
 });
