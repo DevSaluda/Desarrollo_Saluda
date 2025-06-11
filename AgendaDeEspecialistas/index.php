@@ -41,6 +41,12 @@ include "Consultas/Mensaje.php";
   <div >
   
 </div>
+<div class="input-group mb-3" style="max-width:400px;">
+  <input type="text" id="busquedaNombreCita" class="form-control" placeholder="Buscar por nombre de paciente...">
+  <button class="btn btn-primary" type="button" id="btnBuscarCita">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
 <div id="calendar"></div>
 <!-- Modal para detalles de cita -->
 <div class="modal fade" id="modalDetalleCita" tabindex="-1" aria-labelledby="modalDetalleCitaLabel" aria-hidden="true">

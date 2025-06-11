@@ -70,4 +70,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   calendar.render();
+
+  // Búsqueda por nombre
+  document.getElementById('btnBuscarCita').addEventListener('click', function() {
+    filtrarPorNombre();
+  });
+  document.getElementById('busquedaNombreCita').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') filtrarPorNombre();
+    if (this.value === '') filtrarPorNombre(); // Reset si borra todo
+  });
+
+  function filtrarPorNombre() {
+    var texto = document.getElementById('busquedaNombreCita').value.toLowerCase();
+    calendar.removeAllEventSources();
+    calendar.addEventSource(function(fetchInfo, successCallback, failureCallback) {
+      fetch('../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php')
+        .then(response => response.json())
+        .then(events => {
+          if (!texto) {
+            successCallback(events);
+          } else {
+            var lista = Array.isArray(events) ? events : (events.events || []);
+            var filtrados = lista.filter(ev =>
+              (ev.title && ev.title.toLowerCase().includes(texto)) ||
+              (ev.Nombre_Paciente && ev.Nombre_Paciente.toLowerCase().includes(texto))
+            );
+            successCallback(filtrados);
+          }
+        })
+        .catch(failureCallback);
+    });
+  }
 });
