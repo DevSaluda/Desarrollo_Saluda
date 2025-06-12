@@ -16,6 +16,34 @@ function fechaCastellano ($fecha) {
     $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
     return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
   }
+// Obtener el nombre del médico logeado desde la sesión
+$nombre_medico = isset($_SESSION['Nombre_Medico']) ? $_SESSION['Nombre_Medico'] : '';
+
+// Primero obtenemos todos los Medico_ID que coincidan con el nombre
+$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express 
+            WHERE Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
+$result_ids = mysqli_query($conn, $sql_ids);
+
+$ids_medicos = array();
+while($row = mysqli_fetch_assoc($result_ids)) {
+    $ids_medicos[] = $row['Medico_ID'];
+}
+
+// Si no encontramos médicos, devolvemos array vacío
+if(empty($ids_medicos)) {
+    echo json_encode([
+        "sEcho" => 1,
+        "iTotalRecords" => 0,
+        "iTotalDisplayRecords" => 0,
+        "aaData" => array()
+    ]);
+    exit;
+}
+
+// Construimos la condición IN para los IDs
+$ids_string = implode(",", array_map('intval', $ids_medicos));
+
+// Ahora la consulta principal con los IDs obtenidos
 $sql = "SELECT
 AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,
 Especialidades_Express.ID_Especialidad,
@@ -46,7 +74,8 @@ Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_Especiali
 LEFT JOIN
 Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
 WHERE
-YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
+AgendaCitas_EspecialistasExt.Fk_Especialista IN ($ids_string)
+AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())";
 
 
 $result = mysqli_query($conn, $sql);
