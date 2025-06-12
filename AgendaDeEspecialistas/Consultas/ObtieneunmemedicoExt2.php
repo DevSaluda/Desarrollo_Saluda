@@ -9,4 +9,5 @@
 		while($row = $a_result->fetch_array()){
 			echo '<option value = "'.$row['Medico_ID'].'">'.( $row['Nombre_Apellidos']).'</option>';
 		}
+		//PRUEBA
 ?>
