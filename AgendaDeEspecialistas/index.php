@@ -92,7 +92,7 @@ include "Consultas/Mensaje.php";
  include ("footer.php");?>
 <!-- ./wrapper -->
 
-<script src="js/ControlCampanasCalendario2.js"></script>
+<script src="js/ControlCampanasCalendario.js"></script>
 <script src="js/Logs.js"></script>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
