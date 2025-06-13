@@ -54,13 +54,43 @@
   <span class="input-group-text" id="Tarjeta"><i class="fas fa-hospital"></i></span>
   </div>
   <select id = "sucursalExt" class = "form-control" name = "SucursalExt"  >
-                                               <option value="">Seleccione una Sucursal:</option>
-        <?php
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
-          while ($valores = mysqli_fetch_array($query)) {
-            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
-          }
-        ?>  </select>
+    <option value="">Seleccione una Sucursal:</option>
+    <?php
+    // 1. Obtener el nombre del usuario actual (ajusta la variable según tu sesión)
+    $nombre_usuario = isset($_SESSION['Nombre_Medico']) ? $_SESSION['Nombre_Medico'] : '';
+    // 2. Buscar todos los Medico_ID del usuario con estatus 'Disponible'
+    $medicos = [];
+    $especialidades = [];
+    $sucursales = [];
+    $sqlMedicos = "SELECT Medico_ID, Especialidad_Express FROM Personal_Medico_Express WHERE Nombre_Apellidos='".$conn->real_escape_string($nombre_usuario)."' AND Estatus='Disponible'";
+    $resMedicos = $conn->query($sqlMedicos);
+    while($rowMed = $resMedicos->fetch_assoc()) {
+      $medicos[] = $rowMed['Medico_ID'];
+      $especialidades[] = $rowMed['Especialidad_Express'];
+    }
+    // 3. Buscar los Fk_Sucursal de esas especialidades
+    $especialidades_ids = array_map('intval', $especialidades);
+    $especialidades_ids = implode(',', $especialidades_ids);
+    $sucursales_ids = [];
+    if($especialidades_ids) {
+      $sqlEsp = "SELECT Fk_Sucursal FROM Especialidades_Express WHERE ID_Especialidad IN ($especialidades_ids) AND Estatus_Especialidad='Disponible'";
+      $resEsp = $conn->query($sqlEsp);
+      while($rowEsp = $resEsp->fetch_assoc()) {
+        $sucursales_ids[] = $rowEsp['Fk_Sucursal'];
+      }
+    }
+    // 4. Mostrar solo las sucursales válidas
+    if(count($sucursales_ids)) {
+      $sucursales_ids = array_map('intval', $sucursales_ids);
+      $sucursales_ids = implode(',', $sucursales_ids);
+      $sqlSuc = "SELECT ID_SucursalC, Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC IN ($sucursales_ids)";
+      $resSuc = $conn->query($sqlSuc);
+      while($rowSuc = $resSuc->fetch_assoc()) {
+        echo '<option value="'.$rowSuc["ID_SucursalC"].'">'.$rowSuc["Nombre_Sucursal"].'</option>';
+      }
+    }
+    ?>
+  </select>
 </div>
 <label for="sucursal" class="error">
     </div>
