@@ -1,24 +1,32 @@
 <?php
-// FiltraCitasPorNombre.php
-// Recibe por GET o POST: usuario (nombre de usuario) y busqueda (nombre a buscar en las citas)
+session_start();
 header('Content-Type: application/json');
 include "db_connection.php";
 
-$usuario = isset($_REQUEST['usuario']) ? $conn->real_escape_string($_REQUEST['usuario']) : '';
+$usuario = isset($_REQUEST['usuario']) ? trim($_REQUEST['usuario']) : '';
 $busqueda = isset($_REQUEST['busqueda']) ? $conn->real_escape_string($_REQUEST['busqueda']) : '';
 
-// Validación básica
+// Si no viene usuario, intenta obtenerlo de la sesión
 if ($usuario === '') {
-    echo json_encode([]);
+    $usuario = isset($_SESSION['Nombre_Medico']) ? $_SESSION['Nombre_Medico'] : '';
+}
+
+// Si sigue vacío, error
+if ($usuario === '') {
+    echo json_encode(['error' => 'No se especificó usuario']);
     exit;
 }
 
-// Obtener los Medico_ID asociados al usuario (si aplica)
-$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express WHERE Nombre_Apellidos = '$usuario'";
+// Obtener los Medico_ID asociados al usuario
+$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express WHERE Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $usuario) . "'";
 $result_ids = $conn->query($sql_ids);
 $ids_medicos = [];
 while($row = $result_ids->fetch_assoc()) {
     $ids_medicos[] = $row['Medico_ID'];
+}
+if (empty($ids_medicos)) {
+    echo json_encode(['error' => 'No hay médicos asociados al usuario', 'usuario' => $usuario]);
+    exit;
 }
 $ids_string = implode(',', $ids_medicos);
 
