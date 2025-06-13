@@ -70,8 +70,8 @@ while($row = $result->fetch_assoc()) {
         'doctor' => $row['Nombre_Apellidos'],
         'sucursal' => $row['Nombre_Sucursal'],
         'observaciones' => $row['Observaciones'],
-        'start' => $row['Fecha_Hora'],
-        'end' => $row['Fecha_Hora'],
+        'start' => $row['Fecha_Disponibilidad'] . 'T' . substr($row['Horario_Disponibilidad'], 0, 5),
+        'end' => $row['Fecha_Disponibilidad'] . 'T' . substr($row['Horario_Disponibilidad'], 0, 5),
         'allDay' => false
     ];
 }
