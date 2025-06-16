@@ -108,7 +108,12 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
             echo json_encode(array("statusCode" => 200, "message" => "Cita agendada sin Google Calendar"));
         }
     } else {
-        echo json_encode(array("statusCode" => 201));
+        echo json_encode(array(
+            "statusCode" => 201,
+            "error" => mysqli_error($conn),
+            "sql" => $sql,
+            "post" => $_POST
+        ));
     }
     mysqli_close($conn);
 }
