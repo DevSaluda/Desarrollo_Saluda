@@ -209,10 +209,9 @@
 </div>
     </div>
     </div>  
-    <input type="text" class="form-control" name="UsuarioExt" id="usuarioExt"  value="<?php echo $row['Nombre_Apellidos']?>"  hidden readonly >
-    <input type="text" class="form-control" name="SistemaExt" id="sistemaExt"  value="Agenda de citas" hidden  readonly >
-    <input type="text" class="form-control" name="EmpresaExt" id="empresaExt"  value="<?php echo $row['ID_H_O_D']?>" hidden  readonly >
-
+    <input type="hidden" class="form-control" name="UsuarioExt" id="usuarioExt" value="<?php echo isset($_SESSION['Nombre_Medico']) ? $_SESSION['Nombre_Medico'] : ''; ?>">
+<input type="hidden" class="form-control" name="SistemaExt" id="sistemaExt" value="Agenda de citas">
+<input type="hidden" class="form-control" name="EmpresaExt" id="empresaExt" value="Saluda">
     
 <button type="submit"  name="submit_AgeExt" id="submit_AgeExt"  class="btn btn-success">Confirmar datos <i class="fas fa-user-check"></i></button>
     </div>    </div>
