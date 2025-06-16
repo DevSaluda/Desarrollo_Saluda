@@ -18,8 +18,9 @@ $Telefono = $conn->real_escape_string(trim($_POST['TelExt']));
 $Tipo_Consulta = $conn->real_escape_string(trim($_POST['TipoConsultaExt']));
 $Estatus_cita = $conn->real_escape_string(trim($Cita));
 $Observaciones = $conn->real_escape_string(trim($_POST['ObservacionesExt']));
-$ID_H_O_D = $conn->real_escape_string(trim($_POST['EmpresaExt']));
-$AgendadoPor = $conn->real_escape_string(trim($_POST['UsuarioExt']));
+session_start();
+$ID_H_O_D = isset($_POST['EmpresaExt']) && trim($_POST['EmpresaExt']) !== '' ? $conn->real_escape_string(trim($_POST['EmpresaExt'])) : 'Saluda';
+$AgendadoPor = isset($_POST['UsuarioExt']) && trim($_POST['UsuarioExt']) !== '' ? $conn->real_escape_string(trim($_POST['UsuarioExt'])) : (isset($_SESSION['Nombre_Medico']) ? $conn->real_escape_string($_SESSION['Nombre_Medico']) : '');
 $Sistema = $conn->real_escape_string(trim($_POST['SistemaExt']));
 $Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 
