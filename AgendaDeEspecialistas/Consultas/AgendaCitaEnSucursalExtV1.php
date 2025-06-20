@@ -6,7 +6,7 @@ include_once 'db_connection.php';
 $conn->set_charset("utf8mb4");
 
 $Cita = "Agendado";
-$ColorClaveCalendario = "#04B45F";
+
 
 $Fk_Especialidad = $conn->real_escape_string(trim($_POST['EspecialidadExt']));
 $Fk_Especialista = $conn->real_escape_string(trim($_POST['MedicoExt']));
@@ -83,7 +83,7 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
                 $event = new Google_Service_Calendar_Event(array(
                     'summary' => "Consulta de $Nombre_Paciente",
                     'location' => "$Nombre_Sucursal", // Usar el nombre de la sucursal en lugar del Fk_Sucursal
-                    'description' => "$Observaciones",
+                    'description' => "Motivo de Consulta: $Tipo_Consulta\nObservaciones: $Observaciones",
                     'start' => array(
                         'dateTime' => $startDateTime,
                         'timeZone' => 'America/Mexico_City',
