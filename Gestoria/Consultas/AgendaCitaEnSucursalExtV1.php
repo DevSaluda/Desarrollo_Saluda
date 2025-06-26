@@ -43,6 +43,11 @@ if ($row !== null) {
             '$AgendadoPor','$Sistema','$Color_Calendario')";
 
     if (mysqli_query($conn, $sql)) {
+        // Actualizar el estado de la fecha y la hora a 'Ocupado'
+        $sql_update_fecha = "UPDATE Fechas_EspecialistasExt SET Estado='Ocupado' WHERE ID_Fecha_Esp='$Fk_Fecha'";
+        mysqli_query($conn, $sql_update_fecha);
+        $sql_update_hora = "UPDATE Horarios_Citas_Ext SET Estado='Ocupado' WHERE ID_Horario='$Fk_Hora'";
+        mysqli_query($conn, $sql_update_hora);
         echo json_encode(array("statusCode" => 200));
     } else {
         echo json_encode(array("statusCode" => 201));

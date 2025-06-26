@@ -16,8 +16,7 @@ function fechaCastellano ($fecha) {
   }
 	include("ConeSelectDinamico.php");
 	$medico=intval($_REQUEST['medicoExt']);
-	$medicos = $conn->prepare("SELECT * FROM Fechas_EspecialistasExt WHERE 	FK_Especialista = '$medico' and Fecha_Disponibilidad >= CURDATE() ORDER BY Fecha_Disponibilidad ") or die(mysqli_error());
-	echo '<option value = "">Selecciona una fecha </option>';
+	$medicos = $conn->prepare("SELECT * FROM Fechas_EspecialistasExt WHERE FK_Especialista = '$medico' AND Fecha_Disponibilidad >= CURDATE() AND (Estado = '' OR Estado = 'Disponible' OR Estado IS NULL) ORDER BY Fecha_Disponibilidad ") or die(mysqli_error());
 	if($medicos->execute()){
 		$a_result = $medicos->get_result();
 	}
