@@ -23,7 +23,7 @@ if ($GoogleEventId && $calendarId) {
         $service->events->delete($calendarId, $GoogleEventId);
     } catch (Exception $e) {
         // Si el error es porque el evento no existe, continuar con el borrado
-        if (strpos($e->getMessage(), '404') !== false || strpos($e->getMessage(), 'notFound') !== false || strpos($e->getMessage(), 'No se ha encontrado') !== false) {
+        if (strpos($e->getMessage(), '404') !== false || strpos($e->getMessage(), 'notFound') !== false || strpos($e->getMessage(), 'No se ha encontrado') !== false || strpos($e->getMessage(), 'Resource deleted') !== false) {
             // Continuar con el borrado de la agenda
         } else {
             echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
