@@ -66,6 +66,11 @@ if ($row && $row['Nombre_Paciente'] == $Nombre_Paciente && $row['Fecha'] == $Fk_
             '$Estatus_cita', '$Observaciones', '$ID_H_O_D', '$AgendadoPor', '$Sistema', '$Color_Calendario', '$calendarId')";
 
     if (mysqli_query($conn, $sql)) {
+        // Actualizar el estado de la fecha y la hora a 'Ocupado'
+        $sql_update_fecha = "UPDATE Fechas_EspecialistasExt SET Estado='Ocupado' WHERE ID_Fecha_Esp='$Fk_Fecha'";
+        mysqli_query($conn, $sql_update_fecha);
+        $sql_update_hora = "UPDATE Horarios_Citas_Ext SET Estado='Ocupado' WHERE ID_Horario='$Fk_Hora'";
+        mysqli_query($conn, $sql_update_hora);
         if (!empty($calendarId)) {
             // Agregar el evento a Google Calendar
             $client = new Google_Client();
