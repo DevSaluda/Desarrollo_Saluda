@@ -95,7 +95,7 @@ while ($r=$query->fetch_object()){
   <button type="submit"  name="submit_Age" id="submit_Age"  class="btn btn-danger">Cancelar <i class="fas fa-user-check"></i></button>
 </form>
 
-<script src="js/RealizaCancelacionDeSucursalExt.js"></script>
+<script src="js/RealizaCancelacionDeSucursalExt2.js"></script>
 <?php else:?>
 <p class="alert alert-danger">404 No se encuentra</p>
 <?php endif;?>
