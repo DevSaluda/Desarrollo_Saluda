@@ -23,8 +23,24 @@ if ($GoogleEventId && $calendarId) {
         $service->events->delete($calendarId, $GoogleEventId);
     } catch (Exception $e) {
         // Si el error es porque el evento no existe, continuar con el borrado
-        if (strpos($e->getMessage(), '404') !== false || strpos($e->getMessage(), 'notFound') !== false || strpos($e->getMessage(), 'No se ha encontrado') !== false || strpos($e->getMessage(), 'Resource deleted') !== false) {
+        if (
+            strpos($e->getMessage(), '404') !== false ||
+            strpos($e->getMessage(), '410') !== false ||
+            strpos($e->getMessage(), 'notFound') !== false ||
+            strpos($e->getMessage(), 'No se ha encontrado') !== false ||
+            strpos($e->getMessage(), 'Resource deleted') !== false ||
+            strpos($e->getMessage(), 'Resource has been deleted') !== false ||
+            strpos($e->getMessage(), 'deleted') !== false
+        ) {
             // Continuar con el borrado de la agenda
+            $sql = "DELETE FROM `AgendaCitas_EspecialistasExt` WHERE ID_Agenda_Especialista = '$ID_Agenda_Especialista'";
+            if (mysqli_query($conn, $sql)) {
+                echo json_encode(array("statusCode" => 200));
+            } else {
+                echo json_encode(array("statusCode" => 201));
+            }
+            mysqli_close($conn);
+            exit();
         } else {
             echo json_encode(array("statusCode" => 400, "error" => $e->getMessage()));
             exit();
@@ -32,7 +48,7 @@ if ($GoogleEventId && $calendarId) {
     }
 }
 
-// Luego eliminar la cita de la base de datos
+// Luego eliminar la cita de la base de datos solo si no hubo excepción
 $sql = "DELETE FROM `AgendaCitas_EspecialistasExt` WHERE ID_Agenda_Especialista = '$ID_Agenda_Especialista'";
 
 if (mysqli_query($conn, $sql)) {
