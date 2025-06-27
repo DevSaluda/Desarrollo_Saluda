@@ -15,67 +15,30 @@ include "Consultas/Consultas.php";
   <link href='js/fullcalendar/fullcalendar.css' rel='stylesheet' />
 </head>
 <?php include_once ("Menu.php")?>
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-user-md"></i> Cancelaciones por sucursal </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link " id="pills-home-tab" data-toggle="pill" href="#CrediClinicas" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-file-medical"></i> Cancelaciones de especialistas </a>
-  </li>
- 
-</ul>
-<div class="tab-content" id="pills-tabContent">
-<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2E64FE !important;color: white;">
-  Cancelaciones por sucursal
-  </div>
- 
-  <div >
-  
-</div>
-
-</div>
-
-
-    
-<div id="CitasCanceladasSucursal"></div>
-</div>
-<div class="tab-pane fade show " id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
-<div class="card text-center">
-  <div class="card-header" style="background-color: #2E64FE !important;color: white;">
-  Cancelaciones de especialistas
-  </div>
- 
-  <div >
+<div class="container mt-4">
+  <div class="card text-center">
+    <div class="card-header" style="background-color: #2E64FE !important;color: white;">
+      Cancelaciones de especialistas
+    </div>
+    <div id="CitasCanceladasExt"></div>
   </div>
 </div>
-<div id="CitasCanceladasExt"></div>
-</div>
-</div>
-</div>
 
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <?php
-   include ("Modales/Error.php");
-  
-   include ("Modales/Exito.php");
-
-   include ("Modales/Precarga.php");
- 
-  include ("footer.php")?>
-  <script src="js/CancelacionesEnSucursales.js"></script>
+<?php
+ include ("Modales/Error.php");
+ include ("Modales/Exito.php");
+ include ("Modales/Precarga.php");
+ include ("footer.php")?>
 <script src="js/CancelacionesExternas.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
