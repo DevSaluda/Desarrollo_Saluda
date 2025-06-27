@@ -35,14 +35,38 @@ include("db_connection.php");
 include "Consultas.php";
 
 
-$user_id=null;
-$sql1="SELECT Cancelaciones_Ext.ID_CancelacionExt,Cancelaciones_Ext.ID_Agenda_Especialista,Cancelaciones_Ext.Fk_Especialidad,
-Cancelaciones_Ext.Fk_Especialista,Cancelaciones_Ext.Fk_Sucursal,Cancelaciones_Ext.Fecha,Cancelaciones_Ext.Hora,
-Cancelaciones_Ext.Nombre_Paciente,Cancelaciones_Ext.ID_H_O_D,
-Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,
-Personal_Medico_Express.Medico_ID,Personal_Medico_Express.Nombre_Apellidos,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad, Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad FROM
-Cancelaciones_Ext,Personal_Medico_Express,Especialidades_Express,SucursalesCorre,Horarios_Citas_Ext,Fechas_EspecialistasExt where
-Cancelaciones_Ext.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND Cancelaciones_Ext.Fk_Especialista = Personal_Medico_Express.Medico_ID AND Cancelaciones_Ext.Fk_Sucursal=SucursalesCorre.ID_SucursalC AND Cancelaciones_Ext.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp AND Cancelaciones_Ext.Hora = Horarios_Citas_Ext.ID_Horario AND Cancelaciones_Ext.ID_H_O_D ='".$row['ID_H_O_D']."'";
+$user_id = null;
+$sql1 = "SELECT
+    AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,
+    Especialidades_Express.ID_Especialidad,
+    Especialidades_Express.Nombre_Especialidad,
+    Personal_Medico_Express.Medico_ID,
+    Personal_Medico_Express.Nombre_Apellidos,
+    SucursalesCorre.ID_SucursalC,
+    SucursalesCorre.Nombre_Sucursal,
+    Fechas_EspecialistasExt.ID_Fecha_Esp,
+    Fechas_EspecialistasExt.Fecha_Disponibilidad,
+    Horarios_Citas_Ext.ID_Horario,
+    Horarios_Citas_Ext.Horario_Disponibilidad,
+    AgendaCitas_EspecialistasExt.AgendadoPor,
+    AgendaCitas_EspecialistasExt.Nombre_Paciente,
+    AgendaCitas_EspecialistasExt.Telefono,
+    AgendaCitas_EspecialistasExt.Observaciones,
+    AgendaCitas_EspecialistasExt.Fecha_Hora,
+    AgendaCitas_EspecialistasExt.Tipo_Consulta,
+    AgendaCitas_EspecialistasExt.Estatus_cita,
+    AgendaCitas_EspecialistasExt.ID_H_O_D
+FROM
+    AgendaCitas_EspecialistasExt
+    INNER JOIN Especialidades_Express ON AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad
+    INNER JOIN Personal_Medico_Express ON AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID
+    INNER JOIN SucursalesCorre ON AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC
+    INNER JOIN Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp
+    INNER JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
+WHERE
+    AgendaCitas_EspecialistasExt.Estatus_cita = 'Cancelado'
+    AND AgendaCitas_EspecialistasExt.ID_H_O_D ='".$row['ID_H_O_D']."'
+    AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) = YEAR(CURDATE())";
 $query = $conn->query($sql1);
 ?>
 
