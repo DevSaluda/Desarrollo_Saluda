@@ -5,7 +5,7 @@ include("db_connection.php");
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 $estado = isset($_POST['estado']) ? $_POST['estado'] : '';
 
-if ($id > 0 && in_array($estado, ['Pendiente', 'Confirmado'])) {
+if ($id > 0 && in_array($estado, ['Pendiente', 'Confirmado', 'Agendado', 'Cancelado'])) {
     $stmt = $conn->prepare("UPDATE AgendaCitas_EspecialistasExt SET Estatus_cita=? WHERE ID_Agenda_Especialista=?");
     $stmt->bind_param('si', $estado, $id);
     if ($stmt->execute()) {
