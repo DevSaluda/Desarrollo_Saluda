@@ -110,10 +110,11 @@ $query = $conn->query($sql1);
         </span>
     </td>
     <td>
-        <select class="form-control form-control-sm estado-cita-select" data-id="<?php echo $Usuarios['ID_Agenda_Especialista']; ?>">
-            <option value="Pendiente" <?php if($estado=="Pendiente") echo 'selected'; ?>>Pendiente</option>
-            <option value="Confirmado" <?php if($estado=="Confirmado") echo 'selected'; ?>>Confirmado</option>
-        </select>
+        <button class="btn btn-sm btn-outline-primary cambiar-estado-btn" 
+                data-id="<?php echo $Usuarios['ID_Agenda_Especialista']; ?>" 
+                data-estado="<?php echo $estado; ?>">
+            Cambiar Estado
+        </button>
     </td>
     <td>
 		 <!-- Basic dropdown -->
