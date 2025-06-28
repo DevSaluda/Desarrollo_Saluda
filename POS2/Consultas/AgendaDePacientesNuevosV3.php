@@ -143,7 +143,8 @@ $query = $conn->query($sql1);
 <?php endif;?>
   <!-- Modal -->
  <!-- Modal -->
- <script>
+ <script src="../js/actualiza_estado_cita_pos2.js"></script>
+<script>
   	$(".btn-edit1").click(function(){
   		id = $(this).data("id");
   		$.post("https://controlfarmacia.com/ControldecitasV2/Modales/ContactoPaciente.php","id="+id,function(data){

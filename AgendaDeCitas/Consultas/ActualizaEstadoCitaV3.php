@@ -12,8 +12,8 @@ if ($estado === 'Confirmado') $color = '#28a745';
 if ($estado === 'Agendado') $color = '#6c757d';
 
 if ($id > 0 && in_array($estado, ['Pendiente', 'Confirmado', 'Agendado'])) {
-    $stmt = $conn->prepare("UPDATE AgendaCitas_EspecialistasExt SET Estatus_cita=? WHERE ID_Agenda_Especialista=?");
-    $stmt->bind_param('si', $estado, $id);
+    $stmt = $conn->prepare("UPDATE AgendaCitas_EspecialistasExt SET Estatus_cita=?, ColorEstatusCita=? WHERE ID_Agenda_Especialista=?");
+    $stmt->bind_param('ssi', $estado, $color, $id);
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'estado' => $estado, 'color' => $color]);
     } else {
