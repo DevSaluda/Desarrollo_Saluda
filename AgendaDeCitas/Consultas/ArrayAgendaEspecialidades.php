@@ -67,6 +67,22 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
     $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
 
+    // Estado y color
+    $estado = isset($fila['Estatus_cita']) ? $fila['Estatus_cita'] : 'Agendado';
+    $color = '#6c757d'; // gris por defecto
+    if ($estado == 'Pendiente') $color = '#8B5C2A'; // café
+    if ($estado == 'Confirmado') $color = '#28a745'; // verde
+
+    // Badge visual
+    $data[$c]["Estado"] = '<span class="badge" style="background-color:'.$color.';color:white;">'.$estado.'</span>';
+
+    // Botón (select) editable
+    $data[$c]["BotonEstado"] = '<select class="form-control form-control-sm estado-cita-select" data-id="'.$fila['ID_Agenda_Especialista'].'">'
+        .'<option value="Pendiente"'.($estado=="Pendiente"?' selected':'').'>Pendiente</option>'
+        .'<option value="Confirmado"'.($estado=="Confirmado"?' selected':'').'>Confirmado</option>'
+        .'<option value="Agendado"'.($estado=="Agendado"?' selected':'').'>Agendado</option>'
+        .'</select>';
+
     $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
     $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
 
