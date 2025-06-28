@@ -141,7 +141,7 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif;?>
   <!-- Modal -->
-  <script src="../js/actualiza_estado_cita_pos2.js"></script>
+  <script src="https://saludapos.com/POS2/js/actualiza_estado_cita_pos2.js"></script>
 <script>
   	
     $(".btn-Detalles").click(function(){
