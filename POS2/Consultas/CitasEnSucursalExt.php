@@ -140,7 +140,8 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif;?>
   <!-- Modal -->
-  <script>
+  <script src="../js/actualiza_estado_cita_pos2.js"></script>
+<script>
   	
     $(".btn-Detalles").click(function(){
   		id = $(this).data("id");
