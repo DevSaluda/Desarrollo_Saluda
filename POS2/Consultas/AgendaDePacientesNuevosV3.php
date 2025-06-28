@@ -84,6 +84,7 @@ $query = $conn->query($sql1);
     <th>Fecha | Hora</th>
     <th>Doctor</th>
     <th>Estatus</th>
+<th>Cambiar Estado</th>
     
 
 	
@@ -114,6 +115,14 @@ $query = $conn->query($sql1);
     <div class="text-center">
 <a class="dropdown-item" >Cita</a>
 <button class="btn btn-default btn-sm" style="<?echo $Especialista['ColorEstatusCita'];?>"><?php echo $Especialista["Estatus_cita"]; ?></button> 
+</td>
+<td>
+    <select class="form-control form-control-sm estado-cita-select" data-id="<?php echo $Especialista['ID_Agenda_Especialista']; ?>">
+        <option value="Pendiente" <?php if($Especialista["Estatus_cita"]=="Pendiente") echo 'selected'; ?>>Pendiente</option>
+        <option value="Confirmado" <?php if($Especialista["Estatus_cita"]=="Confirmado") echo 'selected'; ?>>Confirmado</option>
+        <option value="Agendado" <?php if($Especialista["Estatus_cita"]=="Agendado") echo 'selected'; ?>>Agendado</option>
+    </select>
+
 <div class="dropdown-divider"></div>
 <a class="dropdown-item" >Pago</a>
 <button class="btn btn-default btn-sm" style="<?echo $Especialista['Color_Pago'];?>"><?php echo $Especialista["Estatus_pago"]; ?></button>

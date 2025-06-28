@@ -108,6 +108,7 @@
   }
 </style>
 
+<script src="js/actualiza_estado_cita.js"></script>
 <script>
   // Definir una lista de mensajes para el mensaje de carga
   var mensajesCarga = [
@@ -201,28 +202,14 @@
       { mData: 'Especialidad' },
       { mData: 'Doctor' },
       { mData: 'Sucursal' },
-      { mData: 'Tipo_Consulta' } ,
+      { mData: 'Tipo_Consulta' },
       { mData: 'Observaciones' },
       { mData: 'AgendadoPor' },
       { mData: 'AgendamientoRealizado' },
       { mData: 'ConWhatsapp' },
-      { mData:<?php 
-    $estado = isset($row['Estatus_cita']) ? $row['Estatus_cita'] : 'Agendado';
-    $color = '#6c757d'; // gris por defecto
-    if ($estado == 'Pendiente') $color = '#8B5C2A';
-    if ($estado == 'Confirmado') $color = '#28a745';
-?>
-<td><span class="badge" style="background-color:<?php echo $color; ?>;color:white;">
-    <?php echo $estado; ?>
-</span></td>
-<td>
-    <select class="form-control form-control-sm estado-cita-select" data-id="<?php echo $row['ID_Agenda_Especialista']; ?>">
-        <option value="Pendiente" <?php if($estado=="Pendiente") echo 'selected'; ?>>Pendiente</option>
-        <option value="Confirmado" <?php if($estado=="Confirmado") echo 'selected'; ?>>Confirmado</option>
-        <option value="Agendado" <?php if($estado=="Agendado") echo 'selected'; ?>>Agendado</option>
-    </select>
-</td>
-<td><?php echo $row["BotonCancelar"]; ?></td>}
+      { mData: 'Estado' },
+      { mData: 'BotonEstado' },
+      { mData: 'BotonCancelar' }
     ],
     "lengthMenu": [[10, 20, 150, 250, 500, -1], [10, 20, 50, 250, 500, "Todos"]],
     "language": {

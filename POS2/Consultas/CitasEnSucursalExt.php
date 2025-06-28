@@ -70,6 +70,7 @@ $query = $conn->query($sql1);
 <th>¿Paciente asiste?</th>
 <th>Recordartorio</th>
 <th>Estado</th>
+<th>Cambiar Estado</th>
 <th>Acciones</th>
 
 
@@ -107,6 +108,12 @@ $query = $conn->query($sql1);
         <span class="badge" style="background-color:<?php echo $color; ?>;color:white;">
             <?php echo $estado; ?>
         </span>
+    </td>
+    <td>
+        <select class="form-control form-control-sm estado-cita-select" data-id="<?php echo $Usuarios['ID_Agenda_Especialista']; ?>">
+            <option value="Pendiente" <?php if($estado=="Pendiente") echo 'selected'; ?>>Pendiente</option>
+            <option value="Confirmado" <?php if($estado=="Confirmado") echo 'selected'; ?>>Confirmado</option>
+        </select>
     </td>
     <td>
 		 <!-- Basic dropdown -->
