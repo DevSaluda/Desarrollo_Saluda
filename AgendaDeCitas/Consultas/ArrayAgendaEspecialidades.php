@@ -73,15 +73,11 @@ while($fila = $result->fetch_assoc()) {
     if ($estado == 'Pendiente') $color = '#8B5C2A'; // café
     if ($estado == 'Confirmado') $color = '#28a745'; // verde
 
-    // Badge visual
-    $data[$c]["Estado"] = '<span class="badge" style="background-color:'.$color.';color:white;">'.$estado.'</span>';
+    // Badge visual solo texto, sin color
+    $data[$c]["Estado"] = '<span class="badge">'.htmlspecialchars($estado).'</span>';
 
-    // Botón (select) editable
-    $data[$c]["BotonEstado"] = '<select class="form-control form-control-sm estado-cita-select" data-id="'.$fila['ID_Agenda_Especialista'].'">'
-        .'<option value="Pendiente"'.($estado=="Pendiente"?' selected':'').'>Pendiente</option>'
-        .'<option value="Confirmado"'.($estado=="Confirmado"?' selected':'').'>Confirmado</option>'
-        .'<option value="Agendado"'.($estado=="Agendado"?' selected':'').'>Agendado</option>'
-        .'</select>';
+    // Botón Cambiar Estado igual que en POS2
+    $data[$c]["BotonEstado"] = '<button class="btn btn-primary btn-sm btn-cambiar-estado" data-id="'.$fila['ID_Agenda_Especialista'].'" data-estado="'.htmlspecialchars($estado).'">Cambiar Estado</button>';
 
     $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
     $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
