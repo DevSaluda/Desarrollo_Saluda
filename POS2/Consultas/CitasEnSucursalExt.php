@@ -99,10 +99,26 @@ $query = $conn->query($sql1);
 </td>
     <td>
         <?php 
-        $estado = isset($Usuarios['Estatus_cita']) ? $Usuarios['Estatus_cita'] : '';
+        $estado = isset($Usuarios['Estatus_cita']) ? $Usuarios['Estatus_cita'] : 'Agendado';
+        // Calcula el color dinámicamente según el estado
+        switch ($estado) {
+            case 'Pendiente':
+                $color = '#8B5C2A'; // café
+                break;
+            case 'Confirmado':
+                $color = '#28a745'; // verde
+                break;
+            case 'Cancelado':
+                $color = '#dc3545'; // rojo
+                break;
+            case 'Agendado':
+            default:
+                $color = '#6c757d'; // gris por defecto
+                break;
+        }
         ?>
-        <span class="badge">
-            <?php echo htmlspecialchars($estado); ?>
+        <span class="badge" style="background-color:<?php echo $color; ?>;color:white;">
+            <?php echo $estado; ?>
         </span>
     </td>
     <td>
