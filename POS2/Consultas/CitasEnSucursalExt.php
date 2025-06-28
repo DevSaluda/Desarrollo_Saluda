@@ -69,6 +69,7 @@ $query = $conn->query($sql1);
 <th>Observaciones</th>
 <th>¿Paciente asiste?</th>
 <th>Recordartorio</th>
+<th>Estado</th>
 <th>Acciones</th>
 
 
@@ -95,7 +96,18 @@ $query = $conn->query($sql1);
         echo urlencode($mensaje);
     ?>" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a>
 </td>
-
+    <td>
+        <?php 
+        // Simulación: aquí deberías obtener el estado real y el color desde la BD si existe
+        $estado = isset($Usuarios['Estatus_cita']) ? $Usuarios['Estatus_cita'] : 'Agendado';
+        $color = '#6c757d'; // gris por defecto
+        if ($estado == 'Pendiente') $color = '#8B5C2A'; // café
+        if ($estado == 'Confirmado') $color = '#28a745'; // verde
+        ?>
+        <span class="badge" style="background-color:<?php echo $color; ?>;color:white;">
+            <?php echo $estado; ?>
+        </span>
+    </td>
     <td>
 		 <!-- Basic dropdown -->
 <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
