@@ -84,10 +84,27 @@ while($cita = mysqli_fetch_assoc($result)) {
     if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
         $fecha = date('Y-m-d', strtotime($fecha));
     }
+    // Determinar color según estado
+    $estado = isset($cita['Estatus_cita']) ? $cita['Estatus_cita'] : '';
+    switch ($estado) {
+        case 'Pendiente':
+            $color = '#8B5C2A'; // café
+            break;
+        case 'Confirmado':
+            $color = '#28a745'; // verde
+            break;
+        case 'Cancelado':
+            $color = '#dc3545'; // rojo
+            break;
+        default:
+            $color = '#6c757d'; // gris
+            break;
+    }
     $eventos[] = array(
         "id" => $id,
         "title" => $paciente . ' (' . $tipo . ')',
         "start" => $fecha . 'T' . $hora,
+        "color" => $color,
         "extendedProps" => array(
             "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
             "especialidad" => isset($cita["Nombre_Especialidad"]) ? $cita["Nombre_Especialidad"] : '',
