@@ -86,7 +86,7 @@ while($cita = mysqli_fetch_assoc($result)) {
         $fecha = date('Y-m-d', strtotime($fecha));
     }
     // Determinar color según estado
-    $estado = isset($cita['Estatus_cita']) ? $cita['Estatus_cita'] : '';
+    $estado = isset($cita['Estado_cita']) ? $cita['Estado_cita'] : '';
     switch ($estado) {
         case 'Pendiente':
             $color = '#8B5C2A'; // café
