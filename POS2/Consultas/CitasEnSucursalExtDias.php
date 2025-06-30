@@ -38,7 +38,7 @@ include "Consultas.php";
 $user_id=null;
 $sql1="SELECT AgendaCitas_EspecialistasExt.ID_Agenda_Especialista,AgendaCitas_EspecialistasExt.Fk_Especialidad,AgendaCitas_EspecialistasExt.Fk_Especialista,
 AgendaCitas_EspecialistasExt.Fk_Sucursal,AgendaCitas_EspecialistasExt.Fecha,AgendaCitas_EspecialistasExt.Hora,
-AgendaCitas_EspecialistasExt.Nombre_Paciente,AgendaCitas_EspecialistasExt.Telefono,AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ID_H_O_D, Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,Personal_Medico_Express.Medico_ID,
+AgendaCitas_EspecialistasExt.Nombre_Paciente,AgendaCitas_EspecialistasExt.Telefono,AgendaCitas_EspecialistasExt.Observaciones,AgendaCitas_EspecialistasExt.ID_H_O_D, AgendaCitas_EspecialistasExt.Estatus_cita, Especialidades_Express.ID_Especialidad,Especialidades_Express.Nombre_Especialidad,Personal_Medico_Express.Medico_ID,
 Personal_Medico_Express.Nombre_Apellidos, Fechas_EspecialistasExt.ID_Fecha_Esp,Fechas_EspecialistasExt.Fecha_Disponibilidad, Horarios_Citas_Ext.ID_Horario,Horarios_Citas_Ext.Horario_Disponibilidad,SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal FROM 
 AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fechas_EspecialistasExt,Horarios_Citas_Ext,SucursalesCorre WHERE 
 AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID 
@@ -58,6 +58,7 @@ $query = $conn->query($sql1);
 <th>Telefono</th>
 <th>Fecha | Hora </th>
 <th>Especialidad | Doctor</th>
+<th>Estado</th>
 <th>Sucursal</th>
 <th>Observaciones</th>
 <th>Recordartorio</th>
@@ -74,6 +75,28 @@ $query = $conn->query($sql1);
     <?php echo date('h:i A', strtotime(($Usuarios["Horario_Disponibilidad"]))); ?></td>
     <td> <?php echo  $Usuarios["Nombre_Especialidad"]; ?> <br>
     <?php echo $Usuarios["Nombre_Apellidos"]; ?></td>
+    <td>
+        <?php 
+        $estado = isset($Usuarios['Estatus_cita']) ? $Usuarios['Estatus_cita'] : 'Agendado';
+        switch ($estado) {
+            case 'Pendiente':
+                $color = '#8B5C2A'; // café
+                break;
+            case 'Confirmado':
+                $color = '#28a745'; // verde
+                break;
+            case 'Cancelado':
+                $color = '#dc3545'; // rojo
+                break;
+            default:
+                $color = '#6c757d'; // gris
+                break;
+        }
+        ?>
+        <span class="badge" style="background-color:<?php echo $color; ?>;color:white;">
+            <?php echo $estado; ?>
+        </span>
+    </td>
     <td> <?php echo $Usuarios["Nombre_Sucursal"]; ?></td>
     <td> <?php echo $Usuarios["Observaciones"]; ?></td>
     <td> <a class="btn btn-success"  href="https://api.whatsapp.com/send?phone=+52<?php echo $Usuarios["Telefono"]; ?>&text=¡Hola, <?php echo $Usuarios["Nombre_Paciente"]; ?> ! Te contactamos de *Saluda Centro Médico Familiar* para la confirmación para su cita de <?php echo $Usuarios["Nombre_Especialidad"]; ?> agendada el día *<?php echo fechaCastellano($Usuarios["Fecha_Disponibilidad"]); ?>* *en horario de <?php echo date('h:i A', strtotime(($Usuarios["Horario_Disponibilidad"]))); ?>* en nuestro centro médico de <?php echo $Usuarios["Nombre_Sucursal"]; ?>. Agradecemos su pronta confirmación. 😁" target="_blank"><span class="fab fa-whatsapp"></span><span class="hidden-xs"></span></a></td>
