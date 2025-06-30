@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
       tabla += '<tr><th>Doctor</th><td>' + (e.extendedProps.doctor || '-') + '</td></tr>';
       tabla += '<tr><th>Sucursal</th><td>' + (e.extendedProps.sucursal || '-') + '</td></tr>';
       tabla += '<tr><th>Observaciones</th><td>' + (e.extendedProps.observaciones || '-') + '</td></tr>';
+      // Estado con badge de color
+      var color = e.backgroundColor || e.color || '#6c757d';
+      var estado = e.extendedProps.estado || '-';
+      tabla += '<tr><th>Estado</th><td><span class="badge" style="background-color:' + color + ';color:white;">' + estado + '</span></td></tr>';
       tabla += '</table>';
       document.getElementById('modalDetalleCitaBody').innerHTML = tabla;
       // Agrega el botón al footer del modal sin sobrescribir el de cerrar

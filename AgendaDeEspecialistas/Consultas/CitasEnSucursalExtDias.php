@@ -50,7 +50,8 @@ $sql = "SELECT
     fe.Fecha_Disponibilidad,
     hce.Horario_Disponibilidad,
     sc.Nombre_Sucursal,
-    sc.LinkMaps
+    sc.LinkMaps,
+    ace.Estatus_cita AS Estado_cita
 FROM AgendaCitas_EspecialistasExt ace
 INNER JOIN Especialidades_Express ee ON ace.Fk_Especialidad = ee.ID_Especialidad
 INNER JOIN Personal_Medico_Express pme ON ace.Fk_Especialista = pme.Medico_ID
@@ -96,7 +97,7 @@ while($cita = mysqli_fetch_assoc($result)) {
         case 'Cancelado':
             $color = '#dc3545'; // rojo
             break;
-        default:
+        case 'Agendado':
             $color = '#6c757d'; // gris
             break;
     }
@@ -110,7 +111,8 @@ while($cita = mysqli_fetch_assoc($result)) {
             "especialidad" => isset($cita["Nombre_Especialidad"]) ? $cita["Nombre_Especialidad"] : '',
             "doctor" => isset($cita["Nombre_Apellidos"]) ? $cita["Nombre_Apellidos"] : '',
             "sucursal" => isset($cita["Nombre_Sucursal"]) ? $cita["Nombre_Sucursal"] : '',
-            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : '',
+            "estado" => $estado
         )
     );
 }
