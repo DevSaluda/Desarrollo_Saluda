@@ -67,14 +67,17 @@ INNER JOIN SucursalesCorre sc ON ace.Fk_Sucursal = sc.ID_SucursalC
 INNER JOIN Fechas_EspecialistasExt fe ON ace.Fecha = fe.ID_Fecha_Esp
 INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario";
 
-// Agregar filtro por estado si corresponde
+// Construir filtros
+$filtros = array();
+$filtros[] = "ace.Fk_Especialista IN ($ids_string)";
+$filtros[] = "fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 if (!empty($estados)) {
     $estados_in = "'" . implode("','", $estados) . "'";
-    $sql .= " WHERE ace.Estatus_cita IN ($estados_in)";
+    $filtros[] = "ace.Estatus_cita IN ($estados_in)";
 }
-
-WHERE ace.Fk_Especialista IN ($ids_string)
-AND fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+if (count($filtros) > 0) {
+    $sql .= " WHERE " . implode(" AND ", $filtros);
+}
 
 $result = mysqli_query($conn, $sql);
 if (!$result) {
