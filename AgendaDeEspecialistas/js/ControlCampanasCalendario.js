@@ -16,14 +16,25 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (window.obtenerEstadosSeleccionados) {
         estados = window.obtenerEstadosSeleccionados();
       }
-      // Construir la URL con los parámetros de estado
+      // Pedir todos los eventos al backend (sin filtro de estados)
       let url = '../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php?start=' + encodeURIComponent(fetchInfo.startStr) + '&end=' + encodeURIComponent(fetchInfo.endStr);
-      if (estados.length > 0) {
-        url += '&estados=' + encodeURIComponent(estados.join(','));
-      }
       fetch(url)
         .then(response => response.json())
-        .then(events => successCallback(events))
+        .then(events => {
+          // Si el backend devuelve un array de objetos tipo evento
+          let filtrados = events;
+          // Si el backend devuelve {eventos: [...]} (por debug), usar esa propiedad
+          if (events && events.eventos) filtrados = events.eventos;
+          // Filtrar por estado seleccionado en el frontend
+          if (Array.isArray(filtrados) && estados.length > 0) {
+            filtrados = filtrados.filter(e => {
+              // e.extendedProps.estado o e.estado o e.Estatus_cita o e.Estado_cita
+              let estado = e.estado || e.Estatus_cita || e.Estado_cita || (e.extendedProps && e.extendedProps.estado);
+              return estados.includes(estado);
+            });
+          }
+          successCallback(filtrados);
+        })
         .catch(error => failureCallback(error));
     },
 
