@@ -51,18 +51,21 @@ include "Consultas/Mensaje.php";
 <div class="mb-3" id="filtro-estados-cita" style="max-width:600px;">
   <label class="form-label"><b>Filtrar por estado de cita:</b></label>
   <div class="form-check form-check-inline">
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Agendado" id="estadoAgendado" checked>
+    <label class="form-check-label" for="estadoAgendado">Agendado</label>
+  </div>
+  <div class="form-check form-check-inline">
     <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Pendiente" id="estadoPendiente" checked>
     <label class="form-check-label" for="estadoPendiente">Pendiente</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Cancelado" id="estadoCancelado" checked>
+    <label class="form-check-label" for="estadoCancelado">Cancelado</label>
   </div>
   <div class="form-check form-check-inline">
     <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Confirmada" id="estadoConfirmada" checked>
     <label class="form-check-label" for="estadoConfirmada">Confirmada</label>
   </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Cancelada" id="estadoCancelada" checked>
-    <label class="form-check-label" for="estadoCancelada">Cancelada</label>
-  </div>
-  <!-- Agrega más estados aquí si es necesario -->
 </div>
 <div id="calendar"></div>
 <script>

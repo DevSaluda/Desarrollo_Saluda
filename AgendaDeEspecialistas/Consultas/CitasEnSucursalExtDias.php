@@ -67,26 +67,25 @@ INNER JOIN SucursalesCorre sc ON ace.Fk_Sucursal = sc.ID_SucursalC
 INNER JOIN Fechas_EspecialistasExt fe ON ace.Fecha = fe.ID_Fecha_Esp
 INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario";
 
-// Construir filtros
-$filtros = array();
-$filtros[] = "ace.Fk_Especialista IN ($ids_string)";
-$filtros[] = "fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
-if (!empty($estados)) {
-    $estados_in = "'" . implode("','", $estados) . "'";
-    $filtros[] = "ace.Estatus_cita IN ($estados_in)";
-}
-if (count($filtros) > 0) {
-    $sql .= " WHERE " . implode(" AND ", $filtros);
-}
+$sql .= " WHERE ace.Fk_Especialista IN ($ids_string)
+AND fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 
 $result = mysqli_query($conn, $sql);
 if (!$result) {
-    echo json_encode(['error' => mysqli_error($conn)]);
+    echo json_encode(['error' => mysqli_error($conn), 'sql' => $sql, 'estados' => $estados]);
     exit;
 }
 
 // 6. Armar array de eventos para FullCalendar
 $eventos = array();
+while($cita = mysqli_fetch_assoc($result)) {
+}
+// Si no hay eventos, enviar la consulta y los estados para depuración
+if (mysqli_num_rows($result) == 0) {
+    echo json_encode(['eventos' => [], 'sql' => $sql, 'estados' => $estados]);
+    exit;
+}
+// (El resto del código sigue igual)
 while($cita = mysqli_fetch_assoc($result)) {
     $id = isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null;
     $paciente = isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '';
