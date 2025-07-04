@@ -47,7 +47,42 @@ include "Consultas/Mensaje.php";
     <i class="fas fa-search"></i>
   </button>
 </div>
+<!-- Filtro por estado de cita -->
+<div class="mb-3" id="filtro-estados-cita" style="max-width:600px;">
+  <label class="form-label"><b>Filtrar por estado de cita:</b></label>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Pendiente" id="estadoPendiente" checked>
+    <label class="form-check-label" for="estadoPendiente">Pendiente</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Confirmada" id="estadoConfirmada" checked>
+    <label class="form-check-label" for="estadoConfirmada">Confirmada</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Cancelada" id="estadoCancelada" checked>
+    <label class="form-check-label" for="estadoCancelada">Cancelada</label>
+  </div>
+  <!-- Agrega más estados aquí si es necesario -->
+</div>
 <div id="calendar"></div>
+<script>
+// Recargar el calendario cuando cambie el filtro de estado
+function obtenerEstadosSeleccionados() {
+  let estados = [];
+  document.querySelectorAll('.estado-cita-checkbox:checked').forEach(function(cb) {
+    estados.push(cb.value);
+  });
+  return estados;
+}
+
+document.querySelectorAll('.estado-cita-checkbox').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    if(window.calendarGlobal) {
+      window.calendarGlobal.refetchEvents();
+    }
+  });
+});
+</script>
 <!-- Modal para detalles de cita -->
 <div class="modal fade" id="modalDetalleCita" tabindex="-1" aria-labelledby="modalDetalleCitaLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
