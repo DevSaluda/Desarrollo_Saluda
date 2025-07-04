@@ -36,6 +36,14 @@ $ids_string = implode(",", array_map('intval', $ids_medicos));
 $fecha_inicio = isset($_GET['start']) ? date('Y-m-d', strtotime($_GET['start'])) : date('Y-m-d');
 $fecha_fin = isset($_GET['end']) ? date('Y-m-d', strtotime($_GET['end'])) : date('Y-m-d', strtotime('+4 day'));
 
+// 4.1. Obtener filtro de estados (si existe)
+$estados = array();
+if (isset($_GET['estados']) && !empty($_GET['estados'])) {
+    $estados = explode(',', $_GET['estados']);
+    // Limpiar los valores
+    $estados = array_map(function($e) use ($conn) { return mysqli_real_escape_string($conn, trim($e)); }, $estados);
+}
+
 // 5. Consulta SQL principal
 $sql = "SELECT 
     ace.ID_Agenda_Especialista,
@@ -57,7 +65,14 @@ INNER JOIN Especialidades_Express ee ON ace.Fk_Especialidad = ee.ID_Especialidad
 INNER JOIN Personal_Medico_Express pme ON ace.Fk_Especialista = pme.Medico_ID
 INNER JOIN SucursalesCorre sc ON ace.Fk_Sucursal = sc.ID_SucursalC
 INNER JOIN Fechas_EspecialistasExt fe ON ace.Fecha = fe.ID_Fecha_Esp
-INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario
+INNER JOIN Horarios_Citas_Ext hce ON ace.Hora = hce.ID_Horario";
+
+// Agregar filtro por estado si corresponde
+if (!empty($estados)) {
+    $estados_in = "'" . implode("','", $estados) . "'";
+    $sql .= " WHERE ace.Estatus_cita IN ($estados_in)";
+}
+
 WHERE ace.Fk_Especialista IN ($ids_string)
 AND fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 

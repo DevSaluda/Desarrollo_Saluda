@@ -8,7 +8,25 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: '../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php',
+    events: function(fetchInfo, successCallback, failureCallback) {
+      // Obtener los estados seleccionados
+      let estados = [];
+      if (typeof obtenerEstadosSeleccionados === 'function') {
+        estados = obtenerEstadosSeleccionados();
+      } else if (window.obtenerEstadosSeleccionados) {
+        estados = window.obtenerEstadosSeleccionados();
+      }
+      // Construir la URL con los parámetros de estado
+      let url = '../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php?start=' + encodeURIComponent(fetchInfo.startStr) + '&end=' + encodeURIComponent(fetchInfo.endStr);
+      if (estados.length > 0) {
+        url += '&estados=' + encodeURIComponent(estados.join(','));
+      }
+      fetch(url)
+        .then(response => response.json())
+        .then(events => successCallback(events))
+        .catch(error => failureCallback(error));
+    },
+
     
     eventClick: function(info) {
       var e = info.event;
@@ -74,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   calendar.render();
+  // Guardar el calendario globalmente para recarga desde el filtro
+  window.calendarGlobal = calendar;
 
   // Búsqueda por nombre
   document.getElementById('btnBuscarCita').addEventListener('click', function() {
