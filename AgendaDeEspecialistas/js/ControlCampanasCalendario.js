@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
           // Filtrar por estado seleccionado en el frontend
           if (Array.isArray(filtrados) && estados.length > 0) {
             filtrados = filtrados.filter(e => {
-              let estado = e.estado || e.Estatus_cita || e.Estado_cita || (e.extendedProps && e.extendedProps.estado) || '';
-              // Normaliza ambos a minúsculas y sin espacios
-              return estados.map(s => (s + '').trim().toLowerCase()).includes((estado + '').trim().toLowerCase());
+              // e.extendedProps.estado o e.estado o e.Estatus_cita o e.Estado_cita
+              let estado = e.estado || e.Estatus_cita || e.Estado_cita || (e.extendedProps && e.extendedProps.estado);
+              return estados.includes(estado);
             });
           }
           successCallback(filtrados);
