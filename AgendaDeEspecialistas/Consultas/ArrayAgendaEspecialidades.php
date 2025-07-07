@@ -76,7 +76,7 @@ Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_
 WHERE
 AgendaCitas_EspecialistasExt.Fk_Especialista IN ($ids_string)
 AND YEAR(AgendaCitas_EspecialistasExt.Fecha_Hora) = YEAR(CURDATE())
-AND AgendaCitas_EspecialistasExt.Estatus_cita = 'Agendado'";
+AND AgendaCitas_EspecialistasExt.Estatus_cita IN ('Agendado', 'Pendiente', 'Confirmado')";
 
 $result = mysqli_query($conn, $sql);
  
