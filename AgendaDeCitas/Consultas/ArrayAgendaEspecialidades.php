@@ -44,7 +44,7 @@ $sql = "SELECT
             INNER JOIN Fechas_EspecialistasExt ON AgendaCitas_EspecialistasExt.Fecha = Fechas_EspecialistasExt.ID_Fecha_Esp
             INNER JOIN Horarios_Citas_Ext ON AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario
         WHERE
-            AgendaCitas_EspecialistasExt.Estatus_cita = 'Agendado'
+            AgendaCitas_EspecialistasExt.Estatus_cita IN ('Agendado', 'Pendiente', 'Confirmado')
             AND AgendaCitas_EspecialistasExt.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
             AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) = YEAR(CURDATE())";
 
