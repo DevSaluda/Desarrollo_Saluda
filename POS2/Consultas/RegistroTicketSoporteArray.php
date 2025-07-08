@@ -3,11 +3,13 @@ header('Content-Type: application/json');
 include("db_connection.php");
 include "Consultas.php";
 
-// Obtiene la fecha actual en el formato 'YYYY-MM-DD'
-$fechaActual = date("Y-m-d");
+session_start();
 
-// Consulta SQL para obtener los datos de la tabla `Tickets_soporte`
-$sql = "SELECT * FROM `Tickets_Soporte` WHERE Sucursal = '" . $row['Nombre_Sucursal'] . "'";
+// Obtiene la sucursal del usuario logueado desde la sesión
+$sucursalUsuario = isset($_SESSION['Sucursal']) ? $_SESSION['Sucursal'] : '';
+
+// Consulta SQL para obtener los datos de la tabla `Tickets_soporte` solo de la sucursal del usuario
+$sql = "SELECT * FROM `Tickets_Soporte` WHERE Sucursal = '" . $sucursalUsuario . "'";
 
 $result = mysqli_query($conn, $sql);
 
