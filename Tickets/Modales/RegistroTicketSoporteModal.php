@@ -38,7 +38,7 @@
 
             <div class="form-group">
               <label for="tipoProblema">Seleccione el tipo de problema</label>
-              <select class="form-control" name="Problematica" id="tipoProblema" required>
+              <select class="form-control" name="Problematica" id="tipoProblema" required onchange="mostrarCampoFolioCorreccion()">
                 <option value="">Seleccione...</option>
                 <option value="POS">Punto de Venta</option>
                 <option value="Teléfono">Teléfono</option>
@@ -66,12 +66,30 @@
               <input type="text" class="form-control" id="agregadoPor" name="Agregado_Por" placeholder="Ingrese su nombre" required>
             </div>
 
+            <div class="form-group" id="campoFolioCorreccion" style="display:none;">
+              <label for="folioCorreccion">Folio del Ticket a corregir</label>
+              <input type="text" class="form-control" id="folioCorreccion" name="FolioCorreccion" placeholder="Ingrese el folio del ticket" />
+            </div>
+
             <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
 
             <div class="text-center">
               <button type="submit" id="submitTicketSoporte" class="btn btn-success">Guardar Ticket <i class="fas fa-check"></i></button>
             </div>
           </form>
+<script>
+function mostrarCampoFolioCorreccion() {
+  var tipo = document.getElementById('tipoProblema').value;
+  var campo = document.getElementById('campoFolioCorreccion');
+  if(tipo === 'Corrección de Ticket') {
+    campo.style.display = 'block';
+    document.getElementById('folioCorreccion').required = true;
+  } else {
+    campo.style.display = 'none';
+    document.getElementById('folioCorreccion').required = false;
+  }
+}
+</script>
         </div>
       </div>
     </div>

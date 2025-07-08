@@ -49,9 +49,10 @@ table td {
 
   <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
- 
-  <!-- Main Footer -->
+  <div class="col-md-12">
+    <div id="RegistrosTicketSoporteTabla"></div>
+  </div>
+
 <?php
   include ("Modales/RegistroTicketSoporteModal.php");
   include ("Modales/Error.php");
