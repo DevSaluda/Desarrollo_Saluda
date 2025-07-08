@@ -11,13 +11,13 @@ if (!$conn) {
     die(json_encode(array("statusCode" => 500, "message" => "Error en la conexión con la base de datos")));
 }
 
-if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) && !empty($_POST['Fecha']) && !empty($_POST['Agregado_Por']) && !empty($_POST['SucursalExt'])) {
+if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) && !empty($_POST['Fecha']) && !empty($_POST['Agregado_Por']) && (!empty($_POST['SucursalExt']) || !empty($_POST['Sucursal']))) {
     // Validación y sanitización de datos
     $tipoProblema = mysqli_real_escape_string($conn, $_POST['Problematica']);
     $descripcion = mysqli_real_escape_string($conn, $_POST['DescripcionProblematica']);
     $fecha = mysqli_real_escape_string($conn, $_POST['Fecha']);
     $reportadoPor = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
-    $sucursal = mysqli_real_escape_string($conn, $_POST['SucursalExt']);
+    $sucursal = mysqli_real_escape_string($conn, !empty($_POST['SucursalExt']) ? $_POST['SucursalExt'] : $_POST['Sucursal']);
     
     // Validación de la fecha
     if (!strtotime($fecha)) {
