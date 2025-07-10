@@ -185,7 +185,7 @@ tabla = $('#Productos').DataTable({
       //  { mData: 'Clave_interna' },
       //  { mData: 'Clave_Levic' },
       //  { mData: 'Cod_Enfermeria' },
-       { mData: 'Precio_C' },
+
        { mData: 'Precio_Venta' },
        { mData: 'Nom_Serv' },
        { mData: 'Tipo' },
@@ -255,7 +255,7 @@ tabla = $('#Productos').DataTable({
     <!-- <th>Cod Interno</th>
     <th>Cod Levic</th>
     <th>Cod Enfermeria</th> -->
-    <th>PC</th>
+
     <th>PV </th>
     <th>Servicio </th>
     <th>Tipo</th>
