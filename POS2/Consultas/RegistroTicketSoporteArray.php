@@ -6,7 +6,7 @@ include "Consultas.php";
 session_start();
 
 // Obtiene la sucursal del usuario logueado desde la sesión
-$sucursalUsuario = isset($_SESSION['Sucursal']) ? $_SESSION['Sucursal'] : '';
+$sucursalUsuario = isset($_SESSION['Nombre_Sucursal']) ? $_SESSION['Nombre_Sucursal'] : '';
 
 // Consulta SQL para obtener los datos de la tabla `Tickets_soporte` solo de la sucursal del usuario
 $sql = "SELECT * FROM `Tickets_Soporte` WHERE Sucursal = '" . $sucursalUsuario . "'";
