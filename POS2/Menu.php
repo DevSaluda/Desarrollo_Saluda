@@ -126,7 +126,15 @@ PRECIO) 💊🦷 !recuerda aplicarlos antes de cobrarle al cliente!.
     <!-- Brand Logo -->
     <a href="index" class="brand-link" style="background-color: #c80096 !important;">
     
-      <span class="brand-text font-weight-light" style="color: white;">PUNTO DE VENTA <?php echo $row['Nombre_Sucursal']?></span>
+      <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['Nombre_Sucursal']) && isset($row['Nombre_Sucursal'])) {
+    $_SESSION['Nombre_Sucursal'] = $row['Nombre_Sucursal'];
+}
+?>
+<span class="brand-text font-weight-light" style="color: white;">PUNTO DE VENTA <?php echo $row['Nombre_Sucursal']?></span>
     
     </a>
 
