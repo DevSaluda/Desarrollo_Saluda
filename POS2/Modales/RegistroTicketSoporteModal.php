@@ -1,8 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 <div class="modal fade" id="RegistroTicketSoporteModal" tabindex="-1" role="dialog" style="overflow-y: auto;" aria-labelledby="editModalLabel" aria-hidden="true">
   <div id="Di" class="modal-dialog modal-lg modal-notify modal-success">
     <div class="modal-content">
@@ -60,9 +55,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <!-- Campos ocultos -->
             <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
-            <input type="hidden" class="form-control" name="Agregado_Por" id="registro" value="<?php echo isset($_SESSION['Nombre_Apellidos']) ? $_SESSION['Nombre_Apellidos'] : '' ?>" readonly>
-            <input type="hidden" class="form-control" name="Sucursal" id="sucursal" value="<?php echo isset($_SESSION['Nombre_Sucursal']) ? $_SESSION['Nombre_Sucursal'] : '' ?>" readonly>
-            <input type="hidden" class="form-control" name="ID_H_O_D" id="Empresa" value="<?php echo isset($_SESSION['ID_H_O_D']) ? $_SESSION['ID_H_O_D'] : '' ?>" readonly>
+            <input type="hidden" class="form-control" name="Agregado_Por" id="registro" value="<?php echo $row['Nombre_Apellidos']?>" readonly>
+            <input type="hidden" class="form-control" name="Sucursal" id="sucursal" value="<?php echo $row['Nombre_Sucursal']?>" readonly>
+            <input type="hidden" class="form-control" name="ID_H_O_D" id="Empresa" value="<?php echo $row['ID_H_O_D']?>" readonly>
 
             <!-- Botón de envío -->
             <div class="text-center">

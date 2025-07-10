@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include_once 'db_connection.php';
 
 if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica'])) {
@@ -34,7 +31,6 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
             $response = array("statusCode" => 200);
         } else {
             // Respuesta de error al ejecutar la consulta
-            error_log('QUERY EXECUTE ERROR: ' . mysqli_stmt_error($stmt));
             $response = array("statusCode" => 201, "message" => "Error: " . mysqli_stmt_error($stmt));
         }
 
@@ -42,7 +38,6 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
         mysqli_stmt_close($stmt);
     } else {
         // Respuesta de error al preparar la consulta
-        error_log('QUERY PREPARE ERROR: ' . mysqli_error($conn));
         $response = array("statusCode" => 201, "message" => "Error: " . mysqli_error($conn));
     }
 } else {
