@@ -19,7 +19,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     $reportadoPor = mysqli_real_escape_string($conn, $_POST['Agregado_Por']);
     $sucursal = mysqli_real_escape_string($conn, !empty($_POST['SucursalExt']) ? $_POST['SucursalExt'] : $_POST['Sucursal']);
     
-    // Validación de la fecha
+    // Validación de la fech
     if (!strtotime($fecha)) {
         $response = array("statusCode" => 400, "message" => "La fecha proporcionada no es válida.");
         echo json_encode($response);
