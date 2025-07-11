@@ -75,7 +75,7 @@ if($query->num_rows>0){
 ?>
 
 <?php if($Devoluciones != null): ?>
-    <form action="javascript:void(0)" method="post" id="ActualizaEstadoDevolucion">
+    <form action="javascript:void(0)" method="post" id="IngresaAsucursalesDesdeDevoluciones">
     <div class="container">
         <div class="row">
             <!-- Columna 1 -->
@@ -95,7 +95,7 @@ if($query->num_rows>0){
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
                     </div>
-                    <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
+                    <input type="text" class="form-control" name="FacturaNumber" readonly value="<?php echo $Devoluciones->Num_Factura; ?>">
                 </div>
             </div>
 
@@ -121,27 +121,55 @@ if($query->num_rows>0){
                     <input type="text" class="form-control" readonly value="<?php echo $Devoluciones->Cantidad; ?>">
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <label for="exampleFormControlInput1">Cantidad a ingresar </label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Factura"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <input type="number"  name="Contabilizado" class="form-control" >
+                </div>
+            </div>
+            <div class="col-md-4">
+            <label for="exampleFormControlInput1">Sucursal destino</label>
+            <div class="input-group-prepend">  <span class="input-group-text" id="Tarjeta2"><i class="fas fa-barcode"></i></span>
+            <select id = "sucursalconordenDestinos" name="Fk_sucursal" class = "form-control" required  >
+  <option value="">Seleccione una Sucursal:</option>
+                                               <?php
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE ID_H_O_D='".$row['ID_H_O_D']."'");
+        
+          while ($valores = mysqli_fetch_array($query)) {
+            echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
+          }
+                        ?>
+        </select>   
+            </div> </div> </div>
             <!-- Campos ocultos (ocupando todo el ancho) -->
             <input type="hidden" class="form-control" name="IdBasedatos" readonly value="<?php echo $Devoluciones->ID_Prod_POS; ?>">
-            <input type="hidden" class="form-control" name="GeneradoPor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
+            <input type="hidden" class="form-control" name="FolioUnico" readonly value="<?php echo $Devoluciones->FolioUnico; ?>">
+            <input type="hidden" class="form-control" name="CodBarras" readonly value="<?php echo $Devoluciones->Cod_Barra; ?>">
+            <input type="hidden" class="form-control" name="AgregoElVendedor" readonly value="<?php echo $row['Nombre_Apellidos']?>">
             <input type="hidden" class="form-control" name="TipodeServicio" readonly value="<?php echo $Devoluciones->Tipo_Servicio; ?>">
             <input type="hidden" class="form-control" name="ID_H_O_D" readonly value="Saluda">
-            <input type="hidden" class="form-control" name="Movimiento" readonly value="Agregado desde devoluciones">
+            <input type="hidden" class="form-control" name="Movimiento" readonly value="Ingresado desde devoluciones">
             <input type="hidden" class="form-control" name="IdDevuelve" readonly value="<?php echo $Devoluciones->ID_Registro; ?>">
+            <input type="hidden" name="preciocompraAguardar" value="N/A">
+
+
+            
         </div>
 
         <!-- Botón de envío -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" id="submit" class="btn btn-success">Realizar traspaso <i class="fas fa-check"></i></button>
+                <button type="submit" id="submit" class="btn btn-success">Realizar ingreso <i class="fas fa-check"></i></button>
             </div>
         </div>
     </div>
 </form>
 
 
-    <script src="js/RealizaIngresoDevolucion.js"></script>
+    <script src="js/RealizaIngresoDevoluciones.js"></script>
 <?php else: ?>
     <p class="alert alert-warning">No hay resultados</p>
 <?php endif; ?>
