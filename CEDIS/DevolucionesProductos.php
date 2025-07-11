@@ -47,31 +47,29 @@ include "Consultas/Consultas.php";
 </div>
     
 <div id="TableVentasDelDia"></div>
-<!-- Botón para ingreso a sucursales desde devoluciones -->
-<div class="text-center" style="margin: 20px 0;">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalIngresaloASucursalesDevolucion">
-        Ingresar a Sucursal desde Devolución <i class="fas fa-exchange-alt"></i>
-    </button>
+
 </div>
+
 <!-- PRESENTACIONES -->
+
 <!-- POR CADUCAR -->
-</div>
-</div>
-</div>
-</div>
+  
+ 
 
-<!-- Modal para ingreso a sucursales desde devoluciones -->
-<div class="modal fade" id="ModalIngresaloASucursalesDevolucion" tabindex="-1" role="dialog" aria-labelledby="ModalIngresaloASucursalesDevolucionLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <?php include ("Modales/IngresaloASucursalesDevolucion.php"); ?>
-    </div>
-  </div>
-</div>
+    
+</div></div>
 
-<!-- /.content-wrapper -->
-<!-- Control Sidebar -->
-<!-- Main Footer -->
+
+
+
+
+     
+  
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+ 
+  <!-- Main Footer -->
 <?php
 
   include ("Modales/FiltraPorFechaDevoluciones.php");
@@ -91,7 +89,7 @@ include ("footer.php")?>
     $(document).on("click", ".btn-Traspaso", function() {
     
         var id = $(this).data("id");
-        $.post("https://saludapos.com/CEDIS/Modales/ConvierteEnTraspaso.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ConvierteEnTraspaso.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Convertir en traspaso");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -102,7 +100,7 @@ include ("footer.php")?>
     $(document).on("click", ".btn-caducado", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/CEDIS/Modales/RegistraEnCaducado.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/RegistraEnCaducado.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Productos Caducados");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -114,7 +112,7 @@ include ("footer.php")?>
     $(document).on("click", ".btn-DevolucionDefinitiva", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/CEDIS/Modales/ActualizaEstadoDeLaDevolucion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/ActualizaEstadoDeLaDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Enviar para devolucion");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -127,7 +125,7 @@ include ("footer.php")?>
     $(document).on("click", ".btn-IngresoSucursales", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/CEDIS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/IngresaloASucursalesDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Ingresando a la sucursal");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
@@ -140,7 +138,7 @@ include ("footer.php")?>
     $(document).on("click", ".btn-CancelarSolicitud", function() {
     console.log("Botón de edición clickeado");
         var id = $(this).data("id");
-        $.post("https://saludapos.com/CEDIS/Modales/CancelaLaDevolucion.php", { id: id }, function(data) {
+        $.post("https://saludapos.com/AdminPOS/Modales/CancelaLaDevolucion.php", { id: id }, function(data) {
             $("#form-edit").html(data);
             $("#Titulo").html("Cancelar solicitud");
             $("#Di").removeClass("modal-dialog modal-lg modal-notify modal-warning");
