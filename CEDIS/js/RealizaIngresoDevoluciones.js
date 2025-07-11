@@ -1,15 +1,15 @@
 $('document').ready(function($) {
     $.validator.addMethod("Sololetras", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z0-f\u00f1\u00d1\s]+$/.test(value);
+        return this.optional(element) || /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar letras");
   
     $.validator.addMethod("Telefonico", function(value, element) {
         return this.optional(element) || /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value);
-    }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar nmeros!");
+    }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Solo debes ingresar números!");
   
     $.validator.addMethod("Correos", function(value, element) {
         return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(value);
-    }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa un correo vlido!");
+    }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Ingresa un correo válido!");
   
     $.validator.addMethod("Problema", function(value, element) {
         return this.optional(element) || /^[\u00F1A-Za-z _]*[\u00F1A-Za-z][\u00F1A-Za-z _]*$/.test(value);
@@ -20,7 +20,7 @@ $('document').ready(function($) {
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Verifique el curp");
   
     $.validator.addMethod("RFCC", function(value, element) {
-        return this.optional(element) || /^([A-Z1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/.test(value);
+        return this.optional(element) || /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/.test(value);
     }, "<i class='fas fa-exclamation-triangle' style='color:red'></i> Verifique el RFC");
   
     $.validator.addMethod("NSSS", function(value, element) {
@@ -32,13 +32,13 @@ $('document').ready(function($) {
             ActPass: {
                 required: true,
             },
-            // Agrega otras reglas aqu para los otros campos segn sea necesario
+            // Agrega otras reglas aquí para los otros campos según sea necesario
         },
         messages: {
             ActPass: {
                 required: "<i class='fas fa-exclamation-triangle' style='color:red'></i>Dato Requerido",
             }
-            // Agrega otros mensajes aqu segn sea necesario
+            // Agrega otros mensajes aquí según sea necesario
         },
         submitHandler: submitForm
     });
@@ -46,7 +46,7 @@ $('document').ready(function($) {
     function submitForm() {
         $.ajax({
             type: 'POST',
-            url: "../AdminPOS/Consultas/IngresoDesdeDevoluciones.php",
+            url: "Consultas/IngresoDesdeDevoluciones.php",
             data: $('#IngresaAsucursalesDesdeDevoluciones').serialize(),
             cache: false,
             beforeSend: function() {
@@ -59,26 +59,38 @@ $('document').ready(function($) {
                     if (dataResult.status === 'success') {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Ingreso realizado',
-                            text: dataResult.message
+                            title: 'Éxito',
+                            text: dataResult.message,
+                            showConfirmButton: false,
+                            timer: 2000
                         });
+                        $("#submit").html("Enviado <i class='fas fa-check'></i>");
+                        $("#editModal").removeClass("in");
+                        $(".modal-backdrop").remove();
+                        $("#editModal").hide();
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: dataResult.message
+                            text: dataResult.message,
+                            showConfirmButton: false,
+                            timer: 2000
                         });
+                        $("#submit").html("Enviar <i class='fas fa-paper-plane'></i>");
                     }
                 } catch (e) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Respuesta inesperada del servidor.'
+                        text: 'Ocurrió un error en el servidor.',
+                        showConfirmButton: false,
+                        timer: 2000
                     });
+                    $("#submit").html("Enviar <i class='fas fa-paper-plane'></i>");
                 }
-                $("#submit").html("Ingresar a sucursal");
             }
         });
         return false;
     }
-});
+  });
+  

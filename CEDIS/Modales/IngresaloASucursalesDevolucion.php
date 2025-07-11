@@ -38,6 +38,7 @@ $sql1 = "SELECT
     MAX(Stock_POS.Precio_Venta) AS Precio_Venta,
     MAX(Stock_POS.Precio_C) AS Precio_C,
     MAX(Stock_POS.ID_Prod_POS) AS ID_Prod_POS,
+    MAX(Stock_POS.Folio_Prod_Stock) AS FolioUnico,
     MAX(Stock_POS.Tipo_Servicio) AS Tipo_Servicio
 FROM 
     Devolucion_POS
