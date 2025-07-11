@@ -47,17 +47,18 @@ include "Consultas/Consultas.php";
 </div>
     
 <div id="TableVentasDelDia"></div>
-
 <!-- Botón para ingreso a sucursales desde devoluciones -->
 <div class="text-center" style="margin: 20px 0;">
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalIngresaloASucursalesDevolucion">
         Ingresar a Sucursal desde Devolución <i class="fas fa-exchange-alt"></i>
     </button>
 </div>
-
 <!-- PRESENTACIONES -->
 <!-- POR CADUCAR -->
-</div></div></div></div>
+</div>
+</div>
+</div>
+</div>
 
 <!-- Modal para ingreso a sucursales desde devoluciones -->
 <div class="modal fade" id="ModalIngresaloASucursalesDevolucion" tabindex="-1" role="dialog" aria-labelledby="ModalIngresaloASucursalesDevolucionLabel" aria-hidden="true">
