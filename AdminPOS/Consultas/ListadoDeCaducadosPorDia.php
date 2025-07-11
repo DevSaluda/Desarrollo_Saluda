@@ -254,6 +254,7 @@ tabla = $('#Productos').DataTable({
     <th>Fecha caducidad</th>
     <th>Lote</th>
     <th>Motivo baja</th>
+    <th>Fecha registro</th>
     <th>Agregado por</th>
     <th>Estado</th>
     <th>Acciones</th>
