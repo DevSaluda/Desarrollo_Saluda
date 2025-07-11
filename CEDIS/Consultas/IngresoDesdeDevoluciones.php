@@ -3,45 +3,52 @@ include_once 'db_connection.php';
 
 $response = array();
 
-// Verificar si $_POST contiene todos los datos requeridos
-if (isset($_POST["IdBasedatos"]) && isset($_POST["CodBarras"]) && isset($_POST["Fk_sucursal"]) && isset($_POST["Diferencia"])) {
-    
+// Convertir a números los valores que deben serlo, evitando errores con "N/A"
+$Precio_compra = (isset($_POST["preciocompraAguardar"]) && is_numeric($_POST["preciocompraAguardar"])) ? floatval($_POST["preciocompraAguardar"]) : 0;
+$Total_Factura = (isset($_POST["CostototalFactura"]) && is_numeric($_POST["CostototalFactura"])) ? floatval($_POST["CostototalFactura"]) : 0;
+
+// Verificar si $_POST contiene todos los datos requeridos (excepto Precio_compra y Total_Factura, que ya aseguramos)
+if (
+    !empty($_POST["IdBasedatos"]) && 
+    !empty($_POST["CodBarras"]) && 
+    !empty($_POST["Fk_sucursal"]) && 
+    !empty($_POST["Contabilizado"]) && 
+    !empty($_POST["AgregoElVendedor"]) && 
+    !empty($_POST["FacturaNumber"]) && 
+    !empty($_POST["Movimiento"])
+) {
     // Preparar la consulta de inserción
-    $query = "INSERT INTO Stock_registrosNuevos (`ID_Prod_POS`, `Cod_Barras`, `Fk_sucursal`, `Existencias_R`, `ExistenciaPrev`, `Recibido`, `Lote`, `Fecha_Caducidad`, `AgregadoPor`, `ID_H_O_D`, `Factura`, `Precio_compra`, `Total_Factura`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+    $query = "INSERT INTO Stock_registrosNuevos 
+        (ID_Prod_POS, Cod_Barras, Fk_sucursal, Recibido, AgregadoPor, ID_H_O_D, Factura, Precio_compra, Total_Factura, TipoMov,FolioUnico) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+
     $stmt = mysqli_prepare($conn, $query);
-    
+
     if ($stmt) {
         // Asignar variables para cada parámetro
         $ID_Prod_POS = htmlentities(strip_tags(trim($_POST["IdBasedatos"])));
         $Cod_Barras = htmlentities(strip_tags(trim($_POST["CodBarras"])));
         $Fk_sucursal = htmlentities(strip_tags(trim($_POST["Fk_sucursal"])));
-        $Existencias_R = htmlentities(strip_tags(trim($_POST["Diferencia"])));
-        $ExistenciaPrev = htmlentities(strip_tags(trim($_POST["StockActual"])));
         $Recibido = htmlentities(strip_tags(trim($_POST["Contabilizado"])));
-        $Lote = htmlentities(strip_tags(trim($_POST["Loteeee"])));
-        $Fecha_Caducidad = htmlentities(strip_tags(trim($_POST["fechacadd"])));
         $AgregadoPor = htmlentities(strip_tags(trim($_POST["AgregoElVendedor"])));
         $ID_H_O_D = "Saluda"; // Valor constante
         $Factura = htmlentities(strip_tags(trim($_POST["FacturaNumber"])));
-        $Precio_compra = htmlentities(strip_tags(trim($_POST["preciocompraAguardar"])));
-        $Total_Factura = htmlentities(strip_tags(trim($_POST["CostototalFactura"])));
+        $TipoMov = htmlentities(strip_tags(trim($_POST["Movimiento"])));
+        $FolioUnico = htmlentities(strip_tags(trim($_POST["FolioUnico"])));
 
-        // Enlazar los parámetros de manera individual
-        mysqli_stmt_bind_param($stmt, 'sssssssssssss', 
+        // Enlazar los parámetros con los tipos correctos (s = string, d = double/decimal)
+        mysqli_stmt_bind_param($stmt, 'ssssssssdss', 
             $ID_Prod_POS, 
             $Cod_Barras, 
             $Fk_sucursal, 
-            $Existencias_R, 
-            $ExistenciaPrev, 
             $Recibido, 
-            $Lote, 
-            $Fecha_Caducidad, 
             $AgregadoPor, 
             $ID_H_O_D, 
             $Factura, 
-            $Precio_compra, 
-            $Total_Factura
+            $Precio_compra, // Número decimal
+            $Total_Factura, // Número decimal
+            $TipoMov,
+            $FolioUnico
         );
 
         // Ejecutar la consulta
