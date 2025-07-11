@@ -64,7 +64,8 @@ while ($fila = $result->fetch_assoc()) {
     $data[$c]["Clave_Levic"] = $fila["Lote"];
     $data[$c]["Cod_Enfermeria"] = $fila["MotivoBaja"];
     $data[$c]["FechaInventario"] = $fila["AgregadoPor"];
-    $data[$c]["FechaRegistro"] = date('d-m-Y H:i', strtotime($fila["AgregadoEl"]));
+    $data[$c]["FechaRegistro"] = $fila["AgregadoEl"];
+    $data[$c]["FechaRegistroFormateada"] = date('d-m-Y H:i', strtotime($fila["AgregadoEl"]));
     $data[$c]["Estado"] = $estado; // Agrega el estado formateado, // Luego usa $estado para mostrar en la tabla o donde lo necesites
     $data[$c]["Acciones"] = '
     <td>
