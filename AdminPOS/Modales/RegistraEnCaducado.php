@@ -122,6 +122,7 @@ if($query->num_rows>0){
                   
                     <th>Código de Barra</th>
                     <th>Producto</th>
+                    <th>Tipo Movimiento</th>
                     <th>Cantidad</th>
                     <th>Fecha caducidad</th>
                     <th>Lote</th>
