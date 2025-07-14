@@ -134,12 +134,29 @@ if($query->num_rows>0){
                     while ($Devolucion = $query->fetch_array()): ?>
                         <tr>
                             
-                            <td> <input type="text" value="<?php echo $Devolucion["Cod_Barra"]; ?>"class="form-control"  id="CodBarra" name="CodBarra" readonly></td>
-                            <td><input type="text" value="<?php echo $Devolucion["Nombre_Produc"]; ?>"class="form-control"  id="NombreProd" name="NombreProd" readonly></td>
-                            <td><input type="text" value="Registrado en caducados"class="form-control"  id="TipoMoviento" name="TipoMovimiento" readonly></td>
-                            <td><input type="text" value="<?php echo $Devolucion["Cantidad"]; ?>"class="form-control"  id="Cantidad" name="Cantidad" readonly></td>
-                            <td><input type="date" class="form-control"  id="fechacaducidad" name="FechaCaducidad" ><input hidden value="<?php echo $Devolucion["Precio_Venta"]; ?>"class="form-control"  id="Precioventa" name="PrecioVenta" readonly></td>
-                            <td> <input type="text" class="form-control"  id="lote" name="Lote"><input hidden value="<?php echo $Devolucion["Precio_C"]; ?>" class="form-control"  id="Preciocompra" name="PrecioCompra" readonly></td>
+                            <td>
+    <?php echo $Devolucion["Cod_Barra"]; ?>
+    <input type="hidden" name="CodBarra" value="<?php echo $Devolucion["Cod_Barra"]; ?>">
+</td>
+<td>
+    <?php echo $Devolucion["Nombre_Produc"]; ?>
+    <input type="hidden" name="NombreProd" value="<?php echo $Devolucion["Nombre_Produc"]; ?>">
+</td>
+<td>
+    Registrado en caducados
+    <input type="hidden" name="TipoMovimiento" value="Registrado en caducados">
+</td>
+<td>
+    <input type="number" value="<?php echo $Devolucion["Cantidad"]; ?>" class="form-control" id="Cantidad" name="Cantidad" min="1" required>
+</td>
+<td>
+    <input type="date" class="form-control" id="fechacaducidad" name="FechaCaducidad">
+    <input type="hidden" name="PrecioVenta" value="<?php echo $Devolucion["Precio_Venta"]; ?>">
+</td>
+<td>
+    <input type="text" class="form-control" id="lote" name="Lote">
+    <input type="hidden" name="PrecioCompra" value="<?php echo $Devolucion["Precio_C"]; ?>">
+</td>
                             
                       
                         </tr>
