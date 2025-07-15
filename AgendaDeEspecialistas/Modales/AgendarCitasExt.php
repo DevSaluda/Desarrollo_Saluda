@@ -83,7 +83,7 @@
     if(count($sucursales_ids)) {
       $sucursales_ids = array_map('intval', $sucursales_ids);
       $sucursales_ids = implode(',', $sucursales_ids);
-      $sqlSuc = "SELECT ID_SucursalC, Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC IN ($sucursales_ids) AND Sucursal_Activa = ''";
+      $sqlSuc = "SELECT ID_SucursalC, Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC IN ($sucursales_ids) AND Sucursal_Activa <> 'No'";
       $resSuc = $conn->query($sqlSuc);
       while($rowSuc = $resSuc->fetch_assoc()) {
         echo '<option value="'.$rowSuc["ID_SucursalC"].'">'.$rowSuc["Nombre_Sucursal"].'</option>';

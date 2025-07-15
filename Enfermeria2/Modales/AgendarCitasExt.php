@@ -72,7 +72,7 @@ function formatPhoneNumber(input) {
   <select id = "sucursalExt" class = "form-control" name = "SucursalExt"  >
                                                <option value="">Seleccione una Sucursal:</option>
         <?php
-          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz'");
+          $query = $conn -> query ("SELECT ID_SucursalC,Nombre_Sucursal,ID_H_O_D FROM SucursalesCorre WHERE  ID_H_O_D='".$row['ID_H_O_D']."' AND Nombre_Sucursal !='Matriz' AND Sucursal_Activa <> 'No'");
           while ($valores = mysqli_fetch_array($query)) {
             echo '<option value="'.$valores["ID_SucursalC"].'">'.$valores["Nombre_Sucursal"].'</option>';
           }
