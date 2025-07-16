@@ -49,6 +49,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
         $asignado = NULL;
+        // Forzar que el tipo de ticket siempre sea 'Sistemas' al guardar desde TicketsSoporte
         $tipoTicket = 'Sistemas';
         mysqli_stmt_bind_param($stmt, "ssssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $asignado, $tipoTicket);
 

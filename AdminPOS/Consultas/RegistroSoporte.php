@@ -17,14 +17,16 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     $noTicket = "TS-" . strtoupper(uniqid());
 
     // Preparar la consulta
-    $query = "INSERT INTO Tickets_Soporte 
-        (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D) 
+    $query = "INSERT INTO Tickets_Reportes 
+        (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D, Asignado, TipoTicket) 
         VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "sssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $id_h_o_d);
+        $asignado = NULL;
+        $tipoTicket = 'Sistemas';
+        mysqli_stmt_bind_param($stmt, "sssssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $id_h_o_d, $asignado, $tipoTicket);
 
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito
