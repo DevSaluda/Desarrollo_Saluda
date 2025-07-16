@@ -9,7 +9,7 @@ session_start();
 $sucursalUsuario = isset($_SESSION['Nombre_Sucursal']) ? $_SESSION['Nombre_Sucursal'] : '';
 
 // Consulta SQL para obtener los datos de la tabla `Tickets_soporte` solo de la sucursal del usuario
-$sql = "SELECT * FROM `Tickets_Soporte` WHERE Sucursal = '" . $sucursalUsuario . "'";
+$sql = "SELECT * FROM `Tickets_Reportes` WHERE Sucursal = '" . $sucursalUsuario . "'";
 
 $result = mysqli_query($conn, $sql);
 
