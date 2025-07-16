@@ -24,6 +24,14 @@ $('document').ready(function($) {
 
     // Manejo del envío del formulario
     function submitForm() {
+        // Concatenar Folio y Nombre antes de enviar
+        var folio = $("#folioEmpleado").val().trim();
+        var nombre = $("#nombreEmpleado").val().trim();
+        if(folio && nombre) {
+            $("#agregadoPor").val(folio + ' ' + nombre);
+        } else {
+            $("#agregadoPor").val("");
+        }
         const form = $("#RegistroTicketSoporteForm")[0];
         const formData = new FormData(form);
 

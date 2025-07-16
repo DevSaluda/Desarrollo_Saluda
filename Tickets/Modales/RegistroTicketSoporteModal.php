@@ -62,9 +62,14 @@
             </div>
 
             <div class="form-group">
-              <label for="agregadoPor">Nombre de quien reporta</label>
-              <input type="text" class="form-control" id="agregadoPor" name="Agregado_Por" placeholder="Ingrese su nombre" required>
-            </div>
+  <label for="folioEmpleado">Folio de Empleado</label>
+  <input type="text" class="form-control" id="folioEmpleado" name="FolioEmpleado" placeholder="Ingrese su folio" pattern="[A-Za-z0-9]+" title="Solo letras y números" required>
+</div>
+<div class="form-group">
+  <label for="nombreEmpleado">Nombre de quien reporta</label>
+  <input type="text" class="form-control" id="nombreEmpleado" name="NombreEmpleado" placeholder="Ingrese su nombre" required>
+</div>
+<input type="hidden" id="agregadoPor" name="Agregado_Por">
 
             <div class="form-group" id="campoFolioCorreccion" style="display:none;">
               <label for="folioCorreccion">Folio del Ticket a corregir</label>
