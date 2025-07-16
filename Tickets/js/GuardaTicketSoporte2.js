@@ -34,6 +34,9 @@ $('document').ready(function($) {
         }
         const form = $("#RegistroTicketSoporteForm")[0];
         const formData = new FormData(form);
+        // Asegurar que folioEmpleado y nombreEmpleado estén en el payload si el backend los requiere
+        formData.set('FolioEmpleado', folio);
+        formData.set('NombreEmpleado', nombre);
 
         $.ajax({
             type: 'POST',
