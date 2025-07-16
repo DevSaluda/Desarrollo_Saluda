@@ -17,7 +17,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']))
     $noTicket = "TS-" . strtoupper(uniqid());
 
     // Preparar la consulta
-    $query = "INSERT INTO Tickets_Soporte 
+    $query = "INSERT INTO Tickets_Reportes 
         (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, ID_H_O_D) 
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?, ?)";
