@@ -30,7 +30,7 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     $estatus = "Pendiente";
 
     // Consultar el último número de ticket
-    $result = mysqli_query($conn, "SELECT MAX(Id_Ticket) as last_id FROM Tickets_Soporte");
+    $result = mysqli_query($conn, "SELECT MAX(Id_Ticket) as last_id FROM Tickets_Reportes");
     $row = mysqli_fetch_assoc($result);
     $lastId = isset($row['last_id']) ? intval($row['last_id']) : 0;
 
@@ -41,14 +41,16 @@ if (!empty($_POST['Problematica']) && !empty($_POST['DescripcionProblematica']) 
     $noTicket = "TS-" . str_pad($nextId, 4, "0", STR_PAD_LEFT); // Ejemplo: TS-0001
 
     // Preparar la consulta
-    $query = "INSERT INTO Tickets_Soporte 
-    (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por) 
+    $query = "INSERT INTO Tickets_Reportes 
+    (No_Ticket, Sucursal, Reportado_Por, Fecha_Registro, Problematica, DescripcionProblematica, Estatus, Agregado_Por, Asignado, TipoTicket) 
     VALUES 
-    (?, ?, ?, ?, ?, ?, ?, ?)"; // 8 placeholders
+    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // 10 placeholders
 
     // Preparar la declaración
     if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "ssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor);
+        $asignado = NULL;
+        $tipoTicket = 'Sistemas';
+        mysqli_stmt_bind_param($stmt, "ssssssssss", $noTicket, $sucursal, $reportadoPor, $fecha, $tipoProblema, $descripcion, $estatus, $reportadoPor, $asignado, $tipoTicket);
 
         if (mysqli_stmt_execute($stmt)) {
             // Respuesta de éxito

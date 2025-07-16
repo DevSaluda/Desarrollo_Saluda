@@ -7,7 +7,7 @@ include "Consultas.php";
 $fechaActual = date("Y-m-d");
 
 // Consulta SQL para obtener los datos de la tabla `Tickets_soporte`
-$sql = "SELECT * FROM `Tickets_Soporte`";
+$sql = "SELECT * FROM `Tickets_Reportes`";
 
 $result = mysqli_query($conn, $sql);
 
@@ -26,7 +26,8 @@ if ($result && $result->num_rows > 0) {
         $data[$c]["DescripcionProblematica"] = $fila["DescripcionProblematica"];
         $data[$c]["Solucion"] = $fila["Solucion"];
         $data[$c]["Estatus"] = $fila["Estatus"];
-
+        $data[$c]["Asignado"] = $fila["Asignado"]; // Nuevo campo
+        $data[$c]["TipoTicket"] = $fila["TipoTicket"]; // Nuevo campo
         $c++;
     }
 }
