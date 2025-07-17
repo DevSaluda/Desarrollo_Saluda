@@ -7,7 +7,7 @@ include "Consultas.php";
 $fechaActual = date("Y-m-d");
 
 // Consulta SQL para obtener los datos de la tabla `Tickets_soporte`
-$sql = "SELECT * FROM `Tickets_Reportes` WHERE TipoTicket = 'Soporte'";
+$sql = "SELECT * FROM `Tickets_Reportes` WHERE TipoTicket = 'Sistemas'";
 
 $result = mysqli_query($conn, $sql);
 
