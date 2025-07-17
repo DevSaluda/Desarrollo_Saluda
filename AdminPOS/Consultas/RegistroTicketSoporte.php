@@ -113,6 +113,8 @@ $(document).ready(function() {
                     <th>Descripción</th>
                     <th>Solución</th>
                     <th>Estatus</th>
+                    <th>Asignado</th>
+                    <th>Tipo de Ticket</th>
                 </tr>
             </thead>
         </table>
