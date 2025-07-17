@@ -20,6 +20,8 @@ $(document).ready(function() {
     { "data": "DescripcionProblematica" },
     { "data": "Solucion" },
     { "data": "Estatus" },
+    { "data": "Asignado" },
+    { "data": "TipoTicket" },
     {
         "data": null,
         "render": function(data, type, row) {
