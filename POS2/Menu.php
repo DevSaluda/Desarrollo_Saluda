@@ -708,6 +708,17 @@ Surtir a enfermería
               </p>
             </a>
           </li> 
+
+          <li class="nav-header">TICKETS <i class="fa-solid fa-chalkboard-user"></i></li>
+          <li class="nav-item">
+            <a href="https://saludapos.com/POS2/TicketsSoporte" class="nav-link">
+            <i class="fa-solid fa-circle-play"></i>
+              <p>
+              TICKETS SOPORTE 
+               
+              </p>
+            </a>
+          </li> 
 <!--          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

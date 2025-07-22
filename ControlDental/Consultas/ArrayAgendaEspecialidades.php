@@ -69,6 +69,18 @@ while($fila = $result->fetch_assoc()) {
     $data[$c]["AgendadoPor"] = $fila["AgendadoPor"];
     $data[$c]["AgendamientoRealizado"] = $fila["Fecha_Hora"];
 
+    // Estado y color
+    $estado = isset($fila['Estatus_cita']) ? $fila['Estatus_cita'] : 'Agendado';
+    $color = '#6c757d'; // gris por defecto
+    if ($estado == 'Pendiente') $color = '#8B5C2A'; // café
+    if ($estado == 'Confirmado') $color = '#28a745'; // verde
+
+    // Badge visual solo texto, sin color
+    $data[$c]["Estado"] = '<span class="badge">'.htmlspecialchars($estado).'</span>';
+
+    // Botón Cambiar Estado igual que en POS2
+    $data[$c]["BotonEstado"] = '<button class="btn btn-primary btn-sm btn-cambiar-estado" data-id="'.$fila['ID_Agenda_Especialista'].'" data-estado="'.htmlspecialchars($estado).'">Cambiar Estado</button>';
+
     $horaFormateada = date('h:i A', strtotime($fila["Horario_Disponibilidad"]));
     $fechaFormateada = fechaCastellano($fila["Fecha_Disponibilidad"]);
 
