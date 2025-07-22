@@ -2,6 +2,21 @@
 require '../vendor/autoload.php';
 include_once 'db_connection.php';
 
+// Debug: Verifica conexión
+if (!$conn) {
+    error_log("Conexión a BD fallida: " . mysqli_connect_error());
+    die(json_encode(["statusCode" => 500, "error" => "Error de conexión a BD"]));
+}
+
+// Debug: Verifica datos POST
+$post_keys = ['EspecialidadExt','MedicoExt','SucursalExt','FechaExt','HorasExt','NombresExt','TelExt','TipoConsultaExt','ObservacionesExt','EmpresaExt','UsuarioExt','SistemaExt'];
+foreach ($post_keys as $key) {
+    if (!isset($_POST[$key])) {
+        error_log("Falta POST: $key");
+        die(json_encode(["statusCode" => 500, "error" => "Falta POST: $key"]));
+    }
+}
+
 // Configura la conexión a la base de datos para usar UTF-8
 $conn->set_charset("utf8mb4");
 
@@ -26,26 +41,58 @@ $Color_Calendario = $conn->real_escape_string(trim($ColorClaveCalendario));
 // Obtener el nombre de la sucursal desde SucursalesCorre
 $sql_sucursal = "SELECT Nombre_Sucursal FROM SucursalesCorre WHERE ID_SucursalC = '$Fk_Sucursal'";
 $result_sucursal = mysqli_query($conn, $sql_sucursal);
+if (!$result_sucursal) {
+    error_log("Error en consulta sucursal: " . mysqli_error($conn));
+    die(json_encode(["statusCode" => 500, "error" => "Error en consulta sucursal"]));
+}
 $row_sucursal = mysqli_fetch_assoc($result_sucursal);
+if (!$row_sucursal) {
+    error_log("No se encontró sucursal con ID: $Fk_Sucursal");
+    die(json_encode(["statusCode" => 404, "error" => "Sucursal no encontrada"]));
+}
 $Nombre_Sucursal = $row_sucursal['Nombre_Sucursal'];
 
 // Obtener la fecha desde la tabla Fechas_EspecialistasExt
 $sql_fecha = "SELECT Fecha_Disponibilidad FROM Fechas_EspecialistasExt WHERE ID_Fecha_Esp = '$Fk_Fecha' AND FK_Especialista = '$Fk_Especialista'";
 $result_fecha = mysqli_query($conn, $sql_fecha);
+if (!$result_fecha) {
+    error_log("Error en consulta fecha: " . mysqli_error($conn));
+    die(json_encode(["statusCode" => 500, "error" => "Error en consulta fecha"]));
+}
 $row_fecha = mysqli_fetch_assoc($result_fecha);
+if (!$row_fecha) {
+    error_log("No se encontró fecha con ID: $Fk_Fecha y especialista: $Fk_Especialista");
+    die(json_encode(["statusCode" => 404, "error" => "Fecha no encontrada"]));
+}
 $Fecha = $row_fecha['Fecha_Disponibilidad'];
 
 // Obtener la hora desde la tabla Horarios_Citas_Ext
 $sql_hora = "SELECT Horario_Disponibilidad FROM Horarios_Citas_Ext WHERE ID_Horario = '$Fk_Hora' AND FK_Especialista = '$Fk_Especialista' AND FK_Fecha = '$Fk_Fecha'";
 $result_hora = mysqli_query($conn, $sql_hora);
+if (!$result_hora) {
+    error_log("Error en consulta hora: " . mysqli_error($conn));
+    die(json_encode(["statusCode" => 500, "error" => "Error en consulta hora"]));
+}
 $row_hora = mysqli_fetch_assoc($result_hora);
+if (!$row_hora) {
+    error_log("No se encontró hora con ID: $Fk_Hora, especialista: $Fk_Especialista y fecha: $Fk_Fecha");
+    die(json_encode(["statusCode" => 404, "error" => "Hora no encontrada"]));
+}
 $Hora = $row_hora['Horario_Disponibilidad'];
 
 // Consultar el IDGoogleCalendar del especialista
 $sql_calendar = "SELECT IDGoogleCalendar FROM Personal_Medico_Express WHERE Medico_ID = '$Fk_Especialista'";
 $result_calendar = mysqli_query($conn, $sql_calendar);
+if (!$result_calendar) {
+    error_log("Error en consulta GoogleCalendar: " . mysqli_error($conn));
+    die(json_encode(["statusCode" => 500, "error" => "Error en consulta GoogleCalendar"]));
+}
 $row_calendar = mysqli_fetch_assoc($result_calendar);
-$calendarId = $row_calendar['IDGoogleCalendar'];
+if ($row_calendar && isset($row_calendar['IDGoogleCalendar'])) {
+    $calendarId = $row_calendar['IDGoogleCalendar'];
+} else {
+    $calendarId = '';
+}
 
 // Verificar si ya existe la cita
 $sql = "SELECT Fk_Especialidad, Fk_Especialista, Fk_Sucursal, Fecha, Hora, Nombre_Paciente, Telefono, Tipo_Consulta, ID_H_O_D 
