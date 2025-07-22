@@ -35,7 +35,7 @@
     <option value="Accesorios">Accesorios</option>
     <option value="Programas/Software">Programas/Software</option>
     <option value="Corrección de Ticket">Corrección de Ticket</option>
-    <option value="Otros">Otros</option>
+
   </select>
 </div>
 
