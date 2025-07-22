@@ -46,6 +46,7 @@ $('document').ready(function($) {
                         $('#Exito').modal('toggle'); // Muestra modal de éxito
                         setTimeout(function() {
                             $('#Exito').modal('hide');
+                            location.reload();
                         }, 2000);
                     } else {
                         $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
