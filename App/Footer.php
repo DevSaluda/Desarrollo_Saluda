@@ -6,8 +6,7 @@
   <div class="footer-copyright text-center py-3">Copyright &copy; <?php echo date('Y'); ?> SALUDA <a href="https://somosgrupoe.com/">Somos Grupo E</a> <br>
   <b>Control Farmacia</b> V 1.3.1
   </div>
-  <!-- Copyright -->
-
+  
 </footer>
 <!-- Footer -->
 
