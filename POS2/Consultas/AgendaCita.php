@@ -1,10 +1,20 @@
 <?php
-if(!empty($_POST['Especialidad'])  || !empty($_POST['Medico'])|| !empty($_POST['Sucursal'])
-|| !empty($_POST['TipoConsulta'])|| !empty($_POST['Colorpago'])|| !empty($_POST['Colorcita'])|| !empty($_POST['Telefono'])
-|| !empty($_POST['Costo'])|| !empty($_POST['Observaciones'])|| !empty($_POST['EstatusPago'])|| !empty($_POST['EstatusCita'])
-|| !empty($_POST['EstatusSeguimiento'])|| !empty($_POST['ColorSigue'])|| !empty($_POST['Empresa'])){
+// Debug: Verifica datos POST obligatorios
+$post_keys = ['Especialidad','Medico','Sucursal','Fecha','Hora','Costo','NombreP','Telefono','TipoConsulta','EstatusPago','Colorpago','EstatusCita','Observaciones','Colorcita','EstatusSeguimiento','ColorSigue','Empresa','AgendaPor','Sistema'];
+foreach ($post_keys as $key) {
+    if (!isset($_POST[$key])) {
+        error_log("Falta POST: $key");
+        die(json_encode(["statusCode" => 500, "error" => "Falta POST: $key"]));
+    }
+}
+
 include_once 'db_connection.php';
-    
+// Debug: Verifica conexión
+if (!$conn) {
+    error_log("Conexión a BD fallida: " . mysqli_connect_error());
+    die(json_encode(["statusCode" => 500, "error" => "Error de conexión a BD"]));
+}
+
 $Fk_Especialidad =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Especialidad']))));
 $Fk_Especialista	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Medico']))));
 $Fk_Sucursal =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Sucursal']))));
@@ -24,16 +34,17 @@ $Color_Seguimiento	= $conn -> real_escape_string(htmlentities(strip_tags(Trim($_
 $ID_H_O_D =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Empresa']))));
 $AgendadoPor =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['AgendaPor']))));
 $Sistema =  $conn -> real_escape_string(htmlentities(strip_tags(Trim($_POST['Sistema']))));
-    //include database configuration file
-    
-    //insert form data in the database
-     $insert = $conn->query("INSERT  AgendaCitas_Especialistas (Fk_Especialidad,Fk_Especialista,Fk_Sucursal,Fk_Fecha,Fk_Hora,Fk_Costo,
-     Nombre_Paciente,Telefono,Tipo_Consulta,Estatus_pago,Color_Pago,Estatus_cita,Observaciones,ColorEstatusCita,Estatus_Seguimiento,
-     Color_Seguimiento,ID_H_O_D,AgendadoPor,Sistema) VALUES 
+
+//insert form data in the database
+$insert = $conn->query("INSERT  AgendaCitas_Especialistas (Fk_Especialidad,Fk_Especialista,Fk_Sucursal,Fk_Fecha,Fk_Hora,Fk_Costo,
+Nombre_Paciente,Telefono,Tipo_Consulta,Estatus_pago,Color_Pago,Estatus_cita,Observaciones,ColorEstatusCita,Estatus_Seguimiento,
+Color_Seguimiento,ID_H_O_D,AgendadoPor,Sistema) VALUES 
 ('".$Fk_Especialidad."','".$Fk_Especialista."','".$Fk_Sucursal."','".$Fk_Fecha."','".$Fk_Hora."','".$Fk_Costo."','".$Nombre_Paciente."',
 '".$Telefono."','".$Tipo_Consulta."','".$Estatus_pago."','".$Color_Pago."','".$Estatus_cita."','".$Observaciones."','".$ColorEstatusCita."',
 '".$Estatus_Seguimiento."','".$Color_Seguimiento."','".$ID_H_O_D."','".$AgendadoPor."','".$Sistema."')");
-    
-
-    
+if (!$insert) {
+    error_log("Error al insertar cita: " . $conn->error);
+    die(json_encode(["statusCode" => 500, "error" => "Error al insertar cita"]));
+} else {
+    echo json_encode(["statusCode" => 200, "message" => "Cita agendada correctamente"]);
 }
