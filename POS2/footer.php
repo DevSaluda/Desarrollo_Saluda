@@ -1,7 +1,7 @@
 
 <!--End of Tawk.to Script-->
 <footer class="main-footer">
-<strong>Derechos reservados.&copy; 2020 </strong>
+<strong>Derechos reservados.&copy; <?php echo date('Y'); ?> SALUDA</strong>
   
   <div class="float-right d-none d-sm-inline-block">
   
