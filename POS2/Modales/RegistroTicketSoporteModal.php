@@ -52,6 +52,11 @@
                 <textarea class="form-control" id="DescripcionProblematica" name="DescripcionProblematica" rows="5" style="resize: vertical;" placeholder="Describa brevemente la problemática con detalles relevantes." required></textarea>
               </div>
             </div>
+            <!-- Numero de ticket solo para Corrección de Ticket -->
+            <div class="form-group" id="numeroTicketGroup" style="display:none;">
+              <label for="NumeroTicket">Número de ticket</label>
+              <input type="text" class="form-control" id="NumeroTicket" placeholder="Ingrese el número de ticket a corregir">
+            </div>
 
             <!-- Campos ocultos -->
             <input type="hidden" name="Fecha" value="<?php echo date('Y-m-d'); ?>">
@@ -69,3 +74,33 @@
     </div>
   </div>
 </div>
+<script>
+// Mostrar/ocultar campo Numero de ticket
+document.addEventListener('DOMContentLoaded', function() {
+  var tipoProblema = document.getElementById('tipoProblema');
+  var numeroTicketGroup = document.getElementById('numeroTicketGroup');
+  var numeroTicket = document.getElementById('NumeroTicket');
+  var descripcion = document.getElementById('DescripcionProblematica');
+
+  tipoProblema.addEventListener('change', function() {
+    if (this.value === 'Corrección de Ticket') {
+      numeroTicketGroup.style.display = 'block';
+      numeroTicket.required = true;
+    } else {
+      numeroTicketGroup.style.display = 'none';
+      numeroTicket.required = false;
+      numeroTicket.value = '';
+    }
+  });
+
+  // Antes de enviar el formulario, concatenar el número de ticket a la descripción
+  document.getElementById('RegistroTicketSoporteForm').addEventListener('submit', function(e) {
+    if (tipoProblema.value === 'Corrección de Ticket' && numeroTicket.value.trim() !== '') {
+      // Si ya contiene el texto, no lo vuelve a agregar
+      if (!descripcion.value.startsWith('Ticket a corregir: ')) {
+        descripcion.value = 'Ticket a corregir: ' + numeroTicket.value.trim() + '\n' + descripcion.value;
+      }
+    }
+  });
+});
+</script>

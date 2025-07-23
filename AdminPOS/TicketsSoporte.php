@@ -11,6 +11,9 @@ include "Consultas/Consultas.php";
   <title>Registro de Tickets Realizados</title>
 
 <?php include "Header.php"?>
+<script>
+    var usuarioActual = "<?php echo isset($_SESSION['Nombre_Apellidos']) ? addslashes($_SESSION['Nombre_Apellidos']) : ''; ?>";
+</script>
  <style>
         .error {
   color: red;
