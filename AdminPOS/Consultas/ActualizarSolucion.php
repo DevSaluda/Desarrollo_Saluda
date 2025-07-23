@@ -1,8 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include_once 'db_connection.php';
 
 if (!empty($_POST['Id_Ticket']) && !empty($_POST['Solucion']) && !empty($_POST['Estatus'])) {
-    $idTicket = mysqli_real_escape_string($conn, $_POST['Id_Ticket']);
+    $idTicket = (int)$_POST['Id_Ticket'];
     $solucion = mysqli_real_escape_string($conn, $_POST['Solucion']);
     $estatus = mysqli_real_escape_string($conn, $_POST['Estatus']);
 
