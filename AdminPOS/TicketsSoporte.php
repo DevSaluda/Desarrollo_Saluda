@@ -12,7 +12,7 @@ include "Consultas/Consultas.php";
 
 <?php include "Header.php"?>
 <script>
-    var usuarioActual = "<?php echo isset($_SESSION['Nombre_Apellidos']) ? addslashes($_SESSION['Nombre_Apellidos']) : ''; ?>";
+    var usuarioActual = "<?php echo isset($row['Nombre_Apellidos']) ? addslashes($row['Nombre_Apellidos']) : ''; ?>";
 </script>
  <style>
         .error {
