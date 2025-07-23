@@ -63,18 +63,8 @@ table td {
   include ("Modales/Exito.php");
   include ("footer.php")?>
 
+
 <!-- ./wrapper -->
-
-
-<script src="js/ControlTicketsSoporte2.js"></script>
-<script src="js/GuardaTicketSoporte.js"></script>
-<script src='js/GuardaSolucionTicket.js'></script>
-<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
 
 <!-- Bootstrap -->
@@ -88,6 +78,16 @@ table td {
 <script src="dist/js/demo.js"></script>
 
 <!-- PAGE PLUGINS -->
+<script src="js/ControlTicketsSoporte2.js"></script>
+<script src="js/GuardaTicketSoporte.js"></script>
+<script src='js/GuardaSolucionTicket.js'></script>
+
+<script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
 </body>
 </html>
