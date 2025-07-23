@@ -26,6 +26,21 @@ $('document').ready(function($) {
         $("#RegistroTicketSoporteForm").on('submit', function(e) {
             e.preventDefault(); // Evita el comportamiento predeterminado del formulario
 
+            // --- INICIO LÓGICA DE CONCATENACIÓN Y LIMPIEZA ---
+            var tipoProblema = $('#tipoProblema').val();
+            var descripcion = $('#DescripcionProblematica').val();
+            if (tipoProblema === 'Corrección de Ticket') {
+                var numeroTicket = $('#NumeroTicket').val() || '';
+                // Concatena y elimina saltos de línea
+                descripcion = "Ticket a corregir: " + numeroTicket + " " + descripcion.replace(/\r?\n/g, " ");
+                $('#DescripcionProblematica').val(descripcion);
+            } else {
+                // Siempre limpia saltos de línea
+                descripcion = descripcion.replace(/\r?\n/g, " ");
+                $('#DescripcionProblematica').val(descripcion);
+            }
+            // --- FIN LÓGICA DE CONCATENACIÓN Y LIMPIEZA ---
+
             $.ajax({
                 type: 'POST',
                 url: 'https://saludapos.com/AdminPOS/Consultas/RegistroSoporte.php',
