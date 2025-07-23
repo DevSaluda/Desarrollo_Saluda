@@ -1,6 +1,7 @@
 $(document).on('click', '.solucion-btn', function() {
     const ticketId = $(this).data('id');
     $('#ticketId').val(ticketId);
+    $('#SolucionModal').modal('show');
 });
 
 $('#SolucionForm').on('submit', function(e) {
