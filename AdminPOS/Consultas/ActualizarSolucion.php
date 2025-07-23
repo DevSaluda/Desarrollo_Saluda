@@ -10,7 +10,7 @@ if (!empty($_POST['Id_Ticket']) && !empty($_POST['Solucion']) && !empty($_POST['
     $solucion = mysqli_real_escape_string($conn, $_POST['Solucion']);
     $estatus = mysqli_real_escape_string($conn, $_POST['Estatus']);
 
-    $query = "UPDATE Tickets_Soporte SET Solucion = ?, Estatus = ? WHERE Id_Ticket = ?";
+    $query = "UPDATE Tickets_Reportes SET Solucion = ?, Estatus = ? WHERE Id_Ticket = ?";
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "ssi", $solucion, $estatus, $idTicket);
 
