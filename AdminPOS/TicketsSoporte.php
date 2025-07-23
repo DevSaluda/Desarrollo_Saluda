@@ -80,7 +80,7 @@ table td {
 <!-- PAGE PLUGINS -->
 <script src="js/ControlTicketsSoporte2.js"></script>
 <script src="js/GuardaTicketSoporte.js"></script>
-<script src='js/GuardaSolucionTicket.js'></script>
+<script src='js/GuardaSolucionTicket2.js'></script>
 
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
