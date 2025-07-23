@@ -31,7 +31,7 @@ $(document).ready(function() {
                 acciones += `<button class='btn btn-success btn-sm asignar-btn' data-id='${row.Id_Ticket}'>Revisar</button> `;
                 acciones += `<button class='btn btn-info btn-sm cambiar-tipo' data-id='${row.Id_Ticket}' data-tipo='Mantenimiento'>Mandar a Mantenimiento</button>`;
             } else if (row.Asignado === usuarioActual) {
-                acciones += `<button class='btn btn-primary btn-sm solucion-btn' data-id='${row.Id_Ticket}' data-toggle='modal' data-target='#SolucionModal'>Marcar Solución</button>`;
+                acciones += `<button class='btn btn-primary btn-sm solucion-btn' data-id='${row.Id_Ticket}'>Marcar Solución</button>`;
             }
             return acciones;
         }
