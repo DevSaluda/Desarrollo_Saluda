@@ -26,10 +26,21 @@ $('document').ready(function($) {
         $("#RegistroTicketSoporteForm").on('submit', function(e) {
             e.preventDefault(); // Evita el comportamiento predeterminado del formulario
 
-            $.ajax({
-                type: 'POST',
-                url: 'https://saludapos.com/POS2/Consultas/RegistroSoporte.php',
-                data: new FormData(this),
+            // Preparar FormData y agregar fecha y hora local del navegador
+const formData = new FormData(this);
+const now = new Date();
+const fechaHora = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0') + ' ' +
+    String(now.getHours()).padStart(2, '0') + ':' +
+    String(now.getMinutes()).padStart(2, '0') + ':' +
+    String(now.getSeconds()).padStart(2, '0');
+formData.set('Fecha_Registro', fechaHora);
+
+$.ajax({
+    type: 'POST',
+    url: 'https://saludapos.com/POS2/Consultas/RegistroSoporte.php',
+    data: formData,
                 contentType: false,
                 cache: false,
                 processData: false,
