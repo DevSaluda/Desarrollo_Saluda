@@ -33,10 +33,19 @@ $('document').ready(function($) {
             $("#agregadoPor").val("");
         }
         const form = $("#RegistroTicketSoporteForm")[0];
-        const formData = new FormData(form);
-        // Asegurar que folioEmpleado y nombreEmpleado estén en el payload si el backend los requiere
-        formData.set('FolioEmpleado', folio);
-        formData.set('NombreEmpleado', nombre);
+const formData = new FormData(form);
+// Asegurar que folioEmpleado y nombreEmpleado estén en el payload si el backend los requiere
+formData.set('FolioEmpleado', folio);
+formData.set('NombreEmpleado', nombre);
+// Agregar fecha y hora local del navegador
+const now = new Date();
+const fechaHora = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0') + ' ' +
+    String(now.getHours()).padStart(2, '0') + ':' +
+    String(now.getMinutes()).padStart(2, '0') + ':' +
+    String(now.getSeconds()).padStart(2, '0');
+formData.set('Fecha_Registro', fechaHora);
 
         $.ajax({
             type: 'POST',
