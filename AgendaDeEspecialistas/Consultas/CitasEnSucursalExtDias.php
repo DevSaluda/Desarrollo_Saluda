@@ -175,9 +175,11 @@ while($row = mysqli_fetch_assoc($result_ids)) {
             "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
         )
     );
-}
+    
+file_put_contents(__DIR__.'/debug_citas.log', "TERMINA WHILE\n", FILE_APPEND);
 file_put_contents(__DIR__.'/debug_citas.log', "LLEGA AL FINAL\n", FILE_APPEND);
-file_put_contents(__DIR__.'/debug_citas.log', "EVENTOS JSON: " . json_encode($eventos) . "\n", FILE_APPEND);
+file_put_contents(__DIR__.'/debug_citas.log', "EVENTOS JSON: " . json_encode($eventos, JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+}
 echo json_encode($eventos);
 exit;
 ?>
