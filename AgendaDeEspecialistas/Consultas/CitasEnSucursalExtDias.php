@@ -148,44 +148,12 @@ exit;
     $fecha = isset($cita["Fecha"]) ? $cita["Fecha"] : '';
     $hora = isset($cita["Hora"]) ? $cita["Hora"] : '';
     // Normaliza hora: si viene en 12h con AM/PM, conviértelo a 24h
-    if (preg_match('/(am|pm)/i', $hora)) {
-
-// Obtener todos los Medico_ID que coincidan con el nombre
-$sql_ids = "SELECT Medico_ID FROM Personal_Medico_Express WHERE Nombre_Apellidos = '" . mysqli_real_escape_string($conn, $nombre_medico) . "'";
-$result_ids = mysqli_query($conn, $sql_ids);
-
-$ids_medicos = array();
-while($row = mysqli_fetch_assoc($result_ids)) {
-    $ids_medicos[] = $row['Medico_ID'];
-    }
-    // Valida fecha en formato YYYY-MM-DD
-    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
-        // Si no está en formato correcto, intenta convertirla
-        $fecha = date('Y-m-d', strtotime($fecha));
-    }
-    $eventos[] = array(
-        "id" => $id,
-        "title" => $paciente . ' (' . $tipo . ')',
-        "start" => $fecha . 'T' . $hora,
-        "extendedProps" => array(
-            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
-            "especialidad" => isset($cita["Especialidad"]) ? $cita["Especialidad"] : '',
-            "doctor" => isset($cita["Doctor"]) ? $cita["Doctor"] : '',
-            "sucursal" => isset($cita["Sucursal"]) ? $cita["Sucursal"] : '',
-            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : ''
-        )
-    );
-    
 file_put_contents(__DIR__.'/debug_citas.log', "TERMINA WHILE\n", FILE_APPEND);
 file_put_contents(__DIR__.'/debug_citas.log', "LLEGA AL FINAL\n", FILE_APPEND);
 file_put_contents(__DIR__.'/debug_citas.log', "EVENTOS JSON: " . json_encode($eventos, JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
-}
 echo json_encode($eventos);
 exit;
 ?>
-  /* Estilos personalizados para la tabla */
-  #Productos th {
-    font-size: 12px; /* Tamaño de letra para los encabezados */
     padding: 4px; /* Ajustar el espaciado entre los encabezados */
     white-space: nowrap; /* Evitar que los encabezados se dividan en varias líneas */
   }
