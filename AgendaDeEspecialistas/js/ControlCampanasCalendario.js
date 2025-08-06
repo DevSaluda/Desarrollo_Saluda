@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       // Pedir todos los eventos al backend (sin filtro de estados)
       let url = '../AgendaDeEspecialistas/Consultas/CitasEnSucursalExtDias.php?start=' + encodeURIComponent(fetchInfo.startStr) + '&end=' + encodeURIComponent(fetchInfo.endStr);
-      fetch(url)
+      fetch(url, { credentials: 'include' })
         .then(response => response.json())
         .then(events => {
           // Si el backend devuelve un array de objetos tipo evento
