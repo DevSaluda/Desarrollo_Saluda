@@ -176,6 +176,7 @@ while($row = mysqli_fetch_assoc($result_ids)) {
         )
     );
 }
+file_put_contents(__DIR__.'/debug_citas.log', "LLEGA AL FINAL\n", FILE_APPEND);
 file_put_contents(__DIR__.'/debug_citas.log', "EVENTOS JSON: " . json_encode($eventos) . "\n", FILE_APPEND);
 echo json_encode($eventos);
 exit;
