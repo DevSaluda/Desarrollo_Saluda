@@ -192,6 +192,47 @@ body, html {
   <?php include "Modal.php";
   include "Modales.php";?>
 
+<!-- Botón para registrar asistencia -->
+<div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+        <div class="login100-form-bgbtn"></div>
+        <button class="login100-form-btn" type="button" id="btnAsistencia" style="background-color: #42a5f5;">
+            Registrar Asistencia
+        </button>
+    </div>
+</div>
+
+<!-- Modal para registrar asistencia -->
+<div class="modal fade" id="modalAsistencia" tabindex="-1" role="dialog" aria-labelledby="modalAsistenciaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form id="formAsistencia">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAsistenciaLabel">Registro de Asistencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="ip_publica" name="ip_publica">
+          <div class="form-group">
+            <label for="tipo_asistencia">Tipo de registro</label>
+            <select class="form-control" id="tipo_asistencia" name="tipo_asistencia" required>
+              <option value="entrada">Entrada</option>
+              <option value="salida_descanso">Salida a descanso</option>
+              <option value="regreso_descanso">Regreso de descanso</option>
+              <option value="salida_final">Salida final</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 					
 					<!--Start of Tawk.to Script-->
 
@@ -232,6 +273,32 @@ body, html {
 <!--===============================================================================================-->
 	<script src="Componentes/js/main.js"></script>
 
+<script>
+// Mostrar el modal al dar click en el botón
+$('#btnAsistencia').on('click', function() {
+    // Obtener la IP pública antes de mostrar el modal
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        $('#ip_publica').val(data.ip);
+        $('#modalAsistencia').modal('show');
+      });
+});
+
+// Enviar el registro de asistencia por AJAX
+$('#formAsistencia').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: 'Scripts/RegistrarAsistenciaPOS.php',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            Swal.fire('Respuesta', response, 'info');
+            $('#modalAsistencia').modal('hide');
+        }
+    });
+});
+</script>
 </body>
 </html>
 

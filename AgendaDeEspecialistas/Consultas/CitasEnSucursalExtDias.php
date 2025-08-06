@@ -36,13 +36,7 @@ $ids_string = implode(",", array_map('intval', $ids_medicos));
 $fecha_inicio = isset($_GET['start']) ? date('Y-m-d', strtotime($_GET['start'])) : date('Y-m-d');
 $fecha_fin = isset($_GET['end']) ? date('Y-m-d', strtotime($_GET['end'])) : date('Y-m-d', strtotime('+4 day'));
 
-// 4.1. Obtener filtro de estados (si existe)
-$estados = array();
-if (isset($_GET['estados']) && !empty($_GET['estados'])) {
-    $estados = explode(',', $_GET['estados']);
-    // Limpiar los valores
-    $estados = array_map(function($e) use ($conn) { return mysqli_real_escape_string($conn, trim($e)); }, $estados);
-}
+// El backend ya no filtra por estado, solo por especialista y rango de fechas.
 
 // 5. Consulta SQL principal
 $sql = "SELECT 
