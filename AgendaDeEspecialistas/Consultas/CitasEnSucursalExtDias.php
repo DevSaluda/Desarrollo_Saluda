@@ -84,12 +84,52 @@ if (!$result) {
 // 6. Armar array de eventos para FullCalendar
 $eventos = array();
 while($cita = mysqli_fetch_assoc($result)) {
+    $id = isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null;
+    $paciente = isset($cita["Nombre_Paciente"]) ? $cita["Nombre_Paciente"] : '';
+    $tipo = isset($cita["Tipo_Consulta"]) ? $cita["Tipo_Consulta"] : '';
+    $fecha = isset($cita["Fecha_Disponibilidad"]) ? $cita["Fecha_Disponibilidad"] : '';
+    $hora = isset($cita["Horario_Disponibilidad"]) ? $cita["Horario_Disponibilidad"] : '';
+    // Normaliza hora a 24h
+    if (preg_match('/(am|pm)/i', $hora)) {
+        $hora = date('H:i', strtotime($hora));
+    } else {
+        $hora = substr($hora, 0, 5); // HH:MM
+    }
+    // Normaliza fecha
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $fecha)) {
+        $fecha = date('Y-m-d', strtotime($fecha));
+    }
+    // Determinar color según estado
+    $estado = isset($cita['Estado_cita']) ? $cita['Estado_cita'] : '';
+    switch ($estado) {
+        case 'Pendiente':
+            $color = '#8B5C2A'; // café
+            break;
+        case 'Confirmado':
+            $color = '#28a745'; // verde
+            break;
+        case 'Cancelado':
+            $color = '#dc3545'; // rojo
+            break;
+        default:
+            $color = '#6c757d'; // gris
+    }
+    $eventos[] = array(
+        "id" => $id,
+        "title" => $paciente . ' (' . $tipo . ')',
+        "start" => $fecha . 'T' . $hora,
+        "backgroundColor" => $color,
+        "extendedProps" => array(
+            "telefono" => isset($cita["Telefono"]) ? $cita["Telefono"] : '',
+            "especialidad" => isset($cita["Nombre_Especialidad"]) ? $cita["Nombre_Especialidad"] : '',
+            "doctor" => isset($cita["Nombre_Apellidos"]) ? $cita["Nombre_Apellidos"] : '',
+            "sucursal" => isset($cita["Nombre_Sucursal"]) ? $cita["Nombre_Sucursal"] : '',
+            "observaciones" => isset($cita["Observaciones"]) ? $cita["Observaciones"] : '',
+            "estado" => $estado
+        )
+    );
 }
-// Si no hay eventos, enviar la consulta y los estados para depuración
-if (mysqli_num_rows($result) == 0) {
-    echo json_encode(['eventos' => [], 'sql' => $sql, 'estados' => $estados]);
-    exit;
-}
+
 // (El resto del código sigue igual)
 while($cita = mysqli_fetch_assoc($result)) {
     $id = isset($cita["ID_Agenda_Especialista"]) ? $cita["ID_Agenda_Especialista"] : null;
