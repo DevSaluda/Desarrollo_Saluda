@@ -63,8 +63,8 @@ include "Consultas/Mensaje.php";
     <label class="form-check-label" for="estadoCancelado">Cancelado</label>
   </div>
   <div class="form-check form-check-inline">
-    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Confirmada" id="estadoConfirmada" checked>
-    <label class="form-check-label" for="estadoConfirmada">Confirmada</label>
+    <input class="form-check-input estado-cita-checkbox" type="checkbox" value="Confirmado" id="estadoConfirmada" checked>
+    <label class="form-check-label" for="estadoConfirmada">Confirmado</label>
   </div>
 </div>
 <div id="calendar"></div>
