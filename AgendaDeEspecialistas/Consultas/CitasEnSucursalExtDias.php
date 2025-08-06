@@ -75,8 +75,9 @@ $sql .= " WHERE ace.Fk_Especialista IN ($ids_string)
 AND fe.Fecha_Disponibilidad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 
 $result = mysqli_query($conn, $sql);
+file_put_contents(__DIR__.'/debug_citas.log', "SQL FINAL: $sql\nRESULTADOS: " . mysqli_num_rows($result) . "\n", FILE_APPEND);
 if (!$result) {
-    echo json_encode(['error' => mysqli_error($conn), 'sql' => $sql, 'estados' => $estados]);
+    echo json_encode(['error' => mysqli_error($conn), 'sql' => $sql]);
     exit;
 }
 
