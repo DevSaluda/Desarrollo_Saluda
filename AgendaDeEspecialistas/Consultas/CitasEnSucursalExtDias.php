@@ -15,6 +15,7 @@ include("db_connection.php");
 include "Consultas.php";
 
 // 1. Obtener nombre del médico de la sesión
+define('DEBUG_CITAS', true);
 $nombre_medico = $_SESSION['Nombre_Medico'];
 
 // 2. Buscar los IDs de médico correspondientes
@@ -24,6 +25,15 @@ $ids_medicos = array();
 while($row = mysqli_fetch_assoc($result_ids)) {
     $ids_medicos[] = $row['Medico_ID'];
 }
+if (defined('DEBUG_CITAS') && DEBUG_CITAS) {
+    file_put_contents(__DIR__.'/debug_citas.log', date('c')."\n".json_encode([
+        'session' => $_SESSION,
+        'nombre_medico' => $nombre_medico,
+        'ids_medicos' => $ids_medicos,
+        'sql_ids' => $sql_ids
+    ], JSON_PRETTY_PRINT)."\n", FILE_APPEND);
+}
+
 
 // 3. Si no hay IDs, retornar array vacío
 if (empty($ids_medicos)) {
