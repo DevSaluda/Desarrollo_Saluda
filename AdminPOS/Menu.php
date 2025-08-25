@@ -1438,19 +1438,6 @@ if ($row['Permisos'] == 0) {
             </ul>
           </li>
           </div>
-          
-        <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">TICKETS DE INCIDENCIAS <i class="fas fa-code-fork"></i></li>
-        <li class="nav-item">
-            <a href="https://saludapos.com/AdminPOS/TicketsSoporte" class="nav-link">
-            <i class="fas fa-ticket-alt"></i>
-              <p>
-              Registro Tickets de Soporte
-              </p>
-            </a>
-          </li>
-
-            </ul>
-          </li>
           <div  style=<?php switch($row){
 	case $row['Permisos']==10 ;				
   echo "display:none;";
@@ -1567,7 +1554,19 @@ if ($row['Permisos'] == 0) {
           </li>
 
         </ul>
-
+        <?php if($row['Permisos'] == 0 || $row['Permisos'] == 1): ?>
+        <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">TICKETS DE INCIDENCIAS <i class="fas fa-code-fork"></i></li>
+        <li class="nav-item">
+            <a href="https://saludapos.com/AdminPOS/TicketsSoporte" class="nav-link">
+            <i class="fas fa-ticket-alt"></i>
+              <p>
+              Registro Tickets de Soporte
+              </p>
+            </a>
+          </li>
+        <?php endif; ?>
+            </ul>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
