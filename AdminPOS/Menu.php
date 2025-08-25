@@ -1554,16 +1554,17 @@ if ($row['Permisos'] == 0) {
           </li>
 
         </ul>
-        <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de enfermería <i class="fas fa-code-fork"></i></li>
+
+        <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">TICKETS DE INCIDENCIAS <i class="fas fa-code-fork"></i></li>
         <li class="nav-item">
             <a href="https://saludapos.com/AdminPOS/TicketsSoporte" class="nav-link">
-            <i class="fab fa-searchengin"></i>
+            <i class="fas fa-ticket-alt"></i>
               <p>
               Registro Tickets de Soporte
-              
               </p>
             </a>
           </li>
+        <?php endif; ?>
             </ul>
           </li>
       </nav>
