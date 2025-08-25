@@ -1564,7 +1564,7 @@ if ($row['Permisos'] == 0) {
               </p>
             </a>
           </li>
-        <?php endif; ?>
+
             </ul>
           </li>
       </nav>
