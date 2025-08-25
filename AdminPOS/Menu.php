@@ -1554,6 +1554,18 @@ if ($row['Permisos'] == 0) {
           </li>
 
         </ul>
+        <li class="nav-header" style="font-size: medium; font-weight: bold; color: white;">Control de enfermería <i class="fas fa-code-fork"></i></li>
+        <li class="nav-item">
+            <a href="https://saludapos.com/AdminPOS/TicketsSoporte" class="nav-link">
+            <i class="fab fa-searchengin"></i>
+              <p>
+              Registro Tickets de Soporte
+              
+              </p>
+            </a>
+          </li>
+            </ul>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
