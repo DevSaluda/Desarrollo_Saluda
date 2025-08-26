@@ -11,11 +11,15 @@ function fechaCastellano ($fecha) {
     $nombredia = str_replace($dias_EN, $dias_ES, $dia);
   $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
     $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+    $nombreMes = str_replace($meses_EN, $meses_ES, $dia);
     return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
   }
 	include("ConeSelectDinamico.php");
 	$medico=intval($_REQUEST['medicoExt']);
+	
+	// Agregar opción por defecto
+	echo '<option value="">Selecciona una fecha</option>';
+	
 	$medicos = $conn->prepare("SELECT * FROM Fechas_EspecialistasExt WHERE FK_Especialista = '$medico' AND Fecha_Disponibilidad >= CURDATE() AND (Estado = '' OR Estado = 'Disponible' OR Estado IS NULL) ORDER BY Fecha_Disponibilidad ") or die(mysqli_error());
 	if($medicos->execute()){
 		$a_result = $medicos->get_result();
