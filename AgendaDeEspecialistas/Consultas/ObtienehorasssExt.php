@@ -1,6 +1,10 @@
 <?php
 	include("ConeSelectDinamico.php");
 	$medico=intval($_REQUEST['fechaExt']);
+	
+	// Agregar opción por defecto
+	echo '<option value="">Selecciona una hora</option>';
+	
 	$medicos = $conn->prepare("SELECT ID_Horario,Horario_Disponibilidad,FK_Fecha FROM Horarios_Citas_Ext WHERE ID_Horario NOT IN (SELECT Hora FROM AgendaCitas_EspecialistasExt) AND FK_Fecha='$medico' AND (Estado = '' OR Estado = 'Disponible' OR Estado IS NULL)") or die(mysqli_error());
 	if($medicos->execute()){
 		$a_result = $medicos->get_result();
