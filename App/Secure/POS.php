@@ -193,14 +193,14 @@ body, html {
   include "Modales.php";?>
 
 <!-- Botón para registrar asistencia -->
-<div class="container-login100-form-btn">
+<!-- <div class="container-login100-form-btn">
     <div class="wrap-login100-form-btn">
         <div class="login100-form-bgbtn"></div>
         <button class="login100-form-btn" type="button" id="btnAsistencia" style="background-color: #42a5f5;">
             Registrar Asistencia
         </button>
     </div>
-</div>
+</div> -->
 
 <!-- Modal para registrar asistencia -->
 <div class="modal fade" id="modalAsistencia" tabindex="-1" role="dialog" aria-labelledby="modalAsistenciaLabel" aria-hidden="true">
