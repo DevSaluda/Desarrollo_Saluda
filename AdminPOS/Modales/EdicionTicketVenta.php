@@ -133,7 +133,15 @@ while ($r=$query->fetch_object()){
 </div>
 
 <button type="submit" class="btn btn-success">Aplicar Cambios <i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-   </form>  
+   </form>
+   
+   <!-- Botón para editar formas de pago -->
+   <div class="mt-3">
+     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" 
+             data-target="#EdicionFormasPago" onclick="cargarFormasPago(<?php echo $Especialistas->Folio_Ticket; ?>, '<?php echo $Especialistas->FolioSucursal; ?>')">
+       <i class="fas fa-credit-card"></i> Editar Formas de Pago
+     </button>
+   </div>  
   
 <?php else:?>
 	<p class="alert alert-warning">No hay resultados</p>
@@ -160,4 +168,29 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
-?><script src="js/ActualizacionTickets.js"></script>
+?>
+<script src="js/ActualizacionTickets.js"></script>
+
+<!-- Incluir el modal de edición de formas de pago -->
+<?php include "EdicionFormasPagoTicket.php"; ?>
+
+<script>
+function cargarFormasPago(folioTicket, folioSucursal) {
+    // Cargar el modal con los datos del ticket
+    $.ajax({
+        url: 'Modales/EdicionFormasPagoTicket.php',
+        type: 'POST',
+        data: {
+            folioTicket: folioTicket,
+            foliosucursal: folioSucursal
+        },
+        success: function(response) {
+            // El modal ya está incluido, solo necesitamos mostrarlo
+            $('#EdicionFormasPago').modal('show');
+        },
+        error: function() {
+            alert('Error al cargar el modal de formas de pago');
+        }
+    });
+}
+</script>
