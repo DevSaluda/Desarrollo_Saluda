@@ -16,7 +16,8 @@ switch ($accion) {
         filtrarPorFechas($_POST['fechaInicio'], $_POST['fechaFin']);
         break;
     case 'filtrar_forma_pago':
-        filtrarPorFormaPago($_POST['formaPago']);
+        $tipoFiltro = isset($_POST['tipoFiltro']) ? $_POST['tipoFiltro'] : 'contiene';
+        filtrarPorFormaPago($_POST['formaPago'], $tipoFiltro);
         break;
     case 'estadisticas':
         obtenerEstadisticas();

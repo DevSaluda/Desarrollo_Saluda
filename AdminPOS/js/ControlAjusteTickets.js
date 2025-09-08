@@ -90,13 +90,14 @@ $(document).ready(function() {
     };
     
     // Función para filtrar por forma de pago
-    window.filtrarPorFormaPago = function(formaPago) {
+    window.filtrarPorFormaPago = function(formaPago, tipoFiltro = 'contiene') {
         $.ajax({
             url: 'Consultas/ConsultaAjusteTickets.php',
             type: 'POST',
             data: {
                 accion: 'filtrar_forma_pago',
-                formaPago: formaPago
+                formaPago: formaPago,
+                tipoFiltro: tipoFiltro
             },
             beforeSend: function() {
                 $('#TableAjusteTickets').html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Filtrando...</div>');
