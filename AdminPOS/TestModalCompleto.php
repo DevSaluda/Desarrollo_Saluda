@@ -35,7 +35,7 @@
     </div>
 
     <!-- Modal container -->
-    <div id="FormCancelacion"></div>
+    <div id="ModalFormasPagoContainer"></div>
 
     <script>
     $(document).ready(function() {
@@ -49,7 +49,7 @@
                 folioSucursal: folioSucursal 
             }, function(data) {
                 console.log("Respuesta del modal:", data);
-                $("#FormCancelacion").html(data);
+                $("#ModalFormasPagoContainer").html(data);
                 $("#EdicionFormasPago").modal('show');
             }).fail(function(xhr, status, error) {
                 console.error("Error al cargar el modal:", error);

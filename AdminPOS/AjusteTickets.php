@@ -93,17 +93,14 @@ include "datatables.php";
         var foliosucursal = ids[1];
         $.post("Modales/EdicionFormasPagoTicket_Fixed.php", { folioTicket: folioTicket, folioSucursal: foliosucursal }, function(data) {
             console.log("Respuesta del modal:", data);
-            $("#FormCancelacion").html(data);
-            $("#TituloCancelacion").html("Ajuste de Formas de Pago - Ticket #" + folioTicket);
-            $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
-            $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-primary");
+            $("#ModalFormasPagoContainer").html(data);
+            $("#EdicionFormasPago").modal('show');
         }).fail(function(xhr, status, error) {
             console.error("Error al cargar el modal:", error);
             console.error("Status:", status);
             console.error("Response:", xhr.responseText);
             alert("Error al cargar el modal: " + error);
         });
-        $('#Cancelacionmodal').modal('show');
     });
 
     // Delegación de eventos para el botón ".btn-desglose" dentro de .dropdown-menu
@@ -173,6 +170,10 @@ include "datatables.php";
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+  <!-- Modal Container para Formas de Pago -->
+  <div id="ModalFormasPagoContainer"></div>
+
 </body>
 </html>
 <?php
