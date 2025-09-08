@@ -1,14 +1,11 @@
 <?php
-// Desarrollo_Saluda/AdminPOS/Consultas/ConsultaAjusteTickets.php
+// Desarrollo_Saluda/AdminPOS/Consultas/FiltrapormediodesucursalconajaxAjuste.php
 include "db_connection.php";
 include "FuncionesFormasPago.php";
 
-// Cargar la tabla de ajuste de tickets
-cargarTablaAjusteTickets();
+$sucursal = $_POST['Sucursal'];
 
-function cargarTablaAjusteTickets() {
-    global $conn;
-    
+if (!empty($sucursal)) {
     $sql = "SELECT DISTINCT 
                 v.Folio_Ticket,
                 v.FolioSucursal,
@@ -22,132 +19,37 @@ function cargarTablaAjusteTickets() {
                 COUNT(*) as productos_ticket
             FROM Ventas_POS v
             INNER JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-            WHERE v.Fecha_venta >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-            GROUP BY v.Folio_Ticket, v.FolioSucursal, v.Fecha_venta, v.Total_VentaG, v.FormaDePago, v.CantidadPago, v.Pagos_tarjeta, v.AgregadoPor, s.Nombre_Sucursal
-            ORDER BY v.Fecha_venta DESC, v.Folio_Ticket DESC
-            LIMIT 100";
-    
-    $result = $conn->query($sql);
-    
-    if ($result && $result->num_rows > 0) {
-        generarTablaHTML($result);
-    } else {
-        echo '<div class="alert alert-info">No se encontraron tickets para mostrar</div>';
-    }
-}
-
-function filtrarPorSucursal($sucursal) {
-    global $conn;
-    
-    $whereSucursal = $sucursal ? "AND v.Fk_sucursal = '$sucursal'" : "";
-    
-    $sql = "SELECT DISTINCT 
-                v.Folio_Ticket,
-                v.FolioSucursal,
-                v.Fecha_venta,
-                v.Total_VentaG,
-                v.FormaDePago,
-                v.CantidadPago,
-                v.Pagos_tarjeta,
-                v.AgregadoPor,
-                s.Nombre_Sucursal,
-                COUNT(*) as productos_ticket
-            FROM Ventas_POS v
-            INNER JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-            WHERE v.Fecha_venta >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-            $whereSucursal
-            GROUP BY v.Folio_Ticket, v.FolioSucursal, v.Fecha_venta, v.Total_VentaG, v.FormaDePago, v.CantidadPago, v.Pagos_tarjeta, v.AgregadoPor, s.Nombre_Sucursal
-            ORDER BY v.Fecha_venta DESC, v.Folio_Ticket DESC
-            LIMIT 100";
-    
-    $result = $conn->query($sql);
-    
-    if ($result && $result->num_rows > 0) {
-        generarTablaHTML($result);
-    } else {
-        echo '<div class="alert alert-info">No se encontraron tickets para la sucursal seleccionada</div>';
-    }
-}
-
-function filtrarPorFechas($fechaInicio, $fechaFin) {
-    global $conn;
-    
-    $sql = "SELECT DISTINCT 
-                v.Folio_Ticket,
-                v.FolioSucursal,
-                v.Fecha_venta,
-                v.Total_VentaG,
-                v.FormaDePago,
-                v.CantidadPago,
-                v.Pagos_tarjeta,
-                v.AgregadoPor,
-                s.Nombre_Sucursal,
-                COUNT(*) as productos_ticket
-            FROM Ventas_POS v
-            INNER JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-            WHERE v.Fecha_venta BETWEEN '$fechaInicio' AND '$fechaFin'
-            GROUP BY v.Folio_Ticket, v.FolioSucursal, v.Fecha_venta, v.Total_VentaG, v.FormaDePago, v.CantidadPago, v.Pagos_tarjeta, v.AgregadoPor, s.Nombre_Sucursal
-            ORDER BY v.Fecha_venta DESC, v.Folio_Ticket DESC
-            LIMIT 100";
-    
-    $result = $conn->query($sql);
-    
-    if ($result && $result->num_rows > 0) {
-        generarTablaHTML($result);
-    } else {
-        echo '<div class="alert alert-info">No se encontraron tickets para el rango de fechas seleccionado</div>';
-    }
-}
-
-function filtrarPorFormaPago($formaPago, $tipoFiltro = 'contiene') {
-    global $conn;
-    
-    $whereClause = "";
-    
-    switch ($tipoFiltro) {
-        case 'contiene':
-            $whereClause = $formaPago ? "v.FormaDePago LIKE '%$formaPago%'" : "1=1";
-            break;
-        case 'solo':
-            $whereClause = $formaPago ? "v.FormaDePago = '$formaPago'" : "1=1";
-            break;
-        case 'multiples':
-            $whereClause = "v.FormaDePago LIKE '%|%'";
-            break;
-        case 'simples':
-            $whereClause = "v.FormaDePago NOT LIKE '%|%' AND v.FormaDePago NOT LIKE '%:%'";
-            break;
-        default:
-            $whereClause = $formaPago ? "v.FormaDePago LIKE '%$formaPago%'" : "1=1";
-            break;
-    }
-    
-    $sql = "SELECT DISTINCT 
-                v.Folio_Ticket,
-                v.FolioSucursal,
-                v.Fecha_venta,
-                v.Total_VentaG,
-                v.FormaDePago,
-                v.CantidadPago,
-                v.Pagos_tarjeta,
-                v.AgregadoPor,
-                s.Nombre_Sucursal,
-                COUNT(*) as productos_ticket
-            FROM Ventas_POS v
-            INNER JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
-            WHERE $whereClause
+            WHERE v.Fk_sucursal = '$sucursal'
             AND v.Fecha_venta >= DATE_SUB(NOW(), INTERVAL 30 DAY)
             GROUP BY v.Folio_Ticket, v.FolioSucursal, v.Fecha_venta, v.Total_VentaG, v.FormaDePago, v.CantidadPago, v.Pagos_tarjeta, v.AgregadoPor, s.Nombre_Sucursal
             ORDER BY v.Fecha_venta DESC, v.Folio_Ticket DESC
             LIMIT 100";
-    
-    $result = $conn->query($sql);
-    
-    if ($result && $result->num_rows > 0) {
-        generarTablaHTML($result);
-    } else {
-        echo '<div class="alert alert-info">No se encontraron tickets con los criterios seleccionados</div>';
-    }
+} else {
+    $sql = "SELECT DISTINCT 
+                v.Folio_Ticket,
+                v.FolioSucursal,
+                v.Fecha_venta,
+                v.Total_VentaG,
+                v.FormaDePago,
+                v.CantidadPago,
+                v.Pagos_tarjeta,
+                v.AgregadoPor,
+                s.Nombre_Sucursal,
+                COUNT(*) as productos_ticket
+            FROM Ventas_POS v
+            INNER JOIN SucursalesCorre s ON v.Fk_sucursal = s.ID_SucursalC
+            WHERE v.Fecha_venta >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+            GROUP BY v.Folio_Ticket, v.FolioSucursal, v.Fecha_venta, v.Total_VentaG, v.FormaDePago, v.CantidadPago, v.Pagos_tarjeta, v.AgregadoPor, s.Nombre_Sucursal
+            ORDER BY v.Fecha_venta DESC, v.Folio_Ticket DESC
+            LIMIT 100";
+}
+
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    generarTablaHTML($result);
+} else {
+    echo '<div class="alert alert-info">No se encontraron tickets para mostrar</div>';
 }
 
 function generarTablaHTML($result) {
@@ -216,23 +118,5 @@ function generarTablaHTML($result) {
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-}
-
-function obtenerEstadisticas() {
-    global $conn;
-    
-    $sql = "SELECT 
-                COUNT(DISTINCT CONCAT(Folio_Ticket, '-', FolioSucursal)) as totalTickets,
-                COUNT(DISTINCT CASE WHEN FormaDePago LIKE '%|%' THEN CONCAT(Folio_Ticket, '-', FolioSucursal) END) as multiplesPagos,
-                SUM(Total_VentaG) as totalVendido
-            FROM Ventas_POS 
-            WHERE Fecha_venta >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
-    
-    $result = $conn->query($sql);
-    $stats = $result->fetch_assoc();
-    
-    $stats['ultimaActualizacion'] = date('H:i:s');
-    
-    echo json_encode($stats);
 }
 ?>

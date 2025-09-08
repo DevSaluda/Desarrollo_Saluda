@@ -38,12 +38,6 @@ include "Consultas/FuncionesFormasPago.php";
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#FiltroPorSucursalesIngresos" class="btn btn-default">
   Filtrar por sucursal <i class="fas fa-clinic-medical"></i>
   </button>
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#FiltroPorFechasAjuste" class="btn btn-default">
-  Filtrar por fechas <i class="fas fa-calendar"></i>
-  </button>
-  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#FiltroPorFormasPagoAjuste" class="btn btn-default">
-  Filtrar por forma de pago <i class="fas fa-credit-card"></i>
-  </button>
   </div>
 </div>
     
@@ -65,15 +59,13 @@ include "Consultas/FuncionesFormasPago.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltroDeIngresosSucursales.php");
-  include ("Modales/FiltroPorFechasAjuste.php");
-  include ("Modales/FiltroPorFormasPagoAjuste.php");
   include ("footer.php")?>
 
 <!-- ./wrapper -->
 
 
 <script src="js/ControlAjusteTickets.js"></script>
-<script src="js/RealizaCambioDeSucursalPorFiltroDeBusqueda.js"></script>
+<script src="js/RealizaCambioDeSucursalPorFiltroDeBusquedaAjuste.js"></script>
 
 
 <?php
