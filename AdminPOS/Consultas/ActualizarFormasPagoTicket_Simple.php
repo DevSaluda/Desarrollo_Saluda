@@ -65,22 +65,16 @@ try {
             AND FolioSucursal = '$folioSucursal'";
 
     if ($conn->query($sql)) {
-        // Registrar en log de auditoría (opcional, no crítico)
+        // Registrar en log de auditoría usando la estructura correcta de la tabla
         try {
             $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Sistema';
             $empresa = isset($_SESSION['empresa']) ? $_SESSION['empresa'] : 'Saluda';
-            $descripcion = "Formas de pago modificadas para ticket $folioTicket. ";
-            $descripcion .= "Formas: $formaPago1 ($" . number_format($montoPago1, 2) . ")";
-            if (!empty($formaPago2) && $montoPago2 > 0) {
-                $descripcion .= " + $formaPago2 ($" . number_format($montoPago2, 2) . ")";
-            }
-            if (!empty($observaciones)) {
-                $descripcion .= " - Observaciones: $observaciones";
-            }
-
-            // Intentar insertar en logs, pero no fallar si no funciona
-            $logSql = "INSERT INTO Logs_Sistema (Descripcion, Usuario, Fecha, ID_H_O_D) 
-                       VALUES ('$descripcion', '$usuario', NOW(), '$empresa')";
+            $tipoLog = "EDICION_PAGO";
+            $sistema = "AdminPOS";
+            
+            // Usar la estructura correcta de la tabla Logs_Sistema
+            $logSql = "INSERT INTO Logs_Sistema (Usuario, Tipo_log, Sistema, ID_H_O_D) 
+                       VALUES ('$usuario', '$tipoLog', '$sistema', '$empresa')";
             $conn->query($logSql);
         } catch (Exception $logError) {
             // No fallar por error en el log

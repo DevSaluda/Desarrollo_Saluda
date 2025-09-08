@@ -53,24 +53,16 @@ try {
             
             echo "<p><strong>Columnas disponibles:</strong> " . implode(', ', $columns) . "</p>";
             
-            // Probar inserción según las columnas disponibles
-            $descripcion = "Prueba de inserción - " . date('Y-m-d H:i:s');
+            // Probar inserción usando la estructura correcta de la tabla
             $usuario = 'Sistema';
             $empresa = 'Saluda';
+            $tipoLog = 'PRUEBA';
+            $sistema = 'AdminPOS';
             
-            if (in_array('Accion', $columns)) {
-                $logSql = "INSERT INTO Logs_Sistema (Accion, Descripcion, Usuario, Fecha, ID_H_O_D) 
-                           VALUES ('PRUEBA', '$descripcion', '$usuario', NOW(), '$empresa')";
-                echo "<p>Usando columna 'Accion' (mayúscula)</p>";
-            } else if (in_array('accion', $columns)) {
-                $logSql = "INSERT INTO Logs_Sistema (accion, descripcion, usuario, fecha, id_h_o_d) 
-                           VALUES ('PRUEBA', '$descripcion', '$usuario', NOW(), '$empresa')";
-                echo "<p>Usando columna 'accion' (minúscula)</p>";
-            } else {
-                $logSql = "INSERT INTO Logs_Sistema (Descripcion, Usuario, Fecha, ID_H_O_D) 
-                           VALUES ('$descripcion', '$usuario', NOW(), '$empresa')";
-                echo "<p>Sin columna Accion, usando solo columnas básicas</p>";
-            }
+            // Usar la estructura correcta: Usuario, Tipo_log, Sistema, ID_H_O_D
+            $logSql = "INSERT INTO Logs_Sistema (Usuario, Tipo_log, Sistema, ID_H_O_D) 
+                       VALUES ('$usuario', '$tipoLog', '$sistema', '$empresa')";
+            echo "<p>Usando estructura correcta de la tabla Logs_Sistema</p>";
             
             echo "<p><strong>SQL de prueba:</strong> <code>$logSql</code></p>";
             
@@ -78,7 +70,7 @@ try {
                 echo "<p style='color: green;'>✅ Inserción de prueba exitosa</p>";
                 
                 // Eliminar el registro de prueba
-                $deleteSql = "DELETE FROM Logs_Sistema WHERE Descripcion = '$descripcion' LIMIT 1";
+                $deleteSql = "DELETE FROM Logs_Sistema WHERE Tipo_log = 'PRUEBA' AND Usuario = 'Sistema' LIMIT 1";
                 $conn->query($deleteSql);
                 echo "<p style='color: blue;'>🗑️ Registro de prueba eliminado</p>";
             } else {
