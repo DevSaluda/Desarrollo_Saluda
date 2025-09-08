@@ -292,6 +292,15 @@ if ($row['Permisos'] == 0) {
             </a>
           </li>
           <li class="nav-item">
+            <a href="AjusteTickets" class="nav-link">
+            <i class="fas fa-edit"></i>
+              <p>
+              Ajuste de Tickets
+               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="ReimpresionCortes" class="nav-link">
             <i class="fas fa-cash-register"></i>
               <p>
