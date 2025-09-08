@@ -9,10 +9,10 @@ echo "<!-- Debug: Iniciando modal -->\n";
 
 try {
     echo "<!-- Debug: Incluyendo archivos -->\n";
-    include "Consultas/db_connection.php";
+    include "../Consultas/db_connection.php";
     echo "<!-- Debug: db_connection incluido -->\n";
     
-    include "Consultas/Consultas.php";
+    include "../Consultas/Consultas.php";
     echo "<!-- Debug: Consultas incluido -->\n";
     
     echo "<!-- Debug: Obteniendo datos POST -->\n";

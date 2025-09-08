@@ -91,7 +91,7 @@ include "datatables.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("Modales/EdicionFormasPagoTicket_Simple.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+        $.post("Modales/EdicionFormasPagoTicket_Fixed.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             console.log("Respuesta del modal:", data);
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Ajuste de Formas de Pago - Ticket #" + folioTicket);

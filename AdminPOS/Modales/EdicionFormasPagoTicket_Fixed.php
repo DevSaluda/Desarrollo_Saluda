@@ -1,6 +1,6 @@
 <?php
-// Desarrollo_Saluda/AdminPOS/Modales/EdicionFormasPagoTicket_Simple.php
-// Versión simplificada sin dependencias de sesión
+// Desarrollo_Saluda/AdminPOS/Modales/EdicionFormasPagoTicket_Fixed.php
+// Versión con rutas absolutas para evitar problemas de rutas
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -14,8 +14,11 @@ if (empty($folioTicket) || empty($folioSucursal)) {
     exit;
 }
 
-// Incluir solo la conexión a la base de datos
-include "../Consultas/db_connection.php";
+// Obtener la ruta absoluta del directorio AdminPOS
+$adminPosPath = dirname(__DIR__);
+
+// Incluir la conexión a la base de datos usando ruta absoluta
+include $adminPosPath . "/Consultas/db_connection.php";
 
 if (!$conn) {
     echo '<div class="alert alert-danger">Error: No hay conexión a la base de datos</div>';
@@ -198,7 +201,7 @@ $(document).ready(function() {
         var formData = $('#formEdicionFormasPago').serialize();
         
         $.ajax({
-            url: 'Consultas/ActualizarFormasPagoTicket.php',
+            url: '../Consultas/ActualizarFormasPagoTicket.php',
             type: 'POST',
             data: formData,
             beforeSend: function() {

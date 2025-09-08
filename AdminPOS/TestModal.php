@@ -48,7 +48,7 @@
             
             console.log("Iniciando prueba del modal...");
             
-            $.post("Modales/EdicionFormasPagoTicket_Simple.php", { 
+            $.post("Modales/EdicionFormasPagoTicket_Fixed.php", { 
                 folioTicket: folioTicket, 
                 foliosucursal: foliosucursal 
             }, function(data) {
