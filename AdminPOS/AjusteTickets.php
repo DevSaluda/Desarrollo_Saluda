@@ -90,16 +90,36 @@ include "datatables.php";
         var id = $(this).data("id");
         var ids = id.split('-');
         var folioTicket = ids[0];
-        var foliosucursal = ids[1];
-        $.post("Modales/EdicionFormasPagoTicket_Fixed.php", { folioTicket: folioTicket, folioSucursal: foliosucursal }, function(data) {
+        var folioSucursal = ids[1];
+        
+        // Validar que tenemos los datos necesarios
+        if (!folioTicket || !folioSucursal) {
+            alert('Error: Datos del ticket incompletos');
+            return;
+        }
+        
+        // Mostrar loading
+        $("#ModalFormasPagoContainer").html('<div class="text-center p-4"><i class="fas fa-spinner fa-spin fa-2x"></i><br>Cargando...</div>');
+        $("#ModalEdicionFormasPago").modal('show');
+        
+        $.post("Modales/EdicionFormasPagoTicket_New.php", { 
+            folioTicket: folioTicket, 
+            folioSucursal: folioSucursal 
+        }, function(data) {
             console.log("Respuesta del modal:", data);
             $("#ModalFormasPagoContainer").html(data);
-            $("#EdicionFormasPago").modal('show');
         }).fail(function(xhr, status, error) {
             console.error("Error al cargar el modal:", error);
             console.error("Status:", status);
             console.error("Response:", xhr.responseText);
-            alert("Error al cargar el modal: " + error);
+            
+            $("#ModalFormasPagoContainer").html(
+                '<div class="alert alert-danger m-3">' +
+                '<h5><i class="fas fa-exclamation-triangle"></i> Error al cargar el modal</h5>' +
+                '<p>No se pudo cargar la información del ticket. Por favor, intenta nuevamente.</p>' +
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>' +
+                '</div>'
+            );
         });
     });
 
