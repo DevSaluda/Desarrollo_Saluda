@@ -105,8 +105,26 @@ try {
         $descripcion .= " - Observaciones: $observaciones";
     }
 
-    $logSql = "INSERT INTO Logs_Sistema (Accion, Descripcion, Usuario, Fecha, ID_H_O_D) 
-               VALUES ('EDICION_PAGO', '$descripcion', '$usuario', NOW(), '$empresa')";
+    // Verificar estructura de la tabla Logs_Sistema
+    $checkColumns = "SHOW COLUMNS FROM Logs_Sistema";
+    $columnsResult = $conn->query($checkColumns);
+    $columns = [];
+    while ($row = $columnsResult->fetch_assoc()) {
+        $columns[] = $row['Field'];
+    }
+    
+    // Construir la consulta de log según las columnas disponibles
+    if (in_array('Accion', $columns)) {
+        $logSql = "INSERT INTO Logs_Sistema (Accion, Descripcion, Usuario, Fecha, ID_H_O_D) 
+                   VALUES ('EDICION_PAGO', '$descripcion', '$usuario', NOW(), '$empresa')";
+    } else if (in_array('accion', $columns)) {
+        $logSql = "INSERT INTO Logs_Sistema (accion, descripcion, usuario, fecha, id_h_o_d) 
+                   VALUES ('EDICION_PAGO', '$descripcion', '$usuario', NOW(), '$empresa')";
+    } else {
+        // Si no hay columna Accion, usar solo las columnas básicas
+        $logSql = "INSERT INTO Logs_Sistema (Descripcion, Usuario, Fecha, ID_H_O_D) 
+                   VALUES ('$descripcion', '$usuario', NOW(), '$empresa')";
+    }
     
     if (!$conn->query($logSql)) {
         // No fallar por error en el log, solo registrar

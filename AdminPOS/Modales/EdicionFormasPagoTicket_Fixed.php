@@ -201,7 +201,7 @@ $(document).ready(function() {
         var formData = $('#formEdicionFormasPago').serialize();
         
         $.ajax({
-            url: '../Consultas/ActualizarFormasPagoTicket.php',
+            url: '../Consultas/ActualizarFormasPagoTicket_Simple.php',
             type: 'POST',
             data: formData,
             beforeSend: function() {
