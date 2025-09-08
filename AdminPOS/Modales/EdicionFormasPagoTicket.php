@@ -1,6 +1,6 @@
 <?php
-include "../Consultas/db_connection.php";
-include "../Consultas/Consultas.php";
+include "Consultas/db_connection.php";
+include "Consultas/Consultas.php";
 
 // Obtener datos del ticket
 $folioTicket = isset($_POST["folioTicket"]) ? $_POST["folioTicket"] : '';
@@ -28,7 +28,7 @@ if ($result->num_rows == 0) {
 $ticket = $result->fetch_assoc();
 
 // Función para parsear formas de pago existentes
-function parsearFormasPago($formasPagoString) {
+function parsearFormasPago($formasPagoString, $cantidadPago = 0) {
     $formas = [];
     if (strpos($formasPagoString, '|') !== false) {
         // Múltiples formas de pago
@@ -45,12 +45,12 @@ function parsearFormasPago($formasPagoString) {
         $formas[] = ['forma' => trim($forma), 'monto' => trim($monto)];
     } else {
         // Forma de pago tradicional
-        $formas[] = ['forma' => $formasPagoString, 'monto' => $ticket['CantidadPago']];
+        $formas[] = ['forma' => $formasPagoString, 'monto' => $cantidadPago];
     }
     return $formas;
 }
 
-$formasPagoActuales = parsearFormasPago($ticket['FormaDePago']);
+$formasPagoActuales = parsearFormasPago($ticket['FormaDePago'], $ticket['CantidadPago']);
 ?>
 
 <div class="modal fade" id="EdicionFormasPago" tabindex="-1" role="dialog" aria-labelledby="EdicionFormasPagoLabel" aria-hidden="true">

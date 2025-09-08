@@ -91,11 +91,17 @@ include "datatables.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/EdicionFormasPagoTicket.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+        $.post("Modales/EdicionFormasPagoTicket.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+            console.log("Respuesta del modal:", data);
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Ajuste de Formas de Pago - Ticket #" + folioTicket);
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
             $("#Di3").addClass("modal-dialog modal-xl modal-notify modal-primary");
+        }).fail(function(xhr, status, error) {
+            console.error("Error al cargar el modal:", error);
+            console.error("Status:", status);
+            console.error("Response:", xhr.responseText);
+            alert("Error al cargar el modal: " + error);
         });
         $('#Cancelacionmodal').modal('show');
     });
@@ -106,7 +112,7 @@ include "datatables.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/DesgloseTicket.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+        $.post("Modales/DesgloseTicket.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Desglose del ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -121,7 +127,7 @@ include "datatables.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/ReimpresionTicketVenta.php",{ folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+        $.post("Modales/ReimpresionTicketVenta.php",{ folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Reimpresion de tickets");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
@@ -136,7 +142,7 @@ include "datatables.php";
         var ids = id.split('-');
         var folioTicket = ids[0];
         var foliosucursal = ids[1];
-        $.post("https://saludapos.com/AdminPOS/Modales/EdicionTicketVenta.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
+        $.post("Modales/EdicionTicketVenta.php", { folioTicket: folioTicket, foliosucursal: foliosucursal }, function(data) {
             $("#FormCancelacion").html(data);
             $("#TituloCancelacion").html("Edicion de datos de ticket");
             $("#Di3").removeClass("modal-dialog modal-lg modal-notify modal-info");
