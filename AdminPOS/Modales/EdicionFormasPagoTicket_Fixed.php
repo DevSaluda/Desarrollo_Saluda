@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 
 // Obtener datos del ticket
 $folioTicket = isset($_POST["folioTicket"]) ? $_POST["folioTicket"] : '';
-$folioSucursal = isset($_POST["foliosucursal"]) ? $_POST["foliosucursal"] : '';
+$folioSucursal = isset($_POST["folioSucursal"]) ? $_POST["folioSucursal"] : '';
 
 if (empty($folioTicket) || empty($folioSucursal)) {
     echo '<div class="alert alert-danger">Error: No se proporcionaron los datos del ticket</div>';
@@ -117,7 +117,7 @@ $formasPagoActuales = parsearFormasPago($ticket['FormaDePago'], $ticket['Cantida
               <div class="form-group">
                 <label for="montoPago1">Monto 1</label>
                 <input type="number" class="form-control" name="montoPago1" id="montoPago1" 
-                       value="<?php echo isset($formasPagoActuales[0]) ? $formasPagoActuales[0]['monto'] : ''; ?>" 
+                       value="<?php echo isset($formasPagoActuales[0]) ? number_format($formasPagoActuales[0]['monto'], 2) : '0.00'; ?>" 
                        step="0.01" min="0" required>
               </div>
             </div>
@@ -140,7 +140,7 @@ $formasPagoActuales = parsearFormasPago($ticket['FormaDePago'], $ticket['Cantida
               <div class="form-group">
                 <label for="montoPago2">Monto 2</label>
                 <input type="number" class="form-control" name="montoPago2" id="montoPago2" 
-                       value="<?php echo isset($formasPagoActuales[1]) ? $formasPagoActuales[1]['monto'] : ''; ?>" 
+                       value="<?php echo isset($formasPagoActuales[1]) ? number_format($formasPagoActuales[1]['monto'], 2) : ''; ?>" 
                        step="0.01" min="0">
               </div>
             </div>
@@ -182,12 +182,14 @@ $(document).ready(function() {
         $('#totalPagado').text(totalPagado.toFixed(2));
         $('#diferencia').text(diferencia.toFixed(2));
         
+        // Aplicar colores según la diferencia
+        $('#diferencia').removeClass('text-success text-danger text-warning');
         if (Math.abs(diferencia) < 0.01) {
-            $('#diferencia').removeClass('text-danger text-warning').addClass('text-success');
+            $('#diferencia').addClass('text-success');
         } else if (diferencia > 0) {
-            $('#diferencia').removeClass('text-success text-warning').addClass('text-danger');
+            $('#diferencia').addClass('text-danger');
         } else {
-            $('#diferencia').removeClass('text-success text-danger').addClass('text-warning');
+            $('#diferencia').addClass('text-warning');
         }
     }
     
@@ -201,7 +203,7 @@ $(document).ready(function() {
         var formData = $('#formEdicionFormasPago').serialize();
         
         $.ajax({
-            url: '../Consultas/ActualizarFormasPagoTicket_Simple.php',
+            url: 'Consultas/ActualizarFormasPagoTicket_Simple.php',
             type: 'POST',
             data: formData,
             beforeSend: function() {
