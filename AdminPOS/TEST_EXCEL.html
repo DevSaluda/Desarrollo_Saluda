@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Excel Upload</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Test de Carga de Excel</h1>
+    
+    <form id="testForm">
+        <input type="file" id="testFile" accept=".xlsx,.xls,.csv">
+        <button type="button" id="testBtn">Probar</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script>
+    $('#testBtn').click(function() {
+        const file = document.getElementById('testFile').files[0];
+        if (!file) {
+            alert('Selecciona un archivo');
+            return;
+        }
+        
+        const formData = new FormData();
+        formData.append('archivoExcel', file);
+        formData.append('action', 'preview');
+        
+        $.ajax({
+            url: 'Consultas/ProcesarExcelInventarioSimple.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(response) {
+                console.log('Respuesta:', response);
+                $('#result').html('<pre>' + JSON.stringify(response, null, 2) + '</pre>');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                $('#result').html('<p>Error: ' + error + '</p>');
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -324,6 +324,7 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                      console.log(`Producto: ${dato.Clave}`);
                      console.log(`Stock Excel: ${stockExcel}, Conteo Excel: ${conteoFisicoExcel}, Diferencia Excel: ${diferenciaExcel}`);
                      console.log(`Stock Sistema: ${stockActualSistema}, Conteo Necesario: ${conteoFisicoNecesario}`);
+                     console.log(`Datos del producto encontrado:`, data);
                     
                     // Crear objeto artículo con los datos del Excel
                     const articulo = {
@@ -416,8 +417,21 @@ function agregarArticuloDesdeExcel(articulo) {
          const stockActual = parseFloat(articulo.existencia);
          const diferencia = conteoFisico - stockActual;
          
-         // Actualizar el campo de diferencia
-         newRow.find('.cantidad-diferencia-input').val(diferencia);
+         // Debug: verificar que se está asignando correctamente
+         console.log(`Asignando conteo: ${conteoFisico}, stock: ${stockActual}, diferencia: ${diferencia}`);
+         
+         // Esperar un momento para que el DOM se actualice
+         setTimeout(function() {
+             // Actualizar el campo de diferencia directamente
+             newRow.find('.cantidad-diferencia-input').val(diferencia);
+             
+             // Verificar que el input existe y tiene el valor correcto
+             const inputConteo = newRow.find('.cantidad-vendida-input');
+             const inputDiferencia = newRow.find('.cantidad-diferencia-input');
+             console.log(`Input conteo encontrado:`, inputConteo.length);
+             console.log(`Valor del input conteo:`, inputConteo.val());
+             console.log(`Valor del input diferencia:`, inputDiferencia.val());
+         }, 100);
          
          actualizarImporte(newRow);
          calcularIVA();

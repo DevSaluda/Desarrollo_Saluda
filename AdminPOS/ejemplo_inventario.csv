@@ -1,0 +1,4 @@
+Clave,Nombre,Stock,Conteo fisico,Diferencia,Observaciones
+12345,Producto A,100,120,20,Faltante
+67890,Producto B,50,45,-5,Sobrante
+11111,Producto C,200,200,0,Correcto
