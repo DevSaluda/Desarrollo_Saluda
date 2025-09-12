@@ -18,13 +18,13 @@
             <li><strong>Clave:</strong> Código de barras del producto</li>
             <li><strong>Nombre:</strong> Nombre del producto</li>
             <li><strong>Stock:</strong> Stock de referencia (puede ser de fecha pasada)</li>
-            <li><strong>Conteo fisico:</strong> Conteo físico actual realizado en sucursal</li>
-            <li><strong>Diferencia:</strong> Diferencia entre stock de referencia y conteo físico (opcional)</li>
+            <li><strong>Conteo fisico:</strong> Conteo físico de referencia</li>
+            <li><strong>Diferencia:</strong> Diferencia deseada (opcional, se calcula automáticamente)</li>
             <li><strong>Observaciones:</strong> Comentarios adicionales</li>
           </ul>
-          <div class="alert alert-warning mt-2 mb-0">
-            <i class="fas fa-exclamation-triangle"></i>
-            <strong>Nota:</strong> El stock del Excel puede ser de una fecha pasada. El sistema mostrará tanto el stock del Excel como el stock actual del sistema para comparación.
+          <div class="alert alert-success mt-2 mb-0">
+            <i class="fas fa-magic"></i>
+            <strong>Función Inteligente:</strong> El sistema calculará automáticamente el conteo físico necesario para mantener la misma diferencia que tenías en el Excel, pero usando el stock actual del sistema.
           </div>
         </div>
         
@@ -217,9 +217,13 @@ function mostrarPreviewDatos(datos) {
                     <span class="badge badge-info">${fila.Stock || 0}</span>
                     <small class="text-muted d-block">(Referencia)</small>
                 </td>
-                <td>${fila['Conteo fisico'] || 0}</td>
+                <td>
+                    <span class="badge badge-warning">${fila['Conteo fisico'] || 0}</span>
+                    <small class="text-muted d-block">(Referencia)</small>
+                </td>
                 <td>
                     <span class="badge ${diferencia >= 0 ? 'badge-success' : 'badge-danger'}">${diferencia}</span>
+                    <small class="text-info d-block">Se mantendrá</small>
                 </td>
                 <td>${fila.Observaciones || ''}</td>
             </tr>
@@ -309,14 +313,22 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
             dataType: 'json',
             success: function (data) {
                 if (data && data.codigo) {
+                    // Calcular el conteo físico necesario para mantener la misma diferencia
+                    const stockExcel = parseFloat(dato.Stock) || 0;
+                    const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
+                    const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
+                    const stockActualSistema = data.existencia || 0;
+                    const conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
+                    
                     // Crear objeto artículo con los datos del Excel
                     const articulo = {
                         id: data.id,
                         codigo: data.codigo,
                         descripcion: data.descripcion,
-                        cantidad: parseFloat(dato['Conteo fisico']) || 0,
-                        existencia: parseFloat(dato.Stock) || 0, // Stock del Excel (puede ser de fecha pasada)
-                        stockActual: data.existencia || 0, // Stock actual del sistema
+                        cantidad: conteoFisicoNecesario, // Conteo físico calculado para mantener la diferencia
+                        existencia: stockActualSistema, // Stock actual del sistema
+                        stockExcel: stockExcel, // Stock del Excel para referencia
+                        diferenciaExcel: diferenciaExcel, // Diferencia del Excel
                         precio: data.precio || 0,
                         preciocompra: data.preciocompra || 0,
                         tipoAjuste: tipoAjuste,
@@ -366,9 +378,9 @@ function agregarArticuloDesdeExcel(articulo) {
                 <td class="cantidad"><input class="form-control cantidad-vendida-input" style="font-size: 0.75rem !important;" type="number" name="Contabilizado[]" value="${articulo.cantidad}" onchange="calcularDiferencia(this)" /></td>
                 <td class="ExistenciasEnBd">
                     <div class="d-flex flex-column">
-                        <input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" title="Stock del Excel (fecha pasada)" />
-                        <small class="text-muted" style="font-size: 0.6rem !important;">Excel: ${articulo.existencia}</small>
-                        <small class="text-info" style="font-size: 0.6rem !important;">Sistema: ${articulo.stockActual}</small>
+                        <input class="form-control cantidad-existencias-input" readonly style="font-size: 0.75rem !important;" type="number" name="StockActual[]" value="${articulo.existencia}" title="Stock actual del sistema" />
+                        <small class="text-info" style="font-size: 0.6rem !important;">Sistema: ${articulo.existencia}</small>
+                        <small class="text-muted" style="font-size: 0.6rem !important;">Excel: ${articulo.stockExcel}</small>
                     </div>
                 </td>
                 <td class="Diferenciaresultante"><input class="form-control cantidad-diferencia-input" style="font-size: 0.75rem  !important;" type="number" readonly name="Diferencia[]" /></td>
