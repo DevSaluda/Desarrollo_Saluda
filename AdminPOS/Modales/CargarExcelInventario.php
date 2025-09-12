@@ -313,12 +313,17 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
             dataType: 'json',
             success: function (data) {
                 if (data && data.codigo) {
-                    // Calcular el conteo físico necesario para mantener la misma diferencia
-                    const stockExcel = parseFloat(dato.Stock) || 0;
-                    const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
-                    const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
-                    const stockActualSistema = data.existencia || 0;
-                    const conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
+                     // Calcular el conteo físico necesario para mantener la misma diferencia
+                     const stockExcel = parseFloat(dato.Stock) || 0;
+                     const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
+                     const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
+                     const stockActualSistema = data.existencia || 0;
+                     const conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
+                     
+                     // Debug: mostrar cálculos
+                     console.log(`Producto: ${dato.Clave}`);
+                     console.log(`Stock Excel: ${stockExcel}, Conteo Excel: ${conteoFisicoExcel}, Diferencia Excel: ${diferenciaExcel}`);
+                     console.log(`Stock Sistema: ${stockActualSistema}, Conteo Necesario: ${conteoFisicoNecesario}`);
                     
                     // Crear objeto artículo con los datos del Excel
                     const articulo = {
@@ -403,13 +408,21 @@ function agregarArticuloDesdeExcel(articulo) {
                 <td><div class="btn-container"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this);"><i class="fas fa-minus-circle fa-xs"></i></button></div></td>
             </tr>`;
 
-        $('#tablaAgregarArticulos tbody').prepend(tr);
-        let newRow = $('#tablaAgregarArticulos tbody tr:first-child');
-        actualizarImporte(newRow);
-        calcularDiferencia(newRow);
-        calcularIVA();
-        actualizarSuma();
-        mostrarTotalVenta();
+         $('#tablaAgregarArticulos tbody').prepend(tr);
+         let newRow = $('#tablaAgregarArticulos tbody tr:first-child');
+         
+         // Calcular la diferencia automáticamente
+         const conteoFisico = parseFloat(articulo.cantidad);
+         const stockActual = parseFloat(articulo.existencia);
+         const diferencia = conteoFisico - stockActual;
+         
+         // Actualizar el campo de diferencia
+         newRow.find('.cantidad-diferencia-input').val(diferencia);
+         
+         actualizarImporte(newRow);
+         calcularIVA();
+         actualizarSuma();
+         mostrarTotalVenta();
     }
 }
 
