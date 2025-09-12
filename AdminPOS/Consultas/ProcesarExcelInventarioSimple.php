@@ -91,6 +91,9 @@ try {
         $dato['Stock'] = isset($columnasEncontradas['Stock']) ? (float)$fila[$columnasEncontradas['Stock']] : 0;
         $dato['Conteo fisico'] = isset($columnasEncontradas['Conteo fisico']) ? (float)$fila[$columnasEncontradas['Conteo fisico']] : 0;
         $dato['Diferencia'] = isset($columnasEncontradas['Diferencia']) ? (float)$fila[$columnasEncontradas['Diferencia']] : 0;
+        
+        // Marcar que el stock viene del Excel (puede ser de fecha pasada)
+        $dato['StockDelExcel'] = true;
         $dato['Observaciones'] = isset($columnasEncontradas['Observaciones']) ? trim($fila[$columnasEncontradas['Observaciones']]) : '';
         
         // Validar datos básicos
