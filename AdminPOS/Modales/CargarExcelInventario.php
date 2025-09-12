@@ -31,11 +31,11 @@
             </label>
             <div class="input-group">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="archivoExcel" name="archivoExcel" accept=".xlsx,.xls" required>
+                <input type="file" class="custom-file-input" id="archivoExcel" name="archivoExcel" accept=".xlsx,.xls,.csv" required>
                 <label class="custom-file-label" for="archivoExcel">Seleccionar archivo...</label>
               </div>
             </div>
-            <small class="form-text text-muted">Formatos soportados: .xlsx, .xls</small>
+            <small class="form-text text-muted">Formatos soportados: .xlsx, .xls, .csv</small>
           </div>
           
           <div class="form-group">
@@ -173,7 +173,7 @@ $('#btnPreviewExcel').on('click', function() {
     });
     
     $.ajax({
-        url: 'Consultas/ProcesarExcelInventario.php',
+        url: 'Consultas/ProcesarExcelInventarioSimple.php',
         type: 'POST',
         data: formData,
         processData: false,
@@ -253,7 +253,7 @@ $('#btnCargarExcel').on('click', function() {
     });
     
     $.ajax({
-        url: 'Consultas/ProcesarExcelInventario.php',
+        url: 'Consultas/ProcesarExcelInventarioSimple.php',
         type: 'POST',
         data: formData,
         processData: false,
