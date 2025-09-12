@@ -317,14 +317,14 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                      const stockExcel = parseFloat(dato.Stock) || 0;
                      const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
                      const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
-                     const stockActualSistema = data.existencia || 0;
+                     const stockActualSistema = parseFloat(data.existencia) || 0;
                      const conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
                      
                      // Debug: mostrar cálculos
                      console.log(`Producto: ${dato.Clave}`);
-                     console.log(`Stock Excel: ${stockExcel}, Conteo Excel: ${conteoFisicoExcel}, Diferencia Excel: ${diferenciaExcel}`);
-                     console.log(`Stock Sistema: ${stockActualSistema}, Conteo Necesario: ${conteoFisicoNecesario}`);
-                     console.log(`Datos del producto encontrado:`, data);
+                     console.log(`Stock Excel: ${stockExcel} (${typeof stockExcel}), Conteo Excel: ${conteoFisicoExcel} (${typeof conteoFisicoExcel}), Diferencia Excel: ${diferenciaExcel} (${typeof diferenciaExcel})`);
+                     console.log(`Stock Sistema: ${stockActualSistema} (${typeof stockActualSistema}), Conteo Necesario: ${conteoFisicoNecesario} (${typeof conteoFisicoNecesario})`);
+                     console.log(`Cálculo: ${stockActualSistema} + ${diferenciaExcel} = ${conteoFisicoNecesario}`);
                     
                     // Crear objeto artículo con los datos del Excel
                     const articulo = {
@@ -343,6 +343,10 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                         comentario: dato.Observaciones || '',
                         stockDelExcel: true // Marcar que viene del Excel
                     };
+                    
+                    // Debug: verificar el objeto artículo
+                    console.log(`Objeto artículo creado:`, articulo);
+                    console.log(`Cantidad en artículo: ${articulo.cantidad} (${typeof articulo.cantidad})`);
                     
                     // Agregar a la tabla
                     agregarArticuloDesdeExcel(articulo);
