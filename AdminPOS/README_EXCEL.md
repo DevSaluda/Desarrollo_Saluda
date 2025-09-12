@@ -41,14 +41,20 @@ El archivo Excel debe contener las siguientes columnas:
 | Diferencia | Diferencia entre stock de referencia y conteo físico | No (se calcula automáticamente) |
 | Observaciones | Comentarios adicionales | No |
 
-## ⚠️ Nota Importante sobre el Stock
+## 🧠 Función Inteligente de Cálculo
 
-El **Stock** del Excel puede ser de una fecha pasada y puede diferir del stock actual en el sistema. El sistema:
+El sistema tiene una **función inteligente** que:
 
-- ✅ **Usa el stock del Excel** como referencia para el cálculo de diferencias
-- ✅ **Muestra el stock actual del sistema** para comparación
-- ✅ **Calcula la diferencia** entre el stock del Excel y el conteo físico actual
-- ✅ **Permite identificar discrepancias** entre diferentes fechas
+- ✅ **Lee el stock del Excel** (puede ser de fecha pasada) como referencia
+- ✅ **Obtiene el stock actual del sistema** automáticamente
+- ✅ **Calcula la diferencia** que tenías en el Excel
+- ✅ **Ajusta el conteo físico** para mantener la misma diferencia con el stock actual
+- ✅ **Carga en la tabla** el stock actual del sistema y el conteo físico calculado
+
+### Ejemplo:
+- **Excel:** Stock=100, Conteo=120, Diferencia=+20
+- **Sistema actual:** Stock=150
+- **Resultado:** Conteo=170, Diferencia=+20 (se mantiene la diferencia)
 
 ## Uso
 
