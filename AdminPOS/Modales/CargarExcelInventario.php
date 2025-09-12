@@ -318,13 +318,28 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                      const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
                      const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
                      const stockActualSistema = parseFloat(data.existencia) || 0;
-                     const conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
+                     
+                     // Calcular el conteo físico necesario
+                     let conteoFisicoNecesario;
+                     if (dato.Diferencia && dato.Diferencia !== '') {
+                         // Si hay diferencia específica en el Excel, usarla
+                         conteoFisicoNecesario = stockActualSistema + diferenciaExcel;
+                     } else {
+                         // Si no hay diferencia específica, calcular basado en el conteo del Excel
+                         conteoFisicoNecesario = conteoFisicoExcel;
+                     }
+                     
+                     // Asegurar que el conteo no sea negativo
+                     if (conteoFisicoNecesario < 0) {
+                         conteoFisicoNecesario = 0;
+                     }
                      
                      // Debug: mostrar cálculos
                      console.log(`Producto: ${dato.Clave}`);
-                     console.log(`Stock Excel: ${stockExcel} (${typeof stockExcel}), Conteo Excel: ${conteoFisicoExcel} (${typeof conteoFisicoExcel}), Diferencia Excel: ${diferenciaExcel} (${typeof diferenciaExcel})`);
-                     console.log(`Stock Sistema: ${stockActualSistema} (${typeof stockActualSistema}), Conteo Necesario: ${conteoFisicoNecesario} (${typeof conteoFisicoNecesario})`);
-                     console.log(`Cálculo: ${stockActualSistema} + ${diferenciaExcel} = ${conteoFisicoNecesario}`);
+                     console.log(`Stock Excel: ${stockExcel}, Conteo Excel: ${conteoFisicoExcel}, Diferencia Excel: ${diferenciaExcel}`);
+                     console.log(`Stock Sistema: ${stockActualSistema}`);
+                     console.log(`Lógica: ${dato.Diferencia && dato.Diferencia !== '' ? 'Usando diferencia específica' : 'Usando conteo del Excel'}`);
+                     console.log(`Conteo Necesario: ${conteoFisicoNecesario} (${conteoFisicoNecesario < 0 ? 'Ajustado a 0' : 'OK'})`);
                     
                     // Crear objeto artículo con los datos del Excel
                     const articulo = {
