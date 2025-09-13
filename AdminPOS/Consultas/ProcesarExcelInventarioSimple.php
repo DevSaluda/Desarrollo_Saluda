@@ -97,11 +97,26 @@ try {
             continue;
         }
         
+        // Debug: mostrar la fila completa para las primeras 3 filas
+        if ($i <= 3) {
+            error_log("Fila $i: " . json_encode($fila));
+        }
+        
         $dato = [];
         $dato['Clave'] = isset($columnasEncontradas['Clave']) ? trim($fila[$columnasEncontradas['Clave']]) : '';
         $dato['Nombre'] = isset($columnasEncontradas['Nombre']) ? trim($fila[$columnasEncontradas['Nombre']]) : '';
         $dato['Stock'] = isset($columnasEncontradas['Stock']) ? (float)$fila[$columnasEncontradas['Stock']] : 0;
         $dato['Conteo Físico'] = isset($columnasEncontradas['Conteo Físico']) ? (float)$fila[$columnasEncontradas['Conteo Físico']] : 0;
+        
+        // Debug específico para Conteo Físico
+        if (isset($columnasEncontradas['Conteo Físico'])) {
+            $indiceConteo = $columnasEncontradas['Conteo Físico'];
+            $valorOriginal = $fila[$indiceConteo];
+            $valorConvertido = (float)$valorOriginal;
+            error_log("Conteo Físico - Índice: $indiceConteo, Valor original: '$valorOriginal', Valor convertido: $valorConvertido");
+        } else {
+            error_log("Conteo Físico - Columna no encontrada");
+        }
         $dato['Diferencia'] = isset($columnasEncontradas['Diferencia']) ? (float)$fila[$columnasEncontradas['Diferencia']] : 0;
         
         // Marcar que el stock viene del Excel (puede ser de fecha pasada)
