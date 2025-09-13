@@ -316,8 +316,15 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                      // Calcular el conteo físico necesario para mantener la misma diferencia
                      const stockExcel = parseFloat(dato.Stock) || 0;
                      const conteoFisicoExcel = parseFloat(dato['Conteo Físico']) || 0;
-                     const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
+                     let diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
                      const stockActualSistema = parseFloat(data.existencia) || 0;
+                     
+                     // SOLUCIÓN TEMPORAL: Si la diferencia es negativa pero debería ser positiva
+                     // Esto corrige el problema de signo invertido
+                     if (diferenciaExcel < 0 && conteoFisicoExcel > stockExcel) {
+                         diferenciaExcel = Math.abs(diferenciaExcel);
+                         console.log(`Corrigiendo signo: diferencia original ${-diferenciaExcel} → ${diferenciaExcel}`);
+                     }
                      
                      // Calcular el conteo físico necesario para mantener la misma diferencia
                      // Fórmula: Conteo Necesario = Stock Actual + Diferencia del Excel
