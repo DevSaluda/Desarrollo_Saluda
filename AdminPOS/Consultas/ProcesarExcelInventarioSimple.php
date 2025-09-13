@@ -147,6 +147,11 @@ try {
             error_log("Diferencia calculada: {$dato['Conteo Físico']} - {$dato['Stock']} = {$dato['Diferencia']}");
         }
         
+        // Debug: verificar si la diferencia ya está especificada en el Excel
+        if ($dato['Diferencia'] != 0) {
+            error_log("Diferencia del Excel para {$dato['Clave']}: {$dato['Diferencia']} (ya especificada)");
+        }
+        
         // Debug final de la diferencia
         error_log("Diferencia final para {$dato['Clave']}: {$dato['Diferencia']}");
         
