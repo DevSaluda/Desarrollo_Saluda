@@ -67,7 +67,9 @@ try {
     
     // Buscar variaciones de "Conteo Físico"
     foreach ($headers as $index => $header) {
-        if (stripos($header, 'conteo') !== false && stripos($header, 'fisico') !== false) {
+        // Normalizar el header para comparación
+        $headerNormalizado = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $header));
+        if (strpos($headerNormalizado, 'conteo') !== false && strpos($headerNormalizado, 'fisico') !== false) {
             $columnasEncontradas['Conteo Físico'] = $index;
             break;
         }
