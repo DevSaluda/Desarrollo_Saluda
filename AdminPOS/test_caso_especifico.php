@@ -51,4 +51,41 @@ echo "<li>El sistema está interpretando la diferencia como -23 en lugar de +23<
 echo "<li>O está calculando: 61 + (-23) = 38</li>";
 echo "<li>Esto sugiere que hay un problema en la interpretación del signo de la diferencia</li>";
 echo "</ul>";
+
+echo "<h3>Posibles causas:</h3>";
+echo "<ol>";
+echo "<li><strong>Problema en la lectura del Excel:</strong> El valor 23 se está leyendo como -23</li>";
+echo "<li><strong>Problema en el cálculo del backend:</strong> La fórmula está invirtiendo el signo</li>";
+echo "<li><strong>Problema en el frontend:</strong> JavaScript está invirtiendo el signo</li>";
+echo "<li><strong>Problema en la codificación:</strong> Caracteres especiales o encoding</li>";
+echo "</ol>";
+
+echo "<h3>Test de diferentes escenarios:</h3>";
+
+// Test con diferentes formatos de diferencia
+$formatosDiferencia = [
+    '23' => 23,
+    '+23' => 23,
+    '-23' => -23,
+    ' 23 ' => 23,
+    '23.0' => 23.0,
+    '23,0' => 23.0
+];
+
+echo "<table border='1' style='border-collapse: collapse; width: 100%;'>";
+echo "<tr><th>Formato en Excel</th><th>Valor parseado</th><th>Resultado</th></tr>";
+
+foreach ($formatosDiferencia as $formato => $valorEsperado) {
+    $valorParseado = (float)$formato;
+    $resultado = $stockSistema + $valorParseado;
+    $color = ($valorParseado == $valorEsperado) ? 'green' : 'red';
+    
+    echo "<tr>";
+    echo "<td>'$formato'</td>";
+    echo "<td>$valorParseado</td>";
+    echo "<td style='color: $color;'>$resultado</td>";
+    echo "</tr>";
+}
+
+echo "</table>";
 ?>
