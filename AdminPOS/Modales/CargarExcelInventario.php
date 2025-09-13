@@ -18,7 +18,7 @@
             <li><strong>Clave:</strong> Código de barras del producto</li>
             <li><strong>Nombre:</strong> Nombre del producto</li>
             <li><strong>Stock:</strong> Stock de referencia (puede ser de fecha pasada)</li>
-            <li><strong>Conteo fisico:</strong> Conteo físico de referencia</li>
+            <li><strong>Conteo Físico:</strong> Conteo físico de referencia</li>
             <li><strong>Diferencia:</strong> Diferencia deseada (opcional, se calcula automáticamente)</li>
             <li><strong>Observaciones:</strong> Comentarios adicionales</li>
           </ul>

@@ -55,7 +55,7 @@ try {
     $headers = array_map('trim', $data[0]);
     
     // Verificar que existan las columnas requeridas
-    $columnasRequeridas = ['Clave', 'Nombre', 'Stock', 'Conteo fisico', 'Diferencia', 'Observaciones'];
+    $columnasRequeridas = ['Clave', 'Nombre', 'Stock', 'Conteo fisico', 'Conteo Físico', 'Diferencia', 'Observaciones'];
     $columnasEncontradas = [];
     
     foreach ($columnasRequeridas as $columna) {
@@ -65,10 +65,24 @@ try {
         }
     }
     
+    // Buscar variaciones de "Conteo fisico"
+    if (!isset($columnasEncontradas['Conteo fisico'])) {
+        foreach ($headers as $index => $header) {
+            if (stripos($header, 'conteo') !== false && stripos($header, 'fisico') !== false) {
+                $columnasEncontradas['Conteo fisico'] = $index;
+                break;
+            }
+        }
+    }
+    
+    // Debug: mostrar columnas encontradas
+    error_log('Columnas encontradas: ' . json_encode($columnasEncontradas));
+    error_log('Headers del archivo: ' . json_encode($headers));
+    
     if (count($columnasEncontradas) < 4) { // Mínimo 4 columnas requeridas
         echo json_encode([
             'success' => false, 
-            'message' => 'El archivo debe contener al menos las columnas: Clave, Nombre, Stock, Conteo fisico'
+            'message' => 'El archivo debe contener al menos las columnas: Clave, Nombre, Stock, Conteo fisico. Columnas encontradas: ' . implode(', ', array_keys($columnasEncontradas))
         ]);
         exit;
     }
