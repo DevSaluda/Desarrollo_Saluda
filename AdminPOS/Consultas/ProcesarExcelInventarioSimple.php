@@ -55,7 +55,7 @@ try {
     $headers = array_map('trim', $data[0]);
     
     // Verificar que existan las columnas requeridas
-    $columnasRequeridas = ['Clave', 'Nombre', 'Stock', 'Conteo fisico', 'Conteo Físico', 'Diferencia', 'Observaciones'];
+    $columnasRequeridas = ['Clave', 'Nombre', 'Stock', 'Diferencia', 'Observaciones'];
     $columnasEncontradas = [];
     
     foreach ($columnasRequeridas as $columna) {
@@ -65,13 +65,11 @@ try {
         }
     }
     
-    // Buscar variaciones de "Conteo fisico"
-    if (!isset($columnasEncontradas['Conteo fisico'])) {
-        foreach ($headers as $index => $header) {
-            if (stripos($header, 'conteo') !== false && stripos($header, 'fisico') !== false) {
-                $columnasEncontradas['Conteo fisico'] = $index;
-                break;
-            }
+    // Buscar variaciones de "Conteo Físico"
+    foreach ($headers as $index => $header) {
+        if (stripos($header, 'conteo') !== false && stripos($header, 'fisico') !== false) {
+            $columnasEncontradas['Conteo Físico'] = $index;
+            break;
         }
     }
     
@@ -82,7 +80,7 @@ try {
     if (count($columnasEncontradas) < 4) { // Mínimo 4 columnas requeridas
         echo json_encode([
             'success' => false, 
-            'message' => 'El archivo debe contener al menos las columnas: Clave, Nombre, Stock, Conteo fisico. Columnas encontradas: ' . implode(', ', array_keys($columnasEncontradas))
+            'message' => 'El archivo debe contener al menos las columnas: Clave, Nombre, Stock, Conteo Físico. Columnas encontradas: ' . implode(', ', array_keys($columnasEncontradas))
         ]);
         exit;
     }
@@ -103,7 +101,7 @@ try {
         $dato['Clave'] = isset($columnasEncontradas['Clave']) ? trim($fila[$columnasEncontradas['Clave']]) : '';
         $dato['Nombre'] = isset($columnasEncontradas['Nombre']) ? trim($fila[$columnasEncontradas['Nombre']]) : '';
         $dato['Stock'] = isset($columnasEncontradas['Stock']) ? (float)$fila[$columnasEncontradas['Stock']] : 0;
-        $dato['Conteo fisico'] = isset($columnasEncontradas['Conteo fisico']) ? (float)$fila[$columnasEncontradas['Conteo fisico']] : 0;
+        $dato['Conteo Físico'] = isset($columnasEncontradas['Conteo Físico']) ? (float)$fila[$columnasEncontradas['Conteo Físico']] : 0;
         $dato['Diferencia'] = isset($columnasEncontradas['Diferencia']) ? (float)$fila[$columnasEncontradas['Diferencia']] : 0;
         
         // Marcar que el stock viene del Excel (puede ser de fecha pasada)
