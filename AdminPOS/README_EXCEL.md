@@ -37,7 +37,7 @@ El archivo Excel debe contener las siguientes columnas:
 | Clave | Código de barras del producto | Sí |
 | Nombre | Nombre del producto | No |
 | Stock | Stock de referencia (puede ser de fecha pasada) | Sí |
-| Conteo fisico | Conteo físico actual realizado en sucursal | Sí |
+| Conteo Físico | Conteo físico actual realizado en sucursal | Sí |
 | Diferencia | Diferencia entre stock de referencia y conteo físico | No (se calcula automáticamente) |
 | Observaciones | Comentarios adicionales | No |
 
