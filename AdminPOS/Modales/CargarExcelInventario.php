@@ -208,7 +208,7 @@ function mostrarPreviewDatos(datos) {
     tbody.empty();
     
     datos.forEach(function(fila, index) {
-        const diferencia = fila.Diferencia || (fila['Conteo fisico'] - fila.Stock);
+        const diferencia = fila.Diferencia || (fila['Conteo Físico'] - fila.Stock);
         const tr = `
             <tr>
                 <td>${fila.Clave || ''}</td>
@@ -218,7 +218,7 @@ function mostrarPreviewDatos(datos) {
                     <small class="text-muted d-block">(Referencia)</small>
                 </td>
                 <td>
-                    <span class="badge badge-warning">${fila['Conteo fisico'] || 0}</span>
+                    <span class="badge badge-warning">${fila['Conteo Físico'] || 0}</span>
                     <small class="text-muted d-block">(Referencia)</small>
                 </td>
                 <td>
@@ -315,7 +315,7 @@ function procesarDatosExcel(datos, tipoAjuste, anaquel, repisa) {
                 if (data && data.codigo) {
                      // Calcular el conteo físico necesario para mantener la misma diferencia
                      const stockExcel = parseFloat(dato.Stock) || 0;
-                     const conteoFisicoExcel = parseFloat(dato['Conteo fisico']) || 0;
+                     const conteoFisicoExcel = parseFloat(dato['Conteo Físico']) || 0;
                      const diferenciaExcel = parseFloat(dato.Diferencia) || (conteoFisicoExcel - stockExcel);
                      const stockActualSistema = parseFloat(data.existencia) || 0;
                      
