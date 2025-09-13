@@ -22,7 +22,10 @@ if (file_exists($archivo)) {
     $headers = array_map('trim', $data[0]);
     $indiceConteo = -1;
     foreach ($headers as $index => $header) {
-        if (stripos($header, 'conteo') !== false && stripos($header, 'fisico') !== false) {
+        // Normalizar el header para comparación
+        $headerNormalizado = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $header));
+        echo "Header $index: '$header' -> Normalizado: '$headerNormalizado'\n";
+        if (strpos($headerNormalizado, 'conteo') !== false && strpos($headerNormalizado, 'fisico') !== false) {
             $indiceConteo = $index;
             break;
         }
