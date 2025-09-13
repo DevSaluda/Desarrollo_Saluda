@@ -132,8 +132,8 @@ try {
         }
         
         // Calcular diferencia si no está especificada
-        if ($dato['Diferencia'] == 0 && $dato['Stock'] != 0 && $dato['Conteo fisico'] != 0) {
-            $dato['Diferencia'] = $dato['Conteo fisico'] - $dato['Stock'];
+        if ($dato['Diferencia'] == 0 && $dato['Stock'] != 0 && $dato['Conteo Físico'] != 0) {
+            $dato['Diferencia'] = $dato['Conteo Físico'] - $dato['Stock'];
         }
         
         $datosProcesados[] = $dato;
