@@ -121,6 +121,16 @@ try {
         }
         $dato['Diferencia'] = isset($columnasEncontradas['Diferencia']) ? (float)$fila[$columnasEncontradas['Diferencia']] : 0;
         
+        // Debug específico para Diferencia
+        if (isset($columnasEncontradas['Diferencia'])) {
+            $indiceDiferencia = $columnasEncontradas['Diferencia'];
+            $valorOriginalDiferencia = $fila[$indiceDiferencia];
+            $valorConvertidoDiferencia = (float)$valorOriginalDiferencia;
+            error_log("Diferencia - Índice: $indiceDiferencia, Valor original: '$valorOriginalDiferencia', Valor convertido: $valorConvertidoDiferencia");
+        } else {
+            error_log("Diferencia - Columna no encontrada");
+        }
+        
         // Marcar que el stock viene del Excel (puede ser de fecha pasada)
         $dato['StockDelExcel'] = true;
         $dato['Observaciones'] = isset($columnasEncontradas['Observaciones']) ? trim($fila[$columnasEncontradas['Observaciones']]) : '';
@@ -134,7 +144,11 @@ try {
         // Calcular diferencia si no está especificada
         if ($dato['Diferencia'] == 0 && $dato['Stock'] != 0 && $dato['Conteo Físico'] != 0) {
             $dato['Diferencia'] = $dato['Conteo Físico'] - $dato['Stock'];
+            error_log("Diferencia calculada: {$dato['Conteo Físico']} - {$dato['Stock']} = {$dato['Diferencia']}");
         }
+        
+        // Debug final de la diferencia
+        error_log("Diferencia final para {$dato['Clave']}: {$dato['Diferencia']}");
         
         $datosProcesados[] = $dato;
     }
