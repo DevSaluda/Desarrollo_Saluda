@@ -22,12 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ic.Precio_C * ic.Contabilizado AS Total_Precio_Compra, 
         ic.Contabilizado, 
         ic.StockEnMomento, 
+        ic.Tipo_Ajuste,
         ic.Diferencia, 
         ic.Sistema, 
         ic.AgregadoPor, 
         ic.AgregadoEl, 
         ic.ID_H_O_D, 
-        ic.FechaInventario
+        ic.FechaInventario,
+        ic.Comentario
     FROM 
         InventariosStocks_Conteos AS ic
     JOIN 
@@ -49,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["IdbD"] = $fila["Cod_Barra"];
             $data[$c]["Cod_Barra"] = $fila["Nombre_Prod"];
             $data[$c]["NombreSucursal"] = $fila["Nombre_Sucursal"];
+            $data[$c]["Tipo_Ajuste"] = $fila["Tipo_Ajuste"];
             $data[$c]["PrecioVenta"] = $fila["Precio_Venta"];
             $data[$c]["PrecioCompra"] = $fila["Precio_C"];
             $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];
@@ -56,8 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
             $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
             $data[$c]["Clave_Levic"] = $fila["Diferencia"];
+            $data[$c]["Comentario"] = $fila["Comentario"];
             $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
+            
             $data[$c]["FechaInventario"] = $fila["FechaInventario"];
+            $horaInventario = date("g:i A", strtotime($fila["AgregadoEl"]));
+            $data[$c]["HoraInventario"] = $horaInventario;
             $c++;
         }
         

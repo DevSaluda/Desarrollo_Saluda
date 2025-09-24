@@ -241,18 +241,18 @@ include "Consultas/Consultas.php";
               { mData: 'Cod_Barra' },
               { mData: 'Nombre_Prod' },
               { mData: 'NombreSucursal' },
-              { mData: 'Tipo_Ajuste' },
+              { mData: 'Tipo_Ajuste', defaultContent: '' },
               { mData: 'PrecioVenta' },
               { mData: 'PrecioCompra' },
               { mData: 'TotalPrecioVenta' },
               { mData: 'TotalPrecioCompra' },
-              { mData: 'Nombre_Prod' },
+              { mData: 'Contabilizado' },
               { mData: 'Clave_interna' },
               { mData: 'Clave_Levic' },
-              { mData: 'Comentario' },
+              { mData: 'Comentario', defaultContent: '' },
               { mData: 'Cod_Enfermeria' },
               { mData: 'FechaInventario' },
-              { mData: 'HoraInventario' }
+              { mData: 'HoraInventario', defaultContent: '' }
             ],
             "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
             "language": {
