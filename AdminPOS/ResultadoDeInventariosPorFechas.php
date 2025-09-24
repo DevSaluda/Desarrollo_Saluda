@@ -323,7 +323,7 @@ include "Consultas/Consultas.php";
 
   <!-- Modales y scripts -->
   <?php
-include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaInventariosFechas.php");
   include ("footer.php");
   ?>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
