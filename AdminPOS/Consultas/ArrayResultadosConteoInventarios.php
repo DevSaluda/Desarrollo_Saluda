@@ -56,11 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[$c]["PrecioCompra"] = $fila["Precio_C"];
             $data[$c]["TotalPrecioVenta"] = $fila["Total_Precio_Venta"];
             $data[$c]["TotalPrecioCompra"] = $fila["Total_Precio_Compra"];
-            $data[$c]["Nombre_Prod"] = $fila["Contabilizado"];
+            $data[$c]["Nombre_Prod"] = $fila["Nombre_Prod"];
             $data[$c]["Clave_interna"] = $fila["StockEnMomento"];
             $data[$c]["Clave_Levic"] = $fila["Diferencia"];
             $data[$c]["Comentario"] = $fila["Comentario"];
             $data[$c]["Cod_Enfermeria"] = $fila["AgregadoPor"];
+            $data[$c]["Contabilizado"] = $fila["Contabilizado"];
             
             $data[$c]["FechaInventario"] = $fila["FechaInventario"];
             $horaInventario = date("g:i A", strtotime($fila["AgregadoEl"]));
