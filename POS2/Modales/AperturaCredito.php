@@ -151,6 +151,9 @@
         <?php
           $query = $conn -> query ("SELECT ID_Med_Cred,Nombre_Med,ID_H_O_D FROM Medicos_Credit_POS WHERE Estatus='Vigente' AND ID_H_O_D='".$row['ID_H_O_D']."'");
           while ($valores = mysqli_fetch_array($query)) {
+            if ($valores["Nombre_Med"] == 'Luis Mario Amezcua' && $row['Nombre_Sucursal'] != 'Uman') {
+              continue;
+            }
             echo '<option value="'.$valores["ID_Med_Cred"].'">'.$valores["Nombre_Med"].'</option>';
           }
         ?>  </select>  
