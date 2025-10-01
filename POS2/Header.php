@@ -1,5 +1,6 @@
 <!-- Font Awesome Icons -->
-<script src="https://kit.fontawesome.com/f976a08a4e.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/f976a08a4e.js" crossorigin="anonymous"></script> -->
+<script src="https://kit.fontawesome.com/a9ef98fce7.js" crossorigin="anonymous"></script>
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
