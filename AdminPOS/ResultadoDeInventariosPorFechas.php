@@ -238,18 +238,21 @@ include "Consultas/Consultas.php";
         }
     },
             "columns": [
-              { mData: 'IdbD' },
-       { mData: 'Cod_Barra' },
-       { mData: 'NombreSucursal' },
-       { mData: 'PrecioVenta' },
-       { mData: 'PrecioCompra' },
-       { mData: 'TotalPrecioVenta' },
-       { mData: 'TotalPrecioCompra' },
-       { mData: 'Nombre_Prod' },
-       { mData: 'Clave_interna' },
-       { mData: 'Clave_Levic' },
-       { mData: 'Cod_Enfermeria' },
-       { mData: 'FechaInventario' },
+              { mData: 'Cod_Barra' },
+              { mData: 'Nombre_Prod' },
+              { mData: 'NombreSucursal' },
+              { mData: 'Tipo_Ajuste', defaultContent: '' },
+              { mData: 'PrecioVenta' },
+              { mData: 'PrecioCompra' },
+              { mData: 'TotalPrecioVenta' },
+              { mData: 'TotalPrecioCompra' },
+              { mData: 'Contabilizado' },
+              { mData: 'Clave_interna' },
+              { mData: 'Clave_Levic' },
+              { mData: 'Comentario', defaultContent: '' },
+              { mData: 'Cod_Enfermeria' },
+              { mData: 'FechaInventario' },
+              { mData: 'HoraInventario', defaultContent: '' }
             ],
             "lengthMenu": [[10,20,150,250,500, -1], [10,20,50,250,500, "Todos"]],
             "language": {
@@ -296,18 +299,21 @@ include "Consultas/Consultas.php";
         <div class="table-responsive">
           <table id="Productos" class="hover" style="width:100%">
             <thead>
-            <th>ID_BD</th>
-<th>Cod Barra</th>
-    <th>Sucursal</th>
-    <th>PV</th>
-    <th>PC</th>
-    <th>Total PV</th>
-    <th>Total PC</th>
-    <th>Contabilizado</th>
-    <th>Stock Previo</th>
-    <th>Diferencia</th>
-    <th>Agregado por</th>
-    <th>Fecha Inventario</th>
+            <th>Cod Barra</th>
+            <th>Nombre Prod</th>
+            <th>Sucursal</th>
+            <th>Tipo de inventario</th>
+            <th>PV</th>
+            <th>PC</th>
+            <th>Total PV</th>
+            <th>Total PC</th>
+            <th>Contabilizado</th>
+            <th>Stock Previo</th>
+            <th>Diferencia</th>
+            <th>Comentario</th>
+            <th>Agregado por</th>
+            <th>Fecha Inventario</th>
+            <th>Hora Inventario</th>
             </thead>
           </table>
         </div>
@@ -317,7 +323,7 @@ include "Consultas/Consultas.php";
 
   <!-- Modales y scripts -->
   <?php
-include("Modales/BusquedaTraspasosFechas.php");
+include("Modales/BusquedaInventariosFechas.php");
   include ("footer.php");
   ?>
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  

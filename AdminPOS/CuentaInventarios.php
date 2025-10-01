@@ -207,6 +207,10 @@ $fechaActual = date('Y-m-d'); // Esto obtiene la fecha actual en el formato 'Añ
  Descargar inventario <i class="fas fa-boxes"></i>
 </button>
 
+<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#CargarExcel" class="btn btn-default">
+ Cargar Excel <i class="fas fa-file-excel"></i>
+</button>
+
 
                       <div class="row">
                         <input hidden type="text" class="form-control " readonly value="<?php echo $row['Nombre_Apellidos'] ?>">
@@ -1183,6 +1187,7 @@ function eliminarFila(element) {
 include("Modales/Error.php");
 include ("Modales/FiltraEspecificamenteInventarios.php");
 include ("Modales/DescargaInventariosPorExcel.php");
+include ("Modales/CargarExcelInventario.php");
 include("footer.php") ?>
 
 

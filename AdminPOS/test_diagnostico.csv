@@ -1,0 +1,4 @@
+Clave,Nombre,Stock,Conteo Físico,Diferencia,Observaciones
+JERINGA-AZUL,Jeringa Azul 10ml,75,98,23,Test de diferencia positiva
+JERINGA-ROJA,Jeringa Roja 5ml,50,45,-5,Test de diferencia negativa
+JERINGA-VERDE,Jeringa Verde 20ml,100,100,0,Test de diferencia cero
