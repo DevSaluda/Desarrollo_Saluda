@@ -73,33 +73,28 @@ include "Consultas/Consultas.php";
  include("Modales/BusquedaCitasMes.php");
   include ("footer.php")?>
 
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="js/RevaloracionesControl.js"></script>
-  <script src="js/AgendaEnSucursales.js"></script>
-
-<script src="js/AgregaEspecialidad.js"></script>
-<script src="js/BuscaDataPacientes.js"></script>
-
-<script src="js/AgregaEspecialista.js"></script>
-<script src="js/ObtieneEspecialidadMedicoSucursal.js"></script>
-<script src="js/ObtieneMedicoDeSucursal.js"></script>
-
-<script src="js/AgendaEnSucursalesExt.js"></script>
-
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-
+<!-- REQUIRED SCRIPTS (orden correcto) -->
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
+
+<!-- App scripts -->
+<script src="js/RevaloracionesControl.js"></script>
+<script src="js/AgendaEnSucursales.js"></script>
+<script src="js/AgregaEspecialidad.js"></script>
+<script src="js/BuscaDataPacientes.js"></script>
+<script src="js/AgregaEspecialista.js"></script>
+<script src="js/ObtieneEspecialidadMedicoSucursal.js"></script>
+<script src="js/ObtieneMedicoDeSucursal.js"></script>
+<script src="js/AgendaEnSucursalesExt.js"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="dist/js/demo.js"></script>
