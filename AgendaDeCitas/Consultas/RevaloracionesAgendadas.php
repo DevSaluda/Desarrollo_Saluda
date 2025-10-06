@@ -1,37 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#RevaloracionesAgendadas').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            "url": "https://saludapos.com/AgendaDeCitas/Consultas/RevaloracionesAgendadas.php",
-            "type": "POST"
-        },
-        "order": [[0, "desc"]],
-        "pageLength": 10,
-        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
-        "language": {
-            "url": "Componentes/Spanish.json"
-        },
-        "drawCallback": function() {
-            // Reasignar eventos después de cada redibujado de la tabla
-            $(".btn-Asiste").click(function(){
-                var id = $(this).data("id");
-                $.post("https://saludapos.com/AgendaDeCitas/Modales/AsistenciaPacienteRevaloracion.php", 
-                    "id=" + id, 
-                    function(data){
-                        $("#form-editExt").html(data);
-                        $("#TituloExt").html("¿El paciente asistió?");
-                        $("#DiExt").removeClass("modal-dialog modal-lg modal-notify modal-success");
-                        $("#DiExt").addClass("modal-dialog modal-sm modal-notify modal-success");
-                    });
-                $('#editModalExt').modal('show');
-            });
-        }
-    });
-});
-</script>
-
 <?php
 function fechaCastellano($fecha) {
     $fecha = substr($fecha, 0, 10);
@@ -120,26 +86,5 @@ $response = array(
 // Enviar la respuesta como JSON
 header('Content-Type: application/json');
 echo json_encode($response);
+exit;
 ?>
-
-<div class="modal fade" id="editModalExt" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="editModalExtLabel" aria-hidden="true">
-    <div id="DiExt" class="modal-dialog modal-notify modal-success">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="heading lead" id="TituloExt"></p>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="white-text">&times;</span>
-                </button>
-            </div>
-            <div id="Mensaje" class="alert alert-info alert-styled-left text-blue-800 content-group">
-                <span id="Aviso" class="text-semibold"><?php echo $row['Nombre_Apellidos'] ?> Verifique los campos antes de realizar alguna acción</span>
-                <button type="button" class="close" data-dismiss="alert">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <div id="form-editExt"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
