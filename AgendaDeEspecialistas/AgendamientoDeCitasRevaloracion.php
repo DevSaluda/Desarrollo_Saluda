@@ -46,32 +46,7 @@ include "Consultas/Consultas.php";
 
 
   
-<div id="CitasDeRevaloracion">
-    <div class="text-center">
-        <div class="table-responsive">
-            <table id="CitasExteriores" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>Paciente</th>
-                        <th>Teléfono</th>
-                        <th>Fecha</th>
-                        <th>Sucursal</th>
-                        <th>Médico</th>
-                        <th>Turno</th>
-                        <th>Motivo Consulta</th>
-                        <th>Contacto por WhatsApp</th>
-                        <th>Agendado por</th>
-                        <th>Agregado el</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<div id="CitasDeRevaloracion"></div>
 </div>
 
 </div>
@@ -113,7 +88,7 @@ include "Consultas/Consultas.php";
 <script src="dist/js/adminlte.js"></script>
 
 <!-- Cargar scripts específicos de la aplicación -->
-<script src="js/Revaloraciones.js"></script>
+<script src="js/RevaloracionesControl.js"></script>
 <script src="js/AgendaEnSucursales.js"></script>
 <script src="js/AgregaEspecialidad.js"></script>
 <script src="js/BuscaDataPacientes.js"></script>

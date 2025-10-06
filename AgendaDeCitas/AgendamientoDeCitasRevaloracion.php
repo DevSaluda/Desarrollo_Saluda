@@ -72,7 +72,11 @@ include "Consultas/Consultas.php";
  include("Modales/BusquedaCitasMes.php");
   include ("footer.php")?>
 
-<script src="js/Revaloraciones.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="js/RevaloracionesControl.js"></script>
   <script src="js/AgendaEnSucursales.js"></script>
 
 <script src="js/AgregaEspecialidad.js"></script>
