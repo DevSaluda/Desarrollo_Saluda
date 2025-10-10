@@ -70,6 +70,7 @@ $query = $conn->query($sql1);
     <th style ="background-color: #0057b8 !important;">N°</th>
     <th style ="background-color: #0057b8 !important;">Tratamiento</th>
     <th style ="background-color: #0057b8 !important;">Titular</th>
+    <th style ="background-color: #0057b8 !important;">Sucursal</th>
     <th style ="background-color: #0057b8 !important;">Fecha abono</th>
     <th style ="background-color: #0057b8 !important;">Saldo anterior</th>
     <th style ="background-color: #0057b8 !important;">Abono</th>
@@ -88,6 +89,7 @@ $query = $conn->query($sql1);
 
   <td > <?php echo $Categorias["Nombre_Tip"]; ?></td>
   <td > <?php echo $Categorias["Nombre_Cred"]; ?></td>
+  <td > <?php echo $Categorias["Nombre_Sucursal"]; ?></td>
  
   <td > <?php echo $Categorias["Fecha_Abono"]; ?></td>
   <td > $<?php echo $Categorias["Cant_Apertura"]; ?></td>
