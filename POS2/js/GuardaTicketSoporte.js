@@ -1,4 +1,7 @@
 $('document').ready(function($) {
+    // Variable para controlar si ya se está enviando el formulario
+    var isSubmitting = false;
+
     // Validación del formulario
     $("#RegistroTicketSoporteForm").validate({
         rules: {
@@ -26,6 +29,16 @@ $('document').ready(function($) {
         $("#RegistroTicketSoporteForm").on('submit', function(e) {
             e.preventDefault(); // Evita el comportamiento predeterminado del formulario
 
+            // Prevenir múltiples envíos
+            if (isSubmitting) {
+                return false;
+            }
+
+            // Marcar como enviando y deshabilitar el botón
+            isSubmitting = true;
+            var $submitButton = $("#submitTicketSoporte");
+            $submitButton.prop('disabled', true);
+
             // Preparar FormData y agregar fecha y hora local del navegador
 const formData = new FormData(this);
 const now = new Date();
@@ -45,13 +58,13 @@ $.ajax({
                 cache: false,
                 processData: false,
                 beforeSend: function() {
-                    $("#submitTicketSoporte").html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
+                    $submitButton.html("Verificando datos... <span class='fa fa-refresh fa-spin' role='status' aria-hidden='true'></span>");
                 },
                 success: function(dataResult) {
                     const result = JSON.parse(dataResult);
 
                     if (result.statusCode === 200) {
-                        $("#submitTicketSoporte").html("Enviado <i class='fas fa-check'></i>");
+                        $submitButton.html("Enviado <i class='fas fa-check'></i>");
                         $("#RegistroTicketSoporteForm")[0].reset();
                         $("#RegistroTicketSoporteModal").modal('hide'); // Cierra el modal
                         $('#Exito').modal('toggle'); // Muestra modal de éxito
@@ -60,20 +73,36 @@ $.ajax({
                             location.reload();
                         }, 2000);
                     } else {
-                        $("#submitTicketSoporte").html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
+                        // Restaurar el botón en caso de error
+                        isSubmitting = false;
+                        $submitButton.prop('disabled', false);
+                        $submitButton.html("Algo no salió bien... <i class='fas fa-exclamation-triangle'></i>");
                         $('#ErrorData').modal('toggle'); // Muestra modal de error
                         setTimeout(function() {
-                            $("#submitTicketSoporte").html("Guardar Ticket <i class='fas fa-check'></i>");
+                            $submitButton.html("Guardar Ticket <i class='fas fa-check'></i>");
                         }, 3000);
                     }
                 },
                 error: function() {
-                    $("#submitTicketSoporte").html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
+                    // Restaurar el botón en caso de error
+                    isSubmitting = false;
+                    $submitButton.prop('disabled', false);
+                    $submitButton.html("Error en la solicitud <i class='fas fa-exclamation-triangle'></i>");
+                    setTimeout(function() {
+                        $submitButton.html("Guardar Ticket <i class='fas fa-check'></i>");
+                    }, 3000);
                 }
             });
         });
         return false; // Detiene el envío predeterminado
     }
 
+    // Resetear el estado cuando se cierra el modal
+    $('#RegistroTicketSoporteModal').on('hidden.bs.modal', function () {
+        isSubmitting = false;
+        var $submitButton = $("#submitTicketSoporte");
+        $submitButton.prop('disabled', false);
+        $submitButton.html("Guardar Ticket <i class='fas fa-check'></i>");
+    });
     
 });
