@@ -20,7 +20,7 @@ function fechaCastellano ($fecha) {
 	// Agregar opción por defecto
 	echo '<option value="">Selecciona una fecha</option>';
 	
-	$medicos = $conn->prepare("SELECT * FROM Fechas_EspecialistasExt WHERE FK_Especialista = '$medico' AND Fecha_Disponibilidad >= CURDATE() AND (Estado = 'Disponible' OR Estado = '' OR Estado IS NULL) ORDER BY Fecha_Disponibilidad") or die(mysqli_error());
+	$medicos = $conn->prepare("SELECT * FROM Fechas_EspecialistasExt WHERE FK_Especialista = '$medico' AND Fecha_Disponibilidad >= CURDATE() AND Fecha_Disponibilidad <= DATE_ADD(CURDATE(), INTERVAL 1 YEAR) AND (Estado = 'Disponible' OR Estado = '' OR Estado IS NULL) ORDER BY Fecha_Disponibilidad") or die(mysqli_error());
 	if($medicos->execute()){
 		$a_result = $medicos->get_result();
 	}
