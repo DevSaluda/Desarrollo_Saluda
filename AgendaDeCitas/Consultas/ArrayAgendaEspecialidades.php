@@ -46,7 +46,7 @@ $sql = "SELECT
         WHERE
             AgendaCitas_EspecialistasExt.Estatus_cita IN ('Agendado', 'Pendiente', 'Confirmado')
             AND AgendaCitas_EspecialistasExt.ID_H_O_D = '" . $row['ID_H_O_D'] . "'
-            AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) = YEAR(CURDATE())";
+            AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) IN (YEAR(CURDATE()), YEAR(CURDATE()) + 1)";
 
 $result = mysqli_query($conn, $sql);
 
