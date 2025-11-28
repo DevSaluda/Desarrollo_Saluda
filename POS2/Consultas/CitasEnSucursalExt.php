@@ -50,7 +50,7 @@ AgendaCitas_EspecialistasExt,Especialidades_Express,Personal_Medico_Express,Fech
 AgendaCitas_EspecialistasExt.Fk_Especialidad = Especialidades_Express.ID_Especialidad AND AgendaCitas_EspecialistasExt.Fk_Especialista = Personal_Medico_Express.Medico_ID 
 AND AgendaCitas_EspecialistasExt.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND AgendaCitas_EspecialistasExt.Fecha =Fechas_EspecialistasExt.ID_Fecha_Esp AND 
 AgendaCitas_EspecialistasExt.Hora = Horarios_Citas_Ext.ID_Horario AND AgendaCitas_EspecialistasExt.Fk_Sucursal='".$row['Fk_Sucursal']."' AND AgendaCitas_EspecialistasExt.Fk_Sucursal ='".$row['Fk_Sucursal']."' AND
-AgendaCitas_EspecialistasExt.ID_H_O_D ='".$row['ID_H_O_D']."'";
+AgendaCitas_EspecialistasExt.ID_H_O_D ='".$row['ID_H_O_D']."' AND YEAR(Fechas_EspecialistasExt.Fecha_Disponibilidad) IN (YEAR(CURDATE()), YEAR(CURDATE()) + 1)";
 $query = $conn->query($sql1);
 ?>
 
