@@ -17,7 +17,7 @@
                         <label for="fecha_fin">Fecha Fin:</label>
                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="<?php echo date('Y-12-31'); ?>" required>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="AplicarFiltroFechas()">
+                    <button type="button" class="btn btn-primary" id="btnAplicarFiltro">
                         <i class="fas fa-filter"></i> Aplicar Filtro
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">

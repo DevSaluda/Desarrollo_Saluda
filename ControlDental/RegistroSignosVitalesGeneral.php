@@ -45,8 +45,6 @@ include "Consultas/Consultas.php";
 </div></div></div>
 <!-- Medicos inicia -->
 
-  
-<script src="js/RegistroCitasGeneral.js"></script>
   <!-- Main Footer -->
   <?php
 
@@ -56,6 +54,8 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraPorPaciente.php");
   include ("Modales/FiltraPorFechas.php");
   include ("footer.php");?>
+  
+<script src="js/RegistroCitasGeneral.js"></script>
 <!-- ./wrapper -->
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
