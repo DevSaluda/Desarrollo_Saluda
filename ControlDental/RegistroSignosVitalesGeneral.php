@@ -55,12 +55,57 @@ include "Consultas/Consultas.php";
   include ("Modales/FiltraPorFechas.php");
   include ("footer.php");?>
   
-<script src="js/RegistroCitasGeneral.js"></script>
+<script>
+// Definir funciones aquí como respaldo si el archivo externo no carga
+if (typeof CargaSignosVitalesLibre === 'undefined') {
+    window.CargaSignosVitalesLibre = function(fecha_inicio, fecha_fin){
+        if (!fecha_inicio) {
+            fecha_inicio = new Date().getFullYear() + '-01-01';
+        }
+        if (!fecha_fin) {
+            fecha_fin = new Date().getFullYear() + '-12-31';
+        }
+        var url = "https://saludapos.com/ControlDental/Consultas/RegistroLibre.php?fecha_inicio=" + encodeURIComponent(fecha_inicio) + "&fecha_fin=" + encodeURIComponent(fecha_fin);
+        console.log("Cargando datos con URL:", url);
+        $.get(url, "", function(data){
+            $("#sv").html(data);
+        }).fail(function(xhr, status, error) {
+            console.error("Error al cargar datos:", error);
+            alert("Error al cargar los datos. Por favor, intente nuevamente.");
+        });
+    };
+}
+
+if (typeof AplicarFiltroFechas === 'undefined') {
+    window.AplicarFiltroFechas = function(){
+        console.log("AplicarFiltroFechas llamada");
+        var fecha_inicio = $("#fecha_inicio").val();
+        var fecha_fin = $("#fecha_fin").val();
+        console.log("Fecha inicio:", fecha_inicio, "Fecha fin:", fecha_fin);
+        if (!fecha_inicio || !fecha_fin) {
+            alert("Por favor, seleccione ambas fechas");
+            return false;
+        }
+        if (fecha_inicio > fecha_fin) {
+            alert("La fecha de inicio no puede ser mayor que la fecha de fin");
+            return false;
+        }
+        $('#FiltraPorFechas').modal('hide');
+        CargaSignosVitalesLibre(fecha_inicio, fecha_fin);
+        return false;
+    };
+}
+</script>
+<script src="js/RegistroCitasGeneral.js" onload="console.log('RegistroCitasGeneral.js cargado')" onerror="console.error('Error al cargar RegistroCitasGeneral.js')"></script>
 <script>
 // Asegurar que el event listener se agregue después de cargar el script
 $(document).ready(function() {
-    // Esperar un momento para asegurar que las funciones estén disponibles
-    setTimeout(function() {
+    console.log("Verificando funciones disponibles...");
+    console.log("CargaSignosVitalesLibre:", typeof CargaSignosVitalesLibre);
+    console.log("AplicarFiltroFechas:", typeof AplicarFiltroFechas);
+    
+    // Función para inicializar event listeners
+    function initEventListeners() {
         if (typeof AplicarFiltroFechas === 'function') {
             console.log("Funciones disponibles, agregando event listeners");
             // Agregar event listener al botón
@@ -71,10 +116,22 @@ $(document).ready(function() {
                 AplicarFiltroFechas();
                 return false;
             });
+            return true;
         } else {
-            console.error("AplicarFiltroFechas no está disponible después de cargar el script");
+            console.error("AplicarFiltroFechas no está disponible");
+            return false;
         }
-    }, 200);
+    }
+    
+    // Intentar inicializar inmediatamente
+    if (!initEventListeners()) {
+        // Si no está disponible, reintentar después de un delay
+        setTimeout(function() {
+            if (!initEventListeners()) {
+                console.warn("Las funciones aún no están disponibles después del timeout");
+            }
+        }, 500);
+    }
 });
 </script>
 <!-- ./wrapper -->
