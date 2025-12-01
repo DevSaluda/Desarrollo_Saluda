@@ -1,6 +1,9 @@
 <?php
 include "Consultas/Consultas.php";
 
+// Obtener parámetros de fecha de la URL
+$fecha_inicio_url = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : null;
+$fecha_fin_url = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -140,8 +143,13 @@ if (typeof AplicarFiltroFechas === 'undefined') {
             alert("La fecha de inicio no puede ser mayor que la fecha de fin");
             return false;
         }
+        // Cerrar el modal
         $('#FiltraPorFechas').modal('hide');
-        CargaSignosVitalesLibre(fecha_inicio, fecha_fin);
+        
+        // Redirigir a la misma página con los parámetros de fecha en la URL
+        var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+        window.location.href = url;
+        
         return false;
     };
 }
@@ -182,6 +190,26 @@ $(document).ready(function() {
             }
         }, 500);
     }
+    
+    // Cargar datos al iniciar - verificar si hay parámetros en la URL
+    setTimeout(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var fecha_inicio_url = urlParams.get('fecha_inicio');
+        var fecha_fin_url = urlParams.get('fecha_fin');
+        
+        if (fecha_inicio_url && fecha_fin_url) {
+            // Cargar con los parámetros de la URL
+            console.log("Cargando con parámetros de URL:", fecha_inicio_url, fecha_fin_url);
+            if (typeof CargaSignosVitalesLibre === 'function') {
+                CargaSignosVitalesLibre(fecha_inicio_url, fecha_fin_url);
+            }
+        } else {
+            // Cargar año actual por defecto
+            if (typeof CargaSignosVitalesLibre === 'function') {
+                CargaSignosVitalesLibre();
+            }
+        }
+    }, 300);
 });
 </script>
 <!-- ./wrapper -->

@@ -11,11 +11,23 @@
                 <form id="formFiltroFechas" method="GET">
                     <div class="form-group">
                         <label for="fecha_inicio">Fecha Inicio:</label>
-                        <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="<?php echo date('Y-01-01'); ?>" required>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="<?php 
+                            if (isset($_GET['fecha_inicio'])) {
+                                echo htmlspecialchars($_GET['fecha_inicio']);
+                            } else {
+                                echo date('Y-01-01');
+                            }
+                        ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="fecha_fin">Fecha Fin:</label>
-                        <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="<?php echo date('Y-12-31'); ?>" required>
+                        <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="<?php 
+                            if (isset($_GET['fecha_fin'])) {
+                                echo htmlspecialchars($_GET['fecha_fin']);
+                            } else {
+                                echo date('Y-12-31');
+                            }
+                        ?>" required>
                     </div>
                     <button type="button" class="btn btn-primary" id="btnAplicarFiltro" onclick="if(typeof AplicarFiltroFechas === 'function') { AplicarFiltroFechas(); } else { alert('Función no disponible. Recargue la página.'); }">
                         <i class="fas fa-filter"></i> Aplicar Filtro
