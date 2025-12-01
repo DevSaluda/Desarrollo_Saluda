@@ -28,22 +28,4 @@
         </div>
     </div>
 </div>
-<script>
-// Script inline como respaldo para asegurar que funcione
-$(document).ready(function() {
-    // Asegurar que el botón tenga el event listener
-    $('#btnAplicarFiltro').off('click').on('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("Click en botón desde script inline");
-        if (typeof AplicarFiltroFechas === 'function') {
-            AplicarFiltroFechas();
-        } else {
-            console.error("AplicarFiltroFechas no está definida");
-            alert("Error: La función de filtrado no está disponible. Por favor, recargue la página.");
-        }
-        return false;
-    });
-});
-</script>
 

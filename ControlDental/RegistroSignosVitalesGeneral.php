@@ -56,6 +56,27 @@ include "Consultas/Consultas.php";
   include ("footer.php");?>
   
 <script src="js/RegistroCitasGeneral.js"></script>
+<script>
+// Asegurar que el event listener se agregue después de cargar el script
+$(document).ready(function() {
+    // Esperar un momento para asegurar que las funciones estén disponibles
+    setTimeout(function() {
+        if (typeof AplicarFiltroFechas === 'function') {
+            console.log("Funciones disponibles, agregando event listeners");
+            // Agregar event listener al botón
+            $('#btnAplicarFiltro').off('click').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Click en botón desde script principal");
+                AplicarFiltroFechas();
+                return false;
+            });
+        } else {
+            console.error("AplicarFiltroFechas no está disponible después de cargar el script");
+        }
+    }, 200);
+});
+</script>
 <!-- ./wrapper -->
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
     <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
