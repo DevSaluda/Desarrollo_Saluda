@@ -21,9 +21,15 @@ include "Consultas/Consultas.php";
   Registro de pacientes hasta el <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
   </div>
   
-  <div >
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default">
+  <div style="padding: 15px;">
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default" style="margin-right: 10px;">
   Filtrar por nombre de paciente  <i class="fas fa-prescription-bottle"></i>
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltraPorFechas" class="btn btn-default">
+  Filtrar por rango de fechas  <i class="fas fa-calendar-alt"></i>
+</button>
+<button type="button" class="btn btn-info" onclick="CargaSignosVitalesLibre()" style="margin-left: 10px;">
+  Mostrar año actual  <i class="fas fa-sync"></i>
 </button>
 </div>
 </div>
@@ -48,6 +54,7 @@ include "Consultas/Consultas.php";
   include ("Modales/Exito.php");
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraPorPaciente.php");
+  include ("Modales/FiltraPorFechas.php");
   include ("footer.php");?>
 <!-- ./wrapper -->
 <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
