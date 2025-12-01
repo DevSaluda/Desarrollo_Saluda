@@ -17,7 +17,7 @@
                         <label for="fecha_fin">Fecha Fin:</label>
                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="<?php echo date('Y-12-31'); ?>" required>
                     </div>
-                    <button type="button" class="btn btn-primary" id="btnAplicarFiltro">
+                    <button type="button" class="btn btn-primary" id="btnAplicarFiltro" onclick="if(typeof AplicarFiltroFechas === 'function') { AplicarFiltroFechas(); } else { alert('Función no disponible. Recargue la página.'); }">
                         <i class="fas fa-filter"></i> Aplicar Filtro
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -28,4 +28,22 @@
         </div>
     </div>
 </div>
+<script>
+// Script inline como respaldo para asegurar que funcione
+$(document).ready(function() {
+    // Asegurar que el botón tenga el event listener
+    $('#btnAplicarFiltro').off('click').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Click en botón desde script inline");
+        if (typeof AplicarFiltroFechas === 'function') {
+            AplicarFiltroFechas();
+        } else {
+            console.error("AplicarFiltroFechas no está definida");
+            alert("Error: La función de filtrado no está disponible. Por favor, recargue la página.");
+        }
+        return false;
+    });
+});
+</script>
 
