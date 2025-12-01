@@ -95,6 +95,34 @@ window.AplicarFiltroFechas = function(){
     return false;
 };
 
+window.AplicarFiltroMes = function(){
+    console.log("AplicarFiltroMes llamada");
+    
+    var mes = $("#mesesSelect").val();
+    var anual = $("#añosSelect").val();
+    
+    console.log("Mes:", mes, "Año:", anual);
+    
+    if (!mes || !anual) {
+        alert("Por favor, seleccione mes y año");
+        return false;
+    }
+    
+    // Calcular fecha inicio y fin del mes
+    var fecha_inicio = anual + '-' + mes + '-01';
+    var ultimoDia = new Date(anual, mes, 0).getDate();
+    var fecha_fin = anual + '-' + mes + '-' + (ultimoDia < 10 ? '0' + ultimoDia : ultimoDia);
+    
+    // Cerrar el modal
+    $('#FiltroPorMesSignosVitales').modal('hide');
+    
+    // Redirigir a la misma página con los parámetros de fecha en la URL
+    var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    window.location.href = url;
+    
+    return false;
+};
+
 // Asegurar que jQuery esté disponible
 $(document).ready(function() {
     console.log("Document ready - RegistroCitasGeneral.js cargado");
@@ -115,19 +143,23 @@ $(document).ready(function() {
         return false;
     });
     
-    // Cargar datos al iniciar - verificar si hay parámetros en la URL
-    var urlParams = new URLSearchParams(window.location.search);
-    var fecha_inicio_url = urlParams.get('fecha_inicio');
-    var fecha_fin_url = urlParams.get('fecha_fin');
+    // Event listener para filtro por mes
+    $(document).on('click', '#btnAplicarFiltroMes', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        AplicarFiltroMes();
+        return false;
+    });
     
-    if (fecha_inicio_url && fecha_fin_url) {
-        // Cargar con los parámetros de la URL
-        console.log("Cargando con parámetros de URL:", fecha_inicio_url, fecha_fin_url);
-        CargaSignosVitalesLibre(fecha_inicio_url, fecha_fin_url);
-    } else {
-        // Cargar año actual por defecto
-        CargaSignosVitalesLibre();
-    }
+    // Prevenir submit del formulario de mes
+    $(document).on('submit', '#formFiltroMes', function(e) {
+        e.preventDefault();
+        AplicarFiltroMes();
+        return false;
+    });
+    
+    // La carga de datos se maneja desde el script inline en el HTML
+    // para evitar cargas duplicadas y asegurar que funcione con parámetros de URL
 });
 
   
