@@ -21,19 +21,33 @@ $fecha_fin_url = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : null;
 
 <div class="card text-center">
   <div class="card-header" style="background-color:#2b73bb !important;color: white;">
-  Registro de pacientes hasta el <?php echo FechaCastellano(date('d-m-Y H:i:s')); ?>  
+  <?php 
+  if ($fecha_inicio_url && $fecha_fin_url) {
+      echo "Registro de signos vitales del " . date('d/m/Y', strtotime($fecha_inicio_url)) . " al " . date('d/m/Y', strtotime($fecha_fin_url));
+  } else {
+      echo "Registro de pacientes hasta el " . FechaCastellano(date('d-m-Y H:i:s'));
+  }
+  ?>  
   </div>
   
   <div style="padding: 15px;">
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default" style="margin-right: 10px;">
+  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#FiltraPorPaciente" class="btn btn-default" style="margin-right: 10px;">
   Filtrar por nombre de paciente  <i class="fas fa-prescription-bottle"></i>
 </button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FiltraPorFechas" class="btn btn-default">
-  Filtrar por rango de fechas  <i class="fas fa-calendar-alt"></i>
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FiltroPorMesSignosVitales" class="btn btn-default">
+  Búsqueda por mes <i class="fas fa-calendar-week"></i>
 </button>
-<button type="button" class="btn btn-info" onclick="CargaSignosVitalesLibre()" style="margin-left: 10px;">
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FiltraPorFechas" class="btn btn-default">
+  Filtrar por rango de fechas <i class="fas fa-calendar-alt"></i>
+</button>
+<button type="button" class="btn btn-success btn-sm" onclick="window.location.href=window.location.pathname;" style="margin-left: 10px;">
   Mostrar año actual  <i class="fas fa-sync"></i>
 </button>
+<?php if ($fecha_inicio_url && $fecha_fin_url): ?>
+<button type="button" class="btn btn-warning btn-sm" onclick="window.location.href=window.location.pathname;" style="margin-left: 10px;">
+  Limpiar filtro  <i class="fas fa-times"></i>
+</button>
+<?php endif; ?>
 </div>
 </div>
     
@@ -56,12 +70,42 @@ $fecha_fin_url = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : null;
   include ("Modales/ExitoActualiza.php");
   include ("Modales/FiltraPorPaciente.php");
   include ("Modales/FiltraPorFechas.php");
+  include ("Modales/FiltraPorMesSignosVitales.php");
   include ("footer.php");?>
   
 <script>
 // Variable global para la instancia de DataTable (si no está definida en el archivo externo)
 if (typeof tablaSignosVitales === 'undefined') {
     var tablaSignosVitales = null;
+}
+
+// Función para cargar datos cuando la página esté lista
+function cargarDatosIniciales() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var fecha_inicio_url = urlParams.get('fecha_inicio');
+    var fecha_fin_url = urlParams.get('fecha_fin');
+    
+    console.log("cargarDatosIniciales - fecha_inicio:", fecha_inicio_url, "fecha_fin:", fecha_fin_url);
+    
+    if (fecha_inicio_url && fecha_fin_url) {
+        // Cargar con los parámetros de la URL
+        console.log("Cargando con parámetros de URL:", fecha_inicio_url, fecha_fin_url);
+        if (typeof CargaSignosVitalesLibre === 'function') {
+            CargaSignosVitalesLibre(fecha_inicio_url, fecha_fin_url);
+        } else {
+            console.warn("CargaSignosVitalesLibre no disponible aún, reintentando...");
+            setTimeout(cargarDatosIniciales, 200);
+        }
+    } else {
+        // Cargar año actual por defecto
+        console.log("No hay parámetros en URL, cargando año actual");
+        if (typeof CargaSignosVitalesLibre === 'function') {
+            CargaSignosVitalesLibre();
+        } else {
+            console.warn("CargaSignosVitalesLibre no disponible aún, reintentando...");
+            setTimeout(cargarDatosIniciales, 200);
+        }
+    }
 }
 
 // Definir funciones aquí como respaldo si el archivo externo no carga
@@ -153,8 +197,31 @@ if (typeof AplicarFiltroFechas === 'undefined') {
         return false;
     };
 }
+
+if (typeof AplicarFiltroMes === 'undefined') {
+    window.AplicarFiltroMes = function(){
+        console.log("AplicarFiltroMes llamada");
+        var mes = $("#mesesSelect").val();
+        var anual = $("#añosSelect").val();
+        console.log("Mes:", mes, "Año:", anual);
+        if (!mes || !anual) {
+            alert("Por favor, seleccione mes y año");
+            return false;
+        }
+        // Calcular fecha inicio y fin del mes
+        var fecha_inicio = anual + '-' + mes + '-01';
+        var ultimoDia = new Date(anual, mes, 0).getDate();
+        var fecha_fin = anual + '-' + mes + '-' + (ultimoDia < 10 ? '0' + ultimoDia : ultimoDia);
+        // Cerrar el modal
+        $('#FiltroPorMesSignosVitales').modal('hide');
+        // Redirigir a la misma página con los parámetros de fecha en la URL
+        var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+        window.location.href = url;
+        return false;
+    };
+}
 </script>
-<script src="js/RegistroCitasGeneral.js" onload="console.log('RegistroCitasGeneral.js cargado')" onerror="console.error('Error al cargar RegistroCitasGeneral.js')"></script>
+<script src="js/RegistroCitasGeneral.js" onload="console.log('RegistroCitasGeneral.js cargado'); setTimeout(cargarDatosIniciales, 100);" onerror="console.error('Error al cargar RegistroCitasGeneral.js')"></script>
 <script>
 // Asegurar que el event listener se agregue después de cargar el script
 $(document).ready(function() {
@@ -191,25 +258,7 @@ $(document).ready(function() {
         }, 500);
     }
     
-    // Cargar datos al iniciar - verificar si hay parámetros en la URL
-    setTimeout(function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var fecha_inicio_url = urlParams.get('fecha_inicio');
-        var fecha_fin_url = urlParams.get('fecha_fin');
-        
-        if (fecha_inicio_url && fecha_fin_url) {
-            // Cargar con los parámetros de la URL
-            console.log("Cargando con parámetros de URL:", fecha_inicio_url, fecha_fin_url);
-            if (typeof CargaSignosVitalesLibre === 'function') {
-                CargaSignosVitalesLibre(fecha_inicio_url, fecha_fin_url);
-            }
-        } else {
-            // Cargar año actual por defecto
-            if (typeof CargaSignosVitalesLibre === 'function') {
-                CargaSignosVitalesLibre();
-            }
-        }
-    }, 300);
+    // La carga de datos se maneja en RegistroCitasGeneral.js para evitar duplicados
 });
 </script>
 <!-- ./wrapper -->
