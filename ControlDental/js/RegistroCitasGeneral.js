@@ -88,8 +88,9 @@ window.AplicarFiltroFechas = function(){
     // Cerrar el modal
     $('#FiltraPorFechas').modal('hide');
     
-    // Cargar los datos con el filtro
-    CargaSignosVitalesLibre(fecha_inicio, fecha_fin);
+    // Redirigir a la misma página con los parámetros de fecha en la URL
+    var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    window.location.href = url;
     
     return false;
 };
@@ -114,8 +115,19 @@ $(document).ready(function() {
         return false;
     });
     
-    // Cargar datos del año actual al iniciar
-    CargaSignosVitalesLibre();
+    // Cargar datos al iniciar - verificar si hay parámetros en la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var fecha_inicio_url = urlParams.get('fecha_inicio');
+    var fecha_fin_url = urlParams.get('fecha_fin');
+    
+    if (fecha_inicio_url && fecha_fin_url) {
+        // Cargar con los parámetros de la URL
+        console.log("Cargando con parámetros de URL:", fecha_inicio_url, fecha_fin_url);
+        CargaSignosVitalesLibre(fecha_inicio_url, fecha_fin_url);
+    } else {
+        // Cargar año actual por defecto
+        CargaSignosVitalesLibre();
+    }
 });
 
   
