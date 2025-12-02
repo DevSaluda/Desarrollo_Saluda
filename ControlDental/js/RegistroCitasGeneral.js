@@ -98,8 +98,8 @@ window.AplicarFiltroFechas = function(){
         console.warn("Error al cerrar modal:", e);
     }
     
-    // Redirigir a la misma página con los parámetros de fecha en la URL
-    var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    // Redirigir a la vista de filtrado
+    var url = 'FiltroSignosVitalesPorFechas.php?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
     console.log("Redirigiendo a:", url);
     window.location.href = url;
     
@@ -137,8 +137,8 @@ window.AplicarFiltroMes = function(){
         console.warn("Error al cerrar modal:", e);
     }
     
-    // Redirigir a la misma página con los parámetros de fecha en la URL
-    var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    // Redirigir a la vista de filtrado
+    var url = 'FiltroSignosVitalesPorFechas.php?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
     console.log("Redirigiendo a:", url);
     window.location.href = url;
     
