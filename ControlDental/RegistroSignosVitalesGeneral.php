@@ -229,36 +229,34 @@ $(document).ready(function() {
     console.log("CargaSignosVitalesLibre:", typeof CargaSignosVitalesLibre);
     console.log("AplicarFiltroFechas:", typeof AplicarFiltroFechas);
     
-    // Función para inicializar event listeners
-    function initEventListeners() {
+    // Verificar que las funciones estén disponibles
+    console.log("AplicarFiltroFechas disponible:", typeof AplicarFiltroFechas);
+    console.log("AplicarFiltroMes disponible:", typeof AplicarFiltroMes);
+    
+    // Agregar event listeners adicionales como respaldo (el onclick directo también funciona)
+    $(document).on('click', '#btnAplicarFiltro', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Click en #btnAplicarFiltro desde event listener");
         if (typeof AplicarFiltroFechas === 'function') {
-            console.log("Funciones disponibles, agregando event listeners");
-            // Agregar event listener al botón
-            $('#btnAplicarFiltro').off('click').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("Click en botón desde script principal");
-                AplicarFiltroFechas();
-                return false;
-            });
-            return true;
+            AplicarFiltroFechas();
         } else {
-            console.error("AplicarFiltroFechas no está disponible");
-            return false;
+            alert('Error: La función AplicarFiltroFechas no está disponible. Recargue la página.');
         }
-    }
+        return false;
+    });
     
-    // Intentar inicializar inmediatamente
-    if (!initEventListeners()) {
-        // Si no está disponible, reintentar después de un delay
-        setTimeout(function() {
-            if (!initEventListeners()) {
-                console.warn("Las funciones aún no están disponibles después del timeout");
-            }
-        }, 500);
-    }
-    
-    // La carga de datos se maneja en RegistroCitasGeneral.js para evitar duplicados
+    $(document).on('click', '#btnAplicarFiltroMes', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Click en #btnAplicarFiltroMes desde event listener");
+        if (typeof AplicarFiltroMes === 'function') {
+            AplicarFiltroMes();
+        } else {
+            alert('Error: La función AplicarFiltroMes no está disponible. Recargue la página.');
+        }
+        return false;
+    });
 });
 </script>
 <!-- ./wrapper -->
