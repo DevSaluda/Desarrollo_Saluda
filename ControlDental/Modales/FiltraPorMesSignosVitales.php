@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success" id="btnAplicarFiltroMes">
+                        <button type="button" class="btn btn-success" id="btnAplicarFiltroMes" onclick="if(typeof AplicarFiltroMes === 'function') { AplicarFiltroMes(); } else { alert('Error: La función no está disponible. Recargue la página.'); }">
                             Realizar Búsqueda <i class="fas fa-exchange-alt"></i>
                         </button>
                     </form>

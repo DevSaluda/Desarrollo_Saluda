@@ -42,7 +42,7 @@
                 </div>
               </div>
             </div>
-            <button type="button" id="btnAplicarFiltro" class="btn btn-success">
+            <button type="button" id="btnAplicarFiltro" class="btn btn-success" onclick="if(typeof AplicarFiltroFechas === 'function') { AplicarFiltroFechas(); } else { alert('Error: La función no está disponible. Recargue la página.'); }">
               Consultar <i class="fas fa-exchange-alt"></i>
             </button>
           </form>

@@ -68,43 +68,56 @@ window.CargaSignosVitalesLibre = function(fecha_inicio, fecha_fin){
 };
 
 window.AplicarFiltroFechas = function(){
-    console.log("AplicarFiltroFechas llamada");
+    console.log("=== AplicarFiltroFechas INICIADA ===");
     
     var fecha_inicio = $("#fecha_inicio").val();
     var fecha_fin = $("#fecha_fin").val();
     
-    console.log("Fecha inicio:", fecha_inicio, "Fecha fin:", fecha_fin);
+    console.log("Fecha inicio obtenida:", fecha_inicio);
+    console.log("Fecha fin obtenida:", fecha_fin);
     
     if (!fecha_inicio || !fecha_fin) {
         alert("Por favor, seleccione ambas fechas");
+        console.log("Validación fallida: fechas vacías");
         return false;
     }
     
     if (fecha_inicio > fecha_fin) {
         alert("La fecha de inicio no puede ser mayor que la fecha de fin");
+        console.log("Validación fallida: fecha inicio > fecha fin");
         return false;
     }
     
+    console.log("Validación exitosa, cerrando modal y redirigiendo...");
+    
     // Cerrar el modal
-    $('#FiltraPorFechas').modal('hide');
+    try {
+        $('#FiltraPorFechas').modal('hide');
+        console.log("Modal cerrado");
+    } catch(e) {
+        console.warn("Error al cerrar modal:", e);
+    }
     
     // Redirigir a la misma página con los parámetros de fecha en la URL
     var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    console.log("Redirigiendo a:", url);
     window.location.href = url;
     
     return false;
 };
 
 window.AplicarFiltroMes = function(){
-    console.log("AplicarFiltroMes llamada");
+    console.log("=== AplicarFiltroMes INICIADA ===");
     
     var mes = $("#mesesSelect").val();
     var anual = $("#añosSelect").val();
     
-    console.log("Mes:", mes, "Año:", anual);
+    console.log("Mes obtenido:", mes);
+    console.log("Año obtenido:", anual);
     
     if (!mes || !anual) {
         alert("Por favor, seleccione mes y año");
+        console.log("Validación fallida: mes o año vacío");
         return false;
     }
     
@@ -113,11 +126,20 @@ window.AplicarFiltroMes = function(){
     var ultimoDia = new Date(anual, mes, 0).getDate();
     var fecha_fin = anual + '-' + mes + '-' + (ultimoDia < 10 ? '0' + ultimoDia : ultimoDia);
     
+    console.log("Fecha inicio calculada:", fecha_inicio);
+    console.log("Fecha fin calculada:", fecha_fin);
+    
     // Cerrar el modal
-    $('#FiltroPorMesSignosVitales').modal('hide');
+    try {
+        $('#FiltroPorMesSignosVitales').modal('hide');
+        console.log("Modal cerrado");
+    } catch(e) {
+        console.warn("Error al cerrar modal:", e);
+    }
     
     // Redirigir a la misma página con los parámetros de fecha en la URL
     var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+    console.log("Redirigiendo a:", url);
     window.location.href = url;
     
     return false;
@@ -131,8 +153,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnAplicarFiltro', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Click detectado en #btnAplicarFiltro");
-        AplicarFiltroFechas();
+        console.log("Click detectado en #btnAplicarFiltro desde RegistroCitasGeneral.js");
+        if (typeof AplicarFiltroFechas === 'function') {
+            AplicarFiltroFechas();
+        } else {
+            console.error("AplicarFiltroFechas no está disponible");
+            alert('Error: La función AplicarFiltroFechas no está disponible. Recargue la página.');
+        }
         return false;
     });
     
@@ -147,7 +174,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnAplicarFiltroMes', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        AplicarFiltroMes();
+        console.log("Click detectado en #btnAplicarFiltroMes desde RegistroCitasGeneral.js");
+        if (typeof AplicarFiltroMes === 'function') {
+            AplicarFiltroMes();
+        } else {
+            console.error("AplicarFiltroMes no está disponible");
+            alert('Error: La función AplicarFiltroMes no está disponible. Recargue la página.');
+        }
         return false;
     });
     
