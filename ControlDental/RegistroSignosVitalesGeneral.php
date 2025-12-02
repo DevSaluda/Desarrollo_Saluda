@@ -137,10 +137,15 @@ if (typeof CargaSignosVitalesLibre === 'undefined') {
             // Limpiar el contenedor
             $("#sv").html(data);
             
-            // Inicializar DataTable después de cargar los datos
-            setTimeout(function() {
-                if ($('#SignosVitales').length > 0) {
-                    tablaSignosVitales = $('#SignosVitales').DataTable({
+        // Inicializar DataTable después de cargar los datos
+        setTimeout(function() {
+            if ($('#SignosVitales').length > 0) {
+                // Verificar si ya existe una instancia de DataTable y destruirla
+                if ($.fn.DataTable.isDataTable('#SignosVitales')) {
+                    $('#SignosVitales').DataTable().destroy();
+                }
+                
+                tablaSignosVitales = $('#SignosVitales').DataTable({
                         "order": [[ 0, "desc" ]],
                         "language": {
                             "url": "Componentes/Spanish.json"
@@ -190,8 +195,8 @@ if (typeof AplicarFiltroFechas === 'undefined') {
         // Cerrar el modal
         $('#FiltraPorFechas').modal('hide');
         
-        // Redirigir a la misma página con los parámetros de fecha en la URL
-        var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+        // Redirigir a la vista de filtrado
+        var url = 'FiltroSignosVitalesPorFechas.php?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
         window.location.href = url;
         
         return false;
@@ -214,8 +219,8 @@ if (typeof AplicarFiltroMes === 'undefined') {
         var fecha_fin = anual + '-' + mes + '-' + (ultimoDia < 10 ? '0' + ultimoDia : ultimoDia);
         // Cerrar el modal
         $('#FiltroPorMesSignosVitales').modal('hide');
-        // Redirigir a la misma página con los parámetros de fecha en la URL
-        var url = window.location.pathname + '?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
+        // Redirigir a la vista de filtrado
+        var url = 'FiltroSignosVitalesPorFechas.php?fecha_inicio=' + encodeURIComponent(fecha_inicio) + '&fecha_fin=' + encodeURIComponent(fecha_fin);
         window.location.href = url;
         return false;
     };
