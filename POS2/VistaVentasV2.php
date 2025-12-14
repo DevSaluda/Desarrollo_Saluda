@@ -173,7 +173,7 @@ $(document).ready(function()
      ?>
 
      
-<script src="js/CalculaTotaldeproducto.js"></script>
+<!-- <script src="js/CalculaTotaldeproducto.js"></script> -->
 
 <script>
 var campos_maxini          = 1;   //max de 10 campos
