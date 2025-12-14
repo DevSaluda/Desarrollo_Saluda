@@ -13,4 +13,4 @@
 include ("Modales/Salidas.php");
 ?>
 <script src="js/LogSalida.js"></script>
-<script src="https://controlfarmacia.com/POS2/js/Refresca.js"></script>
+<script src="js/Refresca.js"></script>

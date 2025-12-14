@@ -1,21 +1,3 @@
-<script type="text/javascript">
-$(document).ready( function () {
-    $('#CajasSucursales').DataTable({
-      "order": [[ 0, "desc" ]],
-     
-      "info": false,
-      "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
-    
-		
-	  } 
-	  
-	  );
-} );
-</script>
 <?php
 // Asegurar que la sesión esté iniciada
 if (session_status() == PHP_SESSION_NONE) {
@@ -36,13 +18,15 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
 }
+
+// Incluir archivos necesarios
 include("db_connection.php");
 include "Consultas.php";
 
 // Verificar que $row esté definido y tenga los datos necesarios
 if (!isset($row) || empty($row) || !isset($row['Fk_Sucursal']) || !isset($row['ID_H_O_D'])) {
     echo '<p class="alert alert-danger">Error: Sesión no válida o datos de usuario incompletos.</p>';
-    exit;
+    return;
 }
 
 
@@ -98,4 +82,18 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif;?>
   <!-- Modal -->
-  
+<script type="text/javascript">
+$(document).ready( function () {
+    if ($('#CajasSucursales').length) {
+        $('#CajasSucursales').DataTable({
+            "order": [[ 0, "desc" ]],
+            "info": false,
+            "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
+            "language": {
+                "url": "Componentes/Spanish.json"
+            }
+        });
+    }
+} );
+</script>
+   
