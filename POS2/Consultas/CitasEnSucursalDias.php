@@ -1,4 +1,8 @@
 <?php
+// Desactivar errores de visualización para evitar que se muestren en la respuesta
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
 // Asegurar que la sesión esté iniciada
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -20,15 +24,43 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 
 // Incluir archivos necesarios
-include("db_connection.php");
-include "Consultas.php";
+try {
+    include("db_connection.php");
+    
+    // Verificar sesión antes de incluir Consultas.php para evitar redirects en AJAX
+    if (!isset($_SESSION['VentasPos'])) {
+        echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+        exit;
+    }
+    
+    // Incluir Consultas.php pero evitar que haga redirect
+    // Necesitamos definir $row manualmente si Consultas.php no se puede incluir
+    $sql_user = "SELECT PersonalPOS.Pos_ID,PersonalPOS.Nombre_Apellidos,PersonalPOS.file_name,PersonalPOS.Fk_Usuario,PersonalPOS.Fk_Sucursal,PersonalPOS.ID_H_O_D,PersonalPOS.Estatus,
+    Roles_Puestos.ID_rol,Roles_Puestos.Nombre_rol, SucursalesCorre.ID_SucursalC,SucursalesCorre.Nombre_Sucursal,SucursalesCorre.Cuenta_Clip,SucursalesCorre.Clave_Clip,SucursalesCorre.EstadoSucursalInv 
+    FROM PersonalPOS,Roles_Puestos,SucursalesCorre 
+    WHERE PersonalPOS.Fk_Usuario = Roles_Puestos.ID_rol AND PersonalPOS.Fk_Sucursal = SucursalesCorre.ID_SucursalC AND PersonalPOS.Pos_ID='".$_SESSION['VentasPos']."'";
+    
+    $resultset = mysqli_query($conn, $sql_user);
+    if ($resultset && mysqli_num_rows($resultset) > 0) {
+        $row = mysqli_fetch_assoc($resultset);
+        if ($row['Estatus'] != "Vigente") {
+            echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+            exit;
+        }
+    } else {
+        echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+        exit;
+    }
+} catch (Exception $e) {
+    echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+    exit;
+}
 
 // Verificar que $row esté definido y tenga los datos necesarios
 if (!isset($row) || empty($row) || !isset($row['Fk_Sucursal']) || !isset($row['ID_H_O_D'])) {
-    echo '<p class="alert alert-danger">Error: Sesión no válida o datos de usuario incompletos.</p>';
-    return;
+    echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+    exit;
 }
-
 
 $user_id=null;
 $sql1="SELECT AgendaCitas_EspecialistasSucursales.ID_Agenda_Especialista,AgendaCitas_EspecialistasSucursales.Fk_Especialidad,AgendaCitas_EspecialistasSucursales.Fk_Especialista,
@@ -39,7 +71,16 @@ Personal_Medico.Medico_ID,Personal_Medico.Nombre_Apellidos,Fechas_Especialistas_
 where AgendaCitas_EspecialistasSucursales.Fk_Especialidad = Roles_Puestos.ID_rol AND Fechas_Especialistas_Sucursales.Fecha_Disponibilidad BETWEEN CURDATE() and CURDATE() + INTERVAL 4 DAY AND
 AgendaCitas_EspecialistasSucursales.Fk_Especialista= Personal_Medico.Medico_ID AND AgendaCitas_EspecialistasSucursales.Fk_Sucursal= SucursalesCorre.ID_SucursalC 
 AND AgendaCitas_EspecialistasSucursales.Fecha = Fechas_Especialistas_Sucursales.ID_Fecha_Esp AND AgendaCitas_EspecialistasSucursales.Fk_Sucursal='".$row['Fk_Sucursal']."' AND AgendaCitas_EspecialistasSucursales.Hora = Horarios_Citas_Sucursales.ID_Horario  AND  AgendaCitas_EspecialistasSucursales.ID_H_O_D='".$row['ID_H_O_D']."'";
-$query = $conn->query($sql1);
+
+try {
+    $query = $conn->query($sql1);
+    if (!$query) {
+        throw new Exception("Error en la consulta: " . $conn->error);
+    }
+} catch (Exception $e) {
+    echo '<p class="alert alert-warning">Por el momento no hay citas</p>';
+    exit;
+}
 ?>
 
 <?php if($query->num_rows>0):?>
