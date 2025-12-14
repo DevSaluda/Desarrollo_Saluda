@@ -159,28 +159,8 @@ include "Consultas/ConsultaFondoCaja.php";
   <!-- Main Footer -->
   
   <script>
-  // Función para abrir la modal automáticamente al cargar la página
-  window.onload = function() {
-    openModal();
-  };
-
-  function openModal() {
-    document.getElementById('modal').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-  }
-
-  // Cerrar modal al hacer clic fuera de él
-  window.onclick = function (event) {
-    var modal = document.getElementById('modal');
-    if (event.target === modal) {
-      closeModal();
-    }
-  };
+  // Función openModal() eliminada - El modal se maneja con Bootstrap y jQuery
+  // El modal de bienvenida se muestra mediante la variable $exibirModal y jQuery en la línea 301
 </script>
 
 <script>

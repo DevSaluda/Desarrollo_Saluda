@@ -1,7 +1,7 @@
 function CargaEspecialidadesH(){
 
 
-  $.get("https://controlfarmacia.com/Controldecitas/Consultas/EspecialidadesH.php","",function(data){
+  $.get("https://saludapos.com/Controldecitas/Consultas/EspecialidadesH.php","",function(data){
     $("#tabla").html(data);
   })
 

@@ -1,7 +1,7 @@
 function CargaReportes(){
 
 
-    $.post("https://controlfarmacia.com/POS2/Consultas/MuestraCumplePacientes.php","",function(data){
+    $.post("https://saludapos.com/POS2/Consultas/MuestraCumplePacientes.php","",function(data){
       $("#ReporteCumples").html(data);
     })
 

@@ -3,6 +3,6 @@ document.addEventListener("DOMContentLoaded", function(){
     const milisegundos = 900 *1000;
     setInterval(function(){
         // No esperamos la respuesta de la petición porque no nos importa
-        fetch("https://controlfarmacia.com/POS2/Consultas/SesionV.php");
+        fetch("https://saludapos.com/POS2/Consultas/SesionV.php");
     },milisegundos);
 });

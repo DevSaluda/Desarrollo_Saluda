@@ -17,6 +17,11 @@ $(document).ready( function () {
 } );
 </script>
 <?php
+// Asegurar que la sesión esté iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
   $numeroDia = date('d', strtotime($fecha));
@@ -33,6 +38,12 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 }
 include("db_connection.php");
 include "Consultas.php";
+
+// Verificar que $row esté definido y tenga los datos necesarios
+if (!isset($row) || empty($row) || !isset($row['Fk_Sucursal']) || !isset($row['ID_H_O_D'])) {
+    echo '<p class="alert alert-danger">Error: Sesión no válida o datos de usuario incompletos.</p>';
+    exit;
+}
 
 
 $user_id=null;
