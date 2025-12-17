@@ -29,9 +29,9 @@
 
   <!-- JS, Popper.js, and jQuery -->
   
-  
-  <link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
-  <script type="text/javascript" src="Componentes/datatables.min.js"></script>
+  <!-- DataTables local eliminado - usando versión CDN para evitar conflictos -->
+  <!-- <link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/> -->
+  <!-- <script type="text/javascript" src="Componentes/datatables.min.js"></script> -->
   <script src="Componentes/sweetalert2@9.js"></script>
   <link href="Componentes/mdb.min.css" rel="stylesheet">
   <script src="js/validation.min.js"></script><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
