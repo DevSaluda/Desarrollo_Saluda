@@ -1,18 +1,18 @@
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#ReimprimirTickets').DataTable({
-      "order": [[ 0, "desc" ]],
-      "lengthMenu": [[10,100,500, -1], [10,100,500, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
- 
-		
-	  } 
-	  
-	  );
-} );
+// Inicializar DataTable solo cuando se abre el modal (lazy loading)
+var reimprimirTicketsInitialized = false;
+$('#ReimprimeVentasEnVentas').on('shown.bs.modal', function () {
+    if (!reimprimirTicketsInitialized && $('#ReimprimirTickets').length > 0) {
+        $('#ReimprimirTickets').DataTable({
+            "order": [[ 0, "desc" ]],
+            "lengthMenu": [[10,100,500, -1], [10,100,500, "Todos"]],   
+            "language": {
+                "url": "https://saludapos.com/POS2/Componentes/Spanish.json"
+            }
+        });
+        reimprimirTicketsInitialized = true;
+    }
+});
 </script>
 <?php
 

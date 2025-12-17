@@ -1,18 +1,18 @@
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#StockSucursales').DataTable({
-      "order": [[ 0, "desc" ]],
-      "lengthMenu": [[5,10,50, -1], [5,10,50, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
- 
-		
-	  } 
-	  
-	  );
-} );
+// Inicializar DataTable solo cuando se abre el modal (lazy loading)
+var stockSucursalesInitialized = false;
+$('#ConsultaProductos').on('shown.bs.modal', function () {
+    if (!stockSucursalesInitialized && $('#StockSucursales').length > 0) {
+        $('#StockSucursales').DataTable({
+            "order": [[ 0, "desc" ]],
+            "lengthMenu": [[5,10,50, -1], [5,10,50, "Todos"]],   
+            "language": {
+                "url": "https://saludapos.com/POS2/Componentes/Spanish.json"
+            }
+        });
+        stockSucursalesInitialized = true;
+    }
+});
 </script>
 <?php
 
