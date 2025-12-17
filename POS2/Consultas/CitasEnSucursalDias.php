@@ -124,17 +124,23 @@ try {
 <?php endif;?>
   <!-- Modal -->
 <script type="text/javascript">
-$(document).ready( function () {
-    if ($('#CajasSucursales').length) {
-        $('#CajasSucursales').DataTable({
-            "order": [[ 0, "desc" ]],
-            "info": false,
-            "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
-            "language": {
-                "url": "Componentes/Spanish.json"
-            }
-        });
-    }
-} );
+// Función para inicializar DataTables cuando el contenido se carga dinámicamente
+(function() {
+    // Usar setTimeout para asegurar que el DOM esté listo
+    setTimeout(function() {
+        // Verificar que la tabla exista y que DataTables no esté ya inicializado
+        var table = $('#CajasSucursales');
+        if (table.length && !$.fn.DataTable.isDataTable('#CajasSucursales')) {
+            table.DataTable({
+                "order": [[ 0, "desc" ]],
+                "info": false,
+                "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
+                "language": {
+                    "url": "Componentes/Spanish.json"
+                }
+            });
+        }
+    }, 100);
+})();
 </script>
    

@@ -1,21 +1,3 @@
-<script type="text/javascript">
-$(document).ready( function () {
-    $('#CitasExteriores').DataTable({
-      "order": [[ 0, "desc" ]],
-      bFilter: false,
-      "info": false,
-      "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
-      "language": {
-        "url": "Componentes/Spanish.json"
-		},
- 
-    
-		
-	  } 
-	  
-	  );
-} );
-</script>
 <?php
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
@@ -112,4 +94,25 @@ $query = $conn->query($sql1);
 	<p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif;?>
   <!-- Modal -->
+<script type="text/javascript">
+// Función para inicializar DataTables cuando el contenido se carga dinámicamente
+(function() {
+    // Usar setTimeout para asegurar que el DOM esté listo
+    setTimeout(function() {
+        // Verificar que la tabla exista y que DataTables no esté ya inicializado
+        var table = $('#CitasExteriores');
+        if (table.length && !$.fn.DataTable.isDataTable('#CitasExteriores')) {
+            table.DataTable({
+                "order": [[ 0, "desc" ]],
+                bFilter: false,
+                "info": false,
+                "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
+                "language": {
+                    "url": "Componentes/Spanish.json"
+                }
+            });
+        }
+    }, 100);
+})();
+</script>
   
