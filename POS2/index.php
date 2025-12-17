@@ -209,9 +209,9 @@ document.addEventListener('DOMContentLoaded', function() {
   include ("footer.php");
  ?>
 <!-- ./wrapper -->
-<script src="js/ControlCampanasDiasSucursalesV2.js"></script>
+<!-- <script src="js/ControlCampanasDiasSucursalesV2.js"></script>
 <script src="js/ControlCampanasDiasExtV2.js"></script>
-<script src="js/GuardaReporteRapidoIndex.js"></script>
+<script src="js/GuardaReporteRapidoIndex.js"></script> -->
 <script src="js/Logs.js"></script>
 <script src="js/Cambianotificacion.js"></script>
 <!-- REQUIRED SCRIPTS -->
