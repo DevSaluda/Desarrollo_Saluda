@@ -98,7 +98,7 @@ include "Consultas/ConsultaFondoCaja.php";
      
 
 
-      
+      <!-- 
 <div class="tab-content" id="pills-tabContent">
 
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -114,7 +114,7 @@ include "Consultas/ConsultaFondoCaja.php";
 <div id="CitasEnLaSucursalExt"></div>
 
 </div>
-
+ -->
 
 <div aria-live="polite" aria-atomic="true" style="position:inherit;">
   <!-- Position it -->
@@ -199,13 +199,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script> -->
 </div></div>
-  <?php include ("Modales/Ingreso.php");
+  <?php /* include ("Modales/Ingreso.php");
       include ("Modales/ModalConsultaProductos.php");
       include ("Modales/ModalTraspasos.php");
       include ("Modales/Error.php");
       include ("Modales/ReporteRapido.php");
       include ("Modales/Mildisculpas.php");
-   include ("Modales/Exito.php");
+   include ("Modales/Exito.php"); */
   include ("footer.php");
  ?>
 <!-- ./wrapper -->
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-<?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
+<!-- <?php if($exibirModal === true) : // Si nuestra variable de control "$exibirModal" es igual a TRUE activa nuestro modal y será visible a nuestro usuario. ?>
 <script>
 $(document).ready(function()
 {
@@ -322,7 +322,7 @@ window.addEventListener("offline",function(){$("#Sinwifi").modal("show");},false
 
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  </div>/.modal -->
 
 <?php
 
