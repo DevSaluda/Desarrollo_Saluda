@@ -98,7 +98,7 @@ include "Consultas/ConsultaFondoCaja.php";
      
 
 
-      <!-- 
+      
 <div class="tab-content" id="pills-tabContent">
 
 <div class="tab-pane fade show active" id="CrediClinicas" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -114,7 +114,7 @@ include "Consultas/ConsultaFondoCaja.php";
 <div id="CitasEnLaSucursalExt"></div>
 
 </div>
- -->
+
 
 <div aria-live="polite" aria-atomic="true" style="position:inherit;">
   <!-- Position it -->
