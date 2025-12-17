@@ -6,8 +6,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.css">
  
-  <!-- jQuery - Solo versión completa (eliminada versión slim que causaba conflictos) -->
-  <script src="Componentes/jquery-3.5.0.js"></script>
+  <script src="Componentes/jquery-3.5.1.slim.min.js"></script>
+<script src="Componentes/jquery-3.5.0.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="Componentes/bootstrap.min.css">
@@ -28,8 +28,10 @@
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
 
   <!-- JS, Popper.js, and jQuery -->
-  <!-- DataTables local eliminado - usando solo versión CDN para evitar conflictos -->
   
+  
+  <link rel="stylesheet" type="text/css" href="Componentes/datatables.min.css"/>
+  <script type="text/javascript" src="Componentes/datatables.min.js"></script>
   <script src="Componentes/sweetalert2@9.js"></script>
   <link href="Componentes/mdb.min.css" rel="stylesheet">
   <script src="js/validation.min.js"></script><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
