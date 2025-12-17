@@ -226,7 +226,7 @@ $(".btn-aperturacaja").click(function() {
    
      <script src="js/RealizaVentas.js"></script>
      <!-- <script src="js/CapturaDataFacturacion.js"></script> -->
-     <!-- <script src="js/BuscaDataPacientes.js"></script> -->
+     <script src="js/BuscaDataPacientes.js"></script>
 
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
