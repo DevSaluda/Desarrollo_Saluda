@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script> -->
 </div></div>
-  <?php  include ("Modales/Ingreso.php");
+  <?php  
       include ("Modales/ModalConsultaProductos.php");
       include ("Modales/ModalTraspasos.php");
       include ("Modales/Error.php");
