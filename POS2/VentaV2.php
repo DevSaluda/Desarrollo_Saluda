@@ -52,6 +52,7 @@ include ("Consultas/db_connection.php");
   <input id="FiltrarContenido" type="text" class="form-control"  autofocus placeholder="Ingrese codigo de barra" style="position: relative;"aria-label="Alumno" aria-describedby="basic-addon1">
   
 </div></div>
+<div id="productos"></div>
 <div class="text-center">
   
   </div>
@@ -225,7 +226,7 @@ $(".btn-aperturacaja").click(function() {
    
      <script src="js/RealizaVentas.js"></script>
      <!-- <script src="js/CapturaDataFacturacion.js"></script> -->
-     <script src="js/BuscaDataPacientes.js"></script>
+     <!-- <script src="js/BuscaDataPacientes.js"></script> -->
 
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

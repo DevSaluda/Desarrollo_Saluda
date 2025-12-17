@@ -164,11 +164,27 @@ function multiplicar() {
 </div>
 
 <script>
-$(document).ready(function () {
-    $("#FiltrarContenido").autocomplete({
-        source: "Consultas/VentaDeProductos.php",
-        minLength: 2,
-        appendTo: "#productos",
+// Función para inicializar el autocomplete solo una vez
+function inicializarAutocomplete() {
+    // Verificar que el elemento existe y no está ya inicializado
+    if ($("#FiltrarContenido").length === 0) {
+        console.warn("El elemento #FiltrarContenido no existe aún");
+        return false;
+    }
+    
+    // Verificar si ya está inicializado
+    if ($("#FiltrarContenido").hasClass("ui-autocomplete-input")) {
+        return false; // Ya está inicializado
+    }
+    
+    // Si existe #productos, usarlo, sino usar body
+    var appendToElement = $("#productos").length > 0 ? "#productos" : "body";
+    
+    try {
+        $("#FiltrarContenido").autocomplete({
+            source: "Consultas/VentaDeProductos.php",
+            minLength: 2,
+            appendTo: appendToElement,
         select: function (event, ui) {
             event.preventDefault();
 
@@ -257,8 +273,23 @@ $(document).ready(function () {
             $('#FiltrarContenido').val("");
             multiplicar();
         }
+        });
+        return true;
+    } catch (error) {
+        console.error("Error al inicializar autocomplete:", error);
+        return false;
+    }
+}
+
+// Intentar inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(inicializarAutocomplete, 100);
     });
-});
+} else {
+    // DOM ya está listo
+    setTimeout(inicializarAutocomplete, 100);
+}
 </script>
 
 </div></div>
