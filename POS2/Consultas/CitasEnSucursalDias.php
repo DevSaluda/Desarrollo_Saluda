@@ -123,4 +123,18 @@ try {
 	<p class="alert alert-warning">Por el momento no hay citas</p>
 <?php endif;?>
   <!-- Modal -->
+<script type="text/javascript">
+$(document).ready( function () {
+    if ($('#CajasSucursales').length) {
+        $('#CajasSucursales').DataTable({
+            "order": [[ 0, "desc" ]],
+            "info": false,
+            "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
+            "language": {
+                "url": "Componentes/Spanish.json"
+            }
+        });
+    }
+} );
+</script>
    

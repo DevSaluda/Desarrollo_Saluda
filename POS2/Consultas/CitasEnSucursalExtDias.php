@@ -1,3 +1,21 @@
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#CitasExteriores').DataTable({
+      "order": [[ 0, "desc" ]],
+      bFilter: false,
+      "info": false,
+      "lengthMenu": [[10,50,200, -1], [10,50,200, "Todos"]],   
+      "language": {
+        "url": "Componentes/Spanish.json"
+		},
+ 
+    
+		
+	  } 
+	  
+	  );
+} );
+</script>
 <?php
 function fechaCastellano ($fecha) {
   $fecha = substr($fecha, 0, 10);
